@@ -666,6 +666,143 @@ async def get_analysis_status():
 
 
 # ============================================================================
+# Telegram Notifications
+# ============================================================================
+
+@app.get("/api/notifications/status")
+async def get_notification_status():
+    """Check Telegram notification status"""
+    try:
+        from .services.telegram_notifier import TelegramNotifier
+        notifier = TelegramNotifier()
+
+        return {
+            'configured': notifier.is_configured(),
+            'service': 'telegram',
+            'message': 'Ready to send notifications' if notifier.is_configured() else 'Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID'
+        }
+    except Exception as e:
+        return {
+            'configured': False,
+            'error': str(e)
+        }
+
+
+@app.post("/api/notifications/test")
+async def test_notifications():
+    """Send a test notification"""
+    try:
+        from .services.telegram_notifier import TelegramNotifier
+
+        notifier = TelegramNotifier()
+
+        if not notifier.is_configured():
+            raise HTTPException(
+                status_code=400,
+                detail="Telegram not configured. Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID"
+            )
+
+        result = await notifier.test_connection()
+
+        if result['success']:
+            return {
+                'status': 'success',
+                'message': 'Test notification sent',
+                'bot_name': result.get('bot_name')
+            }
+        else:
+            raise HTTPException(status_code=500, detail=result.get('error', 'Unknown error'))
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/notifications/send-signal")
+async def send_signal_notification(
+    symbol: str = Query(..., description="Symbol to analyze and notify")
+):
+    """Analyze a symbol and send signal notification via Telegram"""
+    try:
+        from .services.telegram_notifier import TelegramNotifier
+        from .services.free_market_data import FreeMarketDataService
+
+        notifier = TelegramNotifier()
+
+        if not notifier.is_configured():
+            raise HTTPException(
+                status_code=400,
+                detail="Telegram not configured"
+            )
+
+        # Get analysis
+        market_service = FreeMarketDataService()
+        analyzer = get_analyzer()
+        sig_gen = get_signal_generator()
+
+        market_data = {}
+        for tf in ['H1', 'H4', 'D1']:
+            df = market_service.get_ohlcv(symbol, tf, limit=200)
+            if df is not None and not df.empty:
+                market_data[tf] = df
+
+        if not market_data:
+            raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+        # Analyze
+        detected_concepts = []
+        for tf, df in market_data.items():
+            if analyzer:
+                analysis = analyzer.analyze(df, tf)
+                detected_concepts.extend(analysis.get('detected_concepts', []))
+
+        detected_concepts = list(set(detected_concepts))
+
+        # Generate signal
+        if sig_gen:
+            signal_obj = sig_gen.generate_signal(
+                symbol=symbol,
+                market_data=market_data,
+                detected_concepts=detected_concepts
+            )
+
+            if signal_obj:
+                signal_dict = {
+                    'symbol': symbol,
+                    'direction': signal_obj.direction,
+                    'confidence': signal_obj.confidence,
+                    'strength': signal_obj.strength,
+                    'confluence_score': signal_obj.confluence_score,
+                    'entry_zone': signal_obj.entry_zone,
+                    'stop_loss': signal_obj.stop_loss,
+                    'take_profit': signal_obj.take_profit,
+                    'risk_reward': signal_obj.risk_reward,
+                    'concepts': signal_obj.concepts,
+                    'timestamp': signal_obj.timestamp,
+                }
+
+                success = await notifier.send_signal(signal_dict)
+
+                return {
+                    'status': 'success' if success else 'failed',
+                    'signal': signal_dict
+                }
+            else:
+                return {
+                    'status': 'no_signal',
+                    'message': 'Insufficient confluence for signal'
+                }
+        else:
+            raise HTTPException(status_code=500, detail="Signal generator not available")
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # Error Handlers
 # ============================================================================
 
