@@ -1045,11 +1045,265 @@ async def global_exception_handler(request, exc):
 # Startup/Shutdown
 # ============================================================================
 
+# ============================================================================
+# Pattern Recognition
+# ============================================================================
+
+@app.get("/api/patterns/detect/{symbol}")
+async def detect_patterns(
+    symbol: str,
+    timeframe: str = Query("H1", description="Timeframe")
+):
+    """Detect ICT patterns in price data"""
+    try:
+        from .services.free_market_data import FreeMarketDataService
+        from .ml.pattern_recognition import ICTPatternRecognizer
+
+        market_service = FreeMarketDataService()
+        recognizer = ICTPatternRecognizer()
+
+        df = market_service.get_ohlcv(symbol, timeframe, limit=200)
+        if df is None or df.empty:
+            raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+        patterns = recognizer.detect_all_patterns(df)
+        summary = recognizer.get_pattern_summary(patterns)
+
+        return {
+            'symbol': symbol,
+            'timeframe': timeframe,
+            'patterns': [p.to_dict() for p in patterns],
+            'summary': summary,
+            'timestamp': datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Price Prediction
+# ============================================================================
+
+@app.get("/api/predict/{symbol}")
+async def predict_price(
+    symbol: str,
+    timeframe: str = Query("H1", description="Timeframe")
+):
+    """Get AI price prediction for a symbol"""
+    try:
+        from .services.free_market_data import FreeMarketDataService
+        from .ml.price_predictor import ICTPricePredictor
+
+        market_service = FreeMarketDataService()
+        predictor = ICTPricePredictor()
+
+        df = market_service.get_ohlcv(symbol, timeframe, limit=200)
+        if df is None or df.empty:
+            raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+        # Get analysis for context
+        analyzer = get_analyzer()
+        analysis = analyzer.analyze(df, timeframe) if analyzer else None
+
+        prediction = predictor.predict(df, analysis, timeframe)
+
+        return {
+            'symbol': symbol,
+            'timeframe': timeframe,
+            'prediction': prediction.to_dict(),
+            'explanation': predictor.get_prediction_explanation(prediction)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Chart Generation
+# ============================================================================
+
+@app.get("/api/chart/{symbol}")
+async def generate_chart(
+    symbol: str,
+    timeframe: str = Query("H1", description="Timeframe"),
+    with_signal: bool = Query(True, description="Include signal levels"),
+    with_patterns: bool = Query(True, description="Include pattern detection")
+):
+    """Generate an ICT-annotated chart"""
+    try:
+        from .services.free_market_data import FreeMarketDataService
+        from .services.chart_generator import ICTChartGenerator
+        from .ml.pattern_recognition import ICTPatternRecognizer
+
+        market_service = FreeMarketDataService()
+        chart_gen = ICTChartGenerator()
+
+        df = market_service.get_ohlcv(symbol, timeframe, limit=100)
+        if df is None or df.empty:
+            raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+        # Get patterns
+        patterns = None
+        if with_patterns:
+            recognizer = ICTPatternRecognizer()
+            detected = recognizer.detect_all_patterns(df)
+            patterns = [p.to_dict() for p in detected]
+
+        # Get signal
+        signal = None
+        if with_signal:
+            analyzer = get_analyzer()
+            sig_gen = get_signal_generator()
+            if analyzer and sig_gen:
+                analysis = analyzer.analyze(df, timeframe)
+                signal_obj = sig_gen.generate_signal(
+                    symbol=symbol,
+                    market_data={timeframe: df},
+                    detected_concepts=analysis.get('detected_concepts', [])
+                )
+                if signal_obj:
+                    signal = {
+                        'direction': signal_obj.direction,
+                        'confidence': signal_obj.confidence,
+                        'entry_price': float(df['close'].iloc[-1]),
+                        'entry_zone': signal_obj.entry_zone,
+                        'stop_loss': signal_obj.stop_loss,
+                        'take_profit': signal_obj.take_profit,
+                    }
+
+        # Generate chart
+        chart_base64 = chart_gen.generate_candlestick_chart(
+            data=df,
+            symbol=symbol,
+            timeframe=timeframe,
+            signal=signal,
+            patterns=patterns
+        )
+
+        return {
+            'symbol': symbol,
+            'timeframe': timeframe,
+            'chart': chart_base64,
+            'signal': signal,
+            'pattern_count': len(patterns) if patterns else 0
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Scheduler Control
+# ============================================================================
+
+@app.get("/api/scheduler/status")
+async def get_scheduler_status():
+    """Get signal scheduler status"""
+    try:
+        from .services.signal_scheduler import signal_scheduler
+        return signal_scheduler.get_schedule_info()
+    except Exception as e:
+        return {
+            'status': 'not_available',
+            'error': str(e)
+        }
+
+
+@app.post("/api/scheduler/start")
+async def start_scheduler():
+    """Start the signal scheduler"""
+    try:
+        from .services.signal_scheduler import signal_scheduler
+        success = signal_scheduler.start()
+        return {
+            'status': 'started' if success else 'failed',
+            'info': signal_scheduler.get_schedule_info()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/scheduler/stop")
+async def stop_scheduler():
+    """Stop the signal scheduler"""
+    try:
+        from .services.signal_scheduler import signal_scheduler
+        signal_scheduler.stop()
+        return {'status': 'stopped'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/scheduler/run-now")
+async def run_scheduler_now(
+    timeframe: str = Query("H1", description="Timeframe to check")
+):
+    """Manually trigger a signal check"""
+    try:
+        from .services.signal_scheduler import run_manual_check
+        signals = await run_manual_check(timeframe)
+        return {
+            'status': 'completed',
+            'signals_generated': len(signals),
+            'signals': signals
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Database Operations
+# ============================================================================
+
+@app.get("/api/db/stats")
+async def get_database_stats():
+    """Get database statistics"""
+    try:
+        from .database import db
+        return {
+            'performance': db.get_performance_summary(),
+            'training': db.get_training_stats(),
+            'status': 'connected'
+        }
+    except Exception as e:
+        return {
+            'status': 'error',
+            'error': str(e)
+        }
+
+
+@app.get("/api/db/signals")
+async def get_db_signals(
+    symbol: str = Query(None, description="Filter by symbol"),
+    status: str = Query(None, description="Filter by status"),
+    limit: int = Query(50, description="Max results")
+):
+    """Get signals from database"""
+    try:
+        from .database import db
+        signals = db.get_signals(symbol=symbol, status=status, limit=limit)
+        return {
+            'signals': signals,
+            'count': len(signals)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Startup/Shutdown
+# ============================================================================
+
 @app.on_event("startup")
 async def startup_event():
     """Run on application startup"""
     print("🚀 TradingMamba API starting...")
     print(f"📁 Data directory: {DATA_DIR}")
+
+    # Initialize database
+    try:
+        from .database import db
+        print("✅ SQLite database initialized")
+    except Exception as e:
+        print(f"⚠️ Database initialization warning: {e}")
 
     # Ensure directories exist
     DATA_DIR.mkdir(parents=True, exist_ok=True)
