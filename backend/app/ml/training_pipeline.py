@@ -89,91 +89,93 @@ class ICTKnowledgeBase:
         return transcripts
 
     def extract_concept_definitions(self, transcripts: List[Dict]) -> Dict[str, Dict]:
-        """Extract concept definitions from transcripts"""
+        """Extract concept definitions from transcripts (optimized)"""
+        import re
         definitions = defaultdict(lambda: {'examples': [], 'contexts': [], 'frequency': 0})
 
-        definition_patterns = [
-            r"(?:is|are|means?|refers? to|defined as)\s+(.{20,200})",
-            r"(?:what|when|how)\s+(?:is|are|do)\s+(.{20,200})",
-        ]
-
-        import re
+        # Pre-compile patterns for efficiency
+        compiled_patterns = {}
+        for concept, terms in ICT_VOCABULARY.items():
+            # Use simpler word boundary matching
+            term_pattern = '|'.join(re.escape(t) for t in terms)
+            compiled_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
 
         for transcript in transcripts:
             text = transcript.get('full_text', '')
-            segments = transcript.get('segments', [])
+            if not text:
+                continue
 
-            for concept, terms in ICT_VOCABULARY.items():
-                for term in terms:
-                    # Find sentences containing the term
-                    pattern = rf"[^.]*\b{re.escape(term)}\b[^.]*\."
-                    matches = re.findall(pattern, text.lower())
+            # Split into sentences once
+            sentences = text.replace('!', '.').replace('?', '.').split('.')
+            sentences = [s.strip() for s in sentences if len(s.strip()) > 10][:200]  # Limit sentences
 
-                    for match in matches[:5]:  # Limit examples per concept
-                        definitions[concept]['examples'].append(match.strip())
+            for concept, pattern in compiled_patterns.items():
+                for sentence in sentences:
+                    if pattern.search(sentence):
+                        if len(definitions[concept]['examples']) < 10:  # Limit examples
+                            definitions[concept]['examples'].append(sentence[:300])
                         definitions[concept]['frequency'] += 1
-
-                    # Look for definitions
-                    for def_pattern in definition_patterns:
-                        full_pattern = rf"\b{re.escape(term)}\b\s*{def_pattern}"
-                        def_matches = re.findall(full_pattern, text.lower())
-                        definitions[concept]['contexts'].extend(def_matches[:3])
 
         self.concept_definitions = dict(definitions)
         return self.concept_definitions
 
     def extract_trading_rules(self, transcripts: List[Dict]) -> List[Dict]:
-        """Extract trading rules mentioned in transcripts"""
+        """Extract trading rules mentioned in transcripts (optimized)"""
         import re
 
         rules = []
+        # Pre-compile rule patterns
         rule_patterns = [
-            (r"(?:when|if)\s+(.{10,100}),?\s*(?:then|we|you)\s+(.{10,100})", "conditional"),
-            (r"(?:always|never|must)\s+(.{10,100})", "imperative"),
-            (r"(?:look for|wait for)\s+(.{10,100})(?:before|then)", "setup"),
-            (r"(?:entry|exit|stop loss|take profit)\s+(?:at|when|is)\s+(.{10,100})", "execution"),
+            (re.compile(r"(?:when|if)\s+([^,]{10,80}),?\s*(?:then|we|you)\s+([^.]{10,80})", re.IGNORECASE), "conditional"),
+            (re.compile(r"(?:always|never|must)\s+([^.]{10,80})", re.IGNORECASE), "imperative"),
+            (re.compile(r"(?:look for|wait for)\s+([^.]{10,80})", re.IGNORECASE), "setup"),
         ]
 
+        # Pre-compile concept patterns
+        concept_patterns = {}
+        for concept, terms in ICT_VOCABULARY.items():
+            term_pattern = '|'.join(re.escape(t) for t in terms)
+            concept_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
+
         for transcript in transcripts:
-            text = transcript.get('full_text', '').lower()
+            text = transcript.get('full_text', '')
+            if not text:
+                continue
+
+            text_lower = text.lower()
             video_id = transcript.get('video_id', '')
 
             for pattern, rule_type in rule_patterns:
-                matches = re.findall(pattern, text)
-                for match in matches[:10]:  # Limit per transcript
+                matches = pattern.findall(text_lower)[:5]  # Limit matches
+                for match in matches:
                     if isinstance(match, tuple):
                         rule_text = ' -> '.join(match)
                     else:
                         rule_text = match
 
-                    # Check if rule mentions ICT concepts
-                    mentioned_concepts = []
-                    for concept, terms in ICT_VOCABULARY.items():
-                        for term in terms:
-                            if term in rule_text:
-                                mentioned_concepts.append(concept)
-                                break
+                    # Check which concepts are mentioned
+                    mentioned = [c for c, p in concept_patterns.items() if p.search(rule_text)]
 
-                    if mentioned_concepts:
+                    if mentioned:
                         rules.append({
-                            'text': rule_text.strip(),
+                            'text': rule_text.strip()[:200],
                             'type': rule_type,
-                            'concepts': list(set(mentioned_concepts)),
+                            'concepts': mentioned,
                             'source_video': video_id,
                         })
 
-        # Deduplicate similar rules
-        unique_rules = []
+        # Deduplicate
         seen = set()
+        unique_rules = []
         for rule in rules:
-            rule_key = rule['text'][:50]
-            if rule_key not in seen:
-                seen.add(rule_key)
+            key = rule['text'][:40]
+            if key not in seen:
+                seen.add(key)
                 unique_rules.append(rule)
 
-        self.trading_rules = unique_rules
-        logger.info(f"Extracted {len(unique_rules)} trading rules")
-        return unique_rules
+        self.trading_rules = unique_rules[:100]  # Limit total rules
+        logger.info(f"Extracted {len(self.trading_rules)} trading rules")
+        return self.trading_rules
 
     def train(self, transcripts: List[Dict] = None, incremental: bool = False) -> Dict:
         """Train all ML components"""
