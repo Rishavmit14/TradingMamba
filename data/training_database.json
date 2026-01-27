@@ -1,0 +1,1984 @@
+{
+  "videos": {
+    "0LhteuLVuDU": {
+      "video_id": "0LhteuLVuDU",
+      "title": "ICT Mentorship Core Content - Month 1 - Elements Of A Trade Setup",
+      "playlist_id": "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
+      "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
+      "duration": 0,
+      "word_count": 3195,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.680875",
+      "last_trained": "2026-01-27T14:23:03.680875",
+      "training_dates": [
+        "2026-01-27T14:23:03.680875"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block"
+      ],
+      "concept_frequencies": {
+        "market_structure": 19,
+        "order_block": 9,
+        "liquidity": 10,
+        "premium_discount": 11,
+        "institutional": 7,
+        "time_based": 3
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "the market's doing nothing it's consolidating but really  -> all learned in the market maker uh series there's really no such thing is the ma",
+          "type": "conditional",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "0LhteuLVuDU"
+        },
+        {
+          "text": "you will are easy to see once  -> understand the operations and the conditions that the market maker uh in bank pr",
+          "type": "conditional",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "0LhteuLVuDU"
+        },
+        {
+          "text": "price to come back down into the order block where is that going to occur well w",
+          "type": "setup",
+          "concepts": [
+            "order_block"
+          ],
+          "source_video": "0LhteuLVuDU"
+        }
+      ],
+      "key_points": [
+        "In price the order block that the market makers leave near or at the equilibrium price point so i don't know what you're thinking okay michael this is",
+        "Liquidity gaps and liquidity voids when we look for price when we see run ups real quick and run downs in price in other words real quick ries up or r",
+        "We're looking for in terms of liquidity void so we've covered three conditions the next one is the r"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules. Identified 3 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 18.466353677621285
+    },
+    "4i_hnoEk6lw": {
+      "video_id": "4i_hnoEk6lw",
+      "title": "ICT Mentorship Core Content - Month 05 - How To Use Intermarket Analysis",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 3406,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.696015",
+      "last_trained": "2026-01-27T14:23:03.696015",
+      "training_dates": [
+        "2026-01-27T14:23:03.696015"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "time_based"
+      ],
+      "concept_frequencies": {
+        "market_structure": 14,
+        "institutional": 1,
+        "time_based": 11
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, time based.",
+      "content_quality_score": 1.0,
+      "concept_density": 7.633587786259541
+    },
+    "6Sp-pr3yCkc": {
+      "video_id": "6Sp-pr3yCkc",
+      "title": "ICT Mentorship Core Content - Month 05 - How To Use Bullish Seasonal Tendencies In HTF Analysis",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 3124,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.708942",
+      "last_trained": "2026-01-27T14:23:03.708942",
+      "training_dates": [
+        "2026-01-27T14:23:03.708942"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "time_based"
+      ],
+      "concept_frequencies": {
+        "market_structure": 5,
+        "time_based": 7
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, time based.",
+      "content_quality_score": 0.584122919334187,
+      "concept_density": 3.8412291933418694
+    },
+    "BkmZgjuYREU": {
+      "video_id": "BkmZgjuYREU",
+      "title": "ICT Mentorship Core Content - Month 05 - Open Float",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 3158,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.721814",
+      "last_trained": "2026-01-27T14:23:03.721814",
+      "training_dates": [
+        "2026-01-27T14:23:03.721814"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity"
+      ],
+      "concept_frequencies": {
+        "market_structure": 18,
+        "liquidity": 24,
+        "premium_discount": 1,
+        "institutional": 5,
+        "time_based": 22
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "price traded below that low that was a break in market structure okay so  -> had a market shift below that low and the market continued trading all the way d",
+          "type": "conditional",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "BkmZgjuYREU"
+        },
+        {
+          "text": "regardless of whatever time frame you're trading but on the daily chart you're l",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "BkmZgjuYREU"
+        },
+        {
+          "text": "these clues across many pairs and many asset classes you'll see that this is in",
+          "type": "setup",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "BkmZgjuYREU"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 22.165927802406586
+    },
+    "LBlK6JB0QS0": {
+      "video_id": "LBlK6JB0QS0",
+      "title": "ICT Mentorship Core Content - Month 07 - One Shot One Kill Model",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 6073,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.745894",
+      "last_trained": "2026-01-27T14:23:03.745894",
+      "training_dates": [
+        "2026-01-27T14:23:03.745894"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 25,
+        "order_block": 8,
+        "fair_value_gap": 2,
+        "liquidity": 5,
+        "premium_discount": 31,
+        "kill_zones": 2,
+        "entry_models": 2,
+        "institutional": 8,
+        "breaker": 1,
+        "time_based": 30
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "i'm teaching the commodities i'll actually show  -> how to go in and construct the commercial hedgers program and how to look for a",
+          "type": "conditional",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "LBlK6JB0QS0"
+        },
+        {
+          "text": "going to look for discounts at least try to pull to equilibrium then it has to d",
+          "type": "imperative",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "LBlK6JB0QS0"
+        },
+        {
+          "text": "know that for sure but you need to blend time and price with the ifta data range",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "LBlK6JB0QS0"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 18.771612053350896
+    },
+    "LRKtiysz4nA": {
+      "video_id": "LRKtiysz4nA",
+      "title": "ICT Mentorship Core Content - Month 05 - Using IPDA Data Ranges",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 22223,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.832385",
+      "last_trained": "2026-01-27T14:23:03.832385",
+      "training_dates": [
+        "2026-01-27T14:23:03.832385"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "price_action",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 84,
+        "order_block": 13,
+        "fair_value_gap": 1,
+        "liquidity": 36,
+        "premium_discount": 11,
+        "kill_zones": 2,
+        "entry_models": 6,
+        "institutional": 25,
+        "time_based": 74,
+        "price_action": 4
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we do daily reviews i'm taking  -> basically to the points at which i'm drawing my attention to on my own journal h",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "LRKtiysz4nA"
+        },
+        {
+          "text": "that liquidity now it's not giving you directional bias yet i'm telling you it n",
+          "type": "setup",
+          "concepts": [
+            "liquidity"
+          ],
+          "source_video": "LRKtiysz4nA"
+        }
+      ],
+      "key_points": [
+        "That liquidity now it's not giving you directional bias yet i'm telling you it needs to use these reference points to find where the stops would logic",
+        "Price to be drawn to one of those two price points and you look for evidences that that institutional order flow is going that direction then you know"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 2 trading rules. Identified 2 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 11.519596814111507
+    },
+    "N8_8tEw2_44": {
+      "video_id": "N8_8tEw2_44",
+      "title": "ICT Mentorship Core Content - Month 05 - Qualifying Trade Conditions With 10 Year Yields",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 1256,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.845461",
+      "last_trained": "2026-01-27T14:23:03.845461",
+      "training_dates": [
+        "2026-01-27T14:23:03.845461"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "time_based",
+        "liquidity",
+        "price_action",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 12,
+        "liquidity": 2,
+        "entry_models": 1,
+        "institutional": 2,
+        "time_based": 2,
+        "price_action": 2
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we see these things occurring in the price  -> want to be blending these ideas with the quarterly shift concepts that's been ta",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "N8_8tEw2_44"
+        },
+        {
+          "text": "you don't trade in a long-term position capacity  -> can use these ideas to get in sync with higher time frame trend or higher time f",
+          "type": "conditional",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "N8_8tEw2_44"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, time based. Extracted 2 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 16.719745222929937
+    },
+    "O2Sio7opKxo": {
+      "video_id": "O2Sio7opKxo",
+      "title": "ICT Mentorship Core Content - Month 05 - Ideal Seasonal Tendencies",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 2306,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.854679",
+      "last_trained": "2026-01-27T14:23:03.854679",
+      "training_dates": [
+        "2026-01-27T14:23:03.854679"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "time_based"
+      ],
+      "concept_frequencies": {
+        "market_structure": 1,
+        "time_based": 1
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "start your trading day every single day with reviewing a macro perspective like",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "O2Sio7opKxo"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, time based. Extracted 1 trading rules.",
+      "content_quality_score": 0.4367302688638335,
+      "concept_density": 0.8673026886383347
+    },
+    "O69iFqP1j7o": {
+      "video_id": "O69iFqP1j7o",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Low Resistance Liquidity Runs Part 2",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 4294,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.871706",
+      "last_trained": "2026-01-27T14:23:03.871706",
+      "training_dates": [
+        "2026-01-27T14:23:03.871706"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker"
+      ],
+      "concept_frequencies": {
+        "market_structure": 12,
+        "order_block": 7,
+        "fair_value_gap": 7,
+        "liquidity": 3,
+        "premium_discount": 57,
+        "institutional": 6,
+        "breaker": 9,
+        "time_based": 50
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "your platform doesn't use this whatever the equivalent would be but if  -> hold down control and touch the letter y it'll give you the date dividers okay a",
+          "type": "conditional",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "O69iFqP1j7o"
+        },
+        {
+          "text": "you're in four hour it's not giving you the daily dividers it's actually giving  -> the weekly dividers so every vertical dotted line here represents the beginning",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "O69iFqP1j7o"
+        },
+        {
+          "text": "we look at the four hour chart and  -> can see a pd array for instance a discount pd array this could be in the form of",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "O69iFqP1j7o"
+        },
+        {
+          "text": "going to get big weekly ranges sometimes you'll get small weekly ranges and it's",
+          "type": "imperative",
+          "concepts": [
+            "market_structure",
+            "time_based"
+          ],
+          "source_video": "O69iFqP1j7o"
+        },
+        {
+          "text": "premium pd arrays where willing participants in the marketplace will want to buy",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "O69iFqP1j7o"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 5 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 35.16534699580811
+    },
+    "Vb6ueaPqut0": {
+      "video_id": "Vb6ueaPqut0",
+      "title": "ICT Mentorship Core Content - Month 05 - How To Use Bearish Seasonal Tendencies In HTF Analysis",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 5602,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.894579",
+      "last_trained": "2026-01-27T14:23:03.894579",
+      "training_dates": [
+        "2026-01-27T14:23:03.894579"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "order_block",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 12,
+        "order_block": 2,
+        "premium_discount": 1,
+        "entry_models": 1,
+        "institutional": 3,
+        "time_based": 14
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount.",
+      "content_quality_score": 1.0,
+      "concept_density": 5.890753302392002
+    },
+    "WDattjFvNBc": {
+      "video_id": "WDattjFvNBc",
+      "title": "ICT Mentorship Core Content - Month 05 - Limit Order Entry Techniques For Long Term Traders",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 1908,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.903579",
+      "last_trained": "2026-01-27T14:23:03.903579",
+      "training_dates": [
+        "2026-01-27T14:23:03.903579"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "order_block"
+      ],
+      "concept_frequencies": {
+        "market_structure": 6,
+        "order_block": 8,
+        "premium_discount": 10,
+        "institutional": 4,
+        "time_based": 55
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we have an opinion about being bearish these conditions are best suited when  -> align them with a daily pd array in other words if there's a bearish order block",
+          "type": "conditional",
+          "concepts": [
+            "order_block",
+            "time_based"
+          ],
+          "source_video": "WDattjFvNBc"
+        },
+        {
+          "text": "you go through your charts and  -> look at this and start studying it and again what we're looking at is daily time",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "WDattjFvNBc"
+        },
+        {
+          "text": "close the candle with a down close and it is not valid while the daily chart can",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "WDattjFvNBc"
+        },
+        {
+          "text": "close the candle with a up close it is not valid while the daily chart candle is",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "WDattjFvNBc"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 4 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 43.501048218029354
+    },
+    "XwYYWBttWro": {
+      "video_id": "XwYYWBttWro",
+      "title": "ICT Mentorship Core Content - Month 1 - How Market Makers Condition The Market",
+      "playlist_id": "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
+      "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
+      "duration": 0,
+      "word_count": 4146,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.920091",
+      "last_trained": "2026-01-27T14:23:03.920091",
+      "training_dates": [
+        "2026-01-27T14:23:03.920091"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 24,
+        "order_block": 1,
+        "liquidity": 6,
+        "premium_discount": 2,
+        "kill_zones": 6,
+        "entry_models": 4,
+        "institutional": 9,
+        "time_based": 8
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount.",
+      "content_quality_score": 1.0,
+      "concept_density": 14.471780028943561
+    },
+    "Y1oxwc354oo": {
+      "video_id": "Y1oxwc354oo",
+      "title": "ICT Mentorship Core Content - Month 05 - Trade Conditions & Setup Progressions",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 4781,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.939440",
+      "last_trained": "2026-01-27T14:23:03.939440",
+      "training_dates": [
+        "2026-01-27T14:23:03.939440"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "price_action"
+      ],
+      "concept_frequencies": {
+        "market_structure": 13,
+        "order_block": 34,
+        "fair_value_gap": 5,
+        "liquidity": 9,
+        "premium_discount": 50,
+        "institutional": 3,
+        "breaker": 13,
+        "time_based": 98,
+        "price_action": 5
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we're looking at a premium market and markets are trading near a premium and  -> have reasons to suspect that at lower future prices in order we don't know how m",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "there's a breaker of any kind  -> would aim for that and we'd have to weigh out whether or not there's a significa",
+          "type": "conditional",
+          "concepts": [
+            "breaker"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "it doesn't go all the way up to a deep premium or down to a deep discount  -> can always reasonably expect it to go back to equilibrium and if that's all you",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "it trades down below it comes back to it here  -> have it middle of the body of the candle extend out in time it would give you a",
+          "type": "conditional",
+          "concepts": [
+            "price_action"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "we drop down into weekly range but we also have notice  -> have a gap in here which i'm not going to add all this on this chart to make it",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "going to initially look to rebalance that means the equilibrium price point betw",
+          "type": "imperative",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "reasonably expect it to go back to equilibrium and if that's all you aim for if",
+          "type": "imperative",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "when price was rallying but what makes the buy down here we're going to discount",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "Y1oxwc354oo"
+        },
+        {
+          "text": "another return to this order block here as the high end not down this v but we c",
+          "type": "setup",
+          "concepts": [
+            "order_block"
+          ],
+          "source_video": "Y1oxwc354oo"
+        }
+      ],
+      "key_points": [
+        "Is if we don't see any retracement to come back into for a daily bullish order block or or if we saw for instance um let's say it like this let's zoom"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 9 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 48.107090566827026
+    },
+    "YV4fEF4d2wA": {
+      "video_id": "YV4fEF4d2wA",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Blending IPDA Data Ranges & PD Arrays",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 2094,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.949423",
+      "last_trained": "2026-01-27T14:23:03.949423",
+      "training_dates": [
+        "2026-01-27T14:23:03.949423"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 7,
+        "order_block": 15,
+        "fair_value_gap": 4,
+        "liquidity": 13,
+        "premium_discount": 31,
+        "entry_models": 3,
+        "institutional": 4,
+        "breaker": 14,
+        "time_based": 13
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "price is in a premium market obviously working for the market price up  -> would be looking for a bearish mitigation block a bearish breaker liquidity void",
+          "type": "conditional",
+          "concepts": [
+            "order_block",
+            "liquidity",
+            "premium_discount",
+            "breaker"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "the market's in a discount it's not ambiguous when  -> look at price in the form of the pd array matrix a good practice this is always",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "the markets are bearish  -> work from a premium market down to a discount based on whatever premium pd array",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "a void or gap or mitigation block it may just simply need to go all the way up t",
+          "type": "imperative",
+          "concepts": [
+            "order_block",
+            "breaker"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "another discount pd array when we refer to time and price what we're doing is we",
+          "type": "setup",
+          "concepts": [
+            "premium_discount",
+            "time_based"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "all the premium pd arrays to start keying off all potential cell scenarios when",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        },
+        {
+          "text": "a discount pd array it comes in the form of liquidity void taking us down into 7",
+          "type": "setup",
+          "concepts": [
+            "liquidity",
+            "premium_discount"
+          ],
+          "source_video": "YV4fEF4d2wA"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 7 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 49.66571155682904
+    },
+    "crPpMwgwa7k": {
+      "video_id": "crPpMwgwa7k",
+      "title": "ICT Mentorship Core Content - Month 05 - Money Management",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 5907,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:03.972689",
+      "last_trained": "2026-01-27T14:23:03.972689",
+      "training_dates": [
+        "2026-01-27T14:23:03.972689"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "time_based"
+      ],
+      "concept_frequencies": {
+        "market_structure": 19,
+        "time_based": 7
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, time based.",
+      "content_quality_score": 0.6401557474183173,
+      "concept_density": 4.401557474183172
+    },
+    "hbE8S5FSdtQ": {
+      "video_id": "hbE8S5FSdtQ",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Market Maker Manipulation Templates",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 6862,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.000578",
+      "last_trained": "2026-01-27T14:23:04.000578",
+      "training_dates": [
+        "2026-01-27T14:23:04.000578"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 36,
+        "order_block": 19,
+        "fair_value_gap": 4,
+        "liquidity": 29,
+        "premium_discount": 91,
+        "kill_zones": 6,
+        "entry_models": 6,
+        "institutional": 2,
+        "time_based": 138
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "you go through each one of these templates it'll give  -> basically the idea of how the market manipulation has taken place along with the",
+          "type": "conditional",
+          "concepts": [
+            "market_structure",
+            "entry_models"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        },
+        {
+          "text": "it's the weekly high that  -> bought you're going to be looking for a daily or four hour pd array and an exten",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        },
+        {
+          "text": "you sold short at a daily high being ran out for a liquidity run on buy stops  -> could see a four hour discount pd array to trade down into as your objective so",
+          "type": "conditional",
+          "concepts": [
+            "liquidity",
+            "premium_discount",
+            "time_based"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        },
+        {
+          "text": "we're trading a weekly low as resistance  -> could also employ a lower time frame bearish order block or something that effec",
+          "type": "conditional",
+          "concepts": [
+            "order_block",
+            "time_based"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        },
+        {
+          "text": "the high the form for the week by thursday's new york session i can carry over i",
+          "type": "setup",
+          "concepts": [
+            "kill_zones"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        },
+        {
+          "text": "thursday as the lines portion of the weekly range and you're looking for it to t",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "hbE8S5FSdtQ"
+        }
+      ],
+      "key_points": [
+        "You're looking for a time frame lesser than the discount liquidity pool that you used to buy off of for an example if you bought a monthly liquidity p",
+        "The market to trade up into a premium market pd array in a time frame lesser than the discount liquidity pool that we use to train off of for a long y",
+        "It on since for instance like a weekly liquidity pool if he runs out a weekly high it takes out thos"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 6 trading rules. Identified 3 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 48.236665695132615
+    },
+    "jvc105qaCJs": {
+      "video_id": "jvc105qaCJs",
+      "title": "ICT Mentorship Core Content - Month 07 - Intraweek Market Reversals & Overlapping Models",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 4475,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.020300",
+      "last_trained": "2026-01-27T14:23:04.020300",
+      "training_dates": [
+        "2026-01-27T14:23:04.020300"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker"
+      ],
+      "concept_frequencies": {
+        "market_structure": 10,
+        "order_block": 12,
+        "fair_value_gap": 3,
+        "liquidity": 1,
+        "premium_discount": 27,
+        "kill_zones": 1,
+        "institutional": 12,
+        "breaker": 1,
+        "time_based": 27
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "you look at the daily chart here we've outlined the pd arrays and  -> can see that there's a daily bullish order block mean threshold and price reache",
+          "type": "conditional",
+          "concepts": [
+            "order_block",
+            "time_based"
+          ],
+          "source_video": "jvc105qaCJs"
+        },
+        {
+          "text": "we see a fast market  -> have to immediately assume that they're reaching for a level institutional order",
+          "type": "conditional",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "jvc105qaCJs"
+        },
+        {
+          "text": "you will by seeing that we could have if  -> didn't understand pd array matrix discount arrays we could have easily expected",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "jvc105qaCJs"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 21.005586592178773
+    },
+    "mQA8jCem9d0": {
+      "video_id": "mQA8jCem9d0",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Using Monthly & Weekly Ranges",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 7442,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.050318",
+      "last_trained": "2026-01-27T14:23:04.050318",
+      "training_dates": [
+        "2026-01-27T14:23:04.050318"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker"
+      ],
+      "concept_frequencies": {
+        "market_structure": 9,
+        "order_block": 11,
+        "fair_value_gap": 2,
+        "liquidity": 2,
+        "premium_discount": 124,
+        "kill_zones": 6,
+        "institutional": 4,
+        "breaker": 9,
+        "time_based": 193
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "how the institutions will move from a premium to a discount array or from a disc",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "mQA8jCem9d0"
+        },
+        {
+          "text": "an opposing weekly array so if we're starting from a premium and a monthly basis",
+          "type": "setup",
+          "concepts": [
+            "premium_discount",
+            "time_based"
+          ],
+          "source_video": "mQA8jCem9d0"
+        },
+        {
+          "text": "a rejection block or an old low an old high another example would be if we were",
+          "type": "setup",
+          "concepts": [
+            "breaker"
+          ],
+          "source_video": "mQA8jCem9d0"
+        }
+      ],
+      "key_points": [
+        "A opposing weekly discount array so in this case we'd be looking for the movement from a fair value gap that has filled in at a premium level we're dr"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 48.37409298575652
+    },
+    "n7SPAK_tpN8": {
+      "video_id": "n7SPAK_tpN8",
+      "title": "ICT Mentorship Core Content - Month 05 - Quarterly Shifts & IPDA Data Ranges",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 8588,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.086019",
+      "last_trained": "2026-01-27T14:23:04.086019",
+      "training_dates": [
+        "2026-01-27T14:23:04.086019"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "breaker",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 123,
+        "order_block": 1,
+        "liquidity": 27,
+        "entry_models": 21,
+        "institutional": 19,
+        "breaker": 1,
+        "time_based": 42
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "look at price on a macro level it means a monthly weekly and daily time frame an",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "n7SPAK_tpN8"
+        },
+        {
+          "text": "a turtle soup cell in the daily in that condition for smart money distribution f",
+          "type": "setup",
+          "concepts": [
+            "entry_models",
+            "institutional",
+            "time_based"
+          ],
+          "source_video": "n7SPAK_tpN8"
+        },
+        {
+          "text": "the most salient points of reference on the daily chart the 60 the 40 and the 20",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "n7SPAK_tpN8"
+        },
+        {
+          "text": "recent institutional reference points i'm gonna look for an old price high you'r",
+          "type": "setup",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "n7SPAK_tpN8"
+        },
+        {
+          "text": "were all the things we taught in september which is the order block bullish and",
+          "type": "setup",
+          "concepts": [
+            "order_block"
+          ],
+          "source_video": "n7SPAK_tpN8"
+        }
+      ],
+      "key_points": [
+        "An obvious change in trend which we saw up here we have a market structure break here bearishly for"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, time based. Extracted 5 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 27.247321844434097
+    },
+    "okN5p701T7Y": {
+      "video_id": "okN5p701T7Y",
+      "title": "ICT Mentorship Core Content - Month 05 - Position Trade Management",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 4369,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.105699",
+      "last_trained": "2026-01-27T14:23:04.105699",
+      "training_dates": [
+        "2026-01-27T14:23:04.105699"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "price_action",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 10,
+        "order_block": 6,
+        "liquidity": 7,
+        "premium_discount": 8,
+        "entry_models": 1,
+        "institutional": 2,
+        "time_based": 39,
+        "price_action": 2
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we understand there's two higher time frames  -> we'll know what the daily chart is going to do and we're going to be focusing on",
+          "type": "conditional",
+          "concepts": [
+            "market_structure",
+            "time_based"
+          ],
+          "source_video": "okN5p701T7Y"
+        },
+        {
+          "text": "for institutional reference points we're looking for a higher time frame weekly",
+          "type": "setup",
+          "concepts": [
+            "institutional",
+            "time_based"
+          ],
+          "source_video": "okN5p701T7Y"
+        },
+        {
+          "text": "the pda for monthly and weekly objectives institutionally where are we looking t",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "okN5p701T7Y"
+        }
+      ],
+      "key_points": [
+        "For institutional reference points we're looking for a higher time frame weekly and monthly charts to indicate where institutional overflow on those p"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 17.166399633783474
+    },
+    "pwO-E-OOH5k": {
+      "video_id": "pwO-E-OOH5k",
+      "title": "ICT Mentorship Core Content - Month 05 - Defining HTF PD Arrays",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 5744,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.129101",
+      "last_trained": "2026-01-27T14:23:04.129101",
+      "training_dates": [
+        "2026-01-27T14:23:04.129101"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "price_action"
+      ],
+      "concept_frequencies": {
+        "market_structure": 12,
+        "order_block": 41,
+        "fair_value_gap": 9,
+        "liquidity": 15,
+        "premium_discount": 71,
+        "institutional": 6,
+        "breaker": 56,
+        "time_based": 28,
+        "price_action": 5
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we look at charts we want to be viewing price in the terms of are  -> in a premium or are we in a discount market earlier in the mentorship i taught h",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        },
+        {
+          "text": "we look at price swings back and forth on a chart whether it be monthly  -> clear daily and even lower time frames you have to understand that there's swing",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        },
+        {
+          "text": "going to be referred to as equilibrium now equilibrium between where you think p",
+          "type": "imperative",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        },
+        {
+          "text": "right now that's what this teaching's going to do okay for a monthly chart okay",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        },
+        {
+          "text": "the first thing above equilibrium in the form of an array is an old high and old",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        },
+        {
+          "text": "next okay well the next order of hierarchy is liquidity void is there a range th",
+          "type": "setup",
+          "concepts": [
+            "liquidity"
+          ],
+          "source_video": "pwO-E-OOH5k"
+        }
+      ],
+      "key_points": [
+        "If there's a breaker forget about closing in the void and forget about getting up to that gap because the breaker is going to take precedence over eve",
+        "That in price action chances are that if there's a liquidity void in price it won't go down to fill"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 6 trading rules. Identified 2 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 42.3050139275766
+    },
+    "vb_Yc-gCBfU": {
+      "video_id": "vb_Yc-gCBfU",
+      "title": "ICT Mentorship Core Content - Month 05 - Stop Entry Techniques For  Long Term Traders",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 2354,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.140397",
+      "last_trained": "2026-01-27T14:23:04.140397",
+      "training_dates": [
+        "2026-01-27T14:23:04.140397"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "order_block",
+        "fair_value_gap",
+        "breaker"
+      ],
+      "concept_frequencies": {
+        "market_structure": 7,
+        "order_block": 8,
+        "fair_value_gap": 1,
+        "premium_discount": 5,
+        "institutional": 5,
+        "breaker": 1,
+        "time_based": 57
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "you don't get a fill on the daily  -> just go to the next daily candle once as long as there's another down candle you",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "vb_Yc-gCBfU"
+        },
+        {
+          "text": "close the candle with a down close it is not valid while the daily chart candle",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "vb_Yc-gCBfU"
+        },
+        {
+          "text": "close the candle with a up close and it is not valid while the daily chart candl",
+          "type": "imperative",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "vb_Yc-gCBfU"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 3 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 35.6839422259983
+    },
+    "vqtA1S9JH34": {
+      "video_id": "vqtA1S9JH34",
+      "title": "ICT Mentorship Core Content - Month 05 - Defining Open Float Liquidity Pools",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 4351,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.157865",
+      "last_trained": "2026-01-27T14:23:04.157865",
+      "training_dates": [
+        "2026-01-27T14:23:04.157865"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "price_action"
+      ],
+      "concept_frequencies": {
+        "market_structure": 17,
+        "liquidity": 18,
+        "premium_discount": 3,
+        "institutional": 11,
+        "time_based": 12,
+        "price_action": 1
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we're looking at price what  -> like to do is identify on a higher time frame where are the liquidity pools for",
+          "type": "conditional",
+          "concepts": [
+            "liquidity"
+          ],
+          "source_video": "vqtA1S9JH34"
+        },
+        {
+          "text": "it makes a higher high in the next new 60 trading days  -> don't know where that high is going to be in in the future we don't know if it's",
+          "type": "conditional",
+          "concepts": [
+            "market_structure"
+          ],
+          "source_video": "vqtA1S9JH34"
+        },
+        {
+          "text": "the highest high and the lowest low on the daily chart which will lead you to wh",
+          "type": "setup",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "vqtA1S9JH34"
+        },
+        {
+          "text": "those in our higher time frame charts we're seeing a liquidity pool in the form",
+          "type": "setup",
+          "concepts": [
+            "liquidity"
+          ],
+          "source_video": "vqtA1S9JH34"
+        }
+      ],
+      "key_points": [
+        "The highest high and the lowest low on the daily chart which will lead you to where the large funds liquidity pools are above and below the market pri"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 4 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 14.249597793610665
+    },
+    "w6VlX-rsTUs": {
+      "video_id": "w6VlX-rsTUs",
+      "title": "ICT Mentorship Core Content - Month 05 - Interest Rate Differentials",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 2708,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.169739",
+      "last_trained": "2026-01-27T14:23:04.169739",
+      "training_dates": [
+        "2026-01-27T14:23:04.169739"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "order_block",
+        "institutional",
+        "time_based"
+      ],
+      "concept_frequencies": {
+        "market_structure": 8,
+        "order_block": 1,
+        "institutional": 7,
+        "time_based": 4
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we were to take a look at these countries  -> could build a model on a higher time frame basis on long-term macro trades which",
+          "type": "conditional",
+          "concepts": [
+            "time_based"
+          ],
+          "source_video": "w6VlX-rsTUs"
+        },
+        {
+          "text": "smart money clues that it's being bought now we went through several of those th",
+          "type": "setup",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "w6VlX-rsTUs"
+        },
+        {
+          "text": "setups that took place higher timeframe support resistance levels institutional",
+          "type": "setup",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "w6VlX-rsTUs"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, order block, institutional. Extracted 3 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 7.385524372230428
+    },
+    "wFjeUzJys7w": {
+      "video_id": "wFjeUzJys7w",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Defining Weekly Range Profiles",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 1615,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.176973",
+      "last_trained": "2026-01-27T14:23:04.176973",
+      "training_dates": [
+        "2026-01-27T14:23:04.176973"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "kill_zones",
+        "time_based",
+        "liquidity",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 8,
+        "liquidity": 2,
+        "premium_discount": 22,
+        "kill_zones": 14,
+        "entry_models": 11,
+        "institutional": 3,
+        "time_based": 3
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "price is hovering below a higher time frame premium array monday  -> rises into a higher time frame premium array on tuesday to form the high of the",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "wFjeUzJys7w"
+        },
+        {
+          "text": "price is hovering above a higher time frame discount array monday and tuesday  -> drops into the higher time frame discount array on wednesday to form the low of",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "wFjeUzJys7w"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 2 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 39.0092879256966
+    },
+    "xRjKtUEKkSE": {
+      "video_id": "xRjKtUEKkSE",
+      "title": "ICT Mentorship Core Content - Month 05 - Defining Institutional Swing Points",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 6010,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.200493",
+      "last_trained": "2026-01-27T14:23:04.200493",
+      "training_dates": [
+        "2026-01-27T14:23:04.200493"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "price_action",
+        "entry_models"
+      ],
+      "concept_frequencies": {
+        "market_structure": 25,
+        "order_block": 14,
+        "fair_value_gap": 3,
+        "liquidity": 8,
+        "premium_discount": 3,
+        "entry_models": 4,
+        "institutional": 21,
+        "breaker": 26,
+        "time_based": 5,
+        "price_action": 12
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we see price hovering just below a key institutional reference point like  -> learned in september which are the bearish order blocks bullshore blocks liquidi",
+          "type": "conditional",
+          "concepts": [
+            "institutional"
+          ],
+          "source_video": "xRjKtUEKkSE"
+        },
+        {
+          "text": "we see cell stops being ran out or if  -> see a fair value gap below the marketplace or a liquidity void that didn't initi",
+          "type": "conditional",
+          "concepts": [
+            "fair_value_gap",
+            "liquidity"
+          ],
+          "source_video": "xRjKtUEKkSE"
+        }
+      ],
+      "key_points": [
+        "Gets many traders caught and if you understand order blocks many times the bearish order block is ju"
+      ],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 2 trading rules. Identified 1 key learning points.",
+      "content_quality_score": 1.0,
+      "concept_density": 20.133111480865225
+    },
+    "y0lVKWLsZeM": {
+      "video_id": "y0lVKWLsZeM",
+      "title": "ICT Mentorship Core Content - Month 07 - Short Term Trading Low Resistance Liquidity Runs Part 1",
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 07",
+      "duration": 0,
+      "word_count": 3644,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.216534",
+      "last_trained": "2026-01-27T14:23:04.216534",
+      "training_dates": [
+        "2026-01-27T14:23:04.216534"
+      ],
+      "concepts_detected": [
+        "market_structure",
+        "institutional",
+        "premium_discount",
+        "time_based",
+        "liquidity",
+        "order_block",
+        "fair_value_gap",
+        "breaker",
+        "price_action"
+      ],
+      "concept_frequencies": {
+        "market_structure": 6,
+        "order_block": 13,
+        "fair_value_gap": 2,
+        "liquidity": 4,
+        "premium_discount": 96,
+        "institutional": 2,
+        "breaker": 3,
+        "time_based": 28,
+        "price_action": 9
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "we deal with time and price  -> price moves from a premium to a discount array or from a discount array to a pre",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount",
+            "time_based"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        },
+        {
+          "text": "it is coupled with a pd array for a premium market  -> are blending both time and price we would look for that move to be correlated to",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount",
+            "time_based"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        },
+        {
+          "text": "price trades down to a pd array whether it be a discount or a premium if  -> trade into that element whether it be a bullish order block a breaker any of tho",
+          "type": "conditional",
+          "concepts": [
+            "order_block",
+            "premium_discount",
+            "breaker"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        },
+        {
+          "text": "it trades to a bearish pd array or a premium pd array so  -> see that happening with the weekly rejection block it also took out an old high",
+          "type": "conditional",
+          "concepts": [
+            "premium_discount",
+            "breaker",
+            "time_based"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        },
+        {
+          "text": "that move to be correlated to a later discount pd array when price moves that do",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        },
+        {
+          "text": "a four hour or one hour premium pda rate the couple and exit with and moving fur",
+          "type": "setup",
+          "concepts": [
+            "premium_discount"
+          ],
+          "source_video": "y0lVKWLsZeM"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure, institutional, premium discount. Extracted 6 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 44.731064763995604
+    },
+    "z-7ypchAMDE": {
+      "video_id": "z-7ypchAMDE",
+      "title": "ICT Mentorship Core Content - Month 05 - Using 10 Year Notes In HTF Analysis",
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "playlist_name": "2017 ICT Private Mentorship Core Content Month 05",
+      "duration": 0,
+      "word_count": 2635,
+      "training_count": 1,
+      "first_trained": "2026-01-27T14:23:04.228144",
+      "last_trained": "2026-01-27T14:23:04.228144",
+      "training_dates": [
+        "2026-01-27T14:23:04.228144"
+      ],
+      "concepts_detected": [
+        "market_structure"
+      ],
+      "concept_frequencies": {
+        "market_structure": 9
+      },
+      "trading_rules_extracted": [],
+      "key_points": [],
+      "summary": "Primary concepts covered: market structure.",
+      "content_quality_score": 0.4415559772296016,
+      "concept_density": 3.4155597722960156
+    }
+  },
+  "playlists": {
+    "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk": {
+      "playlist_id": "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
+      "title": "2016 ICT Private Mentorship Core Content Month 01",
+      "tier": 2,
+      "total_videos": 8,
+      "videos_trained": 2,
+      "total_training_runs": 1,
+      "first_trained": "2026-01-27T14:23:04.229044",
+      "last_trained": "2026-01-27T14:23:04.229044",
+      "top_concepts": [
+        [
+          "market_structure",
+          43
+        ],
+        [
+          "liquidity",
+          16
+        ],
+        [
+          "institutional",
+          16
+        ],
+        [
+          "premium_discount",
+          13
+        ],
+        [
+          "time_based",
+          11
+        ],
+        [
+          "order_block",
+          10
+        ],
+        [
+          "kill_zones",
+          6
+        ],
+        [
+          "entry_models",
+          4
+        ]
+      ],
+      "total_rules_extracted": 3,
+      "playlist_summary": "Playlist covers 2 videos focusing on: market structure, liquidity, institutional. Extracted 3 trading rules total.",
+      "video_ids": [
+        "XwYYWBttWro",
+        "0LhteuLVuDU"
+      ]
+    },
+    "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk": {
+      "playlist_id": "PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
+      "title": "2017 ICT Private Mentorship Core Content Month 05",
+      "tier": 2,
+      "total_videos": 18,
+      "videos_trained": 18,
+      "total_training_runs": 1,
+      "first_trained": "2026-01-27T14:23:04.229068",
+      "last_trained": "2026-01-27T14:23:04.229068",
+      "top_concepts": [
+        [
+          "time_based",
+          478
+        ],
+        [
+          "market_structure",
+          395
+        ],
+        [
+          "premium_discount",
+          163
+        ],
+        [
+          "liquidity",
+          146
+        ],
+        [
+          "order_block",
+          128
+        ],
+        [
+          "institutional",
+          114
+        ],
+        [
+          "breaker",
+          97
+        ],
+        [
+          "entry_models",
+          34
+        ],
+        [
+          "price_action",
+          31
+        ],
+        [
+          "fair_value_gap",
+          19
+        ]
+      ],
+      "total_rules_extracted": 47,
+      "playlist_summary": "Playlist covers 18 videos focusing on: time based, market structure, premium discount. Extracted 47 trading rules total.",
+      "video_ids": [
+        "O2Sio7opKxo",
+        "Vb6ueaPqut0",
+        "crPpMwgwa7k",
+        "n7SPAK_tpN8",
+        "4i_hnoEk6lw",
+        "Y1oxwc354oo",
+        "w6VlX-rsTUs",
+        "z-7ypchAMDE",
+        "pwO-E-OOH5k",
+        "xRjKtUEKkSE",
+        "okN5p701T7Y",
+        "WDattjFvNBc",
+        "LRKtiysz4nA",
+        "N8_8tEw2_44",
+        "BkmZgjuYREU",
+        "vqtA1S9JH34",
+        "6Sp-pr3yCkc",
+        "vb_Yc-gCBfU"
+      ]
+    },
+    "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR": {
+      "playlist_id": "PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
+      "title": "2017 ICT Private Mentorship Core Content Month 07",
+      "tier": 2,
+      "total_videos": 8,
+      "videos_trained": 8,
+      "total_training_runs": 1,
+      "first_trained": "2026-01-27T14:23:04.229101",
+      "last_trained": "2026-01-27T14:23:04.229101",
+      "top_concepts": [
+        [
+          "time_based",
+          482
+        ],
+        [
+          "premium_discount",
+          479
+        ],
+        [
+          "market_structure",
+          113
+        ],
+        [
+          "order_block",
+          85
+        ],
+        [
+          "liquidity",
+          59
+        ],
+        [
+          "institutional",
+          41
+        ],
+        [
+          "breaker",
+          37
+        ],
+        [
+          "kill_zones",
+          29
+        ],
+        [
+          "fair_value_gap",
+          24
+        ],
+        [
+          "entry_models",
+          22
+        ]
+      ],
+      "total_rules_extracted": 35,
+      "playlist_summary": "Playlist covers 8 videos focusing on: time based, premium discount, market structure. Extracted 35 trading rules total.",
+      "video_ids": [
+        "jvc105qaCJs",
+        "mQA8jCem9d0",
+        "hbE8S5FSdtQ",
+        "LBlK6JB0QS0",
+        "YV4fEF4d2wA",
+        "y0lVKWLsZeM",
+        "O69iFqP1j7o",
+        "wFjeUzJys7w"
+      ]
+    }
+  },
+  "global_stats": {
+    "total_videos_trained": 28,
+    "total_training_runs": 28,
+    "total_words_processed": 134270,
+    "total_rules_extracted": 85,
+    "last_training_date": "2026-01-27T14:23:04.228144",
+    "concept_global_frequencies": {
+      "market_structure": 551,
+      "order_block": 223,
+      "liquidity": 221,
+      "premium_discount": 655,
+      "institutional": 171,
+      "time_based": 971,
+      "fair_value_gap": 43,
+      "kill_zones": 37,
+      "entry_models": 60,
+      "breaker": 134,
+      "price_action": 40
+    }
+  },
+  "last_saved": "2026-01-27T14:23:04.229179"
+}

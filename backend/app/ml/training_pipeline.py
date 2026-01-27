@@ -33,6 +33,7 @@ except ImportError:
 
 from .feature_extractor import ICTFeatureExtractor, ConceptEmbedding, ICT_VOCABULARY
 from .concept_classifier import ICTConceptClassifier, ConceptSequenceAnalyzer
+from .training_database import TrainingDatabase
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -57,6 +58,9 @@ class ICTKnowledgeBase:
         self.concept_embeddings = ConceptEmbedding(embedding_dim=64)
         self.sequence_analyzer = ConceptSequenceAnalyzer()
 
+        # Training database for tracking all video learnings
+        self.training_db = TrainingDatabase(str(self.data_dir))
+
         # Knowledge storage
         self.concept_definitions = {}  # Learned definitions
         self.concept_relationships = {}  # How concepts relate
@@ -67,6 +71,38 @@ class ICTKnowledgeBase:
         self.n_transcripts_processed = 0
         self.last_training_time = None
         self.training_history = []
+
+        # Load playlist metadata for video tracking
+        self.playlist_meta = self._load_playlist_metadata()
+
+    def _load_playlist_metadata(self) -> Dict:
+        """Load playlist metadata to map videos to playlists"""
+        playlists_dir = self.data_dir / "playlists"
+        playlist_meta = {}
+
+        if not playlists_dir.exists():
+            return playlist_meta
+
+        for pfile in playlists_dir.glob("*.json"):
+            try:
+                with open(pfile) as f:
+                    pdata = json.load(f)
+                    pid = pdata.get('playlist_id', '')
+                    playlist_meta[pid] = pdata
+
+                    # Map each video to its playlist
+                    for video in pdata.get('videos', []):
+                        vid = video.get('video_id', '')
+                        playlist_meta[f"video:{vid}"] = {
+                            'playlist_id': pid,
+                            'playlist_title': pdata.get('title', ''),
+                            'video_title': video.get('title', ''),
+                            'tier': pdata.get('tier', 1),
+                        }
+            except Exception as e:
+                logger.warning(f"Error loading playlist {pfile}: {e}")
+
+        return playlist_meta
 
     def load_transcripts(self, limit: int = None) -> List[Dict]:
         """Load all available transcripts"""
@@ -178,7 +214,7 @@ class ICTKnowledgeBase:
         return self.trading_rules
 
     def train(self, transcripts: List[Dict] = None, incremental: bool = False) -> Dict:
-        """Train all ML components"""
+        """Train all ML components and record per-video learnings"""
         logger.info("Starting training pipeline...")
 
         if transcripts is None:
@@ -191,7 +227,8 @@ class ICTKnowledgeBase:
         results = {
             'timestamp': datetime.utcnow().isoformat(),
             'n_transcripts': len(transcripts),
-            'components': {}
+            'components': {},
+            'video_learnings': []
         }
 
         # 1. Train concept classifier
@@ -222,6 +259,14 @@ class ICTKnowledgeBase:
         rules = self.extract_trading_rules(transcripts)
         results['components']['rules'] = {'n_rules': len(rules)}
 
+        # 6. Record per-video learnings to training database
+        logger.info("Recording per-video learnings to database...")
+        self._record_video_learnings(transcripts, rules)
+        results['components']['database'] = {
+            'videos_recorded': len(transcripts),
+            'database_path': str(self.training_db.db_path)
+        }
+
         # Update metadata
         self.n_transcripts_processed = len(transcripts)
         self.last_training_time = datetime.utcnow().isoformat()
@@ -229,6 +274,84 @@ class ICTKnowledgeBase:
 
         logger.info(f"Training complete. Processed {len(transcripts)} transcripts.")
         return results
+
+    def _record_video_learnings(self, transcripts: List[Dict], all_rules: List[Dict]):
+        """Record learnings for each video to the training database"""
+        import re
+
+        # Pre-compile concept patterns for detection
+        concept_patterns = {}
+        for concept, terms in ICT_VOCABULARY.items():
+            term_pattern = '|'.join(re.escape(t) for t in terms)
+            concept_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
+
+        # Group rules by source video
+        rules_by_video = defaultdict(list)
+        for rule in all_rules:
+            vid = rule.get('source_video', '')
+            if vid:
+                rules_by_video[vid].append(rule)
+
+        # Track videos by playlist for playlist-level recording
+        videos_by_playlist = defaultdict(list)
+
+        for transcript in transcripts:
+            video_id = transcript.get('video_id', '')
+            if not video_id:
+                continue
+
+            text = transcript.get('full_text', '')
+
+            # Detect concepts in this video
+            video_concepts = []
+            for concept, pattern in concept_patterns.items():
+                matches = pattern.findall(text)
+                if matches:
+                    video_concepts.extend([concept] * len(matches))
+
+            # Get video's rules
+            video_rules = rules_by_video.get(video_id, [])
+
+            # Get playlist info
+            pinfo = self.playlist_meta.get(f"video:{video_id}", {})
+
+            # Add title from playlist meta if not in transcript
+            if pinfo.get('video_title') and not transcript.get('title'):
+                transcript['title'] = pinfo['video_title']
+
+            # Record to database
+            self.training_db.record_video_training(
+                video_id=video_id,
+                transcript=transcript,
+                concepts_detected=video_concepts,
+                rules_extracted=video_rules,
+                playlist_info={
+                    'playlist_id': pinfo.get('playlist_id', ''),
+                    'title': pinfo.get('playlist_title', ''),
+                }
+            )
+
+            # Track for playlist recording
+            if pinfo.get('playlist_id'):
+                videos_by_playlist[pinfo['playlist_id']].append(video_id)
+
+        # Record playlist-level training
+        for playlist_id, video_ids in videos_by_playlist.items():
+            pdata = self.playlist_meta.get(playlist_id, {})
+            self.training_db.record_playlist_training(
+                playlist_id=playlist_id,
+                videos_trained=video_ids,
+                playlist_meta=pdata
+            )
+
+        # Save the database
+        self.training_db.save()
+
+        # Export markdown report
+        report_path = self.data_dir / "TRAINING_DATABASE_REPORT.md"
+        with open(report_path, 'w') as f:
+            f.write(self.training_db.export_to_markdown())
+        logger.info(f"Training report exported to {report_path}")
 
     def query_concept(self, concept_name: str) -> Dict:
         """Get comprehensive information about a concept"""
@@ -284,6 +407,26 @@ class ICTKnowledgeBase:
                 'sequences': 'trained' if self.sequence_analyzer.transition_matrix is not None else 'not_trained',
             }
         }
+
+    def get_training_database_report(self) -> Dict:
+        """Get comprehensive report from the training database"""
+        return self.training_db.get_training_report()
+
+    def get_video_training_summary(self, video_id: str) -> Optional[Dict]:
+        """Get training summary for a specific video"""
+        return self.training_db.get_video_summary(video_id)
+
+    def get_playlist_training_summary(self, playlist_id: str) -> Optional[Dict]:
+        """Get training summary for a specific playlist"""
+        return self.training_db.get_playlist_summary(playlist_id)
+
+    def get_all_trained_videos(self) -> List[Dict]:
+        """Get list of all trained videos"""
+        return self.training_db.get_all_trained_videos()
+
+    def get_all_playlists(self) -> List[Dict]:
+        """Get list of all playlists"""
+        return self.training_db.get_all_playlists()
 
     def save(self):
         """Save the entire knowledge base"""

@@ -884,7 +884,7 @@
     }
   ],
   "n_transcripts_processed": 28,
-  "last_training_time": "2026-01-27T14:12:10.030609",
+  "last_training_time": "2026-01-27T14:23:04.232827",
   "training_history": [
     {
       "timestamp": "2026-01-27T14:11:29.114964",
@@ -919,6 +919,45 @@
           "n_rules": 85
         }
       }
+    },
+    {
+      "timestamp": "2026-01-27T14:22:04.809340",
+      "n_transcripts": 28,
+      "components": {
+        "classifier": {
+          "timestamp": "2026-01-27T14:22:43.994626",
+          "n_samples": 56,
+          "model_scores": {
+            "random_forest": 0.9793478260869565,
+            "logistic": 0.9600000000000001,
+            "gradient_boost": 1.0
+          },
+          "ensemble_f1": 0.9923913043478261,
+          "model_weights": {
+            "random_forest": 0.3331854152799349,
+            "logistic": 0.32660306190370536,
+            "gradient_boost": 0.3402115228163597
+          }
+        },
+        "embeddings": {
+          "status": "trained",
+          "dim": 64
+        },
+        "sequence_analyzer": {
+          "status": "trained"
+        },
+        "definitions": {
+          "n_concepts": 11
+        },
+        "rules": {
+          "n_rules": 85
+        },
+        "database": {
+          "videos_recorded": 28,
+          "database_path": "/Users/kumarrishav/Desktop/TradingMamba/data/training_database.json"
+        }
+      },
+      "video_learnings": []
     }
   ]
 }
