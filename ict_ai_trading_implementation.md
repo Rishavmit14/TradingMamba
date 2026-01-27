@@ -18,7 +18,7 @@
 │                                    │                                            │
 │                                    ▼                                            │
 │                          ┌─────────────────┐                                   │
-│                          │   WHATSAPP      │                                   │
+│                          │   TELEGRAM      │                                   │
 │                          │   NOTIFICATIONS │                                   │
 │                          └─────────────────┘                                   │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -1100,8 +1100,8 @@ services:
       - DATABASE_URL=postgresql://user:pass@db:5432/ict_trading
       - REDIS_URL=redis://redis:6379
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
-      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
     depends_on:
       - db
       - redis
@@ -1181,10 +1181,9 @@ PINECONE_API_KEY=your_pinecone_key
 POLYGON_API_KEY=your_polygon_key
 ALPHA_VANTAGE_KEY=your_alphavantage_key
 
-# Notifications
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_token
-TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
+# Notifications (Telegram - FREE!)
+TELEGRAM_BOT_TOKEN=your_bot_token_from_botfather
+TELEGRAM_CHAT_ID=your_chat_id
 
 # App Settings
 SECRET_KEY=your_secret_key
