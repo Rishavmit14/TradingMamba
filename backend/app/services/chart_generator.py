@@ -1,6 +1,6 @@
 """
-ICT Chart Generator
-Generates annotated trading charts with ICT patterns
+Smart Money Chart Generator
+Generates annotated trading charts with Smart Money patterns
 Uses matplotlib - 100% FREE, no TradingView subscription needed!
 """
 
@@ -22,7 +22,7 @@ import base64
 
 class ICTChartGenerator:
     """
-    Generate professional ICT-annotated charts
+    Generate professional Smart Money annotated charts
 
     Features:
     - Candlestick charts
@@ -101,7 +101,7 @@ class ICTChartGenerator:
         save_path: Optional[str] = None
     ) -> str:
         """
-        Generate a complete ICT-annotated candlestick chart
+        Generate a complete Smart Money annotated candlestick chart
 
         Parameters:
         - data: OHLCV DataFrame
@@ -109,7 +109,7 @@ class ICTChartGenerator:
         - timeframe: Chart timeframe
         - signal: Optional signal data with entry/SL/TP
         - patterns: Optional list of detected patterns
-        - analysis: Optional ICT analysis results
+        - analysis: Optional Smart Money analysis results
 
         Returns:
         - Path to saved chart or base64 encoded image
@@ -188,7 +188,7 @@ class ICTChartGenerator:
             ax.add_patch(rect)
 
     def _draw_patterns(self, ax, data: pd.DataFrame, patterns: List[Dict]):
-        """Draw detected ICT patterns"""
+        """Draw detected Smart Money patterns"""
         for pattern in patterns:
             pattern_type = pattern.get('pattern_type', '')
             start_idx = pattern.get('start_index', 0)
@@ -254,7 +254,7 @@ class ICTChartGenerator:
                            fontsize=9, color=color, fontweight='bold')
 
     def _draw_analysis(self, ax, data: pd.DataFrame, analysis: Dict):
-        """Draw ICT analysis zones"""
+        """Draw Smart Money analysis zones"""
         # Premium/Discount zones
         if 'premium_discount' in analysis:
             pd_info = analysis['premium_discount']

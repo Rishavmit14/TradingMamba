@@ -1,7 +1,7 @@
 """
-ICT Signal Fusion Engine
+Smart Money Signal Fusion Engine
 
-Combines multiple ICT concepts and technical indicators to generate
+Combines multiple Smart Money concepts and technical indicators to generate
 high-probability trading signals with confidence scoring.
 
 The fusion logic learns which concept combinations are most effective.
@@ -28,12 +28,12 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class ICTSignal:
-    """Represents a trading signal with ICT context"""
+class SmartMoneySignal:
+    """Represents a trading signal with Smart Money context"""
     direction: str  # 'bullish' or 'bearish'
     strength: float  # 0-1 scale
     confidence: float  # 0-1 scale
-    concepts: List[str]  # ICT concepts supporting this signal
+    concepts: List[str]  # Smart Money concepts supporting this signal
     timeframe: str
     entry_zone: Tuple[float, float]  # (low, high)
     stop_loss: float
@@ -44,9 +44,9 @@ class ICTSignal:
     confluence_score: int = 0
 
 
-class ICTConceptScorer:
+class SmartMoneyConceptScorer:
     """
-    Scores individual ICT concepts based on market context.
+    Scores individual Smart Money concepts based on market context.
     Learns optimal scoring from historical performance.
     """
 
@@ -116,7 +116,7 @@ class ICTConceptScorer:
 
 class ConceptFusionEngine:
     """
-    Fuses multiple ICT concepts to determine signal strength.
+    Fuses multiple Smart Money concepts to determine signal strength.
     Uses learned concept relationships for optimal combination.
     """
 
@@ -138,7 +138,7 @@ class ConceptFusionEngine:
     }
 
     def __init__(self):
-        self.concept_scorer = ICTConceptScorer()
+        self.concept_scorer = SmartMoneyConceptScorer()
         self.synergies = self.SYNERGIES.copy()
 
     def calculate_confluence(self, concepts: List[str], context: Dict) -> Tuple[float, int, List[str]]:
@@ -151,7 +151,7 @@ class ConceptFusionEngine:
             - reasoning: Explanation of the scoring
         """
         if not concepts:
-            return 0.0, 0, ["No ICT concepts identified"]
+            return 0.0, 0, ["No Smart Money concepts identified"]
 
         reasoning = []
         scores = []
@@ -189,7 +189,7 @@ class ConceptFusionEngine:
 
 class MultiTimeframeAnalyzer:
     """
-    Analyzes ICT concepts across multiple timeframes.
+    Analyzes Smart Money concepts across multiple timeframes.
     Higher timeframes carry more weight.
     """
 
@@ -209,7 +209,7 @@ class MultiTimeframeAnalyzer:
         self.analysis_cache = {}
 
     def analyze_timeframe(self, df: pd.DataFrame, timeframe: str) -> Dict:
-        """Analyze ICT concepts on a single timeframe"""
+        """Analyze Smart Money concepts on a single timeframe"""
         if df is None or df.empty:
             return {}
 
@@ -323,7 +323,7 @@ class MultiTimeframeAnalyzer:
 class SignalGenerator:
     """
     Main signal generation class.
-    Combines all ICT analysis to produce actionable signals.
+    Combines all Smart Money analysis to produce actionable signals.
     """
 
     def __init__(self, data_dir: str = None):
@@ -343,7 +343,7 @@ class SignalGenerator:
         market_data: Dict[str, pd.DataFrame],  # Timeframe -> DataFrame
         detected_concepts: List[str],
         context: Dict = None
-    ) -> Optional[ICTSignal]:
+    ) -> Optional[SmartMoneySignal]:
         """Generate a trading signal from market data and concepts"""
 
         if not market_data:
@@ -418,7 +418,7 @@ class SignalGenerator:
             risk_reward = 0
 
         # Create signal
-        signal = ICTSignal(
+        signal = SmartMoneySignal(
             direction=direction,
             strength=confluence_score,
             confidence=min(confluence_score * mtf_result['score'] * 1.2, 1.0) if mtf_result['aligned'] else confluence_score * 0.7,
@@ -443,7 +443,7 @@ class SignalGenerator:
         return signal
 
     def _is_in_kill_zone(self) -> bool:
-        """Check if current time is in an ICT kill zone"""
+        """Check if current time is in an Smart Money kill zone"""
         now = datetime.utcnow()
         hour = now.hour
 
@@ -585,7 +585,7 @@ class SignalGenerator:
 def test_signal_fusion():
     """Test the signal fusion engine"""
     print("=" * 60)
-    print("ICT SIGNAL FUSION TEST")
+    print("Smart Money SIGNAL FUSION TEST")
     print("=" * 60)
 
     # Create sample market data

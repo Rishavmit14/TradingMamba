@@ -1,7 +1,7 @@
 """
-ICT Concept Extraction Service
+Smart Money Concept Extraction Service
 
-Uses AI (Claude/GPT) to extract ICT trading concepts from video transcripts.
+Uses AI (Claude/GPT) to extract Smart Money trading concepts from video transcripts.
 This is the core learning component that builds the knowledge base.
 """
 
@@ -14,11 +14,11 @@ from dataclasses import dataclass, field
 
 from ..models.video import Transcript, TranscriptSegment
 from ..models.concept import (
-    ICTConcept,
+    TradingConcept,
     ConceptMention,
     ConceptRule,
     ConceptCategory,
-    ICT_CONCEPT_TAXONOMY
+    SMART_MONEY_CONCEPT_TAXONOMY
 )
 from ..config import settings
 
@@ -31,17 +31,17 @@ class ExtractionResult:
     video_id: str
     concepts_found: List[ConceptMention]
     rules_extracted: List[ConceptRule]
-    new_concepts: List[ICTConcept]  # Previously unknown concepts
+    new_concepts: List[TradingConcept]  # Previously unknown concepts
     quality_score: float
     processing_time: float
 
 
 class ConceptExtractor:
     """
-    Extract ICT concepts from video transcripts using AI
+    Extract Smart Money concepts from video transcripts using AI
 
     This service:
-    1. Analyzes transcripts to find mentions of known ICT concepts
+    1. Analyzes transcripts to find mentions of known Smart Money concepts
     2. Extracts trading rules and guidelines
     3. Identifies new concepts not in the taxonomy
     4. Links concepts to specific timestamps for reference
@@ -56,15 +56,15 @@ class ConceptExtractor:
         self._anthropic_client = None
         self._openai_client = None
 
-    def _load_concept_taxonomy(self) -> Dict[str, ICTConcept]:
-        """Load the ICT concept taxonomy"""
+    def _load_concept_taxonomy(self) -> Dict[str, TradingConcept]:
+        """Load the Smart Money concept taxonomy"""
         concepts = {}
 
-        for category_key, category_data in ICT_CONCEPT_TAXONOMY.items():
+        for category_key, category_data in SMART_MONEY_CONCEPT_TAXONOMY.items():
             category = ConceptCategory(category_key) if category_key in [c.value for c in ConceptCategory] else ConceptCategory.MARKET_STRUCTURE
 
             for concept_data in category_data.get('concepts', []):
-                concept = ICTConcept(
+                concept = TradingConcept(
                     name=concept_data['name'],
                     short_name=concept_data.get('short_name', ''),
                     category=category,
@@ -199,14 +199,14 @@ class ConceptExtractor:
             for name, concept in self.concept_taxonomy.items()
         ])
 
-        return f"""You are an expert in ICT (Inner Circle Trader) trading methodology.
-Analyze the following transcript from an ICT YouTube video and extract:
+        return f"""You are an expert in Smart Money (Inner Circle Trader) trading methodology.
+Analyze the following transcript from an Smart Money YouTube video and extract:
 
-1. **Concept Mentions**: Identify where specific ICT concepts are mentioned or explained.
+1. **Concept Mentions**: Identify where specific Smart Money concepts are mentioned or explained.
 2. **Trading Rules**: Extract any specific trading rules, guidelines, or criteria mentioned.
-3. **New Concepts**: Note any ICT concepts not in the known list that should be added.
+3. **New Concepts**: Note any Smart Money concepts not in the known list that should be added.
 
-## Known ICT Concepts:
+## Known Smart Money Concepts:
 {concept_list}
 
 ## Transcript (Part {chunk_index + 1} of {total_chunks}):

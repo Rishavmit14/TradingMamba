@@ -1,7 +1,7 @@
 """
-ICT Kill Zones and Session Analysis
+Smart Money Kill Zones and Session Analysis
 
-Kill Zones are optimal trading times according to ICT methodology.
+Kill Zones are optimal trading times according to Smart Money methodology.
 These are periods when institutional order flow is highest.
 
 100% FREE - Uses only Python standard library + pandas
@@ -31,7 +31,7 @@ class TradingSession(Enum):
 
 @dataclass
 class KillZone:
-    """Represents an ICT Kill Zone"""
+    """Represents an Smart Money Kill Zone"""
     name: str
     session: TradingSession
     start_time: time  # UTC time
@@ -56,9 +56,9 @@ class SessionInfo:
 
 class KillZoneAnalyzer:
     """
-    Analyzes ICT Kill Zones and trading sessions.
+    Analyzes Smart Money Kill Zones and trading sessions.
 
-    ICT Kill Zones (UTC):
+    Smart Money Kill Zones (UTC):
     - Asian Kill Zone: 00:00 - 04:00 UTC (Tokyo)
     - London Kill Zone: 07:00 - 10:00 UTC
     - New York Kill Zone: 12:00 - 15:00 UTC
@@ -252,7 +252,7 @@ class KillZoneAnalyzer:
         """Determine daily bias based on session and day of week"""
         day_of_week = dt.weekday()  # 0 = Monday
 
-        # ICT concepts about weekly/daily tendencies
+        # Smart Money concepts about weekly/daily tendencies
         # Monday: Accumulation/range
         # Tuesday-Wednesday: Main moves
         # Thursday: Continuation or reversal
@@ -309,7 +309,7 @@ class KillZoneAnalyzer:
         """
         Determine current Power of Three (AMD) phase.
 
-        Power of Three (ICT concept):
+        Power of Three (Smart Money concept):
         - Accumulation: Range-bound, building positions (Asian session)
         - Manipulation: False move to trap traders (early London/NY)
         - Distribution: True move direction (main session)
@@ -354,7 +354,7 @@ class KillZoneAnalyzer:
 
     def get_true_day_open(self, df: pd.DataFrame, dt: datetime = None) -> Optional[float]:
         """
-        Get ICT True Day Open (New York midnight open).
+        Get Smart Money True Day Open (New York midnight open).
 
         True Day Open is at 00:00 New York time (05:00 UTC in winter, 04:00 UTC in summer).
         """
@@ -437,7 +437,7 @@ if __name__ == "__main__":
     analyzer = KillZoneAnalyzer()
 
     print("=" * 50)
-    print("ICT KILL ZONE ANALYZER")
+    print("Smart Money KILL ZONE ANALYZER")
     print("=" * 50)
 
     print(f"\nCurrent UTC Time: {analyzer.get_current_utc_time()}")

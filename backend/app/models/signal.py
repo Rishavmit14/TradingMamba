@@ -100,7 +100,7 @@ class Signal:
     htf_structure: str = ""  # Higher timeframe market structure
     ltf_confirmation: bool = False
 
-    # ICT specific
+    # Smart Money specific
     order_blocks: List[Dict[str, Any]] = field(default_factory=list)
     fair_value_gaps: List[Dict[str, Any]] = field(default_factory=list)
     liquidity_levels: List[Dict[str, Any]] = field(default_factory=list)
@@ -175,7 +175,7 @@ class Signal:
         factors_text = "\n".join([f"• {f.name}" for f in self.factors if f.met])
 
         return f"""
-{emoji} *ICT SIGNAL ALERT* {emoji}
+{emoji} *Smart Money SIGNAL ALERT* {emoji}
 
 *{self.symbol}* | {self.timeframe.value}
 Direction: *{self.direction.value}*

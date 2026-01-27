@@ -24,7 +24,7 @@ function Navigation() {
   const navItems = [
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/signals', icon: TrendingUp, label: 'Signals' },
-    { path: '/concepts', icon: BookOpen, label: 'ICT Concepts' },
+    { path: '/concepts', icon: BookOpen, label: 'Concepts' },
     { path: '/learning', icon: Brain, label: 'ML Learning' },
     { path: '/performance', icon: BarChart3, label: 'Performance' },
   ];
@@ -40,7 +40,7 @@ function Navigation() {
             </div>
             <div>
               <h1 className="text-lg font-bold text-white">TradingMamba</h1>
-              <p className="text-xs text-gray-400">ICT AI Signals</p>
+              <p className="text-xs text-gray-400">AI Trading Signals</p>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ function App() {
         {/* Footer */}
         <footer className="border-t border-gray-800 py-4 mt-8">
           <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-            TradingMamba - Free ICT AI Trading Signals | Not Financial Advice
+            TradingMamba - Free AI Trading Signals | Not Financial Advice
           </div>
         </footer>
       </div>

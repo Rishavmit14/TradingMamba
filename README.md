@@ -1,16 +1,16 @@
 # TradingMamba
 
-An AI-powered trading signal system that learns ICT (Inner Circle Trader) methodology from YouTube videos and generates buy/sell signals with chart analysis across multiple timeframes.
+An AI-powered trading signal system that learns Smart Money (institutional trading) methodology from YouTube videos and generates buy/sell signals with chart analysis across multiple timeframes.
 
 **100% FREE** - No paid APIs required. Uses only open-source tools and free services.
 
 ## Features
 
-- **ICT Concept Learning** - Learns from 100+ ICT YouTube videos
+- **Smart Money Concept Learning** - Learns from 100+ trading methodology videos
 - **Self-Improving ML** - Gets smarter as more videos are added
 - **Real-time Signals** - Generates trading signals with confidence scores
 - **Multi-Timeframe Analysis** - Analyzes H1, H4, D1 timeframes
-- **ICT Pattern Detection** - Order Blocks, FVGs, Liquidity, Premium/Discount
+- **Smart Money Pattern Detection** - Order Blocks, FVGs, Liquidity, Premium/Discount
 - **Telegram Notifications** - Free signal alerts
 - **Web Dashboard** - Modern React UI
 
@@ -66,13 +66,13 @@ Open http://localhost:3000 in your browser.
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/signals/analyze/{symbol}` | GET | Full ICT analysis with signal |
+| `/api/signals/analyze/{symbol}` | GET | Full Smart Money analysis with signal |
 | `/api/signals/quick/{symbol}` | GET | Quick single-timeframe signal |
 | `/api/ml/status` | GET | ML model status |
 | `/api/ml/train` | POST | Trigger model training |
 | `/api/market/price/{symbol}` | GET | Current price |
 | `/api/market/ohlcv/{symbol}` | GET | OHLCV candle data |
-| `/api/concepts` | GET | List ICT concepts |
+| `/api/concepts` | GET | List Smart Money concepts |
 | `/api/notifications/test` | POST | Test Telegram |
 
 ## Adding New Videos
@@ -105,7 +105,7 @@ TradingMamba/
 ├── backend/
 │   └── app/
 │       ├── ml/              # ML pipeline (classifier, features, signals)
-│       ├── models/          # Data models & ICT taxonomy
+│       ├── models/          # Data models & Smart Money taxonomy
 │       └── services/        # Market data, notifications
 ├── frontend/
 │   └── src/
@@ -121,7 +121,7 @@ TradingMamba/
     └── ml_models/           # Trained models
 ```
 
-## ICT Concepts Detected
+## Smart Money Concepts Detected
 
 - **Market Structure** - BOS, CHoCH, HH/HL/LH/LL
 - **Order Blocks** - Bullish/Bearish OBs, Mitigation
@@ -148,12 +148,12 @@ TradingMamba/
 - [x] Phase 4: Signal Generation
 - [x] Phase 5: Web Dashboard
 - [x] Phase 6: Telegram Notifications
-- [ ] Phase 7: More ICT Videos (ongoing)
+- [ ] Phase 7: More Smart Money Videos (ongoing)
 
 ## Documentation
 
-- [System Plan](ict_ai_trading_system_plan.md) - Complete project blueprint
-- [Technical Implementation](ict_ai_trading_implementation.md) - Implementation guide
+- [System Plan](smart_money_trading_system_plan.md) - Complete project blueprint
+- [Technical Implementation](smart_money_trading_implementation.md) - Implementation guide
 
 ## Disclaimer
 

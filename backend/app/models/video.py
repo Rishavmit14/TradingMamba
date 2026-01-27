@@ -1,4 +1,4 @@
-"""Video and Transcript models for ICT video processing"""
+"""Video and Transcript models for Smart Money video processing"""
 
 from datetime import datetime
 from enum import Enum
@@ -19,7 +19,7 @@ class VideoStatus(Enum):
 
 @dataclass
 class Video:
-    """Represents a YouTube video from ICT playlists"""
+    """Represents a YouTube video from Smart Money playlists"""
 
     id: str = field(default_factory=lambda: str(uuid4()))
     youtube_id: str = ""
@@ -128,7 +128,7 @@ class Transcript:
 
 @dataclass
 class Playlist:
-    """Represents an ICT YouTube playlist"""
+    """Represents an Smart Money YouTube playlist"""
 
     id: str = field(default_factory=lambda: str(uuid4()))
     youtube_playlist_id: str = ""

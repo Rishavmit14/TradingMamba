@@ -1,5 +1,5 @@
 """
-ICT Trading ML Training Pipeline
+Smart Money Trading ML Training Pipeline
 
 Orchestrates the entire ML workflow:
 1. Load transcripts
@@ -31,18 +31,18 @@ try:
 except ImportError:
     raise ImportError("Install scikit-learn: pip install scikit-learn")
 
-from .feature_extractor import ICTFeatureExtractor, ConceptEmbedding, ICT_VOCABULARY
-from .concept_classifier import ICTConceptClassifier, ConceptSequenceAnalyzer
+from .feature_extractor import SmartMoneyFeatureExtractor, ConceptEmbedding, SMART_MONEY_VOCABULARY
+from .concept_classifier import SmartMoneyConceptClassifier, ConceptSequenceAnalyzer
 from .training_database import TrainingDatabase
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class ICTKnowledgeBase:
+class SmartMoneyKnowledgeBase:
     """
     Central knowledge base that learns from all transcripts.
-    Combines multiple learning approaches for comprehensive ICT understanding.
+    Combines multiple learning approaches for comprehensive Smart Money understanding.
     """
 
     def __init__(self, data_dir: str = None):
@@ -53,8 +53,8 @@ class ICTKnowledgeBase:
         self.models_dir.mkdir(parents=True, exist_ok=True)
 
         # Components
-        self.feature_extractor = ICTFeatureExtractor(str(self.data_dir))
-        self.concept_classifier = ICTConceptClassifier(str(self.data_dir))
+        self.feature_extractor = SmartMoneyFeatureExtractor(str(self.data_dir))
+        self.concept_classifier = SmartMoneyConceptClassifier(str(self.data_dir))
         self.concept_embeddings = ConceptEmbedding(embedding_dim=64)
         self.sequence_analyzer = ConceptSequenceAnalyzer()
 
@@ -131,7 +131,7 @@ class ICTKnowledgeBase:
 
         # Pre-compile patterns for efficiency
         compiled_patterns = {}
-        for concept, terms in ICT_VOCABULARY.items():
+        for concept, terms in SMART_MONEY_VOCABULARY.items():
             # Use simpler word boundary matching
             term_pattern = '|'.join(re.escape(t) for t in terms)
             compiled_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
@@ -169,7 +169,7 @@ class ICTKnowledgeBase:
 
         # Pre-compile concept patterns
         concept_patterns = {}
-        for concept, terms in ICT_VOCABULARY.items():
+        for concept, terms in SMART_MONEY_VOCABULARY.items():
             term_pattern = '|'.join(re.escape(t) for t in terms)
             concept_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
 
@@ -281,7 +281,7 @@ class ICTKnowledgeBase:
 
         # Pre-compile concept patterns for detection
         concept_patterns = {}
-        for concept, terms in ICT_VOCABULARY.items():
+        for concept, terms in SMART_MONEY_VOCABULARY.items():
             term_pattern = '|'.join(re.escape(t) for t in terms)
             concept_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
 
@@ -355,12 +355,12 @@ class ICTKnowledgeBase:
 
     def query_concept(self, concept_name: str) -> Dict:
         """Get comprehensive information about a concept"""
-        if concept_name not in ICT_VOCABULARY:
+        if concept_name not in SMART_MONEY_VOCABULARY:
             return {'error': f'Unknown concept: {concept_name}'}
 
         result = {
             'name': concept_name,
-            'terms': ICT_VOCABULARY[concept_name],
+            'terms': SMART_MONEY_VOCABULARY[concept_name],
         }
 
         # Add definition if available
@@ -383,7 +383,7 @@ class ICTKnowledgeBase:
         return result
 
     def predict_concepts(self, text: str) -> Dict:
-        """Predict ICT concepts in new text"""
+        """Predict Smart Money concepts in new text"""
         if not self.concept_classifier.is_fitted:
             return {'error': 'Model not trained. Call train() first.'}
 
@@ -487,11 +487,11 @@ class ICTKnowledgeBase:
 
 class SignalPredictionModel:
     """
-    Predicts trading signals based on learned ICT concepts.
+    Predicts trading signals based on learned Smart Money concepts.
     Combines concept presence with market context for predictions.
     """
 
-    def __init__(self, knowledge_base: ICTKnowledgeBase):
+    def __init__(self, knowledge_base: SmartMoneyKnowledgeBase):
         self.kb = knowledge_base
         self.models_dir = self.kb.models_dir
 
@@ -600,10 +600,10 @@ class SignalPredictionModel:
 def run_training_pipeline(data_dir: str = None, incremental: bool = False):
     """Run the full training pipeline"""
     print("=" * 60)
-    print("ICT TRADING ML TRAINING PIPELINE")
+    print("Smart Money TRADING ML TRAINING PIPELINE")
     print("=" * 60)
 
-    kb = ICTKnowledgeBase(data_dir)
+    kb = SmartMoneyKnowledgeBase(data_dir)
 
     # Load existing if incremental
     if incremental:

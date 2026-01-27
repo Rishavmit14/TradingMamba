@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { getConcepts, queryConcept } from '../services/api';
 
-// ICT Concept Categories with descriptions
+// Smart Money Concept Categories with descriptions
 const CATEGORY_INFO = {
   market_structure: {
     name: 'Market Structure',
@@ -172,7 +172,7 @@ function ConceptDetailModal({ concept, data, onClose }) {
               {/* Trading Rules */}
               {data.trading_rules?.length > 0 && (
                 <div>
-                  <h3 className="font-medium mb-2">Trading Rules from ICT</h3>
+                  <h3 className="font-medium mb-2">Trading Rules</h3>
                   <ul className="space-y-2">
                     {data.trading_rules.map((rule, i) => (
                       <li key={i} className="bg-gray-700/50 rounded p-3 text-sm">
@@ -283,8 +283,8 @@ export default function Concepts() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold">ICT Concepts</h1>
-          <p className="text-gray-400">Learn Inner Circle Trader methodology from AI-analyzed transcripts</p>
+          <h1 className="text-2xl font-bold">Smart Money Concepts</h1>
+          <p className="text-gray-400">Learn Smart Money trading methodology from AI-analyzed transcripts</p>
         </div>
       </div>
 

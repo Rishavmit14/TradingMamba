@@ -217,7 +217,7 @@ class TrainingDatabase:
                           rules: List[Dict], key_points: List[str]) -> str:
         """Generate a summary of what was learned from this video"""
         if not concepts:
-            return "No significant ICT concepts detected in this video."
+            return "No significant Smart Money concepts detected in this video."
 
         # Count concept categories
         concept_counts = defaultdict(int)
@@ -253,7 +253,7 @@ class TrainingDatabase:
         Args:
             video_id: YouTube video ID
             transcript: Full transcript data
-            concepts_detected: List of ICT concepts found
+            concepts_detected: List of Smart Money concepts found
             rules_extracted: Trading rules extracted from this video
             playlist_info: Optional playlist metadata
         """
@@ -494,7 +494,7 @@ class TrainingDatabase:
         lines.append(f"- **Last Training:** {self.global_stats['last_training_date']}\n")
 
         # Top Concepts
-        lines.append("## Top ICT Concepts Learned\n")
+        lines.append("## Top Smart Money Concepts Learned\n")
         concept_freq = self.global_stats.get('concept_global_frequencies', {})
         top_concepts = sorted(concept_freq.items(), key=lambda x: -x[1])[:10]
         for concept, freq in top_concepts:
@@ -570,7 +570,7 @@ class TrainingDatabase:
 
 def migrate_existing_data(db: TrainingDatabase) -> int:
     """Migrate existing transcripts to the training database"""
-    from .feature_extractor import ICT_VOCABULARY
+    from .feature_extractor import SMART_MONEY_VOCABULARY
     import re
 
     migrated = 0
@@ -594,7 +594,7 @@ def migrate_existing_data(db: TrainingDatabase) -> int:
 
     # Pre-compile concept patterns
     concept_patterns = {}
-    for concept, terms in ICT_VOCABULARY.items():
+    for concept, terms in SMART_MONEY_VOCABULARY.items():
         term_pattern = '|'.join(re.escape(t) for t in terms)
         concept_patterns[concept] = re.compile(rf'\b({term_pattern})\b', re.IGNORECASE)
 

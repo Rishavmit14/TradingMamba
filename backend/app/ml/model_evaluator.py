@@ -323,7 +323,7 @@ class PerformanceDashboard:
         }
 
     def get_concept_performance(self) -> Dict[str, Dict]:
-        """Analyze which ICT concepts correlate with winning trades"""
+        """Analyze which Smart Money concepts correlate with winning trades"""
         if not self.trading_outcomes:
             return {}
 

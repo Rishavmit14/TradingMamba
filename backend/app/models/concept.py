@@ -1,4 +1,4 @@
-"""ICT Concept models for knowledge base"""
+"""Smart Money Concept models for knowledge base"""
 
 from datetime import datetime
 from enum import Enum
@@ -8,7 +8,7 @@ from uuid import uuid4
 
 
 class ConceptCategory(Enum):
-    """Categories of ICT concepts"""
+    """Categories of Smart Money concepts"""
     MARKET_STRUCTURE = "market_structure"
     KEY_LEVELS = "key_levels"
     ENTRY_MODELS = "entry_models"
@@ -20,9 +20,9 @@ class ConceptCategory(Enum):
 
 
 @dataclass
-class ICTConcept:
+class TradingConcept:
     """
-    Represents an ICT trading concept
+    Represents a Smart Money trading concept
 
     This forms the core taxonomy that the ML model will learn to identify
     and apply to market analysis.
@@ -84,7 +84,7 @@ class ICTConcept:
 @dataclass
 class ConceptMention:
     """
-    Records where an ICT concept was mentioned/explained in a video
+    Records where an Smart Money concept was mentioned/explained in a video
 
     This links video content to concepts for training and retrieval.
     """
@@ -132,7 +132,7 @@ class ConceptMention:
 @dataclass
 class ConceptRule:
     """
-    A codified trading rule extracted from ICT content
+    A codified trading rule extracted from Smart Money content
 
     These rules are what the signal generator will use to make decisions.
     """
@@ -187,8 +187,8 @@ class ConceptRule:
         }
 
 
-# Pre-defined ICT Concept Taxonomy
-ICT_CONCEPT_TAXONOMY = {
+# Pre-defined Smart Money Concept Taxonomy
+SMART_MONEY_CONCEPT_TAXONOMY = {
     "market_structure": {
         "name": "Market Structure",
         "concepts": [
@@ -334,10 +334,10 @@ ICT_CONCEPT_TAXONOMY = {
                 "description": "Specific time-based entry model during NY session",
             },
             {
-                "name": "ICT 2022 Model",
+                "name": "Smart Money 2022 Model",
                 "short_name": "2022",
-                "keywords": ["2022 model", "ict 2022", "new model"],
-                "description": "ICT's refined entry model from 2022",
+                "keywords": ["2022 model", "smart money 2022", "new model"],
+                "description": "Smart Money's refined entry model from 2022",
             },
             {
                 "name": "Power of Three",

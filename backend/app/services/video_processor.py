@@ -1,5 +1,5 @@
 """
-Video Processing Pipeline for ICT YouTube Videos
+Video Processing Pipeline for Smart Money YouTube Videos
 
 This module handles:
 1. Downloading videos from YouTube playlists
@@ -54,7 +54,7 @@ class ProcessingResult:
 
 class VideoProcessor:
     """
-    Process ICT YouTube videos for the learning pipeline
+    Process Smart Money YouTube videos for the learning pipeline
 
     Usage:
         processor = VideoProcessor()
@@ -346,7 +346,7 @@ class PlaylistProcessor:
     """
     Process entire YouTube playlists
 
-    Handles the systematic processing of ICT playlists in order,
+    Handles the systematic processing of Smart Money playlists in order,
     ensuring progressive learning from basics to advanced.
     """
 
@@ -474,70 +474,70 @@ class PlaylistProcessor:
 # Playlist URLs with metadata
 ICT_PLAYLISTS = [
     {
-        "name": "ICT Market Maker Forex Series",
+        "name": "Smart Money Market Maker Forex Series",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paZ0R9gMaq0y2fM_2vyNJadp",
         "learning_tier": 1,
         "order": 1,
         "description": "Foundation series on market maker concepts"
     },
     {
-        "name": "ICT OTE Pattern Recognition Series",
+        "name": "Smart Money OTE Pattern Recognition Series",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paaRnabpBl38GoMkxF1FiXCF",
         "learning_tier": 1,
         "order": 2,
         "description": "Optimal Trade Entry pattern recognition"
     },
     {
-        "name": "ICT Forex Market Maker Primer Course",
+        "name": "Smart Money Forex Market Maker Primer Course",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paah1dHyad1OMJQJdm6iP2Yn",
         "learning_tier": 1,
         "order": 3,
         "description": "2016 primer course on market maker concepts"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 01",
+        "name": "Smart Money Private Mentorship Core Content Month 01",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
         "learning_tier": 2,
         "order": 4,
         "description": "2016 Private Mentorship Month 1"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 02",
+        "name": "Smart Money Private Mentorship Core Content Month 02",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paZvjqerfbn320myZ06L1MOB",
         "learning_tier": 2,
         "order": 5,
         "description": "2016 Private Mentorship Month 2"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 03",
+        "name": "Smart Money Private Mentorship Core Content Month 03",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paaY69GotBJyZ7KN_U09ra2o",
         "learning_tier": 2,
         "order": 6,
         "description": "2016 Private Mentorship Month 3"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 04",
+        "name": "Smart Money Private Mentorship Core Content Month 04",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63pabb9rl1nyG58TG8PG8yzuao",
         "learning_tier": 2,
         "order": 7,
         "description": "2016 Private Mentorship Month 4"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 05",
+        "name": "Smart Money Private Mentorship Core Content Month 05",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paYBN404Q2QZ7D4mOJz1IHAk",
         "learning_tier": 2,
         "order": 8,
         "description": "2017 Private Mentorship Month 5"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 06",
+        "name": "Smart Money Private Mentorship Core Content Month 06",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paaG-26YEf2svQ_EsdGXjws1",
         "learning_tier": 2,
         "order": 9,
         "description": "2017 Private Mentorship Month 6"
     },
     {
-        "name": "ICT Private Mentorship Core Content Month 07",
+        "name": "Smart Money Private Mentorship Core Content Month 07",
         "url": "https://youtube.com/playlist?list=PLVgHx4Z63paYWV_3PDkYajv_oNznvK2aR",
         "learning_tier": 2,
         "order": 10,

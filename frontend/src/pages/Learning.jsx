@@ -125,7 +125,7 @@ export default function Learning() {
           icon={FileText}
           label="Transcripts Processed"
           value={mlStatus?.n_transcripts_processed || transcripts.length}
-          description="ICT video transcripts"
+          description="Smart Money video transcripts"
           color="blue"
         />
         <StatCard
@@ -302,7 +302,7 @@ export default function Learning() {
             </div>
             <div>
               <p className="font-medium">Transcript Collection</p>
-              <p className="text-gray-400">ICT videos are transcribed using free YouTube captions or local Whisper</p>
+              <p className="text-gray-400">Smart Money videos are transcribed using free YouTube captions or local Whisper</p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
@@ -311,7 +311,7 @@ export default function Learning() {
             </div>
             <div>
               <p className="font-medium">Concept Extraction</p>
-              <p className="text-gray-400">ML models learn ICT concepts, patterns, and trading rules from transcripts</p>
+              <p className="text-gray-400">ML models learn Smart Money concepts, patterns, and trading rules from transcripts</p>
             </div>
           </div>
           <div className="flex items-start space-x-3">

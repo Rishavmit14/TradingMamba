@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Extract ICT Concepts from Transcripts (FREE)
+Extract Smart Money Concepts from Transcripts (FREE)
 
 Uses keyword matching and pattern recognition to extract
-ICT concepts from video transcripts without requiring AI APIs.
+Smart Money concepts from video transcripts without requiring AI APIs.
 """
 
 import json
@@ -24,8 +24,8 @@ CONCEPTS_DIR = DATA_DIR / "concepts"
 CONCEPTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# ICT Concept Definitions with keywords and patterns
-ICT_CONCEPTS = {
+# Smart Money Concept Definitions with keywords and patterns
+SMART_MONEY_CONCEPTS = {
     # Market Structure
     "break_of_structure": {
         "name": "Break of Structure (BOS)",
@@ -292,7 +292,7 @@ def find_concept_mentions(text: str, concept_id: str, concept_data: dict) -> Lis
 
 
 def extract_concepts_from_transcript(transcript: dict) -> dict:
-    """Extract all ICT concepts from a transcript"""
+    """Extract all Smart Money concepts from a transcript"""
     text = transcript.get('full_text', '')
     segments = transcript.get('segments', [])
 
@@ -301,7 +301,7 @@ def extract_concepts_from_transcript(transcript: dict) -> dict:
     category_counts = defaultdict(int)
 
     # Find mentions for each concept
-    for concept_id, concept_data in ICT_CONCEPTS.items():
+    for concept_id, concept_data in SMART_MONEY_CONCEPTS.items():
         mentions = find_concept_mentions(text, concept_id, concept_data)
 
         if mentions:
@@ -340,9 +340,9 @@ def extract_concepts_from_transcript(transcript: dict) -> dict:
         'top_concepts': [
             {
                 'id': c,
-                'name': ICT_CONCEPTS[c]['name'],
+                'name': SMART_MONEY_CONCEPTS[c]['name'],
                 'count': count,
-                'category': ICT_CONCEPTS[c]['category']
+                'category': SMART_MONEY_CONCEPTS[c]['category']
             }
             for c, count in top_concepts
         ],
@@ -360,10 +360,10 @@ def process_all_transcripts():
         return
 
     print(f"\n{'='*60}")
-    print(f"ICT CONCEPT EXTRACTION")
+    print(f"SMART MONEY CONCEPT EXTRACTION")
     print(f"{'='*60}")
     print(f"Transcripts: {len(transcript_files)}")
-    print(f"Concepts to find: {len(ICT_CONCEPTS)}")
+    print(f"Concepts to find: {len(SMART_MONEY_CONCEPTS)}")
     print(f"{'='*60}\n")
 
     all_results = []
@@ -409,9 +409,9 @@ def process_all_transcripts():
 
     # Top concepts overall
     top_overall = sorted(grand_totals['concept_counts'].items(), key=lambda x: -x[1])[:10]
-    print(f"\n📊 TOP 10 ICT CONCEPTS FOUND:")
+    print(f"\n📊 TOP 10 SMART MONEY CONCEPTS FOUND:")
     for concept_id, count in top_overall:
-        name = ICT_CONCEPTS[concept_id]['name']
+        name = SMART_MONEY_CONCEPTS[concept_id]['name']
         print(f"  {count:5} - {name}")
 
     # By category
@@ -428,7 +428,7 @@ def process_all_transcripts():
         'concept_counts': dict(grand_totals['concept_counts']),
         'category_counts': dict(grand_totals['category_counts']),
         'top_concepts': [
-            {'id': c, 'name': ICT_CONCEPTS[c]['name'], 'count': count}
+            {'id': c, 'name': SMART_MONEY_CONCEPTS[c]['name'], 'count': count}
             for c, count in top_overall
         ]
     }
@@ -444,7 +444,7 @@ def process_all_transcripts():
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description='Extract ICT concepts from transcripts')
+    parser = argparse.ArgumentParser(description='Extract Smart Money concepts from transcripts')
     parser.add_argument('--video', type=str, help='Process single video by ID')
     parser.add_argument('--summary', action='store_true', help='Show extraction summary')
 
@@ -455,7 +455,7 @@ def main():
         if summary_path.exists():
             with open(summary_path) as f:
                 summary = json.load(f)
-            print(f"\n📊 ICT Concept Extraction Summary")
+            print(f"\n📊 Smart Money Concept Extraction Summary")
             print(f"{'='*40}")
             print(f"Videos: {summary['videos_processed']}")
             print(f"Words: {summary['total_words']:,}")

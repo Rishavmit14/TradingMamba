@@ -1,6 +1,6 @@
 """
-ICT-Based Price Prediction Module
-Uses statistical methods and ICT principles - NO deep learning required!
+Smart Money Based Price Prediction Module
+Uses statistical methods and Smart Money principles - NO deep learning required!
 100% FREE - runs on CPU
 """
 
@@ -52,9 +52,9 @@ class PricePrediction:
         }
 
 
-class ICTPricePredictor:
+class SmartMoneyPricePredictor:
     """
-    Price prediction using ICT principles and statistical methods
+    Price prediction using Smart Money principles and statistical methods
 
     Features used:
     - Market structure (trend direction)
@@ -74,11 +74,11 @@ class ICTPricePredictor:
 
     def extract_features(self, data: pd.DataFrame, analysis: Dict = None) -> np.ndarray:
         """
-        Extract ICT-based features from price data
+        Extract Smart Money based features from price data
 
         Parameters:
         - data: OHLCV DataFrame
-        - analysis: Optional ICT analysis results
+        - analysis: Optional Smart Money analysis results
 
         Returns:
         - Feature array
@@ -175,7 +175,7 @@ class ICTPricePredictor:
         features.extend([body_ratio, upper_wick_ratio, lower_wick_ratio])
         feature_names.extend(['body_ratio', 'upper_wick_ratio', 'lower_wick_ratio'])
 
-        # ============ ICT-Specific Features ============
+        # ============ Smart Money Specific Features ============
 
         # 8. Break of Structure detection
         swing_high_broken = 0
@@ -241,11 +241,11 @@ class ICTPricePredictor:
     def predict(self, data: pd.DataFrame, analysis: Dict = None,
                 timeframe: str = 'H1') -> PricePrediction:
         """
-        Predict price direction using ICT principles
+        Predict price direction using Smart Money principles
 
         Parameters:
         - data: OHLCV DataFrame
-        - analysis: ICT analysis results
+        - analysis: Smart Money analysis results
         - timeframe: Trading timeframe
 
         Returns:
@@ -310,7 +310,7 @@ class ICTPricePredictor:
             bearish_score += weights['structure']
             factors.append("Break of structure (bearish)")
 
-        # ICT patterns
+        # Smart Money patterns
         if features[0, 13] == 1:  # Bullish FVG
             bullish_score += weights['patterns'] * 0.5
             factors.append("Bullish FVG present")
@@ -438,4 +438,4 @@ class ICTPricePredictor:
 
 
 # Singleton instance
-price_predictor = ICTPricePredictor()
+price_predictor = SmartMoneyPricePredictor()

@@ -1,4 +1,4 @@
-"""Configuration settings for ICT AI Trading System"""
+"""Configuration settings for Smart Money AI Trading System"""
 
 import os
 from pydantic_settings import BaseSettings
@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables"""
 
     # Application
-    APP_NAME: str = "ICT AI Trading System"
+    APP_NAME: str = "Smart Money AI Trading System"
     DEBUG: bool = True
     SECRET_KEY: str = "your-secret-key-change-in-production"
 

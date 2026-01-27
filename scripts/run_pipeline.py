@@ -2,9 +2,9 @@
 """
 TradingMamba - Main Pipeline Orchestrator
 
-Runs the complete ICT AI Trading System pipeline:
+Runs the complete Smart Money AI Trading System pipeline:
 1. Load transcripts from all playlists
-2. Extract ICT concepts
+2. Extract Smart Money concepts
 3. Train ML models
 4. Generate trading signals
 5. Track and evaluate performance
@@ -21,9 +21,9 @@ from datetime import datetime
 # Add backend to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "backend"))
 
-from app.ml.training_pipeline import ICTKnowledgeBase, run_training_pipeline
-from app.ml.signal_fusion import SignalGenerator, ICTSignal
-from app.ml.technical_analysis import FullICTAnalysis
+from app.ml.training_pipeline import SmartMoneyKnowledgeBase, run_training_pipeline
+from app.ml.signal_fusion import SignalGenerator, SmartMoneySignal
+from app.ml.technical_analysis import FullSmartMoneyAnalysis
 from app.ml.model_evaluator import PerformanceDashboard, PredictionTracker
 
 # Add user packages
@@ -49,7 +49,7 @@ def print_banner():
 ║   ██║ ╚═╝ ██║██║  ██║██║ ╚═╝ ██║██████╔╝██║  ██║            ║
 ║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ╚═╝  ╚═╝            ║
 ║                                                              ║
-║   ICT AI Trading Signal System - 100% FREE                   ║
+║   Smart Money AI Trading Signal System - 100% FREE           ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
 """
@@ -112,7 +112,7 @@ class TradingMambaPipeline:
         print("PHASE 1: TRAINING ML MODELS")
         print("=" * 60)
 
-        self.knowledge_base = ICTKnowledgeBase(str(self.data_dir))
+        self.knowledge_base = SmartMoneyKnowledgeBase(str(self.data_dir))
 
         if incremental:
             try:
@@ -131,7 +131,7 @@ class TradingMambaPipeline:
         print("\nInitializing components...")
 
         # Knowledge base
-        self.knowledge_base = ICTKnowledgeBase(str(self.data_dir))
+        self.knowledge_base = SmartMoneyKnowledgeBase(str(self.data_dir))
         try:
             self.knowledge_base.load()
             print("  ✓ Knowledge base loaded")
@@ -147,7 +147,7 @@ class TradingMambaPipeline:
             print("  ! Signal generator not found")
 
         # Technical analyzer
-        self.analyzer = FullICTAnalysis()
+        self.analyzer = FullSmartMoneyAnalysis()
         print("  ✓ Technical analyzer initialized")
 
         # Performance dashboard
@@ -159,7 +159,7 @@ class TradingMambaPipeline:
             print("  ! No historical performance data")
 
     def analyze_symbol(self, symbol: str, timeframes: list = None) -> dict:
-        """Run ICT analysis on a symbol"""
+        """Run Smart Money analysis on a symbol"""
         if timeframes is None:
             timeframes = ['H1', 'H4', 'D1']
 
@@ -183,7 +183,7 @@ class TradingMambaPipeline:
             if not market_data:
                 return {'error': 'No market data available'}
 
-            # Run ICT analysis on each timeframe
+            # Run Smart Money analysis on each timeframe
             analyses = {}
             detected_concepts = []
 
@@ -317,7 +317,7 @@ class TradingMambaPipeline:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='TradingMamba - ICT AI Trading Signal System',
+        description='TradingMamba - Smart Money AI Trading Signal System',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

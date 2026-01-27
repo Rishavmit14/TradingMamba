@@ -31,8 +31,8 @@ from app.services.free_market_data import FreeMarketDataService
 from app.services.signal_generator import SignalGenerator
 from app.services.telegram_notifier import TelegramNotifier
 from app.ml.kill_zones import KillZoneAnalyzer
-from app.ml.pattern_recognition import ICTPatternRecognizer
-from app.ml.price_predictor import ICTPricePredictor
+from app.ml.pattern_recognition import SmartMoneyPatternRecognizer
+from app.ml.price_predictor import SmartMoneyPricePredictor
 from app.database import db
 
 
@@ -50,8 +50,8 @@ class SignalScheduler:
         self.market_data = FreeMarketDataService()
         self.signal_generator = SignalGenerator()
         self.kill_zone_analyzer = KillZoneAnalyzer()
-        self.pattern_recognizer = ICTPatternRecognizer()
-        self.price_predictor = ICTPricePredictor()
+        self.pattern_recognizer = SmartMoneyPatternRecognizer()
+        self.price_predictor = SmartMoneyPricePredictor()
 
         # Telegram notifier (optional - works without if not configured)
         self.telegram = None
@@ -186,7 +186,7 @@ class SignalScheduler:
             factors_text = "\n".join([f"• {f}" for f in factors[:5]])
 
             message = f"""
-{direction_emoji} <b>ICT SIGNAL ALERT</b> {direction_emoji}
+{direction_emoji} <b>Smart Money SIGNAL ALERT</b> {direction_emoji}
 
 <b>{signal['symbol']}</b> | {signal['timeframe']}
 Direction: <b>{signal['direction']}</b>

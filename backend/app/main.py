@@ -1,5 +1,5 @@
 """
-ICT AI Trading System - FastAPI Application
+Smart Money AI Trading System - FastAPI Application
 
 Main entry point for the backend API.
 """
@@ -16,8 +16,8 @@ from .config import settings
 
 # Create FastAPI app
 app = FastAPI(
-    title="TradingMamba - ICT AI Trading System",
-    description="AI-powered trading signal system based on ICT methodology",
+    title="TradingMamba - Smart Money AI Trading System",
+    description="AI-powered trading signal system based on Smart Money methodology",
     version="0.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
@@ -68,7 +68,7 @@ async def health_check():
 
 @app.get("/api/playlists")
 async def get_playlists():
-    """Get all ICT playlists"""
+    """Get all Smart Money playlists"""
     playlists = []
 
     if not PLAYLISTS_DIR.exists():
@@ -215,12 +215,12 @@ async def search_transcript(
 
 
 # ============================================================================
-# ICT Concepts
+# Smart Money Concepts
 # ============================================================================
 
 @app.get("/api/concepts")
 async def get_concepts():
-    """Get all ICT concepts from taxonomy"""
+    """Get all Smart Money concepts from taxonomy"""
     from .models.concept import ICT_CONCEPT_TAXONOMY
 
     concepts = []
@@ -344,7 +344,7 @@ async def analyze_symbol(
     timeframes: str = Query("H1,H4,D1", description="Comma-separated timeframes")
 ):
     """
-    Analyze a symbol using ICT methodology.
+    Analyze a symbol using Smart Money methodology.
     Returns detected concepts, market structure, and potential signal.
     """
     try:
@@ -367,7 +367,7 @@ async def analyze_symbol(
         if not market_data:
             raise HTTPException(status_code=404, detail=f"No market data available for {symbol}")
 
-        # Run ICT analysis
+        # Run Smart Money analysis
         analyses = {}
         detected_concepts = []
 
@@ -494,7 +494,7 @@ async def get_ml_status():
 
 @app.get("/api/ml/concepts/{concept_name}")
 async def query_concept(concept_name: str):
-    """Query detailed information about an ICT concept from the knowledge base"""
+    """Query detailed information about an Smart Money concept from the knowledge base"""
     kb = get_knowledge_base()
 
     if not kb:
@@ -510,7 +510,7 @@ async def query_concept(concept_name: str):
 
 @app.post("/api/ml/predict")
 async def predict_concepts(text: str = Query(..., description="Text to analyze")):
-    """Predict ICT concepts in given text"""
+    """Predict Smart Money concepts in given text"""
     kb = get_knowledge_base()
 
     if not kb:
@@ -839,7 +839,7 @@ async def get_current_session():
 
 @app.get("/api/session/kill-zones")
 async def get_all_kill_zones():
-    """Get all ICT kill zones"""
+    """Get all Smart Money kill zones"""
     try:
         from .ml.kill_zones import KillZoneAnalyzer
 
@@ -1054,7 +1054,7 @@ async def detect_patterns(
     symbol: str,
     timeframe: str = Query("H1", description="Timeframe")
 ):
-    """Detect ICT patterns in price data"""
+    """Detect Smart Money patterns in price data"""
     try:
         from .services.free_market_data import FreeMarketDataService
         from .ml.pattern_recognition import ICTPatternRecognizer
@@ -1128,7 +1128,7 @@ async def generate_chart(
     with_signal: bool = Query(True, description="Include signal levels"),
     with_patterns: bool = Query(True, description="Include pattern detection")
 ):
-    """Generate an ICT-annotated chart"""
+    """Generate an Smart Money annotated chart"""
     try:
         from .services.free_market_data import FreeMarketDataService
         from .services.chart_generator import ICTChartGenerator

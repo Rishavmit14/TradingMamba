@@ -283,7 +283,7 @@ export default function Performance() {
       {/* Concept Performance */}
       {summary?.by_concept && Object.keys(summary.by_concept).length > 0 && (
         <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-          <h2 className="text-lg font-bold mb-4">Performance by ICT Concept</h2>
+          <h2 className="text-lg font-bold mb-4">Performance by Smart Money Concept</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Object.entries(summary.by_concept).slice(0, 8).map(([concept, data]) => (
               <div key={concept} className="p-3 bg-gray-700/50 rounded-lg">

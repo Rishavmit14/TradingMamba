@@ -89,7 +89,7 @@ class Database:
                 )
             """)
 
-            # ICT Concepts table
+            # Smart Money Concepts table
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS ict_concepts (
                     id TEXT PRIMARY KEY,

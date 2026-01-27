@@ -1,8 +1,8 @@
 """
-Feature Extractor for ICT Concepts
+Feature Extractor for Smart Money Concepts
 
 Converts raw transcript text into numerical features for ML models.
-Uses TF-IDF, n-grams, and custom ICT concept embeddings.
+Uses TF-IDF, n-grams, and custom Smart Money concept embeddings.
 
 100% FREE - Uses scikit-learn and numpy only.
 """
@@ -23,8 +23,8 @@ except ImportError:
     raise ImportError("Install scikit-learn: pip install scikit-learn joblib")
 
 
-# ICT-specific vocabulary for feature extraction
-ICT_VOCABULARY = {
+# Smart Money specific vocabulary for feature extraction
+SMART_MONEY_VOCABULARY = {
     # Market Structure
     'market_structure': ['bos', 'break of structure', 'choch', 'change of character',
                          'higher high', 'higher low', 'lower high', 'lower low',
@@ -74,16 +74,16 @@ ICT_VOCABULARY = {
 }
 
 
-class ICTFeatureExtractor:
+class SmartMoneyFeatureExtractor:
     """
-    Extracts ML-ready features from ICT trading transcripts.
+    Extracts ML-ready features from Smart Money trading transcripts.
 
     Features:
     1. TF-IDF vectors for general text
-    2. ICT concept counts and densities
+    2. Smart Money concept counts and densities
     3. Concept co-occurrence features
     4. Temporal features (sequence position)
-    5. Custom ICT embeddings
+    5. Custom Smart Money embeddings
     """
 
     def __init__(self, data_dir: str = None):
@@ -110,9 +110,9 @@ class ICTFeatureExtractor:
         self.is_fitted = False
 
     def _build_ict_vocabulary(self) -> List[str]:
-        """Build flat vocabulary list from ICT concepts"""
+        """Build flat vocabulary list from Smart Money concepts"""
         vocab = []
-        for terms in ICT_VOCABULARY.values():
+        for terms in SMART_MONEY_VOCABULARY.values():
             vocab.extend(terms)
         return list(set(vocab))
 
@@ -125,7 +125,7 @@ class ICTFeatureExtractor:
         text = re.sub(r'\d+:\d+:\d+', '', text)
         text = re.sub(r'\[.*?\]', '', text)
 
-        # Normalize ICT terms
+        # Normalize Smart Money terms
         replacements = {
             r'\border\s*block\b': 'orderblock',
             r'\bfair\s*value\s*gap\b': 'fairvaluegap',
@@ -145,13 +145,13 @@ class ICTFeatureExtractor:
         return text
 
     def extract_concept_features(self, text: str) -> Dict[str, float]:
-        """Extract ICT concept-specific features"""
+        """Extract Smart Money concept-specific features"""
         text_lower = text.lower()
         word_count = len(text_lower.split())
 
         features = {}
 
-        for concept_name, terms in ICT_VOCABULARY.items():
+        for concept_name, terms in SMART_MONEY_VOCABULARY.items():
             count = 0
             for term in terms:
                 count += len(re.findall(r'\b' + re.escape(term) + r'\b', text_lower))
@@ -172,14 +172,14 @@ class ICTFeatureExtractor:
 
         # Find positions of each concept
         for i, word in enumerate(words):
-            for concept_name, terms in ICT_VOCABULARY.items():
+            for concept_name, terms in SMART_MONEY_VOCABULARY.items():
                 for term in terms:
                     if term in ' '.join(words[max(0, i-2):i+3]):
                         concept_positions[concept_name].append(i)
                         break
 
         # Count co-occurrences within window
-        concept_names = list(ICT_VOCABULARY.keys())
+        concept_names = list(SMART_MONEY_VOCABULARY.keys())
         for i, c1 in enumerate(concept_names):
             for c2 in concept_names[i+1:]:
                 count = 0
@@ -204,11 +204,11 @@ class ICTFeatureExtractor:
         total_duration = segments[-1].get('end_time', 0) if segments else 0
         segment_count = len(segments)
 
-        # Find when first ICT concept appears
+        # Find when first Smart Money concept appears
         concept_intro_time = total_duration  # Default to end
         for seg in segments:
             text = seg.get('text', '').lower()
-            for terms in ICT_VOCABULARY.values():
+            for terms in SMART_MONEY_VOCABULARY.values():
                 for term in terms:
                     if term in text:
                         concept_intro_time = min(concept_intro_time, seg.get('start_time', 0))
@@ -222,7 +222,7 @@ class ICTFeatureExtractor:
             'concept_intro_ratio': concept_intro_time / max(total_duration, 1),
         }
 
-    def fit(self, transcripts: List[Dict]) -> 'ICTFeatureExtractor':
+    def fit(self, transcripts: List[Dict]) -> 'Smart MoneyFeatureExtractor':
         """Fit the feature extractor on training transcripts"""
         texts = [self.preprocess_text(t.get('full_text', '')) for t in transcripts]
 
@@ -330,7 +330,7 @@ class ICTFeatureExtractor:
 
 class ConceptEmbedding:
     """
-    Creates dense embeddings for ICT concepts.
+    Creates dense embeddings for Smart Money concepts.
     Uses word co-occurrence to learn concept relationships.
 
     100% FREE - No external APIs needed.
@@ -338,7 +338,7 @@ class ConceptEmbedding:
 
     def __init__(self, embedding_dim: int = 64):
         self.embedding_dim = embedding_dim
-        self.concept_names = list(ICT_VOCABULARY.keys())
+        self.concept_names = list(SMART_MONEY_VOCABULARY.keys())
         self.embeddings = None
         self.cooccurrence_matrix = None
 
@@ -357,7 +357,7 @@ class ConceptEmbedding:
             for i, word in enumerate(words):
                 context = ' '.join(words[max(0, i-5):i+6])
                 for j, concept in enumerate(self.concept_names):
-                    for term in ICT_VOCABULARY[concept]:
+                    for term in SMART_MONEY_VOCABULARY[concept]:
                         if term in context:
                             concept_positions[concept].append(i)
                             break
@@ -490,10 +490,10 @@ def test_feature_extractor():
         }
     ]
 
-    print("Testing ICT Feature Extractor")
+    print("Testing Smart Money Feature Extractor")
     print("=" * 50)
 
-    extractor = ICTFeatureExtractor()
+    extractor = SmartMoneyFeatureExtractor()
 
     # Test concept extraction
     print("\n1. Concept Features:")

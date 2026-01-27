@@ -1,10 +1,10 @@
 """
 Technical Analysis Module
 
-Provides technical indicators and pattern detection for ICT analysis.
+Provides technical indicators and pattern detection for Smart Money analysis.
 Uses pandas-ta (100% FREE) for indicator calculations.
 
-Includes ICT-specific analysis like:
+Includes Smart Money specific analysis like:
 - Order Block detection
 - Fair Value Gap identification
 - Liquidity level mapping
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class OrderBlock:
-    """Represents an ICT Order Block"""
+    """Represents an Smart Money Order Block"""
     type: str  # 'bullish' or 'bearish'
     high: float
     low: float
@@ -48,7 +48,7 @@ class OrderBlock:
 
 @dataclass
 class FairValueGap:
-    """Represents an ICT Fair Value Gap"""
+    """Represents an Smart Money Fair Value Gap"""
     type: str  # 'bullish' or 'bearish'
     high: float
     low: float
@@ -169,9 +169,9 @@ class TechnicalIndicators:
         return k, d
 
 
-class ICTStructureAnalyzer:
+class SmartMoneyStructureAnalyzer:
     """
-    Analyzes market structure according to ICT methodology.
+    Analyzes market structure according to Smart Money methodology.
     Identifies swing points, BOS, CHoCH, and trend direction.
     """
 
@@ -281,9 +281,9 @@ class ICTStructureAnalyzer:
         }
 
 
-class ICTConceptDetector:
+class SmartMoneyConceptDetector:
     """
-    Detects ICT-specific concepts in price data:
+    Detects Smart Money specific concepts in price data:
     - Order Blocks
     - Fair Value Gaps
     - Liquidity Levels
@@ -512,19 +512,19 @@ class ICTConceptDetector:
         }
 
 
-class FullICTAnalysis:
+class FullSmartMoneyAnalysis:
     """
-    Performs complete ICT analysis on market data.
-    Combines all ICT concepts for comprehensive view.
+    Performs complete Smart Money analysis on market data.
+    Combines all Smart Money concepts for comprehensive view.
     """
 
     def __init__(self):
-        self.structure_analyzer = ICTStructureAnalyzer()
-        self.concept_detector = ICTConceptDetector()
+        self.structure_analyzer = SmartMoneyStructureAnalyzer()
+        self.concept_detector = SmartMoneyConceptDetector()
         self.indicators = TechnicalIndicators()
 
     def analyze(self, df: pd.DataFrame, timeframe: str = 'H1') -> Dict:
-        """Run full ICT analysis"""
+        """Run full Smart Money analysis"""
         if df is None or df.empty:
             return {'error': 'No data provided'}
 
@@ -596,7 +596,7 @@ class FullICTAnalysis:
         return analysis
 
     def _list_detected_concepts(self, analysis: Dict) -> List[str]:
-        """List all detected ICT concepts"""
+        """List all detected Smart Money concepts"""
         concepts = []
 
         if analysis.get('market_structure', {}).get('bias') != 'neutral':
@@ -619,7 +619,7 @@ class FullICTAnalysis:
 def test_technical_analysis():
     """Test the technical analysis module"""
     print("=" * 60)
-    print("ICT TECHNICAL ANALYSIS TEST")
+    print("Smart Money TECHNICAL ANALYSIS TEST")
     print("=" * 60)
 
     # Create sample data
@@ -637,7 +637,7 @@ def test_technical_analysis():
     }, index=dates)
 
     # Run analysis
-    analyzer = FullICTAnalysis()
+    analyzer = FullSmartMoneyAnalysis()
     result = analyzer.analyze(df, timeframe='H1')
 
     print(f"\n📊 Analysis Results:")

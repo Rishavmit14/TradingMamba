@@ -1,2 +1,2 @@
-# ICT AI Trading System Backend
+# Smart Money AI Trading System Backend
 __version__ = "0.1.0"

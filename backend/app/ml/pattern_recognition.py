@@ -1,6 +1,6 @@
 """
-ICT Chart Pattern Recognition Module
-Detects ICT patterns from price data without requiring deep learning
+Smart Money Chart Pattern Recognition Module
+Detects Smart Money patterns from price data without requiring deep learning
 Uses algorithmic pattern detection - 100% FREE, no GPU needed!
 """
 
@@ -13,7 +13,7 @@ from enum import Enum
 
 
 class PatternType(Enum):
-    """ICT Pattern Types"""
+    """Smart Money Pattern Types"""
     # Order Blocks
     BULLISH_ORDER_BLOCK = "bullish_order_block"
     BEARISH_ORDER_BLOCK = "bearish_order_block"
@@ -47,7 +47,7 @@ class PatternType(Enum):
 
 @dataclass
 class DetectedPattern:
-    """Represents a detected ICT pattern"""
+    """Represents a detected Smart Money pattern"""
     pattern_type: PatternType
     start_index: int
     end_index: int
@@ -70,9 +70,9 @@ class DetectedPattern:
         }
 
 
-class ICTPatternRecognizer:
+class SmartMoneyPatternRecognizer:
     """
-    Algorithmic ICT pattern recognition
+    Algorithmic Smart Money pattern recognition
     No deep learning required - uses pure price action analysis
     """
 
@@ -82,7 +82,7 @@ class ICTPatternRecognizer:
 
     def detect_all_patterns(self, data: pd.DataFrame) -> List[DetectedPattern]:
         """
-        Detect all ICT patterns in the price data
+        Detect all Smart Money patterns in the price data
 
         Parameters:
         - data: DataFrame with columns ['open', 'high', 'low', 'close', 'volume']
@@ -382,7 +382,7 @@ class ICTPatternRecognizer:
 
     def detect_entry_patterns(self, data: pd.DataFrame) -> List[DetectedPattern]:
         """
-        Detect ICT entry patterns: OTE, Silver Bullet, Judas Swing
+        Detect Smart Money entry patterns: OTE, Silver Bullet, Judas Swing
         """
         patterns = []
         highs = data['high'].values
@@ -548,4 +548,4 @@ class ICTPatternRecognizer:
 
 
 # Singleton instance
-pattern_recognizer = ICTPatternRecognizer()
+pattern_recognizer = SmartMoneyPatternRecognizer()

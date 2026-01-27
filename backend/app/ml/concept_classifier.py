@@ -1,7 +1,7 @@
 """
-ICT Concept Classifier
+Smart Money Concept Classifier
 
-Multi-label classifier that identifies ICT concepts in text.
+Multi-label classifier that identifies Smart Money concepts in text.
 Uses ensemble of models for robust predictions.
 
 100% FREE - scikit-learn based, no external APIs.
@@ -27,12 +27,12 @@ try:
 except ImportError:
     raise ImportError("Install scikit-learn: pip install scikit-learn")
 
-from .feature_extractor import ICTFeatureExtractor, ICT_VOCABULARY
+from .feature_extractor import SmartMoneyFeatureExtractor, SMART_MONEY_VOCABULARY
 
 
-class ICTConceptClassifier:
+class SmartMoneyConceptClassifier:
     """
-    Classifies text segments into ICT concepts.
+    Classifies text segments into Smart Money concepts.
 
     Features:
     - Multi-label classification (text can contain multiple concepts)
@@ -48,10 +48,10 @@ class ICTConceptClassifier:
         self.models_dir.mkdir(parents=True, exist_ok=True)
 
         # Feature extractor
-        self.feature_extractor = ICTFeatureExtractor(str(self.data_dir))
+        self.feature_extractor = SmartMoneyFeatureExtractor(str(self.data_dir))
 
         # Concept labels
-        self.concept_labels = list(ICT_VOCABULARY.keys())
+        self.concept_labels = list(SMART_MONEY_VOCABULARY.keys())
         self.mlb = MultiLabelBinarizer(classes=self.concept_labels)
         self.mlb.fit([self.concept_labels])  # Fit with all possible labels
 
@@ -87,7 +87,7 @@ class ICTConceptClassifier:
         text = transcript.get('full_text', '').lower()
         labels = []
 
-        for concept, terms in ICT_VOCABULARY.items():
+        for concept, terms in SMART_MONEY_VOCABULARY.items():
             for term in terms:
                 if term in text:
                     labels.append(concept)
@@ -329,13 +329,13 @@ class ICTConceptClassifier:
 
 class ConceptSequenceAnalyzer:
     """
-    Analyzes sequences of ICT concepts to learn patterns.
-    Useful for understanding how ICT teaches concepts progressively.
+    Analyzes sequences of Smart Money concepts to learn patterns.
+    Useful for understanding how Smart Money teaches concepts progressively.
     """
 
     def __init__(self):
         self.transition_matrix = None
-        self.concept_labels = list(ICT_VOCABULARY.keys())
+        self.concept_labels = list(SMART_MONEY_VOCABULARY.keys())
         self.n_concepts = len(self.concept_labels)
 
     def build_transition_matrix(self, transcripts: List[Dict]) -> np.ndarray:
@@ -351,7 +351,7 @@ class ConceptSequenceAnalyzer:
                 current_concepts = set()
 
                 for i, concept in enumerate(self.concept_labels):
-                    for term in ICT_VOCABULARY[concept]:
+                    for term in SMART_MONEY_VOCABULARY[concept]:
                         if term in text:
                             current_concepts.add(i)
                             break
@@ -409,7 +409,7 @@ class ConceptSequenceAnalyzer:
 # Test function
 def test_classifier():
     """Test the concept classifier"""
-    print("Testing ICT Concept Classifier")
+    print("Testing Smart Money Concept Classifier")
     print("=" * 50)
 
     # Sample transcripts
@@ -443,7 +443,7 @@ def test_classifier():
         },
     ]
 
-    classifier = ICTConceptClassifier()
+    classifier = SmartMoneyConceptClassifier()
 
     # Train
     print("\n1. Training classifier...")

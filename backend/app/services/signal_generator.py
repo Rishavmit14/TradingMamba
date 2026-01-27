@@ -1,7 +1,7 @@
 """
 Signal Generator Service
 
-Combines ICT analysis with ML predictions to generate trading signals.
+Combines Smart Money analysis with ML predictions to generate trading signals.
 """
 
 import logging
@@ -15,7 +15,7 @@ try:
 except ImportError:
     pd = None
 
-from .ict_analyzer import ICTAnalyzer, ICTAnalysisResult, Bias, MarketStructure
+from .smart_money_analyzer import SmartMoneyAnalyzer, SmartMoneyAnalysisResult, Bias, MarketStructure
 from ..models.signal import (
     Signal,
     SignalStatus,
@@ -30,9 +30,9 @@ logger = logging.getLogger(__name__)
 
 class SignalGenerator:
     """
-    Generate trading signals based on ICT analysis
+    Generate trading signals based on Smart Money analysis
 
-    Signal generation follows ICT methodology:
+    Signal generation follows Smart Money methodology:
     1. Determine higher timeframe bias
     2. Identify valid entry zones (Order Blocks, FVGs)
     3. Confirm with market structure
@@ -45,7 +45,7 @@ class SignalGenerator:
         min_confidence: float = 0.65,
         min_risk_reward: float = 2.0
     ):
-        self.analyzer = ICTAnalyzer()
+        self.analyzer = SmartMoneyAnalyzer()
         self.min_confidence = min_confidence
         self.min_risk_reward = min_risk_reward
 
@@ -68,7 +68,7 @@ class SignalGenerator:
         Returns:
             Signal object with entry/exit levels and analysis
         """
-        # Run ICT analysis
+        # Run Smart Money analysis
         analysis = self.analyzer.analyze(data)
 
         # Calculate signal score and factors
@@ -152,7 +152,7 @@ class SignalGenerator:
         htf_bias: Optional[Bias]
     ) -> Tuple[int, List[SignalFactor]]:
         """
-        Calculate signal score based on ICT criteria
+        Calculate signal score based on Smart Money criteria
 
         Maximum score: 100 points
         - Market Structure: 25 points
@@ -401,7 +401,7 @@ class SignalGenerator:
             for f in factors
         ])
 
-        return f"""## ICT Analysis Summary
+        return f"""## Smart Money Analysis Summary
 
 **Market Structure:** {analysis.market_structure.value.title()}
 **Current Bias:** {analysis.bias.value.title()} ({analysis.bias_confidence:.0%} confidence)

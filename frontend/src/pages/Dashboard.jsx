@@ -89,7 +89,7 @@ function SignalCard({ symbol, data, loading, onRefresh }) {
 
       {data.concepts?.length > 0 && (
         <div className="mt-4">
-          <span className="text-gray-400 text-sm">ICT Concepts</span>
+          <span className="text-gray-400 text-sm">Smart Money Concepts</span>
           <div className="flex flex-wrap gap-1 mt-1">
             {data.concepts.map((concept, i) => (
               <span
@@ -174,7 +174,7 @@ export default function Dashboard() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-gray-400">ICT AI Trading Signal Overview</p>
+          <p className="text-gray-400">Smart Money AI Trading Signal Overview</p>
         </div>
         <button
           onClick={() => {
@@ -242,7 +242,7 @@ export default function Dashboard() {
         <div>
           <h3 className="font-medium text-blue-400">Learning in Progress</h3>
           <p className="text-sm text-gray-400 mt-1">
-            The AI is continuously learning from ICT video transcripts.
+            The AI is continuously learning from Smart Money video transcripts.
             As more videos are processed, signal accuracy will improve.
             Currently trained on {status?.transcripts_ready || 0} transcripts.
           </p>

@@ -121,7 +121,7 @@ class TelegramNotifier:
 
         # Build message
         message = f"""
-{emoji} <b>ICT SIGNAL: {symbol}</b>
+{emoji} <b>Smart Money SIGNAL: {symbol}</b>
 
 {direction_text}
 ━━━━━━━━━━━━━━━
@@ -144,7 +144,7 @@ class TelegramNotifier:
         message += f"""
 <b>Risk/Reward:</b> 1:{signal.get('risk_reward', 0):.1f}
 
-<b>ICT Concepts:</b>
+<b>Smart Money Concepts:</b>
 {', '.join(signal.get('concepts', ['None']))}
 
 ━━━━━━━━━━━━━━━
@@ -159,7 +159,7 @@ class TelegramNotifier:
         timeframes = analysis.get('timeframes', [])
 
         message = f"""
-📊 <b>ICT ANALYSIS: {symbol}</b>
+📊 <b>Smart Money ANALYSIS: {symbol}</b>
 ━━━━━━━━━━━━━━━
 
 <b>Timeframes:</b> {', '.join(timeframes)}

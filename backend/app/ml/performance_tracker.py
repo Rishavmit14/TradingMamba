@@ -346,7 +346,7 @@ class PerformanceTracker:
         return round(wins / len(signals), 4)
 
     def _analyze_concept_performance(self, signals: List[SignalRecord]) -> Dict:
-        """Analyze performance by ICT concept"""
+        """Analyze performance by Smart Money concept"""
         concept_results = defaultdict(lambda: {'wins': 0, 'losses': 0, 'total_pnl': 0})
 
         for signal in signals:

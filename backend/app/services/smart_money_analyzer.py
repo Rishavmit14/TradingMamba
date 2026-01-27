@@ -1,7 +1,7 @@
 """
-ICT Analysis Engine
+Smart Money Analysis Engine
 
-Core implementation of ICT (Inner Circle Trader) methodology for market analysis.
+Core implementation of Smart Money (Inner Circle Trader) methodology for market analysis.
 This module analyzes price data to identify:
 - Market Structure (BOS, CHoCH, swing points)
 - Order Blocks
@@ -52,7 +52,7 @@ class SwingPoint:
 
 @dataclass
 class OrderBlock:
-    """An ICT Order Block"""
+    """An Smart Money Order Block"""
     start_index: int
     end_index: int
     high: float
@@ -95,8 +95,8 @@ class StructureEvent:
 
 
 @dataclass
-class ICTAnalysisResult:
-    """Complete ICT analysis result"""
+class SmartMoneyAnalysisResult:
+    """Complete Smart Money analysis result"""
     swing_points: List[SwingPoint] = field(default_factory=list)
     market_structure: MarketStructure = MarketStructure.CONSOLIDATION
     structure_events: List[StructureEvent] = field(default_factory=list)
@@ -111,11 +111,11 @@ class ICTAnalysisResult:
     analysis_timestamp: datetime = field(default_factory=datetime.utcnow)
 
 
-class ICTAnalyzer:
+class SmartMoneyAnalyzer:
     """
-    Core ICT methodology analysis engine
+    Core Smart Money methodology analysis engine
 
-    Implements the key ICT concepts for market analysis:
+    Implements the key Smart Money concepts for market analysis:
     - Swing point identification
     - Market structure analysis (BOS/CHoCH)
     - Order block detection
@@ -126,7 +126,7 @@ class ICTAnalyzer:
 
     def __init__(self, lookback_swing: int = 5):
         """
-        Initialize the ICT Analyzer
+        Initialize the Smart Money Analyzer
 
         Args:
             lookback_swing: Number of candles to look back for swing detection
@@ -135,7 +135,7 @@ class ICTAnalyzer:
 
     def analyze(self, data: 'pd.DataFrame') -> ICTAnalysisResult:
         """
-        Run complete ICT analysis on OHLCV data
+        Run complete Smart Money analysis on OHLCV data
 
         Args:
             data: DataFrame with columns ['open', 'high', 'low', 'close', 'volume']
@@ -145,11 +145,11 @@ class ICTAnalyzer:
             ICTAnalysisResult with all analysis components
         """
         if pd is None:
-            raise ImportError("pandas is required for ICT analysis")
+            raise ImportError("pandas is required for Smart Money analysis")
 
         if len(data) < self.lookback_swing * 2:
             logger.warning("Insufficient data for analysis")
-            return ICTAnalysisResult()
+            return SmartMoneyAnalysisResult()
 
         # Step 1: Find swing points
         swing_points = self.find_swing_points(data)
@@ -174,7 +174,7 @@ class ICTAnalyzer:
             structure, premium_discount, events
         )
 
-        return ICTAnalysisResult(
+        return SmartMoneyAnalysisResult(
             swing_points=swing_points,
             market_structure=structure,
             structure_events=events,
