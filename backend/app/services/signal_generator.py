@@ -1,0 +1,511 @@
+"""
+Signal Generator Service
+
+Combines ICT analysis with ML predictions to generate trading signals.
+"""
+
+import logging
+from datetime import datetime, timedelta
+from typing import List, Dict, Optional, Tuple
+from dataclasses import dataclass
+from uuid import uuid4
+
+try:
+    import pandas as pd
+except ImportError:
+    pd = None
+
+from .ict_analyzer import ICTAnalyzer, ICTAnalysisResult, Bias, MarketStructure
+from ..models.signal import (
+    Signal,
+    SignalStatus,
+    TradingDirection,
+    Timeframe,
+    SignalFactor,
+    KeyLevel
+)
+
+logger = logging.getLogger(__name__)
+
+
+class SignalGenerator:
+    """
+    Generate trading signals based on ICT analysis
+
+    Signal generation follows ICT methodology:
+    1. Determine higher timeframe bias
+    2. Identify valid entry zones (Order Blocks, FVGs)
+    3. Confirm with market structure
+    4. Calculate risk levels
+    5. Score the setup
+    """
+
+    def __init__(
+        self,
+        min_confidence: float = 0.65,
+        min_risk_reward: float = 2.0
+    ):
+        self.analyzer = ICTAnalyzer()
+        self.min_confidence = min_confidence
+        self.min_risk_reward = min_risk_reward
+
+    def generate_signal(
+        self,
+        symbol: str,
+        data: 'pd.DataFrame',
+        timeframe: Timeframe,
+        htf_bias: Optional[Bias] = None
+    ) -> Signal:
+        """
+        Generate a trading signal for a symbol
+
+        Args:
+            symbol: Trading symbol (e.g., "EURUSD")
+            data: OHLCV DataFrame
+            timeframe: Signal timeframe
+            htf_bias: Optional higher timeframe bias
+
+        Returns:
+            Signal object with entry/exit levels and analysis
+        """
+        # Run ICT analysis
+        analysis = self.analyzer.analyze(data)
+
+        # Calculate signal score and factors
+        score, factors = self._calculate_signal_score(analysis, htf_bias)
+
+        # Determine direction
+        direction = self._determine_direction(analysis, score)
+
+        # Calculate levels if we have a valid signal
+        if direction != TradingDirection.WAIT:
+            entry_zone, stop_loss, targets = self._calculate_levels(
+                analysis, direction, data
+            )
+        else:
+            entry_zone = (0.0, 0.0)
+            stop_loss = 0.0
+            targets = []
+
+        # Calculate risk:reward
+        risk_reward = self._calculate_risk_reward(
+            direction, entry_zone, stop_loss, targets[0] if targets else 0
+        )
+
+        # Adjust confidence based on R:R
+        final_confidence = self._adjust_confidence(score / 100, risk_reward)
+
+        # Generate analysis text
+        analysis_text = self._generate_analysis_text(analysis, factors, direction)
+
+        # Extract key levels
+        key_levels = self._extract_key_levels(analysis)
+
+        # Calculate validity period
+        valid_until = self._calculate_validity(timeframe)
+
+        return Signal(
+            id=str(uuid4()),
+            symbol=symbol,
+            timeframe=timeframe,
+            direction=direction,
+            confidence=final_confidence,
+            signal_score=score,
+            current_price=analysis.current_price,
+            entry_zone=entry_zone,
+            stop_loss=stop_loss,
+            take_profit_1=targets[0] if len(targets) > 0 else 0.0,
+            take_profit_2=targets[1] if len(targets) > 1 else None,
+            take_profit_3=targets[2] if len(targets) > 2 else None,
+            risk_reward_ratio=risk_reward,
+            factors=factors,
+            key_levels=key_levels,
+            analysis_text=analysis_text,
+            mtf_bias=htf_bias.value if htf_bias else analysis.bias.value,
+            htf_structure=analysis.market_structure.value,
+            order_blocks=[
+                {'type': ob.type, 'high': ob.high, 'low': ob.low}
+                for ob in analysis.order_blocks[:3]
+            ],
+            fair_value_gaps=[
+                {'type': fvg.type, 'high': fvg.high, 'low': fvg.low}
+                for fvg in analysis.fair_value_gaps[:3]
+            ],
+            liquidity_levels=[
+                {'type': ll.type, 'price': ll.price}
+                for ll in (
+                    analysis.liquidity_levels.get('buy_side', [])[:2] +
+                    analysis.liquidity_levels.get('sell_side', [])[:2]
+                )
+            ],
+            premium_discount_zone=analysis.premium_discount.get('zone', 'neutral'),
+            kill_zone_active=self._is_kill_zone_active(),
+            kill_zone_name=self._get_active_kill_zone(),
+            valid_until=valid_until,
+            concept_ids_used=[],  # TODO: Link to concepts
+            rule_ids_used=[],  # TODO: Link to rules
+        )
+
+    def _calculate_signal_score(
+        self,
+        analysis: ICTAnalysisResult,
+        htf_bias: Optional[Bias]
+    ) -> Tuple[int, List[SignalFactor]]:
+        """
+        Calculate signal score based on ICT criteria
+
+        Maximum score: 100 points
+        - Market Structure: 25 points
+        - Order Block: 25 points
+        - Fair Value Gap: 20 points
+        - Premium/Discount: 20 points
+        - Liquidity Target: 10 points
+        """
+        score = 0
+        factors = []
+
+        # Factor 1: Market Structure (25 points)
+        if analysis.market_structure != MarketStructure.CONSOLIDATION:
+            factor_met = True
+            score += 25
+            description = f"Clear {analysis.market_structure.value} market structure"
+        else:
+            factor_met = False
+            description = "Market in consolidation - no clear structure"
+
+        factors.append(SignalFactor(
+            name="Market Structure",
+            description=description,
+            weight=0.25,
+            met=factor_met,
+            details=f"Structure: {analysis.market_structure.value}"
+        ))
+
+        # Factor 2: Order Block (25 points)
+        bias = htf_bias or analysis.bias
+        valid_ob = False
+
+        if bias == Bias.BULLISH:
+            bullish_obs = [ob for ob in analysis.order_blocks if ob.type == 'bullish']
+            if bullish_obs:
+                valid_ob = True
+                score += 25
+        elif bias == Bias.BEARISH:
+            bearish_obs = [ob for ob in analysis.order_blocks if ob.type == 'bearish']
+            if bearish_obs:
+                valid_ob = True
+                score += 25
+
+        factors.append(SignalFactor(
+            name="Order Block",
+            description="Valid order block present" if valid_ob else "No valid order block",
+            weight=0.25,
+            met=valid_ob,
+            details=f"Found {len(analysis.order_blocks)} order blocks"
+        ))
+
+        # Factor 3: Fair Value Gap (20 points)
+        valid_fvg = False
+
+        if bias == Bias.BULLISH:
+            bullish_fvgs = [fvg for fvg in analysis.fair_value_gaps if fvg.type == 'bullish']
+            if bullish_fvgs:
+                valid_fvg = True
+                score += 20
+        elif bias == Bias.BEARISH:
+            bearish_fvgs = [fvg for fvg in analysis.fair_value_gaps if fvg.type == 'bearish']
+            if bearish_fvgs:
+                valid_fvg = True
+                score += 20
+
+        factors.append(SignalFactor(
+            name="Fair Value Gap",
+            description="FVG available for entry" if valid_fvg else "No valid FVG",
+            weight=0.20,
+            met=valid_fvg,
+            details=f"Found {len(analysis.fair_value_gaps)} FVGs"
+        ))
+
+        # Factor 4: Premium/Discount Zone (20 points)
+        zone = analysis.premium_discount.get('zone', 'neutral')
+        zone_aligned = False
+
+        if bias == Bias.BULLISH and zone == 'discount':
+            zone_aligned = True
+            score += 20
+            zone_desc = f"Price in discount zone ({analysis.premium_discount.get('percentage', 50):.0f}%)"
+        elif bias == Bias.BEARISH and zone == 'premium':
+            zone_aligned = True
+            score += 20
+            zone_desc = f"Price in premium zone ({analysis.premium_discount.get('percentage', 50):.0f}%)"
+        else:
+            zone_desc = f"Price in {zone} zone - not ideal for {bias.value if bias else 'neutral'} bias"
+
+        factors.append(SignalFactor(
+            name="Premium/Discount",
+            description=zone_desc,
+            weight=0.20,
+            met=zone_aligned,
+            details=f"Zone: {zone}, Position: {analysis.premium_discount.get('percentage', 50):.0f}%"
+        ))
+
+        # Factor 5: Liquidity Target (10 points)
+        has_target = False
+
+        if bias == Bias.BULLISH and analysis.liquidity_levels.get('buy_side'):
+            has_target = True
+            score += 10
+            target_desc = "Buy-side liquidity target identified"
+        elif bias == Bias.BEARISH and analysis.liquidity_levels.get('sell_side'):
+            has_target = True
+            score += 10
+            target_desc = "Sell-side liquidity target identified"
+        else:
+            target_desc = "No clear liquidity target"
+
+        factors.append(SignalFactor(
+            name="Liquidity Target",
+            description=target_desc,
+            weight=0.10,
+            met=has_target,
+        ))
+
+        return score, factors
+
+    def _determine_direction(
+        self,
+        analysis: ICTAnalysisResult,
+        score: int
+    ) -> TradingDirection:
+        """Determine trade direction based on analysis and score"""
+        if score < 50:
+            return TradingDirection.WAIT
+
+        if analysis.bias == Bias.BULLISH:
+            return TradingDirection.BUY
+        elif analysis.bias == Bias.BEARISH:
+            return TradingDirection.SELL
+        else:
+            return TradingDirection.WAIT
+
+    def _calculate_levels(
+        self,
+        analysis: ICTAnalysisResult,
+        direction: TradingDirection,
+        data: 'pd.DataFrame'
+    ) -> Tuple[Tuple[float, float], float, List[float]]:
+        """Calculate entry zone, stop loss, and take profit levels"""
+        current_price = analysis.current_price
+
+        if direction == TradingDirection.BUY:
+            # Entry at bullish OB or FVG
+            bullish_obs = [ob for ob in analysis.order_blocks if ob.type == 'bullish']
+            bullish_fvgs = [fvg for fvg in analysis.fair_value_gaps if fvg.type == 'bullish']
+
+            if bullish_obs:
+                entry_zone = (bullish_obs[0].low, bullish_obs[0].high)
+                stop_loss = bullish_obs[0].low * 0.998
+            elif bullish_fvgs:
+                entry_zone = (bullish_fvgs[0].low, bullish_fvgs[0].high)
+                stop_loss = bullish_fvgs[0].low * 0.998
+            else:
+                entry_zone = (current_price * 0.998, current_price)
+                stop_loss = current_price * 0.99
+
+            # Take profits at buy-side liquidity levels
+            buy_side = analysis.liquidity_levels.get('buy_side', [])
+            if buy_side:
+                targets = [ll.price for ll in buy_side[:3]]
+            else:
+                targets = [
+                    current_price * 1.02,
+                    current_price * 1.04,
+                    current_price * 1.06
+                ]
+
+        elif direction == TradingDirection.SELL:
+            # Entry at bearish OB or FVG
+            bearish_obs = [ob for ob in analysis.order_blocks if ob.type == 'bearish']
+            bearish_fvgs = [fvg for fvg in analysis.fair_value_gaps if fvg.type == 'bearish']
+
+            if bearish_obs:
+                entry_zone = (bearish_obs[0].low, bearish_obs[0].high)
+                stop_loss = bearish_obs[0].high * 1.002
+            elif bearish_fvgs:
+                entry_zone = (bearish_fvgs[0].low, bearish_fvgs[0].high)
+                stop_loss = bearish_fvgs[0].high * 1.002
+            else:
+                entry_zone = (current_price, current_price * 1.002)
+                stop_loss = current_price * 1.01
+
+            # Take profits at sell-side liquidity levels
+            sell_side = analysis.liquidity_levels.get('sell_side', [])
+            if sell_side:
+                targets = [ll.price for ll in sell_side[:3]]
+            else:
+                targets = [
+                    current_price * 0.98,
+                    current_price * 0.96,
+                    current_price * 0.94
+                ]
+
+        else:
+            entry_zone = (0.0, 0.0)
+            stop_loss = 0.0
+            targets = []
+
+        return entry_zone, stop_loss, targets
+
+    def _calculate_risk_reward(
+        self,
+        direction: TradingDirection,
+        entry_zone: Tuple[float, float],
+        stop_loss: float,
+        take_profit: float
+    ) -> float:
+        """Calculate risk:reward ratio"""
+        if direction == TradingDirection.WAIT or stop_loss == 0 or take_profit == 0:
+            return 0.0
+
+        entry_mid = (entry_zone[0] + entry_zone[1]) / 2
+        risk = abs(entry_mid - stop_loss)
+
+        if risk == 0:
+            return 0.0
+
+        reward = abs(take_profit - entry_mid)
+        return round(reward / risk, 2)
+
+    def _adjust_confidence(self, base_confidence: float, risk_reward: float) -> float:
+        """Adjust confidence based on risk:reward ratio"""
+        if risk_reward >= 3:
+            return min(base_confidence * 1.1, 1.0)
+        elif risk_reward >= 2:
+            return base_confidence
+        elif risk_reward >= 1.5:
+            return base_confidence * 0.9
+        else:
+            return base_confidence * 0.7
+
+    def _generate_analysis_text(
+        self,
+        analysis: ICTAnalysisResult,
+        factors: List[SignalFactor],
+        direction: TradingDirection
+    ) -> str:
+        """Generate human-readable analysis"""
+        pd_info = analysis.premium_discount
+
+        factors_text = "\n".join([
+            f"{'✓' if f.met else '✗'} {f.name}: {f.description}"
+            for f in factors
+        ])
+
+        return f"""## ICT Analysis Summary
+
+**Market Structure:** {analysis.market_structure.value.title()}
+**Current Bias:** {analysis.bias.value.title()} ({analysis.bias_confidence:.0%} confidence)
+**Price Zone:** {pd_info.get('zone', 'neutral').title()} ({pd_info.get('percentage', 50):.0f}% of range)
+
+### Signal Factors:
+{factors_text}
+
+### Key Observations:
+- {analysis.bias_reasoning}
+- Range: {pd_info.get('range_low', 0):.5f} - {pd_info.get('range_high', 0):.5f}
+- Equilibrium: {pd_info.get('equilibrium', 0):.5f}
+- Order Blocks: {len(analysis.order_blocks)} found
+- Fair Value Gaps: {len(analysis.fair_value_gaps)} found
+
+### Recommendation: **{direction.value}**
+"""
+
+    def _extract_key_levels(self, analysis: ICTAnalysisResult) -> List[KeyLevel]:
+        """Extract key levels for charting"""
+        levels = []
+
+        # Order blocks
+        for ob in analysis.order_blocks[:5]:
+            levels.append(KeyLevel(
+                level_type=f'{ob.type}_ob',
+                price=(ob.high + ob.low) / 2,
+                high=ob.high,
+                low=ob.low,
+                strength=ob.strength
+            ))
+
+        # FVGs
+        for fvg in analysis.fair_value_gaps[:5]:
+            levels.append(KeyLevel(
+                level_type=f'{fvg.type}_fvg',
+                price=(fvg.high + fvg.low) / 2,
+                high=fvg.high,
+                low=fvg.low
+            ))
+
+        # Liquidity
+        for ll in analysis.liquidity_levels.get('buy_side', [])[:3]:
+            levels.append(KeyLevel(
+                level_type='buy_liquidity',
+                price=ll.price,
+                strength=ll.strength
+            ))
+
+        for ll in analysis.liquidity_levels.get('sell_side', [])[:3]:
+            levels.append(KeyLevel(
+                level_type='sell_liquidity',
+                price=ll.price,
+                strength=ll.strength
+            ))
+
+        return levels
+
+    def _calculate_validity(self, timeframe: Timeframe) -> datetime:
+        """Calculate signal validity duration based on timeframe"""
+        validity_map = {
+            Timeframe.M1: timedelta(minutes=5),
+            Timeframe.M5: timedelta(minutes=15),
+            Timeframe.M15: timedelta(hours=1),
+            Timeframe.M30: timedelta(hours=2),
+            Timeframe.H1: timedelta(hours=4),
+            Timeframe.H4: timedelta(hours=16),
+            Timeframe.D1: timedelta(days=2),
+            Timeframe.W1: timedelta(days=7),
+            Timeframe.MN: timedelta(days=30),
+        }
+
+        return datetime.utcnow() + validity_map.get(timeframe, timedelta(hours=4))
+
+    def _is_kill_zone_active(self) -> bool:
+        """Check if currently in a kill zone"""
+        now = datetime.utcnow()
+        hour = now.hour
+
+        # Kill zones (UTC):
+        # Asian: 00:00 - 04:00
+        # London: 07:00 - 10:00
+        # New York: 12:00 - 15:00
+
+        kill_zones = [
+            (0, 4),   # Asian
+            (7, 10),  # London
+            (12, 15), # New York
+        ]
+
+        return any(start <= hour < end for start, end in kill_zones)
+
+    def _get_active_kill_zone(self) -> Optional[str]:
+        """Get the name of the active kill zone"""
+        now = datetime.utcnow()
+        hour = now.hour
+
+        if 0 <= hour < 4:
+            return "Asian Session"
+        elif 7 <= hour < 10:
+            return "London Open"
+        elif 12 <= hour < 15:
+            return "New York Open"
+        elif 15 <= hour < 17:
+            return "London Close"
+
+        return None
