@@ -803,6 +803,229 @@ async def send_signal_notification(
 
 
 # ============================================================================
+# Kill Zones & Session Analysis
+# ============================================================================
+
+@app.get("/api/session/current")
+async def get_current_session():
+    """Get current trading session and kill zone status"""
+    try:
+        from .ml.kill_zones import KillZoneAnalyzer
+
+        analyzer = KillZoneAnalyzer()
+        info = analyzer.get_session_info()
+        po3 = analyzer.get_power_of_three_phase()
+        in_kz, kz = analyzer.is_in_kill_zone()
+        next_kz, time_to_next = analyzer.get_next_kill_zone()
+
+        return {
+            'current_session': info.current_session.value,
+            'in_kill_zone': in_kz,
+            'kill_zone': kz.name if kz else None,
+            'kill_zone_weight': kz.bias_weight if kz else 0,
+            'optimal_pairs': kz.optimal_pairs if kz else [],
+            'next_kill_zone': next_kz.name if next_kz else None,
+            'time_to_next_kz_minutes': int(time_to_next.total_seconds() / 60) if time_to_next else None,
+            'power_of_three': {
+                'phase': po3['phase'],
+                'description': po3['description']
+            },
+            'daily_bias': info.daily_bias,
+            'timestamp': datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/session/kill-zones")
+async def get_all_kill_zones():
+    """Get all ICT kill zones"""
+    try:
+        from .ml.kill_zones import KillZoneAnalyzer
+
+        analyzer = KillZoneAnalyzer()
+
+        kill_zones = []
+        for kz in analyzer.KILL_ZONES:
+            kill_zones.append({
+                'name': kz.name,
+                'session': kz.session.value,
+                'start_time_utc': kz.start_time.strftime('%H:%M'),
+                'end_time_utc': kz.end_time.strftime('%H:%M'),
+                'bias_weight': kz.bias_weight,
+                'description': kz.description,
+                'optimal_pairs': kz.optimal_pairs
+            })
+
+        return {
+            'kill_zones': kill_zones,
+            'current_utc': datetime.utcnow().strftime('%H:%M:%S')
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Performance Tracking
+# ============================================================================
+
+@app.get("/api/performance/summary")
+async def get_performance_summary(
+    days: int = Query(30, description="Number of days to analyze")
+):
+    """Get performance summary for last N days"""
+    try:
+        from .ml.performance_tracker import PerformanceTracker
+
+        tracker = PerformanceTracker(str(DATA_DIR))
+        summary = tracker.get_performance_summary(days=days)
+
+        return summary
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/performance/feedback")
+async def get_model_feedback():
+    """Get model feedback and recommendations"""
+    try:
+        from .ml.performance_tracker import PerformanceTracker
+
+        tracker = PerformanceTracker(str(DATA_DIR))
+        feedback = tracker.get_model_feedback()
+
+        return feedback
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/performance/signals")
+async def get_recent_signals(
+    limit: int = Query(20, description="Number of signals to return")
+):
+    """Get recent signal history"""
+    try:
+        from .ml.performance_tracker import PerformanceTracker
+
+        tracker = PerformanceTracker(str(DATA_DIR))
+        signals = tracker.get_recent_signals(limit=limit)
+
+        return {
+            'signals': signals,
+            'count': len(signals)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/performance/record-signal")
+async def record_signal(signal_data: dict):
+    """Record a new signal for tracking"""
+    try:
+        from .ml.performance_tracker import PerformanceTracker
+
+        tracker = PerformanceTracker(str(DATA_DIR))
+        signal_id = tracker.record_signal(signal_data)
+
+        return {
+            'status': 'recorded',
+            'signal_id': signal_id
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/performance/update-outcome/{signal_id}")
+async def update_signal_outcome(signal_id: str, outcome: dict):
+    """Update signal outcome after trade closes"""
+    try:
+        from .ml.performance_tracker import PerformanceTracker
+
+        tracker = PerformanceTracker(str(DATA_DIR))
+        success = tracker.update_signal_outcome(signal_id, outcome)
+
+        if success:
+            return {'status': 'updated', 'signal_id': signal_id}
+        else:
+            raise HTTPException(status_code=404, detail=f"Signal {signal_id} not found")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Training Database
+# ============================================================================
+
+@app.get("/api/training/database-report")
+async def get_training_database_report():
+    """Get comprehensive training database report"""
+    try:
+        kb = get_knowledge_base()
+        if kb:
+            return kb.get_training_database_report()
+        else:
+            from .ml.training_database import TrainingDatabase
+            db = TrainingDatabase(str(DATA_DIR))
+            return db.get_training_report()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/training/videos")
+async def get_all_trained_videos():
+    """Get all trained videos with summaries"""
+    try:
+        kb = get_knowledge_base()
+        if kb:
+            return {'videos': kb.get_all_trained_videos()}
+        else:
+            from .ml.training_database import TrainingDatabase
+            db = TrainingDatabase(str(DATA_DIR))
+            return {'videos': db.get_all_trained_videos()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/training/video/{video_id}")
+async def get_video_training_summary(video_id: str):
+    """Get training summary for a specific video"""
+    try:
+        kb = get_knowledge_base()
+        if kb:
+            summary = kb.get_video_training_summary(video_id)
+        else:
+            from .ml.training_database import TrainingDatabase
+            db = TrainingDatabase(str(DATA_DIR))
+            summary = db.get_video_summary(video_id)
+
+        if summary:
+            return summary
+        else:
+            raise HTTPException(status_code=404, detail=f"Video {video_id} not found")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/training/playlists")
+async def get_all_playlist_summaries():
+    """Get all playlist training summaries"""
+    try:
+        kb = get_knowledge_base()
+        if kb:
+            return {'playlists': kb.get_all_playlists()}
+        else:
+            from .ml.training_database import TrainingDatabase
+            db = TrainingDatabase(str(DATA_DIR))
+            return {'playlists': db.get_all_playlists()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # Error Handlers
 # ============================================================================
 

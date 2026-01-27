@@ -7,13 +7,15 @@ import {
   Settings,
   Activity,
   Brain,
-  RefreshCw
+  RefreshCw,
+  BarChart3
 } from 'lucide-react';
 
 import Dashboard from './pages/Dashboard';
 import Signals from './pages/Signals';
 import Concepts from './pages/Concepts';
 import Learning from './pages/Learning';
+import Performance from './pages/Performance';
 
 // Navigation Component
 function Navigation() {
@@ -24,6 +26,7 @@ function Navigation() {
     { path: '/signals', icon: TrendingUp, label: 'Signals' },
     { path: '/concepts', icon: BookOpen, label: 'ICT Concepts' },
     { path: '/learning', icon: Brain, label: 'ML Learning' },
+    { path: '/performance', icon: BarChart3, label: 'Performance' },
   ];
 
   return (
@@ -82,6 +85,7 @@ function App() {
             <Route path="/signals" element={<Signals />} />
             <Route path="/concepts" element={<Concepts />} />
             <Route path="/learning" element={<Learning />} />
+            <Route path="/performance" element={<Performance />} />
           </Routes>
         </main>
 
