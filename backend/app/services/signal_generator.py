@@ -148,7 +148,7 @@ class SignalGenerator:
 
     def _calculate_signal_score(
         self,
-        analysis: ICTAnalysisResult,
+        analysis: SmartMoneyAnalysisResult,
         htf_bias: Optional[Bias]
     ) -> Tuple[int, List[SignalFactor]]:
         """
@@ -274,7 +274,7 @@ class SignalGenerator:
 
     def _determine_direction(
         self,
-        analysis: ICTAnalysisResult,
+        analysis: SmartMoneyAnalysisResult,
         score: int
     ) -> TradingDirection:
         """Determine trade direction based on analysis and score"""
@@ -290,7 +290,7 @@ class SignalGenerator:
 
     def _calculate_levels(
         self,
-        analysis: ICTAnalysisResult,
+        analysis: SmartMoneyAnalysisResult,
         direction: TradingDirection,
         data: 'pd.DataFrame'
     ) -> Tuple[Tuple[float, float], float, List[float]]:
@@ -389,7 +389,7 @@ class SignalGenerator:
 
     def _generate_analysis_text(
         self,
-        analysis: ICTAnalysisResult,
+        analysis: SmartMoneyAnalysisResult,
         factors: List[SignalFactor],
         direction: TradingDirection
     ) -> str:
@@ -420,7 +420,7 @@ class SignalGenerator:
 ### Recommendation: **{direction.value}**
 """
 
-    def _extract_key_levels(self, analysis: ICTAnalysisResult) -> List[KeyLevel]:
+    def _extract_key_levels(self, analysis: SmartMoneyAnalysisResult) -> List[KeyLevel]:
         """Extract key levels for charting"""
         levels = []
 

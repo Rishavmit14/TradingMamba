@@ -133,7 +133,7 @@ class SmartMoneyAnalyzer:
         """
         self.lookback_swing = lookback_swing
 
-    def analyze(self, data: 'pd.DataFrame') -> ICTAnalysisResult:
+    def analyze(self, data: 'pd.DataFrame') -> SmartMoneyAnalysisResult:
         """
         Run complete Smart Money analysis on OHLCV data
 
@@ -142,7 +142,7 @@ class SmartMoneyAnalyzer:
                   Index should be datetime
 
         Returns:
-            ICTAnalysisResult with all analysis components
+            SmartMoneyAnalysisResult with all analysis components
         """
         if pd is None:
             raise ImportError("pandas is required for Smart Money analysis")

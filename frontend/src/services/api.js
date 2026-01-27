@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE = '/api';
+// Use absolute URL to bypass proxy issues
+const API_BASE = 'http://localhost:8000/api';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -79,6 +80,29 @@ export const getTranscripts = async () => {
 export const getConcepts = async () => {
   const response = await api.get('/concepts');
   return response.data;
+};
+
+// Playlist Processing
+export const addPlaylist = async (url, tier = 3, trainAfter = true) => {
+  const response = await api.post('/playlist/add', null, {
+    params: { url, tier, train_after: trainAfter },
+  });
+  return response.data;
+};
+
+export const getPlaylistStatus = async (jobId) => {
+  const response = await api.get(`/playlist/status/${jobId}`);
+  return response.data;
+};
+
+export const getProcessingJobs = async () => {
+  const response = await api.get('/playlist/jobs');
+  return response.data;
+};
+
+// Stream playlist progress (returns EventSource URL)
+export const getPlaylistStreamUrl = (jobId) => {
+  return `${API_BASE}/playlist/stream/${jobId}`;
 };
 
 export default api;

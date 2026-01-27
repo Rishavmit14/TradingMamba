@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     TWILIO_WHATSAPP_NUMBER: str = "whatsapp:+14155238886"
 
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:5173", "http://127.0.0.1:3000"]
 
     # Video Processing
     WHISPER_MODEL: str = "large-v3"

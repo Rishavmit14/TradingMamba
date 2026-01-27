@@ -23,10 +23,10 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS middleware
+# CORS middleware - allow all origins in development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://127.0.0.1:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -221,10 +221,10 @@ async def search_transcript(
 @app.get("/api/concepts")
 async def get_concepts():
     """Get all Smart Money concepts from taxonomy"""
-    from .models.concept import ICT_CONCEPT_TAXONOMY
+    from .models.concept import SMART_MONEY_CONCEPT_TAXONOMY
 
     concepts = []
-    for category, data in ICT_CONCEPT_TAXONOMY.items():
+    for category, data in SMART_MONEY_CONCEPT_TAXONOMY.items():
         for concept in data.get("concepts", []):
             concepts.append({
                 "category": category,
@@ -237,19 +237,19 @@ async def get_concepts():
     return {
         "concepts": concepts,
         "total": len(concepts),
-        "categories": list(ICT_CONCEPT_TAXONOMY.keys())
+        "categories": list(SMART_MONEY_CONCEPT_TAXONOMY.keys())
     }
 
 
 @app.get("/api/concepts/{category}")
 async def get_concepts_by_category(category: str):
     """Get concepts for a specific category"""
-    from .models.concept import ICT_CONCEPT_TAXONOMY
+    from .models.concept import SMART_MONEY_CONCEPT_TAXONOMY
 
-    if category not in ICT_CONCEPT_TAXONOMY:
+    if category not in SMART_MONEY_CONCEPT_TAXONOMY:
         raise HTTPException(status_code=404, detail="Category not found")
 
-    data = ICT_CONCEPT_TAXONOMY[category]
+    data = SMART_MONEY_CONCEPT_TAXONOMY[category]
     return {
         "category": category,
         "name": data.get("name"),
@@ -260,12 +260,12 @@ async def get_concepts_by_category(category: str):
 @app.get("/api/concepts/search")
 async def search_concepts(q: str = Query(..., description="Search query")):
     """Search for concepts by name or keyword"""
-    from .models.concept import ICT_CONCEPT_TAXONOMY
+    from .models.concept import SMART_MONEY_CONCEPT_TAXONOMY
 
     query = q.lower()
     matches = []
 
-    for category, data in ICT_CONCEPT_TAXONOMY.items():
+    for category, data in SMART_MONEY_CONCEPT_TAXONOMY.items():
         for concept in data.get("concepts", []):
             # Check name
             if query in concept["name"].lower():
@@ -305,8 +305,8 @@ def get_knowledge_base():
     global _knowledge_base
     if _knowledge_base is None:
         try:
-            from .ml.training_pipeline import ICTKnowledgeBase
-            _knowledge_base = ICTKnowledgeBase(str(DATA_DIR))
+            from .ml.training_pipeline import SmartMoneyKnowledgeBase
+            _knowledge_base = SmartMoneyKnowledgeBase(str(DATA_DIR))
             _knowledge_base.load()
         except Exception as e:
             print(f"Warning: Could not load knowledge base: {e}")
@@ -331,8 +331,8 @@ def get_analyzer():
     global _analyzer
     if _analyzer is None:
         try:
-            from .ml.technical_analysis import FullICTAnalysis
-            _analyzer = FullICTAnalysis()
+            from .ml.technical_analysis import FullSmartMoneyAnalysis
+            _analyzer = FullSmartMoneyAnalysis()
         except Exception as e:
             print(f"Warning: Could not load analyzer: {e}")
     return _analyzer
@@ -527,9 +527,9 @@ async def predict_concepts(text: str = Query(..., description="Text to analyze")
 async def trigger_training(incremental: bool = Query(True, description="Incremental training")):
     """Trigger ML model training (async)"""
     try:
-        from .ml.training_pipeline import ICTKnowledgeBase
+        from .ml.training_pipeline import SmartMoneyKnowledgeBase
 
-        kb = ICTKnowledgeBase(str(DATA_DIR))
+        kb = SmartMoneyKnowledgeBase(str(DATA_DIR))
 
         if incremental:
             try:
@@ -557,6 +557,22 @@ async def trigger_training(incremental: bool = Query(True, description="Incremen
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/reset")
+async def reset_ml_state():
+    """Reset all ML state - clears cached models and knowledge base"""
+    global _knowledge_base, _signal_generator, _analyzer
+
+    # Clear all cached instances
+    _knowledge_base = None
+    _signal_generator = None
+    _analyzer = None
+
+    return {
+        'status': 'success',
+        'message': 'ML state reset. All cached models cleared.'
+    }
 
 
 @app.get("/api/market/price/{symbol}")
@@ -1057,10 +1073,10 @@ async def detect_patterns(
     """Detect Smart Money patterns in price data"""
     try:
         from .services.free_market_data import FreeMarketDataService
-        from .ml.pattern_recognition import ICTPatternRecognizer
+        from .ml.pattern_recognition import SmartMoneyPatternRecognizer
 
         market_service = FreeMarketDataService()
-        recognizer = ICTPatternRecognizer()
+        recognizer = SmartMoneyPatternRecognizer()
 
         df = market_service.get_ohlcv(symbol, timeframe, limit=200)
         if df is None or df.empty:
@@ -1092,10 +1108,10 @@ async def predict_price(
     """Get AI price prediction for a symbol"""
     try:
         from .services.free_market_data import FreeMarketDataService
-        from .ml.price_predictor import ICTPricePredictor
+        from .ml.price_predictor import SmartMoneyPricePredictor
 
         market_service = FreeMarketDataService()
-        predictor = ICTPricePredictor()
+        predictor = SmartMoneyPricePredictor()
 
         df = market_service.get_ohlcv(symbol, timeframe, limit=200)
         if df is None or df.empty:
@@ -1132,7 +1148,7 @@ async def generate_chart(
     try:
         from .services.free_market_data import FreeMarketDataService
         from .services.chart_generator import ICTChartGenerator
-        from .ml.pattern_recognition import ICTPatternRecognizer
+        from .ml.pattern_recognition import SmartMoneyPatternRecognizer
 
         market_service = FreeMarketDataService()
         chart_gen = ICTChartGenerator()
@@ -1144,7 +1160,7 @@ async def generate_chart(
         # Get patterns
         patterns = None
         if with_patterns:
-            recognizer = ICTPatternRecognizer()
+            recognizer = SmartMoneyPatternRecognizer()
             detected = recognizer.detect_all_patterns(df)
             patterns = [p.to_dict() for p in detected]
 
@@ -1286,6 +1302,464 @@ async def get_db_signals(
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Playlist Processing with Live Progress
+# ============================================================================
+
+import asyncio
+import re
+from fastapi.responses import StreamingResponse
+import queue
+import threading
+
+# Global progress tracking
+_processing_status = {}
+
+
+def extract_playlist_id(url: str) -> str:
+    """Extract playlist ID from URL"""
+    patterns = [
+        r'list=([a-zA-Z0-9_-]+)',
+        r'playlist\?list=([a-zA-Z0-9_-]+)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, url)
+        if match:
+            return match.group(1)
+    return None
+
+
+def fetch_playlist_info_sync(playlist_url: str) -> dict:
+    """Fetch playlist information from YouTube (synchronous)"""
+    try:
+        import yt_dlp
+
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+            'skip_download': True,
+        }
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(playlist_url, download=False)
+
+        videos = []
+        for entry in info.get('entries', []):
+            if entry:
+                videos.append({
+                    'video_id': entry.get('id'),
+                    'title': entry.get('title', 'Unknown'),
+                    'duration': entry.get('duration'),
+                    'url': f"https://www.youtube.com/watch?v={entry.get('id')}"
+                })
+
+        return {
+            'playlist_id': info.get('id'),
+            'title': info.get('title', 'Unknown Playlist'),
+            'channel': info.get('channel', info.get('uploader', 'Unknown')),
+            'video_count': len(videos),
+            'videos': videos,
+            'fetched_at': datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+
+def transcribe_with_whisper(video_id: str, status_callback=None) -> dict:
+    """Download audio and transcribe with Whisper (fallback for videos without captions)"""
+    import tempfile
+    import os
+
+    # Add user's bin directory to PATH for ffmpeg
+    user_bin = os.path.expanduser("~/bin")
+    if user_bin not in os.environ.get('PATH', ''):
+        os.environ['PATH'] = f"{user_bin}:{os.environ.get('PATH', '')}"
+
+    try:
+        import yt_dlp
+        import whisper
+    except ImportError as e:
+        return {'error': f'Missing dependency: {e}. Install with: pip install openai-whisper yt-dlp'}
+
+    video_url = f"https://www.youtube.com/watch?v={video_id}"
+
+    # Create temp directory for audio
+    with tempfile.TemporaryDirectory() as temp_dir:
+        audio_path = os.path.join(temp_dir, f"{video_id}.mp3")
+
+        # Download audio only
+        if status_callback:
+            status_callback('downloading_audio', 'Downloading audio...')
+
+        ydl_opts = {
+            'format': 'bestaudio[ext=m4a]/bestaudio[ext=webm]/bestaudio/best',
+            'outtmpl': os.path.join(temp_dir, f"{video_id}.%(ext)s"),
+            # No postprocessors - Whisper can handle m4a/webm directly
+            'quiet': True,
+            'no_warnings': True,
+            # Bypass bot detection
+            'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+            'http_headers': {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            },
+        }
+
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([video_url])
+        except Exception as e:
+            return {'error': f'Failed to download audio: {str(e)}'}
+
+        # Find the downloaded file (extension might vary)
+        audio_file = None
+        for f in os.listdir(temp_dir):
+            if f.startswith(video_id):
+                audio_file = os.path.join(temp_dir, f)
+                break
+
+        if not audio_file or not os.path.exists(audio_file):
+            return {'error': 'Audio download failed - file not found'}
+
+        # Load Whisper model (use base for speed, large-v3 for accuracy)
+        if status_callback:
+            status_callback('loading_model', 'Loading Whisper model...')
+
+        try:
+            # Use 'base' model for faster processing, 'large-v3' for best accuracy
+            model = whisper.load_model("base")
+        except Exception as e:
+            return {'error': f'Failed to load Whisper model: {str(e)}'}
+
+        # Transcribe
+        if status_callback:
+            status_callback('transcribing', 'Transcribing with Whisper...')
+
+        try:
+            result = model.transcribe(audio_file, language='en')
+        except Exception as e:
+            return {'error': f'Transcription failed: {str(e)}'}
+
+        # Process segments
+        segments = []
+        for seg in result.get('segments', []):
+            segments.append({
+                'start_time': round(seg['start'], 2),
+                'end_time': round(seg['end'], 2),
+                'text': seg['text'].strip()
+            })
+
+        full_text = result.get('text', '').strip()
+
+        return {
+            'video_id': video_id,
+            'full_text': full_text,
+            'segments': segments,
+            'word_count': len(full_text.split()),
+            'segment_count': len(segments),
+            'method': 'whisper',
+            'whisper_model': 'base',
+            'transcribed_at': datetime.utcnow().isoformat()
+        }
+
+
+def get_transcript_sync(video_id: str, status_callback=None) -> dict:
+    """Fetch transcript for a video - tries YouTube captions first, falls back to Whisper"""
+    # First try YouTube's built-in captions (instant)
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+
+        ytt_api = YouTubeTranscriptApi()
+        result = ytt_api.fetch(video_id)
+
+        segments = []
+        for item in result:
+            segments.append({
+                'start_time': round(item.start, 2),
+                'end_time': round(item.start + item.duration, 2),
+                'text': item.text.strip()
+            })
+
+        full_text = ' '.join([s['text'] for s in segments])
+
+        return {
+            'video_id': video_id,
+            'full_text': full_text,
+            'segments': segments,
+            'word_count': len(full_text.split()),
+            'segment_count': len(segments),
+            'method': 'youtube_transcript_api',
+            'transcribed_at': datetime.utcnow().isoformat()
+        }
+    except Exception as yt_error:
+        # YouTube captions not available, try Whisper fallback
+        if status_callback:
+            status_callback('whisper_fallback', f'No captions available, using Whisper...')
+
+        whisper_result = transcribe_with_whisper(video_id, status_callback)
+
+        if 'error' in whisper_result:
+            # Both methods failed
+            return {'error': f'YouTube: {str(yt_error)[:50]} | Whisper: {whisper_result["error"][:50]}'}
+
+        return whisper_result
+
+
+def process_playlist_worker(job_id: str, playlist_url: str, tier: int, train_after: bool):
+    """Background worker to process playlist"""
+    global _processing_status
+
+    try:
+        # Update status - fetching playlist
+        _processing_status[job_id] = {
+            'status': 'fetching_playlist',
+            'message': 'Fetching playlist information...',
+            'progress': 0,
+            'total': 0,
+            'current_video': None,
+            'completed': [],
+            'failed': [],
+            'started_at': datetime.utcnow().isoformat()
+        }
+
+        # Fetch playlist info
+        playlist_info = fetch_playlist_info_sync(playlist_url)
+
+        if 'error' in playlist_info:
+            _processing_status[job_id]['status'] = 'error'
+            _processing_status[job_id]['message'] = f"Failed to fetch playlist: {playlist_info['error']}"
+            return
+
+        # Save playlist
+        playlist_info['tier'] = tier
+        playlist_info['description'] = f"Added via Dashboard - Tier {tier}"
+        playlist_info['added_at'] = datetime.utcnow().isoformat()
+
+        save_path = PLAYLISTS_DIR / f"{playlist_info['playlist_id']}.json"
+        with open(save_path, 'w') as f:
+            json.dump(playlist_info, f, indent=2)
+
+        videos = playlist_info['videos']
+        total = len(videos)
+
+        _processing_status[job_id].update({
+            'status': 'processing',
+            'message': f'Processing {total} videos...',
+            'playlist_title': playlist_info['title'],
+            'playlist_id': playlist_info['playlist_id'],
+            'total': total,
+            'progress': 0
+        })
+
+        # Process each video
+        for i, video in enumerate(videos):
+            video_id = video['video_id']
+            video_title = video['title']
+
+            _processing_status[job_id]['current_video'] = {
+                'index': i + 1,
+                'video_id': video_id,
+                'title': video_title[:50]
+            }
+            _processing_status[job_id]['message'] = f'Processing: {video_title[:40]}...'
+
+            transcript_path = TRANSCRIPTS_DIR / f"{video_id}.json"
+
+            # Check if already exists
+            if transcript_path.exists():
+                _processing_status[job_id]['completed'].append({
+                    'video_id': video_id,
+                    'title': video_title,
+                    'status': 'skipped',
+                    'reason': 'Already transcribed'
+                })
+            else:
+                # Create status callback to update UI during Whisper transcription
+                def whisper_status_callback(step, message):
+                    _processing_status[job_id]['whisper_step'] = step
+                    _processing_status[job_id]['message'] = f'{video_title[:30]}... - {message}'
+
+                # Get transcript (tries YouTube first, falls back to Whisper)
+                transcript = get_transcript_sync(video_id, whisper_status_callback)
+
+                # Clear whisper step after completion
+                _processing_status[job_id].pop('whisper_step', None)
+
+                if 'error' in transcript:
+                    _processing_status[job_id]['failed'].append({
+                        'video_id': video_id,
+                        'title': video_title,
+                        'error': transcript['error'][:100]
+                    })
+                else:
+                    transcript['title'] = video_title
+                    with open(transcript_path, 'w') as f:
+                        json.dump(transcript, f, indent=2, ensure_ascii=False)
+
+                    _processing_status[job_id]['completed'].append({
+                        'video_id': video_id,
+                        'title': video_title,
+                        'status': 'success',
+                        'method': transcript.get('method', 'unknown'),
+                        'word_count': transcript['word_count']
+                    })
+
+            _processing_status[job_id]['progress'] = i + 1
+
+        # Training phase
+        if train_after:
+            _processing_status[job_id]['status'] = 'training'
+            _processing_status[job_id]['message'] = 'Training ML model with new data...'
+            _processing_status[job_id]['current_video'] = None
+
+            try:
+                from .ml.training_pipeline import SmartMoneyKnowledgeBase
+
+                kb = SmartMoneyKnowledgeBase(str(DATA_DIR))
+                try:
+                    kb.load()
+                except:
+                    pass
+
+                results = kb.train(incremental=True)
+                kb.save()
+
+                # Reload global instance
+                global _knowledge_base
+                _knowledge_base = kb
+
+                _processing_status[job_id]['training_results'] = {
+                    'n_transcripts': results.get('n_transcripts', 0),
+                    'classifier_f1': results.get('components', {}).get('classifier', {}).get('ensemble_f1'),
+                }
+            except Exception as e:
+                _processing_status[job_id]['training_error'] = str(e)
+
+        # Complete
+        _processing_status[job_id]['status'] = 'completed'
+        _processing_status[job_id]['message'] = 'Processing complete!'
+        _processing_status[job_id]['completed_at'] = datetime.utcnow().isoformat()
+
+    except Exception as e:
+        _processing_status[job_id]['status'] = 'error'
+        _processing_status[job_id]['message'] = f'Error: {str(e)}'
+
+
+@app.post("/api/playlist/add")
+async def add_playlist_endpoint(
+    url: str = Query(..., description="YouTube playlist URL"),
+    tier: int = Query(3, description="Learning tier 1-5"),
+    train_after: bool = Query(True, description="Train model after processing")
+):
+    """
+    Add a YouTube playlist and process all videos.
+    Returns a job ID for tracking progress.
+    """
+    # Validate URL
+    playlist_id = extract_playlist_id(url)
+    if not playlist_id:
+        raise HTTPException(status_code=400, detail="Invalid playlist URL")
+
+    # Check if already exists
+    existing = PLAYLISTS_DIR / f"{playlist_id}.json"
+    if existing.exists():
+        return {
+            'status': 'exists',
+            'message': 'Playlist already added',
+            'playlist_id': playlist_id
+        }
+
+    # Create job
+    job_id = f"job_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{playlist_id[:8]}"
+
+    # Start background processing
+    thread = threading.Thread(
+        target=process_playlist_worker,
+        args=(job_id, url, tier, train_after)
+    )
+    thread.daemon = True
+    thread.start()
+
+    return {
+        'status': 'started',
+        'job_id': job_id,
+        'message': 'Processing started. Use /api/playlist/status/{job_id} to track progress.'
+    }
+
+
+@app.get("/api/playlist/status/{job_id}")
+async def get_playlist_status(job_id: str):
+    """Get processing status for a playlist job"""
+    if job_id not in _processing_status:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    return _processing_status[job_id]
+
+
+@app.get("/api/playlist/stream/{job_id}")
+async def stream_playlist_progress(job_id: str):
+    """Stream processing progress using Server-Sent Events"""
+
+    async def event_generator():
+        last_hash = None
+
+        while True:
+            if job_id not in _processing_status:
+                yield f"data: {json.dumps({'error': 'Job not found'})}\n\n"
+                break
+
+            status = _processing_status[job_id]
+
+            # Create a hash of important fields to detect any change
+            current_hash = (
+                status.get('progress', 0),
+                status.get('status'),
+                status.get('message', ''),
+                status.get('whisper_step', ''),
+                len(status.get('completed', [])),
+                len(status.get('failed', []))
+            )
+
+            # Send update if anything changed
+            if current_hash != last_hash:
+                yield f"data: {json.dumps(status)}\n\n"
+                last_hash = current_hash
+
+            # Stop if completed or error
+            if status.get('status') in ['completed', 'error']:
+                break
+
+            await asyncio.sleep(0.3)  # Faster updates
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Access-Control-Allow-Origin": "*",
+        }
+    )
+
+
+@app.get("/api/playlist/jobs")
+async def list_processing_jobs():
+    """List all processing jobs"""
+    return {
+        'jobs': [
+            {
+                'job_id': job_id,
+                'status': status.get('status'),
+                'playlist_title': status.get('playlist_title'),
+                'progress': status.get('progress', 0),
+                'total': status.get('total', 0),
+                'started_at': status.get('started_at')
+            }
+            for job_id, status in _processing_status.items()
+        ]
+    }
 
 
 # ============================================================================

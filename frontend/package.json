@@ -1,6 +1,7 @@
 {
   "name": "tradingmamba-dashboard",
   "version": "0.1.0",
+  "type": "module",
   "description": "TradingMamba - ICT AI Trading Signal Dashboard",
   "private": true,
   "scripts": {
