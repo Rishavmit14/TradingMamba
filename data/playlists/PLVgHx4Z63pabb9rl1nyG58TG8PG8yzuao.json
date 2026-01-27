@@ -1,0 +1,93 @@
+{
+  "playlist_id": "PLVgHx4Z63pabb9rl1nyG58TG8PG8yzuao",
+  "title": "2016 ICT Private Mentorship Core Content Month 04",
+  "video_count": 14,
+  "videos": [
+    {
+      "video_id": "6oQVb0zVxMM",
+      "title": "ICT Mentorship Core Content - Month 04 - Interest Rate Effects On Currency Trades",
+      "duration": 1255,
+      "order": 1
+    },
+    {
+      "video_id": "npL3ZXJ5zOU",
+      "title": "ICT Mentorship Core Content - Month 04 - Reinforcing Liquidity Concepts & Price Delivery",
+      "duration": 2614,
+      "order": 2
+    },
+    {
+      "video_id": "PIYh0CxoY9c",
+      "title": "ICT Mentorship Core Content - Month 04 - Orderblocks",
+      "duration": 2148,
+      "order": 3
+    },
+    {
+      "video_id": "FOUzW0QmsfI",
+      "title": "ICT Mentorship Core Content - Month 04 - Mitigation Blocks",
+      "duration": 906,
+      "order": 4
+    },
+    {
+      "video_id": "UrS-mtGHtAA",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Breaker Block",
+      "duration": 601,
+      "order": 5
+    },
+    {
+      "video_id": "oALYX0HCSYw",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Rejection Block",
+      "duration": 915,
+      "order": 6
+    },
+    {
+      "video_id": "X5pQjfkAUCI",
+      "title": "ICT Mentorship Core Content - Month 04 - Reclaimed ICT Orderblock",
+      "duration": 669,
+      "order": 7
+    },
+    {
+      "video_id": "glu98jAH8vE",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Propulsion Block",
+      "duration": 470,
+      "order": 8
+    },
+    {
+      "video_id": "shPGUz9pU-A",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Vacuum Block",
+      "duration": 891,
+      "order": 9
+    },
+    {
+      "video_id": "HTQgH11W37o",
+      "title": "ICT Mentorship Core Content - Month 04 - Liquidity Voids",
+      "duration": 879,
+      "order": 10
+    },
+    {
+      "video_id": "Gnw54f9v6SA",
+      "title": "ICT Mentorship Core Content - Month 04 - Liquidity Pools",
+      "duration": 1338,
+      "order": 11
+    },
+    {
+      "video_id": "FgacYSN9QEo",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Fair Value Gaps FVG",
+      "duration": 1077,
+      "order": 12
+    },
+    {
+      "video_id": "Xae0VrbkyFk",
+      "title": "ICT Mentorship Core Content - Month 04 - Divergence Phantoms",
+      "duration": 1313,
+      "order": 13
+    },
+    {
+      "video_id": "owq30ATPU5s",
+      "title": "ICT Mentorship Core Content - Month 04 - Double Bottom Double Top",
+      "duration": 904,
+      "order": 14
+    }
+  ],
+  "fetched_at": "2026-01-27T12:36:10.602229",
+  "tier": 2
+}

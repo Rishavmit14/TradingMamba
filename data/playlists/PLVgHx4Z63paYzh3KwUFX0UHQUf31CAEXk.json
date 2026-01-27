@@ -1,0 +1,57 @@
+{
+  "playlist_id": "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
+  "title": "2016 ICT Private Mentorship Core Content Month 01",
+  "video_count": 8,
+  "videos": [
+    {
+      "video_id": "0LhteuLVuDU",
+      "title": "ICT Mentorship Core Content - Month 1 - Elements Of A Trade Setup",
+      "duration": 1220,
+      "order": 1
+    },
+    {
+      "video_id": "XwYYWBttWro",
+      "title": "ICT Mentorship Core Content - Month 1 - How Market Makers Condition The Market",
+      "duration": 1522,
+      "order": 2
+    },
+    {
+      "video_id": "B7_cjybYQ0g",
+      "title": "ICT Mentorship Core Content - Month 1 - What To Focus On Right Now",
+      "duration": 1503,
+      "order": 3
+    },
+    {
+      "video_id": "qC0LogyIk2I",
+      "title": "ICT Mentorship Core Content - Month 1 - Equilibrium Vs. Discount",
+      "duration": 3389,
+      "order": 4
+    },
+    {
+      "video_id": "YuefjnUKQdM",
+      "title": "ICT Mentorship Core Content - Month 1 - Equilibrium Vs. Premium",
+      "duration": 1259,
+      "order": 5
+    },
+    {
+      "video_id": "SiVmoeyOWZE",
+      "title": "ICT Mentorship Core Content - Month 1 - Fair Valuation",
+      "duration": 1954,
+      "order": 6
+    },
+    {
+      "video_id": "22XkhpJR5eA",
+      "title": "ICT Mentorship Core Content - Month 1 - Liquidity Runs",
+      "duration": 1495,
+      "order": 7
+    },
+    {
+      "video_id": "K4LtfujVpJs",
+      "title": "ICT Mentorship Core Content - Month 1 - Impulse Price Swings & Market Protraction",
+      "duration": 733,
+      "order": 8
+    }
+  ],
+  "fetched_at": "2026-01-27T12:36:07.558481",
+  "tier": 2
+}
