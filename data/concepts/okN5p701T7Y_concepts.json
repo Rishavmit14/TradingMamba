@@ -1,0 +1,1014 @@
+{
+  "video_id": "okN5p701T7Y",
+  "title": "ICT Mentorship Core Content - Month 05 - Position Trade Management",
+  "word_count": 4369,
+  "total_mentions": 125,
+  "unique_concepts": 13,
+  "concept_counts": {
+    "market_structure": 4,
+    "order_block": 30,
+    "breaker_block": 2,
+    "mitigation_block": 4,
+    "fair_value_gap": 4,
+    "liquidity": 27,
+    "buy_side_liquidity": 1,
+    "equal_highs_lows": 2,
+    "premium_discount": 8,
+    "optimal_trade_entry": 12,
+    "ipda": 3,
+    "smart_money": 3,
+    "stop_loss": 25
+  },
+  "category_counts": {
+    "market_structure": 4,
+    "key_levels": 40,
+    "liquidity": 30,
+    "institutional": 11,
+    "entry_models": 12,
+    "time_based": 3,
+    "risk_management": 25
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 30,
+      "category": "key_levels"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 27,
+      "category": "liquidity"
+    },
+    {
+      "id": "stop_loss",
+      "name": "Stop Loss Placement",
+      "count": 25,
+      "category": "risk_management"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 12,
+      "category": "entry_models"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 8,
+      "category": "institutional"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 4,
+      "category": "market_structure"
+    },
+    {
+      "id": "mitigation_block",
+      "name": "Mitigation Block",
+      "count": 4,
+      "category": "key_levels"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 4,
+      "category": "key_levels"
+    },
+    {
+      "id": "ipda",
+      "name": "IPDA Data Range",
+      "count": 3,
+      "category": "time_based"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 3,
+      "category": "institutional"
+    },
+    {
+      "id": "breaker_block",
+      "name": "Breaker Block",
+      "count": 2,
+      "category": "key_levels"
+    },
+    {
+      "id": "equal_highs_lows",
+      "name": "Equal Highs/Lows",
+      "count": 2,
+      "category": "liquidity"
+    },
+    {
+      "id": "buy_side_liquidity",
+      "name": "Buy Side Liquidity",
+      "count": 1,
+      "category": "liquidity"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 16670,
+      "context": "... Range High okay and here's equilibrium right in here okay so we're looking at this move here after market structure has been broken we have this swing low here it's violated here and then we have a rally so we're go...",
+      "match_type": "keyword",
+      "start_time": 1007.28,
+      "end_time": 1011.24
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 17166,
+      "context": "...e get to the um the buy side objectives but here we have this High here price has the um a break in Market structure here and we have a rally up it goes into this last up candle which is a PDA on a weekly basis and i...",
+      "match_type": "keyword",
+      "start_time": 1050.54,
+      "end_time": 1055.76
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 16677,
+      "context": "...High okay and here's equilibrium right in here okay so we're looking at this move here after market structure has been broken we have this swing low here it's violated here and then we have a rally so we're go...",
+      "match_type": "keyword",
+      "start_time": 1008.96,
+      "end_time": 1012.74
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 17173,
+      "context": "...o the um the buy side objectives but here we have this High here price has the um a break in Market structure here and we have a rally up it goes into this last up candle which is a PDA on a weekly basis and i...",
+      "match_type": "keyword",
+      "start_time": 1050.54,
+      "end_time": 1055.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 2730,
+      "context": "...of this mentorship so that way when you receive PDA it's the premium discount arrays that means the order blocks all the things I look for for institutional reference points we're looking for a higher time frame...",
+      "match_type": "keyword",
+      "start_time": 188.4,
+      "end_time": 193.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 9485,
+      "context": "...re we looking to go how far are we looking to go down where are the old loads where are the bullish order blocks where are the liquidity voids on the downside where are the fair value gaps below us where are the...",
+      "match_type": "keyword",
+      "start_time": 596.04,
+      "end_time": 600.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 10526,
+      "context": "... the daily pdas that means the daily premium discount arrays or basically we're looking for bearish order blocks we're looking for bearish liquidity voids to fill in we're looking for old highs to sell above we'...",
+      "match_type": "keyword",
+      "start_time": 656.84,
+      "end_time": 661.62
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 16310,
+      "context": "... of the mentorship and then below these equal lows we have these two panels which makes the bullish order block and what we're going to do is we're going to add a Fibonacci just to grade the scale of this entire...",
+      "match_type": "keyword",
+      "start_time": 979.56,
+      "end_time": 982.14
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 17330,
+      "context": "...ast up candle which is a PDA on a weekly basis and it's also a PDA for the daily and it's a bearish order block for us here trades right up into the body of this candle which is the open comes in at 121.69 the h...",
+      "match_type": "keyword",
+      "start_time": 1064.16,
+      "end_time": 1068.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 20192,
+      "context": "...at's this huge huge move so we're going to focus now on the buy side and we saw that Weekly bullish order block down here and we expected it to trade back up to the weekly bearish order block in here here's the ...",
+      "match_type": "keyword",
+      "start_time": 1343.52,
+      "end_time": 1347.66
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 20272,
+      "context": "...that Weekly bullish order block down here and we expected it to trade back up to the weekly bearish order block in here here's the buy Looking Back 40 trading days your buy uh buy position has a protective sell ...",
+      "match_type": "keyword",
+      "start_time": 1349.58,
+      "end_time": 1355.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 2406,
+      "context": "...sset you're going to be trading is in fact what they're suggesting as well or confirming then you probably got a pretty good trade idea lined up once this occurs we go into a higher time frame monthly a...",
+      "match_type": "keyword",
+      "start_time": 164.7,
+      "end_time": 169.86
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4127,
+      "context": "...hese things in alignment we have a great deal of confluences in our camp we're looking for a high probability scenario in that case once you get to this stage what you're going to have to do is to you'r...",
+      "match_type": "keyword",
+      "start_time": 274.8,
+      "end_time": 279.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4463,
+      "context": "...ct to go with but just understand that if you are going to be trading with limit orders there's a probability of you missing moves or missing your fills because you're demanding a specific price level w...",
+      "match_type": "keyword",
+      "start_time": 292.56,
+      "end_time": 296.82
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8115,
+      "context": "...ying in the move and not being stopped out prematurely okay for bearish market conditions I could probably just save this slide and decide everything I just said for the bullets just reverse it but for ...",
+      "match_type": "keyword",
+      "start_time": 514.62,
+      "end_time": 518.22
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 9351,
+      "context": "...nthly and weekly and we start looking for the ranges and we look for the PDA for monthly and weekly objectives institutionally where are we looking to go how far are we looking to go down where are the ...",
+      "match_type": "keyword",
+      "start_time": 589.74,
+      "end_time": 593.94
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 12586,
+      "context": "... get back in and it takes off and runs away from you then you have to wait for another higher level objective to get in to uh and then you obviously lose some of the potential profit but nonetheless you...",
+      "match_type": "keyword",
+      "start_time": 772.92,
+      "end_time": 778.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 12625,
+      "context": "...away from you then you have to wait for another higher level objective to get in to uh and then you obviously lose some of the potential profit but nonetheless you can still get in the positions but it'...",
+      "match_type": "keyword",
+      "start_time": 774.96,
+      "end_time": 779.34
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 14079,
+      "context": "...r the highest high in the last 20 trading days because you're getting really close to that ultimate objective and it may not really get there so you want to lock in as much profit as possible if you use...",
+      "match_type": "keyword",
+      "start_time": 848.4,
+      "end_time": 853.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15323,
+      "context": "...ays the entire duration of the trade we only get three quarters of the move under our belt you know obviously we're going to be looking to lock in some of that profit and keeping it from moving a great ...",
+      "match_type": "keyword",
+      "start_time": 922.26,
+      "end_time": 925.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15765,
+      "context": "...e that knocks you out if it does knock you out and goes to the below a 20-day low chances are you probably May really handsome profit or you probably saved yourself a complete reversal and watch it erod...",
+      "match_type": "keyword",
+      "start_time": 943.2,
+      "end_time": 948.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15808,
+      "context": "...out and goes to the below a 20-day low chances are you probably May really handsome profit or you probably saved yourself a complete reversal and watch it erode more profits if you would have stepped ju...",
+      "match_type": "keyword",
+      "start_time": 948.0,
+      "end_time": 952.02
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 17095,
+      "context": "...side first okay here's that move we'll refer to this in a minute when we get to the um the buy side objectives but here we have this High here price has the um a break in Market structure here and we ha...",
+      "match_type": "keyword",
+      "start_time": 1042.5,
+      "end_time": 1048.62
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18382,
+      "context": "...stop loss of 250 Pips you got to be above that say 260 Pips that's your stop okay some of you are probably cringing with that 260 Pips good grief it's long-term trading folks and I mean you really gotta...",
+      "match_type": "keyword",
+      "start_time": 1149.84,
+      "end_time": 1155.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18852,
+      "context": "...alls short of that okay so we have basically eight r on this trade that's falling short even at the objective so we can have uh that one off here and here's AR right there okay so selling short up here ...",
+      "match_type": "keyword",
+      "start_time": 1239.72,
+      "end_time": 1243.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19881,
+      "context": "...ading retracement your stock has got to be above these highs okay this is where we actually hit the objective so anything past that doesn't mean anything but at this moment here your stop has to be abov...",
+      "match_type": "keyword",
+      "start_time": 1323.24,
+      "end_time": 1326.78
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 20783,
+      "context": "...yeah you would have saw profits and then on the election day you would have rode through all this probably would have been scary for you but even then 40 trading days back your stop has to be below here...",
+      "match_type": "keyword",
+      "start_time": 1382.1,
+      "end_time": 1386.06
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 22142,
+      "context": "...is trading day your stop loss has to be below this trading day slow and after that it just hits the objective the weekly bear shorter block so again above halfway point you want to start trailing your s...",
+      "match_type": "keyword",
+      "start_time": 1507.2,
+      "end_time": 1512.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 9477,
+      "context": "... where are we looking to go how far are we looking to go down where are the old loads where are the bullish order blocks where are the liquidity voids on the downside where are the fair value gaps below us where are the...",
+      "match_type": "keyword",
+      "start_time": 596.04,
+      "end_time": 600.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 16302,
+      "context": "...eachings of the mentorship and then below these equal lows we have these two panels which makes the bullish order block and what we're going to do is we're going to add a Fibonacci just to grade the scale of this entire...",
+      "match_type": "keyword",
+      "start_time": 977.88,
+      "end_time": 980.82
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 20184,
+      "context": "... Pips that's this huge huge move so we're going to focus now on the buy side and we saw that Weekly bullish order block down here and we expected it to trade back up to the weekly bearish order block in here here's the ...",
+      "match_type": "keyword",
+      "start_time": 1343.52,
+      "end_time": 1347.66
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 10518,
+      "context": "...tilizing the daily pdas that means the daily premium discount arrays or basically we're looking for bearish order blocks we're looking for bearish liquidity voids to fill in we're looking for old highs to sell above we'...",
+      "match_type": "keyword",
+      "start_time": 656.84,
+      "end_time": 661.62
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 17322,
+      "context": "...o this last up candle which is a PDA on a weekly basis and it's also a PDA for the daily and it's a bearish order block for us here trades right up into the body of this candle which is the open comes in at 121.69 the h...",
+      "match_type": "keyword",
+      "start_time": 1064.16,
+      "end_time": 1068.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 20264,
+      "context": "... we saw that Weekly bullish order block down here and we expected it to trade back up to the weekly bearish order block in here here's the buy Looking Back 40 trading days your buy uh buy position has a protective sell ...",
+      "match_type": "keyword",
+      "start_time": 1349.58,
+      "end_time": 1355.88
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 9629,
+      "context": "...n the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all those ideas we have to start mapping those out because they're ...",
+      "match_type": "keyword",
+      "start_time": 605.34,
+      "end_time": 609.12
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 10735,
+      "context": "...e're looking for rejection blocks above and old highs handles body and we're looking for uh bearish Breakers to trade into we're looking for mitigation blocks to trade against and sell off of all those ideas...",
+      "match_type": "keyword",
+      "start_time": 667.38,
+      "end_time": 672.12
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 9597,
+      "context": "... where are the liquidity voids on the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all those ideas we have to start mapping tho...",
+      "match_type": "keyword",
+      "start_time": 602.46,
+      "end_time": 606.66
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 10776,
+      "context": "...nd old highs handles body and we're looking for uh bearish Breakers to trade into we're looking for mitigation blocks to trade against and sell off of all those ideas we're looking for that on a daily time frame to g...",
+      "match_type": "keyword",
+      "start_time": 669.96,
+      "end_time": 674.52
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 9597,
+      "context": "... where are the liquidity voids on the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all those ideas we have to start mappi...",
+      "match_type": "keyword",
+      "start_time": 602.46,
+      "end_time": 606.66
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 10776,
+      "context": "...nd old highs handles body and we're looking for uh bearish Breakers to trade into we're looking for mitigation blocks to trade against and sell off of all those ideas we're looking for that on a daily time fram...",
+      "match_type": "keyword",
+      "start_time": 669.96,
+      "end_time": 674.52
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 9558,
+      "context": "...oads where are the bullish order blocks where are the liquidity voids on the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all...",
+      "match_type": "keyword",
+      "start_time": 600.72,
+      "end_time": 605.34
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 3720,
+      "context": "...we use the daily pdas to frame our bullish setups in other words we're looking for ore blocks voids gaps rejection blocks you know old highs hold lows we're looking for those things to to frame our buy s...",
+      "match_type": "keyword",
+      "start_time": 244.62,
+      "end_time": 251.4
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 4715,
+      "context": "... end up getting filled more times using that order but unfortunately that creates a little bit more Gap in between where you're entering and where your stop loss is going to be if as long as you're not o...",
+      "match_type": "keyword",
+      "start_time": 306.42,
+      "end_time": 309.96
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 9569,
+      "context": "...are the bullish order blocks where are the liquidity voids on the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all...",
+      "match_type": "keyword",
+      "start_time": 600.72,
+      "end_time": 605.34
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 7782,
+      "context": "...ays okay and I'll talk about that in examples in a moment but your permitting price to seek out the liquidity on the upside and giving it a lot of room to consolidate if it needs to before it goes another leg ...",
+      "match_type": "keyword",
+      "start_time": 491.4,
+      "end_time": 495.84
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 9512,
+      "context": "... are we looking to go down where are the old loads where are the bullish order blocks where are the liquidity voids on the downside where are the fair value gaps below us where are the mitigation blocks and po...",
+      "match_type": "keyword",
+      "start_time": 598.8,
+      "end_time": 602.46
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 10565,
+      "context": "...emium discount arrays or basically we're looking for bearish order blocks we're looking for bearish liquidity voids to fill in we're looking for old highs to sell above we're looking for rejection blocks above...",
+      "match_type": "keyword",
+      "start_time": 659.28,
+      "end_time": 663.06
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 22450,
+      "context": "...to be 40 trading days back using if the data ranges because it's not likely it's going to seek that liquidity it's going to be seeking the liquidity above the 40-day ties in above the 20 highs and it's going t...",
+      "match_type": "keyword",
+      "start_time": 1524.72,
+      "end_time": 1529.28
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 22489,
+      "context": "... data ranges because it's not likely it's going to seek that liquidity it's going to be seeking the liquidity above the 40-day ties in above the 20 highs and it's going to be looking for the 60-day high now yo...",
+      "match_type": "keyword",
+      "start_time": 1526.4,
+      "end_time": 1532.04
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 6538,
+      "context": "... have some freedom in the market you can't just let it you know you can't demand really Ultra tight stops in long-term trading you gotta allow it to move a little bit gyrate pool back against you sometimes...",
+      "match_type": "keyword",
+      "start_time": 412.32,
+      "end_time": 417.0
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 4767,
+      "context": "...ut unfortunately that creates a little bit more Gap in between where you're entering and where your stop loss is going to be if as long as you're not over leveraging your account which brings us to how much mo...",
+      "match_type": "keyword",
+      "start_time": 308.16,
+      "end_time": 311.34
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 5548,
+      "context": "...going to be buying on a stop or a limit and you enter the position you're going to be trailing your stop loss below the lowest low in the last 40 trading days now this brings us back to the ifta data range why...",
+      "match_type": "keyword",
+      "start_time": 355.32,
+      "end_time": 360.18
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 5952,
+      "context": "... be looking for the highs in the last 40 trading days so that means we are going to have a trailing stop loss order that's very handsomely behind the current market price and it's going to take a very signific...",
+      "match_type": "keyword",
+      "start_time": 379.8,
+      "end_time": 385.14
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 7372,
+      "context": "... 500 Pips in your favor you need to still consider what the lowest low was in the last 40 days your stop loss is going to be below that but when we get above 50 percent then we're going to be looking for the l...",
+      "match_type": "keyword",
+      "start_time": 464.16,
+      "end_time": 468.0
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 7622,
+      "context": "... about three quarters of the way of the entire weekly monthly range you want to start trailing your stop loss below the most recent low in the last 20 trading days okay and I'll talk about that in examples in ...",
+      "match_type": "keyword",
+      "start_time": 478.38,
+      "end_time": 482.28
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 7915,
+      "context": "...g it a lot of room to consolidate if it needs to before it goes another leg higher if you keep your stop loss below the lowest loan the last 40 trading days you're going to have a better chance of staying in t...",
+      "match_type": "keyword",
+      "start_time": 499.98,
+      "end_time": 504.3
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 11695,
+      "context": "...d you'll be short and again but it opens a little bit more risk from where you enter and where your stop loss needs to be which brings us to once you're in the move you're going to be using a trailing stop los...",
+      "match_type": "keyword",
+      "start_time": 723.6,
+      "end_time": 727.38
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 11796,
+      "context": "...top loss needs to be which brings us to once you're in the move you're going to be using a trailing stop loss above the highest high in the last 40 trading days and what that's going to keep you from having ha...",
+      "match_type": "keyword",
+      "start_time": 727.38,
+      "end_time": 732.06
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 12935,
+      "context": "...e market talk you know knocks you out prematurely because you're trying to have too much of a tight stop loss you don't need to do that on a higher time frame trading in fact it's better if you keep a wider st...",
+      "match_type": "keyword",
+      "start_time": 790.26,
+      "end_time": 794.58
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 13252,
+      "context": "...orst thing they possibly ever consider you don't want to do that so we're going to be trailing your stop loss above the highest high in the last 40 trading days and by doing so what you're doing is actually gi...",
+      "match_type": "keyword",
+      "start_time": 806.4,
+      "end_time": 809.58
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 14603,
+      "context": "...d you would just be knocked out with a great deal of more larger loss by using that trailing 40-day stop loss above the highest high and last 40 trading Days by reducing it to only 20 trading days we're using ...",
+      "match_type": "keyword",
+      "start_time": 878.28,
+      "end_time": 882.84
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 15163,
+      "context": "...xpect to see then we have to start dropping back in terms of how far we go back in terms of using a stop loss basis you know we're not going to use 40 trading days the entire duration of the trade we only get ...",
+      "match_type": "keyword",
+      "start_time": 914.64,
+      "end_time": 918.84
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 15613,
+      "context": "... once three quarters of the move has been seen what you're doing is you're ultimately bringing that stop loss closer to the market price but not so close that knocks you out if it does knock you out and goes t...",
+      "match_type": "keyword",
+      "start_time": 937.02,
+      "end_time": 941.22
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 18131,
+      "context": "...rade day here because you have the up candle this is the day you would trade Look Back 40 days your stop loss has to be above here so your range of risk is framed out for you by doing this and let's just say y...",
+      "match_type": "keyword",
+      "start_time": 1127.34,
+      "end_time": 1130.52
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 18282,
+      "context": "...k is framed out for you by doing this and let's just say you're going to sell a limit if you have a stop loss of 250 Pips you got to be above that say 260 Pips that's your stop okay some of you are probably cr...",
+      "match_type": "keyword",
+      "start_time": 1140.84,
+      "end_time": 1147.08
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 19581,
+      "context": "...is here okay every single trading day you're looking at the highest high and you're keeping your uh stop loss above that high whatever that whatever that high is okay like right in here looking back in the las...",
+      "match_type": "keyword",
+      "start_time": 1298.22,
+      "end_time": 1303.62
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 21708,
+      "context": "...once price trades through this here we start looking back 20 trading days and we start trailing our stop loss below the lowest low in the last 20 trading days so we get 20. from here stop loss has to be below ...",
+      "match_type": "keyword",
+      "start_time": 1468.8,
+      "end_time": 1472.82
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 21791,
+      "context": "...art trailing our stop loss below the lowest low in the last 20 trading days so we get 20. from here stop loss has to be below here on this buying day here the last 20 trading days your stop loss still below he...",
+      "match_type": "keyword",
+      "start_time": 1478.4,
+      "end_time": 1485.18
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 21876,
+      "context": "... 20. from here stop loss has to be below here on this buying day here the last 20 trading days your stop loss still below here this day here the last 20 trading days is still below here this day here the last ...",
+      "match_type": "keyword",
+      "start_time": 1485.18,
+      "end_time": 1488.72
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 22062,
+      "context": "...this day here the last 20 trading days stock loss has to be below here and on this trading day your stop loss has to be below this trading day slow and after that it just hits the objective the weekly bear sho...",
+      "match_type": "keyword",
+      "start_time": 1500.24,
+      "end_time": 1505.76
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stop loss",
+      "position": 22243,
+      "context": "...bjective the weekly bear shorter block so again above halfway point you want to start trailing your stop loss tighter below the low the last 20 trading days but prior to equilibrium or halfway move you want to...",
+      "match_type": "keyword",
+      "start_time": 1512.72,
+      "end_time": 1516.38
+    },
+    {
+      "concept_id": "buy_side_liquidity",
+      "keyword": "liquidity above",
+      "position": 22489,
+      "context": "... data ranges because it's not likely it's going to seek that liquidity it's going to be seeking the liquidity above the 40-day ties in above the 20 highs and it's going to be looking for the 60-day high now you can ...",
+      "match_type": "keyword",
+      "start_time": 1526.4,
+      "end_time": 1532.04
+    },
+    {
+      "concept_id": "equal_highs_lows",
+      "keyword": "equal lows",
+      "position": 16155,
+      "context": "...'re looking at the Japanese Genesis the weekly chart and we have the high up here and we have these equal lows we talked about during the live uh teachings of the mentorship and then below these equal lows we h...",
+      "match_type": "keyword",
+      "start_time": 971.82,
+      "end_time": 975.78
+    },
+    {
+      "concept_id": "equal_highs_lows",
+      "keyword": "equal lows",
+      "position": 16250,
+      "context": "...hese equal lows we talked about during the live uh teachings of the mentorship and then below these equal lows we have these two panels which makes the bullish order block and what we're going to do is we're go...",
+      "match_type": "keyword",
+      "start_time": 975.78,
+      "end_time": 979.56
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 2543,
+      "context": "...ined up once this occurs we go into a higher time frame monthly and weekly chart for PDA now PDA is premium discount array or PD array I'm going to be abbreviating that for the remainder of this mentorship s...",
+      "match_type": "keyword",
+      "start_time": 177.36,
+      "end_time": 183.36
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 2691,
+      "context": "...be abbreviating that for the remainder of this mentorship so that way when you receive PDA it's the premium discount arrays that means the order blocks all the things I look for for institutional reference p...",
+      "match_type": "keyword",
+      "start_time": 185.4,
+      "end_time": 191.46
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 10463,
+      "context": "... is focusing on the daily chart and we're going to be utilizing the daily pdas that means the daily premium discount arrays or basically we're looking for bearish order blocks we're looking for bearish liqui...",
+      "match_type": "keyword",
+      "start_time": 651.36,
+      "end_time": 656.84
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 2551,
+      "context": "...once this occurs we go into a higher time frame monthly and weekly chart for PDA now PDA is premium discount array or PD array I'm going to be abbreviating that for the remainder of this mentorship so that wa...",
+      "match_type": "keyword",
+      "start_time": 177.36,
+      "end_time": 183.36
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 2699,
+      "context": "...viating that for the remainder of this mentorship so that way when you receive PDA it's the premium discount arrays that means the order blocks all the things I look for for institutional reference points we'...",
+      "match_type": "keyword",
+      "start_time": 188.4,
+      "end_time": 193.2
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 10471,
+      "context": "...sing on the daily chart and we're going to be utilizing the daily pdas that means the daily premium discount arrays or basically we're looking for bearish order blocks we're looking for bearish liquidity void...",
+      "match_type": "keyword",
+      "start_time": 651.36,
+      "end_time": 656.84
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 16598,
+      "context": "...gh rather of this candle and that gives us our range low and this is our Range High okay and here's equilibrium right in here okay so we're looking at this move here after market structure has been broken we hav...",
+      "match_type": "keyword",
+      "start_time": 1003.5,
+      "end_time": 1008.96
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 22313,
+      "context": "...u want to start trailing your stop loss tighter below the low the last 20 trading days but prior to equilibrium or halfway move you want to be 40 trading days back using if the data ranges because it's not likel...",
+      "match_type": "keyword",
+      "start_time": 1516.38,
+      "end_time": 1521.12
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "optimal trade entry",
+      "position": 14389,
+      "context": "...retracement that maybe end up becoming the actual reversal that you didn't expect to see think like Optimal trade entry it could go 79 of the total move you expect to see but then fail and go the other direction and you...",
+      "match_type": "keyword",
+      "start_time": 865.74,
+      "end_time": 871.32
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 220,
+      "context": "...ling with the possession trade management okay for bullish market conditions we like to anticipate potential bullish seasonal tendencies and again like I preface in every one of the seasonal teachings it...",
+      "match_type": "keyword",
+      "start_time": 29.7,
+      "end_time": 33.18
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 8362,
+      "context": "...s now so I want to give you both sides uh the bearish market conditions again we're anticipating a potential bear seasonal tendency so we're focusing on the Bears tendencies that have the most ideal cond...",
+      "match_type": "keyword",
+      "start_time": 525.3,
+      "end_time": 529.56
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 9620,
+      "context": "...y voids on the downside where are the fair value gaps below us where are the mitigation blocks and potential Breakers we have to be valueful of okay all those ideas we have to start mapping those out bec...",
+      "match_type": "keyword",
+      "start_time": 605.34,
+      "end_time": 609.12
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10152,
+      "context": "...ce and then therefore have an intermediate term price swing moving over the course of two to three potentially four months at maximum where we see a bearish move take place once we have the scenario outl...",
+      "match_type": "keyword",
+      "start_time": 632.16,
+      "end_time": 637.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 12653,
+      "context": "...to wait for another higher level objective to get in to uh and then you obviously lose some of the potential profit but nonetheless you can still get in the positions but it's nothing worse than that and...",
+      "match_type": "keyword",
+      "start_time": 778.2,
+      "end_time": 780.84
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 20369,
+      "context": "...sh order block in here here's the buy Looking Back 40 trading days your buy uh buy position has a protective sell stop below these lows in here okay if you bought in here before the election and we had t...",
+      "match_type": "keyword",
+      "start_time": 1358.1,
+      "end_time": 1363.86
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fib",
+      "position": 16373,
+      "context": "...e two panels which makes the bullish order block and what we're going to do is we're going to add a Fibonacci just to grade the scale of this entire range so we have this high all the way down to this lo...",
+      "match_type": "keyword",
+      "start_time": 982.14,
+      "end_time": 989.66
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fib",
+      "position": 21563,
+      "context": "...ng days is here still but we have to change gears now once we get half the range I'm going to add a fib to this we have our low foreign here and once price trades through this here we start looking back ...",
+      "match_type": "keyword",
+      "start_time": 1451.22,
+      "end_time": 1456.28
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fibonacci",
+      "position": 16373,
+      "context": "...e two panels which makes the bullish order block and what we're going to do is we're going to add a Fibonacci just to grade the scale of this entire range so we have this high all the way down to this low I'm ...",
+      "match_type": "keyword",
+      "start_time": 982.14,
+      "end_time": 989.66
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 14289,
+      "context": "...hest high in the last 40 trading days and you've seen three quarters of the move you may see a deep retracement that maybe end up becoming the actual reversal that you didn't expect to see think like Optimal tra...",
+      "match_type": "keyword",
+      "start_time": 859.74,
+      "end_time": 864.24
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 19787,
+      "context": "...last 40 trading days your stop is above this high at this point here we have that real deep trading retracement your stock has got to be above these highs okay this is where we actually hit the objective so anyt...",
+      "match_type": "keyword",
+      "start_time": 1314.3,
+      "end_time": 1320.6
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "20 day",
+      "position": 7503,
+      "context": "...that but when we get above 50 percent then we're going to be looking for the lowest low in the last 20 days once we get about three quarters of the way of the entire weekly monthly range you want to start t...",
+      "match_type": "keyword",
+      "start_time": 471.96,
+      "end_time": 475.68
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "40 day",
+      "position": 7359,
+      "context": "...o If It Moves 500 Pips in your favor you need to still consider what the lowest low was in the last 40 days your stop loss is going to be below that but when we get above 50 percent then we're going to be l...",
+      "match_type": "keyword",
+      "start_time": 464.16,
+      "end_time": 468.0
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "40 day",
+      "position": 18118,
+      "context": "...hich is the trade day here because you have the up candle this is the day you would trade Look Back 40 days your stop loss has to be above here so your range of risk is framed out for you by doing this and ...",
+      "match_type": "keyword",
+      "start_time": 1127.34,
+      "end_time": 1130.52
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 2773,
+      "context": "...eive PDA it's the premium discount arrays that means the order blocks all the things I look for for institutional reference points we're looking for a higher time frame weekly and monthly charts to indicate where ...",
+      "match_type": "keyword",
+      "start_time": 193.2,
+      "end_time": 197.82
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 2886,
+      "context": "... reference points we're looking for a higher time frame weekly and monthly charts to indicate where institutional overflow on those particular time frames will look to seek to trade to when we understand there's t...",
+      "match_type": "keyword",
+      "start_time": 200.22,
+      "end_time": 204.78
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 9362,
+      "context": "...eekly and we start looking for the ranges and we look for the PDA for monthly and weekly objectives institutionally where are we looking to go how far are we looking to go down where are the old loads where are th...",
+      "match_type": "keyword",
+      "start_time": 589.74,
+      "end_time": 593.94
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:20.009722"
+}

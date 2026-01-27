@@ -1,0 +1,591 @@
+{
+  "video_id": "Vb6ueaPqut0",
+  "title": "ICT Mentorship Core Content - Month 05 - How To Use Bearish Seasonal Tendencies In HTF Analysis",
+  "word_count": 5602,
+  "total_mentions": 58,
+  "unique_concepts": 7,
+  "concept_counts": {
+    "break_of_structure": 1,
+    "market_structure": 3,
+    "order_block": 43,
+    "premium_discount": 1,
+    "optimal_trade_entry": 6,
+    "power_of_three": 1,
+    "smart_money": 3
+  },
+  "category_counts": {
+    "market_structure": 4,
+    "key_levels": 43,
+    "institutional": 4,
+    "entry_models": 7
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 43,
+      "category": "key_levels"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 6,
+      "category": "entry_models"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 3,
+      "category": "market_structure"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 3,
+      "category": "institutional"
+    },
+    {
+      "id": "break_of_structure",
+      "name": "Break of Structure (BOS)",
+      "count": 1,
+      "category": "market_structure"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 1,
+      "category": "institutional"
+    },
+    {
+      "id": "power_of_three",
+      "name": "Power of Three (AMD)",
+      "count": 1,
+      "category": "entry_models"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "break_of_structure",
+      "keyword": "structure break",
+      "position": 11961,
+      "context": "...earish market did we rally up into a bearish order block did we run an old high did we see a market structure break have we in fact been moving up for the last two or three months and then are we likely to you know ...",
+      "match_type": "keyword",
+      "start_time": 812.84,
+      "end_time": 817.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 11954,
+      "context": "... in a bearish market did we rally up into a bearish order block did we run an old high did we see a market structure break have we in fact been moving up for the last two or three months and then are we likely to you...",
+      "match_type": "keyword",
+      "start_time": 812.84,
+      "end_time": 817.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 11961,
+      "context": "...earish market did we rally up into a bearish order block did we run an old high did we see a market structure break have we in fact been moving up for the last two or three months and then are we likely to you...",
+      "match_type": "keyword",
+      "start_time": 812.84,
+      "end_time": 817.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 25095,
+      "context": "...ur decline in may it comes down into previous bullish order blocks and rallies away created another higher high up into 74.50 so it moved from the may decline into the week before june rallying away from the 67 ...",
+      "match_type": "keyword",
+      "start_time": 1760.08,
+      "end_time": 1766.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 11906,
+      "context": "...that would support that seasonal tendency are we in a bearish market did we rally up into a bearish order block did we run an old high did we see a market structure break have we in fact been moving up for the l...",
+      "match_type": "keyword",
+      "start_time": 811.44,
+      "end_time": 816.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 22680,
+      "context": "... leg higher june july gives us a nice seasonal low off of a previous down candle which is a bullish order block around that 80 big figure and then it rallies all the way up to 8 800 so 800 pips using the seasona...",
+      "match_type": "keyword",
+      "start_time": 1551.12,
+      "end_time": 1554.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 25049,
+      "context": "...ppening in mid february to mid-march we have our decline in may it comes down into previous bullish order blocks and rallies away created another higher high up into 74.50 so it moved from the may decline into t...",
+      "match_type": "keyword",
+      "start_time": 1758.08,
+      "end_time": 1762.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 2614,
+      "context": "...to be and if you can use seasonal tendencies like a road map it's literally like knowing the most probable direction certain times of the year for certain currencies or markets because it's not limited ...",
+      "match_type": "keyword",
+      "start_time": 200.72,
+      "end_time": 205.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3053,
+      "context": "...ighlight a seasonal tendency where it rests most predominantly if you're looking at this chart here obviously you can see that there are certain points in where price generally on the blue line and on t...",
+      "match_type": "keyword",
+      "start_time": 229.68,
+      "end_time": 234.48
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3431,
+      "context": "...cally moving in the same direction up or down at any given particular time that highlights a high probability seasonal tendency now when it gets real muddy and it's choppy back and forth then it makes i...",
+      "match_type": "keyword",
+      "start_time": 254.56,
+      "end_time": 259.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3651,
+      "context": "...s likely there's a seasonal tendency there but just quickly going over this chart here it should be obvious to you what time of year there is a significant decline in price expected and when should ther...",
+      "match_type": "keyword",
+      "start_time": 269.12,
+      "end_time": 274.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4593,
+      "context": "...the smart money entities that move price on these higher time frame charts we know there's a high probability if there's a certain time of year or a tendency for the market to rally or decline and it's ...",
+      "match_type": "keyword",
+      "start_time": 333.92,
+      "end_time": 337.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 5622,
+      "context": "...'s contract has a very strong tendency to rally late in the year and understanding that it's pretty obvious that if you're going to be trading the kiwi you want to be focusing on the june contract and t...",
+      "match_type": "keyword",
+      "start_time": 398.4,
+      "end_time": 401.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 7967,
+      "context": "...ing to see that they generally move in the same direction so if we're going to look at this with a sober mind and understand that yes there are opportunities to be a seller in kiwi there's high probabil...",
+      "match_type": "keyword",
+      "start_time": 541.92,
+      "end_time": 547.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8063,
+      "context": "... a sober mind and understand that yes there are opportunities to be a seller in kiwi there's high probability conditions certain times of the year where it it positions itself for an opportunity to sell...",
+      "match_type": "keyword",
+      "start_time": 547.12,
+      "end_time": 550.64
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8372,
+      "context": "...can use these bearish ideas to get us in sync with a long-term bullish quarterly shift now you're probably saying wait a minute michael you're coloring outside the lines we're supposed to be talking abo...",
+      "match_type": "keyword",
+      "start_time": 568.56,
+      "end_time": 572.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8974,
+      "context": "...e kiwi has a predisposed nature to go higher so let's take a look at a few examples in here there's obviously this one i like is uh mid february to mid march really significant uh time point where you c...",
+      "match_type": "keyword",
+      "start_time": 602.72,
+      "end_time": 608.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10112,
+      "context": "...nd 15 years worth of data so if it was the shift in and out between the two then it's most likely probably not a good time to be a buyer or seller but when they both move in the same direction and it's ...",
+      "match_type": "keyword",
+      "start_time": 685.44,
+      "end_time": 689.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10955,
+      "context": "... june and july and it balances bullishly and then it sells off again around mid august down into october but look what happens in september and october it generally makes a significant point of uh bulli...",
+      "match_type": "keyword",
+      "start_time": 747.12,
+      "end_time": 751.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 11002,
+      "context": "...en it sells off again around mid august down into october but look what happens in september and october it generally makes a significant point of uh bullishness and puts the a large degree of buying in...",
+      "match_type": "keyword",
+      "start_time": 749.2,
+      "end_time": 753.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 11188,
+      "context": "...ree of buying in your scope as far as a trader you look at buying the kiwi around that september october time period now when we use seasonal tendencies the the way we want to use them are limited only ...",
+      "match_type": "keyword",
+      "start_time": 763.36,
+      "end_time": 769.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13280,
+      "context": "...hat and then you see another sell-off that takes place around mid-august down into the september-october time period making in the low but there is a small short-term little move that drops off mid sept...",
+      "match_type": "keyword",
+      "start_time": 890.08,
+      "end_time": 893.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13401,
+      "context": "...ng in the low but there is a small short-term little move that drops off mid september down into october that's the one that generally sets up a really strong buying opportunity so we're going to be a q...",
+      "match_type": "keyword",
+      "start_time": 898.56,
+      "end_time": 902.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13658,
+      "context": "...asonal tendencies and we are short around that time period just be mindful that around september october generally makes a very strong tendency for the kiwi to rally but now let's go back and have a con...",
+      "match_type": "keyword",
+      "start_time": 912.32,
+      "end_time": 917.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15250,
+      "context": "...ect a seasonal low to form for that quarter to be a buyer and then the other one is september to october giving us a strong tendency to be a buyer okay so now think about this for a minute i just outlin...",
+      "match_type": "keyword",
+      "start_time": 1014.0,
+      "end_time": 1017.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15488,
+      "context": "... dollar does on a 12 month cycle now if that didn't floor you you're not paying attention now you probably didn't get it and you didn't you didn't register if you're a new trader it's probably going rig...",
+      "match_type": "keyword",
+      "start_time": 1035.68,
+      "end_time": 1039.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15574,
+      "context": "...ion now you probably didn't get it and you didn't you didn't register if you're a new trader it's probably going right over your head but think about what we've just did we've outlined the macro view on...",
+      "match_type": "keyword",
+      "start_time": 1039.44,
+      "end_time": 1041.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15980,
+      "context": "... that year one seasonal tendency is going to be favored over the other if we're in a bullish market obviously the march april june july and september october time periods are going to be phenomenal buyi...",
+      "match_type": "keyword",
+      "start_time": 1067.36,
+      "end_time": 1072.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 16033,
+      "context": "...ed over the other if we're in a bullish market obviously the march april june july and september october time periods are going to be phenomenal buying opportunities if we're in a bearish market that me...",
+      "match_type": "keyword",
+      "start_time": 1070.88,
+      "end_time": 1074.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 16581,
+      "context": "... nice little buying opportunity as well so in your notes as we go through these slides okay you can obviously go after you watch the video and go back and look at it as well but as we go through each ye...",
+      "match_type": "keyword",
+      "start_time": 1104.08,
+      "end_time": 1107.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 16742,
+      "context": "...t it as well but as we go through each year just be mindful that march april june july september october are really strong buying opportunities when it's bullish when it's non-bullish we can focus prima...",
+      "match_type": "keyword",
+      "start_time": 1112.72,
+      "end_time": 1117.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 17975,
+      "context": "...lish scenarios or expected bullish scenarios for tendencies to go higher june july and september october do you not see those occurring here we have the march april time period creating the very low and...",
+      "match_type": "keyword",
+      "start_time": 1200.48,
+      "end_time": 1203.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18395,
+      "context": "...e the market dips down and trades off into the september time period where we see that september october seasonal tendency to rally so while we're focusing on the bears seasonal tendencies the other sea...",
+      "match_type": "keyword",
+      "start_time": 1234.96,
+      "end_time": 1239.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19508,
+      "context": "...imes where it's been astonishing but as we go to our next year in kiwi here's 2008 for the kiwi and obviously everybody remembers what happened in 2008 the market uh imploded we had the financial meltdo...",
+      "match_type": "keyword",
+      "start_time": 1307.52,
+      "end_time": 1311.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 20892,
+      "context": "...d the month of june july we had a consolidation and july sent us higher going into the late fall october highs september and october had just a continuation 2010 you can see here for the kiwi we had bas...",
+      "match_type": "keyword",
+      "start_time": 1405.36,
+      "end_time": 1408.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 20920,
+      "context": "...had a consolidation and july sent us higher going into the late fall october highs september and october had just a continuation 2010 you can see here for the kiwi we had basically a flat market in mid ...",
+      "match_type": "keyword",
+      "start_time": 1408.24,
+      "end_time": 1412.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 21380,
+      "context": "...at took off and sent price higher and we also see there was a scenario for the bearish august to october time period august we had a little decline which had a small seasonal tendency to be bearish if y...",
+      "match_type": "keyword",
+      "start_time": 1452.88,
+      "end_time": 1457.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 21850,
+      "context": "... an area at which institutional overflow would give us bullishness and then we had the september october time period give us that last little leg price higher from that 74 100 to the 79.50 level so 550 ...",
+      "match_type": "keyword",
+      "start_time": 1485.28,
+      "end_time": 1488.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 22945,
+      "context": "...d away and created a longer term price move very significant price moves higher and in september october gave us a swing from the 7500 to the 8200 so there's 700 pips there okay 2012. you see we had our...",
+      "match_type": "keyword",
+      "start_time": 1569.6,
+      "end_time": 1574.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24129,
+      "context": "...then we had a sell-off in mid-august which was the other bearish opportunity taking it down into october again look at your seasonal tendency about the first or second week of august all the way down in...",
+      "match_type": "keyword",
+      "start_time": 1683.68,
+      "end_time": 1686.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24237,
+      "context": "...in look at your seasonal tendency about the first or second week of august all the way down into october and you can see that seasonal tendency takes uh effect in this market here okay on 2015 you can s...",
+      "match_type": "keyword",
+      "start_time": 1689.2,
+      "end_time": 1693.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24734,
+      "context": "...ext bullish scenario which is the quarterly shift that would be bullish that occurs in september october and that gives us a really nice rally from the 60 to 50 level up to the 6850 level almost 69. so ...",
+      "match_type": "keyword",
+      "start_time": 1727.36,
+      "end_time": 1730.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 29844,
+      "context": "...focus on trading on those time frames and those setups alone we are really basically framing high probability setups you're not going to get perfect winners but you're going to have high probability con...",
+      "match_type": "keyword",
+      "start_time": 2068.0,
+      "end_time": 2071.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 29933,
+      "context": "...ing high probability setups you're not going to get perfect winners but you're going to have high probability conditions where even if you use this as a directional bias tool it'll help you in all facet...",
+      "match_type": "keyword",
+      "start_time": 2073.12,
+      "end_time": 2078.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 22672,
+      "context": "... another leg higher june july gives us a nice seasonal low off of a previous down candle which is a bullish order block around that 80 big figure and then it rallies all the way up to 8 800 so 800 pips using the seasona...",
+      "match_type": "keyword",
+      "start_time": 1551.12,
+      "end_time": 1554.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 25041,
+      "context": "...thing happening in mid february to mid-march we have our decline in may it comes down into previous bullish order blocks and rallies away created another higher high up into 74.50 so it moved from the may decline into t...",
+      "match_type": "keyword",
+      "start_time": 1758.08,
+      "end_time": 1762.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 11898,
+      "context": "...n price that would support that seasonal tendency are we in a bearish market did we rally up into a bearish order block did we run an old high did we see a market structure break have we in fact been moving up for the l...",
+      "match_type": "keyword",
+      "start_time": 811.44,
+      "end_time": 816.08
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 12109,
+      "context": "...or the last two or three months and then are we likely to you know sell off because of an uber ball premium market and then maybe we would anticipate seeing some breakdown in the marketplace and then we can ...",
+      "match_type": "keyword",
+      "start_time": 821.68,
+      "end_time": 826.16
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10377,
+      "context": "...s in my opinion that it's a pretty good chance that we'll see a decline there the second one to be noteworthy of is that notice that if we drop down into mid-march and in april the market tends to have a...",
+      "match_type": "keyword",
+      "start_time": 704.72,
+      "end_time": 709.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 14675,
+      "context": "...uarterly shifts they occur in march to april time period that's generally making a low okay make a note of this because when we go through each year i want you to keep these reference points in mind we a...",
+      "match_type": "keyword",
+      "start_time": 974.24,
+      "end_time": 977.36
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 16533,
+      "context": "...r going into the first week of december that's a nice little buying opportunity as well so in your notes as we go through these slides okay you can obviously go after you watch the video and go back and ...",
+      "match_type": "keyword",
+      "start_time": 1102.4,
+      "end_time": 1106.48
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 25308,
+      "context": "...g figure all the way up to almost 7 500 big figures so rather significant price moves as a closing note i want you to think about how these ideas lead to a roadmap idea of where price should go generally...",
+      "match_type": "keyword",
+      "start_time": 1780.32,
+      "end_time": 1784.72
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 22534,
+      "context": "...ding back down into the january highs so old resistance turns support there the market creates that retracement down in may just to set up another leg higher june july gives us a nice seasonal low off of a previ...",
+      "match_type": "keyword",
+      "start_time": 1542.4,
+      "end_time": 1547.12
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 23948,
+      "context": "...ontinuation on the upside because it's left area consolidation and in may we have a little bit of a retracement that leads to a june rally creating the high up at the 88 big figure then we had a sell-off in mid-...",
+      "match_type": "keyword",
+      "start_time": 1666.64,
+      "end_time": 1671.76
+    },
+    {
+      "concept_id": "power_of_three",
+      "keyword": "manipulation",
+      "position": 27930,
+      "context": "...because it leads to and understanding what should take place and it shows that there's yes there is manipulation in the marketplace but by far and large these markets move by a certain script and they repeat them...",
+      "match_type": "keyword",
+      "start_time": 1952.64,
+      "end_time": 1956.4
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 4497,
+      "context": "...indset where the direction of the market should go in these higher time frame charts since it's the smart money entities that move price on these higher time frame charts we know there's a high probability if th...",
+      "match_type": "keyword",
+      "start_time": 328.08,
+      "end_time": 332.16
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 4382,
+      "context": "...eral hundred pips in a long-term position trade or looking for the ideas to get us in sync with the institutional mindset where the direction of the market should go in these higher time frame charts since it's th...",
+      "match_type": "keyword",
+      "start_time": 322.72,
+      "end_time": 326.24
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 21768,
+      "context": "...e way up to 79.50 sets 950 points or pips that it moved off of just retracing into an area at which institutional overflow would give us bullishness and then we had the september october time period give us that l...",
+      "match_type": "keyword",
+      "start_time": 1478.16,
+      "end_time": 1483.04
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:19.828536"
+}

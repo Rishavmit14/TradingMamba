@@ -1,0 +1,1027 @@
+{
+  "video_id": "xRjKtUEKkSE",
+  "title": "ICT Mentorship Core Content - Month 05 - Defining Institutional Swing Points",
+  "word_count": 6010,
+  "total_mentions": 185,
+  "unique_concepts": 15,
+  "concept_counts": {
+    "break_of_structure": 1,
+    "market_structure": 23,
+    "order_block": 40,
+    "breaker_block": 26,
+    "mitigation_block": 4,
+    "fair_value_gap": 11,
+    "liquidity": 28,
+    "buy_side_liquidity": 7,
+    "sell_side_liquidity": 3,
+    "premium_discount": 3,
+    "optimal_trade_entry": 9,
+    "power_of_three": 3,
+    "judas_swing": 2,
+    "smart_money": 21,
+    "stop_loss": 4
+  },
+  "category_counts": {
+    "market_structure": 24,
+    "key_levels": 81,
+    "liquidity": 38,
+    "institutional": 24,
+    "entry_models": 14,
+    "risk_management": 4
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 40,
+      "category": "key_levels"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 28,
+      "category": "liquidity"
+    },
+    {
+      "id": "breaker_block",
+      "name": "Breaker Block",
+      "count": 26,
+      "category": "key_levels"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 23,
+      "category": "market_structure"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 21,
+      "category": "institutional"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 11,
+      "category": "key_levels"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 9,
+      "category": "entry_models"
+    },
+    {
+      "id": "buy_side_liquidity",
+      "name": "Buy Side Liquidity",
+      "count": 7,
+      "category": "liquidity"
+    },
+    {
+      "id": "mitigation_block",
+      "name": "Mitigation Block",
+      "count": 4,
+      "category": "key_levels"
+    },
+    {
+      "id": "stop_loss",
+      "name": "Stop Loss Placement",
+      "count": 4,
+      "category": "risk_management"
+    },
+    {
+      "id": "sell_side_liquidity",
+      "name": "Sell Side Liquidity",
+      "count": 3,
+      "category": "liquidity"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 3,
+      "category": "institutional"
+    },
+    {
+      "id": "power_of_three",
+      "name": "Power of Three (AMD)",
+      "count": 3,
+      "category": "entry_models"
+    },
+    {
+      "id": "judas_swing",
+      "name": "Judas Swing",
+      "count": 2,
+      "category": "entry_models"
+    },
+    {
+      "id": "break_of_structure",
+      "name": "Break of Structure (BOS)",
+      "count": 1,
+      "category": "market_structure"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "break_of_structure",
+      "keyword": "structure break",
+      "position": 29984,
+      "context": "...g to be buying an old low or are you going to be buying on a return or retracement back to a market structure break to be a buyer at support there it's just that simple nothing else can happen there's no there's not...",
+      "match_type": "keyword",
+      "start_time": 1903.04,
+      "end_time": 1906.4
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 8679,
+      "context": "...rm of a bearish breaker when that high is broken and it takes out that short-term loan between that market structure shift breaking point that becomes your trigger if price ever comes back up to that level you can be...",
+      "match_type": "keyword",
+      "start_time": 590.96,
+      "end_time": 593.92
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 14700,
+      "context": "...u're not going to get this entry down here but you can get a favorable entry point by waiting for a market structure shift here so when the market structure shifts on the bullish side here all eyes go back to this re...",
+      "match_type": "keyword",
+      "start_time": 966.88,
+      "end_time": 969.92
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 14740,
+      "context": "...re but you can get a favorable entry point by waiting for a market structure shift here so when the market structure shifts on the bullish side here all eyes go back to this reference point here we're not worried abo...",
+      "match_type": "keyword",
+      "start_time": 969.92,
+      "end_time": 973.52
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 16795,
+      "context": "...t again or you take it you lose money and here this pattern is in my opinion the best pattern in in market structure when you're looking for uh institutional evidences to what should be taking place in price when you...",
+      "match_type": "keyword",
+      "start_time": 1095.12,
+      "end_time": 1098.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 17335,
+      "context": "...oesn't demand it you can wait for this pattern to give it to you by waiting for the break above the market structure here which is ironic because you don't get that same forgivingness with the next pattern we're goin...",
+      "match_type": "keyword",
+      "start_time": 1129.36,
+      "end_time": 1132.0
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 29815,
+      "context": "... going to be selling it at ohi or you're going to be selling it on a retracement back to a break in market structure that's it if you're going to be a buyer are you going to be buying an old low or are you going to b...",
+      "match_type": "keyword",
+      "start_time": 1893.92,
+      "end_time": 1897.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 29977,
+      "context": "...ou going to be buying an old low or are you going to be buying on a return or retracement back to a market structure break to be a buyer at support there it's just that simple nothing else can happen there's no there...",
+      "match_type": "keyword",
+      "start_time": 1901.12,
+      "end_time": 1905.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 8686,
+      "context": "... bearish breaker when that high is broken and it takes out that short-term loan between that market structure shift breaking point that becomes your trigger if price ever comes back up to that level you can be...",
+      "match_type": "keyword",
+      "start_time": 590.96,
+      "end_time": 593.92
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 14707,
+      "context": "...t going to get this entry down here but you can get a favorable entry point by waiting for a market structure shift here so when the market structure shifts on the bullish side here all eyes go back to this re...",
+      "match_type": "keyword",
+      "start_time": 966.88,
+      "end_time": 969.92
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 14747,
+      "context": "...you can get a favorable entry point by waiting for a market structure shift here so when the market structure shifts on the bullish side here all eyes go back to this reference point here we're not worried abo...",
+      "match_type": "keyword",
+      "start_time": 969.92,
+      "end_time": 973.52
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 16802,
+      "context": "... or you take it you lose money and here this pattern is in my opinion the best pattern in in market structure when you're looking for uh institutional evidences to what should be taking place in price when you...",
+      "match_type": "keyword",
+      "start_time": 1095.12,
+      "end_time": 1098.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 17342,
+      "context": "...demand it you can wait for this pattern to give it to you by waiting for the break above the market structure here which is ironic because you don't get that same forgivingness with the next pattern we're goin...",
+      "match_type": "keyword",
+      "start_time": 1129.36,
+      "end_time": 1132.0
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 29822,
+      "context": "...to be selling it at ohi or you're going to be selling it on a retracement back to a break in market structure that's it if you're going to be a buyer are you going to be buying an old low or are you going to b...",
+      "match_type": "keyword",
+      "start_time": 1893.92,
+      "end_time": 1897.68
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 29984,
+      "context": "...g to be buying an old low or are you going to be buying on a return or retracement back to a market structure break to be a buyer at support there it's just that simple nothing else can happen there's no there...",
+      "match_type": "keyword",
+      "start_time": 1903.04,
+      "end_time": 1906.4
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 1929,
+      "context": "...ng at here is essentially the breaker okay this is a breaker where the market will generally make a higher high fail then break down and have a rejection at the highs many times this is a very surprising and def...",
+      "match_type": "keyword",
+      "start_time": 136.88,
+      "end_time": 142.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 2269,
+      "context": "...e point with the expectation it's going to go higher initially does and then once it makes that new higher high it breaks lower aggressively and you probably experience it as well where you market you sell a low...",
+      "match_type": "keyword",
+      "start_time": 159.68,
+      "end_time": 164.4
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 4427,
+      "context": "...e of resistance that could be a bearish order block uh the short-term high that forms prior to that higher high that's what gets many traders caught and if you understand order blocks many times the bearish orde...",
+      "match_type": "keyword",
+      "start_time": 300.32,
+      "end_time": 304.32
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 4904,
+      "context": "...ng point now why is it a breaker the fact that it creates that little short term low in between the higher high and the previous high for the sell side diagram on the left when the market breaks down and takes o...",
+      "match_type": "keyword",
+      "start_time": 330.32,
+      "end_time": 334.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 18473,
+      "context": "...s but we're focusing primarily on is the ability for the market to get back to this high and make a higher high or the fact that it makes a failure swing we don't ever know with great deal of conviction if we're...",
+      "match_type": "keyword",
+      "start_time": 1205.6,
+      "end_time": 1210.88
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "lower high",
+      "position": 270,
+      "context": "...y instances where the swing high swing low forms in the price action swing high being a high with a lower high to the left of it and a lower high to the right of it just a three consecutive three candle or thre...",
+      "match_type": "keyword",
+      "start_time": 33.92,
+      "end_time": 37.52
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "lower high",
+      "position": 305,
+      "context": "...ing low forms in the price action swing high being a high with a lower high to the left of it and a lower high to the right of it just a three consecutive three candle or three bar pattern one with a high with ...",
+      "match_type": "keyword",
+      "start_time": 33.92,
+      "end_time": 37.52
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "lower high",
+      "position": 419,
+      "context": "...the right of it just a three consecutive three candle or three bar pattern one with a high with two lower highs to the either side of it and then obviously the same thing would be said just in opposite terms fo...",
+      "match_type": "keyword",
+      "start_time": 42.8,
+      "end_time": 46.4
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "lower low",
+      "position": 12797,
+      "context": "...ullish institutional reference point it could be again trading down to an old high or it could be a lower low it trades down but the main thing is you want to see a low that makes no real sense stopping there ...",
+      "match_type": "keyword",
+      "start_time": 840.64,
+      "end_time": 845.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 3754,
+      "context": "...t to trade to the first time which is that a resistance level or in this case it could be a bearish order block for us or could close in a gap but when we see price hovering just below a key institutional refere...",
+      "match_type": "keyword",
+      "start_time": 252.64,
+      "end_time": 256.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 3926,
+      "context": "...g just below a key institutional reference point like we learned in september which are the bearish order blocks bullshore blocks liquidity voids fair value gaps when we see these things in our charts we anticip...",
+      "match_type": "keyword",
+      "start_time": 263.6,
+      "end_time": 267.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 4122,
+      "context": "...arts we anticipate price trading to them to the pip or into them a little bit like as it were for a order block the the idea is once you see the level and these levels are going to be delineated with the blue li...",
+      "match_type": "keyword",
+      "start_time": 276.72,
+      "end_time": 280.64
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 4367,
+      "context": "...resents a selling opportunity or where we expect some measure of resistance that could be a bearish order block uh the short-term high that forms prior to that higher high that's what gets many traders caught an...",
+      "match_type": "keyword",
+      "start_time": 294.32,
+      "end_time": 298.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 4498,
+      "context": "...igh that forms prior to that higher high that's what gets many traders caught and if you understand order blocks many times the bearish order block is just above that it didn't it didn't trade to it or it leaves...",
+      "match_type": "keyword",
+      "start_time": 304.32,
+      "end_time": 309.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 4534,
+      "context": "...high that's what gets many traders caught and if you understand order blocks many times the bearish order block is just above that it didn't it didn't trade to it or it leaves a little bit of a fair value gap an...",
+      "match_type": "keyword",
+      "start_time": 307.04,
+      "end_time": 311.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 5403,
+      "context": "...t was an initial fake out and then the buy stop sometimes also are what's targeted so it could be a order block it could be a fair value gap it could be a liquidity void getting closed in it didn't get closed th...",
+      "match_type": "keyword",
+      "start_time": 366.48,
+      "end_time": 369.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 8025,
+      "context": "...he institutional reference points that we taught in september and throughout all the free tutorials order blocks breakers mitigation blocks liquidity voids and now you've learned fair value gaps so having these ...",
+      "match_type": "keyword",
+      "start_time": 543.44,
+      "end_time": 547.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 9183,
+      "context": "...ty void that didn't get filled in completely when this first pass came up or it came into a bearish order block maybe it fell short of the various order block here or maybe this is just a simply an old high and ...",
+      "match_type": "keyword",
+      "start_time": 628.24,
+      "end_time": 632.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 9230,
+      "context": "...en this first pass came up or it came into a bearish order block maybe it fell short of the various order block here or maybe this is just a simply an old high and price comes right back above the old high and t...",
+      "match_type": "keyword",
+      "start_time": 631.28,
+      "end_time": 634.64
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 12048,
+      "context": "...er you want to see a short term low form at or just above a key support level it could be a bullish order block it could be a liquidity void that hadn't filled in on this pass here that does here it could be an ...",
+      "match_type": "keyword",
+      "start_time": 794.72,
+      "end_time": 798.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 15482,
+      "context": "...down into this breaking point we can be a buyer here with the exception that there may be a bullish order block over here it doesn't have to come back down to this level just like it doesn't have to come all the...",
+      "match_type": "keyword",
+      "start_time": 1018.64,
+      "end_time": 1022.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 15703,
+      "context": "...up to this level it could just come right back up to an area over here where there would be another order block to trade off of depending on how aggressive the selling was away from this high or where the buying...",
+      "match_type": "keyword",
+      "start_time": 1028.56,
+      "end_time": 1033.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 21149,
+      "context": "... back and simply just wait because we'll understand that this movement could have been moved into a order block that's bullish this could be a bearish order block this could be a move that goes into a old high t...",
+      "match_type": "keyword",
+      "start_time": 1385.84,
+      "end_time": 1390.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 21200,
+      "context": "... that this movement could have been moved into a order block that's bullish this could be a bearish order block this could be a move that goes into a old high to run out buy stops here it could be an older hot y...",
+      "match_type": "keyword",
+      "start_time": 1388.24,
+      "end_time": 1394.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 465,
+      "context": "... candle or three bar pattern one with a high with two lower highs to the either side of it and then obviously the same thing would be said just in opposite terms for a swing low one candle with a higher...",
+      "match_type": "keyword",
+      "start_time": 46.4,
+      "end_time": 48.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 2320,
+      "context": "...r initially does and then once it makes that new higher high it breaks lower aggressively and you probably experience it as well where you market you sell a low and it starts to break lower you feel goo...",
+      "match_type": "keyword",
+      "start_time": 161.92,
+      "end_time": 166.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 11066,
+      "context": "... most likely not going to see price trade back up to this level here because it's already done its job of knocking out those players that are already short they don't want to give them an opportunity to...",
+      "match_type": "keyword",
+      "start_time": 736.16,
+      "end_time": 739.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 11438,
+      "context": "...re so when we look at price we're looking for this pattern for ourselves this is the highest most probable condition to be a short seller in the marketplace because it has a built-in advantage even thou...",
+      "match_type": "keyword",
+      "start_time": 758.88,
+      "end_time": 763.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13618,
+      "context": "... see it trade down below this low and hang around for a while okay you don't want to see that the problem you're going to encounter is because we're trading on a daily time frame as position traders we'...",
+      "match_type": "keyword",
+      "start_time": 891.52,
+      "end_time": 895.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 17002,
+      "context": "... when you see this pattern unfold and you learn to anticipate it you're going to have the highest probable entries for all your setups because you're actually entering at the lowest possible point for b...",
+      "match_type": "keyword",
+      "start_time": 1108.64,
+      "end_time": 1112.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 17619,
+      "context": "...lure swings is the second form of institutional swing points again i understand that you know you probably understand this a little bit but i'm giving you some additional points because if we're going t...",
+      "match_type": "keyword",
+      "start_time": 1152.32,
+      "end_time": 1156.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19473,
+      "context": "...rtant as it relates to where the actual level is what we're anticipating is is the market's gonna probably make another pass through and retest this low again we're aiming for and trying to get breaker ...",
+      "match_type": "keyword",
+      "start_time": 1269.04,
+      "end_time": 1272.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19643,
+      "context": "...g for and trying to get breaker swing points if we don't get the breaker swing point that's not a problem we have an opportunity to trade off of this pattern as well if we get the buy set up like this a...",
+      "match_type": "keyword",
+      "start_time": 1278.56,
+      "end_time": 1282.64
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 22577,
+      "context": "...e will if i can't get a short off there and i don't have strong convictions to sell there it's no problem i'm going to just simply wait for that swing point right here to be violated and then i'm going ...",
+      "match_type": "keyword",
+      "start_time": 1472.56,
+      "end_time": 1474.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 23360,
+      "context": "... know with great deal of conviction that this is a good buy or i miss it and it takes off it's no problem i'm waiting for this little swing point here to be broken once that high is broken i can wait fo...",
+      "match_type": "keyword",
+      "start_time": 1517.04,
+      "end_time": 1522.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 23748,
+      "context": "...his low because it's going to be in an area where they had already ran the cell stops now this is probably very 101 ict okay but i want you to come away with this idea that the institutions go into the ...",
+      "match_type": "keyword",
+      "start_time": 1541.28,
+      "end_time": 1547.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24966,
+      "context": "...ng at so if i miss it just like you're going to miss it too and you see this breakdown in here no problem wait for it to trade back up to this level here and that's where your shorts going to be and you...",
+      "match_type": "keyword",
+      "start_time": 1619.76,
+      "end_time": 1623.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 25342,
+      "context": "... already been violated here they're not going to come back up to take those out if it does you're probably wrong anyway you want to be out same thing is said over here just in opposite terms when the ma...",
+      "match_type": "keyword",
+      "start_time": 1640.08,
+      "end_time": 1644.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 25680,
+      "context": "...eal buy and it doesn't do it and if you can't get this off as a long and it starts to take off no problem you go right back to this price point here and wait for it to come back down you can be a trader...",
+      "match_type": "keyword",
+      "start_time": 1658.16,
+      "end_time": 1661.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 27929,
+      "context": "... it get that responsiveness of seeing what happens in price sometimes it'll keep on going okay no problem you're gonna be wrong but you're gonna know right away that you're wrong and you don't have a hu...",
+      "match_type": "keyword",
+      "start_time": 1791.36,
+      "end_time": 1795.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 30547,
+      "context": "...at level did was it able to pass through it and did it reject if it went up to it fell short it's probably going to make one more pass higher and it might give you that breaker entry if it doesn't give ...",
+      "match_type": "keyword",
+      "start_time": 1935.36,
+      "end_time": 1937.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 12040,
+      "context": "...be a buyer you want to see a short term low form at or just above a key support level it could be a bullish order block it could be a liquidity void that hadn't filled in on this pass here that does here it could be an ...",
+      "match_type": "keyword",
+      "start_time": 794.72,
+      "end_time": 798.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 15474,
+      "context": "...me back down into this breaking point we can be a buyer here with the exception that there may be a bullish order block over here it doesn't have to come back down to this level just like it doesn't have to come all the...",
+      "match_type": "keyword",
+      "start_time": 1018.64,
+      "end_time": 1022.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 3746,
+      "context": "...pected it to trade to the first time which is that a resistance level or in this case it could be a bearish order block for us or could close in a gap but when we see price hovering just below a key institutional refere...",
+      "match_type": "keyword",
+      "start_time": 252.64,
+      "end_time": 256.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 3918,
+      "context": "... hovering just below a key institutional reference point like we learned in september which are the bearish order blocks bullshore blocks liquidity voids fair value gaps when we see these things in our charts we anticip...",
+      "match_type": "keyword",
+      "start_time": 263.6,
+      "end_time": 267.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 4359,
+      "context": "...left represents a selling opportunity or where we expect some measure of resistance that could be a bearish order block uh the short-term high that forms prior to that higher high that's what gets many traders caught an...",
+      "match_type": "keyword",
+      "start_time": 294.32,
+      "end_time": 298.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 4526,
+      "context": "... higher high that's what gets many traders caught and if you understand order blocks many times the bearish order block is just above that it didn't it didn't trade to it or it leaves a little bit of a fair value gap an...",
+      "match_type": "keyword",
+      "start_time": 307.04,
+      "end_time": 311.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 9175,
+      "context": "... liquidity void that didn't get filled in completely when this first pass came up or it came into a bearish order block maybe it fell short of the various order block here or maybe this is just a simply an old high and ...",
+      "match_type": "keyword",
+      "start_time": 628.24,
+      "end_time": 632.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 21192,
+      "context": "...derstand that this movement could have been moved into a order block that's bullish this could be a bearish order block this could be a move that goes into a old high to run out buy stops here it could be an older hot y...",
+      "match_type": "keyword",
+      "start_time": 1388.24,
+      "end_time": 1394.24
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 1859,
+      "context": "...d how we can see the characteristics of both the first one we're looking at here is essentially the breaker okay this is a breaker where the market will generally make a higher high fail then break down and ...",
+      "match_type": "keyword",
+      "start_time": 132.24,
+      "end_time": 136.88
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 1882,
+      "context": "...aracteristics of both the first one we're looking at here is essentially the breaker okay this is a breaker where the market will generally make a higher high fail then break down and have a rejection at the...",
+      "match_type": "keyword",
+      "start_time": 134.24,
+      "end_time": 140.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 3005,
+      "context": "...sistance can come in the form of how we interpret resistance as a bare shoulder block it could be a breaker or mitigation block it could be an old low it's returning to or it could be you know high it's retu...",
+      "match_type": "keyword",
+      "start_time": 206.24,
+      "end_time": 211.76
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 4793,
+      "context": "... it in and then finally drives up and closes that little bit of a range in that's when you get this breaker swing point now why is it a breaker the fact that it creates that little short term low in between ...",
+      "match_type": "keyword",
+      "start_time": 323.68,
+      "end_time": 326.24
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 4829,
+      "context": "...d closes that little bit of a range in that's when you get this breaker swing point now why is it a breaker the fact that it creates that little short term low in between the higher high and the previous hig...",
+      "match_type": "keyword",
+      "start_time": 326.24,
+      "end_time": 330.32
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 7610,
+      "context": "...hen it creates that re rejection or reversal high same thing is said for the buy side of the uh the breaker pattern these swing points if you look at them they many times offer outstanding entry points what ...",
+      "match_type": "keyword",
+      "start_time": 515.2,
+      "end_time": 521.92
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 8038,
+      "context": "...nal reference points that we taught in september and throughout all the free tutorials order blocks breakers mitigation blocks liquidity voids and now you've learned fair value gaps so having these ideas in ...",
+      "match_type": "keyword",
+      "start_time": 547.36,
+      "end_time": 551.52
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 8595,
+      "context": "...reak down in the example on the left-hand side for our bearish swing point in the form of a bearish breaker when that high is broken and it takes out that short-term loan between that market structure shift ...",
+      "match_type": "keyword",
+      "start_time": 584.72,
+      "end_time": 588.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 15035,
+      "context": "...ly for a return to this level here so again the same mindset we said about the sell side or bearish breaker on swing point this we know this has already been arrayed on cell stops there's no expectation or r...",
+      "match_type": "keyword",
+      "start_time": 986.24,
+      "end_time": 990.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 16129,
+      "context": "... you to think about the marketplace in two conceptual ways as it relates to swing points you have a breaker swing point which is what we're describing here and i'm giving you the classification of it and i'm...",
+      "match_type": "keyword",
+      "start_time": 1052.4,
+      "end_time": 1058.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 17980,
+      "context": "...arrow your focus to only two ways of viewing the marketplace when it turns we already mentioned the breaker swing point and now we're talking about the failure swing the failure swing is when you identify wh...",
+      "match_type": "keyword",
+      "start_time": 1171.68,
+      "end_time": 1174.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 18599,
+      "context": "...at it makes a failure swing we don't ever know with great deal of conviction if we're gonna get the breaker set up so while this may be unfolding we could be anticipating this high being taken out to be a se...",
+      "match_type": "keyword",
+      "start_time": 1217.84,
+      "end_time": 1222.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 18969,
+      "context": "... a high price we may have may have even second guessed this entry as a short but we are demanding a breaker to occur which would be selling above this old high but it doesn't give it to you here that would b...",
+      "match_type": "keyword",
+      "start_time": 1240.64,
+      "end_time": 1244.64
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19567,
+      "context": "...nna probably make another pass through and retest this low again we're aiming for and trying to get breaker swing points if we don't get the breaker swing point that's not a problem we have an opportunity to...",
+      "match_type": "keyword",
+      "start_time": 1276.08,
+      "end_time": 1280.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19608,
+      "context": "...d retest this low again we're aiming for and trying to get breaker swing points if we don't get the breaker swing point that's not a problem we have an opportunity to trade off of this pattern as well if we ...",
+      "match_type": "keyword",
+      "start_time": 1278.56,
+      "end_time": 1282.64
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 21885,
+      "context": "...r swing point just like we don't know that there's going to be a continuation to go lower to have a breaker swing point for buys here we don't know if it's going to go down below that low i never know that f...",
+      "match_type": "keyword",
+      "start_time": 1433.68,
+      "end_time": 1436.64
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 24626,
+      "context": "...nd then go short i may read it wrong just like you're going to read it wrong i may be looking for a breaker scenario up here where it makes a pass above this old high i may be looking to sell this old high o...",
+      "match_type": "keyword",
+      "start_time": 1598.32,
+      "end_time": 1602.56
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 27205,
+      "context": "...hen we look at price i want you to think again in two institutional swing point theories you have a breaker which is the ideal most optimal trade entry pattern there is in the marketplace because it's absolu...",
+      "match_type": "keyword",
+      "start_time": 1750.4,
+      "end_time": 1754.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28375,
+      "context": "...amazing because you'll see how fast the market tanks if you buy an old low and you're doing it on a breaker setup and it's a swing point in the form of a breaker you're going to be able to see dynamic rallie...",
+      "match_type": "keyword",
+      "start_time": 1819.04,
+      "end_time": 1822.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28429,
+      "context": "...f you buy an old low and you're doing it on a breaker setup and it's a swing point in the form of a breaker you're going to be able to see dynamic rallies just like that take off and it would they'll be expl...",
+      "match_type": "keyword",
+      "start_time": 1821.2,
+      "end_time": 1824.8
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28802,
+      "context": "...ce yourself that there's only two real ways the market's going to turn around it's going to be on a breaker where they run stops or it's going to be a failure swing both of them are indicating a manipulation...",
+      "match_type": "keyword",
+      "start_time": 1842.08,
+      "end_time": 1846.0
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28983,
+      "context": "... indicating a manipulation but they both have to be used slightly different the first one being the breaker swing point that is the ideal one you want to be looking for that scenario all the time on any time...",
+      "match_type": "keyword",
+      "start_time": 1851.6,
+      "end_time": 1854.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29164,
+      "context": "...o all the time on any time frame not just a daily chart but any time frame but if you can't get the breaker don't fear or be upset about missing that move because it still gives you the opportunity to get in...",
+      "match_type": "keyword",
+      "start_time": 1860.64,
+      "end_time": 1864.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29497,
+      "context": "... you to go in and show me something where that doesn't do this because i can tell you it's either a breaker or it's a fair swing every single time it's never anything else so you're you're limited it's reall...",
+      "match_type": "keyword",
+      "start_time": 1880.24,
+      "end_time": 1884.88
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 30616,
+      "context": "...ent up to it fell short it's probably going to make one more pass higher and it might give you that breaker entry if it doesn't give you a breaker inch and it gives you a fair swing this is how you trade the...",
+      "match_type": "keyword",
+      "start_time": 1937.52,
+      "end_time": 1940.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 30655,
+      "context": "...oing to make one more pass higher and it might give you that breaker entry if it doesn't give you a breaker inch and it gives you a fair swing this is how you trade them but there's nothing you need to worry...",
+      "match_type": "keyword",
+      "start_time": 1938.96,
+      "end_time": 1941.6
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 3016,
+      "context": "...n come in the form of how we interpret resistance as a bare shoulder block it could be a breaker or mitigation block it could be an old low it's returning to or it could be you know high it's returning to and it may ...",
+      "match_type": "keyword",
+      "start_time": 209.44,
+      "end_time": 213.76
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 8047,
+      "context": "...ence points that we taught in september and throughout all the free tutorials order blocks breakers mitigation blocks liquidity voids and now you've learned fair value gaps so having these ideas in your chart you'll ...",
+      "match_type": "keyword",
+      "start_time": 547.36,
+      "end_time": 551.52
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 3016,
+      "context": "...n come in the form of how we interpret resistance as a bare shoulder block it could be a breaker or mitigation block it could be an old low it's returning to or it could be you know high it's returning to and i...",
+      "match_type": "keyword",
+      "start_time": 209.44,
+      "end_time": 213.76
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 8047,
+      "context": "...ence points that we taught in september and throughout all the free tutorials order blocks breakers mitigation blocks liquidity voids and now you've learned fair value gaps so having these ideas in your chart y...",
+      "match_type": "keyword",
+      "start_time": 547.36,
+      "end_time": 551.52
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 3972,
+      "context": "...nt like we learned in september which are the bearish order blocks bullshore blocks liquidity voids fair value gaps when we see these things in our charts we anticipate price trading to them to the pip or into them...",
+      "match_type": "keyword",
+      "start_time": 265.04,
+      "end_time": 269.92
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 4628,
+      "context": "...arish order block is just above that it didn't it didn't trade to it or it leaves a little bit of a fair value gap and price comes up and just falls short of filling it in and then finally drives up and closes that...",
+      "match_type": "keyword",
+      "start_time": 313.28,
+      "end_time": 316.96
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 5429,
+      "context": "...and then the buy stop sometimes also are what's targeted so it could be a order block it could be a fair value gap it could be a liquidity void getting closed in it didn't get closed the initial time and then searc...",
+      "match_type": "keyword",
+      "start_time": 369.84,
+      "end_time": 373.92
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 7070,
+      "context": "...es that these patterns present themselves with so if we see cell stops being ran out or if we see a fair value gap below the marketplace or a liquidity void that didn't initially fill in the first pass lower and th...",
+      "match_type": "keyword",
+      "start_time": 478.0,
+      "end_time": 482.48
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 8104,
+      "context": "...l the free tutorials order blocks breakers mitigation blocks liquidity voids and now you've learned fair value gaps so having these ideas in your chart you'll be able to anticipate these patterns unfolding before t...",
+      "match_type": "keyword",
+      "start_time": 551.52,
+      "end_time": 554.72
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 3793,
+      "context": "...hat a resistance level or in this case it could be a bearish order block for us or could close in a gap but when we see price hovering just below a key institutional reference point like we learned in se...",
+      "match_type": "keyword",
+      "start_time": 254.32,
+      "end_time": 258.96
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:20.091986"
+}

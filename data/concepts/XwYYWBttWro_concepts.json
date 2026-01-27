@@ -1,0 +1,786 @@
+{
+  "video_id": "XwYYWBttWro",
+  "title": "ICT Mentorship Core Content - Month 1 - How Market Makers Condition The Market",
+  "word_count": 4146,
+  "total_mentions": 74,
+  "unique_concepts": 14,
+  "concept_counts": {
+    "market_structure": 5,
+    "order_block": 8,
+    "fair_value_gap": 2,
+    "liquidity": 10,
+    "liquidity_sweep": 1,
+    "premium_discount": 2,
+    "optimal_trade_entry": 10,
+    "power_of_three": 4,
+    "asian_session": 8,
+    "london_session": 7,
+    "new_york_session": 2,
+    "ipda": 2,
+    "smart_money": 10,
+    "displacement": 3
+  },
+  "category_counts": {
+    "market_structure": 5,
+    "key_levels": 10,
+    "liquidity": 11,
+    "institutional": 15,
+    "entry_models": 14,
+    "time_based": 19
+  },
+  "top_concepts": [
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 10,
+      "category": "liquidity"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 10,
+      "category": "entry_models"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 10,
+      "category": "institutional"
+    },
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 8,
+      "category": "key_levels"
+    },
+    {
+      "id": "asian_session",
+      "name": "Asian Session/Range",
+      "count": 8,
+      "category": "time_based"
+    },
+    {
+      "id": "london_session",
+      "name": "London Session",
+      "count": 7,
+      "category": "time_based"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 5,
+      "category": "market_structure"
+    },
+    {
+      "id": "power_of_three",
+      "name": "Power of Three (AMD)",
+      "count": 4,
+      "category": "entry_models"
+    },
+    {
+      "id": "displacement",
+      "name": "Displacement",
+      "count": 3,
+      "category": "institutional"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 2,
+      "category": "key_levels"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 2,
+      "category": "institutional"
+    },
+    {
+      "id": "new_york_session",
+      "name": "New York Session",
+      "count": 2,
+      "category": "time_based"
+    },
+    {
+      "id": "ipda",
+      "name": "IPDA Data Range",
+      "count": 2,
+      "category": "time_based"
+    },
+    {
+      "id": "liquidity_sweep",
+      "name": "Liquidity Sweep",
+      "count": 1,
+      "category": "liquidity"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 12627,
+      "context": "... repeating characteristics let's get back to the interbank price delivery algorithm the daily range structure can be really broken down and simplified with it starts with a price equilibrium that's Asian range...",
+      "match_type": "keyword",
+      "start_time": 901.64,
+      "end_time": 905.72
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 18299,
+      "context": "... leg up or down or it's going to reverse and then from the reversal start applying time the general structure is consolidation in Asia expansion reverse in London make a higher low of the day then expand small...",
+      "match_type": "keyword",
+      "start_time": 1268.6,
+      "end_time": 1275.24
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher low",
+      "position": 11892,
+      "context": "... takes place that's expansion it's coming in form of a Judah swing what is it doing it's making the higher low in London that's the London swing for a reversal that's a run on stops then there is another expans...",
+      "match_type": "keyword",
+      "start_time": 848.96,
+      "end_time": 854.04
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher low",
+      "position": 12978,
+      "context": "... or just before it that's the Judah swing then we'll see a range expansion in other words after the higher low is formed the range will start expanding it'll go down into 5:00 in the morning New York time or go...",
+      "match_type": "keyword",
+      "start_time": 929.24,
+      "end_time": 934.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher low",
+      "position": 18369,
+      "context": "...art applying time the general structure is consolidation in Asia expansion reverse in London make a higher low of the day then expand small consolidation in New York retrace between 8:00 and 8:30 in the morning...",
+      "match_type": "keyword",
+      "start_time": 1275.24,
+      "end_time": 1281.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 10649,
+      "context": "...wo understanding expansion retracement reversal and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibriu...",
+      "match_type": "keyword",
+      "start_time": 765.76,
+      "end_time": 769.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 15614,
+      "context": "...ng in once we're in the expansion stage okay then you have a choice it can retrace come back to the order blocket just left behind and then recapitalize that and then make another leg up or down relative to the ...",
+      "match_type": "keyword",
+      "start_time": 1095.2,
+      "end_time": 1098.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 16259,
+      "context": "...on that does not happen it does a consolidation expansion either retrace for another uh move into a order block and then recapitalize it and do the same direction it moved when it made an expansion or it goes fr...",
+      "match_type": "keyword",
+      "start_time": 1140.56,
+      "end_time": 1144.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6414,
+      "context": "...your family members start a legacy but don't make this common knowledge it's going to happen some goobers is going to take this stuff and be the one that you know I'm the cool guy I'm the one that got i...",
+      "match_type": "keyword",
+      "start_time": 484.92,
+      "end_time": 488.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6844,
+      "context": "...t it's not going mainstream you're this is the group that we have whoever can make it in between October 1st and now that's it that's it because when we leave September and October we're buttoning up al...",
+      "match_type": "keyword",
+      "start_time": 518.32,
+      "end_time": 524.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6920,
+      "context": "...n make it in between October 1st and now that's it that's it because when we leave September and October we're buttoning up all of the free tutorial stuff and we're going right into the nut symbol to wh...",
+      "match_type": "keyword",
+      "start_time": 524.24,
+      "end_time": 528.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 7377,
+      "context": "...ou were honest with yourself if you've traded at any time and you looked back on your trading you probably looked at the market and you saw something like this you you knew something was going on and yo...",
+      "match_type": "keyword",
+      "start_time": 553.04,
+      "end_time": 557.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10456,
+      "context": "...up and I give you two characteristics to it there's context and framework around the trade and then obviously those refer back to institutional order flow so you have to be able to bridge the two unders...",
+      "match_type": "keyword",
+      "start_time": 755.96,
+      "end_time": 760.12
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 10662,
+      "context": "...ing expansion retracement reversal and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that...",
+      "match_type": "keyword",
+      "start_time": 765.76,
+      "end_time": 769.88
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 10673,
+      "context": "...on retracement reversal and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that...",
+      "match_type": "keyword",
+      "start_time": 767.4,
+      "end_time": 774.68
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 4988,
+      "context": "... price it's not for your well-being it's for the bank's well-being it's their business they are the liquidity provider everyone else's liquidity are you a lamb or a lion which one because one of us is going to...",
+      "match_type": "keyword",
+      "start_time": 381.4,
+      "end_time": 387.16
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 5023,
+      "context": "... it's for the bank's well-being it's their business they are the liquidity provider everyone else's liquidity are you a lamb or a lion which one because one of us is going to eat meat and the other one's going...",
+      "match_type": "keyword",
+      "start_time": 387.44,
+      "end_time": 392.12
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 9095,
+      "context": "... the drive shaft it which makes the markets go around it's not the big populace of Traders it's the liquidity provider so you need to be thinking like this small group is over here they're not trying to draw a...",
+      "match_type": "keyword",
+      "start_time": 667.4,
+      "end_time": 673.68
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 10678,
+      "context": "...tracement reversal and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that mean for u...",
+      "match_type": "keyword",
+      "start_time": 767.4,
+      "end_time": 774.68
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 10694,
+      "context": "...al and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that mean for us for instance i...",
+      "match_type": "keyword",
+      "start_time": 767.4,
+      "end_time": 774.68
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 12226,
+      "context": "...solidation going into the 8 to 8:30 news zar go lift where there's going to be another injection of liquidity or a reversal then there'll be another expansion and then we go into London close which is another ...",
+      "match_type": "keyword",
+      "start_time": 872.28,
+      "end_time": 877.84
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 10710,
+      "context": "...tion and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that mean for us for instance in the scope ...",
+      "match_type": "keyword",
+      "start_time": 769.88,
+      "end_time": 777.68
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 11968,
+      "context": "...t doing it's making the higher low in London that's the London swing for a reversal that's a run on stops then there is another expansion move okay down into the the New York session then there's going to ...",
+      "match_type": "keyword",
+      "start_time": 854.04,
+      "end_time": 859.72
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 13519,
+      "context": "...then it goes into to the reversal that's classic London open scenario where it shoots down runs the stops and then what happens it expands again there's another range expansion into what 5:00 in the mornin...",
+      "match_type": "keyword",
+      "start_time": 965.84,
+      "end_time": 971.2
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 10694,
+      "context": "...al and consolidation and applying them to respectively order blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that mean for us for instance in the...",
+      "match_type": "keyword",
+      "start_time": 767.4,
+      "end_time": 774.68
+    },
+    {
+      "concept_id": "liquidity_sweep",
+      "keyword": "raid",
+      "position": 19850,
+      "context": "...n process the way the price is delivered and it can't be changed it won't be changed and don't be afraid because you're learning it 700 people is not going to turn the whole world around okay and they sto...",
+      "match_type": "keyword",
+      "start_time": 1373.2,
+      "end_time": 1376.6
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 10750,
+      "context": "...rder blocks fair value gaps liquidity voids liquidity pools stops om run I'm sorry uh stop runs and equilibrium what does that mean for us for instance in the scope of of price how can we use these ideas and mak...",
+      "match_type": "keyword",
+      "start_time": 774.68,
+      "end_time": 780.16
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 12706,
+      "context": "...ithm the daily range structure can be really broken down and simplified with it starts with a price equilibrium that's Asian range then there's a manipulation and that's always going to come by way of some news ...",
+      "match_type": "keyword",
+      "start_time": 909.04,
+      "end_time": 914.4
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 700,
+      "context": "...t involved in trading I didn't know anything about smart money I I just knew that the markets were potentially there and I could be profitable and in fact I was going to be profitable I knew it I couldn'...",
+      "match_type": "keyword",
+      "start_time": 71.36,
+      "end_time": 75.56
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 17160,
+      "context": "...nd I'm doing it on the Fly I'm not measuring things and writing this down writing that down making notes over here I just know by looking at Price what I should be seeing and you see it I'm thinking out ...",
+      "match_type": "keyword",
+      "start_time": 1196.48,
+      "end_time": 1200.12
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fib",
+      "position": 16937,
+      "context": "...letting letting it run which is the importance of knowing what the Euro pounds doing it for trading fiber or cable all these things are going to blend together and you'll know exactly how I'm doing these...",
+      "match_type": "keyword",
+      "start_time": 1184.52,
+      "end_time": 1188.68
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 10576,
+      "context": "...r back to institutional order flow so you have to be able to bridge the two understanding expansion retracement reversal and consolidation and applying them to respectively order blocks fair value gaps liquidity...",
+      "match_type": "keyword",
+      "start_time": 762.36,
+      "end_time": 765.76
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 11648,
+      "context": "... something days that we're going to be together so let's look at the daily range suddenly expansion retracement reversal and consolidation mean something every day starts with consolidation Asian range after mid...",
+      "match_type": "keyword",
+      "start_time": 831.04,
+      "end_time": 835.96
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 13772,
+      "context": "...:00 in the morning in that time window the market will go back into consolidation then it'll have a retracement between 8:00 and 8:30 in the morning New York time then it'll have either a reversal in New York se...",
+      "match_type": "keyword",
+      "start_time": 983.04,
+      "end_time": 986.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 15057,
+      "context": "... to build up above and below the range the next stage is always expansion it's not consolidation to retracement it can't retrace it hasn't moved anywhere it has it can't go consolidation reversal because it has ...",
+      "match_type": "keyword",
+      "start_time": 1063.04,
+      "end_time": 1067.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 15961,
+      "context": "...ack to a consolidation the main thing is I want you to understand is is it never goes consolidation retracement it never does consolidation reversal it's always consolidation expansion and then from expansion it...",
+      "match_type": "keyword",
+      "start_time": 1117.08,
+      "end_time": 1121.84
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 16085,
+      "context": "...s consolidation reversal it's always consolidation expansion and then from expansion it goes either retracement or reversal it does not do consolidation expansion consolidation that does not happen it does a con...",
+      "match_type": "keyword",
+      "start_time": 1123.84,
+      "end_time": 1131.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 17815,
+      "context": "...rtain order like I said it can it never goes consolidation reversal it never does consolidation and retracement it goes consolidation to an expansion move there's an Impulse leg up or down it's either going to r...",
+      "match_type": "keyword",
+      "start_time": 1237.6,
+      "end_time": 1242.32
+    },
+    {
+      "concept_id": "power_of_three",
+      "keyword": "manipulation",
+      "position": 11775,
+      "context": "...nsolidation mean something every day starts with consolidation Asian range after midnight there's a manipulation that takes place that's expansion it's coming in form of a Judah swing what is it doing it's making...",
+      "match_type": "keyword",
+      "start_time": 841.44,
+      "end_time": 846.2
+    },
+    {
+      "concept_id": "power_of_three",
+      "keyword": "manipulation",
+      "position": 12752,
+      "context": "...roken down and simplified with it starts with a price equilibrium that's Asian range then there's a manipulation and that's always going to come by way of some news event some news driver either at the time of th...",
+      "match_type": "keyword",
+      "start_time": 914.4,
+      "end_time": 919.0
+    },
+    {
+      "concept_id": "power_of_three",
+      "keyword": "manipulation",
+      "position": 12866,
+      "context": "...nd that's always going to come by way of some news event some news driver either at the time of the manipulation or just before it that's the Judah swing then we'll see a range expansion in other words after the ...",
+      "match_type": "keyword",
+      "start_time": 921.52,
+      "end_time": 927.36
+    },
+    {
+      "concept_id": "power_of_three",
+      "keyword": "manipulation",
+      "position": 13346,
+      "context": "...l consolidation and then right after midnight New York time there's a drop down in price that's the manipulation making the false move for the low there's a range expansion then it goes into to the reversal that'...",
+      "match_type": "keyword",
+      "start_time": 951.68,
+      "end_time": 955.88
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asian range",
+      "position": 11738,
+      "context": "...expansion retracement reversal and consolidation mean something every day starts with consolidation Asian range after midnight there's a manipulation that takes place that's expansion it's coming in form of a Ju...",
+      "match_type": "keyword",
+      "start_time": 837.76,
+      "end_time": 843.68
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asian range",
+      "position": 12725,
+      "context": "...e structure can be really broken down and simplified with it starts with a price equilibrium that's Asian range then there's a manipulation and that's always going to come by way of some news event some news dri...",
+      "match_type": "keyword",
+      "start_time": 911.36,
+      "end_time": 916.24
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asian range",
+      "position": 13224,
+      "context": "...upon the daily direction we're going to use the perspective it's a buy day that means that Asia the Asian range had a small consolidation and then right after midnight New York time there's a drop down in price ...",
+      "match_type": "keyword",
+      "start_time": 945.28,
+      "end_time": 949.52
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asia",
+      "position": 11738,
+      "context": "...expansion retracement reversal and consolidation mean something every day starts with consolidation Asian range after midnight there's a manipulation that takes place that's expansion it's coming in form ...",
+      "match_type": "keyword",
+      "start_time": 837.76,
+      "end_time": 843.68
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asia",
+      "position": 12725,
+      "context": "...e structure can be really broken down and simplified with it starts with a price equilibrium that's Asian range then there's a manipulation and that's always going to come by way of some news event some n...",
+      "match_type": "keyword",
+      "start_time": 911.36,
+      "end_time": 916.24
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asia",
+      "position": 13215,
+      "context": "...epending upon the daily direction we're going to use the perspective it's a buy day that means that Asia the Asian range had a small consolidation and then right after midnight New York time there's a dro...",
+      "match_type": "keyword",
+      "start_time": 945.28,
+      "end_time": 949.52
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asia",
+      "position": 13224,
+      "context": "...upon the daily direction we're going to use the perspective it's a buy day that means that Asia the Asian range had a small consolidation and then right after midnight New York time there's a drop down in...",
+      "match_type": "keyword",
+      "start_time": 945.28,
+      "end_time": 949.52
+    },
+    {
+      "concept_id": "asian_session",
+      "keyword": "asia",
+      "position": 18329,
+      "context": "...to reverse and then from the reversal start applying time the general structure is consolidation in Asia expansion reverse in London make a higher low of the day then expand small consolidation in New Yor...",
+      "match_type": "keyword",
+      "start_time": 1268.6,
+      "end_time": 1275.24
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london open",
+      "position": 13468,
+      "context": "...e false move for the low there's a range expansion then it goes into to the reversal that's classic London open scenario where it shoots down runs the stops and then what happens it expands again there's another...",
+      "match_type": "keyword",
+      "start_time": 959.36,
+      "end_time": 965.84
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 11906,
+      "context": "...hat's expansion it's coming in form of a Judah swing what is it doing it's making the higher low in London that's the London swing for a reversal that's a run on stops then there is another expansion move o...",
+      "match_type": "keyword",
+      "start_time": 848.96,
+      "end_time": 854.04
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 11924,
+      "context": "...'s coming in form of a Judah swing what is it doing it's making the higher low in London that's the London swing for a reversal that's a run on stops then there is another expansion move okay down into the ...",
+      "match_type": "keyword",
+      "start_time": 852.16,
+      "end_time": 856.92
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 12305,
+      "context": "...another injection of liquidity or a reversal then there'll be another expansion and then we go into London close which is another reversal condition and then what happens the market goes in consolidation fo...",
+      "match_type": "keyword",
+      "start_time": 877.84,
+      "end_time": 881.76
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 13468,
+      "context": "...e false move for the low there's a range expansion then it goes into to the reversal that's classic London open scenario where it shoots down runs the stops and then what happens it expands again there's an...",
+      "match_type": "keyword",
+      "start_time": 959.36,
+      "end_time": 965.84
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 14067,
+      "context": "...oing up into 10:00 or 11:00 in the morning New York time where it will have a reversal again that's London close then the market will go into consolidation ending true day at 19001 Forex LTDs uh platform if...",
+      "match_type": "keyword",
+      "start_time": 1002.12,
+      "end_time": 1007.68
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 18355,
+      "context": "...he reversal start applying time the general structure is consolidation in Asia expansion reverse in London make a higher low of the day then expand small consolidation in New York retrace between 8:00 and 8...",
+      "match_type": "keyword",
+      "start_time": 1272.8,
+      "end_time": 1277.84
+    },
+    {
+      "concept_id": "new_york_session",
+      "keyword": "new york session",
+      "position": 12034,
+      "context": "...ng for a reversal that's a run on stops then there is another expansion move okay down into the the New York session then there's going to be what another consolidation that's the New York consolidation going into th...",
+      "match_type": "keyword",
+      "start_time": 859.72,
+      "end_time": 864.04
+    },
+    {
+      "concept_id": "new_york_session",
+      "keyword": "new york session",
+      "position": 13872,
+      "context": "...retracement between 8:00 and 8:30 in the morning New York time then it'll have either a reversal in New York session or another expansion move the range will expand and make the rest of the day going up into 10:00 or...",
+      "match_type": "keyword",
+      "start_time": 989.76,
+      "end_time": 994.24
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "interbank",
+      "position": 7913,
+      "context": "...nsation that you yeah this is rigged my Brokers have to get me it's not really your broker it's the interbank feed that drives price against the funds and the Brokers are going to expand the spread as well on ...",
+      "match_type": "keyword",
+      "start_time": 585.92,
+      "end_time": 590.96
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "interbank",
+      "position": 12576,
+      "context": "... and applying these Concepts to time of the day and repeating characteristics let's get back to the interbank price delivery algorithm the daily range structure can be really broken down and simplified with it...",
+      "match_type": "keyword",
+      "start_time": 899.64,
+      "end_time": 904.68
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 542,
+      "context": "... we believe it or what uh we will invariably come in contact with the understanding that there is a smart money group of Traders out there and when I first got involved in trading I didn't know anything about sm...",
+      "match_type": "keyword",
+      "start_time": 62.32,
+      "end_time": 66.2
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 651,
+      "context": "...ey group of Traders out there and when I first got involved in trading I didn't know anything about smart money I I just knew that the markets were potentially there and I could be profitable and in fact I was g...",
+      "match_type": "keyword",
+      "start_time": 67.8,
+      "end_time": 71.36
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 1001,
+      "context": "...w investors new Traders new speculators um we may or may not have the understanding that there is a smart money entity out there and we as the larger populace of retail minded trading we think because of our she...",
+      "match_type": "keyword",
+      "start_time": 91.16,
+      "end_time": 99.56
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 2591,
+      "context": "... Yachts girlfriends they even yours everybody is living large over here in the uninformed money and smart money's over here quietly just doing their thing who's inside this small circle over here the bank who's ...",
+      "match_type": "keyword",
+      "start_time": 202.12,
+      "end_time": 207.16
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 4700,
+      "context": "...e markets are efficient because they're not efficient for the speculators they're efficient for the smart money the bank's Drive price whether you want to accept it or not that's what's going on and the sooner y...",
+      "match_type": "keyword",
+      "start_time": 360.92,
+      "end_time": 365.88
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 9861,
+      "context": "...in this little area right here where you can see there's some signals and signs of a real entity of smart money in play but you're not fully convinced to leave this group yet you have too many convictions about ...",
+      "match_type": "keyword",
+      "start_time": 709.08,
+      "end_time": 713.88
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 10183,
+      "context": "...t not enough you got to be able to release all that stuff and just leave it all behind and join the smart money because trust me we're not serving cookies but it's a way better lifestyle over here than it is ove...",
+      "match_type": "keyword",
+      "start_time": 733.0,
+      "end_time": 737.32
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 10486,
+      "context": "...ristics to it there's context and framework around the trade and then obviously those refer back to institutional order flow so you have to be able to bridge the two understanding expansion retracement reversal an...",
+      "match_type": "keyword",
+      "start_time": 758.2,
+      "end_time": 762.36
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "banks",
+      "position": 5830,
+      "context": "... losing their homes marriages it tugged on me and I didn't want to just be over here being like the banks and then I bridged over into what you saw me do in 2010 and I revealed a lot of things in this ment...",
+      "match_type": "keyword",
+      "start_time": 443.92,
+      "end_time": 448.52
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 14926,
+      "context": "...iet why why is that important because that's when the orders are building up in the marketplace the market makers will allow orders to build up above and below the range the next stage is always expansion it's not...",
+      "match_type": "keyword",
+      "start_time": 1055.52,
+      "end_time": 1058.8
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 15351,
+      "context": "... you got to think the next leg is going to be in price it's going to be an explosive move or an imp impulse leg impulse price swing movement you need to see Movement by determining what that movement is in w...",
+      "match_type": "keyword",
+      "start_time": 1078.44,
+      "end_time": 1084.12
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 15363,
+      "context": "...think the next leg is going to be in price it's going to be an explosive move or an imp impulse leg impulse price swing movement you need to see Movement by determining what that movement is in what directio...",
+      "match_type": "keyword",
+      "start_time": 1078.44,
+      "end_time": 1084.12
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 17881,
+      "context": "...l it never does consolidation and retracement it goes consolidation to an expansion move there's an Impulse leg up or down it's either going to retrace back down into where it just ra rallied up from or it's...",
+      "match_type": "keyword",
+      "start_time": 1240.28,
+      "end_time": 1244.44
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:19.842604"
+}

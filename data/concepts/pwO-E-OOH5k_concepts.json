@@ -1,0 +1,997 @@
+{
+  "video_id": "pwO-E-OOH5k",
+  "title": "ICT Mentorship Core Content - Month 05 - Defining HTF PD Arrays",
+  "word_count": 5744,
+  "total_mentions": 268,
+  "unique_concepts": 11,
+  "concept_counts": {
+    "order_block": 56,
+    "breaker_block": 37,
+    "mitigation_block": 40,
+    "fair_value_gap": 25,
+    "liquidity": 15,
+    "sell_side_liquidity": 3,
+    "premium_discount": 71,
+    "optimal_trade_entry": 10,
+    "judas_swing": 1,
+    "smart_money": 6,
+    "displacement": 4
+  },
+  "category_counts": {
+    "key_levels": 158,
+    "liquidity": 18,
+    "institutional": 81,
+    "entry_models": 11
+  },
+  "top_concepts": [
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 71,
+      "category": "institutional"
+    },
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 56,
+      "category": "key_levels"
+    },
+    {
+      "id": "mitigation_block",
+      "name": "Mitigation Block",
+      "count": 40,
+      "category": "key_levels"
+    },
+    {
+      "id": "breaker_block",
+      "name": "Breaker Block",
+      "count": 37,
+      "category": "key_levels"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 25,
+      "category": "key_levels"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 15,
+      "category": "liquidity"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 10,
+      "category": "entry_models"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 6,
+      "category": "institutional"
+    },
+    {
+      "id": "displacement",
+      "name": "Displacement",
+      "count": 4,
+      "category": "institutional"
+    },
+    {
+      "id": "sell_side_liquidity",
+      "name": "Sell Side Liquidity",
+      "count": 3,
+      "category": "liquidity"
+    },
+    {
+      "id": "judas_swing",
+      "name": "Judas Swing",
+      "count": 1,
+      "category": "entry_models"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 5359,
+      "context": "...at's probably going to be a good reasonable expectation for support level now it could be a bullish order block it could be a an old short-term high in there on a lower time frame if this was a monthly chart at ...",
+      "match_type": "keyword",
+      "start_time": 362.16,
+      "end_time": 367.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6175,
+      "context": "...ow we would expect to see some lower time frame support level again it could be the monthly bullish order block it could be a weekly bullish order block or it could be a daily short term high you may not be able...",
+      "match_type": "keyword",
+      "start_time": 411.44,
+      "end_time": 416.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6216,
+      "context": "... frame support level again it could be the monthly bullish order block it could be a weekly bullish order block or it could be a daily short term high you may not be able to see it inside that that little low th...",
+      "match_type": "keyword",
+      "start_time": 413.6,
+      "end_time": 417.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 10978,
+      "context": "...tance and a clear discernible level of support now that can come in the form of bullish and bearish order blocks or it could be just old highs and old lows and we'll just use old highs and lows as an example for...",
+      "match_type": "keyword",
+      "start_time": 738.96,
+      "end_time": 742.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 12927,
+      "context": "...w is it justifying your expectation that it wants to go down to that discount level or some bullish order block to buy back off of and cover a short position or could be a old low that it wants to run below that...",
+      "match_type": "keyword",
+      "start_time": 858.4,
+      "end_time": 862.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 15978,
+      "context": "...uld expect to see or what you're looking for okay you know you know what should i be looking for an order block or should i be looking for a gap you know what should i look for right now that's what this teachin...",
+      "match_type": "keyword",
+      "start_time": 1041.84,
+      "end_time": 1044.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 17582,
+      "context": "...ea of importance is the rejection block that would be just above the candle's body then the bearish order block a fair value gap liquidity void bearish breaker and the mitigation block put another way if we were...",
+      "match_type": "keyword",
+      "start_time": 1147.68,
+      "end_time": 1154.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 18887,
+      "context": "...e next thing is their fair value gap again that might not exist either go to the next thing bearish order block that's probably going to be there chances are it's very strong that's going to be there so what did...",
+      "match_type": "keyword",
+      "start_time": 1234.16,
+      "end_time": 1238.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 19143,
+      "context": "...which you look for a mitigation block is going to be first considered before you get to the bearish order block because the various order blocks will be really high up in the premium mitigation block is going to...",
+      "match_type": "keyword",
+      "start_time": 1248.24,
+      "end_time": 1251.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 19175,
+      "context": "...block is going to be first considered before you get to the bearish order block because the various order blocks will be really high up in the premium mitigation block is going to be the lowest mitigation and br...",
+      "match_type": "keyword",
+      "start_time": 1250.48,
+      "end_time": 1253.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 19524,
+      "context": "... would be a mitigation block basically a bearish breaker will keep your ability to get to a bearish order block which will be resting higher up in the premium when an old high is taken out that down candle right...",
+      "match_type": "keyword",
+      "start_time": 1271.44,
+      "end_time": 1275.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 19902,
+      "context": "...ng to keep you from seeing most likely high probability that it won't allow you to get to a bearish order block so whenever you see bearish breakers just don't expect the bearish order block to be hit okay becau...",
+      "match_type": "keyword",
+      "start_time": 1295.84,
+      "end_time": 1299.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 19981,
+      "context": "... to get to a bearish order block so whenever you see bearish breakers just don't expect the bearish order block to be hit okay because it's going to most likely keep price lower because that's going to be the mo...",
+      "match_type": "keyword",
+      "start_time": 1300.4,
+      "end_time": 1303.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 20289,
+      "context": "...no breaker you can close in that range and that may take you often to a fair value gap or a bearish order block but breakers by themselves even though they're low end on this list it's the first thing you're goi...",
+      "match_type": "keyword",
+      "start_time": 1319.52,
+      "end_time": 1322.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 21099,
+      "context": "... kick in new orders would capitalize and then selling would ensue if there isn't an obvious bearish order block okay um and there's very little times that's like that but we will talk about that when we get into...",
+      "match_type": "keyword",
+      "start_time": 1362.64,
+      "end_time": 1367.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 21275,
+      "context": "...ll talk about that when we get into entry techniques and concepts but if there is a lack of bearish order block understanding and what you're looking at currently in the market action because there may be a lot ...",
+      "match_type": "keyword",
+      "start_time": 1374.32,
+      "end_time": 1378.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 23567,
+      "context": "...nd old low that's that's as high as you can get then you have rejection block then you have bearish order block fair fair value gap and liquidity void bearish breaker and mitigation block you're going to be look...",
+      "match_type": "keyword",
+      "start_time": 1518.64,
+      "end_time": 1522.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 25094,
+      "context": "...thing is is there a gap that would draw price up into it if there's no gap then you go right to the order block okay but the main thing is if there's a breaker forget about closing in the void and forget about g...",
+      "match_type": "keyword",
+      "start_time": 1600.56,
+      "end_time": 1604.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 27147,
+      "context": "...has only been delivered on one side of the marketplace and then the next array would be the bullish order block and again without the breaker you would expect the void to be filled a gap to be filled straight do...",
+      "match_type": "keyword",
+      "start_time": 1733.44,
+      "end_time": 1738.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 27278,
+      "context": "...he breaker you would expect the void to be filled a gap to be filled straight down into the bullish order block then below the order block would be a rejection block which is just below the most lowest candle an...",
+      "match_type": "keyword",
+      "start_time": 1742.48,
+      "end_time": 1746.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 27305,
+      "context": "... the void to be filled a gap to be filled straight down into the bullish order block then below the order block would be a rejection block which is just below the most lowest candle and its body in other words i...",
+      "match_type": "keyword",
+      "start_time": 1742.48,
+      "end_time": 1746.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 28959,
+      "context": "... gap if there is no fair value gap or avoid price could just simply trade right up into the bearish order block and if there is an idea that suggests that there's possibly not a strong bearish order block there ...",
+      "match_type": "keyword",
+      "start_time": 1851.92,
+      "end_time": 1855.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 29052,
+      "context": "...earish order block and if there is an idea that suggests that there's possibly not a strong bearish order block there we would look for a rejection block which is a movement above the candles bodies if there's l...",
+      "match_type": "keyword",
+      "start_time": 1857.36,
+      "end_time": 1860.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 241,
+      "context": "...rdless of what time frame we're looking at it uh there's two elements that come to mind as a trader obviously we think in terms of support or resistance or we think in terms of audit we're sold we think...",
+      "match_type": "keyword",
+      "start_time": 36.16,
+      "end_time": 39.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 998,
+      "context": "... does this we're confirmed to see a response moving up to a resistance point of some kind now the problem is with retail trading and with technical analysis as a whole by itself it doesn't help you beca...",
+      "match_type": "keyword",
+      "start_time": 90.4,
+      "end_time": 93.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 2593,
+      "context": "...his as a retracement but a beginning of an all-out reversal to trade below the old low that's the problem every trader is plagued with when they come into this business who's right who has the the means...",
+      "match_type": "keyword",
+      "start_time": 190.88,
+      "end_time": 194.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 5266,
+      "context": "...ement then as a second leg higher hitting that resistance level that secondary impulse leg that's probably going to be a good reasonable expectation for support level now it could be a bullish order blo...",
+      "match_type": "keyword",
+      "start_time": 357.36,
+      "end_time": 362.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13634,
+      "context": "...mber one stay with the trade idea not be shaken out of it and have the confidence to hold until the objective is met or your stop gets taken and it's simply moving to a next opportunity the opposite sce...",
+      "match_type": "keyword",
+      "start_time": 900.16,
+      "end_time": 903.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18779,
+      "context": "...void is there a range that needs to be closed in again that may not be so clear check that off no problem the next thing is their fair value gap again that might not exist either go to the next thing be...",
+      "match_type": "keyword",
+      "start_time": 1227.36,
+      "end_time": 1231.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18908,
+      "context": "... fair value gap again that might not exist either go to the next thing bearish order block that's probably going to be there chances are it's very strong that's going to be there so what did this give y...",
+      "match_type": "keyword",
+      "start_time": 1236.4,
+      "end_time": 1239.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19848,
+      "context": "...ed too that's going to be a bearish breaker that's going to keep you from seeing most likely high probability that it won't allow you to get to a bearish order block so whenever you see bearish breakers...",
+      "match_type": "keyword",
+      "start_time": 1291.36,
+      "end_time": 1295.84
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 21083,
+      "context": "...l overflow would kick in new orders would capitalize and then selling would ensue if there isn't an obvious bearish order block okay um and there's very little times that's like that but we will talk ab...",
+      "match_type": "keyword",
+      "start_time": 1362.64,
+      "end_time": 1367.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 22813,
+      "context": "...g to see to encounter is there any mitigation block that i got to consider because that's the first objective it could be a selling point then it's a bearish breaker that could set the tone for another ...",
+      "match_type": "keyword",
+      "start_time": 1467.36,
+      "end_time": 1471.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24104,
+      "context": "...titutional order reference point that's listed in here if you get to a breaker chances are you're probably not going to go higher than that you won't generally get up in to close that void if there's a ...",
+      "match_type": "keyword",
+      "start_time": 1548.88,
+      "end_time": 1552.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 28744,
+      "context": "...s are we going to run into a mitigation block bearish breaker if there's a bearish breaker you're probably not going to go higher than that but if there is no breaker you look for a void to close in or ...",
+      "match_type": "keyword",
+      "start_time": 1838.64,
+      "end_time": 1841.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 29487,
+      "context": "...nd how you would expect to see these arrays occur in price action this is the way they are seen and obviously the same thing is said for a daily chart nothing's changed the same hierarchy exists if we'r...",
+      "match_type": "keyword",
+      "start_time": 1881.36,
+      "end_time": 1886.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 29846,
+      "context": "...t is there any mitigation blocks or a bullish breaker if there is anything less than that breaker probably won't be considered or retreated to the breaker has precedence over everything both bullish bre...",
+      "match_type": "keyword",
+      "start_time": 1902.88,
+      "end_time": 1906.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 5351,
+      "context": "...e leg that's probably going to be a good reasonable expectation for support level now it could be a bullish order block it could be a an old short-term high in there on a lower time frame if this was a monthly chart at ...",
+      "match_type": "keyword",
+      "start_time": 362.16,
+      "end_time": 367.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 6167,
+      "context": "...t that low we would expect to see some lower time frame support level again it could be the monthly bullish order block it could be a weekly bullish order block or it could be a daily short term high you may not be able...",
+      "match_type": "keyword",
+      "start_time": 411.44,
+      "end_time": 416.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 6208,
+      "context": "...wer time frame support level again it could be the monthly bullish order block it could be a weekly bullish order block or it could be a daily short term high you may not be able to see it inside that that little low th...",
+      "match_type": "keyword",
+      "start_time": 413.6,
+      "end_time": 417.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 12919,
+      "context": "...rder flow is it justifying your expectation that it wants to go down to that discount level or some bullish order block to buy back off of and cover a short position or could be a old low that it wants to run below that...",
+      "match_type": "keyword",
+      "start_time": 858.4,
+      "end_time": 862.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 27139,
+      "context": "...e price has only been delivered on one side of the marketplace and then the next array would be the bullish order block and again without the breaker you would expect the void to be filled a gap to be filled straight do...",
+      "match_type": "keyword",
+      "start_time": 1733.44,
+      "end_time": 1738.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 27270,
+      "context": "...ithout the breaker you would expect the void to be filled a gap to be filled straight down into the bullish order block then below the order block would be a rejection block which is just below the most lowest candle an...",
+      "match_type": "keyword",
+      "start_time": 1742.48,
+      "end_time": 1746.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 10970,
+      "context": "...of resistance and a clear discernible level of support now that can come in the form of bullish and bearish order blocks or it could be just old highs and old lows and we'll just use old highs and lows as an example for...",
+      "match_type": "keyword",
+      "start_time": 738.96,
+      "end_time": 742.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 17574,
+      "context": "... next area of importance is the rejection block that would be just above the candle's body then the bearish order block a fair value gap liquidity void bearish breaker and the mitigation block put another way if we were...",
+      "match_type": "keyword",
+      "start_time": 1147.68,
+      "end_time": 1154.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 18879,
+      "context": "...oblem the next thing is their fair value gap again that might not exist either go to the next thing bearish order block that's probably going to be there chances are it's very strong that's going to be there so what did...",
+      "match_type": "keyword",
+      "start_time": 1234.16,
+      "end_time": 1238.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 19135,
+      "context": "...hie and which you look for a mitigation block is going to be first considered before you get to the bearish order block because the various order blocks will be really high up in the premium mitigation block is going to...",
+      "match_type": "keyword",
+      "start_time": 1248.24,
+      "end_time": 1251.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 19516,
+      "context": "... markets would be a mitigation block basically a bearish breaker will keep your ability to get to a bearish order block which will be resting higher up in the premium when an old high is taken out that down candle right...",
+      "match_type": "keyword",
+      "start_time": 1271.44,
+      "end_time": 1275.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 19894,
+      "context": "...at's going to keep you from seeing most likely high probability that it won't allow you to get to a bearish order block so whenever you see bearish breakers just don't expect the bearish order block to be hit okay becau...",
+      "match_type": "keyword",
+      "start_time": 1295.84,
+      "end_time": 1299.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 19973,
+      "context": "...llow you to get to a bearish order block so whenever you see bearish breakers just don't expect the bearish order block to be hit okay because it's going to most likely keep price lower because that's going to be the mo...",
+      "match_type": "keyword",
+      "start_time": 1300.4,
+      "end_time": 1303.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 20281,
+      "context": "...there's no breaker you can close in that range and that may take you often to a fair value gap or a bearish order block but breakers by themselves even though they're low end on this list it's the first thing you're goi...",
+      "match_type": "keyword",
+      "start_time": 1319.52,
+      "end_time": 1322.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 21091,
+      "context": "...ow would kick in new orders would capitalize and then selling would ensue if there isn't an obvious bearish order block okay um and there's very little times that's like that but we will talk about that when we get into...",
+      "match_type": "keyword",
+      "start_time": 1362.64,
+      "end_time": 1367.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 21267,
+      "context": "...ut we will talk about that when we get into entry techniques and concepts but if there is a lack of bearish order block understanding and what you're looking at currently in the market action because there may be a lot ...",
+      "match_type": "keyword",
+      "start_time": 1374.32,
+      "end_time": 1378.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 23559,
+      "context": "...d high and old low that's that's as high as you can get then you have rejection block then you have bearish order block fair fair value gap and liquidity void bearish breaker and mitigation block you're going to be look...",
+      "match_type": "keyword",
+      "start_time": 1518.64,
+      "end_time": 1522.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 28951,
+      "context": "...ur value gap if there is no fair value gap or avoid price could just simply trade right up into the bearish order block and if there is an idea that suggests that there's possibly not a strong bearish order block there ...",
+      "match_type": "keyword",
+      "start_time": 1851.92,
+      "end_time": 1855.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 29044,
+      "context": "...to the bearish order block and if there is an idea that suggests that there's possibly not a strong bearish order block there we would look for a rejection block which is a movement above the candles bodies if there's l...",
+      "match_type": "keyword",
+      "start_time": 1857.36,
+      "end_time": 1860.72
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 17634,
+      "context": "...e just above the candle's body then the bearish order block a fair value gap liquidity void bearish breaker and the mitigation block put another way if we were at equilibrium and we were moving away from a p...",
+      "match_type": "keyword",
+      "start_time": 1158.0,
+      "end_time": 1163.12
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 18197,
+      "context": "...s the nearest mitigation block there may not be one okay check that off where's the nearest bearish breaker there may not be one of those either okay check that off but if there is one then you would reasona...",
+      "match_type": "keyword",
+      "start_time": 1192.96,
+      "end_time": 1196.96
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 18360,
+      "context": "...f but if there is one then you would reasonably expect to see price trade up to that price point to breaker then expect some selling to go lower and once it moves below equilibrium then you would be all set ...",
+      "match_type": "keyword",
+      "start_time": 1202.88,
+      "end_time": 1206.32
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 18579,
+      "context": "... monthly discount or support but let's assume for a moment the mitigation block isn't there and the breaker isn't there what would you look for next okay well the next order of hierarchy is liquidity void is...",
+      "match_type": "keyword",
+      "start_time": 1213.52,
+      "end_time": 1218.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19284,
+      "context": "...cks will be really high up in the premium mitigation block is going to be the lowest mitigation and breakers are basically mitigation blocks but generally mitigation blocks can occur lower than breakers smal...",
+      "match_type": "keyword",
+      "start_time": 1255.76,
+      "end_time": 1259.28
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19378,
+      "context": "...n and breakers are basically mitigation blocks but generally mitigation blocks can occur lower than breakers small little bounces and bear markets would be a mitigation block basically a bearish breaker will...",
+      "match_type": "keyword",
+      "start_time": 1261.84,
+      "end_time": 1266.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19473,
+      "context": "...than breakers small little bounces and bear markets would be a mitigation block basically a bearish breaker will keep your ability to get to a bearish order block which will be resting higher up in the premi...",
+      "match_type": "keyword",
+      "start_time": 1268.64,
+      "end_time": 1273.52
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19784,
+      "context": "...h or turtle soup in other words that down candle if it's retreated too that's going to be a bearish breaker that's going to keep you from seeing most likely high probability that it won't allow you to get to...",
+      "match_type": "keyword",
+      "start_time": 1288.8,
+      "end_time": 1294.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 19942,
+      "context": "...igh probability that it won't allow you to get to a bearish order block so whenever you see bearish breakers just don't expect the bearish order block to be hit okay because it's going to most likely keep pr...",
+      "match_type": "keyword",
+      "start_time": 1298.16,
+      "end_time": 1300.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 20192,
+      "context": "...st dominant array of all these in here there is a liquidity void that would be viewed if there's no breaker you can close in that range and that may take you often to a fair value gap or a bearish order bloc...",
+      "match_type": "keyword",
+      "start_time": 1316.08,
+      "end_time": 1319.52
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 20305,
+      "context": "...an close in that range and that may take you often to a fair value gap or a bearish order block but breakers by themselves even though they're low end on this list it's the first thing you're going to encoun...",
+      "match_type": "keyword",
+      "start_time": 1322.56,
+      "end_time": 1327.12
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 20631,
+      "context": "... now for any potential areas to resell at first when you look at is the mitigation block or bearish breaker and if there's neither of those you look for liquidity void to trade up into the close in that rang...",
+      "match_type": "keyword",
+      "start_time": 1339.68,
+      "end_time": 1343.36
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 22871,
+      "context": "... got to consider because that's the first objective it could be a selling point then it's a bearish breaker that could set the tone for another leg lower or stop any rallies on a bullish idea then the next i...",
+      "match_type": "keyword",
+      "start_time": 1471.76,
+      "end_time": 1475.36
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 23626,
+      "context": "...ve rejection block then you have bearish order block fair fair value gap and liquidity void bearish breaker and mitigation block you're going to be looking up and the first thing you're going to encounter is...",
+      "match_type": "keyword",
+      "start_time": 1522.56,
+      "end_time": 1526.0
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 24075,
+      "context": "...y in other words the next institutional order reference point that's listed in here if you get to a breaker chances are you're probably not going to go higher than that you won't generally get up in to close...",
+      "match_type": "keyword",
+      "start_time": 1548.88,
+      "end_time": 1552.08
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 24206,
+      "context": "...ably not going to go higher than that you won't generally get up in to close that void if there's a breaker below a liquidity void the liquidity void may stay open basically that range may stay open so they ...",
+      "match_type": "keyword",
+      "start_time": 1553.68,
+      "end_time": 1557.28
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 24766,
+      "context": "...t and you look for it it's not there okay what's the next thing you've been looking for the bearish breaker if it's not there okay then i'm okay to expect that void to close in there but there may not be a v...",
+      "match_type": "keyword",
+      "start_time": 1583.2,
+      "end_time": 1587.44
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 25146,
+      "context": "...o it if there's no gap then you go right to the order block okay but the main thing is if there's a breaker forget about closing in the void and forget about getting up to that gap because the breaker is goi...",
+      "match_type": "keyword",
+      "start_time": 1604.72,
+      "end_time": 1608.32
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 25239,
+      "context": "...re's a breaker forget about closing in the void and forget about getting up to that gap because the breaker is going to take precedence over everything on this list when you're below it in terms of market pr...",
+      "match_type": "keyword",
+      "start_time": 1608.32,
+      "end_time": 1611.84
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 25638,
+      "context": "... if there is no mitigation block you would expect to see the next pd array in the form of a bullish breaker again this may not occur or be seen in price action but this is the order in which you would expect...",
+      "match_type": "keyword",
+      "start_time": 1635.68,
+      "end_time": 1640.16
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26133,
+      "context": "...a discount the first one you would anticipate seeing is a mitigation block bullishly then a bullish breaker then a liquidity void now if there is a bullish breaker now again a bullish breaker is a up candle ...",
+      "match_type": "keyword",
+      "start_time": 1666.16,
+      "end_time": 1671.04
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26189,
+      "context": "...a mitigation block bullishly then a bullish breaker then a liquidity void now if there is a bullish breaker now again a bullish breaker is a up candle between two swing lows and the most recent swing low wou...",
+      "match_type": "keyword",
+      "start_time": 1671.04,
+      "end_time": 1675.36
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26217,
+      "context": "... then a bullish breaker then a liquidity void now if there is a bullish breaker now again a bullish breaker is a up candle between two swing lows and the most recent swing low would be lower normally you're ...",
+      "match_type": "keyword",
+      "start_time": 1673.28,
+      "end_time": 1679.28
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26457,
+      "context": "... the high the swing height it forms between the two lows that up candle is going to be your bullish breaker so when price comes down to that bullish of candle it'll find some support if you see that in price...",
+      "match_type": "keyword",
+      "start_time": 1691.84,
+      "end_time": 1695.6
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26686,
+      "context": "...at if there's a liquidity void in price it won't go down to fill that in it can if it overtakes the breaker but if it has a breaker anticipate price not going below the breaker and leaving the void intact ag...",
+      "match_type": "keyword",
+      "start_time": 1705.04,
+      "end_time": 1709.6
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26710,
+      "context": "...y void in price it won't go down to fill that in it can if it overtakes the breaker but if it has a breaker anticipate price not going below the breaker and leaving the void intact again assuming there is no...",
+      "match_type": "keyword",
+      "start_time": 1705.04,
+      "end_time": 1709.6
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26755,
+      "context": "... in it can if it overtakes the breaker but if it has a breaker anticipate price not going below the breaker and leaving the void intact again assuming there is no breaker and there is no void but there is a ...",
+      "match_type": "keyword",
+      "start_time": 1709.6,
+      "end_time": 1713.44
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 26818,
+      "context": "...anticipate price not going below the breaker and leaving the void intact again assuming there is no breaker and there is no void but there is a gap and it may be a liquidity void any gap sometimes that can o...",
+      "match_type": "keyword",
+      "start_time": 1715.52,
+      "end_time": 1720.16
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 27181,
+      "context": "...e of the marketplace and then the next array would be the bullish order block and again without the breaker you would expect the void to be filled a gap to be filled straight down into the bullish order bloc...",
+      "match_type": "keyword",
+      "start_time": 1736.88,
+      "end_time": 1740.88
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28698,
+      "context": "...pect to see when you're expecting higher prices are we going to run into a mitigation block bearish breaker if there's a bearish breaker you're probably not going to go higher than that but if there is no br...",
+      "match_type": "keyword",
+      "start_time": 1836.88,
+      "end_time": 1839.76
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28727,
+      "context": "...ting higher prices are we going to run into a mitigation block bearish breaker if there's a bearish breaker you're probably not going to go higher than that but if there is no breaker you look for a void to ...",
+      "match_type": "keyword",
+      "start_time": 1838.64,
+      "end_time": 1841.04
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 28803,
+      "context": "...er if there's a bearish breaker you're probably not going to go higher than that but if there is no breaker you look for a void to close in or if your value gap if there is no fair value gap or avoid price c...",
+      "match_type": "keyword",
+      "start_time": 1841.04,
+      "end_time": 1844.64
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29792,
+      "context": "...thing we want to look for in the left side of our chart is there any mitigation blocks or a bullish breaker if there is anything less than that breaker probably won't be considered or retreated to the breake...",
+      "match_type": "keyword",
+      "start_time": 1897.2,
+      "end_time": 1902.88
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29836,
+      "context": "...f our chart is there any mitigation blocks or a bullish breaker if there is anything less than that breaker probably won't be considered or retreated to the breaker has precedence over everything both bullis...",
+      "match_type": "keyword",
+      "start_time": 1902.88,
+      "end_time": 1906.4
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29893,
+      "context": "...reaker if there is anything less than that breaker probably won't be considered or retreated to the breaker has precedence over everything both bullish breaker and bearish breakers so we're going to take a l...",
+      "match_type": "keyword",
+      "start_time": 1906.4,
+      "end_time": 1909.6
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29945,
+      "context": "...robably won't be considered or retreated to the breaker has precedence over everything both bullish breaker and bearish breakers so we're going to take a look at an example of all this information with our d...",
+      "match_type": "keyword",
+      "start_time": 1908.0,
+      "end_time": 1911.76
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 29965,
+      "context": "...sidered or retreated to the breaker has precedence over everything both bullish breaker and bearish breakers so we're going to take a look at an example of all this information with our dollar yen example th...",
+      "match_type": "keyword",
+      "start_time": 1909.6,
+      "end_time": 1913.36
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 7098,
+      "context": "... trade to that short term little swing low at the failure swing that's going to be what a potential mitigation block that means any orders that were used to go long but failed to make another pass at that old high th...",
+      "match_type": "keyword",
+      "start_time": 472.08,
+      "end_time": 476.8
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 17650,
+      "context": "... candle's body then the bearish order block a fair value gap liquidity void bearish breaker and the mitigation block put another way if we were at equilibrium and we were moving away from a premium level or resistanc...",
+      "match_type": "keyword",
+      "start_time": 1160.56,
+      "end_time": 1165.04
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 18111,
+      "context": "... looking above current market action in the past on the left side of our chart where is the nearest mitigation block there may not be one okay check that off where's the nearest bearish breaker there may not be one o...",
+      "match_type": "keyword",
+      "start_time": 1187.84,
+      "end_time": 1191.12
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 18542,
+      "context": "...hen you would be all set to go to the monthly discount or support but let's assume for a moment the mitigation block isn't there and the breaker isn't there what would you look for next okay well the next order of hi...",
+      "match_type": "keyword",
+      "start_time": 1212.0,
+      "end_time": 1216.16
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 19064,
+      "context": "...at's going to be there so what did this give you i gave you the air archie and which you look for a mitigation block is going to be first considered before you get to the bearish order block because the various order...",
+      "match_type": "keyword",
+      "start_time": 1244.64,
+      "end_time": 1248.24
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 19226,
+      "context": "...t to the bearish order block because the various order blocks will be really high up in the premium mitigation block is going to be the lowest mitigation and breakers are basically mitigation blocks but generally mit...",
+      "match_type": "keyword",
+      "start_time": 1253.52,
+      "end_time": 1255.76
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 19307,
+      "context": "... up in the premium mitigation block is going to be the lowest mitigation and breakers are basically mitigation blocks but generally mitigation blocks can occur lower than breakers small little bounces and bear market...",
+      "match_type": "keyword",
+      "start_time": 1257.68,
+      "end_time": 1261.84
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:20.039535"
+}

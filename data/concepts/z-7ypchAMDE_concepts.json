@@ -1,0 +1,453 @@
+{
+  "video_id": "z-7ypchAMDE",
+  "title": "ICT Mentorship Core Content - Month 05 - Using 10 Year Notes In HTF Analysis",
+  "word_count": 2635,
+  "total_mentions": 45,
+  "unique_concepts": 4,
+  "concept_counts": {
+    "market_structure": 3,
+    "order_block": 6,
+    "liquidity_sweep": 2,
+    "optimal_trade_entry": 34
+  },
+  "category_counts": {
+    "market_structure": 3,
+    "key_levels": 6,
+    "liquidity": 2,
+    "entry_models": 34
+  },
+  "top_concepts": [
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 34,
+      "category": "entry_models"
+    },
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 6,
+      "category": "key_levels"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 3,
+      "category": "market_structure"
+    },
+    {
+      "id": "liquidity_sweep",
+      "name": "Liquidity Sweep",
+      "count": 2,
+      "category": "liquidity"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 7562,
+      "context": "...in we'll go back to the previous slides you can see the 10-year treasury note see i have a slightly higher high going into july as well and then we saw that and we saw that one more higher high pushed into the d...",
+      "match_type": "keyword",
+      "start_time": 599.6,
+      "end_time": 603.36
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 7644,
+      "context": "...i have a slightly higher high going into july as well and then we saw that and we saw that one more higher high pushed into the dollar index in the latter portions of july again this is going to be an indication...",
+      "match_type": "keyword",
+      "start_time": 605.6,
+      "end_time": 609.28
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "lower low",
+      "position": 7341,
+      "context": "... can see we did have a bearish decline in the last week of may going into june and it gave one more lower low in the lighter portion of june but look what happens again we have the dollar index rally one more ...",
+      "match_type": "keyword",
+      "start_time": 588.16,
+      "end_time": 592.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3754,
+      "context": "...ar index typically trades down the rest of the year usually making a low around the last week of october first week of november and it creates a small little bounce on november time period for the dolla...",
+      "match_type": "keyword",
+      "start_time": 313.28,
+      "end_time": 317.2
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4713,
+      "context": "...ment okay you see there's a strong contrast between the two and that means that we do have a high probability scenario for if the 10-year treasury notes are rallying in the in the futures price that mea...",
+      "match_type": "keyword",
+      "start_time": 387.04,
+      "end_time": 392.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8865,
+      "context": "...s seasonal tenancy and the dollar is supporting that same seasonal tendency then we have a strong probability of a directional long-term trend and that's where the large funds place their money when you...",
+      "match_type": "keyword",
+      "start_time": 688.96,
+      "end_time": 692.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10222,
+      "context": "...at same 10-year treasury notes slide for 2017's march contract now we had the presidential election obviously in 2016 and what we're looking at is that high that the election results shown for donald tr...",
+      "match_type": "keyword",
+      "start_time": 790.32,
+      "end_time": 796.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 12449,
+      "context": "... range bound trading as well the only caveat is going to be until we saw the brexit vote and that's obviously going to be the big impact for the latter portions of the summer months but prior to that ev...",
+      "match_type": "keyword",
+      "start_time": 936.56,
+      "end_time": 940.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13167,
+      "context": "... that means you're going to be focusing on very short-term moves that means it's going to be high probability for short-term trades and day trades and highly unlikely for long-term position trades long-...",
+      "match_type": "keyword",
+      "start_time": 978.4,
+      "end_time": 981.6
+    },
+    {
+      "concept_id": "liquidity_sweep",
+      "keyword": "raid",
+      "position": 8293,
+      "context": "...trade higher or lower for either one is highly unlikely so we would be focusing on looking for stop raids or looking for if the data range to look back and see previous highs and lows to be violated when ...",
+      "match_type": "keyword",
+      "start_time": 650.8,
+      "end_time": 654.08
+    },
+    {
+      "concept_id": "liquidity_sweep",
+      "keyword": "stop raid",
+      "position": 8288,
+      "context": "...onal trade higher or lower for either one is highly unlikely so we would be focusing on looking for stop raids or looking for if the data range to look back and see previous highs and lows to be violated when ...",
+      "match_type": "keyword",
+      "start_time": 648.56,
+      "end_time": 652.08
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 154,
+      "context": "...ict mentorship we'll be teaching using 10-year yields in a higher time frame analysis okay 10-year notes in higher time frame analysis you can see here on the right hand side we have a seasonal tendency ...",
+      "match_type": "keyword",
+      "start_time": 26.0,
+      "end_time": 29.68
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 283,
+      "context": "...lysis you can see here on the right hand side we have a seasonal tendency for the 10-year treasury note and i want to take a look at the seasonal tendency chart for a minute and try to see where the most...",
+      "match_type": "keyword",
+      "start_time": 31.36,
+      "end_time": 35.04
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 684,
+      "context": "...ng up into december's highs so there's two primary or dominant cycles in the seasonal for treasury notes and it's bearish for the first half of the year and then bullish for the second part of the year t...",
+      "match_type": "keyword",
+      "start_time": 58.72,
+      "end_time": 61.6
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 1097,
+      "context": "...ally performs adversely or contrary to the seasonal tendency okay before we get into it some quick notes for you when we chart the 10-year treasury prices or the futures contract we're using barchart.com...",
+      "match_type": "keyword",
+      "start_time": 85.76,
+      "end_time": 90.8
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 1320,
+      "context": "...0-year treasury yields we'll be using investing.com both of these websites are free and some quick notes for you treasury prices are inverted to its yield as treasury prices drop that means the futures c...",
+      "match_type": "keyword",
+      "start_time": 104.16,
+      "end_time": 109.92
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 1457,
+      "context": "...rted to its yield as treasury prices drop that means the futures contract for the 10-year treasury notes when that price drops on the chart that shows a treasury yields increase as treasury prices rise t...",
+      "match_type": "keyword",
+      "start_time": 114.32,
+      "end_time": 118.48
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 1912,
+      "context": "...lly when the yields increase and this is seen when the futures contract prices drop on the 10-year note and the dollar has its easiest or most opportune time to decline when yields decrease this is seen ...",
+      "match_type": "keyword",
+      "start_time": 162.8,
+      "end_time": 167.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 2125,
+      "context": "...reasury futures price rise okay here we have a zoomed in seasonal tendency on the 10-year treasury note and i want to take your attention to the first portion of the seasonal tendency and this is in janu...",
+      "match_type": "keyword",
+      "start_time": 186.08,
+      "end_time": 190.24
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 2553,
+      "context": "...olls into the first week of july usually it makes a seasonal low there and in the 10-year treasury notes usually rally the rest of the year now if we have this seasonal tendency on the underlying futures...",
+      "match_type": "keyword",
+      "start_time": 215.2,
+      "end_time": 219.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 3560,
+      "context": "... there's usually a rally that takes place which is contrary to what we saw in the 10-year treasury notes declining then we have a significant high forming between june and july and then the dollar index ...",
+      "match_type": "keyword",
+      "start_time": 298.8,
+      "end_time": 303.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 4595,
+      "context": "...ates uh some short uh high in the latter portion of november let's go back to the 10-year treasury notes just for a moment okay you see there's a strong contrast between the two and that means that we do...",
+      "match_type": "keyword",
+      "start_time": 378.64,
+      "end_time": 383.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 4761,
+      "context": "...een the two and that means that we do have a high probability scenario for if the 10-year treasury notes are rallying in the in the futures price that means that the yield will be doing the opposite they...",
+      "match_type": "keyword",
+      "start_time": 390.56,
+      "end_time": 394.64
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 5464,
+      "context": "...we're going to be looking for quarterly shifts in the marketplace okay here's the 10-year treasury note this is the september contract of 2015. and remember that we saw the seasonal tendency to form a lo...",
+      "match_type": "keyword",
+      "start_time": 439.6,
+      "end_time": 442.96
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 5819,
+      "context": "...ptember that's the delivery contract of september you can see that the contract prices or treasury note prices started to rally in june that means that the yields are going to be decreasing or declining ...",
+      "match_type": "keyword",
+      "start_time": 475.2,
+      "end_time": 479.04
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 6248,
+      "context": "...lly has a little bit of a rally at the same time going back to that september contract of treasury notes 10-year the same time the treasury notes were rallying with its seasonal tenancy if we look at the...",
+      "match_type": "keyword",
+      "start_time": 510.96,
+      "end_time": 514.56
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 6289,
+      "context": "...me time going back to that september contract of treasury notes 10-year the same time the treasury notes were rallying with its seasonal tenancy if we look at the dollar index it was slightly bullish as ...",
+      "match_type": "keyword",
+      "start_time": 514.56,
+      "end_time": 517.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 6975,
+      "context": "...market essentially for the dollar index moved sideways 2016 september contract of 10-year treasury notes again we can see that last week of may going into june that seasonal tendency for a load of form f...",
+      "match_type": "keyword",
+      "start_time": 560.72,
+      "end_time": 565.12
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 7099,
+      "context": "...at last week of may going into june that seasonal tendency for a load of form for 10-year treasury notes 10-year treasury notes rally all up into july and that should give us a bear stance for the dollar...",
+      "match_type": "keyword",
+      "start_time": 567.36,
+      "end_time": 571.6
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 7122,
+      "context": "...ng into june that seasonal tendency for a load of form for 10-year treasury notes 10-year treasury notes rally all up into july and that should give us a bear stance for the dollar index the same time [M...",
+      "match_type": "keyword",
+      "start_time": 569.6,
+      "end_time": 575.04
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 7536,
+      "context": "...ally one more time and again we'll go back to the previous slides you can see the 10-year treasury note see i have a slightly higher high going into july as well and then we saw that and we saw that one ...",
+      "match_type": "keyword",
+      "start_time": 598.0,
+      "end_time": 601.36
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 9223,
+      "context": "...-term trends okay our next example now we're looking at the march contract of the 10-year treasury notes for 2017 and i'm using this contract because it allows me to show the data for the latter portion ...",
+      "match_type": "keyword",
+      "start_time": 716.08,
+      "end_time": 721.04
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 9597,
+      "context": "... just so you guys can see it okay here's the seasonal tendency once again for the 10-year treasury note all the way to the far right you can see that green line that vertical line that most furthest to t...",
+      "match_type": "keyword",
+      "start_time": 748.16,
+      "end_time": 751.36
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10148,
+      "context": "... us in that next slide that we just looked at so here we are back again that same 10-year treasury notes slide for 2017's march contract now we had the presidential election obviously in 2016 and what we...",
+      "match_type": "keyword",
+      "start_time": 783.2,
+      "end_time": 788.8
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10372,
+      "context": "...t high that the election results shown for donald trump making our president-elect at that time of vote the seasonal tendency for the march contract could create a high you can see that came into effect ...",
+      "match_type": "keyword",
+      "start_time": 804.32,
+      "end_time": 807.52
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10588,
+      "context": "...o while we're looking at the end of that uptrend for the seasonal tendency on the 10-year treasury note we're looking at the beginning of a seasonal high and that gives us that movement going lower into ...",
+      "match_type": "keyword",
+      "start_time": 818.24,
+      "end_time": 822.0
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 10899,
+      "context": "...g okay and it's now trending it's not in consolidation it's down trending for the 10-year treasury notes that's going to provide the opportunity for the dollar index to do the opposite but also do it in ...",
+      "match_type": "keyword",
+      "start_time": 838.72,
+      "end_time": 842.32
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 11169,
+      "context": "... same in fact just in opposite terms where the election shown the sell-off in the 10-year treasury notes that sell-off shows an increase in interest rates which means there's going to be an interest to n...",
+      "match_type": "keyword",
+      "start_time": 855.28,
+      "end_time": 859.52
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 11768,
+      "context": "...portion of december of this year so the moral of all this is that if we study the 10-year treasury notes in its price action it's either going to be moving in its seasonal tendency or if the dollar index...",
+      "match_type": "keyword",
+      "start_time": 892.64,
+      "end_time": 895.92
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 12213,
+      "context": "... mid portion of 2016. that was attributed to the consolidation that we saw in the 10-year treasury note and the dollar index because they're basically moving in the same direction but they were range bou...",
+      "match_type": "keyword",
+      "start_time": 920.88,
+      "end_time": 925.84
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 12434,
+      "context": "... translate into range bound trading as well the only caveat is going to be until we saw the brexit vote and that's obviously going to be the big impact for the latter portions of the summer months but pr...",
+      "match_type": "keyword",
+      "start_time": 934.96,
+      "end_time": 938.88
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 12815,
+      "context": "...en are you looking for a trade that's going to be explosive and trending when the 10-year treasury notes seasonal tendency is in effect you see it happening and it's supported with the contrary in price ...",
+      "match_type": "keyword",
+      "start_time": 957.12,
+      "end_time": 961.04
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 13386,
+      "context": "...des are going to be favorable in the conditions we've just shown here when we see 10-year treasury notes moving in trending environments that's going to put the dollar index into a trending environment a...",
+      "match_type": "keyword",
+      "start_time": 989.76,
+      "end_time": 993.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 13606,
+      "context": "... absence of the seasonal tendency the strongest in the form of the buy signal for 10-year treasury notes around june july if that's not occurring then we're going to be focusing on where the highs form s...",
+      "match_type": "keyword",
+      "start_time": 1004.24,
+      "end_time": 1007.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 14102,
+      "context": "...e not always doing the same thing every single time we can focus primarily being a bearish 10-year note trader which would give us the november high as we indicated here which lined up also for the seaso...",
+      "match_type": "keyword",
+      "start_time": 1032.24,
+      "end_time": 1038.48
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:20.112548"
+}

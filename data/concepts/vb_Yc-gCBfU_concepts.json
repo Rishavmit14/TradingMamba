@@ -1,0 +1,462 @@
+{
+  "video_id": "vb_Yc-gCBfU",
+  "title": "ICT Mentorship Core Content - Month 05 - Stop Entry Techniques For  Long Term Traders",
+  "word_count": 2354,
+  "total_mentions": 42,
+  "unique_concepts": 9,
+  "concept_counts": {
+    "break_of_structure": 1,
+    "market_structure": 4,
+    "order_block": 13,
+    "mitigation_block": 2,
+    "fair_value_gap": 2,
+    "liquidity": 1,
+    "premium_discount": 5,
+    "optimal_trade_entry": 8,
+    "smart_money": 6
+  },
+  "category_counts": {
+    "market_structure": 5,
+    "key_levels": 17,
+    "liquidity": 1,
+    "institutional": 11,
+    "entry_models": 8
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 13,
+      "category": "key_levels"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 8,
+      "category": "entry_models"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 6,
+      "category": "institutional"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 5,
+      "category": "institutional"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 4,
+      "category": "market_structure"
+    },
+    {
+      "id": "mitigation_block",
+      "name": "Mitigation Block",
+      "count": 2,
+      "category": "key_levels"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 2,
+      "category": "key_levels"
+    },
+    {
+      "id": "break_of_structure",
+      "name": "Break of Structure (BOS)",
+      "count": 1,
+      "category": "market_structure"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 1,
+      "category": "liquidity"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "break_of_structure",
+      "keyword": "structure break",
+      "position": 10121,
+      "context": "...had a selloff we're going to break that whole area down in the Shaded area you see there's a market structure break here that's the initial one but there's a secondary one we're going to focus on this one primarily ...",
+      "match_type": "keyword",
+      "start_time": 694.92,
+      "end_time": 699.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 10000,
+      "context": "...om 2007 you can see how price made a piercing of that 12350 level and price rejected had a break in Market structure and had a selloff we're going to break that whole area down in the Shaded area you see there's a ma...",
+      "match_type": "keyword",
+      "start_time": 688.44,
+      "end_time": 692.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 10114,
+      "context": "...re and had a selloff we're going to break that whole area down in the Shaded area you see there's a market structure break here that's the initial one but there's a secondary one we're going to focus on this one prim...",
+      "match_type": "keyword",
+      "start_time": 694.92,
+      "end_time": 699.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 10007,
+      "context": "... you can see how price made a piercing of that 12350 level and price rejected had a break in Market structure and had a selloff we're going to break that whole area down in the Shaded area you see there's a ma...",
+      "match_type": "keyword",
+      "start_time": 688.44,
+      "end_time": 692.8
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 10121,
+      "context": "...had a selloff we're going to break that whole area down in the Shaded area you see there's a market structure break here that's the initial one but there's a secondary one we're going to focus on this one prim...",
+      "match_type": "keyword",
+      "start_time": 694.92,
+      "end_time": 699.8
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 1327,
+      "context": "...kly institutional order flow reference point in the form of a PD array it means that has to be a we order block that's bearish above daily price it has to be a fair value Gap above daily price in the form of a w...",
+      "match_type": "keyword",
+      "start_time": 117.6,
+      "end_time": 123.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 1817,
+      "context": "...of a down candle we're using the opening price on the down candle now think about this for a second order block Theory this would be a bullish order block a down candle is a bullish orderer block if price trades...",
+      "match_type": "keyword",
+      "start_time": 150.8,
+      "end_time": 157.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 1860,
+      "context": "...ice on the down candle now think about this for a second order block Theory this would be a bullish order block a down candle is a bullish orderer block if price trades away from a down candle and we trade back ...",
+      "match_type": "keyword",
+      "start_time": 154.32,
+      "end_time": 159.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 3116,
+      "context": "...ept using a daily time frame and now think about this we're actually dovetailing really nicely with order block Theory so if we're buying at the opening price on a down candle longterm expecting monthly end or w...",
+      "match_type": "keyword",
+      "start_time": 231.56,
+      "end_time": 235.68
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6057,
+      "context": "...in terms of the buy stop on a down candle at the opening price it's just like a return to a bullish order block because we buy at that opening price this same premise here is the entry price technique that we us...",
+      "match_type": "keyword",
+      "start_time": 407.24,
+      "end_time": 410.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6195,
+      "context": "...ning price this same premise here is the entry price technique that we use to go short at a bearish order block which is the up candle right before the down price move we're going to sell on a stop right at that...",
+      "match_type": "keyword",
+      "start_time": 415.96,
+      "end_time": 420.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6423,
+      "context": "...d if we get profitability in our trade and we looks like we can see a retracement back to that same order block or same up candle in this case we could get short again with the partial profit we've taken off so ...",
+      "match_type": "keyword",
+      "start_time": 431.68,
+      "end_time": 437.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 11777,
+      "context": "...u can see how they return back to those same candles you shorted from on a stop they become bearish order blocks at a later time too so you can actually put more position in in and you can build in larger positi...",
+      "match_type": "keyword",
+      "start_time": 802.44,
+      "end_time": 807.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10351,
+      "context": "...assume that you could see that this Market on a daily time frame was getting in sync with the lower objectives for the monthly and weekly dollar Yen and in PD arrays they would be looking for lower pric...",
+      "match_type": "keyword",
+      "start_time": 709.76,
+      "end_time": 714.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 1852,
+      "context": "...ening price on the down candle now think about this for a second order block Theory this would be a bullish order block a down candle is a bullish orderer block if price trades away from a down candle and we trade back ...",
+      "match_type": "keyword",
+      "start_time": 154.32,
+      "end_time": 159.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 6049,
+      "context": "...wed you in terms of the buy stop on a down candle at the opening price it's just like a return to a bullish order block because we buy at that opening price this same premise here is the entry price technique that we us...",
+      "match_type": "keyword",
+      "start_time": 407.24,
+      "end_time": 410.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 6187,
+      "context": "...that opening price this same premise here is the entry price technique that we use to go short at a bearish order block which is the up candle right before the down price move we're going to sell on a stop right at that...",
+      "match_type": "keyword",
+      "start_time": 415.96,
+      "end_time": 420.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 11769,
+      "context": "... here you can see how they return back to those same candles you shorted from on a stop they become bearish order blocks at a later time too so you can actually put more position in in and you can build in larger positi...",
+      "match_type": "keyword",
+      "start_time": 802.44,
+      "end_time": 807.12
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 10949,
+      "context": "...short for the Japanese Yen and you can see another example here where the price trades back up to a mitigation block and the up candle you would look to sell short at the opening price and you see that down arrow ind...",
+      "match_type": "keyword",
+      "start_time": 751.48,
+      "end_time": 755.4
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 10949,
+      "context": "...short for the Japanese Yen and you can see another example here where the price trades back up to a mitigation block and the up candle you would look to sell short at the opening price and you see that down arr...",
+      "match_type": "keyword",
+      "start_time": 751.48,
+      "end_time": 755.4
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 1387,
+      "context": "...a PD array it means that has to be a we order block that's bearish above daily price it has to be a fair value Gap above daily price in the form of a weekly or monthly chart something on the monthly and weekly pref...",
+      "match_type": "keyword",
+      "start_time": 123.88,
+      "end_time": 128.72
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 1398,
+      "context": "...it means that has to be a we order block that's bearish above daily price it has to be a fair value Gap above daily price in the form of a weekly or monthly chart something on the monthly and weekly pref...",
+      "match_type": "keyword",
+      "start_time": 123.88,
+      "end_time": 128.72
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 2904,
+      "context": "...ou may not get a fill you may get uh filled and then eventually get stopped out um we'll talk about stops when we talk about trade management but for now we're just focusing on the entry pattern and an ent...",
+      "match_type": "keyword",
+      "start_time": 223.44,
+      "end_time": 226.64
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 4684,
+      "context": "...oing forward every single time until you reach that monthly and or weekly PD array in the form of a premium market so once it gets overbought if you will on those monthly and weekly charts then as long as th...",
+      "match_type": "keyword",
+      "start_time": 320.4,
+      "end_time": 323.96
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 5015,
+      "context": "...rtunities for smart money the higher we get on the monthly and weekly range and get closer to those premium ranges the less likely these candles are going to promote strong buying so just be careful about th...",
+      "match_type": "keyword",
+      "start_time": 336.96,
+      "end_time": 341.32
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 10567,
+      "context": "...a price on the daily chart lower and I mapped out every one of the up candles that went back to the premium of the ranges that price was trading in for the daily chart and every opening price once it's trigg...",
+      "match_type": "keyword",
+      "start_time": 724.2,
+      "end_time": 728.56
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 975,
+      "context": "...o be just buying any old down candle you're going to be looking at the PD arrays that would be in a discount Market or while you're in a long-term uptrend every down candle promotes new buying opportunity for...",
+      "match_type": "keyword",
+      "start_time": 92.0,
+      "end_time": 98.0
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 5161,
+      "context": "...re going to promote strong buying so just be careful about that you want to be buying preferably at equilibrium or less than the range that you would identify on the monthly and weekly charts okay selling with s...",
+      "match_type": "keyword",
+      "start_time": 345.28,
+      "end_time": 349.6
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 1052,
+      "context": "...ays that would be in a discount Market or while you're in a long-term uptrend every down candle promotes new buying opportunity for smart money so you'll be using this entry technique here to get in sync...",
+      "match_type": "keyword",
+      "start_time": 98.0,
+      "end_time": 104.44
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 4895,
+      "context": "... not there we continuously follow along with the marketplace on a daily chart every down candle promotes new buying opportunities for smart money the higher we get on the monthly and weekly range and get...",
+      "match_type": "keyword",
+      "start_time": 330.16,
+      "end_time": 334.08
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 5077,
+      "context": "... weekly range and get closer to those premium ranges the less likely these candles are going to promote strong buying so just be careful about that you want to be buying preferably at equilibrium or less...",
+      "match_type": "keyword",
+      "start_time": 341.32,
+      "end_time": 345.28
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 11343,
+      "context": "...everal hundred Pips again uh and this last one here over 1,000 Pips available in terms of downside potential and again this is is using the monthly weekly PD arays as your directional bias and then using...",
+      "match_type": "keyword",
+      "start_time": 777.24,
+      "end_time": 782.4
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 4124,
+      "context": "...your favor you can take some of that position off with the expectation that you may end up seeing a retracement back to that same opening price if it does you can put that same position that you took off in part...",
+      "match_type": "keyword",
+      "start_time": 288.52,
+      "end_time": 292.36
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 6393,
+      "context": "...right at that opening price and if we get profitability in our trade and we looks like we can see a retracement back to that same order block or same up candle in this case we could get short again with the part...",
+      "match_type": "keyword",
+      "start_time": 429.32,
+      "end_time": 434.36
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 6801,
+      "context": "... our favor in terms of profitability take a portion of it off Bank some profits then if we do get a retracement back to that same opening price we can sell short again with that same portion we just took partial...",
+      "match_type": "keyword",
+      "start_time": 458.52,
+      "end_time": 462.0
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 7511,
+      "context": "... the direction by having an up candle or a bullish candle we're seeing the market have a short-term retracement or creating a short-term overbought scenario when we see the opening price on that up candle traded...",
+      "match_type": "keyword",
+      "start_time": 496.92,
+      "end_time": 500.28
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 1084,
+      "context": "...Market or while you're in a long-term uptrend every down candle promotes new buying opportunity for smart money so you'll be using this entry technique here to get in sync with those long-term trends again you h...",
+      "match_type": "keyword",
+      "start_time": 101.92,
+      "end_time": 106.52
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 4929,
+      "context": "...along with the marketplace on a daily chart every down candle promotes new buying opportunities for smart money the higher we get on the monthly and weekly range and get closer to those premium ranges the less l...",
+      "match_type": "keyword",
+      "start_time": 332.04,
+      "end_time": 336.96
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 205,
+      "context": "...rders preferably you're going to be looking for setups to have the monthly and or weekly suggesting institutional order flow would be seeking a PD aray above daily market price the daily should post a bearish cand...",
+      "match_type": "keyword",
+      "start_time": 28.08,
+      "end_time": 33.32
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 1231,
+      "context": "...ique here to get in sync with those long-term trends again you have to have a monthly and or weekly institutional order flow reference point in the form of a PD array it means that has to be a we order block that'...",
+      "match_type": "keyword",
+      "start_time": 111.92,
+      "end_time": 117.6
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 5328,
+      "context": "...onthly and weekly charts okay selling with stop orders okay the monthly Andor weekly should suggest institutional order flow we be seeking a PD below daily market price the daily should post a bullish candle the d...",
+      "match_type": "keyword",
+      "start_time": 356.6,
+      "end_time": 360.2
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 7346,
+      "context": "...ly and weekly but we're executing on The Daily so while the monthly and weekly are pois to go lower institutionally speaking we're waiting for a move that's opposite the direction by having an up candle or a bulli...",
+      "match_type": "keyword",
+      "start_time": 487.08,
+      "end_time": 492.92
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:20.044908"
+}

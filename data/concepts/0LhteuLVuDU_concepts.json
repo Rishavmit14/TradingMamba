@@ -1,0 +1,905 @@
+{
+  "video_id": "0LhteuLVuDU",
+  "title": "ICT Mentorship Core Content - Month 1 - Elements Of A Trade Setup",
+  "word_count": 3195,
+  "total_mentions": 92,
+  "unique_concepts": 8,
+  "concept_counts": {
+    "order_block": 21,
+    "fair_value_gap": 6,
+    "liquidity": 15,
+    "premium_discount": 11,
+    "optimal_trade_entry": 18,
+    "ipda": 3,
+    "smart_money": 12,
+    "displacement": 6
+  },
+  "category_counts": {
+    "key_levels": 27,
+    "liquidity": 15,
+    "institutional": 29,
+    "entry_models": 18,
+    "time_based": 3
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 21,
+      "category": "key_levels"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 18,
+      "category": "entry_models"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 15,
+      "category": "liquidity"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 12,
+      "category": "institutional"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 11,
+      "category": "institutional"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 6,
+      "category": "key_levels"
+    },
+    {
+      "id": "displacement",
+      "name": "Displacement",
+      "count": 6,
+      "category": "institutional"
+    },
+    {
+      "id": "ipda",
+      "name": "IPDA Data Range",
+      "count": 3,
+      "category": "time_based"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 8388,
+      "context": "... price moves quickly from a level of equilibrium now expansion couples directly with the toll of an order block now what is the or what's the importance of knowing expansion well when price leaves a level quickl...",
+      "match_type": "keyword",
+      "start_time": 636.96,
+      "end_time": 642.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 8783,
+      "context": "...ilibrium if price were to move up quickly that would give us an indication of looking for a bullish order block we don't want to chase price we're going to wait for price to come back down into the order block w...",
+      "match_type": "keyword",
+      "start_time": 662.0,
+      "end_time": 665.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 8881,
+      "context": "...h order block we don't want to chase price we're going to wait for price to come back down into the order block where is that going to occur well what do we look for in price the order block that the market make...",
+      "match_type": "keyword",
+      "start_time": 667.76,
+      "end_time": 671.56
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 8960,
+      "context": "...e back down into the order block where is that going to occur well what do we look for in price the order block that the market makers leave near or at the equilibrium price point so I don't know what you're thi...",
+      "match_type": "keyword",
+      "start_time": 671.56,
+      "end_time": 676.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 10140,
+      "context": "... move that down candle or Black Candle I'm drawing a small little segment off of that's the bullish order block when the price comes back down into that and hits it that's where we would be buying and then obvio...",
+      "match_type": "keyword",
+      "start_time": 740.72,
+      "end_time": 745.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 11471,
+      "context": "... beginning basis point of how I brought a lot of people from that form into the understanding of an order block the order block was introduced in the sniper series tutorial on my website but uh prior to that I j...",
+      "match_type": "keyword",
+      "start_time": 827.12,
+      "end_time": 831.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 11487,
+      "context": "... point of how I brought a lot of people from that form into the understanding of an order block the order block was introduced in the sniper series tutorial on my website but uh prior to that I just gave indicat...",
+      "match_type": "keyword",
+      "start_time": 827.12,
+      "end_time": 831.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 11627,
+      "context": "... series tutorial on my website but uh prior to that I just gave indications and clues about what an order block was without actually really referring to or spelling it out for everyone what's the importance of t...",
+      "match_type": "keyword",
+      "start_time": 835.08,
+      "end_time": 838.48
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 16103,
+      "context": "...e your bread and butter condition some of you will trust the equilibrium some of you will trust the order block some of you will look for the void or the liquidity gaps to trade into uh some of you will have one...",
+      "match_type": "keyword",
+      "start_time": 1141.12,
+      "end_time": 1147.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 333,
+      "context": "...me for the month uh this particular teaching is going to be elements to a trade set up and as you probably noticed uh this month so far we've been focusing primarily on showing the consistency that's ab...",
+      "match_type": "keyword",
+      "start_time": 61.28,
+      "end_time": 66.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 731,
+      "context": "...m when we refer to elements to a trade setup there's really just two primary uh concerns and one is obviously context or framework surrounding the idea in other words what makes the idea uh favorable fo...",
+      "match_type": "keyword",
+      "start_time": 87.28,
+      "end_time": 91.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 1805,
+      "context": "...ng running away in other words uh trending a retracement or pullback uh allog together reversal and obviously when the Market's doing nothing it's consolidating but really we all learned in the market m...",
+      "match_type": "keyword",
+      "start_time": 168.48,
+      "end_time": 172.44
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4083,
+      "context": "...come much more efficient to be electronically based and these things are programmed by human beings obviously and those intelligence are limited so while that is probably unsettling for some of you that...",
+      "match_type": "keyword",
+      "start_time": 351.2,
+      "end_time": 357.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4147,
+      "context": "...ings are programmed by human beings obviously and those intelligence are limited so while that is probably unsettling for some of you that are listening to this thinking well I thought I had a free mark...",
+      "match_type": "keyword",
+      "start_time": 354.0,
+      "end_time": 359.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 5724,
+      "context": "...rket maker series Precision Trading cont Concepts and a sniper series okay the interbank AL go okay obviously uh there's going to be times when the market goes sideways at or in a consolidation or what ...",
+      "match_type": "keyword",
+      "start_time": 459.72,
+      "end_time": 463.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6567,
+      "context": "...d Es and flow of the marketplace you're only going to get one of these four conditions now you're probably saying okay well that's a lot I need to know one of these things to make a trade no you just ne...",
+      "match_type": "keyword",
+      "start_time": 517.84,
+      "end_time": 521.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 9152,
+      "context": "...now what you're thinking okay Michael this is already going over my head give me some examples no problem I'm going to show you that right now as you can see here there's a consolidation and the BL BL s...",
+      "match_type": "keyword",
+      "start_time": 681.6,
+      "end_time": 685.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 10246,
+      "context": "...block when the price comes back down into that and hits it that's where we would be buying and then obviously you can see it hits that level and expands to the upside over 100 Pips just by using that si...",
+      "match_type": "keyword",
+      "start_time": 746.84,
+      "end_time": 750.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 13059,
+      "context": "...wait for the come all way back up to it and fill in the liquidity void once it hits it then it'll probably resume going lower and that's what we're looking for in terms of liquidity void so we've covere...",
+      "match_type": "keyword",
+      "start_time": 932.52,
+      "end_time": 936.64
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 8775,
+      "context": "...t of equilibrium if price were to move up quickly that would give us an indication of looking for a bullish order block we don't want to chase price we're going to wait for price to come back down into the order block w...",
+      "match_type": "keyword",
+      "start_time": 662.0,
+      "end_time": 665.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 10132,
+      "context": "... that up move that down candle or Black Candle I'm drawing a small little segment off of that's the bullish order block when the price comes back down into that and hits it that's where we would be buying and then obvio...",
+      "match_type": "keyword",
+      "start_time": 740.72,
+      "end_time": 745.0
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 2268,
+      "context": "...eference points in institutional order flow the first one is order [Music] blocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these t...",
+      "match_type": "keyword",
+      "start_time": 203.2,
+      "end_time": 210.12
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 2279,
+      "context": "...ints in institutional order flow the first one is order [Music] blocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these t...",
+      "match_type": "keyword",
+      "start_time": 203.2,
+      "end_time": 210.12
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 6934,
+      "context": "...g about how to know where the Market's going to go next and that's going to to fill in a lot of the gaps that you've had with teach me directional bias ICT the main thing is is the consolidation begins w...",
+      "match_type": "keyword",
+      "start_time": 539.24,
+      "end_time": 542.68
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 12010,
+      "context": "...or fair value when we're thinking retracement the goto is for ICT tools we're looking for liquidity gaps and liquidity voids when we look for price when we see run UPS real quick and run Downs in price i...",
+      "match_type": "keyword",
+      "start_time": 857.04,
+      "end_time": 860.52
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 12766,
+      "context": "...m oper uh available price level at that in that range it moved too quickly it skipped or it created gaps Well what we'll do is is we'll wait as a Trader we won't chase price we'll wait and say okay there...",
+      "match_type": "keyword",
+      "start_time": 914.6,
+      "end_time": 919.64
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 16167,
+      "context": "...ilibrium some of you will trust the order block some of you will look for the void or the liquidity gaps to trade into uh some of you will have one or two of these characteristics and you'll trade within...",
+      "match_type": "keyword",
+      "start_time": 1147.0,
+      "end_time": 1151.48
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 2288,
+      "context": "...nstitutional order flow the first one is order [Music] blocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these two characterist...",
+      "match_type": "keyword",
+      "start_time": 206.44,
+      "end_time": 210.12
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 2304,
+      "context": "...er flow the first one is order [Music] blocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these two characteristics together wil...",
+      "match_type": "keyword",
+      "start_time": 210.6,
+      "end_time": 218.64
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 12000,
+      "context": "...y traded for fair value when we're thinking retracement the goto is for ICT tools we're looking for liquidity gaps and liquidity voids when we look for price when we see run UPS real quick and run Downs in pri...",
+      "match_type": "keyword",
+      "start_time": 857.04,
+      "end_time": 860.52
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 12019,
+      "context": "...alue when we're thinking retracement the goto is for ICT tools we're looking for liquidity gaps and liquidity voids when we look for price when we see run UPS real quick and run Downs in price in other words r...",
+      "match_type": "keyword",
+      "start_time": 859.32,
+      "end_time": 863.16
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 12510,
+      "context": "...ck sudden movement away from a price level and that quick sudden movement creates what we call as a liquidity void in other words as the market drops aggressively like that uh there's going to be Pockets where...",
+      "match_type": "keyword",
+      "start_time": 898.6,
+      "end_time": 903.48
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 13015,
+      "context": "...ong and try to fill in that range or we can wait for the come all way back up to it and fill in the liquidity void once it hits it then it'll probably resume going lower and that's what we're looking for in te...",
+      "match_type": "keyword",
+      "start_time": 930.32,
+      "end_time": 934.96
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 13131,
+      "context": "...nce it hits it then it'll probably resume going lower and that's what we're looking for in terms of liquidity void so we've covered three conditions the next one is the reversal the reversal is when price move...",
+      "match_type": "keyword",
+      "start_time": 936.64,
+      "end_time": 942.76
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 13380,
+      "context": "...on has taken in so if we are looking for reversals we're directly coupling that with an ICT tool of liquidity pools now what's the importance of it when the price reverses Direction it indicates the market mak...",
+      "match_type": "keyword",
+      "start_time": 959.96,
+      "end_time": 964.6
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 13608,
+      "context": "...of stops and a significant move should unfold in the New Direction what do we look for in price the liquidity pools just above an old high and just below an old low okay and we're looking at examples of revers...",
+      "match_type": "keyword",
+      "start_time": 973.48,
+      "end_time": 979.24
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 16157,
+      "context": "...st the equilibrium some of you will trust the order block some of you will look for the void or the liquidity gaps to trade into uh some of you will have one or two of these characteristics and you'll trade wi...",
+      "match_type": "keyword",
+      "start_time": 1143.84,
+      "end_time": 1149.08
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 13511,
+      "context": "...importance of it when the price reverses Direction it indicates the market makers have ran level of stops and a significant move should unfold in the New Direction what do we look for in price the liquidit...",
+      "match_type": "keyword",
+      "start_time": 966.16,
+      "end_time": 970.16
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 13750,
+      "context": "... just below an old low okay and we're looking at examples of reversals here every X indicates where stops would be and the market goes just above those levels and rejects and goes the other way or goes jus...",
+      "match_type": "keyword",
+      "start_time": 987.6,
+      "end_time": 992.8
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 2304,
+      "context": "...er flow the first one is order [Music] blocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these two characteristics together will giv...",
+      "match_type": "keyword",
+      "start_time": 210.6,
+      "end_time": 218.64
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 13380,
+      "context": "...on has taken in so if we are looking for reversals we're directly coupling that with an ICT tool of liquidity pools now what's the importance of it when the price reverses Direction it indicates the market makers h...",
+      "match_type": "keyword",
+      "start_time": 959.96,
+      "end_time": 964.6
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 13608,
+      "context": "...of stops and a significant move should unfold in the New Direction what do we look for in price the liquidity pools just above an old high and just below an old low okay and we're looking at examples of reversals h...",
+      "match_type": "keyword",
+      "start_time": 973.48,
+      "end_time": 979.24
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 2345,
+      "context": "...ocks the second one is fair value gaps and liquidity voids liquidity pools and stop runs and lastly equilibrium now understanding these two characteristics together will give you a greater understanding of marke...",
+      "match_type": "keyword",
+      "start_time": 224.96,
+      "end_time": 230.44
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 8325,
+      "context": "...'t be any other way now what is expansion now expansion is when price moves quickly from a level of equilibrium now expansion couples directly with the toll of an order block now what is the or what's the import...",
+      "match_type": "keyword",
+      "start_time": 631.04,
+      "end_time": 636.96
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 8680,
+      "context": "...ntended repricing model now what does that mean well if we're in a consolidation okay or a point of equilibrium if price were to move up quickly that would give us an indication of looking for a bullish order bl...",
+      "match_type": "keyword",
+      "start_time": 656.4,
+      "end_time": 660.4
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 9016,
+      "context": "...occur well what do we look for in price the order block that the market makers leave near or at the equilibrium price point so I don't know what you're thinking okay Michael this is already going over my head gi...",
+      "match_type": "keyword",
+      "start_time": 676.08,
+      "end_time": 680.36
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 9348,
+      "context": "...L BL shaded area very clear defined consolidation it's got a clear discernable high and low and the equilibrium price point is directly in the middle of the high and the low end of that range you can simply take...",
+      "match_type": "keyword",
+      "start_time": 696.08,
+      "end_time": 700.08
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 9939,
+      "context": "...de of the consolidation you can see that impulse move in that tan shaded box it moves away from the equilibrium price point and then all we have to do is go back to the down candle right before that up move that...",
+      "match_type": "keyword",
+      "start_time": 730.84,
+      "end_time": 735.44
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 10614,
+      "context": "...actually a consolidation uh in the cell side where the market broke down and came right back to the equilibrium Price Point again and then sold off I'll leave that for your study now but we're going to move over...",
+      "match_type": "keyword",
+      "start_time": 767.48,
+      "end_time": 771.24
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 14446,
+      "context": "...dation and whenever we're referring to consolidation we're directly relating that to an ICT toll of equilibrium but what is consolidation consolidation is when price moves inside a clear trading range and shows ...",
+      "match_type": "keyword",
+      "start_time": 1038.16,
+      "end_time": 1042.48
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 14889,
+      "context": "... do we look for in price we're waiting for the impulse move or impulse swing in price away from the equilibrium price level that is found exactly in the halfway point of the consolidation range and I'll show you...",
+      "match_type": "keyword",
+      "start_time": 1063.84,
+      "end_time": 1067.8
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 15237,
+      "context": "...e Wicks as you can see price moves out in an expansive Manner and then comes right back down to the equilibrium price point and then expands to the outside by having an understanding of these specific characteri...",
+      "match_type": "keyword",
+      "start_time": 1084.24,
+      "end_time": 1089.56
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 16064,
+      "context": "... of these characteristics is going to be your bread and butter condition some of you will trust the equilibrium some of you will trust the order block some of you will look for the void or the liquidity gaps to ...",
+      "match_type": "keyword",
+      "start_time": 1138.24,
+      "end_time": 1143.84
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "ote",
+      "position": 6372,
+      "context": "...an go to an reversal pattern after the reversal pattern it'll see another retracement then back to potentially consolidation these four conditions they interchange throughout the ups and downs and Es and...",
+      "match_type": "keyword",
+      "start_time": 504.92,
+      "end_time": 508.84
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fib",
+      "position": 9464,
+      "context": "...e point is directly in the middle of the high and the low end of that range you can simply take the Fibonacci tool that you have in all your platforms lay the Fib from the high and the low in the general...",
+      "match_type": "keyword",
+      "start_time": 702.4,
+      "end_time": 706.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fib",
+      "position": 9523,
+      "context": "...nd of that range you can simply take the Fibonacci tool that you have in all your platforms lay the Fib from the high and the low in the general consolidation find that midpoint and you can check yoursel...",
+      "match_type": "keyword",
+      "start_time": 703.96,
+      "end_time": 708.52
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "fibonacci",
+      "position": 9464,
+      "context": "...e point is directly in the middle of the high and the low end of that range you can simply take the Fibonacci tool that you have in all your platforms lay the Fib from the high and the low in the general conso...",
+      "match_type": "keyword",
+      "start_time": 702.4,
+      "end_time": 706.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 1402,
+      "context": "...o talk about expansion and what we look for in that condition we're we're going to be talking about retracements and what tool or concept we used for retracements reversal and lastly consolidation now each one o...",
+      "match_type": "keyword",
+      "start_time": 136.44,
+      "end_time": 141.64
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 1452,
+      "context": "...t condition we're we're going to be talking about retracements and what tool or concept we used for retracements reversal and lastly consolidation now each one of these four give a specific framework and a conte...",
+      "match_type": "keyword",
+      "start_time": 141.64,
+      "end_time": 147.64
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 1750,
+      "context": "...four conditions either the Market's going to be expanding running away in other words uh trending a retracement or pullback uh allog together reversal and obviously when the Market's doing nothing it's consolida...",
+      "match_type": "keyword",
+      "start_time": 164.16,
+      "end_time": 168.48
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 6154,
+      "context": "...swing uh after that impulse swing okay either it goes back to a consolidation again or it goes to a retracement when the retracement happens it goes back down into another level of expansion or after the expansi...",
+      "match_type": "keyword",
+      "start_time": 485.6,
+      "end_time": 490.64
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 6175,
+      "context": "...mpulse swing okay either it goes back to a consolidation again or it goes to a retracement when the retracement happens it goes back down into another level of expansion or after the expansion it can go to an re...",
+      "match_type": "keyword",
+      "start_time": 488.48,
+      "end_time": 494.96
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 6346,
+      "context": "...r after the expansion it can go to an reversal pattern after the reversal pattern it'll see another retracement then back to potentially consolidation these four conditions they interchange throughout the ups an...",
+      "match_type": "keyword",
+      "start_time": 501.4,
+      "end_time": 506.28
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 7695,
+      "context": "... we get the clue as to what the market is most likely going to be doing and then we wait for either retracement or another consolidation or a reversal but we always wait for the first expansion that gives us all...",
+      "match_type": "keyword",
+      "start_time": 587.92,
+      "end_time": 592.76
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 7944,
+      "context": "...cision now sometimes it may expand so far that we can't do anything with it we have to wait for the retracement or the next consolidation there's nothing wrong with that it's all normal you're not going to catch...",
+      "match_type": "keyword",
+      "start_time": 603.0,
+      "end_time": 607.68
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 10788,
+      "context": "...tudy now but we're going to move over to the next characteristic of a trade setup the next one is a retracement now what is a retracement retracement is when price moves back inside the recently created price ra...",
+      "match_type": "keyword",
+      "start_time": 781.24,
+      "end_time": 784.8
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 10814,
+      "context": "...o move over to the next characteristic of a trade setup the next one is a retracement now what is a retracement retracement is when price moves back inside the recently created price range now years ago I think ...",
+      "match_type": "keyword",
+      "start_time": 784.8,
+      "end_time": 789.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 10826,
+      "context": "...to the next characteristic of a trade setup the next one is a retracement now what is a retracement retracement is when price moves back inside the recently created price range now years ago I think it was in 20...",
+      "match_type": "keyword",
+      "start_time": 784.8,
+      "end_time": 789.2
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 11741,
+      "context": "...s without actually really referring to or spelling it out for everyone what's the importance of the retracement well when price returns inside a recent price range this indicates a willingness on the part of the...",
+      "match_type": "keyword",
+      "start_time": 840.72,
+      "end_time": 845.08
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 11944,
+      "context": "...t of the market makers to repic to levels not efficiently traded for fair value when we're thinking retracement the goto is for ICT tools we're looking for liquidity gaps and liquidity voids when we look for pri...",
+      "match_type": "keyword",
+      "start_time": 853.56,
+      "end_time": 859.32
+    },
+    {
+      "concept_id": "optimal_trade_entry",
+      "keyword": "retracement",
+      "position": 12338,
+      "context": "...ack in and close that in and I'll give you an example what that looks like now this is example of a retracement as you can see here the orange shaded area we had a real quick sudden movement away from a price le...",
+      "match_type": "keyword",
+      "start_time": 883.76,
+      "end_time": 891.0
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "interbank",
+      "position": 3331,
+      "context": "...tunity to take action relative to the tools that we couple with those conditions or context now the interbank price delivery algorithm or what I always refer to as the algo or interbank algo uh is the actual b...",
+      "match_type": "keyword",
+      "start_time": 288.4,
+      "end_time": 294.16
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "interbank",
+      "position": 3407,
+      "context": "...ions or context now the interbank price delivery algorithm or what I always refer to as the algo or interbank algo uh is the actual basically artif intelligence uh it's a price engine that um when we receive o...",
+      "match_type": "keyword",
+      "start_time": 294.16,
+      "end_time": 301.12
+    },
+    {
+      "concept_id": "ipda",
+      "keyword": "interbank",
+      "position": 5703,
+      "context": "... they are they are Market maker series Precision Trading cont Concepts and a sniper series okay the interbank AL go okay obviously uh there's going to be times when the market goes sideways at or in a consolid...",
+      "match_type": "keyword",
+      "start_time": 455.2,
+      "end_time": 461.48
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "smart money",
+      "position": 2486,
+      "context": "...haracteristics together will give you a greater understanding of market efficiency Paradigm how the smart money interprets price and how they influence the general populace or the speculative uninformed money it...",
+      "match_type": "keyword",
+      "start_time": 233.28,
+      "end_time": 238.48
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 2187,
+      "context": "... trade setup is using these four criteria for context and framework to specific reference points in institutional order flow the first one is order [Music] blocks the second one is fair value gaps and liquidity vo...",
+      "match_type": "keyword",
+      "start_time": 197.4,
+      "end_time": 201.79
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 8549,
+      "context": "...ng expansion well when price leaves a level quickly this indicates a willingness on the part of the market makers to reveal their intended repricing model now what does that mean well if we're in a consolidation o...",
+      "match_type": "keyword",
+      "start_time": 646.84,
+      "end_time": 650.76
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 8981,
+      "context": "...order block where is that going to occur well what do we look for in price the order block that the market makers leave near or at the equilibrium price point so I don't know what you're thinking okay Michael this...",
+      "match_type": "keyword",
+      "start_time": 673.52,
+      "end_time": 678.84
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 11853,
+      "context": "...well when price returns inside a recent price range this indicates a willingness on the part of the market makers to repic to levels not efficiently traded for fair value when we're thinking retracement the goto i...",
+      "match_type": "keyword",
+      "start_time": 847.08,
+      "end_time": 851.0
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 13479,
+      "context": "... liquidity pools now what's the importance of it when the price reverses Direction it indicates the market makers have ran level of stops and a significant move should unfold in the New Direction what do we look f...",
+      "match_type": "keyword",
+      "start_time": 964.6,
+      "end_time": 968.12
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market makers",
+      "position": 14677,
+      "context": "...ve significantly higher or lower now what's the importance when price consolidates it indicates the market makers are allowing orders to build on both sides of the market expect a new expansion near term now what ...",
+      "match_type": "keyword",
+      "start_time": 1051.64,
+      "end_time": 1055.8
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market maker",
+      "position": 1899,
+      "context": "...l and obviously when the Market's doing nothing it's consolidating but really we all learned in the market maker uh series there's really no such thing is the market doing nothing in consolidation exactly accumul...",
+      "match_type": "pattern",
+      "start_time": 172.44,
+      "end_time": 176.4
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market maker",
+      "position": 4570,
+      "context": "...erprints if you will are easy to see once you understand the operations and the conditions that the market maker uh in Bank price delivery algorithm functions so when the market does what it's doing uh it gives y...",
+      "match_type": "pattern",
+      "start_time": 383.36,
+      "end_time": 389.12
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market maker",
+      "position": 5158,
+      "context": "...ection on my website if you haven't gone through the sniper series prision trading Concepts and the market maker series yet you're going to need those okay so don't be discouraged if you hear some terms in here t...",
+      "match_type": "pattern",
+      "start_time": 416.32,
+      "end_time": 421.24
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market maker",
+      "position": 5622,
+      "context": "...u content with the free tutorials those three tutorials and I'm going to say what they are they are Market maker series Precision Trading cont Concepts and a sniper series okay the interbank AL go okay obviously ...",
+      "match_type": "pattern",
+      "start_time": 446.44,
+      "end_time": 452.48
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "market maker",
+      "position": 7199,
+      "context": "...e start from a measure of consolidation because that's where the markets are building orders so the market maker keeps Market in a tight range or a defined range until there's enough money on both sides of the uh...",
+      "match_type": "pattern",
+      "start_time": 557.16,
+      "end_time": 563.08
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 6021,
+      "context": "...sion okay so all Market start from a consolidation and move into an expansion that means there's an Impulse move or an Impulse price swing uh after that impulse swing okay either it goes back to a consolidat...",
+      "match_type": "keyword",
+      "start_time": 476.48,
+      "end_time": 480.52
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 6040,
+      "context": "...rket start from a consolidation and move into an expansion that means there's an Impulse move or an Impulse price swing uh after that impulse swing okay either it goes back to a consolidation again or it goe...",
+      "match_type": "keyword",
+      "start_time": 477.88,
+      "end_time": 482.64
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 6074,
+      "context": "...d move into an expansion that means there's an Impulse move or an Impulse price swing uh after that impulse swing okay either it goes back to a consolidation again or it goes to a retracement when the retrac...",
+      "match_type": "keyword",
+      "start_time": 480.52,
+      "end_time": 485.6
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 9880,
+      "context": "...ing around that level eventually the market will move outside of the consolidation you can see that impulse move in that tan shaded box it moves away from the equilibrium price point and then all we have to ...",
+      "match_type": "keyword",
+      "start_time": 725.4,
+      "end_time": 730.84
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 14836,
+      "context": "... the market expect a new expansion near term now what do we look for in price we're waiting for the impulse move or impulse swing in price away from the equilibrium price level that is found exactly in the h...",
+      "match_type": "keyword",
+      "start_time": 1061.08,
+      "end_time": 1066.0
+    },
+    {
+      "concept_id": "displacement",
+      "keyword": "impulse",
+      "position": 14852,
+      "context": "...ct a new expansion near term now what do we look for in price we're waiting for the impulse move or impulse swing in price away from the equilibrium price level that is found exactly in the halfway point of ...",
+      "match_type": "keyword",
+      "start_time": 1061.08,
+      "end_time": 1066.0
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:19.605027"
+}

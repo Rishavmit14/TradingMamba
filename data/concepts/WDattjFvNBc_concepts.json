@@ -1,0 +1,470 @@
+{
+  "video_id": "WDattjFvNBc",
+  "title": "ICT Mentorship Core Content - Month 05 - Limit Order Entry Techniques For Long Term Traders",
+  "word_count": 1908,
+  "total_mentions": 42,
+  "unique_concepts": 10,
+  "concept_counts": {
+    "break_of_structure": 1,
+    "market_structure": 2,
+    "order_block": 18,
+    "fair_value_gap": 1,
+    "liquidity": 2,
+    "buy_side_liquidity": 1,
+    "premium_discount": 10,
+    "london_session": 1,
+    "smart_money": 4,
+    "stop_loss": 2
+  },
+  "category_counts": {
+    "market_structure": 3,
+    "key_levels": 19,
+    "liquidity": 3,
+    "institutional": 14,
+    "time_based": 1,
+    "risk_management": 2
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 18,
+      "category": "key_levels"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 10,
+      "category": "institutional"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 4,
+      "category": "institutional"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 2,
+      "category": "market_structure"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 2,
+      "category": "liquidity"
+    },
+    {
+      "id": "stop_loss",
+      "name": "Stop Loss Placement",
+      "count": 2,
+      "category": "risk_management"
+    },
+    {
+      "id": "break_of_structure",
+      "name": "Break of Structure (BOS)",
+      "count": 1,
+      "category": "market_structure"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 1,
+      "category": "key_levels"
+    },
+    {
+      "id": "buy_side_liquidity",
+      "name": "Buy Side Liquidity",
+      "count": 1,
+      "category": "liquidity"
+    },
+    {
+      "id": "london_session",
+      "name": "London Session",
+      "count": 1,
+      "category": "time_based"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "break_of_structure",
+      "keyword": "structure break",
+      "position": 1106,
+      "context": "... this is going to be useful to you when the market's already shown the willingness to have a market structure break it's already started to move higher it's already started to move higher so therefore prices are rea...",
+      "match_type": "keyword",
+      "start_time": 89.04,
+      "end_time": 92.08
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "market structure",
+      "position": 1099,
+      "context": "...ferably this is going to be useful to you when the market's already shown the willingness to have a market structure break it's already started to move higher it's already started to move higher so therefore prices a...",
+      "match_type": "keyword",
+      "start_time": 89.04,
+      "end_time": 92.08
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "structure",
+      "position": 1106,
+      "context": "... this is going to be useful to you when the market's already shown the willingness to have a market structure break it's already started to move higher it's already started to move higher so therefore prices a...",
+      "match_type": "keyword",
+      "start_time": 89.04,
+      "end_time": 92.08
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 3985,
+      "context": "...itions are best suited when we align them with a daily pd array in other words if there's a bearish order block if there's a gap that it's traded into if it's filled in a void if it's traded above a recent high ...",
+      "match_type": "keyword",
+      "start_time": 276.72,
+      "end_time": 280.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6447,
+      "context": "...weekly chart here you can see how price was moving away from that 100 level and there was a bearish order block up around that 118 119 level and that was the weekly premium pd array that would draw price up to t...",
+      "match_type": "keyword",
+      "start_time": 431.2,
+      "end_time": 436.48
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6604,
+      "context": "... weekly premium pd array that would draw price up to that level long long term and we saw a bullish order block down in the discount level at 100 so you saw the willingness to want to bounce off that level we go...",
+      "match_type": "keyword",
+      "start_time": 444.96,
+      "end_time": 450.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6901,
+      "context": "...lly of donald trump's election in the u.s price stabbed one more time down into that weekly bullish order block uh prior to that november dip we saw a september rally away from a previous order block that was fo...",
+      "match_type": "keyword",
+      "start_time": 464.88,
+      "end_time": 468.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 6989,
+      "context": "...kly bullish order block uh prior to that november dip we saw a september rally away from a previous order block that was formed in august 2016 september we saw it retrade back down into it and using the down can...",
+      "match_type": "keyword",
+      "start_time": 472.56,
+      "end_time": 478.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 7335,
+      "context": "...n right up from the down candle up into that red shaded area that's that weekly pd array or bearish order block what that means is this price should be drawn up to that level in weekly and from the low that was ...",
+      "match_type": "keyword",
+      "start_time": 494.48,
+      "end_time": 497.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 7579,
+      "context": "...imit below the daily candles close from that point all the way up to the weekly pd array or bearish order block it's 1800 pips for that particular low the next one comes in around november 17th or thereabouts an...",
+      "match_type": "keyword",
+      "start_time": 506.64,
+      "end_time": 513.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 7857,
+      "context": "...e been filled as well and from that point up to the weekly weekly pd array up at the weekly bearish order block was 980 pips and then the next down close on this daily chart here again using the close of that do...",
+      "match_type": "keyword",
+      "start_time": 531.2,
+      "end_time": 535.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 5104,
+      "context": "...movement to go to a short term premium when that occurs then you have really really low risk high probability entry patterns at your disposal and this is one of the most amazing ones you're going to see...",
+      "match_type": "keyword",
+      "start_time": 343.52,
+      "end_time": 348.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6110,
+      "context": "...ly after that there's one two three four five examples here on this daily time frame and while it probably doesn't look exciting here probably doesn't feel like you know it's that big of a deal i can as...",
+      "match_type": "keyword",
+      "start_time": 410.4,
+      "end_time": 413.76
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 6146,
+      "context": "...four five examples here on this daily time frame and while it probably doesn't look exciting here probably doesn't feel like you know it's that big of a deal i can assure you when we get into two slides...",
+      "match_type": "keyword",
+      "start_time": 412.4,
+      "end_time": 415.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 6596,
+      "context": "... was the weekly premium pd array that would draw price up to that level long long term and we saw a bullish order block down in the discount level at 100 so you saw the willingness to want to bounce off that level we go...",
+      "match_type": "keyword",
+      "start_time": 444.96,
+      "end_time": 450.4
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 6893,
+      "context": "...ction rally of donald trump's election in the u.s price stabbed one more time down into that weekly bullish order block uh prior to that november dip we saw a september rally away from a previous order block that was fo...",
+      "match_type": "keyword",
+      "start_time": 464.88,
+      "end_time": 468.16
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 3977,
+      "context": "...ese conditions are best suited when we align them with a daily pd array in other words if there's a bearish order block if there's a gap that it's traded into if it's filled in a void if it's traded above a recent high ...",
+      "match_type": "keyword",
+      "start_time": 276.72,
+      "end_time": 280.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 6439,
+      "context": "... is the weekly chart here you can see how price was moving away from that 100 level and there was a bearish order block up around that 118 119 level and that was the weekly premium pd array that would draw price up to t...",
+      "match_type": "keyword",
+      "start_time": 431.2,
+      "end_time": 436.48
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 7327,
+      "context": "...are drawn right up from the down candle up into that red shaded area that's that weekly pd array or bearish order block what that means is this price should be drawn up to that level in weekly and from the low that was ...",
+      "match_type": "keyword",
+      "start_time": 491.92,
+      "end_time": 496.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 7571,
+      "context": "...g on a limit below the daily candles close from that point all the way up to the weekly pd array or bearish order block it's 1800 pips for that particular low the next one comes in around november 17th or thereabouts an...",
+      "match_type": "keyword",
+      "start_time": 506.64,
+      "end_time": 513.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 7849,
+      "context": "...ould have been filled as well and from that point up to the weekly weekly pd array up at the weekly bearish order block was 980 pips and then the next down close on this daily chart here again using the close of that do...",
+      "match_type": "keyword",
+      "start_time": 531.2,
+      "end_time": 535.28
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 4010,
+      "context": "...en we align them with a daily pd array in other words if there's a bearish order block if there's a gap that it's traded into if it's filled in a void if it's traded above a recent high okay or it's retr...",
+      "match_type": "keyword",
+      "start_time": 278.08,
+      "end_time": 281.92
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 203,
+      "context": "... long-term traders okay we're looking at buying with a limit order and much likely used for the buy stops the monthly end or weekly should suggest institutional order flow will be seeking a pd array above ...",
+      "match_type": "keyword",
+      "start_time": 27.84,
+      "end_time": 31.44
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 2595,
+      "context": "...eing profitability almost immediately okay selling with limit orders just like we had with the cell stops the monthly and or weekly should suggest institutional order flow will be seeking pd arrays below d...",
+      "match_type": "keyword",
+      "start_time": 182.72,
+      "end_time": 187.36
+    },
+    {
+      "concept_id": "buy_side_liquidity",
+      "keyword": "buy stops",
+      "position": 199,
+      "context": "... for long-term traders okay we're looking at buying with a limit order and much likely used for the buy stops the monthly end or weekly should suggest institutional order flow will be seeking a pd array above ...",
+      "match_type": "keyword",
+      "start_time": 27.84,
+      "end_time": 31.44
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 5035,
+      "context": "...e down to a discount what you're expecting to see on the daily is up movement to go to a short term premium when that occurs then you have really really low risk high probability entry patterns at your dispo...",
+      "match_type": "keyword",
+      "start_time": 341.12,
+      "end_time": 346.08
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 6512,
+      "context": "... 100 level and there was a bearish order block up around that 118 119 level and that was the weekly premium pd array that would draw price up to that level long long term and we saw a bullish order block dow...",
+      "match_type": "keyword",
+      "start_time": 438.64,
+      "end_time": 444.96
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 8451,
+      "context": "... suppressed um undervalued market and it's in a deep discount and it will look to seek to move to a premium and it's an amazing thing when you go through your charts and you look at this and start studying i...",
+      "match_type": "keyword",
+      "start_time": 575.04,
+      "end_time": 579.76
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 2187,
+      "context": "...y going to be oversold without requiring any indicators but we're going to be buying at a deep deep discount when the market's predisposed to move higher you're going to see in our examples how it nails down ...",
+      "match_type": "keyword",
+      "start_time": 155.28,
+      "end_time": 158.64
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 2362,
+      "context": "...n our examples how it nails down extremely extremely awesome entry points i mean they're so deep in discount and you get quick immediate feedback even on a daily basis that you're on the right side of the mar...",
+      "match_type": "keyword",
+      "start_time": 165.84,
+      "end_time": 170.88
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 4947,
+      "context": "...y and weekly if you're expecting lower prices or bearish pd arrays that should draw price down to a discount what you're expecting to see on the daily is up movement to go to a short term premium when that oc...",
+      "match_type": "keyword",
+      "start_time": 333.6,
+      "end_time": 337.12
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 6628,
+      "context": "... that would draw price up to that level long long term and we saw a bullish order block down in the discount level at 100 so you saw the willingness to want to bounce off that level we go back down into a dai...",
+      "match_type": "keyword",
+      "start_time": 447.28,
+      "end_time": 451.76
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 8404,
+      "context": "...s close on a limit you're buying that real deep suppressed um undervalued market and it's in a deep discount and it will look to seek to move to a premium and it's an amazing thing when you go through your ch...",
+      "match_type": "keyword",
+      "start_time": 573.04,
+      "end_time": 577.84
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 9243,
+      "context": "... not have to get the high and you can see here that move from the 980 pip move it's essentially the equilibrium price bar just below it and even above the equilibrium price point there was many opportunities whe...",
+      "match_type": "keyword",
+      "start_time": 619.76,
+      "end_time": 623.6
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "equilibrium",
+      "position": 9298,
+      "context": "...e from the 980 pip move it's essentially the equilibrium price bar just below it and even above the equilibrium price point there was many opportunities where you could have got several hundred pips and whether ...",
+      "match_type": "keyword",
+      "start_time": 623.6,
+      "end_time": 626.64
+    },
+    {
+      "concept_id": "london_session",
+      "keyword": "london",
+      "position": 5524,
+      "context": "... going to see that that's many times what you'll see is the judah swing it'll open make the high in london and then sell off and it'll be the beginning of a long long term move in that particular pair or as...",
+      "match_type": "keyword",
+      "start_time": 367.2,
+      "end_time": 370.8
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 250,
+      "context": "... with a limit order and much likely used for the buy stops the monthly end or weekly should suggest institutional order flow will be seeking a pd array above daily market price the daily should post a bearish cand...",
+      "match_type": "keyword",
+      "start_time": 31.44,
+      "end_time": 35.84
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 2642,
+      "context": "...ing with limit orders just like we had with the cell stops the monthly and or weekly should suggest institutional order flow will be seeking pd arrays below daily market price the daily should post a bullish candl...",
+      "match_type": "keyword",
+      "start_time": 185.12,
+      "end_time": 190.08
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 3398,
+      "context": "...at's predisposed to go lower based on monthly and or weekly pd arrays that will draw price lower so institutional flow should draw prices lower on the daily but we're getting this up movement against what longer t...",
+      "match_type": "keyword",
+      "start_time": 238.4,
+      "end_time": 242.56
+    },
+    {
+      "concept_id": "smart_money",
+      "keyword": "institutional",
+      "position": 3515,
+      "context": "...w should draw prices lower on the daily but we're getting this up movement against what longer term institutional order flows suggesting again on monthly and or weekly chart so while prices moving higher for this ...",
+      "match_type": "keyword",
+      "start_time": 246.24,
+      "end_time": 250.64
+    },
+    {
+      "concept_id": "stop_loss",
+      "keyword": "risk",
+      "position": 5092,
+      "context": "...daily is up movement to go to a short term premium when that occurs then you have really really low risk high probability entry patterns at your disposal and this is one of the most amazing ones you're go...",
+      "match_type": "keyword",
+      "start_time": 343.52,
+      "end_time": 348.24
+    },
+    {
+      "concept_id": "stop_loss",
+      "keyword": "risk",
+      "position": 9907,
+      "context": "...term trading things this is the type of trading that you can find opportunities with still maintain risk relatively low and still find a payable framework for your trading ideas to pan out and this is jus...",
+      "match_type": "keyword",
+      "start_time": 655.52,
+      "end_time": 661.68
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:19.832921"
+}

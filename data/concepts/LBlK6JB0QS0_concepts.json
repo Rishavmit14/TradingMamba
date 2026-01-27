@@ -1,0 +1,1030 @@
+{
+  "video_id": "LBlK6JB0QS0",
+  "title": "ICT Mentorship Core Content - Month 07 - One Shot One Kill Model",
+  "word_count": 6073,
+  "total_mentions": 148,
+  "unique_concepts": 17,
+  "concept_counts": {
+    "market_structure": 6,
+    "order_block": 37,
+    "breaker_block": 1,
+    "mitigation_block": 4,
+    "fair_value_gap": 17,
+    "liquidity": 8,
+    "premium_discount": 33,
+    "optimal_trade_entry": 19,
+    "power_of_three": 2,
+    "judas_swing": 2,
+    "kill_zone": 1,
+    "london_session": 4,
+    "new_york_session": 1,
+    "ipda": 1,
+    "smart_money": 9,
+    "displacement": 1,
+    "stop_loss": 2
+  },
+  "category_counts": {
+    "market_structure": 6,
+    "key_levels": 59,
+    "liquidity": 8,
+    "institutional": 43,
+    "entry_models": 23,
+    "time_based": 7,
+    "risk_management": 2
+  },
+  "top_concepts": [
+    {
+      "id": "order_block",
+      "name": "Order Block",
+      "count": 37,
+      "category": "key_levels"
+    },
+    {
+      "id": "premium_discount",
+      "name": "Premium/Discount",
+      "count": 33,
+      "category": "institutional"
+    },
+    {
+      "id": "optimal_trade_entry",
+      "name": "Optimal Trade Entry (OTE)",
+      "count": 19,
+      "category": "entry_models"
+    },
+    {
+      "id": "fair_value_gap",
+      "name": "Fair Value Gap (FVG)",
+      "count": 17,
+      "category": "key_levels"
+    },
+    {
+      "id": "smart_money",
+      "name": "Smart Money",
+      "count": 9,
+      "category": "institutional"
+    },
+    {
+      "id": "liquidity",
+      "name": "Liquidity",
+      "count": 8,
+      "category": "liquidity"
+    },
+    {
+      "id": "market_structure",
+      "name": "Market Structure",
+      "count": 6,
+      "category": "market_structure"
+    },
+    {
+      "id": "mitigation_block",
+      "name": "Mitigation Block",
+      "count": 4,
+      "category": "key_levels"
+    },
+    {
+      "id": "london_session",
+      "name": "London Session",
+      "count": 4,
+      "category": "time_based"
+    },
+    {
+      "id": "power_of_three",
+      "name": "Power of Three (AMD)",
+      "count": 2,
+      "category": "entry_models"
+    },
+    {
+      "id": "judas_swing",
+      "name": "Judas Swing",
+      "count": 2,
+      "category": "entry_models"
+    },
+    {
+      "id": "stop_loss",
+      "name": "Stop Loss Placement",
+      "count": 2,
+      "category": "risk_management"
+    },
+    {
+      "id": "breaker_block",
+      "name": "Breaker Block",
+      "count": 1,
+      "category": "key_levels"
+    },
+    {
+      "id": "kill_zone",
+      "name": "Kill Zone",
+      "count": 1,
+      "category": "time_based"
+    },
+    {
+      "id": "new_york_session",
+      "name": "New York Session",
+      "count": 1,
+      "category": "time_based"
+    }
+  ],
+  "mentions": [
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 15389,
+      "context": "...get back to a discussion with the euro dollar at the time of this week the euro dollar was making a higher high than that of in January but look at the commercials they were hedging against those rallies and the...",
+      "match_type": "keyword",
+      "start_time": 1133.28,
+      "end_time": 1136.7
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 15629,
+      "context": "...ing aggressively in the rally above the January High and the December high of 2016. so as we made a higher high in the euro the commercials are actually selling aggressively in that rally so what are we seeing h...",
+      "match_type": "keyword",
+      "start_time": 1150.44,
+      "end_time": 1156.08
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 24942,
+      "context": "... you want to teach yourself to trust these Concepts okay because it can go up on Tuesday and make a higher high that's why you have to give it a little bit of leeway now you can sell us a very small portion on M...",
+      "match_type": "keyword",
+      "start_time": 1785.54,
+      "end_time": 1790.16
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 25095,
+      "context": "...it of leeway now you can sell us a very small portion on Monday and then if Tuesday fails to make a higher high at least you have a small piece on the higher level but if it does go higher on Tuesday for Wednesd...",
+      "match_type": "keyword",
+      "start_time": 1795.44,
+      "end_time": 1798.98
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher high",
+      "position": 25285,
+      "context": "...n Tuesday for Wednesday at least you're not going to be at a full position underwater as it makes a higher high on those later days in the week what we do is on the Monday we look for price to trade up and then ...",
+      "match_type": "keyword",
+      "start_time": 1806.18,
+      "end_time": 1810.64
+    },
+    {
+      "concept_id": "market_structure",
+      "keyword": "higher low",
+      "position": 23634,
+      "context": "...he weekly templates that expect specific trading characteristics you know what days make a specific higher low of the week you know how the markets trade you know relative to the respective templates and then w...",
+      "match_type": "keyword",
+      "start_time": 1695.18,
+      "end_time": 1699.86
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 20225,
+      "context": "... for premium PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you ca...",
+      "match_type": "keyword",
+      "start_time": 1451.94,
+      "end_time": 1457.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 22465,
+      "context": "...well and you can see obviously the European has tanked it went down to a very clear logical bullish order block on a four hour basis a series of downed candles sets the tone for that bullish order block so that ...",
+      "match_type": "keyword",
+      "start_time": 1609.98,
+      "end_time": 1614.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 22556,
+      "context": "... bullish order block on a four hour basis a series of downed candles sets the tone for that bullish order block so that is a discount PD array it trades right down to it at Friday's close but all throughout the ...",
+      "match_type": "keyword",
+      "start_time": 1617.06,
+      "end_time": 1622.58
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 23014,
+      "context": "...y we opened up the Gap and traded higher throughout Monday and we traded up into the weekly bearish order block for the euro dollar and I'll leave you to look at your weekly bearish order block on your own platf...",
+      "match_type": "keyword",
+      "start_time": 1655.22,
+      "end_time": 1659.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 23096,
+      "context": "...he weekly bearish order block for the euro dollar and I'll leave you to look at your weekly bearish order block on your own platform but this is the only level that was missing from this week's discussion becaus...",
+      "match_type": "keyword",
+      "start_time": 1659.72,
+      "end_time": 1663.62
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 23285,
+      "context": "...ek's discussion because I want to be able to have some meat for this teaching but uh weekly bearish order block was traded into on Monday and the question is how far into the weekly order block would you expect ...",
+      "match_type": "keyword",
+      "start_time": 1669.98,
+      "end_time": 1673.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 23367,
+      "context": "...uh weekly bearish order block was traded into on Monday and the question is how far into the weekly order block would you expect it to trade into Michael well we're going to that in in the last slide for this te...",
+      "match_type": "keyword",
+      "start_time": 1676.16,
+      "end_time": 1679.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "order block",
+      "position": 27544,
+      "context": "...aded lower each one of the respective PD arrays gaps liquidity pools old highs to sell into bearish order blocks all those things as the market slid lower they were all contributing factors as we mentioned throu...",
+      "match_type": "keyword",
+      "start_time": 1980.42,
+      "end_time": 1984.92
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 2643,
+      "context": "...month and the previous months now as it relates to the cot analysis and Commercial hedging programs obviously everyone's aware of the commitment trades report where they plot the net Trader's position o...",
+      "match_type": "keyword",
+      "start_time": 236.58,
+      "end_time": 240.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3379,
+      "context": "...lly show you how to go in and construct the commercial hedgers program and how to look for a high probability setups using the information but I'm going to give you one set up in here for the euro dolla...",
+      "match_type": "keyword",
+      "start_time": 285.24,
+      "end_time": 291.12
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 3569,
+      "context": "...e euro dollar that was just like a no-brainer so you'll see why this week was just pretty much no problem at all knowing that it was going to come down like it did all right so the one shot one killed t...",
+      "match_type": "keyword",
+      "start_time": 298.52,
+      "end_time": 303.98
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 4305,
+      "context": "... and this far in the mentorship you can now think about how much information you now have now you probably flounder for a little while wondering you know do I have too much information do I have analysi...",
+      "match_type": "keyword",
+      "start_time": 347.04,
+      "end_time": 351.72
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 7180,
+      "context": "...small ranges we got large ranges if the Market's in big ranges we know there's going to be a high probability for the market to go quiet we want to be getting in the market as quiet so that we can expan...",
+      "match_type": "keyword",
+      "start_time": 542.7,
+      "end_time": 546.0
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8453,
+      "context": "...eek at 106.50 that could have rolled over into Monday but throughout the week I gave a 1-0 6.95 low objective and then ultimately at the very last minute of the day on Friday's close uh they pushed the ...",
+      "match_type": "keyword",
+      "start_time": 668.04,
+      "end_time": 675.24
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8590,
+      "context": "...very last minute of the day on Friday's close uh they pushed the euro dollar down to 106.55 now our objective is 106.50 if that's what we're looking for we add five Pips To That that would have been uh ...",
+      "match_type": "keyword",
+      "start_time": 682.82,
+      "end_time": 688.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 8697,
+      "context": "...ve is 106.50 if that's what we're looking for we add five Pips To That that would have been uh your objective used in your own platform some Trump traders in my own live feeds I got down to 106.497 I'll...",
+      "match_type": "keyword",
+      "start_time": 689.82,
+      "end_time": 695.28
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 9002,
+      "context": "...for euro dollar but uh for the Forex LTD it didn't make it down to 106.50 but I'm suspecting it's probably going to open up lower on Sunday that's coming this weekend and then obviously uh you know that...",
+      "match_type": "keyword",
+      "start_time": 713.94,
+      "end_time": 717.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 9078,
+      "context": "...t I'm suspecting it's probably going to open up lower on Sunday that's coming this weekend and then obviously uh you know that would fulfill the whole projected uh swing but we're gonna go into great de...",
+      "match_type": "keyword",
+      "start_time": 720.66,
+      "end_time": 725.04
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 15780,
+      "context": "...y selling aggressively in that rally so what are we seeing here a seasonal tendency that's highly probable for lower Euro prices at the same time commercials are looking to sell short or they want to ex...",
+      "match_type": "keyword",
+      "start_time": 1160.64,
+      "end_time": 1164.3
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 16929,
+      "context": "...as making money right so why is it that commercials aren't on the first of everyone's list because nobody knows how to use it but you're learning how to do it now because you're in the click you're in t...",
+      "match_type": "keyword",
+      "start_time": 1228.8,
+      "end_time": 1231.98
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18839,
+      "context": "...o it's not a seasonal tendency be all end-all it has to happen no seasonal tendency illustrates a probable condition or a probable outcome for the market Direction but without technicals aligning with t...",
+      "match_type": "keyword",
+      "start_time": 1349.4,
+      "end_time": 1354.14
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 18863,
+      "context": "...ndency be all end-all it has to happen no seasonal tendency illustrates a probable condition or a probable outcome for the market Direction but without technicals aligning with that in a market environm...",
+      "match_type": "keyword",
+      "start_time": 1353.0,
+      "end_time": 1356.42
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 19673,
+      "context": "...vel that is a old mitigation block and it comes in at 98.92 now if you look at that level you would obviously suspect that it's going to go to what we round up so it'd be 98.95 you can go to 98.90 if yo...",
+      "match_type": "keyword",
+      "start_time": 1411.74,
+      "end_time": 1417.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 20454,
+      "context": "... a few noted each one of these were draws on price and you can see they are all traded to with no problem with the exception of the fair value Gap I suspect next week maybe even on Sunday we'll probably...",
+      "match_type": "keyword",
+      "start_time": 1471.32,
+      "end_time": 1475.34
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 20550,
+      "context": "...o problem with the exception of the fair value Gap I suspect next week maybe even on Sunday we'll probably see a gap up on Sunday's trading that remains to be seen but it certainly looks like it wants t...",
+      "match_type": "keyword",
+      "start_time": 1475.34,
+      "end_time": 1480.38
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 22386,
+      "context": "...euro dollar prices we need to see if the Euro pound would support that idea as well and you can see obviously the European has tanked it went down to a very clear logical bullish order block on a four h...",
+      "match_type": "keyword",
+      "start_time": 1603.5,
+      "end_time": 1609.98
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 24352,
+      "context": "...e going to be expecting either Monday Tuesday or Wednesday to be the high of the week so you always obviously start with the first day of the week which is going to be the Monday okay so price opens up ...",
+      "match_type": "keyword",
+      "start_time": 1749.6,
+      "end_time": 1752.36
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 26574,
+      "context": "...ineered price higher built in a premium so they can sell it to the smart or lower intelligent crowd obviously the lower intelligent crowd smart money sells it to lesser informed money and that's what we...",
+      "match_type": "keyword",
+      "start_time": 1906.46,
+      "end_time": 1911.78
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 28945,
+      "context": "...s is in this teaching we have a way of looking at Price blending Concepts together using experience obviously okay but over time seeing it studying in hindsight you can look at 10 15 20 years worth of d...",
+      "match_type": "keyword",
+      "start_time": 2069.82,
+      "end_time": 2075.82
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "ob",
+      "position": 30186,
+      "context": "... to all that boring stuff I talked about in January go back through all the lessons in September October November and December and use all that information I helped pull all the free tutorials together ...",
+      "match_type": "keyword",
+      "start_time": 2157.06,
+      "end_time": 2160.6
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 22457,
+      "context": "...idea as well and you can see obviously the European has tanked it went down to a very clear logical bullish order block on a four hour basis a series of downed candles sets the tone for that bullish order block so that ...",
+      "match_type": "keyword",
+      "start_time": 1609.98,
+      "end_time": 1614.96
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bullish order block",
+      "position": 22548,
+      "context": "... logical bullish order block on a four hour basis a series of downed candles sets the tone for that bullish order block so that is a discount PD array it trades right down to it at Friday's close but all throughout the ...",
+      "match_type": "keyword",
+      "start_time": 1614.96,
+      "end_time": 1620.06
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 20217,
+      "context": "... looking for premium PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you ca...",
+      "match_type": "keyword",
+      "start_time": 1451.94,
+      "end_time": 1457.88
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 23006,
+      "context": "...'s Sunday we opened up the Gap and traded higher throughout Monday and we traded up into the weekly bearish order block for the euro dollar and I'll leave you to look at your weekly bearish order block on your own platf...",
+      "match_type": "keyword",
+      "start_time": 1651.5,
+      "end_time": 1657.32
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 23088,
+      "context": "...p into the weekly bearish order block for the euro dollar and I'll leave you to look at your weekly bearish order block on your own platform but this is the only level that was missing from this week's discussion becaus...",
+      "match_type": "keyword",
+      "start_time": 1657.32,
+      "end_time": 1662.06
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 23277,
+      "context": "... this week's discussion because I want to be able to have some meat for this teaching but uh weekly bearish order block was traded into on Monday and the question is how far into the weekly order block would you expect ...",
+      "match_type": "keyword",
+      "start_time": 1669.98,
+      "end_time": 1673.52
+    },
+    {
+      "concept_id": "order_block",
+      "keyword": "bearish order block",
+      "position": 27536,
+      "context": "...arket traded lower each one of the respective PD arrays gaps liquidity pools old highs to sell into bearish order blocks all those things as the market slid lower they were all contributing factors as we mentioned throu...",
+      "match_type": "keyword",
+      "start_time": 1980.42,
+      "end_time": 1984.92
+    },
+    {
+      "concept_id": "breaker_block",
+      "keyword": "breaker",
+      "position": 20272,
+      "context": "... Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you can see here we have a few noted each one of ...",
+      "match_type": "keyword",
+      "start_time": 1457.88,
+      "end_time": 1463.52
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 19591,
+      "context": "... array and we move down into a daily time frame and we can actually see another level that is a old mitigation block and it comes in at 98.92 now if you look at that level you would obviously suspect that it's going ...",
+      "match_type": "keyword",
+      "start_time": 1401.24,
+      "end_time": 1409.82
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation block",
+      "position": 20254,
+      "context": "... we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you can see here we have a few noted eac...",
+      "match_type": "keyword",
+      "start_time": 1454.52,
+      "end_time": 1461.42
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 19591,
+      "context": "... array and we move down into a daily time frame and we can actually see another level that is a old mitigation block and it comes in at 98.92 now if you look at that level you would obviously suspect that it's ...",
+      "match_type": "keyword",
+      "start_time": 1401.24,
+      "end_time": 1409.82
+    },
+    {
+      "concept_id": "mitigation_block",
+      "keyword": "mitigation",
+      "position": 20254,
+      "context": "... we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you can see here we have a few not...",
+      "match_type": "keyword",
+      "start_time": 1454.52,
+      "end_time": 1461.42
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 20238,
+      "context": "...PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you can see here we ha...",
+      "match_type": "keyword",
+      "start_time": 1454.52,
+      "end_time": 1461.42
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 20486,
+      "context": "...ere draws on price and you can see they are all traded to with no problem with the exception of the fair value Gap I suspect next week maybe even on Sunday we'll probably see a gap up on Sunday's trading that remai...",
+      "match_type": "keyword",
+      "start_time": 1473.18,
+      "end_time": 1477.62
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "fair value gap",
+      "position": 20752,
+      "context": "...o do that and if it doesn't Gap up we'll look for it to expand through Sunday into Monday into that fair value Gap okay and getting a better look at the dollar Index this is an hourly chart what I have here is I ha...",
+      "match_type": "keyword",
+      "start_time": 1488.36,
+      "end_time": 1491.26
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 1376,
+      "context": "...l hedging programs now I said when we started this mentorship that this was intended to fill in the gaps that I purposely left in all my free tutorials now if you've gone through the mentorship so far an...",
+      "match_type": "keyword",
+      "start_time": 140.7,
+      "end_time": 145.26
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 1801,
+      "context": "...e tutorials everything that I'm going to show you in this module is really just a quick fill in the gaps and then you'll understand how it is I do one shot one kill the gaps that remain for this month ar...",
+      "match_type": "keyword",
+      "start_time": 171.54,
+      "end_time": 175.86
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 1870,
+      "context": "...eally just a quick fill in the gaps and then you'll understand how it is I do one shot one kill the gaps that remain for this month are filled in with the intraday Concepts for day trading and it just ba...",
+      "match_type": "keyword",
+      "start_time": 175.86,
+      "end_time": 181.38
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 4697,
+      "context": "...now now through 2016-2017 Circa you are now learning all of the procedural things that fills in the gaps and by the time you end this mentorship you'll know everything there is to know about ICT Concepts...",
+      "match_type": "keyword",
+      "start_time": 373.14,
+      "end_time": 376.92
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 20249,
+      "context": "...ys so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that act as resistance as you can see here we ha...",
+      "match_type": "keyword",
+      "start_time": 1454.52,
+      "end_time": 1461.42
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 20497,
+      "context": "...n price and you can see they are all traded to with no problem with the exception of the fair value Gap I suspect next week maybe even on Sunday we'll probably see a gap up on Sunday's trading that remai...",
+      "match_type": "keyword",
+      "start_time": 1473.18,
+      "end_time": 1477.62
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 20563,
+      "context": "...h the exception of the fair value Gap I suspect next week maybe even on Sunday we'll probably see a gap up on Sunday's trading that remains to be seen but it certainly looks like it wants to do that and ...",
+      "match_type": "keyword",
+      "start_time": 1477.62,
+      "end_time": 1481.82
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 20680,
+      "context": "...s trading that remains to be seen but it certainly looks like it wants to do that and if it doesn't Gap up we'll look for it to expand through Sunday into Monday into that fair value Gap okay and getting...",
+      "match_type": "keyword",
+      "start_time": 1484.52,
+      "end_time": 1488.36
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 20763,
+      "context": "...nd if it doesn't Gap up we'll look for it to expand through Sunday into Monday into that fair value Gap okay and getting a better look at the dollar Index this is an hourly chart what I have here is I ha...",
+      "match_type": "keyword",
+      "start_time": 1488.36,
+      "end_time": 1491.26
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 22886,
+      "context": "...lar okay so we're looking at the euro dollar now and we can see here the Monday we opened up with a gap well actually it's Sunday we opened up the Gap and traded higher throughout Monday and we traded up...",
+      "match_type": "keyword",
+      "start_time": 1645.44,
+      "end_time": 1648.62
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 22933,
+      "context": "...w and we can see here the Monday we opened up with a gap well actually it's Sunday we opened up the Gap and traded higher throughout Monday and we traded up into the weekly bearish order block for the eu...",
+      "match_type": "keyword",
+      "start_time": 1648.62,
+      "end_time": 1651.5
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 24464,
+      "context": "...art with the first day of the week which is going to be the Monday okay so price opens up on Sunday gaps up and it starts trading immediately right up on Monday so right away we have to assume that Monda...",
+      "match_type": "keyword",
+      "start_time": 1752.36,
+      "end_time": 1757.64
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 27492,
+      "context": "...t of a premium Market at 109.08 and as the market traded lower each one of the respective PD arrays gaps liquidity pools old highs to sell into bearish order blocks all those things as the market slid lo...",
+      "match_type": "keyword",
+      "start_time": 1973.88,
+      "end_time": 1980.42
+    },
+    {
+      "concept_id": "fair_value_gap",
+      "keyword": "gap",
+      "position": 31729,
+      "context": "... there it's made available to you so the police has been insightful to you and it helps fill in the gaps with the short-term trading that I taught in my free tutorials and it gives you all the elements t...",
+      "match_type": "keyword",
+      "start_time": 2247.24,
+      "end_time": 2251.08
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 7510,
+      "context": "...the large Traders and open interest to confirm smart money action we look to frame a low resistance liquidity run with opposing PD arrays or for bearish we're looking to sell short at a premium PDA and then we...",
+      "match_type": "keyword",
+      "start_time": 568.14,
+      "end_time": 574.08
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 20197,
+      "context": "...e weekly chart we're looking for premium PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows th...",
+      "match_type": "keyword",
+      "start_time": 1451.94,
+      "end_time": 1457.88
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 26817,
+      "context": "... dollar we're in the four hour chart you can see the PD array in the discount Zone you can see that liquidity void that we identified here and at 106.50 level so using the 10650 level as our Baseline drawing u...",
+      "match_type": "keyword",
+      "start_time": 1924.86,
+      "end_time": 1930.02
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 27266,
+      "context": "... then you start breaking down your markets PD array for premium and discount we know that we have a liquidity void in the lower end of the discount range so that's what we're aiming for that's what we are aimi...",
+      "match_type": "keyword",
+      "start_time": 1955.34,
+      "end_time": 1961.1
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity",
+      "position": 27497,
+      "context": "...a premium Market at 109.08 and as the market traded lower each one of the respective PD arrays gaps liquidity pools old highs to sell into bearish order blocks all those things as the market slid lower they we...",
+      "match_type": "keyword",
+      "start_time": 1977.56,
+      "end_time": 1983.48
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "stops",
+      "position": 31559,
+      "context": "...if you really want to get insane about it you can use the scalping ideas and get insane with 10 pip stops but it's not necessary you don't need that but the point is it's there it's made available to you s...",
+      "match_type": "keyword",
+      "start_time": 2237.88,
+      "end_time": 2242.8
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 20197,
+      "context": "...e weekly chart we're looking for premium PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks fair value gaps mitigation blocks Breakers old highs and old lows that ac...",
+      "match_type": "keyword",
+      "start_time": 1451.94,
+      "end_time": 1457.88
+    },
+    {
+      "concept_id": "liquidity",
+      "keyword": "liquidity pool",
+      "position": 27497,
+      "context": "...a premium Market at 109.08 and as the market traded lower each one of the respective PD arrays gaps liquidity pools old highs to sell into bearish order blocks all those things as the market slid lower they were al...",
+      "match_type": "keyword",
+      "start_time": 1977.56,
+      "end_time": 1983.48
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 6890,
+      "context": "... manipulation templates to have the respective profile characteristics then you determine where the premium and discount ranges are in price action and you're going to wait for volatility to Signal a high od...",
+      "match_type": "keyword",
+      "start_time": 521.34,
+      "end_time": 527.54
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 7596,
+      "context": "...ow resistance liquidity run with opposing PD arrays or for bearish we're looking to sell short at a premium PDA and then we're going to be looking at a discount PDA to pair it up with we're going to use fibs...",
+      "match_type": "keyword",
+      "start_time": 574.08,
+      "end_time": 578.82
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 20130,
+      "context": "...looking for price to reach up from this discount level we saw on the weekly chart we're looking for premium PDF PD arrays so we go through our Market looking at where liquidity pools are bearish order blocks...",
+      "match_type": "keyword",
+      "start_time": 1446.06,
+      "end_time": 1451.94
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 20971,
+      "context": "...e equilibrium price point identified so anything above the equilibrium price point is going to be a premium and anything below it is going to be a discount so now what we're doing is we added the PD array Ma...",
+      "match_type": "keyword",
+      "start_time": 1506.6,
+      "end_time": 1509.9
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 21102,
+      "context": "...s going to be a discount so now what we're doing is we added the PD array Matrix in the form of our premium and discount ranges so now we can see graphically thinking like an algorithmic Trader so we're gett...",
+      "match_type": "keyword",
+      "start_time": 1513.08,
+      "end_time": 1518.0
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 21630,
+      "context": "...k for discounts at least try to pull to equilibrium then it has to determine if it wants to go into premium or it could go back down deeper into a discount you never know that for sure but you need to blend ...",
+      "match_type": "keyword",
+      "start_time": 1546.2,
+      "end_time": 1550.52
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 22167,
+      "context": "...e dollar Index poised to go higher it's trading off of weekly discount PD array and we have all the premium PD arrays above us noted in the previous chart that would be drawing price higher so if we're looki...",
+      "match_type": "keyword",
+      "start_time": 1588.08,
+      "end_time": 1591.8
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 26506,
+      "context": "...w on Monday was a false rally all that was was Heavy selling the engineered price higher built in a premium so they can sell it to the smart or lower intelligent crowd obviously the lower intelligent crowd s...",
+      "match_type": "keyword",
+      "start_time": 1901.4,
+      "end_time": 1906.46
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 27130,
+      "context": "...nd then we can divide that in half get an equilibrium price point and having that we can now have a premium and discount PD array Matrix then you start breaking down your markets PD array for premium and dis...",
+      "match_type": "keyword",
+      "start_time": 1944.96,
+      "end_time": 1949.52
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 27222,
+      "context": "... have a premium and discount PD array Matrix then you start breaking down your markets PD array for premium and discount we know that we have a liquidity void in the lower end of the discount range so that's...",
+      "match_type": "keyword",
+      "start_time": 1951.98,
+      "end_time": 1957.8
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "premium",
+      "position": 27399,
+      "context": "...f the discount range so that's what we're aiming for that's what we are aiming for we came out of a premium Market at 109.08 and as the market traded lower each one of the respective PD arrays gaps liquidity...",
+      "match_type": "keyword",
+      "start_time": 1963.98,
+      "end_time": 1968.9
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 6902,
+      "context": "...n templates to have the respective profile characteristics then you determine where the premium and discount ranges are in price action and you're going to wait for volatility to Signal a high odds of a large...",
+      "match_type": "keyword",
+      "start_time": 523.62,
+      "end_time": 527.54
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 7648,
+      "context": "...or for bearish we're looking to sell short at a premium PDA and then we're going to be looking at a discount PDA to pair it up with we're going to use fibs converging with opposing PD arrays and blending it w...",
+      "match_type": "keyword",
+      "start_time": 578.82,
+      "end_time": 583.88
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 7863,
+      "context": "...e and price in other words what I'm looking for is the Fibonacci level that overlaps with a logical discount PD array and we'll be confirming our trade setups with inter-market analysis all right so we're loo...",
+      "match_type": "keyword",
+      "start_time": 597.0,
+      "end_time": 601.28
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 19480,
+      "context": "...ading down to it for this uh this week we've traded down into an old weekly High which makes this a discount PD array and we move down into a daily time frame and we can actually see another level that is a o...",
+      "match_type": "keyword",
+      "start_time": 1392.18,
+      "end_time": 1395.38
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 20070,
+      "context": "... is again illustrating the potential weekly range and we're looking for price to reach up from this discount level we saw on the weekly chart we're looking for premium PDF PD arrays so we go through our Marke...",
+      "match_type": "keyword",
+      "start_time": 1442.64,
+      "end_time": 1446.06
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 21018,
+      "context": "...g above the equilibrium price point is going to be a premium and anything below it is going to be a discount so now what we're doing is we added the PD array Matrix in the form of our premium and discount ran...",
+      "match_type": "keyword",
+      "start_time": 1508.16,
+      "end_time": 1513.08
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 21114,
+      "context": "...e a discount so now what we're doing is we added the PD array Matrix in the form of our premium and discount ranges so now we can see graphically thinking like an algorithmic Trader so we're getting in sync w...",
+      "match_type": "keyword",
+      "start_time": 1513.08,
+      "end_time": 1518.0
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 21536,
+      "context": "...ee clearly that the market has been drawn back up to equilibrium so you're always going to look for discounts at least try to pull to equilibrium then it has to determine if it wants to go into premium or it ...",
+      "match_type": "keyword",
+      "start_time": 1542.3,
+      "end_time": 1546.2
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 21677,
+      "context": "...rium then it has to determine if it wants to go into premium or it could go back down deeper into a discount you never know that for sure but you need to blend time and price with the ifta data ranges looking...",
+      "match_type": "keyword",
+      "start_time": 1550.52,
+      "end_time": 1553.64
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 22129,
+      "context": "...sis supported as well so we've seen the dollar Index poised to go higher it's trading off of weekly discount PD array and we have all the premium PD arrays above us noted in the previous chart that would be d...",
+      "match_type": "keyword",
+      "start_time": 1585.74,
+      "end_time": 1589.34
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 22581,
+      "context": "... four hour basis a series of downed candles sets the tone for that bullish order block so that is a discount PD array it trades right down to it at Friday's close but all throughout the week we saw the Euro p...",
+      "match_type": "keyword",
+      "start_time": 1617.06,
+      "end_time": 1622.58
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 24002,
+      "context": "...wer because the dollar Index was bullish okay or should have been bullish trading off of its weekly discount PD array couple that with we have seasonal tendency for euro dollar to decline we had commercials s...",
+      "match_type": "keyword",
+      "start_time": 1718.1,
+      "end_time": 1721.66
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 26786,
+      "context": "...nday so it takes us to the euro dollar we're in the four hour chart you can see the PD array in the discount Zone you can see that liquidity void that we identified here and at 106.50 level so using the 10650...",
+      "match_type": "keyword",
+      "start_time": 1921.8,
+      "end_time": 1926.3
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 27142,
+      "context": "...an divide that in half get an equilibrium price point and having that we can now have a premium and discount PD array Matrix then you start breaking down your markets PD array for premium and discount we know...",
+      "match_type": "keyword",
+      "start_time": 1946.88,
+      "end_time": 1951.98
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 27234,
+      "context": "...ium and discount PD array Matrix then you start breaking down your markets PD array for premium and discount we know that we have a liquidity void in the lower end of the discount range so that's what we're a...",
+      "match_type": "keyword",
+      "start_time": 1951.98,
+      "end_time": 1957.8
+    },
+    {
+      "concept_id": "premium_discount",
+      "keyword": "discount",
+      "position": 27305,
+      "context": "...ets PD array for premium and discount we know that we have a liquidity void in the lower end of the discount range so that's what we're aiming for that's what we are aiming for we came out of a premium Market...",
+      "match_type": "keyword",
+      "start_time": 1957.8,
+      "end_time": 1962.36
+    }
+  ],
+  "extracted_at": "2026-01-27T12:57:19.647888"
+}
