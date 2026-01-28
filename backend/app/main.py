@@ -395,7 +395,7 @@ def get_knowledge_base():
 
 
 def get_signal_generator():
-    """Lazy load signal generator"""
+    """Lazy load signal generator (legacy - for backwards compatibility)"""
     global _signal_generator
     if _signal_generator is None:
         try:
@@ -408,7 +408,7 @@ def get_signal_generator():
 
 
 def get_analyzer():
-    """Lazy load technical analyzer"""
+    """Lazy load technical analyzer (legacy - for backwards compatibility)"""
     global _analyzer
     if _analyzer is None:
         try:
@@ -419,31 +419,68 @@ def get_analyzer():
     return _analyzer
 
 
+# ============================================================================
+# NEW ML-Powered Analyzers - Use ONLY trained knowledge from videos
+# ============================================================================
+
+_ml_signal_generator = None
+_ml_analyzer = None
+
+
+def get_ml_signal_generator():
+    """Get the ML-powered signal generator that uses ONLY trained knowledge"""
+    global _ml_signal_generator
+    if _ml_signal_generator is None:
+        try:
+            from .services.signal_generator import SignalGenerator
+            _ml_signal_generator = SignalGenerator()
+            print("ML-powered SignalGenerator initialized")
+        except Exception as e:
+            print(f"Warning: Could not load ML signal generator: {e}")
+    return _ml_signal_generator
+
+
+def get_ml_analyzer():
+    """Get the ML-powered analyzer that uses ONLY trained knowledge"""
+    global _ml_analyzer
+    if _ml_analyzer is None:
+        try:
+            from .services.smart_money_analyzer import SmartMoneyAnalyzer
+            _ml_analyzer = SmartMoneyAnalyzer(use_ml=True)
+            print("ML-powered SmartMoneyAnalyzer initialized")
+        except Exception as e:
+            print(f"Warning: Could not load ML analyzer: {e}")
+    return _ml_analyzer
+
+
 @app.get("/api/signals/analyze/{symbol}")
 async def analyze_symbol(
     symbol: str,
     timeframes: str = Query("H1,H4,D1", description="Comma-separated timeframes")
 ):
     """
-    Analyze a symbol using Smart Money methodology.
-    Returns detected concepts, market structure, and potential signal.
-    Only returns signals/patterns if ML models are trained.
+    Analyze a symbol using ML-POWERED Smart Money methodology.
+
+    IMPORTANT: This endpoint uses ONLY patterns the ML has learned from video training.
+    Patterns not learned will not be detected.
+
+    Returns:
+    - ML patterns detected (from training)
+    - ML patterns not yet learned (needs training)
+    - Confidence scores based on ML training frequency
     """
     try:
         from .services.free_market_data import FreeMarketDataService
+        from .models.signal import Timeframe
+        from .ml.ml_pattern_engine import get_ml_engine
 
         market_service = FreeMarketDataService()
-        kb = get_knowledge_base()
-
-        # Check if ML is trained - if not, return empty analysis
-        is_ml_trained = False
-        if kb:
-            progress = kb.get_learning_progress()
-            is_ml_trained = progress.get('n_transcripts_processed', 0) > 0 or progress.get('n_training_runs', 0) > 0
+        ml_engine = get_ml_engine()
+        ml_knowledge = ml_engine.get_knowledge_summary()
 
         tf_list = [tf.strip() for tf in timeframes.split(",")]
 
-        # Fetch market data (always needed for price display)
+        # Fetch market data
         market_data = {}
         for tf in tf_list:
             df = market_service.get_ohlcv(symbol, tf, limit=200)
@@ -453,91 +490,97 @@ async def analyze_symbol(
         if not market_data:
             raise HTTPException(status_code=404, detail=f"No market data available for {symbol}")
 
-        # If ML is not trained, return minimal response without signals/patterns
-        if not is_ml_trained:
+        # Check ML knowledge status
+        if ml_knowledge.get('status') != 'trained' or not ml_knowledge.get('patterns_learned'):
             return {
                 'symbol': symbol,
                 'timestamp': datetime.utcnow().isoformat(),
                 'timeframes': list(market_data.keys()),
-                'detected_concepts': [],
+                'ml_patterns_detected': [],
+                'ml_patterns_not_learned': ml_knowledge.get('patterns_not_learned', []),
                 'analyses': {},
                 'signal': None,
-                'patterns': [],
                 'ml_status': 'not_trained',
-                'message': 'ML models not trained. Train from a playlist to enable Smart Money analysis.'
+                'ml_knowledge_status': '⚠️ ML has NO trained knowledge. Train videos using Vision Training to enable pattern detection.',
+                'message': 'Train videos using Vision Training to enable ML-powered analysis.'
             }
 
-        analyzer = get_analyzer()
-        sig_gen = get_signal_generator()
+        # Use ML-powered analyzer
+        ml_analyzer = get_ml_analyzer()
+        ml_sig_gen = get_ml_signal_generator()
 
-        # Run Smart Money analysis
+        # Run ML-powered Smart Money analysis for each timeframe
         analyses = {}
-        detected_concepts = []
+        all_ml_patterns_used = []
+        all_ml_patterns_not_learned = []
+        all_ml_confidence = {}
 
         for tf, df in market_data.items():
-            if analyzer:
-                analysis = analyzer.analyze(df, tf)
-                analyses[tf] = analysis
-                detected_concepts.extend(analysis.get('detected_concepts', []))
+            if ml_analyzer:
+                analysis = ml_analyzer.analyze(df)
 
-        detected_concepts = list(set(detected_concepts))
+                # Collect ML knowledge info
+                all_ml_patterns_used.extend(analysis.ml_patterns_used)
+                all_ml_patterns_not_learned.extend(analysis.ml_patterns_not_learned)
+                all_ml_confidence.update(analysis.ml_confidence_scores)
 
-        # Generate signal
-        signal = None
-        if sig_gen and market_data:
-            signal_obj = sig_gen.generate_signal(
-                symbol=symbol,
-                market_data=market_data,
-                detected_concepts=detected_concepts,
-                context={'is_fresh': True}
-            )
-            if signal_obj:
-                signal = {
-                    'direction': signal_obj.direction,
-                    'strength': signal_obj.strength,
-                    'confidence': signal_obj.confidence,
-                    'concepts': signal_obj.concepts,
-                    'entry_zone': signal_obj.entry_zone,
-                    'stop_loss': signal_obj.stop_loss,
-                    'take_profit': signal_obj.take_profit,
-                    'risk_reward': signal_obj.risk_reward,
-                    'reasoning': signal_obj.reasoning,
-                    'confluence_score': signal_obj.confluence_score,
+                analyses[tf] = {
+                    'bias': analysis.bias.value,
+                    'bias_confidence': analysis.bias_confidence,
+                    'zone': analysis.premium_discount.get('zone', 'neutral'),
+                    'order_blocks': len(analysis.order_blocks),
+                    'fvgs': len(analysis.fair_value_gaps),
+                    'market_structure': analysis.market_structure.value,
+                    'reasoning': analysis.bias_reasoning,
+                    'ml_patterns_used': analysis.ml_patterns_used,
+                    'ml_patterns_not_learned': analysis.ml_patterns_not_learned,
+                    'ml_confidence': analysis.ml_confidence_scores,
                 }
 
-        # Detect Smart Money patterns for chart drawing
-        patterns = []
-        try:
-            from .ml.pattern_recognition import SmartMoneyPatternRecognizer
-            recognizer = SmartMoneyPatternRecognizer()
+        # Deduplicate
+        all_ml_patterns_used = list(set(all_ml_patterns_used))
+        all_ml_patterns_not_learned = list(set(all_ml_patterns_not_learned))
 
-            for tf, df in market_data.items():
-                detected = recognizer.detect_all_patterns(df)
-                for pattern in detected:
-                    pattern_dict = pattern.to_dict()
-                    pattern_dict['timeframe'] = tf
-                    patterns.append(pattern_dict)
-        except Exception as e:
-            print(f"Pattern detection error: {e}")
+        # Generate ML-powered signal using primary timeframe (first in list)
+        signal = None
+        primary_tf = tf_list[0]
+        if ml_sig_gen and primary_tf in market_data:
+            try:
+                tf_enum = Timeframe(primary_tf)
+                signal_obj = ml_sig_gen.generate_signal(
+                    symbol=symbol,
+                    data=market_data[primary_tf],
+                    timeframe=tf_enum
+                )
+                if signal_obj:
+                    signal = signal_obj.to_dict()
+            except Exception as e:
+                print(f"Signal generation error: {e}")
+
+        # Generate ML knowledge status message
+        if all_ml_patterns_used and not all_ml_patterns_not_learned:
+            ml_status_msg = f"✅ ML-powered analysis. Patterns detected: {', '.join(all_ml_patterns_used)}"
+        elif all_ml_patterns_used and all_ml_patterns_not_learned:
+            ml_status_msg = f"⚡ Partial ML coverage. Detected: {', '.join(all_ml_patterns_used)}. Needs training: {', '.join(all_ml_patterns_not_learned)}"
+        else:
+            ml_status_msg = "⚠️ No ML patterns detected in this data. Train more videos to improve detection."
 
         return {
             'symbol': symbol,
             'timestamp': datetime.utcnow().isoformat(),
             'timeframes': list(market_data.keys()),
-            'detected_concepts': detected_concepts,
-            'analyses': {
-                tf: {
-                    'bias': a.get('market_structure', {}).get('bias', 'neutral'),
-                    'zone': a.get('premium_discount', {}).get('zone', 'neutral'),
-                    'order_blocks': len(a.get('order_blocks', {}).get('bullish', [])) + len(a.get('order_blocks', {}).get('bearish', [])),
-                    'fvgs': len(a.get('fair_value_gaps', {}).get('bullish', [])) + len(a.get('fair_value_gaps', {}).get('bearish', [])),
-                    'summary': a.get('summary', ''),
-                }
-                for tf, a in analyses.items()
-            },
+            'ml_patterns_detected': all_ml_patterns_used,
+            'ml_patterns_not_learned': all_ml_patterns_not_learned,
+            'ml_confidence_scores': all_ml_confidence,
+            'analyses': analyses,
             'signal': signal,
-            'patterns': patterns,
             'ml_status': 'trained',
+            'ml_knowledge_status': ml_status_msg,
+            'training_info': {
+                'videos_trained': ml_knowledge.get('total_videos', 0),
+                'frames_analyzed': ml_knowledge.get('total_frames', 0),
+                'patterns_learned': [p['type'] for p in ml_knowledge.get('patterns_learned', [])],
+            }
         }
 
     except ImportError as e:
@@ -549,20 +592,18 @@ async def analyze_symbol(
 @app.get("/api/signals/quick/{symbol}")
 async def quick_signal(symbol: str):
     """
-    Get a quick signal for a symbol (single timeframe analysis).
-    Faster than full analysis. Only works if ML is trained.
+    Get a quick ML-powered signal for a symbol (single timeframe analysis).
+
+    Uses ONLY patterns the ML has learned from video training.
+    Returns ML knowledge status showing what patterns were/weren't detected.
     """
     try:
         from .services.free_market_data import FreeMarketDataService
+        from .ml.ml_pattern_engine import get_ml_engine
 
         market_service = FreeMarketDataService()
-        kb = get_knowledge_base()
-
-        # Check if ML is trained
-        is_ml_trained = False
-        if kb:
-            progress = kb.get_learning_progress()
-            is_ml_trained = progress.get('n_transcripts_processed', 0) > 0 or progress.get('n_training_runs', 0) > 0
+        ml_engine = get_ml_engine()
+        ml_knowledge = ml_engine.get_knowledge_summary()
 
         # Get H1 data
         df = market_service.get_ohlcv(symbol, 'H1', limit=100)
@@ -572,34 +613,57 @@ async def quick_signal(symbol: str):
 
         current_price = float(df['close'].iloc[-1])
 
-        # If ML not trained, return minimal response
+        # Check ML knowledge status
+        is_ml_trained = ml_knowledge.get('status') == 'trained' and ml_knowledge.get('patterns_learned')
+
         if not is_ml_trained:
             return {
                 'symbol': symbol,
                 'timestamp': datetime.utcnow().isoformat(),
                 'bias': 'neutral',
                 'zone': 'neutral',
-                'concepts': [],
-                'summary': 'ML not trained - train from a playlist to enable analysis',
+                'ml_patterns_detected': [],
+                'ml_patterns_not_learned': ml_knowledge.get('patterns_not_learned', []),
+                'summary': '⚠️ ML not trained - use Vision Training on videos to enable pattern detection',
                 'current_price': current_price,
                 'ml_status': 'not_trained',
+                'ml_knowledge_status': 'No trained knowledge. Train videos first.',
             }
 
-        analyzer = get_analyzer()
+        # Use ML-powered analyzer
+        ml_analyzer = get_ml_analyzer()
 
-        # Quick analysis
-        if analyzer:
-            analysis = analyzer.analyze(df, 'H1')
+        if ml_analyzer:
+            analysis = ml_analyzer.analyze(df)
+
+            # Generate summary based on ML patterns
+            if analysis.ml_patterns_used:
+                patterns_str = ', '.join(analysis.ml_patterns_used)
+                if analysis.bias.value == 'bullish':
+                    summary = f"✅ BULLISH - ML detected: {patterns_str}"
+                elif analysis.bias.value == 'bearish':
+                    summary = f"✅ BEARISH - ML detected: {patterns_str}"
+                else:
+                    summary = f"⚡ NEUTRAL - ML detected: {patterns_str}"
+            else:
+                summary = f"⚠️ No ML patterns found in current data"
 
             return {
                 'symbol': symbol,
                 'timestamp': datetime.utcnow().isoformat(),
-                'bias': analysis.get('market_structure', {}).get('bias', 'neutral'),
-                'zone': analysis.get('premium_discount', {}).get('zone', 'neutral'),
-                'concepts': analysis.get('detected_concepts', []),
-                'summary': analysis.get('summary', 'Analysis unavailable'),
+                'bias': analysis.bias.value,
+                'bias_confidence': analysis.bias_confidence,
+                'zone': analysis.premium_discount.get('zone', 'neutral'),
+                'ml_patterns_detected': analysis.ml_patterns_used,
+                'ml_patterns_not_learned': analysis.ml_patterns_not_learned,
+                'ml_confidence_scores': analysis.ml_confidence_scores,
+                'order_blocks_found': len(analysis.order_blocks),
+                'fvgs_found': len(analysis.fair_value_gaps),
+                'summary': summary,
+                'reasoning': analysis.bias_reasoning,
                 'current_price': current_price,
                 'ml_status': 'trained',
+                'ml_knowledge_status': f"Trained on {ml_knowledge.get('total_videos', 0)} videos",
             }
         else:
             return {
@@ -607,10 +671,11 @@ async def quick_signal(symbol: str):
                 'timestamp': datetime.utcnow().isoformat(),
                 'bias': 'neutral',
                 'zone': 'neutral',
-                'concepts': [],
-                'summary': 'Analyzer not available',
+                'ml_patterns_detected': [],
+                'ml_patterns_not_learned': [],
+                'summary': 'ML Analyzer not available',
                 'current_price': current_price,
-                'ml_status': 'trained',
+                'ml_status': 'error',
             }
 
     except Exception as e:
