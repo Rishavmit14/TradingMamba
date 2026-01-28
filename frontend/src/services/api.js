@@ -5,7 +5,7 @@ const API_BASE = 'http://localhost:8000/api';
 
 const api = axios.create({
   baseURL: API_BASE,
-  timeout: 30000,
+  timeout: 120000, // 2 minutes for chart generation
 });
 
 // Signals & Analysis
@@ -103,6 +103,35 @@ export const getProcessingJobs = async () => {
 // Stream playlist progress (returns EventSource URL)
 export const getPlaylistStreamUrl = (jobId) => {
   return `${API_BASE}/playlist/stream/${jobId}`;
+};
+
+// Chart Generation with Smart Money annotations
+export const getChart = async (symbol, timeframe = 'H1', withSignal = true, withPatterns = true) => {
+  const response = await api.get(`/chart/${symbol}`, {
+    params: { timeframe, with_signal: withSignal, with_patterns: withPatterns },
+  });
+  return response.data;
+};
+
+// Detailed Signal Analysis
+export const getSignalAnalysis = async (symbol, timeframe = 'H1') => {
+  const response = await api.get(`/signals/analyze/${symbol}`, {
+    params: { timeframe },
+  });
+  return response.data;
+};
+
+// Live OHLCV data for real-time charting
+export const getLiveOHLCV = async (symbol, timeframe = 'M1', limit = 100) => {
+  const response = await api.get(`/live/ohlcv/${symbol}`, {
+    params: { timeframe, limit },
+  });
+  return response.data;
+};
+
+// WebSocket URL for live price updates
+export const getWebSocketUrl = (symbol) => {
+  return `ws://localhost:8000/ws/live/${symbol}`;
 };
 
 export default api;

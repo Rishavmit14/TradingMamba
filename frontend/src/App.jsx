@@ -6,6 +6,7 @@ import {
   BookOpen,
   Brain,
   BarChart3,
+  LineChart,
   Zap,
   Menu,
   X,
@@ -18,6 +19,7 @@ import Signals from './pages/Signals';
 import Concepts from './pages/Concepts';
 import Learning from './pages/Learning';
 import Performance from './pages/Performance';
+import LiveChart from './pages/LiveChart';
 
 // Modern Navigation Component
 function Navigation() {
@@ -35,6 +37,7 @@ function Navigation() {
 
   const navItems = [
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
+    { path: '/live-chart', icon: LineChart, label: 'Live Chart' },
     { path: '/signals', icon: TrendingUp, label: 'Signals' },
     { path: '/concepts', icon: BookOpen, label: 'Concepts' },
     { path: '/learning', icon: Brain, label: 'Learning' },
@@ -161,6 +164,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/live-chart" element={<LiveChart />} />
               <Route path="/signals" element={<Signals />} />
               <Route path="/concepts" element={<Concepts />} />
               <Route path="/learning" element={<Learning />} />

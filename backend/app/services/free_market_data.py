@@ -47,6 +47,31 @@ SYMBOL_MAP = {
     'GOOGL': 'GOOGL',
     'TSLA': 'TSLA',
     'NVDA': 'NVDA',
+
+    # Cryptocurrencies (support both BTC and BTCUSDT formats)
+    'BTC': 'BTC-USD',
+    'BTCUSD': 'BTC-USD',
+    'BTCUSDT': 'BTC-USD',
+    'ETH': 'ETH-USD',
+    'ETHUSD': 'ETH-USD',
+    'ETHUSDT': 'ETH-USD',
+    'SOL': 'SOL-USD',
+    'SOLUSD': 'SOL-USD',
+    'SOLUSDT': 'SOL-USD',
+    'XRP': 'XRP-USD',
+    'XRPUSDT': 'XRP-USD',
+    'DOGE': 'DOGE-USD',
+    'DOGEUSDT': 'DOGE-USD',
+    'ADA': 'ADA-USD',
+    'ADAUSDT': 'ADA-USD',
+    'AVAX': 'AVAX-USD',
+    'AVAXUSDT': 'AVAX-USD',
+    'DOT': 'DOT-USD',
+    'DOTUSDT': 'DOT-USD',
+    'LINK': 'LINK-USD',
+    'LINKUSDT': 'LINK-USD',
+    'MATIC': 'MATIC-USD',
+    'MATICUSDT': 'MATIC-USD',
 }
 
 # Timeframe mappings

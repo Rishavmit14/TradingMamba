@@ -58,15 +58,25 @@ class DetectedPattern:
     details: Dict = field(default_factory=dict)
 
     def to_dict(self) -> Dict:
+        # Helper to convert numpy types to Python native types
+        def convert(val):
+            if hasattr(val, 'item'):  # numpy scalar
+                return val.item()
+            if isinstance(val, dict):
+                return {k: convert(v) for k, v in val.items()}
+            if isinstance(val, (list, tuple)):
+                return [convert(v) for v in val]
+            return val
+
         return {
             'pattern_type': self.pattern_type.value,
-            'start_index': self.start_index,
-            'end_index': self.end_index,
-            'price_high': self.price_high,
-            'price_low': self.price_low,
-            'confidence': self.confidence,
+            'start_index': int(self.start_index),
+            'end_index': int(self.end_index),
+            'price_high': float(self.price_high),
+            'price_low': float(self.price_low),
+            'confidence': float(self.confidence),
             'timestamp': self.timestamp.isoformat() if self.timestamp else None,
-            'details': self.details
+            'details': convert(self.details)
         }
 
 

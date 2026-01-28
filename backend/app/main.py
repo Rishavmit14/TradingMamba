@@ -4,12 +4,13 @@ Smart Money AI Trading System - FastAPI Application
 Main entry point for the backend API.
 """
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from typing import List, Optional
+from typing import List, Optional, Dict, Set
 from datetime import datetime
 import json
+import asyncio
 from pathlib import Path
 
 from .config import settings
@@ -26,7 +27,7 @@ app = FastAPI(
 # CORS middleware - allow all origins in development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://127.0.0.1:3000"],
+    allow_origins=["*"],  # Allow all origins in development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -402,6 +403,21 @@ async def analyze_symbol(
                     'confluence_score': signal_obj.confluence_score,
                 }
 
+        # Detect Smart Money patterns for chart drawing
+        patterns = []
+        try:
+            from .ml.pattern_recognition import SmartMoneyPatternRecognizer
+            recognizer = SmartMoneyPatternRecognizer()
+
+            for tf, df in market_data.items():
+                detected = recognizer.detect_all_patterns(df)
+                for pattern in detected:
+                    pattern_dict = pattern.to_dict()
+                    pattern_dict['timeframe'] = tf
+                    patterns.append(pattern_dict)
+        except Exception as e:
+            print(f"Pattern detection error: {e}")
+
         return {
             'symbol': symbol,
             'timestamp': datetime.utcnow().isoformat(),
@@ -418,6 +434,7 @@ async def analyze_symbol(
                 for tf, a in analyses.items()
             },
             'signal': signal,
+            'patterns': patterns,
         }
 
     except ImportError as e:
@@ -1202,6 +1219,252 @@ async def generate_chart(
             'signal': signal,
             'pattern_count': len(patterns) if patterns else 0
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Live Price WebSocket
+# ============================================================================
+
+# Store active WebSocket connections
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: Dict[str, Set[WebSocket]] = {}
+
+    async def connect(self, websocket: WebSocket, symbol: str):
+        await websocket.accept()
+        if symbol not in self.active_connections:
+            self.active_connections[symbol] = set()
+        self.active_connections[symbol].add(websocket)
+
+    def disconnect(self, websocket: WebSocket, symbol: str):
+        if symbol in self.active_connections:
+            self.active_connections[symbol].discard(websocket)
+
+    async def broadcast(self, symbol: str, data: dict):
+        if symbol in self.active_connections:
+            disconnected = set()
+            for connection in self.active_connections[symbol]:
+                try:
+                    await connection.send_json(data)
+                except:
+                    disconnected.add(connection)
+            for conn in disconnected:
+                self.active_connections[symbol].discard(conn)
+
+manager = ConnectionManager()
+
+
+@app.websocket("/ws/live/{symbol}")
+async def websocket_live_price(websocket: WebSocket, symbol: str):
+    """WebSocket endpoint for live price updates with real-time USDT Perpetual futures data"""
+    import httpx
+
+    await manager.connect(websocket, symbol)
+
+    # Crypto symbols that can use Binance Futures real-time data
+    # Support both formats: BTC -> BTCUSDT, or direct BTCUSDT
+    CRYPTO_BINANCE_MAP = {
+        'BTC': 'BTCUSDT',
+        'BTCUSDT': 'BTCUSDT',
+        'ETH': 'ETHUSDT',
+        'ETHUSDT': 'ETHUSDT',
+        'SOL': 'SOLUSDT',
+        'SOLUSDT': 'SOLUSDT',
+        'XRP': 'XRPUSDT',
+        'XRPUSDT': 'XRPUSDT',
+        'DOGE': 'DOGEUSDT',
+        'DOGEUSDT': 'DOGEUSDT',
+        'ADA': 'ADAUSDT',
+        'ADAUSDT': 'ADAUSDT',
+        'AVAX': 'AVAXUSDT',
+        'AVAXUSDT': 'AVAXUSDT',
+        'DOT': 'DOTUSDT',
+        'DOTUSDT': 'DOTUSDT',
+        'LINK': 'LINKUSDT',
+        'LINKUSDT': 'LINKUSDT',
+        'MATIC': 'MATICUSDT',
+        'MATICUSDT': 'MATICUSDT',
+    }
+
+    is_crypto = symbol.upper() in CRYPTO_BINANCE_MAP
+    binance_symbol = CRYPTO_BINANCE_MAP.get(symbol.upper())
+
+    # Track candle data
+    last_price = None
+    last_high = None
+    last_low = None
+    last_open = None
+    candle_minute = None
+
+    try:
+        async with httpx.AsyncClient() as client:
+            while True:
+                try:
+                    if is_crypto and binance_symbol:
+                        # Use Binance Futures API for real-time USDT Perpetual prices
+                        # This matches TradingView's BTCUSDT.P (perpetual) chart
+                        response = await client.get(
+                            f"https://fapi.binance.com/fapi/v1/ticker/price?symbol={binance_symbol}",
+                            timeout=5.0
+                        )
+                        if response.status_code == 200:
+                            data = response.json()
+                            current_price = float(data['price'])
+
+                            # Track candle data (reset every minute)
+                            current_minute = datetime.utcnow().minute
+                            if candle_minute != current_minute:
+                                # New candle
+                                candle_minute = current_minute
+                                last_open = current_price
+                                last_high = current_price
+                                last_low = current_price
+                            else:
+                                # Update high/low
+                                last_high = max(last_high, current_price) if last_high else current_price
+                                last_low = min(last_low, current_price) if last_low else current_price
+
+                            last_price = current_price
+
+                            await websocket.send_json({
+                                'type': 'price_update',
+                                'symbol': symbol,
+                                'timestamp': datetime.utcnow().isoformat(),
+                                'open': last_open or current_price,
+                                'high': last_high or current_price,
+                                'low': last_low or current_price,
+                                'close': current_price,
+                                'volume': 0
+                            })
+                    else:
+                        # For non-crypto, use Yahoo Finance (delayed)
+                        from .services.free_market_data import FreeMarketDataService
+                        market_service = FreeMarketDataService()
+                        df = market_service.get_ohlcv(symbol, 'M1', limit=1)
+                        if df is not None and not df.empty:
+                            latest = df.iloc[-1]
+                            await websocket.send_json({
+                                'type': 'price_update',
+                                'symbol': symbol,
+                                'timestamp': datetime.utcnow().isoformat(),
+                                'open': float(latest['open']),
+                                'high': float(latest['high']),
+                                'low': float(latest['low']),
+                                'close': float(latest['close']),
+                                'volume': float(latest['volume']) if 'volume' in latest else 0
+                            })
+
+                except Exception as e:
+                    print(f"Price fetch error for {symbol}: {e}")
+
+                # Update every 1 second for crypto, 5 seconds for others
+                await asyncio.sleep(1 if is_crypto else 5)
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, symbol)
+    except Exception as e:
+        manager.disconnect(websocket, symbol)
+
+
+@app.get("/api/live/ohlcv/{symbol}")
+async def get_live_ohlcv(
+    symbol: str,
+    timeframe: str = Query("M1", description="Timeframe"),
+    limit: int = Query(100, description="Number of candles")
+):
+    """Get OHLCV data for live charting - uses Binance Futures for crypto"""
+    import httpx
+
+    # Crypto symbols that use Binance Futures
+    CRYPTO_BINANCE_MAP = {
+        'BTC': 'BTCUSDT', 'BTCUSDT': 'BTCUSDT',
+        'ETH': 'ETHUSDT', 'ETHUSDT': 'ETHUSDT',
+        'SOL': 'SOLUSDT', 'SOLUSDT': 'SOLUSDT',
+        'XRP': 'XRPUSDT', 'XRPUSDT': 'XRPUSDT',
+        'DOGE': 'DOGEUSDT', 'DOGEUSDT': 'DOGEUSDT',
+        'ADA': 'ADAUSDT', 'ADAUSDT': 'ADAUSDT',
+        'AVAX': 'AVAXUSDT', 'AVAXUSDT': 'AVAXUSDT',
+        'DOT': 'DOTUSDT', 'DOTUSDT': 'DOTUSDT',
+        'LINK': 'LINKUSDT', 'LINKUSDT': 'LINKUSDT',
+        'MATIC': 'MATICUSDT', 'MATICUSDT': 'MATICUSDT',
+    }
+
+    # Binance Futures timeframe mapping
+    BINANCE_TF_MAP = {
+        'M1': '1m', 'M5': '5m', 'M15': '15m', 'M30': '30m',
+        'H1': '1h', 'H4': '4h', 'D1': '1d', 'W1': '1w', 'MN': '1M'
+    }
+
+    is_crypto = symbol.upper() in CRYPTO_BINANCE_MAP
+    binance_symbol = CRYPTO_BINANCE_MAP.get(symbol.upper())
+    binance_interval = BINANCE_TF_MAP.get(timeframe, '1h')
+
+    try:
+        if is_crypto and binance_symbol:
+            # Use Binance Futures API for crypto OHLCV data
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    "https://fapi.binance.com/fapi/v1/klines",
+                    params={
+                        'symbol': binance_symbol,
+                        'interval': binance_interval,
+                        'limit': limit
+                    },
+                    timeout=10.0
+                )
+
+                if response.status_code == 200:
+                    klines = response.json()
+                    candles = []
+                    for k in klines:
+                        # Binance kline format: [open_time, open, high, low, close, volume, close_time, ...]
+                        candles.append({
+                            'time': int(k[0] / 1000),  # Convert ms to seconds
+                            'open': float(k[1]),
+                            'high': float(k[2]),
+                            'low': float(k[3]),
+                            'close': float(k[4]),
+                            'volume': float(k[5])
+                        })
+
+                    return {
+                        'symbol': symbol,
+                        'timeframe': timeframe,
+                        'candles': candles,
+                        'source': 'binance_futures'
+                    }
+                else:
+                    raise HTTPException(status_code=response.status_code, detail=f"Binance API error: {response.text}")
+        else:
+            # Use Yahoo Finance for non-crypto (forex, indices, stocks)
+            from .services.free_market_data import FreeMarketDataService
+
+            market_service = FreeMarketDataService()
+            df = market_service.get_ohlcv(symbol, timeframe, limit=limit)
+
+            if df is None or df.empty:
+                raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+            candles = []
+            for idx, row in df.iterrows():
+                candles.append({
+                    'time': int(idx.timestamp()) if hasattr(idx, 'timestamp') else int(datetime.now().timestamp()) - (len(df) - len(candles)) * 60,
+                    'open': float(row['open']),
+                    'high': float(row['high']),
+                    'low': float(row['low']),
+                    'close': float(row['close']),
+                    'volume': float(row['volume']) if 'volume' in row else 0
+                })
+
+            return {
+                'symbol': symbol,
+                'timeframe': timeframe,
+                'candles': candles,
+                'source': 'yahoo_finance'
+            }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
