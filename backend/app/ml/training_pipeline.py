@@ -71,6 +71,7 @@ class SmartMoneyKnowledgeBase:
         self.n_transcripts_processed = 0
         self.last_training_time = None
         self.training_history = []
+        self.trained_video_ids = []  # Track which videos have been trained
 
         # Load playlist metadata for video tracking
         self.playlist_meta = self._load_playlist_metadata()
@@ -275,6 +276,35 @@ class SmartMoneyKnowledgeBase:
         logger.info(f"Training complete. Processed {len(transcripts)} transcripts.")
         return results
 
+    def train_from_videos(self, video_ids: List[str], incremental: bool = False) -> Dict:
+        """
+        Train only from specific video transcripts.
+        Used for selective playlist-based training.
+        """
+        logger.info(f"Training from {len(video_ids)} specific videos...")
+
+        # Load only the specified transcripts
+        transcripts = []
+        for vid in video_ids:
+            transcript_file = self.transcripts_dir / f"{vid}.json"
+            if transcript_file.exists():
+                try:
+                    with open(transcript_file) as f:
+                        transcript = json.load(f)
+                        if transcript.get('full_text'):
+                            transcripts.append(transcript)
+                except Exception as e:
+                    logger.warning(f"Error loading transcript {vid}: {e}")
+
+        if not transcripts:
+            logger.warning("No valid transcripts found for specified videos")
+            return {'status': 'no_data', 'n_transcripts': 0}
+
+        logger.info(f"Loaded {len(transcripts)} transcripts from specified videos")
+
+        # Train with these transcripts
+        return self.train(transcripts=transcripts, incremental=incremental)
+
     def _record_video_learnings(self, transcripts: List[Dict], all_rules: List[Dict]):
         """Record learnings for each video to the training database"""
         import re
@@ -396,6 +426,7 @@ class SmartMoneyKnowledgeBase:
 
         return {
             'n_transcripts_processed': self.n_transcripts_processed,
+            'n_trained_videos': len(self.trained_video_ids) if self.trained_video_ids else 0,
             'last_training': self.last_training_time,
             'n_training_runs': len(self.training_history),
             'n_concepts_defined': len(self.concept_definitions),
@@ -448,6 +479,7 @@ class SmartMoneyKnowledgeBase:
                 'n_transcripts_processed': self.n_transcripts_processed,
                 'last_training_time': self.last_training_time,
                 'training_history': self.training_history[-10:],  # Last 10
+                'trained_video_ids': getattr(self, 'trained_video_ids', []),
             }, f, indent=2, default=str)
 
         logger.info(f"Knowledge base saved to {self.models_dir}")
@@ -479,6 +511,7 @@ class SmartMoneyKnowledgeBase:
                 self.n_transcripts_processed = data.get('n_transcripts_processed', 0)
                 self.last_training_time = data.get('last_training_time')
                 self.training_history = data.get('training_history', [])
+                self.trained_video_ids = data.get('trained_video_ids', [])
         except:
             logger.warning("Could not load knowledge base")
 

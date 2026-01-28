@@ -199,6 +199,7 @@ class SmartMoneyFeatureExtractor:
                 'segment_count': 0,
                 'avg_segment_length': 0,
                 'concept_intro_time': 0,  # When first concept appears
+                'concept_intro_ratio': 0,  # Added to match non-empty case
             }
 
         total_duration = segments[-1].get('end_time', 0) if segments else 0

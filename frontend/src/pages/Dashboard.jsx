@@ -21,9 +21,13 @@ import {
   CheckCircle,
   XCircle,
   Loader2,
-  Play
+  Play,
+  Trash2,
+  FolderOpen,
+  ChevronDown,
+  GraduationCap
 } from 'lucide-react';
-import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl } from '../services/api';
+import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, whitewashML, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus } from '../services/api';
 
 // Animated Background Orb
 function BackgroundOrb({ className }) {
@@ -204,7 +208,6 @@ function StatCard({ icon: Icon, label, value, subValue, gradient, delay = 0 }) {
 // Playlist Processing Card
 function PlaylistProcessor({ onProcessingComplete }) {
   const [playlistUrl, setPlaylistUrl] = useState('');
-  const [tier, setTier] = useState(3);
   const [trainAfter, setTrainAfter] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(null);
@@ -225,7 +228,7 @@ function PlaylistProcessor({ onProcessingComplete }) {
     });
 
     try {
-      const result = await addPlaylist(playlistUrl, tier, trainAfter);
+      const result = await addPlaylist(playlistUrl, 1, trainAfter);
 
       if (result.status === 'exists') {
         setError('This playlist has already been added.');
@@ -307,30 +310,16 @@ function PlaylistProcessor({ onProcessingComplete }) {
             />
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="text-xs text-slate-400 mb-1 block">Learning Tier</label>
-              <select
-                value={tier}
-                onChange={(e) => setTier(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-indigo-500/50"
-              >
-                <option value={1} className="bg-[#0a0a0f]">Tier 1 - Core Concepts</option>
-                <option value={2} className="bg-[#0a0a0f]">Tier 2 - Advanced</option>
-                <option value={3} className="bg-[#0a0a0f]">Tier 3 - Additional</option>
-              </select>
-            </div>
-            <div className="flex items-end">
-              <label className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 transition-colors">
-                <input
-                  type="checkbox"
-                  checked={trainAfter}
-                  onChange={(e) => setTrainAfter(e.target.checked)}
-                  className="w-4 h-4 rounded border-white/20 bg-white/5 text-indigo-500 focus:ring-indigo-500/50"
-                />
-                <span className="text-sm text-slate-300">Train ML after</span>
-              </label>
-            </div>
+          <div className="flex items-center">
+            <label className="flex items-center gap-2 px-3 py-2 bg-white/5 border border-white/10 rounded-lg cursor-pointer hover:bg-white/10 transition-colors">
+              <input
+                type="checkbox"
+                checked={trainAfter}
+                onChange={(e) => setTrainAfter(e.target.checked)}
+                className="w-4 h-4 rounded border-white/20 bg-white/5 text-indigo-500 focus:ring-indigo-500/50"
+              />
+              <span className="text-sm text-slate-300">Train ML after processing</span>
+            </label>
           </div>
 
           {error && (
@@ -482,6 +471,341 @@ function PlaylistProcessor({ onProcessingComplete }) {
   );
 }
 
+// ML Training Manager Component
+function MLTrainingManager({ onTrainingComplete }) {
+  const [groupedData, setGroupedData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [whitewashing, setWhitewashing] = useState(false);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [expandedPlaylist, setExpandedPlaylist] = useState(null);
+  const [training, setTraining] = useState(false);
+  const [trainingProgress, setTrainingProgress] = useState(null);
+  const [error, setError] = useState(null);
+  const eventSourceRef = useRef(null);
+
+  useEffect(() => {
+    loadGroupedTranscripts();
+    return () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+    };
+  }, []);
+
+  const loadGroupedTranscripts = async () => {
+    setLoading(true);
+    try {
+      const data = await getTranscriptsGrouped();
+      setGroupedData(data);
+    } catch (err) {
+      console.error('Failed to load grouped transcripts:', err);
+      setError('Failed to load transcripts');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleWhitewash = async () => {
+    if (!window.confirm('Are you sure you want to WHITEWASH all ML training? This will delete all trained models but keep your transcripts.')) {
+      return;
+    }
+
+    setWhitewashing(true);
+    setError(null);
+
+    try {
+      await whitewashML();
+      setTrainingProgress(null);
+      setSelectedPlaylist(null);
+      onTrainingComplete?.();
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Whitewash failed');
+    } finally {
+      setWhitewashing(false);
+    }
+  };
+
+  const handleTrainPlaylist = async (playlist) => {
+    if (!playlist?.id) return;
+
+    setError(null);
+    setTraining(true);
+    setSelectedPlaylist(playlist);
+    setTrainingProgress({
+      status: 'starting',
+      message: 'Initializing training...',
+      playlist_title: playlist.title
+    });
+
+    try {
+      const result = await trainFromPlaylist(playlist.id);
+
+      if (result.status === 'started' && result.job_id) {
+        // Use polling instead of SSE for reliability
+        const pollStatus = async () => {
+          try {
+            const status = await getSelectiveTrainingStatus(result.job_id);
+            setTrainingProgress(status);
+
+            if (status.status === 'completed' || status.status === 'error') {
+              setTraining(false);
+              if (status.status === 'completed') {
+                onTrainingComplete?.();
+              }
+            } else {
+              // Continue polling every 500ms
+              setTimeout(pollStatus, 500);
+            }
+          } catch (err) {
+            console.error('Polling error:', err);
+            setTraining(false);
+            setError('Failed to get training status');
+          }
+        };
+
+        // Start polling
+        pollStatus();
+      }
+    } catch (err) {
+      setError(err.response?.data?.detail || err.message || 'Training failed to start');
+      setTraining(false);
+      setTrainingProgress(null);
+    }
+  };
+
+  const togglePlaylistExpand = (playlistId) => {
+    setExpandedPlaylist(expandedPlaylist === playlistId ? null : playlistId);
+  };
+
+  return (
+    <div className="glass-card p-6 relative overflow-hidden">
+      {/* Gradient accent */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500" />
+
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center shadow-lg">
+            <GraduationCap className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-lg">ML Training Manager</h3>
+            <p className="text-sm text-slate-400">Train ML from specific playlists</p>
+          </div>
+        </div>
+
+        {/* Whitewash Button */}
+        <button
+          onClick={handleWhitewash}
+          disabled={whitewashing || training}
+          className="px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm font-medium hover:bg-red-500/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
+          {whitewashing ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Trash2 className="w-4 h-4" />
+          )}
+          <span>Whitewash ML</span>
+        </button>
+      </div>
+
+      {error && (
+        <div className="p-3 mb-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-red-400 text-sm">
+          <AlertCircle className="w-4 h-4" />
+          {error}
+        </div>
+      )}
+
+      {/* Training Progress */}
+      {trainingProgress && (
+        <div className="mb-6 p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              {trainingProgress.status === 'completed' ? (
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
+              ) : trainingProgress.status === 'error' ? (
+                <XCircle className="w-5 h-5 text-red-400" />
+              ) : (
+                <Loader2 className="w-5 h-5 text-purple-400 animate-spin" />
+              )}
+              <span className="text-sm font-medium text-white capitalize">
+                {trainingProgress.status?.replace('_', ' ')}
+              </span>
+            </div>
+            <span className="text-xs text-slate-400">
+              {trainingProgress.playlist_title}
+            </span>
+          </div>
+          <p className="text-sm text-slate-300 mb-3">{trainingProgress.message}</p>
+
+          {/* Progress bar with actual progress */}
+          {(trainingProgress.status === 'loading' || trainingProgress.status === 'training') && (
+            <div className="mb-3">
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span>
+                  {trainingProgress.status === 'loading'
+                    ? `Loading transcripts: ${trainingProgress.current_transcript || 0} / ${trainingProgress.total_transcripts}`
+                    : trainingProgress.training_phase === 'extracting_concepts'
+                      ? 'Extracting Smart Money concepts...'
+                      : trainingProgress.training_phase === 'saving'
+                        ? 'Saving models...'
+                        : 'Training ML models...'}
+                </span>
+                {trainingProgress.status === 'loading' && (
+                  <span>{Math.round((trainingProgress.current_transcript / trainingProgress.total_transcripts) * 100)}%</span>
+                )}
+              </div>
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className={`h-full rounded-full transition-all duration-300 ${
+                    trainingProgress.status === 'loading'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-500'
+                      : 'bg-gradient-to-r from-purple-500 to-indigo-500 animate-pulse'
+                  }`}
+                  style={{
+                    width: trainingProgress.status === 'loading'
+                      ? `${(trainingProgress.current_transcript / trainingProgress.total_transcripts) * 100}%`
+                      : '100%'
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Transcripts loaded list - scrollable */}
+          {trainingProgress.transcripts_loaded && trainingProgress.transcripts_loaded.length > 0 && (
+            <div className="mt-3 max-h-32 overflow-y-auto">
+              <p className="text-xs text-slate-500 mb-2">Transcripts processed:</p>
+              <div className="space-y-1">
+                {trainingProgress.transcripts_loaded.map((t, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex items-center gap-2 text-xs py-1 px-2 rounded ${
+                      t.status === 'loaded' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'
+                    }`}
+                  >
+                    {t.status === 'loaded' ? (
+                      <CheckCircle className="w-3 h-3 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="w-3 h-3 flex-shrink-0" />
+                    )}
+                    <span className="truncate">{t.title}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Results */}
+          {trainingProgress.status === 'completed' && trainingProgress.results && (
+            <div className="grid grid-cols-3 gap-3 mt-4">
+              <div className="p-2 bg-white/5 rounded-lg text-center">
+                <p className="text-lg font-bold text-white">{trainingProgress.results.n_transcripts}</p>
+                <p className="text-xs text-slate-400">Transcripts</p>
+              </div>
+              <div className="p-2 bg-white/5 rounded-lg text-center">
+                <p className="text-lg font-bold text-white">
+                  {trainingProgress.results.classifier_f1 ? `${(trainingProgress.results.classifier_f1 * 100).toFixed(1)}%` : 'N/A'}
+                </p>
+                <p className="text-xs text-slate-400">F1 Score</p>
+              </div>
+              <div className="p-2 bg-white/5 rounded-lg text-center">
+                <p className="text-lg font-bold text-white">{trainingProgress.results.concepts_defined || 'N/A'}</p>
+                <p className="text-xs text-slate-400">Concepts</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Playlist List */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="w-8 h-8 text-indigo-400 animate-spin" />
+        </div>
+      ) : groupedData?.playlists?.length > 0 ? (
+        <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2">
+          <p className="text-xs text-slate-500 mb-3">
+            Select a playlist to train ML on its transcripts ({groupedData.total} total transcripts)
+          </p>
+          {groupedData.playlists.map((playlist) => (
+            <div key={playlist.id} className="glass-card-static rounded-lg overflow-hidden">
+              {/* Playlist Header */}
+              <div
+                className="p-4 flex items-center justify-between cursor-pointer hover:bg-white/[0.05] transition-colors"
+                onClick={() => togglePlaylistExpand(playlist.id)}
+              >
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                    <FolderOpen className="w-5 h-5 text-indigo-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-white truncate">{playlist.title}</p>
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <span>{playlist.transcript_count} transcripts</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleTrainPlaylist(playlist);
+                    }}
+                    disabled={training}
+                    className="px-3 py-1.5 bg-indigo-500/20 border border-indigo-500/30 rounded-lg text-indigo-300 text-xs font-medium hover:bg-indigo-500/30 transition-colors disabled:opacity-50 flex items-center gap-1"
+                  >
+                    <Play className="w-3 h-3" />
+                    Train
+                  </button>
+                  <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${expandedPlaylist === playlist.id ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+
+              {/* Expanded Transcripts */}
+              {expandedPlaylist === playlist.id && (
+                <div className="border-t border-white/5 p-3 bg-black/20 max-h-48 overflow-y-auto">
+                  <p className="text-xs text-slate-500 mb-2">Transcripts in this playlist:</p>
+                  <div className="space-y-1">
+                    {playlist.transcripts.map((t, idx) => (
+                      <div key={idx} className="flex items-center justify-between py-1.5 px-2 bg-white/[0.02] rounded text-xs">
+                        <span className="text-slate-300 truncate flex-1">{t.title || t.video_id}</span>
+                        <span className="text-slate-500 ml-2">{t.word_count?.toLocaleString()} words</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Ungrouped transcripts */}
+          {groupedData.ungrouped?.length > 0 && (
+            <div className="glass-card-static rounded-lg p-4 mt-4">
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="w-4 h-4 text-slate-400" />
+                <span className="text-sm text-slate-400">Ungrouped Transcripts ({groupedData.ungrouped.length})</span>
+              </div>
+              <p className="text-xs text-slate-500">
+                These transcripts are not associated with any playlist.
+              </p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <div className="w-16 h-16 rounded-2xl bg-slate-500/10 flex items-center justify-center mx-auto mb-4">
+            <FolderOpen className="w-8 h-8 text-slate-500" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-400 mb-2">No playlists with transcripts</h3>
+          <p className="text-sm text-slate-500">
+            Add a YouTube playlist above to get started
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Main Dashboard
 export default function Dashboard() {
   const [status, setStatus] = useState(null);
@@ -591,49 +915,83 @@ export default function Dashboard() {
         {/* Playlist Processor */}
         <PlaylistProcessor onProcessingComplete={loadStatus} />
 
-        {/* Info Banner */}
-        <div className="glass-card-static p-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl" />
+        {/* Info Banner - Shows different content based on ML training status */}
+        <div className={`glass-card-static p-6 relative overflow-hidden ${!status?.ml_trained ? 'border-amber-500/30' : ''}`}>
+          <div className={`absolute top-0 right-0 w-32 h-32 ${status?.ml_trained ? 'bg-indigo-500/10' : 'bg-amber-500/10'} rounded-full blur-2xl`} />
 
-          <div className="flex items-start gap-4 relative">
-            <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
-              <Layers className="w-6 h-6 text-indigo-400" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-white mb-1">
-                Continuous Learning Active
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                The AI is continuously analyzing Smart Money video transcripts to improve signal accuracy.
-                Currently trained on <span className="text-indigo-400 font-medium">{status?.transcripts_ready || 0} transcripts</span> with
-                <span className="text-emerald-400 font-medium"> {status?.total_videos || 0} videos</span> in the knowledge base.
-              </p>
-            </div>
-          </div>
+          {status?.ml_trained ? (
+            <>
+              <div className="flex items-start gap-4 relative">
+                <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
+                  <Layers className="w-6 h-6 text-indigo-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-white mb-1">
+                    ML Model Trained
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    The AI has been trained on Smart Money video transcripts and is ready for signal generation.
+                    Trained on <span className="text-indigo-400 font-medium">{status?.n_transcripts_trained || 0} transcripts</span> out of
+                    <span className="text-emerald-400 font-medium"> {status?.transcripts_ready || 0} available</span>.
+                  </p>
+                </div>
+              </div>
 
-          {/* Progress bar */}
-          <div className="mt-4 pt-4 border-t border-white/5">
-            <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-slate-400">Learning Progress</span>
-              <span className="text-white font-medium">
-                {status?.transcripts_ready && status?.total_videos
-                  ? Math.round((status.transcripts_ready / status.total_videos) * 100)
-                  : 0}%
-              </span>
-            </div>
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{
-                  width: `${status?.transcripts_ready && status?.total_videos
-                    ? (status.transcripts_ready / status.total_videos) * 100
-                    : 0}%`
-                }}
-              />
-            </div>
-          </div>
+              {/* Progress bar - Shows trained vs available */}
+              <div className="mt-4 pt-4 border-t border-white/5">
+                <div className="flex items-center justify-between text-sm mb-2">
+                  <span className="text-slate-400">Training Coverage</span>
+                  <span className="text-white font-medium">
+                    {status?.n_transcripts_trained || 0} / {status?.transcripts_ready || 0} transcripts
+                  </span>
+                </div>
+                <div className="progress-bar">
+                  <div
+                    className="progress-fill"
+                    style={{
+                      width: `${status?.n_transcripts_trained && status?.transcripts_ready
+                        ? (status.n_transcripts_trained / status.transcripts_ready) * 100
+                        : 0}%`
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-start gap-4 relative">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                  <AlertCircle className="w-6 h-6 text-amber-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-amber-400 mb-1">
+                    ML Not Trained
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    The AI model needs to be trained before generating signals. Use the ML Training Manager below to train from a playlist.
+                    {status?.transcripts_ready > 0 && (
+                      <span className="block mt-1">
+                        <span className="text-slate-500">{status?.transcripts_ready} transcripts available</span> - ready for training.
+                      </span>
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              {/* No progress bar when not trained - show prompt instead */}
+              <div className="mt-4 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-2 text-sm text-amber-400/80">
+                  <Brain className="w-4 h-4" />
+                  <span>Select a playlist below and click "Train ML" to get started</span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
+
+      {/* ML Training Manager - Full Width */}
+      <MLTrainingManager onTrainingComplete={loadStatus} />
 
       {/* Signal Cards Section */}
       <div>

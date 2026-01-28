@@ -4,7 +4,7 @@ Smart Money AI Trading System - FastAPI Application
 Main entry point for the backend API.
 """
 
-from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from typing import List, Optional, Dict, Set
@@ -145,6 +145,85 @@ async def get_transcripts():
     return {
         "transcripts": transcripts,
         "total": len(transcripts)
+    }
+
+
+@app.get("/api/transcripts/grouped")
+async def get_transcripts_grouped_by_playlist():
+    """Get all transcripts grouped by their playlist"""
+    if not TRANSCRIPTS_DIR.exists():
+        return {"playlists": [], "ungrouped": [], "total": 0}
+
+    # Load all playlists to map video_id -> playlist
+    playlist_videos = {}  # video_id -> playlist_info
+    playlist_info = {}    # playlist_id -> playlist details
+
+    if PLAYLISTS_DIR.exists():
+        for playlist_file in sorted(PLAYLISTS_DIR.glob("*.json")):
+            with open(playlist_file) as f:
+                data = json.load(f)
+                playlist_id = data.get("playlist_id")
+                playlist_title = data.get("title", "Unknown Playlist")
+
+                playlist_info[playlist_id] = {
+                    "id": playlist_id,
+                    "title": playlist_title,
+                    "tier": data.get("tier", 3),
+                    "video_count": data.get("video_count", 0),
+                    "transcripts": []
+                }
+
+                for video in data.get("videos", []):
+                    vid_id = video.get("video_id")
+                    if vid_id:
+                        playlist_videos[vid_id] = playlist_id
+
+    # Load all transcripts and group them
+    ungrouped = []
+
+    for transcript_file in sorted(TRANSCRIPTS_DIR.glob("*.json")):
+        with open(transcript_file) as f:
+            data = json.load(f)
+            video_id = data.get("video_id")
+
+            transcript_info = {
+                "video_id": video_id,
+                "title": data.get("title"),
+                "word_count": data.get("word_count", 0),
+                "method": data.get("method"),
+                "transcribed_at": data.get("transcribed_at"),
+            }
+
+            # Find which playlist this belongs to
+            if video_id in playlist_videos:
+                playlist_id = playlist_videos[video_id]
+                if playlist_id in playlist_info:
+                    playlist_info[playlist_id]["transcripts"].append(transcript_info)
+            else:
+                ungrouped.append(transcript_info)
+
+    # Convert to list and sort by tier, then by title
+    playlists = sorted(
+        [p for p in playlist_info.values() if p["transcripts"]],
+        key=lambda x: (x["tier"], x["title"])
+    )
+
+    # Add transcript counts
+    for p in playlists:
+        p["transcript_count"] = len(p["transcripts"])
+        # Sort transcripts by date
+        p["transcripts"] = sorted(
+            p["transcripts"],
+            key=lambda x: x.get("transcribed_at") or "",
+            reverse=True
+        )
+
+    total_transcripts = sum(len(p["transcripts"]) for p in playlists) + len(ungrouped)
+
+    return {
+        "playlists": playlists,
+        "ungrouped": ungrouped,
+        "total": total_transcripts
     }
 
 
@@ -347,18 +426,23 @@ async def analyze_symbol(
     """
     Analyze a symbol using Smart Money methodology.
     Returns detected concepts, market structure, and potential signal.
+    Only returns signals/patterns if ML models are trained.
     """
     try:
         from .services.free_market_data import FreeMarketDataService
 
         market_service = FreeMarketDataService()
-        analyzer = get_analyzer()
         kb = get_knowledge_base()
-        sig_gen = get_signal_generator()
+
+        # Check if ML is trained - if not, return empty analysis
+        is_ml_trained = False
+        if kb:
+            progress = kb.get_learning_progress()
+            is_ml_trained = progress.get('n_transcripts_processed', 0) > 0 or progress.get('n_training_runs', 0) > 0
 
         tf_list = [tf.strip() for tf in timeframes.split(",")]
 
-        # Fetch market data
+        # Fetch market data (always needed for price display)
         market_data = {}
         for tf in tf_list:
             df = market_service.get_ohlcv(symbol, tf, limit=200)
@@ -367,6 +451,23 @@ async def analyze_symbol(
 
         if not market_data:
             raise HTTPException(status_code=404, detail=f"No market data available for {symbol}")
+
+        # If ML is not trained, return minimal response without signals/patterns
+        if not is_ml_trained:
+            return {
+                'symbol': symbol,
+                'timestamp': datetime.utcnow().isoformat(),
+                'timeframes': list(market_data.keys()),
+                'detected_concepts': [],
+                'analyses': {},
+                'signal': None,
+                'patterns': [],
+                'ml_status': 'not_trained',
+                'message': 'ML models not trained. Train from a playlist to enable Smart Money analysis.'
+            }
+
+        analyzer = get_analyzer()
+        sig_gen = get_signal_generator()
 
         # Run Smart Money analysis
         analyses = {}
@@ -435,6 +536,7 @@ async def analyze_symbol(
             },
             'signal': signal,
             'patterns': patterns,
+            'ml_status': 'trained',
         }
 
     except ImportError as e:
@@ -447,19 +549,42 @@ async def analyze_symbol(
 async def quick_signal(symbol: str):
     """
     Get a quick signal for a symbol (single timeframe analysis).
-    Faster than full analysis.
+    Faster than full analysis. Only works if ML is trained.
     """
     try:
         from .services.free_market_data import FreeMarketDataService
 
         market_service = FreeMarketDataService()
-        analyzer = get_analyzer()
+        kb = get_knowledge_base()
+
+        # Check if ML is trained
+        is_ml_trained = False
+        if kb:
+            progress = kb.get_learning_progress()
+            is_ml_trained = progress.get('n_transcripts_processed', 0) > 0 or progress.get('n_training_runs', 0) > 0
 
         # Get H1 data
         df = market_service.get_ohlcv(symbol, 'H1', limit=100)
 
         if df is None or df.empty:
             raise HTTPException(status_code=404, detail=f"No data for {symbol}")
+
+        current_price = float(df['close'].iloc[-1])
+
+        # If ML not trained, return minimal response
+        if not is_ml_trained:
+            return {
+                'symbol': symbol,
+                'timestamp': datetime.utcnow().isoformat(),
+                'bias': 'neutral',
+                'zone': 'neutral',
+                'concepts': [],
+                'summary': 'ML not trained - train from a playlist to enable analysis',
+                'current_price': current_price,
+                'ml_status': 'not_trained',
+            }
+
+        analyzer = get_analyzer()
 
         # Quick analysis
         if analyzer:
@@ -472,7 +597,8 @@ async def quick_signal(symbol: str):
                 'zone': analysis.get('premium_discount', {}).get('zone', 'neutral'),
                 'concepts': analysis.get('detected_concepts', []),
                 'summary': analysis.get('summary', 'Analysis unavailable'),
-                'current_price': float(df['close'].iloc[-1]),
+                'current_price': current_price,
+                'ml_status': 'trained',
             }
         else:
             return {
@@ -482,7 +608,8 @@ async def quick_signal(symbol: str):
                 'zone': 'neutral',
                 'concepts': [],
                 'summary': 'Analyzer not available',
-                'current_price': float(df['close'].iloc[-1]),
+                'current_price': current_price,
+                'ml_status': 'trained',
             }
 
     except Exception as e:
@@ -496,9 +623,11 @@ async def get_ml_status():
 
     if kb:
         progress = kb.get_learning_progress()
+        # Check if models are actually trained (not just loaded empty)
+        is_trained = progress.get('n_transcripts_processed', 0) > 0 or progress.get('n_training_runs', 0) > 0
         return {
-            'status': 'operational',
-            'knowledge_base_loaded': True,
+            'status': 'operational' if is_trained else 'not_trained',
+            'knowledge_base_loaded': is_trained,
             **progress
         }
     else:
@@ -590,6 +719,234 @@ async def reset_ml_state():
         'status': 'success',
         'message': 'ML state reset. All cached models cleared.'
     }
+
+
+@app.post("/api/ml/whitewash")
+async def whitewash_ml():
+    """
+    Complete ML whitewash - deletes all trained models and resets state.
+    Transcripts are preserved but all training is wiped clean.
+    """
+    global _knowledge_base, _signal_generator, _analyzer
+    import shutil
+
+    # Clear all cached instances
+    _knowledge_base = None
+    _signal_generator = None
+    _analyzer = None
+
+    # Delete ML model files
+    ml_models_dir = DATA_DIR / "ml_models"
+    deleted_files = []
+
+    if ml_models_dir.exists():
+        for model_file in ml_models_dir.glob("*"):
+            if model_file.is_file():
+                deleted_files.append(model_file.name)
+                model_file.unlink()
+
+    return {
+        'status': 'success',
+        'message': 'ML whitewash complete. All models deleted, transcripts preserved.',
+        'deleted_files': deleted_files
+    }
+
+
+# Training status for selective training
+_selective_training_status = {}
+
+
+@app.post("/api/ml/train/playlist/{playlist_id}")
+async def train_ml_from_playlist(playlist_id: str):
+    """Start ML training using only transcripts from a specific playlist"""
+    import uuid
+
+    # Verify playlist exists and has transcripts
+    playlist_file = PLAYLISTS_DIR / f"{playlist_id}.json"
+    if not playlist_file.exists():
+        raise HTTPException(status_code=404, detail="Playlist not found")
+
+    with open(playlist_file) as f:
+        playlist_data = json.load(f)
+
+    # Get video IDs from playlist
+    video_ids = [v.get("video_id") for v in playlist_data.get("videos", []) if v.get("video_id")]
+
+    # Check which have transcripts
+    available_transcripts = []
+    for vid in video_ids:
+        transcript_file = TRANSCRIPTS_DIR / f"{vid}.json"
+        if transcript_file.exists():
+            available_transcripts.append(vid)
+
+    if not available_transcripts:
+        raise HTTPException(status_code=400, detail="No transcripts available for this playlist")
+
+    # Create job
+    job_id = str(uuid.uuid4())[:8]
+    _selective_training_status[job_id] = {
+        "status": "starting",
+        "message": "Initializing training...",
+        "playlist_id": playlist_id,
+        "playlist_title": playlist_data.get("title"),
+        "total_transcripts": len(available_transcripts),
+        "progress": 0,
+        "started_at": datetime.utcnow().isoformat()
+    }
+
+    # Start background training in a separate thread (not blocking event loop)
+    import threading
+    thread = threading.Thread(
+        target=train_from_playlist_worker,
+        args=(job_id, playlist_id, available_transcripts, playlist_data.get("title")),
+        daemon=True
+    )
+    thread.start()
+
+    return {
+        "status": "started",
+        "job_id": job_id,
+        "playlist_title": playlist_data.get("title"),
+        "transcript_count": len(available_transcripts)
+    }
+
+
+def train_from_playlist_worker(job_id: str, playlist_id: str, video_ids: list, playlist_title: str):
+    """Background worker for selective playlist training with per-transcript progress"""
+    global _selective_training_status, _knowledge_base
+
+    try:
+        total = len(video_ids)
+        _selective_training_status[job_id]["status"] = "loading"
+        _selective_training_status[job_id]["message"] = f"Loading transcripts from '{playlist_title}'..."
+        _selective_training_status[job_id]["current_transcript"] = 0
+        _selective_training_status[job_id]["transcripts_loaded"] = []
+
+        from .ml.training_pipeline import SmartMoneyKnowledgeBase
+
+        # Load transcripts one by one with progress updates
+        transcripts = []
+        for i, vid in enumerate(video_ids):
+            transcript_file = TRANSCRIPTS_DIR / f"{vid}.json"
+            if transcript_file.exists():
+                try:
+                    with open(transcript_file) as f:
+                        transcript = json.load(f)
+                        if transcript.get('full_text'):
+                            transcripts.append(transcript)
+                            title = transcript.get('title', vid)[:50]
+                            _selective_training_status[job_id]["current_transcript"] = i + 1
+                            _selective_training_status[job_id]["current_title"] = title
+                            _selective_training_status[job_id]["message"] = f"Loaded: {title}..."
+                            _selective_training_status[job_id]["transcripts_loaded"].append({
+                                "video_id": vid,
+                                "title": title,
+                                "status": "loaded"
+                            })
+                except Exception as e:
+                    _selective_training_status[job_id]["transcripts_loaded"].append({
+                        "video_id": vid,
+                        "title": vid,
+                        "status": "error",
+                        "error": str(e)
+                    })
+
+        if not transcripts:
+            _selective_training_status[job_id]["status"] = "error"
+            _selective_training_status[job_id]["message"] = "No valid transcripts found"
+            return
+
+        # Now train with all loaded transcripts
+        _selective_training_status[job_id]["status"] = "training"
+        _selective_training_status[job_id]["message"] = f"Training ML on {len(transcripts)} transcripts..."
+        _selective_training_status[job_id]["training_phase"] = "initializing"
+
+        # Load existing knowledge base to get previously trained video IDs
+        kb = SmartMoneyKnowledgeBase(str(DATA_DIR))
+        kb.load()  # Load saved data including trained_video_ids
+
+        # Get previously trained transcripts and merge with new ones
+        previously_trained_ids = set(kb.trained_video_ids) if kb.trained_video_ids else set()
+        new_video_ids = set(t.get('video_id') for t in transcripts)
+
+        # If there are previously trained transcripts not in current batch, load them too
+        all_transcripts = list(transcripts)  # Start with new transcripts
+        for vid in previously_trained_ids:
+            if vid not in new_video_ids:
+                transcript_file = TRANSCRIPTS_DIR / f"{vid}.json"
+                if transcript_file.exists():
+                    try:
+                        with open(transcript_file) as f:
+                            old_transcript = json.load(f)
+                            if old_transcript.get('full_text'):
+                                all_transcripts.append(old_transcript)
+                    except:
+                        pass
+
+        _selective_training_status[job_id]["message"] = f"Training ML on {len(all_transcripts)} total transcripts ({len(transcripts)} new + {len(all_transcripts) - len(transcripts)} existing)..."
+
+        # Update progress during training phases
+        _selective_training_status[job_id]["training_phase"] = "extracting_concepts"
+        _selective_training_status[job_id]["message"] = "Extracting Smart Money concepts..."
+
+        # Train with all transcripts (new + previously trained)
+        results = kb.train(transcripts=all_transcripts, incremental=False)
+
+        # Store all trained video IDs
+        kb.trained_video_ids = list(set(t.get('video_id') for t in all_transcripts))
+
+        _selective_training_status[job_id]["training_phase"] = "saving"
+        _selective_training_status[job_id]["message"] = "Saving trained models..."
+        kb.save()
+
+        # Reload global instance
+        _knowledge_base = kb
+
+        _selective_training_status[job_id]["status"] = "completed"
+        _selective_training_status[job_id]["message"] = f"Training complete! Processed {len(transcripts)} transcripts."
+        _selective_training_status[job_id]["training_phase"] = "done"
+        _selective_training_status[job_id]["results"] = {
+            "n_transcripts": results.get("n_transcripts", len(transcripts)),
+            "classifier_f1": results.get("components", {}).get("classifier", {}).get("ensemble_f1"),
+            "concepts_defined": results.get("components", {}).get("knowledge_base", {}).get("n_concepts"),
+        }
+        _selective_training_status[job_id]["completed_at"] = datetime.utcnow().isoformat()
+
+    except Exception as e:
+        import traceback
+        error_msg = f"Training failed: {str(e)}"
+        print(f"[Training Error] {error_msg}")
+        print(traceback.format_exc())
+        _selective_training_status[job_id]["status"] = "error"
+        _selective_training_status[job_id]["message"] = error_msg
+        _selective_training_status[job_id]["traceback"] = traceback.format_exc()
+
+
+@app.get("/api/ml/train/status/{job_id}")
+async def get_training_status(job_id: str):
+    """Get status of a selective training job"""
+    if job_id not in _selective_training_status:
+        raise HTTPException(status_code=404, detail="Training job not found")
+    return _selective_training_status[job_id]
+
+
+@app.get("/api/ml/train/stream/{job_id}")
+async def stream_training_status(job_id: str):
+    """SSE stream for training progress"""
+    from sse_starlette.sse import EventSourceResponse
+
+    async def event_generator():
+        while True:
+            if job_id in _selective_training_status:
+                status = _selective_training_status[job_id]
+                yield {"data": json.dumps(status)}
+
+                if status.get("status") in ["completed", "error"]:
+                    break
+
+            await asyncio.sleep(0.5)
+
+    return EventSourceResponse(event_generator())
 
 
 @app.get("/api/market/price/{symbol}")
@@ -685,6 +1042,9 @@ async def get_analysis_status():
     sig_gen = get_signal_generator()
     signals_generated = sig_gen.signals_generated if sig_gen else 0
 
+    # Use n_trained_videos if available (more accurate), fallback to n_transcripts_processed
+    n_trained = ml_status.get('n_trained_videos', ml_status.get('n_transcripts_processed', 0))
+
     return {
         "status": "operational",
         "playlists_loaded": len(list(PLAYLISTS_DIR.glob("*.json"))) if PLAYLISTS_DIR.exists() else 0,
@@ -692,7 +1052,8 @@ async def get_analysis_status():
         "transcripts_ready": transcript_count,
         "transcription_progress": f"{transcript_count}/{total_videos}" if total_videos else "0/0",
         "concepts_loaded": 40,  # From taxonomy
-        "ml_trained": ml_status.get('n_transcripts_processed', 0) > 0,
+        "ml_trained": n_trained > 0,
+        "n_transcripts_trained": n_trained,
         "signals_generated": signals_generated,
         "last_updated": datetime.utcnow().isoformat()
     }
