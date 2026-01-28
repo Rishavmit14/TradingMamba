@@ -126,6 +126,12 @@ class Signal:
     concept_ids_used: List[str] = field(default_factory=list)
     rule_ids_used: List[str] = field(default_factory=list)
 
+    # ML Knowledge tracking
+    ml_patterns_detected: List[str] = field(default_factory=list)  # Patterns ML found
+    ml_patterns_not_learned: List[str] = field(default_factory=list)  # Patterns ML can't detect yet
+    ml_confidence_scores: Dict[str, float] = field(default_factory=dict)  # Confidence per pattern
+    ml_knowledge_status: str = ""  # Summary of ML knowledge state
+
     def calculate_risk_reward(self) -> float:
         """Calculate risk:reward ratio"""
         if self.direction == TradingDirection.WAIT:
@@ -166,6 +172,11 @@ class Signal:
             "created_at": self.created_at.isoformat(),
             "valid_until": self.valid_until.isoformat(),
             "analysis_text": self.analysis_text,
+            # ML Knowledge info
+            "ml_patterns_detected": self.ml_patterns_detected,
+            "ml_patterns_not_learned": self.ml_patterns_not_learned,
+            "ml_confidence_scores": self.ml_confidence_scores,
+            "ml_knowledge_status": self.ml_knowledge_status,
         }
 
     def to_notification_message(self) -> str:

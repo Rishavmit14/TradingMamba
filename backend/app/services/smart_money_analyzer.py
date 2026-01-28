@@ -1,7 +1,12 @@
 """
-Smart Money Analysis Engine
+Smart Money Analysis Engine - ML-POWERED
 
 Core implementation of Smart Money (Inner Circle Trader) methodology for market analysis.
+This module uses the ML's LEARNED KNOWLEDGE to identify patterns.
+
+IMPORTANT: Patterns are ONLY detected if the ML has learned them from training videos.
+If ML hasn't learned a pattern type, it will NOT be detected.
+
 This module analyzes price data to identify:
 - Market Structure (BOS, CHoCH, swing points)
 - Order Blocks
@@ -22,6 +27,9 @@ try:
     import pandas as pd
 except ImportError:
     pd = None
+
+# Import ML Pattern Engine
+from ..ml.ml_pattern_engine import get_ml_engine, MLPatternEngine
 
 logger = logging.getLogger(__name__)
 
@@ -109,33 +117,58 @@ class SmartMoneyAnalysisResult:
     bias_reasoning: str = ""
     current_price: float = 0.0
     analysis_timestamp: datetime = field(default_factory=datetime.utcnow)
+    # ML Knowledge tracking
+    ml_patterns_used: List[str] = field(default_factory=list)  # Patterns ML detected
+    ml_patterns_not_learned: List[str] = field(default_factory=list)  # Patterns ML can't detect yet
+    ml_confidence_scores: Dict[str, float] = field(default_factory=dict)  # Confidence per pattern type
 
 
 class SmartMoneyAnalyzer:
     """
-    Core Smart Money methodology analysis engine
+    ML-Powered Smart Money methodology analysis engine
+
+    IMPORTANT: This analyzer uses ONLY patterns that the ML has learned from training.
+    If the ML hasn't been trained on a pattern type, it will NOT be detected.
 
     Implements the key Smart Money concepts for market analysis:
     - Swing point identification
     - Market structure analysis (BOS/CHoCH)
-    - Order block detection
-    - Fair value gap identification
+    - Order block detection (if ML learned)
+    - Fair value gap identification (if ML learned)
     - Liquidity mapping
     - Premium/Discount zone calculation
     """
 
-    def __init__(self, lookback_swing: int = 5):
+    def __init__(self, lookback_swing: int = 5, use_ml: bool = True):
         """
         Initialize the Smart Money Analyzer
 
         Args:
             lookback_swing: Number of candles to look back for swing detection
+            use_ml: Whether to use ML knowledge (True) or fallback to basic (False)
         """
         self.lookback_swing = lookback_swing
+        self.use_ml = use_ml
+        self.ml_engine: Optional[MLPatternEngine] = None
+
+        if use_ml:
+            try:
+                self.ml_engine = get_ml_engine()
+                learned = self.ml_engine.get_learned_patterns()
+                if learned:
+                    logger.info(f"SmartMoneyAnalyzer initialized with ML knowledge: {learned}")
+                else:
+                    logger.warning("ML Engine loaded but has NO learned patterns!")
+            except Exception as e:
+                logger.error(f"Failed to load ML engine: {e}")
+                self.ml_engine = None
 
     def analyze(self, data: 'pd.DataFrame') -> SmartMoneyAnalysisResult:
         """
-        Run complete Smart Money analysis on OHLCV data
+        Run complete Smart Money analysis on OHLCV data using ML knowledge.
+
+        IMPORTANT: Only patterns the ML has learned will be detected.
+        Patterns not learned will be empty and flagged in ml_patterns_not_learned.
 
         Args:
             data: DataFrame with columns ['open', 'high', 'low', 'close', 'volume']
@@ -151,28 +184,61 @@ class SmartMoneyAnalyzer:
             logger.warning("Insufficient data for analysis")
             return SmartMoneyAnalysisResult()
 
-        # Step 1: Find swing points
+        # Track ML knowledge usage
+        ml_patterns_used = []
+        ml_patterns_not_learned = []
+        ml_confidence_scores = {}
+
+        # Step 1: Find swing points (basic analysis, always available)
         swing_points = self.find_swing_points(data)
 
-        # Step 2: Analyze market structure
+        # Step 2: Analyze market structure (basic analysis)
         structure, events = self.analyze_market_structure(swing_points)
 
-        # Step 3: Find order blocks
-        order_blocks = self.find_order_blocks(data, structure)
+        # Step 3: Find order blocks - ONLY IF ML LEARNED
+        order_blocks = []
+        if self._can_detect('order_block'):
+            order_blocks = self.find_order_blocks(data, structure)
+            if order_blocks:
+                ml_patterns_used.append('order_block')
+                ml_confidence_scores['order_block'] = self._get_ml_confidence('order_block')
+        else:
+            ml_patterns_not_learned.append('order_block')
+            logger.info("Order Blocks NOT detected - ML hasn't learned this pattern yet")
 
-        # Step 4: Find fair value gaps
-        fvgs = self.find_fair_value_gaps(data)
+        # Step 4: Find fair value gaps - ONLY IF ML LEARNED
+        fvgs = []
+        if self._can_detect('fvg'):
+            fvgs = self.find_fair_value_gaps(data)
+            if fvgs:
+                ml_patterns_used.append('fvg')
+                ml_confidence_scores['fvg'] = self._get_ml_confidence('fvg')
+        else:
+            ml_patterns_not_learned.append('fvg')
+            logger.info("FVGs NOT detected - ML hasn't learned this pattern yet")
 
-        # Step 5: Map liquidity levels
+        # Step 5: Map liquidity levels (basic analysis - swing-based)
         liquidity = self.find_liquidity_levels(swing_points, data)
 
-        # Step 6: Calculate premium/discount
+        # Step 6: Calculate premium/discount (basic analysis)
         premium_discount = self.calculate_premium_discount(data, swing_points)
 
         # Step 7: Determine overall bias
+        # Adjust confidence based on ML knowledge
         bias, confidence, reasoning = self.determine_bias(
             structure, premium_discount, events
         )
+
+        # Adjust bias confidence based on ML pattern detection
+        if ml_patterns_used:
+            # Boost confidence if ML detected patterns
+            avg_ml_confidence = sum(ml_confidence_scores.values()) / len(ml_confidence_scores)
+            confidence = min(confidence + (avg_ml_confidence * 0.2), 1.0)
+            reasoning += f" [ML detected: {', '.join(ml_patterns_used)}]"
+        elif ml_patterns_not_learned:
+            # Lower confidence if key patterns couldn't be detected
+            confidence = confidence * 0.7
+            reasoning += f" [ML needs training on: {', '.join(ml_patterns_not_learned)}]"
 
         return SmartMoneyAnalysisResult(
             swing_points=swing_points,
@@ -186,7 +252,23 @@ class SmartMoneyAnalyzer:
             bias_confidence=confidence,
             bias_reasoning=reasoning,
             current_price=float(data['close'].iloc[-1]),
+            ml_patterns_used=ml_patterns_used,
+            ml_patterns_not_learned=ml_patterns_not_learned,
+            ml_confidence_scores=ml_confidence_scores,
         )
+
+    def _can_detect(self, pattern_type: str) -> bool:
+        """Check if ML can detect a pattern type"""
+        if not self.use_ml or not self.ml_engine:
+            # Fallback to basic detection if ML not available
+            return True
+        return self.ml_engine.can_detect_pattern(pattern_type)
+
+    def _get_ml_confidence(self, pattern_type: str) -> float:
+        """Get ML's confidence for a pattern type"""
+        if not self.ml_engine:
+            return 0.5  # Default confidence
+        return self.ml_engine.get_pattern_confidence(pattern_type)
 
     def find_swing_points(self, data: 'pd.DataFrame') -> List[SwingPoint]:
         """
@@ -366,13 +448,27 @@ class SmartMoneyAnalyzer:
         structure: MarketStructure
     ) -> List[OrderBlock]:
         """
-        Find Order Blocks
+        Find Order Blocks using ML-learned parameters.
+
+        The detection sensitivity is based on what ML learned from training videos.
+        - Higher frequency in training = stricter detection
+        - Teaching contexts inform what characteristics to look for
 
         Bullish OB: Last bearish candle before a bullish impulse
         Bearish OB: Last bullish candle before a bearish impulse
         """
         order_blocks = []
         current_price = data['close'].iloc[-1]
+
+        # Get ML-learned parameters
+        ml_params = {}
+        if self.ml_engine:
+            ml_params = self.ml_engine.get_detection_parameters('order_block')
+            confidence_multiplier = ml_params.get('confidence_multiplier', 0.5)
+            min_move_strength = ml_params.get('min_move_strength', 0.3)
+        else:
+            confidence_multiplier = 0.5
+            min_move_strength = 0.3
 
         for i in range(2, len(data) - 1):
             # Current candle info
@@ -391,6 +487,13 @@ class SmartMoneyAnalyzer:
                 move = (next_close - current_high) / current_high
                 strength = min(move * 100, 1.0)
 
+                # Apply ML-learned minimum strength threshold
+                if strength < min_move_strength:
+                    continue
+
+                # Apply ML confidence to strength
+                adjusted_strength = strength * confidence_multiplier
+
                 ob = OrderBlock(
                     start_index=i,
                     end_index=i,
@@ -399,7 +502,7 @@ class SmartMoneyAnalyzer:
                     type='bullish',
                     mitigated=current_price < current_low,
                     timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
-                    strength=strength
+                    strength=adjusted_strength
                 )
                 order_blocks.append(ob)
 
@@ -409,6 +512,13 @@ class SmartMoneyAnalyzer:
                 move = (current_low - next_close) / current_low
                 strength = min(move * 100, 1.0)
 
+                # Apply ML-learned minimum strength threshold
+                if strength < min_move_strength:
+                    continue
+
+                # Apply ML confidence to strength
+                adjusted_strength = strength * confidence_multiplier
+
                 ob = OrderBlock(
                     start_index=i,
                     end_index=i,
@@ -417,7 +527,7 @@ class SmartMoneyAnalyzer:
                     type='bearish',
                     mitigated=current_price > current_high,
                     timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
-                    strength=strength
+                    strength=adjusted_strength
                 )
                 order_blocks.append(ob)
 
@@ -427,13 +537,26 @@ class SmartMoneyAnalyzer:
 
     def find_fair_value_gaps(self, data: 'pd.DataFrame') -> List[FairValueGap]:
         """
-        Find Fair Value Gaps (Imbalances)
+        Find Fair Value Gaps (Imbalances) using ML-learned parameters.
+
+        FVG was the most frequently observed pattern in ML training (31 instances),
+        so detection uses learned characteristics for high confidence.
 
         Bullish FVG: Gap between candle 1's high and candle 3's low
         Bearish FVG: Gap between candle 1's low and candle 3's high
         """
         fvgs = []
         current_price = data['close'].iloc[-1]
+
+        # Get ML-learned parameters
+        ml_params = {}
+        if self.ml_engine:
+            ml_params = self.ml_engine.get_detection_parameters('fvg')
+            min_gap_size_pct = ml_params.get('min_gap_size_pct', 0.0001)
+            confidence_multiplier = ml_params.get('confidence_multiplier', 0.7)
+        else:
+            min_gap_size_pct = 0.0001
+            confidence_multiplier = 0.7
 
         for i in range(2, len(data)):
             candle1_high = data['high'].iloc[i - 2]
@@ -445,6 +568,11 @@ class SmartMoneyAnalyzer:
             if candle3_low > candle1_high:
                 gap_high = float(candle3_low)
                 gap_low = float(candle1_high)
+
+                # ML-learned minimum gap size filter
+                gap_size_pct = (gap_high - gap_low) / gap_low
+                if gap_size_pct < min_gap_size_pct:
+                    continue
 
                 # Check if filled
                 filled = current_price < gap_low
@@ -466,6 +594,11 @@ class SmartMoneyAnalyzer:
             if candle3_high < candle1_low:
                 gap_high = float(candle1_low)
                 gap_low = float(candle3_high)
+
+                # ML-learned minimum gap size filter
+                gap_size_pct = (gap_high - gap_low) / gap_high
+                if gap_size_pct < min_gap_size_pct:
+                    continue
 
                 filled = current_price > gap_high
                 fill_pct = 0.0

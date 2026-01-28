@@ -1396,6 +1396,52 @@ async def get_visual_knowledge():
     }
 
 
+@app.get("/api/ml/pattern-knowledge")
+async def get_ml_pattern_knowledge():
+    """
+    Get ML's pattern knowledge status - what it can and cannot detect for live charts.
+
+    This endpoint shows:
+    - Which patterns the ML has learned and can detect
+    - Which patterns the ML hasn't learned yet (needs training)
+    - Confidence levels for each learned pattern
+    - Training sources (which videos contributed to learning)
+
+    IMPORTANT: Live charts ONLY use patterns the ML has learned.
+    If a pattern isn't in the 'learned' list, it won't be detected.
+    """
+    try:
+        from .ml.ml_pattern_engine import get_ml_engine
+
+        engine = get_ml_engine()
+        summary = engine.get_knowledge_summary()
+
+        return {
+            "status": summary.get('status', 'unknown'),
+            "message": summary.get('message', ''),
+            "patterns_learned": summary.get('patterns_learned', []),
+            "patterns_not_learned": summary.get('patterns_not_learned', []),
+            "training_stats": {
+                "total_videos": summary.get('total_videos', 0),
+                "total_frames_analyzed": summary.get('total_frames', 0),
+                "chart_frames": summary.get('chart_frames', 0),
+                "last_trained": summary.get('last_trained'),
+            },
+            "training_sources": summary.get('training_sources', []),
+            "usage_info": {
+                "note": "Live charts ONLY detect patterns from 'patterns_learned' list.",
+                "to_learn_more": "Train more videos using Vision Training to expand ML knowledge.",
+            }
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "patterns_learned": [],
+            "patterns_not_learned": ["fvg", "order_block", "breaker_block", "market_structure"],
+        }
+
+
 @app.get("/api/market/price/{symbol}")
 async def get_price(symbol: str):
     """Get current price for a symbol"""

@@ -1,7 +1,12 @@
 """
-Signal Generator Service
+Signal Generator Service - ML-POWERED
 
-Combines Smart Money analysis with ML predictions to generate trading signals.
+Combines Smart Money analysis with ML's LEARNED knowledge to generate trading signals.
+
+IMPORTANT: Signals are generated using ONLY patterns the ML has learned from training.
+The signal will clearly indicate:
+- Which patterns ML detected (from its training)
+- Which patterns ML hasn't learned yet (needs more training)
 """
 
 import logging
@@ -24,20 +29,23 @@ from ..models.signal import (
     SignalFactor,
     KeyLevel
 )
+from ..ml.ml_pattern_engine import get_ml_engine
 
 logger = logging.getLogger(__name__)
 
 
 class SignalGenerator:
     """
-    Generate trading signals based on Smart Money analysis
+    ML-Powered Trading Signal Generator
 
-    Signal generation follows Smart Money methodology:
+    Signal generation uses the ML's LEARNED knowledge:
     1. Determine higher timeframe bias
-    2. Identify valid entry zones (Order Blocks, FVGs)
+    2. Identify valid entry zones (ONLY patterns ML learned)
     3. Confirm with market structure
     4. Calculate risk levels
-    5. Score the setup
+    5. Score the setup based on ML confidence
+
+    If ML hasn't been trained, signals will be limited and flagged.
     """
 
     def __init__(
@@ -45,9 +53,10 @@ class SignalGenerator:
         min_confidence: float = 0.65,
         min_risk_reward: float = 2.0
     ):
-        self.analyzer = SmartMoneyAnalyzer()
+        self.analyzer = SmartMoneyAnalyzer(use_ml=True)
         self.min_confidence = min_confidence
         self.min_risk_reward = min_risk_reward
+        self.ml_engine = get_ml_engine()
 
     def generate_signal(
         self,
@@ -104,6 +113,9 @@ class SignalGenerator:
         # Calculate validity period
         valid_until = self._calculate_validity(timeframe)
 
+        # Generate ML knowledge status message
+        ml_status = self._generate_ml_status(analysis)
+
         return Signal(
             id=str(uuid4()),
             symbol=symbol,
@@ -144,6 +156,11 @@ class SignalGenerator:
             valid_until=valid_until,
             concept_ids_used=[],  # TODO: Link to concepts
             rule_ids_used=[],  # TODO: Link to rules
+            # ML Knowledge tracking
+            ml_patterns_detected=analysis.ml_patterns_used,
+            ml_patterns_not_learned=analysis.ml_patterns_not_learned,
+            ml_confidence_scores=analysis.ml_confidence_scores,
+            ml_knowledge_status=ml_status,
         )
 
     def _calculate_signal_score(
@@ -509,3 +526,19 @@ class SignalGenerator:
             return "London Close"
 
         return None
+
+    def _generate_ml_status(self, analysis: SmartMoneyAnalysisResult) -> str:
+        """Generate a human-readable ML knowledge status"""
+        if not analysis.ml_patterns_used and analysis.ml_patterns_not_learned:
+            return "⚠️ ML has NOT been trained yet. Signal based on basic structure only. Train on videos to enable pattern detection."
+
+        if analysis.ml_patterns_used and not analysis.ml_patterns_not_learned:
+            patterns = ', '.join(analysis.ml_patterns_used)
+            return f"✅ ML-powered signal. Patterns detected: {patterns}"
+
+        if analysis.ml_patterns_used and analysis.ml_patterns_not_learned:
+            detected = ', '.join(analysis.ml_patterns_used)
+            missing = ', '.join(analysis.ml_patterns_not_learned)
+            return f"⚡ Partial ML coverage. Detected: {detected}. Needs training: {missing}"
+
+        return "ℹ️ Basic analysis. No ML patterns applicable for this setup."
