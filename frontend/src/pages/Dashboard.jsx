@@ -25,9 +25,13 @@ import {
   Trash2,
   FolderOpen,
   ChevronDown,
-  GraduationCap
+  GraduationCap,
+  Eye,
+  Image,
+  Video,
+  Scan
 } from 'lucide-react';
-import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, whitewashML, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus } from '../services/api';
+import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, whitewashML, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus, trainWithVision, trainSingleVideoWithVision, getVisionTrainingStatus, getVisionCapabilities, getVisualKnowledge } from '../services/api';
 
 // Animated Background Orb
 function BackgroundOrb({ className }) {
@@ -806,6 +810,526 @@ function MLTrainingManager({ onTrainingComplete }) {
   );
 }
 
+// Vision Training Manager Component
+function VisionTrainingManager({ onTrainingComplete }) {
+  const [groupedData, setGroupedData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [visionCapabilities, setVisionCapabilities] = useState(null);
+  const [visualKnowledge, setVisualKnowledge] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [expandedPlaylist, setExpandedPlaylist] = useState(null);
+  const [training, setTraining] = useState(false);
+  const [trainingProgress, setTrainingProgress] = useState(null);
+  const [visionProvider, setVisionProvider] = useState('local');
+  const [extractionMode, setExtractionMode] = useState('comprehensive');
+  const [maxFrames, setMaxFrames] = useState(0); // 0 = no limit
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const [grouped, capabilities, knowledge] = await Promise.all([
+        getTranscriptsGrouped(),
+        getVisionCapabilities().catch(() => ({ vision_available: false })),
+        getVisualKnowledge().catch(() => ({ has_vision_knowledge: false }))
+      ]);
+      setGroupedData(grouped);
+      setVisionCapabilities(capabilities);
+      setVisualKnowledge(knowledge);
+    } catch (err) {
+      console.error('Failed to load data:', err);
+      setError('Failed to load data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleTrainWithVision = async (playlist) => {
+    if (!playlist?.id) return;
+
+    setError(null);
+    setTraining(true);
+    setSelectedPlaylist(playlist);
+    setTrainingProgress({
+      status: 'starting',
+      message: 'Initializing vision training...',
+      playlist_title: playlist.title,
+      frames_analyzed: 0,
+      charts_detected: 0,
+      patterns_found: 0
+    });
+
+    try {
+      const result = await trainWithVision(playlist.id, visionProvider, maxFrames, extractionMode);
+
+      if (result.status === 'started' && result.job_id) {
+        // Poll for status
+        const pollStatus = async () => {
+          try {
+            const status = await getVisionTrainingStatus(result.job_id);
+            setTrainingProgress(status);
+
+            if (status.status === 'completed' || status.status === 'error') {
+              setTraining(false);
+              if (status.status === 'completed') {
+                // Refresh visual knowledge
+                const knowledge = await getVisualKnowledge().catch(() => null);
+                if (knowledge) setVisualKnowledge(knowledge);
+                onTrainingComplete?.();
+              }
+            } else {
+              setTimeout(pollStatus, 1000); // Poll every second for vision training
+            }
+          } catch (err) {
+            console.error('Polling error:', err);
+            setTraining(false);
+            setError('Failed to get training status');
+          }
+        };
+
+        pollStatus();
+      }
+    } catch (err) {
+      setError(err.response?.data?.detail || err.message || 'Vision training failed to start');
+      setTraining(false);
+      setTrainingProgress(null);
+    }
+  };
+
+  // Train vision on a SINGLE video
+  const handleTrainSingleVideo = async (video, playlistTitle) => {
+    if (!video?.video_id) return;
+
+    setError(null);
+    setTraining(true);
+    setTrainingProgress({
+      status: 'starting',
+      message: `Initializing vision training for: ${video.title || video.video_id}`,
+      playlist_title: playlistTitle,
+      video_title: video.title,
+      frames_analyzed: 0,
+      charts_detected: 0,
+      patterns_found: 0
+    });
+
+    try {
+      const result = await trainSingleVideoWithVision(video.video_id, visionProvider, maxFrames, extractionMode);
+
+      if (result.status === 'started' && result.job_id) {
+        // Poll for status
+        const pollStatus = async () => {
+          try {
+            const status = await getVisionTrainingStatus(result.job_id);
+            setTrainingProgress({
+              ...status,
+              video_title: video.title
+            });
+
+            if (status.status === 'completed' || status.status === 'error') {
+              setTraining(false);
+              if (status.status === 'completed') {
+                // Refresh visual knowledge
+                const knowledge = await getVisualKnowledge().catch(() => null);
+                if (knowledge) setVisualKnowledge(knowledge);
+                onTrainingComplete?.();
+              }
+            } else {
+              setTimeout(pollStatus, 1000);
+            }
+          } catch (err) {
+            console.error('Polling error:', err);
+            setTraining(false);
+            setError('Failed to get training status');
+          }
+        };
+
+        pollStatus();
+      }
+    } catch (err) {
+      setError(err.response?.data?.detail || err.message || 'Vision training failed to start');
+      setTraining(false);
+      setTrainingProgress(null);
+    }
+  };
+
+  const togglePlaylistExpand = (playlistId) => {
+    setExpandedPlaylist(expandedPlaylist === playlistId ? null : playlistId);
+  };
+
+  if (!visionCapabilities?.vision_available) {
+    return (
+      <div className="glass-card p-6 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" />
+
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
+            <Eye className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-lg">Vision Training</h3>
+            <p className="text-sm text-slate-400">Multimodal video analysis</p>
+          </div>
+        </div>
+
+        <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-amber-300 font-medium">Vision Training Not Available</p>
+              <p className="text-sm text-slate-400 mt-1">
+                Vision training requires additional dependencies and API keys.
+                Set <code className="text-cyan-400">ANTHROPIC_API_KEY</code> or <code className="text-cyan-400">OPENAI_API_KEY</code> environment variable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="glass-card p-6 relative overflow-hidden">
+      {/* Gradient accent */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" />
+
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
+            <Eye className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-lg">Vision Training</h3>
+            <p className="text-sm text-slate-400">Analyze video frames with AI vision</p>
+          </div>
+        </div>
+
+        {/* Vision Knowledge Badge */}
+        {visualKnowledge?.has_vision_knowledge && (
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
+            <Scan className="w-4 h-4 text-cyan-400" />
+            <span className="text-xs text-cyan-300">
+              {visualKnowledge.patterns_learned || 0} patterns learned
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Vision Knowledge Summary */}
+      {visualKnowledge?.has_vision_knowledge && (
+        <div className="mb-6 p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
+          <div className="flex items-center gap-2 mb-3">
+            <Image className="w-4 h-4 text-cyan-400" />
+            <span className="text-sm font-medium text-white">Visual Knowledge Summary</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-cyan-400">{visualKnowledge.videos_with_vision || 0}</p>
+              <p className="text-xs text-slate-400">Videos Analyzed</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-blue-400">{visualKnowledge.visual_concepts || 0}</p>
+              <p className="text-xs text-slate-400">Visual Concepts</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-indigo-400">{visualKnowledge.patterns_learned || 0}</p>
+              <p className="text-xs text-slate-400">Patterns Learned</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-purple-400">{visualKnowledge.key_teaching_moments_count || 0}</p>
+              <p className="text-xs text-slate-400">Teaching Moments</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="p-3 mb-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-red-400 text-sm">
+          <AlertCircle className="w-4 h-4" />
+          {error}
+        </div>
+      )}
+
+      {/* Training Options */}
+      <div className="mb-6 p-4 bg-white/5 border border-white/10 rounded-xl">
+        <p className="text-sm text-slate-400 mb-3">Training Configuration</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs text-slate-500 mb-1">Vision Provider</label>
+            <select
+              value={visionProvider}
+              onChange={(e) => setVisionProvider(e.target.value)}
+              disabled={training}
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-cyan-500/50"
+            >
+              <option value="local">🍎 Local (FREE - Apple Silicon)</option>
+              <option value="anthropic">Claude (Anthropic - Paid)</option>
+              <option value="openai">GPT-4V (OpenAI - Paid)</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs text-slate-500 mb-1">Learning Mode</label>
+            <select
+              value={extractionMode}
+              onChange={(e) => setExtractionMode(e.target.value)}
+              disabled={training}
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-cyan-500/50"
+            >
+              <option value="comprehensive">Comprehensive - Learn Everything (3s intervals)</option>
+              <option value="thorough">Thorough - Good Coverage (5s intervals)</option>
+              <option value="balanced">Balanced - Moderate (10-15s intervals)</option>
+              <option value="selective">Selective - Key Moments Only (fastest)</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Provider Description */}
+        {visionProvider === 'local' && (
+          <div className="mt-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+            <div className="flex items-start gap-2">
+              <span className="text-lg">🆓</span>
+              <div className="text-xs text-emerald-300">
+                <strong>100% FREE!</strong> Uses Ollama + LLaVA locally on your Mac. No API costs, no data sent to cloud.<br/>
+                <span className="text-emerald-400/70">Setup: Install Ollama from ollama.ai, then run: <code className="bg-black/30 px-1 rounded">ollama pull llava</code></span>
+              </div>
+            </div>
+          </div>
+        )}
+        {visionProvider !== 'local' && (
+          <div className="mt-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+            <div className="flex items-start gap-2">
+              <span className="text-lg">💰</span>
+              <div className="text-xs text-amber-300">
+                <strong>Paid API:</strong> Uses cloud API which costs ~$0.01-0.03 per frame analyzed. Comprehensive mode on a 10-min video = ~$2-6.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Learning Mode Description */}
+        <div className="mt-3 p-3 bg-white/[0.02] rounded-lg">
+          <div className="flex items-start gap-2">
+            <GraduationCap className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+            <div className="text-xs text-slate-400">
+              {extractionMode === 'comprehensive' && (
+                <span><strong className="text-cyan-300">Dedicated Student Mode:</strong> Extracts a frame every 3 seconds to capture EVERYTHING shown in the video. The AI will learn every visual detail just like a student watching attentively.</span>
+              )}
+              {extractionMode === 'thorough' && (
+                <span><strong className="text-blue-300">Thorough Mode:</strong> Extracts frames every 5 seconds with extra focus on key teaching moments. Good balance between coverage and efficiency.</span>
+              )}
+              {extractionMode === 'balanced' && (
+                <span><strong className="text-indigo-300">Balanced Mode:</strong> Extracts frames every 10-15 seconds with keyword-triggered boosts. Efficient but may miss some visual details.</span>
+              )}
+              {extractionMode === 'selective' && (
+                <span><strong className="text-purple-300">Selective Mode:</strong> Only extracts frames when demonstrative language is used ("this", "here", "look at"). Fastest but may miss important visual content shown without verbal cues.</span>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Training Progress */}
+      {trainingProgress && (
+        <div className="mb-6 p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              {trainingProgress.status === 'completed' ? (
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
+              ) : trainingProgress.status === 'error' ? (
+                <XCircle className="w-5 h-5 text-red-400" />
+              ) : (
+                <Loader2 className="w-5 h-5 text-cyan-400 animate-spin" />
+              )}
+              <span className="text-sm font-medium text-white capitalize">
+                {trainingProgress.status?.replace('_', ' ')}
+              </span>
+            </div>
+            <span className="text-xs text-slate-400">
+              {trainingProgress.playlist_title}
+            </span>
+          </div>
+
+          <p className="text-sm text-slate-300 mb-3">{trainingProgress.message}</p>
+
+          {/* Vision-specific progress */}
+          {(trainingProgress.status === 'training' || trainingProgress.status === 'loading') && (
+            <div className="mb-3">
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span>Analyzing videos...</span>
+                {trainingProgress.total > 0 && (
+                  <span>{trainingProgress.progress} / {trainingProgress.total}</span>
+                )}
+              </div>
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-500"
+                  style={{
+                    width: trainingProgress.total > 0
+                      ? `${(trainingProgress.progress / trainingProgress.total) * 100}%`
+                      : '0%'
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Vision stats during training */}
+          <div className="grid grid-cols-3 gap-2 mt-3">
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <div className="flex items-center justify-center gap-1">
+                <Video className="w-3 h-3 text-cyan-400" />
+                <p className="text-sm font-bold text-white">{trainingProgress.frames_analyzed || 0}</p>
+              </div>
+              <p className="text-xs text-slate-400">Frames</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <div className="flex items-center justify-center gap-1">
+                <BarChart3 className="w-3 h-3 text-blue-400" />
+                <p className="text-sm font-bold text-white">{trainingProgress.charts_detected || 0}</p>
+              </div>
+              <p className="text-xs text-slate-400">Charts</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <div className="flex items-center justify-center gap-1">
+                <Scan className="w-3 h-3 text-indigo-400" />
+                <p className="text-sm font-bold text-white">{trainingProgress.patterns_found || 0}</p>
+              </div>
+              <p className="text-xs text-slate-400">Patterns</p>
+            </div>
+          </div>
+
+          {/* Current video being analyzed */}
+          {trainingProgress.current_video && (
+            <div className="mt-3 p-2 bg-white/5 rounded-lg">
+              <p className="text-xs text-slate-500 mb-1">Currently analyzing:</p>
+              <p className="text-sm text-white truncate">{trainingProgress.current_video}</p>
+            </div>
+          )}
+
+          {/* Results */}
+          {trainingProgress.status === 'completed' && trainingProgress.results && (
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <p className="text-xs text-slate-500 mb-2">Training Results</p>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2 bg-emerald-500/10 rounded-lg text-center">
+                  <p className="text-lg font-bold text-emerald-400">
+                    {trainingProgress.results.vision_analysis?.total_frames_analyzed || 0}
+                  </p>
+                  <p className="text-xs text-slate-400">Total Frames</p>
+                </div>
+                <div className="p-2 bg-blue-500/10 rounded-lg text-center">
+                  <p className="text-lg font-bold text-blue-400">
+                    {trainingProgress.results.vision_analysis?.chart_frames || 0}
+                  </p>
+                  <p className="text-xs text-slate-400">Chart Frames</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Playlist List */}
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+        </div>
+      ) : groupedData?.playlists?.length > 0 ? (
+        <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2">
+          <p className="text-xs text-slate-500 mb-3">
+            Select a playlist for vision training (analyzes video frames for visual patterns)
+          </p>
+          {groupedData.playlists.map((playlist) => (
+            <div key={playlist.id} className="glass-card-static rounded-lg overflow-hidden">
+              <div
+                className="p-4 flex items-center justify-between cursor-pointer hover:bg-white/[0.05] transition-colors"
+                onClick={() => togglePlaylistExpand(playlist.id)}
+              >
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                    <Video className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-white truncate">{playlist.title}</p>
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <span>{playlist.transcript_count} videos</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleTrainWithVision(playlist);
+                    }}
+                    disabled={training}
+                    className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-lg text-cyan-300 text-xs font-medium hover:bg-cyan-500/30 transition-colors disabled:opacity-50 flex items-center gap-1"
+                  >
+                    <Eye className="w-3 h-3" />
+                    Vision Train
+                  </button>
+                  <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${expandedPlaylist === playlist.id ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+
+              {/* Expanded videos list */}
+              {expandedPlaylist === playlist.id && (
+                <div className="border-t border-white/5 p-3 bg-black/20 max-h-64 overflow-y-auto">
+                  <p className="text-xs text-slate-500 mb-3">
+                    Select a video to train vision on, or train entire playlist:
+                  </p>
+                  <div className="space-y-2">
+                    {playlist.transcripts.map((video, idx) => (
+                      <div
+                        key={video.video_id || idx}
+                        className="flex items-center justify-between p-2 bg-white/[0.03] hover:bg-white/[0.06] rounded-lg transition-colors group"
+                      >
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <div className="w-8 h-8 rounded bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
+                            <Video className="w-4 h-4 text-cyan-400/70" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-white truncate">{video.title || video.video_id}</p>
+                            <p className="text-xs text-slate-500">{video.word_count?.toLocaleString()} words in transcript</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleTrainSingleVideo(video, playlist.title);
+                          }}
+                          disabled={training}
+                          className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded text-cyan-300 text-xs font-medium hover:bg-cyan-500/20 transition-colors disabled:opacity-50 flex items-center gap-1 opacity-70 group-hover:opacity-100"
+                        >
+                          <Eye className="w-3 h-3" />
+                          Train
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <div className="w-16 h-16 rounded-2xl bg-slate-500/10 flex items-center justify-center mx-auto mb-4">
+            <Video className="w-8 h-8 text-slate-500" />
+          </div>
+          <h3 className="text-lg font-semibold text-slate-400 mb-2">No playlists available</h3>
+          <p className="text-sm text-slate-500">
+            Add a YouTube playlist above to enable vision training
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Main Dashboard
 export default function Dashboard() {
   const [status, setStatus] = useState(null);
@@ -992,6 +1516,9 @@ export default function Dashboard() {
 
       {/* ML Training Manager - Full Width */}
       <MLTrainingManager onTrainingComplete={loadStatus} />
+
+      {/* Vision Training Manager - Full Width */}
+      <VisionTrainingManager onTrainingComplete={loadStatus} />
 
       {/* Signal Cards Section */}
       <div>

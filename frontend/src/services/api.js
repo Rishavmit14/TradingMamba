@@ -134,4 +134,92 @@ export const getWebSocketUrl = (symbol) => {
   return `ws://localhost:8000/ws/live/${symbol}`;
 };
 
+// ML Whitewash - Delete all trained models
+export const whitewashML = async () => {
+  const response = await api.post('/ml/whitewash');
+  return response.data;
+};
+
+// Get transcripts grouped by playlist
+export const getTranscriptsGrouped = async () => {
+  const response = await api.get('/transcripts/grouped');
+  return response.data;
+};
+
+// Train ML from specific playlist
+export const trainFromPlaylist = async (playlistId) => {
+  const response = await api.post(`/ml/train/playlist/${playlistId}`);
+  return response.data;
+};
+
+// Get selective training status
+export const getSelectiveTrainingStatus = async (jobId) => {
+  const response = await api.get(`/ml/train/status/${jobId}`);
+  return response.data;
+};
+
+// Stream training progress URL
+export const getTrainingStreamUrl = (jobId) => {
+  return `${API_BASE}/ml/train/stream/${jobId}`;
+};
+
+// ============================================================================
+// Vision Training APIs - Multimodal video analysis
+// ============================================================================
+
+// Start vision training for a playlist
+// visionProvider: 'local' (FREE on M1/M2/M3 Mac), 'anthropic' (paid), 'openai' (paid)
+// extractionMode: 'comprehensive' (every 3s - learns everything), 'thorough' (5s), 'balanced' (10-15s), 'selective' (key moments)
+export const trainWithVision = async (playlistId, visionProvider = 'local', maxFrames = 0, extractionMode = 'comprehensive') => {
+  const response = await api.post(`/ml/train/vision/${playlistId}`, null, {
+    params: { vision_provider: visionProvider, max_frames: maxFrames, extraction_mode: extractionMode },
+  });
+  return response.data;
+};
+
+// Start vision training for a SINGLE video
+export const trainSingleVideoWithVision = async (videoId, visionProvider = 'local', maxFrames = 0, extractionMode = 'comprehensive') => {
+  const response = await api.post(`/ml/train/vision/video/${videoId}`, null, {
+    params: { vision_provider: visionProvider, max_frames: maxFrames, extraction_mode: extractionMode },
+  });
+  return response.data;
+};
+
+// Get vision training status
+export const getVisionTrainingStatus = async (jobId) => {
+  const response = await api.get(`/ml/train/vision/status/${jobId}`);
+  return response.data;
+};
+
+// Stream vision training progress URL
+export const getVisionTrainingStreamUrl = (jobId) => {
+  return `${API_BASE}/ml/train/vision/stream/${jobId}`;
+};
+
+// Get vision capabilities status
+export const getVisionCapabilities = async () => {
+  const response = await api.get('/ml/vision/status');
+  return response.data;
+};
+
+// Get visual pattern examples
+export const getVisualPatternExamples = async (patternType) => {
+  const response = await api.get(`/ml/vision/patterns/${patternType}`);
+  return response.data;
+};
+
+// Get teaching moments
+export const getTeachingMoments = async (concept = null) => {
+  const response = await api.get('/ml/vision/teaching-moments', {
+    params: concept ? { concept } : {},
+  });
+  return response.data;
+};
+
+// Get visual knowledge summary
+export const getVisualKnowledge = async () => {
+  const response = await api.get('/ml/vision/knowledge');
+  return response.data;
+};
+
 export default api;

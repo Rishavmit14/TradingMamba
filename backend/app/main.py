@@ -11,6 +11,7 @@ from typing import List, Optional, Dict, Set
 from datetime import datetime
 import json
 import asyncio
+import os
 from pathlib import Path
 
 from .config import settings
@@ -947,6 +948,452 @@ async def stream_training_status(job_id: str):
             await asyncio.sleep(0.5)
 
     return EventSourceResponse(event_generator())
+
+
+# ============================================================================
+# ML Vision Training - Multimodal video analysis
+# ============================================================================
+
+_vision_training_status = {}
+
+
+@app.post("/api/ml/train/vision/{playlist_id}")
+async def train_ml_with_vision(
+    playlist_id: str,
+    background_tasks: BackgroundTasks,
+    vision_provider: str = Query("local", description="Vision AI provider: 'local' (FREE on M1/M2/M3 Mac), 'anthropic' (paid), 'openai' (paid)"),
+    max_frames: int = Query(0, description="Max frames per video (0 = no limit, recommended for comprehensive)"),
+    extraction_mode: str = Query("comprehensive", description="Learning mode: 'comprehensive' (every 3s - learns everything), 'thorough' (every 5s), 'balanced' (every 10-15s), 'selective' (key moments only)")
+):
+    """
+    Start multimodal ML training that analyzes video frames along with transcripts.
+    This allows the ML to understand visual patterns shown in trading tutorials.
+
+    Vision Providers:
+    - local: FREE! Uses mlx-vlm on Apple Silicon (M1/M2/M3 Mac) - no API costs
+    - anthropic: Claude API (costs money)
+    - openai: GPT-4V API (costs money)
+
+    Extraction Modes:
+    - comprehensive: Like a dedicated student - extracts frame every 3 seconds to miss NOTHING
+    - thorough: Good coverage - extracts every 5 seconds with extra frames at key moments
+    - balanced: Moderate coverage - extracts every 10-15 seconds with keyword boosting
+    - selective: Fastest but may miss content - only extracts at demonstrative moments
+    """
+    import uuid
+    import traceback
+
+    # Create job ID
+    job_id = str(uuid.uuid4())[:8]
+
+    # Initialize status
+    _vision_training_status[job_id] = {
+        "job_id": job_id,
+        "playlist_id": playlist_id,
+        "status": "starting",
+        "progress": 0,
+        "total": 0,
+        "current_video": None,
+        "message": f"Initializing vision training ({extraction_mode} mode)...",
+        "started_at": datetime.utcnow().isoformat(),
+        "vision_provider": vision_provider,
+        "extraction_mode": extraction_mode,
+        "frames_analyzed": 0,
+        "charts_detected": 0,
+        "patterns_found": 0
+    }
+
+    def run_vision_training():
+        """Background task for vision training"""
+        try:
+            from .ml.training_pipeline import SmartMoneyKnowledgeBase
+
+            _vision_training_status[job_id]["status"] = "loading"
+            _vision_training_status[job_id]["message"] = "Loading playlist..."
+
+            # Load playlist
+            playlist_file = PLAYLISTS_DIR / f"{playlist_id}.json"
+            if not playlist_file.exists():
+                _vision_training_status[job_id]["status"] = "error"
+                _vision_training_status[job_id]["error"] = f"Playlist not found: {playlist_id}"
+                return
+
+            with open(playlist_file) as f:
+                playlist_data = json.load(f)
+
+            videos = playlist_data.get("videos", [])
+            video_ids = [v.get("video_id") for v in videos if v.get("video_id")]
+
+            # Load transcripts for these videos
+            transcripts = []
+            for vid in video_ids:
+                transcript_file = TRANSCRIPTS_DIR / f"{vid}.json"
+                if transcript_file.exists():
+                    try:
+                        with open(transcript_file) as f:
+                            transcript = json.load(f)
+                            if transcript.get('full_text'):
+                                transcripts.append(transcript)
+                    except Exception:
+                        pass
+
+            if not transcripts:
+                _vision_training_status[job_id]["status"] = "error"
+                _vision_training_status[job_id]["error"] = "No transcripts found for playlist videos"
+                return
+
+            _vision_training_status[job_id]["total"] = len(transcripts)
+            _vision_training_status[job_id]["message"] = f"Found {len(transcripts)} transcripts with videos"
+
+            # Create knowledge base and run vision training
+            kb = SmartMoneyKnowledgeBase()
+
+            def progress_callback(current, total, message):
+                _vision_training_status[job_id]["progress"] = current
+                _vision_training_status[job_id]["total"] = total
+                _vision_training_status[job_id]["message"] = message
+                _vision_training_status[job_id]["status"] = "training"
+
+                # Extract video title from message
+                if "Analyzing" in message:
+                    _vision_training_status[job_id]["current_video"] = message.replace("Analyzing visual content: ", "")
+
+            # Run multimodal training
+            results = kb.train_with_vision(
+                transcripts=transcripts,
+                vision_provider=vision_provider,
+                max_frames_per_video=max_frames,
+                extraction_mode=extraction_mode,
+                progress_callback=progress_callback
+            )
+
+            # Save the trained model
+            kb.save()
+
+            # Reset global knowledge base to use new model
+            global _knowledge_base
+            _knowledge_base = None
+
+            # Update final status
+            vision_analysis = results.get('vision_analysis', {})
+            _vision_training_status[job_id].update({
+                "status": "completed",
+                "message": "Vision training completed successfully",
+                "completed_at": datetime.utcnow().isoformat(),
+                "frames_analyzed": vision_analysis.get('total_frames_analyzed', 0),
+                "charts_detected": vision_analysis.get('chart_frames', 0),
+                "patterns_found": len(vision_analysis.get('visual_patterns', {})),
+                "visual_concepts": vision_analysis.get('visual_concepts', 0),
+                "results": {
+                    "videos_processed": results.get('n_transcripts', 0),
+                    "concepts_learned": results['components'].get('definitions', {}).get('n_concepts', 0),
+                    "rules_extracted": results['components'].get('rules', {}).get('n_rules', 0),
+                    "vision_analysis": vision_analysis
+                }
+            })
+
+        except Exception as e:
+            _vision_training_status[job_id]["status"] = "error"
+            _vision_training_status[job_id]["error"] = str(e)
+            _vision_training_status[job_id]["traceback"] = traceback.format_exc()
+
+    # Run in background
+    background_tasks.add_task(run_vision_training)
+
+    return {
+        "job_id": job_id,
+        "status": "started",
+        "message": f"Vision training started for playlist {playlist_id}",
+        "vision_provider": vision_provider,
+        "max_frames_per_video": max_frames,
+        "status_url": f"/api/ml/train/vision/status/{job_id}",
+        "stream_url": f"/api/ml/train/vision/stream/{job_id}"
+    }
+
+
+@app.get("/api/ml/train/vision/status/{job_id}")
+async def get_vision_training_status(job_id: str):
+    """Get status of a vision training job"""
+    if job_id not in _vision_training_status:
+        raise HTTPException(status_code=404, detail=f"Job not found: {job_id}")
+    return _vision_training_status[job_id]
+
+
+@app.get("/api/ml/train/vision/stream/{job_id}")
+async def stream_vision_training_status(job_id: str):
+    """SSE stream for vision training progress"""
+    from sse_starlette.sse import EventSourceResponse
+
+    async def event_generator():
+        while True:
+            if job_id in _vision_training_status:
+                status = _vision_training_status[job_id]
+                yield {"data": json.dumps(status)}
+
+                if status.get("status") in ["completed", "error"]:
+                    break
+
+            await asyncio.sleep(0.5)
+
+    return EventSourceResponse(event_generator())
+
+
+@app.post("/api/ml/train/vision/video/{video_id}")
+async def train_single_video_with_vision(
+    video_id: str,
+    background_tasks: BackgroundTasks,
+    vision_provider: str = Query("local", description="Vision AI provider: 'local' (FREE), 'anthropic' (paid), 'openai' (paid)"),
+    max_frames: int = Query(0, description="Max frames (0 = no limit)"),
+    extraction_mode: str = Query("comprehensive", description="Learning mode")
+):
+    """
+    Start vision training for a SINGLE video.
+    Perfect for testing or when you want to train on specific videos.
+    """
+    import uuid
+    import traceback
+
+    # Create job ID
+    job_id = str(uuid.uuid4())[:8]
+
+    # Check if transcript exists for this video
+    transcript_file = TRANSCRIPTS_DIR / f"{video_id}.json"
+    if not transcript_file.exists():
+        raise HTTPException(status_code=404, detail=f"Transcript not found for video: {video_id}")
+
+    # Load transcript to get title
+    with open(transcript_file) as f:
+        transcript_data = json.load(f)
+    video_title = transcript_data.get('title', video_id)
+
+    # Initialize status
+    _vision_training_status[job_id] = {
+        "job_id": job_id,
+        "video_id": video_id,
+        "video_title": video_title,
+        "status": "starting",
+        "progress": 0,
+        "total": 1,
+        "current_video": video_title,
+        "message": f"Initializing vision training for: {video_title}",
+        "started_at": datetime.utcnow().isoformat(),
+        "vision_provider": vision_provider,
+        "extraction_mode": extraction_mode,
+        "frames_analyzed": 0,
+        "charts_detected": 0,
+        "patterns_found": 0
+    }
+
+    def run_single_video_vision_training():
+        """Background task for single video vision training"""
+        try:
+            from .ml.training_pipeline import SmartMoneyKnowledgeBase
+
+            _vision_training_status[job_id]["status"] = "loading"
+            _vision_training_status[job_id]["message"] = f"Loading transcript for {video_title}..."
+
+            # Load the transcript
+            with open(transcript_file) as f:
+                transcript = json.load(f)
+
+            if not transcript.get('full_text'):
+                _vision_training_status[job_id]["status"] = "error"
+                _vision_training_status[job_id]["error"] = "Transcript has no text content"
+                return
+
+            _vision_training_status[job_id]["message"] = f"Starting vision analysis for: {video_title}"
+
+            # Create knowledge base and run vision training
+            kb = SmartMoneyKnowledgeBase()
+
+            def progress_callback(current, total, message):
+                _vision_training_status[job_id]["progress"] = current
+                _vision_training_status[job_id]["total"] = total
+                _vision_training_status[job_id]["message"] = message
+                _vision_training_status[job_id]["status"] = "training"
+
+            # Run multimodal training on single video
+            results = kb.train_with_vision(
+                transcripts=[transcript],
+                vision_provider=vision_provider,
+                max_frames_per_video=max_frames,
+                extraction_mode=extraction_mode,
+                progress_callback=progress_callback
+            )
+
+            # Save the trained model
+            kb.save()
+
+            # Reset global knowledge base to use new model
+            global _knowledge_base
+            _knowledge_base = None
+
+            # Update final status
+            vision_analysis = results.get('vision_analysis', {})
+            _vision_training_status[job_id].update({
+                "status": "completed",
+                "message": f"Vision training completed for: {video_title}",
+                "completed_at": datetime.utcnow().isoformat(),
+                "frames_analyzed": vision_analysis.get('total_frames_analyzed', 0),
+                "charts_detected": vision_analysis.get('chart_frames', 0),
+                "patterns_found": len(vision_analysis.get('visual_patterns', {})),
+                "visual_concepts": vision_analysis.get('visual_concepts', 0),
+                "results": {
+                    "video_title": video_title,
+                    "concepts_learned": results['components'].get('definitions', {}).get('n_concepts', 0),
+                    "rules_extracted": results['components'].get('rules', {}).get('n_rules', 0),
+                    "vision_analysis": vision_analysis
+                }
+            })
+
+        except Exception as e:
+            _vision_training_status[job_id]["status"] = "error"
+            _vision_training_status[job_id]["error"] = str(e)
+            _vision_training_status[job_id]["traceback"] = traceback.format_exc()
+
+    # Run in background
+    background_tasks.add_task(run_single_video_vision_training)
+
+    return {
+        "job_id": job_id,
+        "status": "started",
+        "message": f"Vision training started for video: {video_title}",
+        "video_id": video_id,
+        "video_title": video_title,
+        "vision_provider": vision_provider,
+        "extraction_mode": extraction_mode,
+        "status_url": f"/api/ml/train/vision/status/{job_id}"
+    }
+
+
+@app.get("/api/ml/vision/status")
+async def get_vision_capabilities():
+    """Check if vision training is available and its current status"""
+    try:
+        from .ml.training_pipeline import VISION_AVAILABLE
+        from .ml.video_vision_analyzer import VideoVisionTrainer
+        vision_available = VISION_AVAILABLE
+    except ImportError:
+        vision_available = False
+
+    # Check if Ollama is available for local vision (FREE!)
+    ollama_available = False
+    try:
+        import requests
+        response = requests.get("http://localhost:11434/api/tags", timeout=2)
+        if response.status_code == 200:
+            ollama_available = True
+    except:
+        pass
+
+    # Vision is available if we have API keys OR local Ollama
+    vision_available = vision_available or ollama_available
+
+    kb = get_knowledge_base()
+    vision_knowledge = getattr(kb, 'vision_knowledge', {}) if kb else {}
+
+    supported_providers = []
+    if ollama_available:
+        supported_providers.append("local")
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        supported_providers.append("anthropic")
+    if os.environ.get("OPENAI_API_KEY"):
+        supported_providers.append("openai")
+
+    return {
+        "vision_available": vision_available,
+        "has_vision_knowledge": bool(vision_knowledge),
+        "patterns_learned": len(vision_knowledge.get('pattern_frequency', {})) if vision_knowledge else 0,
+        "visual_concepts": len(vision_knowledge.get('visual_concepts', [])) if vision_knowledge else 0,
+        "videos_with_vision": len(vision_knowledge.get('analyzed_videos', [])) if vision_knowledge else 0,
+        "supported_providers": supported_providers,
+        "ollama_available": ollama_available,
+        "requirements": {
+            "local": "Ollama running locally (FREE!) - ollama.ai",
+            "anthropic": "ANTHROPIC_API_KEY environment variable",
+            "openai": "OPENAI_API_KEY environment variable"
+        }
+    }
+
+
+@app.get("/api/ml/vision/patterns/{pattern_type}")
+async def get_visual_pattern_examples(pattern_type: str):
+    """
+    Get visual examples of a specific Smart Money pattern type.
+    Examples: FVG, OrderBlock, Breaker, Mitigation, etc.
+    """
+    kb = get_knowledge_base()
+    if not kb:
+        raise HTTPException(status_code=503, detail="Knowledge base not loaded")
+
+    examples = kb.get_visual_pattern_examples(pattern_type)
+
+    if not examples:
+        # Check if we have any vision knowledge at all
+        vision_knowledge = getattr(kb, 'vision_knowledge', {})
+        available_patterns = list(vision_knowledge.get('pattern_frequency', {}).keys()) if vision_knowledge else []
+
+        return {
+            "pattern_type": pattern_type,
+            "examples": [],
+            "count": 0,
+            "message": f"No visual examples found for '{pattern_type}'",
+            "available_patterns": available_patterns
+        }
+
+    return {
+        "pattern_type": pattern_type,
+        "examples": examples[:20],  # Limit to 20 examples
+        "count": len(examples)
+    }
+
+
+@app.get("/api/ml/vision/teaching-moments")
+async def get_teaching_moments(
+    concept: Optional[str] = Query(None, description="Filter by concept (e.g., 'FVG', 'Order Block')")
+):
+    """
+    Get key teaching moments from analyzed videos.
+    These are moments where the tutor is demonstrating or explaining a concept visually.
+    """
+    kb = get_knowledge_base()
+    if not kb:
+        raise HTTPException(status_code=503, detail="Knowledge base not loaded")
+
+    moments = kb.get_teaching_moments(concept)
+
+    return {
+        "concept_filter": concept,
+        "teaching_moments": moments[:50],  # Limit to 50 moments
+        "total_count": len(moments)
+    }
+
+
+@app.get("/api/ml/vision/knowledge")
+async def get_visual_knowledge():
+    """Get comprehensive visual knowledge learned from video analysis"""
+    kb = get_knowledge_base()
+    if not kb:
+        raise HTTPException(status_code=503, detail="Knowledge base not loaded")
+
+    vision_knowledge = getattr(kb, 'vision_knowledge', {})
+
+    if not vision_knowledge:
+        return {
+            "has_vision_knowledge": False,
+            "message": "No vision training has been performed. Use /api/ml/train/vision/{playlist_id} to start vision training."
+        }
+
+    return {
+        "has_vision_knowledge": True,
+        "pattern_frequency": vision_knowledge.get('pattern_frequency', {}),
+        "visual_concepts": vision_knowledge.get('visual_concepts', []),
+        "chart_types_seen": vision_knowledge.get('chart_types_seen', []),
+        "timeframes_seen": vision_knowledge.get('timeframes_seen', []),
+        "symbols_seen": vision_knowledge.get('symbols_seen', []),
+        "key_teaching_moments_count": len(vision_knowledge.get('key_teaching_moments', [])),
+        "analyzed_videos": vision_knowledge.get('analyzed_videos', [])
+    }
 
 
 @app.get("/api/market/price/{symbol}")
