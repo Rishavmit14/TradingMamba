@@ -223,9 +223,14 @@ class SmartMoneyFeatureExtractor:
             'concept_intro_ratio': concept_intro_time / max(total_duration, 1),
         }
 
-    def fit(self, transcripts: List[Dict]) -> 'Smart MoneyFeatureExtractor':
+    def fit(self, transcripts: List[Dict]) -> 'SmartMoneyFeatureExtractor':
         """Fit the feature extractor on training transcripts"""
         texts = [self.preprocess_text(t.get('full_text', '')) for t in transcripts]
+
+        # Adjust TF-IDF parameters for small document sets (1-2 docs)
+        n_docs = len(texts)
+        if n_docs < 3:
+            self.tfidf_vectorizer.set_params(min_df=1, max_df=1.0)
 
         # Fit TF-IDF
         self.tfidf_vectorizer.fit(texts)
