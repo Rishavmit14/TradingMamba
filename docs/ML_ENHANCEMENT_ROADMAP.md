@@ -11,6 +11,7 @@ We have implemented hedge fund-level ML capabilities:
 - ✅ Historical Validation (backtest patterns)
 - ✅ Multi-Timeframe Confluence checking
 - ✅ Statistical Edge Tracking (win rate, R:R, expectancy)
+- ✅ **ICT Sentiment/Tone Analysis** (NEW! - Senses HOW ICT judges patterns)
 
 ---
 
@@ -163,7 +164,72 @@ stats = get_edge_statistics("fvg")
 
 ---
 
-### 🔄 Phase 6: Self-Learning Loop (PARTIAL)
+### ✅ Phase 6: ICT Sentiment/Tone Analysis (COMPLETE - NEW!)
+**Location**: `backend/app/ml/feature_extractor.py`
+
+**Classes**:
+- `ICTSentimentAnalyzer` - Detects HOW ICT judges pattern quality
+- `ICT_SENTIMENT_VOCABULARY` - Comprehensive sentiment word lists
+
+**Problem Solved**:
+The ML was only counting keywords (TF-IDF), NOT understanding ICT's qualitative judgments.
+When ICT said "This is a beautiful order block", the ML only saw "order block" -
+it completely missed that ICT was saying this is a HIGH QUALITY pattern.
+
+**Sentiment Categories Tracked**:
+```
+high_quality     : beautiful, pristine, clean, textbook, perfect
+low_quality      : ugly, messy, sloppy, weak, avoid
+high_confidence  : always, definitely, this works, trust me
+low_confidence   : sometimes, maybe, depends, be careful
+critical_importance : key, crucial, pay attention, remember this
+institutional_quality : bank level, hedge fund, smart money
+good_timing      : kill zone, sweet spot, perfect timing
+fresh_pattern    : fresh, untested, first touch, virgin
+stale_pattern    : old, stale, already tested, mitigated
+low_risk         : safe, tight stop, defined risk
+high_risk        : risky, dangerous, wide stop
+```
+
+**Usage**:
+```python
+from backend.app.ml.feature_extractor import ICTSentimentAnalyzer, SmartMoneyFeatureExtractor
+
+# Direct sentiment analysis
+analyzer = ICTSentimentAnalyzer()
+result = analyzer.analyze_sentiment(transcript_text)
+# result['quality_signal'] = 'HIGH'  # or 'LOW', 'NEUTRAL'
+# result['confidence_signal'] = 'HIGH'
+# result['importance_score'] = 0.67
+
+# Pattern-specific quality
+extractor = SmartMoneyFeatureExtractor()
+quality = extractor.extract_pattern_quality(text, 'order_block')
+# quality['quality'] = 'HIGH'
+# quality['positive_signals'] = ['beautiful', 'clean']
+# quality['negative_signals'] = []
+
+# Get emphasized teachings
+emphasis = extractor.get_emphasized_teachings(text)
+# [{'text': 'pay attention - this is the key...', 'concept': 'institutional', 'importance': 'HIGH'}]
+```
+
+**Before vs After**:
+```
+BEFORE: "This is a beautiful order block"
+        → ML sees: order_block (count: 1)
+        → MISSES: ICT's quality judgment
+
+AFTER:  "This is a beautiful order block"
+        → ML sees: order_block (count: 1)
+        → ML sees: quality_signal = HIGH
+        → ML sees: positive_signals = ['beautiful']
+        → ML UNDERSTANDS: ICT approves of this pattern type
+```
+
+---
+
+### 🔄 Phase 7: Self-Learning Loop (PARTIAL)
 **Status**: Foundation built, needs automated outcome checking
 
 **What's done**:
@@ -182,9 +248,13 @@ stats = get_edge_statistics("fvg")
 
 ```
 backend/app/ml/
+├── feature_extractor.py      # Feature extraction + Sentiment Analysis
+│   ├── ICT_SENTIMENT_VOCABULARY  # NEW: Sentiment word lists
+│   ├── ICTSentimentAnalyzer      # NEW: Tone/quality detection
+│   └── SmartMoneyFeatureExtractor # Enhanced with sentiment features
 ├── video_vision_analyzer.py  # Multi-pass deep questioning
 ├── ml_pattern_engine.py      # Core ML engine + hedge fund integration
-├── hedge_fund_ml.py          # NEW: Hedge fund level features
+├── hedge_fund_ml.py          # Hedge fund level features
 │   ├── PatternGrader         # A+ to F grading
 │   ├── HistoricalValidator   # Backtest patterns
 │   ├── MultiTimeframeAnalyzer # MTF confluence
@@ -218,13 +288,37 @@ data/
 **Now (Genius Student)**:
 - "I see an FVG here" ✅
 - "It's in discount zone - good location" ✅ (LocationScoring)
-- "ICT called this type 'beautiful' in training" ✅ (TranscriptContext)
+- "ICT called this type 'beautiful' in training" ✅ (ICTSentimentAnalyzer) **← NOW REAL!**
+- "ICT emphasized 'pay attention' when teaching this" ✅ (TeachingEmphasis)
 - "Historical data shows 78% fill rate" ✅ (HistoricalValidator)
 - "H4 has Order Block confluence" ✅ (MultiTimeframeAnalyzer)
 - "Grade: A - High probability setup" ✅ (PatternGrader)
 - "Entry at 50% of FVG, SL below, TP at previous high" ✅ (EntryExitLogic)
 
 **This IS the difference between a retail trader and a hedge fund.**
+
+### 🎯 The Sentiment Analysis Difference
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ICT SAYS: "This is a beautiful order block, pay attention" │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  OLD ML (Keyword Counter):                                  │
+│  ─────────────────────────                                  │
+│  • order_block: 1                                           │
+│  • (ignores "beautiful", "pay attention")                   │
+│  • Result: Just knows pattern exists                        │
+│                                                             │
+│  NEW ML (Sentiment Aware):                                  │
+│  ─────────────────────────                                  │
+│  • order_block: 1                                           │
+│  • quality_signal: HIGH (from "beautiful")                  │
+│  • importance_score: 0.67 (from "pay attention")            │
+│  • Result: Knows pattern is HIGH QUALITY + IMPORTANT        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -256,6 +350,25 @@ from backend.app.ml.ml_pattern_engine import (
 from backend.app.ml.hedge_fund_ml import get_historical_validator
 validator = get_historical_validator()
 validator.validate_pattern(pattern_type, symbol, pattern_time, pattern_levels)
+```
+
+### ICT Sentiment/Tone Analysis (NEW!)
+```python
+from backend.app.ml.feature_extractor import ICTSentimentAnalyzer, SmartMoneyFeatureExtractor
+
+# Direct sentiment analysis
+analyzer = ICTSentimentAnalyzer()
+result = analyzer.analyze_sentiment(transcript_text)
+# Returns: quality_signal, confidence_signal, importance_score, risk_signal
+
+# Pattern-specific quality judgment
+extractor = SmartMoneyFeatureExtractor()
+quality = extractor.extract_pattern_quality(text, 'order_block')
+# Returns: quality (HIGH/LOW/NEUTRAL), positive_signals, negative_signals
+
+# Find emphasized teachings
+emphasis = extractor.get_emphasized_teachings(text)
+# Returns: list of emphasized moments with concept and importance
 ```
 
 ---
