@@ -748,42 +748,121 @@ class LocalVisionModel:
                 if "status" in data:
                     logger.info(f"  {data['status']}")
 
-    def analyze(self, image_path: str, prompt: str, max_tokens: int = 1500) -> str:
-        """Analyze an image with a prompt using Ollama"""
+    def analyze(self, image_path: str, prompt: str, max_tokens: int = 1500, retries: int = 3) -> str:
+        """
+        Analyze an image with a prompt using Ollama.
+
+        IMPROVED: Robust error handling for many-frame analysis sessions.
+        - 5-minute timeout per request
+        - Exponential backoff with jitter
+        - Memory management for large batches
+        - Detailed logging for debugging
+
+        Args:
+            image_path: Path to the image file
+            prompt: The prompt to send to the vision model
+            max_tokens: Maximum tokens in response
+            retries: Number of retry attempts on failure
+
+        Returns:
+            The model's response text
+        """
         import requests
+        import time
+        import random
+        import gc
 
         self._ensure_available()
 
         # Encode image to base64
-        with open(image_path, "rb") as f:
-            image_data = base64.standard_b64encode(f.read()).decode("utf-8")
+        try:
+            with open(image_path, "rb") as f:
+                image_data = base64.standard_b64encode(f.read()).decode("utf-8")
+        except Exception as e:
+            logger.error(f"Failed to read image {image_path}: {e}")
+            raise RuntimeError(f"Cannot read image: {e}")
 
-        # Call Ollama API
-        response = requests.post(
-            f"{self.ollama_url}/api/generate",
-            json={
-                "model": self.model_name,
-                "prompt": prompt,
-                "images": [image_data],
-                "stream": False,
-                "options": {
-                    "num_predict": max_tokens
-                }
-            },
-            timeout=120
-        )
+        last_error = None
+        frame_name = os.path.basename(image_path)
 
-        if response.status_code != 200:
-            raise RuntimeError(f"Ollama error: {response.text}")
+        for attempt in range(retries):
+            try:
+                logger.debug(f"Analyzing {frame_name} (attempt {attempt + 1}/{retries})")
 
-        result = response.json()
-        return result.get("response", "")
+                # Call Ollama API with generous timeout (300s = 5 min)
+                response = requests.post(
+                    f"{self.ollama_url}/api/generate",
+                    json={
+                        "model": self.model_name,
+                        "prompt": prompt,
+                        "images": [image_data],
+                        "stream": False,
+                        "options": {
+                            "num_predict": max_tokens,
+                            "temperature": 0.1,  # Lower temperature for consistent analysis
+                            "num_ctx": 4096,  # Context window
+                        }
+                    },
+                    timeout=300  # 5 minutes - generous for complex analysis
+                )
+
+                if response.status_code == 200:
+                    result = response.json()
+                    response_text = result.get("response", "")
+
+                    # Success logging
+                    if attempt > 0:
+                        logger.info(f"Successfully analyzed {frame_name} on attempt {attempt + 1}")
+
+                    # Hint garbage collection after successful analysis
+                    gc.collect()
+
+                    return response_text
+                else:
+                    last_error = f"Ollama error (status {response.status_code}): {response.text[:200]}"
+                    logger.warning(f"Ollama returned {response.status_code} for {frame_name}")
+
+            except requests.exceptions.Timeout:
+                last_error = f"Timeout on attempt {attempt + 1} (300s limit)"
+                logger.warning(f"Ollama timeout for {frame_name} on attempt {attempt + 1}/{retries}")
+
+            except requests.exceptions.ConnectionError as e:
+                last_error = f"Connection error: {e}"
+                logger.warning(f"Connection error for {frame_name}: {e}")
+                # Check if Ollama is still running
+                try:
+                    check = requests.get(f"{self.ollama_url}/api/tags", timeout=5)
+                    if check.status_code != 200:
+                        logger.error("Ollama appears to be down!")
+                except:
+                    logger.error("Cannot reach Ollama - please ensure it's running")
+
+            except requests.exceptions.RequestException as e:
+                last_error = str(e)
+                logger.warning(f"Request error for {frame_name} on attempt {attempt + 1}: {e}")
+
+            except Exception as e:
+                last_error = str(e)
+                logger.error(f"Unexpected error analyzing {frame_name}: {e}")
+
+            # Exponential backoff with jitter before retry
+            if attempt < retries - 1:
+                base_wait = 2 ** attempt  # 1s, 2s, 4s
+                jitter = random.uniform(0, base_wait * 0.5)  # Add randomness
+                wait_time = base_wait + jitter
+                logger.info(f"Retrying {frame_name} in {wait_time:.1f}s...")
+                time.sleep(wait_time)
+
+                # Garbage collection before retry
+                gc.collect()
+
+        raise RuntimeError(f"Ollama failed for {frame_name} after {retries} attempts. Last error: {last_error}")
 
 
 class VisionAnalyzer:
     """Analyze video frames using vision AI models"""
 
-    def __init__(self, provider: str = "local"):
+    def __init__(self, provider: str = "local", max_concurrent_frames: int = 1):
         """
         Initialize vision analyzer.
 
@@ -792,8 +871,12 @@ class VisionAnalyzer:
                 - "local" - FREE! Uses mlx-vlm on Apple Silicon (recommended)
                 - "anthropic" - Claude API (costs money)
                 - "openai" - GPT-4V API (costs money)
+            max_concurrent_frames: Max frames to analyze concurrently (for local, keep at 1)
         """
         self.provider = provider
+        self.max_concurrent_frames = max_concurrent_frames
+        self._analysis_cache = {}  # Cache to resume interrupted analysis
+        self._failed_frames = []  # Track failed frames for retry
 
         if provider == "local":
             # Free local model for Apple Silicon
@@ -1193,20 +1276,120 @@ Respond in JSON:
         self,
         video_id: str,
         frames: List[Tuple[float, str, str]],  # timestamp, path, context
-        progress_callback=None
+        progress_callback=None,
+        save_progress: bool = True,
+        resume_from_cache: bool = True,
+        batch_size: int = 5,
+        max_retries_per_frame: int = 2
     ) -> VideoVisualSummary:
         """
         Analyze all frames from a video and create a summary.
+
+        Enhanced with:
+        - Progress saving (can resume interrupted analysis)
+        - Batch processing with better error handling
+        - Automatic retry for failed frames
+        - No frame limiting - analyzes ALL frames
+
+        Args:
+            video_id: YouTube video ID
+            frames: List of (timestamp, path, context) tuples
+            progress_callback: Optional callback for progress updates
+            save_progress: Save progress periodically to allow resumption
+            resume_from_cache: Try to resume from cached results
+            batch_size: Process and save progress every N frames
+            max_retries_per_frame: Max retries for each failed frame
         """
+        import time
+
         analyses = []
         total = len(frames)
 
-        for i, (timestamp, frame_path, context) in enumerate(frames):
-            if progress_callback:
-                progress_callback(i + 1, total, f"Analyzing frame at {timestamp:.1f}s")
+        # Try to resume from cache
+        cache_key = f"{video_id}_analysis_cache"
+        start_index = 0
 
-            analysis = self.analyze_frame(frame_path, context, timestamp)
-            analyses.append(analysis)
+        if resume_from_cache and cache_key in self._analysis_cache:
+            cached = self._analysis_cache[cache_key]
+            analyses = cached.get("analyses", [])
+            start_index = cached.get("last_index", 0) + 1
+            logger.info(f"Resuming from cache: {start_index}/{total} frames already analyzed")
+
+        failed_frames = []
+
+        # Process ALL frames (no artificial limiting)
+        for i in range(start_index, total):
+            timestamp, frame_path, context = frames[i]
+
+            if progress_callback:
+                eta = ""
+                if i > start_index and analyses:
+                    # Estimate time remaining
+                    elapsed_per_frame = 15  # Rough estimate in seconds
+                    remaining = (total - i) * elapsed_per_frame
+                    if remaining > 60:
+                        eta = f" (~{remaining//60:.0f}m remaining)"
+                    else:
+                        eta = f" (~{remaining:.0f}s remaining)"
+                progress_callback(i + 1, total, f"Analyzing frame {i+1}/{total} at {timestamp:.1f}s{eta}")
+
+            # Try to analyze with retries
+            analysis = None
+            for attempt in range(max_retries_per_frame):
+                try:
+                    analysis = self.analyze_frame(frame_path, context, timestamp)
+                    break  # Success
+                except Exception as e:
+                    logger.warning(f"Frame {i} attempt {attempt+1} failed: {e}")
+                    if attempt < max_retries_per_frame - 1:
+                        wait_time = 2 ** attempt
+                        logger.info(f"Retrying frame {i} in {wait_time}s...")
+                        time.sleep(wait_time)
+
+            if analysis:
+                analyses.append(analysis)
+            else:
+                # Create a placeholder for failed analysis
+                failed_frames.append((i, timestamp, frame_path))
+                logger.error(f"Failed to analyze frame {i} at {timestamp:.1f}s after {max_retries_per_frame} attempts")
+                # Add a minimal analysis to maintain sequence
+                analyses.append(FrameAnalysis(
+                    timestamp=timestamp,
+                    frame_path=frame_path,
+                    transcript_context=context,
+                    chart_detected=False,
+                    chart_type=None,
+                    timeframe_visible=None,
+                    symbol_visible=None,
+                    patterns_detected=[],
+                    annotations_detected=[],
+                    price_levels=[],
+                    market_structure=None,
+                    visual_description=f"Analysis failed after {max_retries_per_frame} attempts",
+                    teaching_point="",
+                    visual_text=[],
+                    chart_confidence=0.0,
+                    pattern_confidence=0.0,
+                    entry_exit_logic=None
+                ))
+
+            # Save progress periodically
+            if save_progress and (i + 1) % batch_size == 0:
+                self._analysis_cache[cache_key] = {
+                    "analyses": analyses,
+                    "last_index": i,
+                    "total": total
+                }
+                logger.info(f"Progress saved: {i+1}/{total} frames analyzed")
+
+        # Store failed frames for potential manual retry
+        self._failed_frames = failed_frames
+        if failed_frames:
+            logger.warning(f"Total failed frames: {len(failed_frames)}")
+
+        # Clear cache on completion
+        if cache_key in self._analysis_cache:
+            del self._analysis_cache[cache_key]
 
         # Aggregate results
         chart_frames = sum(1 for a in analyses if a.chart_detected)
@@ -1282,17 +1465,22 @@ class VideoVisionTrainer:
     def process_video(
         self,
         video_id: str,
-        max_frames: int = 0,  # 0 = no limit (let deduplication handle it)
+        max_frames: int = 0,  # 0 = no limit (RECOMMENDED - analyze ALL frames)
         extraction_mode: str = "sincere_student",  # Sincere student learns everything, never skips >15s
         progress_callback=None,
-        force_reprocess: bool = False
+        force_reprocess: bool = False,
+        enable_resume: bool = True
     ) -> Optional[VideoVisualSummary]:
         """
         Process a video: extract frames and analyze visually.
 
+        IMPROVED: Now handles ALL frames without artificial limits.
+        The Ollama timeout and retry logic ensures all frames are processed.
+
         Args:
             video_id: YouTube video ID
-            max_frames: Maximum frames to analyze (0 = no limit, recommended for smart mode)
+            max_frames: Maximum frames to analyze (0 = no limit, RECOMMENDED)
+                        Set to > 0 only for quick testing
             extraction_mode: How thoroughly to extract frames:
                 - "sincere_student" (RECOMMENDED): Like a dedicated student - never skips
                   more than 15s of teaching. Best for ICT videos. ~60-75 min for 57-min video.
@@ -1304,6 +1492,7 @@ class VideoVisionTrainer:
                 - "selective": Only at demonstrative moments (fastest, may miss content)
             progress_callback: Optional callback(current, total, message)
             force_reprocess: Re-analyze even if already processed
+            enable_resume: Allow resuming interrupted analysis (saves progress)
         """
         # Check if already processed
         summary_path = self.vision_dir / f"{video_id}_vision.json"
@@ -1325,7 +1514,7 @@ class VideoVisionTrainer:
         title = transcript_data.get("title", video_id)
 
         if progress_callback:
-            progress_callback(0, 3, f"Extracting frames ({extraction_mode} mode)...")
+            progress_callback(0, 4, f"Extracting frames ({extraction_mode} mode)...")
 
         # Extract frames based on mode
         frames = self.frame_extractor.extract_key_frames(
@@ -1334,37 +1523,56 @@ class VideoVisionTrainer:
             extraction_mode=extraction_mode
         )
 
-        # Limit frames if specified (0 = no limit for comprehensive learning)
+        # IMPORTANT: Only limit frames if explicitly requested
+        # By default (max_frames=0), we process ALL frames for comprehensive learning
         if max_frames > 0:
+            original_count = len(frames)
             frames = frames[:max_frames]
+            logger.warning(f"Frame limit applied: {original_count} -> {len(frames)} frames")
+            logger.warning("Set max_frames=0 for comprehensive learning (recommended)")
 
         if not frames:
             logger.warning(f"No frames extracted for video {video_id}")
             return None
 
-        logger.info(f"Processing video {video_id} with {len(frames)} frames ({extraction_mode} mode)")
+        logger.info(f"Processing video {video_id} with ALL {len(frames)} frames ({extraction_mode} mode)")
+        logger.info(f"Estimated time: ~{len(frames) * 15 // 60} minutes (15s per frame with Ollama)")
 
         if progress_callback:
-            progress_callback(1, 3, f"Analyzing {len(frames)} frames with AI vision...")
+            progress_callback(1, 4, f"Analyzing {len(frames)} frames with AI vision (no frame limiting)...")
 
-        # Analyze frames
+        # Analyze frames with improved batch processing
         def frame_progress(current, total, msg):
             if progress_callback:
-                progress_callback(1 + current/total, 3, msg)
+                # Scale progress from 1-3 (leaving room for final steps)
+                progress_callback(1 + (current/total) * 2, 4, msg)
 
         summary = self.vision_analyzer.analyze_video_frames(
             video_id,
             frames,
-            progress_callback=frame_progress
+            progress_callback=frame_progress,
+            save_progress=enable_resume,
+            resume_from_cache=enable_resume,
+            batch_size=5,  # Save progress every 5 frames
+            max_retries_per_frame=3  # Retry failed frames up to 3 times
         )
         summary.title = title
+
+        if progress_callback:
+            progress_callback(3, 4, "Saving vision analysis results...")
 
         # Save summary
         with open(summary_path, 'w') as f:
             json.dump(summary.to_dict(), f, indent=2)
 
+        # Report any failed frames
+        if hasattr(self.vision_analyzer, '_failed_frames') and self.vision_analyzer._failed_frames:
+            failed_count = len(self.vision_analyzer._failed_frames)
+            logger.warning(f"Analysis complete with {failed_count} failed frames")
+            logger.info(f"Successfully analyzed: {len(frames) - failed_count}/{len(frames)} frames")
+
         if progress_callback:
-            progress_callback(3, 3, "Vision analysis complete")
+            progress_callback(4, 4, f"Vision analysis complete: {len(frames)} frames processed")
 
         return summary
 

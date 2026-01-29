@@ -738,16 +738,21 @@ class SynchronizedLearningPipeline:
         video_id: str,
         audio_path: str,
         frames_data: List[Dict],  # From vision analyzer
-        existing_transcript: Optional[Dict] = None
+        existing_transcript: Optional[Dict] = None,
+        max_frames: int = 0  # 0 = no limit (process ALL frames)
     ) -> Dict[str, Any]:
         """
         Process a video with synchronized learning.
+
+        IMPROVED: Now processes ALL frames without artificial limits.
+        The frame limiting that caused 73->10 reduction has been removed.
 
         Args:
             video_id: YouTube video ID
             audio_path: Path to audio file
             frames_data: List of frame analysis results from vision analyzer
             existing_transcript: Optionally provide existing transcript
+            max_frames: Maximum frames to process (0 = ALL frames, recommended)
 
         Returns:
             {
@@ -757,7 +762,17 @@ class SynchronizedLearningPipeline:
                 "verified_knowledge": {...}
             }
         """
+        total_frames = len(frames_data)
         logger.info(f"Processing video {video_id} with synchronized learning")
+        logger.info(f"Total frames to process: {total_frames} (no artificial limiting)")
+
+        # Apply frame limit only if explicitly set
+        if max_frames > 0 and max_frames < total_frames:
+            logger.warning(f"Frame limit applied: {total_frames} -> {max_frames}")
+            logger.warning("Set max_frames=0 to process ALL frames (recommended for comprehensive learning)")
+            frames_data = frames_data[:max_frames]
+        else:
+            logger.info(f"Processing ALL {total_frames} frames for comprehensive learning")
 
         # Step 1: Get word-level timestamps
         if existing_transcript and "word_segments" in existing_transcript:
