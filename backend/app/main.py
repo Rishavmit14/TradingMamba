@@ -530,23 +530,23 @@ async def analyze_symbol(
                 for ob in analysis.order_blocks:
                     all_patterns.append({
                         'pattern_type': f'{ob.type}_order_block',  # 'bullish_order_block' or 'bearish_order_block'
-                        'high': ob.high,
-                        'low': ob.low,
-                        'start_index': ob.start_index,
+                        'high': float(ob.high),
+                        'low': float(ob.low),
+                        'start_index': int(ob.start_index),
                         'timeframe': tf,
-                        'strength': ob.strength,
-                        'mitigated': ob.mitigated,
+                        'strength': float(ob.strength) if ob.strength else 0.5,
+                        'mitigated': bool(ob.mitigated),
                     })
 
                 for fvg in analysis.fair_value_gaps:
                     all_patterns.append({
                         'pattern_type': f'{fvg.type}_fvg',  # 'bullish_fvg' or 'bearish_fvg'
-                        'high': fvg.high,
-                        'low': fvg.low,
-                        'start_index': fvg.index,
+                        'high': float(fvg.high),
+                        'low': float(fvg.low),
+                        'start_index': int(fvg.index),
                         'timeframe': tf,
-                        'filled': fvg.filled,
-                        'fill_percentage': fvg.fill_percentage,
+                        'filled': bool(fvg.filled),
+                        'fill_percentage': float(fvg.fill_percentage) if fvg.fill_percentage else 0.0,
                     })
 
                 # Also add market structure events (BOS/CHoCH)
@@ -554,7 +554,7 @@ async def analyze_symbol(
                     if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish']:
                         all_patterns.append({
                             'pattern_type': event.type,
-                            'price': event.level,
+                            'price': float(event.level),
                             'timeframe': tf,
                             'description': event.description,
                         })
@@ -564,20 +564,38 @@ async def analyze_symbol(
                     for eq in analysis.liquidity_levels['equal_highs']:
                         all_patterns.append({
                             'pattern_type': 'equal_highs',
-                            'price': eq['level'],
+                            'price': float(eq['level']),
                             'timeframe': tf,
                         })
                 if analysis.liquidity_levels.get('equal_lows'):
                     for eq in analysis.liquidity_levels['equal_lows']:
                         all_patterns.append({
                             'pattern_type': 'equal_lows',
-                            'price': eq['level'],
+                            'price': float(eq['level']),
                             'timeframe': tf,
+                        })
+
+                # Add buy-side and sell-side liquidity levels
+                if analysis.liquidity_levels.get('buy_side'):
+                    for liq in analysis.liquidity_levels['buy_side'][:3]:  # Top 3 BSL
+                        all_patterns.append({
+                            'pattern_type': 'buyside_liquidity',
+                            'price': float(liq.price),
+                            'timeframe': tf,
+                            'strength': float(liq.strength) if liq.strength else 0.5,
+                        })
+                if analysis.liquidity_levels.get('sell_side'):
+                    for liq in analysis.liquidity_levels['sell_side'][:3]:  # Top 3 SSL
+                        all_patterns.append({
+                            'pattern_type': 'sellside_liquidity',
+                            'price': float(liq.price),
+                            'timeframe': tf,
+                            'strength': float(liq.strength) if liq.strength else 0.5,
                         })
 
                 analyses[tf] = {
                     'bias': analysis.bias.value,
-                    'bias_confidence': analysis.bias_confidence,
+                    'bias_confidence': float(analysis.bias_confidence),
                     'zone': analysis.premium_discount.get('zone', 'neutral'),
                     'order_blocks': len(analysis.order_blocks),
                     'fvgs': len(analysis.fair_value_gaps),
@@ -1155,71 +1173,210 @@ async def stream_training_status(job_id: str):
 
 
 # ============================================================================
-# ML Vision Training - Multimodal video analysis
+# ============================================================================
+# ML Training - DEPRECATED Vision endpoints redirect to Synchronized Learning
+# ============================================================================
+# NOTE: Standalone Vision Training has been deprecated.
+# All /api/ml/train/vision/* endpoints now redirect to Synchronized Learning
+# which combines Text + Vision + Audio-Visual Verification for better results.
 # ============================================================================
 
-_vision_training_status = {}
+# Use the synchronized training status for all training
+# _vision_training_status is now an alias to _sync_training_status (defined below)
 
 
 @app.post("/api/ml/train/vision/{playlist_id}")
 async def train_ml_with_vision(
     playlist_id: str,
     background_tasks: BackgroundTasks,
-    vision_provider: str = Query("local", description="Vision AI provider: 'local' (FREE on M1/M2/M3 Mac), 'anthropic' (paid), 'openai' (paid)"),
-    max_frames: int = Query(0, description="Max frames per video (0 = no limit, recommended for comprehensive)"),
-    extraction_mode: str = Query("comprehensive", description="Learning mode: 'comprehensive' (every 3s - learns everything), 'thorough' (every 5s), 'balanced' (every 10-15s), 'selective' (key moments only)")
+    vision_provider: str = Query("local", description="Vision AI provider"),
+    max_frames: int = Query(0, description="Max frames per video"),
+    extraction_mode: str = Query("sincere_student", description="Extraction mode")
 ):
     """
-    Start multimodal ML training that analyzes video frames along with transcripts.
-    This allows the ML to understand visual patterns shown in trading tutorials.
+    DEPRECATED: This endpoint now redirects to Synchronized Learning.
 
-    Vision Providers:
-    - local: FREE! Uses mlx-vlm on Apple Silicon (M1/M2/M3 Mac) - no API costs
-    - anthropic: Claude API (costs money)
-    - openai: GPT-4V API (costs money)
+    Synchronized Learning is superior because it:
+    1. Uses WhisperX word-level timestamps for precise audio-visual sync
+    2. Extracts frames at teaching moments (not blindly every N seconds)
+    3. Verifies audio matches visual before learning (prevents contamination)
 
-    Extraction Modes:
-    - comprehensive: Like a dedicated student - extracts frame every 3 seconds to miss NOTHING
-    - thorough: Good coverage - extracts every 5 seconds with extra frames at key moments
-    - balanced: Moderate coverage - extracts every 10-15 seconds with keyword boosting
-    - selective: Fastest but may miss content - only extracts at demonstrative moments
+    Use /api/ml/train/synchronized/{playlist_id} directly for the full API.
+    """
+    # Redirect to synchronized learning
+    return await train_ml_synchronized(
+        playlist_id=playlist_id,
+        background_tasks=background_tasks,
+        vision_provider=vision_provider,
+        max_frames=max_frames,
+        extraction_mode=extraction_mode if extraction_mode in ['sincere_student', 'comprehensive', 'thorough', 'balanced'] else 'sincere_student',
+        alignment_threshold=0.6,
+        sync_window=2.0
+    )
+
+
+@app.get("/api/ml/train/vision/status/{job_id}")
+async def get_vision_training_status(job_id: str):
+    """Get status of a training job (redirects to synchronized status)"""
+    return await get_synchronized_training_status(job_id)
+
+
+@app.get("/api/ml/train/vision/stream/{job_id}")
+async def stream_vision_training_status(job_id: str):
+    """SSE stream for training progress (redirects to synchronized stream)"""
+    return await stream_synchronized_training_status(job_id)
+
+
+@app.post("/api/ml/train/vision/video/{video_id}")
+async def train_single_video_with_vision(
+    video_id: str,
+    background_tasks: BackgroundTasks,
+    vision_provider: str = Query("local", description="Vision AI provider"),
+    max_frames: int = Query(0, description="Max frames"),
+    extraction_mode: str = Query("sincere_student", description="Extraction mode")
+):
+    """
+    DEPRECATED: Train a single video - now uses Synchronized Learning.
+
+    This creates a temporary playlist with just this video and runs
+    synchronized learning on it.
     """
     import uuid
     import traceback
 
-    # Create job ID
+    # Check if transcript exists
+    transcript_file = TRANSCRIPTS_DIR / f"{video_id}.json"
+    if not transcript_file.exists():
+        raise HTTPException(status_code=404, detail=f"Transcript not found for video: {video_id}")
+
+    # Load transcript to get title
+    with open(transcript_file) as f:
+        transcript_data = json.load(f)
+    video_title = transcript_data.get('title', video_id)
+
+    # Create a temporary single-video playlist
+    temp_playlist_id = f"_temp_single_{video_id}"
+    temp_playlist_file = PLAYLISTS_DIR / f"{temp_playlist_id}.json"
+
+    temp_playlist = {
+        "playlist_id": temp_playlist_id,
+        "title": f"Single Video: {video_title}",
+        "videos": [{"video_id": video_id, "title": video_title}],
+        "is_temporary": True
+    }
+
+    with open(temp_playlist_file, 'w') as f:
+        json.dump(temp_playlist, f)
+
+    try:
+        # Use synchronized learning
+        result = await train_ml_synchronized(
+            playlist_id=temp_playlist_id,
+            background_tasks=background_tasks,
+            vision_provider=vision_provider,
+            max_frames=max_frames,
+            extraction_mode=extraction_mode if extraction_mode in ['sincere_student', 'comprehensive', 'thorough', 'balanced'] else 'sincere_student',
+            alignment_threshold=0.6,
+            sync_window=2.0
+        )
+
+        # Add video info to result
+        result["video_id"] = video_id
+        result["video_title"] = video_title
+        result["note"] = "Using Synchronized Learning (superior to standalone Vision Training)"
+
+        return result
+
+    finally:
+        # Clean up temp playlist after a delay (let the background task read it first)
+        import asyncio
+        async def cleanup_temp():
+            await asyncio.sleep(5)
+            try:
+                temp_playlist_file.unlink()
+            except:
+                pass
+        background_tasks.add_task(cleanup_temp)
+
+
+# ============================================================================
+# SYNCHRONIZED LEARNING (STATE-OF-THE-ART)
+# ============================================================================
+
+_sync_training_status = {}
+
+
+@app.post("/api/ml/train/synchronized/{playlist_id}")
+async def train_ml_synchronized(
+    playlist_id: str,
+    background_tasks: BackgroundTasks,
+    vision_provider: str = Query("local", description="Vision AI provider: 'local' (FREE), 'anthropic', 'openai'"),
+    max_frames: int = Query(0, description="Max frames per video (0 = no limit)"),
+    extraction_mode: str = Query("sincere_student", description="'sincere_student' (recommended), 'comprehensive', 'thorough', 'balanced'"),
+    alignment_threshold: float = Query(0.6, description="Min audio-visual alignment score (0.6 = 60% match required)"),
+    sync_window: float = Query(2.0, description="Time window for syncing audio to visual (seconds)")
+):
+    """
+    STATE-OF-THE-ART synchronized audio-visual training.
+
+    This is the BEST training mode that ensures ML only learns VERIFIED knowledge
+    where what is heard (transcript) matches what is seen (chart patterns).
+
+    Key Features:
+    1. WhisperX word-level timestamps (forced alignment) - precise timing
+    2. Joint embedding space (ImageBind-style) - compares audio vs visual
+    3. Verification Gate - REJECTS mismatched data (prevents MACD→FVG contamination)
+
+    Based on:
+    - Meta's ImageBind (joint embedding across modalities)
+    - Meta's PE-AV (Perception Encoder AudioVisual)
+    - WhisperX (word-level forced alignment)
+
+    100% FREE - Uses only open-source libraries!
+    """
+    import uuid
+    import traceback
+
     job_id = str(uuid.uuid4())[:8]
 
-    # Initialize status
-    _vision_training_status[job_id] = {
+    _sync_training_status[job_id] = {
         "job_id": job_id,
         "playlist_id": playlist_id,
         "status": "starting",
         "progress": 0,
         "total": 0,
         "current_video": None,
-        "message": f"Initializing vision training ({extraction_mode} mode)...",
+        "message": "Initializing synchronized learning...",
         "started_at": datetime.utcnow().isoformat(),
         "vision_provider": vision_provider,
         "extraction_mode": extraction_mode,
-        "frames_analyzed": 0,
-        "charts_detected": 0,
-        "patterns_found": 0
+        "alignment_threshold": alignment_threshold,
+        "sync_window": sync_window,
+        # Sync-specific stats
+        "moments_analyzed": 0,
+        "verified_moments": 0,
+        "rejected_moments": 0,
+        "contamination_prevented": [],
     }
 
-    def run_vision_training():
-        """Background task for vision training"""
+    def run_synchronized_training():
+        """Background task for synchronized training"""
         try:
-            from .ml.training_pipeline import SmartMoneyKnowledgeBase
+            from .ml.training_pipeline import SmartMoneyKnowledgeBase, SYNC_LEARNING_AVAILABLE
 
-            _vision_training_status[job_id]["status"] = "loading"
-            _vision_training_status[job_id]["message"] = "Loading playlist..."
+            if not SYNC_LEARNING_AVAILABLE:
+                _sync_training_status[job_id]["status"] = "error"
+                _sync_training_status[job_id]["error"] = "Synchronized learning not available. Check dependencies."
+                return
+
+            _sync_training_status[job_id]["status"] = "loading"
+            _sync_training_status[job_id]["message"] = "Loading playlist..."
 
             # Load playlist
             playlist_file = PLAYLISTS_DIR / f"{playlist_id}.json"
             if not playlist_file.exists():
-                _vision_training_status[job_id]["status"] = "error"
-                _vision_training_status[job_id]["error"] = f"Playlist not found: {playlist_id}"
+                _sync_training_status[job_id]["status"] = "error"
+                _sync_training_status[job_id]["error"] = f"Playlist not found: {playlist_id}"
                 return
 
             with open(playlist_file) as f:
@@ -1228,7 +1385,7 @@ async def train_ml_with_vision(
             videos = playlist_data.get("videos", [])
             video_ids = [v.get("video_id") for v in videos if v.get("video_id")]
 
-            # Load transcripts for these videos
+            # Load transcripts
             transcripts = []
             for vid in video_ids:
                 transcript_file = TRANSCRIPTS_DIR / f"{vid}.json"
@@ -1238,100 +1395,106 @@ async def train_ml_with_vision(
                             transcript = json.load(f)
                             if transcript.get('full_text'):
                                 transcripts.append(transcript)
-                    except Exception:
+                    except Exception as e:
                         pass
 
             if not transcripts:
-                _vision_training_status[job_id]["status"] = "error"
-                _vision_training_status[job_id]["error"] = "No transcripts found for playlist videos"
+                _sync_training_status[job_id]["status"] = "error"
+                _sync_training_status[job_id]["error"] = "No transcripts found for playlist"
                 return
 
-            _vision_training_status[job_id]["total"] = len(transcripts)
-            _vision_training_status[job_id]["message"] = f"Found {len(transcripts)} transcripts with videos"
+            _sync_training_status[job_id]["total"] = len(transcripts)
+            _sync_training_status[job_id]["status"] = "training"
+            _sync_training_status[job_id]["message"] = "Starting synchronized audio-visual training..."
 
-            # Create knowledge base and run vision training
-            kb = SmartMoneyKnowledgeBase()
-
+            # Progress callback
             def progress_callback(current, total, message):
-                _vision_training_status[job_id]["progress"] = current
-                _vision_training_status[job_id]["total"] = total
-                _vision_training_status[job_id]["message"] = message
-                _vision_training_status[job_id]["status"] = "training"
+                _sync_training_status[job_id]["progress"] = current
+                _sync_training_status[job_id]["total"] = total
+                _sync_training_status[job_id]["message"] = message
 
-                # Extract video title from message
-                if "Analyzing" in message:
-                    _vision_training_status[job_id]["current_video"] = message.replace("Analyzing visual content: ", "")
+            # Initialize and run synchronized training
+            kb = SmartMoneyKnowledgeBase(str(DATA_DIR))
 
-            # Run multimodal training
-            results = kb.train_with_vision(
+            results = kb.train_synchronized(
                 transcripts=transcripts,
                 vision_provider=vision_provider,
                 max_frames_per_video=max_frames,
                 extraction_mode=extraction_mode,
+                alignment_threshold=alignment_threshold,
+                sync_window=sync_window,
                 progress_callback=progress_callback
             )
 
-            # Save the trained model
+            # Update status with results
+            sync_stats = results.get('synchronization', {})
+            _sync_training_status[job_id]["moments_analyzed"] = sync_stats.get('total_moments_analyzed', 0)
+            _sync_training_status[job_id]["verified_moments"] = sync_stats.get('verified_moments', 0)
+            _sync_training_status[job_id]["rejected_moments"] = sync_stats.get('rejected_moments', 0)
+            _sync_training_status[job_id]["verification_rate"] = sync_stats.get('verification_rate', 0)
+            _sync_training_status[job_id]["concepts_verified"] = sync_stats.get('concepts_verified', [])
+
+            # Track rejection reasons (contamination prevention)
+            rejection_reasons = sync_stats.get('rejection_reasons', {})
+            _sync_training_status[job_id]["contamination_prevented"] = [
+                f"{reason}: {count}" for reason, count in rejection_reasons.items()
+            ]
+
+            # Save
             kb.save()
 
-            # Reset global knowledge base to use new model
-            global _knowledge_base
-            _knowledge_base = None
-
-            # Update final status
-            vision_analysis = results.get('vision_analysis', {})
-            _vision_training_status[job_id].update({
-                "status": "completed",
-                "message": "Vision training completed successfully",
-                "completed_at": datetime.utcnow().isoformat(),
-                "frames_analyzed": vision_analysis.get('total_frames_analyzed', 0),
-                "charts_detected": vision_analysis.get('chart_frames', 0),
-                "patterns_found": len(vision_analysis.get('visual_patterns', {})),
-                "visual_concepts": vision_analysis.get('visual_concepts', 0),
-                "results": {
-                    "videos_processed": results.get('n_transcripts', 0),
-                    "concepts_learned": results['components'].get('definitions', {}).get('n_concepts', 0),
-                    "rules_extracted": results['components'].get('rules', {}).get('n_rules', 0),
-                    "vision_analysis": vision_analysis
-                }
-            })
+            _sync_training_status[job_id]["status"] = "completed"
+            _sync_training_status[job_id]["completed_at"] = datetime.utcnow().isoformat()
+            _sync_training_status[job_id]["message"] = (
+                f"Synchronized training complete! "
+                f"{sync_stats.get('verified_moments', 0)} moments verified, "
+                f"{sync_stats.get('rejected_moments', 0)} contaminated samples rejected."
+            )
+            _sync_training_status[job_id]["results"] = {
+                "transcripts_processed": results.get('n_transcripts', 0),
+                "verification_rate": f"{sync_stats.get('verification_rate', 0):.1%}",
+                "concepts_verified": sync_stats.get('concepts_verified', []),
+            }
 
         except Exception as e:
-            _vision_training_status[job_id]["status"] = "error"
-            _vision_training_status[job_id]["error"] = str(e)
-            _vision_training_status[job_id]["traceback"] = traceback.format_exc()
+            _sync_training_status[job_id]["status"] = "error"
+            _sync_training_status[job_id]["error"] = str(e)
+            _sync_training_status[job_id]["traceback"] = traceback.format_exc()
 
-    # Run in background
-    background_tasks.add_task(run_vision_training)
+    # Start background training
+    background_tasks.add_task(run_synchronized_training)
 
     return {
         "job_id": job_id,
         "status": "started",
-        "message": f"Vision training started for playlist {playlist_id}",
+        "message": f"Synchronized training started for playlist {playlist_id}",
+        "description": "STATE-OF-THE-ART training that verifies audio matches visual before learning",
         "vision_provider": vision_provider,
-        "max_frames_per_video": max_frames,
-        "status_url": f"/api/ml/train/vision/status/{job_id}",
-        "stream_url": f"/api/ml/train/vision/stream/{job_id}"
+        "extraction_mode": extraction_mode,
+        "alignment_threshold": alignment_threshold,
+        "sync_window": sync_window,
+        "status_url": f"/api/ml/train/synchronized/status/{job_id}",
+        "stream_url": f"/api/ml/train/synchronized/stream/{job_id}"
     }
 
 
-@app.get("/api/ml/train/vision/status/{job_id}")
-async def get_vision_training_status(job_id: str):
-    """Get status of a vision training job"""
-    if job_id not in _vision_training_status:
+@app.get("/api/ml/train/synchronized/status/{job_id}")
+async def get_synchronized_training_status(job_id: str):
+    """Get status of a synchronized training job"""
+    if job_id not in _sync_training_status:
         raise HTTPException(status_code=404, detail=f"Job not found: {job_id}")
-    return _vision_training_status[job_id]
+    return _sync_training_status[job_id]
 
 
-@app.get("/api/ml/train/vision/stream/{job_id}")
-async def stream_vision_training_status(job_id: str):
-    """SSE stream for vision training progress"""
+@app.get("/api/ml/train/synchronized/stream/{job_id}")
+async def stream_synchronized_training_status(job_id: str):
+    """SSE stream for synchronized training progress"""
     from sse_starlette.sse import EventSourceResponse
 
     async def event_generator():
         while True:
-            if job_id in _vision_training_status:
-                status = _vision_training_status[job_id]
+            if job_id in _sync_training_status:
+                status = _sync_training_status[job_id]
                 yield {"data": json.dumps(status)}
 
                 if status.get("status") in ["completed", "error"]:
@@ -1342,144 +1505,38 @@ async def stream_vision_training_status(job_id: str):
     return EventSourceResponse(event_generator())
 
 
-@app.post("/api/ml/train/vision/video/{video_id}")
-async def train_single_video_with_vision(
-    video_id: str,
-    background_tasks: BackgroundTasks,
-    vision_provider: str = Query("local", description="Vision AI provider: 'local' (FREE), 'anthropic' (paid), 'openai' (paid)"),
-    max_frames: int = Query(0, description="Max frames (0 = no limit)"),
-    extraction_mode: str = Query("comprehensive", description="Learning mode")
-):
+@app.get("/api/ml/synchronized/knowledge")
+async def get_synchronized_knowledge(concept: str = Query(None, description="Optional: get knowledge for specific concept")):
     """
-    Start vision training for a SINGLE video.
-    Perfect for testing or when you want to train on specific videos.
+    Get VERIFIED knowledge that passed audio-visual alignment tests.
+
+    This knowledge is guaranteed accurate - what was said matches what was shown.
     """
-    import uuid
-    import traceback
+    kb = get_knowledge_base()
+    if not kb:
+        raise HTTPException(status_code=500, detail="Knowledge base not loaded")
 
-    # Create job ID
-    job_id = str(uuid.uuid4())[:8]
-
-    # Check if transcript exists for this video
-    transcript_file = TRANSCRIPTS_DIR / f"{video_id}.json"
-    if not transcript_file.exists():
-        raise HTTPException(status_code=404, detail=f"Transcript not found for video: {video_id}")
-
-    # Load transcript to get title
-    with open(transcript_file) as f:
-        transcript_data = json.load(f)
-    video_title = transcript_data.get('title', video_id)
-
-    # Initialize status
-    _vision_training_status[job_id] = {
-        "job_id": job_id,
-        "video_id": video_id,
-        "video_title": video_title,
-        "status": "starting",
-        "progress": 0,
-        "total": 1,
-        "current_video": video_title,
-        "message": f"Initializing vision training for: {video_title}",
-        "started_at": datetime.utcnow().isoformat(),
-        "vision_provider": vision_provider,
-        "extraction_mode": extraction_mode,
-        "frames_analyzed": 0,
-        "charts_detected": 0,
-        "patterns_found": 0
-    }
-
-    def run_single_video_vision_training():
-        """Background task for single video vision training"""
-        try:
-            from .ml.training_pipeline import SmartMoneyKnowledgeBase
-
-            _vision_training_status[job_id]["status"] = "loading"
-            _vision_training_status[job_id]["message"] = f"Loading transcript for {video_title}..."
-
-            # Load the transcript
-            with open(transcript_file) as f:
-                transcript = json.load(f)
-
-            if not transcript.get('full_text'):
-                _vision_training_status[job_id]["status"] = "error"
-                _vision_training_status[job_id]["error"] = "Transcript has no text content"
-                return
-
-            _vision_training_status[job_id]["message"] = f"Starting vision analysis for: {video_title}"
-
-            # Create knowledge base and run vision training
-            kb = SmartMoneyKnowledgeBase()
-
-            def progress_callback(current, total, message):
-                _vision_training_status[job_id]["progress"] = current
-                _vision_training_status[job_id]["total"] = total
-                _vision_training_status[job_id]["message"] = message
-                _vision_training_status[job_id]["status"] = "training"
-
-            # Run multimodal training on single video
-            results = kb.train_with_vision(
-                transcripts=[transcript],
-                vision_provider=vision_provider,
-                max_frames_per_video=max_frames,
-                extraction_mode=extraction_mode,
-                progress_callback=progress_callback
-            )
-
-            # Save the trained model
-            kb.save()
-
-            # Reset global knowledge base to use new model
-            global _knowledge_base
-            _knowledge_base = None
-
-            # Update final status
-            vision_analysis = results.get('vision_analysis', {})
-            _vision_training_status[job_id].update({
-                "status": "completed",
-                "message": f"Vision training completed for: {video_title}",
-                "completed_at": datetime.utcnow().isoformat(),
-                "frames_analyzed": vision_analysis.get('total_frames_analyzed', 0),
-                "charts_detected": vision_analysis.get('chart_frames', 0),
-                "patterns_found": len(vision_analysis.get('visual_patterns', {})),
-                "visual_concepts": vision_analysis.get('visual_concepts', 0),
-                "results": {
-                    "video_title": video_title,
-                    "concepts_learned": results['components'].get('definitions', {}).get('n_concepts', 0),
-                    "rules_extracted": results['components'].get('rules', {}).get('n_rules', 0),
-                    "vision_analysis": vision_analysis
-                }
-            })
-
-        except Exception as e:
-            _vision_training_status[job_id]["status"] = "error"
-            _vision_training_status[job_id]["error"] = str(e)
-            _vision_training_status[job_id]["traceback"] = traceback.format_exc()
-
-    # Run in background
-    background_tasks.add_task(run_single_video_vision_training)
-
-    return {
-        "job_id": job_id,
-        "status": "started",
-        "message": f"Vision training started for video: {video_title}",
-        "video_id": video_id,
-        "video_title": video_title,
-        "vision_provider": vision_provider,
-        "extraction_mode": extraction_mode,
-        "status_url": f"/api/ml/train/vision/status/{job_id}"
-    }
+    try:
+        verified = kb.get_verified_knowledge(concept)
+        return {
+            "status": "success",
+            "has_synchronized_learning": bool(getattr(kb, 'synchronized_knowledge', {})),
+            "verified_knowledge": verified
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "has_synchronized_learning": False
+        }
 
 
 @app.get("/api/ml/vision/status")
 async def get_vision_capabilities():
-    """Check if vision training is available and its current status"""
-    try:
-        from .ml.training_pipeline import VISION_AVAILABLE
-        from .ml.video_vision_analyzer import VideoVisionTrainer
-        vision_available = VISION_AVAILABLE
-    except ImportError:
-        vision_available = False
-
+    """
+    Check if synchronized learning (visual training) is available.
+    NOTE: Standalone vision training is deprecated. This now checks for synchronized learning capabilities.
+    """
     # Check if Ollama is available for local vision (FREE!)
     ollama_available = False
     try:
@@ -1490,11 +1547,10 @@ async def get_vision_capabilities():
     except:
         pass
 
-    # Vision is available if we have API keys OR local Ollama
-    vision_available = vision_available or ollama_available
-
+    # Check for synchronized knowledge instead of vision_knowledge
     kb = get_knowledge_base()
-    vision_knowledge = getattr(kb, 'vision_knowledge', {}) if kb else {}
+    sync_knowledge = getattr(kb, 'synchronized_knowledge', {}) if kb else {}
+    has_sync = getattr(kb, 'has_synchronized_learning', False) if kb else False
 
     supported_providers = []
     if ollama_available:
@@ -1504,19 +1560,24 @@ async def get_vision_capabilities():
     if os.environ.get("OPENAI_API_KEY"):
         supported_providers.append("openai")
 
+    # Count patterns from synchronized knowledge
+    patterns_learned = len(sync_knowledge) if sync_knowledge else 0
+
     return {
-        "vision_available": vision_available,
-        "has_vision_knowledge": bool(vision_knowledge),
-        "patterns_learned": len(vision_knowledge.get('pattern_frequency', {})) if vision_knowledge else 0,
-        "visual_concepts": len(vision_knowledge.get('visual_concepts', [])) if vision_knowledge else 0,
-        "videos_with_vision": len(vision_knowledge.get('analyzed_videos', [])) if vision_knowledge else 0,
+        "vision_available": ollama_available or bool(supported_providers),
+        "has_vision_knowledge": has_sync,  # Now uses synchronized learning status
+        "patterns_learned": patterns_learned,
+        "visual_concepts": patterns_learned,
+        "videos_with_vision": 0,  # Will be updated when sync learning tracks this
         "supported_providers": supported_providers,
         "ollama_available": ollama_available,
+        "training_mode": "synchronized",  # Indicate we use synchronized learning
         "requirements": {
             "local": "Ollama running locally (FREE!) - ollama.ai",
             "anthropic": "ANTHROPIC_API_KEY environment variable",
             "openai": "OPENAI_API_KEY environment variable"
-        }
+        },
+        "note": "Using Synchronized Learning (Text + Vision + Verification)"
     }
 
 
@@ -1524,31 +1585,48 @@ async def get_vision_capabilities():
 async def get_visual_pattern_examples(pattern_type: str):
     """
     Get visual examples of a specific Smart Money pattern type.
-    Examples: FVG, OrderBlock, Breaker, Mitigation, etc.
+    Now uses synchronized knowledge for verified visual examples.
     """
     kb = get_knowledge_base()
     if not kb:
         raise HTTPException(status_code=503, detail="Knowledge base not loaded")
 
-    examples = kb.get_visual_pattern_examples(pattern_type)
+    # Try to get from synchronized knowledge first
+    sync_knowledge = getattr(kb, 'synchronized_knowledge', {})
 
-    if not examples:
-        # Check if we have any vision knowledge at all
-        vision_knowledge = getattr(kb, 'vision_knowledge', {})
-        available_patterns = list(vision_knowledge.get('pattern_frequency', {}).keys()) if vision_knowledge else []
+    # Map pattern type to concept name
+    pattern_map = {
+        'fvg': 'fair_value_gap',
+        'fair_value_gap': 'fair_value_gap',
+        'order_block': 'order_block',
+        'ob': 'order_block',
+        'breaker': 'breaker_block',
+        'breaker_block': 'breaker_block',
+    }
+    concept_name = pattern_map.get(pattern_type.lower(), pattern_type.lower())
 
+    if concept_name in sync_knowledge:
+        vk = sync_knowledge[concept_name]
+        examples = vk.get('visual_evidence', []) if isinstance(vk, dict) else []
         return {
             "pattern_type": pattern_type,
-            "examples": [],
-            "count": 0,
-            "message": f"No visual examples found for '{pattern_type}'",
-            "available_patterns": available_patterns
+            "examples": examples[:20],
+            "count": len(examples),
+            "source": "synchronized_learning",
+            "verified": True
         }
+
+    # Fallback to old method
+    examples = kb.get_visual_pattern_examples(pattern_type) if hasattr(kb, 'get_visual_pattern_examples') else []
+
+    available_patterns = list(sync_knowledge.keys()) if sync_knowledge else []
 
     return {
         "pattern_type": pattern_type,
-        "examples": examples[:20],  # Limit to 20 examples
-        "count": len(examples)
+        "examples": examples[:20] if examples else [],
+        "count": len(examples) if examples else 0,
+        "message": f"No verified visual examples found for '{pattern_type}'. Run synchronized training first.",
+        "available_patterns": available_patterns
     }
 
 
@@ -1557,8 +1635,8 @@ async def get_teaching_moments(
     concept: Optional[str] = Query(None, description="Filter by concept (e.g., 'FVG', 'Order Block')")
 ):
     """
-    Get key teaching moments from analyzed videos.
-    These are moments where the tutor is demonstrating or explaining a concept visually.
+    Get key teaching moments from synchronized learning.
+    These are verified moments where audio matches visual evidence.
     """
     kb = get_knowledge_base()
     if not kb:
@@ -1575,7 +1653,10 @@ async def get_teaching_moments(
 
 @app.get("/api/ml/vision/knowledge")
 async def get_visual_knowledge():
-    """Get comprehensive visual knowledge learned from video analysis"""
+    """
+    Get comprehensive visual knowledge learned from synchronized training.
+    NOTE: Now returns data from synchronized learning (Text + Vision + Verification).
+    """
     from .ml.ml_pattern_engine import get_ml_engine
 
     # Get ML engine knowledge
@@ -1585,12 +1666,19 @@ async def get_visual_knowledge():
     except Exception as e:
         ml_summary = {'status': 'error', 'patterns_learned': [], 'patterns_not_learned': []}
 
+    # Also check synchronized knowledge
+    kb = get_knowledge_base()
+    has_sync = getattr(kb, 'has_synchronized_learning', False) if kb else False
+    sync_knowledge = getattr(kb, 'synchronized_knowledge', {}) if kb else {}
+
     # Check if we have any trained knowledge
     if ml_summary.get('status') != 'trained' or not ml_summary.get('patterns_learned'):
         return {
-            "has_vision_knowledge": False,
-            "message": "No vision training has been performed. Use /api/ml/train/vision/{playlist_id} to start vision training.",
-            "patterns_not_learned": ml_summary.get('patterns_not_learned', [])
+            "has_vision_knowledge": has_sync,
+            "message": "Run synchronized training for verified visual learning: /api/ml/train/synchronized/{playlist_id}",
+            "patterns_not_learned": ml_summary.get('patterns_not_learned', []),
+            "has_synchronized_learning": has_sync,
+            "synchronized_concepts": list(sync_knowledge.keys()) if sync_knowledge else []
         }
 
     # Build detailed pattern info
@@ -1601,7 +1689,8 @@ async def get_visual_knowledge():
             'frequency': p.get('frequency', 0),
             'confidence': p.get('confidence', 0),
             'has_teaching': p.get('has_teaching', False),
-            'has_visual': p.get('has_visual', False)
+            'has_visual': p.get('has_visual', False),
+            'verified': p.get('type') in sync_knowledge  # Mark if verified by sync learning
         })
 
     return {
@@ -1612,10 +1701,13 @@ async def get_visual_knowledge():
         "videos_with_vision": ml_summary.get('total_videos', 0),
         "total_frames_analyzed": ml_summary.get('total_frames', 0),
         "chart_frames": ml_summary.get('chart_frames', 0),
-        "visual_concepts": len(pattern_details),  # Same as patterns learned
+        "visual_concepts": len(pattern_details),
         "key_teaching_moments_count": sum(1 for p in pattern_details if p.get('has_teaching', False)),
         "training_sources": ml_summary.get('training_sources', []),
-        "last_trained": ml_summary.get('last_trained')
+        "last_trained": ml_summary.get('last_trained'),
+        "has_synchronized_learning": has_sync,
+        "synchronized_concepts": list(sync_knowledge.keys()) if sync_knowledge else [],
+        "training_mode": "synchronized" if has_sync else "legacy_vision"
     }
 
 
@@ -2380,15 +2472,41 @@ async def websocket_live_price(websocket: WebSocket, symbol: str):
             while True:
                 try:
                     if is_crypto and binance_symbol:
-                        # Use Binance Futures API for real-time USDT Perpetual prices
-                        # This matches TradingView's BTCUSDT.P (perpetual) chart
-                        response = await client.get(
-                            f"https://fapi.binance.com/fapi/v1/ticker/price?symbol={binance_symbol}",
-                            timeout=5.0
-                        )
-                        if response.status_code == 200:
-                            data = response.json()
-                            current_price = float(data['price'])
+                        # Try Binance Futures API first, fallback to CoinGecko if banned
+                        current_price = None
+                        try:
+                            response = await client.get(
+                                f"https://fapi.binance.com/fapi/v1/ticker/price?symbol={binance_symbol}",
+                                timeout=3.0
+                            )
+                            if response.status_code == 200:
+                                data = response.json()
+                                current_price = float(data['price'])
+                        except:
+                            pass
+
+                        # Fallback to CoinGecko if Binance fails
+                        if current_price is None:
+                            coin_id_map = {
+                                'BTCUSDT': 'bitcoin', 'ETHUSDT': 'ethereum', 'SOLUSDT': 'solana',
+                                'XRPUSDT': 'ripple', 'DOGEUSDT': 'dogecoin', 'ADAUSDT': 'cardano',
+                                'AVAXUSDT': 'avalanche-2', 'DOTUSDT': 'polkadot', 'LINKUSDT': 'chainlink',
+                                'MATICUSDT': 'matic-network'
+                            }
+                            coin_id = coin_id_map.get(binance_symbol)
+                            if coin_id:
+                                try:
+                                    response = await client.get(
+                                        f"https://api.coingecko.com/api/v3/simple/price?ids={coin_id}&vs_currencies=usd",
+                                        timeout=5.0
+                                    )
+                                    if response.status_code == 200:
+                                        data = response.json()
+                                        current_price = float(data[coin_id]['usd'])
+                                except:
+                                    pass
+
+                        if current_price is not None:
 
                             # Track candle data (reset every minute)
                             current_minute = datetime.utcnow().minute

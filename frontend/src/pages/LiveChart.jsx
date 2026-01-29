@@ -54,9 +54,9 @@ const CONCEPT_INFO = {
 // Map backend pattern types to display names
 const PATTERN_TYPE_MAP = {
   'bullish_order_block': { short: 'OB', color: '#26a69a', direction: 'bullish' },
-  'bearish_order_block': { short: 'OB', color: '#ef5350', direction: 'bearish' },
-  'bullish_fvg': { short: 'FVG', color: '#ffd700', direction: 'bullish' },
-  'bearish_fvg': { short: 'FVG', color: '#ff9800', direction: 'bearish' },
+  'bearish_order_block': { short: 'OB', color: '#ff9800', direction: 'bearish' },  // Orange for bearish OB
+  'bullish_fvg': { short: 'FVG', color: '#4caf50', direction: 'bullish' },  // Green for bullish
+  'bearish_fvg': { short: 'FVG', color: '#ef5350', direction: 'bearish' },  // Red for bearish FVG
   'bos_bullish': { short: 'BOS', color: '#4fc3f7', direction: 'bullish' },
   'bos_bearish': { short: 'BOS', color: '#29b6f6', direction: 'bearish' },
   'choch_bullish': { short: 'CHoCH', color: '#66bb6a', direction: 'bullish' },
@@ -92,6 +92,7 @@ function LiveChart() {
   const lastCandleRef = useRef(null);
   const priceLinesRef = useRef([]);
   const patternOverlaysRef = useRef([]);
+  const rayOverlaysRef = useRef([]);
   const candlesDataRef = useRef([]);
   const analysisPatternsRef = useRef([]);
 
@@ -129,6 +130,214 @@ function LiveChart() {
       }
     });
     patternOverlaysRef.current = [];
+
+    // Also clear ray overlays
+    rayOverlaysRef.current.forEach(el => {
+      if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    });
+    rayOverlaysRef.current = [];
+  }, []);
+
+  // Draw horizontal rays for BOS/CHoCH, liquidity, and equal highs/lows
+  const drawHorizontalRays = useCallback((patterns, candles) => {
+    if (!chartRef.current || !candlestickSeriesRef.current || !chartContainerRef.current || !patterns || patterns.length === 0 || candles.length === 0) {
+      return;
+    }
+
+    const chart = chartRef.current;
+    const series = candlestickSeriesRef.current;
+    const chartElement = chartContainerRef.current;
+    const chartHeight = chartElement.clientHeight || 500;
+
+    // Pattern types that should be drawn as horizontal rays
+    const rayPatternTypes = [
+      'bos_bullish', 'bos_bearish',
+      'choch_bullish', 'choch_bearish',
+      'equal_highs', 'equal_lows',
+      'liquidity_sweep_high', 'liquidity_sweep_low',
+      'buyside_liquidity', 'sellside_liquidity'
+    ];
+
+    // Get annotation labels for each pattern type (all solid lines now)
+    const getAnnotation = (patternType) => {
+      const annotations = {
+        'bos_bullish': { text: 'BOS ↑', color: '#4fc3f7' },
+        'bos_bearish': { text: 'BOS ↓', color: '#ff9800' },
+        'choch_bullish': { text: 'CHoCH ↑', color: '#66bb6a' },
+        'choch_bearish': { text: 'CHoCH ↓', color: '#ff5722' },
+        'equal_highs': { text: 'EQH', color: '#ef5350' },
+        'equal_lows': { text: 'EQL', color: '#66bb6a' },
+        'liquidity_sweep_high': { text: 'BSL Sweep', color: '#e91e63' },
+        'liquidity_sweep_low': { text: 'SSL Sweep', color: '#9c27b0' },
+        'buyside_liquidity': { text: 'BSL', color: '#ef5350' },
+        'sellside_liquidity': { text: 'SSL', color: '#66bb6a' },
+      };
+      return annotations[patternType] || { text: patternType, color: '#9ca3af' };
+    };
+
+    // Filter to only ray patterns
+    const rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
+
+    rayPatterns.forEach((pattern, idx) => {
+      const patternType = pattern.pattern_type;
+      const annotation = getAnnotation(patternType);
+
+      // Get the price level for the ray
+      const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
+      if (!price) return;
+
+      // Get Y coordinate for this price
+      const y = series.priceToCoordinate(price);
+
+      // Skip if price level is outside visible chart area
+      if (y === null || y < 0 || y > chartHeight) return;
+
+      // Determine if this is a high-type or low-type pattern
+      const isHighPattern = patternType.includes('high') || patternType.includes('bullish') ||
+                           patternType === 'buyside_liquidity' || patternType === 'equal_highs';
+      const isLowPattern = patternType.includes('low') || patternType.includes('bearish') ||
+                          patternType === 'sellside_liquidity' || patternType === 'equal_lows';
+
+      // Find the candle that CREATED this level (swing high or swing low)
+      let startTime = null;
+      let foundValidLevel = false;
+      const tolerance = 0.005; // 0.5% tolerance
+
+      // For high patterns (BSL, EQH, BOS bullish): find swing high candle
+      // For low patterns (SSL, EQL, BOS bearish): find swing low candle
+      for (let i = 2; i < candles.length - 2; i++) {
+        const candle = candles[i];
+        const prevCandle1 = candles[i - 1];
+        const prevCandle2 = candles[i - 2];
+        const nextCandle1 = candles[i + 1];
+        const nextCandle2 = candles[i + 2];
+
+        if (isHighPattern) {
+          // Check if this candle is a swing high (higher than surrounding candles)
+          const isSwingHigh = candle.high >= prevCandle1.high &&
+                             candle.high >= prevCandle2.high &&
+                             candle.high >= nextCandle1.high &&
+                             candle.high >= nextCandle2.high;
+
+          if (isSwingHigh && Math.abs(candle.high - price) / price < tolerance) {
+            startTime = candle.time;
+            foundValidLevel = true;
+            break;
+          }
+        } else if (isLowPattern) {
+          // Check if this candle is a swing low (lower than surrounding candles)
+          const isSwingLow = candle.low <= prevCandle1.low &&
+                            candle.low <= prevCandle2.low &&
+                            candle.low <= nextCandle1.low &&
+                            candle.low <= nextCandle2.low;
+
+          if (isSwingLow && Math.abs(candle.low - price) / price < tolerance) {
+            startTime = candle.time;
+            foundValidLevel = true;
+            break;
+          }
+        }
+      }
+
+      // If no swing point found, try simpler match (candle that touched this level)
+      if (!startTime) {
+        for (let i = 0; i < candles.length; i++) {
+          const candle = candles[i];
+          if (isHighPattern && Math.abs(candle.high - price) / price < tolerance) {
+            startTime = candle.time;
+            foundValidLevel = true;
+            break;
+          } else if (isLowPattern && Math.abs(candle.low - price) / price < tolerance) {
+            startTime = candle.time;
+            foundValidLevel = true;
+            break;
+          }
+        }
+      }
+
+      // Skip this ray if we couldn't find a valid candle that created this level
+      // This prevents showing rays for price levels that don't exist on the current chart
+      if (!foundValidLevel) return;
+
+      if (!startTime) return;
+
+      try {
+        const timeScale = chart.timeScale();
+        let startX = timeScale.timeToCoordinate(startTime);
+        const chartWidth = chartElement.clientWidth;
+
+        // If start is off-screen left, start from left edge (x=0)
+        if (startX === null || startX < 0) {
+          startX = 0;
+        }
+
+        const rayWidth = Math.max(chartWidth - startX - 70, 50);
+
+        // Create the horizontal ray line (solid line)
+        const rayLine = document.createElement('div');
+        rayLine.className = 'pattern-ray-overlay';
+        rayLine.style.cssText = `
+          position: absolute;
+          left: ${startX}px;
+          top: ${y}px;
+          width: ${rayWidth}px;
+          height: 2px;
+          background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);
+          pointer-events: none;
+          z-index: 4;
+          box-shadow: 0 0 4px ${annotation.color}60;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `;
+
+        // Create the annotation label centered on the ray line
+        const labelEl = document.createElement('div');
+        labelEl.className = 'pattern-ray-overlay';
+        labelEl.style.cssText = `
+          color: ${annotation.color};
+          font-size: 10px;
+          font-weight: 700;
+          text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+          white-space: nowrap;
+          padding: 2px 6px;
+          background: rgba(0,0,0,0.8);
+          border: 1px solid ${annotation.color};
+          border-radius: 3px;
+          pointer-events: none;
+        `;
+        labelEl.textContent = annotation.text;
+        rayLine.appendChild(labelEl);
+
+        // Create small circle at the start point (only if visible)
+        if (startX > 0) {
+          const startMarker = document.createElement('div');
+          startMarker.className = 'pattern-ray-overlay';
+          startMarker.style.cssText = `
+            position: absolute;
+            left: ${startX - 4}px;
+            top: ${y - 4}px;
+            width: 8px;
+            height: 8px;
+            background: ${annotation.color};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            box-shadow: 0 0 6px ${annotation.color};
+          `;
+          chartElement.appendChild(startMarker);
+          rayOverlaysRef.current.push(startMarker);
+        }
+
+        chartElement.style.position = 'relative';
+        chartElement.appendChild(rayLine);
+        rayOverlaysRef.current.push(rayLine);
+      } catch (e) {
+        console.log('Error drawing ray:', e);
+      }
+    });
   }, []);
 
   // Draw pattern boxes on chart
@@ -144,6 +353,14 @@ function LiveChart() {
     const chartElement = chartContainerRef.current;
 
     const boxPatternTypes = ['bullish_order_block', 'bearish_order_block', 'bullish_fvg', 'bearish_fvg', 'optimal_trade_entry'];
+    // Pattern types that are drawn as horizontal rays (skip them here)
+    const rayPatternTypes = [
+      'bos_bullish', 'bos_bearish',
+      'choch_bullish', 'choch_bearish',
+      'equal_highs', 'equal_lows',
+      'liquidity_sweep_high', 'liquidity_sweep_low',
+      'buyside_liquidity', 'sellside_liquidity'
+    ];
     const markers = [];
 
     patterns.forEach((pattern, idx) => {
@@ -157,16 +374,91 @@ function LiveChart() {
 
       if (!highPrice && !lowPrice && !pattern.price) return;
 
+      // Find where this FVG/OB pattern was created on the chart
       let patternTime;
-      if (pattern.start_index !== undefined && candles.length > 0) {
-        const startIdx = Math.max(0, Math.min(pattern.start_index, candles.length - 1));
-        patternTime = candles[startIdx]?.time;
-      } else if (candles.length > 0) {
-        const defaultIdx = Math.max(0, candles.length - 20 - idx * 3);
-        patternTime = candles[defaultIdx]?.time;
+
+      // For FVG: Find the candle that created the gap
+      // FVG is formed when candle[i-1].low > candle[i+1].high (bearish) or
+      // candle[i-1].high < candle[i+1].low (bullish)
+      // The FVG zone is the gap between those levels
+
+      if (patternType.includes('fvg')) {
+        // Search for where this FVG gap exists in the candle data
+        for (let i = 1; i < candles.length - 1; i++) {
+          const prevCandle = candles[i - 1];
+          const currCandle = candles[i];
+          const nextCandle = candles[i + 1];
+
+          if (patternType === 'bearish_fvg') {
+            // Bearish FVG: gap between prev candle low and next candle high
+            const gapHigh = prevCandle.low;
+            const gapLow = nextCandle.high;
+            if (gapHigh > gapLow &&
+                Math.abs(gapHigh - highPrice) / highPrice < 0.005 &&
+                Math.abs(gapLow - lowPrice) / lowPrice < 0.005) {
+              patternTime = currCandle.time;
+              break;
+            }
+          } else if (patternType === 'bullish_fvg') {
+            // Bullish FVG: gap between prev candle high and next candle low
+            const gapLow = prevCandle.high;
+            const gapHigh = nextCandle.low;
+            if (gapHigh > gapLow &&
+                Math.abs(gapHigh - highPrice) / highPrice < 0.005 &&
+                Math.abs(gapLow - lowPrice) / lowPrice < 0.005) {
+              patternTime = currCandle.time;
+              break;
+            }
+          }
+        }
+      }
+
+      // For Order Blocks: Find the candle with matching high/low
+      if (!patternTime && patternType.includes('order_block')) {
+        for (let i = 0; i < candles.length; i++) {
+          const candle = candles[i];
+          // OB is defined by a specific candle's range
+          if (Math.abs(candle.high - highPrice) / highPrice < 0.003 &&
+              Math.abs(candle.low - lowPrice) / lowPrice < 0.003) {
+            patternTime = candle.time;
+            break;
+          }
+        }
+      }
+
+      // Fallback: Find candle where price touched this zone
+      if (!patternTime && candles.length > 0) {
+        for (let i = 0; i < candles.length; i++) {
+          const candle = candles[i];
+          // Check if candle wick/body touched this zone
+          if (candle.high >= lowPrice && candle.low <= highPrice) {
+            patternTime = candle.time;
+            break;
+          }
+        }
+      }
+
+      // Last resort: position based on pattern index from backend
+      if (!patternTime && candles.length > 0) {
+        if (pattern.start_index !== undefined && pattern.start_index >= 0) {
+          // Backend uses 200 candle window, map proportionally
+          const ratio = pattern.start_index / 200;
+          const chartIdx = Math.floor(candles.length * ratio);
+          const startIdx = Math.max(0, Math.min(chartIdx, candles.length - 1));
+          patternTime = candles[startIdx]?.time;
+        } else {
+          // Use a position near the end
+          const recentIdx = Math.max(0, candles.length - 20);
+          patternTime = candles[recentIdx]?.time;
+        }
       }
 
       if (!patternTime) return;
+
+      // Skip ray patterns - they're drawn separately as horizontal rays
+      if (rayPatternTypes.includes(patternType)) {
+        return;
+      }
 
       if (!boxPatternTypes.includes(patternType)) {
         const price = pattern.price || highPrice || lowPrice;
@@ -183,57 +475,66 @@ function LiveChart() {
       }
 
       let startTime = patternTime;
-      // Always extend patterns to the right edge of the chart (current time)
-      // This ensures higher timeframe patterns are visible in lower timeframes
-      let endTime = candles.length > 0 ? candles[candles.length - 1]?.time : null;
+      // Extend FVG/OB zones to the right edge of the chart
+      // This is correct ICT methodology - zones remain valid until filled/mitigated
 
-      if (!startTime || !endTime || !highPrice || !lowPrice) return;
+      if (!startTime || !highPrice || !lowPrice) return;
 
       try {
         const timeScale = chart.timeScale();
-        const x1 = timeScale.timeToCoordinate(startTime);
-        const x2 = timeScale.timeToCoordinate(endTime);
+        const chartWidth = chartElement.clientWidth;
+        let x1 = timeScale.timeToCoordinate(startTime);
         const y1 = series.priceToCoordinate(highPrice);
         const y2 = series.priceToCoordinate(lowPrice);
 
-        if (x1 === null || x2 === null || y1 === null || y2 === null) return;
+        // If start is off-screen left, start from left edge
+        if (x1 === null || x1 < 0) {
+          x1 = 0;
+        }
 
-        const width = Math.max(Math.abs(x2 - x1), 30);
-        const height = Math.max(Math.abs(y2 - y1), 20);
+        if (y1 === null || y2 === null) return;
+
+        // Extend to right edge of chart (minus price scale area ~60px)
+        const rightEdge = chartWidth - 60;
+        const width = Math.max(rightEdge - x1, 50);
+        const height = Math.max(Math.abs(y2 - y1), 15);
 
         const overlay = document.createElement('div');
         overlay.className = 'pattern-box-overlay';
         overlay.style.cssText = `
           position: absolute;
-          left: ${Math.min(x1, x2)}px;
+          left: ${x1}px;
           top: ${Math.min(y1, y2)}px;
           width: ${width}px;
           height: ${height}px;
-          background-color: ${patternInfo.color}25;
-          border: 2px solid ${patternInfo.color}80;
-          border-radius: 4px;
+          background-color: ${patternInfo.color}20;
+          border-left: 3px solid ${patternInfo.color};
+          border-top: 1px solid ${patternInfo.color}60;
+          border-bottom: 1px solid ${patternInfo.color}60;
           pointer-events: none;
-          z-index: 5;
+          z-index: 3;
           display: flex;
           align-items: center;
           justify-content: center;
         `;
 
-        const labelEl = document.createElement('span');
+        // Label centered within the box
+        const labelEl = document.createElement('div');
         labelEl.style.cssText = `
           color: ${patternInfo.color};
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 700;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.7);
+          text-shadow: 0 1px 2px rgba(0,0,0,0.9);
           white-space: nowrap;
-          padding: 3px 6px;
-          background: rgba(0,0,0,0.6);
-          border-radius: 4px;
+          padding: 2px 6px;
+          background: rgba(0,0,0,0.7);
+          border-radius: 3px;
+          pointer-events: none;
         `;
         labelEl.textContent = label;
-        overlay.appendChild(labelEl);
 
         chartElement.style.position = 'relative';
+        overlay.appendChild(labelEl);
         chartElement.appendChild(overlay);
         patternOverlaysRef.current.push(overlay);
       } catch (e) {
@@ -249,7 +550,10 @@ function LiveChart() {
         console.log('Error setting markers:', e);
       }
     }
-  }, [timeframe, clearPatternOverlays]);
+
+    // Also draw horizontal rays for BOS/CHoCH, liquidity, equal highs/lows
+    drawHorizontalRays(patterns, candles);
+  }, [timeframe, clearPatternOverlays, drawHorizontalRays]);
 
   // Initialize chart and load data
   useEffect(() => {
@@ -315,11 +619,13 @@ function LiveChart() {
       };
       window.addEventListener('resize', handleResize);
 
-      // Scroll handler for pattern redraw
+      // Scroll handler for pattern redraw (both boxes and rays)
       chart.timeScale().subscribeVisibleLogicalRangeChange(() => {
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
         window.patternUpdateTimeout = setTimeout(() => {
           if (analysisPatternsRef.current.length > 0 && candlesDataRef.current.length > 0) {
+            // Clear and redraw all overlays
+            clearPatternOverlays();
             drawPatternBoxes(analysisPatternsRef.current, candlesDataRef.current);
           }
         }, 100);
@@ -336,7 +642,10 @@ function LiveChart() {
       setError(null);
 
       try {
-        const ohlcvData = await getLiveOHLCV(symbol, timeframe, 200);
+        // Request more candles for higher timeframes to show more history
+        const candleLimit = ['D1', 'W1', 'MN'].includes(timeframe) ? 500 :
+                           ['H4', 'H1'].includes(timeframe) ? 300 : 200;
+        const ohlcvData = await getLiveOHLCV(symbol, timeframe, candleLimit);
 
         if (ohlcvData?.candles?.length > 0) {
           const candles = ohlcvData.candles;
@@ -367,23 +676,117 @@ function LiveChart() {
           const isMlTrained = analysisData?.ml_status === 'trained';
 
           if (isMlTrained && analysisData?.patterns && analysisData.patterns.length > 0 && candlesDataRef.current.length > 0) {
-            const signalDirection = analysisData?.signal?.direction;
+            const signalDirection = analysisData?.signal?.direction?.toLowerCase();
+            const totalCandles = candlesDataRef.current.length;
+            const currentPrice = candlesDataRef.current[candlesDataRef.current.length - 1]?.close || 0;
+
+            // Get visible price range from candles
+            const visibleHigh = Math.max(...candlesDataRef.current.map(c => c.high));
+            const visibleLow = Math.min(...candlesDataRef.current.map(c => c.low));
+            const priceRange = visibleHigh - visibleLow;
+
+            // Map timeframe to priority (current TF gets highest priority)
+            const getTfPriority = (patternTf) => {
+              if (patternTf === timeframe) return 0;  // Current timeframe - highest priority
+              // Higher timeframes are more significant
+              const tfOrder = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1'];
+              const currentIdx = tfOrder.indexOf(timeframe);
+              const patternIdx = tfOrder.indexOf(patternTf);
+              if (patternIdx > currentIdx) return 1;  // Higher TF - second priority
+              return 2;  // Lower TF - lowest priority
+            };
+
+            // Filter patterns to only those within visible price range (with some margin)
+            const margin = priceRange * 0.1;  // 10% margin
+            const visiblePatterns = analysisData.patterns.filter(p => {
+              const price = p.price || ((p.high || 0) + (p.low || 0)) / 2;
+              return price >= (visibleLow - margin) && price <= (visibleHigh + margin);
+            });
+
+            // Sort patterns: prioritize current timeframe, then by distance from current price
+            const sortedPatterns = [...visiblePatterns].sort((a, b) => {
+              // First: prioritize current timeframe patterns
+              const tfPriorityA = getTfPriority(a.timeframe);
+              const tfPriorityB = getTfPriority(b.timeframe);
+              if (tfPriorityA !== tfPriorityB) return tfPriorityA - tfPriorityB;
+
+              // Second: prioritize BOS/CHoCH patterns
+              const isBosChochA = a.pattern_type?.includes('bos') || a.pattern_type?.includes('choch');
+              const isBosChochB = b.pattern_type?.includes('bos') || b.pattern_type?.includes('choch');
+              if (isBosChochA && !isBosChochB) return -1;
+              if (!isBosChochA && isBosChochB) return 1;
+
+              // Third: sort by distance from current price (nearest first)
+              const priceA = a.price || ((a.high || 0) + (a.low || 0)) / 2;
+              const priceB = b.price || ((b.high || 0) + (b.low || 0)) / 2;
+              const distA = Math.abs(priceA - currentPrice);
+              const distB = Math.abs(priceB - currentPrice);
+              return distA - distB;
+            });
+
             let relevantPatterns;
 
-            if (signalDirection) {
-              // Filter patterns based on signal direction
-              relevantPatterns = analysisData.patterns.filter(p => {
+            // Separate box patterns (FVG, OB) from ray patterns (BOS, CHoCH, liquidity, etc.)
+            const rayPatternTypes = [
+              'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
+              'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
+              'buyside_liquidity', 'sellside_liquidity'
+            ];
+
+            const boxPatterns = sortedPatterns.filter(p => !rayPatternTypes.includes(p.pattern_type));
+            const rayPatterns = sortedPatterns.filter(p => rayPatternTypes.includes(p.pattern_type));
+
+            // Only filter if we have a clear bullish or bearish signal
+            // For WAIT, neutral, or no signal - show all patterns
+            if (signalDirection === 'bullish') {
+              // Filter to bullish patterns only
+              const filteredBoxes = boxPatterns.filter(p => {
                 const pt = p.pattern_type;
-                if (signalDirection === 'bullish') {
-                  return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows';
-                } else if (signalDirection === 'bearish') {
-                  return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs';
-                }
-                return false;
-              }).slice(-10);
+                return pt.includes('bullish');
+              }).slice(0, 5);
+              const filteredRays = rayPatterns.filter(p => {
+                const pt = p.pattern_type;
+                return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity';
+              }).slice(0, 8);  // Allow more ray patterns
+              relevantPatterns = [...filteredBoxes, ...filteredRays];
+            } else if (signalDirection === 'bearish') {
+              // Filter to bearish patterns only
+              const filteredBoxes = boxPatterns.filter(p => {
+                const pt = p.pattern_type;
+                return pt.includes('bearish');
+              }).slice(0, 5);
+              const filteredRays = rayPatterns.filter(p => {
+                const pt = p.pattern_type;
+                return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity';
+              }).slice(0, 8);  // Allow more ray patterns
+              relevantPatterns = [...filteredBoxes, ...filteredRays];
             } else {
-              // No signal direction - show all patterns (most recent 10)
-              relevantPatterns = analysisData.patterns.slice(-10);
+              // WAIT, neutral, or undefined - show mix of patterns
+              // Always include BOS/CHoCH patterns as they're key market structure
+              const bosChochPatterns = rayPatterns.filter(p =>
+                p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch')
+              );
+              const otherRays = rayPatterns.filter(p =>
+                !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch')
+              );
+
+              // Deduplicate rays by price level (keep only unique price levels)
+              const uniqueRays = [];
+              const seenPrices = new Set();
+              for (const ray of otherRays) {
+                const price = ray.price || ray.high || ray.low;
+                const roundedPrice = Math.round(price / 100) * 100; // Round to nearest 100
+                if (!seenPrices.has(roundedPrice)) {
+                  seenPrices.add(roundedPrice);
+                  uniqueRays.push(ray);
+                }
+              }
+
+              relevantPatterns = [
+                ...bosChochPatterns.slice(0, 2),  // BOS/CHoCH (up to 2)
+                ...boxPatterns.slice(0, 4),        // Box patterns
+                ...uniqueRays.slice(0, 4)          // Other rays (deduplicated)
+              ];
             }
 
             analysisPatternsRef.current = relevantPatterns;
