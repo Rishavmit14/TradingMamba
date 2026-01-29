@@ -29,9 +29,10 @@ import {
   Eye,
   Image,
   Video,
-  Scan
+  Scan,
+  Shield
 } from 'lucide-react';
-import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, whitewashML, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus, trainWithVision, trainSingleVideoWithVision, getVisionTrainingStatus, getVisionCapabilities, getVisualKnowledge } from '../services/api';
+import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, whitewashML, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus, trainWithVision, trainSingleVideoWithVision, getVisionTrainingStatus, getVisionCapabilities, getVisualKnowledge, getHedgeFundStatus, getEdgeStatistics } from '../services/api';
 
 // Animated Background Orb
 function BackgroundOrb({ className }) {
@@ -1336,11 +1337,14 @@ export default function Dashboard() {
   const [signals, setSignals] = useState({});
   const [loading, setLoading] = useState({});
   const [refreshing, setRefreshing] = useState(false);
+  const [hedgeFundStatus, setHedgeFundStatus] = useState(null);
+  const [edgeStats, setEdgeStats] = useState(null);
 
   const symbols = ['EURUSD', 'XAUUSD', 'US30', 'GBPUSD'];
 
   useEffect(() => {
     loadStatus();
+    loadHedgeFundStatus();
     symbols.forEach(symbol => loadSignal(symbol));
   }, []);
 
@@ -1350,6 +1354,19 @@ export default function Dashboard() {
       setStatus(data);
     } catch (err) {
       console.error('Failed to load status:', err);
+    }
+  };
+
+  const loadHedgeFundStatus = async () => {
+    try {
+      const [hfStatus, edgeData] = await Promise.all([
+        getHedgeFundStatus(),
+        getEdgeStatistics()
+      ]);
+      setHedgeFundStatus(hfStatus);
+      setEdgeStats(edgeData);
+    } catch (err) {
+      console.error('Failed to load hedge fund status:', err);
     }
   };
 
@@ -1368,6 +1385,7 @@ export default function Dashboard() {
   const refreshAll = async () => {
     setRefreshing(true);
     await loadStatus();
+    await loadHedgeFundStatus();
     await Promise.all(symbols.map(s => loadSignal(s)));
     setRefreshing(false);
   };
@@ -1399,7 +1417,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard
           icon={FileText}
           label="Transcripts Processed"
@@ -1425,12 +1443,20 @@ export default function Dashboard() {
           delay={100}
         />
         <StatCard
+          icon={Shield}
+          label="Hedge Fund"
+          value={hedgeFundStatus?.available ? 'Active' : 'Inactive'}
+          subValue={`${Object.keys(edgeStats?.all_patterns || {}).length} patterns tracked`}
+          gradient="from-indigo-500 to-violet-500"
+          delay={150}
+        />
+        <StatCard
           icon={Activity}
           label="System Status"
           value={status?.status === 'operational' ? 'Online' : 'Offline'}
           subValue="All systems nominal"
           gradient="from-orange-500 to-amber-500"
-          delay={150}
+          delay={200}
         />
       </div>
 

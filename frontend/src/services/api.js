@@ -222,4 +222,68 @@ export const getVisualKnowledge = async () => {
   return response.data;
 };
 
+// ============================================================================
+// Hedge Fund APIs - Institutional-grade pattern analysis
+// ============================================================================
+
+// Get hedge fund components status
+export const getHedgeFundStatus = async () => {
+  const response = await api.get('/hedge-fund/status');
+  return response.data;
+};
+
+// Get edge statistics for patterns
+// patternType: optional filter (e.g., 'fvg', 'order_block')
+export const getEdgeStatistics = async (patternType = null) => {
+  const params = patternType ? { pattern_type: patternType } : {};
+  const response = await api.get('/hedge-fund/edge-statistics', { params });
+  return response.data;
+};
+
+// Grade a pattern (A+ to F)
+export const gradePattern = async (patternType, patternData, marketContext) => {
+  const response = await api.post('/hedge-fund/grade-pattern', null, {
+    params: {
+      pattern_type: patternType,
+      pattern_data: JSON.stringify(patternData),
+      market_context: JSON.stringify(marketContext),
+    },
+  });
+  return response.data;
+};
+
+// Analyze multi-timeframe confluence
+export const analyzeConfluence = async (primaryPattern, primaryTf, allTfPatterns) => {
+  const response = await api.post('/hedge-fund/analyze-confluence', null, {
+    params: {
+      primary_pattern: JSON.stringify(primaryPattern),
+      primary_tf: primaryTf,
+      all_tf_patterns: JSON.stringify(allTfPatterns),
+    },
+  });
+  return response.data;
+};
+
+// Record trade outcome for edge tracking (feedback loop)
+export const recordTrade = async (patternType, outcome, rrAchieved = 0, session = '', dayOfWeek = '') => {
+  const response = await api.post('/hedge-fund/record-trade', null, {
+    params: {
+      pattern_type: patternType,
+      outcome,
+      rr_achieved: rrAchieved,
+      session,
+      day_of_week: dayOfWeek,
+    },
+  });
+  return response.data;
+};
+
+// Get best performing patterns ranked by expectancy
+export const getBestPatterns = async (minSignals = 10) => {
+  const response = await api.get('/hedge-fund/best-patterns', {
+    params: { min_signals: minSignals },
+  });
+  return response.data;
+};
+
 export default api;

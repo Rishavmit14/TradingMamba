@@ -16,7 +16,11 @@ import {
   AlertTriangle,
   Sparkles,
   BarChart3,
-  Layers
+  Layers,
+  Trophy,
+  Star,
+  CheckCircle,
+  XCircle
 } from 'lucide-react';
 import { analyzeSymbol, getSymbols } from '../services/api';
 
@@ -24,6 +28,62 @@ import { analyzeSymbol, getSymbols } from '../services/api';
 function BackgroundOrb({ className }) {
   return (
     <div className={`absolute rounded-full blur-3xl opacity-20 animate-pulse ${className}`} />
+  );
+}
+
+// Grade Badge Component (Hedge Fund Level)
+function GradeBadge({ grade, size = 'md' }) {
+  const gradeConfig = {
+    'A+': { bg: 'bg-gradient-to-br from-amber-400 to-yellow-500', text: 'text-black', icon: Trophy },
+    'A': { bg: 'bg-gradient-to-br from-emerald-400 to-green-500', text: 'text-white', icon: Star },
+    'B': { bg: 'bg-gradient-to-br from-blue-400 to-indigo-500', text: 'text-white', icon: CheckCircle },
+    'C': { bg: 'bg-gradient-to-br from-yellow-400 to-orange-500', text: 'text-black', icon: AlertTriangle },
+    'D': { bg: 'bg-gradient-to-br from-orange-400 to-red-500', text: 'text-white', icon: XCircle },
+    'F': { bg: 'bg-gradient-to-br from-red-500 to-red-700', text: 'text-white', icon: XCircle },
+  };
+
+  const config = gradeConfig[grade] || gradeConfig['C'];
+  const sizeClasses = size === 'lg' ? 'w-14 h-14 text-xl' : size === 'sm' ? 'w-8 h-8 text-xs' : 'w-10 h-10 text-sm';
+
+  return (
+    <div className={`${sizeClasses} ${config.bg} ${config.text} rounded-xl flex items-center justify-center font-bold shadow-lg`}>
+      {grade}
+    </div>
+  );
+}
+
+// Pattern Grade Card Component
+function PatternGradeCard({ patternType, gradeInfo }) {
+  if (!gradeInfo) return null;
+
+  return (
+    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-white font-medium capitalize">{patternType.replace('_', ' ')}</span>
+        <GradeBadge grade={gradeInfo.grade} size="sm" />
+      </div>
+      <div className="text-xs text-slate-400 mb-2">
+        Score: {(gradeInfo.score * 100).toFixed(0)}%
+      </div>
+      {gradeInfo.strengths?.length > 0 && (
+        <div className="flex flex-wrap gap-1 mb-2">
+          {gradeInfo.strengths.slice(0, 2).map((s, i) => (
+            <span key={i} className="px-2 py-0.5 text-xs rounded-full bg-emerald-500/10 text-emerald-400">
+              {s}
+            </span>
+          ))}
+        </div>
+      )}
+      {gradeInfo.weaknesses?.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          {gradeInfo.weaknesses.slice(0, 2).map((w, i) => (
+            <span key={i} className="px-2 py-0.5 text-xs rounded-full bg-red-500/10 text-red-400">
+              {w}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -166,26 +226,37 @@ function SignalAnalysis({ symbol, analysis, loading }) {
             </p>
           </div>
           {hasSignal && (
-            <div className={`flex items-center gap-3 px-6 py-4 rounded-2xl ${
-              isBullish
-                ? 'bg-emerald-500/10 border border-emerald-500/20'
-                : 'bg-red-500/10 border border-red-500/20'
-            }`}>
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                isBullish ? 'bg-emerald-500/20' : 'bg-red-500/20'
+            <div className="flex items-center gap-4">
+              {/* Pattern Grade Badge (Hedge Fund Level) */}
+              {signal.best_pattern_grade && (
+                <div className="flex flex-col items-center">
+                  <GradeBadge grade={signal.best_pattern_grade} size="lg" />
+                  <span className="text-xs text-slate-400 mt-1 capitalize">
+                    {signal.best_pattern_type?.replace('_', ' ') || 'Pattern'}
+                  </span>
+                </div>
+              )}
+              <div className={`flex items-center gap-3 px-6 py-4 rounded-2xl ${
+                isBullish
+                  ? 'bg-emerald-500/10 border border-emerald-500/20'
+                  : 'bg-red-500/10 border border-red-500/20'
               }`}>
-                {isBullish
-                  ? <ArrowUpRight className="w-7 h-7 text-emerald-400" />
-                  : <ArrowDownRight className="w-7 h-7 text-red-400" />
-                }
-              </div>
-              <div>
-                <p className={`text-2xl font-bold ${isBullish ? 'text-emerald-400' : 'text-red-400'}`}>
-                  {signal.direction.toUpperCase()}
-                </p>
-                <p className="text-xs text-slate-400">
-                  {isBullish ? 'Long positions favored' : 'Short positions favored'}
-                </p>
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
+                  isBullish ? 'bg-emerald-500/20' : 'bg-red-500/20'
+                }`}>
+                  {isBullish
+                    ? <ArrowUpRight className="w-7 h-7 text-emerald-400" />
+                    : <ArrowDownRight className="w-7 h-7 text-red-400" />
+                  }
+                </div>
+                <div>
+                  <p className={`text-2xl font-bold ${isBullish ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {signal.direction.toUpperCase()}
+                  </p>
+                  <p className="text-xs text-slate-400">
+                    {isBullish ? 'Long positions favored' : 'Short positions favored'}
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -231,6 +302,97 @@ function SignalAnalysis({ symbol, analysis, loading }) {
               </p>
             </div>
           </div>
+
+          {/* Hedge Fund Level: Pattern Grades */}
+          {signal.pattern_grades && Object.keys(signal.pattern_grades).length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Shield className="w-5 h-5 text-indigo-400" />
+                Pattern Grades (Hedge Fund Level)
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {Object.entries(signal.pattern_grades).map(([patternType, gradeInfo]) => (
+                  <PatternGradeCard key={patternType} patternType={patternType} gradeInfo={gradeInfo} />
+                ))}
+              </div>
+              {signal.grade_recommendation && (
+                <div className="mt-4 p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+                  <p className="text-sm text-indigo-300 flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    <strong>Recommendation:</strong> {signal.grade_recommendation}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Edge Statistics (Hedge Fund Level) */}
+          {signal.edge_statistics && Object.keys(signal.edge_statistics).length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-purple-400" />
+                Edge Statistics
+              </h3>
+              <div className="glass-card-static p-5">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <p className="text-xs text-slate-400">Pattern</p>
+                    <p className="text-white font-medium capitalize">{signal.edge_statistics.pattern_type?.replace('_', ' ')}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Win Rate</p>
+                    <p className="text-emerald-400 font-medium">{signal.edge_statistics.win_rate}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Expectancy</p>
+                    <p className="text-purple-400 font-medium">{signal.edge_statistics.expectancy}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Has Edge</p>
+                    <p className={`font-medium flex items-center gap-1 ${signal.edge_statistics.has_edge ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {signal.edge_statistics.has_edge ? <CheckCircle className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                      {signal.edge_statistics.has_edge ? 'Yes' : 'No'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Historical Validation (Hedge Fund Level) */}
+          {signal.historical_validation && signal.historical_validation.validated && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Clock className="w-5 h-5 text-amber-400" />
+                Historical Validation
+              </h3>
+              <div className="glass-card-static p-5">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                  <div>
+                    <p className="text-xs text-slate-400">Patterns Tested</p>
+                    <p className="text-white font-medium">{signal.historical_validation.total_tested}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Fill Rate</p>
+                    <p className="text-blue-400 font-medium">{(signal.historical_validation.fill_rate * 100).toFixed(0)}%</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Win Rate</p>
+                    <p className="text-emerald-400 font-medium">{(signal.historical_validation.win_rate * 100).toFixed(0)}%</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Avg R:R</p>
+                    <p className="text-purple-400 font-medium">{signal.historical_validation.avg_rr_achieved?.toFixed(2)}</p>
+                  </div>
+                </div>
+                {signal.historical_validation.recommendation && (
+                  <p className="text-sm text-amber-300 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                    {signal.historical_validation.recommendation}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Trade Levels */}
           <div>

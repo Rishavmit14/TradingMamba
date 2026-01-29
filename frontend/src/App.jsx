@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Shield
 } from 'lucide-react';
 
 import Dashboard from './pages/Dashboard';
@@ -20,6 +21,7 @@ import Concepts from './pages/Concepts';
 import Learning from './pages/Learning';
 import Performance from './pages/Performance';
 import LiveChart from './pages/LiveChart';
+import HedgeFund from './pages/HedgeFund';
 
 // Modern Navigation Component
 function Navigation() {
@@ -39,6 +41,7 @@ function Navigation() {
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/live-chart', icon: LineChart, label: 'Live Chart' },
     { path: '/signals', icon: TrendingUp, label: 'Signals' },
+    { path: '/hedge-fund', icon: Shield, label: 'Hedge Fund' },
     { path: '/concepts', icon: BookOpen, label: 'Concepts' },
     { path: '/learning', icon: Brain, label: 'Learning' },
     { path: '/performance', icon: BarChart3, label: 'Performance' },
@@ -166,6 +169,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/live-chart" element={<LiveChart />} />
               <Route path="/signals" element={<Signals />} />
+              <Route path="/hedge-fund" element={<HedgeFund />} />
               <Route path="/concepts" element={<Concepts />} />
               <Route path="/learning" element={<Learning />} />
               <Route path="/performance" element={<Performance />} />
