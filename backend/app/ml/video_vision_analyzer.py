@@ -313,7 +313,12 @@ class FrameDeduplicator:
 
 @dataclass
 class FrameAnalysis:
-    """Analysis result for a single video frame"""
+    """
+    Analysis result for a single video frame.
+
+    GENIUS STUDENT MODE: Now includes deep grading and entry/exit logic
+    from multi-pass analysis for hedge fund-level pattern understanding.
+    """
     timestamp: float  # seconds into video
     frame_path: str
     transcript_context: str  # surrounding transcript text
@@ -325,7 +330,8 @@ class FrameAnalysis:
     symbol_visible: Optional[str]  # if visible on chart
 
     # Smart Money patterns detected visually
-    patterns_detected: List[Dict]  # [{type: "FVG", location: "...", description: "..."}]
+    # Now includes grades (A+ to F), quality_score, strengths, weaknesses from Pass 2
+    patterns_detected: List[Dict]  # [{type: "FVG", grade: "A", quality_score: 0.85, ...}]
     annotations_detected: List[Dict]  # drawings, arrows, boxes, zones
 
     # Price levels and zones
@@ -340,6 +346,10 @@ class FrameAnalysis:
     # Confidence scores
     chart_confidence: float
     pattern_confidence: float
+
+    # GENIUS STUDENT: Entry/Exit Logic from Pass 3
+    # Contains entry_logic, stop_loss_logic, take_profit_logic, risk_reward, trade_management
+    entry_exit_logic: Optional[Dict] = None
 
     def to_dict(self) -> Dict:
         return asdict(self)
@@ -820,51 +830,52 @@ class VisionAnalyzer:
         self,
         image_path: str,
         transcript_context: str = "",
-        timestamp: float = 0
+        timestamp: float = 0,
+        deep_analysis: bool = True
     ) -> FrameAnalysis:
         """
         Analyze a single video frame for trading content.
+
+        GENIUS STUDENT MODE: Multi-pass deep questioning
+        - Pass 1: Identify patterns
+        - Pass 2: Grade pattern quality (if deep_analysis=True)
+        - Pass 3: Extract entry/exit logic (if patterns found)
+
+        This transforms passive learning into active understanding.
         """
 
-        prompt = f"""Analyze this trading video screenshot. The tutor was saying: "{transcript_context}"
+        # =====================================================================
+        # PASS 1: Initial Pattern Identification
+        # =====================================================================
+        prompt_pass1 = f"""You are an expert ICT/Smart Money analyst studying a trading video.
+The tutor was saying: "{transcript_context}"
 
-Please identify and describe:
+TASK: Analyze this chart screenshot with EXPERT-LEVEL precision.
 
-1. **Chart Detection**: Is there a trading chart visible? What type (candlestick, line, etc.)?
+Identify and describe:
 
-2. **Chart Details**: If a chart is present, identify:
-   - Timeframe (if visible)
-   - Symbol/Pair (if visible)
-   - Market structure (bullish/bearish trend)
+1. **Chart Detection**: Is there a trading chart? What type (candlestick, line)?
 
-3. **Smart Money Patterns**: Identify any ICT/Smart Money patterns visible:
-   - Fair Value Gaps (FVG) - price imbalances
-   - Order Blocks - institutional zones
-   - Breaker Blocks
-   - Liquidity pools (equal highs/lows)
-   - Market structure shifts (BOS/CHoCH)
-   - Premium/Discount zones
+2. **Chart Details**:
+   - Timeframe (M1, M5, M15, H1, H4, D1, W1)
+   - Symbol/Pair
+   - Overall market structure (bullish/bearish/ranging)
 
-   For each pattern, describe its location and characteristics.
+3. **ICT/Smart Money Patterns** (be PRECISE):
+   - FVG (Fair Value Gap): Gap between candle 1 high and candle 3 low
+   - Order Block: Last down candle before impulsive up move (or vice versa)
+   - Breaker Block: Order block that failed and became opposite
+   - Liquidity: Equal highs/lows where stops are resting
+   - BOS/CHoCH: Break of structure / Change of character
+   - Premium/Discount: Above or below 50% of range
 
-4. **Annotations/Drawings**: Identify any visual annotations:
-   - Rectangles/boxes marking zones
-   - Lines (support/resistance, trendlines)
-   - Arrows or pointers
-   - Text labels
-   - Highlighted areas
+4. **Annotations**: Rectangles, lines, arrows, text labels on chart
 
-5. **Price Levels**: Note any significant price levels:
-   - Support/Resistance levels
-   - Entry zones
-   - Stop loss levels
-   - Take profit targets
+5. **Price Levels**: Support, resistance, entry, SL, TP zones
 
-6. **Teaching Point**: Based on the visual + transcript context, what specific concept is being taught at this moment?
+6. **Teaching Point**: What concept is ICT teaching at this exact moment?
 
-7. **Visual Text**: List any text visible in the screenshot (labels, prices, etc.)
-
-Respond in JSON format:
+Respond in JSON:
 {{
     "chart_detected": true/false,
     "chart_type": "candlestick/line/none",
@@ -872,87 +883,48 @@ Respond in JSON format:
     "symbol": "EURUSD/BTCUSD/null",
     "market_structure": "bullish/bearish/ranging/null",
     "patterns": [
-        {{"type": "FVG", "location": "description", "characteristic": "bullish/bearish", "significance": "high/medium/low"}}
+        {{
+            "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH",
+            "location": "specific location on chart",
+            "characteristic": "bullish/bearish",
+            "significance": "high/medium/low"
+        }}
     ],
-    "annotations": [
-        {{"type": "rectangle/line/arrow/text", "description": "what it marks", "color": "if visible"}}
-    ],
-    "price_levels": [
-        {{"type": "support/resistance/entry/sl/tp", "approximate_location": "description"}}
-    ],
-    "teaching_point": "What the tutor is demonstrating visually",
-    "visual_text": ["list", "of", "visible", "text"],
-    "visual_description": "Overall description of what's shown",
+    "annotations": [{{"type": "rectangle/line/arrow", "description": "what it marks", "color": "if visible"}}],
+    "price_levels": [{{"type": "support/resistance/entry/sl/tp", "approximate_location": "description"}}],
+    "teaching_point": "What the tutor is demonstrating",
+    "visual_text": ["visible", "text", "labels"],
+    "visual_description": "Overall description",
     "chart_confidence": 0.0-1.0,
     "pattern_confidence": 0.0-1.0
 }}"""
 
         try:
-            if self.provider == "local":
-                # FREE local model on Apple Silicon
-                result_text = self.local_model.analyze(image_path, prompt)
+            # =====================================================================
+            # PASS 1: Initial Analysis
+            # =====================================================================
+            result_text = self._call_vision_model(image_path, prompt_pass1)
+            result = self._parse_json_response(result_text)
 
-            elif self.provider == "anthropic":
-                response = self.client.messages.create(
-                    model="claude-sonnet-4-20250514",
-                    max_tokens=2000,
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "image",
-                                    "source": {
-                                        "type": "base64",
-                                        "media_type": self._get_image_media_type(image_path),
-                                        "data": self._encode_image(image_path)
-                                    }
-                                },
-                                {
-                                    "type": "text",
-                                    "text": prompt
-                                }
-                            ]
-                        }
-                    ]
-                )
-                result_text = response.content[0].text
+            patterns = result.get("patterns", [])
 
-            elif self.provider == "openai":
-                response = self.client.chat.completions.create(
-                    model="gpt-4o",
-                    max_tokens=2000,
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "image_url",
-                                    "image_url": {
-                                        "url": f"data:{self._get_image_media_type(image_path)};base64,{self._encode_image(image_path)}"
-                                    }
-                                },
-                                {
-                                    "type": "text",
-                                    "text": prompt
-                                }
-                            ]
-                        }
-                    ]
-                )
-                result_text = response.choices[0].message.content
+            # =====================================================================
+            # PASS 2: Deep Pattern Grading (GENIUS STUDENT MODE)
+            # Only if patterns found and deep_analysis enabled
+            # =====================================================================
+            if deep_analysis and patterns and len(patterns) > 0:
+                graded_patterns = self._grade_patterns_deep(image_path, patterns, transcript_context)
+                if graded_patterns:
+                    result["patterns"] = graded_patterns
 
-            else:
-                raise ValueError(f"Unknown provider: {self.provider}")
-
-            # Parse JSON from response
-            # Handle markdown code blocks
-            if "```json" in result_text:
-                result_text = result_text.split("```json")[1].split("```")[0]
-            elif "```" in result_text:
-                result_text = result_text.split("```")[1].split("```")[0]
-
-            result = json.loads(result_text.strip())
+            # =====================================================================
+            # PASS 3: Entry/Exit Logic Extraction
+            # Learn HOW to trade these patterns, not just identify them
+            # =====================================================================
+            if deep_analysis and patterns and len(patterns) > 0:
+                entry_exit_logic = self._extract_entry_exit_logic(image_path, patterns, transcript_context)
+                if entry_exit_logic:
+                    result["entry_exit_logic"] = entry_exit_logic
 
             return FrameAnalysis(
                 timestamp=timestamp,
@@ -970,7 +942,8 @@ Respond in JSON format:
                 teaching_point=result.get("teaching_point", ""),
                 visual_text=result.get("visual_text", []),
                 chart_confidence=result.get("chart_confidence", 0.0),
-                pattern_confidence=result.get("pattern_confidence", 0.0)
+                pattern_confidence=result.get("pattern_confidence", 0.0),
+                entry_exit_logic=result.get("entry_exit_logic", {})
             )
 
         except Exception as e:
@@ -991,8 +964,230 @@ Respond in JSON format:
                 teaching_point="",
                 visual_text=[],
                 chart_confidence=0.0,
-                pattern_confidence=0.0
+                pattern_confidence=0.0,
+                entry_exit_logic=None
             )
+
+    def _call_vision_model(self, image_path: str, prompt: str) -> str:
+        """Call the vision model with a prompt and return raw text response."""
+        if self.provider == "local":
+            return self.local_model.analyze(image_path, prompt)
+
+        elif self.provider == "anthropic":
+            response = self.client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=2000,
+                messages=[{
+                    "role": "user",
+                    "content": [
+                        {"type": "image", "source": {
+                            "type": "base64",
+                            "media_type": self._get_image_media_type(image_path),
+                            "data": self._encode_image(image_path)
+                        }},
+                        {"type": "text", "text": prompt}
+                    ]
+                }]
+            )
+            return response.content[0].text
+
+        elif self.provider == "openai":
+            response = self.client.chat.completions.create(
+                model="gpt-4o",
+                max_tokens=2000,
+                messages=[{
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url", "image_url": {
+                            "url": f"data:{self._get_image_media_type(image_path)};base64,{self._encode_image(image_path)}"
+                        }},
+                        {"type": "text", "text": prompt}
+                    ]
+                }]
+            )
+            return response.choices[0].message.content
+
+        else:
+            raise ValueError(f"Unknown provider: {self.provider}")
+
+    def _parse_json_response(self, result_text: str) -> dict:
+        """Parse JSON from model response, handling markdown code blocks."""
+        if "```json" in result_text:
+            result_text = result_text.split("```json")[1].split("```")[0]
+        elif "```" in result_text:
+            result_text = result_text.split("```")[1].split("```")[0]
+        return json.loads(result_text.strip())
+
+    def _grade_patterns_deep(
+        self,
+        image_path: str,
+        patterns: List[dict],
+        transcript_context: str
+    ) -> List[dict]:
+        """
+        PASS 2: Deep Pattern Grading - The Genius Student Difference
+
+        For each pattern, ask:
+        1. What makes this pattern high-quality vs low-quality?
+        2. What grade would ICT give this pattern (A+, A, B, C, D, F)?
+        3. What are the invalidation criteria?
+
+        This is what separates average traders from professionals.
+        """
+        if not patterns:
+            return patterns
+
+        pattern_list = ", ".join([p.get("type", "unknown") for p in patterns])
+
+        prompt_grade = f"""You are an EXPERT ICT trader grading patterns for quality.
+
+The following patterns were identified: {pattern_list}
+
+The tutor was saying: "{transcript_context}"
+
+For EACH pattern, provide a PROFESSIONAL GRADE and REASONING:
+
+GRADING CRITERIA (ICT Methodology):
+- A+ : Perfect setup - institutional footprint clear, in kill zone, confluence with HTF
+- A  : Excellent - clear pattern, good location, high probability
+- B  : Good - valid pattern but minor issues (size, location, timing)
+- C  : Average - pattern exists but weak characteristics
+- D  : Poor - questionable validity, avoid trading
+- F  : Invalid - not a real pattern, misidentified
+
+For each pattern, assess:
+1. **Size/Magnitude**: Is the FVG large enough? Is the OB significant?
+2. **Location**: Premium zone for sells, Discount zone for buys?
+3. **Structure**: Does it align with market structure?
+4. **Confluence**: Does it have confluence with other patterns?
+5. **Freshness**: Is this a fresh/untested level?
+
+Respond in JSON:
+{{
+    "graded_patterns": [
+        {{
+            "type": "FVG/Order Block/etc",
+            "grade": "A+/A/B/C/D/F",
+            "quality_score": 0.0-1.0,
+            "grade_reasoning": "Why this grade was assigned",
+            "strengths": ["list", "of", "strengths"],
+            "weaknesses": ["list", "of", "weaknesses"],
+            "invalidation": "What would invalidate this pattern",
+            "trade_recommendation": "Should this be traded? Why/why not?"
+        }}
+    ]
+}}"""
+
+        try:
+            result_text = self._call_vision_model(image_path, prompt_grade)
+            grading_result = self._parse_json_response(result_text)
+
+            graded = grading_result.get("graded_patterns", [])
+
+            # Merge grades back into original patterns
+            for i, pattern in enumerate(patterns):
+                if i < len(graded):
+                    grade_info = graded[i]
+                    pattern["grade"] = grade_info.get("grade", "C")
+                    pattern["quality_score"] = grade_info.get("quality_score", 0.5)
+                    pattern["grade_reasoning"] = grade_info.get("grade_reasoning", "")
+                    pattern["strengths"] = grade_info.get("strengths", [])
+                    pattern["weaknesses"] = grade_info.get("weaknesses", [])
+                    pattern["invalidation"] = grade_info.get("invalidation", "")
+                    pattern["trade_recommendation"] = grade_info.get("trade_recommendation", "")
+
+            logger.info(f"Deep grading complete: {len(patterns)} patterns graded")
+            return patterns
+
+        except Exception as e:
+            logger.warning(f"Pattern grading failed (continuing with ungraded): {e}")
+            return patterns
+
+    def _extract_entry_exit_logic(
+        self,
+        image_path: str,
+        patterns: List[dict],
+        transcript_context: str
+    ) -> dict:
+        """
+        PASS 3: Entry/Exit Logic Extraction
+
+        This is the MOST IMPORTANT part - learning HOW to trade, not just identify.
+
+        Extract:
+        1. Where exactly to enter
+        2. Where to place stop loss
+        3. Where to take profit
+        4. Risk:Reward ratio
+        5. Position sizing logic
+        """
+        if not patterns:
+            return {}
+
+        pattern_list = ", ".join([p.get("type", "unknown") for p in patterns])
+
+        prompt_logic = f"""You are an EXPERT ICT trader. Based on the patterns visible ({pattern_list}):
+
+The tutor was saying: "{transcript_context}"
+
+Extract the EXACT TRADING LOGIC that ICT is teaching:
+
+1. **Entry Logic**: Where EXACTLY should a trader enter?
+   - At the 50% of FVG?
+   - At the Order Block edge?
+   - After a confirmation candle?
+
+2. **Stop Loss Logic**: Where should the stop be placed?
+   - Below the Order Block?
+   - Below the swing low?
+   - X pips below entry?
+
+3. **Take Profit Logic**: Where should profit be taken?
+   - At the next liquidity pool?
+   - At a previous swing high/low?
+   - At a specific R:R multiple?
+
+4. **Risk:Reward**: What R:R does this setup offer?
+
+5. **Trade Management**: Any specific management rules?
+
+Respond in JSON:
+{{
+    "entry_logic": {{
+        "entry_type": "limit/market/stop",
+        "entry_location": "Description of where to enter",
+        "entry_trigger": "What confirms the entry",
+        "entry_timeframe": "M15/H1/H4"
+    }},
+    "stop_loss_logic": {{
+        "sl_location": "Where to place SL",
+        "sl_reasoning": "Why here",
+        "sl_type": "fixed/trailing/breakeven"
+    }},
+    "take_profit_logic": {{
+        "tp_location": "Where to take profit",
+        "tp_reasoning": "Why here",
+        "partial_tp": "Any partial profit taking"
+    }},
+    "risk_reward": {{
+        "estimated_rr": "2:1, 3:1, etc",
+        "minimum_rr": "What's the minimum acceptable"
+    }},
+    "trade_management": {{
+        "rules": ["list", "of", "management", "rules"]
+    }},
+    "ict_wisdom": "Any specific ICT teaching point about execution"
+}}"""
+
+        try:
+            result_text = self._call_vision_model(image_path, prompt_logic)
+            logic_result = self._parse_json_response(result_text)
+            logger.info("Entry/Exit logic extraction complete")
+            return logic_result
+
+        except Exception as e:
+            logger.warning(f"Entry/Exit logic extraction failed: {e}")
+            return {}
 
     def analyze_video_frames(
         self,

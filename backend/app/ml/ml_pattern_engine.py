@@ -687,3 +687,151 @@ def reload_ml_knowledge():
         _ml_engine.reload_knowledge()
     else:
         _ml_engine = MLPatternEngine()
+
+
+# =============================================================================
+# HEDGE FUND ML INTEGRATION
+# =============================================================================
+# These features bridge the gap between retail and institutional trading:
+# - Pattern Grading (A+ to F)
+# - Historical Validation
+# - Multi-Timeframe Confluence
+# - Statistical Edge Tracking
+# =============================================================================
+
+try:
+    from .hedge_fund_ml import (
+        PatternGrader,
+        HistoricalValidator,
+        MultiTimeframeAnalyzer,
+        EdgeTracker,
+        PatternGrade,
+        GradedPattern,
+        get_pattern_grader,
+        get_historical_validator,
+        get_mtf_analyzer,
+        get_edge_tracker,
+    )
+    HEDGE_FUND_ML_AVAILABLE = True
+    logger.info("Hedge Fund ML features loaded successfully")
+except ImportError as e:
+    HEDGE_FUND_ML_AVAILABLE = False
+    logger.warning(f"Hedge Fund ML features not available: {e}")
+
+
+def grade_pattern(
+    pattern_type: str,
+    pattern_data: Dict,
+    market_context: Dict,
+    historical_stats: Optional[Dict] = None
+) -> Optional[Dict]:
+    """
+    Grade a pattern from A+ to F (Hedge Fund Level Quality Assessment).
+
+    This is what separates professionals from amateurs:
+    - Not all patterns are equal
+    - Location, confluence, freshness all matter
+    - Only trade A/B grade patterns
+    """
+    if not HEDGE_FUND_ML_AVAILABLE:
+        logger.warning("Hedge Fund ML not available for pattern grading")
+        return None
+
+    grader = get_pattern_grader()
+    graded = grader.grade_pattern(
+        pattern_type=pattern_type,
+        pattern_data=pattern_data,
+        market_context=market_context,
+        historical_stats=historical_stats
+    )
+
+    return graded.to_dict()
+
+
+def analyze_confluence(
+    primary_pattern: Dict,
+    primary_tf: str,
+    all_tf_patterns: Dict[str, List[Dict]]
+) -> Optional[Dict]:
+    """
+    Analyze multi-timeframe confluence for a pattern.
+
+    ICT teaches: Higher timeframe patterns are stronger.
+    Professional traders check M15, H1, H4, D1 for confluence.
+    """
+    if not HEDGE_FUND_ML_AVAILABLE:
+        logger.warning("Hedge Fund ML not available for confluence analysis")
+        return None
+
+    mtf = get_mtf_analyzer()
+    result = mtf.analyze_confluence(
+        primary_pattern=primary_pattern,
+        primary_tf=primary_tf,
+        all_tf_patterns=all_tf_patterns
+    )
+
+    return {
+        'pattern_type': result.pattern_type,
+        'primary_timeframe': result.primary_timeframe,
+        'confluence_score': result.confluence_score,
+        'aligned_timeframes': result.aligned_timeframes,
+        'conflicting_timeframes': result.conflicting_timeframes,
+        'confluence_factors': result.confluence_factors,
+        'recommendation': result.recommendation,
+    }
+
+
+def record_trade_outcome(
+    pattern_type: str,
+    outcome: str,
+    rr_achieved: float = 0.0,
+    session: str = "",
+    day_of_week: str = ""
+):
+    """
+    Record a trade outcome for statistical edge tracking.
+
+    Track over time to build a statistical edge profile:
+    - Which patterns have positive expectancy?
+    - What's the real win rate?
+    - What R:R do you actually achieve?
+    """
+    if not HEDGE_FUND_ML_AVAILABLE:
+        logger.warning("Hedge Fund ML not available for edge tracking")
+        return
+
+    tracker = get_edge_tracker()
+    tracker.record_trade(
+        pattern_type=pattern_type,
+        outcome=outcome,
+        rr_achieved=rr_achieved,
+        session=session,
+        day_of_week=day_of_week
+    )
+
+
+def get_edge_statistics(pattern_type: str = None) -> Optional[Dict]:
+    """
+    Get statistical edge for pattern(s).
+
+    Returns win rate, expectancy, profit factor.
+    Use this to know which patterns to focus on.
+    """
+    if not HEDGE_FUND_ML_AVAILABLE:
+        return None
+
+    tracker = get_edge_tracker()
+    return tracker.get_edge_summary(pattern_type)
+
+
+def get_best_performing_patterns(min_signals: int = 10) -> List[Dict]:
+    """
+    Get patterns with proven positive expectancy.
+
+    Only trade patterns with statistical edge!
+    """
+    if not HEDGE_FUND_ML_AVAILABLE:
+        return []
+
+    tracker = get_edge_tracker()
+    return tracker.get_best_patterns(min_signals)
