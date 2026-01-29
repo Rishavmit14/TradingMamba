@@ -18,9 +18,13 @@ import {
   Image,
   Video,
   BarChart3,
-  Box
+  Box,
+  Shield,
+  Link2,
+  Waves,
+  Ban
 } from 'lucide-react';
-import { getMLStatus, triggerTraining, getTranscripts, getVisualKnowledge, getVisionCapabilities } from '../services/api';
+import { getMLStatus, triggerTraining, getTranscripts, getSynchronizedKnowledge } from '../services/api';
 
 // Background Orb Component
 function BackgroundOrb({ className }) {
@@ -107,8 +111,7 @@ const PATTERN_INFO = {
 export default function Learning() {
   const [mlStatus, setMLStatus] = useState(null);
   const [transcripts, setTranscripts] = useState([]);
-  const [visualKnowledge, setVisualKnowledge] = useState(null);
-  const [visionCapabilities, setVisionCapabilities] = useState(null);
+  const [syncKnowledge, setSyncKnowledge] = useState(null);
   const [loading, setLoading] = useState(true);
   const [training, setTraining] = useState(false);
   const [trainingResult, setTrainingResult] = useState(null);
@@ -120,16 +123,14 @@ export default function Learning() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [status, transcriptsData, vision, capabilities] = await Promise.all([
+      const [status, transcriptsData, syncData] = await Promise.all([
         getMLStatus().catch(() => null),
         getTranscripts().catch(() => ({ transcripts: [] })),
-        getVisualKnowledge().catch(() => null),
-        getVisionCapabilities().catch(() => null),
+        getSynchronizedKnowledge().catch(() => null),
       ]);
       setMLStatus(status);
       setTranscripts(transcriptsData.transcripts || []);
-      setVisualKnowledge(vision);
-      setVisionCapabilities(capabilities);
+      setSyncKnowledge(syncData);
     } catch (err) {
       console.error('Failed to load data:', err);
     } finally {
@@ -191,11 +192,11 @@ export default function Learning() {
           delay={0}
         />
         <StatCard
-          icon={Eye}
-          label="Vision Training"
-          value={visualKnowledge?.has_vision_knowledge ? `${visualKnowledge.patterns_learned || 0} patterns` : 'Not trained'}
-          description={visualKnowledge?.has_vision_knowledge ? `${visualKnowledge.videos_with_vision || 0} videos analyzed` : 'Train from Dashboard'}
-          gradient={visualKnowledge?.has_vision_knowledge ? 'from-cyan-500 to-blue-500' : 'from-orange-500 to-amber-500'}
+          icon={Shield}
+          label="Synchronized Learning"
+          value={syncKnowledge?.has_synchronized_learning ? `${Object.keys(syncKnowledge.concepts || {}).length} concepts` : 'Not trained'}
+          description={syncKnowledge?.has_synchronized_learning ? `${syncKnowledge.verified_moments || 0} verified moments` : 'Train from Dashboard'}
+          gradient={syncKnowledge?.has_synchronized_learning ? 'from-emerald-500 to-teal-500' : 'from-orange-500 to-amber-500'}
           delay={50}
         />
         <StatCard
@@ -216,91 +217,118 @@ export default function Learning() {
         />
       </div>
 
-      {/* Vision Knowledge Section */}
-      {visualKnowledge?.has_vision_knowledge && (
+      {/* Synchronized Knowledge Section (STATE-OF-THE-ART) */}
+      {syncKnowledge?.has_synchronized_learning && (
         <div className="glass-card p-6 relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
 
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
-                <Eye className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
+                <Shield className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Visual Pattern Knowledge</h2>
-                <p className="text-sm text-slate-400">Patterns learned from video frame analysis</p>
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  Synchronized Knowledge
+                  <span className="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full border border-emerald-500/30">
+                    VERIFIED
+                  </span>
+                </h2>
+                <p className="text-sm text-slate-400">Audio-visual aligned knowledge (contamination-free)</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-              <Video className="w-4 h-4 text-cyan-400" />
-              <span className="text-xs text-cyan-300">{visualKnowledge.videos_with_vision || 0} videos analyzed</span>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
+              <Link2 className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs text-emerald-300">What's heard = What's seen</span>
             </div>
           </div>
 
-          {/* Patterns Learned Grid */}
-          {visualKnowledge.pattern_details && visualKnowledge.pattern_details.length > 0 && (
+          {/* How it works */}
+          <div className="mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/10">
+            <h3 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-teal-400" />
+              How Synchronized Learning Works
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="flex items-start gap-2">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Waves className="w-3 h-3 text-blue-400" />
+                </div>
+                <div>
+                  <p className="font-medium text-white">1. Word-Level Timing</p>
+                  <p className="text-slate-500">WhisperX extracts precise word timestamps</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Eye className="w-3 h-3 text-cyan-400" />
+                </div>
+                <div>
+                  <p className="font-medium text-white">2. Visual Analysis</p>
+                  <p className="text-slate-500">AI identifies patterns in video frames</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Shield className="w-3 h-3 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="font-medium text-white">3. Verification Gate</p>
+                  <p className="text-slate-500">Only stores if audio matches visual</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Verified Concepts */}
+          {syncKnowledge.verified_knowledge && Object.keys(syncKnowledge.verified_knowledge).length > 0 && (
             <div className="mb-6">
               <h3 className="text-sm font-semibold text-slate-400 mb-3 flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-emerald-400" />
-                Patterns ML Has Learned ({visualKnowledge.pattern_details.length})
+                Verified Concepts ({Object.keys(syncKnowledge.verified_knowledge).length})
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {visualKnowledge.pattern_details.map((pattern) => {
-                  const info = PATTERN_INFO[pattern.type] || {
-                    name: pattern.type.replace('_', ' '),
-                    short: pattern.type.toUpperCase(),
-                    color: '#6b7280',
-                    icon: Box
+                {Object.entries(syncKnowledge.verified_knowledge).map(([concept, data]) => {
+                  const info = PATTERN_INFO[concept] || {
+                    name: concept.replace(/_/g, ' '),
+                    short: concept.toUpperCase(),
+                    color: '#10b981',
+                    icon: CheckCircle
                   };
                   const IconComp = info.icon;
                   return (
                     <div
-                      key={pattern.type}
-                      className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-colors"
+                      key={concept}
+                      className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div
-                          className="w-10 h-10 rounded-lg flex items-center justify-center"
-                          style={{ backgroundColor: info.color + '20' }}
+                          className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-500/20"
                         >
-                          <IconComp className="w-5 h-5" style={{ color: info.color }} />
+                          <IconComp className="w-5 h-5 text-emerald-400" />
                         </div>
                         <div>
-                          <p className="font-semibold text-white">{info.name}</p>
-                          <p className="text-xs text-slate-500">{info.short}</p>
+                          <p className="font-semibold text-white capitalize">{info.name}</p>
+                          <p className="text-xs text-emerald-400">Verified ✓</p>
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-slate-400">Understanding</span>
-                          <span className={`font-medium capitalize ${
-                            pattern.understanding_level === 'expert' ? 'text-green-400' :
-                            pattern.understanding_level === 'proficient' ? 'text-blue-400' :
-                            pattern.understanding_level === 'intermediate' ? 'text-amber-400' :
-                            'text-slate-300'
-                          }`}>
-                            {pattern.understanding_level || 'learning'}
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Alignment</span>
+                          <span className="text-emerald-400 font-medium">
+                            {Math.round((data.alignment_confidence || 0) * 100)}%
                           </span>
                         </div>
-                        <div className="flex justify-between text-sm">
-                          <span className="text-slate-400">Confidence</span>
-                          <span className="text-white font-medium">{Math.round(pattern.confidence * 100)}%</span>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Occurrences</span>
+                          <span className="text-white font-medium">{data.occurrence_count || 0}</span>
                         </div>
                         <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full rounded-full transition-all duration-500"
-                            style={{
-                              width: `${Math.round(pattern.confidence * 100)}%`,
-                              backgroundColor: info.color
-                            }}
+                            className="h-full rounded-full bg-emerald-500 transition-all duration-500"
+                            style={{ width: `${Math.round((data.alignment_confidence || 0) * 100)}%` }}
                           />
                         </div>
-                        {pattern.can_detect_universally && (
-                          <div className="flex items-center gap-1 text-xs text-green-400">
-                            <span>✓</span>
-                            <span>Can detect universally</span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   );
@@ -308,67 +336,41 @@ export default function Learning() {
               </div>
             </div>
           )}
-
-          {/* Patterns Not Yet Learned */}
-          {visualKnowledge.patterns_not_learned && visualKnowledge.patterns_not_learned.length > 0 && (
-            <div>
-              <h3 className="text-sm font-semibold text-slate-400 mb-3 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-400" />
-                Patterns Not Yet Learned ({visualKnowledge.patterns_not_learned.length})
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {visualKnowledge.patterns_not_learned.map((pattern) => {
-                  const info = PATTERN_INFO[pattern] || { name: pattern.replace('_', ' '), short: pattern.toUpperCase() };
-                  return (
-                    <div
-                      key={pattern}
-                      className="px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-400 text-sm flex items-center gap-2"
-                    >
-                      <span>{info.name}</span>
-                      <span className="text-xs text-slate-500 bg-slate-700/50 px-1.5 py-0.5 rounded">Train more</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Vision Stats Summary */}
-          <div className="mt-6 pt-6 border-t border-white/10">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-cyan-400">{visualKnowledge.total_frames_analyzed || 0}</p>
-                <p className="text-xs text-slate-400">Frames Analyzed</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-blue-400">{visualKnowledge.chart_frames || 0}</p>
-                <p className="text-xs text-slate-400">Chart Frames</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-indigo-400">{visualKnowledge.visual_concepts || 0}</p>
-                <p className="text-xs text-slate-400">Visual Concepts</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold text-purple-400">{visualKnowledge.key_teaching_moments_count || 0}</p>
-                <p className="text-xs text-slate-400">Teaching Moments</p>
-              </div>
-            </div>
-          </div>
         </div>
       )}
 
-      {/* No Vision Knowledge Notice */}
-      {!visualKnowledge?.has_vision_knowledge && visionCapabilities?.vision_available && (
-        <div className="glass-card p-6 border-amber-500/20 bg-amber-500/5">
+      {/* No Synchronized Knowledge Notice */}
+      {!syncKnowledge?.has_synchronized_learning && (
+        <div className="glass-card p-6 border-teal-500/20 bg-teal-500/5">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
-              <Eye className="w-6 h-6 text-amber-400" />
+            <div className="w-12 h-12 rounded-xl bg-teal-500/20 flex items-center justify-center flex-shrink-0">
+              <Shield className="w-6 h-6 text-teal-400" />
             </div>
             <div>
-              <h3 className="font-semibold text-amber-400 mb-1">No Visual Patterns Learned Yet</h3>
-              <p className="text-sm text-slate-400">
-                The ML has not been trained on video frames yet. Go to <span className="text-indigo-400">Dashboard → Vision Training Manager</span> to
-                analyze video frames and learn visual patterns like FVGs, Order Blocks, and Market Structure.
+              <h3 className="font-semibold text-teal-400 mb-1 flex items-center gap-2">
+                Synchronized Learning Available
+                <span className="text-xs px-2 py-0.5 bg-teal-500/20 text-teal-300 rounded-full">STATE-OF-THE-ART</span>
+              </h3>
+              <p className="text-sm text-slate-400 mb-3">
+                Synchronized training ensures the ML only learns <span className="text-teal-300">verified knowledge</span> where
+                what's heard in the audio matches what's shown in the video. This prevents contamination like labeling MACD as FVG.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-xs px-2 py-1 bg-blue-500/10 text-blue-300 rounded border border-blue-500/20">
+                  WhisperX word-level timing
+                </span>
+                <span className="text-xs px-2 py-1 bg-cyan-500/10 text-cyan-300 rounded border border-cyan-500/20">
+                  ImageBind-style embeddings
+                </span>
+                <span className="text-xs px-2 py-1 bg-emerald-500/10 text-emerald-300 rounded border border-emerald-500/20">
+                  Verification Gate
+                </span>
+                <span className="text-xs px-2 py-1 bg-purple-500/10 text-purple-300 rounded border border-purple-500/20">
+                  100% FREE
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-3">
+                Use <span className="text-indigo-400">/api/ml/train/synchronized/{'<playlist_id>'}</span> to start synchronized training
               </p>
             </div>
           </div>
@@ -560,15 +562,15 @@ export default function Learning() {
             },
             {
               step: '2',
-              title: 'Vision Training',
-              description: 'Video frames are analyzed to learn visual patterns like FVGs, Order Blocks, and chart structures',
-              icon: Eye,
-              color: 'cyan'
+              title: 'Synchronized Learning',
+              description: 'Audio-visual verification ensures what is SAID matches what is SHOWN (prevents contamination)',
+              icon: Shield,
+              color: 'emerald'
             },
             {
               step: '3',
               title: 'Concept Extraction',
-              description: 'ML combines transcript and visual knowledge to understand Smart Money methodology',
+              description: 'ML combines verified transcript and visual knowledge to understand Smart Money methodology',
               icon: Brain,
               color: 'purple'
             },
@@ -577,7 +579,7 @@ export default function Learning() {
               title: 'Signal Generation',
               description: 'Learned patterns are detected on live charts to generate trading signals',
               icon: Target,
-              color: 'emerald'
+              color: 'cyan'
             }
           ].map((item, i) => {
             const IconComp = item.icon;

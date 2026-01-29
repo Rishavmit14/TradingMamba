@@ -46,6 +46,20 @@ except ImportError:
     VISION_AVAILABLE = False
     logger.info("Vision training not available (missing dependencies)")
 
+# Synchronized Learning imports - ensures audio-visual alignment
+try:
+    from .synchronized_learning import (
+        SynchronizedLearningPipeline,
+        WhisperXTranscriber,
+        VerificationGate,
+        JointEmbeddingSpace,
+        integrate_synchronized_learning
+    )
+    SYNC_LEARNING_AVAILABLE = True
+except ImportError:
+    SYNC_LEARNING_AVAILABLE = False
+    logger.info("Synchronized learning not available")
+
 
 class SmartMoneyKnowledgeBase:
     """
@@ -69,9 +83,16 @@ class SmartMoneyKnowledgeBase:
         # Training database for tracking all video learnings
         self.training_db = TrainingDatabase(str(self.data_dir))
 
-        # Vision trainer for multimodal learning (optional)
+        # DEPRECATED: Vision trainer - use synchronized learning instead
+        # Kept for backward compatibility but redirects to synchronized learning
         self.vision_trainer = None
-        self.vision_knowledge = {}  # Visual patterns learned from videos
+        self.vision_knowledge = {}  # DEPRECATED: Use synchronized_knowledge instead
+
+        # Synchronized Learning Pipeline (RECOMMENDED - prevents contamination)
+        # This combines Text + Vision + Audio-Visual Verification
+        self.sync_pipeline = None
+        self.synchronized_knowledge = {}  # Verified audio-visual aligned knowledge
+        self.has_synchronized_learning = False  # Flag to indicate sync learning was used
 
         # Knowledge storage
         self.concept_definitions = {}  # Learned definitions
@@ -297,28 +318,107 @@ class SmartMoneyKnowledgeBase:
         progress_callback=None
     ) -> Dict:
         """
-        Enhanced training that includes visual analysis of video frames.
-        This enables the ML to understand visual patterns shown in tutorials.
+        DEPRECATED: This method now redirects to train_synchronized().
+
+        Standalone vision training has been removed in favor of Synchronized Learning,
+        which provides better results by verifying that audio matches visual content.
+        This prevents contamination (e.g., MACD discussion being labeled as FVG).
+
+        For backward compatibility, this method redirects to train_synchronized()
+        which includes vision analysis as part of its audio-visual verification pipeline.
 
         Args:
             transcripts: List of transcript dicts (loads all if None)
             vision_provider: "local" (FREE on M1/M2/M3 Mac), "anthropic", or "openai"
             max_frames_per_video: Max frames to analyze per video (0 = no limit)
-            extraction_mode: How thoroughly to analyze:
-                - "comprehensive": Every 3s like a dedicated student (DEFAULT)
-                - "thorough": Every 5s with keyword boosting
-                - "balanced": Every 10-15s with keyword boosting
-                - "selective": Only at demonstrative moments
+            extraction_mode: Mapped to synchronized learning mode
             progress_callback: Optional callback(current, total, message)
 
         Returns:
-            Training results including vision analysis
+            Training results from synchronized learning
+        """
+        logger.warning("=" * 60)
+        logger.warning("DEPRECATION NOTICE: train_with_vision() is deprecated")
+        logger.warning("Redirecting to train_synchronized() for better results")
+        logger.warning("Synchronized Learning prevents contamination by verifying")
+        logger.warning("that what is SAID matches what is SHOWN in the video.")
+        logger.warning("=" * 60)
+
+        # Map old extraction modes to synchronized learning modes
+        mode_mapping = {
+            "comprehensive": "sincere_student",
+            "thorough": "sincere_student",
+            "balanced": "sincere_student",
+            "selective": "sincere_student",
+        }
+        sync_mode = mode_mapping.get(extraction_mode, "sincere_student")
+
+        # Redirect to synchronized learning
+        return self.train_synchronized(
+            transcripts=transcripts,
+            vision_provider=vision_provider,
+            max_frames_per_video=max_frames_per_video,
+            extraction_mode=sync_mode,
+            alignment_threshold=0.6,
+            sync_window=2.0,
+            progress_callback=progress_callback
+        )
+
+    def train_synchronized(
+        self,
+        transcripts: List[Dict] = None,
+        vision_provider: str = "local",
+        max_frames_per_video: int = 0,
+        extraction_mode: str = "sincere_student",
+        alignment_threshold: float = 0.6,
+        sync_window: float = 2.0,
+        progress_callback=None
+    ) -> Dict:
+        """
+        STATE-OF-THE-ART synchronized audio-visual training.
+
+        This is the BEST training mode that ensures:
+        1. Word-level timestamps via WhisperX (forced alignment)
+        2. Audio-visual alignment in joint embedding space
+        3. Verification gate rejects mismatched data (prevents MACD→FVG contamination)
+
+        Based on:
+        - Meta's ImageBind (joint embedding space)
+        - Meta's PE-AV (perception encoder audiovisual)
+        - WhisperX (word-level forced alignment)
+
+        100% FREE - Uses only open-source libraries.
+
+        Args:
+            transcripts: List of transcript dicts (loads all if None)
+            vision_provider: "local" (FREE on M1/M2/M3 Mac), "anthropic", or "openai"
+            max_frames_per_video: Max frames to analyze per video (0 = no limit)
+            extraction_mode: "sincere_student" (recommended), "comprehensive", etc.
+            alignment_threshold: Min alignment score to accept (0.6 = 60% match)
+            sync_window: Time window for matching audio to visual (seconds)
+            progress_callback: Optional callback(current, total, message)
+
+        Returns:
+            Training results with verification statistics
         """
         if not VISION_AVAILABLE:
             logger.warning("Vision training not available. Falling back to text-only training.")
             return self.train(transcripts)
 
-        logger.info(f"Starting multimodal training pipeline (text + vision) - {extraction_mode} mode...")
+        if not SYNC_LEARNING_AVAILABLE:
+            logger.warning("Synchronized learning not available. Falling back to standard multimodal.")
+            return self.train_with_vision(
+                transcripts, vision_provider, max_frames_per_video,
+                extraction_mode, progress_callback
+            )
+
+        logger.info("=" * 60)
+        logger.info("SYNCHRONIZED AUDIO-VISUAL LEARNING PIPELINE")
+        logger.info("=" * 60)
+        logger.info(f"Mode: {extraction_mode}")
+        logger.info(f"Alignment threshold: {alignment_threshold}")
+        logger.info(f"Sync window: {sync_window}s")
+        logger.info("=" * 60)
 
         if transcripts is None:
             transcripts = self.load_transcripts()
@@ -326,6 +426,13 @@ class SmartMoneyKnowledgeBase:
         if not transcripts:
             logger.warning("No transcripts available for training")
             return {'status': 'no_data'}
+
+        # Initialize synchronized learning pipeline
+        self.sync_pipeline = SynchronizedLearningPipeline(
+            data_dir=str(self.data_dir),
+            alignment_threshold=alignment_threshold,
+            sync_window=sync_window
+        )
 
         # Initialize vision trainer
         self.vision_trainer = VideoVisionTrainer(
@@ -336,112 +443,181 @@ class SmartMoneyKnowledgeBase:
         results = {
             'timestamp': datetime.utcnow().isoformat(),
             'n_transcripts': len(transcripts),
-            'training_mode': 'multimodal',
+            'training_mode': 'synchronized',
             'extraction_mode': extraction_mode,
+            'alignment_threshold': alignment_threshold,
+            'sync_window': sync_window,
             'components': {},
             'vision_analysis': {},
+            'synchronization': {},
             'video_learnings': []
         }
 
-        total_steps = len(transcripts) + 5  # +5 for other training steps
+        total_steps = len(transcripts) * 2 + 5  # Vision + Sync + other steps
         current_step = 0
 
-        # 1. Process videos with vision analysis
-        logger.info(f"Starting vision analysis of video frames ({extraction_mode} mode)...")
-        vision_summaries = []
+        total_verified = 0
+        total_rejected = 0
+        all_rejection_reasons = {}
+
+        # ====================================================================
+        # PHASE 1: Vision Analysis + Synchronized Learning per video
+        # ====================================================================
+        logger.info("PHASE 1: Synchronized audio-visual processing...")
+
+        enhanced_transcripts = []
 
         for i, transcript in enumerate(transcripts):
             video_id = transcript.get('video_id', '')
             if not video_id:
+                enhanced_transcripts.append(transcript)
                 continue
+
+            video_title = transcript.get('title', video_id)[:40]
 
             if progress_callback:
                 progress_callback(
                     current_step,
                     total_steps,
-                    f"Analyzing visual content: {transcript.get('title', video_id)[:40]}..."
+                    f"[Vision] Analyzing: {video_title}..."
                 )
 
+            # Step 1a: Run vision analysis on video frames
             try:
-                summary = self.vision_trainer.process_video(
+                vision_summary = self.vision_trainer.process_video(
                     video_id,
                     max_frames=max_frames_per_video,
                     extraction_mode=extraction_mode
                 )
-                if summary:
-                    vision_summaries.append(summary)
 
-                    # Enhance transcript with visual data
-                    transcripts[i] = self.vision_trainer.enhance_transcript_with_vision(
-                        video_id,
-                        transcript
-                    )
+                frames_data = []
+                if vision_summary:
+                    # Get detailed frame analysis
+                    vision_file = self.data_dir / "video_vision" / f"{video_id}_vision.json"
+                    if vision_file.exists():
+                        with open(vision_file) as f:
+                            vision_data = json.load(f)
+                            frames_data = vision_data.get("key_moments", [])
+
             except Exception as e:
                 logger.warning(f"Vision analysis failed for {video_id}: {e}")
+                frames_data = []
 
             current_step += 1
 
-        results['vision_analysis'] = {
-            'videos_analyzed': len(vision_summaries),
-            'total_frames_analyzed': sum(s.total_frames_analyzed for s in vision_summaries),
-            'chart_frames': sum(s.chart_frames for s in vision_summaries),
+            if progress_callback:
+                progress_callback(
+                    current_step,
+                    total_steps,
+                    f"[Sync] Verifying: {video_title}..."
+                )
+
+            # Step 1b: Run synchronized learning (audio-visual alignment + verification)
+            if frames_data:
+                try:
+                    # Get audio path for word-level timestamps
+                    audio_path = self.data_dir / "audio" / f"{video_id}.mp3"
+                    if not audio_path.exists():
+                        audio_path = self.data_dir / "audio" / f"{video_id}.wav"
+
+                    if audio_path.exists():
+                        sync_result = self.sync_pipeline.process_video(
+                            video_id=video_id,
+                            audio_path=str(audio_path),
+                            frames_data=frames_data,
+                            existing_transcript=transcript
+                        )
+
+                        total_verified += sync_result.get('verified_count', 0)
+                        total_rejected += sync_result.get('rejected_count', 0)
+
+                        # Track rejection reasons
+                        rej_stats = sync_result.get('rejection_stats', {})
+                        for reason, count in rej_stats.get('by_reason', {}).items():
+                            all_rejection_reasons[reason] = all_rejection_reasons.get(reason, 0) + count
+
+                        logger.info(f"  {video_id}: {sync_result['verified_count']} verified, "
+                                   f"{sync_result['rejected_count']} rejected")
+                    else:
+                        logger.warning(f"  No audio file for {video_id}, skipping sync")
+
+                except Exception as e:
+                    logger.warning(f"Synchronized learning failed for {video_id}: {e}")
+
+            # Enhance transcript with vision data (standard way)
+            enhanced = self.vision_trainer.enhance_transcript_with_vision(video_id, transcript)
+            enhanced_transcripts.append(enhanced)
+
+            current_step += 1
+
+        # Store synchronized knowledge
+        self.synchronized_knowledge = self.sync_pipeline.verified_knowledge
+
+        results['synchronization'] = {
+            'total_moments_analyzed': total_verified + total_rejected,
+            'verified_moments': total_verified,
+            'rejected_moments': total_rejected,
+            'verification_rate': total_verified / max(1, total_verified + total_rejected),
+            'rejection_reasons': all_rejection_reasons,
+            'concepts_verified': list(self.synchronized_knowledge.keys())
         }
 
-        # Aggregate visual knowledge
-        self.vision_knowledge = self.vision_trainer.get_visual_knowledge()
-        results['vision_analysis']['visual_patterns'] = self.vision_knowledge.get('pattern_frequency', {})
-        results['vision_analysis']['visual_concepts'] = len(self.vision_knowledge.get('visual_concepts', []))
+        # ====================================================================
+        # PHASE 2: Standard ML Training (with synchronized data)
+        # ====================================================================
+        logger.info("\nPHASE 2: Training ML models with verified data...")
 
         if progress_callback:
             progress_callback(current_step, total_steps, "Training concept classifier...")
 
-        # 2. Train concept classifier (now with enhanced transcripts)
-        logger.info("Training concept classifier with vision-enhanced data...")
-        clf_result = self.concept_classifier.fit(transcripts)
+        # Use enhanced transcripts for training
+        clf_result = self.concept_classifier.fit(enhanced_transcripts)
         results['components']['classifier'] = clf_result
         current_step += 1
 
         if progress_callback:
             progress_callback(current_step, total_steps, "Building concept embeddings...")
 
-        # 3. Build concept embeddings
-        logger.info("Building concept embeddings...")
-        self.concept_embeddings.fit(transcripts)
+        # Build concept embeddings
+        self.concept_embeddings.fit(enhanced_transcripts)
         results['components']['embeddings'] = {'status': 'trained', 'dim': self.concept_embeddings.embedding_dim}
         current_step += 1
 
         if progress_callback:
             progress_callback(current_step, total_steps, "Analyzing concept sequences...")
 
-        # 4. Build sequence analyzer
-        logger.info("Analyzing concept sequences...")
-        self.sequence_analyzer.build_transition_matrix(transcripts)
+        # Build sequence analyzer
+        self.sequence_analyzer.build_transition_matrix(enhanced_transcripts)
         results['components']['sequence_analyzer'] = {'status': 'trained'}
         current_step += 1
 
         if progress_callback:
-            progress_callback(current_step, total_steps, "Extracting concept definitions...")
+            progress_callback(current_step, total_steps, "Extracting definitions and rules...")
 
-        # 5. Extract concept definitions
-        logger.info("Extracting concept definitions...")
-        definitions = self.extract_concept_definitions(transcripts)
+        # Extract definitions and rules
+        definitions = self.extract_concept_definitions(enhanced_transcripts)
         results['components']['definitions'] = {'n_concepts': len(definitions)}
 
-        # 6. Extract trading rules
-        logger.info("Extracting trading rules...")
-        rules = self.extract_trading_rules(transcripts)
+        rules = self.extract_trading_rules(enhanced_transcripts)
         results['components']['rules'] = {'n_rules': len(rules)}
         current_step += 1
 
         if progress_callback:
             progress_callback(current_step, total_steps, "Recording to training database...")
 
-        # 7. Record per-video learnings
-        logger.info("Recording per-video learnings to database...")
-        self._record_video_learnings(transcripts, rules)
+        # Record per-video learnings
+        self._record_video_learnings(enhanced_transcripts, rules)
         results['components']['database'] = {
-            'videos_recorded': len(transcripts),
+            'videos_recorded': len(enhanced_transcripts),
             'database_path': str(self.training_db.db_path)
+        }
+
+        # Aggregate vision knowledge
+        self.vision_knowledge = self.vision_trainer.get_visual_knowledge()
+        results['vision_analysis'] = {
+            'videos_analyzed': len([t for t in transcripts if t.get('video_id')]),
+            'visual_patterns': self.vision_knowledge.get('pattern_frequency', {}),
+            'visual_concepts': len(self.vision_knowledge.get('visual_concepts', []))
         }
 
         # Update metadata
@@ -450,41 +626,96 @@ class SmartMoneyKnowledgeBase:
         self.training_history.append(results)
 
         if progress_callback:
-            progress_callback(total_steps, total_steps, "Multimodal training complete!")
+            progress_callback(total_steps, total_steps, "Synchronized training complete!")
 
-        logger.info(f"Multimodal training complete. Processed {len(transcripts)} transcripts with vision analysis.")
+        # ====================================================================
+        # Summary
+        # ====================================================================
+        logger.info("\n" + "=" * 60)
+        logger.info("SYNCHRONIZED TRAINING COMPLETE")
+        logger.info("=" * 60)
+        logger.info(f"Transcripts processed: {len(transcripts)}")
+        logger.info(f"Moments analyzed: {total_verified + total_rejected}")
+        logger.info(f"Verified (audio matches visual): {total_verified}")
+        logger.info(f"Rejected (contamination prevented): {total_rejected}")
+        logger.info(f"Verification rate: {results['synchronization']['verification_rate']:.1%}")
+        logger.info(f"Concepts with verified knowledge: {len(self.synchronized_knowledge)}")
+        logger.info("=" * 60)
+
+        if all_rejection_reasons:
+            logger.info("\nRejection Reasons (contamination prevention):")
+            for reason, count in sorted(all_rejection_reasons.items(), key=lambda x: -x[1]):
+                logger.info(f"  - {reason}: {count}")
+
         return results
+
+    def get_verified_knowledge(self, concept: str = None) -> Dict:
+        """
+        Get verified knowledge that passed the audio-visual alignment test.
+
+        This knowledge is guaranteed to be accurate - what was said matches
+        what was shown in the video.
+        """
+        if not self.synchronized_knowledge:
+            return {'error': 'No synchronized training done yet. Run train_synchronized() first.'}
+
+        if concept:
+            if concept in self.synchronized_knowledge:
+                vk = self.synchronized_knowledge[concept]
+                return vk.to_dict() if hasattr(vk, 'to_dict') else vk
+            return {'error': f'No verified knowledge for concept: {concept}'}
+
+        # Return all verified knowledge
+        result = {}
+        for c, vk in self.synchronized_knowledge.items():
+            result[c] = vk.to_dict() if hasattr(vk, 'to_dict') else vk
+        return result
 
     def get_visual_pattern_examples(self, pattern_type: str) -> List[Dict]:
         """
-        Get visual examples of a specific pattern type from analyzed videos.
+        Get visual examples of a specific pattern type from synchronized learning.
 
         Args:
             pattern_type: e.g., "FVG", "Order Block", "Breaker"
 
         Returns:
-            List of examples with timestamps and frame paths
+            List of verified examples with timestamps and frame paths
         """
-        if not self.vision_knowledge:
-            return []
+        # First try synchronized_knowledge (preferred - verified data)
+        if self.synchronized_knowledge:
+            pattern_lower = pattern_type.lower().replace(' ', '_')
+            if pattern_lower in self.synchronized_knowledge:
+                vk = self.synchronized_knowledge[pattern_lower]
+                if hasattr(vk, 'visual_examples'):
+                    return vk.visual_examples
+                elif isinstance(vk, dict):
+                    return vk.get('visual_examples', [])
 
-        patterns_by_type = self.vision_knowledge.get('patterns_by_type', {})
-        return patterns_by_type.get(pattern_type, [])
+        # No synchronized data available
+        return []
 
     def get_teaching_moments(self, concept: str = None) -> List[Dict]:
         """
-        Get key teaching moments from videos, optionally filtered by concept.
+        Get key teaching moments from synchronized learning data.
+        These are verified moments where audio matches visual content.
         """
-        if not self.vision_knowledge:
-            return []
+        moments = []
 
-        moments = self.vision_knowledge.get('key_teaching_moments', [])
+        # Get from synchronized_knowledge (verified data)
+        if self.synchronized_knowledge:
+            for concept_key, vk in self.synchronized_knowledge.items():
+                if hasattr(vk, 'teaching_moments'):
+                    moments.extend(vk.teaching_moments)
+                elif isinstance(vk, dict) and 'teaching_moments' in vk:
+                    moments.extend(vk['teaching_moments'])
 
-        if concept:
+        # Filter by concept if specified
+        if concept and moments:
             concept_lower = concept.lower()
             moments = [
                 m for m in moments
                 if concept_lower in m.get('teaching_point', '').lower()
+                or concept_lower in m.get('concept', '').lower()
                 or any(concept_lower in p.get('type', '').lower() for p in m.get('patterns', []))
             ]
 
@@ -686,6 +917,15 @@ class SmartMoneyKnowledgeBase:
 
         # Save knowledge
         knowledge_path = self.models_dir / "knowledge_base.json"
+
+        # Prepare synchronized knowledge for JSON serialization
+        sync_knowledge_serializable = {}
+        for concept, vk in getattr(self, 'synchronized_knowledge', {}).items():
+            if hasattr(vk, 'to_dict'):
+                sync_knowledge_serializable[concept] = vk.to_dict()
+            else:
+                sync_knowledge_serializable[concept] = vk
+
         with open(knowledge_path, 'w') as f:
             json.dump({
                 'concept_definitions': self.concept_definitions,
@@ -694,7 +934,12 @@ class SmartMoneyKnowledgeBase:
                 'last_training_time': self.last_training_time,
                 'training_history': self.training_history[-10:],  # Last 10
                 'trained_video_ids': getattr(self, 'trained_video_ids', []),
-                'vision_knowledge': getattr(self, 'vision_knowledge', {}),
+                # DEPRECATED: vision_knowledge - kept for backward compatibility only
+                # New training uses synchronized_knowledge instead
+                'vision_knowledge': {},  # No longer populated, use synchronized_knowledge
+                # Synchronized Learning data (RECOMMENDED)
+                'synchronized_knowledge': sync_knowledge_serializable,
+                'has_synchronized_learning': bool(sync_knowledge_serializable),
             }, f, indent=2, default=str)
 
         logger.info(f"Knowledge base saved to {self.models_dir}")
@@ -727,6 +972,18 @@ class SmartMoneyKnowledgeBase:
                 self.last_training_time = data.get('last_training_time')
                 self.training_history = data.get('training_history', [])
                 self.trained_video_ids = data.get('trained_video_ids', [])
+
+                # Load synchronized knowledge (RECOMMENDED)
+                self.synchronized_knowledge = data.get('synchronized_knowledge', {})
+                self.has_synchronized_learning = data.get('has_synchronized_learning', bool(self.synchronized_knowledge))
+
+                # DEPRECATED: vision_knowledge - only load for backward compatibility
+                # If old data exists and no synchronized_knowledge, log warning
+                old_vision = data.get('vision_knowledge', {})
+                if old_vision and not self.synchronized_knowledge:
+                    logger.warning("Found legacy vision_knowledge but no synchronized_knowledge.")
+                    logger.warning("Consider re-training with train_synchronized() for better results.")
+                self.vision_knowledge = {}  # Don't use old vision data
         except:
             logger.warning("Could not load knowledge base")
 

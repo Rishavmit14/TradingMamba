@@ -122,22 +122,48 @@ export const getSignalAnalysis = async (symbol, timeframe = 'H1') => {
 };
 
 // Live OHLCV data for real-time charting
+// Falls back to market/ohlcv if live endpoint fails (e.g., IP banned by Binance)
 export const getLiveOHLCV = async (symbol, timeframe = 'M1', limit = 100) => {
-  const response = await api.get(`/live/ohlcv/${symbol}`, {
-    params: { timeframe, limit },
-  });
-  return response.data;
+  try {
+    const response = await api.get(`/live/ohlcv/${symbol}`, {
+      params: { timeframe, limit },
+    });
+    return response.data;
+  } catch (error) {
+    // Fallback to market OHLCV endpoint
+    console.log('Live OHLCV failed, falling back to market OHLCV:', error.message);
+    const response = await api.get(`/market/ohlcv/${symbol}`, {
+      params: { timeframe, limit },
+    });
+    // Transform market OHLCV format to match live format expected by LiveChart
+    const marketData = response.data;
+    const candles = (marketData.data || [])
+      .map(d => {
+        // Handle both "Date" (for D1/W1/MN) and "Datetime" (for intraday) keys
+        const dateStr = d.Date || d.Datetime;
+        return {
+          time: Math.floor(new Date(dateStr).getTime() / 1000),
+          open: d.open,
+          high: d.high,
+          low: d.low,
+          close: d.close,
+          volume: d.volume
+        };
+      })
+      .filter(c => !isNaN(c.time) && c.time > 0)  // Filter out invalid times
+      .sort((a, b) => a.time - b.time);  // Sort ascending by time
+
+    return {
+      symbol: marketData.symbol,
+      timeframe: marketData.timeframe,
+      candles
+    };
+  }
 };
 
 // WebSocket URL for live price updates
 export const getWebSocketUrl = (symbol) => {
   return `ws://localhost:8000/ws/live/${symbol}`;
-};
-
-// ML Whitewash - Delete all trained models
-export const whitewashML = async () => {
-  const response = await api.post('/ml/whitewash');
-  return response.data;
 };
 
 // Get transcripts grouped by playlist
@@ -164,62 +190,105 @@ export const getTrainingStreamUrl = (jobId) => {
 };
 
 // ============================================================================
-// Vision Training APIs - Multimodal video analysis
+// Synchronized Learning APIs (RECOMMENDED)
+// Audio-Visual verified training - prevents contamination
 // ============================================================================
 
-// Start vision training for a playlist
-// visionProvider: 'local' (FREE on M1/M2/M3 Mac), 'anthropic' (paid), 'openai' (paid)
-// extractionMode: 'comprehensive' (every 3s - learns everything), 'thorough' (5s), 'balanced' (10-15s), 'selective' (key moments)
-export const trainWithVision = async (playlistId, visionProvider = 'local', maxFrames = 0, extractionMode = 'comprehensive') => {
-  const response = await api.post(`/ml/train/vision/${playlistId}`, null, {
-    params: { vision_provider: visionProvider, max_frames: maxFrames, extraction_mode: extractionMode },
+// Get synchronized knowledge (verified audio-visual aligned)
+export const getSynchronizedKnowledge = async (concept = null) => {
+  const params = concept ? { concept } : {};
+  const response = await api.get('/ml/synchronized/knowledge', { params });
+  return response.data;
+};
+
+// Start synchronized training (state-of-the-art)
+// This is the RECOMMENDED training method that verifies audio matches visual
+export const startSynchronizedTraining = async (playlistId, options = {}) => {
+  const response = await api.post(`/ml/train/synchronized/${playlistId}`, null, {
+    params: {
+      vision_provider: options.visionProvider || 'local',
+      max_frames: options.maxFrames || 0,
+      extraction_mode: options.extractionMode || 'sincere_student',
+      alignment_threshold: options.alignmentThreshold || 0.6,
+      sync_window: options.syncWindow || 2.0,
+    },
   });
   return response.data;
 };
 
-// Start vision training for a SINGLE video
+// Get synchronized training status
+export const getSyncTrainingStatus = async (jobId) => {
+  const response = await api.get(`/ml/train/synchronized/status/${jobId}`);
+  return response.data;
+};
+
+// Get teaching moments from synchronized knowledge
+export const getTeachingMoments = async (concept = null) => {
+  // Now redirects to synchronized knowledge endpoint
+  const response = await api.get('/ml/synchronized/teaching-moments', {
+    params: concept ? { concept } : {},
+  });
+  return response.data;
+};
+
+// Get visual pattern examples from synchronized knowledge
+export const getVisualPatternExamples = async (patternType) => {
+  // Now redirects to synchronized knowledge endpoint
+  const response = await api.get(`/ml/synchronized/patterns/${patternType}`);
+  return response.data;
+};
+
+// ============================================================================
+// DEPRECATED Vision Training APIs
+// These now redirect to Synchronized Learning on the backend
+// Kept for backward compatibility only
+// ============================================================================
+
+// DEPRECATED: Use startSynchronizedTraining instead
+// This now redirects to synchronized training on the backend
+export const trainWithVision = async (playlistId, visionProvider = 'local', maxFrames = 0, extractionMode = 'comprehensive') => {
+  console.warn('trainWithVision is DEPRECATED. Use startSynchronizedTraining instead.');
+  // Redirect to synchronized training
+  return startSynchronizedTraining(playlistId, {
+    visionProvider,
+    maxFrames,
+    extractionMode: 'sincere_student', // Map to sync mode
+  });
+};
+
+// DEPRECATED: Use startSynchronizedTraining instead
 export const trainSingleVideoWithVision = async (videoId, visionProvider = 'local', maxFrames = 0, extractionMode = 'comprehensive') => {
+  console.warn('trainSingleVideoWithVision is DEPRECATED. Use startSynchronizedTraining instead.');
+  // Backend endpoint redirects to synchronized training
   const response = await api.post(`/ml/train/vision/video/${videoId}`, null, {
     params: { vision_provider: visionProvider, max_frames: maxFrames, extraction_mode: extractionMode },
   });
   return response.data;
 };
 
-// Get vision training status
+// DEPRECATED: Use getSyncTrainingStatus instead
 export const getVisionTrainingStatus = async (jobId) => {
-  const response = await api.get(`/ml/train/vision/status/${jobId}`);
-  return response.data;
+  console.warn('getVisionTrainingStatus is DEPRECATED. Use getSyncTrainingStatus instead.');
+  return getSyncTrainingStatus(jobId);
 };
 
-// Stream vision training progress URL
+// DEPRECATED: Use getSyncTrainingStreamUrl instead
 export const getVisionTrainingStreamUrl = (jobId) => {
-  return `${API_BASE}/ml/train/vision/stream/${jobId}`;
+  console.warn('getVisionTrainingStreamUrl is DEPRECATED.');
+  return `${API_BASE}/ml/train/synchronized/stream/${jobId}`;
 };
 
-// Get vision capabilities status
+// DEPRECATED: Use getSynchronizedKnowledge instead
 export const getVisionCapabilities = async () => {
-  const response = await api.get('/ml/vision/status');
+  console.warn('getVisionCapabilities is DEPRECATED. Use getSynchronizedKnowledge instead.');
+  const response = await api.get('/ml/synchronized/status');
   return response.data;
 };
 
-// Get visual pattern examples
-export const getVisualPatternExamples = async (patternType) => {
-  const response = await api.get(`/ml/vision/patterns/${patternType}`);
-  return response.data;
-};
-
-// Get teaching moments
-export const getTeachingMoments = async (concept = null) => {
-  const response = await api.get('/ml/vision/teaching-moments', {
-    params: concept ? { concept } : {},
-  });
-  return response.data;
-};
-
-// Get visual knowledge summary
+// DEPRECATED: Use getSynchronizedKnowledge instead
 export const getVisualKnowledge = async () => {
-  const response = await api.get('/ml/vision/knowledge');
-  return response.data;
+  console.warn('getVisualKnowledge is DEPRECATED. Use getSynchronizedKnowledge instead.');
+  return getSynchronizedKnowledge();
 };
 
 // ============================================================================

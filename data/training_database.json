@@ -7,9 +7,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 396,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.508853",
-      "last_trained": "2026-01-28T10:25:45.197537",
+      "last_trained": "2026-01-29T13:14:23.928374",
       "training_dates": [
         "2026-01-27T18:57:58.508853",
         "2026-01-27T19:00:26.181486",
@@ -27,21 +27,23 @@
         "2026-01-28T10:16:23.919110",
         "2026-01-28T10:20:28.113922",
         "2026-01-28T10:25:29.262364",
-        "2026-01-28T10:25:45.197537"
+        "2026-01-28T10:25:45.197537",
+        "2026-01-29T12:55:58.223560",
+        "2026-01-29T13:14:23.928374"
       ],
       "concepts_detected": [
-        "time_based",
         "kill_zones",
-        "entry_models"
+        "entry_models",
+        "time_based"
       ],
       "concept_frequencies": {
-        "kill_zones": 17,
-        "entry_models": 34,
-        "time_based": 34
+        "kill_zones": 19,
+        "entry_models": 38,
+        "time_based": 38
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, kill zones, entry models.",
+      "summary": "Primary concepts covered: kill zones, entry models, time based.",
       "content_quality_score": 1.0,
       "concept_density": 12.626262626262626
     },
@@ -52,9 +54,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 3145,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.517239",
-      "last_trained": "2026-01-28T10:25:45.036809",
+      "last_trained": "2026-01-29T13:14:23.941393",
       "training_dates": [
         "2026-01-27T18:57:58.517239",
         "2026-01-27T19:00:26.200676",
@@ -70,23 +72,25 @@
         "2026-01-28T10:16:09.137188",
         "2026-01-28T10:16:38.618306",
         "2026-01-28T10:20:12.288544",
-        "2026-01-28T10:25:45.036809"
+        "2026-01-28T10:25:45.036809",
+        "2026-01-29T12:55:58.237303",
+        "2026-01-29T13:14:23.941393"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "institutional",
-        "market_structure",
         "order_block",
-        "liquidity"
+        "market_structure",
+        "institutional",
+        "liquidity",
+        "premium_discount",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 300,
-        "order_block": 90,
-        "liquidity": 150,
-        "premium_discount": 165,
-        "institutional": 105,
-        "time_based": 45
+        "market_structure": 340,
+        "order_block": 102,
+        "liquidity": 170,
+        "premium_discount": 187,
+        "institutional": 119,
+        "time_based": 51
       },
       "trading_rules_extracted": [
         {
@@ -111,7 +115,7 @@
         "In terms of liquidity void so we've covered three conditions the next one is the reversal the reversal is when price moves the opposite direction curr",
         "We're looking for in terms of liquidity void so we've covered three conditions the next one is the r"
       ],
-      "summary": "Primary concepts covered: time based, premium discount, institutional. Extracted 2 trading rules. Identified 3 key learning points.",
+      "summary": "Primary concepts covered: order block, market structure, institutional. Extracted 2 trading rules. Identified 3 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 18.124006359300477
     },
@@ -122,9 +126,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 3734,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.527236",
-      "last_trained": "2026-01-28T10:25:45.125205",
+      "last_trained": "2026-01-29T13:14:23.956868",
       "training_dates": [
         "2026-01-27T18:57:58.527236",
         "2026-01-27T19:00:26.221763",
@@ -140,19 +144,21 @@
         "2026-01-28T10:16:09.219475",
         "2026-01-28T10:16:38.700329",
         "2026-01-28T10:20:12.369533",
-        "2026-01-28T10:25:45.125205"
+        "2026-01-28T10:25:45.125205",
+        "2026-01-29T12:55:58.253192",
+        "2026-01-29T13:14:23.956868"
       ],
       "concepts_detected": [
         "price_action",
+        "market_structure",
         "institutional",
-        "liquidity",
-        "market_structure"
+        "liquidity"
       ],
       "concept_frequencies": {
-        "market_structure": 90,
-        "liquidity": 900,
-        "institutional": 75,
-        "price_action": 15
+        "market_structure": 102,
+        "liquidity": 1020,
+        "institutional": 85,
+        "price_action": 17
       },
       "trading_rules_extracted": [
         {
@@ -181,7 +187,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: price action, institutional, liquidity. Extracted 3 trading rules.",
+      "summary": "Primary concepts covered: price action, market structure, institutional. Extracted 3 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 19.2822710230316
     },
@@ -192,9 +198,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 480,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.529935",
-      "last_trained": "2026-01-28T10:25:45.153352",
+      "last_trained": "2026-01-29T13:14:23.961097",
       "training_dates": [
         "2026-01-27T18:57:58.529935",
         "2026-01-27T19:00:26.225956",
@@ -212,7 +218,9 @@
         "2026-01-28T10:16:23.937706",
         "2026-01-28T10:20:28.132688",
         "2026-01-28T10:25:29.281300",
-        "2026-01-28T10:25:45.153352"
+        "2026-01-28T10:25:45.153352",
+        "2026-01-29T12:55:58.257721",
+        "2026-01-29T13:14:23.961097"
       ],
       "concepts_detected": [
         "kill_zones",
@@ -221,10 +229,10 @@
         "liquidity"
       ],
       "concept_frequencies": {
-        "market_structure": 68,
-        "liquidity": 17,
-        "kill_zones": 34,
-        "entry_models": 34
+        "market_structure": 76,
+        "liquidity": 19,
+        "kill_zones": 38,
+        "entry_models": 38
       },
       "trading_rules_extracted": [],
       "key_points": [],
@@ -239,9 +247,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 4607,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.541895",
-      "last_trained": "2026-01-28T10:25:45.060643",
+      "last_trained": "2026-01-29T13:14:23.978747",
       "training_dates": [
         "2026-01-27T18:57:58.541895",
         "2026-01-27T19:00:26.249537",
@@ -257,29 +265,31 @@
         "2026-01-28T10:16:09.159772",
         "2026-01-28T10:16:38.640739",
         "2026-01-28T10:20:12.311502",
-        "2026-01-28T10:25:45.060643"
+        "2026-01-28T10:25:45.060643",
+        "2026-01-29T12:55:58.276335",
+        "2026-01-29T13:14:23.978747"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "institutional",
-        "entry_models",
-        "market_structure",
+        "kill_zones",
         "order_block",
         "price_action",
-        "kill_zones",
-        "liquidity"
+        "entry_models",
+        "market_structure",
+        "institutional",
+        "liquidity",
+        "premium_discount",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 105,
-        "order_block": 15,
-        "liquidity": 225,
-        "premium_discount": 15,
-        "kill_zones": 15,
-        "entry_models": 15,
-        "institutional": 285,
-        "time_based": 375,
-        "price_action": 30
+        "market_structure": 119,
+        "order_block": 17,
+        "liquidity": 255,
+        "premium_discount": 17,
+        "kill_zones": 17,
+        "entry_models": 17,
+        "institutional": 323,
+        "time_based": 425,
+        "price_action": 34
       },
       "trading_rules_extracted": [
         {
@@ -295,7 +305,7 @@
       "key_points": [
         "Makes the world go around in the marketplace the smart money is there to provide liquidity but they'"
       ],
-      "summary": "Primary concepts covered: time based, premium discount, institutional. Extracted 1 trading rules. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: kill zones, order block, price action. Extracted 1 trading rules. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 15.628391578033426
     },
@@ -306,9 +316,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 9587,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.566452",
-      "last_trained": "2026-01-28T10:25:45.185917",
+      "last_trained": "2026-01-29T13:14:24.016420",
       "training_dates": [
         "2026-01-27T18:57:58.566452",
         "2026-01-27T19:00:26.301278",
@@ -326,27 +336,29 @@
         "2026-01-28T10:16:23.894619",
         "2026-01-28T10:20:28.089396",
         "2026-01-28T10:25:29.237392",
-        "2026-01-28T10:25:45.185917"
+        "2026-01-28T10:25:45.185917",
+        "2026-01-29T12:55:58.315817",
+        "2026-01-29T13:14:24.016420"
       ],
       "concepts_detected": [
-        "time_based",
-        "institutional",
-        "entry_models",
-        "market_structure",
+        "kill_zones",
         "order_block",
         "price_action",
-        "kill_zones",
-        "liquidity"
+        "entry_models",
+        "market_structure",
+        "institutional",
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 544,
-        "order_block": 17,
-        "liquidity": 68,
-        "kill_zones": 153,
-        "entry_models": 442,
-        "institutional": 51,
-        "time_based": 170,
-        "price_action": 17
+        "market_structure": 608,
+        "order_block": 19,
+        "liquidity": 76,
+        "kill_zones": 171,
+        "entry_models": 494,
+        "institutional": 57,
+        "time_based": 190,
+        "price_action": 19
       },
       "trading_rules_extracted": [
         {
@@ -378,7 +390,7 @@
       "key_points": [
         "Specific patterns and signatures and price action over a period of years and because of that and seeing it over and over and over again it builds in a"
       ],
-      "summary": "Primary concepts covered: time based, institutional, entry models. Extracted 3 trading rules. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: kill zones, order block, price action. Extracted 3 trading rules. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 8.970480859497236
     },
@@ -389,9 +401,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 720,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.570303",
-      "last_trained": "2026-01-28T10:25:45.135908",
+      "last_trained": "2026-01-29T13:14:24.034842",
       "training_dates": [
         "2026-01-27T18:57:58.570303",
         "2026-01-27T19:00:26.308879",
@@ -409,23 +421,25 @@
         "2026-01-28T10:16:23.921536",
         "2026-01-28T10:20:28.116336",
         "2026-01-28T10:25:29.264789",
-        "2026-01-28T10:25:45.135908"
+        "2026-01-28T10:25:45.135908",
+        "2026-01-29T12:55:58.334546",
+        "2026-01-29T13:14:24.034842"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
+        "price_action",
         "entry_models",
         "market_structure",
-        "price_action",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 68,
-        "liquidity": 68,
-        "kill_zones": 51,
-        "entry_models": 102,
-        "time_based": 85,
-        "price_action": 17
+        "market_structure": 76,
+        "liquidity": 76,
+        "kill_zones": 57,
+        "entry_models": 114,
+        "time_based": 95,
+        "price_action": 19
       },
       "trading_rules_extracted": [
         {
@@ -438,7 +452,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, price action, entry models. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 31.944444444444446
     },
@@ -449,9 +463,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 1408,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.573965",
-      "last_trained": "2026-01-28T10:25:45.129510",
+      "last_trained": "2026-01-29T13:14:24.040562",
       "training_dates": [
         "2026-01-27T18:57:58.573965",
         "2026-01-27T19:00:26.316265",
@@ -467,25 +481,27 @@
         "2026-01-28T10:16:09.223572",
         "2026-01-28T10:16:38.704604",
         "2026-01-28T10:20:12.373713",
-        "2026-01-28T10:25:45.129510"
+        "2026-01-28T10:25:45.129510",
+        "2026-01-29T12:55:58.340170",
+        "2026-01-29T13:14:24.040562"
       ],
       "concepts_detected": [
-        "premium_discount",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "premium_discount"
       ],
       "concept_frequencies": {
-        "market_structure": 30,
-        "liquidity": 75,
-        "premium_discount": 60,
-        "kill_zones": 75,
-        "entry_models": 60
+        "market_structure": 34,
+        "liquidity": 85,
+        "premium_discount": 68,
+        "kill_zones": 85,
+        "entry_models": 68
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: premium discount, entry models, market structure.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure.",
       "content_quality_score": 1.0,
       "concept_density": 14.204545454545455
     },
@@ -496,9 +512,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 669,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.575910",
-      "last_trained": "2026-01-28T10:25:45.133995",
+      "last_trained": "2026-01-29T13:14:24.043612",
       "training_dates": [
         "2026-01-27T18:57:58.575910",
         "2026-01-27T19:00:26.320273",
@@ -516,21 +532,23 @@
         "2026-01-28T10:16:23.939398",
         "2026-01-28T10:20:28.134413",
         "2026-01-28T10:25:29.283333",
-        "2026-01-28T10:25:45.133995"
+        "2026-01-28T10:25:45.133995",
+        "2026-01-29T12:55:58.343756",
+        "2026-01-29T13:14:24.043612"
       ],
       "concepts_detected": [
-        "institutional",
         "entry_models",
-        "market_structure"
+        "market_structure",
+        "institutional"
       ],
       "concept_frequencies": {
-        "market_structure": 34,
-        "entry_models": 17,
-        "institutional": 17
+        "market_structure": 38,
+        "entry_models": 19,
+        "institutional": 19
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: institutional, entry models, market structure.",
+      "summary": "Primary concepts covered: entry models, market structure, institutional.",
       "content_quality_score": 0.8979073243647235,
       "concept_density": 5.9790732436472345
     },
@@ -541,9 +559,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1282,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.579164",
-      "last_trained": "2026-01-28T10:25:45.139140",
+      "last_trained": "2026-01-29T13:14:24.048705",
       "training_dates": [
         "2026-01-27T18:57:58.579164",
         "2026-01-27T19:00:26.327871",
@@ -561,29 +579,31 @@
         "2026-01-28T10:16:23.904513",
         "2026-01-28T10:20:28.099189",
         "2026-01-28T10:25:29.247733",
-        "2026-01-28T10:25:45.139140"
+        "2026-01-28T10:25:45.139140",
+        "2026-01-29T12:55:58.348997",
+        "2026-01-29T13:14:24.048705"
       ],
       "concepts_detected": [
-        "time_based",
         "breaker",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 34,
-        "liquidity": 51,
-        "kill_zones": 34,
-        "entry_models": 136,
-        "breaker": 68,
-        "time_based": 68
+        "market_structure": 38,
+        "liquidity": 57,
+        "kill_zones": 38,
+        "entry_models": 152,
+        "breaker": 76,
+        "time_based": 76
       },
       "trading_rules_extracted": [],
       "key_points": [
         "Buy side liquidity is"
       ],
-      "summary": "Primary concepts covered: time based, breaker, entry models. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: breaker, kill zones, entry models. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 17.940717628705148
     },
@@ -594,9 +614,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1255,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.582496",
-      "last_trained": "2026-01-28T10:25:45.151809",
+      "last_trained": "2026-01-29T13:14:24.053930",
       "training_dates": [
         "2026-01-27T18:57:58.582496",
         "2026-01-27T19:00:26.335886",
@@ -614,7 +634,9 @@
         "2026-01-28T10:16:23.928434",
         "2026-01-28T10:20:28.123264",
         "2026-01-28T10:25:29.271931",
-        "2026-01-28T10:25:45.151809"
+        "2026-01-28T10:25:45.151809",
+        "2026-01-29T12:55:58.354386",
+        "2026-01-29T13:14:24.053930"
       ],
       "concepts_detected": [
         "entry_models",
@@ -622,9 +644,9 @@
         "liquidity"
       ],
       "concept_frequencies": {
-        "market_structure": 68,
-        "liquidity": 17,
-        "entry_models": 68
+        "market_structure": 76,
+        "liquidity": 19,
+        "entry_models": 76
       },
       "trading_rules_extracted": [],
       "key_points": [],
@@ -639,9 +661,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 5195,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.595548",
-      "last_trained": "2026-01-28T10:25:45.113257",
+      "last_trained": "2026-01-29T13:14:24.074336",
       "training_dates": [
         "2026-01-27T18:57:58.595548",
         "2026-01-27T19:00:26.363570",
@@ -657,29 +679,31 @@
         "2026-01-28T10:16:09.209390",
         "2026-01-28T10:16:38.689392",
         "2026-01-28T10:20:12.359421",
-        "2026-01-28T10:25:45.113257"
+        "2026-01-28T10:25:45.113257",
+        "2026-01-29T12:55:58.375706",
+        "2026-01-29T13:14:24.074336"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "institutional",
-        "fair_value_gap",
-        "entry_models",
-        "market_structure",
         "order_block",
         "price_action",
-        "liquidity"
+        "liquidity",
+        "entry_models",
+        "institutional",
+        "fair_value_gap",
+        "premium_discount",
+        "market_structure",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 210,
-        "order_block": 45,
-        "fair_value_gap": 90,
-        "liquidity": 195,
-        "premium_discount": 1185,
-        "entry_models": 75,
-        "institutional": 300,
-        "time_based": 30,
-        "price_action": 60
+        "market_structure": 238,
+        "order_block": 51,
+        "fair_value_gap": 102,
+        "liquidity": 221,
+        "premium_discount": 1343,
+        "entry_models": 85,
+        "institutional": 340,
+        "time_based": 34,
+        "price_action": 68
       },
       "trading_rules_extracted": [
         {
@@ -718,7 +742,7 @@
       "key_points": [
         "Where the market makers should aim, but ultimately this is the fair value gap that they wanted to get back up into and the reason why in the basis was"
       ],
-      "summary": "Primary concepts covered: time based, premium discount, institutional. Extracted 4 trading rules. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: order block, price action, liquidity. Extracted 4 trading rules. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 28.103946102021172
     },
@@ -729,9 +753,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1086,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.599450",
-      "last_trained": "2026-01-28T10:25:45.156054",
+      "last_trained": "2026-01-29T13:14:24.080458",
       "training_dates": [
         "2026-01-27T18:57:58.599450",
         "2026-01-27T19:00:26.373277",
@@ -749,21 +773,23 @@
         "2026-01-28T10:16:23.901236",
         "2026-01-28T10:20:28.095940",
         "2026-01-28T10:25:29.244480",
-        "2026-01-28T10:25:45.156054"
+        "2026-01-28T10:25:45.156054",
+        "2026-01-29T12:55:58.381987",
+        "2026-01-29T13:14:24.080458"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 51,
-        "liquidity": 51,
-        "kill_zones": 68,
-        "entry_models": 68,
-        "time_based": 51
+        "market_structure": 57,
+        "liquidity": 57,
+        "kill_zones": 76,
+        "entry_models": 76,
+        "time_based": 57
       },
       "trading_rules_extracted": [
         {
@@ -776,7 +802,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 15.65377532228361
     },
@@ -787,9 +813,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1034,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.602276",
-      "last_trained": "2026-01-28T10:25:45.158778",
+      "last_trained": "2026-01-29T13:14:24.084768",
       "training_dates": [
         "2026-01-27T18:57:58.602276",
         "2026-01-27T19:00:26.379108",
@@ -807,23 +833,25 @@
         "2026-01-28T10:16:23.908713",
         "2026-01-28T10:20:28.103421",
         "2026-01-28T10:25:29.251954",
-        "2026-01-28T10:25:45.158778"
+        "2026-01-28T10:25:45.158778",
+        "2026-01-29T12:55:58.386406",
+        "2026-01-29T13:14:24.084768"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
+        "price_action",
         "entry_models",
         "market_structure",
-        "price_action",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 85,
-        "liquidity": 34,
-        "kill_zones": 51,
-        "entry_models": 34,
-        "time_based": 136,
-        "price_action": 119
+        "market_structure": 95,
+        "liquidity": 38,
+        "kill_zones": 57,
+        "entry_models": 38,
+        "time_based": 152,
+        "price_action": 133
       },
       "trading_rules_extracted": [
         {
@@ -844,7 +872,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure. Extracted 2 trading rules.",
+      "summary": "Primary concepts covered: kill zones, price action, entry models. Extracted 2 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 26.11218568665377
     },
@@ -855,9 +883,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 4109,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.612753",
-      "last_trained": "2026-01-28T10:25:45.047801",
+      "last_trained": "2026-01-29T13:14:24.100776",
       "training_dates": [
         "2026-01-27T18:57:58.612753",
         "2026-01-27T19:00:26.400808",
@@ -873,29 +901,31 @@
         "2026-01-28T10:16:09.148071",
         "2026-01-28T10:16:38.628970",
         "2026-01-28T10:20:12.299719",
-        "2026-01-28T10:25:45.047801"
+        "2026-01-28T10:25:45.047801",
+        "2026-01-29T12:55:58.402689",
+        "2026-01-29T13:14:24.100776"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "institutional",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "institutional",
+        "liquidity",
+        "premium_discount",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 300,
-        "liquidity": 90,
-        "premium_discount": 30,
-        "kill_zones": 90,
-        "entry_models": 60,
-        "institutional": 165,
-        "time_based": 120
+        "market_structure": 340,
+        "liquidity": 102,
+        "premium_discount": 34,
+        "kill_zones": 102,
+        "entry_models": 68,
+        "institutional": 187,
+        "time_based": 136
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, premium discount, institutional.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure.",
       "content_quality_score": 1.0,
       "concept_density": 13.871988318325627
     },
@@ -906,9 +936,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 624,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.615242",
-      "last_trained": "2026-01-28T10:25:45.194917",
+      "last_trained": "2026-01-29T13:14:24.104503",
       "training_dates": [
         "2026-01-27T18:57:58.615242",
         "2026-01-27T19:00:26.405821",
@@ -926,25 +956,27 @@
         "2026-01-28T10:16:23.936428",
         "2026-01-28T10:20:28.131409",
         "2026-01-28T10:25:29.279975",
-        "2026-01-28T10:25:45.194917"
+        "2026-01-28T10:25:45.194917",
+        "2026-01-29T12:55:58.406501",
+        "2026-01-29T13:14:24.104503"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 17,
-        "liquidity": 34,
-        "kill_zones": 17,
-        "entry_models": 68,
-        "time_based": 34
+        "market_structure": 19,
+        "liquidity": 38,
+        "kill_zones": 19,
+        "entry_models": 76,
+        "time_based": 38
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure.",
       "content_quality_score": 1.0,
       "concept_density": 16.025641025641026
     },
@@ -955,9 +987,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 3578,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.624667",
-      "last_trained": "2026-01-28T10:25:45.099243",
+      "last_trained": "2026-01-29T13:14:24.118362",
       "training_dates": [
         "2026-01-27T18:57:58.624667",
         "2026-01-27T19:00:26.424298",
@@ -973,23 +1005,25 @@
         "2026-01-28T10:16:09.195838",
         "2026-01-28T10:16:38.676043",
         "2026-01-28T10:20:12.346020",
-        "2026-01-28T10:25:45.099243"
+        "2026-01-28T10:25:45.099243",
+        "2026-01-29T12:55:58.420554",
+        "2026-01-29T13:14:24.118362"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "entry_models",
-        "market_structure",
         "order_block",
-        "price_action"
+        "entry_models",
+        "price_action",
+        "market_structure",
+        "premium_discount",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 105,
-        "order_block": 15,
-        "premium_discount": 1110,
-        "entry_models": 105,
-        "time_based": 75,
-        "price_action": 15
+        "market_structure": 119,
+        "order_block": 17,
+        "premium_discount": 1258,
+        "entry_models": 119,
+        "time_based": 85,
+        "price_action": 17
       },
       "trading_rules_extracted": [
         {
@@ -1043,7 +1077,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, premium discount, entry models. Extracted 6 trading rules.",
+      "summary": "Primary concepts covered: order block, entry models, price action. Extracted 6 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 26.551145891559532
     },
@@ -1054,9 +1088,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1891,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.630171",
-      "last_trained": "2026-01-28T10:25:45.143901",
+      "last_trained": "2026-01-29T13:14:24.126853",
       "training_dates": [
         "2026-01-27T18:57:58.630171",
         "2026-01-27T19:00:26.436431",
@@ -1074,21 +1108,23 @@
         "2026-01-28T10:16:23.933164",
         "2026-01-28T10:20:28.128054",
         "2026-01-28T10:25:29.276650",
-        "2026-01-28T10:25:45.143901"
+        "2026-01-28T10:25:45.143901",
+        "2026-01-29T12:55:58.429571",
+        "2026-01-29T13:14:24.126853"
       ],
       "concepts_detected": [
-        "time_based",
-        "institutional",
         "entry_models",
         "market_structure",
-        "liquidity"
+        "institutional",
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 17,
-        "liquidity": 68,
-        "entry_models": 68,
-        "institutional": 51,
-        "time_based": 170
+        "market_structure": 19,
+        "liquidity": 76,
+        "entry_models": 76,
+        "institutional": 57,
+        "time_based": 190
       },
       "trading_rules_extracted": [
         {
@@ -1101,7 +1137,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, institutional, entry models. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: entry models, market structure, institutional. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 11.634056054997355
     },
@@ -1112,9 +1148,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 860,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.632650",
-      "last_trained": "2026-01-28T10:25:45.132077",
+      "last_trained": "2026-01-29T13:14:24.130756",
       "training_dates": [
         "2026-01-27T18:57:58.632650",
         "2026-01-27T19:00:26.443005",
@@ -1132,17 +1168,19 @@
         "2026-01-28T10:16:23.911011",
         "2026-01-28T10:20:28.105760",
         "2026-01-28T10:25:29.254256",
-        "2026-01-28T10:25:45.132077"
+        "2026-01-28T10:25:45.132077",
+        "2026-01-29T12:55:58.433560",
+        "2026-01-29T13:14:24.130756"
       ],
       "concepts_detected": [
-        "time_based",
         "kill_zones",
-        "entry_models"
+        "entry_models",
+        "time_based"
       ],
       "concept_frequencies": {
-        "kill_zones": 85,
-        "entry_models": 34,
-        "time_based": 51
+        "kill_zones": 95,
+        "entry_models": 38,
+        "time_based": 57
       },
       "trading_rules_extracted": [
         {
@@ -1155,7 +1193,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, kill zones, entry models. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, entry models, time based. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 11.627906976744185
     },
@@ -1166,9 +1204,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 595,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.634254",
-      "last_trained": "2026-01-28T10:25:45.193271",
+      "last_trained": "2026-01-29T13:14:24.145265",
       "training_dates": [
         "2026-01-27T18:57:58.634254",
         "2026-01-27T19:00:26.447245",
@@ -1186,25 +1224,27 @@
         "2026-01-28T10:16:23.918032",
         "2026-01-28T10:20:28.112832",
         "2026-01-28T10:25:29.261285",
-        "2026-01-28T10:25:45.193271"
+        "2026-01-28T10:25:45.193271",
+        "2026-01-29T12:55:58.448525",
+        "2026-01-29T13:14:24.145265"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 34,
-        "liquidity": 34,
-        "kill_zones": 17,
-        "entry_models": 34,
-        "time_based": 34
+        "market_structure": 38,
+        "liquidity": 38,
+        "kill_zones": 19,
+        "entry_models": 38,
+        "time_based": 38
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure.",
       "content_quality_score": 1.0,
       "concept_density": 15.126050420168069
     },
@@ -1215,9 +1255,9 @@
       "playlist_name": "2016 ICT Private Mentorship Core Content Month 01",
       "duration": 0,
       "word_count": 9620,
-      "training_count": 15,
+      "training_count": 17,
       "first_trained": "2026-01-27T18:57:58.657759",
-      "last_trained": "2026-01-28T10:25:45.087221",
+      "last_trained": "2026-01-29T13:14:24.182134",
       "training_dates": [
         "2026-01-27T18:57:58.657759",
         "2026-01-27T19:00:26.504955",
@@ -1233,27 +1273,29 @@
         "2026-01-28T10:16:09.184389",
         "2026-01-28T10:16:38.664891",
         "2026-01-28T10:20:12.335325",
-        "2026-01-28T10:25:45.087221"
+        "2026-01-28T10:25:45.087221",
+        "2026-01-29T12:55:58.486385",
+        "2026-01-29T13:14:24.182134"
       ],
       "concepts_detected": [
-        "time_based",
-        "premium_discount",
-        "institutional",
-        "entry_models",
-        "market_structure",
         "order_block",
+        "entry_models",
         "price_action",
-        "liquidity"
+        "market_structure",
+        "institutional",
+        "liquidity",
+        "premium_discount",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 420,
-        "order_block": 45,
-        "liquidity": 210,
-        "premium_discount": 2235,
-        "entry_models": 195,
-        "institutional": 240,
-        "time_based": 225,
-        "price_action": 15
+        "market_structure": 476,
+        "order_block": 51,
+        "liquidity": 238,
+        "premium_discount": 2533,
+        "entry_models": 221,
+        "institutional": 272,
+        "time_based": 255,
+        "price_action": 17
       },
       "trading_rules_extracted": [
         {
@@ -1293,7 +1335,7 @@
       "key_points": [
         "The engineer liquidity"
       ],
-      "summary": "Primary concepts covered: time based, premium discount, institutional. Extracted 4 trading rules. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: order block, entry models, price action. Extracted 4 trading rules. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 24.844074844074846
     },
@@ -1304,9 +1346,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 668,
-      "training_count": 17,
+      "training_count": 19,
       "first_trained": "2026-01-27T18:57:58.661570",
-      "last_trained": "2026-01-28T10:25:45.189512",
+      "last_trained": "2026-01-29T13:14:24.190430",
       "training_dates": [
         "2026-01-27T18:57:58.661570",
         "2026-01-27T19:00:26.514027",
@@ -1324,21 +1366,23 @@
         "2026-01-28T10:16:23.916451",
         "2026-01-28T10:20:28.111281",
         "2026-01-28T10:25:29.259709",
-        "2026-01-28T10:25:45.189512"
+        "2026-01-28T10:25:45.189512",
+        "2026-01-29T12:55:58.494984",
+        "2026-01-29T13:14:24.190430"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
         "entry_models",
         "market_structure",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 51,
-        "liquidity": 85,
-        "kill_zones": 85,
-        "entry_models": 68,
-        "time_based": 34
+        "market_structure": 57,
+        "liquidity": 95,
+        "kill_zones": 95,
+        "entry_models": 76,
+        "time_based": 38
       },
       "trading_rules_extracted": [
         {
@@ -1359,7 +1403,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure. Extracted 2 trading rules.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure. Extracted 2 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 28.44311377245509
     },
@@ -1370,12 +1414,10 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 712,
-      "training_count": 22,
+      "training_count": 24,
       "first_trained": "2026-01-27T18:57:58.663446",
-      "last_trained": "2026-01-28T15:58:14.556142",
+      "last_trained": "2026-01-29T13:14:24.193460",
       "training_dates": [
-        "2026-01-27T19:01:37.533522",
-        "2026-01-27T19:04:29.821583",
         "2026-01-27T19:09:59.489845",
         "2026-01-28T07:47:34.607972",
         "2026-01-28T08:52:37.075717",
@@ -1393,23 +1435,25 @@
         "2026-01-28T14:57:36.661985",
         "2026-01-28T15:01:12.455625",
         "2026-01-28T15:02:55.953027",
-        "2026-01-28T15:58:14.556142"
+        "2026-01-28T15:58:14.556142",
+        "2026-01-29T12:55:58.498022",
+        "2026-01-29T13:14:24.193460"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
         "entry_models",
-        "market_structure",
-        "kill_zones"
+        "time_based",
+        "market_structure"
       ],
       "concept_frequencies": {
-        "market_structure": 110,
-        "kill_zones": 44,
-        "entry_models": 88,
-        "time_based": 66
+        "market_structure": 120,
+        "kill_zones": 48,
+        "entry_models": 96,
+        "time_based": 72
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, entry models, market structure.",
+      "summary": "Primary concepts covered: kill zones, entry models, time based.",
       "content_quality_score": 1.0,
       "concept_density": 19.662921348314608
     },
@@ -1420,9 +1464,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 566,
-      "training_count": 8,
+      "training_count": 10,
       "first_trained": "2026-01-28T10:07:34.215058",
-      "last_trained": "2026-01-28T10:25:45.196422",
+      "last_trained": "2026-01-29T13:14:24.187595",
       "training_dates": [
         "2026-01-28T10:07:34.215058",
         "2026-01-28T10:10:42.798670",
@@ -1431,29 +1475,31 @@
         "2026-01-28T10:16:23.906125",
         "2026-01-28T10:20:28.100801",
         "2026-01-28T10:25:29.249347",
-        "2026-01-28T10:25:45.196422"
+        "2026-01-28T10:25:45.196422",
+        "2026-01-29T12:55:58.492115",
+        "2026-01-29T13:14:24.187595"
       ],
       "concepts_detected": [
-        "time_based",
+        "kill_zones",
+        "order_block",
         "entry_models",
         "market_structure",
-        "order_block",
-        "kill_zones",
-        "liquidity"
+        "liquidity",
+        "time_based"
       ],
       "concept_frequencies": {
-        "market_structure": 16,
-        "order_block": 8,
-        "liquidity": 40,
-        "kill_zones": 16,
-        "entry_models": 16,
-        "time_based": 8
+        "market_structure": 20,
+        "order_block": 10,
+        "liquidity": 50,
+        "kill_zones": 20,
+        "entry_models": 20,
+        "time_based": 10
       },
       "trading_rules_extracted": [],
       "key_points": [
         "A set up and here's the high we trade down to this low and start retracing inside the new york session trading up into the bearish order block which i"
       ],
-      "summary": "Primary concepts covered: time based, entry models, market structure. Identified 1 key learning points.",
+      "summary": "Primary concepts covered: kill zones, order block, entry models. Identified 1 key learning points.",
       "content_quality_score": 1.0,
       "concept_density": 22.96819787985866
     },
@@ -1464,9 +1510,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1410,
-      "training_count": 8,
+      "training_count": 10,
       "first_trained": "2026-01-28T10:07:34.228583",
-      "last_trained": "2026-01-28T10:25:45.162430",
+      "last_trained": "2026-01-29T13:14:24.142526",
       "training_dates": [
         "2026-01-28T10:07:34.228583",
         "2026-01-28T10:10:42.807221",
@@ -1475,21 +1521,23 @@
         "2026-01-28T10:16:23.914589",
         "2026-01-28T10:20:28.109371",
         "2026-01-28T10:25:29.257807",
-        "2026-01-28T10:25:45.162430"
+        "2026-01-28T10:25:45.162430",
+        "2026-01-29T12:55:58.445716",
+        "2026-01-29T13:14:24.142526"
       ],
       "concepts_detected": [
+        "kill_zones",
+        "order_block",
         "entry_models",
         "market_structure",
-        "order_block",
-        "kill_zones",
         "liquidity"
       ],
       "concept_frequencies": {
-        "market_structure": 56,
-        "order_block": 8,
-        "liquidity": 24,
-        "kill_zones": 32,
-        "entry_models": 40
+        "market_structure": 70,
+        "order_block": 10,
+        "liquidity": 30,
+        "kill_zones": 40,
+        "entry_models": 50
       },
       "trading_rules_extracted": [
         {
@@ -1502,7 +1550,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: entry models, market structure, order block. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, order block, entry models. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 14.184397163120568
     },
@@ -1513,9 +1561,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 234,
-      "training_count": 8,
+      "training_count": 10,
       "first_trained": "2026-01-28T10:07:34.236963",
-      "last_trained": "2026-01-28T10:25:45.190317",
+      "last_trained": "2026-01-29T13:14:23.959140",
       "training_dates": [
         "2026-01-28T10:07:34.236963",
         "2026-01-28T10:10:42.812434",
@@ -1524,23 +1572,25 @@
         "2026-01-28T10:16:23.919781",
         "2026-01-28T10:20:28.114582",
         "2026-01-28T10:25:29.263026",
-        "2026-01-28T10:25:45.190317"
+        "2026-01-28T10:25:45.190317",
+        "2026-01-29T12:55:58.255542",
+        "2026-01-29T13:14:23.959140"
       ],
       "concepts_detected": [
-        "time_based",
         "kill_zones",
         "entry_models",
+        "time_based",
         "market_structure"
       ],
       "concept_frequencies": {
-        "market_structure": 16,
-        "kill_zones": 16,
-        "entry_models": 24,
-        "time_based": 16
+        "market_structure": 20,
+        "kill_zones": 20,
+        "entry_models": 30,
+        "time_based": 20
       },
       "trading_rules_extracted": [],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, kill zones, entry models.",
+      "summary": "Primary concepts covered: kill zones, entry models, time based.",
       "content_quality_score": 1.0,
       "concept_density": 38.46153846153846
     },
@@ -1551,9 +1601,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 1459,
-      "training_count": 8,
+      "training_count": 10,
       "first_trained": "2026-01-28T10:07:34.245566",
-      "last_trained": "2026-01-28T10:25:45.148141",
+      "last_trained": "2026-01-29T13:14:24.136609",
       "training_dates": [
         "2026-01-28T10:07:34.245566",
         "2026-01-28T10:10:42.817754",
@@ -1562,19 +1612,21 @@
         "2026-01-28T10:16:23.925120",
         "2026-01-28T10:20:28.119935",
         "2026-01-28T10:25:29.268587",
-        "2026-01-28T10:25:45.148141"
+        "2026-01-28T10:25:45.148141",
+        "2026-01-29T12:55:58.439419",
+        "2026-01-29T13:14:24.136609"
       ],
       "concepts_detected": [
-        "order_block",
         "kill_zones",
         "entry_models",
-        "market_structure"
+        "market_structure",
+        "order_block"
       ],
       "concept_frequencies": {
-        "market_structure": 24,
-        "order_block": 8,
-        "kill_zones": 16,
-        "entry_models": 16
+        "market_structure": 30,
+        "order_block": 10,
+        "kill_zones": 20,
+        "entry_models": 20
       },
       "trading_rules_extracted": [
         {
@@ -1587,7 +1639,7 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: order block, kill zones, entry models. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, entry models, market structure. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 5.483207676490747
     },
@@ -1598,9 +1650,9 @@
       "playlist_name": "ICT OTE Pattern Recognition Series",
       "duration": 0,
       "word_count": 536,
-      "training_count": 8,
+      "training_count": 10,
       "first_trained": "2026-01-28T10:07:34.261165",
-      "last_trained": "2026-01-28T10:25:45.191701",
+      "last_trained": "2026-01-29T13:14:24.021432",
       "training_dates": [
         "2026-01-28T10:07:34.261165",
         "2026-01-28T10:10:42.827445",
@@ -1609,19 +1661,21 @@
         "2026-01-28T10:16:23.934814",
         "2026-01-28T10:20:28.129787",
         "2026-01-28T10:25:29.278340",
-        "2026-01-28T10:25:45.191701"
+        "2026-01-28T10:25:45.191701",
+        "2026-01-29T12:55:58.320834",
+        "2026-01-29T13:14:24.021432"
       ],
       "concepts_detected": [
-        "time_based",
         "kill_zones",
         "entry_models",
+        "time_based",
         "liquidity"
       ],
       "concept_frequencies": {
-        "liquidity": 16,
-        "kill_zones": 8,
-        "entry_models": 16,
-        "time_based": 40
+        "liquidity": 20,
+        "kill_zones": 10,
+        "entry_models": 20,
+        "time_based": 50
       },
       "trading_rules_extracted": [
         {
@@ -1634,9 +1688,56 @@
         }
       ],
       "key_points": [],
-      "summary": "Primary concepts covered: time based, kill zones, entry models. Extracted 1 trading rules.",
+      "summary": "Primary concepts covered: kill zones, entry models, time based. Extracted 1 trading rules.",
       "content_quality_score": 1.0,
       "concept_density": 18.656716417910445
+    },
+    "FgacYSN9QEo": {
+      "video_id": "FgacYSN9QEo",
+      "title": "ICT Mentorship Core Content - Month 04 - ICT Fair Value Gaps FVG",
+      "playlist_id": "",
+      "playlist_name": "",
+      "duration": 0,
+      "word_count": 2545,
+      "training_count": 5,
+      "first_trained": "2026-01-29T12:54:47.249813",
+      "last_trained": "2026-01-29T17:35:23.687882",
+      "training_dates": [
+        "2026-01-29T12:54:47.249813",
+        "2026-01-29T12:55:58.330845",
+        "2026-01-29T13:14:24.031205",
+        "2026-01-29T16:26:58.540994",
+        "2026-01-29T17:35:23.687882"
+      ],
+      "concepts_detected": [
+        "price_action",
+        "fair_value_gap",
+        "market_structure",
+        "time_based",
+        "liquidity"
+      ],
+      "concept_frequencies": {
+        "market_structure": 20,
+        "fair_value_gap": 100,
+        "liquidity": 145,
+        "time_based": 45,
+        "price_action": 20
+      },
+      "trading_rules_extracted": [
+        {
+          "text": "you take that same range okay and  -> look at our down candle that created that fair value gap on the daily chart that",
+          "type": "conditional",
+          "concepts": [
+            "fair_value_gap",
+            "time_based"
+          ],
+          "source_video": "FgacYSN9QEo"
+        }
+      ],
+      "key_points": [],
+      "summary": "Primary concepts covered: price action, fair value gap, market structure. Extracted 1 trading rules.",
+      "content_quality_score": 1.0,
+      "concept_density": 25.93320235756385
     }
   },
   "playlists": {
@@ -1646,70 +1747,70 @@
       "tier": 1,
       "total_videos": 20,
       "videos_trained": 20,
-      "total_training_runs": 22,
+      "total_training_runs": 24,
       "first_trained": "2026-01-27T18:57:58.663646",
-      "last_trained": "2026-01-28T15:58:14.557537",
+      "last_trained": "2026-01-29T13:14:24.193757",
       "top_concepts": [
         [
           "entry_models",
-          1407
+          1585
         ],
         [
           "market_structure",
-          1293
+          1457
         ],
         [
           "time_based",
-          997
+          1121
         ],
         [
           "kill_zones",
-          744
+          842
         ],
         [
           "liquidity",
-          607
+          689
         ],
         [
           "price_action",
-          153
+          171
         ],
         [
           "institutional",
-          119
+          133
         ],
         [
           "breaker",
-          68
+          76
         ],
         [
           "order_block",
-          41
+          49
         ]
       ],
       "total_rules_extracted": 14,
       "playlist_summary": "Playlist covers 20 videos focusing on: entry models, market structure, time based. Extracted 14 trading rules total.",
       "video_ids": [
-        "GtTKPt-K9u0",
-        "9F-anykT7J0",
-        "E9F_aT9f038",
-        "uqptoSAGS30",
-        "-k1eBYoajIo",
-        "Vx25X2sbxPA",
+        "t6y637OyiDY",
+        "6D3sKabkozk",
+        "ZbkEvNpm-_k",
+        "RP6rVMJP4hA",
+        "j5x90p55O8A",
         "TmbLhchNrAM",
         "v6ATva5DF0I",
-        "L--1zBIEanY",
-        "6D3sKabkozk",
-        "t6y637OyiDY",
-        "ZbkEvNpm-_k",
-        "j5x90p55O8A",
         "cYzS_kFxv7M",
-        "FNwqw7IiByo",
-        "_x36n9Jc2JQ",
-        "YMt87VQRpNM",
+        "-k1eBYoajIo",
+        "GtTKPt-K9u0",
+        "uqptoSAGS30",
+        "9F-anykT7J0",
         "ifFDif82Bmg",
-        "RP6rVMJP4hA",
-        "Q0SFXEQqI08"
+        "E9F_aT9f038",
+        "_x36n9Jc2JQ",
+        "FNwqw7IiByo",
+        "L--1zBIEanY",
+        "Q0SFXEQqI08",
+        "YMt87VQRpNM",
+        "Vx25X2sbxPA"
       ]
     },
     "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk": {
@@ -1718,84 +1819,84 @@
       "tier": 1,
       "total_videos": 8,
       "videos_trained": 8,
-      "total_training_runs": 15,
+      "total_training_runs": 17,
       "first_trained": "2026-01-27T18:57:58.663679",
-      "last_trained": "2026-01-28T10:25:45.199924",
+      "last_trained": "2026-01-29T13:14:24.193798",
       "top_concepts": [
         [
           "premium_discount",
-          4800
+          5440
         ],
         [
           "liquidity",
-          1845
+          2091
         ],
         [
           "market_structure",
-          1560
+          1768
         ],
         [
           "institutional",
-          1170
+          1326
         ],
         [
           "time_based",
-          870
+          986
         ],
         [
           "entry_models",
-          510
+          578
         ],
         [
           "order_block",
-          210
+          238
         ],
         [
           "kill_zones",
-          180
+          204
         ],
         [
           "price_action",
-          135
+          153
         ],
         [
           "fair_value_gap",
-          90
+          102
         ]
       ],
       "total_rules_extracted": 20,
       "playlist_summary": "Playlist covers 8 videos focusing on: premium discount, liquidity, market structure. Extracted 20 trading rules total.",
       "video_ids": [
+        "qC0LogyIk2I",
         "SiVmoeyOWZE",
-        "XwYYWBttWro",
+        "0LhteuLVuDU",
         "YuefjnUKQdM",
         "22XkhpJR5eA",
+        "B7_cjybYQ0g",
         "K4LtfujVpJs",
-        "qC0LogyIk2I",
-        "0LhteuLVuDU",
-        "B7_cjybYQ0g"
+        "XwYYWBttWro"
       ]
     }
   },
   "global_stats": {
-    "total_videos_trained": 28,
-    "total_training_runs": 420,
-    "total_words_processed": 61460,
-    "total_rules_extracted": 34,
-    "last_training_date": "2026-01-28T15:58:14.556142",
+    "total_videos_trained": 29,
+    "total_training_runs": 481,
+    "total_words_processed": 64005,
+    "total_rules_extracted": 35,
+    "last_training_date": "2026-01-29T17:35:23.687882",
     "concept_global_frequencies": {
-      "kill_zones": 924,
-      "entry_models": 1917,
-      "time_based": 1867,
-      "market_structure": 2853,
-      "order_block": 251,
-      "liquidity": 2452,
-      "premium_discount": 4800,
-      "institutional": 1289,
-      "price_action": 288,
-      "breaker": 68,
-      "fair_value_gap": 90
+      "kill_zones": 1046,
+      "entry_models": 2163,
+      "time_based": 2152,
+      "market_structure": 3245,
+      "order_block": 287,
+      "liquidity": 2925,
+      "premium_discount": 5440,
+      "institutional": 1459,
+      "price_action": 344,
+      "breaker": 76,
+      "fair_value_gap": 202
     }
   },
-  "last_saved": "2026-01-28T15:58:14.558578"
+  "last_saved": "2026-01-29T17:35:23.690988"
 }

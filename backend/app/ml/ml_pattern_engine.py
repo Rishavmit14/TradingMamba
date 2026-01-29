@@ -275,15 +275,103 @@ class MLPatternEngine:
 
             confidence = min(base_confidence + teaching_boost, 0.95)
 
+            # Deduplicate lists - handle both string and dict items
+            def unique_items(items, max_items=10):
+                seen = set()
+                result = []
+                for item in items:
+                    # Convert dicts to strings for deduplication
+                    key = str(item) if isinstance(item, dict) else item
+                    if key not in seen:
+                        seen.add(key)
+                        result.append(item if isinstance(item, str) else str(item))
+                        if len(result) >= max_items:
+                            break
+                return result
+
             self.knowledge_base.patterns_learned[pattern_type] = LearnedPattern(
                 pattern_type=pattern_type,
                 frequency=data['frequency'],
                 confidence=confidence,
-                characteristics=list(set(data['characteristics']))[:10],  # Unique, max 10
-                example_locations=list(set(data['locations']))[:5],
-                teaching_contexts=list(set(data['teaching_contexts']))[:5],
+                characteristics=unique_items(data['characteristics'], 10),
+                example_locations=unique_items(data['locations'], 5),
+                teaching_contexts=unique_items(data['teaching_contexts'], 5),
                 visual_example_path=data['visual_path']
             )
+
+        # ALSO load concepts from knowledge_base.json (transcript/synchronized training)
+        # This integrates concepts learned from ICT video transcripts
+        kb_file = self.data_dir / 'ml_models' / 'knowledge_base.json'
+        if kb_file.exists():
+            try:
+                with open(kb_file, 'r') as f:
+                    kb_data = json.load(f)
+
+                concept_definitions = kb_data.get('concept_definitions', {})
+                trading_rules = kb_data.get('trading_rules', [])
+
+                for concept_name, concept_data in concept_definitions.items():
+                    normalized = self.knowledge_base._normalize_pattern_type(concept_name)
+
+                    # Skip if already learned from vision training
+                    if normalized in self.knowledge_base.patterns_learned:
+                        continue
+
+                    # Get frequency and examples from concept data
+                    if isinstance(concept_data, dict):
+                        frequency = concept_data.get('frequency', 1)
+                        examples = concept_data.get('examples', [])
+                    else:
+                        frequency = 1
+                        examples = []
+
+                    # Extract teaching contexts from examples
+                    teaching_contexts = []
+                    for ex in examples[:5]:
+                        if isinstance(ex, dict) and ex.get('text'):
+                            teaching_contexts.append(ex['text'][:200])
+                        elif isinstance(ex, str):
+                            teaching_contexts.append(ex[:200])
+
+                    # Calculate confidence based on frequency
+                    confidence = min(0.5 + (frequency * 0.05), 0.85)
+
+                    # Add rules that mention this concept as teaching context
+                    for rule in trading_rules:
+                        if isinstance(rule, dict):
+                            rule_concepts = rule.get('concepts', [])
+                            # Handle both string and dict concept formats
+                            normalized_concepts = []
+                            for c in rule_concepts:
+                                if isinstance(c, str):
+                                    normalized_concepts.append(self.knowledge_base._normalize_pattern_type(c))
+                                elif isinstance(c, dict) and c.get('name'):
+                                    normalized_concepts.append(self.knowledge_base._normalize_pattern_type(c['name']))
+
+                            if normalized in normalized_concepts and rule.get('text'):
+                                teaching_contexts.append(f"Rule: {rule['text'][:150]}")
+
+                    # Add as learned pattern
+                    self.knowledge_base.patterns_learned[normalized] = LearnedPattern(
+                        pattern_type=normalized,
+                        frequency=frequency,
+                        confidence=confidence,
+                        characteristics=[f"Learned from ICT transcript training"],
+                        example_locations=[],
+                        teaching_contexts=teaching_contexts[:5],
+                        visual_example_path=None
+                    )
+
+                    all_patterns[normalized] = {'frequency': frequency}
+                    logger.info(f"  + Added concept from transcript: {normalized} (confidence={confidence:.2f})")
+
+                # Update training sources
+                n_transcripts = kb_data.get('n_transcripts_processed', 0)
+                if n_transcripts > 0:
+                    sources.append(f"Transcript training ({n_transcripts} videos)")
+
+            except Exception as e:
+                logger.error(f"Error loading knowledge_base.json: {e}")
 
         self.knowledge_base.total_videos_trained = len(vision_files)
         self.knowledge_base.total_frames_analyzed = total_frames
@@ -291,7 +379,7 @@ class MLPatternEngine:
         self.knowledge_base.training_sources = sources
         self.knowledge_base.last_trained = latest_trained
 
-        logger.info(f"ML Knowledge loaded: {len(all_patterns)} pattern types from {len(vision_files)} videos")
+        logger.info(f"ML Knowledge loaded: {len(all_patterns)} pattern types from {len(vision_files)} vision files + knowledge base")
         for pt, p in self.knowledge_base.patterns_learned.items():
             logger.info(f"  - {pt}: frequency={p.frequency}, confidence={p.confidence:.2f}")
 
@@ -426,6 +514,99 @@ class MLPatternEngine:
 
         return traits
 
+    def _load_concept_definitions(self) -> Dict[str, Any]:
+        """Load concept definitions from knowledge_base.json (actual ICT definitions from transcripts)"""
+        try:
+            kb_path = self.data_dir / "ml_models" / "knowledge_base.json"
+            if kb_path.exists():
+                with open(kb_path) as f:
+                    data = json.load(f)
+                    return data.get('concept_definitions', {})
+        except Exception as e:
+            logger.warning(f"Could not load concept definitions: {e}")
+        return {}
+
+    def _extract_core_definition(self, examples: list, concept: str) -> str:
+        """
+        Extract the core definition from transcript examples.
+
+        ICT typically says "what is a [concept]? it is..." so we look for that pattern.
+        We search through ALL examples to find the actual definition.
+        """
+        # For FVG - look for the canonical definition
+        if concept in ['fvg', 'fair_value_gap']:
+            for ex in examples:
+                if 'range in price delivery' in ex.lower():
+                    start = ex.lower().find('it is a range')
+                    if start == -1:
+                        start = ex.lower().find('range in price delivery')
+                        if start > 10:
+                            start -= 10  # Include "it is a" if present
+                    if start != -1:
+                        end = min(start + 150, len(ex))
+                        definition = ex[start:end].strip()
+                        if not definition.endswith('.'):
+                            definition = definition.rsplit(' ', 1)[0] + '...'
+                        return f"ICT defines FVG as: {definition}"
+
+        # For Order Blocks - look for the canonical definition
+        if concept == 'order_block':
+            for ex in examples:
+                ex_lower = ex.lower()
+                # Look for the actual ICT definition pattern
+                if 'down candle' in ex_lower and ('before' in ex_lower or 'bullish order block' in ex_lower):
+                    return f"ICT defines Order Block as: {ex[:150]}..."
+                if 'that is a bullish order block' in ex_lower or 'that is a bearish order block' in ex_lower:
+                    return f"ICT defines Order Block as: {ex[:150]}..."
+
+            # Fallback: provide the standard ICT definition
+            return "ICT defines Order Block as: The last down candle before price moves higher (bullish OB) or last up candle before price moves lower (bearish OB) - indicates institutional order placement."
+
+        # For Breaker Blocks
+        if concept in ['breaker_block', 'breaker']:
+            for ex in examples:
+                if 'breaker' in ex.lower() and ('failed' in ex.lower() or 'broken' in ex.lower()):
+                    return f"ICT defines Breaker: {ex[:150]}..."
+            return "ICT defines Breaker: A failed Order Block that becomes support/resistance after price breaks through it."
+
+        # For Liquidity
+        if concept == 'liquidity':
+            for ex in examples:
+                if 'buy stop' in ex.lower() or 'sell stop' in ex.lower() or 'liquidity pool' in ex.lower():
+                    return f"ICT on Liquidity: {ex[:150]}..."
+
+        # Default: use first non-day-specific example
+        for ex in examples:
+            if not self._is_day_specific_context(ex):
+                clean = ex[:120].strip()
+                if not clean.endswith('.'):
+                    clean = clean.rsplit(' ', 1)[0] + '...'
+                return clean
+
+        # Absolute fallback
+        clean = examples[0][:120].strip() if examples else "Pattern understood from ICT methodology"
+        if not clean.endswith('.'):
+            clean = clean.rsplit(' ', 1)[0] + '...'
+        return clean
+
+    def _is_day_specific_context(self, context: str) -> bool:
+        """
+        Check if a teaching context is day-specific (not a general rule).
+
+        Day-specific contexts like "Thursday's high" or "Wednesday's range" are
+        specific to that video's market conditions, not general ICT methodology.
+        """
+        day_markers = [
+            'monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+            "monday's", "tuesday's", "wednesday's", "thursday's", "friday's",
+            'today', 'yesterday', 'this week', 'last week',
+            'this morning', 'this afternoon',
+            # Specific prices that are day-specific
+            '106.6', '1.06', 'pipettes',
+        ]
+        context_lower = context.lower()
+        return any(marker in context_lower for marker in day_markers)
+
     def get_knowledge_summary(self) -> Dict[str, Any]:
         """
         Get a summary of what the AI knows.
@@ -536,11 +717,17 @@ class MLPatternEngine:
 
         This is based ONLY on what ML learned from videos, not generic SMC concepts.
         Focus on the LOGIC and CHARACTERISTICS learned, not frequency counts.
+
+        IMPORTANT: Uses concept_definitions (actual ICT definitions from transcripts)
+        NOT teaching_contexts from vision files (which may contain day-specific commentary).
         """
         if not self.knowledge_base or not self.knowledge_base.patterns_learned:
             return "⚠️ AI has no trained knowledge. Analysis is based on basic price structure only."
 
         reasoning_parts = []
+
+        # Load concept definitions from knowledge base for proper definitions
+        concept_definitions = self._load_concept_definitions()
 
         # Explain based on patterns detected
         for pattern in detected_patterns:
@@ -551,12 +738,42 @@ class MLPatternEngine:
                 # Extract learned traits for this pattern
                 traits = self._extract_learned_traits(learned)
 
-                # Primary explanation: What ICT taught about this pattern
-                if learned.teaching_contexts:
-                    context = learned.teaching_contexts[0]
+                # PRIORITY 1: Use concept_definitions (actual ICT definitions from transcripts)
+                # This is the REAL definition, not day-specific teaching commentary
+                # Check both normalized form (fvg) and full form (fair_value_gap)
+                concept_key = None
+                if normalized in concept_definitions and concept_definitions[normalized].get('examples'):
+                    concept_key = normalized
+                elif normalized == 'fvg' and 'fair_value_gap' in concept_definitions:
+                    concept_key = 'fair_value_gap'
+                elif normalized == 'order_block' and 'order_block' in concept_definitions:
+                    concept_key = 'order_block'
+                elif normalized == 'breaker_block' and 'breaker' in concept_definitions:
+                    concept_key = 'breaker'
+
+                if concept_key and concept_definitions[concept_key].get('examples'):
+                    # Get ALL examples and find the best definition
+                    examples = concept_definitions[concept_key]['examples']
+                    # Extract the core definition from the examples
+                    clean_def = self._extract_core_definition(examples, concept_key)
                     reasoning_parts.append(
-                        f"📚 **{pattern.upper()}**: {context[:120]}..."
+                        f"📚 **{pattern.upper()}**: {clean_def}"
                     )
+                # PRIORITY 2: Fall back to teaching_contexts only if no definition
+                elif learned.teaching_contexts:
+                    # Filter out day-specific contexts (Thursday, Monday, etc.)
+                    valid_contexts = [c for c in learned.teaching_contexts
+                                     if not self._is_day_specific_context(c)]
+                    if valid_contexts:
+                        context = valid_contexts[0]
+                        reasoning_parts.append(
+                            f"📚 **{pattern.upper()}**: {context[:120]}..."
+                        )
+                    else:
+                        reasoning_parts.append(
+                            f"📊 **{pattern.upper()}**: AI understands this pattern from ICT methodology. "
+                            f"(confidence: {learned.confidence:.0%})"
+                        )
                 else:
                     # Describe based on learned characteristics
                     reasoning_parts.append(

@@ -136,8 +136,16 @@ class GradedPattern:
         return {
             'pattern_type': self.pattern_type,
             'grade': self.grade.value,
-            'total_score': round(self.total_score, 3),
-            'criteria': asdict(self.criteria),
+            'total_score': round(float(self.total_score), 3),
+            'criteria': {
+                'size_score': float(self.criteria.size_score),
+                'location_score': float(self.criteria.location_score),
+                'structure_score': float(self.criteria.structure_score),
+                'confluence_score': float(self.criteria.confluence_score),
+                'freshness_score': float(self.criteria.freshness_score),
+                'timeframe_score': float(self.criteria.timeframe_score),
+                'historical_score': float(self.criteria.historical_score),
+            },
             'strengths': self.strengths,
             'weaknesses': self.weaknesses,
             'trade_recommendation': self.trade_recommendation,

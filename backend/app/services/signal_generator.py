@@ -731,23 +731,23 @@ class SignalGenerator:
         market_context = {
             'bias': htf_bias.value if htf_bias else analysis.bias.value,
             'current_zone': analysis.premium_discount.get('zone', 'equilibrium'),
-            'zone_percentage': analysis.premium_discount.get('percentage', 50),
+            'zone_percentage': float(analysis.premium_discount.get('percentage', 50)),
             'market_structure': analysis.market_structure.value,
-            'in_kill_zone': self._is_kill_zone_active(),
+            'in_kill_zone': bool(self._is_kill_zone_active()),
             'nearby_patterns': [],  # Will be populated below
-            'htf_aligned': htf_bias is not None and htf_bias == analysis.bias,
+            'htf_aligned': bool(htf_bias is not None and htf_bias == analysis.bias),
         }
 
         # Grade Order Blocks
         for ob in analysis.order_blocks:
             pattern_data = {
                 'type': 'order_block',
-                'high': ob.high,
-                'low': ob.low,
+                'high': float(ob.high),
+                'low': float(ob.low),
                 'bias': ob.type,  # bullish/bearish
                 'characteristic': ob.type,
-                'strength': ob.strength,
-                'touch_count': getattr(ob, 'touch_count', 0),
+                'strength': float(ob.strength) if ob.strength else 0.5,
+                'touch_count': int(getattr(ob, 'touch_count', 0)),
                 'timeframe': getattr(ob, 'timeframe', 'M15'),
             }
 
@@ -764,14 +764,16 @@ class SignalGenerator:
 
         # Grade Fair Value Gaps
         for fvg in analysis.fair_value_gaps:
+            fvg_high = float(fvg.high)
+            fvg_low = float(fvg.low)
             pattern_data = {
                 'type': 'fvg',
-                'high': fvg.high,
-                'low': fvg.low,
+                'high': fvg_high,
+                'low': fvg_low,
                 'bias': fvg.type,
                 'characteristic': fvg.type,
-                'gap_size_pct': abs(fvg.high - fvg.low) / fvg.low * 100 if fvg.low > 0 else 0,
-                'touch_count': getattr(fvg, 'touch_count', 0),
+                'gap_size_pct': float(abs(fvg_high - fvg_low) / fvg_low * 100) if fvg_low > 0 else 0.0,
+                'touch_count': int(getattr(fvg, 'touch_count', 0)),
                 'timeframe': getattr(fvg, 'timeframe', 'M15'),
             }
 

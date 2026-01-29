@@ -281,7 +281,7 @@ function SignalAnalysis({ symbol, analysis, loading }) {
             </div>
             <div className="glass-card-static p-6 flex flex-col items-center text-center">
               <ConfidenceRing
-                value={(signal.strength * 100).toFixed(0)}
+                value={signal.signal_score || 0}
                 color="#3b82f6"
               />
               <p className="text-sm text-slate-400 mt-3">Signal Strength</p>
@@ -292,13 +292,13 @@ function SignalAnalysis({ symbol, analysis, loading }) {
             </div>
             <div className="glass-card-static p-6 flex flex-col items-center text-center">
               <ConfidenceRing
-                value={Math.min(signal.confluence_score * 10, 100)}
+                value={signal.factors ? Math.round((signal.factors.filter(f => f.met).length / signal.factors.length) * 100) : 0}
                 color="#a855f7"
               />
               <p className="text-sm text-slate-400 mt-3">Confluence</p>
               <p className="text-xs text-slate-500 flex items-center gap-1 mt-1">
                 <Shield className="w-3 h-3 text-purple-400" />
-                {signal.confluence_score} factors aligned
+                {signal.factors ? signal.factors.filter(f => f.met).length : 0} factors aligned
               </p>
             </div>
           </div>

@@ -1,0 +1,248 @@
+{
+  "video_id": "FgacYSN9QEo",
+  "title": "ICT Mentorship Core Content - Month 04 - ICT Fair Value Gaps FVG",
+  "total_frames_analyzed": 10,
+  "chart_frames": 5,
+  "all_patterns": [
+    {
+      "timestamp": 51.0,
+      "type": "Liquidity",
+      "location": "between the two red rectangles, near the middle of the chart",
+      "characteristic": "high",
+      "significance": "medium",
+      "grade": "A",
+      "quality_score": 0.75,
+      "grade_reasoning": "The image shows an order block with a significant liquidity void lower timeframe chart. The OB is in the premium zone for sells, which aligns with the market structure and suggests that the price gap could be used to take profits or sell. However, there may be minor issues with size, location, and timing.",
+      "strengths": [
+        "Clear institutional footprint",
+        "In kill zone"
+      ],
+      "weaknesses": [
+        "Size of FVG may not be large enough for a significant price gap",
+        "Location is at the lower edge of OB, which could limit profit potential"
+      ],
+      "invalidation": "If the price gap does not occur or if the price does not hold above/below the OB",
+      "trade_recommendation": "This should be traded given the clear pattern and confluence with other patterns. However, it's essential to consider trade management and risk."
+    },
+    {
+      "timestamp": 66.0,
+      "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH",
+      "location": {
+        "candle1_high": {
+          "x": 49,
+          "y": 0.267
+        },
+        "candle3_low": {
+          "x": 48,
+          "y": -0.586
+        }
+      },
+      "characteristic": "bullish",
+      "significance": "medium",
+      "grade": "A+/A/B/C/D/F",
+      "quality_score": 0.8,
+      "grade_reasoning": {
+        "Size/Magnitude": "The FVG is quite large and significant, indicating a strong institutional footprint in the kill zone.",
+        "Location": "The pattern is located within the premium zone for sells, which aligns with market structure.",
+        "Structure": "The confluence of the FVG with the OB and potential breakers/liquidity points suggests a solid structure."
+      },
+      "strengths": [
+        "Clear institutional footprint in the kill zone",
+        "Aligned with market structure"
+      ],
+      "weaknesses": [
+        "No obvious confluence with other patterns",
+        "Size could be improved to reach an A+ grade"
+      ],
+      "invalidation": "Invalidation would occur if this level does not hold and there is no subsequent test of the pattern's significance.",
+      "trade_recommendation": {
+        "Should this be traded?": "Yes",
+        "Why/why not?": "The FVG has a strong institutional footprint, is located within the premium zone for sells, and aligns with market structure. It would be advisable to enter a trade if conditions allow."
+      }
+    },
+    {
+      "timestamp": 84.0,
+      "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh",
+      "location": "1.59",
+      "characteristic": "ranging",
+      "significance": "high"
+    },
+    {
+      "timestamp": 114.0,
+      "type": "FVG",
+      "location": "Candle 2 high to Candle 3 low",
+      "characteristic": "high",
+      "significance": "medium",
+      "grade": "A+",
+      "quality_score": 0.85,
+      "grade_reasoning": "This is an excellent example of a FVG pattern. The gap is significant, spanning the entire height of the chart. The size and magnitude are both strong, with the OB being at a premium zone for sells, indicating that this would be a powerful supply level.",
+      "strengths": [
+        "The gap is of a large magnitude, making it a high-probability trade setup."
+      ],
+      "weaknesses": [],
+      "invalidation": [
+        "If the price action fails to close below the OB and instead shows signs of reversal or consolidation, this pattern may be considered invalidated.",
+        "It would also be important to consider other indicators and market factors that could impact the effectiveness of this pattern."
+      ],
+      "trade_recommendation": "This is an excellent setup for a potential short trade based on the FVG. The OB and the gap suggest a strong institutional footprint, making it likely that sellers will enter the market if price action breaks below the OB. However, traders should also be mindful of the potential invalidations mentioned above."
+    },
+    {
+      "timestamp": 120.0,
+      "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh",
+      "location": "candle 3 low",
+      "characteristic": "bearish",
+      "significance": "high",
+      "grade": "B+",
+      "quality_score": 0.5,
+      "grade_reasoning": "The pattern has a clear FVG and order block formation, which is a significant event for price movement. However, it lacks some of the other criteria such as being in the premium zone for sells or having confluence with other patterns.",
+      "strengths": [
+        "Clear price action"
+      ],
+      "weaknesses": [
+        "Not in an optimal location or within institutional footprint",
+        "No clear confluence with other patterns"
+      ],
+      "invalidation": "A reversal pattern would invalidate the pattern, as well as if the FVG is filled and the OB does not hold. Additionally, if price action breaks out from the OB without following through on the potential move based on the OB.",
+      "trade_recommendation": "While there is a clear price action and a potential entry point with the order block, the lack of confluence and optimal location make it a less attractive setup. It may be more suitable for traders who are comfortable with potentially lower-probability trades or those looking to trade off market structure."
+    }
+  ],
+  "pattern_frequency": {
+    "Liquidity": 1,
+    "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH": 1,
+    "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh": 2,
+    "FVG": 1
+  },
+  "key_moments": [
+    {
+      "timestamp": 51.0,
+      "teaching_point": "The tutor is likely discussing how trading gaps in a trading chart can be identified and analyzed. Specifically, they may be discussing liquidity voids or price gaps as areas where orders can accumulate, potentially leading to a reversal in the market. This is an important concept for traders to understand when analyzing charts and making decisions about entering trades.",
+      "patterns": [
+        {
+          "type": "Liquidity",
+          "location": "between the two red rectangles, near the middle of the chart",
+          "characteristic": "high",
+          "significance": "medium",
+          "grade": "A",
+          "quality_score": 0.75,
+          "grade_reasoning": "The image shows an order block with a significant liquidity void lower timeframe chart. The OB is in the premium zone for sells, which aligns with the market structure and suggests that the price gap could be used to take profits or sell. However, there may be minor issues with size, location, and timing.",
+          "strengths": [
+            "Clear institutional footprint",
+            "In kill zone"
+          ],
+          "weaknesses": [
+            "Size of FVG may not be large enough for a significant price gap",
+            "Location is at the lower edge of OB, which could limit profit potential"
+          ],
+          "invalidation": "If the price gap does not occur or if the price does not hold above/below the OB",
+          "trade_recommendation": "This should be traded given the clear pattern and confluence with other patterns. However, it's essential to consider trade management and risk."
+        }
+      ],
+      "transcript": "liquidity void on the lower time frame charts in the same range of price price can actually gap to create a literal vacuum of trading thus posting an actual price gap okay let's take a look at a"
+    },
+    {
+      "timestamp": 66.0,
+      "teaching_point": "Analyzing a chart from an ICT/Smart Money perspective, specifically focusing on a Fair Value Gap pattern and potential areas of interest for trading.",
+      "patterns": [
+        {
+          "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH",
+          "location": {
+            "candle1_high": {
+              "x": 49,
+              "y": 0.267
+            },
+            "candle3_low": {
+              "x": 48,
+              "y": -0.586
+            }
+          },
+          "characteristic": "bullish",
+          "significance": "medium",
+          "grade": "A+/A/B/C/D/F",
+          "quality_score": 0.8,
+          "grade_reasoning": {
+            "Size/Magnitude": "The FVG is quite large and significant, indicating a strong institutional footprint in the kill zone.",
+            "Location": "The pattern is located within the premium zone for sells, which aligns with market structure.",
+            "Structure": "The confluence of the FVG with the OB and potential breakers/liquidity points suggests a solid structure."
+          },
+          "strengths": [
+            "Clear institutional footprint in the kill zone",
+            "Aligned with market structure"
+          ],
+          "weaknesses": [
+            "No obvious confluence with other patterns",
+            "Size could be improved to reach an A+ grade"
+          ],
+          "invalidation": "Invalidation would occur if this level does not hold and there is no subsequent test of the pattern's significance.",
+          "trade_recommendation": {
+            "Should this be traded?": "Yes",
+            "Why/why not?": "The FVG has a strong institutional footprint, is located within the premium zone for sells, and aligns with market structure. It would be advisable to enter a trade if conditions allow."
+          }
+        }
+      ],
+      "transcript": "okay let's take a look at a euro dollar daily chart okay and i'm going to ask you where do you see an example of the fair value gap"
+    },
+    {
+      "timestamp": 84.0,
+      "teaching_point": "The tutor is discussing fair value gaps on a trading chart.",
+      "patterns": [
+        {
+          "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh",
+          "location": "1.59",
+          "characteristic": "ranging",
+          "significance": "high"
+        }
+      ],
+      "transcript": "okay i'm going to draw your attention to it here it's a blue shaded area here on the daily chart let me explain to you why i'm shading in that specific area of"
+    },
+    {
+      "timestamp": 120.0,
+      "teaching_point": "The tutor is demonstrating the concept of a 'Fair Value Gap' and possibly discussing its significance in trading",
+      "patterns": [
+        {
+          "type": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh",
+          "location": "candle 3 low",
+          "characteristic": "bearish",
+          "significance": "high",
+          "grade": "B+",
+          "quality_score": 0.5,
+          "grade_reasoning": "The pattern has a clear FVG and order block formation, which is a significant event for price movement. However, it lacks some of the other criteria such as being in the premium zone for sells or having confluence with other patterns.",
+          "strengths": [
+            "Clear price action"
+          ],
+          "weaknesses": [
+            "Not in an optimal location or within institutional footprint",
+            "No clear confluence with other patterns"
+          ],
+          "invalidation": "A reversal pattern would invalidate the pattern, as well as if the FVG is filled and the OB does not hold. Additionally, if price action breaks out from the OB without following through on the potential move based on the OB.",
+          "trade_recommendation": "While there is a clear price action and a potential entry point with the order block, the lack of confluence and optimal location make it a less attractive setup. It may be more suitable for traders who are comfortable with potentially lower-probability trades or those looking to trade off market structure."
+        }
+      ],
+      "transcript": "that gap so significant as you can see here the candle to the left of the down candle we're looking at that comprises the fair value gap that's this candle here"
+    }
+  ],
+  "visual_concepts": [
+    {
+      "concept": "Liquidity",
+      "visual_example_timestamp": 51.0,
+      "frame_path": "data/video_frames/FgacYSN9QEo/frame_51.00.jpg",
+      "description": "high",
+      "context": "liquidity void on the lower time frame charts in the same range of price price can actually gap to create a literal vacuum of trading thus posting an actual price gap okay let's take a look at a"
+    },
+    {
+      "concept": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH",
+      "visual_example_timestamp": 66.0,
+      "frame_path": "data/video_frames/FgacYSN9QEo/frame_66.00.jpg",
+      "description": "bullish",
+      "context": "okay let's take a look at a euro dollar daily chart okay and i'm going to ask you where do you see an example of the fair value gap"
+    },
+    {
+      "concept": "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh",
+      "visual_example_timestamp": 84.0,
+      "frame_path": "data/video_frames/FgacYSN9QEo/frame_84.00.jpg",
+      "description": "ranging",
+      "context": "okay i'm going to draw your attention to it here it's a blue shaded area here on the daily chart let me explain to you why i'm shading in that specific area of"
+    }
+  ],
+  "comparison_examples": [],
+  "analyzed_at": "2026-01-29T17:35:22.040722"
+}
