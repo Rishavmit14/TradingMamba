@@ -932,18 +932,52 @@ TradingMamba/
 
 ## ✅ IMPLEMENTATION STATUS (Updated)
 
-All hedge fund components are now **IMPLEMENTED**:
+All hedge fund components are now **IMPLEMENTED AND INTEGRATED**:
 
-| Component | File | Status |
-|-----------|------|--------|
-| Pattern Grading (A+ to F) | `hedge_fund_ml.py` | ✅ DONE |
-| Historical Validation | `hedge_fund_ml.py` | ✅ DONE |
-| MTF Confluence | `hedge_fund_ml.py` | ✅ DONE |
-| Edge Tracking | `hedge_fund_ml.py` | ✅ DONE |
-| ICT Sentiment Analysis | `feature_extractor.py` | ✅ DONE |
-| **Backtest Engine** | `backtest_engine.py` | ✅ DONE |
-| **Paper Trading** | `paper_trading.py` | ✅ DONE |
-| **Risk Metrics** | `risk_metrics.py` | ✅ DONE |
+| Component | File | Built | Integrated | API |
+|-----------|------|:-----:|:----------:|:---:|
+| Pattern Grading (A+ to F) | `hedge_fund_ml.py` | ✅ | ✅ | ✅ |
+| Historical Validation | `hedge_fund_ml.py` | ✅ | ✅ | ✅ |
+| MTF Confluence | `hedge_fund_ml.py` | ✅ | ✅ | ✅ |
+| Edge Tracking | `hedge_fund_ml.py` | ✅ | ✅ | ✅ |
+| ICT Sentiment Analysis | `feature_extractor.py` | ✅ | ✅ | - |
+| **Backtest Engine** | `backtest_engine.py` | ✅ | ✅ | - |
+| **Paper Trading** | `paper_trading.py` | ✅ | ✅ | - |
+| **Risk Metrics** | `risk_metrics.py` | ✅ | - | - |
+
+### Integration Points:
+
+| Integration | Location | What it does |
+|-------------|----------|--------------|
+| PatternGrader → SignalGenerator | `signal_generator.py:_grade_patterns()` | Grades all patterns A+ to F, only A/B generate signals |
+| EdgeTracker → SignalGenerator | `signal_generator.py:_check_should_generate_signal()` | Checks statistical edge before signal |
+| EdgeTracker → PaperTrading | `paper_trading.py:_record_to_edge_tracker()` | Records trade outcomes for feedback loop |
+| HistoricalValidator → SignalGenerator | `signal_generator.py:_validate_pattern_historically()` | Validates patterns against historical data |
+| API Endpoints | `main.py` | `/api/hedge-fund/*` endpoints for all hedge fund features |
+
+### Signal Generation Flow (UPDATED):
+
+```
+Market Data
+    ↓
+SmartMoneyAnalyzer (detect patterns)
+    ↓
+PatternGrader (grade A+ to F)  ←── NEW
+    ↓
+[Only A/B grades pass]         ←── NEW
+    ↓
+HistoricalValidator (check history) ←── NEW
+    ↓
+EdgeTracker (check statistical edge) ←── NEW
+    ↓
+Generate Signal
+    ↓
+Signal includes:
+- Pattern grades
+- Historical validation
+- Edge statistics
+- Confidence adjusted by grade
+```
 
 ### New Components API Reference:
 

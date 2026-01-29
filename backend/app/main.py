@@ -3103,6 +3103,266 @@ async def list_processing_jobs():
 
 
 # ============================================================================
+# Hedge Fund Level API Endpoints
+# ============================================================================
+
+# Import hedge fund components
+try:
+    from .ml.hedge_fund_ml import (
+        get_pattern_grader,
+        get_edge_tracker,
+        get_historical_validator,
+        get_mtf_analyzer,
+        PatternGrade,
+    )
+    HEDGE_FUND_AVAILABLE = True
+except ImportError:
+    HEDGE_FUND_AVAILABLE = False
+    print("⚠️ Hedge fund ML components not available")
+
+
+@app.get("/api/hedge-fund/status")
+async def get_hedge_fund_status():
+    """
+    Get hedge fund components status.
+
+    Shows which hedge fund level features are available and active.
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        return {
+            "available": False,
+            "message": "Hedge fund ML components not installed"
+        }
+
+    return {
+        "available": True,
+        "components": {
+            "pattern_grader": True,
+            "edge_tracker": True,
+            "historical_validator": True,
+            "mtf_analyzer": True,
+        },
+        "description": "All hedge fund level features are active",
+        "features": [
+            "Pattern Grading (A+ to F)",
+            "Statistical Edge Tracking",
+            "Historical Pattern Validation",
+            "Multi-Timeframe Confluence Analysis"
+        ]
+    }
+
+
+@app.get("/api/hedge-fund/edge-statistics")
+async def get_edge_statistics(pattern_type: Optional[str] = None):
+    """
+    Get statistical edge data for patterns.
+
+    This shows which patterns have positive expectancy (statistical edge)
+    based on tracked trade outcomes.
+
+    Args:
+        pattern_type: Optional filter for specific pattern type (fvg, order_block, etc.)
+
+    Returns:
+        Edge statistics including win rate, expectancy, profit factor
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Hedge fund components not available")
+
+    try:
+        edge_tracker = get_edge_tracker()
+
+        if pattern_type:
+            return edge_tracker.get_edge_summary(pattern_type)
+        else:
+            # Return statistics for all pattern types
+            return {
+                "all_patterns": edge_tracker.get_edge_summary(),
+                "best_patterns": edge_tracker.get_best_patterns(min_signals=5),
+                "description": "Patterns with positive expectancy are recommended for trading"
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/hedge-fund/grade-pattern")
+async def grade_pattern(
+    pattern_type: str,
+    pattern_data: Dict,
+    market_context: Dict
+):
+    """
+    Grade a single pattern using hedge fund methodology.
+
+    Args:
+        pattern_type: Type of pattern (fvg, order_block, breaker, etc.)
+        pattern_data: Pattern details (high, low, bias, timeframe, etc.)
+        market_context: Current market context (bias, zone, structure, etc.)
+
+    Returns:
+        Pattern grade (A+ to F) with detailed reasoning
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Hedge fund components not available")
+
+    try:
+        grader = get_pattern_grader()
+
+        # Get historical stats for this pattern type
+        edge_tracker = get_edge_tracker()
+        edge_summary = edge_tracker.get_edge_summary(pattern_type)
+
+        historical_stats = None
+        if not edge_summary.get('no_data'):
+            historical_stats = {
+                'win_rate': float(edge_summary.get('win_rate', '0%').rstrip('%')) / 100,
+                'fill_rate': 0.7,
+            }
+
+        graded = grader.grade_pattern(
+            pattern_type=pattern_type,
+            pattern_data=pattern_data,
+            market_context=market_context,
+            historical_stats=historical_stats
+        )
+
+        return graded.to_dict()
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/hedge-fund/analyze-confluence")
+async def analyze_confluence(
+    primary_pattern: Dict,
+    primary_tf: str,
+    all_tf_patterns: Dict[str, List[Dict]]
+):
+    """
+    Analyze multi-timeframe confluence for a pattern.
+
+    Args:
+        primary_pattern: The main pattern being analyzed
+        primary_tf: Timeframe of the primary pattern (M5, M15, H1, H4, D1)
+        all_tf_patterns: Patterns found on all timeframes {tf: [patterns]}
+
+    Returns:
+        Confluence analysis with recommendation (STRONG/MODERATE/WEAK/AVOID)
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Hedge fund components not available")
+
+    try:
+        mtf_analyzer = get_mtf_analyzer()
+
+        result = mtf_analyzer.analyze_confluence(
+            primary_pattern=primary_pattern,
+            primary_tf=primary_tf,
+            all_tf_patterns=all_tf_patterns
+        )
+
+        return {
+            "pattern_type": result.pattern_type,
+            "primary_timeframe": result.primary_timeframe,
+            "confluence_score": result.confluence_score,
+            "aligned_timeframes": result.aligned_timeframes,
+            "conflicting_timeframes": result.conflicting_timeframes,
+            "confluence_factors": result.confluence_factors,
+            "recommendation": result.recommendation,
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/hedge-fund/record-trade")
+async def record_trade_outcome(
+    pattern_type: str,
+    outcome: str,
+    rr_achieved: float = 0.0,
+    session: str = "",
+    day_of_week: str = ""
+):
+    """
+    Record a trade outcome for edge tracking.
+
+    This is the feedback loop that makes the ML learn from real trades:
+    - Records win/loss/breakeven outcomes
+    - Updates statistical edge calculations
+    - Improves pattern recommendations over time
+
+    Args:
+        pattern_type: Type of pattern traded (fvg, order_block, etc.)
+        outcome: Trade result ('win', 'loss', 'breakeven')
+        rr_achieved: Risk-reward ratio achieved (e.g., 2.5 for 2.5:1)
+        session: Trading session ('asian', 'london', 'new_york')
+        day_of_week: Day of the week ('Monday', 'Tuesday', etc.)
+
+    Returns:
+        Updated edge statistics for this pattern type
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Hedge fund components not available")
+
+    if outcome not in ['win', 'loss', 'breakeven']:
+        raise HTTPException(status_code=400, detail="Outcome must be 'win', 'loss', or 'breakeven'")
+
+    try:
+        edge_tracker = get_edge_tracker()
+
+        edge_tracker.record_trade(
+            pattern_type=pattern_type,
+            outcome=outcome,
+            rr_achieved=rr_achieved,
+            session=session,
+            day_of_week=day_of_week
+        )
+
+        # Return updated statistics
+        return {
+            "recorded": True,
+            "pattern_type": pattern_type,
+            "outcome": outcome,
+            "updated_stats": edge_tracker.get_edge_summary(pattern_type)
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/hedge-fund/best-patterns")
+async def get_best_patterns(min_signals: int = 10):
+    """
+    Get the best performing patterns based on tracked outcomes.
+
+    These are patterns with positive expectancy (statistical edge).
+    The more trades tracked, the more reliable these statistics become.
+
+    Args:
+        min_signals: Minimum number of signals required to be included (default: 10)
+
+    Returns:
+        List of patterns with positive edge, sorted by expectancy
+    """
+    if not HEDGE_FUND_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Hedge fund components not available")
+
+    try:
+        edge_tracker = get_edge_tracker()
+        best = edge_tracker.get_best_patterns(min_signals=min_signals)
+
+        return {
+            "best_patterns": best,
+            "min_signals_required": min_signals,
+            "description": "Patterns are ranked by expectancy (expected R per trade)",
+            "recommendation": "Focus on patterns at the top of this list for highest edge"
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # Startup/Shutdown
 # ============================================================================
 

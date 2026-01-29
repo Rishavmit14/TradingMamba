@@ -229,18 +229,38 @@ AFTER:  "This is a beautiful order block"
 
 ---
 
-### 🔄 Phase 7: Self-Learning Loop (PARTIAL)
-**Status**: Foundation built, needs automated outcome checking
+### ✅ Phase 7: Self-Learning Loop (INTEGRATED!)
+**Status**: COMPLETE - Paper trading records outcomes to EdgeTracker
 
 **What's done**:
-- Edge tracking infrastructure
-- Pattern validation framework
-- Grade tracking
+- ✅ Edge tracking infrastructure
+- ✅ Pattern validation framework
+- ✅ Grade tracking
+- ✅ **Paper trading → EdgeTracker feedback loop** (NEW!)
+- ✅ **Signal generator uses edge statistics** (NEW!)
 
-**TODO**:
-- Automated outcome checking (cron job)
-- Reinforcement learning loop
+**Integration Details**:
+```python
+# Paper trading automatically records trade outcomes
+# File: paper_trading.py -> _record_to_edge_tracker()
+
+# When a trade closes:
+edge_tracker.record_trade(
+    pattern_type="fvg",
+    outcome="win",  # or "loss", "breakeven"
+    rr_achieved=2.5,
+    session="london",
+    day_of_week="Tuesday"
+)
+
+# Signal generator checks edge before generating signals
+# File: signal_generator.py -> _check_should_generate_signal()
+```
+
+**TODO** (Future Enhancement):
+- Automated outcome checking (cron job for pending trades)
 - Weekly accuracy reports
+- Pattern weight adjustments based on edge
 
 ---
 
@@ -249,16 +269,24 @@ AFTER:  "This is a beautiful order block"
 ```
 backend/app/ml/
 ├── feature_extractor.py      # Feature extraction + Sentiment Analysis
-│   ├── ICT_SENTIMENT_VOCABULARY  # NEW: Sentiment word lists
-│   ├── ICTSentimentAnalyzer      # NEW: Tone/quality detection
+│   ├── ICT_SENTIMENT_VOCABULARY  # Sentiment word lists
+│   ├── ICTSentimentAnalyzer      # Tone/quality detection
 │   └── SmartMoneyFeatureExtractor # Enhanced with sentiment features
 ├── video_vision_analyzer.py  # Multi-pass deep questioning
 ├── ml_pattern_engine.py      # Core ML engine + hedge fund integration
 ├── hedge_fund_ml.py          # Hedge fund level features
-│   ├── PatternGrader         # A+ to F grading
-│   ├── HistoricalValidator   # Backtest patterns
-│   ├── MultiTimeframeAnalyzer # MTF confluence
-│   └── EdgeTracker           # Statistical edge
+│   ├── PatternGrader         # A+ to F grading (INTEGRATED)
+│   ├── HistoricalValidator   # Backtest patterns (INTEGRATED)
+│   ├── MultiTimeframeAnalyzer # MTF confluence (INTEGRATED)
+│   └── EdgeTracker           # Statistical edge (INTEGRATED)
+
+backend/app/services/
+├── signal_generator.py       # UPDATED: Uses all hedge fund components
+├── paper_trading.py          # UPDATED: Records to EdgeTracker
+├── backtest_engine.py        # Walk-forward backtesting
+└── risk_metrics.py           # Institutional risk metrics
+
+backend/app/main.py           # UPDATED: New /api/hedge-fund/* endpoints
 
 data/
 ├── pattern_validations.json  # Cached historical validations

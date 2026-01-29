@@ -1,5 +1,5 @@
 """
-Paper Trading Engine - Alpaca API Integration
+Paper Trading Engine - Alpaca API Integration + EdgeTracker Integration
 
 This module provides paper trading capabilities using Alpaca's FREE paper trading API.
 It bridges the gap between backtesting and live trading.
@@ -10,6 +10,7 @@ Key Features:
 - Real slippage modeling
 - Same API as live trading (zero code changes needed)
 - Automatic trade outcome tracking
+- **HEDGE FUND**: EdgeTracker integration for statistical feedback loop
 
 100% FREE - Uses Alpaca paper trading API.
 
@@ -24,12 +25,15 @@ Setup:
 
 import os
 import json
+import logging
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict, field
 from enum import Enum
 import time
+
+logger = logging.getLogger(__name__)
 
 # Try to import alpaca-trade-api
 try:
@@ -38,6 +42,14 @@ try:
 except ImportError:
     ALPACA_AVAILABLE = False
     print("Alpaca API not installed. Install with: pip install alpaca-trade-api")
+
+# Import EdgeTracker for statistical feedback loop
+try:
+    from ..ml.hedge_fund_ml import get_edge_tracker
+    EDGE_TRACKER_AVAILABLE = True
+except ImportError:
+    EDGE_TRACKER_AVAILABLE = False
+    logger.warning("EdgeTracker not available for paper trading feedback loop")
 
 
 class OrderSide(Enum):
@@ -445,11 +457,86 @@ class PaperTradingEngine:
         trade.status = OrderStatus.FILLED.value
         self._save_trades()
 
+        # =====================================================================
+        # HEDGE FUND LEVEL: Record trade outcome to EdgeTracker
+        # =====================================================================
+        self._record_to_edge_tracker(trade)
+
         print(f"Trade closed: {trade.trade_id}")
         print(f"  Exit Price: ${trade.exit_price:,.2f}")
         print(f"  P&L: ${trade.pnl:,.2f} ({trade.pnl_percent:+.2%})")
 
         return trade
+
+    def _record_to_edge_tracker(self, trade: PaperTrade) -> None:
+        """
+        Record trade outcome to EdgeTracker for statistical feedback loop.
+
+        This is the critical feedback mechanism that makes the ML LEARN from real trades:
+        - Records win/loss/breakeven outcome
+        - Calculates achieved R:R
+        - Tracks by pattern type, session, day of week
+
+        The EdgeTracker uses this to:
+        - Update win rate per pattern type
+        - Calculate expectancy (expected value per trade)
+        - Identify which patterns have statistical edge
+        - Determine best trading sessions/days
+        """
+        if not EDGE_TRACKER_AVAILABLE:
+            logger.warning("EdgeTracker not available - trade outcome not recorded")
+            return
+
+        if not trade.is_closed() or not trade.pnl:
+            return
+
+        try:
+            edge_tracker = get_edge_tracker()
+
+            # Determine outcome
+            if trade.pnl > 0:
+                outcome = 'win'
+            elif trade.pnl < 0:
+                outcome = 'loss'
+            else:
+                outcome = 'breakeven'
+
+            # Calculate achieved R:R
+            rr_achieved = 0.0
+            if trade.entry_price and trade.exit_price and trade.stop_loss:
+                risk = abs(trade.entry_price - trade.stop_loss)
+                if risk > 0:
+                    reward = abs(trade.exit_price - trade.entry_price)
+                    rr_achieved = reward / risk
+
+            # Get session and day
+            trade_time = datetime.fromisoformat(trade.created_at) if trade.created_at else datetime.now()
+            day_of_week = trade_time.strftime("%A")
+
+            hour = trade_time.hour
+            if 0 <= hour < 4:
+                session = "asian"
+            elif 7 <= hour < 10:
+                session = "london"
+            elif 12 <= hour < 16:
+                session = "new_york"
+            else:
+                session = "off_hours"
+
+            # Record to EdgeTracker
+            edge_tracker.record_trade(
+                pattern_type=trade.pattern_type,
+                outcome=outcome,
+                rr_achieved=rr_achieved,
+                session=session,
+                day_of_week=day_of_week
+            )
+
+            logger.info(f"EdgeTracker recorded: {trade.pattern_type} | {outcome} | {rr_achieved:.2f}R")
+            print(f"  📊 EdgeTracker: Recorded {outcome} for {trade.pattern_type} pattern")
+
+        except Exception as e:
+            logger.error(f"Failed to record trade to EdgeTracker: {e}")
 
     def _get_simulated_price(self, symbol: str) -> float:
         """Get simulated current price (for when Alpaca not connected)"""

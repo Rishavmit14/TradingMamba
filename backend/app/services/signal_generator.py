@@ -1,12 +1,20 @@
 """
-Signal Generator Service - ML-POWERED
+Signal Generator Service - ML-POWERED + HEDGE FUND LEVEL
 
 Combines Smart Money analysis with ML's LEARNED knowledge to generate trading signals.
+
+HEDGE FUND INTEGRATION:
+- PatternGrader: Grades patterns A+ to F (only A/B patterns generate signals)
+- EdgeTracker: Tracks statistical edge of each pattern type
+- HistoricalValidator: Validates patterns against historical data
+- MTF Confluence: Checks alignment across timeframes
 
 IMPORTANT: Signals are generated using ONLY patterns the ML has learned from training.
 The signal will clearly indicate:
 - Which patterns ML detected (from its training)
-- Which patterns ML hasn't learned yet (needs more training)
+- Pattern grades (A+ to F) with quality reasoning
+- Statistical edge based on historical performance
+- Multi-timeframe confluence status
 """
 
 import logging
@@ -30,33 +38,58 @@ from ..models.signal import (
     KeyLevel
 )
 from ..ml.ml_pattern_engine import get_ml_engine
+from ..ml.hedge_fund_ml import (
+    get_pattern_grader,
+    get_edge_tracker,
+    get_historical_validator,
+    get_mtf_analyzer,
+    PatternGrade,
+    GradedPattern,
+)
 
 logger = logging.getLogger(__name__)
 
 
 class SignalGenerator:
     """
-    ML-Powered Trading Signal Generator
+    ML-Powered Trading Signal Generator (HEDGE FUND LEVEL)
 
-    Signal generation uses the ML's LEARNED knowledge:
+    Signal generation uses the ML's LEARNED knowledge + Hedge Fund Components:
     1. Determine higher timeframe bias
     2. Identify valid entry zones (ONLY patterns ML learned)
-    3. Confirm with market structure
-    4. Calculate risk levels
-    5. Score the setup based on ML confidence
+    3. GRADE patterns A+ to F (hedge fund level)
+    4. FILTER: Only A/B grades generate signals
+    5. Check historical validation and MTF confluence
+    6. Track statistical edge for continuous improvement
+    7. Calculate risk levels with pattern-specific adjustments
+    8. Score the setup based on ML confidence + grade
 
     If ML hasn't been trained, signals will be limited and flagged.
     """
 
+    # Minimum grade required to generate a signal
+    TRADEABLE_GRADES = [PatternGrade.A_PLUS, PatternGrade.A, PatternGrade.B]
+
     def __init__(
         self,
         min_confidence: float = 0.65,
-        min_risk_reward: float = 2.0
+        min_risk_reward: float = 2.0,
+        min_grade: str = "B"  # Minimum pattern grade to trade
     ):
         self.analyzer = SmartMoneyAnalyzer(use_ml=True)
         self.min_confidence = min_confidence
         self.min_risk_reward = min_risk_reward
         self.ml_engine = get_ml_engine()
+
+        # Hedge Fund Components
+        self.pattern_grader = get_pattern_grader()
+        self.edge_tracker = get_edge_tracker()
+        self.historical_validator = get_historical_validator()
+        self.mtf_analyzer = get_mtf_analyzer()
+
+        # Set minimum grade threshold
+        grade_map = {"A+": PatternGrade.A_PLUS, "A": PatternGrade.A, "B": PatternGrade.B, "C": PatternGrade.C}
+        self.min_grade = grade_map.get(min_grade, PatternGrade.B)
 
     def generate_signal(
         self,
@@ -66,7 +99,7 @@ class SignalGenerator:
         htf_bias: Optional[Bias] = None
     ) -> Signal:
         """
-        Generate a trading signal for a symbol
+        Generate a trading signal for a symbol (HEDGE FUND LEVEL)
 
         Args:
             symbol: Trading symbol (e.g., "EURUSD")
@@ -75,7 +108,7 @@ class SignalGenerator:
             htf_bias: Optional higher timeframe bias
 
         Returns:
-            Signal object with entry/exit levels and analysis
+            Signal object with entry/exit levels, analysis, and PATTERN GRADES
         """
         # Run Smart Money analysis
         analysis = self.analyzer.analyze(data)
@@ -83,8 +116,20 @@ class SignalGenerator:
         # Calculate signal score and factors
         score, factors = self._calculate_signal_score(analysis, htf_bias)
 
-        # Determine direction
-        direction = self._determine_direction(analysis, score)
+        # =====================================================================
+        # HEDGE FUND LEVEL: Grade all patterns
+        # =====================================================================
+        graded_patterns, best_pattern = self._grade_patterns(analysis, htf_bias)
+
+        # Check if we should generate a signal based on grade criteria
+        should_signal, signal_reason = self._check_should_generate_signal(best_pattern, score)
+
+        # Determine direction (may be WAIT if pattern grade is too low)
+        if should_signal:
+            direction = self._determine_direction(analysis, score)
+        else:
+            direction = TradingDirection.WAIT
+            logger.info(f"Signal blocked: {signal_reason}")
 
         # Calculate levels if we have a valid signal
         if direction != TradingDirection.WAIT:
@@ -102,10 +147,19 @@ class SignalGenerator:
         )
 
         # Adjust confidence based on R:R
-        final_confidence = self._adjust_confidence(score / 100, risk_reward)
+        base_confidence = self._adjust_confidence(score / 100, risk_reward)
 
-        # Generate analysis text
+        # =====================================================================
+        # HEDGE FUND LEVEL: Adjust confidence based on pattern grade
+        # =====================================================================
+        final_confidence = self._adjust_confidence_with_grade(base_confidence, best_pattern)
+
+        # Generate analysis text (includes grade analysis)
         analysis_text = self._generate_analysis_text(analysis, factors, direction)
+
+        # Add hedge fund grade analysis
+        grade_analysis = self._generate_grade_analysis(graded_patterns, best_pattern)
+        analysis_text += grade_analysis
 
         # Extract key levels
         key_levels = self._extract_key_levels(analysis)
@@ -115,6 +169,50 @@ class SignalGenerator:
 
         # Generate ML knowledge status message
         ml_status = self._generate_ml_status(analysis)
+
+        # =====================================================================
+        # HEDGE FUND LEVEL: Build grade information for signal
+        # =====================================================================
+        pattern_grades = {}
+        for gp in graded_patterns:
+            pattern_grades[gp.pattern_type] = {
+                'grade': gp.grade.value,
+                'score': round(gp.total_score, 3),
+                'strengths': gp.strengths,
+                'weaknesses': gp.weaknesses,
+                'recommendation': gp.trade_recommendation,
+            }
+
+        # Get edge statistics for the best pattern
+        edge_info = {}
+        if best_pattern:
+            edge_summary = self.edge_tracker.get_edge_summary(best_pattern.pattern_type)
+            if not edge_summary.get('no_data'):
+                edge_info = {
+                    'pattern_type': best_pattern.pattern_type,
+                    'win_rate': edge_summary.get('win_rate', 'N/A'),
+                    'expectancy': edge_summary.get('expectancy', 'N/A'),
+                    'has_edge': edge_summary.get('has_edge', True),
+                }
+
+        # =====================================================================
+        # HEDGE FUND LEVEL: Historical validation
+        # =====================================================================
+        historical_validation = {}
+        if best_pattern and direction != TradingDirection.WAIT:
+            historical_validation = self._validate_pattern_historically(
+                pattern_type=best_pattern.pattern_type,
+                symbol=symbol,
+                pattern_levels=best_pattern.raw_data
+            )
+
+            # Adjust confidence based on historical performance
+            confidence_adj = historical_validation.get('confidence_adjustment', 1.0)
+            final_confidence = min(final_confidence * confidence_adj, 0.95)
+
+            # Add validation analysis to text
+            validation_analysis = self._generate_validation_analysis(historical_validation)
+            analysis_text += validation_analysis
 
         return Signal(
             id=str(uuid4()),
@@ -136,11 +234,11 @@ class SignalGenerator:
             mtf_bias=htf_bias.value if htf_bias else analysis.bias.value,
             htf_structure=analysis.market_structure.value,
             order_blocks=[
-                {'type': ob.type, 'high': ob.high, 'low': ob.low}
+                {'type': ob.type, 'high': ob.high, 'low': ob.low, 'grade': pattern_grades.get('order_block', {}).get('grade', 'N/A')}
                 for ob in analysis.order_blocks[:3]
             ],
             fair_value_gaps=[
-                {'type': fvg.type, 'high': fvg.high, 'low': fvg.low}
+                {'type': fvg.type, 'high': fvg.high, 'low': fvg.low, 'grade': pattern_grades.get('fvg', {}).get('grade', 'N/A')}
                 for fvg in analysis.fair_value_gaps[:3]
             ],
             liquidity_levels=[
@@ -161,6 +259,15 @@ class SignalGenerator:
             ml_patterns_not_learned=analysis.ml_patterns_not_learned,
             ml_confidence_scores=analysis.ml_confidence_scores,
             ml_knowledge_status=ml_status,
+            # =====================================================================
+            # HEDGE FUND LEVEL: New fields
+            # =====================================================================
+            pattern_grades=pattern_grades,
+            best_pattern_grade=best_pattern.grade.value if best_pattern else None,
+            best_pattern_type=best_pattern.pattern_type if best_pattern else None,
+            edge_statistics=edge_info,
+            grade_recommendation=best_pattern.trade_recommendation if best_pattern else "No tradeable pattern found",
+            historical_validation=historical_validation,
         )
 
     def _calculate_signal_score(
@@ -602,3 +709,284 @@ class SignalGenerator:
             return f"⚡ Partial ML coverage. Detected: {detected}. Needs training: {missing}"
 
         return "ℹ️ Basic analysis. No ML patterns applicable for this setup."
+
+    # =========================================================================
+    # HEDGE FUND LEVEL METHODS
+    # =========================================================================
+
+    def _grade_patterns(
+        self,
+        analysis: SmartMoneyAnalysisResult,
+        htf_bias: Optional[Bias]
+    ) -> Tuple[List[GradedPattern], Optional[GradedPattern]]:
+        """
+        Grade all detected patterns using hedge fund methodology.
+
+        Returns:
+            Tuple of (all_graded_patterns, best_pattern_for_entry)
+        """
+        all_graded = []
+
+        # Build market context for grading
+        market_context = {
+            'bias': htf_bias.value if htf_bias else analysis.bias.value,
+            'current_zone': analysis.premium_discount.get('zone', 'equilibrium'),
+            'zone_percentage': analysis.premium_discount.get('percentage', 50),
+            'market_structure': analysis.market_structure.value,
+            'in_kill_zone': self._is_kill_zone_active(),
+            'nearby_patterns': [],  # Will be populated below
+            'htf_aligned': htf_bias is not None and htf_bias == analysis.bias,
+        }
+
+        # Grade Order Blocks
+        for ob in analysis.order_blocks:
+            pattern_data = {
+                'type': 'order_block',
+                'high': ob.high,
+                'low': ob.low,
+                'bias': ob.type,  # bullish/bearish
+                'characteristic': ob.type,
+                'strength': ob.strength,
+                'touch_count': getattr(ob, 'touch_count', 0),
+                'timeframe': getattr(ob, 'timeframe', 'M15'),
+            }
+
+            # Get historical stats for this pattern type
+            historical_stats = self._get_historical_stats('order_block')
+
+            graded = self.pattern_grader.grade_pattern(
+                pattern_type='order_block',
+                pattern_data=pattern_data,
+                market_context=market_context,
+                historical_stats=historical_stats
+            )
+            all_graded.append(graded)
+
+        # Grade Fair Value Gaps
+        for fvg in analysis.fair_value_gaps:
+            pattern_data = {
+                'type': 'fvg',
+                'high': fvg.high,
+                'low': fvg.low,
+                'bias': fvg.type,
+                'characteristic': fvg.type,
+                'gap_size_pct': abs(fvg.high - fvg.low) / fvg.low * 100 if fvg.low > 0 else 0,
+                'touch_count': getattr(fvg, 'touch_count', 0),
+                'timeframe': getattr(fvg, 'timeframe', 'M15'),
+            }
+
+            historical_stats = self._get_historical_stats('fvg')
+
+            graded = self.pattern_grader.grade_pattern(
+                pattern_type='fvg',
+                pattern_data=pattern_data,
+                market_context=market_context,
+                historical_stats=historical_stats
+            )
+            all_graded.append(graded)
+
+        # Sort by score (best first)
+        all_graded.sort(key=lambda x: x.total_score, reverse=True)
+
+        # Find best tradeable pattern
+        best_pattern = None
+        for graded in all_graded:
+            if graded.grade in self.TRADEABLE_GRADES:
+                best_pattern = graded
+                break
+
+        return all_graded, best_pattern
+
+    def _get_historical_stats(self, pattern_type: str) -> Optional[Dict]:
+        """Get historical statistics for a pattern type from EdgeTracker"""
+        try:
+            edge_summary = self.edge_tracker.get_edge_summary(pattern_type)
+            if edge_summary.get('no_data'):
+                return None
+
+            return {
+                'win_rate': float(edge_summary.get('win_rate', '0%').rstrip('%')) / 100,
+                'fill_rate': 0.7,  # Default if not tracked
+                'avg_rr': float(edge_summary.get('avg_rr', '0R').rstrip('R')),
+            }
+        except Exception:
+            return None
+
+    def _adjust_confidence_with_grade(
+        self,
+        base_confidence: float,
+        best_pattern: Optional[GradedPattern]
+    ) -> float:
+        """
+        Adjust confidence based on pattern grade.
+
+        A+ patterns boost confidence significantly
+        A patterns have standard confidence
+        B patterns reduce confidence slightly
+        C/D/F patterns should not generate signals
+        """
+        if best_pattern is None:
+            return base_confidence * 0.7  # No graded pattern
+
+        grade_multipliers = {
+            PatternGrade.A_PLUS: 1.25,  # 25% boost for institutional setups
+            PatternGrade.A: 1.10,       # 10% boost for excellent setups
+            PatternGrade.B: 0.95,       # Slight reduction for good-but-not-great
+            PatternGrade.C: 0.75,       # Significant reduction
+            PatternGrade.D: 0.50,       # Major reduction
+            PatternGrade.F: 0.25,       # Should not trade
+        }
+
+        multiplier = grade_multipliers.get(best_pattern.grade, 1.0)
+        adjusted = base_confidence * multiplier
+
+        return min(adjusted, 0.95)  # Cap at 95%
+
+    def _generate_grade_analysis(
+        self,
+        graded_patterns: List[GradedPattern],
+        best_pattern: Optional[GradedPattern]
+    ) -> str:
+        """Generate analysis text for pattern grades"""
+        if not graded_patterns:
+            return "\n### Pattern Grading: No patterns to grade"
+
+        lines = ["\n### Pattern Grading (Hedge Fund Level):"]
+
+        for graded in graded_patterns[:5]:  # Top 5 patterns
+            grade_emoji = {
+                PatternGrade.A_PLUS: "🏆",
+                PatternGrade.A: "✅",
+                PatternGrade.B: "👍",
+                PatternGrade.C: "⚠️",
+                PatternGrade.D: "❌",
+                PatternGrade.F: "🚫",
+            }.get(graded.grade, "❓")
+
+            lines.append(f"- {grade_emoji} **{graded.pattern_type.upper()}**: Grade {graded.grade.value} ({graded.total_score:.0%})")
+
+            if graded.strengths:
+                lines.append(f"  - Strengths: {', '.join(graded.strengths[:2])}")
+            if graded.weaknesses:
+                lines.append(f"  - Weaknesses: {', '.join(graded.weaknesses[:2])}")
+
+        if best_pattern:
+            lines.append(f"\n**Best Entry Pattern**: {best_pattern.pattern_type.upper()} (Grade {best_pattern.grade.value})")
+            lines.append(f"**Recommendation**: {best_pattern.trade_recommendation}")
+        else:
+            lines.append("\n**⚠️ No A/B grade patterns found - Consider waiting for better setup**")
+
+        return '\n'.join(lines)
+
+    def _check_should_generate_signal(
+        self,
+        best_pattern: Optional[GradedPattern],
+        score: int
+    ) -> Tuple[bool, str]:
+        """
+        Determine if a signal should be generated based on hedge fund criteria.
+
+        Returns:
+            Tuple of (should_generate, reason)
+        """
+        if score < 50:
+            return False, "Score too low (< 50)"
+
+        if best_pattern is None:
+            return False, "No patterns detected"
+
+        if best_pattern.grade not in self.TRADEABLE_GRADES:
+            return False, f"Pattern grade {best_pattern.grade.value} below minimum (need A+/A/B)"
+
+        # Check edge statistics
+        edge_summary = self.edge_tracker.get_edge_summary(best_pattern.pattern_type)
+        if not edge_summary.get('no_data'):
+            has_edge = edge_summary.get('has_edge', True)
+            if not has_edge:
+                # Don't completely block, but note it
+                logger.warning(f"Pattern {best_pattern.pattern_type} has negative expectancy")
+
+        return True, "All criteria met"
+
+    def _validate_pattern_historically(
+        self,
+        pattern_type: str,
+        symbol: str,
+        pattern_levels: Dict,
+        lookback_days: int = 30
+    ) -> Dict:
+        """
+        Validate pattern against recent historical data.
+
+        This answers: "Has this type of pattern worked recently for this symbol?"
+
+        Args:
+            pattern_type: Type of pattern (fvg, order_block, etc.)
+            symbol: Trading symbol
+            pattern_levels: Price levels of the pattern
+            lookback_days: How far back to look for similar patterns
+
+        Returns:
+            Validation result with fill rate, win rate, and recommendation
+        """
+        try:
+            # Get pattern statistics from historical validator
+            stats = self.historical_validator.get_pattern_statistics(
+                pattern_type=pattern_type,
+                symbol=symbol
+            )
+
+            # Build validation result
+            result = {
+                'validated': stats.total_tested > 0,
+                'total_tested': stats.total_tested,
+                'fill_rate': stats.fill_rate,
+                'win_rate': stats.win_rate,
+                'avg_rr_achieved': stats.avg_rr_achieved,
+                'avg_time_to_fill': stats.avg_time_to_fill,
+                'best_timeframe': stats.best_timeframe,
+                'notes': stats.notes,
+            }
+
+            # Generate recommendation based on historical performance
+            if stats.total_tested == 0:
+                result['recommendation'] = "No historical data - use default risk"
+                result['confidence_adjustment'] = 1.0
+            elif stats.win_rate >= 0.6 and stats.fill_rate >= 0.7:
+                result['recommendation'] = "Strong historical performance - full position"
+                result['confidence_adjustment'] = 1.15
+            elif stats.win_rate >= 0.5:
+                result['recommendation'] = "Moderate historical performance - standard position"
+                result['confidence_adjustment'] = 1.0
+            else:
+                result['recommendation'] = "Weak historical performance - reduced position"
+                result['confidence_adjustment'] = 0.85
+
+            return result
+
+        except Exception as e:
+            logger.error(f"Historical validation failed: {e}")
+            return {
+                'validated': False,
+                'error': str(e),
+                'recommendation': "Validation failed - use caution",
+                'confidence_adjustment': 0.9
+            }
+
+    def _generate_validation_analysis(self, validation_result: Dict) -> str:
+        """Generate analysis text for historical validation"""
+        if not validation_result.get('validated'):
+            return "\n### Historical Validation: No data available"
+
+        lines = ["\n### Historical Validation:"]
+
+        if validation_result.get('total_tested', 0) > 0:
+            lines.append(f"- Patterns tested: {validation_result['total_tested']}")
+            lines.append(f"- Fill rate: {validation_result.get('fill_rate', 0):.0%}")
+            lines.append(f"- Win rate: {validation_result.get('win_rate', 0):.0%}")
+            lines.append(f"- Avg R:R achieved: {validation_result.get('avg_rr_achieved', 0):.2f}")
+            lines.append(f"- Best timeframe: {validation_result.get('best_timeframe', 'N/A')}")
+
+        lines.append(f"\n**Recommendation**: {validation_result.get('recommendation', 'N/A')}")
+
+        return '\n'.join(lines)

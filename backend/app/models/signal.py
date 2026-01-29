@@ -132,6 +132,23 @@ class Signal:
     ml_confidence_scores: Dict[str, float] = field(default_factory=dict)  # Confidence per pattern
     ml_knowledge_status: str = ""  # Summary of ML knowledge state
 
+    # =========================================================================
+    # HEDGE FUND LEVEL FIELDS
+    # =========================================================================
+    # Pattern Grading (A+ to F)
+    pattern_grades: Dict[str, Dict] = field(default_factory=dict)  # {pattern_type: {grade, score, strengths, weaknesses}}
+    best_pattern_grade: Optional[str] = None  # A+, A, B, C, D, F
+    best_pattern_type: Optional[str] = None  # The pattern type with best grade
+
+    # Edge Statistics (from EdgeTracker)
+    edge_statistics: Dict[str, Any] = field(default_factory=dict)  # {win_rate, expectancy, has_edge}
+
+    # Trade Recommendation
+    grade_recommendation: str = ""  # Human-readable recommendation based on grade
+
+    # Historical Validation
+    historical_validation: Dict[str, Any] = field(default_factory=dict)  # {fill_rate, win_rate, recommendation}
+
     def calculate_risk_reward(self) -> float:
         """Calculate risk:reward ratio"""
         if self.direction == TradingDirection.WAIT:
@@ -177,13 +194,37 @@ class Signal:
             "ml_patterns_not_learned": self.ml_patterns_not_learned,
             "ml_confidence_scores": self.ml_confidence_scores,
             "ml_knowledge_status": self.ml_knowledge_status,
+            # Hedge Fund Level info
+            "pattern_grades": self.pattern_grades,
+            "best_pattern_grade": self.best_pattern_grade,
+            "best_pattern_type": self.best_pattern_type,
+            "edge_statistics": self.edge_statistics,
+            "grade_recommendation": self.grade_recommendation,
+            "historical_validation": self.historical_validation,
         }
 
     def to_notification_message(self) -> str:
-        """Format signal for notification"""
+        """Format signal for notification (HEDGE FUND LEVEL)"""
         emoji = "🟢" if self.direction == TradingDirection.BUY else "🔴" if self.direction == TradingDirection.SELL else "⚪"
 
         factors_text = "\n".join([f"• {f.name}" for f in self.factors if f.met])
+
+        # Grade emoji mapping
+        grade_emoji = {
+            "A+": "🏆", "A": "✅", "B": "👍",
+            "C": "⚠️", "D": "❌", "F": "🚫"
+        }.get(self.best_pattern_grade, "❓")
+
+        # Edge statistics text
+        edge_text = ""
+        if self.edge_statistics:
+            edge_text = f"""
+📈 *Edge Statistics:*
+Pattern: {self.edge_statistics.get('pattern_type', 'N/A')}
+Win Rate: {self.edge_statistics.get('win_rate', 'N/A')}
+Expectancy: {self.edge_statistics.get('expectancy', 'N/A')}
+Has Edge: {'✅' if self.edge_statistics.get('has_edge') else '❌'}
+"""
 
         return f"""
 {emoji} *Smart Money SIGNAL ALERT* {emoji}
@@ -191,6 +232,9 @@ class Signal:
 *{self.symbol}* | {self.timeframe.value}
 Direction: *{self.direction.value}*
 Confidence: {self.confidence:.0%}
+
+{grade_emoji} *Pattern Grade: {self.best_pattern_grade or 'N/A'}* ({self.best_pattern_type or 'None'})
+{self.grade_recommendation}
 
 📊 *Levels:*
 Entry Zone: {self.entry_zone[0]:.5f} - {self.entry_zone[1]:.5f}
@@ -201,7 +245,7 @@ Risk:Reward: 1:{self.risk_reward_ratio:.1f}
 
 📋 *Analysis:*
 {factors_text}
-
+{edge_text}
 MTF Bias: {self.mtf_bias.title()}
 Zone: {self.premium_discount_zone.title()}
 Kill Zone: {'✅ ' + self.kill_zone_name if self.kill_zone_active else '❌'}
