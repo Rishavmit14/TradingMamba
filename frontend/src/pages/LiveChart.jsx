@@ -39,15 +39,16 @@ const TIMEFRAMES = [
 ];
 
 // Smart Money concept descriptions (short names for display)
+// These are now dynamically shown based on ML training status
 const CONCEPT_INFO = {
-  'FVG': { name: 'Fair Value Gap', color: '#ffd700', description: 'Price imbalance zone' },
-  'OB': { name: 'Order Block', color: '#26a69a', description: 'Institutional entry zone' },
-  'BOS': { name: 'Break of Structure', color: '#4fc3f7', description: 'Trend continuation' },
-  'CHoCH': { name: 'Change of Character', color: '#ff9800', description: 'Trend reversal signal' },
-  'EQH': { name: 'Equal Highs', color: '#ef5350', description: 'Buy-side liquidity' },
-  'EQL': { name: 'Equal Lows', color: '#66bb6a', description: 'Sell-side liquidity' },
-  'OTE': { name: 'Optimal Trade Entry', color: '#9c27b0', description: 'Fib retracement zone' },
-  'LIQ': { name: 'Liquidity Sweep', color: '#e91e63', description: 'Stop hunt pattern' },
+  'fvg': { name: 'Fair Value Gap', short: 'FVG', color: '#ffd700', description: 'Price imbalance zone' },
+  'order_block': { name: 'Order Block', short: 'OB', color: '#26a69a', description: 'Institutional entry zone' },
+  'breaker_block': { name: 'Breaker Block', short: 'BB', color: '#ff6b6b', description: 'Failed order block' },
+  'market_structure': { name: 'Market Structure', short: 'BOS/CHoCH', color: '#4fc3f7', description: 'Trend continuation/reversal' },
+  'support_resistance': { name: 'Support/Resistance', short: 'S/R', color: '#9c27b0', description: 'Key price levels' },
+  'liquidity': { name: 'Liquidity', short: 'LIQ', color: '#e91e63', description: 'Stop hunt zones' },
+  'mitigation_block': { name: 'Mitigation Block', short: 'MB', color: '#00bcd4', description: 'Mitigation zone' },
+  'rejection_block': { name: 'Rejection Block', short: 'RB', color: '#ff9800', description: 'Rejection zone' },
 };
 
 // Map backend pattern types to display names
@@ -362,24 +363,39 @@ function LiveChart() {
           const analysisData = await getSignalAnalysis(symbol, timeframe);
           setAnalysis(analysisData);
 
-          if (analysisData?.patterns && candlesDataRef.current.length > 0 && analysisData?.signal?.direction) {
-            const signalDirection = analysisData.signal.direction;
-            const relevantPatterns = analysisData.patterns.filter(p => {
-              const pt = p.pattern_type;
-              if (signalDirection === 'bullish') {
-                return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows';
-              } else if (signalDirection === 'bearish') {
-                return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs';
-              }
-              return false;
-            }).slice(-10);
+          // Only draw patterns and price lines if ML is trained
+          const isMlTrained = analysisData?.ml_status === 'trained';
+
+          if (isMlTrained && analysisData?.patterns && analysisData.patterns.length > 0 && candlesDataRef.current.length > 0) {
+            const signalDirection = analysisData?.signal?.direction;
+            let relevantPatterns;
+
+            if (signalDirection) {
+              // Filter patterns based on signal direction
+              relevantPatterns = analysisData.patterns.filter(p => {
+                const pt = p.pattern_type;
+                if (signalDirection === 'bullish') {
+                  return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows';
+                } else if (signalDirection === 'bearish') {
+                  return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs';
+                }
+                return false;
+              }).slice(-10);
+            } else {
+              // No signal direction - show all patterns (most recent 10)
+              relevantPatterns = analysisData.patterns.slice(-10);
+            }
 
             analysisPatternsRef.current = relevantPatterns;
             setTimeout(() => drawPatternBoxes(relevantPatterns, candlesDataRef.current), 200);
+          } else {
+            // Clear patterns if ML not trained or no patterns
+            analysisPatternsRef.current = [];
+            clearPatternOverlays();
           }
 
-          // Add price lines
-          if (analysisData?.signal && candlestickSeriesRef.current) {
+          // Add price lines only if ML is trained
+          if (isMlTrained && analysisData?.signal && candlestickSeriesRef.current) {
             const signal = analysisData.signal;
             priceLinesRef.current.forEach(line => {
               try { candlestickSeriesRef.current.removePriceLine(line); } catch (e) {}
@@ -404,6 +420,12 @@ function LiveChart() {
                 color: '#22c55e', lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: `TP${idx + 1}`,
               }));
             });
+          } else if (!isMlTrained) {
+            // Clear price lines if ML not trained
+            priceLinesRef.current.forEach(line => {
+              try { candlestickSeriesRef.current?.removePriceLine(line); } catch (e) {}
+            });
+            priceLinesRef.current = [];
           }
         } catch (err) {
           console.log('Analysis not available:', err.message);
@@ -616,99 +638,90 @@ function LiveChart() {
             )}
           </div>
 
-          {/* Smart Money Analysis Summary */}
-          {analysis?.signal && !loading && (
+          {/* ML Not Trained Notice */}
+          {analysis?.ml_status === 'not_trained' && !loading && (
+            <div className="mt-4 p-4 bg-amber-500/10 rounded-xl border border-amber-500/30">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-amber-400">AI Not Trained</h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    AI analysis is disabled. Go to Dashboard → ML Training Manager and train from ICT videos to enable pattern detection and signal generation.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* AI Analysis Summary - Based on ML's learned knowledge from ICT videos */}
+          {analysis?.signal && analysis?.ml_status === 'trained' && !loading && (
             <div className="mt-4 p-4 bg-slate-900/50 rounded-xl border border-slate-700/50">
               <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
                 <Layers className="w-4 h-4 text-indigo-400" />
-                Smart Money Analysis Summary
+                AI Analysis Summary
+                <span className="text-xs text-slate-500 ml-auto">Based on ML's learned ICT knowledge</span>
               </h3>
 
               <div className="space-y-4 text-sm">
-                {/* Entry Zone Explanation */}
+                {/* ML Reasoning Section - Shows WHY based on learned knowledge */}
+                {analysis.ml_reasoning && (
+                  <div className="p-3 rounded-lg bg-indigo-500/5 border border-indigo-500/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Eye className="w-4 h-4 text-indigo-400" />
+                      <span className="font-semibold text-indigo-400">ML Analysis Reasoning</span>
+                    </div>
+                    <div className="text-slate-300 leading-relaxed whitespace-pre-line text-xs">
+                      {analysis.ml_reasoning}
+                    </div>
+                  </div>
+                )}
+
+                {/* Entry Zone Explanation - From ML Knowledge */}
                 {analysis.signal.entry_zone && (
                   <div className="p-3 rounded-lg bg-blue-500/5 border border-blue-500/20">
                     <div className="flex items-center gap-2 mb-2">
                       <Crosshair className="w-4 h-4 text-blue-400" />
                       <span className="font-semibold text-blue-400">Entry Zone: {formatPrice(analysis.signal.entry_zone[0])} - {formatPrice(analysis.signal.entry_zone[1])}</span>
                     </div>
-                    <p className="text-slate-300 leading-relaxed">
-                      {analysis.signal.direction === 'bullish' ? (
-                        <>
-                          The ML identified this as a <span className="text-yellow-400 font-medium">bullish Order Block (OB)</span> zone where institutional buying previously occurred.
-                          Price has swept below an <span className="text-green-400 font-medium">Equal Low (EQL)</span> liquidity pool, grabbing stop losses from retail traders.
-                          Combined with a <span className="text-yellow-400 font-medium">Fair Value Gap (FVG)</span> in this zone, the ML expects a reversal to the upside as smart money accumulates positions.
-                        </>
-                      ) : analysis.signal.direction === 'bearish' ? (
-                        <>
-                          The ML identified this as a <span className="text-yellow-400 font-medium">bearish Order Block (OB)</span> zone where institutional selling previously occurred.
-                          Price has swept above an <span className="text-red-400 font-medium">Equal High (EQH)</span> liquidity pool, triggering stop losses from retail shorts.
-                          Combined with a <span className="text-yellow-400 font-medium">Fair Value Gap (FVG)</span> imbalance, the ML expects distribution and a move to the downside.
-                        </>
-                      ) : (
-                        <>The ML is analyzing price action for potential Smart Money accumulation or distribution zones.</>
-                      )}
+                    <p className="text-slate-300 leading-relaxed text-xs">
+                      {analysis.entry_exit_reasoning?.entry_reason ||
+                        `Entry based on ${analysis.ml_patterns_detected?.join(', ') || 'market structure'} patterns detected by ML.`}
                     </p>
                   </div>
                 )}
 
-                {/* Stop Loss Explanation */}
+                {/* Stop Loss Explanation - From ML Knowledge */}
                 {analysis.signal.stop_loss && (
                   <div className="p-3 rounded-lg bg-red-500/5 border border-red-500/20">
                     <div className="flex items-center gap-2 mb-2">
                       <Shield className="w-4 h-4 text-red-400" />
                       <span className="font-semibold text-red-400">Stop Loss: {formatPrice(analysis.signal.stop_loss)}</span>
                     </div>
-                    <p className="text-slate-300 leading-relaxed">
-                      {analysis.signal.direction === 'bullish' ? (
-                        <>
-                          Stop loss is placed <span className="text-red-400 font-medium">below the Order Block</span> and recent swing low structure.
-                          This level is positioned beyond the <span className="text-green-400 font-medium">liquidity pool</span> that smart money targeted.
-                          A <span className="text-cyan-400 font-medium">Break of Structure (BOS)</span> below this level would invalidate the bullish setup.
-                        </>
-                      ) : analysis.signal.direction === 'bearish' ? (
-                        <>
-                          Stop loss is placed <span className="text-red-400 font-medium">above the Order Block</span> and recent swing high structure.
-                          This protects against a false <span className="text-cyan-400 font-medium">Change of Character (CHoCH)</span>.
-                          A break above this level would invalidate the bearish thesis.
-                        </>
-                      ) : (
-                        <>Stop loss is strategically placed beyond key structure levels.</>
-                      )}
+                    <p className="text-slate-300 leading-relaxed text-xs">
+                      {analysis.entry_exit_reasoning?.stop_reason ||
+                        'Stop loss placed beyond key structure level based on ML analysis.'}
                     </p>
                   </div>
                 )}
 
-                {/* Take Profit Explanation */}
+                {/* Take Profit Explanation - From ML Knowledge */}
                 {analysis.signal.take_profit && analysis.signal.take_profit.length > 0 && (
                   <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
                     <div className="flex items-center gap-2 mb-2">
                       <Target className="w-4 h-4 text-emerald-400" />
                       <span className="font-semibold text-emerald-400">Take Profit Targets</span>
                     </div>
-                    <p className="text-slate-300 leading-relaxed mb-2">
-                      {analysis.signal.direction === 'bullish' ? (
-                        <>
-                          Take profit levels are set at <span className="text-red-400 font-medium">buy-side liquidity pools (Equal Highs)</span> where retail traders have their stop losses clustered.
-                          Smart money will target these levels to distribute positions.
-                        </>
-                      ) : analysis.signal.direction === 'bearish' ? (
-                        <>
-                          Take profit levels are set at <span className="text-green-400 font-medium">sell-side liquidity pools (Equal Lows)</span> where retail traders have their stop losses.
-                          Smart money will drive price to these levels to cover short positions.
-                        </>
-                      ) : (
-                        <>Take profit levels are identified at key liquidity zones.</>
-                      )}
+                    <p className="text-slate-300 leading-relaxed mb-2 text-xs">
+                      {analysis.entry_exit_reasoning?.target_reason ||
+                        'Targets at liquidity levels identified by ML.'}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2">
                       {analysis.signal.take_profit.map((tp, idx) => (
                         <div key={idx} className="p-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-center">
                           <div className="text-xs text-slate-400">TP{idx + 1}</div>
                           <div className="font-mono text-emerald-400 font-semibold">{formatPrice(tp)}</div>
-                          <div className="text-xs text-slate-500">
-                            {idx === 0 ? 'First Liquidity' : idx === 1 ? 'Key Structure' : 'Extended Target'}
-                          </div>
                         </div>
                       ))}
                     </div>
@@ -837,20 +850,102 @@ function LiveChart() {
               </div>
             )}
 
-            {/* Concepts Legend */}
+            {/* ML Knowledge Status */}
             <div className="card-dark rounded-xl p-4">
               <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-purple-400" /> Smart Money Concepts
+                <Layers className="w-4 h-4 text-purple-400" /> ML Pattern Knowledge
               </h3>
-              <div className="space-y-2">
-                {Object.entries(CONCEPT_INFO).map(([key, info]) => (
-                  <div key={key} className="flex items-center gap-2 text-xs">
-                    <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
-                    <span className="text-white font-medium">{key}</span>
-                    <span className="text-slate-500">- {info.description}</span>
+
+              {analysis?.ml_status === 'trained' ? (
+                <div className="space-y-3">
+                  {/* Learned Patterns - Show all patterns from ml_confidence_scores */}
+                  {analysis?.ml_confidence_scores && Object.keys(analysis.ml_confidence_scores).length > 0 && (
+                    <div>
+                      <div className="text-xs text-emerald-400 font-semibold mb-2 flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        Patterns ML Has Learned ({Object.keys(analysis.ml_confidence_scores).length})
+                      </div>
+                      <div className="space-y-1.5">
+                        {Object.entries(analysis.ml_confidence_scores)
+                          .sort(([,a], [,b]) => b - a)  // Sort by confidence descending
+                          .map(([pattern, confidence]) => {
+                          const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#9ca3af', description: 'Pattern' };
+                          const isActivelyDetected = analysis.ml_patterns_detected?.includes(pattern);
+                          return (
+                            <div key={pattern} className={`flex items-center justify-between text-xs p-2 rounded-lg ${
+                              isActivelyDetected
+                                ? 'bg-emerald-500/10 border border-emerald-500/20'
+                                : 'bg-slate-800/50 border border-slate-600/30'
+                            }`}>
+                              <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
+                                <span className="text-white font-medium">{info.short}</span>
+                                {isActivelyDetected && (
+                                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-16 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                                  <div
+                                    className={`h-full rounded-full ${isActivelyDetected ? 'bg-emerald-400' : 'bg-slate-500'}`}
+                                    style={{ width: `${Math.round(confidence * 100)}%` }}
+                                  />
+                                </div>
+                                <span className={`font-mono w-10 text-right ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-400'}`}>
+                                  {Math.round(confidence * 100)}%
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Not Yet Learned Patterns */}
+                  {analysis?.ml_patterns_not_learned && analysis.ml_patterns_not_learned.length > 0 && (
+                    <div>
+                      <div className="text-xs text-amber-400 font-semibold mb-2 flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                        Not Yet Learned
+                      </div>
+                      <div className="space-y-1.5">
+                        {analysis.ml_patterns_not_learned.map((pattern) => {
+                          const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#6b7280', description: 'Pattern' };
+                          return (
+                            <div key={pattern} className="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-800/50 border border-slate-700/50 opacity-60">
+                              <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 rounded bg-slate-600 border border-slate-500" />
+                                <span className="text-slate-400 font-medium">{info.short}</span>
+                              </div>
+                              <span className="text-slate-500 text-[10px]">Train to enable</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ML Knowledge Summary */}
+                  {analysis?.ml_knowledge_status && (
+                    <div className="mt-3 pt-3 border-t border-slate-700/50">
+                      <p className="text-[10px] text-slate-500 leading-relaxed">
+                        {analysis.ml_knowledge_status}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center py-4">
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-amber-500/20 flex items-center justify-center">
+                    <AlertCircle className="w-6 h-6 text-amber-400" />
                   </div>
-                ))}
-              </div>
+                  <p className="text-xs text-amber-400 font-semibold mb-1">ML Not Trained</p>
+                  <p className="text-[10px] text-slate-500">
+                    Train the ML from YouTube videos to enable pattern detection.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}

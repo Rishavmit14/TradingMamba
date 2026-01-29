@@ -1,0 +1,584 @@
+{
+  "video_id": "v6ATva5DF0I",
+  "title": "OTE Pattern Recognition Series - Vol. 02",
+  "total_frames_analyzed": 50,
+  "chart_frames": 33,
+  "all_patterns": [
+    {
+      "timestamp": 9.0,
+      "type": "FVG",
+      "location": "description",
+      "characteristic": "bullish",
+      "significance": "low"
+    },
+    {
+      "timestamp": 18.0,
+      "type": "FVG",
+      "location": "EUR/USD chart",
+      "characteristic": "Fair Value Gaps",
+      "significance": "high"
+    },
+    {
+      "timestamp": 24.0,
+      "type": "FVG",
+      "location": "3700 to 3850 (red zone)",
+      "characteristic": "bearish"
+    },
+    {
+      "timestamp": 27.0,
+      "type": "FVG",
+      "location": "3:05 - 3:20, 6:10 - 6:20, 9:20 - 9:30",
+      "characteristic": "green and red candles indicate the price structure"
+    },
+    {
+      "timestamp": 27.0,
+      "type": "Order Blocks",
+      "location": "4:45 - 4:55, 7:45 - 7:55",
+      "characteristic": "these are zones where large trades or orders may have occurred"
+    },
+    {
+      "timestamp": 33.0,
+      "type": "FVG",
+      "location": "The chart shows fair value gaps (FVG) which are price imbalances created by large order blocks or breaker blocks that occur in the market structure. These gaps represent areas where a significant amount of buy/sell orders have been executed, creating a visual representation of institutional trading behavior."
+    },
+    {
+      "timestamp": 36.0,
+      "type": "FVG",
+      "location": "description",
+      "characteristic": "bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 39.0,
+      "type": "FVG",
+      "location": "describe location",
+      "characteristic": "bullish",
+      "significance": "high/medium/low"
+    },
+    {
+      "timestamp": 48.0,
+      "type": "FVG",
+      "location": "not detected in this screenshot"
+    },
+    {
+      "timestamp": 48.0,
+      "type": "Order Block",
+      "location": "around 1.5204, marked with a rectangular box on the right side of the chart"
+    },
+    {
+      "timestamp": 54.0,
+      "type": "Order Block",
+      "location": "central part of the chart",
+      "characteristic": "significant price action zone",
+      "significance": "high"
+    },
+    {
+      "timestamp": 60.0,
+      "type": "FVG",
+      "location": "Around the current price level",
+      "characteristic": "Bearish/Bearish/Neutral",
+      "significance": "High"
+    },
+    {
+      "timestamp": 60.0,
+      "type": "Order Blocks",
+      "location": "Not fully visible in the image provided",
+      "characteristic": "Not applicable",
+      "significance": "Low"
+    },
+    {
+      "timestamp": 66.0,
+      "type": "FVG",
+      "location": "1.05 - 1.23 range",
+      "characteristic": "bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 69.0,
+      "type": "FVG",
+      "location": "Moving averages converging",
+      "characteristic": "Both moving averges are bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 72.0,
+      "type": "FVG",
+      "location": "describe the Fair Value Gap pattern here",
+      "characteristic": " bullish/bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 75.0,
+      "type": "FVG",
+      "location": "lower left corner of chart",
+      "characteristic": "bearish",
+      "significance": "low"
+    },
+    {
+      "timestamp": 75.0,
+      "type": "Support/Resistance",
+      "location": "notable levels on chart",
+      "characteristic": "price levels",
+      "significance": "high"
+    },
+    {
+      "timestamp": 78.0,
+      "type": "FVG",
+      "location": "lower left of chart",
+      "characteristic": "bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 81.0,
+      "type": "Order Block",
+      "location": "Central part of the chart with a cluster of candle bodies, indicating an area where there was significant activity and likely institutional interest"
+    },
+    {
+      "timestamp": 81.0,
+      "type": "Breaker Block",
+      "location": "Above the order block, showing resistance that had to be broken for the price to move higher"
+    },
+    {
+      "timestamp": 84.0,
+      "type": "FVG",
+      "location": "Fair Value Gap",
+      "characteristic": "bearish",
+      "significance": "medium"
+    },
+    {
+      "timestamp": 87.0,
+      "type": "FVG",
+      "location": "lower left",
+      "characteristic": "bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 87.0,
+      "type": "Order Block",
+      "location": "upper right",
+      "characteristic": "institutional zone with breaker on top",
+      "significance": "medium"
+    },
+    {
+      "timestamp": 90.0,
+      "type": "FVG",
+      "location": "4-hour chart shown in the image, between 1.268 and 1.270 (blue box)",
+      "characteristic": "bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 96.0,
+      "type": "FVG",
+      "location": "3rd candle from the right, red and green boxes around it",
+      "characteristic": "bearish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 99.0,
+      "type": "FVG",
+      "location": "describe the chart and patterns",
+      "characteristic": "Fair Value Gap",
+      "significance": "high"
+    },
+    {
+      "timestamp": 105.0,
+      "type": "FVG",
+      "location": "top right of image",
+      "characteristic": "high/medium/low",
+      "significance": "high"
+    },
+    {
+      "timestamp": 111.0,
+      "type": "FVG",
+      "location": "description",
+      "characteristic": "bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 114.0,
+      "type": "FVG",
+      "location": "high",
+      "characteristic": "bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 116.72,
+      "type": "FVG",
+      "location": "Not directly visible in the image, but seems to be implied by the tutor's statement 'Thursday's trading goes to 106.657 so we went above Wednesday's high.' This suggests a Fair Value Gap (FVG) pattern might have been identified with price imbalance towards bullish territory after breaking above the previous high.",
+      "characteristic": "Bullish",
+      "significance": "High"
+    },
+    {
+      "timestamp": 120.0,
+      "type": "FVG",
+      "location": "high. Look at the high. Here's right here look at this number here. Wednesday's high comes in at 106.629 Thursday's trading goes to 106.657 so we went above Wednesday's high.",
+      "characteristic": "Bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 126.0,
+      "type": "FVG",
+      "location": "106.657",
+      "characteristic": "upside expansion on high of Wednesday"
+    },
+    {
+      "timestamp": 126.0,
+      "type": "FVG",
+      "location": "106.629",
+      "characteristic": "possible support/resistance"
+    },
+    {
+      "timestamp": 129.0,
+      "type": "FVG",
+      "location": "high/medium/low",
+      "characteristic": "potential bullish continuation",
+      "significance": "high"
+    },
+    {
+      "timestamp": 132.0,
+      "type": "FVG",
+      "location": "Moving Average Convergence Divergence (MACD) with the signal line crossing above the zero line and the histogram being above the zero line",
+      "characteristic": "bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 135.0,
+      "type": "Order Blocks",
+      "location": "Thursday's high (106.657 pipettes)",
+      "characteristic": "Significant support/resistance level"
+    },
+    {
+      "timestamp": 138.0,
+      "type": "FVG",
+      "location": "1.066",
+      "characteristic": "potentially bullish gap"
+    },
+    {
+      "timestamp": 141.0,
+      "type": "FVG",
+      "location": "106.657 pipettes",
+      "characteristic": "bullish",
+      "significance": "high"
+    },
+    {
+      "timestamp": 147.0,
+      "type": "FVG",
+      "location": "106.657",
+      "characteristic": "bullish",
+      "significance": "high"
+    }
+  ],
+  "pattern_frequency": {
+    "FVG": 31,
+    "Order Blocks": 3,
+    "Order Block": 4,
+    "Support/Resistance": 1,
+    "Breaker Block": 1
+  },
+  "key_moments": [
+    {
+      "timestamp": 18.0,
+      "teaching_point": "Explanation of FVG pattern in context of the EUR/USD chart",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "EUR/USD chart",
+          "characteristic": "Fair Value Gaps",
+          "significance": "high"
+        }
+      ],
+      "transcript": "Welcome back folks, this is the second of a series of 20 videos making up the ICT optimal trade entry pattern recognition series. And we're looking at the Japanese yen today or specifically dollar yen."
+    },
+    {
+      "timestamp": 24.0,
+      "teaching_point": "Recognizing fair value gaps as a trading pattern.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "3700 to 3850 (red zone)",
+          "characteristic": "bearish"
+        }
+      ],
+      "transcript": "trade entry pattern recognition series. And we're looking at the Japanese yen today or specifically dollar yen. Alright so this is our daily chart and I want you to take a look at this chart and consider"
+    },
+    {
+      "timestamp": 27.0,
+      "teaching_point": "analyzing the daily chart of the Japanese yen to identify patterns and structures for potential trading opportunities",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "3:05 - 3:20, 6:10 - 6:20, 9:20 - 9:30",
+          "characteristic": "green and red candles indicate the price structure"
+        },
+        {
+          "type": "Order Blocks",
+          "location": "4:45 - 4:55, 7:45 - 7:55",
+          "characteristic": "these are zones where large trades or orders may have occurred"
+        }
+      ],
+      "transcript": "And we're looking at the Japanese yen today or specifically dollar yen. Alright so this is our daily chart and I want you to take a look at this chart and consider"
+    },
+    {
+      "timestamp": 48.0,
+      "teaching_point": "the tutor is teaching the concept of using swing highs/lows and reaction price points in trading",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "not detected in this screenshot"
+        },
+        {
+          "type": "Order Block",
+          "location": "around 1.5204, marked with a rectangular box on the right side of the chart"
+        }
+      ],
+      "transcript": "Alright so we're going to take our fit from this low to this high. This is a swing low swing high. And we get to our reaction price points."
+    },
+    {
+      "timestamp": 54.0,
+      "teaching_point": "Explaining how to recognize and use Order Blocks in technical analysis.",
+      "patterns": [
+        {
+          "type": "Order Block",
+          "location": "central part of the chart",
+          "characteristic": "significant price action zone",
+          "significance": "high"
+        }
+      ],
+      "transcript": "This is a swing low swing high. And we get to our reaction price points. Low to high."
+    },
+    {
+      "timestamp": 66.0,
+      "teaching_point": "Tutor is demonstrating how price of entry trades into optimal trade entry for daily time frame.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "1.05 - 1.23 range",
+          "characteristic": "bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "Okay and all we'll do is continue this out in time and you'll see how price of entry trades into the optimal trade entry for the daily time frame."
+    },
+    {
+      "timestamp": 69.0,
+      "teaching_point": "Demonstrating how to identify entry points based on price levels and market structure",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "Moving averages converging",
+          "characteristic": "Both moving averges are bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "Okay and all we'll do is continue this out in time and you'll see how price of entry trades into the optimal trade entry for the daily time frame."
+    },
+    {
+      "timestamp": 75.0,
+      "teaching_point": "Demonstration of how to identify fair value gaps and potential entry points for trading based on the price action",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "lower left corner of chart",
+          "characteristic": "bearish",
+          "significance": "low"
+        },
+        {
+          "type": "Support/Resistance",
+          "location": "notable levels on chart",
+          "characteristic": "price levels",
+          "significance": "high"
+        }
+      ],
+      "transcript": "of entry trades into the optimal trade entry for the daily time frame. Alright so if price were lower than this on this swing we would use this low drug from here"
+    },
+    {
+      "timestamp": 81.0,
+      "teaching_point": "The tutor is teaching about identifying potential entry points for trades based on market structure and patterns like order blocks",
+      "patterns": [
+        {
+          "type": "Order Block",
+          "location": "Central part of the chart with a cluster of candle bodies, indicating an area where there was significant activity and likely institutional interest"
+        },
+        {
+          "type": "Breaker Block",
+          "location": "Above the order block, showing resistance that had to be broken for the price to move higher"
+        }
+      ],
+      "transcript": "of entry trades into the optimal trade entry for the daily time frame. Alright so if price were lower than this on this swing we would use this low drug from here"
+    },
+    {
+      "timestamp": 87.0,
+      "teaching_point": "How to identify and use support and resistance levels as well as order blocks for trading",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "lower left",
+          "characteristic": "bearish",
+          "significance": "high"
+        },
+        {
+          "type": "Order Block",
+          "location": "upper right",
+          "characteristic": "institutional zone with breaker on top",
+          "significance": "medium"
+        }
+      ],
+      "transcript": "Alright so if price were lower than this on this swing we would use this low drug from here up to here but you want to work with what range you have available."
+    },
+    {
+      "timestamp": 96.0,
+      "teaching_point": "The tutor is explaining the concept of working with the range available, and how to identify and utilize Fair Value Gaps (FVGs) in trading based on a specific chart pattern.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "3rd candle from the right, red and green boxes around it",
+          "characteristic": "bearish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "up to here but you want to work with what range you have available. So in the yen on the daily we know that we entered into or below the 60% or 80% level three days ago and yesterday or Thursday's trading we pierced the previous days high or Wednesday's"
+    },
+    {
+      "timestamp": 99.0,
+      "teaching_point": "The tutor is demonstrating how to identify and utilize Fair Value Gaps for trading opportunities in the context of daily charts.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "describe the chart and patterns",
+          "characteristic": "Fair Value Gap",
+          "significance": "high"
+        }
+      ],
+      "transcript": "So in the yen on the daily we know that we entered into or below the 60% or 80% level three days ago and yesterday or Thursday's trading we pierced the previous days high or Wednesday's"
+    },
+    {
+      "timestamp": 111.0,
+      "teaching_point": "A discussion on identifying and analyzing highs in trading, specifically focusing on how Wednesday's high was pierced.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "description",
+          "characteristic": "bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "three days ago and yesterday or Thursday's trading we pierced the previous days high or Wednesday's high. Look at the high. Here's right here look at this number here. Wednesday's high comes in at"
+    },
+    {
+      "timestamp": 116.72,
+      "teaching_point": "The tutor is demonstrating how to identify and understand FVG patterns, as well as how to follow price levels to make trading decisions.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "Not directly visible in the image, but seems to be implied by the tutor's statement 'Thursday's trading goes to 106.657 so we went above Wednesday's high.' This suggests a Fair Value Gap (FVG) pattern might have been identified with price imbalance towards bullish territory after breaking above the previous high.",
+          "characteristic": "Bullish",
+          "significance": "High"
+        }
+      ],
+      "transcript": "106.629 Thursday's trading goes to 106.657 so we went above Wednesday's high."
+    },
+    {
+      "timestamp": 120.0,
+      "teaching_point": "The tutor is teaching about identifying the high and how it relates to trading strategies.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "high. Look at the high. Here's right here look at this number here. Wednesday's high comes in at 106.629 Thursday's trading goes to 106.657 so we went above Wednesday's high.",
+          "characteristic": "Bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "high. Look at the high. Here's right here look at this number here. Wednesday's high comes in at 106.629 Thursday's trading goes to 106.657 so we went above Wednesday's high."
+    },
+    {
+      "timestamp": 132.0,
+      "teaching_point": "Identifying bullish patterns and movements, such as the moving average crossover for a potential entry point.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "Moving Average Convergence Divergence (MACD) with the signal line crossing above the zero line and the histogram being above the zero line",
+          "characteristic": "bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "106.629 Thursday's trading goes to 106.657 so we went above Wednesday's high. We could potentially be seeing a turn or an expansion on the upside. It's already shown a willingness to go higher than the previous days range."
+    },
+    {
+      "timestamp": 135.0,
+      "teaching_point": "Potential for a continuation of the upward trend and Thursday's high being significant",
+      "patterns": [
+        {
+          "type": "Order Blocks",
+          "location": "Thursday's high (106.657 pipettes)",
+          "characteristic": "Significant support/resistance level"
+        }
+      ],
+      "transcript": "We could potentially be seeing a turn or an expansion on the upside. It's already shown a willingness to go higher than the previous days range. So now we're going to look at Thursday's high which is 106.657 pipettes."
+    },
+    {
+      "timestamp": 141.0,
+      "teaching_point": "Highlighting the significance of Thursday's high as a bullish pattern within a ranging market structure",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "106.657 pipettes",
+          "characteristic": "bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "It's already shown a willingness to go higher than the previous days range. So now we're going to look at Thursday's high which is 106.657 pipettes."
+    },
+    {
+      "timestamp": 147.0,
+      "teaching_point": "The tutor is teaching about the concept of identifying important levels on a chart, specifically focusing on the high price from Thursday.",
+      "patterns": [
+        {
+          "type": "FVG",
+          "location": "106.657",
+          "characteristic": "bullish",
+          "significance": "high"
+        }
+      ],
+      "transcript": "So now we're going to look at Thursday's high which is 106.657 pipettes. Okay so that's our level and we're going to drop down into a five minute chart. Alright so here's our dollar yen five minute chart."
+    }
+  ],
+  "visual_concepts": [
+    {
+      "concept": "FVG",
+      "visual_example_timestamp": 18.0,
+      "frame_path": "/Users/kumarrishav/Desktop/TradingMamba/data/video_frames/v6ATva5DF0I/frame_18.00.jpg",
+      "description": "Fair Value Gaps",
+      "context": "Welcome back folks, this is the second of a series of 20 videos making up the ICT optimal trade entry pattern recognition series. And we're looking at the Japanese yen today or specifically dollar yen."
+    },
+    {
+      "concept": "Order Blocks",
+      "visual_example_timestamp": 27.0,
+      "frame_path": "/Users/kumarrishav/Desktop/TradingMamba/data/video_frames/v6ATva5DF0I/frame_27.00.jpg",
+      "description": "these are zones where large trades or orders may have occurred",
+      "context": "And we're looking at the Japanese yen today or specifically dollar yen. Alright so this is our daily chart and I want you to take a look at this chart and consider"
+    },
+    {
+      "concept": "Order Block",
+      "visual_example_timestamp": 48.0,
+      "frame_path": "/Users/kumarrishav/Desktop/TradingMamba/data/video_frames/v6ATva5DF0I/frame_48.00.jpg",
+      "description": "",
+      "context": "Alright so we're going to take our fit from this low to this high. This is a swing low swing high. And we get to our reaction price points."
+    },
+    {
+      "concept": "Support/Resistance",
+      "visual_example_timestamp": 75.0,
+      "frame_path": "/Users/kumarrishav/Desktop/TradingMamba/data/video_frames/v6ATva5DF0I/frame_75.00.jpg",
+      "description": "price levels",
+      "context": "of entry trades into the optimal trade entry for the daily time frame. Alright so if price were lower than this on this swing we would use this low drug from here"
+    },
+    {
+      "concept": "Breaker Block",
+      "visual_example_timestamp": 81.0,
+      "frame_path": "/Users/kumarrishav/Desktop/TradingMamba/data/video_frames/v6ATva5DF0I/frame_81.00.jpg",
+      "description": "",
+      "context": "of entry trades into the optimal trade entry for the daily time frame. Alright so if price were lower than this on this swing we would use this low drug from here"
+    }
+  ],
+  "comparison_examples": [],
+  "analyzed_at": "2026-01-28T15:58:13.453278"
+}

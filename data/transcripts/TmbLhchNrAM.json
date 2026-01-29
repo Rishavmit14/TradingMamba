@@ -1,0 +1,522 @@
+{
+  "video_id": "TmbLhchNrAM",
+  "full_text": "Okay, folks, welcome back. This is part three of the continuing series of the ICT OptumTrade entry pattern recognition series. And we're going to step outside of 4x, as I mentioned, one of the central tents to this pattern is it's not limited to the 4x. So I'm going to show you how I can use it in the futures market. This is an index futures and it's the delivery contract of June 2020 of the S&P E-Mini futures. All right, so we want to look for a signature in price that would lend well to aiming for our previous days higher low. And again, it's focusing primarily on a very short term timeframe, but the pattern can be scaled to whatever timeframe you really want. Looking at the price action here, you can see that we have a swing low, swing high, and a retracement here. And price was underway going higher. And there's no necessity for you to say, I have to be in this here or I have to be in this here, or I can't participate in a market like this and be a buyer, which is not true. So I want you to take a look at the framework here. So presently in a larger daily optimal trade entry, just fell short of hitting the 79% tradesmen level. And again, the magic is not the fib. It's the target of liquidity. All I'm doing the fib just helps me frame an underlying context. It's not that you need these levels. It just gives you a framework. So the framework is we have an old low, old high retracement and it starts to move higher. So at one of the daily chart, where is the likely momentum? It's going higher. Okay, great. It could be reaching to this old high here or it could fail to run that high or it could go through it and keep on going higher. In this instance, we don't care. We just know that the likelihood is it's probably going to run a previous days high. So today's Monday of May, 2020, May 11th specifically. So here's Friday, May 8th, 2020. And we're going to denote that high. So that price level is going to be significant when we drop down the lower time frame. Okay, so here is the S&P in many futures for June, 2020, five minute chart. And this is a naked chart. So that way you got a chance to take a look at this before I put the lipstick on this particular example. And you can pause the video here. All right, so if you haven't paused the video and studied and looked for what I'm going to cover before I actually show it to you, you're going to miss that opportunity now. The big figure, 2.900 price trades down into that during the New York session. Whenever a big figure is swept either down into it or up into it, it will generally create some kind of a tradable bounce or a retracement. And while it may be a very short term, a short lived, it still gives the opportunity for a quick snap in marketplace where you can take something out of it. Since this is a futures contract and it's not a foreign exchange pair, we can't talk in terms of PIP. So we're going to be using just the range. Now, if you look closely, you can see inside of the New York session, the idea is the beginning is here at 8.30 and the end is again 11 o'clock. It's a static time. It doesn't change. Everything that I was showing you thus far, we're just doing the same thing every single day and you'll see this pattern forms every single day. So let's take a look at the FIB over top of this right here. This is the optimal trade entry. The market rallies back above. The 29-bit figure comes back down into a short block, overlapping with a 29-hundred-big figure inside of our specific time of day, the New York session. Okay? 8.30 in the morning until 11 o'clock in the morning, New York local time. This pattern is seen with the FIB. So we trade down into the 70.5 level, which is the sweet spot by my definition for optimal trade entry. And you could be a buyer there. And the market comes back down and does give multiple entries. You can take it on here, which is still inside of the New York session. Time-winded that we've created for this pattern. And we have really three candles here, here and here where it meets optimal trade entry. 62 or less down to 79. And you could be a buyer there. We're going to use the range here. Okay? So 0.5. You could take your first scaling there, partials, and look how it spends a little bit of time consolidating there. And then expands up to 1 to 1 full standard deviation here at 29.22. So being a buyer at around 2900 big figure and getting out with 15 handles in the S&P as a first scalp or scaling, then your secondary exit for a partial could be at 29.22, which is 22 handles in the S&P. Then ultimately, guys, I mentioned in this pattern, this level here on the FIB, if it gets to that price level and runs a specific price point for liquidity, which is the Friday's high, which is we annotated on the daily chart. The market will likely rather want to gravitate towards that old Friday high because the trend is bullish. It's going to want to take liquidity out there because a lot of people are short selling in the S&P. The market has taken up above Friday's high and to the FIB level 2936, the high comes in on this candle at 2937, only off by one handle on the S&P. Then went up again to another opportunity to do so. Again, 2937. So it was only off by one handle, but you could take this idea here instead of reaching for the 2936, round down to the nearest five level. So that would be 2935. So that's 35 handles with as much as one, two, and three partials taken out. But at this point here, I would be out for this particular pattern in this market as an example. Hope you found this insightful until next time. I wish you good luck and good trading.",
+  "segments": [
+    {
+      "start_time": 0.0,
+      "end_time": 12.3,
+      "text": "Okay, folks, welcome back."
+    },
+    {
+      "start_time": 12.3,
+      "end_time": 17.68,
+      "text": "This is part three of the continuing series of the ICT OptumTrade entry pattern recognition"
+    },
+    {
+      "start_time": 17.68,
+      "end_time": 19.56,
+      "text": "series."
+    },
+    {
+      "start_time": 19.56,
+      "end_time": 25.48,
+      "text": "And we're going to step outside of 4x, as I mentioned, one of the central tents to this pattern"
+    },
+    {
+      "start_time": 25.48,
+      "end_time": 28.2,
+      "text": "is it's not limited to the 4x."
+    },
+    {
+      "start_time": 28.2,
+      "end_time": 31.44,
+      "text": "So I'm going to show you how I can use it in the futures market."
+    },
+    {
+      "start_time": 31.44,
+      "end_time": 38.92,
+      "text": "This is an index futures and it's the delivery contract of June 2020 of the S&P E-Mini futures."
+    },
+    {
+      "start_time": 38.92,
+      "end_time": 45.6,
+      "text": "All right, so we want to look for a signature in price that would lend well to aiming for"
+    },
+    {
+      "start_time": 45.6,
+      "end_time": 47.92,
+      "text": "our previous days higher low."
+    },
+    {
+      "start_time": 47.92,
+      "end_time": 53.48,
+      "text": "And again, it's focusing primarily on a very short term timeframe, but the pattern can"
+    },
+    {
+      "start_time": 53.48,
+      "end_time": 56.52,
+      "text": "be scaled to whatever timeframe you really want."
+    },
+    {
+      "start_time": 57.52,
+      "end_time": 62.08,
+      "text": "Looking at the price action here, you can see that we have a swing low, swing high,"
+    },
+    {
+      "start_time": 62.08,
+      "end_time": 64.0,
+      "text": "and a retracement here."
+    },
+    {
+      "start_time": 64.0,
+      "end_time": 66.4,
+      "text": "And price was underway going higher."
+    },
+    {
+      "start_time": 66.4,
+      "end_time": 72.84,
+      "text": "And there's no necessity for you to say, I have to be in this here or I have to be in"
+    },
+    {
+      "start_time": 72.84,
+      "end_time": 80.12,
+      "text": "this here, or I can't participate in a market like this and be a buyer, which is not true."
+    },
+    {
+      "start_time": 80.12,
+      "end_time": 83.24,
+      "text": "So I want you to take a look at the framework here."
+    },
+    {
+      "start_time": 83.24,
+      "end_time": 89.96,
+      "text": "So presently in a larger daily optimal trade entry, just fell short of hitting the 79%"
+    },
+    {
+      "start_time": 89.96,
+      "end_time": 91.36,
+      "text": "tradesmen level."
+    },
+    {
+      "start_time": 91.36,
+      "end_time": 94.36,
+      "text": "And again, the magic is not the fib."
+    },
+    {
+      "start_time": 94.36,
+      "end_time": 96.88,
+      "text": "It's the target of liquidity."
+    },
+    {
+      "start_time": 96.88,
+      "end_time": 101.56,
+      "text": "All I'm doing the fib just helps me frame an underlying context."
+    },
+    {
+      "start_time": 101.56,
+      "end_time": 103.56,
+      "text": "It's not that you need these levels."
+    },
+    {
+      "start_time": 103.56,
+      "end_time": 105.72,
+      "text": "It just gives you a framework."
+    },
+    {
+      "start_time": 105.72,
+      "end_time": 110.88,
+      "text": "So the framework is we have an old low, old high retracement and it starts to move higher."
+    },
+    {
+      "start_time": 110.88,
+      "end_time": 115.68,
+      "text": "So at one of the daily chart, where is the likely momentum?"
+    },
+    {
+      "start_time": 115.68,
+      "end_time": 117.16,
+      "text": "It's going higher."
+    },
+    {
+      "start_time": 117.16,
+      "end_time": 118.92,
+      "text": "Okay, great."
+    },
+    {
+      "start_time": 118.92,
+      "end_time": 123.6,
+      "text": "It could be reaching to this old high here or it could fail to run that high or it could"
+    },
+    {
+      "start_time": 123.6,
+      "end_time": 126.32,
+      "text": "go through it and keep on going higher."
+    },
+    {
+      "start_time": 126.32,
+      "end_time": 128.84,
+      "text": "In this instance, we don't care."
+    },
+    {
+      "start_time": 128.84,
+      "end_time": 133.32,
+      "text": "We just know that the likelihood is it's probably going to run a previous days high."
+    },
+    {
+      "start_time": 133.32,
+      "end_time": 139.28,
+      "text": "So today's Monday of May, 2020, May 11th specifically."
+    },
+    {
+      "start_time": 139.28,
+      "end_time": 143.44,
+      "text": "So here's Friday, May 8th, 2020."
+    },
+    {
+      "start_time": 143.44,
+      "end_time": 145.76,
+      "text": "And we're going to denote that high."
+    },
+    {
+      "start_time": 145.76,
+      "end_time": 148.92,
+      "text": "So that price level is going to be significant when we drop down the lower time frame."
+    },
+    {
+      "start_time": 148.92,
+      "end_time": 154.72,
+      "text": "Okay, so here is the S&P in many futures for June, 2020, five minute chart."
+    },
+    {
+      "start_time": 154.72,
+      "end_time": 156.08,
+      "text": "And this is a naked chart."
+    },
+    {
+      "start_time": 156.08,
+      "end_time": 160.52,
+      "text": "So that way you got a chance to take a look at this before I put the lipstick on this"
+    },
+    {
+      "start_time": 160.52,
+      "end_time": 163.6,
+      "text": "particular example."
+    },
+    {
+      "start_time": 163.6,
+      "end_time": 166.6,
+      "text": "And you can pause the video here."
+    },
+    {
+      "start_time": 167.6,
+      "end_time": 173.04,
+      "text": "All right, so if you haven't paused the video and studied and looked for what I'm going"
+    },
+    {
+      "start_time": 173.04,
+      "end_time": 178.52,
+      "text": "to cover before I actually show it to you, you're going to miss that opportunity now."
+    },
+    {
+      "start_time": 178.52,
+      "end_time": 187.64,
+      "text": "The big figure, 2.900 price trades down into that during the New York session."
+    },
+    {
+      "start_time": 187.64,
+      "end_time": 194.76,
+      "text": "Whenever a big figure is swept either down into it or up into it, it will generally create"
+    },
+    {
+      "start_time": 194.76,
+      "end_time": 199.64,
+      "text": "some kind of a tradable bounce or a retracement."
+    },
+    {
+      "start_time": 199.64,
+      "end_time": 205.0,
+      "text": "And while it may be a very short term, a short lived, it still gives the opportunity for"
+    },
+    {
+      "start_time": 205.0,
+      "end_time": 209.36,
+      "text": "a quick snap in marketplace where you can take something out of it."
+    },
+    {
+      "start_time": 209.36,
+      "end_time": 215.0,
+      "text": "Since this is a futures contract and it's not a foreign exchange pair, we can't talk"
+    },
+    {
+      "start_time": 215.0,
+      "end_time": 216.0,
+      "text": "in terms of PIP."
+    },
+    {
+      "start_time": 216.0,
+      "end_time": 218.16,
+      "text": "So we're going to be using just the range."
+    },
+    {
+      "start_time": 218.16,
+      "end_time": 223.2,
+      "text": "Now, if you look closely, you can see inside of the New York session, the idea is the"
+    },
+    {
+      "start_time": 223.2,
+      "end_time": 227.76,
+      "text": "beginning is here at 8.30 and the end is again 11 o'clock."
+    },
+    {
+      "start_time": 227.76,
+      "end_time": 228.76,
+      "text": "It's a static time."
+    },
+    {
+      "start_time": 228.76,
+      "end_time": 229.76,
+      "text": "It doesn't change."
+    },
+    {
+      "start_time": 229.76,
+      "end_time": 233.44,
+      "text": "Everything that I was showing you thus far, we're just doing the same thing every single"
+    },
+    {
+      "start_time": 233.44,
+      "end_time": 237.28,
+      "text": "day and you'll see this pattern forms every single day."
+    },
+    {
+      "start_time": 237.28,
+      "end_time": 245.8,
+      "text": "So let's take a look at the FIB over top of this right here."
+    },
+    {
+      "start_time": 245.8,
+      "end_time": 247.76,
+      "text": "This is the optimal trade entry."
+    },
+    {
+      "start_time": 247.76,
+      "end_time": 249.16,
+      "text": "The market rallies back above."
+    },
+    {
+      "start_time": 249.16,
+      "end_time": 254.56,
+      "text": "The 29-bit figure comes back down into a short block, overlapping with a 29-hundred-big"
+    },
+    {
+      "start_time": 254.56,
+      "end_time": 259.36,
+      "text": "figure inside of our specific time of day, the New York session."
+    },
+    {
+      "start_time": 259.36,
+      "end_time": 260.36,
+      "text": "Okay?"
+    },
+    {
+      "start_time": 260.36,
+      "end_time": 265.12,
+      "text": "8.30 in the morning until 11 o'clock in the morning, New York local time."
+    },
+    {
+      "start_time": 265.12,
+      "end_time": 267.92,
+      "text": "This pattern is seen with the FIB."
+    },
+    {
+      "start_time": 267.92,
+      "end_time": 273.24,
+      "text": "So we trade down into the 70.5 level, which is the sweet spot by my definition for optimal"
+    },
+    {
+      "start_time": 273.24,
+      "end_time": 274.76,
+      "text": "trade entry."
+    },
+    {
+      "start_time": 274.76,
+      "end_time": 276.68,
+      "text": "And you could be a buyer there."
+    },
+    {
+      "start_time": 276.68,
+      "end_time": 280.0,
+      "text": "And the market comes back down and does give multiple entries."
+    },
+    {
+      "start_time": 280.0,
+      "end_time": 283.72,
+      "text": "You can take it on here, which is still inside of the New York session."
+    },
+    {
+      "start_time": 283.72,
+      "end_time": 286.56,
+      "text": "Time-winded that we've created for this pattern."
+    },
+    {
+      "start_time": 286.56,
+      "end_time": 292.68,
+      "text": "And we have really three candles here, here and here where it meets optimal trade entry."
+    },
+    {
+      "start_time": 292.68,
+      "end_time": 295.52,
+      "text": "62 or less down to 79."
+    },
+    {
+      "start_time": 295.52,
+      "end_time": 296.6,
+      "text": "And you could be a buyer there."
+    },
+    {
+      "start_time": 296.6,
+      "end_time": 298.12,
+      "text": "We're going to use the range here."
+    },
+    {
+      "start_time": 298.12,
+      "end_time": 299.12,
+      "text": "Okay?"
+    },
+    {
+      "start_time": 299.12,
+      "end_time": 300.28,
+      "text": "So 0.5."
+    },
+    {
+      "start_time": 300.28,
+      "end_time": 303.88,
+      "text": "You could take your first scaling there, partials, and look how it spends a little bit of"
+    },
+    {
+      "start_time": 303.88,
+      "end_time": 305.12,
+      "text": "time consolidating there."
+    },
+    {
+      "start_time": 305.12,
+      "end_time": 310.68,
+      "text": "And then expands up to 1 to 1 full standard deviation here at 29.22."
+    },
+    {
+      "start_time": 310.68,
+      "end_time": 318.8,
+      "text": "So being a buyer at around 2900 big figure and getting out with 15 handles in the S&P"
+    },
+    {
+      "start_time": 318.8,
+      "end_time": 326.88,
+      "text": "as a first scalp or scaling, then your secondary exit for a partial could be at 29.22, which"
+    },
+    {
+      "start_time": 326.88,
+      "end_time": 329.12,
+      "text": "is 22 handles in the S&P."
+    },
+    {
+      "start_time": 329.12,
+      "end_time": 334.4,
+      "text": "Then ultimately, guys, I mentioned in this pattern, this level here on the FIB, if it gets"
+    },
+    {
+      "start_time": 334.4,
+      "end_time": 338.84,
+      "text": "to that price level and runs a specific price point for liquidity, which is the Friday's"
+    },
+    {
+      "start_time": 338.84,
+      "end_time": 341.76,
+      "text": "high, which is we annotated on the daily chart."
+    },
+    {
+      "start_time": 341.76,
+      "end_time": 346.8,
+      "text": "The market will likely rather want to gravitate towards that old Friday high because the trend"
+    },
+    {
+      "start_time": 346.8,
+      "end_time": 347.8,
+      "text": "is bullish."
+    },
+    {
+      "start_time": 347.8,
+      "end_time": 351.52,
+      "text": "It's going to want to take liquidity out there because a lot of people are short selling"
+    },
+    {
+      "start_time": 351.52,
+      "end_time": 352.88,
+      "text": "in the S&P."
+    },
+    {
+      "start_time": 352.88,
+      "end_time": 359.32,
+      "text": "The market has taken up above Friday's high and to the FIB level 2936, the high comes"
+    },
+    {
+      "start_time": 359.32,
+      "end_time": 364.28,
+      "text": "in on this candle at 2937, only off by one handle on the S&P."
+    },
+    {
+      "start_time": 364.28,
+      "end_time": 366.44,
+      "text": "Then went up again to another opportunity to do so."
+    },
+    {
+      "start_time": 366.44,
+      "end_time": 367.44,
+      "text": "Again, 2937."
+    },
+    {
+      "start_time": 367.44,
+      "end_time": 373.92,
+      "text": "So it was only off by one handle, but you could take this idea here instead of reaching"
+    },
+    {
+      "start_time": 373.92,
+      "end_time": 377.4,
+      "text": "for the 2936, round down to the nearest five level."
+    },
+    {
+      "start_time": 377.4,
+      "end_time": 378.72,
+      "text": "So that would be 2935."
+    },
+    {
+      "start_time": 378.72,
+      "end_time": 384.0,
+      "text": "So that's 35 handles with as much as one, two, and three partials taken out."
+    },
+    {
+      "start_time": 384.0,
+      "end_time": 388.32,
+      "text": "But at this point here, I would be out for this particular pattern in this market as an"
+    },
+    {
+      "start_time": 388.32,
+      "end_time": 389.32,
+      "text": "example."
+    },
+    {
+      "start_time": 389.32,
+      "end_time": 391.08,
+      "text": "Hope you found this insightful until next time."
+    },
+    {
+      "start_time": 391.08,
+      "end_time": 392.24,
+      "text": "I wish you good luck and good trading."
+    }
+  ],
+  "word_count": 1086,
+  "segment_count": 102,
+  "method": "whisper",
+  "whisper_model": "base",
+  "transcribed_at": "2026-01-27T18:27:34.432457",
+  "title": "OTE Pattern Recognition Series - Vol. 03"
+}

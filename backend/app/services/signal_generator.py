@@ -394,15 +394,33 @@ class SignalGenerator:
         return round(reward / risk, 2)
 
     def _adjust_confidence(self, base_confidence: float, risk_reward: float) -> float:
-        """Adjust confidence based on risk:reward ratio"""
+        """
+        Adjust confidence based on:
+        1. Risk:Reward ratio - Higher R:R = more confident
+        2. Kill zone timing - Premium kill zones boost confidence
+        3. ML pattern coverage - More patterns = higher confidence
+
+        ICT methodology emphasizes that entries should be taken:
+        - In kill zones for maximum institutional flow
+        - At locations offering minimum 2:1 R:R
+        """
+        # R:R multiplier
         if risk_reward >= 3:
-            return min(base_confidence * 1.1, 1.0)
+            rr_mult = 1.15
         elif risk_reward >= 2:
-            return base_confidence
+            rr_mult = 1.0
         elif risk_reward >= 1.5:
-            return base_confidence * 0.9
+            rr_mult = 0.9
         else:
-            return base_confidence * 0.7
+            rr_mult = 0.7
+
+        # Kill zone multiplier
+        kz_mult = self._get_kill_zone_multiplier()
+
+        # Combined confidence
+        adjusted = base_confidence * rr_mult * kz_mult
+
+        return min(adjusted, 0.95)  # Cap at 95% - never 100% certain
 
     def _generate_analysis_text(
         self,
@@ -418,7 +436,8 @@ class SignalGenerator:
             for f in factors
         ])
 
-        return f"""## Smart Money Analysis Summary
+        return f"""## AI Analysis Summary
+*Based on ML's learned ICT knowledge*
 
 **Market Structure:** {analysis.market_structure.value.title()}
 **Current Bias:** {analysis.bias.value.title()} ({analysis.bias_confidence:.0%} confidence)
@@ -431,8 +450,8 @@ class SignalGenerator:
 - {analysis.bias_reasoning}
 - Range: {pd_info.get('range_low', 0):.5f} - {pd_info.get('range_high', 0):.5f}
 - Equilibrium: {pd_info.get('equilibrium', 0):.5f}
-- Order Blocks: {len(analysis.order_blocks)} found
-- Fair Value Gaps: {len(analysis.fair_value_gaps)} found
+- Order Blocks: {len(analysis.order_blocks)} found (ML-detected)
+- Fair Value Gaps: {len(analysis.fair_value_gaps)} found (ML-detected)
 
 ### Recommendation: **{direction.value}**
 """
@@ -494,38 +513,79 @@ class SignalGenerator:
         return datetime.utcnow() + validity_map.get(timeframe, timedelta(hours=4))
 
     def _is_kill_zone_active(self) -> bool:
-        """Check if currently in a kill zone"""
+        """
+        Check if currently in an ICT Kill Zone (optimal trading times).
+
+        ICT Kill Zones represent times when institutional order flow is highest,
+        creating the best opportunities for Smart Money concept trades.
+        """
         now = datetime.utcnow()
         hour = now.hour
+        minute = now.minute
+        time_decimal = hour + minute / 60
 
-        # Kill zones (UTC):
-        # Asian: 00:00 - 04:00
-        # London: 07:00 - 10:00
-        # New York: 12:00 - 15:00
+        # ICT Kill Zones (UTC) - Based on ICT methodology:
+        # Asian Kill Zone: 00:00 - 04:00 UTC (7 PM - 11 PM EST)
+        # London Kill Zone: 02:00 - 05:00 UTC (9 PM - 12 AM EST) & 07:00 - 10:00 UTC (2 AM - 5 AM EST)
+        # New York Kill Zone: 12:00 - 15:00 UTC (7 AM - 10 AM EST)
+        # London Close: 15:00 - 17:00 UTC (10 AM - 12 PM EST)
 
         kill_zones = [
-            (0, 4),   # Asian
-            (7, 10),  # London
-            (12, 15), # New York
+            (0, 4),      # Asian Session
+            (2, 5),      # London Pre-Market
+            (7, 10),     # London Open (most volatile)
+            (12, 15),    # New York Open (most volume)
+            (15, 17),    # London Close / NY Session Overlap
         ]
 
-        return any(start <= hour < end for start, end in kill_zones)
+        return any(start <= time_decimal < end for start, end in kill_zones)
 
     def _get_active_kill_zone(self) -> Optional[str]:
-        """Get the name of the active kill zone"""
+        """
+        Get the name and quality of the active kill zone.
+
+        Returns the kill zone name with quality indicator.
+        Premium kill zones (London Open, NY Open) have higher signal weighting.
+        """
+        now = datetime.utcnow()
+        hour = now.hour
+        minute = now.minute
+        time_decimal = hour + minute / 60
+
+        # ICT Kill Zones with quality ratings
+        kill_zone_info = [
+            (0, 4, "Asian Session", "standard"),
+            (2, 5, "London Pre-Market", "standard"),
+            (7, 10, "London Open", "premium"),  # Highest volatility
+            (12, 15, "New York Open", "premium"),  # Highest volume
+            (15, 17, "London Close", "standard"),
+        ]
+
+        for start, end, name, quality in kill_zone_info:
+            if start <= time_decimal < end:
+                return f"{name} ({quality.title()})"
+
+        return None
+
+    def _get_kill_zone_multiplier(self) -> float:
+        """
+        Get confidence multiplier based on current kill zone.
+
+        Premium kill zones (London Open, NY Open) increase signal confidence.
+        Standard kill zones have neutral effect.
+        Outside kill zones reduces confidence.
+        """
         now = datetime.utcnow()
         hour = now.hour
 
-        if 0 <= hour < 4:
-            return "Asian Session"
-        elif 7 <= hour < 10:
-            return "London Open"
-        elif 12 <= hour < 15:
-            return "New York Open"
-        elif 15 <= hour < 17:
-            return "London Close"
-
-        return None
+        if 7 <= hour < 10:  # London Open - Premium
+            return 1.15
+        elif 12 <= hour < 15:  # NY Open - Premium
+            return 1.20
+        elif self._is_kill_zone_active():  # Other kill zones - Standard
+            return 1.0
+        else:  # Outside kill zones
+            return 0.85
 
     def _generate_ml_status(self, analysis: SmartMoneyAnalysisResult) -> str:
         """Generate a human-readable ML knowledge status"""

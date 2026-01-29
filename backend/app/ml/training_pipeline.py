@@ -38,6 +38,14 @@ from .training_database import TrainingDatabase
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Optional vision imports - only used if vision training is enabled
+try:
+    from .video_vision_analyzer import VideoVisionTrainer, VideoVisualSummary
+    VISION_AVAILABLE = True
+except ImportError:
+    VISION_AVAILABLE = False
+    logger.info("Vision training not available (missing dependencies)")
+
 
 class SmartMoneyKnowledgeBase:
     """
@@ -60,6 +68,10 @@ class SmartMoneyKnowledgeBase:
 
         # Training database for tracking all video learnings
         self.training_db = TrainingDatabase(str(self.data_dir))
+
+        # Vision trainer for multimodal learning (optional)
+        self.vision_trainer = None
+        self.vision_knowledge = {}  # Visual patterns learned from videos
 
         # Knowledge storage
         self.concept_definitions = {}  # Learned definitions
@@ -276,6 +288,208 @@ class SmartMoneyKnowledgeBase:
         logger.info(f"Training complete. Processed {len(transcripts)} transcripts.")
         return results
 
+    def train_with_vision(
+        self,
+        transcripts: List[Dict] = None,
+        vision_provider: str = "local",
+        max_frames_per_video: int = 0,
+        extraction_mode: str = "comprehensive",
+        progress_callback=None
+    ) -> Dict:
+        """
+        Enhanced training that includes visual analysis of video frames.
+        This enables the ML to understand visual patterns shown in tutorials.
+
+        Args:
+            transcripts: List of transcript dicts (loads all if None)
+            vision_provider: "local" (FREE on M1/M2/M3 Mac), "anthropic", or "openai"
+            max_frames_per_video: Max frames to analyze per video (0 = no limit)
+            extraction_mode: How thoroughly to analyze:
+                - "comprehensive": Every 3s like a dedicated student (DEFAULT)
+                - "thorough": Every 5s with keyword boosting
+                - "balanced": Every 10-15s with keyword boosting
+                - "selective": Only at demonstrative moments
+            progress_callback: Optional callback(current, total, message)
+
+        Returns:
+            Training results including vision analysis
+        """
+        if not VISION_AVAILABLE:
+            logger.warning("Vision training not available. Falling back to text-only training.")
+            return self.train(transcripts)
+
+        logger.info(f"Starting multimodal training pipeline (text + vision) - {extraction_mode} mode...")
+
+        if transcripts is None:
+            transcripts = self.load_transcripts()
+
+        if not transcripts:
+            logger.warning("No transcripts available for training")
+            return {'status': 'no_data'}
+
+        # Initialize vision trainer
+        self.vision_trainer = VideoVisionTrainer(
+            str(self.data_dir),
+            vision_provider=vision_provider
+        )
+
+        results = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'n_transcripts': len(transcripts),
+            'training_mode': 'multimodal',
+            'extraction_mode': extraction_mode,
+            'components': {},
+            'vision_analysis': {},
+            'video_learnings': []
+        }
+
+        total_steps = len(transcripts) + 5  # +5 for other training steps
+        current_step = 0
+
+        # 1. Process videos with vision analysis
+        logger.info(f"Starting vision analysis of video frames ({extraction_mode} mode)...")
+        vision_summaries = []
+
+        for i, transcript in enumerate(transcripts):
+            video_id = transcript.get('video_id', '')
+            if not video_id:
+                continue
+
+            if progress_callback:
+                progress_callback(
+                    current_step,
+                    total_steps,
+                    f"Analyzing visual content: {transcript.get('title', video_id)[:40]}..."
+                )
+
+            try:
+                summary = self.vision_trainer.process_video(
+                    video_id,
+                    max_frames=max_frames_per_video,
+                    extraction_mode=extraction_mode
+                )
+                if summary:
+                    vision_summaries.append(summary)
+
+                    # Enhance transcript with visual data
+                    transcripts[i] = self.vision_trainer.enhance_transcript_with_vision(
+                        video_id,
+                        transcript
+                    )
+            except Exception as e:
+                logger.warning(f"Vision analysis failed for {video_id}: {e}")
+
+            current_step += 1
+
+        results['vision_analysis'] = {
+            'videos_analyzed': len(vision_summaries),
+            'total_frames_analyzed': sum(s.total_frames_analyzed for s in vision_summaries),
+            'chart_frames': sum(s.chart_frames for s in vision_summaries),
+        }
+
+        # Aggregate visual knowledge
+        self.vision_knowledge = self.vision_trainer.get_visual_knowledge()
+        results['vision_analysis']['visual_patterns'] = self.vision_knowledge.get('pattern_frequency', {})
+        results['vision_analysis']['visual_concepts'] = len(self.vision_knowledge.get('visual_concepts', []))
+
+        if progress_callback:
+            progress_callback(current_step, total_steps, "Training concept classifier...")
+
+        # 2. Train concept classifier (now with enhanced transcripts)
+        logger.info("Training concept classifier with vision-enhanced data...")
+        clf_result = self.concept_classifier.fit(transcripts)
+        results['components']['classifier'] = clf_result
+        current_step += 1
+
+        if progress_callback:
+            progress_callback(current_step, total_steps, "Building concept embeddings...")
+
+        # 3. Build concept embeddings
+        logger.info("Building concept embeddings...")
+        self.concept_embeddings.fit(transcripts)
+        results['components']['embeddings'] = {'status': 'trained', 'dim': self.concept_embeddings.embedding_dim}
+        current_step += 1
+
+        if progress_callback:
+            progress_callback(current_step, total_steps, "Analyzing concept sequences...")
+
+        # 4. Build sequence analyzer
+        logger.info("Analyzing concept sequences...")
+        self.sequence_analyzer.build_transition_matrix(transcripts)
+        results['components']['sequence_analyzer'] = {'status': 'trained'}
+        current_step += 1
+
+        if progress_callback:
+            progress_callback(current_step, total_steps, "Extracting concept definitions...")
+
+        # 5. Extract concept definitions
+        logger.info("Extracting concept definitions...")
+        definitions = self.extract_concept_definitions(transcripts)
+        results['components']['definitions'] = {'n_concepts': len(definitions)}
+
+        # 6. Extract trading rules
+        logger.info("Extracting trading rules...")
+        rules = self.extract_trading_rules(transcripts)
+        results['components']['rules'] = {'n_rules': len(rules)}
+        current_step += 1
+
+        if progress_callback:
+            progress_callback(current_step, total_steps, "Recording to training database...")
+
+        # 7. Record per-video learnings
+        logger.info("Recording per-video learnings to database...")
+        self._record_video_learnings(transcripts, rules)
+        results['components']['database'] = {
+            'videos_recorded': len(transcripts),
+            'database_path': str(self.training_db.db_path)
+        }
+
+        # Update metadata
+        self.n_transcripts_processed = len(transcripts)
+        self.last_training_time = datetime.utcnow().isoformat()
+        self.training_history.append(results)
+
+        if progress_callback:
+            progress_callback(total_steps, total_steps, "Multimodal training complete!")
+
+        logger.info(f"Multimodal training complete. Processed {len(transcripts)} transcripts with vision analysis.")
+        return results
+
+    def get_visual_pattern_examples(self, pattern_type: str) -> List[Dict]:
+        """
+        Get visual examples of a specific pattern type from analyzed videos.
+
+        Args:
+            pattern_type: e.g., "FVG", "Order Block", "Breaker"
+
+        Returns:
+            List of examples with timestamps and frame paths
+        """
+        if not self.vision_knowledge:
+            return []
+
+        patterns_by_type = self.vision_knowledge.get('patterns_by_type', {})
+        return patterns_by_type.get(pattern_type, [])
+
+    def get_teaching_moments(self, concept: str = None) -> List[Dict]:
+        """
+        Get key teaching moments from videos, optionally filtered by concept.
+        """
+        if not self.vision_knowledge:
+            return []
+
+        moments = self.vision_knowledge.get('key_teaching_moments', [])
+
+        if concept:
+            concept_lower = concept.lower()
+            moments = [
+                m for m in moments
+                if concept_lower in m.get('teaching_point', '').lower()
+                or any(concept_lower in p.get('type', '').lower() for p in m.get('patterns', []))
+            ]
+
+        return moments
+
     def train_from_videos(self, video_ids: List[str], incremental: bool = False) -> Dict:
         """
         Train only from specific video transcripts.
@@ -480,6 +694,7 @@ class SmartMoneyKnowledgeBase:
                 'last_training_time': self.last_training_time,
                 'training_history': self.training_history[-10:],  # Last 10
                 'trained_video_ids': getattr(self, 'trained_video_ids', []),
+                'vision_knowledge': getattr(self, 'vision_knowledge', {}),
             }, f, indent=2, default=str)
 
         logger.info(f"Knowledge base saved to {self.models_dir}")

@@ -13,9 +13,14 @@ import {
   Sparkles,
   Target,
   ArrowRight,
-  Layers
+  Layers,
+  Eye,
+  Image,
+  Video,
+  BarChart3,
+  Box
 } from 'lucide-react';
-import { getMLStatus, triggerTraining, getTranscripts } from '../services/api';
+import { getMLStatus, triggerTraining, getTranscripts, getVisualKnowledge, getVisionCapabilities } from '../services/api';
 
 // Background Orb Component
 function BackgroundOrb({ className }) {
@@ -88,10 +93,22 @@ function StatCard({ icon: Icon, label, value, description, gradient, delay = 0 }
   );
 }
 
+// Pattern info for display
+const PATTERN_INFO = {
+  'fvg': { name: 'Fair Value Gap', short: 'FVG', color: '#ffd700', icon: Box },
+  'order_block': { name: 'Order Block', short: 'OB', color: '#26a69a', icon: Layers },
+  'breaker_block': { name: 'Breaker Block', short: 'BB', color: '#ff6b6b', icon: Target },
+  'market_structure': { name: 'Market Structure', short: 'BOS/CHoCH', color: '#4fc3f7', icon: TrendingUp },
+  'support_resistance': { name: 'Support/Resistance', short: 'S/R', color: '#9c27b0', icon: BarChart3 },
+  'liquidity': { name: 'Liquidity', short: 'LIQ', color: '#e91e63', icon: Zap },
+};
+
 // Main Learning Page
 export default function Learning() {
   const [mlStatus, setMLStatus] = useState(null);
   const [transcripts, setTranscripts] = useState([]);
+  const [visualKnowledge, setVisualKnowledge] = useState(null);
+  const [visionCapabilities, setVisionCapabilities] = useState(null);
   const [loading, setLoading] = useState(true);
   const [training, setTraining] = useState(false);
   const [trainingResult, setTrainingResult] = useState(null);
@@ -103,12 +120,16 @@ export default function Learning() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [status, transcriptsData] = await Promise.all([
+      const [status, transcriptsData, vision, capabilities] = await Promise.all([
         getMLStatus().catch(() => null),
         getTranscripts().catch(() => ({ transcripts: [] })),
+        getVisualKnowledge().catch(() => null),
+        getVisionCapabilities().catch(() => null),
       ]);
       setMLStatus(status);
       setTranscripts(transcriptsData.transcripts || []);
+      setVisualKnowledge(vision);
+      setVisionCapabilities(capabilities);
     } catch (err) {
       console.error('Failed to load data:', err);
     } finally {
@@ -170,19 +191,19 @@ export default function Learning() {
           delay={0}
         />
         <StatCard
+          icon={Eye}
+          label="Vision Training"
+          value={visualKnowledge?.has_vision_knowledge ? `${visualKnowledge.patterns_learned || 0} patterns` : 'Not trained'}
+          description={visualKnowledge?.has_vision_knowledge ? `${visualKnowledge.videos_with_vision || 0} videos analyzed` : 'Train from Dashboard'}
+          gradient={visualKnowledge?.has_vision_knowledge ? 'from-cyan-500 to-blue-500' : 'from-orange-500 to-amber-500'}
+          delay={50}
+        />
+        <StatCard
           icon={Database}
           label="Total Words"
           value={totalWords.toLocaleString()}
           description="Training corpus size"
           gradient="from-purple-500 to-pink-500"
-          delay={50}
-        />
-        <StatCard
-          icon={TrendingUp}
-          label="Training Runs"
-          value={mlStatus?.n_training_runs || 0}
-          description="Model iterations"
-          gradient="from-emerald-500 to-teal-500"
           delay={100}
         />
         <StatCard
@@ -194,6 +215,165 @@ export default function Learning() {
           delay={150}
         />
       </div>
+
+      {/* Vision Knowledge Section */}
+      {visualKnowledge?.has_vision_knowledge && (
+        <div className="glass-card p-6 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500" />
+
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
+                <Eye className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white">Visual Pattern Knowledge</h2>
+                <p className="text-sm text-slate-400">Patterns learned from video frame analysis</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
+              <Video className="w-4 h-4 text-cyan-400" />
+              <span className="text-xs text-cyan-300">{visualKnowledge.videos_with_vision || 0} videos analyzed</span>
+            </div>
+          </div>
+
+          {/* Patterns Learned Grid */}
+          {visualKnowledge.pattern_details && visualKnowledge.pattern_details.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-slate-400 mb-3 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-400" />
+                Patterns ML Has Learned ({visualKnowledge.pattern_details.length})
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {visualKnowledge.pattern_details.map((pattern) => {
+                  const info = PATTERN_INFO[pattern.type] || {
+                    name: pattern.type.replace('_', ' '),
+                    short: pattern.type.toUpperCase(),
+                    color: '#6b7280',
+                    icon: Box
+                  };
+                  const IconComp = info.icon;
+                  return (
+                    <div
+                      key={pattern.type}
+                      className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-colors"
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <div
+                          className="w-10 h-10 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: info.color + '20' }}
+                        >
+                          <IconComp className="w-5 h-5" style={{ color: info.color }} />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-white">{info.name}</p>
+                          <p className="text-xs text-slate-500">{info.short}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-slate-400">Understanding</span>
+                          <span className={`font-medium capitalize ${
+                            pattern.understanding_level === 'expert' ? 'text-green-400' :
+                            pattern.understanding_level === 'proficient' ? 'text-blue-400' :
+                            pattern.understanding_level === 'intermediate' ? 'text-amber-400' :
+                            'text-slate-300'
+                          }`}>
+                            {pattern.understanding_level || 'learning'}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-slate-400">Confidence</span>
+                          <span className="text-white font-medium">{Math.round(pattern.confidence * 100)}%</span>
+                        </div>
+                        <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${Math.round(pattern.confidence * 100)}%`,
+                              backgroundColor: info.color
+                            }}
+                          />
+                        </div>
+                        {pattern.can_detect_universally && (
+                          <div className="flex items-center gap-1 text-xs text-green-400">
+                            <span>✓</span>
+                            <span>Can detect universally</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Patterns Not Yet Learned */}
+          {visualKnowledge.patterns_not_learned && visualKnowledge.patterns_not_learned.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-400 mb-3 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-400" />
+                Patterns Not Yet Learned ({visualKnowledge.patterns_not_learned.length})
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {visualKnowledge.patterns_not_learned.map((pattern) => {
+                  const info = PATTERN_INFO[pattern] || { name: pattern.replace('_', ' '), short: pattern.toUpperCase() };
+                  return (
+                    <div
+                      key={pattern}
+                      className="px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-400 text-sm flex items-center gap-2"
+                    >
+                      <span>{info.name}</span>
+                      <span className="text-xs text-slate-500 bg-slate-700/50 px-1.5 py-0.5 rounded">Train more</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Vision Stats Summary */}
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-cyan-400">{visualKnowledge.total_frames_analyzed || 0}</p>
+                <p className="text-xs text-slate-400">Frames Analyzed</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-blue-400">{visualKnowledge.chart_frames || 0}</p>
+                <p className="text-xs text-slate-400">Chart Frames</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-indigo-400">{visualKnowledge.visual_concepts || 0}</p>
+                <p className="text-xs text-slate-400">Visual Concepts</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-purple-400">{visualKnowledge.key_teaching_moments_count || 0}</p>
+                <p className="text-xs text-slate-400">Teaching Moments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* No Vision Knowledge Notice */}
+      {!visualKnowledge?.has_vision_knowledge && visionCapabilities?.vision_available && (
+        <div className="glass-card p-6 border-amber-500/20 bg-amber-500/5">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+              <Eye className="w-6 h-6 text-amber-400" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-amber-400 mb-1">No Visual Patterns Learned Yet</h3>
+              <p className="text-sm text-slate-400">
+                The ML has not been trained on video frames yet. Go to <span className="text-indigo-400">Dashboard → Vision Training Manager</span> to
+                analyze video frames and learn visual patterns like FVGs, Order Blocks, and Market Structure.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Training Controls */}
       <div className="glass-card p-6">
@@ -316,15 +496,17 @@ export default function Learning() {
         </div>
       )}
 
-      {/* Recent Transcripts */}
+      {/* All Transcripts */}
       <div className="glass-card p-6">
         <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
           <Layers className="w-5 h-5 text-indigo-400" />
-          Recent Transcripts
+          All Transcripts ({transcripts.length})
         </h2>
         {transcripts.length > 0 ? (
-          <div className="space-y-2 max-h-96 overflow-y-auto pr-2">
-            {transcripts.slice(0, 20).map((t, i) => (
+          <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2">
+            {[...transcripts]
+              .sort((a, b) => new Date(b.transcribed_at) - new Date(a.transcribed_at))
+              .map((t, i) => (
               <div
                 key={i}
                 className="glass-card-static p-4 flex items-center justify-between group hover:bg-white/[0.08] transition-colors animate-slide-up"
@@ -365,39 +547,53 @@ export default function Learning() {
       <div className="glass-card-static p-6 border-indigo-500/20 bg-indigo-500/5">
         <h2 className="text-xl font-bold text-indigo-300 mb-6 flex items-center gap-2">
           <Sparkles className="w-5 h-5" />
-          How the Learning Works
+          How TradingMamba Learns
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             {
               step: '1',
               title: 'Transcript Collection',
-              description: 'Smart Money videos are transcribed using free YouTube captions or local Whisper'
+              description: 'Smart Money videos are transcribed using free YouTube captions or local Whisper',
+              icon: FileText,
+              color: 'blue'
             },
             {
               step: '2',
-              title: 'Concept Extraction',
-              description: 'ML models learn Smart Money concepts, patterns, and trading rules from transcripts'
+              title: 'Vision Training',
+              description: 'Video frames are analyzed to learn visual patterns like FVGs, Order Blocks, and chart structures',
+              icon: Eye,
+              color: 'cyan'
             },
             {
               step: '3',
+              title: 'Concept Extraction',
+              description: 'ML combines transcript and visual knowledge to understand Smart Money methodology',
+              icon: Brain,
+              color: 'purple'
+            },
+            {
+              step: '4',
               title: 'Signal Generation',
-              description: 'Learned concepts are combined with market data to generate trading signals'
+              description: 'Learned patterns are detected on live charts to generate trading signals',
+              icon: Target,
+              color: 'emerald'
             }
-          ].map((item, i) => (
-            <div key={i} className="flex items-start gap-4 animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center flex-shrink-0">
-                <span className="text-indigo-400 font-bold">{item.step}</span>
-              </div>
-              <div>
-                <p className="font-semibold text-white mb-1">{item.title}</p>
+          ].map((item, i) => {
+            const IconComp = item.icon;
+            return (
+              <div key={i} className="flex flex-col items-center text-center animate-slide-up" style={{ animationDelay: `${i * 100}ms` }}>
+                <div className={`w-14 h-14 rounded-xl bg-${item.color}-500/20 flex items-center justify-center mb-4`}>
+                  <IconComp className={`w-7 h-7 text-${item.color}-400`} />
+                </div>
+                <div className={`w-8 h-8 rounded-full bg-${item.color}-500/20 flex items-center justify-center mb-3`}>
+                  <span className={`text-${item.color}-400 font-bold text-sm`}>{item.step}</span>
+                </div>
+                <p className="font-semibold text-white mb-2">{item.title}</p>
                 <p className="text-sm text-slate-400">{item.description}</p>
               </div>
-              {i < 2 && (
-                <ArrowRight className="w-5 h-5 text-indigo-500/30 hidden md:block absolute right-0 top-1/2 -translate-y-1/2" />
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

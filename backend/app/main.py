@@ -500,6 +500,7 @@ async def analyze_symbol(
                 'ml_patterns_not_learned': ml_knowledge.get('patterns_not_learned', []),
                 'analyses': {},
                 'signal': None,
+                'patterns': [],  # Empty patterns array for frontend compatibility
                 'ml_status': 'not_trained',
                 'ml_knowledge_status': '⚠️ ML has NO trained knowledge. Train videos using Vision Training to enable pattern detection.',
                 'message': 'Train videos using Vision Training to enable ML-powered analysis.'
@@ -514,6 +515,7 @@ async def analyze_symbol(
         all_ml_patterns_used = []
         all_ml_patterns_not_learned = []
         all_ml_confidence = {}
+        all_patterns = []  # Collect actual pattern objects for chart visualization
 
         for tf, df in market_data.items():
             if ml_analyzer:
@@ -523,6 +525,55 @@ async def analyze_symbol(
                 all_ml_patterns_used.extend(analysis.ml_patterns_used)
                 all_ml_patterns_not_learned.extend(analysis.ml_patterns_not_learned)
                 all_ml_confidence.update(analysis.ml_confidence_scores)
+
+                # Collect actual pattern objects for frontend visualization
+                for ob in analysis.order_blocks:
+                    all_patterns.append({
+                        'pattern_type': f'{ob.type}_order_block',  # 'bullish_order_block' or 'bearish_order_block'
+                        'high': ob.high,
+                        'low': ob.low,
+                        'start_index': ob.start_index,
+                        'timeframe': tf,
+                        'strength': ob.strength,
+                        'mitigated': ob.mitigated,
+                    })
+
+                for fvg in analysis.fair_value_gaps:
+                    all_patterns.append({
+                        'pattern_type': f'{fvg.type}_fvg',  # 'bullish_fvg' or 'bearish_fvg'
+                        'high': fvg.high,
+                        'low': fvg.low,
+                        'start_index': fvg.index,
+                        'timeframe': tf,
+                        'filled': fvg.filled,
+                        'fill_percentage': fvg.fill_percentage,
+                    })
+
+                # Also add market structure events (BOS/CHoCH)
+                for event in analysis.structure_events:
+                    if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish']:
+                        all_patterns.append({
+                            'pattern_type': event.type,
+                            'price': event.level,
+                            'timeframe': tf,
+                            'description': event.description,
+                        })
+
+                # Add liquidity levels (equal highs/lows)
+                if analysis.liquidity_levels.get('equal_highs'):
+                    for eq in analysis.liquidity_levels['equal_highs']:
+                        all_patterns.append({
+                            'pattern_type': 'equal_highs',
+                            'price': eq['level'],
+                            'timeframe': tf,
+                        })
+                if analysis.liquidity_levels.get('equal_lows'):
+                    for eq in analysis.liquidity_levels['equal_lows']:
+                        all_patterns.append({
+                            'pattern_type': 'equal_lows',
+                            'price': eq['level'],
+                            'timeframe': tf,
+                        })
 
                 analyses[tf] = {
                     'bias': analysis.bias.value,
@@ -541,6 +592,22 @@ async def analyze_symbol(
         all_ml_patterns_used = list(set(all_ml_patterns_used))
         all_ml_patterns_not_learned = list(set(all_ml_patterns_not_learned))
 
+        # Get ML Engine for reasoning generation
+        ml_engine = get_ml_engine()
+
+        # Generate ML-based reasoning (ONLY from learned knowledge, not generic SMC)
+        ml_reasoning = ml_engine.generate_ml_reasoning(
+            detected_patterns=all_ml_patterns_used,
+            bias=analyses.get(tf_list[0], {}).get('bias', 'neutral'),
+            zone=analyses.get(tf_list[0], {}).get('zone', 'neutral'),
+        )
+
+        # Get entry/exit reasoning from ML knowledge
+        entry_exit_reasoning = ml_engine.get_entry_exit_reasoning(
+            direction=analyses.get(tf_list[0], {}).get('bias', 'neutral'),
+            patterns_found={'ml_patterns': all_ml_patterns_used}
+        )
+
         # Generate ML-powered signal using primary timeframe (first in list)
         signal = None
         primary_tf = tf_list[0]
@@ -557,25 +624,37 @@ async def analyze_symbol(
             except Exception as e:
                 print(f"Signal generation error: {e}")
 
+        # Get full list of not-learned patterns from ML knowledge base (not just from analysis)
+        ml_not_learned_full = ml_knowledge.get('patterns_not_learned', [])
+
         # Generate ML knowledge status message
-        if all_ml_patterns_used and not all_ml_patterns_not_learned:
+        if all_ml_patterns_used and not ml_not_learned_full:
             ml_status_msg = f"✅ ML-powered analysis. Patterns detected: {', '.join(all_ml_patterns_used)}"
-        elif all_ml_patterns_used and all_ml_patterns_not_learned:
-            ml_status_msg = f"⚡ Partial ML coverage. Detected: {', '.join(all_ml_patterns_used)}. Needs training: {', '.join(all_ml_patterns_not_learned)}"
+        elif all_ml_patterns_used and ml_not_learned_full:
+            ml_status_msg = f"⚡ Partial ML coverage. Detected: {', '.join(all_ml_patterns_used)}. Needs training: {', '.join(ml_not_learned_full)}"
         else:
             ml_status_msg = "⚠️ No ML patterns detected in this data. Train more videos to improve detection."
+
+        # Get all learned patterns with their confidences
+        all_learned_patterns = {}
+        for p in ml_knowledge.get('patterns_learned', []):
+            all_learned_patterns[p['type']] = p['confidence']
 
         return {
             'symbol': symbol,
             'timestamp': datetime.utcnow().isoformat(),
             'timeframes': list(market_data.keys()),
-            'ml_patterns_detected': all_ml_patterns_used,
-            'ml_patterns_not_learned': all_ml_patterns_not_learned,
-            'ml_confidence_scores': all_ml_confidence,
+            'ml_patterns_detected': all_ml_patterns_used,  # Patterns actively detected in this analysis
+            'ml_patterns_not_learned': ml_not_learned_full,  # Full list from ML knowledge base
+            'ml_confidence_scores': all_learned_patterns,  # All learned patterns with confidences
             'analyses': analyses,
             'signal': signal,
+            'patterns': all_patterns,  # Full pattern objects for chart visualization (OBs, FVGs, BOS, CHoCH, etc.)
             'ml_status': 'trained',
             'ml_knowledge_status': ml_status_msg,
+            # NEW: ML-based reasoning (from learned knowledge ONLY, not generic SMC)
+            'ml_reasoning': ml_reasoning,  # Why ML made this analysis decision
+            'entry_exit_reasoning': entry_exit_reasoning,  # Why entry/SL/TP are placed here
             'training_info': {
                 'videos_trained': ml_knowledge.get('total_videos', 0),
                 'frames_analyzed': ml_knowledge.get('total_frames', 0),
@@ -624,6 +703,7 @@ async def quick_signal(symbol: str):
                 'zone': 'neutral',
                 'ml_patterns_detected': [],
                 'ml_patterns_not_learned': ml_knowledge.get('patterns_not_learned', []),
+                'patterns': [],  # Empty for consistency
                 'summary': '⚠️ ML not trained - use Vision Training on videos to enable pattern detection',
                 'current_price': current_price,
                 'ml_status': 'not_trained',
@@ -648,6 +728,60 @@ async def quick_signal(symbol: str):
             else:
                 summary = f"⚠️ No ML patterns found in current data"
 
+            # Build patterns array for frontend visualization
+            patterns = []
+            for ob in analysis.order_blocks:
+                patterns.append({
+                    'pattern_type': f'{ob.type}_order_block',
+                    'high': ob.high,
+                    'low': ob.low,
+                    'start_index': ob.start_index,
+                    'timeframe': 'H1',
+                    'strength': ob.strength,
+                })
+            for fvg in analysis.fair_value_gaps:
+                patterns.append({
+                    'pattern_type': f'{fvg.type}_fvg',
+                    'high': fvg.high,
+                    'low': fvg.low,
+                    'start_index': fvg.index,
+                    'timeframe': 'H1',
+                })
+
+            # Determine kill zone status
+            now = datetime.utcnow()
+            hour = now.hour
+            kill_zone_active = any([
+                0 <= hour < 4,   # Asian
+                7 <= hour < 10,  # London Open
+                12 <= hour < 15, # NY Open
+                15 <= hour < 17, # London Close
+            ])
+
+            if 0 <= hour < 4:
+                kill_zone_name = "Asian Session"
+            elif 7 <= hour < 10:
+                kill_zone_name = "London Open (Premium)"
+            elif 12 <= hour < 15:
+                kill_zone_name = "New York Open (Premium)"
+            elif 15 <= hour < 17:
+                kill_zone_name = "London Close"
+            else:
+                kill_zone_name = None
+
+            # Generate ML-based reasoning (from learned knowledge ONLY)
+            ml_reasoning = ml_engine.generate_ml_reasoning(
+                detected_patterns=analysis.ml_patterns_used,
+                bias=analysis.bias.value,
+                zone=analysis.premium_discount.get('zone', 'neutral'),
+            )
+
+            # Get entry/exit reasoning from ML knowledge
+            entry_exit_reasoning = ml_engine.get_entry_exit_reasoning(
+                direction=analysis.bias.value,
+                patterns_found={'ml_patterns': analysis.ml_patterns_used}
+            )
+
             return {
                 'symbol': symbol,
                 'timestamp': datetime.utcnow().isoformat(),
@@ -659,11 +793,16 @@ async def quick_signal(symbol: str):
                 'ml_confidence_scores': analysis.ml_confidence_scores,
                 'order_blocks_found': len(analysis.order_blocks),
                 'fvgs_found': len(analysis.fair_value_gaps),
+                'patterns': patterns,  # Full pattern objects for chart visualization
                 'summary': summary,
                 'reasoning': analysis.bias_reasoning,
+                'ml_reasoning': ml_reasoning,  # Detailed ML reasoning from learned knowledge
+                'entry_exit_reasoning': entry_exit_reasoning,  # Why entry/SL/TP placed here
                 'current_price': current_price,
                 'ml_status': 'trained',
                 'ml_knowledge_status': f"Trained on {ml_knowledge.get('total_videos', 0)} videos",
+                'kill_zone_active': kill_zone_active,
+                'kill_zone_name': kill_zone_name,
             }
         else:
             return {
@@ -1437,27 +1576,46 @@ async def get_teaching_moments(
 @app.get("/api/ml/vision/knowledge")
 async def get_visual_knowledge():
     """Get comprehensive visual knowledge learned from video analysis"""
-    kb = get_knowledge_base()
-    if not kb:
-        raise HTTPException(status_code=503, detail="Knowledge base not loaded")
+    from .ml.ml_pattern_engine import get_ml_engine
 
-    vision_knowledge = getattr(kb, 'vision_knowledge', {})
+    # Get ML engine knowledge
+    try:
+        ml_engine = get_ml_engine()
+        ml_summary = ml_engine.get_knowledge_summary()
+    except Exception as e:
+        ml_summary = {'status': 'error', 'patterns_learned': [], 'patterns_not_learned': []}
 
-    if not vision_knowledge:
+    # Check if we have any trained knowledge
+    if ml_summary.get('status') != 'trained' or not ml_summary.get('patterns_learned'):
         return {
             "has_vision_knowledge": False,
-            "message": "No vision training has been performed. Use /api/ml/train/vision/{playlist_id} to start vision training."
+            "message": "No vision training has been performed. Use /api/ml/train/vision/{playlist_id} to start vision training.",
+            "patterns_not_learned": ml_summary.get('patterns_not_learned', [])
         }
+
+    # Build detailed pattern info
+    pattern_details = []
+    for p in ml_summary.get('patterns_learned', []):
+        pattern_details.append({
+            'type': p.get('type'),
+            'frequency': p.get('frequency', 0),
+            'confidence': p.get('confidence', 0),
+            'has_teaching': p.get('has_teaching', False),
+            'has_visual': p.get('has_visual', False)
+        })
 
     return {
         "has_vision_knowledge": True,
-        "pattern_frequency": vision_knowledge.get('pattern_frequency', {}),
-        "visual_concepts": vision_knowledge.get('visual_concepts', []),
-        "chart_types_seen": vision_knowledge.get('chart_types_seen', []),
-        "timeframes_seen": vision_knowledge.get('timeframes_seen', []),
-        "symbols_seen": vision_knowledge.get('symbols_seen', []),
-        "key_teaching_moments_count": len(vision_knowledge.get('key_teaching_moments', [])),
-        "analyzed_videos": vision_knowledge.get('analyzed_videos', [])
+        "patterns_learned": len(pattern_details),
+        "pattern_details": pattern_details,
+        "patterns_not_learned": ml_summary.get('patterns_not_learned', []),
+        "videos_with_vision": ml_summary.get('total_videos', 0),
+        "total_frames_analyzed": ml_summary.get('total_frames', 0),
+        "chart_frames": ml_summary.get('chart_frames', 0),
+        "visual_concepts": len(pattern_details),  # Same as patterns learned
+        "key_teaching_moments_count": sum(1 for p in pattern_details if p.get('has_teaching', False)),
+        "training_sources": ml_summary.get('training_sources', []),
+        "last_trained": ml_summary.get('last_trained')
     }
 
 

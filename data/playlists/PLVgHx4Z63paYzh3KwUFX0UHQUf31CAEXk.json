@@ -1,57 +1,60 @@
 {
   "playlist_id": "PLVgHx4Z63paYzh3KwUFX0UHQUf31CAEXk",
   "title": "2016 ICT Private Mentorship Core Content Month 01",
+  "channel": "The Inner Circle Trader",
   "video_count": 8,
   "videos": [
     {
       "video_id": "0LhteuLVuDU",
       "title": "ICT Mentorship Core Content - Month 1 - Elements Of A Trade Setup",
       "duration": 1220,
-      "order": 1
+      "url": "https://www.youtube.com/watch?v=0LhteuLVuDU"
     },
     {
       "video_id": "XwYYWBttWro",
       "title": "ICT Mentorship Core Content - Month 1 - How Market Makers Condition The Market",
       "duration": 1522,
-      "order": 2
+      "url": "https://www.youtube.com/watch?v=XwYYWBttWro"
     },
     {
       "video_id": "B7_cjybYQ0g",
       "title": "ICT Mentorship Core Content - Month 1 - What To Focus On Right Now",
       "duration": 1503,
-      "order": 3
+      "url": "https://www.youtube.com/watch?v=B7_cjybYQ0g"
     },
     {
       "video_id": "qC0LogyIk2I",
       "title": "ICT Mentorship Core Content - Month 1 - Equilibrium Vs. Discount",
       "duration": 3389,
-      "order": 4
+      "url": "https://www.youtube.com/watch?v=qC0LogyIk2I"
     },
     {
       "video_id": "YuefjnUKQdM",
       "title": "ICT Mentorship Core Content - Month 1 - Equilibrium Vs. Premium",
       "duration": 1259,
-      "order": 5
+      "url": "https://www.youtube.com/watch?v=YuefjnUKQdM"
     },
     {
       "video_id": "SiVmoeyOWZE",
       "title": "ICT Mentorship Core Content - Month 1 - Fair Valuation",
       "duration": 1954,
-      "order": 6
+      "url": "https://www.youtube.com/watch?v=SiVmoeyOWZE"
     },
     {
       "video_id": "22XkhpJR5eA",
       "title": "ICT Mentorship Core Content - Month 1 - Liquidity Runs",
       "duration": 1495,
-      "order": 7
+      "url": "https://www.youtube.com/watch?v=22XkhpJR5eA"
     },
     {
       "video_id": "K4LtfujVpJs",
       "title": "ICT Mentorship Core Content - Month 1 - Impulse Price Swings & Market Protraction",
       "duration": 733,
-      "order": 8
+      "url": "https://www.youtube.com/watch?v=K4LtfujVpJs"
     }
   ],
-  "fetched_at": "2026-01-27T12:36:07.558481",
-  "tier": 2
+  "fetched_at": "2026-01-27T18:43:04.497748",
+  "tier": 1,
+  "description": "Added via Dashboard - Tier 1",
+  "added_at": "2026-01-27T18:43:04.497762"
 }

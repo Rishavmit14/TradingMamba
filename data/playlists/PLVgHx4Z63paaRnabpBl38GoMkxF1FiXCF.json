@@ -1,129 +1,132 @@
 {
   "playlist_id": "PLVgHx4Z63paaRnabpBl38GoMkxF1FiXCF",
   "title": "ICT OTE Pattern Recognition Series",
+  "channel": "The Inner Circle Trader",
   "video_count": 20,
   "videos": [
     {
       "video_id": "E9F_aT9f038",
       "title": "OTE Pattern Recognition Series - Vol. 01",
       "duration": 3447,
-      "order": 1
+      "url": "https://www.youtube.com/watch?v=E9F_aT9f038"
     },
     {
       "video_id": "v6ATva5DF0I",
       "title": "OTE Pattern Recognition Series - Vol. 02",
       "duration": 331,
-      "order": 2
+      "url": "https://www.youtube.com/watch?v=v6ATva5DF0I"
     },
     {
       "video_id": "TmbLhchNrAM",
       "title": "OTE Pattern Recognition Series - Vol. 03",
       "duration": 393,
-      "order": 3
+      "url": "https://www.youtube.com/watch?v=TmbLhchNrAM"
     },
     {
       "video_id": "Q0SFXEQqI08",
       "title": "OTE Pattern Recognition Series - Vol. 04",
       "duration": 481,
-      "order": 4
+      "url": "https://www.youtube.com/watch?v=Q0SFXEQqI08"
     },
     {
       "video_id": "t6y637OyiDY",
       "title": "OTE Pattern Recognition Series - Vol. 05",
       "duration": 203,
-      "order": 5
+      "url": "https://www.youtube.com/watch?v=t6y637OyiDY"
     },
     {
       "video_id": "Vx25X2sbxPA",
       "title": "OTE Pattern Recognition Series - Vol. 06",
       "duration": 399,
-      "order": 6
+      "url": "https://www.youtube.com/watch?v=Vx25X2sbxPA"
     },
     {
       "video_id": "_x36n9Jc2JQ",
       "title": "OTE Pattern Recognition Series - Vol. 07",
       "duration": 323,
-      "order": 7
+      "url": "https://www.youtube.com/watch?v=_x36n9Jc2JQ"
     },
     {
       "video_id": "ifFDif82Bmg",
       "title": "OTE Pattern Recognition Series - Vol. 08",
       "duration": 518,
-      "order": 8
+      "url": "https://www.youtube.com/watch?v=ifFDif82Bmg"
     },
     {
       "video_id": "uqptoSAGS30",
       "title": "OTE Pattern Recognition Series - Vol. 09",
       "duration": 246,
-      "order": 9
+      "url": "https://www.youtube.com/watch?v=uqptoSAGS30"
     },
     {
       "video_id": "j5x90p55O8A",
       "title": "OTE Pattern Recognition Series - Vol. 10",
       "duration": 254,
-      "order": 10
+      "url": "https://www.youtube.com/watch?v=j5x90p55O8A"
     },
     {
       "video_id": "-k1eBYoajIo",
       "title": "OTE Pattern Recognition Series - Vol. 11",
       "duration": 160,
-      "order": 11
+      "url": "https://www.youtube.com/watch?v=-k1eBYoajIo"
     },
     {
       "video_id": "6D3sKabkozk",
       "title": "OTE Pattern Recognition Series - Vol. 12",
       "duration": 109,
-      "order": 12
+      "url": "https://www.youtube.com/watch?v=6D3sKabkozk"
     },
     {
       "video_id": "GtTKPt-K9u0",
       "title": "OTE Pattern Recognition Series - Vol. 13",
       "duration": 262,
-      "order": 13
+      "url": "https://www.youtube.com/watch?v=GtTKPt-K9u0"
     },
     {
       "video_id": "cYzS_kFxv7M",
       "title": "OTE Pattern Recognition Series - Vol. 14",
       "duration": 505,
-      "order": 14
+      "url": "https://www.youtube.com/watch?v=cYzS_kFxv7M"
     },
     {
       "video_id": "RP6rVMJP4hA",
       "title": "OTE Pattern Recognition Series - Vol. 15",
       "duration": 498,
-      "order": 15
+      "url": "https://www.youtube.com/watch?v=RP6rVMJP4hA"
     },
     {
       "video_id": "ZbkEvNpm-_k",
       "title": "OTE Pattern Recognition Series - Vol.16",
       "duration": 756,
-      "order": 16
+      "url": "https://www.youtube.com/watch?v=ZbkEvNpm-_k"
     },
     {
       "video_id": "FNwqw7IiByo",
       "title": "OTE Pattern Recognition Series - Vol.17",
       "duration": 202,
-      "order": 17
+      "url": "https://www.youtube.com/watch?v=FNwqw7IiByo"
     },
     {
       "video_id": "YMt87VQRpNM",
       "title": "OTE Pattern Recognition Series - Vol.18",
       "duration": 249,
-      "order": 18
+      "url": "https://www.youtube.com/watch?v=YMt87VQRpNM"
     },
     {
       "video_id": "9F-anykT7J0",
       "title": "OTE Pattern Recognition Series - Vol.19",
       "duration": 192,
-      "order": 19
+      "url": "https://www.youtube.com/watch?v=9F-anykT7J0"
     },
     {
       "video_id": "L--1zBIEanY",
       "title": "OTE Pattern Recognition Series - Vol. 20",
       "duration": 279,
-      "order": 20
+      "url": "https://www.youtube.com/watch?v=L--1zBIEanY"
     }
   ],
-  "fetched_at": "2026-01-27T12:36:05.711851",
-  "tier": 1
+  "fetched_at": "2026-01-27T18:22:31.974955",
+  "tier": 1,
+  "description": "Added via Dashboard - Tier 1",
+  "added_at": "2026-01-27T18:22:31.974966"
 }

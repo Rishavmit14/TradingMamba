@@ -25,6 +25,292 @@ import hashlib
 logger = logging.getLogger(__name__)
 
 
+class FrameDeduplicator:
+    """
+    Smart frame deduplication using perceptual hashing and histogram comparison.
+    Reduces ~120 frames to ~25-40 unique frames without losing important content.
+    """
+
+    def __init__(self, similarity_threshold: float = 0.92):
+        """
+        Args:
+            similarity_threshold: Frames more similar than this are considered duplicates (0-1).
+                                  Higher = more aggressive deduplication.
+                                  0.92 is good for trading videos (same chart = duplicate)
+        """
+        self.similarity_threshold = similarity_threshold
+        self._has_cv2 = None
+
+    def _check_cv2(self) -> bool:
+        """Check if OpenCV is available"""
+        if self._has_cv2 is None:
+            try:
+                import cv2
+                self._has_cv2 = True
+            except ImportError:
+                self._has_cv2 = False
+                logger.warning("OpenCV not installed. Using basic deduplication. Install with: pip install opencv-python")
+        return self._has_cv2
+
+    def compute_image_hash(self, image_path: str) -> Optional[str]:
+        """
+        Compute perceptual hash (pHash) for an image.
+        Similar images will have similar hashes.
+        """
+        if not self._check_cv2():
+            return self._compute_basic_hash(image_path)
+
+        import cv2
+        import numpy as np
+
+        try:
+            # Read and resize to 32x32 for consistent hashing
+            img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+            if img is None:
+                return None
+
+            # Resize to 32x32
+            resized = cv2.resize(img, (32, 32), interpolation=cv2.INTER_AREA)
+
+            # Compute DCT (Discrete Cosine Transform)
+            dct = cv2.dct(np.float32(resized))
+
+            # Use top-left 8x8 of DCT (low frequencies = structure)
+            dct_low = dct[:8, :8]
+
+            # Compute median and create hash
+            median = np.median(dct_low)
+            hash_bits = (dct_low > median).flatten()
+
+            # Convert to hex string
+            hash_int = sum(bit << i for i, bit in enumerate(hash_bits))
+            return format(hash_int, '016x')
+
+        except Exception as e:
+            logger.warning(f"Failed to compute hash for {image_path}: {e}")
+            return self._compute_basic_hash(image_path)
+
+    def _compute_basic_hash(self, image_path: str) -> Optional[str]:
+        """Fallback: use file content hash (less smart but works)"""
+        try:
+            with open(image_path, 'rb') as f:
+                # Read chunks to create a simple hash
+                content = f.read(50000)  # First 50KB
+                return hashlib.md5(content).hexdigest()[:16]
+        except:
+            return None
+
+    def compute_histogram_similarity(self, img_path1: str, img_path2: str) -> float:
+        """
+        Compare two images using histogram correlation.
+        Returns similarity score 0-1 (1 = identical).
+        """
+        if not self._check_cv2():
+            # Fallback: compare file sizes as rough similarity
+            try:
+                size1 = os.path.getsize(img_path1)
+                size2 = os.path.getsize(img_path2)
+                return 1.0 - abs(size1 - size2) / max(size1, size2)
+            except:
+                return 0.0
+
+        import cv2
+
+        try:
+            img1 = cv2.imread(img_path1)
+            img2 = cv2.imread(img_path2)
+
+            if img1 is None or img2 is None:
+                return 0.0
+
+            # Convert to HSV for better color comparison
+            hsv1 = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
+            hsv2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
+
+            # Compute histograms
+            hist1 = cv2.calcHist([hsv1], [0, 1, 2], None, [8, 8, 8], [0, 180, 0, 256, 0, 256])
+            hist2 = cv2.calcHist([hsv2], [0, 1, 2], None, [8, 8, 8], [0, 180, 0, 256, 0, 256])
+
+            # Normalize
+            cv2.normalize(hist1, hist1)
+            cv2.normalize(hist2, hist2)
+
+            # Compare using correlation
+            similarity = cv2.compareHist(hist1, hist2, cv2.HISTCMP_CORREL)
+
+            return max(0.0, similarity)  # Correlation can be negative
+
+        except Exception as e:
+            logger.warning(f"Histogram comparison failed: {e}")
+            return 0.0
+
+    def hamming_distance(self, hash1: str, hash2: str) -> int:
+        """Compute Hamming distance between two hashes"""
+        if not hash1 or not hash2 or len(hash1) != len(hash2):
+            return 64  # Max distance
+
+        try:
+            int1 = int(hash1, 16)
+            int2 = int(hash2, 16)
+            xor = int1 ^ int2
+            return bin(xor).count('1')
+        except:
+            return 64
+
+    def deduplicate_frames(
+        self,
+        frames: List[Tuple[float, str, str]],  # (timestamp, path, context)
+        progress_callback=None,
+        max_gap_seconds: float = 0  # 0 = no max gap enforcement
+    ) -> List[Tuple[float, str, str]]:
+        """
+        Remove duplicate/similar frames from a list.
+
+        Returns filtered list keeping only unique frames.
+        Prioritizes frames with richer transcript context.
+
+        Args:
+            frames: List of (timestamp, path, context) tuples
+            progress_callback: Optional callback for progress updates
+            max_gap_seconds: Maximum allowed gap between kept frames (0 = no limit).
+                             If > 0, forces frame retention even if similar to prevent
+                             skipping too much teaching content.
+        """
+        if not frames:
+            return []
+
+        if len(frames) <= 5:
+            return frames  # Not worth deduplicating tiny lists
+
+        logger.info(f"Deduplicating {len(frames)} frames (max_gap={max_gap_seconds}s)...")
+
+        # Compute hashes for all frames
+        frame_hashes = []
+        for i, (ts, path, context) in enumerate(frames):
+            if progress_callback:
+                progress_callback(i, len(frames), f"Computing hash for frame {i+1}/{len(frames)}")
+
+            img_hash = self.compute_image_hash(path)
+            frame_hashes.append((ts, path, context, img_hash))
+
+        # Keep track of unique frames
+        unique_frames = []
+
+        for ts, path, context, img_hash in frame_hashes:
+            is_duplicate = False
+
+            # Get the timestamp of the last kept frame
+            last_kept_ts = unique_frames[-1][0] if unique_frames else -999
+            time_since_last = ts - last_kept_ts
+
+            # SINCERE STUDENT RULE: If max_gap is set and we've gone too long
+            # without keeping a frame, force keep this one regardless of similarity
+            if max_gap_seconds > 0 and time_since_last >= max_gap_seconds:
+                # Force keep - don't skip more than max_gap_seconds of teaching
+                unique_frames.append((ts, path, context, img_hash))
+                continue
+
+            # Check against all kept frames for duplicates
+            for kept_ts, kept_path, kept_context, kept_hash in unique_frames:
+                # Method 1: Hash similarity (fast)
+                if img_hash and kept_hash:
+                    hamming = self.hamming_distance(img_hash, kept_hash)
+                    hash_similarity = 1.0 - (hamming / 64.0)
+
+                    if hash_similarity > self.similarity_threshold:
+                        is_duplicate = True
+                        break
+
+                # Method 2: Histogram similarity (more accurate, for close calls)
+                if not is_duplicate and abs(ts - kept_ts) < 15:  # Only compare nearby frames
+                    hist_sim = self.compute_histogram_similarity(path, kept_path)
+                    if hist_sim > self.similarity_threshold:
+                        is_duplicate = True
+                        break
+
+            if not is_duplicate:
+                unique_frames.append((ts, path, context, img_hash))
+
+        # Return without hash
+        result = [(ts, path, context) for ts, path, context, _ in unique_frames]
+
+        reduction = len(frames) - len(result)
+        reduction_pct = (reduction / len(frames)) * 100 if frames else 0
+        logger.info(f"Deduplication complete: {len(frames)} → {len(result)} frames ({reduction_pct:.1f}% reduction)")
+
+        return result
+
+    def detect_scene_changes(
+        self,
+        video_path: str,
+        threshold: float = 30.0,
+        min_scene_length: float = 2.0
+    ) -> List[float]:
+        """
+        Detect scene changes in a video using frame differencing.
+        Returns list of timestamps where significant visual changes occur.
+
+        This is MUCH faster than extracting all frames - only marks where to look.
+        """
+        if not self._check_cv2():
+            logger.warning("OpenCV required for scene detection")
+            return []
+
+        import cv2
+        import numpy as np
+
+        try:
+            cap = cv2.VideoCapture(video_path)
+            fps = cap.get(cv2.CAP_PROP_FPS)
+
+            if fps <= 0:
+                logger.warning("Could not get video FPS")
+                return []
+
+            scene_changes = [0.0]  # Always include start
+            last_scene_time = 0.0
+
+            prev_frame = None
+            frame_idx = 0
+
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    break
+
+                current_time = frame_idx / fps
+                frame_idx += 1
+
+                # Only check every 0.5 seconds for speed
+                if frame_idx % int(fps * 0.5) != 0:
+                    continue
+
+                # Convert to grayscale and resize for speed
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                small = cv2.resize(gray, (160, 90))
+
+                if prev_frame is not None:
+                    # Compute absolute difference
+                    diff = cv2.absdiff(small, prev_frame)
+                    mean_diff = np.mean(diff)
+
+                    # Scene change detected
+                    if mean_diff > threshold and (current_time - last_scene_time) >= min_scene_length:
+                        scene_changes.append(current_time)
+                        last_scene_time = current_time
+
+                prev_frame = small
+
+            cap.release()
+
+            logger.info(f"Detected {len(scene_changes)} scene changes in video")
+            return scene_changes
+
+        except Exception as e:
+            logger.error(f"Scene detection failed: {e}")
+            return []
+
+
 @dataclass
 class FrameAnalysis:
     """Analysis result for a single video frame"""
@@ -92,16 +378,20 @@ class VideoFrameExtractor:
     def __init__(self, output_dir: str):
         self.output_dir = Path(output_dir) / "video_frames"
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.deduplicator = FrameDeduplicator(similarity_threshold=0.92)
 
     def extract_frames_at_timestamps(
         self,
         video_id: str,
         timestamps: List[float],
-        max_frames: int = 50
+        max_frames: int = 0  # 0 = no limit (recommended for smart mode)
     ) -> List[Tuple[float, str]]:
         """
         Extract frames at specific timestamps.
         Returns list of (timestamp, frame_path) tuples.
+
+        Args:
+            max_frames: Maximum frames to extract. 0 = no limit (let smart deduplication handle it)
         """
         import yt_dlp
         import subprocess
@@ -110,8 +400,9 @@ class VideoFrameExtractor:
         video_dir = self.output_dir / video_id
         video_dir.mkdir(exist_ok=True)
 
-        # Limit number of frames
-        timestamps = timestamps[:max_frames]
+        # Limit number of frames only if specified
+        if max_frames > 0:
+            timestamps = timestamps[:max_frames]
 
         # First, download the video temporarily
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -171,15 +462,23 @@ class VideoFrameExtractor:
         transcript_segments: List[Dict],
         interval_seconds: float = 10.0,
         keyword_boost: bool = True,
-        extraction_mode: str = "balanced"
+        extraction_mode: str = "sincere_student",
+        progress_callback=None
     ) -> List[Tuple[float, str, str]]:
         """
         Extract frames based on the specified extraction mode.
         Returns list of (timestamp, frame_path, transcript_context) tuples.
 
         Extraction modes:
+        - "sincere_student" (RECOMMENDED): Like a dedicated student who never misses
+          more than 15 seconds of teaching. Extracts every 3s, deduplicates similar
+          frames, but ENFORCES max 15s gap. Best for ICT videos where important
+          concepts are taught on static charts. ~60-75 min for 57-min video.
+        - "smart": Extracts at short intervals then uses AI deduplication
+          to remove similar frames. Fast but may skip long teaching segments on
+          static charts. ~22 min for 57-min video.
         - "comprehensive": Extract frames at very short intervals (3-5 seconds)
-          to capture EVERYTHING like a dedicated student. Misses nothing.
+          to capture EVERYTHING. Misses nothing but VERY SLOW (~6+ hrs for 57-min video).
         - "thorough": Extract frames at moderate intervals (5-8 seconds) with
           extra frames at key moments. Good balance of coverage and efficiency.
         - "balanced": Extract frames at regular intervals (10-15 seconds) with
@@ -212,12 +511,34 @@ class VideoFrameExtractor:
             max_time = max(s.get('end_time', s.get('start_time', 0)) for s in transcript_segments)
 
         # Configure based on extraction mode
-        if extraction_mode == "comprehensive":
+        if extraction_mode == "sincere_student":
+            # SINCERE STUDENT MODE: Learn like a dedicated student
+            # Never skip more than 15 seconds of teaching, even on static charts
+            interval = 3.0  # Extract every 3 seconds
+            min_gap = 2.5
+            use_keywords = True
+            use_deduplication = True
+            max_gap_seconds = 15.0  # KEY: Never skip more than 15s of teaching
+            logger.info(f"Sincere Student mode: Extracting every {interval}s, max {max_gap_seconds}s gap allowed")
+
+        elif extraction_mode == "smart":
+            # SMART MODE: Extract comprehensively, then deduplicate
+            # This gives the quality of comprehensive with ~70% fewer frames to analyze
+            interval = 3.0  # Start with comprehensive extraction
+            min_gap = 2.5
+            use_keywords = True
+            use_deduplication = True  # Key difference: dedupe after extraction
+            max_gap_seconds = 0  # No max gap enforcement
+            logger.info(f"Smart mode: Extracting every {interval}s then deduplicating similar frames")
+
+        elif extraction_mode == "comprehensive":
             # Like a dedicated student - capture EVERYTHING
             # Extract frame every 3 seconds to miss nothing
             interval = 3.0
             min_gap = 2.5
             use_keywords = True  # Still mark keywords but extract everything
+            use_deduplication = False
+            max_gap_seconds = 0
             logger.info(f"Comprehensive mode: Extracting frame every {interval}s for full coverage")
 
         elif extraction_mode == "thorough":
@@ -225,6 +546,8 @@ class VideoFrameExtractor:
             interval = 5.0
             min_gap = 3.0
             use_keywords = True
+            use_deduplication = False
+            max_gap_seconds = 0
             logger.info(f"Thorough mode: Extracting frame every {interval}s with keyword boosting")
 
         elif extraction_mode == "selective":
@@ -232,12 +555,16 @@ class VideoFrameExtractor:
             interval = 30.0  # Very sparse base intervals
             min_gap = 2.0
             use_keywords = True
+            use_deduplication = False
+            max_gap_seconds = 0
             logger.info("Selective mode: Extracting only at key demonstrative moments")
 
         else:  # "balanced" - default
             interval = interval_seconds
             min_gap = 3.0
             use_keywords = keyword_boost
+            use_deduplication = False
+            max_gap_seconds = 0
 
         # Add regular interval timestamps
         if max_time > 0:
@@ -277,9 +604,15 @@ class VideoFrameExtractor:
 
         logger.info(f"Extraction mode '{extraction_mode}': {len(deduped)} frames to extract from {max_time:.0f}s video")
 
+        if progress_callback:
+            progress_callback(0, 3, f"Extracting {len(deduped)} frames from video...")
+
         # Extract frames
         timestamps_only = [ts for ts, _, _ in deduped]
         extracted = self.extract_frames_at_timestamps(video_id, timestamps_only)
+
+        if progress_callback:
+            progress_callback(1, 3, f"Extracted {len(extracted)} frames")
 
         # Combine with context
         result = []
@@ -289,6 +622,25 @@ class VideoFrameExtractor:
             closest = min(deduped, key=lambda x: abs(x[0] - ts))
             reason, context = ts_to_context.get(closest[0], ("interval", ""))
             result.append((ts, path, context))
+
+        # Apply smart deduplication if enabled
+        if use_deduplication and len(result) > 5:
+            if progress_callback:
+                gap_msg = f" (max gap: {max_gap_seconds}s)" if max_gap_seconds > 0 else ""
+                progress_callback(2, 3, f"Deduplicating {len(result)} frames{gap_msg}...")
+
+            original_count = len(result)
+            result = self.deduplicator.deduplicate_frames(
+                result,
+                progress_callback=None,
+                max_gap_seconds=max_gap_seconds
+            )
+
+            reduction_pct = ((original_count - len(result)) / original_count) * 100
+            logger.info(f"Smart deduplication: {original_count} → {len(result)} frames ({reduction_pct:.1f}% reduction)")
+
+            if progress_callback:
+                progress_callback(3, 3, f"Optimized: {original_count} → {len(result)} unique frames")
 
         return result
 
@@ -735,8 +1087,8 @@ class VideoVisionTrainer:
     def process_video(
         self,
         video_id: str,
-        max_frames: int = 30,
-        extraction_mode: str = "comprehensive",
+        max_frames: int = 0,  # 0 = no limit (let deduplication handle it)
+        extraction_mode: str = "sincere_student",  # Sincere student learns everything, never skips >15s
         progress_callback=None,
         force_reprocess: bool = False
     ) -> Optional[VideoVisualSummary]:
@@ -745,12 +1097,16 @@ class VideoVisionTrainer:
 
         Args:
             video_id: YouTube video ID
-            max_frames: Maximum frames to analyze (0 = no limit)
+            max_frames: Maximum frames to analyze (0 = no limit, recommended for smart mode)
             extraction_mode: How thoroughly to extract frames:
-                - "comprehensive": Every 3s, learns EVERYTHING like a student
+                - "sincere_student" (RECOMMENDED): Like a dedicated student - never skips
+                  more than 15s of teaching. Best for ICT videos. ~60-75 min for 57-min video.
+                - "smart": Fast deduplication but may skip long teaching segments.
+                  ~22 min for 57-min video.
+                - "comprehensive": Every 3s, no deduplication. SLOW (~6+ hrs for 57-min video)
                 - "thorough": Every 5s with keyword boosting
                 - "balanced": Every 10-15s with keyword boosting
-                - "selective": Only at demonstrative moments
+                - "selective": Only at demonstrative moments (fastest, may miss content)
             progress_callback: Optional callback(current, total, message)
             force_reprocess: Re-analyze even if already processed
         """

@@ -1,0 +1,322 @@
+{
+  "video_id": "YMt87VQRpNM",
+  "full_text": "Okay folks, welcome back. This is volume 18 and a continuing series of 20 videos for the Industrial Trade, Optimal Trade Entry Patent Recognition Series. All right, so our example today is from the Treasury Bond Futures Contract and the delivery contract month is September 2020. This is at the time of this recording June 2, 2020. The open interest is the highest in September contract, even though the nearby contract is June. So we're electing to follow this month for Treasury bonds. And once you take a look at the daily chart, notice that we have this high to this low, and we had a retracement in here. And on the first of June, we had a nice reaction in here. So is it more likely to take out this candle's high or this candle's low? Notice that we have a training point here, a lower training point here, and now we had a reaction within Optimal Trade Entry. So is it likely to take the low out or the high out? Not the high, the low. And we have relative equal lows here as well so that could be a potential target. So I'm going to take this off and we're going to draw out the low here. So when we drop down into a lower five minute chart, we'll be able to see the delineation of this particular day's low. And it comes in at 177 and 230 seconds. So let's drop down into a five minute chart. Okay, so here is the five minute chart on the September contract for the Treasury Bond Market. And you know the drill, pause your video, study what you think you see here. Okay, so let's take the annotations and add them to the chart. New York Session and we have our high to low and retracement back into Optimal Trade Entry. And this requires a 62% retracement level entry at 177 and 230 seconds. So the entry is our hypothetical 177 and 20, 30 seconds. It suffers a draw down. Now, I'm having annotations here, not saying that you would be filled here. You would be filled here on this candle right there, that particular candle. And you have one candle here that goes a little bit against you. But all of these candles here, it's two ticks, which is $31.25 each contract. Or in this case, it would be $62.50 draw down and using a six tick stop. So it's six times $31.25 per contract that you're trading. And we have relative equal lows here as well. And this heavy line here is the previous days low. So June 1st, daily low. You can see that we did create an optimal trade entry looking for it to trade down below that. And ultimately, two standard deviations. That's our day trade for this model. It is a total of $29.06 or $906.25. Now, if you left a leader in something that's safe, it's going to catch a runner. It does, in fact, go down here and actually trades to a point at which for one contract, there was over $1,650 per contract. So not bad. Really hard to beat the bond market. It's been tough recently because of all the consolidation and such. But when this market does move, there is no better market out there. It beats forex. It beats index futures. It beats crypto. It beats everything. It's so perfect. It allows very ultra short-term trades that have very tight stops, as you can see here. And this could have actually been done with a four tick stop loss in order to find. So hopefully you found this example insightful. Until next time, I wish you good luck and good trading.",
+  "segments": [
+    {
+      "start_time": 0.0,
+      "end_time": 11.0,
+      "text": "Okay folks, welcome back."
+    },
+    {
+      "start_time": 11.0,
+      "end_time": 16.0,
+      "text": "This is volume 18 and a continuing series of 20 videos for the Industrial Trade, Optimal"
+    },
+    {
+      "start_time": 16.0,
+      "end_time": 18.0,
+      "text": "Trade Entry Patent Recognition Series."
+    },
+    {
+      "start_time": 18.0,
+      "end_time": 23.52,
+      "text": "All right, so our example today is from the Treasury Bond Futures Contract and the delivery"
+    },
+    {
+      "start_time": 23.52,
+      "end_time": 26.88,
+      "text": "contract month is September 2020."
+    },
+    {
+      "start_time": 26.88,
+      "end_time": 29.6,
+      "text": "This is at the time of this recording June 2, 2020."
+    },
+    {
+      "start_time": 29.6,
+      "end_time": 34.72,
+      "text": "The open interest is the highest in September contract, even though the nearby contract"
+    },
+    {
+      "start_time": 34.72,
+      "end_time": 35.72,
+      "text": "is June."
+    },
+    {
+      "start_time": 35.72,
+      "end_time": 41.88,
+      "text": "So we're electing to follow this month for Treasury bonds."
+    },
+    {
+      "start_time": 41.88,
+      "end_time": 45.88,
+      "text": "And once you take a look at the daily chart, notice that we have this high to this low,"
+    },
+    {
+      "start_time": 45.88,
+      "end_time": 47.76,
+      "text": "and we had a retracement in here."
+    },
+    {
+      "start_time": 47.76,
+      "end_time": 51.0,
+      "text": "And on the first of June, we had a nice reaction in here."
+    },
+    {
+      "start_time": 51.0,
+      "end_time": 57.12,
+      "text": "So is it more likely to take out this candle's high or this candle's low?"
+    },
+    {
+      "start_time": 57.12,
+      "end_time": 61.04,
+      "text": "Notice that we have a training point here, a lower training point here, and now we had"
+    },
+    {
+      "start_time": 61.04,
+      "end_time": 67.12,
+      "text": "a reaction within Optimal Trade Entry."
+    },
+    {
+      "start_time": 67.12,
+      "end_time": 71.56,
+      "text": "So is it likely to take the low out or the high out?"
+    },
+    {
+      "start_time": 71.56,
+      "end_time": 74.36,
+      "text": "Not the high, the low."
+    },
+    {
+      "start_time": 74.36,
+      "end_time": 78.76,
+      "text": "And we have relative equal lows here as well so that could be a potential target."
+    },
+    {
+      "start_time": 78.76,
+      "end_time": 87.72,
+      "text": "So I'm going to take this off and we're going to draw out the low here."
+    },
+    {
+      "start_time": 87.72,
+      "end_time": 92.64,
+      "text": "So when we drop down into a lower five minute chart, we'll be able to see the delineation"
+    },
+    {
+      "start_time": 92.64,
+      "end_time": 94.64,
+      "text": "of this particular day's low."
+    },
+    {
+      "start_time": 94.64,
+      "end_time": 99.76,
+      "text": "And it comes in at 177 and 230 seconds."
+    },
+    {
+      "start_time": 99.76,
+      "end_time": 101.44,
+      "text": "So let's drop down into a five minute chart."
+    },
+    {
+      "start_time": 101.44,
+      "end_time": 105.96,
+      "text": "Okay, so here is the five minute chart on the September contract for the Treasury Bond"
+    },
+    {
+      "start_time": 105.96,
+      "end_time": 107.8,
+      "text": "Market."
+    },
+    {
+      "start_time": 107.8,
+      "end_time": 112.96,
+      "text": "And you know the drill, pause your video, study what you think you see here."
+    },
+    {
+      "start_time": 112.96,
+      "end_time": 122.92,
+      "text": "Okay, so let's take the annotations and add them to the chart."
+    },
+    {
+      "start_time": 122.92,
+      "end_time": 128.36,
+      "text": "New York Session and we have our high to low and retracement back into Optimal Trade"
+    },
+    {
+      "start_time": 128.36,
+      "end_time": 129.36,
+      "text": "Entry."
+    },
+    {
+      "start_time": 129.84,
+      "end_time": 136.88,
+      "text": "And this requires a 62% retracement level entry at 177 and 230 seconds."
+    },
+    {
+      "start_time": 136.88,
+      "end_time": 142.48,
+      "text": "So the entry is our hypothetical 177 and 20, 30 seconds."
+    },
+    {
+      "start_time": 142.48,
+      "end_time": 143.84,
+      "text": "It suffers a draw down."
+    },
+    {
+      "start_time": 143.84,
+      "end_time": 147.2,
+      "text": "Now, I'm having annotations here, not saying that you would be filled here."
+    },
+    {
+      "start_time": 147.2,
+      "end_time": 153.0,
+      "text": "You would be filled here on this candle right there, that particular candle."
+    },
+    {
+      "start_time": 153.0,
+      "end_time": 156.52,
+      "text": "And you have one candle here that goes a little bit against you."
+    },
+    {
+      "start_time": 156.52,
+      "end_time": 164.12,
+      "text": "But all of these candles here, it's two ticks, which is $31.25 each contract."
+    },
+    {
+      "start_time": 164.12,
+      "end_time": 169.6,
+      "text": "Or in this case, it would be $62.50 draw down and using a six tick stop."
+    },
+    {
+      "start_time": 169.6,
+      "end_time": 174.36,
+      "text": "So it's six times $31.25 per contract that you're trading."
+    },
+    {
+      "start_time": 174.36,
+      "end_time": 177.16,
+      "text": "And we have relative equal lows here as well."
+    },
+    {
+      "start_time": 177.16,
+      "end_time": 184.36,
+      "text": "And this heavy line here is the previous days low."
+    },
+    {
+      "start_time": 184.36,
+      "end_time": 186.8,
+      "text": "So June 1st, daily low."
+    },
+    {
+      "start_time": 186.8,
+      "end_time": 192.92,
+      "text": "You can see that we did create an optimal trade entry looking for it to trade down below"
+    },
+    {
+      "start_time": 192.92,
+      "end_time": 195.96,
+      "text": "that."
+    },
+    {
+      "start_time": 195.96,
+      "end_time": 198.44,
+      "text": "And ultimately, two standard deviations."
+    },
+    {
+      "start_time": 198.44,
+      "end_time": 200.84,
+      "text": "That's our day trade for this model."
+    },
+    {
+      "start_time": 200.84,
+      "end_time": 204.44,
+      "text": "It is a total of $29.06 or $906.25."
+    },
+    {
+      "start_time": 204.44,
+      "end_time": 209.56,
+      "text": "Now, if you left a leader in something that's safe, it's going to catch a runner."
+    },
+    {
+      "start_time": 209.56,
+      "end_time": 213.84,
+      "text": "It does, in fact, go down here and actually trades to a point at which for one contract,"
+    },
+    {
+      "start_time": 213.84,
+      "end_time": 217.52,
+      "text": "there was over $1,650 per contract."
+    },
+    {
+      "start_time": 217.52,
+      "end_time": 220.2,
+      "text": "So not bad."
+    },
+    {
+      "start_time": 220.2,
+      "end_time": 221.36,
+      "text": "Really hard to beat the bond market."
+    },
+    {
+      "start_time": 221.36,
+      "end_time": 224.68,
+      "text": "It's been tough recently because of all the consolidation and such."
+    },
+    {
+      "start_time": 224.68,
+      "end_time": 229.08,
+      "text": "But when this market does move, there is no better market out there."
+    },
+    {
+      "start_time": 229.08,
+      "end_time": 230.08,
+      "text": "It beats forex."
+    },
+    {
+      "start_time": 230.08,
+      "end_time": 232.08,
+      "text": "It beats index futures."
+    },
+    {
+      "start_time": 232.08,
+      "end_time": 233.08,
+      "text": "It beats crypto."
+    },
+    {
+      "start_time": 233.08,
+      "end_time": 234.08,
+      "text": "It beats everything."
+    },
+    {
+      "start_time": 234.08,
+      "end_time": 235.08,
+      "text": "It's so perfect."
+    },
+    {
+      "start_time": 235.08,
+      "end_time": 239.84,
+      "text": "It allows very ultra short-term trades that have very tight stops, as you can see here."
+    },
+    {
+      "start_time": 239.84,
+      "end_time": 243.8,
+      "text": "And this could have actually been done with a four tick stop loss in order to find."
+    },
+    {
+      "start_time": 243.8,
+      "end_time": 245.92,
+      "text": "So hopefully you found this example insightful."
+    },
+    {
+      "start_time": 245.92,
+      "end_time": 247.68,
+      "text": "Until next time, I wish you good luck and good trading."
+    }
+  ],
+  "word_count": 624,
+  "segment_count": 62,
+  "method": "whisper",
+  "whisper_model": "base",
+  "transcribed_at": "2026-01-27T18:33:24.928061",
+  "title": "OTE Pattern Recognition Series - Vol.18"
+}
