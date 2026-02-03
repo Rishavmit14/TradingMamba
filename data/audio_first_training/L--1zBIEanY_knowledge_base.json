@@ -1,0 +1,43 @@
+{
+  "video_id": "L--1zBIEanY",
+  "generated_at": "2026-02-03T22:15:26.290151",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 71.52273106575012,
+  "processing_stats": {
+    "teaching_units": 5,
+    "vision_analyses": 10,
+    "concepts_extracted": 2,
+    "total_audio_duration": 236.89999999999998,
+    "total_words": 653
+  },
+  "concepts": {
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the foreign exchange market. It involves identifying a gap between the high and low prices, which is often used as a reference point for identifying potential order blocks. The chart analysis shows specific price levels, such as +86 Pips, +47 Pips, and +12 Pips, which are used as entry points for trading strategies. The chart also includes annotations and markings, such as the \"previous Day High\" and \"previous Day Low,\" which are used to identify the high and low price points for the previous trading day. The possibility exists that you could sustain a loss of some or all of your initial investment and, therefore, you should not invest money that you cannot afford to lose.",
+      "generation_time_seconds": 37.45517015457153,
+      "statistics": {
+        "teaching_duration_seconds": 110.94000000000001,
+        "word_count": 320,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying potential entry points on a chart. The key visual characteristics to spot are high and low price levels, support and resistance levels, Bollinger Bands, moving averages, and chill zones. These patterns are important for identifying potential entry points in the market. The Inner Circle Trader recommends trading these patterns by entering when the price crosses a support or resistance level, or when the Bollinger Bands are in a specific range. The key price levels to watch are the highs and lows, support and resistance levels, and moving averages. The Inner Circle Trader also emphasizes the importance of risk management, suggesting that you should not invest money that you cannot afford to lose.",
+      "generation_time_seconds": 33.698697090148926,
+      "statistics": {
+        "teaching_duration_seconds": 44.21999999999997,
+        "word_count": 115,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

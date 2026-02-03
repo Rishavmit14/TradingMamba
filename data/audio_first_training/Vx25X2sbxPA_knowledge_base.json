@@ -1,0 +1,57 @@
+{
+  "video_id": "Vx25X2sbxPA",
+  "generated_at": "2026-02-01T11:56:35.218314",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 119.58486986160278,
+  "processing_stats": {
+    "teaching_units": 16,
+    "vision_analyses": 27,
+    "concepts_extracted": 3,
+    "total_audio_duration": 332.25999999999993,
+    "total_words": 922
+  },
+  "concepts": {
+    "order block": {
+      "llm_summary": "ORDER BLOCK is a specific trading pattern identified on a chart, characterized by a high on a candle, typically near the end of a trading session, and a near-term objective. The high on this candle is marked by a specific price level, and the trader aims to achieve this objective. ORDER BLOCK is a bread-and-butter approach to trading, focusing on identifying and trading specific candle patterns, which are then used as entry and exit points. The trader should not invest money that they cannot afford to lose, and should not sustain a loss of some or all of their initial investment. ORDER BLOCK is a risk management strategy, as it involves taking a high level of risk, which may not be suitable for all investors.",
+      "generation_time_seconds": 30.647725105285645,
+      "statistics": {
+        "teaching_duration_seconds": 79.41999999999996,
+        "word_count": 240,
+        "teaching_units": 3,
+        "frames_analyzed": 8,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The \"FIBONACCI\" concept refers to a series of numbers where each number is the sum of the two preceding numbers, starting from any number in the sequence. This concept is often used in financial trading as a tool to identify potential support and resistance levels. To spot Fibonacci patterns on a chart, traders should look for horizontal lines drawn at specific price levels, often used to identify potential support and resistance levels. The \"FIBONACCI\" concept is recommended for trading as it can provide valuable insights into market behavior and potential price movements. Key price levels to consider include the \"Previous Day's High\" and \"Previous Day's Low\". The \"FIBONACCI\" concept can be used to identify potential support and resistance levels, which traders can use to make informed trading decisions.",
+      "generation_time_seconds": 41.32038187980652,
+      "statistics": {
+        "teaching_duration_seconds": 8.5,
+        "word_count": 27,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "**Optimal Trade Entry** is a trading strategy used by the Inner Circle Trader (ICT) methodology. The strategy involves identifying a specific price level, known as the \"62% tradesman level,\" which is used as the entry point. The entry price is around 25.90, and the start of the trade would have to be below the low, as indicated by the annotations on the chart.\n\n**Identification**:\n- The chart patterns ICT is referencing include the retracement down into an optimal trade entry area.\n- The main focus is on the 62% tradesman level, which is used as the entry point.\n- The entry price is around 25.90, and the start of the trade would have to be below the low.\n\n**Trading Application**:\n- The Inner Circle Trader recommends trading this pattern by entering the trade at the 62% tradesman level, which is around 25.90.\n- The strategy involves starting the trade below the low, as indicated by the annotations on the chart.\n\n**Key Price Levels**:\n- 25.90: The entry price for the trade.\n- 25.00: The previous day's high.\n- 25.69: The high of the current trading session.\n- 25.83: The high of the previous trading session.\n- 25.89: The high of the current trading session.\n- 25.99: The high of the previous trading session.\n- 26.00: The high of the current trading session.\n- 26.44: The high o",
+      "generation_time_seconds": 45.18720102310181,
+      "statistics": {
+        "teaching_duration_seconds": 12.759999999999991,
+        "word_count": 33,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

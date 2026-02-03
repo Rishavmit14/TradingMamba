@@ -1,0 +1,171 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 11.280000000000003,
+    "end_time": 19.6,
+    "duration": 8.319999999999999,
+    "text": "Okay folks, welcome back. This is our 20th video and final in this series. As you know, all good things must come to an end.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        11.478400000000002,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/L--1zBIEanY/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_001",
+    "start_time": 20.04,
+    "end_time": 33.54,
+    "duration": 13.5,
+    "text": "So here we have today's example and it's in the Euro dollar and we have our charts already trained in on a five minute chart and you know the drill. You pause the video and take a look at this example and see what you say.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        21.922173913043476,
+        "this"
+      ],
+      [
+        20.088260869565218,
+        "here"
+      ],
+      [
+        21.825652173913042,
+        "look"
+      ],
+      [
+        22.06695652173913,
+        "see"
+      ],
+      [
+        21.825652173913042,
+        "look at this"
+      ],
+      [
+        21.825652173913042,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/L--1zBIEanY/frame_00021.00s.jpg"
+    ],
+    "frame_timestamps": [
+      21.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_002",
+    "start_time": 39.38,
+    "end_time": 99.3,
+    "duration": 59.919999999999995,
+    "text": "And here's previous days high and I'll scroll back one after I go over this portion here, but between 830 in the morning, New York time to 11 o'clock. Right there every single day, New York time. We have a market run here above the previous days. High and it retraces all the way back down into the 70.5 level. But for this model for the YouTube channel, we have a type of entry of 1.1250 and the position entry would have suffered eight PIP drawdown using 30 PIP stop loss. At the old high, it's a plus 47 at one half standard deviation. It is 86 PIPs ultimately at one standard deviation. It's 124 PIPs really, really nice day, really easy day actually. You don't get these every single day of the week, but when they do come, wow, it's very, very fun to do it.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        40.10666666666667,
+        "this"
+      ],
+      [
+        39.43190476190477,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/L--1zBIEanY/frame_00039.00s.jpg",
+      "data/video_frames/L--1zBIEanY/frame_00069.00s.jpg"
+    ],
+    "frame_timestamps": [
+      39.0,
+      69.0
+    ],
+    "word_count": 147
+  },
+  {
+    "id": "unit_003",
+    "start_time": 99.64,
+    "end_time": 210.58,
+    "duration": 110.94000000000001,
+    "text": "We participated in an observation today on the British pound versus the US dollar. I'll reserve that for my private group. But for now, this is just a wonderful example to close this series out. The previous days high, you can see here and we drew that out in time. And again, as I mentioned earlier in this series, you're going to see examples of this setup that will form when it runs the previous days high or the previous days low. And don't think that that's the end of the move. And many times it just is the very perfect setup. Actually, it just shows you that it wants to go higher and it's retracing lower. And this gets a lot of the retail traders tripped up. They think that the market's reversing or something that affect a topping formation. I remember back in the 90s when I first started, I thought that everyone picked tops and everyone picked bottoms. And I quickly found out that I personally at the time couldn't do that. And learning how these markets operate initially with commodities, that market is no different from the foreign exchange market in a lot of ways. But the foreign exchange market has a whole lot more subtle nuances that are very specific to it, just like the bond market has subtle nuances that are very unique to it. And I'm sure if I were a crypto trader, which I'm not, I could probably give a list of things about that asset class that would be very germane to just that asset class alone. So when we go through all these examples, and I'm going to count you to go through them multiple times, and purposely went in and made them as short as I possibly can right to the point. And it gives you basically what a one full month or 20 trading days would be like",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        100.9165,
+        "this"
+      ],
+      [
+        101.873875,
+        "here"
+      ],
+      [
+        101.8206875,
+        "see"
+      ]
+    ],
+    "confidence": 0.15625,
+    "selected_frames": [
+      "data/video_frames/L--1zBIEanY/frame_00099.00s.jpg",
+      "data/video_frames/L--1zBIEanY/frame_00102.00s.jpg",
+      "data/video_frames/L--1zBIEanY/frame_00117.00s.jpg"
+    ],
+    "frame_timestamps": [
+      99.0,
+      102.0,
+      117.0
+    ],
+    "word_count": 320
+  },
+  {
+    "id": "unit_004",
+    "start_time": 211.42000000000002,
+    "end_time": 255.64,
+    "duration": 44.21999999999997,
+    "text": "logging the examples of one market that you find the optimal trade entry in. And what will happen is you will assume, especially if you're new watching this video series, that this pattern should form every single day in the same market. And that's not true. There is this pattern always every single day. But not every single day is the market that you're following exclusively going to make a really easy run above the previous days higher below the previous days low. So that part, you have to work out and build a watch list. And those things, you can learn how to do that in my free YouTube channel videos and other series.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        212.8944347826087,
+        "this"
+      ],
+      [
+        213.9866086956522,
+        "here"
+      ],
+      [
+        212.83982608695655,
+        "watch"
+      ]
+    ],
+    "confidence": 0.4347826086956522,
+    "selected_frames": [
+      "data/video_frames/L--1zBIEanY/frame_00210.00s.jpg",
+      "data/video_frames/L--1zBIEanY/frame_00213.00s.jpg",
+      "data/video_frames/L--1zBIEanY/frame_00246.00s.jpg"
+    ],
+    "frame_timestamps": [
+      210.0,
+      213.0,
+      246.0
+    ],
+    "word_count": 115
+  }
+]

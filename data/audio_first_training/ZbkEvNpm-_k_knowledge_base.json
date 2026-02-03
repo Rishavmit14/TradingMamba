@@ -1,0 +1,71 @@
+{
+  "video_id": "ZbkEvNpm-_k",
+  "generated_at": "2026-02-03T17:40:27.123798",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 147.65389704704285,
+  "processing_stats": {
+    "teaching_units": 31,
+    "vision_analyses": 57,
+    "concepts_extracted": 4,
+    "total_audio_duration": 684.3399999999998,
+    "total_words": 1845
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "Optimal Trade Entry (OET) is a fundamental concept in trading that involves identifying and entering trades at specific price levels. The video focuses on identifying the optimal trade entry pattern in crude oil futures, specifically between 8.30 and 11 a.m. on a daily chart. The key visual characteristics to spot the optimal trade entry are high and low price levels, which are crucial for identifying potential entry points. The video emphasizes the importance of using simple things in the daily chart to arrive at a bias, not an everyday bias, and suggests that the most that the trade would have hypothetically taken is 80 bucks of suffering. The video also highlights the potential risk associated with off-exchange foreign currency trading and encourages traders to carefully consider their investment objectives, level of experience, and risk appetite before making any investment decisions.",
+      "generation_time_seconds": 39.676681995391846,
+      "statistics": {
+        "teaching_duration_seconds": 93.22000000000008,
+        "word_count": 236,
+        "teaching_units": 3,
+        "frames_analyzed": 6,
+        "deictic_references": 7
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used by **Inner Circle Trader** (ICT) methodology. It involves identifying and trading in **long-term or broader objectives**. The strategy is based on **public or retail traders' opinions** about the market, which are often **loosely hinged on factual, real underpinnings**. The **key visual characteristics** of **ORDER BLOCK** include **long-term or broader trading objectives** indicated by multiple candlesticks, **price action** with price moving up and down in a range, and **specific price levels** such as 33.71, 33.49, and 32.49. The **risk associated with ORDER BLOCK** is high, as it involves **off-exchange foreign currency trading** on margin, which carries a high level of risk and may not be suitable for all investors. The **risk appetite** of the trader should be carefully considered before making any investment decisions.",
+      "generation_time_seconds": 37.40445113182068,
+      "statistics": {
+        "teaching_duration_seconds": 73.44000000000001,
+        "word_count": 189,
+        "teaching_units": 2,
+        "frames_analyzed": 5,
+        "deictic_references": 9
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a concept in trading that refers to the ease with which a financial instrument, such as a stock or currency, can be bought and sold. It is a measure of the market's willingness to trade a particular asset, indicating the liquidity of the market.\n\n**Identification** of liquidity on a chart involves observing several key visual characteristics:\n1. **Long-term Trend**: The chart shows a long-term upward trend, which indicates that the market is liquid and willing to trade.\n2. **Resistance Levels**: The chart includes resistance levels, which are highlighted by red horizontal lines. These levels are important support or resistance points for the market.\n3. **Market Volume**: The chart shows market volume, which is represented by the number of bars and candles in the chart. This can provide insights into the trading volume and the market's liquidity.\n4. **Market Sentiment**: The chart may include indicators of market sentiment, such as specific candle patterns or price action patterns, which can affect trading strategies.\n5. **Market Sentiment**: The chart may include indicators of market sentiment, such as the presence of specific candle patterns or price action patterns, which can affect trading strategies.\n\n**Trading Application** of liquidity on a chart involves identifying the market's willingness to trade a particular asset. ICT recommends trading this pattern by determining if you're looking for the previous days higher previous days low to be traded to. This approach helps in identifying potential continuation or explosive price action moves. The chart provides logical levels to take profits at and partials, and now includes a little longer term bias idea to help frame a likely scenario that we get a continuation or explosive price action move.",
+      "generation_time_seconds": 38.748292207717896,
+      "statistics": {
+        "teaching_duration_seconds": 78.55999999999992,
+        "word_count": 247,
+        "teaching_units": 3,
+        "frames_analyzed": 9,
+        "deictic_references": 9
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading patterns on a chart. The strategy involves identifying support and resistance levels, moving averages, and bull and bearish flags. The key visual characteristics to spot are support and resistance levels, moving averages, and bull and bearish flags. The trading application involves buying low and anticipating a run higher, and selling high and anticipating a run above that level. The key price levels to focus on are support and resistance levels, moving averages, and bull and bearish flags. The strategy involves trading off-exchange foreign currency trading, and the risk associated with this trading is high. The possibility exists that you could sustain a loss of some or all of your initial investment, and therefore, you should not invest money that you cannot afford to lose.",
+      "generation_time_seconds": 31.37659502029419,
+      "statistics": {
+        "teaching_duration_seconds": 29.41999999999996,
+        "word_count": 70,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 9.759999999999998,
+    "end_time": 33.1,
+    "duration": 23.340000000000003,
+    "text": "All right folks, this is volume 19 in a continuing series of 20 videos for the optimal trade entry pattern recognition series for the Inner Circle Trader YouTube channel. All right, our example today is the dollar yen and we already got charts trained in on our five-minute basis and I just want to show you the previous days high as they",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        9.923548387096773,
+        "this"
+      ]
+    ],
+    "confidence": 0.8064516129032259,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00009.00s.jpg"
+    ],
+    "frame_timestamps": [
+      9.0
+    ],
+    "word_count": 62
+  },
+  {
+    "id": "unit_001",
+    "start_time": 33.1,
+    "end_time": 41.62,
+    "duration": 8.519999999999996,
+    "text": "were trading you can see there's relative equal highs in here. There's a lot of retail theory about this being resistance and any shorts",
+    "detected_concepts": [
+      "equal highs"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        34.120000000000005,
+        "this"
+      ],
+      [
+        33.440000000000005,
+        "here"
+      ],
+      [
+        33.32666666666667,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00033.00s.jpg"
+    ],
+    "frame_timestamps": [
+      33.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_002",
+    "start_time": 41.62,
+    "end_time": 67.3,
+    "duration": 25.68,
+    "text": "their protective stop loss could be quote-unquote protected about these highs. Well we're gonna see about that so let's again remember this is the high I'll show you that's where it is okay and take this off and do our regular approach. All right, so now pause the video I'll give you an opportunity to study it before I show you the annotations.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        42.77333333333333,
+        "this"
+      ],
+      [
+        43.26761904761904,
+        "here"
+      ],
+      [
+        42.388888888888886,
+        "see"
+      ]
+    ],
+    "confidence": 0.7936507936507936,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00042.00s.jpg"
+    ],
+    "frame_timestamps": [
+      42.0
+    ],
+    "word_count": 63
+  },
+  {
+    "id": "unit_003",
+    "start_time": 74.86,
+    "end_time": 106.56,
+    "duration": 31.700000000000003,
+    "text": "All right let's add the annotations now so we have our New York session again always static at 8 30 in the morning New York time to 11 o'clock New York time so go straight up in there and you'll see that we create optimal trade entries in here. I like this one let me take the annotations off real quick I like this one because we've already came back down in a little deep on that and it broke a high so I like this right here so if you look at the scalping or",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        77.3090625,
+        "this"
+      ],
+      [
+        76.68479166666667,
+        "here"
+      ],
+      [
+        79.22989583333333,
+        "look"
+      ],
+      [
+        76.78083333333333,
+        "see"
+      ],
+      [
+        78.98979166666666,
+        "right here"
+      ],
+      [
+        79.22989583333333,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00075.00s.jpg",
+      "data/video_frames/9F-anykT7J0/frame_00078.00s.jpg",
+      "data/video_frames/9F-anykT7J0/frame_00090.00s.jpg"
+    ],
+    "frame_timestamps": [
+      75.0,
+      78.0,
+      90.0
+    ],
+    "word_count": 96
+  },
+  {
+    "id": "unit_004",
+    "start_time": 106.56,
+    "end_time": 119.02,
+    "duration": 12.459999999999994,
+    "text": "high probability scalping series I have on my YouTube channel that'll actually give you a little bit more detail as to how you can trust bias and again there's more tips in that video series as well but let's go back to this example here",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        108.772,
+        "this"
+      ],
+      [
+        108.08733333333333,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      108.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_005",
+    "start_time": 119.02,
+    "end_time": 190.26,
+    "duration": 71.24,
+    "text": "we have the low the high optimal trade entry dropping down in on the candle at 10 25 New York time hypothetical entry would be 108.70 and the entry would have suffered three pips drawdown 10 pips stop loss which takes us at 108.60 doesn't give us too much at the old high and not much going on that either about 14 pips and 20 pips at one standard deviation and finally make it to the one and a half standard deviation right here on this candle here offering 28 pips and the standard deviation of two or two standard deviations just say looks like it could potentially pop up in here in the Asian session because right now time of the recording is 7 39 local time in New York so that's the business for this example and tomorrow is our last and final episode for this series and if you give me thumbs up in tomorrow's video it might even inspire me to do something else after this one ends until I talk to you next time wish you good luck and good trading",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        123.38424731182795,
+        "this"
+      ],
+      [
+        123.28155913978495,
+        "here"
+      ],
+      [
+        124.30844086021506,
+        "look"
+      ],
+      [
+        123.23021505376343,
+        "right here"
+      ],
+      [
+        123.38424731182795,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.26881720430107525,
+    "selected_frames": [
+      "data/video_frames/9F-anykT7J0/frame_00120.00s.jpg",
+      "data/video_frames/9F-anykT7J0/frame_00123.00s.jpg"
+    ],
+    "frame_timestamps": [
+      120.0,
+      123.0
+    ],
+    "word_count": 186
+  }
+]

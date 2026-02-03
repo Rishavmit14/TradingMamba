@@ -1,0 +1,244 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.120000000000001,
+    "end_time": 32.78,
+    "duration": 22.66,
+    "text": "Welcome back folks. This is volume number 17 in a continuing series of 20 videos for the optimal trade entry pattern recognition series for the Inner Circle Trader YouTube channel. Our example today is from the British pound or pound versus dollar. And we're looking at the daily chart here and I'm going to save you a lot of time and just simply state that we have retail resistance up here.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        10.285633802816902,
+        "this"
+      ],
+      [
+        12.825352112676057,
+        "here"
+      ],
+      [
+        12.549295774647888,
+        "look"
+      ]
+    ],
+    "confidence": 0.7042253521126761,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00009.00s.jpg",
+      "data/video_frames/FNwqw7IiByo/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      9.0,
+      12.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_001",
+    "start_time": 33.28,
+    "end_time": 52.18,
+    "duration": 18.9,
+    "text": "And that's going to be likely a draw on liquidity. Now here's one of the things that you're going to have in your notes. When you're looking at a daily chart like this, it's not important or even required that price trades from this level here all the way up to that level and higher. It just needs to draw towards it. That's the reason why I call it a draw on liquidity.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        34.906301369863016,
+        "this"
+      ],
+      [
+        33.839041095890416,
+        "here"
+      ],
+      [
+        34.6013698630137,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00033.00s.jpg",
+      "data/video_frames/FNwqw7IiByo/frame_00036.00s.jpg"
+    ],
+    "frame_timestamps": [
+      33.0,
+      36.0
+    ],
+    "word_count": 73
+  },
+  {
+    "id": "unit_002",
+    "start_time": 52.9,
+    "end_time": 69.56,
+    "duration": 16.660000000000004,
+    "text": "Now again, the ideal scenario would be to see price trade up there. But it's not required if especially if we're looking for day trades or interday trades, which is the scope of this series focusing primarily for moves within the 8 30 a.m. to 11 a.m. New York session.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        54.6688,
+        "this"
+      ],
+      [
+        53.5968,
+        "here"
+      ],
+      [
+        54.0256,
+        "look"
+      ],
+      [
+        53.3288,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00054.00s.jpg"
+    ],
+    "frame_timestamps": [
+      54.0
+    ],
+    "word_count": 50
+  },
+  {
+    "id": "unit_003",
+    "start_time": 80.84,
+    "end_time": 86.72,
+    "duration": 5.8799999999999955,
+    "text": "Now again, it's not imperative that it goes all the way up there, but it's more likely to go that direction than it is to go lower.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        81.47074074074074,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00081.00s.jpg"
+    ],
+    "frame_timestamps": [
+      81.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_004",
+    "start_time": 88.32000000000001,
+    "end_time": 98.86,
+    "duration": 10.539999999999992,
+    "text": "So we want to put our line on the daily high, which comes in at 123.94 and one pip at. And we're going to go over to our five minute chart.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      87.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_005",
+    "start_time": 109.8,
+    "end_time": 157.8,
+    "duration": 48.000000000000014,
+    "text": "Okay, so let's add the annotations now. And right away, you can see we have our optimal trade entry price move here drops down in after 8 30 a.m. move drops down into 62% tradesmen level. Our hypothetical entry is 123 and 88 and it suffers three pips drawdown stop losses 15 pips, which puts it just below this low here at the old high. We have a one to one right away at the old high at plus 15 pips at one half of standard deviation. It's up 29 pips 43 pips at one standard deviation one and a half standard deviations takes us to plus 56 pips and ultimately at two standard deviations where we would kill",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        112.75848739495798,
+        "this"
+      ],
+      [
+        110.87117647058824,
+        "here"
+      ],
+      [
+        110.41210084033614,
+        "see"
+      ]
+    ],
+    "confidence": 0.42016806722689076,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00111.00s.jpg",
+      "data/video_frames/FNwqw7IiByo/frame_00114.00s.jpg"
+    ],
+    "frame_timestamps": [
+      111.0,
+      114.0
+    ],
+    "word_count": 119
+  },
+  {
+    "id": "unit_006",
+    "start_time": 157.8,
+    "end_time": 194.82,
+    "duration": 37.01999999999998,
+    "text": "the trade at 70 pips. Now obviously in hindsight, you can see it went a little bit further. But again, I lean on the fact that the rules for this model says we have to bail on the day trade at two standard deviations. Again, there's going to be trades if you follow this model, you're going to leave money on the table hypothetically. And you're going to either going to have to accept that. Or again, if you think you're going to go higher than that, leave a leader in or it's a small portion of your original position to see if you can capture anything especially based on what we showed on that daily chart.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        159.31196581196582,
+        "this"
+      ],
+      [
+        160.1982905982906,
+        "here"
+      ],
+      [
+        158.3735042735043,
+        "see"
+      ]
+    ],
+    "confidence": 0.4273504273504274,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00159.00s.jpg",
+      "data/video_frames/FNwqw7IiByo/frame_00177.00s.jpg"
+    ],
+    "frame_timestamps": [
+      159.0,
+      177.0
+    ],
+    "word_count": 117
+  },
+  {
+    "id": "unit_007",
+    "start_time": 195.96,
+    "end_time": 200.14,
+    "duration": 4.179999999999978,
+    "text": "So that's going to do it for today. Hopefully you found this insightful. Until next time, I wish you good luck and good trading.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        196.54666666666668,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/FNwqw7IiByo/frame_00195.00s.jpg",
+      "data/video_frames/FNwqw7IiByo/frame_00198.00s.jpg"
+    ],
+    "frame_timestamps": [
+      195.0,
+      198.0
+    ],
+    "word_count": 24
+  }
+]

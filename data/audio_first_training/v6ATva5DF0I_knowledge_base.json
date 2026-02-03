@@ -1,0 +1,57 @@
+{
+  "video_id": "v6ATva5DF0I",
+  "generated_at": "2026-01-31T18:04:40.337364",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 89.03002405166626,
+  "processing_stats": {
+    "teaching_units": 17,
+    "vision_analyses": 20,
+    "concepts_extracted": 3,
+    "total_audio_duration": 258.88,
+    "total_words": 629
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying potential entry points for trades on a chart. The key visual characteristics of this pattern include high and low levels, candlestick patterns, support and resistance levels, and Bollinger Bands. The optimal trade entry is based on identifying when price is lower than the swing low, which is a low between the high and low. The chart analysis suggests that the market may be expanding on the upside, and the optimal trade entry is to use the swing low from here up to the high. The Inner Circle Trader recommends trading this pattern by identifying potential entry points and using them to enter trades.",
+      "generation_time_seconds": 21.702658891677856,
+      "statistics": {
+        "teaching_duration_seconds": 79.47999999999999,
+        "word_count": 185,
+        "teaching_units": 4,
+        "frames_analyzed": 5,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the trading market, particularly in the foreign exchange (FX) market. It involves setting a stop-loss order and a buy or sell order at specific price levels, known as \"order blocks,\" to protect a trading position from potential losses.\n\n**Identification**:\n- The \"Previous Day's High\" line on the chart represents the \"62% level\" mentioned by ICT.\n- The \"3rd Scaling Above PDH\" and \"2nd Scaling at Old Range High\" annotations are used to identify specific price levels or support and resistance areas.\n- The \"Stop Loss\" and \"Stop Loss Loss\" annotations are used to set stop-loss orders.\n- The \"Entry\" and \"Entry Entry\" annotations are used to set entry points for trades.\n- The \"1st Scaling at Old Range High\" annotation is used to identify a specific price level for a potential entry or exit strategy.\n\n**Trading Application**:\n- ICT recommends trading the \"ORDER BLOCK\" pattern by setting a stop-loss order and a buy or sell order at specific price levels, known as \"order blocks.\"\n- The \"62% level\" is used as a reference point for setting the stop-loss order.\n- The \"order blocks\" are used to protect a trading position from potential losses.\n- The \"ORDER BLOCK\" pattern can be used to enter or exit a trade, depending on the specific price level and risk tolerance.\n\n**Key Price Levels**:\n- The \"62% level\" is a reference point for setting the stop-loss order.\n- The specific price levels or support and resistance areas are used to identify potential entry or exit points.\n- The \"order blocks\" are used to protect a trading position from potential losses.\n\n**Summary**:\n- **Definition**: The \"ORDER BLOCK\" is a trading strategy used in the trading market, particularly in the foreign exchange (FX) market, to protect a trading position from potential losses.\n- **Identification**: The \"Previous Day's High\" line, \"3rd Scaling Above PDH,\" \"2nd Scaling at Old Range High,\" \"Stop Loss,\" \"Stop Loss Loss,\" \"Entry,\" and \"1st Scaling at Old Range High\" annotations are used to identify specific price levels or support and resistance areas.\n- **Trading Application**: The \"ORDER BLOCK\" pattern involves setting a stop-loss order and a buy or sell order at specific price levels, known as \"order blocks,\" to protect a trading position from potential losses.\n- **Key Price Levels**: The \"62% level\" is a reference point for setting the stop-loss order, and specific price levels or support and resistance areas are used to identify potential entry or exit points.\n- **Summary**: The \"ORDER BLOCK\" is a practical and actionable trading strategy used in the trading market, particularly in the foreign exchange (FX) market, to protect a trading position from potential losses.",
+      "generation_time_seconds": 36.993319034576416,
+      "statistics": {
+        "teaching_duration_seconds": 8.95999999999998,
+        "word_count": 22,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding numbers, starting from 0 or 1. The sequence is often used in various fields, including finance, mathematics, and art, to represent growth and proportion. In the context of trading, the Fibonacci sequence can be used to identify potential trading opportunities based on price patterns. The \"FIBONACCI\" concept involves identifying Fibonacci levels, which are price levels that are 10 pips above the previous day's high. These levels can be used as entry points for trading, as they represent potential support or resistance levels. The Fibonacci sequence can also be used to identify Fibonacci retracement levels, which are price levels that are 10 pips below the previous day's high. These levels can be used as exit points for trades, as they represent potential resistance or profit targets.",
+      "generation_time_seconds": 27.719501733779907,
+      "statistics": {
+        "teaching_duration_seconds": 17.519999999999982,
+        "word_count": 48,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 0
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    }
+  }
+}

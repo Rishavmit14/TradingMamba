@@ -1,0 +1,154 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.44,
+    "end_time": 25.24,
+    "duration": 14.799999999999999,
+    "text": "Welcome back folks. This is video number 12 in our continuing series of 20 videos for the ICT Optimal Trade Entry Pattern Recognition Series. All right, today's example is a commodity futures and it's a Mexican peso.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        10.615135135135134,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/6D3sKabkozk/frame_00009.00s.jpg",
+      "data/video_frames/6D3sKabkozk/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      9.0,
+      12.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_001",
+    "start_time": 25.24,
+    "end_time": 34.72,
+    "duration": 9.48,
+    "text": "So we already have our chart trained on the five minute and take a look at what you see here before I put the annotations on pause the video.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        26.163793103448274,
+        "here"
+      ],
+      [
+        25.920689655172414,
+        "look"
+      ],
+      [
+        26.1151724137931,
+        "see"
+      ],
+      [
+        25.920689655172414,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/6D3sKabkozk/frame_00024.00s.jpg",
+      "data/video_frames/6D3sKabkozk/frame_00027.00s.jpg"
+    ],
+    "frame_timestamps": [
+      24.0,
+      27.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_002",
+    "start_time": 47.28,
+    "end_time": 84.0,
+    "duration": 36.72,
+    "text": "And during the New York session, we have an optimal trade entry in here and you'd see one half standard deviation. One full standard deviation takes us above Thursday's daily high and one and a half is a little too rich for today, but that's okay. The model that I'm teaching is simply looking at a run above previous days high or below previous days low. And you can see that there is a 47 pip opportunity here and a four to one reward to risk.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        47.95267441860465,
+        "here"
+      ],
+      [
+        50.022441860465115,
+        "look"
+      ],
+      [
+        48.10790697674419,
+        "see"
+      ]
+    ],
+    "confidence": 0.5813953488372093,
+    "selected_frames": [
+      "data/video_frames/6D3sKabkozk/frame_00048.00s.jpg",
+      "data/video_frames/6D3sKabkozk/frame_00051.00s.jpg"
+    ],
+    "frame_timestamps": [
+      48.0,
+      51.0
+    ],
+    "word_count": 86
+  },
+  {
+    "id": "unit_003",
+    "start_time": 84.42,
+    "end_time": 97.46,
+    "duration": 13.039999999999992,
+    "text": "So not a bad little trade. You might want to take a look at the Canadian dollar today in your own study. There was an opportunity for a continuation on the dollar CAD.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        85.58393939393939,
+        "here"
+      ],
+      [
+        85.02727272727273,
+        "look"
+      ],
+      [
+        85.02727272727273,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/6D3sKabkozk/frame_00084.00s.jpg",
+      "data/video_frames/6D3sKabkozk/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      84.0,
+      87.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_004",
+    "start_time": 97.84,
+    "end_time": 106.98,
+    "duration": 9.14,
+    "text": "It gave an optimal trade entry today in the New York session. So I'll leave that for your own personal study and homework until talk to you next weekend. I wish you good luck and good trading.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/6D3sKabkozk/frame_00099.00s.jpg"
+    ],
+    "frame_timestamps": [
+      99.0
+    ],
+    "word_count": 37
+  }
+]

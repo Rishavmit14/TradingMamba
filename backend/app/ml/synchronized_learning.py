@@ -18,13 +18,16 @@ Author: TradingMamba AI
 """
 
 import os
-import json
+import sys
+from pathlib import Path
+# Use fast orjson for JSON operations (6x faster)
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from utils import json_utils as json
 import numpy as np
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime
 import logging
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -349,18 +352,90 @@ class WhisperXTranscriber:
             return self._fallback_transcribe(audio_path, language)
 
     def _fallback_transcribe(self, audio_path: str, language: str) -> Dict:
-        """Fallback to standard Whisper with word_timestamps=True"""
+        """
+        Fallback using faster-whisper (4-8x faster than standard Whisper).
+
+        faster-whisper uses CTranslate2 for optimized inference.
+        For 8GB RAM, we use the 'small' model which is highly accurate
+        and runs efficiently.
+        """
+        try:
+            from faster_whisper import WhisperModel
+
+            # Use 'small' model for 8GB RAM (good balance of speed/accuracy)
+            # Options: tiny, base, small, medium, large-v2, large-v3
+            model_size = "small" if "large" in self.model_size else self.model_size
+
+            logger.info(f"Loading faster-whisper model: {model_size}")
+            model = WhisperModel(
+                model_size,
+                device="cpu",  # CPU for Apple Silicon compatibility
+                compute_type="int8"  # INT8 quantization for 50% memory reduction
+            )
+
+            # Transcribe with word timestamps
+            segments, info = model.transcribe(
+                audio_path,
+                language=language if language else None,
+                beam_size=5,
+                word_timestamps=True,
+                vad_filter=True  # Voice activity detection for cleaner output
+            )
+
+            # Extract word segments
+            word_segments = []
+            all_segments = []
+
+            for segment in segments:
+                seg_dict = {
+                    "start": segment.start,
+                    "end": segment.end,
+                    "text": segment.text,
+                    "words": []
+                }
+
+                if segment.words:
+                    for word in segment.words:
+                        word_data = {
+                            "word": word.word,
+                            "start": word.start,
+                            "end": word.end,
+                            "score": word.probability if word.probability else 1.0
+                        }
+                        word_segments.append(word_data)
+                        seg_dict["words"].append(word_data)
+
+                all_segments.append(seg_dict)
+
+            logger.info(f"faster-whisper transcribed {len(word_segments)} words in {len(all_segments)} segments")
+
+            return {
+                "segments": all_segments,
+                "word_segments": word_segments,
+                "language": info.language if info else language
+            }
+
+        except ImportError:
+            logger.warning("faster-whisper not installed, trying standard whisper")
+            # Final fallback to standard whisper
+            return self._standard_whisper_fallback(audio_path, language)
+
+        except Exception as e:
+            logger.error(f"faster-whisper transcription failed: {e}")
+            return self._standard_whisper_fallback(audio_path, language)
+
+    def _standard_whisper_fallback(self, audio_path: str, language: str) -> Dict:
+        """Final fallback to standard Whisper with word_timestamps=True"""
         try:
             import whisper
 
-            model = whisper.load_model(self.model_size)
+            model = whisper.load_model("small")  # Use small for 8GB RAM
             result = model.transcribe(
                 audio_path,
                 language=language,
-                word_timestamps=True  # Enable word-level timestamps
+                word_timestamps=True
             )
 
-            # Extract word segments from standard Whisper output
             word_segments = []
             for segment in result.get("segments", []):
                 for word_data in segment.get("words", []):
@@ -378,7 +453,7 @@ class WhisperXTranscriber:
             }
 
         except Exception as e:
-            logger.error(f"Fallback transcription also failed: {e}")
+            logger.error(f"All transcription methods failed: {e}")
             return {"segments": [], "word_segments": [], "language": language}
 
     def get_words_at_timestamp(

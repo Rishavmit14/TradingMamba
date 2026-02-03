@@ -1,0 +1,4428 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 26.020000000000003,
+    "end_time": 56.74,
+    "duration": 30.72,
+    "text": "Well, hello folks, long time no see. If you're like me, um, the present conditions around the world right now because of the, uh, the illness that's been plaguing everyone, uh, I thought of everyone on the YouTube channel that has supported this channel and maybe has been longing for some inspiration, maybe some kind of a nudge by good, wise, he T.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        28.353333333333335,
+        "this"
+      ],
+      [
+        26.353333333333335,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00027.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00042.00s.jpg"
+    ],
+    "frame_timestamps": [
+      27.0,
+      42.0
+    ],
+    "word_count": 63
+  },
+  {
+    "id": "unit_001",
+    "start_time": 70.22,
+    "end_time": 81.74,
+    "duration": 11.519999999999996,
+    "text": "Uh, this day snapshot real quick, kind of like train your eye to see the optimal trade entry and it's many formations and subtle nuances.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        70.2748,
+        "this"
+      ],
+      [
+        70.9324,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00069.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00072.00s.jpg"
+    ],
+    "frame_timestamps": [
+      69.0,
+      72.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_002",
+    "start_time": 83.06,
+    "end_time": 102.86,
+    "duration": 19.799999999999997,
+    "text": "Now it's not a signal service. So that way you guys didn't like to do the thumbs down button, which I love that the, uh, the content that I'm going to be providing you here is just really to activate your particular activating system. I mean, train your eye to see what it looks like and how it tends to form.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        84.78229508196722,
+        "here"
+      ],
+      [
+        85.74475409836066,
+        "look"
+      ],
+      [
+        85.5927868852459,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00084.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      84.0,
+      87.0
+    ],
+    "word_count": 61
+  },
+  {
+    "id": "unit_003",
+    "start_time": 102.86,
+    "end_time": 118.62,
+    "duration": 15.760000000000005,
+    "text": "Okay. So, uh, for some of you that are very versed in my content and old stuff in the classic ICT library, uh, the optimal trade entry is say really an old staple.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00102.00s.jpg"
+    ],
+    "frame_timestamps": [
+      102.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_004",
+    "start_time": 119.12,
+    "end_time": 147.54,
+    "duration": 28.419999999999987,
+    "text": "Now it's not important for me to go through the entire optimal trade entry and all the levels and all that stuff. You'll see what they are obviously in the examples, but if you have not watched the optimal trade entry or OTE primer video, you can do a search on YouTube and you'll see it pops up. Watch that video and kind of like gives you a, kind of like a foundation up how to set your fit and all that business.",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        120.27000000000001,
+        "see"
+      ],
+      [
+        120.92,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00120.00s.jpg"
+    ],
+    "frame_timestamps": [
+      120.0
+    ],
+    "word_count": 83
+  },
+  {
+    "id": "unit_005",
+    "start_time": 148.9,
+    "end_time": 160.78,
+    "duration": 11.879999999999995,
+    "text": "So if we are looking at the next 20 days, just know that these videos are not intended to be very long. I want to try to get right to the point, but this is the first one in a series.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        150.3729268292683,
+        "this"
+      ],
+      [
+        149.07853658536587,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00150.00s.jpg"
+    ],
+    "frame_timestamps": [
+      150.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_006",
+    "start_time": 161.04,
+    "end_time": 180.58,
+    "duration": 19.54000000000002,
+    "text": "So I kind of like want to take a little bit of liberty to remind the individuals that are probably just new to me or the hard line critics that just can't stand me. I love you too. The, again, the premise behind all this is again, not to say, here's what the, here's what the market's going to do next.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        163.21836065573768,
+        "this"
+      ],
+      [
+        163.51540983606557,
+        "here"
+      ]
+    ],
+    "confidence": 0.819672131147541,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00162.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00165.00s.jpg"
+    ],
+    "frame_timestamps": [
+      162.0,
+      165.0
+    ],
+    "word_count": 61
+  },
+  {
+    "id": "unit_007",
+    "start_time": 180.82,
+    "end_time": 188.08,
+    "duration": 7.260000000000019,
+    "text": "Okay. That's not what I'm doing here. Okay. What I'm showing you is how you go into your charts and annotate them.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        181.13090909090909,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00180.00s.jpg"
+    ],
+    "frame_timestamps": [
+      180.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_008",
+    "start_time": 189.16,
+    "end_time": 201.24,
+    "duration": 12.080000000000013,
+    "text": "Look for the optimal trade entry because this is how I trained myself to see it back in the 1990s. I worked just like everyone of you and I came home and I had to look at charts and look at moves that I missed.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        189.48666666666665,
+        "this"
+      ],
+      [
+        189.16,
+        "look"
+      ],
+      [
+        189.81333333333333,
+        "see"
+      ],
+      [
+        190.79333333333332,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00189.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00192.00s.jpg"
+    ],
+    "frame_timestamps": [
+      189.0,
+      192.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_009",
+    "start_time": 201.24,
+    "end_time": 224.56,
+    "duration": 23.319999999999993,
+    "text": "So I taught myself to look for specific patterns and signatures and price action over a period of years. And because of that and seeing it over and over and over again, it builds in a pseudo experience. In other words, I at the time was not able to see these formations form live.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        201.49925925925928,
+        "look"
+      ],
+      [
+        202.48444444444445,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00201.00s.jpg"
+    ],
+    "frame_timestamps": [
+      201.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_010",
+    "start_time": 225.16,
+    "end_time": 236.48,
+    "duration": 11.319999999999993,
+    "text": "So I would go back and look at my charts and annotate them in capacity as if I were really there watching it and annotating the chart as if it was something I watched and witnessed live.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        226.21567567567567,
+        "here"
+      ],
+      [
+        225.46162162162162,
+        "look"
+      ],
+      [
+        226.21567567567567,
+        "watch"
+      ],
+      [
+        225.46162162162162,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00225.00s.jpg"
+    ],
+    "frame_timestamps": [
+      225.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_011",
+    "start_time": 237.58,
+    "end_time": 265.84,
+    "duration": 28.259999999999962,
+    "text": "Now, I'm not going to annotate the charts to the degree that I personally would do it, but I'm going to provide you a kind of baseline to work with. And you can dress up your own charts and annotations and draw a great deal of attention to other things that may be important to you or your unique price action model. I'm not teaching bias.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00237.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0
+    ],
+    "word_count": 66
+  },
+  {
+    "id": "unit_012",
+    "start_time": 266.62,
+    "end_time": 282.32,
+    "duration": 15.699999999999989,
+    "text": "I'm not teaching how to find the right order blocks. Okay. I'm not doing all that. It's just, again, to train your eye to see a specific phenomenon that takes place in the marketplace. And again, some of you are going to say, oh, this is something that everybody knows about.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        268.99254901960785,
+        "this"
+      ],
+      [
+        267.91411764705884,
+        "see"
+      ]
+    ],
+    "confidence": 0.9803921568627451,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00267.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00270.00s.jpg"
+    ],
+    "frame_timestamps": [
+      267.0,
+      270.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_013",
+    "start_time": 288.08,
+    "end_time": 305.46,
+    "duration": 17.379999999999995,
+    "text": "Okay. If that's your attitude, that's how you think of it. So you're going into this video. I'm really going to waste your time and just know that if you're that person, I enjoy that for everyone else that wants to really learn how to do something. I want you to see what it's like over and over and over again over a period of four weeks.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        288.8389552238806,
+        "this"
+      ],
+      [
+        290.660447761194,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00288.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      288.0,
+      291.0
+    ],
+    "word_count": 67
+  },
+  {
+    "id": "unit_014",
+    "start_time": 306.04,
+    "end_time": 318.46,
+    "duration": 12.419999999999959,
+    "text": "Okay. So if anything is studied for a month, basically, it really starts to take root in number one, your memory and your identification.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00306.00s.jpg"
+    ],
+    "frame_timestamps": [
+      306.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_015",
+    "start_time": 318.98,
+    "end_time": 328.04,
+    "duration": 9.060000000000002,
+    "text": "Okay. The faculties that each of us have to see something that is important to us, it has to be activated.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        319.43428571428575,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00318.00s.jpg"
+    ],
+    "frame_timestamps": [
+      318.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_016",
+    "start_time": 328.04,
+    "end_time": 425.5,
+    "duration": 97.45999999999998,
+    "text": "Okay. And real short and sweet. The common example I always use is if you buy a car and you've looked forward to buying this car, and once you buy it, you take it home. And the very next day you're driving it, it might be the day you come home with it. You start noticing that a lot of other people seem to have that same car. And it's not that more people bought it because you did, but your reticular activating system has been keyed up to filter that car because it's meaningful to you. And so by me showing you examples of this particular pattern and the signatures that generally repeat with it, you're going to see how you can start doing this on your own. And then if you have the ability to watch it live, you'll see many times it's formation and then you'll grow in your confidence to paper trade it, then demo trade it. And if you feel inclined to do so, if you've shown six months of consistency, you want to dabble with a very, very small amount of money, live money, nothing big, nothing grandiose. The smallest amount of money you can open up an account with and then trade the smallest little lot sizes possible. And then again, just follow the same protocols and procedures that would otherwise lead to your trust in finding it in price action. You determine that on your own. I don't ever tell anybody say, okay, go trade with life money because there's a lot of responsibility in that. And legally, I can't tell you to do that. But I can talk about price action and I can talk about the signatures that repeat themselves.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        329.3136551724138,
+        "this"
+      ],
+      [
+        341.7317931034483,
+        "here"
+      ],
+      [
+        329.10137931034484,
+        "look"
+      ],
+      [
+        331.33027586206896,
+        "see"
+      ],
+      [
+        335.3104482758621,
+        "watch"
+      ],
+      [
+        334.35520689655175,
+        "see how"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00327.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00330.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00333.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00336.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00342.00s.jpg"
+    ],
+    "frame_timestamps": [
+      327.0,
+      330.0,
+      333.0,
+      336.0,
+      342.0
+    ],
+    "word_count": 290
+  },
+  {
+    "id": "unit_017",
+    "start_time": 425.78,
+    "end_time": 436.24,
+    "duration": 10.460000000000036,
+    "text": "And I only want to talk about the optimal trade entry. Okay, so please don't try to reach out to me and say, Hey, can you talk about this? Can you do that? I'm only going to be doing just this.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        427.0980487804878,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00426.00s.jpg"
+    ],
+    "frame_timestamps": [
+      426.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_018",
+    "start_time": 436.5,
+    "end_time": 448.18,
+    "duration": 11.680000000000007,
+    "text": "Okay, so again, every video I'm going to try to aim at five minutes or less. But this one just has to be just a little bit long window because I have to have a preamble to set the stage for what it is I'm doing.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        437.27978260869565,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00438.00s.jpg"
+    ],
+    "frame_timestamps": [
+      438.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_019",
+    "start_time": 448.18,
+    "end_time": 462.08,
+    "duration": 13.899999999999977,
+    "text": "So that way no one can say you said it was going to be this and it's not. Okay, so if you're serious about understanding the things that I'm making available to you on this YouTube channel, one of the hallmarks is the optimal trade entry.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        448.90434782608696,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00447.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00450.00s.jpg"
+    ],
+    "frame_timestamps": [
+      447.0,
+      450.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_020",
+    "start_time": 467.66,
+    "end_time": 481.86,
+    "duration": 14.199999999999989,
+    "text": "Okay, so again, it'll be 20 videos in the series and I'll try to create a playlist that way you guys can find it very easily and be able to go through it. But tonight as the pilot episode, we're looking at the Australian dollar.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        469.68666666666667,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00468.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      468.0,
+      471.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_021",
+    "start_time": 482.06,
+    "end_time": 494.0,
+    "duration": 11.939999999999998,
+    "text": "Okay, so I'm using trading view.com as the resource and platform. And the data I'm pulling up is the Australian dollar versus the US dollar forex.com.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00483.00s.jpg"
+    ],
+    "frame_timestamps": [
+      483.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_022",
+    "start_time": 494.14,
+    "end_time": 508.94,
+    "duration": 14.800000000000011,
+    "text": "So whenever you put this symbol over here, it's going to give you a assortment of different data feeds. And I always use the forex.com so that way you guys can see the price action the same way as I'm presenting it here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        494.3446511627907,
+        "this"
+      ],
+      [
+        494.4981395348837,
+        "here"
+      ],
+      [
+        495.7260465116279,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00495.00s.jpg"
+    ],
+    "frame_timestamps": [
+      495.0
+    ],
+    "word_count": 43
+  },
+  {
+    "id": "unit_023",
+    "start_time": 510.48,
+    "end_time": 519.06,
+    "duration": 8.579999999999927,
+    "text": "All right, so when we look at the optimal trade entry and we look at its formation on a day by day daily basis.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        510.71125,
+        "look"
+      ],
+      [
+        510.71125,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00510.00s.jpg"
+    ],
+    "frame_timestamps": [
+      510.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_024",
+    "start_time": 519.06,
+    "end_time": 530.72,
+    "duration": 11.660000000000082,
+    "text": "Now again, I am not trying to push or entice or convince that you should be day trading every single day.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00519.00s.jpg"
+    ],
+    "frame_timestamps": [
+      519.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_025",
+    "start_time": 538.14,
+    "end_time": 554.7,
+    "duration": 16.56000000000006,
+    "text": "So many of you are very, very new. And there's nothing wrong with that, but you cannot speed this process up. It has to be done methodically has to be done in a way where it just allows for development and not rush. You can't rush it.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        539.0361702127659,
+        "this"
+      ],
+      [
+        538.6378723404255,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00537.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00540.00s.jpg"
+    ],
+    "frame_timestamps": [
+      537.0,
+      540.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_026",
+    "start_time": 554.78,
+    "end_time": 571.94,
+    "duration": 17.160000000000082,
+    "text": "Okay, so if you look at this particular currency pair, some of you that are familiar with my concepts right away know that there is the sensitivity off of this low here and this low here is inside of these two consecutive down close candles.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        555.1013333333333,
+        "this"
+      ],
+      [
+        556.0653333333333,
+        "here"
+      ],
+      [
+        554.9942222222222,
+        "look"
+      ],
+      [
+        554.9942222222222,
+        "look at this"
+      ],
+      [
+        554.9942222222222,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00555.00s.jpg"
+    ],
+    "frame_timestamps": [
+      555.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_027",
+    "start_time": 579.28,
+    "end_time": 588.0,
+    "duration": 8.720000000000027,
+    "text": "But every video after this, I'm only going to go right into the day and reference the previous days range and show you how the optimal trade entry formed.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        579.4924137931034,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00579.00s.jpg"
+    ],
+    "frame_timestamps": [
+      579.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_028",
+    "start_time": 588.46,
+    "end_time": 600.32,
+    "duration": 11.860000000000014,
+    "text": "So if you learn this, okay, if you grow in comfort and identifying this over a period of time, what period of time minimum four weeks daily study.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        588.6685714285715,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00588.00s.jpg"
+    ],
+    "frame_timestamps": [
+      588.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_029",
+    "start_time": 600.32,
+    "end_time": 624.58,
+    "duration": 24.25999999999999,
+    "text": "Now that doesn't mean four weeks you graduate. Now your optimal trade entry master. It just means that you're very familiar with it and you have a little bit of a sample size of experience. You want to build on that. How long it will take for you to get really, I guess, used to seeing the pattern and anticipating when it's going to form. That's going to be different for every single one of you.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        603.1930263157896,
+        "see"
+      ]
+    ],
+    "confidence": 0.6578947368421053,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00600.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00603.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00624.00s.jpg"
+    ],
+    "frame_timestamps": [
+      600.0,
+      603.0,
+      624.0
+    ],
+    "word_count": 76
+  },
+  {
+    "id": "unit_030",
+    "start_time": 625.0,
+    "end_time": 633.86,
+    "duration": 8.860000000000014,
+    "text": "So it's not here's a general rule of thumb or everybody gets it by this time. No mentor, no teacher, no educator can say everyone's going to get it by this timeline.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        625.721875,
+        "this"
+      ],
+      [
+        625.1546875,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00624.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00627.00s.jpg"
+    ],
+    "frame_timestamps": [
+      624.0,
+      627.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_031",
+    "start_time": 641.88,
+    "end_time": 652.88,
+    "duration": 11.0,
+    "text": "Okay, so when we look at price action on a daily chart, the main thing we're looking for is the reactions from the previous days range.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        642.0876923076924,
+        "look"
+      ],
+      [
+        642.0876923076924,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00642.00s.jpg"
+    ],
+    "frame_timestamps": [
+      642.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_032",
+    "start_time": 652.88,
+    "end_time": 665.46,
+    "duration": 12.580000000000041,
+    "text": "Okay, so this is the day that we're going to study because this is a new trading day now, but we're going to be looking at this particular day here. And I already hear all the people here it is, it's hindsight again.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        652.9804651162791,
+        "this"
+      ],
+      [
+        654.3367441860465,
+        "here"
+      ],
+      [
+        654.0855813953489,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00654.00s.jpg"
+    ],
+    "frame_timestamps": [
+      654.0
+    ],
+    "word_count": 43
+  },
+  {
+    "id": "unit_033",
+    "start_time": 665.78,
+    "end_time": 684.7,
+    "duration": 18.920000000000073,
+    "text": "Okay, for those that are new, put the fact that it's hindsight aside for a moment because every single thing that you study when you buy a book, newsflash, that's all hindsight too. When you go to a seminar or a webinar and they show you previous examples, that's all hindsight too.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00666.00s.jpg"
+    ],
+    "frame_timestamps": [
+      666.0
+    ],
+    "word_count": 52
+  },
+  {
+    "id": "unit_034",
+    "start_time": 685.3,
+    "end_time": 694.94,
+    "duration": 9.6400000000001,
+    "text": "So you'll learn by identifying a pattern that repeats. Okay, so I'm teaching you a pattern of what it looks like and how it generally forms.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        686.3230769230769,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00684.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00687.00s.jpg"
+    ],
+    "frame_timestamps": [
+      684.0,
+      687.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_035",
+    "start_time": 695.3,
+    "end_time": 773.58,
+    "duration": 78.28000000000009,
+    "text": "Okay, so if you do this, if you learn to do this very, very well, this could be your personal trading model. You never need to learn anything else. You never worry about indicators. You never worry about learning anything else in the ICT library. You don't even worry about mentorships. You don't worry about going over there and signing up with signal services because you will be your own power plant of decisions and ideas and trade setups. They'll come organically from your own study, not relying on other people, not relying on me, not people in chat rooms or groups, nothing like that. The big thing now is everyone's going to discord rooms or telegram rooms, all these things and they're all looking for someone that's good so they can copycat off of. And you don't need that. You're absolutely in a position to learn how to do this for free right here and you don't need to have anybody else to convince you or pat you on the back to say, follow me because I'm going to do it and you're going to copy up because that makes you subservient to them and that's not independent thinking. And to me personally, I think it's weakness and you don't want to be a weak minded decision maker in something like this because you have the capacity to lose a great deal of money for trading with live funds.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        695.57125,
+        "this"
+      ],
+      [
+        698.4464999999999,
+        "here"
+      ],
+      [
+        702.0269999999999,
+        "look"
+      ],
+      [
+        703.60025,
+        "right here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00696.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00699.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00702.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00705.00s.jpg"
+    ],
+    "frame_timestamps": [
+      696.0,
+      699.0,
+      702.0,
+      705.0
+    ],
+    "word_count": 240
+  },
+  {
+    "id": "unit_036",
+    "start_time": 773.58,
+    "end_time": 781.82,
+    "duration": 8.240000000000009,
+    "text": "All right, so the down close candles in here, that's our order block. We had a candle trade down into it and then the previous day.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        773.983076923077,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00774.00s.jpg"
+    ],
+    "frame_timestamps": [
+      774.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_037",
+    "start_time": 781.98,
+    "end_time": 795.52,
+    "duration": 13.539999999999964,
+    "text": "Now again, kind of like just move this candle out of your focus. Don't think that anything about this candle right now. We're only focusing on this candles range and the previous day, which is the 6th of May.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        782.3533333333334,
+        "this"
+      ],
+      [
+        782.3533333333334,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00783.00s.jpg"
+    ],
+    "frame_timestamps": [
+      783.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_038",
+    "start_time": 795.52,
+    "end_time": 808.6,
+    "duration": 13.080000000000041,
+    "text": "Okay, so in the United States right now it's 841 p.m. New York local time and it's still the 7th for me, but it's a new financial day in the forex.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00795.00s.jpg"
+    ],
+    "frame_timestamps": [
+      795.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_039",
+    "start_time": 808.64,
+    "end_time": 818.92,
+    "duration": 10.279999999999973,
+    "text": "So that's what we're seeing this candle form. So when we look at the previous days range, it's important to simply identify the highs and the lows of it.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        808.9037931034483,
+        "this"
+      ],
+      [
+        809.2203448275862,
+        "look"
+      ],
+      [
+        808.8510344827586,
+        "see"
+      ],
+      [
+        809.2203448275862,
+        "look at"
+      ],
+      [
+        808.9037931034483,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00810.00s.jpg"
+    ],
+    "frame_timestamps": [
+      810.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_040",
+    "start_time": 820.9399999999999,
+    "end_time": 830.5,
+    "duration": 9.56000000000006,
+    "text": "Okay, so right away we know this candle is high and if we looked at these two down close candles and the fact that we traded down into it here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        821.2259999999999,
+        "this"
+      ],
+      [
+        822.3223333333333,
+        "here"
+      ],
+      [
+        821.5596666666667,
+        "look"
+      ],
+      [
+        821.2259999999999,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00822.00s.jpg"
+    ],
+    "frame_timestamps": [
+      822.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_041",
+    "start_time": 832.08,
+    "end_time": 838.96,
+    "duration": 6.8799999999999955,
+    "text": "We had a candle trade again a little bit into the order block. The order block is starting at the wick.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00831.00s.jpg"
+    ],
+    "frame_timestamps": [
+      831.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_042",
+    "start_time": 838.96,
+    "end_time": 852.66,
+    "duration": 13.699999999999932,
+    "text": "Okay, so this candle's high comes in at 63.97 of 4 pipettes. The price action dips into that candle range and it does it again on the 7th.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        839.0585714285714,
+        "this"
+      ],
+      [
+        839.0585714285714,
+        "this candle"
+      ],
+      [
+        839.7978571428572,
+        "that candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00840.00s.jpg"
+    ],
+    "frame_timestamps": [
+      840.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_043",
+    "start_time": 853.16,
+    "end_time": 859.88,
+    "duration": 6.720000000000027,
+    "text": "Okay, so it's not showing a willingness to go deeper. It doesn't want to dig in deeper and even take out the low over here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        854.3408,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00852.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00855.00s.jpg"
+    ],
+    "frame_timestamps": [
+      852.0,
+      855.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_044",
+    "start_time": 859.88,
+    "end_time": 870.08,
+    "duration": 10.200000000000045,
+    "text": "So we have to consider at least for this episode for this particular video, the likelihood of the market wanting to go higher.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        860.3182608695652,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00861.00s.jpg"
+    ],
+    "frame_timestamps": [
+      861.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_045",
+    "start_time": 870.26,
+    "end_time": 881.74,
+    "duration": 11.480000000000018,
+    "text": "So what we want to see is does it have the ability on the very next day or the May 7th candle doesn't have the ability to trade above the previous days range high.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        870.4997058823529,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00870.00s.jpg"
+    ],
+    "frame_timestamps": [
+      870.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_046",
+    "start_time": 881.74,
+    "end_time": 891.34,
+    "duration": 9.600000000000023,
+    "text": "Why is that important? For those that have a serious interest in filing along and keeping up with this series, you want to take notes.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        882.7048,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00882.00s.jpg"
+    ],
+    "frame_timestamps": [
+      882.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_047",
+    "start_time": 892.0,
+    "end_time": 901.1,
+    "duration": 9.100000000000023,
+    "text": "Okay, so get yourself a pen and pad and just I guess make a study journal just for optimal trade entry.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00891.00s.jpg"
+    ],
+    "frame_timestamps": [
+      891.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_048",
+    "start_time": 901.5,
+    "end_time": 907.28,
+    "duration": 5.779999999999973,
+    "text": "Okay, so over the next 20 days, I'm going to give you simple little facets that go along with this pattern.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        902.4680952380952,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00903.00s.jpg"
+    ],
+    "frame_timestamps": [
+      903.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_049",
+    "start_time": 907.28,
+    "end_time": 915.9,
+    "duration": 8.620000000000005,
+    "text": "And you'll see that it will flesh out over a period of time and you'll start seeing things that you didn't really see before, even if you're familiar with the optimal trade entry.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        907.3884848484848,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00906.00s.jpg"
+    ],
+    "frame_timestamps": [
+      906.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_050",
+    "start_time": 916.5,
+    "end_time": 940.84,
+    "duration": 24.340000000000032,
+    "text": "So we're going to go down to a lower time frame and these levels here are going to be on the lower time frame chart. But this study over the next 20 days is going to focus on intraday charts and specifically a five minute chart. And right away some of you are like, I don't like five minute charts, I can't do that. Trust me, it's beneficial to your learning.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        917.814647887324,
+        "this"
+      ],
+      [
+        917.2078873239436,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00918.00s.jpg"
+    ],
+    "frame_timestamps": [
+      918.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_051",
+    "start_time": 941.38,
+    "end_time": 963.44,
+    "duration": 22.06000000000006,
+    "text": "Alright, so what we have here is a blank canvas in the form of candlesticks that may or may not mean anything to you. But I want to press upon you the importance of knowing the previous days high and low. And it's a very simple process you can go into your charts intraday and put vertical delineations on the seventh and the sixth.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        941.639375,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00942.00s.jpg"
+    ],
+    "frame_timestamps": [
+      942.0
+    ],
+    "word_count": 64
+  },
+  {
+    "id": "unit_052",
+    "start_time": 968.94,
+    "end_time": 995.9,
+    "duration": 26.959999999999923,
+    "text": "So when we know that on the daily chart, okay above previous days highs and lows. Well, let me say like this above previous days highs and below previous days lows. There's a bank of orders that generally reside in the marketplace and throughout the day, depending upon how we get closer to the previous days high or low on the new trading day and the new trading day in this example here is the seventh.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        970.0563157894737,
+        "this"
+      ],
+      [
+        970.641052631579,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00969.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00972.00s.jpg"
+    ],
+    "frame_timestamps": [
+      969.0,
+      972.0
+    ],
+    "word_count": 76
+  },
+  {
+    "id": "unit_053",
+    "start_time": 996.06,
+    "end_time": 1094.04,
+    "duration": 97.98000000000002,
+    "text": "So we're assuming all this price action here is what we're studying. When the market has a predisposed bias or trend or momentum or you just think okay that it's going to go higher. You want to focus on the previous days high and then you want to see does it have the ability to stretch and reach up to the previous days high. If it does, one of two things generally happens in assuming it's bullish. One, it goes through the previous days high and this explodes and never gives you a chance to trade and that's just a missed opportunity. And there's nothing you can do about it. There's no reason to get upset about it. There's no reason to go online and complain to other people how you missed that trade or you suck or you're never going to get this. Never do that because you're actually giving yourself negative reinforcement and your subconscious will remember that. And every trade you take after that trade will be plagued by that negative narrative that you've given yourself that you suck. You're never going to get this. So every time you actually muster up the courage to get and actually execute, you're going to be scared. You're going to be constantly revved up. You're going to be in a constant state of stress and anxiety versus just following the method that you've adopted and focusing on what price is doing. Is it still viable in terms of a trade or should you collapse it or maybe take some of the risk off or stick with it because it's now it's moving in your favor. When we look at previous days highs and previous days lows, we want to see the market go up above it.",
+    "detected_concepts": [],
+    "teaching_type": "summary",
+    "deictic_references": [
+      [
+        996.275,
+        "this"
+      ],
+      [
+        996.43625,
+        "here"
+      ],
+      [
+        1010.9487499999999,
+        "look"
+      ],
+      [
+        998.64,
+        "see"
+      ],
+      [
+        1010.9487499999999,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_00996.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_00999.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01011.00s.jpg"
+    ],
+    "frame_timestamps": [
+      996.0,
+      999.0,
+      1011.0
+    ],
+    "word_count": 296
+  },
+  {
+    "id": "unit_054",
+    "start_time": 1094.04,
+    "end_time": 1170.32,
+    "duration": 76.27999999999997,
+    "text": "And then once it trades to the previous days high, if we're bullish, we want to see does it create an optimal trade entry because many times you're going to see this formation form exactly like I'm going to show you here. Lots and lots of times you see this formation form throughout the week and it may not be that particular currency or this currency in this example here, Australian versus the dollar. It may be in Euro, it may be in cable, it may be in the beast, pound versus yen, it may be the New Zealand dollar, it may be in gold, it may be in a cryptocurrency. It's not limited to just one currency stick to it and always expected to happen like that. When you understand this pattern, you can mark out your previous days highs and lows and if there is a very discernible, clear, unambiguous directional bias that lends well to one particular currency or two over the other basket of currencies that you follow, then that means that you've very easily filtered out all the other currencies so now you're going to focus on maybe one or two for that particular day and then wait to see if it trades to and through the previous days high if it's bullish or below the previous days low if you're bearish.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        1095.6910572687225,
+        "this"
+      ],
+      [
+        1096.2236563876652,
+        "here"
+      ],
+      [
+        1094.8921585903083,
+        "see"
+      ],
+      [
+        1095.637797356828,
+        "see this"
+      ]
+    ],
+    "confidence": 0.22026431718061673,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01095.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01170.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1095.0,
+      1170.0
+    ],
+    "word_count": 227
+  },
+  {
+    "id": "unit_055",
+    "start_time": 1171.98,
+    "end_time": 1181.94,
+    "duration": 9.960000000000036,
+    "text": "Now, with these ideas mentioned in general bullet point fashion as I've just given you, let's flesh this idea out a little bit and put some lipstick on this pig here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1172.8903225806453,
+        "this"
+      ],
+      [
+        1173.5864516129031,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01173.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1173.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_056",
+    "start_time": 1187.58,
+    "end_time": 1196.62,
+    "duration": 9.039999999999964,
+    "text": "So between those two vertical lines, we have the highest high and the lowest low as I denoted on the chart here, previous days high, previous days low.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1188.7124999999999,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01188.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1188.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_057",
+    "start_time": 1197.1,
+    "end_time": 1214.56,
+    "duration": 17.460000000000036,
+    "text": "And here's the daily bullish order blocked as I outlined on the daily chart before we moved down into a lower time frame. All right, so the previous days high on this particular candle here we have 6445 and three pipettes and in the next candle is the very highest high at 6453.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1198.7260377358489,
+        "this"
+      ],
+      [
+        1197.1524528301886,
+        "here"
+      ]
+    ],
+    "confidence": 0.9433962264150942,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01197.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01200.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1197.0,
+      1200.0
+    ],
+    "word_count": 53
+  },
+  {
+    "id": "unit_058",
+    "start_time": 1221.94,
+    "end_time": 1234.22,
+    "duration": 12.279999999999973,
+    "text": "Okay, so essentially this high being 53 even. If that's the high, what is it really trading around 6450 mid figure.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1222.1042857142859,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01221.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1221.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_059",
+    "start_time": 1239.82,
+    "end_time": 1275.42,
+    "duration": 35.600000000000136,
+    "text": "So the mid figure levels are very significant. They're important couple that with the fact that this high and this high here are basically relatively the same high. Above this clear area that would otherwise be viewed as retail resistance. Traders think that this offered resistance here it offered resistance here and as it starts to break down anyone going short. They would feel very comfortable putting a stop loss above these highs because they feel with visual support behind the theory that this is resistance.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1240.7818604651163,
+        "this"
+      ],
+      [
+        1241.082441860465,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01239.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01242.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1239.0,
+      1242.0
+    ],
+    "word_count": 86
+  },
+  {
+    "id": "unit_060",
+    "start_time": 1275.82,
+    "end_time": 1286.98,
+    "duration": 11.160000000000082,
+    "text": "So there's going to be a bank of orders that reside above this. Because it's the previous days high when we're looking at over here and the fact that we have relative equal highs.",
+    "detected_concepts": [
+      "equal highs"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1276.4517647058824,
+        "this"
+      ],
+      [
+        1275.925294117647,
+        "here"
+      ],
+      [
+        1276.925588235294,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01275.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01278.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1275.0,
+      1278.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_061",
+    "start_time": 1293.22,
+    "end_time": 1302.76,
+    "duration": 9.539999999999964,
+    "text": "Okay, so 6450 which is this black line here and in 10 pips above it which is 6460 and 10 pips below is 6440.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1293.445,
+        "this"
+      ],
+      [
+        1293.58,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01293.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1293.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_062",
+    "start_time": 1302.76,
+    "end_time": 1330.52,
+    "duration": 27.75999999999999,
+    "text": "So we have a standard deviation of 10 pips. Now I don't want to make it too complicated but just understand that what I'm showing you here this is about the general rule of thumb you're going to get that seems really technical. Just know that whenever we have a previous high or previous low how I did this here I would do the same thing around this low here. Because the low on this candle comes in at 6378.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1304.137,
+        "this"
+      ],
+      [
+        1304.086,
+        "here"
+      ],
+      [
+        1304.8,
+        "see"
+      ],
+      [
+        1306.5339999999999,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01302.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01305.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01308.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1302.0,
+      1305.0,
+      1308.0
+    ],
+    "word_count": 80
+  },
+  {
+    "id": "unit_063",
+    "start_time": 1330.86,
+    "end_time": 1347.34,
+    "duration": 16.480000000000018,
+    "text": "So we have an institutional level of 80. So if you're again if you're new here 00 level 0.80 or 80 in this case here 50 mid figure and 0.20 or 20 in instance for Australian dollars.",
+    "detected_concepts": [
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1331.936216216216,
+        "this"
+      ],
+      [
+        1331.5937837837837,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01332.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1332.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_064",
+    "start_time": 1352.8,
+    "end_time": 1369.18,
+    "duration": 16.38000000000011,
+    "text": "Now, why are these levels important? Why they significant is because a lot of large fund traders make their orders very easy for processing and they just put them in there at that level. A lot of commerce gets done at those levels too.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1354.4556818181818,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01353.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1353.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_065",
+    "start_time": 1369.44,
+    "end_time": 1389.78,
+    "duration": 20.339999999999918,
+    "text": "So when there's global commerce that comes into the marketplace IBM needs to do business in Japan so they have to turn dollars into yen. When they put orders in for that transaction it's just easier for the bank to move that into those levels and do the commerce there.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1369.6014,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01368.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01371.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1368.0,
+      1371.0
+    ],
+    "word_count": 50
+  },
+  {
+    "id": "unit_066",
+    "start_time": 1397.86,
+    "end_time": 1403.92,
+    "duration": 6.060000000000173,
+    "text": "Okay to see this work. All we're doing is studying a signature in price action that will tend to repeat a lot.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1398.01,
+        "this"
+      ],
+      [
+        1397.9599999999998,
+        "see"
+      ],
+      [
+        1397.9599999999998,
+        "see this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01398.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1398.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_067",
+    "start_time": 1410.16,
+    "end_time": 1419.66,
+    "duration": 9.5,
+    "text": "Okay so again the daily chart we're assuming the previous days high should be traded to and if it does it should be bullish and look to see higher prices.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1411.4433333333334,
+        "look"
+      ],
+      [
+        1411.546,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01410.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01413.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1410.0,
+      1413.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_068",
+    "start_time": 1421.0,
+    "end_time": 1433.86,
+    "duration": 12.8599999999999,
+    "text": "If it goes below the previous days low that means that we can't be as bullish but we can now study to see if we have a bearish optimal trade entry. Because the previous days low has been violated.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        1422.105641025641,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01422.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01434.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1422.0,
+      1434.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_069",
+    "start_time": 1434.64,
+    "end_time": 1453.74,
+    "duration": 19.09999999999991,
+    "text": "So there's always a study and it's not about and it's very important to write this down and underline it several times and highlight it and draw all kinds of annotations around the draw. Your attention to how important this is. It's not about being right or wrong. The study is to show you what it looks like every single day and how you're going to go into the chart.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1435.4285714285716,
+        "this"
+      ],
+      [
+        1434.745142857143,
+        "here"
+      ],
+      [
+        1437.584,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01434.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01437.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1434.0,
+      1437.0
+    ],
+    "word_count": 70
+  },
+  {
+    "id": "unit_070",
+    "start_time": 1453.74,
+    "end_time": 1474.6,
+    "duration": 20.8599999999999,
+    "text": "So when I show these examples again it's just to train your eye to see the thing I'm showing you over and over again. And you're going to find that this is exactly what it tends to do in other markets as well. It's not just me form fitting it into this one because it looks pretty.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1455.2189473684211,
+        "this"
+      ],
+      [
+        1456.451403508772,
+        "look"
+      ],
+      [
+        1454.4301754385965,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01455.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1455.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_071",
+    "start_time": 1475.14,
+    "end_time": 1497.76,
+    "duration": 22.61999999999989,
+    "text": "Okay so again the idea is we're looking for the previous days high on the sixth to be traded to it does here. And then we consolidate and retrace a little bit and we hang around once it hits that 6450 level with that black line here. It does blow out the previous days high not by much but it does and then it gyrates down 10 pips or a little bit more than that and picks up more orders.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1476.20425,
+        "here"
+      ],
+      [
+        1475.4786250000002,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01476.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1476.0
+    ],
+    "word_count": 80
+  },
+  {
+    "id": "unit_072",
+    "start_time": 1498.12,
+    "end_time": 1508.0,
+    "duration": 9.88000000000011,
+    "text": "What is it doing it's gathering more orders here and then there's a displacement here price starts to create a run up above the previous days high with a little more meaningful run.",
+    "detected_concepts": [
+      "displacement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1498.5587878787878,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01497.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01500.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1497.0,
+      1500.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_073",
+    "start_time": 1508.0,
+    "end_time": 1532.82,
+    "duration": 24.819999999999936,
+    "text": "So the shallow run here gets overtaken here and then price does what it returns back to the 6450 mid figure and consolidates in between 6460, 6450 and what is it doing? It's allowing all the orders that was above the previous days high and around 6450 an order bank gets depleted because of the time it's sitting in here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1508.214,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01509.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1509.0
+    ],
+    "word_count": 60
+  },
+  {
+    "id": "unit_074",
+    "start_time": 1532.82,
+    "end_time": 1571.42,
+    "duration": 38.600000000000136,
+    "text": "Now when I say order bank it's basically a huge collection of orders that may or may not be in the marketplace around here but as it sits in here people will start to build a bias or a sentiment about what they think the Australian dollar is going to do in terms of bullishness or bearishness. These orders that are accumulated in here are going to build up over time. Price makes a run above the 6460 level and starts to just get up into the 6470 but it's not important. We're looking for price to go to a specific time and a specific price.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1533.996037735849,
+        "here"
+      ],
+      [
+        1537.5752830188678,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01533.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01539.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1533.0,
+      1539.0
+    ],
+    "word_count": 106
+  },
+  {
+    "id": "unit_075",
+    "start_time": 1571.98,
+    "end_time": 1578.74,
+    "duration": 6.759999999999991,
+    "text": "So we're looking at time and price that's what makes optimal trade entry or the ICT optimal trade entry pattern what it is.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1572.0869565217392,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01572.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1572.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_076",
+    "start_time": 1578.74,
+    "end_time": 1598.26,
+    "duration": 19.519999999999982,
+    "text": "It's not just simply going in there and saying okay every time the price retraces because otherwise that's just Fibonacci trading or ratio trading or harmonic trading you know what I'm saying. Everyone's got a name for it okay but what I'm showing you what makes this optimal is the fact that it's occurring at a key time of day.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1581.2623333333333,
+        "this"
+      ],
+      [
+        1579.1238333333333,
+        "here"
+      ]
+    ],
+    "confidence": 0.8333333333333334,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01578.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01581.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1578.0,
+      1581.0
+    ],
+    "word_count": 60
+  },
+  {
+    "id": "unit_077",
+    "start_time": 1598.68,
+    "end_time": 1612.46,
+    "duration": 13.779999999999973,
+    "text": "Now I'm not teaching you ICT kill zones. Okay I'm going to make it very very simple it's specific times a window that begins and a window that ends and we're only focusing during the New York session.",
+    "detected_concepts": [
+      "kill zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01599.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1599.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_078",
+    "start_time": 1612.88,
+    "end_time": 1709.48,
+    "duration": 96.59999999999991,
+    "text": "Okay so it's not the New York kill zone it's the New York session. So it allows a great deal of flexibility and it allows you also to look for this pattern with specific envelopes in time where it begins and ends. If it doesn't occur then you can't do anything with it. It may form later on and you'll be like oh well I didn't see it then and I didn't take it in so I'm mad. Don't be mad you only want something that makes sense and a time where you anticipate it occurring. This is discipline this is focusing on a rule based premise and filing your price action model. This is the way professional traders do it they don't get lax in their rules and say okay well it was good the last 12 times I did it but this time I just feel lucky and I'm just going to do things slightly different. They don't do that okay generally if you have a model or trading plan you want to stick to the rules and that way you're not going to be confused when things go awry. It's just simply a losing trade and you're not going to be able to avoid every instance of that occurring. Everyone takes losses I take losses I have lost money okay you're going to lose money you can't avoid it it's absolutely going to happen if you put live money in here you're going to lose money. But if you learn how to do this you're going to see how often this signature becomes very familiar in price action and I'll leave it up to you what that means on an individual basis.",
+    "detected_concepts": [
+      "kill zone"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        1614.3957894736843,
+        "this"
+      ],
+      [
+        1614.8000000000002,
+        "here"
+      ],
+      [
+        1614.2947368421053,
+        "look"
+      ],
+      [
+        1616.2147368421054,
+        "see"
+      ],
+      [
+        1626.0168421052633,
+        "see how"
+      ]
+    ],
+    "confidence": 0.17543859649122806,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01614.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01617.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01626.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01707.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1614.0,
+      1617.0,
+      1626.0,
+      1707.0
+    ],
+    "word_count": 285
+  },
+  {
+    "id": "unit_079",
+    "start_time": 1710.32,
+    "end_time": 1729.82,
+    "duration": 19.5,
+    "text": "So price stays around in meanders up and down gi rates until we get to a specific time of the day and this is going to be 8 30 a.m. to 11 o'clock in the morning. New York time these are always New York times 8 30 New York time to 11 o'clock New York time.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1711.3217857142856,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01710.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1710.0
+    ],
+    "word_count": 56
+  },
+  {
+    "id": "unit_080",
+    "start_time": 1730.8,
+    "end_time": 1745.96,
+    "duration": 15.160000000000082,
+    "text": "Do not email me why is this time this and not the New York kill zone times I'm not teaching mentorship I'm not teaching I CT kill zones I'm teaching you a specific price action model with rule based ideas and you work with just this.",
+    "detected_concepts": [
+      "kill zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1731.1039130434783,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01731.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1731.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_081",
+    "start_time": 1745.96,
+    "end_time": 1764.34,
+    "duration": 18.37999999999988,
+    "text": "Okay I'm not reinventing it because my stuff doesn't work anymore okay that's not what I'm doing I'm making a very specific window of time and it's based on New York time so. If. You want to see the time window I have it set you can see right here this is what I have in my time setting.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1748.3922033898305,
+        "this"
+      ],
+      [
+        1748.343559322034,
+        "here"
+      ],
+      [
+        1747.7598305084746,
+        "see"
+      ],
+      [
+        1748.2949152542374,
+        "right here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01746.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01749.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1746.0,
+      1749.0
+    ],
+    "word_count": 59
+  },
+  {
+    "id": "unit_082",
+    "start_time": 1765.02,
+    "end_time": 1784.08,
+    "duration": 19.059999999999945,
+    "text": "So this is what you look for. And then your chart will look like mine is here. If you live a different time zone in a different country then you need to figure out what that time is for you locally and where you live at but this is the time that this pattern tends to form.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1765.0678947368422,
+        "this"
+      ],
+      [
+        1765.7863157894737,
+        "here"
+      ],
+      [
+        1765.2594736842104,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01764.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01767.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1764.0,
+      1767.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_083",
+    "start_time": 1784.08,
+    "end_time": 1804.3,
+    "duration": 20.220000000000027,
+    "text": "Okay now the green shaded area in here is what everyone's familiar with in terms of my pattern optimal trade entry optimal trade entry is the 62% tracement level to the 79% tracement level and the mid point or 70.5 level.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1784.4573170731708,
+        "here"
+      ],
+      [
+        1784.2956097560975,
+        "shaded"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01785.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1785.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_084",
+    "start_time": 1818.34,
+    "end_time": 1825.8,
+    "duration": 7.460000000000036,
+    "text": "Is what I have on my fit so these are the that's the levels that you would have for your Fibonacci over here okay or on trading view.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1819.385,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01818.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1818.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_085",
+    "start_time": 1825.8,
+    "end_time": 1836.08,
+    "duration": 10.279999999999973,
+    "text": "So that way it's included now they don't change they're not flipping around and I'm not making it fit because I gotta have a winner every single day that's not what I'm doing here okay.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1827.5442857142857,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01827.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1827.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_086",
+    "start_time": 1837.0,
+    "end_time": 1846.76,
+    "duration": 9.759999999999991,
+    "text": "So again all of this gyration is just simply working the bank of orders that come and go around that mid figure level and above the previous days high.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1837.208275862069,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01836.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1836.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_087",
+    "start_time": 1847.3,
+    "end_time": 1860.54,
+    "duration": 13.240000000000009,
+    "text": "Now remember earlier I said one of two things are going to happen when you're bullish and if it trades to the previous days high. One it takes off and it doesn't give you a chance to do anything and you missed that opportunity or it starts to gyrate around the previous days high.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01848.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1848.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_088",
+    "start_time": 1867.06,
+    "end_time": 1889.28,
+    "duration": 22.220000000000027,
+    "text": "Okay so now what I'm saying closest to the previous days high in this instance it's 6450 and then you do an envelope of 10 pips above that and 10 pips below it. And then you allow basically price to generate a trading range until we get to this little sweet spot in time between 830 in the morning why 830.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1867.712131147541,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01866.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01869.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1866.0,
+      1869.0
+    ],
+    "word_count": 61
+  },
+  {
+    "id": "unit_089",
+    "start_time": 1894.5,
+    "end_time": 1917.32,
+    "duration": 22.819999999999936,
+    "text": "Okay so the 830 news session usually it's like non-farm payroll will come out some other kind of report. I don't off the top of my head know what they are and I don't really care to know what they are really because I don't have any real specific affinity for one particular set of data because they always come in and out in terms of what's relevant right now.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01896.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1896.0
+    ],
+    "word_count": 70
+  },
+  {
+    "id": "unit_090",
+    "start_time": 1917.42,
+    "end_time": 1930.9,
+    "duration": 13.480000000000018,
+    "text": "What's the focus right now whereas at the time of this recording employment numbers or the lack of employment is the main focus right now because everyone's at home or without a job because of the illness that's been spreading.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1917.9875000000002,
+        "this"
+      ],
+      [
+        1917.7605,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01917.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1917.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_091",
+    "start_time": 1930.9,
+    "end_time": 1943.88,
+    "duration": 12.980000000000018,
+    "text": "So when we get to 830 you want to see price try to trade when your bullish trade down into 62 to 79% of the tradesmen level on the fib.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1931.305,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01932.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1932.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_092",
+    "start_time": 1945.0,
+    "end_time": 1962.9,
+    "duration": 17.90000000000009,
+    "text": "Now that is your range determined from the low to the high once this previous days high is broken. If this was a bearish scenario we would just do the opposite of what's being seen here once the low of the previous days low is broken.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1945.661304347826,
+        "this"
+      ],
+      [
+        1946.7804347826086,
+        "here"
+      ],
+      [
+        1946.7295652173914,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01944.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01947.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1944.0,
+      1947.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_093",
+    "start_time": 1963.28,
+    "end_time": 1977.22,
+    "duration": 13.940000000000055,
+    "text": "We would use a short term high to a short term low that would be below the previous days low when you're bearish but in this instance obviously we're bullish so we want to use a short term low to the short term high.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1964.5072727272727,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01962.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01965.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1962.0,
+      1965.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_094",
+    "start_time": 1977.22,
+    "end_time": 2061.7,
+    "duration": 84.47999999999979,
+    "text": "So this range is the range prior to the formation of the New York session of 830 in the morning New York time to 11 o'clock in the morning New York time. Why 11 o'clock? That's typically around when London close occurs and usually it's also the time when the AM session starts to wane in the New York session. And early lunch takers didn't leave the marketplace. That volume is no longer available and through noon to 1 o'clock in the afternoon that's generally the New York lunch and it can be quiet during those times. You only want to be looking for this pattern up to 11 o'clock in the morning. After 11 o'clock it can form but it's something other than what I'm teaching here and that's not important. The point is you want to see this pattern form during this time of day with the bias determined by what you determine on your daily chart. Do you think the previous days high is going to be taken out or the previous days low is taken out? And here's the thing, the beautiful thing really is many times you don't even need a bias. You just wait for the chart to show you what it's done. Does it take out the previous days high or the previous days low? At this time of day what has it done? Well here's midnight in New York and during the London session it created a run higher.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1977.271983805668,
+        "this"
+      ],
+      [
+        1983.821943319838,
+        "here"
+      ],
+      [
+        1982.5223481781377,
+        "look"
+      ],
+      [
+        1984.3937651821864,
+        "see"
+      ],
+      [
+        1984.3937651821864,
+        "see this"
+      ],
+      [
+        1977.271983805668,
+        "this range"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_01977.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_01983.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1977.0,
+      1983.0
+    ],
+    "word_count": 247
+  },
+  {
+    "id": "unit_095",
+    "start_time": 2063.66,
+    "end_time": 2070.48,
+    "duration": 6.820000000000164,
+    "text": "So there's been a lot of buying taking place to get above the previous days high. Does it create an optimal trade entry?",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2063.764347826087,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02064.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2064.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_096",
+    "start_time": 2070.82,
+    "end_time": 2079.76,
+    "duration": 8.940000000000055,
+    "text": "So the low to the high that's what I have the fib drawn on even though it's drug out to here that way you can see all the levels help. They line up nicely with time.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2071.7366666666667,
+        "here"
+      ],
+      [
+        2071.9658333333336,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02070.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02073.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2070.0,
+      2073.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_097",
+    "start_time": 2089.6600000000003,
+    "end_time": 2110.38,
+    "duration": 20.7199999999998,
+    "text": "So price is the level determined by the fib relative to its high and low of that range. Time is static. This is always static. It does not change. It does not deviate. It's 8 30 in the morning New York time till 11 o'clock. It does not change.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2090.701428571429,
+        "this"
+      ],
+      [
+        2090.4534693877554,
+        "that range"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02091.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2091.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_098",
+    "start_time": 2110.72,
+    "end_time": 2124.8,
+    "duration": 14.080000000000382,
+    "text": "So the easy way to do that is simply just get a horizontal I'm sorry vertical line and put it at these specific times.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02112.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2112.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_099",
+    "start_time": 2128.0800000000004,
+    "end_time": 2151.08,
+    "duration": 22.999999999999545,
+    "text": "If you do that you know in between these two vertical lines you don't need to have a guess as to when something's going to form.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02127.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2127.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_100",
+    "start_time": 2151.08,
+    "end_time": 2159.38,
+    "duration": 8.300000000000182,
+    "text": "You know when price enters this area between the first vertical line up to the second vertical line you're anticipating an optimal trade entry to form.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2151.3703846153844,
+        "this"
+      ],
+      [
+        2151.3703846153844,
+        "this area"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02151.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2151.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_101",
+    "start_time": 2165.98,
+    "end_time": 2186.64,
+    "duration": 20.659999999999854,
+    "text": "So you don't right now have a whole lot of business on this chart but you can see clearly that this is what the time element would be to this pattern. Price is always going to be between 62% and 790% which is 79 here and 62 is just underneath that 50 level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2166.5618867924527,
+        "this"
+      ],
+      [
+        2168.1135849056604,
+        "here"
+      ],
+      [
+        2166.8043396226417,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02166.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02169.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2166.0,
+      2169.0
+    ],
+    "word_count": 53
+  },
+  {
+    "id": "unit_102",
+    "start_time": 2187.22,
+    "end_time": 2218.9,
+    "duration": 31.68000000000029,
+    "text": "So 6450 is this black line here. So it cleans it up a little bit. So you can see 62, 79, and 70.5 which is a sweet spot or optimal trade entry. When price drops down into this level you can be a buyer on paper or demo and I'm not going to say you're on that because I'm not licensed to do that. But we're studying price action and you could be a buyer here with the expectation that we would see it expand.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2187.363294117647,
+        "this"
+      ],
+      [
+        2187.5065882352937,
+        "here"
+      ],
+      [
+        2188.079764705882,
+        "see"
+      ]
+    ],
+    "confidence": 0.5882352941176471,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02187.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02202.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2187.0,
+      2202.0
+    ],
+    "word_count": 85
+  },
+  {
+    "id": "unit_103",
+    "start_time": 2219.52,
+    "end_time": 2226.84,
+    "duration": 7.320000000000164,
+    "text": "Now I'll get up to here and talk about these levels in a minute but right now this low is where your stop would have to be below that.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2220.305517241379,
+        "this"
+      ],
+      [
+        2219.7510344827588,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02220.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2220.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_104",
+    "start_time": 2233.86,
+    "end_time": 2241.36,
+    "duration": 7.5,
+    "text": "So you can do a stop at 64, 30. So here's your stop, 64, 30. Darker colors as you can see.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2234.3361904761905,
+        "here"
+      ],
+      [
+        2234.812380952381,
+        "see"
+      ],
+      [
+        2234.669523809524,
+        "as you can see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02235.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2235.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_105",
+    "start_time": 2242.62,
+    "end_time": 2257.0,
+    "duration": 14.38000000000011,
+    "text": "So your stop could be at 64, 30. So your stop could be at 64, 30. Your entry could be at the 62% and tracement level is 64, 49, and 7 pipettes.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02244.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2244.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_106",
+    "start_time": 2257.44,
+    "end_time": 2276.96,
+    "duration": 19.519999999999982,
+    "text": "So basically we could simply say if it traces 6450 you can be a buyer. Because you're going to look for the institutional level and the lower you get down into the 79% and tracement level the less likely you're going to get your fill. Because if you demand 79% and tracement level here you may or may not get that with the spread.",
+    "detected_concepts": [
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2260.1728125,
+        "here"
+      ],
+      [
+        2258.4196875000002,
+        "look"
+      ]
+    ],
+    "confidence": 0.78125,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02256.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02259.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2256.0,
+      2259.0
+    ],
+    "word_count": 64
+  },
+  {
+    "id": "unit_107",
+    "start_time": 2277.6,
+    "end_time": 2304.58,
+    "duration": 26.980000000000018,
+    "text": "So what I like to use is 60% and tracement level and then maybe factor in the spread there. But if you're using 62 generally it's a little bit more forgiving because you don't need to add always in my experience using 60% and tracement level. You can absolutely get it because you're going to dip even further generally into the 70 and a half. And sometimes it is 79% and tracement level but that's our range for price and then this is our time window.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2281.8572093023254,
+        "this"
+      ],
+      [
+        2278.5986046511625,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02277.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02280.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02283.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2277.0,
+      2280.0,
+      2283.0
+    ],
+    "word_count": 86
+  },
+  {
+    "id": "unit_108",
+    "start_time": 2305.0,
+    "end_time": 2315.96,
+    "duration": 10.960000000000036,
+    "text": "So the fact that we're looking at this specific area, if we use a limit order at 62% and tracement level, if it trades below that you're filled.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2305.36,
+        "this"
+      ],
+      [
+        2305.2571428571428,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02304.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2304.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_109",
+    "start_time": 2316.36,
+    "end_time": 2334.2,
+    "duration": 17.83999999999969,
+    "text": "Your stop would be placed here and then using the fib levels 0.50 or 0.5, negative 0.5 rather. This is an area where you take first profit. If it allows you 15 pips or more.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2317.2497142857146,
+        "this"
+      ],
+      [
+        2316.607142857143,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02316.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2316.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_110",
+    "start_time": 2335.6,
+    "end_time": 2350.72,
+    "duration": 15.11999999999989,
+    "text": "So there's your rules. You want to take 15 pips at first scalp exit at the negative 0.5 level and then the negative 1 level which would be one standard deviation of the range that you calculate for your fib.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2335.7035,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02337.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2337.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_111",
+    "start_time": 2350.72,
+    "end_time": 2362.66,
+    "duration": 11.940000000000055,
+    "text": "So in other words you're drawing your load to your high here. That range here if it's duplicated and basically projected higher. A measured move of that would be this level up here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2352.310606060606,
+        "this"
+      ],
+      [
+        2351.3233333333333,
+        "here"
+      ],
+      [
+        2351.3781818181815,
+        "that range"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02352.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2352.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_112",
+    "start_time": 2370.8,
+    "end_time": 2388.22,
+    "duration": 17.419999999999618,
+    "text": "We want the highest degree of probability for our levels for scaling and taking profits. This would be an area where we can take profits again. So first scaling would be here at negative 0.5 but the minimum expectation is 15 pips.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2371.6214285714286,
+        "this"
+      ],
+      [
+        2371.9500000000003,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02370.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02373.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2370.0,
+      2373.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_113",
+    "start_time": 2388.64,
+    "end_time": 2406.08,
+    "duration": 17.440000000000055,
+    "text": "So you have to be able to get 15 pips. If you can't get 15 pips here but you can get it here or more then this is where you would take first profit. Here it's just one level where we'd expect it. In this instance here we can see at 64.50 or so.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2389.814814814815,
+        "this"
+      ],
+      [
+        2389.3629629629627,
+        "here"
+      ],
+      [
+        2390.854074074074,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02388.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02391.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2388.0,
+      2391.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_114",
+    "start_time": 2406.46,
+    "end_time": 2427.8,
+    "duration": 21.340000000000146,
+    "text": "Getting out at 64.93 that's 43 pips almost or 43 pips of potential profit at first scaling. The next level up here would be 65.13 and 5 but it may not get to these levels.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2407.486,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02406.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2406.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_115",
+    "start_time": 2428.04,
+    "end_time": 2460.58,
+    "duration": 32.539999999999964,
+    "text": "Again Fibonacci is not the answer to everything in the marketplace. Even though this is giving you a general rule principle and in theory and it's going to get you very very close to some really sweet setups. Do not demand that the price reaches to these levels for your targets. What I do and this is how I teach my students as well. If this is the Fib level that we're looking for. In other words if your calculations suggest that this is what the range level for negative 1 would be on the projection.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2428.7225,
+        "this"
+      ],
+      [
+        2431.82,
+        "look"
+      ]
+    ],
+    "confidence": 0.5208333333333334,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02427.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02430.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02433.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2427.0,
+      2430.0,
+      2433.0
+    ],
+    "word_count": 96
+  },
+  {
+    "id": "unit_116",
+    "start_time": 2465.12,
+    "end_time": 2473.16,
+    "duration": 8.039999999999964,
+    "text": "6510 is the nearest 10 level without getting up to that level. So what we're doing is we're rounding down to the next 10 level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02466.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2466.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_117",
+    "start_time": 2480.3,
+    "end_time": 2492.38,
+    "duration": 12.079999999999927,
+    "text": "So I'd be looking to take profit or scaling out here. If this level was at 15 or more pips this would be my first scaling from my entry down here at 64.50.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2480.8636363636365,
+        "this"
+      ],
+      [
+        2480.769696969697,
+        "here"
+      ],
+      [
+        2480.4409090909094,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02481.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2481.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_118",
+    "start_time": 2493.18,
+    "end_time": 2538.9,
+    "duration": 45.720000000000255,
+    "text": "So 64.50 it was my limit entry for general principles. And the stop would be 64.30 so it's a 20 pips stop. And again forget risk to reward we're not teaching that. Don't think it has to be 3 to 1 it has to be 5 to 1. If it's 1 to 1 it's still good. In my opinion it's good because if you have a setup that repeats over and over and over again very frequently. I understand and accept the fact I'm not going to be a winner on every single trade I'm going to take losses. But if I have a system that doesn't require me to spend a lot of money when I'm losing. But I do have a high frequency of accuracy. And if you look at this you'll determine if this does or doesn't have a lot of accuracy.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2499.4613793103445,
+        "this"
+      ],
+      [
+        2499.3662068965514,
+        "look"
+      ],
+      [
+        2499.3662068965514,
+        "look at this"
+      ],
+      [
+        2499.3662068965514,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02493.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02499.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2493.0,
+      2499.0
+    ],
+    "word_count": 145
+  },
+  {
+    "id": "unit_119",
+    "start_time": 2539.08,
+    "end_time": 2551.42,
+    "duration": 12.340000000000146,
+    "text": "But nonetheless by looking at and studying it with this logic behind it's not the fib that's creating it. The logic is we've traded above the previous days high in a relatively bullish scenario.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2539.593529411765,
+        "this"
+      ],
+      [
+        2539.2511764705882,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02538.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02541.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2538.0,
+      2541.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_120",
+    "start_time": 2552.08,
+    "end_time": 2579.88,
+    "duration": 27.800000000000182,
+    "text": "So we're lending well on this example for bias but it doesn't require bias. If you blow out the previous days high or blow out the previous days low you still look for these general theories to pan out. And again it's not about right or wrong you're not supposed to be taking live trades with this. I'm not enticing you to take trades with this. I'm teaching you how to read the tape. How to read the price action and forecast setups that will repeat if you know what you're looking for.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2552.341827956989,
+        "this"
+      ],
+      [
+        2553.7033333333334,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02553.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2553.0
+    ],
+    "word_count": 93
+  },
+  {
+    "id": "unit_121",
+    "start_time": 2593.74,
+    "end_time": 2649.86,
+    "duration": 56.120000000000346,
+    "text": "And then you can get another scaling out at 65-10 which is rounded down from the fib level here. It can hit this fib level or it can go through it a little bit more and that's fine. This is where you would take your next level of profit taking. If you can get first scaling where it's 15 pips or more you want to start reducing your risk on your stop to about midpoint of the range that you identified here. Because if it comes back down into that it's generally not a good idea to hold on to the trade and let it stop you out. You've taken something out at partial and then you reduced your risk and then if it comes back down and stops you out you've taken something off the bone. You've got a bite of flesh and if it comes back down you didn't get stopped out with a loss. That's in theory what we're saying here. And if you get second scaling if you ever get a second scaling you have to be above your entry point at least two or three pips and just let it go.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2594.8220408163265,
+        "this"
+      ],
+      [
+        2594.625306122449,
+        "here"
+      ]
+    ],
+    "confidence": 0.25510204081632654,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02595.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02622.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2595.0,
+      2622.0
+    ],
+    "word_count": 196
+  },
+  {
+    "id": "unit_122",
+    "start_time": 2649.86,
+    "end_time": 2675.96,
+    "duration": 26.09999999999991,
+    "text": "That way you've gotten two pieces of meat off the bone and now you're in a position where your stop should in theory protect you from taking a loss on the remaining balance. It does not mean you can't take a loss because you can. As long as the trade is open you are inviting risk and the market can always gap down or above your stop loss and that's this life. A lot of people don't realize that.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2653.3777215189875,
+        "this"
+      ],
+      [
+        2650.7645569620254,
+        "here"
+      ]
+    ],
+    "confidence": 0.6329113924050632,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02649.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02652.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2649.0,
+      2652.0
+    ],
+    "word_count": 79
+  },
+  {
+    "id": "unit_123",
+    "start_time": 2675.96,
+    "end_time": 2686.42,
+    "duration": 10.460000000000036,
+    "text": "They're listening to people online and they're like oh my stop's going to do my job. Nope, not always. It's just that's the best case scenario. And sometimes the best case scenario doesn't work out.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02676.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2676.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_124",
+    "start_time": 2699.72,
+    "end_time": 2710.76,
+    "duration": 11.040000000000418,
+    "text": "I'm sorry 6510 which is three and a half pips below where the fib projected to. But that does not mean collapse the trade. It doesn't mean get out of the trade. Leave a little bit on.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2700.3135135135135,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02700.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2700.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_125",
+    "start_time": 2711.08,
+    "end_time": 2738.2,
+    "duration": 27.11999999999989,
+    "text": "So again the assumption is when you're paper trading this or if you're demo trading it you want to use a lot size that allows you to have multiple. In my case I like to look for a leverage that allows me to take three partials and then give me something to let run. That means I can get four stages of scaling out of that position. Not all positions will allow me to do that and here's the thing. If it doesn't let me do that I don't take that trade.",
+    "detected_concepts": [],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        2711.5202173913044,
+        "this"
+      ],
+      [
+        2714.846304347826,
+        "here"
+      ],
+      [
+        2712.791956521739,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02712.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02715.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02736.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2712.0,
+      2715.0,
+      2736.0
+    ],
+    "word_count": 92
+  },
+  {
+    "id": "unit_126",
+    "start_time": 2738.82,
+    "end_time": 2763.42,
+    "duration": 24.59999999999991,
+    "text": "So I've given you something bonus in here where it helps me determine with a decision based process and protocols that leads to me getting into a trade. There's lots of times I see moves coming and I can see them forming. I can see exactly when they're going to turn and exactly where they're likely to go. But I'm not in them because they don't meet all the criteria that I demand of my setups.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2739.183815789474,
+        "here"
+      ],
+      [
+        2740.5351315789476,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02739.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02742.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2739.0,
+      2742.0
+    ],
+    "word_count": 76
+  },
+  {
+    "id": "unit_127",
+    "start_time": 2763.78,
+    "end_time": 2807.36,
+    "duration": 43.57999999999993,
+    "text": "So there's nothing wrong with being very very dependent on your rules and only executing in that. It's actually a good thing. It builds discipline. It builds maturity as a trader and you will not be shaken by a lot of the things that a trader that doesn't have rule based ideas that sticks to them very rigid. They will generally be encountering a lot more stress anxiety because they're always guessing as to what they should be doing versus this is what I'm doing. This is the time of day I'm doing it and I'm looking forward to go long. I'm looking forward to go short. If it doesn't fit the criteria you don't do anything and you let it go and you'll see over weeks of time doing that.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2767.9876335877866,
+        "this"
+      ],
+      [
+        2763.885190839695,
+        "here"
+      ],
+      [
+        2768.8291603053435,
+        "look"
+      ],
+      [
+        2770.301832061069,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02763.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02769.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2763.0,
+      2769.0
+    ],
+    "word_count": 131
+  },
+  {
+    "id": "unit_128",
+    "start_time": 2809.44,
+    "end_time": 2849.62,
+    "duration": 40.179999999999836,
+    "text": "In theory protect yourself from taking more risks than you're supposed to or should. And you're going to be working towards a perception of price action that is going to be appreciated by you. And your bottom line and your results will show that. But again you're going to take losses. You're going to get it wrong. This is not a magic recipe for always winning trading. It's just something to start with. It's rule based and you stick with it. Come hell or high water you do this for weeks and you see if it pans out and shows any kind of merit. And I promise you if you do this you're going to see it.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2812.3776923076925,
+        "this"
+      ],
+      [
+        2814.233076923077,
+        "see"
+      ]
+    ],
+    "confidence": 0.4273504273504274,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02808.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02811.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02814.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2808.0,
+      2811.0,
+      2814.0
+    ],
+    "word_count": 117
+  },
+  {
+    "id": "unit_129",
+    "start_time": 2851.54,
+    "end_time": 2864.26,
+    "duration": 12.720000000000255,
+    "text": "So the market comes up to that 65-10 level has a reaction retraces back down into some old order flow. And we want to keep something in and we want to keep a leader in the water. See if we can catch a runner.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2853.2890909090906,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02853.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2853.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_130",
+    "start_time": 2873.06,
+    "end_time": 2884.82,
+    "duration": 11.760000000000218,
+    "text": "Okay we have 65, 52, and 9 pipettes. Okay so that's the next level which would be this range two times. That's one of it here and then the second one here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2873.8834375,
+        "this"
+      ],
+      [
+        2874.2709375,
+        "here"
+      ],
+      [
+        2873.8834375,
+        "this range"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02874.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2874.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_131",
+    "start_time": 2885.14,
+    "end_time": 2929.42,
+    "duration": 44.2800000000002,
+    "text": "So this is two standard deviations. This level in here generally if for day trading if they ever get an explosive move. I want to be out at this point here and I'm content with if it runs more I don't care. I'm not a long-term position trader and it could continue for six months. And everybody can say yeah but you missed this ICT and I'm not interested. I could care less. I want consistency. I want continuity. And I want the ability to be able to see these things repeat over and over and over again. Trades for a neophyte are mysterious. They sneak up on them. They surprise them. They're like well what just happened? You ever notice that when you get online and you see people on Twitter, Instagram, whatever.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2885.1934328358207,
+        "this"
+      ],
+      [
+        2885.620895522388,
+        "here"
+      ],
+      [
+        2889.8420895522386,
+        "see"
+      ],
+      [
+        2891.5519402985074,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02886.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02889.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02892.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2886.0,
+      2889.0,
+      2892.0
+    ],
+    "word_count": 134
+  },
+  {
+    "id": "unit_132",
+    "start_time": 2929.94,
+    "end_time": 2959.76,
+    "duration": 29.820000000000164,
+    "text": "Okay any of these chat room things, these trade rooms. They're all like surprised. Whoa what happened with the so-and-so. And now they're only interested in that pair or that mark because it moved. You are not going to be surprised. You're going to be anticipating. You're going to be anticipating. And by anticipating things occurring around a specific time of day, around a rule-based idea and a pattern that you're familiar with and seeing over and over again.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2934.2769620253166,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02931.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02934.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2931.0,
+      2934.0
+    ],
+    "word_count": 79
+  },
+  {
+    "id": "unit_133",
+    "start_time": 2959.86,
+    "end_time": 2992.46,
+    "duration": 32.59999999999991,
+    "text": "Now let's go back to that analogy about buying a car that you have a lot of affinity for. It's a sports car or it's a luxury car. You like this car. You can't imagine being anything else but the driver of that car. And you buy it and you bring it home. Remember generally when you look around very soon after taking it home you will start seeing that car more because you have activated your filter in your attention to let these cars get your attention.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2961.4077272727272,
+        "this"
+      ],
+      [
+        2962.800681818182,
+        "look"
+      ],
+      [
+        2963.368181818182,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02961.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02964.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2961.0,
+      2964.0
+    ],
+    "word_count": 88
+  },
+  {
+    "id": "unit_134",
+    "start_time": 2993.52,
+    "end_time": 3048.7,
+    "duration": 55.179999999999836,
+    "text": "Okay and that's what you're doing. You're teaching yourself to see this pattern over and over and over again in price action. And by default what happens is when you start seeing it form live with everything on your chart annotating at the time of day what you're anticipating in terms of the direction that it's supposed to expand up or down relative to the market being bullish or bearish. Relative to it running the previous days higher low. You will see the pattern form live and you'll know what it looks like and you'll trust what you have practiced in hindsight weeks and months of it. And now when you watch price action live it'll be like I see it it's right there and you won't be surprised you won't be taken back like wow where did that just come from price is algorithmic. It repeats every single day on elements of time and price.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        2994.1151282051283,
+        "this"
+      ],
+      [
+        3000.228717948718,
+        "here"
+      ],
+      [
+        2998.443333333333,
+        "look"
+      ],
+      [
+        2994.0610256410255,
+        "see"
+      ],
+      [
+        2999.5253846153846,
+        "watch"
+      ],
+      [
+        2994.0610256410255,
+        "see this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_02994.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_02997.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03000.00s.jpg"
+    ],
+    "frame_timestamps": [
+      2994.0,
+      2997.0,
+      3000.0
+    ],
+    "word_count": 156
+  },
+  {
+    "id": "unit_135",
+    "start_time": 3049.2,
+    "end_time": 3057.54,
+    "duration": 8.340000000000146,
+    "text": "It does not work on magic Fibonacci. The Fibonacci is just a way for me to frame the context to use this pattern.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3050.2317391304346,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03048.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03051.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3048.0,
+      3051.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_136",
+    "start_time": 3058.44,
+    "end_time": 3086.02,
+    "duration": 27.579999999999927,
+    "text": "Okay I didn't reinvent Fibonacci. I'm not trying to claim claim the three quarter pullback of a Fibonacci is mine. The logic of using the Fib with time and the element of market structure that's me that's mine that's why it's called optimal trade entry. OTE is just an abbreviation of those three words. What makes it optimal is it's occurring at a time of day when the market will likely spool and spread out in one particular direction over the other.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03057.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3057.0
+    ],
+    "word_count": 82
+  },
+  {
+    "id": "unit_137",
+    "start_time": 3086.46,
+    "end_time": 3105.46,
+    "duration": 19.0,
+    "text": "So it's more inclined to go higher or lower relative to the things that I'm showing you here. Alright so anyway so we have two opportunities here for scaling one two and this is the target where you would want to get out at. The market trading right now it's just about midpoint of that in here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3088.1161403508772,
+        "this"
+      ],
+      [
+        3087.3398245614035,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3087.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_138",
+    "start_time": 3105.86,
+    "end_time": 3120.06,
+    "duration": 14.199999999999818,
+    "text": "Now you can use this midpoint which I don't have a Fib and if you want to add a Fib for that level it would be negative one point zero and that would give you a line right in here. I just don't care to have it.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3106.0387234042555,
+        "this"
+      ],
+      [
+        3107.6025531914893,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03105.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3105.0,
+      3108.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_139",
+    "start_time": 3120.06,
+    "end_time": 3145.88,
+    "duration": 25.820000000000164,
+    "text": "In this point where the market is running you want to have your stop loss below some point of support or structure that would yes make your stop be part of a pool of sell side liquidity or where a bank of sell stops would be. But you have already in theory taken one two portions of profit out and your stop would just be above break even.",
+    "detected_concepts": [
+      "liquidity",
+      "sell stops",
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3120.1098529411765,
+        "this"
+      ],
+      [
+        3120.259411764706,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03120.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3120.0
+    ],
+    "word_count": 68
+  },
+  {
+    "id": "unit_140",
+    "start_time": 3145.88,
+    "end_time": 3160.28,
+    "duration": 14.400000000000091,
+    "text": "So you want to look at where you are in terms of the current market structure we had a run here it retraced and then right up multiple terms lower so you trace multiple times. I like the idea of moving stop below here not below here.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3146.2270212765957,
+        "here"
+      ],
+      [
+        3146.0782978723405,
+        "look"
+      ],
+      [
+        3146.0782978723405,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03147.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3147.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_141",
+    "start_time": 3161.14,
+    "end_time": 3168.48,
+    "duration": 7.3400000000001455,
+    "text": "Okay not below here why because this one we already had a run below these lows here and then we broke to new highs.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3161.4275,
+        "this"
+      ],
+      [
+        3161.28375,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03162.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3162.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_142",
+    "start_time": 3169.04,
+    "end_time": 3174.82,
+    "duration": 5.7800000000002,
+    "text": "We had a retracement to this low and a retracement to this low which is basically the relative equal lows.",
+    "detected_concepts": [
+      "equal lows"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3169.305,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03168.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3168.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_143",
+    "start_time": 3174.82,
+    "end_time": 3189.38,
+    "duration": 14.559999999999945,
+    "text": "So it could still get below here it could break down hit that and still go higher longer term and I would miss out on that move just trying to choke the trade with a really really tight stop loss which is not advisable.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3175.1186363636366,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03174.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3174.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_144",
+    "start_time": 3189.38,
+    "end_time": 3204.08,
+    "duration": 14.699999999999818,
+    "text": "So we have this low that's much more appropriate for trailing a stop loss and not jamming it up too tight and not giving the market room to breathe especially because we're tracing this on a five minute chart.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3189.5407692307695,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03189.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3189.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_145",
+    "start_time": 3204.7,
+    "end_time": 3214.0,
+    "duration": 9.300000000000182,
+    "text": "So the idea again is we're looking for day trades and not hold this thing for four weeks not even for multiple days but this is how you would manage your trade.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3205.35,
+        "this"
+      ],
+      [
+        3205.0,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03204.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3204.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_146",
+    "start_time": 3214.0,
+    "end_time": 3247.1,
+    "duration": 33.09999999999991,
+    "text": "So if all this occurred inside of the same trading day or same few hours say all this movement here occurred in a little bit less time the same thing I'm showing you here in terms of when you would move your stop would be the same thing. This is we have a reaction and we have two higher reactions you don't want to put your stop loss at the nearest area where stops would be everybody else has their stop loss below this low or here. Mine would be down here and I already banked two positions or two scalings.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3214.151485148515,
+        "this"
+      ],
+      [
+        3214.959405940594,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03213.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03216.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3213.0,
+      3216.0
+    ],
+    "word_count": 101
+  },
+  {
+    "id": "unit_147",
+    "start_time": 3247.42,
+    "end_time": 3255.2,
+    "duration": 7.779999999999745,
+    "text": "Okay, so if it gets to 6550 and nine pipettes you would collapse the entire trade and be done and be content with that.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03246.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3246.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_148",
+    "start_time": 3255.46,
+    "end_time": 3265.92,
+    "duration": 10.460000000000036,
+    "text": "So you would be basically getting around 100 pips movement from this particular trade with three partials or the final collapse here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3256.125,
+        "this"
+      ],
+      [
+        3256.7295454545456,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03255.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03258.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3255.0,
+      3258.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_149",
+    "start_time": 3265.92,
+    "end_time": 3282.08,
+    "duration": 16.159999999999854,
+    "text": "Now if this level was higher up okay so in other words if you weren't getting this range here and allowed for 100 pips but 100 pips occurs before the two standard deviations of the initial range to create your fib.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3266.0243902439024,
+        "this"
+      ],
+      [
+        3266.859512195122,
+        "here"
+      ],
+      [
+        3266.7551219512197,
+        "this range"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03267.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3267.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_150",
+    "start_time": 3282.82,
+    "end_time": 3310.34,
+    "duration": 27.519999999999982,
+    "text": "So this is your range this is one standard deviation of it here and then another standard deviation would be here. If this level is above 100 pips okay in other words if this range here was like 65629 okay that would be 110 pips from your entry. You would take a partial at 100 pips flat simply just take 100 pips bank something there as well.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3282.871194029851,
+        "this"
+      ],
+      [
+        3283.4343283582093,
+        "here"
+      ],
+      [
+        3284.5094029850748,
+        "this range"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03282.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03285.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3282.0,
+      3285.0
+    ],
+    "word_count": 67
+  },
+  {
+    "id": "unit_151",
+    "start_time": 3310.68,
+    "end_time": 3347.4,
+    "duration": 36.720000000000255,
+    "text": "So there's your rules it's very simple those rules I've given you if you missed it if you weren't really taking those go back and watch the video again. And listen very carefully because I gave you very specific criteria about when to move a stop what entry price you would look for where your stop loss would be and where you take partials. And when you graduate that stop and what you avoid doing when moving the stop not trying to choke the trade out by having a stop loss. You know right under here or right under here or because this looks like a support you know there you put your stop loss there.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3315.9910344827586,
+        "this"
+      ],
+      [
+        3310.7841379310344,
+        "here"
+      ],
+      [
+        3313.335517241379,
+        "look"
+      ],
+      [
+        3311.981724137931,
+        "watch"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03312.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03315.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3312.0,
+      3315.0
+    ],
+    "word_count": 116
+  },
+  {
+    "id": "unit_152",
+    "start_time": 3353.86,
+    "end_time": 3363.58,
+    "duration": 9.7199999999998,
+    "text": "They may have been lucky they went along here maybe they wouldn't hear or they bought here and just wrote it out because they don't use tough loss but now they want to put a stop loss in their thinking here.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3354.2639024390246,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03354.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3354.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_153",
+    "start_time": 3363.58,
+    "end_time": 3398.54,
+    "duration": 34.960000000000036,
+    "text": "Okay so I use market structure to help me manage a trade and market structure you can learn that it's on my YouTube channel as well but this low here I want to put my stop. This low and not something ultra super tight because just normal gyrations okay or quick sudden retracement lower and still be viable for the trade going higher would knock you out prematurely. And you would miss the opportunity of allowing yourself taking out 100 pips or where the second standard deviation would be for your ultimate target right.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3365.0793617021277,
+        "this"
+      ],
+      [
+        3365.190425531915,
+        "here"
+      ]
+    ],
+    "confidence": 0.5319148936170213,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03363.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03366.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3363.0,
+      3366.0
+    ],
+    "word_count": 94
+  },
+  {
+    "id": "unit_154",
+    "start_time": 3399.72,
+    "end_time": 3421.16,
+    "duration": 21.440000000000055,
+    "text": "So hopefully you guys got something from this I'll try to give you something every single day it will not be this in depth okay so the rules have been applied and shared with you in this video. And I'll always refer back to this video when there's any discussion about when stops are moved how you take partials and what the general principle of this pattern is okay.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3400.0923188405795,
+        "this"
+      ],
+      [
+        3402.2730434782607,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03399.00s.jpg",
+      "data/video_frames/E9F_aT9f038/frame_03402.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3399.0,
+      3402.0
+    ],
+    "word_count": 69
+  },
+  {
+    "id": "unit_155",
+    "start_time": 3422.1600000000003,
+    "end_time": 3444.98,
+    "duration": 22.81999999999971,
+    "text": "It'll be a five minute or less many times it'll probably be less than four minutes because this is going to be me saying okay here's your chart. These are the levels and here's what it looks like and it'll be just all the annotation on the chart and it'll be me saying take care God bless and good luck in the trading. And with that I'm going to close this one and do that very thing which good luck and good trading.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3423.0140963855424,
+        "this"
+      ],
+      [
+        3423.4160240963856,
+        "here"
+      ],
+      [
+        3423.9686746987954,
+        "look"
+      ]
+    ],
+    "confidence": 0.6024096385542169,
+    "selected_frames": [
+      "data/video_frames/E9F_aT9f038/frame_03423.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3423.0
+    ],
+    "word_count": 83
+  }
+]

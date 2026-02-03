@@ -1,0 +1,85 @@
+{
+  "video_id": "j5x90p55O8A",
+  "generated_at": "2026-02-03T11:53:57.597031",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 190.54260182380676,
+  "processing_stats": {
+    "teaching_units": 12,
+    "vision_analyses": 18,
+    "concepts_extracted": 5,
+    "total_audio_duration": 198.17999999999998,
+    "total_words": 532
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the ICT (Inner Circle Trader), involves identifying and entering trades based on specific price levels and Fibonacci retracement levels. The concept is based on the idea of identifying potential support and resistance levels in the market, which can be used to enter trades with a higher probability of success. The chart analysis provided in the video shows the formation of a bearish trend in the Australian Dollar (AUD) versus the U.S. Dollar (USD) currency pair, with specific price levels and annotations. The traders recommend entering trades at key Fibonacci retracement levels, such as the 79th retracement level, which is a sweet spot and price expands above. The stops are set at the 70.5 level, and the targets are projected up for potential targets. The traders also emphasize the importance of risk management and the need to consider all risks associated with off-exchange foreign currency trading.",
+      "generation_time_seconds": 27.305067777633667,
+      "statistics": {
+        "teaching_duration_seconds": 57.34000000000001,
+        "word_count": 160,
+        "teaching_units": 3,
+        "frames_analyzed": 4,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The \"FIBONACCI\" concept refers to a trading strategy used in financial markets, particularly in trading of foreign exchange (FX) and futures. The Fibonacci retracement levels are significant points on a chart where the price may pause or reverse. These levels are used to identify potential support and resistance levels in trading.\n\nTo spot the Fibonacci retracement levels on a chart, look for key visual characteristics such as Fibonacci retracement levels at 79% and 70.5%. These levels are important points where the price may pause or reverse. The Fibonacci retracement levels are used to identify potential support and resistance levels in trading.\n\nThe \"FIBONACCI\" concept is recommended for trading by the Inner Circle Trader (ICT) methodology. The ICT recommends trading above the 0.6600 level, which is a key resistance level. The price expands above this level, and the chart indicates that the price runs and expands above the 0.6600 level. This suggests that the price may have found some support at this level and is now looking to expand higher.\n\nThe \"FIBONACCI\" concept involves identifying potential support and resistance levels in trading. The Fibonacci retracement levels are used to identify these levels, and the ICT recommends trading above these levels to capitalize on potential gains.",
+      "generation_time_seconds": 32.79120111465454,
+      "statistics": {
+        "teaching_duration_seconds": 76.82,
+        "word_count": 204,
+        "teaching_units": 4,
+        "frames_analyzed": 6,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a technical trading strategy that involves buying or selling a security when the price gap between the high and low of a given period is significant. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Identification** of an ORDER BLOCK can be done by observing a significant price gap between the high and low, which is typically around 0.0010 or more. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Trading Application** of an ORDER BLOCK involves buying or selling a security when the price gap between the high and low is significant. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Key Price Levels** of an ORDER BLOCK include the high and low, which are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference",
+      "generation_time_seconds": 53.93492126464844,
+      "statistics": {
+        "teaching_duration_seconds": 6.180000000000007,
+        "word_count": 28,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 0
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "market structure": {
+      "llm_summary": "**Market Structure**:\n\n1. **Definition**: The market structure refers to the overall direction and trend of a market, which can be influenced by various factors such as supply and demand, economic conditions, and geopolitical events. It provides a framework for identifying potential entry points and stop-loss levels for trades.\n\n2. **Identification**: The market structure can be identified on a chart by observing the price movement over a period of time. Key visual characteristics include the trend line, which indicates the direction of price movement. The chart highlights specific price levels, such as -1.5, -1.0, and -0.5, which are potential entry points for trades. The annotations indicate that these entry points are based on the market structure and the trend line.\n\n3. **Trading Application**: ICT recommends trading the market structure by identifying potential entry points and stop-loss levels. The chart provides a visual representation of the market structure, which can be used to identify these entry points. The annotations highlight these entry points, which are based on the market structure and the trend line. The chart is a daily timeframe, and the trading pair is the Australian Dollar (AUD) against the U.S. Dollar (USD).\n\n4. **Key Price Levels**: The -1.5, -1.0, and -0.5 price levels are important as they represent potential entry points for trades. These levels are based on the market structure and the trend line, which indicates the direction of price movement. The annotations indicate that these entry points are based on the market structure and the trend line, providing a clear and actionable approach for traders.",
+      "generation_time_seconds": 33.59338593482971,
+      "statistics": {
+        "teaching_duration_seconds": 9.140000000000015,
+        "word_count": 30,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** in the context of trading refers to the ease with which a financial instrument, such as a stock or currency, can be bought and sold. It indicates the liquidity of a market, meaning the ability to buy or sell a financial instrument quickly and at a price close to the current market price. \n\n**Identification of LIQUIDITY on a chart**:\n- **Visible Price Levels**: The chart displays specific price levels, which are important for identifying liquidity. These levels include -2.0000, -1.5000, -1.0000, -0.5000, and -0.5000. These levels are crucial for traders to monitor and make decisions based on the current market conditions.\n- **Chart Patterns**: The chart patterns, such as the trading pair and the trading timeframe, provide context for the liquidity. The trading pair is the Australian Dollar (AUD) against the U.S. Dollar (USD), and the trading timeframe is likely a daily or weekly timeframe, which is common in trading pairs.\n- **Key Visual Characteristics**: The chart includes vertical lines or boxes at specific price levels, which are important for traders to identify potential buying and selling opportunities. These visual characteristics help in identifying the liquidity of the market at different price points.\n\n**Trading Application of LIQUIDITY**:\n- **Traders** should focus on the liquidity levels to make informed trading decisions. Traders should monitor the liquidity levels to identify potential buying and selling opportunities.\n- **Risk Management**:\n  - **Risk Associated with LIQUIDITY**: Traders should be aware of the risk associated with liquidity. High liquidity can lead to higher trading volumes, which can increase the risk of price fluctuations.\n  - **Risk Management Strategies**:\n    - **Stop Losses**: Traders can implement stop losses to limit potential losses in case of sudden price movements.\n    - **Slippage Costs**: Traders should consider the slippage costs associated with liquidity, which can affect the overall profitability of their trades.\n- **Independent Financial Advisor**:\n  - **Advice from an Independent Financial Advisor**: Traders should seek advice from an independent financial advisor to understand the risks and potential outcomes of their trading strategies. Independent financial advisors can provide guidance on risk management and help traders make informed decisions.",
+      "generation_time_seconds": 42.40037202835083,
+      "statistics": {
+        "teaching_duration_seconds": 25.17999999999998,
+        "word_count": 64,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    }
+  }
+}

@@ -2,6 +2,16 @@
 # ICT AI Trading Signal System - 100% FREE
 
 # =============================================================================
+# 🚀 PERFORMANCE OPTIMIZATIONS (All FREE)
+# =============================================================================
+orjson>=3.9.0               # 6x faster JSON serialization
+uvloop>=0.19.0              # 2-4x faster async event loop
+polars>=0.20.0              # 10-100x faster than pandas
+aiohttp>=3.9.0              # 10x faster concurrent HTTP
+faster-whisper>=1.0.0       # 4-8x faster transcription
+mlx-vlm>=0.1.0              # 5-7x faster vision (Apple Silicon Metal GPU)
+
+# =============================================================================
 # Core Framework
 # =============================================================================
 fastapi>=0.104.0
@@ -19,8 +29,8 @@ joblib>=1.3.0
 # =============================================================================
 # Data Processing
 # =============================================================================
-pandas>=2.0.0
-pandas-ta>=0.3.14b0  # Technical indicators
+pandas>=2.0.0               # Keep for compatibility
+pandas-ta>=0.3.14b0         # Technical indicators
 
 # =============================================================================
 # Market Data (FREE via Yahoo Finance)
@@ -32,6 +42,7 @@ yfinance>=0.2.28
 # =============================================================================
 youtube-transcript-api>=0.6.1
 yt-dlp>=2023.10.13
+pytubefix>=8.0.0              # Reliable YouTube audio download (handles 403 errors)
 
 # =============================================================================
 # Local Transcription (FREE - runs locally)

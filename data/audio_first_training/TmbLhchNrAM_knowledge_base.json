@@ -1,0 +1,99 @@
+{
+  "video_id": "TmbLhchNrAM",
+  "generated_at": "2026-01-31T18:32:44.519814",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 187.2031569480896,
+  "processing_stats": {
+    "teaching_units": 21,
+    "vision_analyses": 33,
+    "concepts_extracted": 6,
+    "total_audio_duration": 341.2200000000001,
+    "total_words": 1018
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying and trading in specific price levels, particularly those near 2825.00, 2828.00, 2830.00, and 2832.00. The trading strategy is to enter trades when the price falls short of these levels, and exit trades when the price returns above these levels. The focus is on identifying and trading in these specific price levels, which are important for the optimal trade entry.",
+      "generation_time_seconds": 22.67551589012146,
+      "statistics": {
+        "teaching_duration_seconds": 50.220000000000006,
+        "word_count": 148,
+        "teaching_units": 4,
+        "frames_analyzed": 5,
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "swing high": {
+      "llm_summary": "The \"Swing High\" concept in the context of the Inner Circle Trader (ICT) methodology refers to a price action where the price moves above and below a certain level, and then continues to move higher or lower. The specific chart patterns ICT is referencing include a swing high, a swing low, and a retracement. The swing high is a price action where the price moves above and below a certain level, and then continues to move higher, and the swing low is a price action where the price moves below and above a certain level, and then continues to move lower. The swing high and swing low are important levels to consider when trading, as they can indicate potential support and resistance levels. The swing high and swing low can also be used to identify potential trading opportunities, as they can indicate when the price is likely to move higher or lower. The swing high and swing low can also be used to identify potential risk levels, as they can indicate when the price is likely to move higher or lower, and the potential risk associated with that move.",
+      "generation_time_seconds": 25.796435832977295,
+      "statistics": {
+        "teaching_duration_seconds": 23.240000000000002,
+        "word_count": 68,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "swing low": {
+      "llm_summary": "The \"Swing Low\" concept in the context of the Inner Circle Trader (ICT) methodology refers to a price action where the price moves above and below a certain level, and then continues to move higher or lower. The specific chart patterns ICT is referencing include a swing high, a swing low, and a retracement. The swing high is around 2928.50, and the swing low is around 2880.00. The swing low is a key visual characteristic to identify a swing low. ICT recommends trading this pattern by being in the market like this and not being in the market like that. The swing low is important because it represents a potential opportunity for trading. The swing high and swing low are important because they represent potential price action and can be used to identify potential trading opportunities. The swing low is important because it represents a potential opportunity for trading. The swing high and swing low are important because they represent potential price action and can be used to identify potential trading opportunities.",
+      "generation_time_seconds": 27.94069790840149,
+      "statistics": {
+        "teaching_duration_seconds": 23.240000000000002,
+        "word_count": 68,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the willingness of market participants to buy or sell at a given price. It is a critical factor in determining the direction and magnitude of price movements in the market. The **identification** of liquidity can be achieved through visual characteristics such as the presence of green bars (buying pressure) and black bars (selling pressure) on a chart, as well as the gap between buying and selling pressure. **Trading application** of **LIQUIDITY** involves identifying opportunities to take advantage of the market's willingness to trade at specific price levels, such as the **0.22 (2211.50)**, **0.25 (2511.50)**, **0.28 (2811.50)**, and **0.32 (3211.50)** price levels. **Key price levels** are important for traders to consider when making decisions, as they can indicate potential support or resistance levels. **LIQUIDITY** is a key factor in determining the strength of a market trend, as it can influence the market's ability to absorb or dissipate liquidity, which in turn affects the market's overall direction.",
+      "generation_time_seconds": 31.884601831436157,
+      "statistics": {
+        "teaching_duration_seconds": 54.18000000000001,
+        "word_count": 173,
+        "teaching_units": 2,
+        "frames_analyzed": 4,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "order block": {
+      "llm_summary": "The \"ORDER BLOCK\" concept in the context of the Inner Circle Trader methodology refers to a situation where the price of a trading pair is significantly higher than the price of the underlying asset, with a notable gap between the two prices. This gap is typically between $15 and $20, and it indicates a potential order block, which means that there are likely orders from both sides of the market that are trying to buy or sell at the current price.\n\nThe identification of an ORDER BLOCK on a chart involves observing the following key visual characteristics:\n\n1. **Price Gap**: The high price is around $2965, and the low price is around $2950, with a gap between these two prices of approximately $15.\n2. **High Price**: The high price is $2965.\n3. **Low Price**: The low price is $2950.\n4. **Annotations, Markings, or Highlighted Areas**: The chart includes annotations, markings, or highlighted areas, which are not explicitly mentioned in the provided chart analysis but are common in trading charts to highlight important price points or patterns.\n\nBased on these characteristics, the Inner Circle Trader methodology recommends trading the ORDER BLOCK pattern by:\n\n1. **Identifying the Gap**: Recognize the significant price gap between the high and low prices, which is a potential order block.\n2. **Monitoring Orders**: Keep an eye on the trading pair, as there are likely orders from both sides of the market trying to buy or sell at the current price.\n3. **Potential for Profit**: The high price is likely to be a potential entry point for traders looking to profit from the gap, as the gap suggests a potential for a price move.\n4. **Risk Management**: The high price is a high-risk trade, and traders should carefully consider the potential risks associated with the trade, such as the possibility of a price move in the opposite direction.\n\nThe key price levels mentioned in the chart analysis are important for traders to monitor and consider when making trading decisions. These levels include the high price of $2965 and the low price of $2950, which are critical points for identifying potential entry and exit points for the ORDER BLOCK pattern.",
+      "generation_time_seconds": 36.821852922439575,
+      "statistics": {
+        "teaching_duration_seconds": 9.859999999999985,
+        "word_count": 25,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 0
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The \"Fibonacci\" concept in the context of the \"Inner Circle Trader\" methodology involves identifying potential support and resistance levels in financial trading. The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding numbers, starting from any number in the sequence. This concept is often used in trading to identify potential support and resistance levels, which can be used to make informed trading decisions.\n\nTo spot the Fibonacci pattern on a chart, look for specific price levels, such as Fibonacci retracement levels, which are significant levels of support or resistance. These levels are identified by the Fibonacci sequence and can be used to identify potential entry points for trades. The chart in the teaching transcript shows Fibonacci levels at 2900, 2901, and 2902, which are significant Fibonacci retracement levels.\n\nThe \"Inner Circle Trader\" methodology recommends trading the Fibonacci pattern by identifying potential entry points at these levels. The chart in the teaching transcript shows specific price levels mentioned or visible, such as 2900, 2901, and 2902, which are significant Fibonacci retracement levels. These levels can be used to identify potential entry points for trades, as the market may gravitate towards these levels due to the trend being bullish.\n\nThe \"Fibonacci\" concept is a useful tool for traders to identify potential support and resistance levels, which can be used to make informed trading decisions. The chart in the teaching transcript shows specific price levels mentioned or visible, such as 2900, 2901, and 2902, which are significant Fibonacci retracement levels. These levels can be used to identify potential entry points for trades, as the market may gravitate towards these levels due to the trend being bullish.",
+      "generation_time_seconds": 39.11321997642517,
+      "statistics": {
+        "teaching_duration_seconds": 70.10000000000002,
+        "word_count": 221,
+        "teaching_units": 2,
+        "frames_analyzed": 5,
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    }
+  }
+}

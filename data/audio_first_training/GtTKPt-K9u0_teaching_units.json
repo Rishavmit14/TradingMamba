@@ -1,0 +1,337 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.399999999999999,
+    "end_time": 27.66,
+    "duration": 17.26,
+    "text": "Welcome back folks, this is video number 13 in a continuing series of the optimal trade entry pattern recognition series for the Inner Circle Trader YouTube channel. All right, our example again today is the dollar CAD and our charts are already trained in on the five minute chart and I'm going to counsel you to take a look at your",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        10.563770491803277,
+        "this"
+      ],
+      [
+        13.56622950819672,
+        "look"
+      ],
+      [
+        13.56622950819672,
+        "look at"
+      ]
+    ],
+    "confidence": 0.819672131147541,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00009.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00012.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00015.00s.jpg"
+    ],
+    "frame_timestamps": [
+      9.0,
+      12.0,
+      15.0
+    ],
+    "word_count": 61
+  },
+  {
+    "id": "unit_001",
+    "start_time": 27.66,
+    "end_time": 72.82,
+    "duration": 45.16,
+    "text": "daily chart and look at the most recent optimal trade entry that formed which led to this strong breakdown on a daily chart. Now when we see big moves like that the natural assumption is it's gone down too far and it's gonna have to reverse and many times that's going to plague your trust in a pattern like this in the New York session. As you can see the market has been going down and when we add the annotations to the chart you'll see that nothing really has changed it's still the same logic and you can't just simply say the markets oversold the pattern can't work it's not how this works. The market's going to",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        28.497966101694914,
+        "this"
+      ],
+      [
+        27.817118644067797,
+        "look"
+      ],
+      [
+        29.021694915254237,
+        "see"
+      ],
+      [
+        31.064237288135594,
+        "as you can see"
+      ],
+      [
+        27.817118644067797,
+        "look at"
+      ]
+    ],
+    "confidence": 0.42372881355932207,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00027.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00030.00s.jpg"
+    ],
+    "frame_timestamps": [
+      27.0,
+      30.0
+    ],
+    "word_count": 118
+  },
+  {
+    "id": "unit_002",
+    "start_time": 72.82,
+    "end_time": 80.02,
+    "duration": 7.200000000000003,
+    "text": "seek liquidity and it's going to expand and seek that liquidity above or below the marketplace. If you look at the daily chart it had a really",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        73.76666666666667,
+        "look"
+      ],
+      [
+        72.82,
+        "see"
+      ],
+      [
+        73.76666666666667,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00072.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00075.00s.jpg"
+    ],
+    "frame_timestamps": [
+      72.0,
+      75.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_003",
+    "start_time": 85.58,
+    "end_time": 102.08,
+    "duration": 16.5,
+    "text": "taking sell side liquidity and couple that with optimal trade entry on the daily chart and you get beautiful results like this. We're gonna look at the dollar CAD here if you haven't already done so polish your video. Alright so",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        86.74780487804878,
+        "this"
+      ],
+      [
+        87.19268292682926,
+        "here"
+      ],
+      [
+        86.91463414634146,
+        "look"
+      ],
+      [
+        86.91463414634146,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      87.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_004",
+    "start_time": 102.08,
+    "end_time": 112.0,
+    "duration": 9.920000000000002,
+    "text": "now I'm gonna add the annotations. Alright so you can see they have the New York session again standard times never changing 8 30 a.m. New York time",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        102.60857142857142,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00102.00s.jpg"
+    ],
+    "frame_timestamps": [
+      102.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_005",
+    "start_time": 113.12,
+    "end_time": 130.78,
+    "duration": 17.659999999999997,
+    "text": "to 11 a.m. Okay the optimal trade entry is here now obviously you can see the market has been going down and we have this retracement in here inside the heart of the New York session trades back to optimal trade entry now notice it goes just a little bit above that that's okay it's fine it's not a big",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        114.328,
+        "this"
+      ],
+      [
+        113.57300000000001,
+        "here"
+      ],
+      [
+        113.82466666666667,
+        "see"
+      ],
+      [
+        115.28433333333334,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00114.00s.jpg"
+    ],
+    "frame_timestamps": [
+      114.0
+    ],
+    "word_count": 60
+  },
+  {
+    "id": "unit_006",
+    "start_time": 142.98,
+    "end_time": 226.26,
+    "duration": 83.28,
+    "text": "starting going lower it did have a higher high here and I'll show you what that looks like in a moment but drop down and then consolidation and run more one more time rally up to me I'm gonna use this point here before I go to this one I gotta take the annotations off for a moment you can see this one's slightly higher than this one but this one's where all the volume is and you see that with the bodies of the candles versus this wick now adding that 62% tracer level that's our standard for this model as an entry pattern your stock would have to be above the short-term high whatever fits your risk appetite if it's 1% half a percent 2% 20% if you don't want to be in the business too long and I'll be in bed alright so the short-term low trades to 38 11 and a half so that gives you about what's at 20 pips or so you have about 20 pips just to the old low here and then you get half a standard deviation at 39 93 one full standard deviation at 3775 and a half and then one and a half standard deviation set 137 57 and a half and the low of the day comes in exactly at 1.3",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        144.9136322869955,
+        "this"
+      ],
+      [
+        143.415067264574,
+        "here"
+      ],
+      [
+        143.7534529147982,
+        "look"
+      ],
+      [
+        145.88044843049326,
+        "see"
+      ],
+      [
+        145.88044843049326,
+        "see this"
+      ]
+    ],
+    "confidence": 0.2242152466367713,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00144.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00147.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00159.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00174.00s.jpg"
+    ],
+    "frame_timestamps": [
+      144.0,
+      147.0,
+      159.0,
+      174.0
+    ],
+    "word_count": 223
+  },
+  {
+    "id": "unit_007",
+    "start_time": 226.26,
+    "end_time": 240.82,
+    "duration": 14.560000000000002,
+    "text": "757 and a half so beautiful beautiful symmetry in the dollar CAD obvious set up from the daily chart using the things that I've taught obviously on this channel for free you can go through all the tutorials and see everything I've",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        227.73857142857142,
+        "this"
+      ],
+      [
+        228.39571428571426,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00225.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00228.00s.jpg"
+    ],
+    "frame_timestamps": [
+      225.0,
+      228.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_008",
+    "start_time": 240.82,
+    "end_time": 260.42,
+    "duration": 19.600000000000023,
+    "text": "shown in those videos coupled with this optimal trade entry pattern recognition series you can see how the things that I teach and I look for up here every single market day in this time of day so this is an example again you can use for your application I hope you found insightful until next time wish good luck and good trading",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        241.1342857142857,
+        "this"
+      ],
+      [
+        242.2342857142857,
+        "here"
+      ],
+      [
+        242.07714285714286,
+        "look"
+      ],
+      [
+        241.60571428571427,
+        "see"
+      ],
+      [
+        241.60571428571427,
+        "see how"
+      ]
+    ],
+    "confidence": 0.7936507936507936,
+    "selected_frames": [
+      "data/video_frames/GtTKPt-K9u0/frame_00240.00s.jpg",
+      "data/video_frames/GtTKPt-K9u0/frame_00243.00s.jpg"
+    ],
+    "frame_timestamps": [
+      240.0,
+      243.0
+    ],
+    "word_count": 63
+  }
+]

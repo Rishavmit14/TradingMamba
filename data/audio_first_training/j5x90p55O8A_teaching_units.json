@@ -1,0 +1,343 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.919999999999996,
+    "end_time": 31.0,
+    "duration": 20.080000000000005,
+    "text": "Okay, folks, welcome back. This is video number 10 in a continuing series of 20 videos for the ICT Optimal Trade Entry Pattern Recognition Series. All right, so today's example is going to be on the Australian dollar versus the U.S. dollar, and we have our chart already trained in on the five-minute chart. I want you to take a look at the chart and pause the video.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        11.135882352941174,
+        "this"
+      ],
+      [
+        14.158235294117643,
+        "look"
+      ],
+      [
+        14.158235294117643,
+        "look at"
+      ]
+    ],
+    "confidence": 0.7352941176470588,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00012.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00015.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0,
+      15.0
+    ],
+    "word_count": 68
+  },
+  {
+    "id": "unit_001",
+    "start_time": 41.5,
+    "end_time": 54.88,
+    "duration": 13.380000000000003,
+    "text": "All right. So we have Tuesday's previous daily high annotated here, the beginning of May 20th, 2020, and we have our New York session time of day delineated on our chart.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        42.04838709677419,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00042.00s.jpg"
+    ],
+    "frame_timestamps": [
+      42.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_002",
+    "start_time": 54.88,
+    "end_time": 70.02,
+    "duration": 15.139999999999993,
+    "text": "So we're looking for price to run above Tuesday's daily high. You can see it's reaching up for it there. It's it just pierces it very, very, very modestly, and then it retraces down into our time of day.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        55.92102564102564,
+        "here"
+      ],
+      [
+        54.984102564102564,
+        "look"
+      ],
+      [
+        55.55666666666667,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00054.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00057.00s.jpg"
+    ],
+    "frame_timestamps": [
+      54.0,
+      57.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_003",
+    "start_time": 70.98,
+    "end_time": 99.1,
+    "duration": 28.11999999999999,
+    "text": "And we're going to add our fib. There's our fib here on our low to high optimal trade entry. We'll touch to the 79th retracement level touches it again at the 70.5 level, which is a sweet spot and price expands above, comes back, finds some support at previous daily high and price runs and expands above the big figure 0.6600 level.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        71.40967741935484,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00072.00s.jpg"
+    ],
+    "frame_timestamps": [
+      72.0
+    ],
+    "word_count": 62
+  },
+  {
+    "id": "unit_004",
+    "start_time": 100.38,
+    "end_time": 126.52,
+    "duration": 26.14,
+    "text": "Now for the fib, I've shown you this in the first video, but I just want to show you the levels again, because I got people asking on Twitter. Those are the levels that are highlighted on this fib. And the one I've added, but I said in one of that, I can't recall what Lydia was in this series, but you can add a negative 1.5 level. And you can see that being applied here.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        100.72355263157894,
+        "this"
+      ],
+      [
+        104.06092105263157,
+        "here"
+      ],
+      [
+        103.86460526315788,
+        "see"
+      ],
+      [
+        102.09776315789473,
+        "highlighted"
+      ]
+    ],
+    "confidence": 0.6578947368421053,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00099.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00102.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00105.00s.jpg"
+    ],
+    "frame_timestamps": [
+      99.0,
+      102.0,
+      105.0
+    ],
+    "word_count": 76
+  },
+  {
+    "id": "unit_005",
+    "start_time": 126.96,
+    "end_time": 147.98,
+    "duration": 21.019999999999996,
+    "text": "Okay, so that way you have your half standard deviation, full standard deviation, one and a half standard deviation and two standard deviations. Further look with the details here 65776 entry rate at the 62% retracement level. Your fill would be on this candle here and using a 10 pip stop.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        129.34823529411764,
+        "this"
+      ],
+      [
+        128.55215686274508,
+        "here"
+      ],
+      [
+        128.32470588235293,
+        "look"
+      ],
+      [
+        129.34823529411764,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00126.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00129.00s.jpg"
+    ],
+    "frame_timestamps": [
+      126.0,
+      129.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_006",
+    "start_time": 166.18,
+    "end_time": 172.36,
+    "duration": 6.180000000000007,
+    "text": "It doesn't really line up with any of the fib, but if we're going to run above Tuesday's high, it's probably going to run above the big figure.",
+    "detected_concepts": [
+      "order block",
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00165.00s.jpg"
+    ],
+    "frame_timestamps": [
+      165.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_007",
+    "start_time": 172.62,
+    "end_time": 190.04,
+    "duration": 17.419999999999987,
+    "text": "So it's nice to be able to try to capture some kind of a movement above that big figure. Now you can simply just use the one standard deviation here, and that would be 0.6600 again rounding down, not demanding that 6603 and two pipettes.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        174.14733333333334,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00174.00s.jpg"
+    ],
+    "frame_timestamps": [
+      174.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_008",
+    "start_time": 190.34,
+    "end_time": 206.72,
+    "duration": 16.379999999999995,
+    "text": "So we're just using the fib again as a framework. It's just a rough idea in terms of the basic profile to the trade. It doesn't require or we don't rather demand that these fib levels get hit.",
+    "detected_concepts": [
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00189.00s.jpg"
+    ],
+    "frame_timestamps": [
+      189.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_009",
+    "start_time": 206.72,
+    "end_time": 215.86,
+    "duration": 9.140000000000015,
+    "text": "It just helps us structure the trade and where we can put our entries in, what our stops are going to be, and then project it up for potential targets.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        207.173,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00207.00s.jpg"
+    ],
+    "frame_timestamps": [
+      207.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_010",
+    "start_time": 216.52,
+    "end_time": 228.92,
+    "duration": 12.399999999999977,
+    "text": "But we use the liquidity above this old high as the real framework. And the big figure level I'll add here just for completeness sake.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        216.8416,
+        "this"
+      ],
+      [
+        217.592,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00216.00s.jpg",
+      "data/video_frames/j5x90p55O8A/frame_00219.00s.jpg"
+    ],
+    "frame_timestamps": [
+      216.0,
+      219.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_011",
+    "start_time": 236.22,
+    "end_time": 249.0,
+    "duration": 12.780000000000001,
+    "text": "running liquidity above that. So it's not that we're requiring this absolute high. I have tools and techniques that will give you this very high, but it's not important, especially not in the scope of a YouTube video series.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        236.79435897435897,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/j5x90p55O8A/frame_00237.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0
+    ],
+    "word_count": 39
+  }
+]

@@ -1,0 +1,150 @@
+{
+  "playlist_url": "https://youtube.com/playlist?list=PLVgHx4Z63paaRnabpBl38GoMkxF1FiXCF",
+  "total_videos": 20,
+  "completed": 20,
+  "video_ids": [
+    "E9F_aT9f038",
+    "v6ATva5DF0I",
+    "TmbLhchNrAM",
+    "Q0SFXEQqI08",
+    "t6y637OyiDY",
+    "Vx25X2sbxPA",
+    "_x36n9Jc2JQ",
+    "ifFDif82Bmg",
+    "uqptoSAGS30",
+    "j5x90p55O8A",
+    "-k1eBYoajIo",
+    "6D3sKabkozk",
+    "GtTKPt-K9u0",
+    "cYzS_kFxv7M",
+    "RP6rVMJP4hA",
+    "ZbkEvNpm-_k",
+    "FNwqw7IiByo",
+    "YMt87VQRpNM",
+    "9F-anykT7J0",
+    "L--1zBIEanY"
+  ],
+  "results": [
+    {
+      "video_id": "E9F_aT9f038",
+      "success": true,
+      "concepts": 11,
+      "error": null
+    },
+    {
+      "video_id": "v6ATva5DF0I",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/v6ATva5DF0I.mp3"
+    },
+    {
+      "video_id": "TmbLhchNrAM",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/TmbLhchNrAM.mp3"
+    },
+    {
+      "video_id": "Q0SFXEQqI08",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/Q0SFXEQqI08.mp3"
+    },
+    {
+      "video_id": "t6y637OyiDY",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/t6y637OyiDY.mp3"
+    },
+    {
+      "video_id": "Vx25X2sbxPA",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/Vx25X2sbxPA.mp3"
+    },
+    {
+      "video_id": "_x36n9Jc2JQ",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/_x36n9Jc2JQ.mp3"
+    },
+    {
+      "video_id": "ifFDif82Bmg",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/ifFDif82Bmg.mp3"
+    },
+    {
+      "video_id": "uqptoSAGS30",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/uqptoSAGS30.mp3"
+    },
+    {
+      "video_id": "j5x90p55O8A",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/j5x90p55O8A.mp3"
+    },
+    {
+      "video_id": "-k1eBYoajIo",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/-k1eBYoajIo.mp3"
+    },
+    {
+      "video_id": "6D3sKabkozk",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/6D3sKabkozk.mp3"
+    },
+    {
+      "video_id": "GtTKPt-K9u0",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/GtTKPt-K9u0.mp3"
+    },
+    {
+      "video_id": "cYzS_kFxv7M",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/cYzS_kFxv7M.mp3"
+    },
+    {
+      "video_id": "RP6rVMJP4hA",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/RP6rVMJP4hA.mp3"
+    },
+    {
+      "video_id": "ZbkEvNpm-_k",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/ZbkEvNpm-_k.mp3"
+    },
+    {
+      "video_id": "FNwqw7IiByo",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/FNwqw7IiByo.mp3"
+    },
+    {
+      "video_id": "YMt87VQRpNM",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/YMt87VQRpNM.mp3"
+    },
+    {
+      "video_id": "9F-anykT7J0",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/9F-anykT7J0.mp3"
+    },
+    {
+      "video_id": "L--1zBIEanY",
+      "success": false,
+      "concepts": 0,
+      "error": "Audio file not found: data/audio/L--1zBIEanY.mp3"
+    }
+  ],
+  "last_updated": "2026-01-31T18:09:52.374770"
+}

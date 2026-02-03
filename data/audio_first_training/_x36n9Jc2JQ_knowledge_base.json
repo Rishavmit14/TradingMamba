@@ -1,0 +1,85 @@
+{
+  "video_id": "_x36n9Jc2JQ",
+  "generated_at": "2026-02-02T11:49:13.270275",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 150.91941785812378,
+  "processing_stats": {
+    "teaching_units": 15,
+    "vision_analyses": 26,
+    "concepts_extracted": 5,
+    "total_audio_duration": 297.64,
+    "total_words": 861
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader methodology, involves identifying and entering trades at specific price levels. The key visual characteristics of this pattern include:\n\n1. **Price Levels**: The chart shows price levels at 1.22500, 1.23000, 1.23500, and 1.24000. These levels are important points in the trading strategy.\n\n2. **Identification**: To spot the optimal trade entry, one must look for the price of the currency pair to cross these specific price levels. The green bars represent the price of the currency pair, and the black bars represent the high and low prices.\n\n3. **Trading Application**: The Inner Circle Trader recommends trading this pattern by entering a trade when the price crosses one of the price levels. This entry strategy is designed to capitalize on the potential gains associated with the specific price levels.\n\n4. **Key Price Levels**: The important price levels to consider are 1.22500, 1.23000, 1.23500, and 1.24000. These levels are critical points in the trading strategy and should be monitored closely to identify potential trading opportunities.\n\nBy following the \"Optimal Trade Entry\" concept, traders can capitalize on the potential gains associated with specific price levels, such as those at 1.22500, 1.23000, 1.23500, and 1.24000. This approach helps in identifying and entering trades at the right time, potentially increasing the likelihood of profitable trades.",
+      "generation_time_seconds": 32.102962255477905,
+      "statistics": {
+        "teaching_duration_seconds": 17.240000000000027,
+        "word_count": 40,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a specific chart pattern identified by the Inner Circle Trader (ICT) methodology. It consists of vertical bars, typically representing high, low, and closing prices, which are used to identify support and resistance levels. The specific price levels mentioned or visible in the chart include:\n\n1. **Low on Thursday**: 121.65\n2. **High on Thursday**: 121.65\n3. **Low on Friday**: 121.65\n4. **High on Friday**: 121.65\n5. **Low on Saturday**: 121.65\n6. **High on Saturday**: 121.65\n7. **Low on Sunday**: 121.65\n8. **High on Sunday**: 121.65\n9. **Low on Monday**: 121.65\n10. **High on Monday**: 121.65\n11. **Low on Tuesday**: 121.65\n12. **High on Tuesday**: 121.65\n13. **Low on Wednesday**: 121.65\n14. **High on Wednesday**: 121.65\n15. **Low on Thursday**: 121.65\n16. **High on Thursday**: 121.65\n17. **Low on Friday**: 121.65\n18. **High on Friday**: 121.65\n19. **Low on Saturday**: 121.65\n20. **High on Saturday**: 121.65\n21. **Low on Sunday**: 121.65\n22. **High on Sunday**: 121.65\n23. **Low on Monday**: 121.65\n24. **High on Monday**: 121.65\n25. **Low on Tuesday**: 121.65\n26. **High on Tuesday**: 121.65\n27. **Low on Wednesday**: 121.65\n28. **High on Wednesday**: 121.65\n29. **Low on Thursday**: 121.65\n30. **High on Thursday**: 121.65\n31. **Low on Friday**: 121.65\n32. **High on Friday**: 121.65\n33. **Low on Saturday**: 121.65\n34. **High on Saturday**: 121.65\n35. **Low on Sunday**: 121.65\n36. **High on Sunday**: 121.65\n37. **Low on Monday**: 121.65\n38. **High on Monday**: 121.65\n39. **Low on Tuesday**: 121.65\n40. **High on Tuesday**: 121.65\n41. **Low on Wednesday**: 121.65\n42. **High on Wednesday**: 121.65\n43. **Low on Thursday**: 121.65\n44. **High on Thursday**: 121.65\n45. **Low on Friday**: 121.65\n46. **High on Friday**: 121.65\n47. **Low on Saturday**: 121.65",
+      "generation_time_seconds": 40.32632780075073,
+      "statistics": {
+        "teaching_duration_seconds": 78.35999999999997,
+        "word_count": 220,
+        "teaching_units": 4,
+        "frames_analyzed": 9,
+        "deictic_references": 13
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "swing high": {
+      "llm_summary": "The \"SWING HIGH\" concept in the context of the ICT (Inner Circle Trader) methodology involves identifying a high price point in a chart, which is typically used as a support or resistance level for traders. The swing high is identified by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing high is then used as a trading entry point, with traders looking for opportunities to trade at this level. The swing high is also used as a retracement level, where the price retraces 62% of the move from the swing high to the swing low. The swing high is a key visual characteristic used to identify the swing high, and traders should look for opportunities to trade at this level.",
+      "generation_time_seconds": 18.776432991027832,
+      "statistics": {
+        "teaching_duration_seconds": 37.27999999999997,
+        "word_count": 113,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "swing low": {
+      "llm_summary": "The \"Swing Low\" concept in the context of the Inner Circle Trader methodology involves identifying a price range where the market experiences a significant retracement, typically 62% of the move from the swing high to the swing low. This retracement level is a key reference point for traders to enter trades, as it represents a retracement of 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934,",
+      "generation_time_seconds": 38.650285959243774,
+      "statistics": {
+        "teaching_duration_seconds": 37.27999999999997,
+        "word_count": 113,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The Fibonacci concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading at specific price levels, known as Fibonacci retracement levels. These levels are identified by retracing the previous price movements, which are typically 21.2%, 38.2%, 50%, 61.8%, and 78.6% of the previous price range. The Fibonacci retracement levels are crucial for identifying potential support and resistance levels in the market, which can be used to trade effectively. The Inner Circle Trader recommends trading at these levels, as they can provide significant opportunities for profitable trades.",
+      "generation_time_seconds": 18.354215145111084,
+      "statistics": {
+        "teaching_duration_seconds": 42.379999999999995,
+        "word_count": 122,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

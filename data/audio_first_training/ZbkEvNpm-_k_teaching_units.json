@@ -1,0 +1,971 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.759999999999998,
+    "end_time": 17.42,
+    "duration": 6.660000000000004,
+    "text": "Welcome back folks. This is volume number 16 in a continuing series of 20 videos for the Inner Circle Trader",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        10.921999999999999,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_001",
+    "start_time": 17.42,
+    "end_time": 36.12,
+    "duration": 18.699999999999996,
+    "text": "Optimal Trade Entry Pattern Recognition Series for YouTube. All right, today's example is going to be in crude oil. This is a commodity market and we're looking at the daily chart and I want to give you a little bit of finesse on bias, little additional insights that way you can see how these optimal",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        18.459818181818182,
+        "this"
+      ],
+      [
+        18.842909090909092,
+        "look"
+      ],
+      [
+        20.21109090909091,
+        "see"
+      ],
+      [
+        20.21109090909091,
+        "see how"
+      ]
+    ],
+    "confidence": 0.9090909090909091,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00018.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00021.00s.jpg"
+    ],
+    "frame_timestamps": [
+      18.0,
+      21.0
+    ],
+    "word_count": 55
+  },
+  {
+    "id": "unit_002",
+    "start_time": 36.12,
+    "end_time": 54.48,
+    "duration": 18.36,
+    "text": "trade entries also manifest in terms of a little bit longer term or broader objectives. If you look at this chart, I want you to take a look at it for a moment, pause your video, think about what you think you see in price action, then take a look at the annotations once I release them on the screen.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        37.073166666666665,
+        "this"
+      ],
+      [
+        36.972833333333334,
+        "look"
+      ],
+      [
+        38.227,
+        "see"
+      ],
+      [
+        36.972833333333334,
+        "look at this"
+      ],
+      [
+        36.972833333333334,
+        "look at"
+      ]
+    ],
+    "confidence": 0.8333333333333334,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00036.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00039.00s.jpg"
+    ],
+    "frame_timestamps": [
+      36.0,
+      39.0
+    ],
+    "word_count": 60
+  },
+  {
+    "id": "unit_003",
+    "start_time": 60.82000000000001,
+    "end_time": 82.84,
+    "duration": 22.019999999999996,
+    "text": "Okay, so let's take a look at what we have here. Right away, this gap in price should draw your attention whenever you see a price action gap in a commodity or stock or forex or anything if it trades. Just think of this area here as a magnet.",
+    "detected_concepts": [],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        61.462040816326535,
+        "this"
+      ],
+      [
+        61.31387755102042,
+        "here"
+      ],
+      [
+        61.06693877551021,
+        "look"
+      ],
+      [
+        61.955918367346946,
+        "see"
+      ],
+      [
+        61.06693877551021,
+        "look at"
+      ],
+      [
+        62.94367346938776,
+        "this area"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00060.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00063.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00081.00s.jpg"
+    ],
+    "frame_timestamps": [
+      60.0,
+      63.0,
+      81.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_004",
+    "start_time": 89.3,
+    "end_time": 100.84,
+    "duration": 11.540000000000006,
+    "text": "Now when price went to this high here, it repelled and went lower. Now I'm not going to go into the reasons why it did here, but as price is doing this, what is the retail trader thinking?",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        89.54736842105262,
+        "this"
+      ],
+      [
+        89.64631578947368,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00090.00s.jpg"
+    ],
+    "frame_timestamps": [
+      90.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_005",
+    "start_time": 101.1,
+    "end_time": 156.18,
+    "duration": 55.08000000000001,
+    "text": "Well price stopped here before, so it's probably not going to go through that. That is the logic behind 90% of how I decipher price action. I'm looking for those moments when the public or the retail trader, or as I like to dub them, retail Rick, they see something in price action that is so loosely hinged on factual, real underpinnings of the market. In other words, I am waiting for moments where the public or retail traders mindset or opinion about a marketplace is so obvious based on what's taught in books and I fell victim to back in the 90s when I first started. I will look at opportunities and see the opposing view to what a retail trader would see or expect in price action.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        101.26023255813953,
+        "here"
+      ],
+      [
+        102.5420930232558,
+        "look"
+      ],
+      [
+        103.66372093023256,
+        "see"
+      ],
+      [
+        106.92178294573642,
+        "look at"
+      ]
+    ],
+    "confidence": 0.38759689922480617,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00102.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00105.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      102.0,
+      105.0,
+      108.0
+    ],
+    "word_count": 129
+  },
+  {
+    "id": "unit_006",
+    "start_time": 157.10000000000002,
+    "end_time": 165.48,
+    "duration": 8.379999999999967,
+    "text": "So they expect this to act as resistance. So therefore, they don't want to be buying, they don't want to see a run above that level",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        157.25115384615387,
+        "this"
+      ],
+      [
+        157.60384615384618,
+        "here"
+      ],
+      [
+        158.10769230769233,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00156.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00159.00s.jpg"
+    ],
+    "frame_timestamps": [
+      156.0,
+      159.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_007",
+    "start_time": 165.48,
+    "end_time": 178.64,
+    "duration": 13.159999999999997,
+    "text": "to attack any kind of liquidity. They're thinking, I want to short this market and my stop is safe above this old high because look what it did in the past. It turned and never went back above it.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        166.0830769230769,
+        "this"
+      ],
+      [
+        166.68615384615384,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00165.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00168.00s.jpg"
+    ],
+    "frame_timestamps": [
+      165.0,
+      168.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_008",
+    "start_time": 178.76,
+    "end_time": 225.98,
+    "duration": 47.22,
+    "text": "So as it's been gravitating towards this old high, the natural tendency and I admit back in the 90s, I was being trained to see it just like this because of all the books. And I got nearly 3000 books in my library and the multitude of them are useless. They're absolutely useless. I just can't separate myself from them by discarding them because they really framed who I am today because I could go back and see where I followed that failed logic and like I said, 99.9% of everything that's written is garbage. It's all things that's going to end up leading you to monetary loss, confusion and no real understanding about what it is you should be doing to be consistently profitable.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        179.08831999999998,
+        "this"
+      ],
+      [
+        183.08288,
+        "here"
+      ],
+      [
+        180.07327999999998,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00180.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00183.00s.jpg"
+    ],
+    "frame_timestamps": [
+      180.0,
+      183.0
+    ],
+    "word_count": 125
+  },
+  {
+    "id": "unit_009",
+    "start_time": 234.24,
+    "end_time": 247.8,
+    "duration": 13.560000000000002,
+    "text": "That is a draw on liquidity and what does that mean? There's going to be an interest for price to get back up into between this level here and this level here, which is the low of this candle and the high of this candle.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        235.46222222222224,
+        "this"
+      ],
+      [
+        234.82666666666668,
+        "here"
+      ],
+      [
+        236.0488888888889,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00234.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00237.00s.jpg"
+    ],
+    "frame_timestamps": [
+      234.0,
+      237.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_010",
+    "start_time": 248.0,
+    "end_time": 255.68,
+    "duration": 7.680000000000007,
+    "text": "So there's no candle or price action trading in here. So that's what we call gap. The market will want to likely trade up into that.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        248.10153846153847,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      249.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_011",
+    "start_time": 255.88,
+    "end_time": 284.4,
+    "duration": 28.519999999999982,
+    "text": "Now, how can we use that as a bias or a tool for bias? Well, right away, we are looking at a market that is predisposed to go higher, more likely to go higher than lower regardless of this so-called retail trader's resistance. If we go forward in the future, we would expect to see the bias be bullish and this is Thursday's trading here, May 28th of 2020.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        257.84057971014494,
+        "this"
+      ],
+      [
+        259.18202898550726,
+        "here"
+      ],
+      [
+        256.86028985507244,
+        "look"
+      ],
+      [
+        258.6660869565217,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00255.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00258.00s.jpg"
+    ],
+    "frame_timestamps": [
+      255.0,
+      258.0
+    ],
+    "word_count": 69
+  },
+  {
+    "id": "unit_012",
+    "start_time": 285.46,
+    "end_time": 302.14,
+    "duration": 16.680000000000007,
+    "text": "So the expectation would be to see that high, which is 34.21 to be blown out. And if we can get a run further, we could see it run to 35.18, which is this high here, 35.18.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        286.99405405405406,
+        "this"
+      ],
+      [
+        287.08702702702703,
+        "here"
+      ],
+      [
+        285.7389189189189,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00285.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00288.00s.jpg"
+    ],
+    "frame_timestamps": [
+      285.0,
+      288.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_013",
+    "start_time": 302.86,
+    "end_time": 314.94,
+    "duration": 12.079999999999984,
+    "text": "Now, it's not that we're looking for it just to get to that level. Remember what's said about this. There's orders that's resting above that or new orders entering, going short with their",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        303.88,
+        "this"
+      ],
+      [
+        303.99333333333334,
+        "here"
+      ],
+      [
+        303.1433333333334,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00303.00s.jpg"
+    ],
+    "frame_timestamps": [
+      303.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_014",
+    "start_time": 320.92,
+    "end_time": 350.34,
+    "duration": 29.41999999999996,
+    "text": "So if smart money investors or traders or people like you watching this video see opportunities like this and we can anticipate a run higher and you're buying low and anticipate a run above that level, then we can, number one, formulate a bias for the day, the next trading day. We know a time of day when we're looking to seek and discover a pattern that has been identified",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        321.5628571428572,
+        "this"
+      ],
+      [
+        324.0807142857143,
+        "look"
+      ],
+      [
+        321.67,
+        "see"
+      ],
+      [
+        321.50928571428574,
+        "watch"
+      ]
+    ],
+    "confidence": 0.7142857142857143,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00321.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00324.00s.jpg"
+    ],
+    "frame_timestamps": [
+      321.0,
+      324.0
+    ],
+    "word_count": 70
+  },
+  {
+    "id": "unit_015",
+    "start_time": 350.34,
+    "end_time": 394.04,
+    "duration": 43.700000000000045,
+    "text": "in this series is the optimal trade entry and it's specific to time and price. So between 8.30 in the morning and 11 o'clock in the morning, we're looking for a rally higher, a sharp rally higher and then a pull back into that down to the 62% of the tradesman level. That's the optimal trade entry and it has to occur between 8.30 and 11 a.m. If it doesn't, we don't do anything. We just wait for the next trading day or trade another pair or market. But this is how we can use very simple things in the daily chart to arrive at a bias, not an everyday bias, but this is a bias model.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        350.3899145299145,
+        "this"
+      ],
+      [
+        351.7376068376068,
+        "look"
+      ]
+    ],
+    "confidence": 0.4273504273504274,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00351.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00372.00s.jpg"
+    ],
+    "frame_timestamps": [
+      351.0,
+      372.0
+    ],
+    "word_count": 117
+  },
+  {
+    "id": "unit_016",
+    "start_time": 394.6,
+    "end_time": 405.76,
+    "duration": 11.159999999999968,
+    "text": "So if we drop down into a five minute chart, here's your five minute chart and again you know the drill, pause the video and take a look at what you think you see here and then when you're ready, unpause the video and I'll add the annotations.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        395.10625000000005,
+        "here"
+      ],
+      [
+        395.966875,
+        "look"
+      ],
+      [
+        396.270625,
+        "see"
+      ],
+      [
+        395.966875,
+        "look at"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00396.00s.jpg"
+    ],
+    "frame_timestamps": [
+      396.0
+    ],
+    "word_count": 48
+  },
+  {
+    "id": "unit_017",
+    "start_time": 409.58000000000004,
+    "end_time": 445.24,
+    "duration": 35.65999999999997,
+    "text": "Okay, so here is the annotations for the five minute chart as I mentioned on the daily chart for the 28th of May, which is Thursday of 2020. The previous highs here as I mentioned 34.21 price level. This line here is that old daily high or daily retail resistance coming in at 35.18. Our time of day is 8.30 a.m. to 11 a.m. And we can see a price run here. It clears a high and we trade back down into it.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        411.4342168674699,
+        "this"
+      ],
+      [
+        409.6775903614458,
+        "here"
+      ],
+      [
+        412.8492771084338,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00411.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00414.00s.jpg"
+    ],
+    "frame_timestamps": [
+      411.0,
+      414.0
+    ],
+    "word_count": 83
+  },
+  {
+    "id": "unit_018",
+    "start_time": 445.38,
+    "end_time": 452.78,
+    "duration": 7.399999999999977,
+    "text": "Now this candle right there is the candle you'd be filled on. It's inside of our time window. It fits the criteria.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        445.43227272727273,
+        "this"
+      ],
+      [
+        445.6413636363636,
+        "here"
+      ],
+      [
+        445.43227272727273,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00444.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00447.00s.jpg"
+    ],
+    "frame_timestamps": [
+      444.0,
+      447.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_019",
+    "start_time": 453.44,
+    "end_time": 465.16,
+    "duration": 11.720000000000027,
+    "text": "So it's at this low up to this price high down. So it's trading back down in our hypothetical entry would be 32.75. It suffers an eight point drawdown or tick.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        453.5938709677419,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00453.00s.jpg"
+    ],
+    "frame_timestamps": [
+      453.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_020",
+    "start_time": 465.48,
+    "end_time": 485.02,
+    "duration": 19.539999999999964,
+    "text": "So one point or tick in the crude oil market equals $10 per contract. Now they do offer a mini contract, but I'm going to show this example in light of a regular standard contract for crude oil. You're using 0.26 or 26 ticks or point stop.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        466.80212765957447,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00465.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00468.00s.jpg"
+    ],
+    "frame_timestamps": [
+      465.0,
+      468.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_021",
+    "start_time": 485.76,
+    "end_time": 508.62,
+    "duration": 22.860000000000014,
+    "text": "So that would be a $260 loss if you got stopped out. And trading back just to the old high offered more than 35 points or $350. One half of standard deviation is 75 points or ticks or in monetary terms it would be a hypothetical $750. Then over a thousand so $1090 at one standard deviation.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00486.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_022",
+    "start_time": 509.14,
+    "end_time": 527.74,
+    "duration": 18.600000000000023,
+    "text": "Now that's even before you get to the previous day's high. One and a half standard deviations takes us to 34.18 and that doesn't quite get us above the daily high from the previous day. The next one is your two standard deviations at over 175 points.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00510.00s.jpg"
+    ],
+    "frame_timestamps": [
+      510.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_023",
+    "start_time": 527.86,
+    "end_time": 544.38,
+    "duration": 16.519999999999982,
+    "text": "So that's $1,750 per contract. This is the model for taking your intraday trade. But because the logic as I outlined on the daily chart supposes that we could see a run and it didn't have to happen on Friday.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        528.12,
+        "this"
+      ],
+      [
+        529.368,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00528.00s.jpg"
+    ],
+    "frame_timestamps": [
+      528.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_024",
+    "start_time": 544.82,
+    "end_time": 556.34,
+    "duration": 11.519999999999982,
+    "text": "Okay or the 29th of May. It could have happened into the following week. But if you leave a leader in now again what's a leader. A leader is where you keep a small piece of the original trade on.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        546.2825,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00546.00s.jpg"
+    ],
+    "frame_timestamps": [
+      546.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_025",
+    "start_time": 556.62,
+    "end_time": 598.56,
+    "duration": 41.93999999999994,
+    "text": "Now the rules for this model is you collapse. At two standard deviations but if you have a criteria in price action that lends well to a likely outcome of reaching for a higher target then at this point here you absolutely have to have 80% off and then leave 20% on and you have to scale that for your own account or as close as you possibly can the majority of your trade should be closed here. And then if you capture any kind of continuation to run that daily level this is what you can participate in so it offers as much as 290 points or $2,900 per contract.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        556.8228828828829,
+        "this"
+      ],
+      [
+        558.5981081081081,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00558.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00579.00s.jpg"
+    ],
+    "frame_timestamps": [
+      558.0,
+      579.0
+    ],
+    "word_count": 111
+  },
+  {
+    "id": "unit_026",
+    "start_time": 614.66,
+    "end_time": 629.24,
+    "duration": 14.580000000000041,
+    "text": "So if you can see these patterns forming and you can determine the likely direction think about the power that that's given you. It tells you exactly when to train your attention in the marketplace relative to time.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        614.8863157894737,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00615.00s.jpg"
+    ],
+    "frame_timestamps": [
+      615.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_027",
+    "start_time": 629.62,
+    "end_time": 659.0,
+    "duration": 29.379999999999995,
+    "text": "So you can treat it like a business. You have operating hours between 8 30 a.m. and 11 a.m. You're looking for a particular pattern to get in sync or move in a opposing direction to where you think the market's going to go. Remember we're looking for the previous days high and maybe even a longer term high to be taken out. This rally up we don't want to chase that we want to see it drop when it drops down",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        632.7546341463415,
+        "this"
+      ],
+      [
+        631.4609756097561,
+        "here"
+      ],
+      [
+        630.6151219512195,
+        "look"
+      ],
+      [
+        633.3517073170732,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00630.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00633.00s.jpg"
+    ],
+    "frame_timestamps": [
+      630.0,
+      633.0
+    ],
+    "word_count": 82
+  },
+  {
+    "id": "unit_028",
+    "start_time": 659.0,
+    "end_time": 689.82,
+    "duration": 30.82000000000005,
+    "text": "in optimal trade entry 62% tradesmen levels are entry between 8 30 and 11 this is our entry and then again with only $80 drawdown that's the most that the trade would have hypothetically taken so 80 bucks of suffering using the 62% of tradesmen levels are entry and then riding it all the way up to 290 points and ultimately we still have",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        659.739375,
+        "this"
+      ]
+    ],
+    "confidence": 0.78125,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00660.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00675.00s.jpg"
+    ],
+    "frame_timestamps": [
+      660.0,
+      675.0
+    ],
+    "word_count": 64
+  },
+  {
+    "id": "unit_029",
+    "start_time": 693.94,
+    "end_time": 701.98,
+    "duration": 8.039999999999964,
+    "text": "that gap to likely trade up into now it doesn't mean it's going to go there on Monday doesn't mean it's going to go there Tuesday it just means over a period of time",
+    "detected_concepts": [],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        694.7164705882353,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00693.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00696.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00702.00s.jpg"
+    ],
+    "frame_timestamps": [
+      693.0,
+      696.0,
+      702.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_030",
+    "start_time": 702.9000000000001,
+    "end_time": 754.74,
+    "duration": 51.83999999999992,
+    "text": "this is an upside draw on liquidity so it's going to act like a magnet and pool price up there which is going to lend well for daily bias so again study this example and you can see there's lots of things that you can mine from this particular episode but it's just one more evidence to this model I created in model very simple very easy to understand in terms of time you only have to determine if you're going to be looking for the previous days higher previous days low to be traded to and then you wait for this pattern it's very simple you have logical levels to take profits at and partials and now they included a little bit longer term bias idea to help frame a likely scenario that we get a continuation or explosive price action move like we see here so if we found this insightful until next time wish you good luck and good trading",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        702.9000000000001,
+        "this"
+      ],
+      [
+        703.935582822086,
+        "here"
+      ],
+      [
+        707.1976687116565,
+        "look"
+      ],
+      [
+        704.815828220859,
+        "see"
+      ]
+    ],
+    "confidence": 0.3067484662576687,
+    "selected_frames": [
+      "data/video_frames/ZbkEvNpm-_k/frame_00702.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00705.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00708.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00714.00s.jpg",
+      "data/video_frames/ZbkEvNpm-_k/frame_00753.00s.jpg"
+    ],
+    "frame_timestamps": [
+      702.0,
+      705.0,
+      708.0,
+      714.0,
+      753.0
+    ],
+    "word_count": 163
+  }
+]

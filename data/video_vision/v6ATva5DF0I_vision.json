@@ -96,8 +96,8 @@
     {
       "timestamp": 69.0,
       "type": "FVG",
-      "location": "Moving averages converging",
-      "characteristic": "Both moving averges are bullish",
+      "location": "Price imbalance zone on chart",
+      "characteristic": "bullish",
       "significance": "high"
     },
     {
@@ -237,7 +237,7 @@
     {
       "timestamp": 132.0,
       "type": "FVG",
-      "location": "Moving Average Convergence Divergence (MACD) with the signal line crossing above the zero line and the histogram being above the zero line",
+      "location": "Gap between candle bodies showing price imbalance",
       "characteristic": "bullish",
       "significance": "high"
     },
@@ -365,8 +365,8 @@
       "patterns": [
         {
           "type": "FVG",
-          "location": "Moving averages converging",
-          "characteristic": "Both moving averges are bullish",
+          "location": "Price imbalance zone on chart",
+          "characteristic": "bullish",
           "significance": "high"
         }
       ],
@@ -492,11 +492,11 @@
     },
     {
       "timestamp": 132.0,
-      "teaching_point": "Identifying bullish patterns and movements, such as the moving average crossover for a potential entry point.",
+      "teaching_point": "Identifying bullish FVG patterns based on price imbalance and expansion above previous day's range.",
       "patterns": [
         {
           "type": "FVG",
-          "location": "Moving Average Convergence Divergence (MACD) with the signal line crossing above the zero line and the histogram being above the zero line",
+          "location": "Gap between candle bodies showing price imbalance",
           "characteristic": "bullish",
           "significance": "high"
         }

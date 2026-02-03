@@ -1,10 +1,3772 @@
 {
   "video_id": "t6y637OyiDY",
-  "title": "OTE Pattern Recognition Series - Vol. 05",
-  "full_text": "okay folks welcome back this is volume 5 in the series of 20 videos from the ICT optimal trade entry pattern recognition series all right so we're looking at the e-mini S&P the June contract for 2020 and I've already given you an example with the ESPE recently in this series it was revolving around the previous week's Friday's high and we put that on here now so we projected that out that was an opportunity here and then later on came back and gave an opportunity to trade into that level again I said it once it got up into that level I'd be done with that idea that trade idea and it has moved over a hundred and thirty handles for the SP which is pretty significant but the framework is obviously it's bearish leading up into the setup or outlining here for our example for May 13 2020 so the previous day's low is here the 12th of May 2020 that's what we would be targeting we're gonna drop down into the 5-minute chart okay so here's the five-minute chart and we're gonna put our lipstick on this pig here here is the previous day or the 12th low below that would be suicide liquidity and we've already outlined the fact on that hourly chart the bearish market structure and seeking liquidity below the previous day's low here's our new york session so inside of this area here okay we're looking for a set up and here's the high we trade down to this low and start retracing inside the new york session trading up into the bearish order block which is that last up close candle right here trades into the butt end of that and your entry would be 2865 in theory stop would be above the high here trading down to the low of the optimal trade entry since we're dealing with the SMP we're not talking about pips so we're dealing specifically with the range so the range low that would offer over 30 handles on the SP and then a second partial at plus 50 handles at half of the projected standard deviation in other words the range is here okay so we have this high to this low half of that range is this level that's what this is all about and in one full standard deviation of this range or a projection down would send us into that twenty seven eighty eight and three quarters for plus seventy five handles for your third partial and look at a beautiful response of that now this is all again based on the liquidity below the previous day's low it's not the magic of the fib the fib has absolutely nothing to do with the reasons why prices going down there the reason why it's going down there is there's a liquidity resting below this low the markets gonna seek that liquidity not always in a single run down into it and I take several passes to get down to it as it does here and then we had a nice little retracement there and we'll probably look forward to grab tape back to the 12th or the low of the twelfth rather so that's going to be it for this example I hope you found it insightful until next time I wish you good luck and good trading",
-  "segments": [],
-  "word_count": 566,
-  "segment_count": 0,
-  "method": "manual_paste",
-  "transcribed_at": "2026-01-28T09:57:35.869565"
+  "language": "en",
+  "duration": 202.222625,
+  "transcribed_at": "2026-01-31T18:53:04.110695",
+  "model": "small",
+  "segments": [
+    {
+      "start_time": 10.58,
+      "end_time": 11.86,
+      "text": "Okay folks, welcome back.",
+      "words": [
+        {
+          "word": " Okay",
+          "start": 10.58,
+          "end": 11.24,
+          "probability": 0.4259921610355377
+        },
+        {
+          "word": " folks,",
+          "start": 11.24,
+          "end": 11.44,
+          "probability": 0.6025974750518799
+        },
+        {
+          "word": " welcome",
+          "start": 11.54,
+          "end": 11.66,
+          "probability": 0.9857153296470642
+        },
+        {
+          "word": " back.",
+          "start": 11.66,
+          "end": 11.86,
+          "probability": 0.9967527985572815
+        }
+      ]
+    },
+    {
+      "start_time": 12.02,
+      "end_time": 19.22,
+      "text": "This is Volume 5 in the series of 20 videos from the ICT Optimal Trade Entry Patent Recognition",
+      "words": [
+        {
+          "word": " This",
+          "start": 12.02,
+          "end": 12.06,
+          "probability": 0.9748396277427673
+        },
+        {
+          "word": " is",
+          "start": 12.06,
+          "end": 12.28,
+          "probability": 0.9731329083442688
+        },
+        {
+          "word": " Volume",
+          "start": 12.28,
+          "end": 13.04,
+          "probability": 0.13937921822071075
+        },
+        {
+          "word": " 5",
+          "start": 13.04,
+          "end": 13.58,
+          "probability": 0.7798569798469543
+        },
+        {
+          "word": " in",
+          "start": 13.58,
+          "end": 14.32,
+          "probability": 0.961188554763794
+        },
+        {
+          "word": " the",
+          "start": 14.32,
+          "end": 14.46,
+          "probability": 0.7843209505081177
+        },
+        {
+          "word": " series",
+          "start": 14.46,
+          "end": 14.66,
+          "probability": 0.9507144689559937
+        },
+        {
+          "word": " of",
+          "start": 14.66,
+          "end": 15.1,
+          "probability": 0.999125063419342
+        },
+        {
+          "word": " 20",
+          "start": 15.1,
+          "end": 15.96,
+          "probability": 0.9684895277023315
+        },
+        {
+          "word": " videos",
+          "start": 15.96,
+          "end": 16.44,
+          "probability": 0.9815852642059326
+        },
+        {
+          "word": " from",
+          "start": 16.44,
+          "end": 17.06,
+          "probability": 0.9677932262420654
+        },
+        {
+          "word": " the",
+          "start": 17.06,
+          "end": 17.16,
+          "probability": 0.9931619167327881
+        },
+        {
+          "word": " ICT",
+          "start": 17.16,
+          "end": 17.42,
+          "probability": 0.9776647090911865
+        },
+        {
+          "word": " Optimal",
+          "start": 17.42,
+          "end": 17.94,
+          "probability": 0.8979147374629974
+        },
+        {
+          "word": " Trade",
+          "start": 17.94,
+          "end": 18.14,
+          "probability": 0.6418155431747437
+        },
+        {
+          "word": " Entry",
+          "start": 18.14,
+          "end": 18.42,
+          "probability": 0.918524980545044
+        },
+        {
+          "word": " Patent",
+          "start": 18.42,
+          "end": 18.8,
+          "probability": 0.5361033752560616
+        },
+        {
+          "word": " Recognition",
+          "start": 18.8,
+          "end": 19.22,
+          "probability": 0.9741005897521973
+        }
+      ]
+    },
+    {
+      "start_time": 19.22,
+      "end_time": 19.58,
+      "text": "Series.",
+      "words": [
+        {
+          "word": " Series.",
+          "start": 19.22,
+          "end": 19.58,
+          "probability": 0.6595748662948608
+        }
+      ]
+    },
+    {
+      "start_time": 20.44,
+      "end_time": 27.88,
+      "text": "All right, so we're looking at the E-Mini S&P, the June contract for 2020, and I've",
+      "words": [
+        {
+          "word": " All",
+          "start": 20.44,
+          "end": 21.02,
+          "probability": 0.48772144317626953
+        },
+        {
+          "word": " right,",
+          "start": 21.02,
+          "end": 21.1,
+          "probability": 0.9974367022514343
+        },
+        {
+          "word": " so",
+          "start": 21.12,
+          "end": 21.2,
+          "probability": 0.9934234619140625
+        },
+        {
+          "word": " we're",
+          "start": 21.2,
+          "end": 21.28,
+          "probability": 0.9875836372375488
+        },
+        {
+          "word": " looking",
+          "start": 21.28,
+          "end": 21.42,
+          "probability": 0.9990485310554504
+        },
+        {
+          "word": " at",
+          "start": 21.42,
+          "end": 21.6,
+          "probability": 0.9906622767448425
+        },
+        {
+          "word": " the",
+          "start": 21.6,
+          "end": 21.84,
+          "probability": 0.9909115433692932
+        },
+        {
+          "word": " E",
+          "start": 21.84,
+          "end": 22.14,
+          "probability": 0.5378106236457825
+        },
+        {
+          "word": "-Mini",
+          "start": 22.14,
+          "end": 22.34,
+          "probability": 0.6896469593048096
+        },
+        {
+          "word": " S",
+          "start": 22.34,
+          "end": 22.6,
+          "probability": 0.9047748446464539
+        },
+        {
+          "word": "&P,",
+          "start": 22.6,
+          "end": 23.02,
+          "probability": 0.6530388295650482
+        },
+        {
+          "word": " the",
+          "start": 23.4,
+          "end": 23.76,
+          "probability": 0.9759533405303955
+        },
+        {
+          "word": " June",
+          "start": 23.76,
+          "end": 24.14,
+          "probability": 0.9746609926223755
+        },
+        {
+          "word": " contract",
+          "start": 24.14,
+          "end": 24.6,
+          "probability": 0.9419211745262146
+        },
+        {
+          "word": " for",
+          "start": 24.6,
+          "end": 25.0,
+          "probability": 0.956720769405365
+        },
+        {
+          "word": " 2020,",
+          "start": 25.0,
+          "end": 26.0,
+          "probability": 0.992007851600647
+        },
+        {
+          "word": " and",
+          "start": 26.0,
+          "end": 27.42,
+          "probability": 0.9962100982666016
+        },
+        {
+          "word": " I've",
+          "start": 27.42,
+          "end": 27.88,
+          "probability": 0.9955455362796783
+        }
+      ]
+    },
+    {
+      "start_time": 27.88,
+      "end_time": 32.56,
+      "text": "already given you an example with the S&P recently in this series.",
+      "words": [
+        {
+          "word": " already",
+          "start": 27.88,
+          "end": 28.02,
+          "probability": 0.006736807059496641
+        },
+        {
+          "word": " given",
+          "start": 28.02,
+          "end": 28.18,
+          "probability": 0.5034728646278381
+        },
+        {
+          "word": " you",
+          "start": 28.18,
+          "end": 28.36,
+          "probability": 0.9875426292419434
+        },
+        {
+          "word": " an",
+          "start": 28.36,
+          "end": 28.48,
+          "probability": 0.9890077114105225
+        },
+        {
+          "word": " example",
+          "start": 28.48,
+          "end": 28.92,
+          "probability": 0.9859133362770081
+        },
+        {
+          "word": " with",
+          "start": 28.92,
+          "end": 29.26,
+          "probability": 0.896634042263031
+        },
+        {
+          "word": " the",
+          "start": 29.26,
+          "end": 29.56,
+          "probability": 0.9845619797706604
+        },
+        {
+          "word": " S",
+          "start": 29.56,
+          "end": 30.36,
+          "probability": 0.9394558668136597
+        },
+        {
+          "word": "&P",
+          "start": 30.36,
+          "end": 30.64,
+          "probability": 0.8435752987861633
+        },
+        {
+          "word": " recently",
+          "start": 30.64,
+          "end": 31.82,
+          "probability": 0.8101465106010437
+        },
+        {
+          "word": " in",
+          "start": 31.82,
+          "end": 32.1,
+          "probability": 0.9668058753013611
+        },
+        {
+          "word": " this",
+          "start": 32.1,
+          "end": 32.24,
+          "probability": 0.964387834072113
+        },
+        {
+          "word": " series.",
+          "start": 32.24,
+          "end": 32.56,
+          "probability": 0.9950821399688721
+        }
+      ]
+    },
+    {
+      "start_time": 33.22,
+      "end_time": 39.62,
+      "text": "It was revolving around the previous week's Fridays High, and let me put that on here now.",
+      "words": [
+        {
+          "word": " It",
+          "start": 33.22,
+          "end": 33.5,
+          "probability": 0.8146375417709351
+        },
+        {
+          "word": " was",
+          "start": 33.5,
+          "end": 33.7,
+          "probability": 0.9967796206474304
+        },
+        {
+          "word": " revolving",
+          "start": 33.7,
+          "end": 34.58,
+          "probability": 0.9974182844161987
+        },
+        {
+          "word": " around",
+          "start": 34.58,
+          "end": 34.9,
+          "probability": 0.9989835619926453
+        },
+        {
+          "word": " the",
+          "start": 34.9,
+          "end": 35.06,
+          "probability": 0.9976792931556702
+        },
+        {
+          "word": " previous",
+          "start": 35.06,
+          "end": 35.36,
+          "probability": 0.9971458315849304
+        },
+        {
+          "word": " week's",
+          "start": 35.36,
+          "end": 36.92,
+          "probability": 0.7711379826068878
+        },
+        {
+          "word": " Fridays",
+          "start": 36.92,
+          "end": 37.14,
+          "probability": 0.7757154107093811
+        },
+        {
+          "word": " High,",
+          "start": 37.14,
+          "end": 37.6,
+          "probability": 0.4020179212093353
+        },
+        {
+          "word": " and",
+          "start": 38.24,
+          "end": 38.68,
+          "probability": 0.9688004851341248
+        },
+        {
+          "word": " let",
+          "start": 38.68,
+          "end": 38.82,
+          "probability": 0.6176174879074097
+        },
+        {
+          "word": " me",
+          "start": 38.82,
+          "end": 38.84,
+          "probability": 0.9932126998901367
+        },
+        {
+          "word": " put",
+          "start": 38.84,
+          "end": 38.98,
+          "probability": 0.997742772102356
+        },
+        {
+          "word": " that",
+          "start": 38.98,
+          "end": 39.12,
+          "probability": 0.9968780279159546
+        },
+        {
+          "word": " on",
+          "start": 39.12,
+          "end": 39.26,
+          "probability": 0.9868143796920776
+        },
+        {
+          "word": " here",
+          "start": 39.26,
+          "end": 39.4,
+          "probability": 0.9970260262489319
+        },
+        {
+          "word": " now.",
+          "start": 39.4,
+          "end": 39.62,
+          "probability": 0.94972163438797
+        }
+      ]
+    },
+    {
+      "start_time": 40.56,
+      "end_time": 41.78,
+      "text": "So we projected that out.",
+      "words": [
+        {
+          "word": " So",
+          "start": 40.56,
+          "end": 40.96,
+          "probability": 0.9332069158554077
+        },
+        {
+          "word": " we",
+          "start": 40.96,
+          "end": 41.08,
+          "probability": 0.9159752130508423
+        },
+        {
+          "word": " projected",
+          "start": 41.08,
+          "end": 41.32,
+          "probability": 0.8974716067314148
+        },
+        {
+          "word": " that",
+          "start": 41.32,
+          "end": 41.56,
+          "probability": 0.9609785079956055
+        },
+        {
+          "word": " out.",
+          "start": 41.56,
+          "end": 41.78,
+          "probability": 0.9954622387886047
+        }
+      ]
+    },
+    {
+      "start_time": 42.1,
+      "end_time": 46.82,
+      "text": "That was an opportunity here, and then later on came back and gave an opportunity to trade",
+      "words": [
+        {
+          "word": " That",
+          "start": 42.1,
+          "end": 42.18,
+          "probability": 0.9925600290298462
+        },
+        {
+          "word": " was",
+          "start": 42.18,
+          "end": 42.36,
+          "probability": 0.9975457787513733
+        },
+        {
+          "word": " an",
+          "start": 42.36,
+          "end": 42.46,
+          "probability": 0.9962583780288696
+        },
+        {
+          "word": " opportunity",
+          "start": 42.46,
+          "end": 42.84,
+          "probability": 0.9985226988792419
+        },
+        {
+          "word": " here,",
+          "start": 42.84,
+          "end": 43.24,
+          "probability": 0.9931930899620056
+        },
+        {
+          "word": " and",
+          "start": 43.5,
+          "end": 43.52,
+          "probability": 0.9812931418418884
+        },
+        {
+          "word": " then",
+          "start": 43.52,
+          "end": 43.64,
+          "probability": 0.7311851382255554
+        },
+        {
+          "word": " later",
+          "start": 43.64,
+          "end": 44.18,
+          "probability": 0.7738391160964966
+        },
+        {
+          "word": " on",
+          "start": 44.18,
+          "end": 44.58,
+          "probability": 0.9809916615486145
+        },
+        {
+          "word": " came",
+          "start": 44.58,
+          "end": 44.74,
+          "probability": 0.7160100340843201
+        },
+        {
+          "word": " back",
+          "start": 44.74,
+          "end": 45.08,
+          "probability": 0.9991711378097534
+        },
+        {
+          "word": " and",
+          "start": 45.08,
+          "end": 45.92,
+          "probability": 0.8746820092201233
+        },
+        {
+          "word": " gave",
+          "start": 45.92,
+          "end": 46.06,
+          "probability": 0.9251745939254761
+        },
+        {
+          "word": " an",
+          "start": 46.06,
+          "end": 46.16,
+          "probability": 0.9664093255996704
+        },
+        {
+          "word": " opportunity",
+          "start": 46.16,
+          "end": 46.44,
+          "probability": 0.9990897178649902
+        },
+        {
+          "word": " to",
+          "start": 46.44,
+          "end": 46.7,
+          "probability": 0.9682797193527222
+        },
+        {
+          "word": " trade",
+          "start": 46.7,
+          "end": 46.82,
+          "probability": 0.9963384866714478
+        }
+      ]
+    },
+    {
+      "start_time": 46.82,
+      "end_time": 47.42,
+      "text": "into that level.",
+      "words": [
+        {
+          "word": " into",
+          "start": 46.82,
+          "end": 47.06,
+          "probability": 0.9801581501960754
+        },
+        {
+          "word": " that",
+          "start": 47.06,
+          "end": 47.22,
+          "probability": 0.9990311861038208
+        },
+        {
+          "word": " level.",
+          "start": 47.22,
+          "end": 47.42,
+          "probability": 0.996595561504364
+        }
+      ]
+    },
+    {
+      "start_time": 47.56,
+      "end_time": 50.3,
+      "text": "Again, I said that once it got up into that level, I'd be done with that idea,",
+      "words": [
+        {
+          "word": " Again,",
+          "start": 47.56,
+          "end": 47.64,
+          "probability": 0.9812007546424866
+        },
+        {
+          "word": " I",
+          "start": 47.68,
+          "end": 47.76,
+          "probability": 0.9793064594268799
+        },
+        {
+          "word": " said",
+          "start": 47.76,
+          "end": 47.86,
+          "probability": 0.993611752986908
+        },
+        {
+          "word": " that",
+          "start": 47.86,
+          "end": 47.94,
+          "probability": 0.47003549337387085
+        },
+        {
+          "word": " once",
+          "start": 47.94,
+          "end": 48.08,
+          "probability": 0.9775886535644531
+        },
+        {
+          "word": " it",
+          "start": 48.08,
+          "end": 48.24,
+          "probability": 0.9972457885742188
+        },
+        {
+          "word": " got",
+          "start": 48.24,
+          "end": 48.4,
+          "probability": 0.9964806437492371
+        },
+        {
+          "word": " up",
+          "start": 48.4,
+          "end": 48.68,
+          "probability": 0.9952335953712463
+        },
+        {
+          "word": " into",
+          "start": 48.68,
+          "end": 48.8,
+          "probability": 0.9268266558647156
+        },
+        {
+          "word": " that",
+          "start": 48.8,
+          "end": 48.96,
+          "probability": 0.997048556804657
+        },
+        {
+          "word": " level,",
+          "start": 48.96,
+          "end": 49.18,
+          "probability": 0.9971404075622559
+        },
+        {
+          "word": " I'd",
+          "start": 49.22,
+          "end": 49.38,
+          "probability": 0.9092041254043579
+        },
+        {
+          "word": " be",
+          "start": 49.38,
+          "end": 49.5,
+          "probability": 0.9983452558517456
+        },
+        {
+          "word": " done",
+          "start": 49.5,
+          "end": 49.74,
+          "probability": 0.9987265467643738
+        },
+        {
+          "word": " with",
+          "start": 49.74,
+          "end": 49.9,
+          "probability": 0.9963219165802002
+        },
+        {
+          "word": " that",
+          "start": 49.9,
+          "end": 50.04,
+          "probability": 0.9968296885490417
+        },
+        {
+          "word": " idea,",
+          "start": 50.04,
+          "end": 50.3,
+          "probability": 0.960191011428833
+        }
+      ]
+    },
+    {
+      "start_time": 50.4,
+      "end_time": 50.98,
+      "text": "that trade idea.",
+      "words": [
+        {
+          "word": " that",
+          "start": 50.4,
+          "end": 50.46,
+          "probability": 0.9934871196746826
+        },
+        {
+          "word": " trade",
+          "start": 50.46,
+          "end": 50.68,
+          "probability": 0.9923315048217773
+        },
+        {
+          "word": " idea.",
+          "start": 50.68,
+          "end": 50.98,
+          "probability": 0.9984667897224426
+        }
+      ]
+    },
+    {
+      "start_time": 50.98,
+      "end_time": 57.62,
+      "text": "And it has moved over 130 handles for the S&P, which is pretty significant.",
+      "words": [
+        {
+          "word": " And",
+          "start": 50.98,
+          "end": 51.64,
+          "probability": 0.11994199454784393
+        },
+        {
+          "word": " it",
+          "start": 51.64,
+          "end": 51.72,
+          "probability": 0.8281813263893127
+        },
+        {
+          "word": " has",
+          "start": 51.72,
+          "end": 51.9,
+          "probability": 0.9692157506942749
+        },
+        {
+          "word": " moved",
+          "start": 51.9,
+          "end": 52.48,
+          "probability": 0.9940326809883118
+        },
+        {
+          "word": " over",
+          "start": 52.48,
+          "end": 53.28,
+          "probability": 0.9847053289413452
+        },
+        {
+          "word": " 130",
+          "start": 53.28,
+          "end": 54.32,
+          "probability": 0.8759798407554626
+        },
+        {
+          "word": " handles",
+          "start": 54.32,
+          "end": 55.14,
+          "probability": 0.9603798985481262
+        },
+        {
+          "word": " for",
+          "start": 55.14,
+          "end": 55.66,
+          "probability": 0.9841743111610413
+        },
+        {
+          "word": " the",
+          "start": 55.66,
+          "end": 55.76,
+          "probability": 0.9921388030052185
+        },
+        {
+          "word": " S",
+          "start": 55.76,
+          "end": 55.86,
+          "probability": 0.9388983249664307
+        },
+        {
+          "word": "&P,",
+          "start": 55.86,
+          "end": 56.04,
+          "probability": 0.7973245978355408
+        },
+        {
+          "word": " which",
+          "start": 56.1,
+          "end": 56.24,
+          "probability": 0.9968936443328857
+        },
+        {
+          "word": " is",
+          "start": 56.24,
+          "end": 56.5,
+          "probability": 0.9982661604881287
+        },
+        {
+          "word": " pretty",
+          "start": 56.5,
+          "end": 57.16,
+          "probability": 0.9820970892906189
+        },
+        {
+          "word": " significant.",
+          "start": 57.16,
+          "end": 57.62,
+          "probability": 0.9986948370933533
+        }
+      ]
+    },
+    {
+      "start_time": 57.92,
+      "end_time": 63.2,
+      "text": "But the framework is, obviously, it's bearish leading up into the setup we're outlining",
+      "words": [
+        {
+          "word": " But",
+          "start": 57.92,
+          "end": 57.98,
+          "probability": 0.9297475218772888
+        },
+        {
+          "word": " the",
+          "start": 57.98,
+          "end": 58.8,
+          "probability": 0.9495406746864319
+        },
+        {
+          "word": " framework",
+          "start": 58.8,
+          "end": 59.1,
+          "probability": 0.9753419756889343
+        },
+        {
+          "word": " is,",
+          "start": 59.1,
+          "end": 59.36,
+          "probability": 0.9545914530754089
+        },
+        {
+          "word": " obviously,",
+          "start": 59.44,
+          "end": 59.68,
+          "probability": 0.9907076358795166
+        },
+        {
+          "word": " it's",
+          "start": 60.0,
+          "end": 60.18,
+          "probability": 0.9782528877258301
+        },
+        {
+          "word": " bearish",
+          "start": 60.18,
+          "end": 61.38,
+          "probability": 0.9632041156291962
+        },
+        {
+          "word": " leading",
+          "start": 61.38,
+          "end": 61.56,
+          "probability": 0.8246935606002808
+        },
+        {
+          "word": " up",
+          "start": 61.56,
+          "end": 61.78,
+          "probability": 0.9995323419570923
+        },
+        {
+          "word": " into",
+          "start": 61.78,
+          "end": 61.94,
+          "probability": 0.9938161373138428
+        },
+        {
+          "word": " the",
+          "start": 61.94,
+          "end": 62.1,
+          "probability": 0.7695125341415405
+        },
+        {
+          "word": " setup",
+          "start": 62.1,
+          "end": 62.3,
+          "probability": 0.7857534289360046
+        },
+        {
+          "word": " we're",
+          "start": 62.3,
+          "end": 62.56,
+          "probability": 0.7227097004652023
+        },
+        {
+          "word": " outlining",
+          "start": 62.56,
+          "end": 63.2,
+          "probability": 0.9832390546798706
+        }
+      ]
+    },
+    {
+      "start_time": 63.2,
+      "end_time": 67.12,
+      "text": "here for our example for May 13, 2020.",
+      "words": [
+        {
+          "word": " here",
+          "start": 63.2,
+          "end": 63.66,
+          "probability": 0.9847401976585388
+        },
+        {
+          "word": " for",
+          "start": 63.66,
+          "end": 64.4,
+          "probability": 0.6297027468681335
+        },
+        {
+          "word": " our",
+          "start": 64.4,
+          "end": 64.56,
+          "probability": 0.9518351554870605
+        },
+        {
+          "word": " example",
+          "start": 64.56,
+          "end": 64.94,
+          "probability": 0.9970058798789978
+        },
+        {
+          "word": " for",
+          "start": 64.94,
+          "end": 65.38,
+          "probability": 0.8762458562850952
+        },
+        {
+          "word": " May",
+          "start": 65.38,
+          "end": 65.86,
+          "probability": 0.989544153213501
+        },
+        {
+          "word": " 13,",
+          "start": 65.86,
+          "end": 66.5,
+          "probability": 0.9753154516220093
+        },
+        {
+          "word": " 2020.",
+          "start": 66.74,
+          "end": 67.12,
+          "probability": 0.997921884059906
+        }
+      ]
+    },
+    {
+      "start_time": 68.08,
+      "end_time": 71.46,
+      "text": "So the previous day's low is here, the 12th of May, 2020.",
+      "words": [
+        {
+          "word": " So",
+          "start": 68.08,
+          "end": 68.3,
+          "probability": 0.9892652034759521
+        },
+        {
+          "word": " the",
+          "start": 68.3,
+          "end": 68.44,
+          "probability": 0.8898605108261108
+        },
+        {
+          "word": " previous",
+          "start": 68.44,
+          "end": 68.7,
+          "probability": 0.9960997104644775
+        },
+        {
+          "word": " day's",
+          "start": 68.7,
+          "end": 69.16,
+          "probability": 0.7531095743179321
+        },
+        {
+          "word": " low",
+          "start": 69.16,
+          "end": 69.34,
+          "probability": 0.9672068357467651
+        },
+        {
+          "word": " is",
+          "start": 69.34,
+          "end": 69.54,
+          "probability": 0.8766565322875977
+        },
+        {
+          "word": " here,",
+          "start": 69.54,
+          "end": 69.74,
+          "probability": 0.9892779588699341
+        },
+        {
+          "word": " the",
+          "start": 69.88,
+          "end": 69.92,
+          "probability": 0.9321195483207703
+        },
+        {
+          "word": " 12th",
+          "start": 69.92,
+          "end": 70.4,
+          "probability": 0.9453674554824829
+        },
+        {
+          "word": " of",
+          "start": 70.4,
+          "end": 70.54,
+          "probability": 0.9974551796913147
+        },
+        {
+          "word": " May,",
+          "start": 70.54,
+          "end": 70.82,
+          "probability": 0.9890283346176147
+        },
+        {
+          "word": " 2020.",
+          "start": 71.04,
+          "end": 71.46,
+          "probability": 0.9980674386024475
+        }
+      ]
+    },
+    {
+      "start_time": 71.98,
+      "end_time": 73.42,
+      "text": "That's what we would be targeting.",
+      "words": [
+        {
+          "word": " That's",
+          "start": 71.98,
+          "end": 72.3,
+          "probability": 0.996913492679596
+        },
+        {
+          "word": " what",
+          "start": 72.3,
+          "end": 72.48,
+          "probability": 0.9956552982330322
+        },
+        {
+          "word": " we",
+          "start": 72.48,
+          "end": 72.84,
+          "probability": 0.9967342615127563
+        },
+        {
+          "word": " would",
+          "start": 72.84,
+          "end": 72.96,
+          "probability": 0.8778508901596069
+        },
+        {
+          "word": " be",
+          "start": 72.96,
+          "end": 73.08,
+          "probability": 0.9993531107902527
+        },
+        {
+          "word": " targeting.",
+          "start": 73.08,
+          "end": 73.42,
+          "probability": 0.9983248114585876
+        }
+      ]
+    },
+    {
+      "start_time": 73.62,
+      "end_time": 76.84,
+      "text": "We're going to drop down into the five minute chart, in case here's the five minute chart.",
+      "words": [
+        {
+          "word": " We're",
+          "start": 73.62,
+          "end": 73.68,
+          "probability": 0.9474180936813354
+        },
+        {
+          "word": " going",
+          "start": 73.68,
+          "end": 73.78,
+          "probability": 0.5947014689445496
+        },
+        {
+          "word": " to",
+          "start": 73.78,
+          "end": 73.82,
+          "probability": 0.9943069815635681
+        },
+        {
+          "word": " drop",
+          "start": 73.82,
+          "end": 73.98,
+          "probability": 0.9931414723396301
+        },
+        {
+          "word": " down",
+          "start": 73.98,
+          "end": 74.2,
+          "probability": 0.9893346428871155
+        },
+        {
+          "word": " into",
+          "start": 74.2,
+          "end": 74.48,
+          "probability": 0.9411493539810181
+        },
+        {
+          "word": " the",
+          "start": 74.48,
+          "end": 74.72,
+          "probability": 0.9901997447013855
+        },
+        {
+          "word": " five",
+          "start": 74.72,
+          "end": 74.96,
+          "probability": 0.8238011598587036
+        },
+        {
+          "word": " minute",
+          "start": 74.96,
+          "end": 75.14,
+          "probability": 0.7270526885986328
+        },
+        {
+          "word": " chart,",
+          "start": 75.14,
+          "end": 75.44,
+          "probability": 0.9970760345458984
+        },
+        {
+          "word": " in",
+          "start": 75.62,
+          "end": 75.68,
+          "probability": 0.37049001455307007
+        },
+        {
+          "word": " case",
+          "start": 75.68,
+          "end": 75.78,
+          "probability": 0.9846745729446411
+        },
+        {
+          "word": " here's",
+          "start": 75.78,
+          "end": 76.08,
+          "probability": 0.8933136463165283
+        },
+        {
+          "word": " the",
+          "start": 76.08,
+          "end": 76.14,
+          "probability": 0.8515668511390686
+        },
+        {
+          "word": " five",
+          "start": 76.14,
+          "end": 76.32,
+          "probability": 0.9783798456192017
+        },
+        {
+          "word": " minute",
+          "start": 76.32,
+          "end": 76.48,
+          "probability": 0.9781962633132935
+        },
+        {
+          "word": " chart.",
+          "start": 76.48,
+          "end": 76.84,
+          "probability": 0.9979416728019714
+        }
+      ]
+    },
+    {
+      "start_time": 77.38,
+      "end_time": 81.56,
+      "text": "And we're going to put our lipstick on this pig here.",
+      "words": [
+        {
+          "word": " And",
+          "start": 77.38,
+          "end": 77.9,
+          "probability": 0.05861983820796013
+        },
+        {
+          "word": " we're",
+          "start": 77.9,
+          "end": 78.04,
+          "probability": 0.7921608984470367
+        },
+        {
+          "word": " going",
+          "start": 78.04,
+          "end": 78.14,
+          "probability": 0.794403612613678
+        },
+        {
+          "word": " to",
+          "start": 78.14,
+          "end": 78.18,
+          "probability": 0.9960505366325378
+        },
+        {
+          "word": " put",
+          "start": 78.18,
+          "end": 78.36,
+          "probability": 0.9712004661560059
+        },
+        {
+          "word": " our",
+          "start": 78.36,
+          "end": 78.6,
+          "probability": 0.9235113263130188
+        },
+        {
+          "word": " lipstick",
+          "start": 78.6,
+          "end": 78.9,
+          "probability": 0.9246484041213989
+        },
+        {
+          "word": " on",
+          "start": 78.9,
+          "end": 79.42,
+          "probability": 0.980500340461731
+        },
+        {
+          "word": " this",
+          "start": 79.42,
+          "end": 80.88,
+          "probability": 0.8638906478881836
+        },
+        {
+          "word": " pig",
+          "start": 80.88,
+          "end": 81.2,
+          "probability": 0.9269632697105408
+        },
+        {
+          "word": " here.",
+          "start": 81.2,
+          "end": 81.56,
+          "probability": 0.917768120765686
+        }
+      ]
+    },
+    {
+      "start_time": 82.2,
+      "end_time": 84.8,
+      "text": "Here is the previous day, or the 12th low.",
+      "words": [
+        {
+          "word": " Here",
+          "start": 82.2,
+          "end": 82.72,
+          "probability": 0.9607241153717041
+        },
+        {
+          "word": " is",
+          "start": 82.72,
+          "end": 82.9,
+          "probability": 0.9627455472946167
+        },
+        {
+          "word": " the",
+          "start": 82.9,
+          "end": 83.02,
+          "probability": 0.9268628358840942
+        },
+        {
+          "word": " previous",
+          "start": 83.02,
+          "end": 83.22,
+          "probability": 0.9970568418502808
+        },
+        {
+          "word": " day,",
+          "start": 83.22,
+          "end": 83.56,
+          "probability": 0.24529783427715302
+        },
+        {
+          "word": " or",
+          "start": 83.64,
+          "end": 83.68,
+          "probability": 0.9591498970985413
+        },
+        {
+          "word": " the",
+          "start": 83.68,
+          "end": 83.78,
+          "probability": 0.9924511313438416
+        },
+        {
+          "word": " 12th",
+          "start": 83.78,
+          "end": 84.26,
+          "probability": 0.8657164871692657
+        },
+        {
+          "word": " low.",
+          "start": 84.26,
+          "end": 84.8,
+          "probability": 0.7631794810295105
+        }
+      ]
+    },
+    {
+      "start_time": 84.96,
+      "end_time": 90.04,
+      "text": "Below that would be sell side liquidity, and we've already outlined the fact on that hourly",
+      "words": [
+        {
+          "word": " Below",
+          "start": 84.96,
+          "end": 85.1,
+          "probability": 0.9891741275787354
+        },
+        {
+          "word": " that",
+          "start": 85.1,
+          "end": 85.34,
+          "probability": 0.972873330116272
+        },
+        {
+          "word": " would",
+          "start": 85.34,
+          "end": 85.44,
+          "probability": 0.9648227691650391
+        },
+        {
+          "word": " be",
+          "start": 85.44,
+          "end": 85.6,
+          "probability": 0.997499406337738
+        },
+        {
+          "word": " sell",
+          "start": 85.6,
+          "end": 85.8,
+          "probability": 0.5160010457038879
+        },
+        {
+          "word": " side",
+          "start": 85.8,
+          "end": 86.02,
+          "probability": 0.5778671503067017
+        },
+        {
+          "word": " liquidity,",
+          "start": 86.02,
+          "end": 86.32,
+          "probability": 0.9853427410125732
+        },
+        {
+          "word": " and",
+          "start": 87.1,
+          "end": 87.54,
+          "probability": 0.9867936968803406
+        },
+        {
+          "word": " we've",
+          "start": 87.54,
+          "end": 88.02,
+          "probability": 0.9900526702404022
+        },
+        {
+          "word": " already",
+          "start": 88.02,
+          "end": 88.22,
+          "probability": 0.992720365524292
+        },
+        {
+          "word": " outlined",
+          "start": 88.22,
+          "end": 88.5,
+          "probability": 0.9845006465911865
+        },
+        {
+          "word": " the",
+          "start": 88.5,
+          "end": 88.76,
+          "probability": 0.8922010660171509
+        },
+        {
+          "word": " fact",
+          "start": 88.76,
+          "end": 88.94,
+          "probability": 0.9833283424377441
+        },
+        {
+          "word": " on",
+          "start": 88.94,
+          "end": 89.34,
+          "probability": 0.9423921704292297
+        },
+        {
+          "word": " that",
+          "start": 89.34,
+          "end": 89.58,
+          "probability": 0.9704369902610779
+        },
+        {
+          "word": " hourly",
+          "start": 89.58,
+          "end": 90.04,
+          "probability": 0.9958510398864746
+        }
+      ]
+    },
+    {
+      "start_time": 90.04,
+      "end_time": 94.62,
+      "text": "chart, the bearish market structure, and seeking liquidity below the previous day's",
+      "words": [
+        {
+          "word": " chart,",
+          "start": 90.04,
+          "end": 90.38,
+          "probability": 0.99703049659729
+        },
+        {
+          "word": " the",
+          "start": 90.58,
+          "end": 90.74,
+          "probability": 0.9905542731285095
+        },
+        {
+          "word": " bearish",
+          "start": 90.74,
+          "end": 91.24,
+          "probability": 0.989206850528717
+        },
+        {
+          "word": " market",
+          "start": 91.24,
+          "end": 91.44,
+          "probability": 0.9915264248847961
+        },
+        {
+          "word": " structure,",
+          "start": 91.44,
+          "end": 91.82,
+          "probability": 0.997766375541687
+        },
+        {
+          "word": " and",
+          "start": 92.24,
+          "end": 92.72,
+          "probability": 0.9884710311889648
+        },
+        {
+          "word": " seeking",
+          "start": 92.72,
+          "end": 93.16,
+          "probability": 0.9878681898117065
+        },
+        {
+          "word": " liquidity",
+          "start": 93.16,
+          "end": 93.64,
+          "probability": 0.9824907183647156
+        },
+        {
+          "word": " below",
+          "start": 93.64,
+          "end": 93.88,
+          "probability": 0.9456860423088074
+        },
+        {
+          "word": " the",
+          "start": 93.88,
+          "end": 94.06,
+          "probability": 0.9935019612312317
+        },
+        {
+          "word": " previous",
+          "start": 94.06,
+          "end": 94.24,
+          "probability": 0.9989551305770874
+        },
+        {
+          "word": " day's",
+          "start": 94.24,
+          "end": 94.62,
+          "probability": 0.5442654639482498
+        }
+      ]
+    },
+    {
+      "start_time": 94.62,
+      "end_time": 95.18,
+      "text": "low.",
+      "words": [
+        {
+          "word": " low.",
+          "start": 94.62,
+          "end": 95.18,
+          "probability": 0.9838834404945374
+        }
+      ]
+    },
+    {
+      "start_time": 96.28,
+      "end_time": 97.42,
+      "text": "Here's our New York session.",
+      "words": [
+        {
+          "word": " Here's",
+          "start": 96.28,
+          "end": 96.8,
+          "probability": 0.9829582870006561
+        },
+        {
+          "word": " our",
+          "start": 96.8,
+          "end": 96.86,
+          "probability": 0.9266307950019836
+        },
+        {
+          "word": " New",
+          "start": 96.86,
+          "end": 96.98,
+          "probability": 0.9473634958267212
+        },
+        {
+          "word": " York",
+          "start": 96.98,
+          "end": 97.1,
+          "probability": 0.997225284576416
+        },
+        {
+          "word": " session.",
+          "start": 97.1,
+          "end": 97.42,
+          "probability": 0.7816550731658936
+        }
+      ]
+    },
+    {
+      "start_time": 98.26,
+      "end_time": 105.14,
+      "text": "So inside of this area here, okay, we're looking for a setup, and here's the high.",
+      "words": [
+        {
+          "word": " So",
+          "start": 98.26,
+          "end": 98.5,
+          "probability": 0.9531244039535522
+        },
+        {
+          "word": " inside",
+          "start": 98.5,
+          "end": 98.86,
+          "probability": 0.811364471912384
+        },
+        {
+          "word": " of",
+          "start": 98.86,
+          "end": 99.06,
+          "probability": 0.9895336031913757
+        },
+        {
+          "word": " this",
+          "start": 99.06,
+          "end": 99.32,
+          "probability": 0.9990147352218628
+        },
+        {
+          "word": " area",
+          "start": 99.32,
+          "end": 99.68,
+          "probability": 0.9986383318901062
+        },
+        {
+          "word": " here,",
+          "start": 99.68,
+          "end": 100.1,
+          "probability": 0.9793305993080139
+        },
+        {
+          "word": " okay,",
+          "start": 101.06,
+          "end": 102.54,
+          "probability": 0.6997776031494141
+        },
+        {
+          "word": " we're",
+          "start": 102.62,
+          "end": 102.68,
+          "probability": 0.9941018521785736
+        },
+        {
+          "word": " looking",
+          "start": 102.68,
+          "end": 102.84,
+          "probability": 0.9984174966812134
+        },
+        {
+          "word": " for",
+          "start": 102.84,
+          "end": 103.02,
+          "probability": 0.9956567287445068
+        },
+        {
+          "word": " a",
+          "start": 103.02,
+          "end": 103.14,
+          "probability": 0.8923174142837524
+        },
+        {
+          "word": " setup,",
+          "start": 103.14,
+          "end": 103.38,
+          "probability": 0.7579702734947205
+        },
+        {
+          "word": " and",
+          "start": 103.66,
+          "end": 104.42,
+          "probability": 0.9961709380149841
+        },
+        {
+          "word": " here's",
+          "start": 104.42,
+          "end": 104.78,
+          "probability": 0.9759395718574524
+        },
+        {
+          "word": " the",
+          "start": 104.78,
+          "end": 104.88,
+          "probability": 0.8768203854560852
+        },
+        {
+          "word": " high.",
+          "start": 104.88,
+          "end": 105.14,
+          "probability": 0.980137288570404
+        }
+      ]
+    },
+    {
+      "start_time": 105.7,
+      "end_time": 109.3,
+      "text": "We trade down to this low, and start retracing inside of the New York session.",
+      "words": [
+        {
+          "word": " We",
+          "start": 105.48,
+          "end": 105.72,
+          "probability": 0.3105573058128357
+        },
+        {
+          "word": " trade",
+          "start": 105.72,
+          "end": 105.9,
+          "probability": 0.8175349235534668
+        },
+        {
+          "word": " down",
+          "start": 105.9,
+          "end": 106.12,
+          "probability": 0.9885427951812744
+        },
+        {
+          "word": " to",
+          "start": 106.12,
+          "end": 106.24,
+          "probability": 0.9950227737426758
+        },
+        {
+          "word": " this",
+          "start": 106.24,
+          "end": 106.4,
+          "probability": 0.9938708543777466
+        },
+        {
+          "word": " low,",
+          "start": 106.4,
+          "end": 106.66,
+          "probability": 0.9523723721504211
+        },
+        {
+          "word": " and",
+          "start": 106.74,
+          "end": 106.78,
+          "probability": 0.47678321599960327
+        },
+        {
+          "word": " start",
+          "start": 106.78,
+          "end": 106.92,
+          "probability": 0.9732028841972351
+        },
+        {
+          "word": " retracing",
+          "start": 106.92,
+          "end": 107.6,
+          "probability": 0.9914613962173462
+        },
+        {
+          "word": " inside",
+          "start": 107.6,
+          "end": 108.48,
+          "probability": 0.9380766749382019
+        },
+        {
+          "word": " of",
+          "start": 108.48,
+          "end": 108.64,
+          "probability": 0.35889992117881775
+        },
+        {
+          "word": " the",
+          "start": 108.64,
+          "end": 108.7,
+          "probability": 0.8160533308982849
+        },
+        {
+          "word": " New",
+          "start": 108.7,
+          "end": 108.78,
+          "probability": 0.8940941095352173
+        },
+        {
+          "word": " York",
+          "start": 108.78,
+          "end": 108.92,
+          "probability": 0.9979596138000488
+        },
+        {
+          "word": " session.",
+          "start": 108.92,
+          "end": 109.3,
+          "probability": 0.5297597050666809
+        }
+      ]
+    },
+    {
+      "start_time": 109.94,
+      "end_time": 114.28,
+      "text": "Trading up into the bearish order block, which is that last up close candle right here.",
+      "words": [
+        {
+          "word": " Trading",
+          "start": 109.94,
+          "end": 110.42,
+          "probability": 0.9714156985282898
+        },
+        {
+          "word": " up",
+          "start": 110.42,
+          "end": 110.58,
+          "probability": 0.9911632537841797
+        },
+        {
+          "word": " into",
+          "start": 110.58,
+          "end": 110.86,
+          "probability": 0.9773837327957153
+        },
+        {
+          "word": " the",
+          "start": 110.86,
+          "end": 111.1,
+          "probability": 0.9948474168777466
+        },
+        {
+          "word": " bearish",
+          "start": 111.1,
+          "end": 111.52,
+          "probability": 0.8745210766792297
+        },
+        {
+          "word": " order",
+          "start": 111.52,
+          "end": 111.7,
+          "probability": 0.8846445083618164
+        },
+        {
+          "word": " block,",
+          "start": 111.7,
+          "end": 111.98,
+          "probability": 0.960135281085968
+        },
+        {
+          "word": " which",
+          "start": 112.04,
+          "end": 112.16,
+          "probability": 0.9956347346305847
+        },
+        {
+          "word": " is",
+          "start": 112.16,
+          "end": 112.3,
+          "probability": 0.9945076107978821
+        },
+        {
+          "word": " that",
+          "start": 112.3,
+          "end": 112.44,
+          "probability": 0.9084113836288452
+        },
+        {
+          "word": " last",
+          "start": 112.44,
+          "end": 112.86,
+          "probability": 0.9956900477409363
+        },
+        {
+          "word": " up",
+          "start": 112.86,
+          "end": 113.2,
+          "probability": 0.965438723564148
+        },
+        {
+          "word": " close",
+          "start": 113.2,
+          "end": 113.46,
+          "probability": 0.4879423975944519
+        },
+        {
+          "word": " candle",
+          "start": 113.46,
+          "end": 113.72,
+          "probability": 0.7649866342544556
+        },
+        {
+          "word": " right",
+          "start": 113.72,
+          "end": 113.98,
+          "probability": 0.7338780164718628
+        },
+        {
+          "word": " here.",
+          "start": 113.98,
+          "end": 114.28,
+          "probability": 0.9981231093406677
+        }
+      ]
+    },
+    {
+      "start_time": 115.42000000000002,
+      "end_time": 121.82,
+      "text": "Trades into the butt end of that, and your entry would be 2865, in theory, stop would",
+      "words": [
+        {
+          "word": " Trades",
+          "start": 115.42000000000002,
+          "end": 115.9,
+          "probability": 0.8485002815723419
+        },
+        {
+          "word": " into",
+          "start": 115.9,
+          "end": 116.04,
+          "probability": 0.9241526126861572
+        },
+        {
+          "word": " the",
+          "start": 116.04,
+          "end": 116.18,
+          "probability": 0.9048296809196472
+        },
+        {
+          "word": " butt",
+          "start": 116.18,
+          "end": 116.44,
+          "probability": 0.6128826141357422
+        },
+        {
+          "word": " end",
+          "start": 116.44,
+          "end": 116.66,
+          "probability": 0.881669282913208
+        },
+        {
+          "word": " of",
+          "start": 116.66,
+          "end": 116.8,
+          "probability": 0.990635335445404
+        },
+        {
+          "word": " that,",
+          "start": 116.8,
+          "end": 117.08,
+          "probability": 0.9986683130264282
+        },
+        {
+          "word": " and",
+          "start": 117.62,
+          "end": 118.24,
+          "probability": 0.9959915280342102
+        },
+        {
+          "word": " your",
+          "start": 118.24,
+          "end": 118.42,
+          "probability": 0.9865370988845825
+        },
+        {
+          "word": " entry",
+          "start": 118.42,
+          "end": 118.74,
+          "probability": 0.997623860836029
+        },
+        {
+          "word": " would",
+          "start": 118.74,
+          "end": 118.94,
+          "probability": 0.9945488572120667
+        },
+        {
+          "word": " be",
+          "start": 118.94,
+          "end": 119.18,
+          "probability": 0.999108612537384
+        },
+        {
+          "word": " 2865,",
+          "start": 119.18,
+          "end": 120.26,
+          "probability": 0.671379417181015
+        },
+        {
+          "word": " in",
+          "start": 120.26,
+          "end": 120.72,
+          "probability": 0.4406715929508209
+        },
+        {
+          "word": " theory,",
+          "start": 120.72,
+          "end": 120.98,
+          "probability": 0.9986380934715271
+        },
+        {
+          "word": " stop",
+          "start": 121.26,
+          "end": 121.64,
+          "probability": 0.7474640607833862
+        },
+        {
+          "word": " would",
+          "start": 121.64,
+          "end": 121.82,
+          "probability": 0.9281037449836731
+        }
+      ]
+    },
+    {
+      "start_time": 121.82,
+      "end_time": 122.78,
+      "text": "be above the high here.",
+      "words": [
+        {
+          "word": " be",
+          "start": 121.82,
+          "end": 121.9,
+          "probability": 0.9974666833877563
+        },
+        {
+          "word": " above",
+          "start": 121.9,
+          "end": 122.1,
+          "probability": 0.9967978596687317
+        },
+        {
+          "word": " the",
+          "start": 122.1,
+          "end": 122.28,
+          "probability": 0.9966463446617126
+        },
+        {
+          "word": " high",
+          "start": 122.28,
+          "end": 122.5,
+          "probability": 0.9941383600234985
+        },
+        {
+          "word": " here.",
+          "start": 122.5,
+          "end": 122.78,
+          "probability": 0.9340585470199585
+        }
+      ]
+    },
+    {
+      "start_time": 123.72,
+      "end_time": 128.14,
+      "text": "Trading down to the low of the optimal trade entry, since we're dealing with the S&P,",
+      "words": [
+        {
+          "word": " Trading",
+          "start": 123.72,
+          "end": 124.2,
+          "probability": 0.957449734210968
+        },
+        {
+          "word": " down",
+          "start": 124.2,
+          "end": 124.52,
+          "probability": 0.998755931854248
+        },
+        {
+          "word": " to",
+          "start": 124.52,
+          "end": 124.86,
+          "probability": 0.9933210015296936
+        },
+        {
+          "word": " the",
+          "start": 124.86,
+          "end": 125.62,
+          "probability": 0.9484682679176331
+        },
+        {
+          "word": " low",
+          "start": 125.62,
+          "end": 126.06,
+          "probability": 0.9630641937255859
+        },
+        {
+          "word": " of",
+          "start": 126.06,
+          "end": 126.18,
+          "probability": 0.8237708210945129
+        },
+        {
+          "word": " the",
+          "start": 126.18,
+          "end": 126.24,
+          "probability": 0.9977700710296631
+        },
+        {
+          "word": " optimal",
+          "start": 126.24,
+          "end": 126.48,
+          "probability": 0.9910515546798706
+        },
+        {
+          "word": " trade",
+          "start": 126.48,
+          "end": 126.72,
+          "probability": 0.9708545804023743
+        },
+        {
+          "word": " entry,",
+          "start": 126.72,
+          "end": 126.84,
+          "probability": 0.8424611687660217
+        },
+        {
+          "word": " since",
+          "start": 126.98,
+          "end": 127.06,
+          "probability": 0.9805339574813843
+        },
+        {
+          "word": " we're",
+          "start": 127.06,
+          "end": 127.22,
+          "probability": 0.9868900775909424
+        },
+        {
+          "word": " dealing",
+          "start": 127.22,
+          "end": 127.42,
+          "probability": 0.9961114525794983
+        },
+        {
+          "word": " with",
+          "start": 127.42,
+          "end": 127.64,
+          "probability": 0.9975898265838623
+        },
+        {
+          "word": " the",
+          "start": 127.64,
+          "end": 127.76,
+          "probability": 0.984735369682312
+        },
+        {
+          "word": " S",
+          "start": 127.76,
+          "end": 127.86,
+          "probability": 0.9931023120880127
+        },
+        {
+          "word": "&P,",
+          "start": 127.86,
+          "end": 128.14,
+          "probability": 0.9008653461933136
+        }
+      ]
+    },
+    {
+      "start_time": 128.72,
+      "end_time": 131.98,
+      "text": "we're not talking about PIP, so we're dealing specifically with the range.",
+      "words": [
+        {
+          "word": " we're",
+          "start": 128.72,
+          "end": 128.88,
+          "probability": 0.991182416677475
+        },
+        {
+          "word": " not",
+          "start": 128.88,
+          "end": 128.98,
+          "probability": 0.9992170333862305
+        },
+        {
+          "word": " talking",
+          "start": 128.98,
+          "end": 129.24,
+          "probability": 0.9974581599235535
+        },
+        {
+          "word": " about",
+          "start": 129.24,
+          "end": 129.48,
+          "probability": 0.9979076385498047
+        },
+        {
+          "word": " PIP,",
+          "start": 129.48,
+          "end": 129.7,
+          "probability": 0.7592092752456665
+        },
+        {
+          "word": " so",
+          "start": 129.82,
+          "end": 129.98,
+          "probability": 0.9831068515777588
+        },
+        {
+          "word": " we're",
+          "start": 129.98,
+          "end": 130.06,
+          "probability": 0.9965496957302094
+        },
+        {
+          "word": " dealing",
+          "start": 130.06,
+          "end": 130.26,
+          "probability": 0.9967576861381531
+        },
+        {
+          "word": " specifically",
+          "start": 130.26,
+          "end": 130.9,
+          "probability": 0.9952347874641418
+        },
+        {
+          "word": " with",
+          "start": 130.9,
+          "end": 131.38,
+          "probability": 0.9983776807785034
+        },
+        {
+          "word": " the",
+          "start": 131.38,
+          "end": 131.58,
+          "probability": 0.9936287999153137
+        },
+        {
+          "word": " range.",
+          "start": 131.58,
+          "end": 131.98,
+          "probability": 0.9753028154373169
+        }
+      ]
+    },
+    {
+      "start_time": 132.66,
+      "end_time": 140.6,
+      "text": "So the range low, that would offer over 30 handles on the S&P, and then a second partial",
+      "words": [
+        {
+          "word": " So",
+          "start": 132.4,
+          "end": 132.68,
+          "probability": 0.1554594337940216
+        },
+        {
+          "word": " the",
+          "start": 132.68,
+          "end": 132.78,
+          "probability": 0.8037287592887878
+        },
+        {
+          "word": " range",
+          "start": 132.78,
+          "end": 133.0,
+          "probability": 0.9735152721405029
+        },
+        {
+          "word": " low,",
+          "start": 133.0,
+          "end": 133.38,
+          "probability": 0.9219657778739929
+        },
+        {
+          "word": " that",
+          "start": 133.62,
+          "end": 134.04,
+          "probability": 0.6325603723526001
+        },
+        {
+          "word": " would",
+          "start": 134.04,
+          "end": 134.12,
+          "probability": 0.9641220569610596
+        },
+        {
+          "word": " offer",
+          "start": 134.12,
+          "end": 134.52,
+          "probability": 0.9897778630256653
+        },
+        {
+          "word": " over",
+          "start": 134.52,
+          "end": 135.66,
+          "probability": 0.9582368731498718
+        },
+        {
+          "word": " 30",
+          "start": 135.66,
+          "end": 135.94,
+          "probability": 0.9677019715309143
+        },
+        {
+          "word": " handles",
+          "start": 135.94,
+          "end": 136.62,
+          "probability": 0.9865778684616089
+        },
+        {
+          "word": " on",
+          "start": 136.62,
+          "end": 137.32,
+          "probability": 0.9702637195587158
+        },
+        {
+          "word": " the",
+          "start": 137.32,
+          "end": 137.38,
+          "probability": 0.9912428855895996
+        },
+        {
+          "word": " S",
+          "start": 137.38,
+          "end": 137.5,
+          "probability": 0.9763087630271912
+        },
+        {
+          "word": "&P,",
+          "start": 137.5,
+          "end": 137.74,
+          "probability": 0.8979102969169617
+        },
+        {
+          "word": " and",
+          "start": 138.38,
+          "end": 139.06,
+          "probability": 0.9838781356811523
+        },
+        {
+          "word": " then",
+          "start": 139.06,
+          "end": 139.26,
+          "probability": 0.9932083487510681
+        },
+        {
+          "word": " a",
+          "start": 139.26,
+          "end": 139.72,
+          "probability": 0.9734589457511902
+        },
+        {
+          "word": " second",
+          "start": 139.72,
+          "end": 140.08,
+          "probability": 0.9892194867134094
+        },
+        {
+          "word": " partial",
+          "start": 140.08,
+          "end": 140.6,
+          "probability": 0.9837747812271118
+        }
+      ]
+    },
+    {
+      "start_time": 140.6,
+      "end_time": 147.44,
+      "text": "at plus 50 handles at half of the projected standard deviation, in other words, the range",
+      "words": [
+        {
+          "word": " at",
+          "start": 140.6,
+          "end": 140.84,
+          "probability": 0.9009312987327576
+        },
+        {
+          "word": " plus",
+          "start": 140.84,
+          "end": 141.18,
+          "probability": 0.6856129765510559
+        },
+        {
+          "word": " 50",
+          "start": 141.18,
+          "end": 141.64,
+          "probability": 0.9884445667266846
+        },
+        {
+          "word": " handles",
+          "start": 141.64,
+          "end": 142.12,
+          "probability": 0.9954075217247009
+        },
+        {
+          "word": " at",
+          "start": 142.12,
+          "end": 143.16,
+          "probability": 0.8636940717697144
+        },
+        {
+          "word": " half",
+          "start": 143.16,
+          "end": 143.74,
+          "probability": 0.9850992560386658
+        },
+        {
+          "word": " of",
+          "start": 143.74,
+          "end": 144.16,
+          "probability": 0.990149736404419
+        },
+        {
+          "word": " the",
+          "start": 144.16,
+          "end": 144.38,
+          "probability": 0.994788408279419
+        },
+        {
+          "word": " projected",
+          "start": 144.38,
+          "end": 145.32,
+          "probability": 0.9919503927230835
+        },
+        {
+          "word": " standard",
+          "start": 145.32,
+          "end": 145.72,
+          "probability": 0.9773764610290527
+        },
+        {
+          "word": " deviation,",
+          "start": 145.72,
+          "end": 146.14,
+          "probability": 0.9992952346801758
+        },
+        {
+          "word": " in",
+          "start": 146.82,
+          "end": 146.82,
+          "probability": 0.9150694012641907
+        },
+        {
+          "word": " other",
+          "start": 146.82,
+          "end": 146.94,
+          "probability": 0.9519222378730774
+        },
+        {
+          "word": " words,",
+          "start": 146.94,
+          "end": 147.04,
+          "probability": 0.9994181394577026
+        },
+        {
+          "word": " the",
+          "start": 147.08,
+          "end": 147.18,
+          "probability": 0.9981318116188049
+        },
+        {
+          "word": " range",
+          "start": 147.18,
+          "end": 147.44,
+          "probability": 0.9942252039909363
+        }
+      ]
+    },
+    {
+      "start_time": 147.44,
+      "end_time": 147.88,
+      "text": "is here.",
+      "words": [
+        {
+          "word": " is",
+          "start": 147.44,
+          "end": 147.64,
+          "probability": 0.9954788684844971
+        },
+        {
+          "word": " here.",
+          "start": 147.64,
+          "end": 147.88,
+          "probability": 0.9982001781463623
+        }
+      ]
+    },
+    {
+      "start_time": 148.28,
+      "end_time": 151.7,
+      "text": "Okay, so we have this high to this low, half of that range is this level.",
+      "words": [
+        {
+          "word": " Okay,",
+          "start": 148.28,
+          "end": 148.38,
+          "probability": 0.6401727199554443
+        },
+        {
+          "word": " so",
+          "start": 148.38,
+          "end": 148.46,
+          "probability": 0.9943839311599731
+        },
+        {
+          "word": " we",
+          "start": 148.46,
+          "end": 148.54,
+          "probability": 0.9252766370773315
+        },
+        {
+          "word": " have",
+          "start": 148.54,
+          "end": 148.66,
+          "probability": 0.9973140358924866
+        },
+        {
+          "word": " this",
+          "start": 148.66,
+          "end": 148.98,
+          "probability": 0.9964780211448669
+        },
+        {
+          "word": " high",
+          "start": 148.98,
+          "end": 149.36,
+          "probability": 0.9844202399253845
+        },
+        {
+          "word": " to",
+          "start": 149.36,
+          "end": 149.6,
+          "probability": 0.9897879362106323
+        },
+        {
+          "word": " this",
+          "start": 149.6,
+          "end": 149.84,
+          "probability": 0.998235821723938
+        },
+        {
+          "word": " low,",
+          "start": 149.84,
+          "end": 150.14,
+          "probability": 0.998454213142395
+        },
+        {
+          "word": " half",
+          "start": 150.38,
+          "end": 150.7,
+          "probability": 0.9834691286087036
+        },
+        {
+          "word": " of",
+          "start": 150.7,
+          "end": 150.78,
+          "probability": 0.842688262462616
+        },
+        {
+          "word": " that",
+          "start": 150.78,
+          "end": 150.86,
+          "probability": 0.9937008619308472
+        },
+        {
+          "word": " range",
+          "start": 150.86,
+          "end": 151.08,
+          "probability": 0.9930108189582825
+        },
+        {
+          "word": " is",
+          "start": 151.08,
+          "end": 151.22,
+          "probability": 0.9876476526260376
+        },
+        {
+          "word": " this",
+          "start": 151.22,
+          "end": 151.4,
+          "probability": 0.8370823264122009
+        },
+        {
+          "word": " level.",
+          "start": 151.4,
+          "end": 151.7,
+          "probability": 0.9973325729370117
+        }
+      ]
+    },
+    {
+      "start_time": 151.94,
+      "end_time": 153.34,
+      "text": "That's what this is all about.",
+      "words": [
+        {
+          "word": " That's",
+          "start": 151.94,
+          "end": 152.22,
+          "probability": 0.9959893226623535
+        },
+        {
+          "word": " what",
+          "start": 152.22,
+          "end": 152.34,
+          "probability": 0.9967758059501648
+        },
+        {
+          "word": " this",
+          "start": 152.34,
+          "end": 152.52,
+          "probability": 0.99716717004776
+        },
+        {
+          "word": " is",
+          "start": 152.52,
+          "end": 152.72,
+          "probability": 0.986047625541687
+        },
+        {
+          "word": " all",
+          "start": 152.72,
+          "end": 153.06,
+          "probability": 0.9978984594345093
+        },
+        {
+          "word": " about.",
+          "start": 153.06,
+          "end": 153.34,
+          "probability": 0.9993888139724731
+        }
+      ]
+    },
+    {
+      "start_time": 153.84,
+      "end_time": 158.72,
+      "text": "And then one full standard deviation of this range or projection down would send us",
+      "words": [
+        {
+          "word": " And",
+          "start": 153.84,
+          "end": 154.1,
+          "probability": 0.9633281826972961
+        },
+        {
+          "word": " then",
+          "start": 154.1,
+          "end": 154.22,
+          "probability": 0.6488255262374878
+        },
+        {
+          "word": " one",
+          "start": 154.22,
+          "end": 154.52,
+          "probability": 0.9606109261512756
+        },
+        {
+          "word": " full",
+          "start": 154.52,
+          "end": 154.92,
+          "probability": 0.9957757592201233
+        },
+        {
+          "word": " standard",
+          "start": 154.92,
+          "end": 155.16,
+          "probability": 0.9971833825111389
+        },
+        {
+          "word": " deviation",
+          "start": 155.16,
+          "end": 155.7,
+          "probability": 0.9993137121200562
+        },
+        {
+          "word": " of",
+          "start": 155.7,
+          "end": 156.06,
+          "probability": 0.9964585900306702
+        },
+        {
+          "word": " this",
+          "start": 156.06,
+          "end": 156.3,
+          "probability": 0.9991856217384338
+        },
+        {
+          "word": " range",
+          "start": 156.3,
+          "end": 156.62,
+          "probability": 0.9993901252746582
+        },
+        {
+          "word": " or",
+          "start": 156.62,
+          "end": 156.76,
+          "probability": 0.8140031695365906
+        },
+        {
+          "word": " projection",
+          "start": 156.76,
+          "end": 157.12,
+          "probability": 0.9055767059326172
+        },
+        {
+          "word": " down",
+          "start": 157.12,
+          "end": 157.54,
+          "probability": 0.994479775428772
+        },
+        {
+          "word": " would",
+          "start": 157.54,
+          "end": 158.38,
+          "probability": 0.830611526966095
+        },
+        {
+          "word": " send",
+          "start": 158.38,
+          "end": 158.6,
+          "probability": 0.9917701482772827
+        },
+        {
+          "word": " us",
+          "start": 158.6,
+          "end": 158.72,
+          "probability": 0.9633429050445557
+        }
+      ]
+    },
+    {
+      "start_time": 158.72,
+      "end_time": 166.1,
+      "text": "into that 2788 and three quarters for plus 75 handles for your third partial.",
+      "words": [
+        {
+          "word": " into",
+          "start": 158.72,
+          "end": 159.1,
+          "probability": 0.7151914238929749
+        },
+        {
+          "word": " that",
+          "start": 159.1,
+          "end": 160.22,
+          "probability": 0.8392970561981201
+        },
+        {
+          "word": " 2788",
+          "start": 160.22,
+          "end": 161.48,
+          "probability": 0.43743865191936493
+        },
+        {
+          "word": " and",
+          "start": 161.48,
+          "end": 161.82,
+          "probability": 0.7356059551239014
+        },
+        {
+          "word": " three",
+          "start": 161.82,
+          "end": 162.0,
+          "probability": 0.8263187408447266
+        },
+        {
+          "word": " quarters",
+          "start": 162.0,
+          "end": 162.3,
+          "probability": 0.910505473613739
+        },
+        {
+          "word": " for",
+          "start": 162.3,
+          "end": 163.14,
+          "probability": 0.8842183947563171
+        },
+        {
+          "word": " plus",
+          "start": 163.14,
+          "end": 163.58,
+          "probability": 0.8996139764785767
+        },
+        {
+          "word": " 75",
+          "start": 163.58,
+          "end": 164.14,
+          "probability": 0.9621055722236633
+        },
+        {
+          "word": " handles",
+          "start": 164.14,
+          "end": 164.94,
+          "probability": 0.9715371131896973
+        },
+        {
+          "word": " for",
+          "start": 164.94,
+          "end": 165.36,
+          "probability": 0.9889401793479919
+        },
+        {
+          "word": " your",
+          "start": 165.36,
+          "end": 165.48,
+          "probability": 0.9580975770950317
+        },
+        {
+          "word": " third",
+          "start": 165.48,
+          "end": 165.7,
+          "probability": 0.9819729328155518
+        },
+        {
+          "word": " partial.",
+          "start": 165.7,
+          "end": 166.1,
+          "probability": 0.9880220890045166
+        }
+      ]
+    },
+    {
+      "start_time": 166.44,
+      "end_time": 168.0,
+      "text": "And look at the beautiful response of that.",
+      "words": [
+        {
+          "word": " And",
+          "start": 166.44,
+          "end": 166.78,
+          "probability": 0.417768269777298
+        },
+        {
+          "word": " look",
+          "start": 166.78,
+          "end": 166.86,
+          "probability": 0.945664644241333
+        },
+        {
+          "word": " at",
+          "start": 166.86,
+          "end": 166.96,
+          "probability": 0.9427868127822876
+        },
+        {
+          "word": " the",
+          "start": 166.96,
+          "end": 167.02,
+          "probability": 0.9920551180839539
+        },
+        {
+          "word": " beautiful",
+          "start": 167.02,
+          "end": 167.24,
+          "probability": 0.9891421794891357
+        },
+        {
+          "word": " response",
+          "start": 167.24,
+          "end": 167.66,
+          "probability": 0.9813778400421143
+        },
+        {
+          "word": " of",
+          "start": 167.66,
+          "end": 167.86,
+          "probability": 0.8681942820549011
+        },
+        {
+          "word": " that.",
+          "start": 167.86,
+          "end": 168.0,
+          "probability": 0.9982309937477112
+        }
+      ]
+    },
+    {
+      "start_time": 168.08,
+      "end_time": 171.7,
+      "text": "Now this is all, again, based on the liquidity below the previous day's low.",
+      "words": [
+        {
+          "word": " Now",
+          "start": 168.08,
+          "end": 168.16,
+          "probability": 0.9872898459434509
+        },
+        {
+          "word": " this",
+          "start": 168.16,
+          "end": 168.34,
+          "probability": 0.6960549354553223
+        },
+        {
+          "word": " is",
+          "start": 168.34,
+          "end": 168.44,
+          "probability": 0.9879145622253418
+        },
+        {
+          "word": " all,",
+          "start": 168.44,
+          "end": 168.72,
+          "probability": 0.9796308279037476
+        },
+        {
+          "word": " again,",
+          "start": 168.76,
+          "end": 168.94,
+          "probability": 0.9960023760795593
+        },
+        {
+          "word": " based",
+          "start": 169.3,
+          "end": 169.84,
+          "probability": 0.990959644317627
+        },
+        {
+          "word": " on",
+          "start": 169.84,
+          "end": 170.14,
+          "probability": 0.996501088142395
+        },
+        {
+          "word": " the",
+          "start": 170.14,
+          "end": 170.24,
+          "probability": 0.9862939715385437
+        },
+        {
+          "word": " liquidity",
+          "start": 170.24,
+          "end": 170.5,
+          "probability": 0.9965159893035889
+        },
+        {
+          "word": " below",
+          "start": 170.5,
+          "end": 170.78,
+          "probability": 0.9865561723709106
+        },
+        {
+          "word": " the",
+          "start": 170.78,
+          "end": 170.96,
+          "probability": 0.9961832165718079
+        },
+        {
+          "word": " previous",
+          "start": 170.96,
+          "end": 171.18,
+          "probability": 0.998921275138855
+        },
+        {
+          "word": " day's",
+          "start": 171.18,
+          "end": 171.54,
+          "probability": 0.7020179033279419
+        },
+        {
+          "word": " low.",
+          "start": 171.54,
+          "end": 171.7,
+          "probability": 0.9836814403533936
+        }
+      ]
+    },
+    {
+      "start_time": 172.2,
+      "end_time": 173.66,
+      "text": "It's not the magic of the fib.",
+      "words": [
+        {
+          "word": " It's",
+          "start": 172.2,
+          "end": 172.44,
+          "probability": 0.9940784573554993
+        },
+        {
+          "word": " not",
+          "start": 172.44,
+          "end": 172.62,
+          "probability": 0.9993624091148376
+        },
+        {
+          "word": " the",
+          "start": 172.62,
+          "end": 172.78,
+          "probability": 0.9968540072441101
+        },
+        {
+          "word": " magic",
+          "start": 172.78,
+          "end": 173.1,
+          "probability": 0.995093822479248
+        },
+        {
+          "word": " of",
+          "start": 173.1,
+          "end": 173.24,
+          "probability": 0.9974831938743591
+        },
+        {
+          "word": " the",
+          "start": 173.24,
+          "end": 173.34,
+          "probability": 0.9950377345085144
+        },
+        {
+          "word": " fib.",
+          "start": 173.34,
+          "end": 173.66,
+          "probability": 0.6005487442016602
+        }
+      ]
+    },
+    {
+      "start_time": 173.92,
+      "end_time": 178.68,
+      "text": "The fib has absolutely nothing to do with the reasons why price is going down there.",
+      "words": [
+        {
+          "word": " The",
+          "start": 173.92,
+          "end": 174.02,
+          "probability": 0.9865869879722595
+        },
+        {
+          "word": " fib",
+          "start": 174.02,
+          "end": 174.18,
+          "probability": 0.968643307685852
+        },
+        {
+          "word": " has",
+          "start": 174.18,
+          "end": 174.36,
+          "probability": 0.9929225444793701
+        },
+        {
+          "word": " absolutely",
+          "start": 174.36,
+          "end": 174.8,
+          "probability": 0.997822642326355
+        },
+        {
+          "word": " nothing",
+          "start": 174.8,
+          "end": 175.2,
+          "probability": 0.9979503750801086
+        },
+        {
+          "word": " to",
+          "start": 175.2,
+          "end": 175.44,
+          "probability": 0.9992896318435669
+        },
+        {
+          "word": " do",
+          "start": 175.44,
+          "end": 175.7,
+          "probability": 0.9990612864494324
+        },
+        {
+          "word": " with",
+          "start": 175.7,
+          "end": 176.5,
+          "probability": 0.9974262118339539
+        },
+        {
+          "word": " the",
+          "start": 176.5,
+          "end": 176.9,
+          "probability": 0.9948227405548096
+        },
+        {
+          "word": " reasons",
+          "start": 176.9,
+          "end": 177.44,
+          "probability": 0.9871842265129089
+        },
+        {
+          "word": " why",
+          "start": 177.44,
+          "end": 177.8,
+          "probability": 0.98869389295578
+        },
+        {
+          "word": " price",
+          "start": 177.8,
+          "end": 178.06,
+          "probability": 0.9242406487464905
+        },
+        {
+          "word": " is",
+          "start": 178.06,
+          "end": 178.2,
+          "probability": 0.9970288872718811
+        },
+        {
+          "word": " going",
+          "start": 178.2,
+          "end": 178.38,
+          "probability": 0.998119056224823
+        },
+        {
+          "word": " down",
+          "start": 178.38,
+          "end": 178.56,
+          "probability": 0.9972902536392212
+        },
+        {
+          "word": " there.",
+          "start": 178.56,
+          "end": 178.68,
+          "probability": 0.6688613295555115
+        }
+      ]
+    },
+    {
+      "start_time": 178.74,
+      "end_time": 182.06,
+      "text": "The reason why it's going down there is there's liquidity resting below this low.",
+      "words": [
+        {
+          "word": " The",
+          "start": 178.74,
+          "end": 178.78,
+          "probability": 0.9799550175666809
+        },
+        {
+          "word": " reason",
+          "start": 178.78,
+          "end": 179.0,
+          "probability": 0.9989270567893982
+        },
+        {
+          "word": " why",
+          "start": 179.0,
+          "end": 179.22,
+          "probability": 0.9944776296615601
+        },
+        {
+          "word": " it's",
+          "start": 179.22,
+          "end": 179.34,
+          "probability": 0.9972596764564514
+        },
+        {
+          "word": " going",
+          "start": 179.34,
+          "end": 179.5,
+          "probability": 0.9963271021842957
+        },
+        {
+          "word": " down",
+          "start": 179.5,
+          "end": 179.76,
+          "probability": 0.9991641044616699
+        },
+        {
+          "word": " there",
+          "start": 179.76,
+          "end": 179.98,
+          "probability": 0.9975677132606506
+        },
+        {
+          "word": " is",
+          "start": 179.98,
+          "end": 180.28,
+          "probability": 0.9831324219703674
+        },
+        {
+          "word": " there's",
+          "start": 180.28,
+          "end": 180.62,
+          "probability": 0.9670872390270233
+        },
+        {
+          "word": " liquidity",
+          "start": 180.62,
+          "end": 180.92,
+          "probability": 0.9420892000198364
+        },
+        {
+          "word": " resting",
+          "start": 180.92,
+          "end": 181.26,
+          "probability": 0.9921169877052307
+        },
+        {
+          "word": " below",
+          "start": 181.26,
+          "end": 181.52,
+          "probability": 0.9979992508888245
+        },
+        {
+          "word": " this",
+          "start": 181.52,
+          "end": 181.84,
+          "probability": 0.9945987462997437
+        },
+        {
+          "word": " low.",
+          "start": 181.84,
+          "end": 182.06,
+          "probability": 0.9894837737083435
+        }
+      ]
+    },
+    {
+      "start_time": 182.26,
+      "end_time": 186.1,
+      "text": "The market's going to seek that liquidity, not always in a single run down into it.",
+      "words": [
+        {
+          "word": " The",
+          "start": 182.26,
+          "end": 182.36,
+          "probability": 0.5759710073471069
+        },
+        {
+          "word": " market's",
+          "start": 182.36,
+          "end": 182.58,
+          "probability": 0.7117266654968262
+        },
+        {
+          "word": " going",
+          "start": 182.58,
+          "end": 182.66,
+          "probability": 0.7705232501029968
+        },
+        {
+          "word": " to",
+          "start": 182.66,
+          "end": 182.76,
+          "probability": 0.9984638690948486
+        },
+        {
+          "word": " seek",
+          "start": 182.76,
+          "end": 183.0,
+          "probability": 0.9799821376800537
+        },
+        {
+          "word": " that",
+          "start": 183.0,
+          "end": 183.24,
+          "probability": 0.9984618425369263
+        },
+        {
+          "word": " liquidity,",
+          "start": 183.24,
+          "end": 183.66,
+          "probability": 0.9983466863632202
+        },
+        {
+          "word": " not",
+          "start": 183.84,
+          "end": 184.1,
+          "probability": 0.9963966012001038
+        },
+        {
+          "word": " always",
+          "start": 184.1,
+          "end": 184.46,
+          "probability": 0.9970321655273438
+        },
+        {
+          "word": " in",
+          "start": 184.46,
+          "end": 184.62,
+          "probability": 0.9136602282524109
+        },
+        {
+          "word": " a",
+          "start": 184.62,
+          "end": 184.74,
+          "probability": 0.8989304900169373
+        },
+        {
+          "word": " single",
+          "start": 184.74,
+          "end": 185.08,
+          "probability": 0.9981054067611694
+        },
+        {
+          "word": " run",
+          "start": 185.08,
+          "end": 185.42,
+          "probability": 0.9014503955841064
+        },
+        {
+          "word": " down",
+          "start": 185.42,
+          "end": 185.64,
+          "probability": 0.9114698767662048
+        },
+        {
+          "word": " into",
+          "start": 185.64,
+          "end": 185.96,
+          "probability": 0.9835000038146973
+        },
+        {
+          "word": " it.",
+          "start": 185.96,
+          "end": 186.1,
+          "probability": 0.9945598244667053
+        }
+      ]
+    },
+    {
+      "start_time": 186.1,
+      "end_time": 188.74,
+      "text": "And they take several passes to get down to it as it does here.",
+      "words": [
+        {
+          "word": " And",
+          "start": 186.1,
+          "end": 186.26,
+          "probability": 0.12884807586669922
+        },
+        {
+          "word": " they",
+          "start": 186.26,
+          "end": 186.36,
+          "probability": 0.1699528992176056
+        },
+        {
+          "word": " take",
+          "start": 186.36,
+          "end": 186.64,
+          "probability": 0.9566090703010559
+        },
+        {
+          "word": " several",
+          "start": 186.64,
+          "end": 186.98,
+          "probability": 0.9970121383666992
+        },
+        {
+          "word": " passes",
+          "start": 186.98,
+          "end": 187.4,
+          "probability": 0.9546098113059998
+        },
+        {
+          "word": " to",
+          "start": 187.4,
+          "end": 187.6,
+          "probability": 0.9850509166717529
+        },
+        {
+          "word": " get",
+          "start": 187.6,
+          "end": 187.68,
+          "probability": 0.9974852800369263
+        },
+        {
+          "word": " down",
+          "start": 187.68,
+          "end": 187.88,
+          "probability": 0.9963093400001526
+        },
+        {
+          "word": " to",
+          "start": 187.88,
+          "end": 188.04,
+          "probability": 0.9956511855125427
+        },
+        {
+          "word": " it",
+          "start": 188.04,
+          "end": 188.14,
+          "probability": 0.9228172302246094
+        },
+        {
+          "word": " as",
+          "start": 188.14,
+          "end": 188.26,
+          "probability": 0.9221533536911011
+        },
+        {
+          "word": " it",
+          "start": 188.26,
+          "end": 188.36,
+          "probability": 0.9976131916046143
+        },
+        {
+          "word": " does",
+          "start": 188.36,
+          "end": 188.52,
+          "probability": 0.999038577079773
+        },
+        {
+          "word": " here.",
+          "start": 188.52,
+          "end": 188.74,
+          "probability": 0.9954686164855957
+        }
+      ]
+    },
+    {
+      "start_time": 188.92,
+      "end_time": 190.94,
+      "text": "And then we had a nice little retracement there.",
+      "words": [
+        {
+          "word": " And",
+          "start": 188.92,
+          "end": 188.94,
+          "probability": 0.9765763282775879
+        },
+        {
+          "word": " then",
+          "start": 188.94,
+          "end": 189.04,
+          "probability": 0.9785246253013611
+        },
+        {
+          "word": " we",
+          "start": 189.04,
+          "end": 189.14,
+          "probability": 0.9586018919944763
+        },
+        {
+          "word": " had",
+          "start": 189.14,
+          "end": 189.28,
+          "probability": 0.8113160729408264
+        },
+        {
+          "word": " a",
+          "start": 189.28,
+          "end": 189.38,
+          "probability": 0.9938541650772095
+        },
+        {
+          "word": " nice",
+          "start": 189.38,
+          "end": 189.52,
+          "probability": 0.9982752799987793
+        },
+        {
+          "word": " little",
+          "start": 189.52,
+          "end": 189.82,
+          "probability": 0.9585754871368408
+        },
+        {
+          "word": " retracement",
+          "start": 189.82,
+          "end": 190.66,
+          "probability": 0.9963532388210297
+        },
+        {
+          "word": " there.",
+          "start": 190.66,
+          "end": 190.94,
+          "probability": 0.9919546246528625
+        }
+      ]
+    },
+    {
+      "start_time": 191.42,
+      "end_time": 196.18,
+      "text": "And we'll probably look forward to gravity back to the 12th or the low of the 12th rather.",
+      "words": [
+        {
+          "word": " And",
+          "start": 191.42,
+          "end": 191.58,
+          "probability": 0.9822361469268799
+        },
+        {
+          "word": " we'll",
+          "start": 191.58,
+          "end": 191.7,
+          "probability": 0.9372979700565338
+        },
+        {
+          "word": " probably",
+          "start": 191.7,
+          "end": 191.96,
+          "probability": 0.9976636171340942
+        },
+        {
+          "word": " look",
+          "start": 191.96,
+          "end": 192.26,
+          "probability": 0.980536937713623
+        },
+        {
+          "word": " forward",
+          "start": 192.26,
+          "end": 192.54,
+          "probability": 0.6736590266227722
+        },
+        {
+          "word": " to",
+          "start": 192.54,
+          "end": 192.72,
+          "probability": 0.9739225506782532
+        },
+        {
+          "word": " gravity",
+          "start": 192.72,
+          "end": 193.16,
+          "probability": 0.23499974608421326
+        },
+        {
+          "word": " back",
+          "start": 193.16,
+          "end": 193.44,
+          "probability": 0.8808820247650146
+        },
+        {
+          "word": " to",
+          "start": 193.44,
+          "end": 193.7,
+          "probability": 0.9970001578330994
+        },
+        {
+          "word": " the",
+          "start": 193.7,
+          "end": 193.84,
+          "probability": 0.9874216318130493
+        },
+        {
+          "word": " 12th",
+          "start": 193.84,
+          "end": 195.12,
+          "probability": 0.8624868392944336
+        },
+        {
+          "word": " or",
+          "start": 195.12,
+          "end": 195.22,
+          "probability": 0.6674200892448425
+        },
+        {
+          "word": " the",
+          "start": 195.22,
+          "end": 195.34,
+          "probability": 0.9831045269966125
+        },
+        {
+          "word": " low",
+          "start": 195.34,
+          "end": 195.58,
+          "probability": 0.9443063139915466
+        },
+        {
+          "word": " of",
+          "start": 195.58,
+          "end": 195.7,
+          "probability": 0.8297199606895447
+        },
+        {
+          "word": " the",
+          "start": 195.7,
+          "end": 195.78,
+          "probability": 0.9941400289535522
+        },
+        {
+          "word": " 12th",
+          "start": 195.78,
+          "end": 196.06,
+          "probability": 0.983939915895462
+        },
+        {
+          "word": " rather.",
+          "start": 196.06,
+          "end": 196.18,
+          "probability": 0.7267047762870789
+        }
+      ]
+    },
+    {
+      "start_time": 196.76,
+      "end_time": 198.18,
+      "text": "So that's going to be it for this example.",
+      "words": [
+        {
+          "word": " So",
+          "start": 196.76,
+          "end": 197.06,
+          "probability": 0.983157217502594
+        },
+        {
+          "word": " that's",
+          "start": 197.06,
+          "end": 197.2,
+          "probability": 0.9839076995849609
+        },
+        {
+          "word": " going",
+          "start": 197.2,
+          "end": 197.3,
+          "probability": 0.6595326662063599
+        },
+        {
+          "word": " to",
+          "start": 197.3,
+          "end": 197.36,
+          "probability": 0.9992700219154358
+        },
+        {
+          "word": " be",
+          "start": 197.36,
+          "end": 197.46,
+          "probability": 0.997680127620697
+        },
+        {
+          "word": " it",
+          "start": 197.46,
+          "end": 197.54,
+          "probability": 0.9960598349571228
+        },
+        {
+          "word": " for",
+          "start": 197.54,
+          "end": 197.66,
+          "probability": 0.9960958361625671
+        },
+        {
+          "word": " this",
+          "start": 197.66,
+          "end": 197.82,
+          "probability": 0.999397873878479
+        },
+        {
+          "word": " example.",
+          "start": 197.82,
+          "end": 198.18,
+          "probability": 0.9990144968032837
+        }
+      ]
+    },
+    {
+      "start_time": 198.78,
+      "end_time": 199.54,
+      "text": "I hope you found it insightful.",
+      "words": [
+        {
+          "word": " I",
+          "start": 198.78,
+          "end": 198.78,
+          "probability": 0.8413854837417603
+        },
+        {
+          "word": " hope",
+          "start": 198.78,
+          "end": 198.88,
+          "probability": 0.9987820982933044
+        },
+        {
+          "word": " you",
+          "start": 198.88,
+          "end": 198.98,
+          "probability": 0.9968270659446716
+        },
+        {
+          "word": " found",
+          "start": 198.98,
+          "end": 199.14,
+          "probability": 0.9538650512695312
+        },
+        {
+          "word": " it",
+          "start": 199.14,
+          "end": 199.22,
+          "probability": 0.958731472492218
+        },
+        {
+          "word": " insightful.",
+          "start": 199.22,
+          "end": 199.54,
+          "probability": 0.9994710087776184
+        }
+      ]
+    },
+    {
+      "start_time": 199.74,
+      "end_time": 201.62,
+      "text": "Until next time, I wish you good luck and good trading.",
+      "words": [
+        {
+          "word": " Until",
+          "start": 199.74,
+          "end": 199.8,
+          "probability": 0.9832987189292908
+        },
+        {
+          "word": " next",
+          "start": 199.8,
+          "end": 200.08,
+          "probability": 0.9984482526779175
+        },
+        {
+          "word": " time,",
+          "start": 200.08,
+          "end": 200.3,
+          "probability": 0.9967246651649475
+        },
+        {
+          "word": " I",
+          "start": 200.34,
+          "end": 200.38,
+          "probability": 0.8213524222373962
+        },
+        {
+          "word": " wish",
+          "start": 200.38,
+          "end": 200.48,
+          "probability": 0.9983900785446167
+        },
+        {
+          "word": " you",
+          "start": 200.48,
+          "end": 200.58,
+          "probability": 0.9988221526145935
+        },
+        {
+          "word": " good",
+          "start": 200.58,
+          "end": 200.68,
+          "probability": 0.9791914820671082
+        },
+        {
+          "word": " luck",
+          "start": 200.68,
+          "end": 200.88,
+          "probability": 0.99860018491745
+        },
+        {
+          "word": " and",
+          "start": 200.88,
+          "end": 201.24,
+          "probability": 0.9577125310897827
+        },
+        {
+          "word": " good",
+          "start": 201.24,
+          "end": 201.4,
+          "probability": 0.9829313158988953
+        },
+        {
+          "word": " trading.",
+          "start": 201.4,
+          "end": 201.62,
+          "probability": 0.9934780597686768
+        }
+      ]
+    }
+  ]
 }

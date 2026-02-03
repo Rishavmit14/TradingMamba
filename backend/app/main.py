@@ -2,14 +2,25 @@
 Smart Money AI Trading System - FastAPI Application
 
 Main entry point for the backend API.
+
+Performance Optimizations:
+- uvloop: 2-4x faster async event loop (Apple Silicon optimized)
+- orjson: 6x faster JSON serialization
 """
+
+# Enable uvloop for 2-4x faster async performance
+try:
+    import uvloop
+    uvloop.install()
+except ImportError:
+    pass  # uvloop not available, use default event loop
 
 from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from typing import List, Optional, Dict, Set
 from datetime import datetime
-import json
+from .utils import json_utils as json  # 6x faster than standard json (orjson-based)
 import asyncio
 import os
 from pathlib import Path

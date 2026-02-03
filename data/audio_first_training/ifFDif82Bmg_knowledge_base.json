@@ -1,0 +1,99 @@
+{
+  "video_id": "ifFDif82Bmg",
+  "generated_at": "2026-02-02T12:26:26.005169",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 434.4583251476288,
+  "processing_stats": {
+    "teaching_units": 23,
+    "vision_analyses": 33,
+    "concepts_extracted": 6,
+    "total_audio_duration": 437.5999999999998,
+    "total_words": 1274
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the British Pound Cable, involves identifying a specific price level on a chart, which is then used to trigger a trade entry. The key visual characteristics of this pattern include the high and low price levels, as well as the midpoint of the chart. The trading application for this pattern involves entering a trade when the price reaches or crosses the optimal trade entry level. The importance of these key price levels is highlighted, as they represent critical support and resistance levels in the trading strategy.",
+      "generation_time_seconds": 57.57762622833252,
+      "statistics": {
+        "teaching_duration_seconds": 48.62,
+        "word_count": 135,
+        "teaching_units": 4,
+        "frames_analyzed": 4,
+        "deictic_references": 7
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "kill zone": {
+      "llm_summary": "The \"Kill Zone\" concept in the context of the Inner Circle Trader methodology involves a trading strategy where the trader sells when the price reaches a certain level, and then buys back when the price falls below that level. The specific price levels mentioned or visible in the chart include the midpoint of the London close and the heart of the New York open. The trader recommends trading this pattern by identifying the \"kill zone\" on a chart and then taking positions based on the price levels mentioned. The key price levels mentioned are 1.21945, 1.22006, and 1.22000. The trader advises customers to carefully consider their investment objectives, level of experience, and risk appetite before making decisions. The possibility exists that the trader could sustain a loss of some or all of their initial investment, and therefore, the trader advises customers to not invest money that they cannot afford to lose.",
+      "generation_time_seconds": 76.84417033195496,
+      "statistics": {
+        "teaching_duration_seconds": 18.159999999999997,
+        "word_count": 38,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 0
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The Fibonacci sequence is a series of numbers where each number is the ratio of the last two numbers in the series. It is often used in trading to identify potential support and resistance levels. The Fibonacci sequence is applied to the key low identified on the chart, which is a critical price point for traders to consider. The key low is identified as \"Key Low\" on the chart, and the Fibonacci sequence is used to frame an idea that is very visual to a new trader. The Fibonacci sequence is not a reliable indicator for trading, and traders should not rely on it for trading purposes.",
+      "generation_time_seconds": 80.35913300514221,
+      "statistics": {
+        "teaching_duration_seconds": 90.47999999999996,
+        "word_count": 235,
+        "teaching_units": 4,
+        "frames_analyzed": 5,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "liquidity": {
+      "llm_summary": "The \"LIQUIDITY\" concept in the context of the ICT (Inner Circle Trader) methodology refers to the availability and ease of buying and selling in a market. It is a key factor in determining the price of a security or asset. In the chart analysis provided, liquidity is identified by the presence of equal highs, which are instances where the price is at or near the same high level, indicating high price action. The chart also highlights specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked on the chart. The annotations and markings on the chart are crucial in identifying liquidity, as they highlight specific price levels and patterns that are indicative of high liquidity. The liquidity concept is important in trading as it can influence the price of a security or asset, and traders should be aware of the potential for high liquidity to affect the price.",
+      "generation_time_seconds": 69.86110401153564,
+      "statistics": {
+        "teaching_duration_seconds": 6.2999999999999545,
+        "word_count": 20,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "equal highs": {
+      "llm_summary": "**Equal Highs** concept in the context of trading refers to a situation where the price of a financial instrument or asset is at or near the same high level multiple times, indicating a period of high price action. This pattern can be identified on a chart by observing several instances where the price is at or near the same high level, which are then repeated or expanded over time. The concept is based on the idea that high price action can be sustained over a period of time, and that there may be opportunities to trade or speculate on this pattern.\n\n**Identification of Equal Highs on a Chart**:\n- **Key Visual Characteristics**:\n  - **Equal Highs**: The chart shows several instances where the price is at or near the same high level, indicating a period of high price action.\n  - **Relative Equal Highs**: The chart highlights specific instances where the price is at or near the same high level, but not necessarily at the same time.\n\n**Trading Application**:\n- **ICT Recommends Trading**:\n  - **Off-exchange Foreign Currency Trading**: The concept suggests that off-exchange foreign currency trading, which carries a high level of risk, may not be suitable for all investors. The high degree of leverage can work against you, and you should carefully consider your investment objectives, level of experience, and risk appetite.\n  - **Risk Management**: It is important to manage risk, and before deciding to invest in foreign exchange, you should carefully consider your investment objectives, level of experience, and risk appetite. The possibility exists that you could sustain a loss of some or all of your initial investment, and therefore, you should not invest money that you cannot afford to lose.\n\n**Key Price Levels**:\n- **Visible Price Levels**: The chart shows specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked on the chart.\n- **Highlighted Price Levels**: The chart highlights specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked with annotations or markings.\n\n**Summary**:\nThe **Equal Highs** concept in trading refers to a situation where the price of a financial instrument or asset is at or near the same high level multiple times, indicating a period of high price action. The concept is based on the idea that high price action can be sustained over a period of time, and that there may be opportunities to trade or speculate on this pattern. The identification of Equal Highs on a chart involves observing several instances where the price is at or near the same high level, which are then repeated or expanded over time. The trading application suggests that off-exchange foreign currency trading may not be suitable for all investors, and that risk management is important before making investment decisions. The key price levels on the chart include specific price levels marked on the chart, such as 1.21945, 1.22045, and 1.22100, which are marked with annotations or markings.",
+      "generation_time_seconds": 98.52346682548523,
+      "statistics": {
+        "teaching_duration_seconds": 24.999999999999886,
+        "word_count": 71,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the **Inner Circle Trader** methodology. It involves identifying a specific area on a chart where there is an order block, which indicates a potential entry point for a trade. The strategy is based on the idea that the price will move up and expand above this high, and it runs up and expands above that high. The chart analysis shows several instances where the price is at or near the same high, suggesting a potential pause in the price action before moving higher. The annotations and markings on the chart provide additional context and guidance for the trader. The **National Futures Association (NFA)** and **Commodity Futures Trading Commission (CFTC)** are regulatory agencies for the **forex and futures market** in the United States, which adds credibility to the trading strategy. The **order block** is a key visual characteristic that helps traders identify potential entry points for a trade. The **risk associated with the order block** is a consideration, as the high level of risk may not be suitable for all investors. The **order block** is a tool for traders to identify potential entry points for a trade, and the **NFA and CFTC** are regulatory agencies that provide guidance and support for traders in the **forex and futures market**.",
+      "generation_time_seconds": 47.745572090148926,
+      "statistics": {
+        "teaching_duration_seconds": 18.699999999999932,
+        "word_count": 51,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

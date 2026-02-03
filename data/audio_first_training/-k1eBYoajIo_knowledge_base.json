@@ -1,0 +1,43 @@
+{
+  "video_id": "-k1eBYoajIo",
+  "generated_at": "2026-02-03T13:14:42.565838",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 159.58647203445435,
+  "processing_stats": {
+    "teaching_units": 7,
+    "vision_analyses": 11,
+    "concepts_extracted": 2,
+    "total_audio_duration": 135.94,
+    "total_words": 378
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying specific areas on a chart to spot potential trading opportunities. The key visual characteristics to spot include:\n\n1. The main focus is on identifying specific areas on the chart, such as price levels or candlestick patterns.\n2. The chart patterns ICT is referencing include specific price levels, annotations, or highlighted areas on the chart.\n3. The timeframe and trading pair are not visible in the screenshot provided.\n4. The chart appears to be a candlestick chart, which is a common type of chart used in trading to show price movements over a specific period.\n5. The chart is displayed on a currency pair, likely USD/CAD, as indicated by the currency symbols and the specific pair code.\n\nThe optimal trade entry involves identifying these specific areas on the chart to spot potential trading opportunities. Once identified, the trader can then enter the trade at these specific price levels or candlestick patterns. The trader should carefully consider the risk associated with these trades, as they involve off-exchange foreign currency trading on margin, which carries a high level of risk and may not be suitable for all investors. The trader should also consider the potential for sustaining a loss of some or all of their initial investment and, therefore, should not invest money that they cannot afford to lose.",
+      "generation_time_seconds": 60.0680992603302,
+      "statistics": {
+        "teaching_duration_seconds": 17.43999999999999,
+        "word_count": 57,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The Fibonacci concept, also known as the golden ratio, is a mathematical ratio that appears in nature, art, and architecture. It is characterized by the ratio of two numbers, where the ratio of the sum of the numbers to the larger number is equal to the ratio of the larger number to the smaller number. In trading, the Fibonacci concept can be used to identify potential retracement levels and support and resistance levels. The Fibonacci retracement levels are important because they can be used to identify potential buy and sell signals. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions, and Fibonacci levels. The Fibonacci concept can also be used to identify potential price levels, such as Fibonacci retracement levels, Fibonacci extensions,",
+      "generation_time_seconds": 99.27986001968384,
+      "statistics": {
+        "teaching_duration_seconds": 50.480000000000004,
+        "word_count": 134,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "video_id": "9F-anykT7J0",
+  "generated_at": "2026-02-03T22:00:51.144287",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 77.51243495941162,
+  "processing_stats": {
+    "teaching_units": 6,
+    "vision_analyses": 9,
+    "concepts_extracted": 3,
+    "total_audio_duration": 172.94,
+    "total_words": 476
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying and trading at specific price levels on a chart. The key visual characteristics of this pattern include high price levels, high volume, and specific candle patterns. The trading application involves identifying these high price levels and using them as entry points for trading. The optimal trade entry concept is based on identifying and trading at specific price levels, which can provide a higher probability of profit.",
+      "generation_time_seconds": 24.2399959564209,
+      "statistics": {
+        "teaching_duration_seconds": 120.25999999999999,
+        "word_count": 311,
+        "teaching_units": 3,
+        "frames_analyzed": 4,
+        "deictic_references": 9
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "equal highs": {
+      "llm_summary": "The \"Equal Highs\" concept in trading refers to a specific pattern where the price moves up to a similar level, indicating equal highs. This pattern can be identified on a chart by observing several instances where the price crosses the midpoint of the previous high and low. The key visual characteristics include equal highs, specific price levels, and annotations and markings on the chart. The trading application for this pattern involves identifying and trading at these equal highs, as they represent potential support or resistance levels. The important price levels to consider are the midpoint of the previous high and low, and the midpoint of the current high and low. The Equal Highs concept is a useful tool for traders to identify potential support or resistance levels in the market.",
+      "generation_time_seconds": 26.091825008392334,
+      "statistics": {
+        "teaching_duration_seconds": 8.519999999999996,
+        "word_count": 24,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "order block": {
+      "llm_summary": "The \"ORDER BLOCK\" concept in the context of trading refers to a specific pattern identified on a chart, which consists of high probability scalping trades highlighted in red. These trades are likely to occur at specific price levels, such as the high and low price points of the chart. The key visual characteristics of an ORDER BLOCK include annotations and markings, such as arrows and highlighted areas, which help in identifying specific price levels and trading opportunities. The trading application of ORDER BLOCK involves identifying these specific price levels and using them to place trades, with a high level of risk associated with off-exchange foreign currency trading on margin. The concept is recommended for traders who are willing to take on the risk of losing some or all of their initial investment.",
+      "generation_time_seconds": 26.857489824295044,
+      "statistics": {
+        "teaching_duration_seconds": 12.459999999999994,
+        "word_count": 45,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

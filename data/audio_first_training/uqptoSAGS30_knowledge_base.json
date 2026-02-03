@@ -1,0 +1,59 @@
+{
+  "video_id": "uqptoSAGS30",
+  "generated_at": "2026-02-03T11:29:49.506036",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 84.10858988761902,
+  "processing_stats": {
+    "teaching_units": 4,
+    "vision_analyses": 12,
+    "concepts_extracted": 3,
+    "total_audio_duration": 228.43999999999997,
+    "total_words": 659
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the ICT, involves identifying and trading at specific price levels on a chart. The key visual characteristics to spot are high and low price levels, as well as the proximity of these levels. The concept suggests that taking a trade entry at a high price level and protecting it with a shallow run can lead to successful trading. The video emphasizes the importance of identifying and trading at these specific price levels, as they represent potential opportunities for profit.",
+      "generation_time_seconds": 24.42736792564392,
+      "statistics": {
+        "teaching_duration_seconds": 181.39999999999998,
+        "word_count": 510,
+        "teaching_units": 2,
+        "frames_analyzed": 8,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 1,
+        "definition": 1
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a concept in trading that refers to the ease with which a financial instrument, such as a stock or currency, can be bought and sold. It is a measure of the liquidity of a financial instrument, indicating how quickly and easily it can be bought or sold at a given price. In the context of the teaching transcript and chart analysis, liquidity is identified by the following characteristics:\n\n1. **Visible Price Levels**: The chart shows specific price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity.\n\n2. **Optimal Trade Entry**: The chart indicates a specific entry point for a trade, which is based on the run above a specific high, indicating a potential for further gains.\n\n3. **Key Price Levels**: The chart shows important price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity.\n\n4. **Specific Chart Patterns**: The chart shows specific patterns, such as equal highs, which indicate potential gains and momentum in the market.\n\n5. **Trading Application**: The chart suggests using the New York Session time of day to look for an optimal trade entry, based on the specific entry point and the rules of the trading model.\n\n6. **Key Visual Characteristics**: The chart shows specific visual characteristics, such as equal highs, which indicate potential gains and momentum in the market.\n\n**Summary**:\nLIQUIDITY is a measure of the liquidity of a financial instrument, indicating how quickly and easily it can be bought or sold. It is identified by specific price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity. The chart analysis suggests using the New York Session time of day to look for an optimal trade entry, based on the specific entry point and the rules of the trading model.",
+      "generation_time_seconds": 34.06736612319946,
+      "statistics": {
+        "teaching_duration_seconds": 107.93999999999998,
+        "word_count": 321,
+        "teaching_units": 2,
+        "frames_analyzed": 6,
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "definition": 1,
+        "explanation": 1
+      }
+    },
+    "equal highs": {
+      "llm_summary": "**Equal Highs** concept is a trading strategy used in the trading market. It involves identifying instances where the price runs above a specific high, indicating potential gains. The strategy is based on the idea that the price will continue to run above the high, potentially leading to further gains. The trading application involves identifying the run above the high, which is a key visual characteristic, and using the New York Session time frame to look for an optimal trade entry. The strategy recommends using the 62% retracement level, which is a key price level, and the 166.97 level, which is a key entry point. The strategy also recommends using a stop-loss level at the high and a drawdown level of 7 pips. The strategy aims to minimize risk and maximize potential gains.",
+      "generation_time_seconds": 25.3142249584198,
+      "statistics": {
+        "teaching_duration_seconds": 91.89999999999999,
+        "word_count": 264,
+        "teaching_units": 1,
+        "frames_analyzed": 4,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "definition": 1
+      }
+    }
+  }
+}

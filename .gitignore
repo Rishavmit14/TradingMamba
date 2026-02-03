@@ -39,5 +39,12 @@ data/tradingmamba.db
 # Video frames (large files, can be regenerated)
 data/video_frames/
 
+# Audio files (large, can be re-downloaded from YouTube)
+data/audio/
+
+# ML model files (large binaries)
+data/ml_models/*.joblib
+data/ml_models/*.npz
+
 # Package locks (optional - uncomment if you want to ignore)
 # frontend/package-lock.json
