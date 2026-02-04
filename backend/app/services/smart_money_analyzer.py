@@ -117,6 +117,12 @@ class SmartMoneyAnalysisResult:
     bias_reasoning: str = ""
     current_price: float = 0.0
     analysis_timestamp: datetime = field(default_factory=datetime.utcnow)
+    # New ICT pattern results (from Audio-First Training)
+    displacements: List[Dict] = field(default_factory=list)
+    ote_zones: List[Dict] = field(default_factory=list)
+    breaker_blocks: List[Dict] = field(default_factory=list)
+    buy_sell_stops: Dict = field(default_factory=dict)
+    kill_zone_active: bool = False
     # ML Knowledge tracking
     ml_patterns_used: List[str] = field(default_factory=list)  # Patterns ML detected
     ml_patterns_not_learned: List[str] = field(default_factory=list)  # Patterns ML can't detect yet
@@ -139,19 +145,29 @@ class SmartMoneyAnalyzer:
     - Premium/Discount zone calculation
     """
 
-    def __init__(self, lookback_swing: int = 5, use_ml: bool = True):
+    def __init__(self, lookback_swing: int = 5, use_ml: bool = True, params: Optional[Dict] = None,
+                 ml_engine: Optional[MLPatternEngine] = None):
         """
         Initialize the Smart Money Analyzer
 
         Args:
             lookback_swing: Number of candles to look back for swing detection
             use_ml: Whether to use ML knowledge (True) or fallback to basic (False)
+            params: Optional parameter overrides from Tier 2 optimizer
+            ml_engine: Optional pre-configured MLPatternEngine (for playlist isolation).
+                       If provided, uses this engine instead of the global singleton.
         """
-        self.lookback_swing = lookback_swing
+        self.params = params or {}
+        self.lookback_swing = int(self.params.get('swing_lookback', lookback_swing))
         self.use_ml = use_ml
         self.ml_engine: Optional[MLPatternEngine] = None
 
-        if use_ml:
+        if ml_engine is not None:
+            # Use injected engine (playlist-isolated)
+            self.ml_engine = ml_engine
+            learned = self.ml_engine.get_learned_patterns()
+            logger.info(f"SmartMoneyAnalyzer initialized with injected ML engine: {learned}")
+        elif use_ml:
             try:
                 self.ml_engine = get_ml_engine()
                 learned = self.ml_engine.get_learned_patterns()
@@ -217,13 +233,85 @@ class SmartMoneyAnalyzer:
             ml_patterns_not_learned.append('fvg')
             logger.info("FVGs NOT detected - ML hasn't learned this pattern yet")
 
-        # Step 5: Map liquidity levels (basic analysis - swing-based)
+        # Initialize new pattern containers
+        displacements = []
+        ote_zones = []
+        breaker_blocks = []
+        buy_sell_stops = {}
+        kill_zone_active = False
+
+        # Step 5: Detect displacement - ONLY IF ML LEARNED
+        if self._can_detect('displacement'):
+            displacements = self.find_displacement(data)
+            if displacements:
+                ml_patterns_used.append('displacement')
+                ml_confidence_scores['displacement'] = self._get_ml_confidence('displacement')
+        else:
+            ml_patterns_not_learned.append('displacement')
+
+        # Step 6: Detect Fibonacci OTE zone - ONLY IF ML LEARNED
+        if self._can_detect('optimal_trade_entry') or self._can_detect('fibonacci_ote'):
+            ote_zones = self.find_ote_zone(data, swing_points)
+            if ote_zones:
+                if self._can_detect('optimal_trade_entry'):
+                    ml_patterns_used.append('optimal_trade_entry')
+                    ml_confidence_scores['optimal_trade_entry'] = self._get_ml_confidence('optimal_trade_entry')
+                if self._can_detect('fibonacci_ote'):
+                    ml_patterns_used.append('fibonacci_ote')
+                    ml_confidence_scores['fibonacci_ote'] = self._get_ml_confidence('fibonacci_ote')
+        else:
+            if not self._can_detect('optimal_trade_entry'):
+                ml_patterns_not_learned.append('optimal_trade_entry')
+            if not self._can_detect('fibonacci_ote'):
+                ml_patterns_not_learned.append('fibonacci_ote')
+
+        # Step 7: Detect buy/sell stops - ONLY IF ML LEARNED
+        if self._can_detect('buy_stops') or self._can_detect('sell_stops'):
+            buy_sell_stops = self.find_buy_sell_stops(swing_points, data)
+            if buy_sell_stops.get('buy_stops'):
+                ml_patterns_used.append('buy_stops')
+                ml_confidence_scores['buy_stops'] = self._get_ml_confidence('buy_stops')
+            if buy_sell_stops.get('sell_stops'):
+                ml_patterns_used.append('sell_stops')
+                ml_confidence_scores['sell_stops'] = self._get_ml_confidence('sell_stops')
+        else:
+            if not self._can_detect('buy_stops'):
+                ml_patterns_not_learned.append('buy_stops')
+            if not self._can_detect('sell_stops'):
+                ml_patterns_not_learned.append('sell_stops')
+
+        # Step 8: Detect breaker blocks - ONLY IF ML LEARNED
+        if self._can_detect('breaker_block'):
+            breaker_blocks = self.find_breaker_blocks(data, order_blocks)
+            if breaker_blocks:
+                ml_patterns_used.append('breaker_block')
+                ml_confidence_scores['breaker_block'] = self._get_ml_confidence('breaker_block')
+        else:
+            ml_patterns_not_learned.append('breaker_block')
+
+        # Step 9: Kill zone detection - ONLY IF ML LEARNED
+        if self._can_detect('kill_zone'):
+            kill_zone_active = self._is_kill_zone_active()
+            if kill_zone_active:
+                ml_patterns_used.append('kill_zone')
+                ml_confidence_scores['kill_zone'] = self._get_ml_confidence('kill_zone')
+        else:
+            ml_patterns_not_learned.append('kill_zone')
+
+        # Step 10: Equal highs/lows - ONLY IF ML LEARNED
+        if self._can_detect('equal_highs_lows'):
+            ml_patterns_used.append('equal_highs_lows')
+            ml_confidence_scores['equal_highs_lows'] = self._get_ml_confidence('equal_highs_lows')
+        else:
+            ml_patterns_not_learned.append('equal_highs_lows')
+
+        # Step 11: Map liquidity levels (basic analysis - swing-based)
         liquidity = self.find_liquidity_levels(swing_points, data)
 
-        # Step 6: Calculate premium/discount (basic analysis)
+        # Step 12: Calculate premium/discount (basic analysis)
         premium_discount = self.calculate_premium_discount(data, swing_points)
 
-        # Step 7: Determine overall bias
+        # Step 13: Determine overall bias
         # Adjust confidence based on ML knowledge
         bias, confidence, reasoning = self.determine_bias(
             structure, premium_discount, events
@@ -252,6 +340,13 @@ class SmartMoneyAnalyzer:
             bias_confidence=confidence,
             bias_reasoning=reasoning,
             current_price=float(data['close'].iloc[-1]),
+            # New ICT patterns from Audio-First Training
+            displacements=displacements,
+            ote_zones=ote_zones,
+            breaker_blocks=breaker_blocks,
+            buy_sell_stops=buy_sell_stops,
+            kill_zone_active=kill_zone_active,
+            # ML tracking
             ml_patterns_used=ml_patterns_used,
             ml_patterns_not_learned=ml_patterns_not_learned,
             ml_confidence_scores=ml_confidence_scores,
@@ -460,7 +555,7 @@ class SmartMoneyAnalyzer:
         order_blocks = []
         current_price = data['close'].iloc[-1]
 
-        # Get ML-learned parameters
+        # Get ML-learned parameters (with Tier 2 override support)
         ml_params = {}
         if self.ml_engine:
             ml_params = self.ml_engine.get_detection_parameters('order_block')
@@ -469,6 +564,9 @@ class SmartMoneyAnalyzer:
         else:
             confidence_multiplier = 0.5
             min_move_strength = 0.3
+        # Tier 2 optimizer overrides
+        confidence_multiplier = self.params.get('ob_confidence_multiplier', confidence_multiplier)
+        min_move_strength = self.params.get('ob_min_move_strength', min_move_strength)
 
         for i in range(2, len(data) - 1):
             # Current candle info
@@ -548,7 +646,7 @@ class SmartMoneyAnalyzer:
         fvgs = []
         current_price = data['close'].iloc[-1]
 
-        # Get ML-learned parameters
+        # Get ML-learned parameters (with Tier 2 override support)
         ml_params = {}
         if self.ml_engine:
             ml_params = self.ml_engine.get_detection_parameters('fvg')
@@ -557,6 +655,8 @@ class SmartMoneyAnalyzer:
         else:
             min_gap_size_pct = 0.0001
             confidence_multiplier = 0.7
+        # Tier 2 optimizer overrides
+        min_gap_size_pct = self.params.get('fvg_min_gap_pct', min_gap_size_pct)
 
         for i in range(2, len(data)):
             candle1_high = data['high'].iloc[i - 2]
@@ -574,11 +674,19 @@ class SmartMoneyAnalyzer:
                 if gap_size_pct < min_gap_size_pct:
                     continue
 
-                # Check if filled
-                filled = current_price < gap_low
+                # Check if filled by any subsequent candle trading into the gap
+                filled = False
                 fill_pct = 0.0
-                if not filled and current_price < gap_high:
-                    fill_pct = (gap_high - current_price) / (gap_high - gap_low)
+                for j in range(i + 1, len(data)):
+                    sub_low = float(data['low'].iloc[j])
+                    if sub_low <= gap_low:
+                        filled = True
+                        fill_pct = 1.0
+                        break
+                    elif sub_low < gap_high:
+                        fill_pct = max(fill_pct, (gap_high - sub_low) / (gap_high - gap_low))
+                if fill_pct >= 0.8:
+                    filled = True
 
                 fvgs.append(FairValueGap(
                     index=i - 1,
@@ -600,10 +708,19 @@ class SmartMoneyAnalyzer:
                 if gap_size_pct < min_gap_size_pct:
                     continue
 
-                filled = current_price > gap_high
+                # Check if filled by any subsequent candle trading into the gap
+                filled = False
                 fill_pct = 0.0
-                if not filled and current_price > gap_low:
-                    fill_pct = (current_price - gap_low) / (gap_high - gap_low)
+                for j in range(i + 1, len(data)):
+                    sub_high = float(data['high'].iloc[j])
+                    if sub_high >= gap_high:
+                        filled = True
+                        fill_pct = 1.0
+                        break
+                    elif sub_high > gap_low:
+                        fill_pct = max(fill_pct, (sub_high - gap_low) / (gap_high - gap_low))
+                if fill_pct >= 0.8:
+                    filled = True
 
                 fvgs.append(FairValueGap(
                     index=i - 1,
@@ -674,8 +791,10 @@ class SmartMoneyAnalyzer:
     def _find_equal_levels(
         self,
         swing_points: List[SwingPoint],
-        tolerance: float = 0.001
+        tolerance: float = None,
     ) -> List[Dict]:
+        if tolerance is None:
+            tolerance = self.params.get('equal_level_tolerance', 0.001)
         """Find equal highs or lows within tolerance"""
         equal_levels = []
 
@@ -804,3 +923,242 @@ class SmartMoneyAnalyzer:
             0.3,
             "Market in consolidation - wait for structure break"
         )
+
+    # =========================================================================
+    # NEW PATTERN DETECTION METHODS (from Audio-First Training)
+    # =========================================================================
+
+    def find_displacement(self, data: 'pd.DataFrame') -> List[Dict]:
+        """
+        Find displacement candles (strong institutional moves).
+
+        Displacement = large body candle with small wicks, indicating
+        strong directional intent. Body > 70% of total range.
+        """
+        displacements = []
+        if len(data) < 3:
+            return displacements
+
+        for i in range(max(0, len(data) - 20), len(data)):
+            high = data['high'].iloc[i]
+            low = data['low'].iloc[i]
+            open_p = data['open'].iloc[i]
+            close = data['close'].iloc[i]
+
+            total_range = high - low
+            if total_range == 0:
+                continue
+
+            body = abs(close - open_p)
+            body_ratio = body / total_range
+
+            # Displacement: body > threshold of range AND significant size
+            disp_body_threshold = self.params.get('displacement_body_ratio', 0.70)
+            disp_range_mult = self.params.get('displacement_range_mult', 1.2)
+            if body_ratio >= disp_body_threshold:
+                # Check if it's a significant candle (above average range)
+                avg_range = (data['high'] - data['low']).tail(20).mean()
+                if total_range > avg_range * disp_range_mult:
+                    direction = 'bullish' if close > open_p else 'bearish'
+                    displacements.append({
+                        'index': i,
+                        'type': direction,
+                        'high': float(high),
+                        'low': float(low),
+                        'body_ratio': float(body_ratio),
+                        'range_vs_avg': float(total_range / avg_range),
+                        'timestamp': data.index[i] if hasattr(data.index, '__getitem__') else None,
+                    })
+
+        return displacements[-5:]  # Return last 5
+
+    def find_ote_zone(
+        self,
+        data: 'pd.DataFrame',
+        swing_points: List[SwingPoint]
+    ) -> List[Dict]:
+        """
+        Find Optimal Trade Entry zones (62-79% Fibonacci retracement).
+
+        ICT teaches: The OTE is the sweet spot between the 62% and 79%
+        retracement levels of a significant swing.
+        """
+        ote_zones = []
+
+        recent_highs = [sp for sp in swing_points if sp.type == 'high'][-3:]
+        recent_lows = [sp for sp in swing_points if sp.type == 'low'][-3:]
+
+        if not recent_highs or not recent_lows:
+            return ote_zones
+
+        # Find the most recent significant swing
+        for i in range(len(recent_highs)):
+            for j in range(len(recent_lows)):
+                sh = recent_highs[-(i+1)]
+                sl = recent_lows[-(j+1)]
+
+                swing_range = abs(sh.price - sl.price)
+                if swing_range == 0:
+                    continue
+
+                # Calculate OTE zone (Fibonacci retracement levels)
+                fib_low = self.params.get('ote_fib_low', 0.62)
+                fib_high = self.params.get('ote_fib_high', 0.79)
+                if sh.index > sl.index:
+                    # Upswing: retracement goes down
+                    ote_high = sh.price - (swing_range * fib_low)
+                    ote_low = sh.price - (swing_range * fib_high)
+                    direction = 'bullish'  # Buy in the OTE of an upswing
+                else:
+                    # Downswing: retracement goes up
+                    ote_low = sl.price + (swing_range * fib_low)
+                    ote_high = sl.price + (swing_range * fib_high)
+                    direction = 'bearish'  # Sell in the OTE of a downswing
+
+                current_price = float(data['close'].iloc[-1])
+
+                ote_zones.append({
+                    'type': direction,
+                    'ote_high': float(ote_high),
+                    'ote_low': float(ote_low),
+                    'swing_high': float(sh.price),
+                    'swing_low': float(sl.price),
+                    'fib_62': float(sh.price - swing_range * fib_low) if sh.index > sl.index else float(sl.price + swing_range * fib_low),
+                    'fib_79': float(sh.price - swing_range * fib_high) if sh.index > sl.index else float(sl.price + swing_range * fib_high),
+                    'price_in_ote': ote_low <= current_price <= ote_high,
+                })
+
+                if ote_zones:
+                    return ote_zones[:2]  # Return top 2
+
+        return ote_zones
+
+    def find_buy_sell_stops(
+        self,
+        swing_points: List[SwingPoint],
+        data: 'pd.DataFrame'
+    ) -> Dict[str, List[Dict]]:
+        """
+        Find buy stops (above equal/clustered highs) and sell stops
+        (below equal/clustered lows).
+
+        ICT teaches: Smart money targets these liquidity pools.
+        """
+        current_price = float(data['close'].iloc[-1])
+        tolerance = 0.001  # 0.1% tolerance for "equal" levels
+
+        buy_stops = []
+        sell_stops = []
+
+        # Find equal highs (buy stops above)
+        highs = [sp for sp in swing_points if sp.type == 'high']
+        for i, sp1 in enumerate(highs):
+            for sp2 in highs[i + 1:]:
+                if abs(sp1.price - sp2.price) / sp1.price < tolerance:
+                    level = (sp1.price + sp2.price) / 2
+                    if level > current_price:
+                        buy_stops.append({
+                            'level': float(level),
+                            'type': 'equal_highs',
+                            'count': 2,
+                            'distance_pct': float((level - current_price) / current_price * 100),
+                        })
+
+        # Find equal lows (sell stops below)
+        lows = [sp for sp in swing_points if sp.type == 'low']
+        for i, sp1 in enumerate(lows):
+            for sp2 in lows[i + 1:]:
+                if abs(sp1.price - sp2.price) / sp1.price < tolerance:
+                    level = (sp1.price + sp2.price) / 2
+                    if level < current_price:
+                        sell_stops.append({
+                            'level': float(level),
+                            'type': 'equal_lows',
+                            'count': 2,
+                            'distance_pct': float((current_price - level) / current_price * 100),
+                        })
+
+        return {
+            'buy_stops': sorted(buy_stops, key=lambda x: x['level'])[:5],
+            'sell_stops': sorted(sell_stops, key=lambda x: x['level'], reverse=True)[:5],
+        }
+
+    def find_breaker_blocks(
+        self,
+        data: 'pd.DataFrame',
+        order_blocks: List[OrderBlock]
+    ) -> List[Dict]:
+        """
+        Find breaker blocks (mitigated order blocks that become support/resistance).
+
+        ICT teaches: When an order block fails (gets mitigated), it becomes
+        a breaker that acts as the opposite (support becomes resistance, etc.)
+        """
+        breakers = []
+        current_price = float(data['close'].iloc[-1])
+
+        # Check all candles for failed OB patterns
+        for i in range(3, len(data) - 2):
+            open_p = data['open'].iloc[i]
+            close = data['close'].iloc[i]
+            high = data['high'].iloc[i]
+            low = data['low'].iloc[i]
+
+            is_bearish = close < open_p
+            is_bullish = close > open_p
+
+            # Look for bullish candle that gets broken below (becomes bearish breaker)
+            if is_bullish:
+                # Check if subsequent candles broke below this candle's low
+                for j in range(i + 1, min(i + 10, len(data))):
+                    if data['close'].iloc[j] < low:
+                        # This is a failed bullish OB → bearish breaker
+                        # Check if price has come back to test it
+                        if current_price <= high and current_price >= low:
+                            breakers.append({
+                                'index': i,
+                                'type': 'bearish_breaker',
+                                'high': float(high),
+                                'low': float(low),
+                                'being_tested': True,
+                            })
+                        break
+
+            # Look for bearish candle that gets broken above (becomes bullish breaker)
+            if is_bearish:
+                for j in range(i + 1, min(i + 10, len(data))):
+                    if data['close'].iloc[j] > high:
+                        if current_price >= low and current_price <= high:
+                            breakers.append({
+                                'index': i,
+                                'type': 'bullish_breaker',
+                                'high': float(high),
+                                'low': float(low),
+                                'being_tested': True,
+                            })
+                        break
+
+        return breakers[-5:]  # Return last 5
+
+    def _is_kill_zone_active(self) -> bool:
+        """
+        Check if current time is in an ICT Kill Zone.
+
+        London Kill Zone: 2:00-5:00 AM EST (7:00-10:00 UTC)
+        NY Kill Zone: 7:00-10:00 AM EST (12:00-15:00 UTC)
+        Asian Kill Zone: 8:00 PM - 12:00 AM EST (1:00-5:00 UTC)
+        """
+        now = datetime.utcnow()
+        hour = now.hour
+
+        kill_zones = [
+            (1, 5),    # Asian
+            (7, 10),   # London
+            (12, 15),  # New York
+        ]
+
+        for start, end in kill_zones:
+            if start <= hour < end:
+                return True
+
+        return False

@@ -99,25 +99,68 @@ class MLKnowledgeBase:
 
         # Map variations to standard names
         mappings = {
+            # Order Blocks
             'order blocks': 'order_block',
             'order block': 'order_block',
             'ob': 'order_block',
+            # Fair Value Gap
             'fvg': 'fvg',
             'fair value gap': 'fvg',
             'fair value gaps': 'fvg',
+            # Breaker Block
             'breaker block': 'breaker_block',
             'breaker blocks': 'breaker_block',
             'breaker': 'breaker_block',
+            # Support/Resistance
             'support/resistance': 'support_resistance',
             'support': 'support_resistance',
             'resistance': 'support_resistance',
+            # Liquidity
             'liquidity': 'liquidity',
             'buy side liquidity': 'liquidity',
             'sell side liquidity': 'liquidity',
+            # Market Structure
+            'market structure': 'market_structure',
             'bos': 'market_structure',
             'break of structure': 'market_structure',
             'choch': 'market_structure',
             'change of character': 'market_structure',
+            # Optimal Trade Entry / Fibonacci
+            'optimal trade entry': 'optimal_trade_entry',
+            'ote': 'optimal_trade_entry',
+            'optimal_trade_entry': 'optimal_trade_entry',
+            'fibonacci': 'fibonacci_ote',
+            'fib': 'fibonacci_ote',
+            'fibonacci retracement': 'fibonacci_ote',
+            'fibonacci_ote': 'fibonacci_ote',
+            # Swing Points
+            'swing high': 'swing_high_low',
+            'swing low': 'swing_high_low',
+            'swing high/low': 'swing_high_low',
+            'swing_high_low': 'swing_high_low',
+            # Equal Highs/Lows
+            'equal highs': 'equal_highs_lows',
+            'equal lows': 'equal_highs_lows',
+            'equal_highs_lows': 'equal_highs_lows',
+            # Displacement
+            'displacement': 'displacement',
+            # Kill Zones
+            'kill zone': 'kill_zone',
+            'kill zones': 'kill_zone',
+            'kill_zone': 'kill_zone',
+            # Institutional
+            'institutional': 'institutional',
+            # Buy/Sell Stops
+            'sell stops': 'sell_stops',
+            'sell_stops': 'sell_stops',
+            'buy stops': 'buy_stops',
+            'buy_stops': 'buy_stops',
+            # Higher High
+            'higher high': 'higher_high',
+            'higher_high': 'higher_high',
+            # Smart Money
+            'smart money': 'smart_money',
+            'smart_money': 'smart_money',
         }
 
         return mappings.get(normalized, normalized.replace(' ', '_'))
@@ -142,7 +185,16 @@ class MLPatternEngine:
     3. Detection uses learned CHARACTERISTICS, not frequency limits
     """
 
-    def __init__(self, data_dir: str = None):
+    def __init__(self, data_dir: str = None, video_ids: Optional[List[str]] = None):
+        """
+        Initialize the ML Pattern Engine.
+
+        Args:
+            data_dir: Path to data directory. If None, auto-resolved from project root.
+            video_ids: Optional list of video IDs to filter knowledge loading.
+                       If None, loads ALL videos (backward compatible).
+                       If provided, only loads knowledge from those specific videos.
+        """
         # Resolve the data directory relative to the project root
         if data_dir is None:
             # Go up from backend/app/ml/ to backend/ then to project root
@@ -153,7 +205,30 @@ class MLPatternEngine:
 
         self.vision_dir = self.data_dir / "video_vision"
         self.knowledge_base: Optional[MLKnowledgeBase] = None
+        self._video_ids = set(video_ids) if video_ids else None  # None = load all
         self._load_knowledge()
+
+    def _extract_video_id_from_file(self, filepath: Path) -> str:
+        """Extract video_id from a training file path.
+
+        Examples:
+            E9F_aT9f038_vision.json -> E9F_aT9f038
+            -k1eBYoajIo_knowledge_base.json -> -k1eBYoajIo
+        """
+        stem = filepath.stem
+        for suffix in ['_vision', '_knowledge_base', '_teaching_units',
+                       '_vision_analysis', '_vision_progress',
+                       '_selected_frames', '_summary', '_knowledge_summary']:
+            if stem.endswith(suffix):
+                return stem[:-len(suffix)]
+        return stem
+
+    def _should_load_file(self, filepath: Path) -> bool:
+        """Check if a file should be loaded based on video_ids filter."""
+        if self._video_ids is None:
+            return True  # No filter, load everything
+        vid = self._extract_video_id_from_file(filepath)
+        return vid in self._video_ids
 
     def _load_knowledge(self):
         """Load all ML knowledge from trained video analyses"""
@@ -164,12 +239,16 @@ class MLPatternEngine:
             logger.warning("ML has NO knowledge - no patterns will be detected!")
             return
 
-        # Load all vision analysis files
-        vision_files = list(self.vision_dir.glob("*_vision.json"))
+        # Load all vision analysis files (filtered by playlist if specified)
+        vision_files = [f for f in self.vision_dir.glob("*_vision.json")
+                        if self._should_load_file(f)]
 
         if not vision_files:
-            logger.warning("No vision training files found - ML has NO knowledge!")
-            return
+            if self._video_ids is not None:
+                logger.info(f"No vision files match playlist filter ({len(self._video_ids)} video IDs)")
+            else:
+                logger.warning("No vision training files found - ML has NO knowledge!")
+            # Don't return yet - audio-first training may still have knowledge
 
         all_patterns = {}
         total_frames = 0
@@ -301,8 +380,10 @@ class MLPatternEngine:
 
         # ALSO load concepts from knowledge_base.json (transcript/synchronized training)
         # This integrates concepts learned from ICT video transcripts
+        # NOTE: Skip this global merged file when playlist-filtering is active,
+        # because it contains mixed knowledge from ALL videos.
         kb_file = self.data_dir / 'ml_models' / 'knowledge_base.json'
-        if kb_file.exists():
+        if kb_file.exists() and self._video_ids is None:
             try:
                 with open(kb_file, 'r') as f:
                     kb_data = json.load(f)
@@ -373,13 +454,169 @@ class MLPatternEngine:
             except Exception as e:
                 logger.error(f"Error loading knowledge_base.json: {e}")
 
-        self.knowledge_base.total_videos_trained = len(vision_files)
+        # =========================================================================
+        # AUDIO-FIRST TRAINING KNOWLEDGE (from 20 ICT video trainings)
+        # These contain rich LLM-generated summaries for each concept
+        # =========================================================================
+        audio_first_dir = self.data_dir / 'audio_first_training'
+        audio_first_videos = 0
+        if audio_first_dir.exists():
+            kb_files = [f for f in audio_first_dir.glob("*_knowledge_base.json")
+                        if self._should_load_file(f)]
+            logger.info(f"Loading audio-first training from {len(kb_files)} knowledge bases"
+                        f"{' (playlist-filtered)' if self._video_ids is not None else ''}...")
+
+            for kb_file in kb_files:
+                try:
+                    with open(kb_file, 'r') as f:
+                        kb_data = json.load(f)
+
+                    video_id = kb_data.get('video_id', kb_file.stem.replace('_knowledge_base', ''))
+                    audio_first_videos += 1
+
+                    # Track as training source
+                    source_label = f"Audio-First Training: {video_id}"
+                    if source_label not in sources:
+                        sources.append(source_label)
+
+                    # Parse timestamp
+                    if 'generated_at' in kb_data:
+                        try:
+                            generated = datetime.fromisoformat(kb_data['generated_at'])
+                            if latest_trained is None or generated > latest_trained:
+                                latest_trained = generated
+                        except (ValueError, TypeError):
+                            pass
+
+                    # Extract concepts from this video's knowledge base
+                    concepts = kb_data.get('concepts', {})
+                    stats = kb_data.get('processing_stats', {})
+
+                    total_frames += stats.get('vision_analyses', 0)
+
+                    for concept_name, concept_data in concepts.items():
+                        normalized = self.knowledge_base._normalize_pattern_type(concept_name)
+
+                        llm_summary = concept_data.get('llm_summary', '')
+                        concept_stats = concept_data.get('statistics', {})
+                        teaching_types = concept_data.get('teaching_types', {})
+
+                        # Calculate frequency from teaching units
+                        teaching_units = concept_stats.get('teaching_units', 1)
+                        frames_analyzed = concept_stats.get('frames_analyzed', 0)
+
+                        if normalized in self.knowledge_base.patterns_learned:
+                            # MERGE with existing pattern - audio-first supplements
+                            existing = self.knowledge_base.patterns_learned[normalized]
+                            existing.frequency += teaching_units
+
+                            # Store LLM summary in learned_traits (keep best/longest)
+                            existing_summary = existing.learned_traits.get('llm_summary', '')
+                            if len(llm_summary) > len(existing_summary):
+                                existing.learned_traits['llm_summary'] = llm_summary
+
+                            # Add teaching context from summary (first 120 chars)
+                            if llm_summary and llm_summary[:120] not in existing.teaching_contexts:
+                                existing.teaching_contexts.append(llm_summary[:120])
+                                existing.teaching_contexts = existing.teaching_contexts[:8]
+
+                            # Accumulate stats
+                            existing.learned_traits['total_teaching_seconds'] = (
+                                existing.learned_traits.get('total_teaching_seconds', 0) +
+                                concept_stats.get('teaching_duration_seconds', 0)
+                            )
+                            existing.learned_traits['total_words'] = (
+                                existing.learned_traits.get('total_words', 0) +
+                                concept_stats.get('word_count', 0)
+                            )
+                            existing.learned_traits['total_frames'] = (
+                                existing.learned_traits.get('total_frames', 0) + frames_analyzed
+                            )
+                            existing.learned_traits['deictic_references'] = (
+                                existing.learned_traits.get('deictic_references', 0) +
+                                concept_stats.get('deictic_references', 0)
+                            )
+                            existing.learned_traits['video_ids'] = list(set(
+                                existing.learned_traits.get('video_ids', []) + [video_id]
+                            ))
+
+                            # Boost confidence from audio-first training
+                            existing.confidence = min(existing.confidence + 0.05, 0.95)
+
+                            # Add characteristic
+                            char = f"Audio-first trained ({teaching_units} teaching units, {frames_analyzed} frames)"
+                            if char not in existing.characteristics:
+                                existing.characteristics.append(char)
+
+                        else:
+                            # NEW pattern from audio-first training
+                            # Calculate confidence based on depth of training
+                            confidence = 0.5  # Base for audio-first
+                            if teaching_units >= 3:
+                                confidence += 0.15
+                            if frames_analyzed >= 5:
+                                confidence += 0.10
+                            if concept_stats.get('word_count', 0) >= 200:
+                                confidence += 0.05
+                            if concept_stats.get('deictic_references', 0) >= 5:
+                                confidence += 0.05
+                            confidence = min(confidence, 0.90)
+
+                            # Build teaching contexts from LLM summary
+                            teaching_contexts = []
+                            if llm_summary:
+                                # Take first sentence as primary teaching context
+                                first_sentence = llm_summary.split('.')[0] + '.'
+                                if len(first_sentence) > 10:
+                                    teaching_contexts.append(first_sentence[:150])
+
+                            # Build characteristics
+                            characteristics = [
+                                f"Audio-first trained ({teaching_units} teaching units, {frames_analyzed} frames)",
+                                f"Learned from ICT video {video_id}",
+                            ]
+
+                            # Build learned traits
+                            learned_traits = {
+                                'llm_summary': llm_summary,
+                                'total_teaching_seconds': concept_stats.get('teaching_duration_seconds', 0),
+                                'total_words': concept_stats.get('word_count', 0),
+                                'total_frames': frames_analyzed,
+                                'deictic_references': concept_stats.get('deictic_references', 0),
+                                'teaching_types': teaching_types,
+                                'video_ids': [video_id],
+                                'audio_first': True,
+                            }
+
+                            self.knowledge_base.patterns_learned[normalized] = LearnedPattern(
+                                pattern_type=normalized,
+                                frequency=teaching_units,
+                                confidence=confidence,
+                                characteristics=characteristics,
+                                example_locations=[],
+                                teaching_contexts=teaching_contexts,
+                                visual_example_path=None,
+                                learned_traits=learned_traits,
+                            )
+
+                            all_patterns[normalized] = {'frequency': teaching_units}
+                            logger.info(f"  + Audio-first concept: {normalized} (confidence={confidence:.2f}, "
+                                       f"units={teaching_units}, frames={frames_analyzed})")
+
+                except Exception as e:
+                    logger.error(f"Error loading audio-first KB {kb_file}: {e}")
+                    continue
+
+            logger.info(f"Audio-first training: loaded {audio_first_videos} videos")
+
+        self.knowledge_base.total_videos_trained = len(vision_files) + audio_first_videos
         self.knowledge_base.total_frames_analyzed = total_frames
         self.knowledge_base.total_chart_frames = total_charts
         self.knowledge_base.training_sources = sources
         self.knowledge_base.last_trained = latest_trained
 
-        logger.info(f"ML Knowledge loaded: {len(all_patterns)} pattern types from {len(vision_files)} vision files + knowledge base")
+        logger.info(f"ML Knowledge loaded: {len(self.knowledge_base.patterns_learned)} pattern types "
+                    f"from {len(vision_files)} vision files + knowledge base + {audio_first_videos} audio-first trainings")
         for pt, p in self.knowledge_base.patterns_learned.items():
             logger.info(f"  - {pt}: frequency={p.frequency}, confidence={p.confidence:.2f}")
 
@@ -390,11 +627,13 @@ class MLPatternEngine:
         return list(self.knowledge_base.patterns_learned.keys())
 
     def get_unlearned_patterns(self) -> List[str]:
-        """Get list of common pattern types the ML has NOT learned yet"""
+        """Get list of common ICT pattern types the ML has NOT learned yet"""
         common_patterns = [
             'fvg', 'order_block', 'breaker_block', 'market_structure',
-            'liquidity', 'support_resistance', 'mitigation_block',
-            'rejection_block', 'void', 'imbalance'
+            'liquidity', 'optimal_trade_entry', 'fibonacci_ote',
+            'displacement', 'kill_zone', 'institutional', 'smart_money',
+            'buy_stops', 'sell_stops', 'equal_highs_lows', 'swing_high_low',
+            'higher_high', 'support_resistance',
         ]
 
         learned = self.get_learned_patterns()
@@ -738,6 +977,33 @@ class MLPatternEngine:
                 # Extract learned traits for this pattern
                 traits = self._extract_learned_traits(learned)
 
+                # PRIORITY 0: Use LLM summary from audio-first training (richest source)
+                llm_summary = learned.learned_traits.get('llm_summary', '')
+                if llm_summary and len(llm_summary) > 20:
+                    # Use first 200 chars of the LLM-generated summary
+                    summary_text = llm_summary[:200].strip()
+                    if not summary_text.endswith('.'):
+                        # Cut at last complete sentence
+                        last_period = summary_text.rfind('.')
+                        if last_period > 50:
+                            summary_text = summary_text[:last_period + 1]
+                        else:
+                            summary_text = summary_text + '...'
+                    reasoning_parts.append(
+                        f"🧠 **{pattern.upper()}**: {summary_text}"
+                    )
+                    # Skip other priorities since we have the best source
+                    # Still add characteristic insights below
+                    if traits['bullish_count'] > traits['bearish_count']:
+                        reasoning_parts.append(f"   ↳ Typically bullish pattern in current context")
+                    elif traits['bearish_count'] > traits['bullish_count']:
+                        reasoning_parts.append(f"   ↳ Typically bearish pattern in current context")
+                    if traits['high_significance'] > 0:
+                        reasoning_parts.append(f"   ↳ High significance level as taught by ICT")
+                    if traits['institutional']:
+                        reasoning_parts.append(f"   ↳ Indicates institutional activity")
+                    continue
+
                 # PRIORITY 1: Use concept_definitions (actual ICT definitions from transcripts)
                 # This is the REAL definition, not day-specific teaching commentary
                 # Check both normalized form (fvg) and full form (fair_value_gap)
@@ -856,6 +1122,38 @@ class MLPatternEngine:
 
             if not entry_reason:
                 entry_reason = f"Entry at Order Block (AI understands this as institutional zone)"
+
+        # Entry at Optimal Trade Entry (62-79% Fibonacci retracement)
+        if 'optimal_trade_entry' in self.knowledge_base.patterns_learned:
+            ote = self.knowledge_base.patterns_learned['optimal_trade_entry']
+            llm_summary = ote.learned_traits.get('llm_summary', '')
+            if llm_summary:
+                entry_reason = f"Entry at OTE zone (62-79% Fib retracement) - ICT: \"{llm_summary[:80]}...\""
+            elif not entry_reason:
+                entry_reason = "Entry at Optimal Trade Entry (62-79% Fibonacci retracement as taught by ICT)"
+
+        # Displacement confirms institutional intent
+        if 'displacement' in self.knowledge_base.patterns_learned:
+            disp = self.knowledge_base.patterns_learned['displacement']
+            llm_summary = disp.learned_traits.get('llm_summary', '')
+            if llm_summary:
+                if entry_reason:
+                    entry_reason += f" | Displacement confirms institutional intent"
+                else:
+                    entry_reason = f"Entry confirmed by displacement (institutional move)"
+
+        # Kill Zone timing confirmation
+        if 'kill_zone' in self.knowledge_base.patterns_learned:
+            kz = self.knowledge_base.patterns_learned['kill_zone']
+            if entry_reason:
+                entry_reason += " | Kill Zone timing active"
+            else:
+                entry_reason = "Entry during Kill Zone (high-probability ICT session time)"
+
+        # Buy/Sell Stops as liquidity targets
+        if 'buy_stops' in self.knowledge_base.patterns_learned or 'sell_stops' in self.knowledge_base.patterns_learned:
+            if not stop_reason:
+                stop_reason = "Stop beyond buy/sell stop liquidity level (ICT methodology)"
 
         # Default if patterns not learned
         if not entry_reason:

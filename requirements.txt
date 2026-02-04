@@ -31,6 +31,7 @@ joblib>=1.3.0
 # =============================================================================
 pandas>=2.0.0               # Keep for compatibility
 pandas-ta>=0.3.14b0         # Technical indicators
+pyarrow>=14.0.0             # Parquet caching for market data
 
 # =============================================================================
 # Market Data (FREE via Yahoo Finance)
@@ -55,6 +56,11 @@ openai-whisper>=20231117  # Local Whisper model
 python-dotenv>=1.0.0
 requests>=2.31.0
 aiohttp>=3.8.0
+
+# =============================================================================
+# Quant Engine (Tier 5)
+# =============================================================================
+hmmlearn>=0.3.0             # Hidden Markov Models for regime detection
 
 # =============================================================================
 # Optional: Better ML Performance

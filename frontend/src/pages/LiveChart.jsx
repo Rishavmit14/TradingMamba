@@ -17,7 +17,7 @@ import {
   Wifi,
   WifiOff
 } from 'lucide-react';
-import { getLiveOHLCV, getSignalAnalysis, getWebSocketUrl } from '../services/api';
+import { getLiveOHLCV, getSignalAnalysis, getWebSocketUrl, predictPrice, getAvailablePlaylists } from '../services/api';
 
 // Available symbols organized by category
 const SYMBOL_CATEGORIES = {
@@ -69,12 +69,22 @@ const PATTERN_TYPE_MAP = {
   'accumulation': { short: 'ACC', color: '#4caf50', direction: 'bullish' },
   'manipulation': { short: 'MAN', color: '#f44336', direction: 'neutral' },
   'distribution': { short: 'DIST', color: '#ff5722', direction: 'bearish' },
+  // New ICT patterns from Audio-First Training
+  'bullish_displacement': { short: 'DISP ↑', color: '#00e676', direction: 'bullish' },
+  'bearish_displacement': { short: 'DISP ↓', color: '#ff1744', direction: 'bearish' },
+  'bullish_ote': { short: 'OTE', color: '#aa00ff', direction: 'bullish' },
+  'bearish_ote': { short: 'OTE', color: '#d500f9', direction: 'bearish' },
+  'bullish_breaker': { short: 'BRK', color: '#00bfa5', direction: 'bullish' },
+  'bearish_breaker': { short: 'BRK', color: '#ff6d00', direction: 'bearish' },
+  'buy_stops': { short: 'BST', color: '#ff5252', direction: 'neutral' },
+  'sell_stops': { short: 'SST', color: '#69f0ae', direction: 'neutral' },
 };
 
 function LiveChart() {
   const [symbol, setSymbol] = useState('BTCUSDT');
   const [timeframe, setTimeframe] = useState('M15');
   const [analysis, setAnalysis] = useState(null);
+  const [mlPrediction, setMlPrediction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(null);
@@ -84,6 +94,8 @@ function LiveChart() {
   const [isConnected, setIsConnected] = useState(false);
   const [currentPrice, setCurrentPrice] = useState(null);
   const [priceChange, setPriceChange] = useState(0);
+  const [playlists, setPlaylists] = useState([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState('all');
 
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
@@ -91,10 +103,13 @@ function LiveChart() {
   const wsRef = useRef(null);
   const lastCandleRef = useRef(null);
   const priceLinesRef = useRef([]);
+  const placedLabelsRef = useRef([]); // Shared label position tracking for anti-overlap
   const patternOverlaysRef = useRef([]);
   const rayOverlaysRef = useRef([]);
   const candlesDataRef = useRef([]);
   const analysisPatternsRef = useRef([]);
+  const allApiPatternsRef = useRef([]);      // ALL patterns from API (unfiltered)
+  const signalDirectionRef = useRef(null);   // Signal direction for pattern filtering
 
   // Format price with appropriate decimals
   const formatPrice = (price, sym = symbol) => {
@@ -122,6 +137,17 @@ function LiveChart() {
     return labels[tf] || tf;
   };
 
+  // Fetch available playlists for the dropdown
+  useEffect(() => {
+    getAvailablePlaylists()
+      .then(data => {
+        if (Array.isArray(data)) {
+          setPlaylists(data);
+        }
+      })
+      .catch(err => console.warn('Failed to fetch playlists:', err));
+  }, []);
+
   // Clear pattern overlays
   const clearPatternOverlays = useCallback(() => {
     patternOverlaysRef.current.forEach(el => {
@@ -140,6 +166,120 @@ function LiveChart() {
     rayOverlaysRef.current = [];
   }, []);
 
+  // Reusable: filter API patterns for the current visible price range
+  const getRelevantPatterns = useCallback((allPatterns, candles, signalDirection) => {
+    if (!allPatterns || allPatterns.length === 0 || !candles || candles.length === 0) return [];
+
+    const visibleHigh = Math.max(...candles.map(c => c.high));
+    const visibleLow = Math.min(...candles.map(c => c.low));
+    const priceRange = visibleHigh - visibleLow;
+    const margin = priceRange * 0.15;  // 15% margin for better coverage
+    // Use midpoint of visible range as reference price for sorting
+    const currentPrice = (visibleHigh + visibleLow) / 2;
+
+    const getTfPriority = (patternTf) => {
+      if (patternTf === timeframe) return 0;
+      const tfOrder = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1'];
+      const currentIdx = tfOrder.indexOf(timeframe);
+      const patternIdx = tfOrder.indexOf(patternTf);
+      if (patternIdx > currentIdx) return 1;
+      return 2;
+    };
+
+    const allVisible = allPatterns.filter(p => {
+      if (p.filled) return false;
+      const price = p.price || ((p.high || 0) + (p.low || 0)) / 2;
+      return price >= (visibleLow - margin) && price <= (visibleHigh + margin);
+    });
+
+    allVisible.sort((a, b) => {
+      const midA = a.price || ((a.high || 0) + (a.low || 0)) / 2;
+      const midB = b.price || ((b.high || 0) + (b.low || 0)) / 2;
+      return Math.abs(midA - currentPrice) - Math.abs(midB - currentPrice);
+    });
+
+    // Use last candle close as the actual market price for directional filters
+    const lastClose = candles[candles.length - 1]?.close || currentPrice;
+    const filtered = allVisible.filter(p => {
+      const pt = p.pattern_type;
+      const pPrice = p.price || ((p.high || 0) + (p.low || 0)) / 2;
+      // Only apply directional filters if viewing near current price
+      const isNearCurrent = Math.abs(lastClose - currentPrice) / currentPrice < 0.15;
+      if (isNearCurrent) {
+        if (pt === 'buyside_liquidity' && pPrice < lastClose * 0.98) return false;
+        if (pt === 'sellside_liquidity' && pPrice > lastClose * 1.02) return false;
+        if (pt === 'equal_highs' && pPrice < lastClose) return false;
+        if (pt === 'equal_lows' && pPrice > lastClose) return false;
+      }
+      return true;
+    });
+
+    const typeCounts = {};
+    const seenZones = [];
+    const visiblePatterns = [];
+    for (const p of filtered) {
+      const pt = p.pattern_type || '';
+      const baseType = pt.replace('bullish_', '').replace('bearish_', '');
+      const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
+      typeCounts[baseType] = (typeCounts[baseType] || 0) + 1;
+      if (typeCounts[baseType] > 2) continue;
+      const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
+      if (isBoxType) {
+        if (seenZones.some(z => Math.abs(z - mid) / mid < 0.03)) continue;
+        seenZones.push(mid);
+      }
+      visiblePatterns.push(p);
+    }
+
+    const sortedPatterns = [...visiblePatterns].sort((a, b) => {
+      const tpA = getTfPriority(a.timeframe), tpB = getTfPriority(b.timeframe);
+      if (tpA !== tpB) return tpA - tpB;
+      const bosA = a.pattern_type?.includes('bos') || a.pattern_type?.includes('choch');
+      const bosB = b.pattern_type?.includes('bos') || b.pattern_type?.includes('choch');
+      if (bosA && !bosB) return -1;
+      if (!bosA && bosB) return 1;
+      const pA = a.price || ((a.high || 0) + (a.low || 0)) / 2;
+      const pB = b.price || ((b.high || 0) + (b.low || 0)) / 2;
+      return Math.abs(pA - currentPrice) - Math.abs(pB - currentPrice);
+    });
+
+    const rayTypes = [
+      'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
+      'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
+      'buyside_liquidity', 'sellside_liquidity', 'buy_stops', 'sell_stops',
+    ];
+    const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
+    const rayPats = sortedPatterns.filter(p => rayTypes.includes(p.pattern_type));
+
+    if (signalDirection === 'bullish') {
+      return [
+        ...boxPats.filter(p => p.pattern_type.includes('bullish')).slice(0, 5),
+        ...rayPats.filter(p => {
+          const pt = p.pattern_type;
+          return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity' || pt === 'sell_stops';
+        }).slice(0, 6),
+      ];
+    } else if (signalDirection === 'bearish') {
+      return [
+        ...boxPats.filter(p => p.pattern_type.includes('bearish')).slice(0, 5),
+        ...rayPats.filter(p => {
+          const pt = p.pattern_type;
+          return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity' || pt === 'buy_stops';
+        }).slice(0, 6),
+      ];
+    } else {
+      const bosCh = rayPats.filter(p => p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch'));
+      const other = rayPats.filter(p => !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch'));
+      const uniqRays = [];
+      const seen = new Set();
+      for (const r of other) {
+        const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
+        if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
+      }
+      return [...bosCh.slice(0, 2), ...boxPats.slice(0, 5), ...uniqRays.slice(0, 5)];
+    }
+  }, [timeframe]);
+
   // Draw horizontal rays for BOS/CHoCH, liquidity, and equal highs/lows
   const drawHorizontalRays = useCallback((patterns, candles) => {
     if (!chartRef.current || !candlestickSeriesRef.current || !chartContainerRef.current || !patterns || patterns.length === 0 || candles.length === 0) {
@@ -151,13 +291,35 @@ function LiveChart() {
     const chartElement = chartContainerRef.current;
     const chartHeight = chartElement.clientHeight || 500;
 
+    const LABEL_HEIGHT = 20;
+    const LABEL_MIN_GAP = 4;
+
+    // Helper: find non-overlapping Y using shared ref (max 60px displacement)
+    const findNonOverlappingYRay = (desiredY) => {
+      const placed = placedLabelsRef.current;
+      let y = desiredY;
+      let attempts = 0;
+      const maxDisplacement = 60;
+      while (attempts < 8) {
+        const overlaps = placed.some(p => Math.abs(y - p.y) < (LABEL_HEIGHT + LABEL_MIN_GAP));
+        if (!overlaps) break;
+        const offset = (Math.floor(attempts / 2) + 1) * (LABEL_HEIGHT + LABEL_MIN_GAP) * (attempts % 2 === 0 ? 1 : -1);
+        if (Math.abs(offset) > maxDisplacement) break;
+        y = desiredY + offset;
+        attempts++;
+      }
+      placed.push({ y, h: LABEL_HEIGHT });
+      return y;
+    };
+
     // Pattern types that should be drawn as horizontal rays
     const rayPatternTypes = [
       'bos_bullish', 'bos_bearish',
       'choch_bullish', 'choch_bearish',
       'equal_highs', 'equal_lows',
       'liquidity_sweep_high', 'liquidity_sweep_low',
-      'buyside_liquidity', 'sellside_liquidity'
+      'buyside_liquidity', 'sellside_liquidity',
+      'buy_stops', 'sell_stops',
     ];
 
     // Get annotation labels for each pattern type (all solid lines now)
@@ -173,6 +335,8 @@ function LiveChart() {
         'liquidity_sweep_low': { text: 'SSL Sweep', color: '#9c27b0' },
         'buyside_liquidity': { text: 'BSL', color: '#ef5350' },
         'sellside_liquidity': { text: 'SSL', color: '#66bb6a' },
+        'buy_stops': { text: 'BST 🎯', color: '#ff5252' },
+        'sell_stops': { text: 'SST 🎯', color: '#69f0ae' },
       };
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
@@ -268,14 +432,24 @@ function LiveChart() {
         let startX = timeScale.timeToCoordinate(startTime);
         const chartWidth = chartElement.clientWidth;
 
-        // If start is off-screen left, start from left edge (x=0)
+        const rightEdge = chartWidth - 70;
+        // If start is off-screen left, show a shorter ray from the left portion
         if (startX === null || startX < 0) {
           startX = 0;
         }
 
-        const rayWidth = Math.max(chartWidth - startX - 70, 50);
+        // Cap ray width so it doesn't span the entire chart
+        const maxRayWidth = Math.min(rightEdge * 0.6, 500);
+        const rawRayWidth = rightEdge - startX;
+        const rayWidth = Math.max(Math.min(rawRayWidth, maxRayWidth), 50);
+        // Shift start so the ray ends at the right edge
+        startX = rightEdge - rayWidth;
 
-        // Create the horizontal ray line (solid line)
+        // Anti-overlap: adjust Y for ray label
+        const adjustedRayY = findNonOverlappingYRay(y);
+        const labelOffsetY = adjustedRayY - y; // how much the label shifted
+
+        // Create the horizontal ray line (solid line) - always at true price
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
         rayLine.style.cssText = `
@@ -288,15 +462,15 @@ function LiveChart() {
           pointer-events: none;
           z-index: 4;
           box-shadow: 0 0 4px ${annotation.color}60;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         `;
 
-        // Create the annotation label centered on the ray line
+        // Create the annotation label - offset to avoid overlap
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
         labelEl.style.cssText = `
+          position: absolute;
+          left: ${startX + rayWidth / 2 - 30}px;
+          top: ${adjustedRayY - 10}px;
           color: ${annotation.color};
           font-size: 10px;
           font-weight: 700;
@@ -307,9 +481,9 @@ function LiveChart() {
           border: 1px solid ${annotation.color};
           border-radius: 3px;
           pointer-events: none;
+          z-index: 6;
         `;
         labelEl.textContent = annotation.text;
-        rayLine.appendChild(labelEl);
 
         // Create small circle at the start point (only if visible)
         if (startX > 0) {
@@ -333,7 +507,9 @@ function LiveChart() {
 
         chartElement.style.position = 'relative';
         chartElement.appendChild(rayLine);
+        chartElement.appendChild(labelEl);
         rayOverlaysRef.current.push(rayLine);
+        rayOverlaysRef.current.push(labelEl);
       } catch (e) {
         console.log('Error drawing ray:', e);
       }
@@ -352,16 +528,48 @@ function LiveChart() {
     const series = candlestickSeriesRef.current;
     const chartElement = chartContainerRef.current;
 
-    const boxPatternTypes = ['bullish_order_block', 'bearish_order_block', 'bullish_fvg', 'bearish_fvg', 'optimal_trade_entry'];
+    const boxPatternTypes = [
+      'bullish_order_block', 'bearish_order_block',
+      'bullish_fvg', 'bearish_fvg',
+      'optimal_trade_entry',
+      'bullish_ote', 'bearish_ote',
+      'bullish_displacement', 'bearish_displacement',
+      'bullish_breaker', 'bearish_breaker',
+    ];
     // Pattern types that are drawn as horizontal rays (skip them here)
     const rayPatternTypes = [
       'bos_bullish', 'bos_bearish',
       'choch_bullish', 'choch_bearish',
       'equal_highs', 'equal_lows',
       'liquidity_sweep_high', 'liquidity_sweep_low',
-      'buyside_liquidity', 'sellside_liquidity'
+      'buyside_liquidity', 'sellside_liquidity',
+      'buy_stops', 'sell_stops',
     ];
     const markers = [];
+    // Reset shared label position tracking
+    placedLabelsRef.current = [];
+    const LABEL_HEIGHT = 20;
+    const LABEL_MIN_GAP = 4;
+
+    // Helper: find a non-overlapping Y position for a label (max 60px displacement)
+    const findNonOverlappingY = (desiredY, labelH = LABEL_HEIGHT) => {
+      const placed = placedLabelsRef.current;
+      let y = desiredY;
+      let attempts = 0;
+      const maxDisplacement = 60;
+      while (attempts < 8) {
+        const overlaps = placed.some(p =>
+          Math.abs(y - p.y) < (labelH + LABEL_MIN_GAP)
+        );
+        if (!overlaps) break;
+        const offset = (Math.floor(attempts / 2) + 1) * (LABEL_HEIGHT + LABEL_MIN_GAP) * (attempts % 2 === 0 ? 1 : -1);
+        if (Math.abs(offset) > maxDisplacement) break;
+        y = desiredY + offset;
+        attempts++;
+      }
+      placed.push({ y, h: labelH });
+      return y;
+    };
 
     patterns.forEach((pattern, idx) => {
       const patternType = pattern.pattern_type;
@@ -487,24 +695,32 @@ function LiveChart() {
         const y1 = series.priceToCoordinate(highPrice);
         const y2 = series.priceToCoordinate(lowPrice);
 
-        // If start is off-screen left, start from left edge
-        if (x1 === null || x1 < 0) {
-          x1 = 0;
-        }
-
         if (y1 === null || y2 === null) return;
 
         // Extend to right edge of chart (minus price scale area ~60px)
         const rightEdge = chartWidth - 60;
-        const width = Math.max(rightEdge - x1, 50);
+
+        // If pattern start is off-screen left or null, show compact zone on the right
+        if (x1 === null || x1 < 0) {
+          x1 = rightEdge - 120;
+        }
+
+        // Cap maximum box width — keep boxes compact
+        const maxWidth = 150;
+        const rawWidth = rightEdge - x1;
+        const width = Math.max(Math.min(rawWidth, maxWidth), 40);
+        // Shift x1 right so the box ends at the right edge
+        x1 = rightEdge - width;
+
         const height = Math.max(Math.abs(y2 - y1), 15);
 
+        const boxTop = Math.min(y1, y2);
         const overlay = document.createElement('div');
         overlay.className = 'pattern-box-overlay';
         overlay.style.cssText = `
           position: absolute;
           left: ${x1}px;
-          top: ${Math.min(y1, y2)}px;
+          top: ${boxTop}px;
           width: ${width}px;
           height: ${height}px;
           background-color: ${patternInfo.color}20;
@@ -513,30 +729,37 @@ function LiveChart() {
           border-bottom: 1px solid ${patternInfo.color}60;
           pointer-events: none;
           z-index: 3;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         `;
 
-        // Label centered within the box
+        // Label positioned at right side of box, with anti-overlap
+        const desiredLabelY = boxTop + height / 2 - LABEL_HEIGHT / 2;
+        const adjustedLabelY = findNonOverlappingY(desiredLabelY);
+
         const labelEl = document.createElement('div');
+        labelEl.className = 'pattern-box-overlay';
         labelEl.style.cssText = `
+          position: absolute;
+          right: 70px;
+          top: ${adjustedLabelY}px;
           color: ${patternInfo.color};
           font-size: 10px;
           font-weight: 700;
           text-shadow: 0 1px 2px rgba(0,0,0,0.9);
           white-space: nowrap;
           padding: 2px 6px;
-          background: rgba(0,0,0,0.7);
+          background: rgba(0,0,0,0.75);
+          border: 1px solid ${patternInfo.color}80;
           border-radius: 3px;
           pointer-events: none;
+          z-index: 6;
         `;
         labelEl.textContent = label;
 
         chartElement.style.position = 'relative';
-        overlay.appendChild(labelEl);
         chartElement.appendChild(overlay);
+        chartElement.appendChild(labelEl);
         patternOverlaysRef.current.push(overlay);
+        patternOverlaysRef.current.push(labelEl);
       } catch (e) {
         console.log('Error drawing pattern box:', e);
       }
@@ -619,16 +842,25 @@ function LiveChart() {
       };
       window.addEventListener('resize', handleResize);
 
-      // Scroll handler for pattern redraw (both boxes and rays)
-      chart.timeScale().subscribeVisibleLogicalRangeChange(() => {
+      // Scroll/pan handler: re-filter patterns for visible range and redraw
+      chart.timeScale().subscribeVisibleLogicalRangeChange((logicalRange) => {
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
         window.patternUpdateTimeout = setTimeout(() => {
-          if (analysisPatternsRef.current.length > 0 && candlesDataRef.current.length > 0) {
-            // Clear and redraw all overlays
-            clearPatternOverlays();
-            drawPatternBoxes(analysisPatternsRef.current, candlesDataRef.current);
+          const candles = candlesDataRef.current;
+          const allPatterns = allApiPatternsRef.current;
+          if (allPatterns.length > 0 && candles.length > 0 && logicalRange) {
+            // Get only the visible candles based on the logical range
+            const from = Math.max(0, Math.floor(logicalRange.from));
+            const to = Math.min(candles.length - 1, Math.ceil(logicalRange.to));
+            const visibleCandles = candles.slice(from, to + 1);
+            if (visibleCandles.length > 0) {
+              const relevant = getRelevantPatterns(allPatterns, visibleCandles, signalDirectionRef.current);
+              analysisPatternsRef.current = relevant;
+              clearPatternOverlays();
+              drawPatternBoxes(relevant, candles);
+            }
           }
-        }, 100);
+        }, 150);
       });
 
       return () => {
@@ -669,7 +901,7 @@ function LiveChart() {
 
         // Load analysis
         try {
-          const analysisData = await getSignalAnalysis(symbol, timeframe);
+          const analysisData = await getSignalAnalysis(symbol, timeframe, selectedPlaylist);
           setAnalysis(analysisData);
 
           // Only draw patterns and price lines if ML is trained
@@ -677,122 +909,19 @@ function LiveChart() {
 
           if (isMlTrained && analysisData?.patterns && analysisData.patterns.length > 0 && candlesDataRef.current.length > 0) {
             const signalDirection = analysisData?.signal?.direction?.toLowerCase();
-            const totalCandles = candlesDataRef.current.length;
-            const currentPrice = candlesDataRef.current[candlesDataRef.current.length - 1]?.close || 0;
 
-            // Get visible price range from candles
-            const visibleHigh = Math.max(...candlesDataRef.current.map(c => c.high));
-            const visibleLow = Math.min(...candlesDataRef.current.map(c => c.low));
-            const priceRange = visibleHigh - visibleLow;
+            // Store all API patterns and signal direction for scroll-based re-filtering
+            allApiPatternsRef.current = analysisData.patterns;
+            signalDirectionRef.current = signalDirection;
 
-            // Map timeframe to priority (current TF gets highest priority)
-            const getTfPriority = (patternTf) => {
-              if (patternTf === timeframe) return 0;  // Current timeframe - highest priority
-              // Higher timeframes are more significant
-              const tfOrder = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1'];
-              const currentIdx = tfOrder.indexOf(timeframe);
-              const patternIdx = tfOrder.indexOf(patternTf);
-              if (patternIdx > currentIdx) return 1;  // Higher TF - second priority
-              return 2;  // Lower TF - lowest priority
-            };
-
-            // Filter patterns to only those within visible price range (with some margin)
-            const margin = priceRange * 0.1;  // 10% margin
-            const visiblePatterns = analysisData.patterns.filter(p => {
-              const price = p.price || ((p.high || 0) + (p.low || 0)) / 2;
-              return price >= (visibleLow - margin) && price <= (visibleHigh + margin);
-            });
-
-            // Sort patterns: prioritize current timeframe, then by distance from current price
-            const sortedPatterns = [...visiblePatterns].sort((a, b) => {
-              // First: prioritize current timeframe patterns
-              const tfPriorityA = getTfPriority(a.timeframe);
-              const tfPriorityB = getTfPriority(b.timeframe);
-              if (tfPriorityA !== tfPriorityB) return tfPriorityA - tfPriorityB;
-
-              // Second: prioritize BOS/CHoCH patterns
-              const isBosChochA = a.pattern_type?.includes('bos') || a.pattern_type?.includes('choch');
-              const isBosChochB = b.pattern_type?.includes('bos') || b.pattern_type?.includes('choch');
-              if (isBosChochA && !isBosChochB) return -1;
-              if (!isBosChochA && isBosChochB) return 1;
-
-              // Third: sort by distance from current price (nearest first)
-              const priceA = a.price || ((a.high || 0) + (a.low || 0)) / 2;
-              const priceB = b.price || ((b.high || 0) + (b.low || 0)) / 2;
-              const distA = Math.abs(priceA - currentPrice);
-              const distB = Math.abs(priceB - currentPrice);
-              return distA - distB;
-            });
-
-            let relevantPatterns;
-
-            // Separate box patterns (FVG, OB) from ray patterns (BOS, CHoCH, liquidity, etc.)
-            const rayPatternTypes = [
-              'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
-              'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
-              'buyside_liquidity', 'sellside_liquidity'
-            ];
-
-            const boxPatterns = sortedPatterns.filter(p => !rayPatternTypes.includes(p.pattern_type));
-            const rayPatterns = sortedPatterns.filter(p => rayPatternTypes.includes(p.pattern_type));
-
-            // Only filter if we have a clear bullish or bearish signal
-            // For WAIT, neutral, or no signal - show all patterns
-            if (signalDirection === 'bullish') {
-              // Filter to bullish patterns only
-              const filteredBoxes = boxPatterns.filter(p => {
-                const pt = p.pattern_type;
-                return pt.includes('bullish');
-              }).slice(0, 5);
-              const filteredRays = rayPatterns.filter(p => {
-                const pt = p.pattern_type;
-                return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity';
-              }).slice(0, 8);  // Allow more ray patterns
-              relevantPatterns = [...filteredBoxes, ...filteredRays];
-            } else if (signalDirection === 'bearish') {
-              // Filter to bearish patterns only
-              const filteredBoxes = boxPatterns.filter(p => {
-                const pt = p.pattern_type;
-                return pt.includes('bearish');
-              }).slice(0, 5);
-              const filteredRays = rayPatterns.filter(p => {
-                const pt = p.pattern_type;
-                return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity';
-              }).slice(0, 8);  // Allow more ray patterns
-              relevantPatterns = [...filteredBoxes, ...filteredRays];
-            } else {
-              // WAIT, neutral, or undefined - show mix of patterns
-              // Always include BOS/CHoCH patterns as they're key market structure
-              const bosChochPatterns = rayPatterns.filter(p =>
-                p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch')
-              );
-              const otherRays = rayPatterns.filter(p =>
-                !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch')
-              );
-
-              // Deduplicate rays by price level (keep only unique price levels)
-              const uniqueRays = [];
-              const seenPrices = new Set();
-              for (const ray of otherRays) {
-                const price = ray.price || ray.high || ray.low;
-                const roundedPrice = Math.round(price / 100) * 100; // Round to nearest 100
-                if (!seenPrices.has(roundedPrice)) {
-                  seenPrices.add(roundedPrice);
-                  uniqueRays.push(ray);
-                }
-              }
-
-              relevantPatterns = [
-                ...bosChochPatterns.slice(0, 2),  // BOS/CHoCH (up to 2)
-                ...boxPatterns.slice(0, 4),        // Box patterns
-                ...uniqueRays.slice(0, 4)          // Other rays (deduplicated)
-              ];
-            }
-
+            // Filter for current visible range
+            const relevantPatterns = getRelevantPatterns(analysisData.patterns, candlesDataRef.current, signalDirection);
             analysisPatternsRef.current = relevantPatterns;
             setTimeout(() => drawPatternBoxes(relevantPatterns, candlesDataRef.current), 200);
           } else {
             // Clear patterns if ML not trained or no patterns
+            allApiPatternsRef.current = [];
+            signalDirectionRef.current = null;
             analysisPatternsRef.current = [];
             clearPatternOverlays();
           }
@@ -834,6 +963,14 @@ function LiveChart() {
           console.log('Analysis not available:', err.message);
         }
 
+        // Load ML prediction in background
+        try {
+          const pred = await predictPrice(symbol);
+          setMlPrediction(pred);
+        } catch (err) {
+          setMlPrediction(null);
+        }
+
         setLastUpdate(new Date());
       } catch (err) {
         console.error('Load error:', err);
@@ -854,7 +991,7 @@ function LiveChart() {
         candlestickSeriesRef.current = null;
       }
     };
-  }, [symbol, timeframe, drawPatternBoxes, clearPatternOverlays]);
+  }, [symbol, timeframe, selectedPlaylist, drawPatternBoxes, clearPatternOverlays]);
 
   // WebSocket connection
   useEffect(() => {
@@ -992,6 +1129,26 @@ function LiveChart() {
               </button>
             ))}
           </div>
+
+          {/* Playlist Knowledge Selector */}
+          {playlists.length > 0 && (
+            <div className="flex items-center">
+              <select
+                value={selectedPlaylist}
+                onChange={(e) => setSelectedPlaylist(e.target.value)}
+                className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500/50 cursor-pointer appearance-none"
+                title="Select which playlist's ML knowledge drives pattern detection"
+                style={{ maxWidth: '220px' }}
+              >
+                <option value="all">All Playlists (Combined)</option>
+                {playlists.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.title} ({p.trained_video_count}/{p.video_count} trained)
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <button
             onClick={() => setShowLegend(!showLegend)}
@@ -1185,6 +1342,78 @@ function LiveChart() {
                     </div>
                   </div>
                 )}
+
+                {/* Quant Engine Insights */}
+                {analysis.quant && (
+                  <div className="p-3 rounded-lg bg-cyan-500/5 border border-cyan-500/20">
+                    <div className="flex items-center gap-2 mb-2">
+                      <BarChart2 className="w-4 h-4 text-cyan-400" />
+                      <span className="font-semibold text-cyan-400">Quant Engine</span>
+                    </div>
+                    <div className="space-y-2">
+                      {/* Market Regime */}
+                      {analysis.quant.regime && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400">Market Regime</span>
+                          <span className={`px-2 py-0.5 rounded-full font-medium ${
+                            analysis.quant.regime.regime === 'trending_up' ? 'bg-emerald-500/20 text-emerald-400' :
+                            analysis.quant.regime.regime === 'trending_down' ? 'bg-red-500/20 text-red-400' :
+                            analysis.quant.regime.regime === 'high_volatility' ? 'bg-amber-500/20 text-amber-400' :
+                            'bg-blue-500/20 text-blue-400'
+                          }`}>
+                            {(analysis.quant.regime.regime || 'unknown').replace('_', ' ').toUpperCase()}
+                          </span>
+                        </div>
+                      )}
+                      {analysis.quant.regime?.confidence && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400">Regime Confidence</span>
+                          <span className="font-mono text-white">{Math.round(analysis.quant.regime.confidence * 100)}%</span>
+                        </div>
+                      )}
+                      {/* ML Classifier */}
+                      {analysis.quant.ml_classifier && (
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400">ML Classifiers</span>
+                          <span className="text-cyan-400 font-medium">
+                            {analysis.quant.ml_classifier.models_trained} trained
+                          </span>
+                        </div>
+                      )}
+                      {/* Backtest Stats */}
+                      {analysis.quant.backtest && Object.keys(analysis.quant.backtest).length > 0 && (
+                        <div className="mt-2 pt-2 border-t border-cyan-500/10">
+                          <div className="text-[10px] text-cyan-400 font-semibold mb-1">Backtest Win Rates</div>
+                          <div className="space-y-1">
+                            {Object.entries(analysis.quant.backtest).slice(0, 4).map(([pattern, stats]) => {
+                              const wr = stats.avg_win_rate || stats.win_rate || 0;
+                              const wrPct = wr > 1 ? wr : wr * 100;
+                              return (
+                              <div key={pattern} className="flex items-center justify-between text-xs">
+                                <span className="text-slate-400 capitalize">{pattern.replace('_', ' ')}</span>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-12 h-1 bg-slate-700 rounded-full overflow-hidden">
+                                    <div
+                                      className={`h-full rounded-full ${
+                                        wrPct >= 60 ? 'bg-emerald-400' :
+                                        wrPct >= 50 ? 'bg-amber-400' : 'bg-red-400'
+                                      }`}
+                                      style={{ width: `${Math.round(wrPct)}%` }}
+                                    />
+                                  </div>
+                                  <span className="font-mono text-white w-8 text-right">
+                                    {Math.round(wrPct)}%
+                                  </span>
+                                </div>
+                              </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -1350,6 +1579,135 @@ function LiveChart() {
                 </div>
               )}
             </div>
+
+            {/* Quant Engine Status Card */}
+            {analysis?.quant && (
+              <div className="card-dark rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                  <BarChart2 className="w-4 h-4 text-cyan-400" /> Quant Engine
+                </h3>
+                <div className="space-y-2">
+                  {analysis.quant.regime && (
+                    <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-slate-400">Regime</span>
+                        <span className={`px-2 py-0.5 rounded-full font-semibold ${
+                          analysis.quant.regime.regime === 'trending_up' ? 'bg-emerald-500/20 text-emerald-400' :
+                          analysis.quant.regime.regime === 'trending_down' ? 'bg-red-500/20 text-red-400' :
+                          analysis.quant.regime.regime === 'high_volatility' ? 'bg-amber-500/20 text-amber-400' :
+                          'bg-blue-500/20 text-blue-400'
+                        }`}>
+                          {(analysis.quant.regime.regime || '').replace('_', ' ').toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {analysis.quant.ml_classifier && (
+                    <div className="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-800/50">
+                      <span className="text-slate-400">ML Models</span>
+                      <span className="text-cyan-400">{analysis.quant.ml_classifier.models_trained} trained</span>
+                    </div>
+                  )}
+                  {analysis.quant.backtest && Object.keys(analysis.quant.backtest).length > 0 && (
+                    <div className="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-800/50">
+                      <span className="text-slate-400">Backtested</span>
+                      <span className="text-emerald-400">{Object.keys(analysis.quant.backtest).length} patterns</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Video Knowledge → ML Features */}
+            {analysis?.video_knowledge?.active && (
+              <div className="card-dark rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-purple-400" /> Video Knowledge
+                  <span className="text-[9px] bg-purple-500/20 text-purple-400 px-1.5 py-0.5 rounded-full">
+                    {analysis.video_knowledge.concepts_loaded} concepts
+                  </span>
+                </h3>
+                <div className="space-y-2">
+                  {/* Teaching depth for detected patterns */}
+                  {analysis.video_knowledge.pattern_teaching && Object.entries(analysis.video_knowledge.pattern_teaching).length > 0 && (
+                    <div>
+                      <div className="text-[10px] text-slate-400 mb-1.5">Teaching Depth (detected patterns)</div>
+                      {Object.entries(analysis.video_knowledge.pattern_teaching)
+                        .sort(([,a], [,b]) => b.depth_score - a.depth_score)
+                        .map(([pattern, info]) => (
+                        <div key={pattern} className="flex items-center gap-1.5 mb-1">
+                          <span className="text-[10px] text-slate-300 w-20 truncate">{pattern.replace(/_/g, ' ')}</span>
+                          <div className="flex-1 bg-slate-700 rounded-full h-1.5">
+                            <div
+                              className="bg-gradient-to-r from-purple-500 to-cyan-400 h-1.5 rounded-full"
+                              style={{ width: `${Math.round(info.depth_score * 100)}%` }}
+                            />
+                          </div>
+                          <span className="text-[9px] text-slate-500 w-8 text-right">{info.teaching_depth}u</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {/* Co-occurrences */}
+                  {analysis.video_knowledge.co_occurrences?.length > 0 && (
+                    <div className="pt-2 border-t border-slate-700/50">
+                      <div className="text-[10px] text-slate-400 mb-1">Learned Co-occurrences</div>
+                      {analysis.video_knowledge.co_occurrences.slice(0, 3).map((pair, i) => (
+                        <div key={i} className="flex items-center gap-1 text-[10px] mb-0.5">
+                          <span className="text-cyan-400">{pair.a.replace(/_/g, ' ')}</span>
+                          <span className="text-slate-600">+</span>
+                          <span className="text-purple-400">{pair.b.replace(/_/g, ' ')}</span>
+                          <span className="ml-auto text-yellow-400 font-mono">{Math.round(pair.score * 100)}%</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="text-[9px] text-slate-600 mt-1">
+                    {analysis.video_knowledge.features_active} video features active
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ML Price Prediction Card */}
+            {mlPrediction?.predictions && (
+              <div className="card-dark rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-violet-400" /> ML Prediction
+                </h3>
+                <div className="space-y-2">
+                  {['h5', 'h10', 'h20'].map(h => {
+                    const pred = mlPrediction.predictions[h];
+                    if (!pred || pred.error) return null;
+                    return (
+                      <div key={h} className={`p-2 rounded-lg border text-xs ${
+                        pred.direction === 'bullish' ? 'bg-emerald-500/10 border-emerald-500/20' :
+                        pred.direction === 'bearish' ? 'bg-red-500/10 border-red-500/20' :
+                        'bg-slate-500/10 border-slate-500/20'
+                      }`}>
+                        <div className="flex items-center justify-between">
+                          <span className="text-slate-400">{h.replace('h', '')}d</span>
+                          <div className="flex items-center gap-1">
+                            <span className={`font-bold uppercase ${
+                              pred.direction === 'bullish' ? 'text-emerald-400' :
+                              pred.direction === 'bearish' ? 'text-red-400' : 'text-slate-400'
+                            }`}>
+                              {pred.direction}
+                            </span>
+                            <span className="text-slate-500 font-mono">
+                              {(pred.confidence * 100).toFixed(0)}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {Object.values(mlPrediction.predictions).every(p => p?.error) && (
+                    <p className="text-xs text-slate-500 text-center py-2">Not trained yet</p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

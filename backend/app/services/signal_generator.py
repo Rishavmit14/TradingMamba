@@ -74,12 +74,17 @@ class SignalGenerator:
         self,
         min_confidence: float = 0.65,
         min_risk_reward: float = 2.0,
-        min_grade: str = "B"  # Minimum pattern grade to trade
+        min_grade: str = "B",  # Minimum pattern grade to trade
+        ml_engine=None  # Optional injected MLPatternEngine for playlist isolation
     ):
-        self.analyzer = SmartMoneyAnalyzer(use_ml=True)
+        if ml_engine is not None:
+            self.ml_engine = ml_engine
+            self.analyzer = SmartMoneyAnalyzer(use_ml=True, ml_engine=ml_engine)
+        else:
+            self.ml_engine = get_ml_engine()
+            self.analyzer = SmartMoneyAnalyzer(use_ml=True)
         self.min_confidence = min_confidence
         self.min_risk_reward = min_risk_reward
-        self.ml_engine = get_ml_engine()
 
         # Hedge Fund Components
         self.pattern_grader = get_pattern_grader()

@@ -54,24 +54,84 @@ class SmartMoneyConceptScorer:
     BASE_WEIGHTS = {
         'order_block': 0.85,
         'fair_value_gap': 0.80,
+        'fvg': 0.80,
         'liquidity': 0.90,
         'market_structure': 0.95,
         'premium_discount': 0.75,
         'kill_zones': 0.70,
+        'kill_zone': 0.70,
         'entry_models': 0.85,
         'breaker': 0.80,
+        'breaker_block': 0.80,
         'institutional': 0.65,
         'time_based': 0.60,
         'price_action': 0.70,
+        # Audio-first training concepts
+        'optimal_trade_entry': 0.90,
+        'fibonacci_ote': 0.85,
+        'displacement': 0.80,
+        'buy_stops': 0.75,
+        'sell_stops': 0.75,
+        'equal_highs_lows': 0.70,
+        'smart_money': 0.65,
+        'higher_high': 0.60,
+        'swing_high_low': 0.55,
     }
 
     def __init__(self):
         self.weights = self.BASE_WEIGHTS.copy()
         self.performance_history = defaultdict(list)
+        self._ml_classifier = None  # Tier 3 ML classifier (lazy loaded)
+        self._pattern_quality_model = None  # Tier 6+ pattern quality (lazy loaded)
+
+    def _get_ml_classifier(self):
+        """Lazy load ML classifier (Tier 3)."""
+        if self._ml_classifier is None:
+            try:
+                from .ml_models import get_classifier
+                classifier = get_classifier()
+                if classifier.models:  # Only use if models are trained
+                    self._ml_classifier = classifier
+            except Exception:
+                pass
+        return self._ml_classifier
+
+    def _get_pattern_quality_model(self):
+        """Lazy load Pattern Quality Model (video-trained)."""
+        if self._pattern_quality_model is None:
+            try:
+                from .pattern_quality_model import get_pattern_quality_model
+                pqm = get_pattern_quality_model()
+                if pqm.is_trained:
+                    self._pattern_quality_model = pqm
+            except Exception:
+                pass
+        return self._pattern_quality_model
 
     def score_concept(self, concept: str, context: Dict) -> float:
-        """Score a concept based on market context"""
-        base_weight = self.weights.get(concept, 0.5)
+        """Score a concept based on market context, using ML predictions when available."""
+        # Tier 3: Use ML classifier probability if trained
+        ml_classifier = self._get_ml_classifier()
+        if ml_classifier and ml_classifier.has_model(concept):
+            features = context.get('ml_features')
+            if features is not None:
+                ml_prob = ml_classifier.predict(concept, features)
+                # Blend ML prediction with base weight (70% ML, 30% base)
+                base_weight = self.weights.get(concept, 0.5)
+                base_weight = ml_prob * 0.7 + base_weight * 0.3
+            else:
+                base_weight = self.weights.get(concept, 0.5)
+        else:
+            base_weight = self.weights.get(concept, 0.5)
+
+        # Video-trained Pattern Quality Model (blends video knowledge)
+        pqm = self._get_pattern_quality_model()
+        if pqm is not None:
+            extended_features = context.get('extended_features')
+            if extended_features is not None:
+                pqm_score = pqm.score_pattern(concept, extended_features)
+                # Three-way blend: 40% base, 30% ML classifier, 30% video-trained PQM
+                base_weight = base_weight * 0.7 + pqm_score * 0.3
 
         # Context multipliers
         multipliers = []
@@ -123,6 +183,7 @@ class ConceptFusionEngine:
     # Concept synergies (concepts that work well together)
     SYNERGIES = {
         ('order_block', 'fair_value_gap'): 1.3,
+        ('order_block', 'fvg'): 1.3,
         ('order_block', 'liquidity'): 1.25,
         ('market_structure', 'order_block'): 1.2,
         ('premium_discount', 'order_block'): 1.2,
@@ -130,6 +191,15 @@ class ConceptFusionEngine:
         ('liquidity', 'market_structure'): 1.15,
         ('fair_value_gap', 'premium_discount'): 1.15,
         ('breaker', 'fair_value_gap'): 1.2,
+        # Audio-first training synergies
+        ('optimal_trade_entry', 'fibonacci_ote'): 1.35,
+        ('displacement', 'order_block'): 1.25,
+        ('kill_zone', 'optimal_trade_entry'): 1.20,
+        ('buy_stops', 'liquidity'): 1.15,
+        ('sell_stops', 'liquidity'): 1.15,
+        ('displacement', 'fvg'): 1.20,
+        ('equal_highs_lows', 'liquidity'): 1.15,
+        ('breaker_block', 'fvg'): 1.20,
     }
 
     # Concept conflicts (concepts that contradict each other)
@@ -140,6 +210,21 @@ class ConceptFusionEngine:
     def __init__(self):
         self.concept_scorer = SmartMoneyConceptScorer()
         self.synergies = self.SYNERGIES.copy()
+
+        # Override hardcoded synergies with video-learned co-occurrence where available
+        try:
+            from .playlist_registry import PlaylistRegistry, playlist_context
+            vk = PlaylistRegistry.get_video_knowledge(playlist_context.get())
+            if vk.is_loaded():
+                for (c1, c2), default_bonus in self.SYNERGIES.items():
+                    co_occ = vk.get_co_occurrence(c1, c2)
+                    if co_occ > 0:
+                        # Scale co-occurrence (0-1) to synergy bonus (1.0-1.4)
+                        learned_bonus = 1.0 + co_occ * 0.4
+                        # Blend: 60% learned, 40% hardcoded
+                        self.synergies[(c1, c2)] = learned_bonus * 0.6 + default_bonus * 0.4
+        except Exception:
+            pass  # Keep hardcoded synergies if video knowledge unavailable
 
     def calculate_confluence(self, concepts: List[str], context: Dict) -> Tuple[float, int, List[str]]:
         """

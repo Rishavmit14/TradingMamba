@@ -192,11 +192,113 @@ class Database:
                 )
             """)
 
+            # Backtest results table (Tier 1)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS backtest_results (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    symbol TEXT NOT NULL,
+                    timeframe TEXT NOT NULL,
+                    pattern_type TEXT NOT NULL,
+                    total_signals INTEGER,
+                    win_rate REAL,
+                    avg_return_pct REAL,
+                    profit_factor REAL,
+                    avg_rr REAL,
+                    max_drawdown_pct REAL,
+                    sample_count INTEGER,
+                    lookback_days INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Optimized parameters table (Tier 2)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS optimized_params (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    symbol TEXT NOT NULL,
+                    timeframe TEXT NOT NULL,
+                    param_name TEXT NOT NULL,
+                    param_value REAL NOT NULL,
+                    validation_win_rate REAL,
+                    validation_profit_factor REAL,
+                    train_period_start TEXT,
+                    train_period_end TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE(symbol, timeframe, param_name)
+                )
+            """)
+
+            # ML model metrics table (Tier 3)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ml_model_metrics (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    symbol TEXT NOT NULL,
+                    timeframe TEXT NOT NULL,
+                    pattern_type TEXT NOT NULL,
+                    model_type TEXT NOT NULL,
+                    accuracy REAL,
+                    precision_score REAL,
+                    recall REAL,
+                    f1_score REAL,
+                    auc_roc REAL,
+                    feature_importance TEXT,
+                    train_samples INTEGER,
+                    test_samples INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Price predictions table (Tier 6 - Genuine ML Predictor)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS price_predictions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    symbol TEXT NOT NULL,
+                    timeframe TEXT NOT NULL,
+                    horizon INTEGER NOT NULL,
+                    direction TEXT NOT NULL,
+                    confidence REAL NOT NULL,
+                    prob_bullish REAL,
+                    prob_neutral REAL,
+                    prob_bearish REAL,
+                    price_at_prediction REAL NOT NULL,
+                    predicted_at TEXT NOT NULL,
+                    feature_snapshot TEXT,
+                    model_version TEXT,
+                    actual_return REAL,
+                    actual_direction TEXT,
+                    was_correct INTEGER,
+                    resolved_at TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Predictor metrics table (walk-forward validation results)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS predictor_metrics (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    symbol TEXT NOT NULL,
+                    timeframe TEXT NOT NULL,
+                    horizon INTEGER NOT NULL,
+                    accuracy REAL,
+                    f1_macro REAL,
+                    directional_accuracy REAL,
+                    n_walk_forward_folds INTEGER,
+                    n_train_samples INTEGER,
+                    class_distribution TEXT,
+                    feature_importance TEXT,
+                    trained_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
             # Create indexes for faster queries
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_videos_youtube_id ON videos(youtube_id)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_signals_symbol ON signals(symbol)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_signals_status ON signals(status)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_performance_signal ON performance(signal_id)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_backtest_symbol ON backtest_results(symbol)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_optimized_params ON optimized_params(symbol, timeframe)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_predictions_symbol ON price_predictions(symbol)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_predictions_resolved ON price_predictions(was_correct)")
 
             conn.commit()
             print(f"Database initialized at {self.db_path}")
@@ -477,6 +579,176 @@ class Database:
                 'total_training_sessions': total_sessions,
                 'last_training': last_training
             }
+
+    # ==================== Price Prediction Operations ====================
+
+    def save_prediction(self, pred: Dict) -> int:
+        """Save a price prediction"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO price_predictions
+                (symbol, timeframe, horizon, direction, confidence,
+                 prob_bullish, prob_neutral, prob_bearish,
+                 price_at_prediction, predicted_at, feature_snapshot, model_version)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                pred['symbol'], pred['timeframe'], pred['horizon'],
+                pred['direction'], pred['confidence'],
+                pred.get('prob_bullish', 0), pred.get('prob_neutral', 0),
+                pred.get('prob_bearish', 0),
+                pred['price_at_prediction'], pred['predicted_at'],
+                pred.get('feature_snapshot', '{}'), pred.get('model_version', ''),
+            ))
+            return cursor.lastrowid
+
+    def get_pending_predictions(self) -> List[Dict]:
+        """Get all unresolved predictions"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT * FROM price_predictions
+                WHERE was_correct IS NULL
+                ORDER BY created_at ASC
+            """)
+            return [dict(row) for row in cursor.fetchall()]
+
+    def resolve_prediction(self, pred_id: int, actual_return: float,
+                           actual_direction: str, was_correct: int):
+        """Resolve a prediction with actual outcome"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE price_predictions
+                SET actual_return = ?, actual_direction = ?,
+                    was_correct = ?, resolved_at = ?
+                WHERE id = ?
+            """, (actual_return, actual_direction, was_correct,
+                  datetime.utcnow().isoformat(), pred_id))
+
+    def get_prediction_performance(self, symbol: str = None,
+                                    lookback_days: int = 90) -> Dict:
+        """Get prediction performance metrics"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cutoff = (datetime.utcnow() - __import__('datetime').timedelta(days=lookback_days)).isoformat()
+
+            # Build query
+            where = "WHERE was_correct IS NOT NULL AND created_at > ?"
+            params = [cutoff]
+            if symbol:
+                where += " AND symbol = ?"
+                params.append(symbol)
+
+            # Overall stats
+            cursor.execute(f"""
+                SELECT COUNT(*) as total,
+                       SUM(was_correct) as correct,
+                       AVG(was_correct) as accuracy
+                FROM price_predictions {where}
+            """, params)
+            row = cursor.fetchone()
+            overall = {
+                'total': row['total'] or 0,
+                'correct': row['correct'] or 0,
+                'accuracy': round(row['accuracy'] or 0, 4),
+            }
+
+            # By symbol
+            cursor.execute(f"""
+                SELECT symbol,
+                       COUNT(*) as total,
+                       SUM(was_correct) as correct,
+                       AVG(was_correct) as accuracy
+                FROM price_predictions {where}
+                GROUP BY symbol
+            """, params)
+            by_symbol = {
+                row['symbol']: {
+                    'total': row['total'],
+                    'correct': row['correct'] or 0,
+                    'accuracy': round(row['accuracy'] or 0, 4),
+                }
+                for row in cursor.fetchall()
+            }
+
+            # By horizon
+            cursor.execute(f"""
+                SELECT horizon,
+                       COUNT(*) as total,
+                       SUM(was_correct) as correct,
+                       AVG(was_correct) as accuracy
+                FROM price_predictions {where}
+                GROUP BY horizon
+            """, params)
+            by_horizon = {
+                str(row['horizon']): {
+                    'total': row['total'],
+                    'correct': row['correct'] or 0,
+                    'accuracy': round(row['accuracy'] or 0, 4),
+                }
+                for row in cursor.fetchall()
+            }
+
+            return {
+                'overall': overall,
+                'by_symbol': by_symbol,
+                'by_horizon': by_horizon,
+                'lookback_days': lookback_days,
+            }
+
+    def get_recent_predictions(self, symbol: str = None, limit: int = 20) -> List[Dict]:
+        """Get recent predictions with outcomes"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            query = "SELECT * FROM price_predictions"
+            params = []
+
+            if symbol:
+                query += " WHERE symbol = ?"
+                params.append(symbol)
+
+            query += " ORDER BY created_at DESC LIMIT ?"
+            params.append(limit)
+
+            cursor.execute(query, params)
+            return [dict(row) for row in cursor.fetchall()]
+
+    def save_predictor_metrics(self, metrics: Dict):
+        """Save predictor training metrics"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO predictor_metrics
+                (symbol, timeframe, horizon, accuracy, f1_macro,
+                 directional_accuracy, n_walk_forward_folds, n_train_samples,
+                 class_distribution, feature_importance)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                metrics['symbol'], metrics['timeframe'], metrics['horizon'],
+                metrics['accuracy'], metrics['f1_macro'],
+                metrics['directional_accuracy'],
+                metrics['n_walk_forward_folds'], metrics['n_train_samples'],
+                metrics.get('class_distribution', '{}'),
+                metrics.get('feature_importance', '{}'),
+            ))
+
+    def get_predictor_metrics(self, symbol: str = None) -> List[Dict]:
+        """Get predictor training metrics"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            if symbol:
+                cursor.execute("""
+                    SELECT * FROM predictor_metrics
+                    WHERE symbol = ?
+                    ORDER BY trained_at DESC
+                """, (symbol,))
+            else:
+                cursor.execute("""
+                    SELECT * FROM predictor_metrics
+                    ORDER BY trained_at DESC
+                """)
+            return [dict(row) for row in cursor.fetchall()]
 
 
 # Singleton instance

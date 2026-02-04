@@ -31,7 +31,7 @@ import {
   Scan,
   Shield
 } from 'lucide-react';
-import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus, startSynchronizedTraining, getSyncTrainingStatus, getSynchronizedKnowledge, getHedgeFundStatus, getEdgeStatistics } from '../services/api';
+import { getAnalysisStatus, quickSignal, getSymbols, addPlaylist, getPlaylistStreamUrl, getTranscriptsGrouped, trainFromPlaylist, getSelectiveTrainingStatus, startSynchronizedTraining, getSyncTrainingStatus, getSynchronizedKnowledge, getHedgeFundStatus, getEdgeStatistics, getQuantDashboard, predictPrice, trainPredictor, getPredictorStatus, getPredictorPerformance, resolvePredictions, getVideoKnowledgeStatus, trainPatternQuality, getPatternQualityStatus } from '../services/api';
 
 // Animated Background Orb
 function BackgroundOrb({ className }) {
@@ -1170,6 +1170,392 @@ function SynchronizedTrainingManager({ onTrainingComplete }) {
 }
 
 // Main Dashboard
+// Price Prediction Panel - Genuine ML Forward Predictions
+function VideoKnowledgePanel() {
+  const [vkStatus, setVkStatus] = useState(null);
+  const [pqStatus, setPqStatus] = useState(null);
+  const [trainingPQ, setTrainingPQ] = useState(false);
+  const [pqResult, setPqResult] = useState(null);
+
+  useEffect(() => {
+    loadStatus();
+  }, []);
+
+  const loadStatus = async () => {
+    try {
+      const [vk, pq] = await Promise.all([
+        getVideoKnowledgeStatus().catch(() => null),
+        getPatternQualityStatus().catch(() => null),
+      ]);
+      setVkStatus(vk);
+      setPqStatus(pq);
+    } catch (e) { /* ignore */ }
+  };
+
+  const handleTrainPQ = async () => {
+    setTrainingPQ(true);
+    setPqResult(null);
+    try {
+      const result = await trainPatternQuality('BTCUSDT', 'D1');
+      setPqResult(result);
+      loadStatus();
+    } catch (e) {
+      setPqResult({ error: e.message });
+    }
+    setTrainingPQ(false);
+  };
+
+  if (!vkStatus?.loaded) return null;
+
+  return (
+    <div className="mb-8">
+      <div className="flex items-center gap-2 mb-4">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <span className="text-2xl">🎓</span>
+          Video Knowledge → ML Features
+        </h2>
+        <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
+          {vkStatus.concepts} concepts • {vkStatus.videos} videos
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Concept Teaching Depth */}
+        <div className="bg-gray-800/60 border border-gray-700/50 rounded-xl p-4">
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">Concept Teaching Depth (→ 22 ML Features)</h3>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {vkStatus.concepts_list?.slice(0, 12).map((concept) => {
+              const maxDepth = vkStatus.normalization?.max_teaching_depth || 1;
+              const pct = Math.round((concept.teaching_depth / maxDepth) * 100);
+              return (
+                <div key={concept.name} className="flex items-center gap-2">
+                  <span className="text-xs text-gray-400 w-32 truncate">{concept.name.replace(/_/g, ' ')}</span>
+                  <div className="flex-1 bg-gray-700 rounded-full h-2">
+                    <div
+                      className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <span className="text-xs text-gray-500 w-16 text-right">
+                    {concept.teaching_depth} units
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Co-occurrence & Pattern Quality */}
+        <div className="bg-gray-800/60 border border-gray-700/50 rounded-xl p-4">
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">Learned Co-occurrences & Pattern Quality</h3>
+
+          {/* Top co-occurrences */}
+          <div className="space-y-1.5 mb-4">
+            {vkStatus.top_co_occurrences?.slice(0, 5).map((pair, i) => (
+              <div key={i} className="flex items-center gap-1 text-xs">
+                <span className="text-cyan-400">{pair.concept_a.replace(/_/g, ' ')}</span>
+                <span className="text-gray-600">+</span>
+                <span className="text-purple-400">{pair.concept_b.replace(/_/g, ' ')}</span>
+                <span className="ml-auto text-yellow-400 font-mono">{Math.round(pair.score * 100)}%</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Pattern Quality Model */}
+          <div className="border-t border-gray-700/50 pt-3 mt-3">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs text-gray-400">Pattern Quality Model</span>
+              <button
+                onClick={handleTrainPQ}
+                disabled={trainingPQ}
+                className="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 disabled:opacity-50"
+              >
+                {trainingPQ ? 'Training...' : 'Train'}
+              </button>
+            </div>
+            {pqStatus?.trained && (
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div className="text-center">
+                  <div className="text-blue-400 font-bold">{Math.round((pqStatus.feature_importance_breakdown?.ohlcv || 0) * 100)}%</div>
+                  <div className="text-gray-500">OHLCV</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-purple-400 font-bold">{Math.round((pqStatus.feature_importance_breakdown?.video || 0) * 100)}%</div>
+                  <div className="text-gray-500">Video</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-cyan-400 font-bold">{Math.round((pqStatus.feature_importance_breakdown?.pattern_type || 0) * 100)}%</div>
+                  <div className="text-gray-500">Pattern</div>
+                </div>
+              </div>
+            )}
+            {pqResult?.error && <p className="text-xs text-red-400 mt-1">{pqResult.error}</p>}
+            {pqResult?.accuracy && (
+              <p className="text-xs text-emerald-400 mt-1">
+                Accuracy: {Math.round(pqResult.accuracy * 100)}% • Video features: {Math.round((pqResult.video_feature_importance || 0) * 100)}% importance
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+function PricePredictionPanel() {
+  const [predictions, setPredictions] = useState({});
+  const [status, setPredictorStatus] = useState(null);
+  const [performance, setPerformance] = useState(null);
+  const [training, setTraining] = useState({});
+  const [predicting, setPredicting] = useState({});
+  const [selectedHorizon, setSelectedHorizon] = useState('h10');
+  const [error, setError] = useState(null);
+
+  const predictionSymbols = ['BTCUSDT', 'ETHUSDT', 'XAUUSD'];
+  const horizons = [
+    { key: 'h5', label: '5 bars', desc: '5 days' },
+    { key: 'h10', label: '10 bars', desc: '10 days' },
+    { key: 'h20', label: '20 bars', desc: '20 days' },
+  ];
+
+  useEffect(() => {
+    loadStatus();
+  }, []);
+
+  const loadStatus = async () => {
+    try {
+      const [st, perf] = await Promise.all([
+        getPredictorStatus().catch(() => null),
+        getPredictorPerformance().catch(() => null),
+      ]);
+      if (st) setPredictorStatus(st);
+      if (perf) setPerformance(perf);
+    } catch (err) {
+      console.error('Failed to load predictor status:', err);
+    }
+  };
+
+  const handleTrain = async (symbol) => {
+    setTraining(prev => ({ ...prev, [symbol]: true }));
+    setError(null);
+    try {
+      await trainPredictor(symbol);
+      await loadStatus();
+    } catch (err) {
+      setError(`Training failed for ${symbol}: ${err.message}`);
+    } finally {
+      setTraining(prev => ({ ...prev, [symbol]: false }));
+    }
+  };
+
+  const handlePredict = async (symbol) => {
+    setPredicting(prev => ({ ...prev, [symbol]: true }));
+    setError(null);
+    try {
+      const result = await predictPrice(symbol);
+      setPredictions(prev => ({ ...prev, [symbol]: result }));
+    } catch (err) {
+      setError(`Prediction failed for ${symbol}: ${err.message}`);
+    } finally {
+      setPredicting(prev => ({ ...prev, [symbol]: false }));
+    }
+  };
+
+  const handleResolve = async () => {
+    try {
+      await resolvePredictions();
+      await loadStatus();
+    } catch (err) {
+      console.error('Resolve failed:', err);
+    }
+  };
+
+  const isModelTrained = (symbol) => {
+    return status?.models?.some(m => m.symbol === symbol && m.is_trained);
+  };
+
+  const getDirectionColor = (direction) => {
+    if (direction === 'bullish') return 'text-emerald-400';
+    if (direction === 'bearish') return 'text-red-400';
+    return 'text-slate-400';
+  };
+
+  const getDirectionBg = (direction) => {
+    if (direction === 'bullish') return 'bg-emerald-500/10 border-emerald-500/20';
+    if (direction === 'bearish') return 'bg-red-500/10 border-red-500/20';
+    return 'bg-slate-500/10 border-slate-500/20';
+  };
+
+  return (
+    <div className="glass-card p-6 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500" />
+
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+            <TrendingUp className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-lg">ML Price Predictor</h3>
+            <p className="text-sm text-slate-400">Genuine forward predictions with walk-forward validation</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {status?.total_models > 0 && (
+            <span className="px-2 py-1 text-xs bg-violet-500/20 text-violet-300 rounded-lg border border-violet-500/30">
+              {status.total_models} models
+            </span>
+          )}
+          <button onClick={handleResolve} className="px-3 py-1.5 text-xs bg-white/5 text-slate-400 hover:text-white rounded-lg border border-white/10 hover:border-white/20 transition-all">
+            Resolve Predictions
+          </button>
+        </div>
+      </div>
+
+      {/* Horizon Selector */}
+      <div className="flex gap-2 mb-6">
+        {horizons.map(h => (
+          <button
+            key={h.key}
+            onClick={() => setSelectedHorizon(h.key)}
+            className={`px-3 py-1.5 text-xs rounded-lg border transition-all ${
+              selectedHorizon === h.key
+                ? 'bg-violet-500/20 text-violet-300 border-violet-500/30'
+                : 'bg-white/5 text-slate-400 border-white/10 hover:text-white'
+            }`}
+          >
+            {h.label} <span className="text-slate-500">({h.desc})</span>
+          </button>
+        ))}
+      </div>
+
+      {error && (
+        <div className="p-3 mb-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2 text-red-400 text-sm">
+          <AlertCircle className="w-4 h-4" />
+          {error}
+        </div>
+      )}
+
+      {/* Performance Summary */}
+      {performance?.overall?.total > 0 && (
+        <div className="mb-6 p-4 bg-violet-500/10 border border-violet-500/20 rounded-xl">
+          <div className="flex items-center gap-2 mb-3">
+            <BarChart3 className="w-4 h-4 text-violet-400" />
+            <span className="text-sm font-medium text-white">Live Prediction Accuracy</span>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-white">{performance.overall.total}</p>
+              <p className="text-xs text-slate-400">Total Resolved</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className="text-lg font-bold text-emerald-400">{performance.overall.correct}</p>
+              <p className="text-xs text-slate-400">Correct</p>
+            </div>
+            <div className="p-2 bg-white/5 rounded-lg text-center">
+              <p className={`text-lg font-bold ${performance.overall.accuracy >= 0.4 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {(performance.overall.accuracy * 100).toFixed(1)}%
+              </p>
+              <p className="text-xs text-slate-400">Accuracy</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Symbol Prediction Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {predictionSymbols.map(symbol => {
+          const pred = predictions[symbol]?.predictions?.[selectedHorizon];
+          const trained = isModelTrained(symbol);
+          const isTraining = training[symbol];
+          const isPredicting = predicting[symbol];
+
+          return (
+            <div key={symbol} className="p-4 bg-white/5 border border-white/10 rounded-xl">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-bold text-white">{symbol}</span>
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => handleTrain(symbol)}
+                    disabled={isTraining}
+                    className="px-2 py-1 text-xs bg-violet-500/20 text-violet-300 rounded border border-violet-500/30 hover:bg-violet-500/30 transition-all disabled:opacity-50"
+                  >
+                    {isTraining ? <Loader2 className="w-3 h-3 animate-spin inline" /> : 'Train'}
+                  </button>
+                  <button
+                    onClick={() => handlePredict(symbol)}
+                    disabled={isPredicting || !trained}
+                    className="px-2 py-1 text-xs bg-emerald-500/20 text-emerald-300 rounded border border-emerald-500/30 hover:bg-emerald-500/30 transition-all disabled:opacity-50"
+                  >
+                    {isPredicting ? <Loader2 className="w-3 h-3 animate-spin inline" /> : 'Predict'}
+                  </button>
+                </div>
+              </div>
+
+              {!trained && !pred && (
+                <div className="text-center py-6">
+                  <Brain className="w-6 h-6 text-slate-500 mx-auto mb-2" />
+                  <p className="text-xs text-slate-500">Not trained yet</p>
+                  <p className="text-xs text-slate-600">Click Train to start</p>
+                </div>
+              )}
+
+              {pred && !pred.error && (
+                <div className={`p-3 rounded-lg border ${getDirectionBg(pred.direction)}`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    {pred.direction === 'bullish' ? (
+                      <ArrowUpRight className="w-5 h-5 text-emerald-400" />
+                    ) : pred.direction === 'bearish' ? (
+                      <ArrowDownRight className="w-5 h-5 text-red-400" />
+                    ) : (
+                      <Activity className="w-5 h-5 text-slate-400" />
+                    )}
+                    <span className={`text-lg font-bold uppercase ${getDirectionColor(pred.direction)}`}>
+                      {pred.direction}
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Confidence</span>
+                      <span className="text-white font-mono">{(pred.confidence * 100).toFixed(1)}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">P(Bull)</span>
+                      <span className="text-emerald-400 font-mono">{(pred.prob_bullish * 100).toFixed(1)}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">P(Bear)</span>
+                      <span className="text-red-400 font-mono">{(pred.prob_bearish * 100).toFixed(1)}%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">P(Neutral)</span>
+                      <span className="text-slate-300 font-mono">{(pred.prob_neutral * 100).toFixed(1)}%</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {pred?.error && (
+                <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+                  <p className="text-xs text-red-400">{pred.error}</p>
+                </div>
+              )}
+
+              {predictions[symbol]?.current_price && (
+                <div className="mt-2 text-xs text-slate-500 text-right">
+                  Price: <span className="text-slate-300 font-mono">{predictions[symbol].current_price.toFixed(2)}</span>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const [status, setStatus] = useState(null);
   const [signals, setSignals] = useState({});
@@ -1177,12 +1563,14 @@ export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [hedgeFundStatus, setHedgeFundStatus] = useState(null);
   const [edgeStats, setEdgeStats] = useState(null);
+  const [quantDashboard, setQuantDashboard] = useState(null);
 
   const symbols = ['EURUSD', 'XAUUSD', 'US30', 'GBPUSD'];
 
   useEffect(() => {
     loadStatus();
     loadHedgeFundStatus();
+    loadQuantDashboard();
     symbols.forEach(symbol => loadSignal(symbol));
   }, []);
 
@@ -1208,6 +1596,15 @@ export default function Dashboard() {
     }
   };
 
+  const loadQuantDashboard = async () => {
+    try {
+      const data = await getQuantDashboard();
+      setQuantDashboard(data);
+    } catch (err) {
+      console.error('Failed to load quant dashboard:', err);
+    }
+  };
+
   const loadSignal = async (symbol) => {
     setLoading(prev => ({ ...prev, [symbol]: true }));
     try {
@@ -1224,6 +1621,7 @@ export default function Dashboard() {
     setRefreshing(true);
     await loadStatus();
     await loadHedgeFundStatus();
+    await loadQuantDashboard();
     await Promise.all(symbols.map(s => loadSignal(s)));
     setRefreshing(false);
   };
@@ -1290,10 +1688,10 @@ export default function Dashboard() {
         />
         <StatCard
           icon={Activity}
-          label="System Status"
-          value={status?.status === 'operational' ? 'Online' : 'Offline'}
-          subValue="All systems nominal"
-          gradient="from-orange-500 to-amber-500"
+          label="Quant Engine"
+          value={quantDashboard?.tiers ? `${Object.values(quantDashboard.tiers).filter(t => t.available).length}/6` : 'N/A'}
+          subValue={quantDashboard?.tiers ? `${Object.values(quantDashboard.tiers).filter(t => t.available).length} tiers active` : 'Loading...'}
+          gradient="from-cyan-500 to-blue-500"
           delay={200}
         />
       </div>
@@ -1419,6 +1817,51 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+
+      {/* Video Knowledge → ML Features */}
+      <VideoKnowledgePanel />
+
+      {/* ML Price Predictor */}
+      <PricePredictionPanel />
+
+      {/* Quant Engine Status */}
+      {quantDashboard?.tiers && (
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-cyan-400" />
+              Quant Engine (6-Tier ML)
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            {Object.entries(quantDashboard.tiers).map(([tierName, tierData], i) => (
+              <div
+                key={tierName}
+                className={`glass-card p-4 animate-slide-up ${tierData.available ? 'border-cyan-500/20' : 'border-slate-700/30 opacity-60'}`}
+                style={{ animationDelay: `${i * 50}ms` }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-slate-400 uppercase tracking-wider">
+                    {tierName.replace('_', ' ')}
+                  </span>
+                  <span className={`w-2 h-2 rounded-full ${tierData.available ? 'bg-emerald-400' : 'bg-slate-600'}`} />
+                </div>
+                <p className={`text-sm font-semibold ${tierData.available ? 'text-cyan-400' : 'text-slate-500'}`}>
+                  {tierData.available ? 'Active' : 'Inactive'}
+                </p>
+                {tierData.details && (
+                  <p className="text-xs text-slate-500 mt-1 truncate">
+                    {typeof tierData.details === 'string' ? tierData.details :
+                     tierData.details.models_trained ? `${tierData.details.models_trained} models` :
+                     tierData.details.regime ? tierData.details.regime :
+                     ''}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

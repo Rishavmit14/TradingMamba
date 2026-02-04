@@ -113,11 +113,17 @@ export const getChart = async (symbol, timeframe = 'H1', withSignal = true, with
   return response.data;
 };
 
-// Detailed Signal Analysis
-export const getSignalAnalysis = async (symbol, timeframe = 'H1') => {
+// Detailed Signal Analysis (playlist-aware)
+export const getSignalAnalysis = async (symbol, timeframe = 'H1', playlistId = 'all') => {
   const response = await api.get(`/signals/analyze/${symbol}`, {
-    params: { timeframe },
+    params: { timeframe, playlist_id: playlistId },
   });
+  return response.data;
+};
+
+// Get available playlists with training stats (for dropdown)
+export const getAvailablePlaylists = async () => {
+  const response = await api.get('/playlists/available');
   return response.data;
 };
 
@@ -352,6 +358,136 @@ export const getBestPatterns = async (minSignals = 10) => {
   const response = await api.get('/hedge-fund/best-patterns', {
     params: { min_signals: minSignals },
   });
+  return response.data;
+};
+
+// ============================================================================
+// Quant Engine APIs (Tier 1-5) - Backtesting, ML Classifiers, Regime Detection
+// ============================================================================
+
+// Get quant dashboard (all tiers summary)
+export const getQuantDashboard = async () => {
+  const response = await api.get('/quant/dashboard');
+  return response.data;
+};
+
+// Get market regime for a symbol
+export const getQuantRegime = async (symbol) => {
+  const response = await api.get(`/quant/regime/${symbol}`);
+  return response.data;
+};
+
+// Get multi-asset correlation matrix
+export const getQuantCorrelation = async () => {
+  const response = await api.get('/quant/correlation');
+  return response.data;
+};
+
+// Get full quant signal for a symbol
+export const getQuantSignal = async (symbol, timeframe = 'D1') => {
+  const response = await api.post(`/quant/signal/${symbol}`, null, {
+    params: { timeframe },
+  });
+  return response.data;
+};
+
+// Run backtest for a symbol
+export const runBacktest = async (symbol, timeframe = 'D1', lookbackDays = 365) => {
+  const response = await api.post(`/backtest/${symbol}`, null, {
+    params: { timeframe, lookback_days: lookbackDays },
+  });
+  return response.data;
+};
+
+// Get backtest results
+export const getBacktestResults = async (symbol) => {
+  const response = await api.get(`/backtest/results/${symbol}`);
+  return response.data;
+};
+
+// Train ML classifier for a symbol
+export const trainMLClassifier = async (symbol, timeframe = 'D1') => {
+  const response = await api.post(`/ml/train-classifier/${symbol}`, null, {
+    params: { timeframe },
+  });
+  return response.data;
+};
+
+// Get ML classifier status
+export const getMLClassifierStatus = async () => {
+  const response = await api.get('/ml/classifier/status');
+  return response.data;
+};
+
+// ============================================================================
+// Tier 6: Genuine ML Price Predictor
+// ============================================================================
+
+// Generate forward price predictions for a symbol
+export const predictPrice = async (symbol, timeframe = 'D1') => {
+  const response = await api.post(`/ml/predict-price/${symbol}`, null, {
+    params: { timeframe },
+  });
+  return response.data;
+};
+
+// Get recent predictions and outcomes for a symbol
+export const getPredictions = async (symbol, limit = 20) => {
+  const response = await api.get(`/ml/predictions/${symbol}`, {
+    params: { limit },
+  });
+  return response.data;
+};
+
+// Train prediction models for a symbol
+export const trainPredictor = async (symbol, timeframe = 'D1') => {
+  const response = await api.post(`/ml/train-predictor/${symbol}`, null, {
+    params: { timeframe },
+  });
+  return response.data;
+};
+
+// Get live accuracy metrics from resolved predictions
+export const getPredictorPerformance = async (symbol = null, lookbackDays = 90) => {
+  const params = { lookback_days: lookbackDays };
+  if (symbol) params.symbol = symbol;
+  const response = await api.get('/ml/predictor/performance', { params });
+  return response.data;
+};
+
+// Get status of all trained prediction models
+export const getPredictorStatus = async () => {
+  const response = await api.get('/ml/predictor/status');
+  return response.data;
+};
+
+// Resolve pending predictions against actual prices
+export const resolvePredictions = async () => {
+  const response = await api.post('/ml/predictor/resolve');
+  return response.data;
+};
+
+// ============================================================================
+// Video Knowledge Integration - Video training → ML features bridge
+// ============================================================================
+
+// Get video knowledge index status (concepts, teaching depth, co-occurrence)
+export const getVideoKnowledgeStatus = async () => {
+  const response = await api.get('/ml/video-knowledge/status');
+  return response.data;
+};
+
+// Train pattern quality model (video-learned features + OHLCV)
+export const trainPatternQuality = async (symbol = 'BTCUSDT', timeframe = 'D1') => {
+  const response = await api.post('/ml/train-pattern-quality', null, {
+    params: { symbol, timeframe },
+  });
+  return response.data;
+};
+
+// Get pattern quality model status and feature importance
+export const getPatternQualityStatus = async () => {
+  const response = await api.get('/ml/pattern-quality/status');
   return response.data;
 };
 

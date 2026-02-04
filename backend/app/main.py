@@ -103,6 +103,24 @@ async def get_playlists():
     }
 
 
+@app.get("/api/playlists/available")
+async def get_available_playlists():
+    """
+    List all playlists with training stats for the LiveChart dropdown.
+
+    Returns list of playlists with:
+    - id, title, channel, video_count
+    - trained_video_count (how many videos have been ML-trained)
+    - concepts_learned (what concepts this playlist teaches)
+    - concepts_count
+    """
+    try:
+        from .ml.playlist_registry import PlaylistRegistry
+        return PlaylistRegistry.get_available_playlists()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/api/playlists/{playlist_id}")
 async def get_playlist(playlist_id: str):
     """Get a specific playlist with videos"""
@@ -467,13 +485,18 @@ def get_ml_analyzer():
 @app.get("/api/signals/analyze/{symbol}")
 async def analyze_symbol(
     symbol: str,
-    timeframes: str = Query("H1,H4,D1", description="Comma-separated timeframes")
+    timeframes: str = Query("H1,H4,D1", description="Comma-separated timeframes"),
+    playlist_id: str = Query("all", description="Playlist ID to scope ML knowledge. 'all' = combined.")
 ):
     """
     Analyze a symbol using ML-POWERED Smart Money methodology.
 
     IMPORTANT: This endpoint uses ONLY patterns the ML has learned from video training.
     Patterns not learned will not be detected.
+
+    Args:
+        playlist_id: Scope analysis to a specific playlist's knowledge.
+                     'all' = use all trained knowledge (default, backward compatible).
 
     Returns:
     - ML patterns detected (from training)
@@ -483,10 +506,13 @@ async def analyze_symbol(
     try:
         from .services.free_market_data import FreeMarketDataService
         from .models.signal import Timeframe
-        from .ml.ml_pattern_engine import get_ml_engine
+        from .ml.playlist_registry import PlaylistRegistry, playlist_context
+
+        # Set playlist context for deep-stack scoping (signal_fusion, feature_engineering)
+        playlist_context.set(playlist_id)
 
         market_service = FreeMarketDataService()
-        ml_engine = get_ml_engine()
+        ml_engine = PlaylistRegistry.get_ml_engine(playlist_id)
         ml_knowledge = ml_engine.get_knowledge_summary()
 
         tf_list = [tf.strip() for tf in timeframes.split(",")]
@@ -517,9 +543,9 @@ async def analyze_symbol(
                 'message': 'Train videos using Vision Training to enable ML-powered analysis.'
             }
 
-        # Use ML-powered analyzer
-        ml_analyzer = get_ml_analyzer()
-        ml_sig_gen = get_ml_signal_generator()
+        # Use ML-powered analyzer (playlist-scoped)
+        ml_analyzer = PlaylistRegistry.get_analyzer(playlist_id)
+        ml_sig_gen = PlaylistRegistry.get_signal_generator(playlist_id)
 
         # Run ML-powered Smart Money analysis for each timeframe
         analyses = {}
@@ -550,13 +576,15 @@ async def analyze_symbol(
                     })
 
                 for fvg in analysis.fair_value_gaps:
+                    if fvg.filled:
+                        continue  # Skip filled FVGs
                     all_patterns.append({
-                        'pattern_type': f'{fvg.type}_fvg',  # 'bullish_fvg' or 'bearish_fvg'
+                        'pattern_type': f'{fvg.type}_fvg',
                         'high': float(fvg.high),
                         'low': float(fvg.low),
                         'start_index': int(fvg.index),
                         'timeframe': tf,
-                        'filled': bool(fvg.filled),
+                        'filled': False,
                         'fill_percentage': float(fvg.fill_percentage) if fvg.fill_percentage else 0.0,
                     })
 
@@ -604,6 +632,63 @@ async def analyze_symbol(
                             'strength': float(liq.strength) if liq.strength else 0.5,
                         })
 
+                # ============================================================
+                # NEW ICT PATTERNS (from Audio-First Training)
+                # ============================================================
+
+                # Displacement candles
+                for disp in analysis.displacements:
+                    all_patterns.append({
+                        'pattern_type': f'{disp["type"]}_displacement',
+                        'high': float(disp['high']),
+                        'low': float(disp['low']),
+                        'price': float((disp['high'] + disp['low']) / 2),
+                        'start_index': int(disp.get('index', 0)),
+                        'timeframe': tf,
+                        'body_ratio': float(disp.get('body_ratio', 0)),
+                    })
+
+                # OTE zones (Optimal Trade Entry / Fibonacci)
+                for ote in analysis.ote_zones:
+                    all_patterns.append({
+                        'pattern_type': f'{ote["type"]}_ote',
+                        'high': float(ote['ote_high']),
+                        'low': float(ote['ote_low']),
+                        'timeframe': tf,
+                        'fib_62': float(ote.get('fib_62', 0)),
+                        'fib_79': float(ote.get('fib_79', 0)),
+                        'price_in_ote': ote.get('price_in_ote', False),
+                    })
+
+                # Breaker blocks
+                for bb in analysis.breaker_blocks:
+                    all_patterns.append({
+                        'pattern_type': bb['type'],  # 'bullish_breaker' or 'bearish_breaker'
+                        'high': float(bb['high']),
+                        'low': float(bb['low']),
+                        'start_index': int(bb.get('index', 0)),
+                        'timeframe': tf,
+                        'being_tested': bb.get('being_tested', False),
+                    })
+
+                # Buy/sell stops
+                if analysis.buy_sell_stops.get('buy_stops'):
+                    for bs in analysis.buy_sell_stops['buy_stops'][:3]:
+                        all_patterns.append({
+                            'pattern_type': 'buy_stops',
+                            'price': float(bs['level']),
+                            'timeframe': tf,
+                            'distance_pct': float(bs.get('distance_pct', 0)),
+                        })
+                if analysis.buy_sell_stops.get('sell_stops'):
+                    for ss in analysis.buy_sell_stops['sell_stops'][:3]:
+                        all_patterns.append({
+                            'pattern_type': 'sell_stops',
+                            'price': float(ss['level']),
+                            'timeframe': tf,
+                            'distance_pct': float(ss.get('distance_pct', 0)),
+                        })
+
                 analyses[tf] = {
                     'bias': analysis.bias.value,
                     'bias_confidence': float(analysis.bias_confidence),
@@ -621,8 +706,8 @@ async def analyze_symbol(
         all_ml_patterns_used = list(set(all_ml_patterns_used))
         all_ml_patterns_not_learned = list(set(all_ml_patterns_not_learned))
 
-        # Get ML Engine for reasoning generation
-        ml_engine = get_ml_engine()
+        # Get ML Engine for reasoning generation (use playlist-scoped engine)
+        # ml_engine already set above from PlaylistRegistry
 
         # Generate ML-based reasoning (ONLY from learned knowledge, not generic SMC)
         ml_reasoning = ml_engine.generate_ml_reasoning(
@@ -669,6 +754,84 @@ async def analyze_symbol(
         for p in ml_knowledge.get('patterns_learned', []):
             all_learned_patterns[p['type']] = p['confidence']
 
+        # ============================================================
+        # QUANT TIER DATA (Tiers 1-5)
+        # ============================================================
+        quant_data = {}
+        try:
+            # Tier 1: Backtest performance
+            from .ml.backtester import get_backtester
+            bt = get_backtester()
+            bt_perf = bt.get_aggregate_performance()
+            if bt_perf:
+                quant_data['backtest'] = bt_perf
+
+            # Tier 3: ML classifier predictions
+            try:
+                from .ml.ml_models import get_classifier
+                classifier = get_classifier()
+                if classifier.models:
+                    quant_data['ml_classifier'] = {
+                        'models_trained': len(classifier.models),
+                        'pattern_types': list(classifier.models.keys()),
+                    }
+            except Exception:
+                pass
+
+            # Tier 5: Regime detection
+            try:
+                from .ml.quant_engine import get_quant_engine
+                engine = get_quant_engine()
+                primary_df = list(market_data.values())[0]
+                from .ml.quant_engine import RegimeDetector
+                detector = RegimeDetector()
+                regime_info = detector.detect(primary_df)
+                quant_data['regime'] = regime_info
+            except Exception:
+                pass
+
+        except Exception as e:
+            pass  # Quant data enrichment is optional
+
+        # ============================================================
+        # VIDEO KNOWLEDGE ENRICHMENT
+        # Add teaching depth and co-occurrence data for detected patterns
+        # ============================================================
+        video_knowledge_data = {}
+        try:
+            vk = PlaylistRegistry.get_video_knowledge(playlist_id)
+            if vk.is_loaded():
+                # Per-pattern teaching info
+                pattern_teaching = {}
+                for p in all_ml_patterns_used:
+                    profile = vk.get_concept_profile(p)
+                    if profile:
+                        pattern_teaching[p] = {
+                            'teaching_depth': profile.teaching_depth,
+                            'video_count': profile.video_count,
+                            'total_words': profile.total_words,
+                            'depth_score': round(vk.get_teaching_depth_score(p), 3),
+                        }
+                # Co-occurrence for detected pattern pairs
+                co_occurrences = []
+                for i, a in enumerate(all_ml_patterns_used):
+                    for b in all_ml_patterns_used[i+1:]:
+                        score = vk.get_co_occurrence(a, b)
+                        if score > 0.1:
+                            co_occurrences.append({'a': a, 'b': b, 'score': round(score, 3)})
+                co_occurrences.sort(key=lambda x: x['score'], reverse=True)
+
+                video_knowledge_data = {
+                    'active': True,
+                    'concepts_loaded': len(vk.concept_profiles),
+                    'videos_loaded': vk._n_videos,
+                    'pattern_teaching': pattern_teaching,
+                    'co_occurrences': co_occurrences[:5],
+                    'features_active': 22,
+                }
+        except Exception:
+            video_knowledge_data = {'active': False}
+
         return {
             'symbol': symbol,
             'timestamp': datetime.utcnow().isoformat(),
@@ -688,7 +851,11 @@ async def analyze_symbol(
                 'videos_trained': ml_knowledge.get('total_videos', 0),
                 'frames_analyzed': ml_knowledge.get('total_frames', 0),
                 'patterns_learned': [p['type'] for p in ml_knowledge.get('patterns_learned', [])],
-            }
+            },
+            # Quant Engine Data (Tiers 1-5)
+            'quant': quant_data,
+            # Video Knowledge → ML Features data
+            'video_knowledge': video_knowledge_data,
         }
 
     except ImportError as e:
@@ -698,7 +865,10 @@ async def analyze_symbol(
 
 
 @app.get("/api/signals/quick/{symbol}")
-async def quick_signal(symbol: str):
+async def quick_signal(
+    symbol: str,
+    playlist_id: str = Query("all", description="Playlist ID to scope ML knowledge")
+):
     """
     Get a quick ML-powered signal for a symbol (single timeframe analysis).
 
@@ -707,10 +877,11 @@ async def quick_signal(symbol: str):
     """
     try:
         from .services.free_market_data import FreeMarketDataService
-        from .ml.ml_pattern_engine import get_ml_engine
+        from .ml.playlist_registry import PlaylistRegistry, playlist_context
 
+        playlist_context.set(playlist_id)
         market_service = FreeMarketDataService()
-        ml_engine = get_ml_engine()
+        ml_engine = PlaylistRegistry.get_ml_engine(playlist_id)
         ml_knowledge = ml_engine.get_knowledge_summary()
 
         # Get H1 data
@@ -739,8 +910,8 @@ async def quick_signal(symbol: str):
                 'ml_knowledge_status': 'No trained knowledge. Train videos first.',
             }
 
-        # Use ML-powered analyzer
-        ml_analyzer = get_ml_analyzer()
+        # Use ML-powered analyzer (playlist-scoped)
+        ml_analyzer = PlaylistRegistry.get_analyzer(playlist_id)
 
         if ml_analyzer:
             analysis = ml_analyzer.analyze(df)
@@ -769,6 +940,8 @@ async def quick_signal(symbol: str):
                     'strength': ob.strength,
                 })
             for fvg in analysis.fair_value_gaps:
+                if fvg.filled:
+                    continue  # Skip filled FVGs
                 patterns.append({
                     'pattern_type': f'{fvg.type}_fvg',
                     'high': fvg.high,
@@ -776,6 +949,105 @@ async def quick_signal(symbol: str):
                     'start_index': fvg.index,
                     'timeframe': 'H1',
                 })
+
+            # Add market structure events (BOS/CHoCH)
+            for event in analysis.structure_events:
+                if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish']:
+                    patterns.append({
+                        'pattern_type': event.type,
+                        'price': float(event.level),
+                        'timeframe': 'H1',
+                        'description': event.description,
+                    })
+
+            # Add equal highs/lows
+            if analysis.liquidity_levels.get('equal_highs'):
+                for eq in analysis.liquidity_levels['equal_highs']:
+                    patterns.append({
+                        'pattern_type': 'equal_highs',
+                        'price': float(eq['level']),
+                        'timeframe': 'H1',
+                    })
+            if analysis.liquidity_levels.get('equal_lows'):
+                for eq in analysis.liquidity_levels['equal_lows']:
+                    patterns.append({
+                        'pattern_type': 'equal_lows',
+                        'price': float(eq['level']),
+                        'timeframe': 'H1',
+                    })
+
+            # Add buy-side and sell-side liquidity
+            if analysis.liquidity_levels.get('buy_side'):
+                for liq in analysis.liquidity_levels['buy_side'][:3]:
+                    patterns.append({
+                        'pattern_type': 'buyside_liquidity',
+                        'price': float(liq.price),
+                        'timeframe': 'H1',
+                        'strength': float(liq.strength) if liq.strength else 0.5,
+                    })
+            if analysis.liquidity_levels.get('sell_side'):
+                for liq in analysis.liquidity_levels['sell_side'][:3]:
+                    patterns.append({
+                        'pattern_type': 'sellside_liquidity',
+                        'price': float(liq.price),
+                        'timeframe': 'H1',
+                        'strength': float(liq.strength) if liq.strength else 0.5,
+                    })
+
+            # NEW ICT PATTERNS from Audio-First Training
+
+            # Displacement candles
+            for disp in analysis.displacements:
+                patterns.append({
+                    'pattern_type': f'{disp["type"]}_displacement',
+                    'high': float(disp['high']),
+                    'low': float(disp['low']),
+                    'price': float((disp['high'] + disp['low']) / 2),
+                    'start_index': int(disp.get('index', 0)),
+                    'timeframe': 'H1',
+                    'body_ratio': float(disp.get('body_ratio', 0)),
+                })
+
+            # OTE zones (Optimal Trade Entry)
+            for ote in analysis.ote_zones:
+                patterns.append({
+                    'pattern_type': f'{ote["type"]}_ote',
+                    'high': float(ote['ote_high']),
+                    'low': float(ote['ote_low']),
+                    'timeframe': 'H1',
+                    'fib_62': float(ote.get('fib_62', 0)),
+                    'fib_79': float(ote.get('fib_79', 0)),
+                    'price_in_ote': ote.get('price_in_ote', False),
+                })
+
+            # Breaker blocks
+            for bb in analysis.breaker_blocks:
+                patterns.append({
+                    'pattern_type': bb['type'],  # 'bullish_breaker' or 'bearish_breaker'
+                    'high': float(bb['high']),
+                    'low': float(bb['low']),
+                    'start_index': int(bb.get('index', 0)),
+                    'timeframe': 'H1',
+                    'being_tested': bb.get('being_tested', False),
+                })
+
+            # Buy/sell stops
+            if analysis.buy_sell_stops.get('buy_stops'):
+                for bs in analysis.buy_sell_stops['buy_stops'][:3]:
+                    patterns.append({
+                        'pattern_type': 'buy_stops',
+                        'price': float(bs['level']),
+                        'timeframe': 'H1',
+                        'distance_pct': float(bs.get('distance_pct', 0)),
+                    })
+            if analysis.buy_sell_stops.get('sell_stops'):
+                for ss in analysis.buy_sell_stops['sell_stops'][:3]:
+                    patterns.append({
+                        'pattern_type': 'sell_stops',
+                        'price': float(ss['level']),
+                        'timeframe': 'H1',
+                        'distance_pct': float(ss.get('distance_pct', 0)),
+                    })
 
             # Determine kill zone status
             now = datetime.utcnow()
@@ -3486,6 +3758,456 @@ async def get_best_patterns(min_signals: int = 10):
             "description": "Patterns are ranked by expectancy (expected R per trade)",
             "recommendation": "Focus on patterns at the top of this list for highest edge"
         }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Backtesting & ML Quant Endpoints (Tier 1-5)
+# ============================================================================
+
+@app.post("/api/backtest/{symbol}")
+async def run_backtest(
+    symbol: str,
+    timeframe: str = Query("D1", description="Timeframe: M5,M15,M30,H1,H4,D1,W1"),
+    lookback_days: int = Query(365, description="Days of history to backtest"),
+    background_tasks: BackgroundTasks = None,
+):
+    """
+    Run pattern backtest on historical data.
+    Tests all Smart Money patterns and tracks forward outcomes.
+    """
+    try:
+        from .ml.backtester import get_backtester
+        backtester = get_backtester()
+        result = backtester.backtest_patterns(symbol, timeframe, lookback_days)
+        backtester.save_results(result)
+        return backtester.to_dict(result)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/backtest/results/{symbol}")
+async def get_backtest_results(
+    symbol: str,
+    timeframe: Optional[str] = Query(None, description="Filter by timeframe"),
+):
+    """Get saved backtest results for a symbol."""
+    try:
+        from .ml.backtester import get_backtester
+        backtester = get_backtester()
+        results = backtester.get_saved_results(symbol, timeframe)
+        return {"symbol": symbol, "results": results}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/backtest/performance")
+async def get_backtest_performance():
+    """Get aggregate backtest performance across all symbols and patterns."""
+    try:
+        from .ml.backtester import get_backtester
+        backtester = get_backtester()
+        performance = backtester.get_aggregate_performance()
+        return {"performance": performance}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/data-cache/info")
+async def get_data_cache_info():
+    """Get info about cached market data files."""
+    try:
+        from .ml.data_cache import get_data_cache
+        cache = get_data_cache()
+        return {"cache_files": cache.get_cache_info()}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/data-cache/refresh/{symbol}")
+async def refresh_data_cache(
+    symbol: str,
+    timeframe: str = Query("D1", description="Timeframe to refresh"),
+):
+    """Force refresh cached data for a symbol."""
+    try:
+        from .ml.data_cache import get_data_cache
+        cache = get_data_cache()
+        df = cache.get_ohlcv(symbol, timeframe, force_refresh=True)
+        return {
+            "symbol": symbol,
+            "timeframe": timeframe,
+            "bars": len(df),
+            "start": str(df.index[0]) if len(df) > 0 else None,
+            "end": str(df.index[-1]) if len(df) > 0 else None,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/optimize/{symbol}")
+async def optimize_parameters(
+    symbol: str,
+    timeframe: str = Query("D1", description="Timeframe to optimize"),
+):
+    """Run walk-forward parameter optimization (Tier 2)."""
+    try:
+        from .ml.parameter_optimizer import get_optimizer
+        optimizer = get_optimizer()
+        result = optimizer.optimize_thresholds(symbol, timeframe)
+        return result
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Parameter optimizer not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/optimize/params/{symbol}")
+async def get_optimized_params(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Get saved optimized parameters for a symbol."""
+    try:
+        from .ml.parameter_optimizer import get_optimizer
+        optimizer = get_optimizer()
+        params = optimizer.get_best_params(symbol, timeframe)
+        return {"symbol": symbol, "timeframe": timeframe, "params": params}
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Parameter optimizer not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/train-classifier/{symbol}")
+async def train_ml_classifier(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Train ML classifiers on backtest data (Tier 3)."""
+    try:
+        from .ml.ml_models import get_classifier
+        classifier = get_classifier()
+        result = classifier.train(symbol, timeframe)
+        return result
+    except ImportError:
+        raise HTTPException(status_code=503, detail="ML classifiers not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/classifier/status")
+async def get_classifier_status():
+    """Get status of trained ML classifiers (Tier 3)."""
+    try:
+        from .ml.ml_models import get_classifier
+        classifier = get_classifier()
+        return classifier.get_status()
+    except ImportError:
+        raise HTTPException(status_code=503, detail="ML classifiers not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/train-deep/{symbol}")
+async def train_deep_models(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Train deep learning models (Tier 4)."""
+    try:
+        from .ml.deep_models import get_deep_model
+        model = get_deep_model()
+        result = model.train(symbol, timeframe)
+        return result
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Deep models not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/quant/regime/{symbol}")
+async def get_market_regime(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Get current market regime detection (Tier 5)."""
+    try:
+        from .ml.quant_engine import get_quant_engine
+        engine = get_quant_engine()
+        regime = engine.detect_regime(symbol, timeframe)
+        return regime
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Quant engine not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/quant/correlation")
+async def get_correlation_matrix(
+    symbols: str = Query("BTCUSDT,ETHUSDT,SPY,GOLD,DXY", description="Comma-separated symbols"),
+    timeframe: str = Query("D1"),
+    lookback_days: int = Query(90),
+):
+    """Get multi-asset correlation matrix (Tier 5)."""
+    try:
+        from .ml.quant_engine import get_quant_engine
+        engine = get_quant_engine()
+        symbol_list = [s.strip() for s in symbols.split(',')]
+        result = engine.get_correlation_matrix(symbol_list, timeframe, lookback_days)
+        return result
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Quant engine not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/quant/signal/{symbol}")
+async def get_quant_signal(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Get full quant signal combining all tiers (Tier 5)."""
+    try:
+        from .ml.quant_engine import get_quant_engine
+        engine = get_quant_engine()
+        signal = engine.generate_signal(symbol, timeframe)
+        return signal
+    except ImportError:
+        raise HTTPException(status_code=503, detail="Quant engine not yet implemented")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# Tier 6: Genuine ML Price Predictor
+# ============================================================================
+
+@app.post("/api/ml/predict-price/{symbol}")
+async def predict_price(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Generate forward price direction predictions using trained ML models."""
+    try:
+        from .ml.price_predictor import get_price_predictor
+        predictor = get_price_predictor()
+        result = predictor.predict_symbol(symbol.upper(), timeframe)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/predictions/{symbol}")
+async def get_predictions(
+    symbol: str,
+    limit: int = Query(20),
+):
+    """Get recent predictions and outcomes for a symbol."""
+    try:
+        from .database import db
+        predictions = db.get_recent_predictions(symbol.upper(), limit)
+        return {"symbol": symbol.upper(), "predictions": predictions}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/train-predictor/{symbol}")
+async def train_predictor(
+    symbol: str,
+    timeframe: str = Query("D1"),
+):
+    """Train ML prediction models for a symbol (walk-forward validated)."""
+    try:
+        from .ml.price_predictor import get_price_predictor
+        predictor = get_price_predictor()
+        result = predictor.train_symbol(symbol.upper(), timeframe)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/predictor/performance")
+async def get_predictor_performance(
+    symbol: str = Query(None),
+    lookback_days: int = Query(90),
+):
+    """Get live accuracy metrics from resolved predictions."""
+    try:
+        from .ml.price_predictor import get_price_predictor
+        predictor = get_price_predictor()
+        result = predictor.get_performance(
+            symbol.upper() if symbol else None, lookback_days
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/predictor/status")
+async def get_predictor_status():
+    """Get status of all trained prediction models."""
+    try:
+        from .ml.price_predictor import get_price_predictor
+        predictor = get_price_predictor()
+        return predictor.get_status()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/predictor/resolve")
+async def resolve_predictions():
+    """Resolve pending predictions against actual prices."""
+    try:
+        from .ml.price_predictor import get_price_predictor
+        predictor = get_price_predictor()
+        result = predictor.resolve_predictions()
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/video-knowledge/status")
+async def get_video_knowledge_status(
+    playlist_id: str = Query("all", description="Playlist ID to scope video knowledge")
+):
+    """Get video knowledge index status - concepts, teaching depth, co-occurrence."""
+    try:
+        from .ml.playlist_registry import PlaylistRegistry
+        vk = PlaylistRegistry.get_video_knowledge(playlist_id)
+        return vk.get_status()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/ml/train-pattern-quality")
+async def train_pattern_quality(symbol: str = 'BTCUSDT', timeframe: str = 'D1'):
+    """Train the pattern quality model using video-learned knowledge + OHLCV features."""
+    try:
+        from .ml.pattern_quality_model import get_pattern_quality_model
+        pqm = get_pattern_quality_model()
+        result = pqm.train(symbol, timeframe)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/ml/pattern-quality/status")
+async def get_pattern_quality_status():
+    """Get pattern quality model status and feature importance breakdown."""
+    try:
+        from .ml.pattern_quality_model import get_pattern_quality_model
+        pqm = get_pattern_quality_model()
+        return pqm.get_status()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/quant/dashboard")
+async def get_quant_dashboard():
+    """Get full quant dashboard with all tier data."""
+    try:
+        dashboard = {"tiers": {}}
+
+        # Tier 1: Backtest performance
+        try:
+            from .ml.backtester import get_backtester
+            backtester = get_backtester()
+            dashboard["tiers"]["tier1_backtest"] = {
+                "available": True,
+                "details": "Pattern outcome tracking",
+            }
+        except Exception:
+            dashboard["tiers"]["tier1_backtest"] = {"available": False}
+
+        # Tier 2: Optimized params
+        try:
+            from .ml.parameter_optimizer import get_optimizer
+            optimizer = get_optimizer()
+            dashboard["tiers"]["tier2_optimizer"] = {
+                "available": True,
+                "details": "Threshold optimization",
+            }
+        except Exception:
+            dashboard["tiers"]["tier2_optimizer"] = {"available": False}
+
+        # Tier 3: ML classifiers
+        try:
+            from .ml.ml_models import get_classifier
+            classifier = get_classifier()
+            status = classifier.get_status()
+            dashboard["tiers"]["tier3_classifier"] = {
+                "available": True,
+                "details": {"models_trained": status.get("models_trained", 0)},
+            }
+        except Exception:
+            dashboard["tiers"]["tier3_classifier"] = {"available": False}
+
+        # Tier 4: Deep models
+        try:
+            from .ml.deep_models import get_deep_model
+            model = get_deep_model()
+            dashboard["tiers"]["tier4_deep"] = {
+                "available": True,
+                "details": "MLP sequence models",
+            }
+        except Exception:
+            dashboard["tiers"]["tier4_deep"] = {"available": False}
+
+        # Tier 5: Quant engine
+        try:
+            from .ml.quant_engine import get_quant_engine
+            engine = get_quant_engine()
+            dashboard["tiers"]["tier5_quant"] = {
+                "available": True,
+                "details": "Regime + correlation + risk",
+            }
+        except Exception:
+            dashboard["tiers"]["tier5_quant"] = {"available": False}
+
+        # Tier 6: Genuine ML Price Predictor
+        try:
+            from .ml.price_predictor import get_price_predictor
+            predictor = get_price_predictor()
+            status = predictor.get_status()
+            dashboard["tiers"]["tier6_predictor"] = {
+                "available": True,
+                "details": {
+                    "models_trained": status.get("total_models", 0),
+                    "pending_predictions": status.get("pending_predictions", 0),
+                },
+            }
+        except Exception:
+            dashboard["tiers"]["tier6_predictor"] = {"available": False}
+
+        # Video Knowledge Integration
+        try:
+            from .ml.video_knowledge import get_video_knowledge
+            vk = get_video_knowledge()
+            vk_status = vk.get_status()
+            dashboard["video_knowledge"] = {
+                "loaded": vk_status.get("loaded", False),
+                "concepts": vk_status.get("concepts", 0),
+                "videos_trained": vk_status.get("videos", 0),
+                "features_active": 22 if vk_status.get("loaded") else 0,
+            }
+        except Exception:
+            dashboard["video_knowledge"] = {"loaded": False, "concepts": 0}
+
+        # Pattern Quality Model
+        try:
+            from .ml.pattern_quality_model import get_pattern_quality_model
+            pqm = get_pattern_quality_model()
+            dashboard["pattern_quality"] = {
+                "trained": pqm.is_trained,
+                "video_importance": round(pqm.training_result.video_importance, 4) if pqm.training_result else None,
+            }
+        except Exception:
+            dashboard["pattern_quality"] = {"trained": False}
+
+        return dashboard
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

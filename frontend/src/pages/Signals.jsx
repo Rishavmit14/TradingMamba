@@ -22,7 +22,7 @@ import {
   CheckCircle,
   XCircle
 } from 'lucide-react';
-import { analyzeSymbol, getSymbols } from '../services/api';
+import { analyzeSymbol, getSymbols, predictPrice } from '../services/api';
 
 // Background Orb Component
 function BackgroundOrb({ className }) {
@@ -169,7 +169,7 @@ function TradeLevelRow({ label, value, type, icon: Icon }) {
 }
 
 // Full Signal Analysis Card
-function SignalAnalysis({ symbol, analysis, loading }) {
+function SignalAnalysis({ symbol, analysis, loading, mlPrediction }) {
   if (loading) {
     return (
       <div className="glass-card p-8 animate-pulse">
@@ -446,6 +446,71 @@ function SignalAnalysis({ symbol, analysis, loading }) {
             </div>
           </div>
 
+          {/* Video Knowledge → ML Features */}
+          {analysis.video_knowledge?.active && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Layers className="w-5 h-5 text-purple-400" />
+                Video Knowledge → ML Features
+                <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded-full">
+                  {analysis.video_knowledge.features_active} features active
+                </span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Teaching Depth for Detected Patterns */}
+                {analysis.video_knowledge.pattern_teaching && Object.keys(analysis.video_knowledge.pattern_teaching).length > 0 && (
+                  <div className="glass-card-static p-5">
+                    <p className="text-xs text-slate-400 mb-3">Teaching Depth (detected patterns)</p>
+                    <div className="space-y-2">
+                      {Object.entries(analysis.video_knowledge.pattern_teaching)
+                        .sort(([,a], [,b]) => b.depth_score - a.depth_score)
+                        .map(([pattern, info]) => (
+                        <div key={pattern} className="flex items-center gap-2">
+                          <span className="text-xs text-slate-300 w-28 truncate capitalize">{pattern.replace(/_/g, ' ')}</span>
+                          <div className="flex-1 bg-slate-700 rounded-full h-2">
+                            <div
+                              className="bg-gradient-to-r from-purple-500 to-cyan-400 h-2 rounded-full transition-all"
+                              style={{ width: `${Math.round(info.depth_score * 100)}%` }}
+                            />
+                          </div>
+                          <span className="text-xs text-slate-500 w-20 text-right">
+                            {info.teaching_depth} units / {info.video_count} videos
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {/* Learned Co-occurrences */}
+                <div className="glass-card-static p-5">
+                  <p className="text-xs text-slate-400 mb-3">Learned Pattern Co-occurrences</p>
+                  {analysis.video_knowledge.co_occurrences?.length > 0 ? (
+                    <div className="space-y-2">
+                      {analysis.video_knowledge.co_occurrences.map((pair, i) => (
+                        <div key={i} className="flex items-center gap-2 text-xs p-2 rounded-lg bg-slate-800/50">
+                          <span className="text-cyan-400 capitalize">{pair.a.replace(/_/g, ' ')}</span>
+                          <span className="text-slate-600">+</span>
+                          <span className="text-purple-400 capitalize">{pair.b.replace(/_/g, ' ')}</span>
+                          <div className="ml-auto flex items-center gap-1">
+                            <div className="w-12 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                              <div className="bg-yellow-400 h-full rounded-full" style={{ width: `${Math.round(pair.score * 100)}%` }} />
+                            </div>
+                            <span className="text-yellow-400 font-mono w-10 text-right">{Math.round(pair.score * 100)}%</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-slate-500">No co-occurrences detected among active patterns</p>
+                  )}
+                  <div className="mt-3 pt-3 border-t border-slate-700/50 text-xs text-slate-500">
+                    {analysis.video_knowledge.concepts_loaded} concepts loaded from {analysis.video_knowledge.videos_loaded} videos
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Reasoning */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
@@ -463,6 +528,139 @@ function SignalAnalysis({ symbol, analysis, loading }) {
               ))}
             </div>
           </div>
+
+          {/* Quant Engine Insights */}
+          {analysis.quant && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-cyan-400" />
+                Quant Engine Insights
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Regime */}
+                {analysis.quant.regime && (
+                  <div className="glass-card-static p-5">
+                    <p className="text-xs text-slate-400 mb-2">Market Regime</p>
+                    <div className={`inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-semibold ${
+                      analysis.quant.regime.regime === 'trending_up' ? 'bg-emerald-500/20 text-emerald-400' :
+                      analysis.quant.regime.regime === 'trending_down' ? 'bg-red-500/20 text-red-400' :
+                      analysis.quant.regime.regime === 'high_volatility' ? 'bg-amber-500/20 text-amber-400' :
+                      'bg-blue-500/20 text-blue-400'
+                    }`}>
+                      {(analysis.quant.regime.regime || 'unknown').replace('_', ' ').toUpperCase()}
+                    </div>
+                    {analysis.quant.regime.confidence && (
+                      <p className="text-xs text-slate-500 mt-2">
+                        Confidence: {Math.round(analysis.quant.regime.confidence * 100)}%
+                      </p>
+                    )}
+                  </div>
+                )}
+                {/* ML Classifier */}
+                {analysis.quant.ml_classifier && (
+                  <div className="glass-card-static p-5">
+                    <p className="text-xs text-slate-400 mb-2">ML Classifiers</p>
+                    <p className="text-xl font-bold text-cyan-400">
+                      {analysis.quant.ml_classifier.models_trained} Models
+                    </p>
+                    {analysis.quant.ml_classifier.pattern_types && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {analysis.quant.ml_classifier.pattern_types.map(pt => (
+                          <span key={pt} className="px-2 py-0.5 text-xs rounded-full bg-cyan-500/10 text-cyan-400">
+                            {pt.replace('_', ' ')}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {/* Backtest Summary */}
+                {analysis.quant.backtest && Object.keys(analysis.quant.backtest).length > 0 && (
+                  <div className="glass-card-static p-5">
+                    <p className="text-xs text-slate-400 mb-2">Backtest Performance</p>
+                    <div className="space-y-2">
+                      {Object.entries(analysis.quant.backtest).slice(0, 4).map(([pattern, stats]) => {
+                        const wr = stats.avg_win_rate || stats.win_rate || 0;
+                        const wrPct = wr > 1 ? wr : wr * 100;
+                        return (
+                        <div key={pattern} className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400 capitalize">{pattern.replace('_', ' ')}</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-16 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${
+                                  wrPct >= 60 ? 'bg-emerald-400' :
+                                  wrPct >= 50 ? 'bg-amber-400' : 'bg-red-400'
+                                }`}
+                                style={{ width: `${Math.round(wrPct)}%` }}
+                              />
+                            </div>
+                            <span className="font-mono text-white">{Math.round(wrPct)}%</span>
+                          </div>
+                        </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ML Price Prediction */}
+          {mlPrediction?.predictions && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-violet-400" />
+                ML Price Prediction
+                <span className="text-xs text-slate-500 font-normal ml-2">(Forward-looking)</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {['h5', 'h10', 'h20'].map(h => {
+                  const pred = mlPrediction.predictions[h];
+                  if (!pred || pred.error) return (
+                    <div key={h} className="glass-card-static p-4 opacity-50">
+                      <p className="text-xs text-slate-400 mb-1">{h.replace('h', '')} bars ahead</p>
+                      <p className="text-sm text-slate-500">{pred?.error || 'Not trained'}</p>
+                    </div>
+                  );
+                  return (
+                    <div key={h} className={`glass-card-static p-4 border ${
+                      pred.direction === 'bullish' ? 'border-emerald-500/20' :
+                      pred.direction === 'bearish' ? 'border-red-500/20' : 'border-slate-500/20'
+                    }`}>
+                      <p className="text-xs text-slate-400 mb-2">{h.replace('h', '')} bars ahead</p>
+                      <div className="flex items-center gap-2 mb-2">
+                        {pred.direction === 'bullish' ? (
+                          <ArrowUpRight className="w-5 h-5 text-emerald-400" />
+                        ) : pred.direction === 'bearish' ? (
+                          <ArrowDownRight className="w-5 h-5 text-red-400" />
+                        ) : (
+                          <Activity className="w-5 h-5 text-slate-400" />
+                        )}
+                        <span className={`text-sm font-bold uppercase ${
+                          pred.direction === 'bullish' ? 'text-emerald-400' :
+                          pred.direction === 'bearish' ? 'text-red-400' : 'text-slate-400'
+                        }`}>
+                          {pred.direction}
+                        </span>
+                        <span className="text-xs text-slate-500 ml-auto font-mono">
+                          {(pred.confidence * 100).toFixed(1)}%
+                        </span>
+                      </div>
+                      <div className="flex gap-2 text-xs">
+                        <span className="text-emerald-400">{(pred.prob_bullish * 100).toFixed(0)}%</span>
+                        <span className="text-slate-500">|</span>
+                        <span className="text-slate-400">{(pred.prob_neutral * 100).toFixed(0)}%</span>
+                        <span className="text-slate-500">|</span>
+                        <span className="text-red-400">{(pred.prob_bearish * 100).toFixed(0)}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="p-12 text-center">
@@ -528,6 +726,7 @@ export default function Signals() {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [symbols, setSymbols] = useState([]);
+  const [mlPrediction, setMlPrediction] = useState(null);
 
   const defaultSymbols = ['EURUSD', 'GBPUSD', 'XAUUSD', 'US30', 'NAS100', 'USDJPY'];
 
@@ -556,11 +755,19 @@ export default function Signals() {
     } finally {
       setLoading(false);
     }
+    // Load ML prediction in background
+    try {
+      const pred = await predictPrice(selectedSymbol);
+      setMlPrediction(pred);
+    } catch (err) {
+      setMlPrediction(null);
+    }
   };
 
   const handleSymbolChange = (symbol) => {
     setSelectedSymbol(symbol);
     setAnalysis(null);
+    setMlPrediction(null);
   };
 
   useEffect(() => {
@@ -625,6 +832,7 @@ export default function Signals() {
         symbol={selectedSymbol}
         analysis={analysis}
         loading={loading}
+        mlPrediction={mlPrediction}
       />
 
       {/* Disclaimer */}
