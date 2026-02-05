@@ -1,0 +1,1021 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 4.340000000000002,
+    "end_time": 12.08,
+    "duration": 7.739999999999998,
+    "text": "Welcome back and welcome to Forex Minions. Today our topic is how to find or how to mark a valid or fake change of character.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00003.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_001",
+    "start_time": 12.98,
+    "end_time": 45.98,
+    "duration": 33.0,
+    "text": "Basically, we will study smart money traps that market set for retail traders in form of fake shock levels. I promise you that you have never seen market in such perspective, but as promised, I'll share every premium content and forex trading rules in this free mentorship. Free mentorship lectures with premium content available on YouTube playlist in English language. You can also get these lectures in Urdu and Hindi. Please subscribe, like and share this channel to receive new lecture notifications.",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        15.689756097560977,
+        "this"
+      ],
+      [
+        14.581219512195123,
+        "see"
+      ]
+    ],
+    "confidence": 0.6097560975609756,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00012.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00015.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00030.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00033.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0,
+      15.0,
+      30.0,
+      33.0
+    ],
+    "word_count": 82
+  },
+  {
+    "id": "unit_002",
+    "start_time": 47.72,
+    "end_time": 76.68,
+    "duration": 28.960000000000008,
+    "text": "Now, question is why we need to study this? As you know, big institutes and successful forex traders mostly trade in major trend direction. But, does trend always remain same? Do market always move in one direction or it keep changing its direction? Well, sometime market manipulate retail traders and trap them by showing them a fake trend reversal. Today, we will study these traps in complete details.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        48.19529411764706,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00048.00s.jpg"
+    ],
+    "frame_timestamps": [
+      48.0
+    ],
+    "word_count": 68
+  },
+  {
+    "id": "unit_003",
+    "start_time": 78.46,
+    "end_time": 89.66,
+    "duration": 11.200000000000003,
+    "text": "Now, how to anticipate a fake change of character. Retail traders become part of these fake traps due to lack of knowledge, or you can say that due to not knowing the exact rules.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00078.00s.jpg"
+    ],
+    "frame_timestamps": [
+      78.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_004",
+    "start_time": 90.62,
+    "end_time": 103.02,
+    "duration": 12.399999999999991,
+    "text": "Take notes and remember these following rules to identify fake shock levels. First, when market break the weak swing point to create a fake shock level. We will study its complete details in a moment.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00090.00s.jpg"
+    ],
+    "frame_timestamps": [
+      90.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_005",
+    "start_time": 109.6,
+    "end_time": 121.76,
+    "duration": 12.16000000000001,
+    "text": "when market break such swing point, it's a smart money trap for trend following traders. Third, when market moves in from of impulse, I mean without creating an inducement level or",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00111.00s.jpg"
+    ],
+    "frame_timestamps": [
+      111.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_006",
+    "start_time": 121.76,
+    "end_time": 147.42,
+    "duration": 25.659999999999982,
+    "text": "valid pullback, such impulse or swing high or low act as inducement level. When market raid the swing high or low, this also creates a fake shock trap. Fourth rule which occur very less but we must have knowledge about it. When smaller time frame swing points are inducement levels for higher time frames. Well this seem confusing at the moment, but we will study about it in complete details next.",
+    "detected_concepts": [
+      "swing high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        122.93718309859156,
+        "this"
+      ],
+      [
+        124.89915492957746,
+        "see"
+      ]
+    ],
+    "confidence": 0.7042253521126761,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00123.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00126.00s.jpg"
+    ],
+    "frame_timestamps": [
+      123.0,
+      126.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_007",
+    "start_time": 156.56,
+    "end_time": 173.44,
+    "duration": 16.879999999999995,
+    "text": "Please note these swing points looks like valid swing point, but its strength is already consumed by swing initiating candle by being part of liquidity sweep. Such high and low are weak swing points. Remember, candle being part of liquidity sweep is known as sweeping candle.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        156.85891304347825,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00156.00s.jpg"
+    ],
+    "frame_timestamps": [
+      156.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_008",
+    "start_time": 174.38,
+    "end_time": 184.7,
+    "duration": 10.319999999999993,
+    "text": "Let's understand this concept by simple schematic diagram. As a smart money trading concept, we always look for an inducement level with respect to recent high.",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        174.50307692307692,
+        "this"
+      ],
+      [
+        175.36461538461538,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00174.00s.jpg"
+    ],
+    "frame_timestamps": [
+      174.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_009",
+    "start_time": 185.56,
+    "end_time": 194.42,
+    "duration": 8.859999999999985,
+    "text": "Now, for this high, where is out inducement level? Note this level is our inducement, and price taken out this inducement and moved higher.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        185.67583333333334,
+        "this"
+      ],
+      [
+        185.84958333333333,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00186.00s.jpg"
+    ],
+    "frame_timestamps": [
+      186.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_010",
+    "start_time": 200.66,
+    "end_time": 209.86,
+    "duration": 9.200000000000017,
+    "text": "Now, question is, if this area is liquidity sweep? Liquidity sweep area looks like this in which only candle wicks raid above previous high.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        200.89333333333332,
+        "this"
+      ],
+      [
+        201.35999999999999,
+        "look"
+      ],
+      [
+        200.89333333333332,
+        "this area"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00201.00s.jpg"
+    ],
+    "frame_timestamps": [
+      201.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_011",
+    "start_time": 210.74,
+    "end_time": 217.04,
+    "duration": 6.299999999999983,
+    "text": "Now you can understand that if this is our liquidity sweep area, then this high is created by a sweeping candle wick.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        211.0590909090909,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00210.00s.jpg"
+    ],
+    "frame_timestamps": [
+      210.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_012",
+    "start_time": 217.7,
+    "end_time": 231.12,
+    "duration": 13.420000000000016,
+    "text": "Something like this as shown on left side. Such swing points are weak swing points. Let me repeat again, if a swing started by a sweeping candle, then these points will be considered as weak swing points.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        217.81027027027025,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00219.00s.jpg"
+    ],
+    "frame_timestamps": [
+      219.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_013",
+    "start_time": 240.57999999999998,
+    "end_time": 248.24,
+    "duration": 7.660000000000025,
+    "text": "Now, let's understand this rule by real market sample size. This is pound dollar chart at 30 minute time frame.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        240.7465,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00240.00s.jpg"
+    ],
+    "frame_timestamps": [
+      240.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_014",
+    "start_time": 249.0,
+    "end_time": 257.86,
+    "duration": 8.860000000000014,
+    "text": "Now, for this low, this is our inducement level. Now, candle closed above this inducement level and below this previous low.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        249.11809523809524,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      249.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_015",
+    "start_time": 258.62,
+    "end_time": 271.58,
+    "duration": 12.95999999999998,
+    "text": "As per rule, we can market as swing high and swing low points. But, note that this is actually a liquidity sweep area. And this low is created by a candle wick or you can say that a sweeping candle.",
+    "detected_concepts": [
+      "liquidity",
+      "swing high",
+      "swing low",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        259.412,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00258.00s.jpg"
+    ],
+    "frame_timestamps": [
+      258.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_016",
+    "start_time": 283.2,
+    "end_time": 292.02,
+    "duration": 8.819999999999993,
+    "text": "Let's check price reaction here. Notice that market just trapped retail traders and moved in true direction again because this was a fake shock level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        284.34,
+        "this"
+      ],
+      [
+        283.44,
+        "here"
+      ],
+      [
+        283.5,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00282.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00285.00s.jpg"
+    ],
+    "frame_timestamps": [
+      282.0,
+      285.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_017",
+    "start_time": 318.26,
+    "end_time": 331.32,
+    "duration": 13.060000000000002,
+    "text": "As per rule, we can market as swing high and swing low points. But, note that this is actually a liquidity sweep area. And this high is created by a candle wick or you can say that a sweeping candle.",
+    "detected_concepts": [
+      "liquidity",
+      "swing high",
+      "swing low",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        319.056,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00318.00s.jpg"
+    ],
+    "frame_timestamps": [
+      318.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_018",
+    "start_time": 356.1,
+    "end_time": 376.88,
+    "duration": 20.779999999999973,
+    "text": "Now, let's discuss second rule. Second rule is when market break a swing point which creates an engineered liquidity to trap retail traders. I hope you have concept of engineered liquidity as we discussed it in last lecture. If you have not seen last lecture, I would advise you to watch it to understand this concept.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        359.1664285714286,
+        "this"
+      ],
+      [
+        358.485,
+        "see"
+      ],
+      [
+        358.93928571428575,
+        "watch"
+      ]
+    ],
+    "confidence": 0.8928571428571428,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00357.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00360.00s.jpg"
+    ],
+    "frame_timestamps": [
+      357.0,
+      360.0
+    ],
+    "word_count": 56
+  },
+  {
+    "id": "unit_019",
+    "start_time": 377.82,
+    "end_time": 389.7,
+    "duration": 11.879999999999995,
+    "text": "Now, let's understand this rule by a simple schematic diagram. Here is a line chart and for this high, where is our inducement? Check this point, this is our inducement level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        377.9893548387097,
+        "this"
+      ],
+      [
+        378.38451612903225,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00378.00s.jpg"
+    ],
+    "frame_timestamps": [
+      378.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_020",
+    "start_time": 390.64,
+    "end_time": 402.7,
+    "duration": 12.060000000000002,
+    "text": "Now, when market will take out this inducement and move higher, then these two points will be our swing high and swing low points. Again, for this high, we will mark our inducement level.",
+    "detected_concepts": [
+      "swing high",
+      "swing low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        390.96999999999997,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00390.00s.jpg"
+    ],
+    "frame_timestamps": [
+      390.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_021",
+    "start_time": 411.56,
+    "end_time": 420.66,
+    "duration": 9.100000000000023,
+    "text": "Here, this will be our swing higher high and this low is our swing higher low. Check this new high now, for this high, this is our inducement level.",
+    "detected_concepts": [
+      "swing high",
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        411.6110344827586,
+        "this"
+      ],
+      [
+        411.56,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00411.00s.jpg"
+    ],
+    "frame_timestamps": [
+      411.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_022",
+    "start_time": 435.68,
+    "end_time": 457.46,
+    "duration": 21.779999999999973,
+    "text": "Smart money engineered this low in such way that this low is now creating a engineered liquidity pool. Those students who had seen last lecture, they can expect a price reaction here. Well, let's check what market did now. Notice that market actually grabbed this liquidity pool, taking out all pending orders and stop losses here and moved higher.",
+    "detected_concepts": [
+      "liquidity",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        435.85694915254237,
+        "this"
+      ],
+      [
+        437.50847457627117,
+        "here"
+      ],
+      [
+        436.9776271186441,
+        "see"
+      ],
+      [
+        437.98033898305084,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00435.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00438.00s.jpg"
+    ],
+    "frame_timestamps": [
+      435.0,
+      438.0
+    ],
+    "word_count": 59
+  },
+  {
+    "id": "unit_023",
+    "start_time": 467.32,
+    "end_time": 475.4,
+    "duration": 8.079999999999984,
+    "text": "Now, let's understand this rule by real market sample size. This is Australian dollar chart at four hour time frame.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        467.49399999999997,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00468.00s.jpg"
+    ],
+    "frame_timestamps": [
+      468.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_024",
+    "start_time": 487.76,
+    "end_time": 497.58,
+    "duration": 9.819999999999993,
+    "text": "As per rule, we can market as swing high and swing low points. Now, let's check this high. For this high, this is our inducement level.",
+    "detected_concepts": [
+      "swing high",
+      "swing low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        488.59076923076924,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00489.00s.jpg"
+    ],
+    "frame_timestamps": [
+      489.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_025",
+    "start_time": 503.8,
+    "end_time": 521.36,
+    "duration": 17.560000000000002,
+    "text": "So, we can market as swing high and swing low points. Here, price took a dip below this swing low. Here, retail traders will think that market broke this level, so trend is reversing. Is it so? Is it a change of character or chock level?",
+    "detected_concepts": [
+      "swing high",
+      "swing low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        504.6758695652174,
+        "this"
+      ],
+      [
+        504.3667391304348,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00504.00s.jpg"
+    ],
+    "frame_timestamps": [
+      504.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_026",
+    "start_time": 527.44,
+    "end_time": 536.08,
+    "duration": 8.639999999999986,
+    "text": "to create engineered liquidity. We know that whenever market take out engineered liquidity, it always attack on opposite side liquidity pool.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00528.00s.jpg"
+    ],
+    "frame_timestamps": [
+      528.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_027",
+    "start_time": 552.52,
+    "end_time": 580.84,
+    "duration": 28.32000000000005,
+    "text": "Now, let's move on and discuss our third rule. As per third rule, when market moves from one swing point to another swing point in form of impulse, I mean without creating an inducement or valid pullback. When price break such swing points, this will be actually a fake change of character. Because this kind of swings act as inducement. I am sure that those student who knows about inducement shift rule, they can easily understand this rule.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        554.9621794871795,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00552.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00555.00s.jpg"
+    ],
+    "frame_timestamps": [
+      552.0,
+      555.0
+    ],
+    "word_count": 78
+  },
+  {
+    "id": "unit_028",
+    "start_time": 608.38,
+    "end_time": 619.9,
+    "duration": 11.519999999999982,
+    "text": "But as per smart money concept, these are not valid swing points. Because price moved from this low to this high in form of impulse, price did not created any valid pullback,",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        609.25,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00609.00s.jpg"
+    ],
+    "frame_timestamps": [
+      609.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_029",
+    "start_time": 625.7,
+    "end_time": 635.98,
+    "duration": 10.279999999999973,
+    "text": "Here, let's observe price reaction. Check now that price took a dip below this swing low. Here, retail traders will think that market broke this level,",
+    "detected_concepts": [
+      "order block",
+      "swing low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        626.455,
+        "this"
+      ],
+      [
+        625.7,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00627.00s.jpg"
+    ],
+    "frame_timestamps": [
+      627.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_030",
+    "start_time": 644.04,
+    "end_time": 655.5,
+    "duration": 11.460000000000036,
+    "text": "Well, take notes that this will be a fake chalk level. Reason, this low will act as inducement as price moved in impulse form, from this low to high, I mean without any pullback.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        644.2494117647059,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00645.00s.jpg"
+    ],
+    "frame_timestamps": [
+      645.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_031",
+    "start_time": 656.22,
+    "end_time": 673.42,
+    "duration": 17.199999999999932,
+    "text": "So, we can expect a trend resuming here. Note that price moved higher and higher as this was just a smart money trap and this is mostly occurring in forex market. If you really want to be a successful traders, note down these rules, practice them to be a pro trader.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        657.0545098039216,
+        "this"
+      ],
+      [
+        656.5850980392157,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00657.00s.jpg"
+    ],
+    "frame_timestamps": [
+      657.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_032",
+    "start_time": 675.5,
+    "end_time": 695.3,
+    "duration": 19.799999999999955,
+    "text": "Next, this is our fourth rule to avoid smart money traps. As per this rule, when lower time valid swing point is inducement, level for higher time frame, then such chalk levels do not work as per expectation. Please note this is hidden smart money trap and we must consider this point while setting up our trade.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        675.5547368421053,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00675.00s.jpg"
+    ],
+    "frame_timestamps": [
+      675.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_033",
+    "start_time": 703.7,
+    "end_time": 735.8,
+    "duration": 32.09999999999991,
+    "text": "I mean swing higher highs and higher lows. Now, check this low. Assume, if this low is swing point for small time frame and this is inducement level for higher time frame, then what will happen? In such situation, this will be an indication of change of character or trend reversal for smaller time frame. But if this is an inducement level for higher time frame, then price will grab this inducement and will move into higher direction by following the higher time frame momentum, which is already bullish.",
+    "detected_concepts": [
+      "swing high",
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        704.2696629213484,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00705.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00720.00s.jpg"
+    ],
+    "frame_timestamps": [
+      705.0,
+      720.0
+    ],
+    "word_count": 89
+  },
+  {
+    "id": "unit_034",
+    "start_time": 742.04,
+    "end_time": 749.98,
+    "duration": 7.940000000000055,
+    "text": "This is a real market sample size. This is gold chart at 4 hour time frame. These are our swing points.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        742.04,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00741.00s.jpg"
+    ],
+    "frame_timestamps": [
+      741.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_035",
+    "start_time": 750.96,
+    "end_time": 792.84,
+    "duration": 41.879999999999995,
+    "text": "I mean swing higher high and swing point on low side. Now, check this low. As this low is swing point for small time frame, I mean H1 and M15. And this is inducement level for higher time frame, I mean H4 and daily chart. In such situation, this will be an indication of change of character or trend reversal for smaller time frame. That's why market showed some ranging reaction here as per smaller time frame momentum. But, this is an inducement level for higher time frame, that's why price taken out this inducement and moved into higher direction by following the higher time frame momentum, which was already bullish.",
+    "detected_concepts": [
+      "swing high",
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        751.6896396396397,
+        "this"
+      ],
+      [
+        754.9449549549549,
+        "here"
+      ]
+    ],
+    "confidence": 0.9009009009009008,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00750.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00753.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00756.00s.jpg"
+    ],
+    "frame_timestamps": [
+      750.0,
+      753.0,
+      756.0
+    ],
+    "word_count": 111
+  },
+  {
+    "id": "unit_036",
+    "start_time": 793.84,
+    "end_time": 809.78,
+    "duration": 15.93999999999994,
+    "text": "Now, I hope you have clear understanding to avoid such market traps. Always follow these rules and make your trade plan accordingly. Never try to catch the highest point or lowest point, always find tarred on smaller time frame confirmation level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00795.00s.jpg"
+    ],
+    "frame_timestamps": [
+      795.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_037",
+    "start_time": 811.5,
+    "end_time": 845.68,
+    "duration": 34.17999999999995,
+    "text": "Now question comes into mind that if there are so many smart money traps in trend direction, then how we can avoid them? How we can actually confirm a change of character? Well, to confirm a chalk level, we will study confirmation rules in upcoming lecture. Stay tuned. Follow us and subscribe for next lecture. If you have any question, you can email us on this email ID, or you can contact us on Instagram or Telegram. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        815.0712643678161,
+        "this"
+      ],
+      [
+        811.9395402298851,
+        "here"
+      ]
+    ],
+    "confidence": 0.5747126436781609,
+    "selected_frames": [
+      "data/video_frames/eoL_y_6ODLk/frame_00813.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00816.00s.jpg",
+      "data/video_frames/eoL_y_6ODLk/frame_00834.00s.jpg"
+    ],
+    "frame_timestamps": [
+      813.0,
+      816.0,
+      834.0
+    ],
+    "word_count": 87
+  }
+]

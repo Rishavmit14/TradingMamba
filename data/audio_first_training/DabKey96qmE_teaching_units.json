@@ -1,0 +1,528 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 2.5200000000000014,
+    "end_time": 31.66,
+    "duration": 29.14,
+    "text": "Welcome to Forex Minions. Our topic is secret to Forex trading success. Let me tell you the purpose of this channel, considering the market condition and the unemployment rate, I want that my friends and people around me who want to learn forex and they cannot afford paid courses, I will share the free premium content with them free of cost. Hopefully, it will be very helpful for you. And as I think, whatever I have learned in my 7th to 8th year",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        3.547831325301206,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00003.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3.0
+    ],
+    "word_count": 83
+  },
+  {
+    "id": "unit_001",
+    "start_time": 39.26,
+    "end_time": 59.2,
+    "duration": 19.940000000000005,
+    "text": "So first, we will talk about forex structural mapping. Do you know about forex structural mapping? And why am I starting from here? Because 50% of success in forex depends on valid structural mapping. If trader do not know real market trend, they will end up in losing trades.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        40.49918367346939,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00039.00s.jpg"
+    ],
+    "frame_timestamps": [
+      39.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_002",
+    "start_time": 68.12,
+    "end_time": 87.78,
+    "duration": 19.659999999999997,
+    "text": "In bullish trend, market creates higher high and higher lows. See this image. Basically, what market is doing in this market is higher highs, higher lows, higher highs, higher lows, and similarly, in second market, what does the market do? In bearish trend or",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        68.7675,
+        "this"
+      ],
+      [
+        68.70863636363637,
+        "see"
+      ],
+      [
+        68.70863636363637,
+        "see this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00069.00s.jpg"
+    ],
+    "frame_timestamps": [
+      69.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_003",
+    "start_time": 93.56,
+    "end_time": 106.46,
+    "duration": 12.899999999999991,
+    "text": "being trending. It look like very easy and simple to see that a structure is going upward, which is our bullish trend. But question is, is that so simple? When you understand",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        93.723125,
+        "look"
+      ],
+      [
+        94.10375,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00093.00s.jpg"
+    ],
+    "frame_timestamps": [
+      93.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_004",
+    "start_time": 106.46,
+    "end_time": 120.96,
+    "duration": 14.5,
+    "text": "trend mapping, you can easily find your high probability entry. Because trend is your friend, then your 50% forex success will start here. Now, let's talk about the bullish trend.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        107.77266666666667,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00105.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      105.0,
+      108.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_005",
+    "start_time": 128.46,
+    "end_time": 141.3,
+    "duration": 12.840000000000003,
+    "text": "then what they do? They will mark every high and every low as valid higher high and valid higher low, higher high, higher low, and so on. But if we compare this concept with smart",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        130.04542857142857,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00129.00s.jpg"
+    ],
+    "frame_timestamps": [
+      129.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_006",
+    "start_time": 160.08,
+    "end_time": 178.42,
+    "duration": 18.339999999999975,
+    "text": "is valid higher high? Yes, it is. Now, is this point is valid higher low? Yes, it is. We will discuss the reasons shortly. And next, these points? They are valid highs and lows. Answer",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        160.55314285714286,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00159.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00162.00s.jpg"
+    ],
+    "frame_timestamps": [
+      159.0,
+      162.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_007",
+    "start_time": 210.18,
+    "end_time": 291.46,
+    "duration": 81.27999999999997,
+    "text": "two conditions to identify higher highs and higher lows. First, higher high will be confirmed when market must take out the first inducement from previous swing. First mean most recent one. We will discuss about inducement in details in next topic. Because I want to hand over you small pieces and later we will join them to build our forex strategy. Inducement is basically a valid pullback in recent swing. As showing here in image. See, here is out inducement. And price taken out this inducement fulfilling our first rule. That's why these are our valid higher high and higher low. Now, check this level. For this swing, here is out inducement. And price taken out this inducement completing our first rule. That's why these are our valid higher high and higher low. Now, what about these four points? These are not valid higher highs and higher lows. Because, these swings are without inducement and market moved higher without taking the inducement. Hopefully, you understand the first rule. Now, what is our second rule? Second rule is candle body must close. I repeat, candle body must close below inducement and above recent high.",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        215.13730569948189,
+        "this"
+      ],
+      [
+        214.42911917098445,
+        "here"
+      ],
+      [
+        214.6061658031088,
+        "see"
+      ]
+    ],
+    "confidence": 0.2590673575129534,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00210.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00213.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00216.00s.jpg"
+    ],
+    "frame_timestamps": [
+      210.0,
+      213.0,
+      216.0
+    ],
+    "word_count": 193
+  },
+  {
+    "id": "unit_008",
+    "start_time": 292.32,
+    "end_time": 311.2,
+    "duration": 18.879999999999995,
+    "text": "Otherwise, we will market as liquidity sweep. These are two new terms for you. Inducement and liquidity but we will cover them in details in next lecture. But remember, these are two major driving force for our forex market. First one is liquidity. And second one",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_009",
+    "start_time": 318.5,
+    "end_time": 375.72,
+    "duration": 57.22000000000003,
+    "text": "They follow these two mentioned rules. Every high higher than previous high is higher high and every low higher than previous low is higher low. Example of a forex chart as follow. Suppose market made a move, they will mark this high as higher high and this low as higher low. Then market continued and created a new high again. They will mark this high as higher high and this low as higher low. Then market again moved again and created a new high again. They will mark this high as higher high as this is higher than previous high and this low as higher low. Then market dipped down and closed below this higher low and closed below it. Retail trader will consider this point as breakout. If yes, they will try to sell here. Now see. When market started and continued, it created a new high and retail trader will be shocked. What happened and why? Well they will consider",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        320.6604938271605,
+        "this"
+      ],
+      [
+        325.7916666666667,
+        "here"
+      ],
+      [
+        325.8996913580247,
+        "see"
+      ]
+    ],
+    "confidence": 0.30864197530864196,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00318.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00321.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00327.00s.jpg"
+    ],
+    "frame_timestamps": [
+      318.0,
+      321.0,
+      327.0
+    ],
+    "word_count": 162
+  },
+  {
+    "id": "unit_010",
+    "start_time": 375.72,
+    "end_time": 418.42,
+    "duration": 42.69999999999999,
+    "text": "it market manipulation due to lack of knowledge and again, they will mark this high as higher high and remove this higher low. They will mark this new low as higher low. Again market created a new high. They will mark this high as high or high and this low as higher low. Then market dipped down and closed below this higher low. Now retail trader will consider this point as breakout and this retesting candle as a confirmation. If yes, they will try to sell here. Then market continued and created a new high and low. Retail trader will be trapped by forex market. Why reason will be explained shortly. Again they will consider it market manipulation due to lack of",
+    "detected_concepts": [
+      "higher high",
+      "manipulation"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        376.43073770491804,
+        "this"
+      ],
+      [
+        380.42180327868857,
+        "here"
+      ]
+    ],
+    "confidence": 0.819672131147541,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00375.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00381.00s.jpg"
+    ],
+    "frame_timestamps": [
+      375.0,
+      381.0
+    ],
+    "word_count": 122
+  },
+  {
+    "id": "unit_011",
+    "start_time": 418.42,
+    "end_time": 430.5,
+    "duration": 12.079999999999984,
+    "text": "knowledge and they will mark this high as higher high and remove this low. They will mark this new low as higher low and these high as higher high and low as higher low. This is retail trader's basic mindset approach.",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        418.68463414634147,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00417.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00420.00s.jpg"
+    ],
+    "frame_timestamps": [
+      417.0,
+      420.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_012",
+    "start_time": 440.72,
+    "end_time": 463.18,
+    "duration": 22.45999999999998,
+    "text": "rules. First, higher high will be confirmed when market must take out the first, recent, inducement from previous swing and inducement is first pullback on left side of the current high as mentioned earlier. Second rule, candle body must close below inducement and above high. Otherwise, we will market",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00441.00s.jpg"
+    ],
+    "frame_timestamps": [
+      441.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_013",
+    "start_time": 463.18,
+    "end_time": 536.12,
+    "duration": 72.94,
+    "text": "as liquidity sweep. Now what is liquidity? Well, we will explain it in complete detail in next lecture. But for now, just as a guideline, all pending orders, stop losses, break even, high and lows act as liquidity. Let's see this forex chart example. Market started and created high and low. But being a smart money concept trader, we will find inducement in recent swing as this is our first rule. We will always look for inducement on left side of the recent high. So, here is our inducement. Market did not rated it and moved up. Now, we will watch this high. Again, to verify first rule, we need to identify inducement and check if market taken it out or not. See, here inducement taken by new price swing. Now, we will check second rule which is candle closing above recent high. Here, as candle body not closed above this high, so we will market as liquidity sweep. Now, market made a move again. Posted this high. We will plot and map",
+    "detected_concepts": [
+      "liquidity",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        465.3557225433526,
+        "this"
+      ],
+      [
+        467.8034104046243,
+        "here"
+      ],
+      [
+        467.2050867052023,
+        "look"
+      ],
+      [
+        465.3013294797688,
+        "see"
+      ],
+      [
+        468.6193063583815,
+        "watch"
+      ],
+      [
+        465.3013294797688,
+        "see this"
+      ]
+    ],
+    "confidence": 0.5780346820809249,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00462.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00465.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00468.00s.jpg"
+    ],
+    "frame_timestamps": [
+      462.0,
+      465.0,
+      468.0
+    ],
+    "word_count": 173
+  },
+  {
+    "id": "unit_014",
+    "start_time": 536.12,
+    "end_time": 555.5,
+    "duration": 19.379999999999995,
+    "text": "structure as per rule. Our first rule to find inducement. Where it is? Check this point. This is inducement. Now, market taken out inducement and closed above previous high. Candle bodies closed below inducement and above high as well. So,",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        536.9565,
+        "this"
+      ],
+      [
+        536.77725,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00537.00s.jpg"
+    ],
+    "frame_timestamps": [
+      537.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_015",
+    "start_time": 555.96,
+    "end_time": 567.56,
+    "duration": 11.599999999999909,
+    "text": "both rule are okay. Now, we can market as higher high and this low as a higher low. Hopeful, now your concept is clear. And it will be more crystal clear when you",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        556.549090909091,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00555.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00558.00s.jpg"
+    ],
+    "frame_timestamps": [
+      555.0,
+      558.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_016",
+    "start_time": 567.56,
+    "end_time": 584.7,
+    "duration": 17.1400000000001,
+    "text": "will see next lecture on liquidity and inducement. Again, market moving and creating new high and low. Again, we will find inducement. Here it is. Candle closing above high and below inducement as well. That's why we can mark them",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        568.8249999999999,
+        "here"
+      ],
+      [
+        567.6175,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00567.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00570.00s.jpg"
+    ],
+    "frame_timestamps": [
+      567.0,
+      570.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_017",
+    "start_time": 595.0,
+    "end_time": 614.3,
+    "duration": 19.299999999999955,
+    "text": "inducement and candle closing to map a real and accurate structure. This will help you are to filter fake and invalid setups and your winning ratio will increase significantly. Follow us for more videos. Subscribe our channel and share with your trader friends. In next lecture, we will discuss about",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        595.66,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/DabKey96qmE/frame_00594.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00597.00s.jpg",
+      "data/video_frames/DabKey96qmE/frame_00606.00s.jpg"
+    ],
+    "frame_timestamps": [
+      594.0,
+      597.0,
+      606.0
+    ],
+    "word_count": 50
+  }
+]

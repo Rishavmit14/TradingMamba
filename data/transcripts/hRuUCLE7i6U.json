@@ -1,0 +1,7573 @@
+{
+  "video_id": "hRuUCLE7i6U",
+  "language": "en",
+  "duration": 500.3668125,
+  "transcribed_at": "2026-02-05T18:07:22.203593",
+  "model": "small",
+  "segments": [
+    {
+      "start_time": 3.919999999999999,
+      "end_time": 12.5,
+      "text": "Welcome back and welcome to Forex Minions. In this lecture, we will discuss daily candlestick formation and forex trading sessions.",
+      "words": [
+        {
+          "word": " Welcome",
+          "start": 3.919999999999999,
+          "end": 4.56,
+          "probability": 0.8207072615623474
+        },
+        {
+          "word": " back",
+          "start": 4.56,
+          "end": 4.9,
+          "probability": 0.9385138750076294
+        },
+        {
+          "word": " and",
+          "start": 4.9,
+          "end": 5.1,
+          "probability": 0.9309021830558777
+        },
+        {
+          "word": " welcome",
+          "start": 5.1,
+          "end": 5.4,
+          "probability": 0.9790838360786438
+        },
+        {
+          "word": " to",
+          "start": 5.4,
+          "end": 5.66,
+          "probability": 0.9967173933982849
+        },
+        {
+          "word": " Forex",
+          "start": 5.66,
+          "end": 6.08,
+          "probability": 0.7352715581655502
+        },
+        {
+          "word": " Minions.",
+          "start": 6.08,
+          "end": 6.48,
+          "probability": 0.75845667719841
+        },
+        {
+          "word": " In",
+          "start": 7.2,
+          "end": 7.66,
+          "probability": 0.9679208397865295
+        },
+        {
+          "word": " this",
+          "start": 7.66,
+          "end": 7.88,
+          "probability": 0.9984675049781799
+        },
+        {
+          "word": " lecture,",
+          "start": 7.88,
+          "end": 8.24,
+          "probability": 0.9896818995475769
+        },
+        {
+          "word": " we",
+          "start": 8.74,
+          "end": 8.9,
+          "probability": 0.9717112183570862
+        },
+        {
+          "word": " will",
+          "start": 8.9,
+          "end": 9.06,
+          "probability": 0.9937726855278015
+        },
+        {
+          "word": " discuss",
+          "start": 9.06,
+          "end": 9.38,
+          "probability": 0.996266782283783
+        },
+        {
+          "word": " daily",
+          "start": 9.38,
+          "end": 9.78,
+          "probability": 0.7607757449150085
+        },
+        {
+          "word": " candlestick",
+          "start": 9.78,
+          "end": 10.5,
+          "probability": 0.9961407780647278
+        },
+        {
+          "word": " formation",
+          "start": 10.5,
+          "end": 10.86,
+          "probability": 0.9929661750793457
+        },
+        {
+          "word": " and",
+          "start": 10.86,
+          "end": 11.28,
+          "probability": 0.9906444549560547
+        },
+        {
+          "word": " forex",
+          "start": 11.28,
+          "end": 11.72,
+          "probability": 0.885225385427475
+        },
+        {
+          "word": " trading",
+          "start": 11.72,
+          "end": 12.04,
+          "probability": 0.9960448145866394
+        },
+        {
+          "word": " sessions.",
+          "start": 12.04,
+          "end": 12.5,
+          "probability": 0.9969934225082397
+        }
+      ]
+    },
+    {
+      "start_time": 13.6,
+      "end_time": 18.26,
+      "text": "Many of you have brief knowledge about it, but let's discuss this in some logical ways.",
+      "words": [
+        {
+          "word": " Many",
+          "start": 13.6,
+          "end": 13.9,
+          "probability": 0.9873518943786621
+        },
+        {
+          "word": " of",
+          "start": 13.9,
+          "end": 14.1,
+          "probability": 0.9990465044975281
+        },
+        {
+          "word": " you",
+          "start": 14.1,
+          "end": 14.26,
+          "probability": 0.9992377758026123
+        },
+        {
+          "word": " have",
+          "start": 14.26,
+          "end": 14.44,
+          "probability": 0.9967913031578064
+        },
+        {
+          "word": " brief",
+          "start": 14.44,
+          "end": 14.7,
+          "probability": 0.9829933643341064
+        },
+        {
+          "word": " knowledge",
+          "start": 14.7,
+          "end": 15.06,
+          "probability": 0.9986984729766846
+        },
+        {
+          "word": " about",
+          "start": 15.06,
+          "end": 15.36,
+          "probability": 0.997768759727478
+        },
+        {
+          "word": " it,",
+          "start": 15.36,
+          "end": 15.6,
+          "probability": 0.9945788383483887
+        },
+        {
+          "word": " but",
+          "start": 16.04,
+          "end": 16.2,
+          "probability": 0.9861615896224976
+        },
+        {
+          "word": " let's",
+          "start": 16.2,
+          "end": 16.52,
+          "probability": 0.9858759939670563
+        },
+        {
+          "word": " discuss",
+          "start": 16.52,
+          "end": 16.82,
+          "probability": 0.9981294274330139
+        },
+        {
+          "word": " this",
+          "start": 16.82,
+          "end": 17.14,
+          "probability": 0.9961488246917725
+        },
+        {
+          "word": " in",
+          "start": 17.14,
+          "end": 17.34,
+          "probability": 0.9981570839881897
+        },
+        {
+          "word": " some",
+          "start": 17.34,
+          "end": 17.52,
+          "probability": 0.9990899562835693
+        },
+        {
+          "word": " logical",
+          "start": 17.52,
+          "end": 17.9,
+          "probability": 0.998813271522522
+        },
+        {
+          "word": " ways.",
+          "start": 17.9,
+          "end": 18.26,
+          "probability": 0.9969683289527893
+        }
+      ]
+    },
+    {
+      "start_time": 19.22,
+      "end_time": 23.2,
+      "text": "This lecture will set a good base for your session and intraday trading skills.",
+      "words": [
+        {
+          "word": " This",
+          "start": 19.22,
+          "end": 19.54,
+          "probability": 0.990546703338623
+        },
+        {
+          "word": " lecture",
+          "start": 19.54,
+          "end": 19.84,
+          "probability": 0.9975946545600891
+        },
+        {
+          "word": " will",
+          "start": 19.84,
+          "end": 20.1,
+          "probability": 0.9927167892456055
+        },
+        {
+          "word": " set",
+          "start": 20.1,
+          "end": 20.34,
+          "probability": 0.9985248446464539
+        },
+        {
+          "word": " a",
+          "start": 20.34,
+          "end": 20.46,
+          "probability": 0.9985865354537964
+        },
+        {
+          "word": " good",
+          "start": 20.46,
+          "end": 20.62,
+          "probability": 0.9987003803253174
+        },
+        {
+          "word": " base",
+          "start": 20.62,
+          "end": 20.9,
+          "probability": 0.9964324235916138
+        },
+        {
+          "word": " for",
+          "start": 20.9,
+          "end": 21.12,
+          "probability": 0.9990969896316528
+        },
+        {
+          "word": " your",
+          "start": 21.12,
+          "end": 21.26,
+          "probability": 0.9988940358161926
+        },
+        {
+          "word": " session",
+          "start": 21.26,
+          "end": 21.6,
+          "probability": 0.9963284134864807
+        },
+        {
+          "word": " and",
+          "start": 21.6,
+          "end": 21.88,
+          "probability": 0.9934905767440796
+        },
+        {
+          "word": " intraday",
+          "start": 21.88,
+          "end": 22.3,
+          "probability": 0.97531129916509
+        },
+        {
+          "word": " trading",
+          "start": 22.3,
+          "end": 22.68,
+          "probability": 0.9959070682525635
+        },
+        {
+          "word": " skills.",
+          "start": 22.68,
+          "end": 23.2,
+          "probability": 0.9981597065925598
+        }
+      ]
+    },
+    {
+      "start_time": 24.780000000000005,
+      "end_time": 29.8,
+      "text": "Let's start with forex market working principle that how forex market actually works.",
+      "words": [
+        {
+          "word": " Let's",
+          "start": 24.780000000000005,
+          "end": 25.42,
+          "probability": 0.6488763093948364
+        },
+        {
+          "word": " start",
+          "start": 25.42,
+          "end": 25.64,
+          "probability": 0.9657278656959534
+        },
+        {
+          "word": " with",
+          "start": 25.64,
+          "end": 25.88,
+          "probability": 0.9968751668930054
+        },
+        {
+          "word": " forex",
+          "start": 25.88,
+          "end": 26.32,
+          "probability": 0.6306837797164917
+        },
+        {
+          "word": " market",
+          "start": 26.32,
+          "end": 26.62,
+          "probability": 0.8964021801948547
+        },
+        {
+          "word": " working",
+          "start": 26.62,
+          "end": 27.08,
+          "probability": 0.953163743019104
+        },
+        {
+          "word": " principle",
+          "start": 27.08,
+          "end": 27.52,
+          "probability": 0.9669769406318665
+        },
+        {
+          "word": " that",
+          "start": 27.52,
+          "end": 27.82,
+          "probability": 0.9242584109306335
+        },
+        {
+          "word": " how",
+          "start": 27.82,
+          "end": 28.04,
+          "probability": 0.9729951024055481
+        },
+        {
+          "word": " forex",
+          "start": 28.04,
+          "end": 28.5,
+          "probability": 0.8931693434715271
+        },
+        {
+          "word": " market",
+          "start": 28.5,
+          "end": 28.84,
+          "probability": 0.9928255081176758
+        },
+        {
+          "word": " actually",
+          "start": 28.84,
+          "end": 29.36,
+          "probability": 0.9897935390472412
+        },
+        {
+          "word": " works.",
+          "start": 29.36,
+          "end": 29.8,
+          "probability": 0.99733966588974
+        }
+      ]
+    },
+    {
+      "start_time": 30.78,
+      "end_time": 39.0,
+      "text": "Well, whenever we use word smart money, it's mean big institutions, big banks, insurance companies, and fund hedgers companies.",
+      "words": [
+        {
+          "word": " Well,",
+          "start": 30.78,
+          "end": 31.08,
+          "probability": 0.9226509928703308
+        },
+        {
+          "word": " whenever",
+          "start": 31.54,
+          "end": 31.8,
+          "probability": 0.9588534235954285
+        },
+        {
+          "word": " we",
+          "start": 31.8,
+          "end": 32.14,
+          "probability": 0.9975403547286987
+        },
+        {
+          "word": " use",
+          "start": 32.14,
+          "end": 32.4,
+          "probability": 0.9970388412475586
+        },
+        {
+          "word": " word",
+          "start": 32.4,
+          "end": 32.64,
+          "probability": 0.775332510471344
+        },
+        {
+          "word": " smart",
+          "start": 32.64,
+          "end": 32.88,
+          "probability": 0.6125802397727966
+        },
+        {
+          "word": " money,",
+          "start": 32.88,
+          "end": 33.3,
+          "probability": 0.9565102458000183
+        },
+        {
+          "word": " it's",
+          "start": 33.84,
+          "end": 34.06,
+          "probability": 0.8641501367092133
+        },
+        {
+          "word": " mean",
+          "start": 34.06,
+          "end": 34.26,
+          "probability": 0.9850590229034424
+        },
+        {
+          "word": " big",
+          "start": 34.26,
+          "end": 34.46,
+          "probability": 0.9583706855773926
+        },
+        {
+          "word": " institutions,",
+          "start": 34.46,
+          "end": 35.18,
+          "probability": 0.9920094013214111
+        },
+        {
+          "word": " big",
+          "start": 35.64,
+          "end": 35.76,
+          "probability": 0.9833742380142212
+        },
+        {
+          "word": " banks,",
+          "start": 35.76,
+          "end": 36.18,
+          "probability": 0.9951049089431763
+        },
+        {
+          "word": " insurance",
+          "start": 36.48,
+          "end": 36.84,
+          "probability": 0.9968595504760742
+        },
+        {
+          "word": " companies,",
+          "start": 36.84,
+          "end": 37.38,
+          "probability": 0.9974657297134399
+        },
+        {
+          "word": " and",
+          "start": 37.78,
+          "end": 37.92,
+          "probability": 0.9963208436965942
+        },
+        {
+          "word": " fund",
+          "start": 37.92,
+          "end": 38.14,
+          "probability": 0.9926924109458923
+        },
+        {
+          "word": " hedgers",
+          "start": 38.14,
+          "end": 38.54,
+          "probability": 0.8437133729457855
+        },
+        {
+          "word": " companies.",
+          "start": 38.54,
+          "end": 39.0,
+          "probability": 0.9758555889129639
+        }
+      ]
+    },
+    {
+      "start_time": 40.14,
+      "end_time": 43.92,
+      "text": "Forex market works 24 hours a day and 5 days a week.",
+      "words": [
+        {
+          "word": " Forex",
+          "start": 40.14,
+          "end": 40.62,
+          "probability": 0.9627684056758881
+        },
+        {
+          "word": " market",
+          "start": 40.62,
+          "end": 40.94,
+          "probability": 0.8966019749641418
+        },
+        {
+          "word": " works",
+          "start": 40.94,
+          "end": 41.34,
+          "probability": 0.9959639310836792
+        },
+        {
+          "word": " 24",
+          "start": 41.34,
+          "end": 41.78,
+          "probability": 0.9723528623580933
+        },
+        {
+          "word": " hours",
+          "start": 41.78,
+          "end": 42.3,
+          "probability": 0.9688814878463745
+        },
+        {
+          "word": " a",
+          "start": 42.3,
+          "end": 42.5,
+          "probability": 0.9970614314079285
+        },
+        {
+          "word": " day",
+          "start": 42.5,
+          "end": 42.7,
+          "probability": 0.998788058757782
+        },
+        {
+          "word": " and",
+          "start": 42.7,
+          "end": 42.9,
+          "probability": 0.9804372191429138
+        },
+        {
+          "word": " 5",
+          "start": 42.9,
+          "end": 43.2,
+          "probability": 0.5993292927742004
+        },
+        {
+          "word": " days",
+          "start": 43.2,
+          "end": 43.48,
+          "probability": 0.9976183772087097
+        },
+        {
+          "word": " a",
+          "start": 43.48,
+          "end": 43.72,
+          "probability": 0.9975916147232056
+        },
+        {
+          "word": " week.",
+          "start": 43.72,
+          "end": 43.92,
+          "probability": 0.9995717406272888
+        }
+      ]
+    },
+    {
+      "start_time": 44.72,
+      "end_time": 49.36,
+      "text": "Reason is our banking system, because our bank works 5 days within a week.",
+      "words": [
+        {
+          "word": " Reason",
+          "start": 44.72,
+          "end": 45.1,
+          "probability": 0.9677302241325378
+        },
+        {
+          "word": " is",
+          "start": 45.1,
+          "end": 45.34,
+          "probability": 0.9986910223960876
+        },
+        {
+          "word": " our",
+          "start": 45.34,
+          "end": 45.52,
+          "probability": 0.9927389025688171
+        },
+        {
+          "word": " banking",
+          "start": 45.52,
+          "end": 45.84,
+          "probability": 0.9955578446388245
+        },
+        {
+          "word": " system,",
+          "start": 45.84,
+          "end": 46.34,
+          "probability": 0.9990365505218506
+        },
+        {
+          "word": " because",
+          "start": 46.86,
+          "end": 47.18,
+          "probability": 0.9968711733818054
+        },
+        {
+          "word": " our",
+          "start": 47.18,
+          "end": 47.42,
+          "probability": 0.9985425472259521
+        },
+        {
+          "word": " bank",
+          "start": 47.42,
+          "end": 47.68,
+          "probability": 0.9888129830360413
+        },
+        {
+          "word": " works",
+          "start": 47.68,
+          "end": 48.04,
+          "probability": 0.9933157563209534
+        },
+        {
+          "word": " 5",
+          "start": 48.04,
+          "end": 48.34,
+          "probability": 0.7782058119773865
+        },
+        {
+          "word": " days",
+          "start": 48.34,
+          "end": 48.62,
+          "probability": 0.9972568154335022
+        },
+        {
+          "word": " within",
+          "start": 48.62,
+          "end": 48.94,
+          "probability": 0.9975296854972839
+        },
+        {
+          "word": " a",
+          "start": 48.94,
+          "end": 49.12,
+          "probability": 0.99852055311203
+        },
+        {
+          "word": " week.",
+          "start": 49.12,
+          "end": 49.36,
+          "probability": 0.999632716178894
+        }
+      ]
+    },
+    {
+      "start_time": 49.36,
+      "end_time": 57.94,
+      "text": "As Saturday and Sunday is off day for banks and big institutions, that's why Saturday and Sunday are off trading days in forex.",
+      "words": [
+        {
+          "word": " As",
+          "start": 49.36,
+          "end": 50.46,
+          "probability": 0.17389187216758728
+        },
+        {
+          "word": " Saturday",
+          "start": 50.46,
+          "end": 50.8,
+          "probability": 0.9333057403564453
+        },
+        {
+          "word": " and",
+          "start": 50.8,
+          "end": 51.16,
+          "probability": 0.9799543023109436
+        },
+        {
+          "word": " Sunday",
+          "start": 51.16,
+          "end": 51.46,
+          "probability": 0.9958370923995972
+        },
+        {
+          "word": " is",
+          "start": 51.46,
+          "end": 51.78,
+          "probability": 0.9936192631721497
+        },
+        {
+          "word": " off",
+          "start": 51.78,
+          "end": 52.02,
+          "probability": 0.9690552353858948
+        },
+        {
+          "word": " day",
+          "start": 52.02,
+          "end": 52.24,
+          "probability": 0.541900634765625
+        },
+        {
+          "word": " for",
+          "start": 52.24,
+          "end": 52.42,
+          "probability": 0.9900847673416138
+        },
+        {
+          "word": " banks",
+          "start": 52.42,
+          "end": 52.74,
+          "probability": 0.9784858226776123
+        },
+        {
+          "word": " and",
+          "start": 52.74,
+          "end": 52.98,
+          "probability": 0.9922199845314026
+        },
+        {
+          "word": " big",
+          "start": 52.98,
+          "end": 53.18,
+          "probability": 0.9923646450042725
+        },
+        {
+          "word": " institutions,",
+          "start": 53.18,
+          "end": 53.86,
+          "probability": 0.984293520450592
+        },
+        {
+          "word": " that's",
+          "start": 54.52,
+          "end": 54.84,
+          "probability": 0.952110081911087
+        },
+        {
+          "word": " why",
+          "start": 54.84,
+          "end": 55.02,
+          "probability": 0.9988560676574707
+        },
+        {
+          "word": " Saturday",
+          "start": 55.02,
+          "end": 55.4,
+          "probability": 0.9941579103469849
+        },
+        {
+          "word": " and",
+          "start": 55.4,
+          "end": 55.74,
+          "probability": 0.9937506318092346
+        },
+        {
+          "word": " Sunday",
+          "start": 55.74,
+          "end": 56.08,
+          "probability": 0.997435986995697
+        },
+        {
+          "word": " are",
+          "start": 56.08,
+          "end": 56.34,
+          "probability": 0.9955102205276489
+        },
+        {
+          "word": " off",
+          "start": 56.34,
+          "end": 56.56,
+          "probability": 0.993278443813324
+        },
+        {
+          "word": " trading",
+          "start": 56.56,
+          "end": 56.84,
+          "probability": 0.8470422029495239
+        },
+        {
+          "word": " days",
+          "start": 56.84,
+          "end": 57.18,
+          "probability": 0.9935833811759949
+        },
+        {
+          "word": " in",
+          "start": 57.18,
+          "end": 57.44,
+          "probability": 0.9965746402740479
+        },
+        {
+          "word": " forex.",
+          "start": 57.44,
+          "end": 57.94,
+          "probability": 0.6752192080020905
+        }
+      ]
+    },
+    {
+      "start_time": 58.88,
+      "end_time": 61.82,
+      "text": "It's mean forex market is off on Saturday and Sunday.",
+      "words": [
+        {
+          "word": " It's",
+          "start": 58.88,
+          "end": 59.1,
+          "probability": 0.8118186593055725
+        },
+        {
+          "word": " mean",
+          "start": 59.1,
+          "end": 59.28,
+          "probability": 0.9810298681259155
+        },
+        {
+          "word": " forex",
+          "start": 59.28,
+          "end": 59.76,
+          "probability": 0.925763338804245
+        },
+        {
+          "word": " market",
+          "start": 59.76,
+          "end": 60.08,
+          "probability": 0.9903268218040466
+        },
+        {
+          "word": " is",
+          "start": 60.08,
+          "end": 60.34,
+          "probability": 0.9984784722328186
+        },
+        {
+          "word": " off",
+          "start": 60.34,
+          "end": 60.6,
+          "probability": 0.9962930083274841
+        },
+        {
+          "word": " on",
+          "start": 60.6,
+          "end": 60.76,
+          "probability": 0.9975899457931519
+        },
+        {
+          "word": " Saturday",
+          "start": 60.76,
+          "end": 61.12,
+          "probability": 0.9955037236213684
+        },
+        {
+          "word": " and",
+          "start": 61.12,
+          "end": 61.48,
+          "probability": 0.9962729215621948
+        },
+        {
+          "word": " Sunday.",
+          "start": 61.48,
+          "end": 61.82,
+          "probability": 0.995877742767334
+        }
+      ]
+    },
+    {
+      "start_time": 62.84,
+      "end_time": 69.8,
+      "text": "Well, to understand the concept and working principle of forex industry, we must start with small banks.",
+      "words": [
+        {
+          "word": " Well,",
+          "start": 62.84,
+          "end": 63.1,
+          "probability": 0.9541763663291931
+        },
+        {
+          "word": " to",
+          "start": 63.9,
+          "end": 64.18,
+          "probability": 0.9153111577033997
+        },
+        {
+          "word": " understand",
+          "start": 64.18,
+          "end": 64.74,
+          "probability": 0.9986127614974976
+        },
+        {
+          "word": " the",
+          "start": 64.74,
+          "end": 64.9,
+          "probability": 0.9985722303390503
+        },
+        {
+          "word": " concept",
+          "start": 64.9,
+          "end": 65.26,
+          "probability": 0.9986947178840637
+        },
+        {
+          "word": " and",
+          "start": 65.26,
+          "end": 65.58,
+          "probability": 0.9970079064369202
+        },
+        {
+          "word": " working",
+          "start": 65.58,
+          "end": 65.84,
+          "probability": 0.9992893934249878
+        },
+        {
+          "word": " principle",
+          "start": 65.84,
+          "end": 66.4,
+          "probability": 0.9713341593742371
+        },
+        {
+          "word": " of",
+          "start": 66.4,
+          "end": 66.66,
+          "probability": 0.9989763498306274
+        },
+        {
+          "word": " forex",
+          "start": 66.66,
+          "end": 67.08,
+          "probability": 0.9501965939998627
+        },
+        {
+          "word": " industry,",
+          "start": 67.08,
+          "end": 67.56,
+          "probability": 0.9854493737220764
+        },
+        {
+          "word": " we",
+          "start": 68.08,
+          "end": 68.26,
+          "probability": 0.9833545088768005
+        },
+        {
+          "word": " must",
+          "start": 68.26,
+          "end": 68.46,
+          "probability": 0.9994152784347534
+        },
+        {
+          "word": " start",
+          "start": 68.46,
+          "end": 68.8,
+          "probability": 0.9982998967170715
+        },
+        {
+          "word": " with",
+          "start": 68.8,
+          "end": 69.02,
+          "probability": 0.9996150732040405
+        },
+        {
+          "word": " small",
+          "start": 69.02,
+          "end": 69.32,
+          "probability": 0.9899898767471313
+        },
+        {
+          "word": " banks.",
+          "start": 69.32,
+          "end": 69.8,
+          "probability": 0.9978558421134949
+        }
+      ]
+    },
+    {
+      "start_time": 70.76,
+      "end_time": 73.84,
+      "text": "Every country or region has small banks operating there.",
+      "words": [
+        {
+          "word": " Every",
+          "start": 70.76,
+          "end": 71.1,
+          "probability": 0.9844597578048706
+        },
+        {
+          "word": " country",
+          "start": 71.1,
+          "end": 71.44,
+          "probability": 0.9976100921630859
+        },
+        {
+          "word": " or",
+          "start": 71.44,
+          "end": 71.72,
+          "probability": 0.9983994364738464
+        },
+        {
+          "word": " region",
+          "start": 71.72,
+          "end": 72.02,
+          "probability": 0.9982471466064453
+        },
+        {
+          "word": " has",
+          "start": 72.02,
+          "end": 72.28,
+          "probability": 0.9970155954360962
+        },
+        {
+          "word": " small",
+          "start": 72.28,
+          "end": 72.62,
+          "probability": 0.9974408149719238
+        },
+        {
+          "word": " banks",
+          "start": 72.62,
+          "end": 72.98,
+          "probability": 0.9985523819923401
+        },
+        {
+          "word": " operating",
+          "start": 72.98,
+          "end": 73.46,
+          "probability": 0.9995750784873962
+        },
+        {
+          "word": " there.",
+          "start": 73.46,
+          "end": 73.84,
+          "probability": 0.9843132495880127
+        }
+      ]
+    },
+    {
+      "start_time": 73.84,
+      "end_time": 79.42,
+      "text": "These small banks are bound to share data of each and every transaction to their state bank.",
+      "words": [
+        {
+          "word": " These",
+          "start": 73.84,
+          "end": 74.98,
+          "probability": 0.03097647614777088
+        },
+        {
+          "word": " small",
+          "start": 74.98,
+          "end": 75.34,
+          "probability": 0.9527813196182251
+        },
+        {
+          "word": " banks",
+          "start": 75.34,
+          "end": 75.7,
+          "probability": 0.9938191771507263
+        },
+        {
+          "word": " are",
+          "start": 75.7,
+          "end": 75.92,
+          "probability": 0.9914809465408325
+        },
+        {
+          "word": " bound",
+          "start": 75.92,
+          "end": 76.14,
+          "probability": 0.9974167346954346
+        },
+        {
+          "word": " to",
+          "start": 76.14,
+          "end": 76.34,
+          "probability": 0.999249279499054
+        },
+        {
+          "word": " share",
+          "start": 76.34,
+          "end": 76.58,
+          "probability": 0.9948451519012451
+        },
+        {
+          "word": " data",
+          "start": 76.58,
+          "end": 76.9,
+          "probability": 0.9947931170463562
+        },
+        {
+          "word": " of",
+          "start": 76.9,
+          "end": 77.08,
+          "probability": 0.9983564019203186
+        },
+        {
+          "word": " each",
+          "start": 77.08,
+          "end": 77.26,
+          "probability": 0.9986754059791565
+        },
+        {
+          "word": " and",
+          "start": 77.26,
+          "end": 77.44,
+          "probability": 0.9954665899276733
+        },
+        {
+          "word": " every",
+          "start": 77.44,
+          "end": 77.76,
+          "probability": 0.9979947805404663
+        },
+        {
+          "word": " transaction",
+          "start": 77.76,
+          "end": 78.3,
+          "probability": 0.9969270825386047
+        },
+        {
+          "word": " to",
+          "start": 78.3,
+          "end": 78.64,
+          "probability": 0.9958386421203613
+        },
+        {
+          "word": " their",
+          "start": 78.64,
+          "end": 78.8,
+          "probability": 0.9987597465515137
+        },
+        {
+          "word": " state",
+          "start": 78.8,
+          "end": 79.06,
+          "probability": 0.9433892965316772
+        },
+        {
+          "word": " bank.",
+          "start": 79.06,
+          "end": 79.42,
+          "probability": 0.9840365052223206
+        }
+      ]
+    },
+    {
+      "start_time": 80.16,
+      "end_time": 82.98,
+      "text": "They enter this data in system as a digital record.",
+      "words": [
+        {
+          "word": " They",
+          "start": 80.16,
+          "end": 80.58,
+          "probability": 0.9266664385795593
+        },
+        {
+          "word": " enter",
+          "start": 80.58,
+          "end": 80.86,
+          "probability": 0.9935723543167114
+        },
+        {
+          "word": " this",
+          "start": 80.86,
+          "end": 81.04,
+          "probability": 0.9922203421592712
+        },
+        {
+          "word": " data",
+          "start": 81.04,
+          "end": 81.32,
+          "probability": 0.997329831123352
+        },
+        {
+          "word": " in",
+          "start": 81.32,
+          "end": 81.54,
+          "probability": 0.9115829467773438
+        },
+        {
+          "word": " system",
+          "start": 81.54,
+          "end": 81.9,
+          "probability": 0.9504173398017883
+        },
+        {
+          "word": " as",
+          "start": 81.9,
+          "end": 82.16,
+          "probability": 0.997137188911438
+        },
+        {
+          "word": " a",
+          "start": 82.16,
+          "end": 82.26,
+          "probability": 0.9977679252624512
+        },
+        {
+          "word": " digital",
+          "start": 82.26,
+          "end": 82.58,
+          "probability": 0.982632040977478
+        },
+        {
+          "word": " record.",
+          "start": 82.58,
+          "end": 82.98,
+          "probability": 0.9977514147758484
+        }
+      ]
+    },
+    {
+      "start_time": 84.0,
+      "end_time": 87.02,
+      "text": "Suppose this is schematic illustration for Asian countries.",
+      "words": [
+        {
+          "word": " Suppose",
+          "start": 84.0,
+          "end": 84.32,
+          "probability": 0.9256839156150818
+        },
+        {
+          "word": " this",
+          "start": 84.32,
+          "end": 84.68,
+          "probability": 0.992912232875824
+        },
+        {
+          "word": " is",
+          "start": 84.68,
+          "end": 84.86,
+          "probability": 0.9983385801315308
+        },
+        {
+          "word": " schematic",
+          "start": 84.86,
+          "end": 85.18,
+          "probability": 0.9798250794410706
+        },
+        {
+          "word": " illustration",
+          "start": 85.18,
+          "end": 86.02,
+          "probability": 0.9943547248840332
+        },
+        {
+          "word": " for",
+          "start": 86.02,
+          "end": 86.3,
+          "probability": 0.9952534437179565
+        },
+        {
+          "word": " Asian",
+          "start": 86.3,
+          "end": 86.56,
+          "probability": 0.9517706632614136
+        },
+        {
+          "word": " countries.",
+          "start": 86.56,
+          "end": 87.02,
+          "probability": 0.9929593801498413
+        }
+      ]
+    },
+    {
+      "start_time": 87.97999999999999,
+      "end_time": 96.82,
+      "text": "Similarly, if we talk about London region, these small banks report all transactions data to their big banks or you can say that their state bank.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 87.97999999999999,
+          "end": 88.58,
+          "probability": 0.9756248593330383
+        },
+        {
+          "word": " if",
+          "start": 89.2,
+          "end": 89.4,
+          "probability": 0.9780020117759705
+        },
+        {
+          "word": " we",
+          "start": 89.4,
+          "end": 89.56,
+          "probability": 0.9994208812713623
+        },
+        {
+          "word": " talk",
+          "start": 89.56,
+          "end": 89.82,
+          "probability": 0.9960081577301025
+        },
+        {
+          "word": " about",
+          "start": 89.82,
+          "end": 90.12,
+          "probability": 0.9987282156944275
+        },
+        {
+          "word": " London",
+          "start": 90.12,
+          "end": 90.42,
+          "probability": 0.966969907283783
+        },
+        {
+          "word": " region,",
+          "start": 90.42,
+          "end": 90.78,
+          "probability": 0.47672149538993835
+        },
+        {
+          "word": " these",
+          "start": 91.36,
+          "end": 91.56,
+          "probability": 0.9566923975944519
+        },
+        {
+          "word": " small",
+          "start": 91.56,
+          "end": 91.9,
+          "probability": 0.9961905479431152
+        },
+        {
+          "word": " banks",
+          "start": 91.9,
+          "end": 92.24,
+          "probability": 0.9972063899040222
+        },
+        {
+          "word": " report",
+          "start": 92.24,
+          "end": 92.64,
+          "probability": 0.9969559907913208
+        },
+        {
+          "word": " all",
+          "start": 92.64,
+          "end": 92.94,
+          "probability": 0.9925425052642822
+        },
+        {
+          "word": " transactions",
+          "start": 92.94,
+          "end": 93.46,
+          "probability": 0.952090859413147
+        },
+        {
+          "word": " data",
+          "start": 93.46,
+          "end": 94.0,
+          "probability": 0.957956850528717
+        },
+        {
+          "word": " to",
+          "start": 94.0,
+          "end": 94.22,
+          "probability": 0.998471200466156
+        },
+        {
+          "word": " their",
+          "start": 94.22,
+          "end": 94.4,
+          "probability": 0.9987460374832153
+        },
+        {
+          "word": " big",
+          "start": 94.4,
+          "end": 94.64,
+          "probability": 0.9779778718948364
+        },
+        {
+          "word": " banks",
+          "start": 94.64,
+          "end": 94.98,
+          "probability": 0.9979844093322754
+        },
+        {
+          "word": " or",
+          "start": 94.98,
+          "end": 95.2,
+          "probability": 0.932159960269928
+        },
+        {
+          "word": " you",
+          "start": 95.2,
+          "end": 95.38,
+          "probability": 0.9962875843048096
+        },
+        {
+          "word": " can",
+          "start": 95.38,
+          "end": 95.56,
+          "probability": 0.9987194538116455
+        },
+        {
+          "word": " say",
+          "start": 95.56,
+          "end": 95.8,
+          "probability": 0.9986733198165894
+        },
+        {
+          "word": " that",
+          "start": 95.8,
+          "end": 95.98,
+          "probability": 0.9958112239837646
+        },
+        {
+          "word": " their",
+          "start": 95.98,
+          "end": 96.16,
+          "probability": 0.735884964466095
+        },
+        {
+          "word": " state",
+          "start": 96.16,
+          "end": 96.42,
+          "probability": 0.972597062587738
+        },
+        {
+          "word": " bank.",
+          "start": 96.42,
+          "end": 96.82,
+          "probability": 0.9929354786872864
+        }
+      ]
+    },
+    {
+      "start_time": 97.56,
+      "end_time": 100.4,
+      "text": "Same goes for New York region and Sydney continent.",
+      "words": [
+        {
+          "word": " Same",
+          "start": 97.56,
+          "end": 98.12,
+          "probability": 0.963852047920227
+        },
+        {
+          "word": " goes",
+          "start": 98.12,
+          "end": 98.36,
+          "probability": 0.9987069368362427
+        },
+        {
+          "word": " for",
+          "start": 98.36,
+          "end": 98.64,
+          "probability": 0.9988975524902344
+        },
+        {
+          "word": " New",
+          "start": 98.64,
+          "end": 98.82,
+          "probability": 0.9861300587654114
+        },
+        {
+          "word": " York",
+          "start": 98.82,
+          "end": 99.04,
+          "probability": 0.9974766373634338
+        },
+        {
+          "word": " region",
+          "start": 99.04,
+          "end": 99.4,
+          "probability": 0.9265503883361816
+        },
+        {
+          "word": " and",
+          "start": 99.4,
+          "end": 99.64,
+          "probability": 0.9950226545333862
+        },
+        {
+          "word": " Sydney",
+          "start": 99.64,
+          "end": 99.96,
+          "probability": 0.9581215381622314
+        },
+        {
+          "word": " continent.",
+          "start": 99.96,
+          "end": 100.4,
+          "probability": 0.9459153413772583
+        }
+      ]
+    },
+    {
+      "start_time": 101.06,
+      "end_time": 111.2,
+      "text": "Now, if we talk collectively about these banks, I mean Asian, London, New York and Sydney banks, they report their data to another big institution.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 101.06,
+          "end": 101.7,
+          "probability": 0.3104444742202759
+        },
+        {
+          "word": " if",
+          "start": 102.12,
+          "end": 102.32,
+          "probability": 0.8256407380104065
+        },
+        {
+          "word": " we",
+          "start": 102.32,
+          "end": 102.5,
+          "probability": 0.997197151184082
+        },
+        {
+          "word": " talk",
+          "start": 102.5,
+          "end": 102.8,
+          "probability": 0.9935621023178101
+        },
+        {
+          "word": " collectively",
+          "start": 102.8,
+          "end": 103.28,
+          "probability": 0.994380533695221
+        },
+        {
+          "word": " about",
+          "start": 103.28,
+          "end": 103.64,
+          "probability": 0.9985955357551575
+        },
+        {
+          "word": " these",
+          "start": 103.64,
+          "end": 103.9,
+          "probability": 0.9952887296676636
+        },
+        {
+          "word": " banks,",
+          "start": 103.9,
+          "end": 104.32,
+          "probability": 0.9774583578109741
+        },
+        {
+          "word": " I",
+          "start": 104.84,
+          "end": 105.02,
+          "probability": 0.9148728251457214
+        },
+        {
+          "word": " mean",
+          "start": 105.02,
+          "end": 105.16,
+          "probability": 0.9701398015022278
+        },
+        {
+          "word": " Asian,",
+          "start": 105.16,
+          "end": 105.48,
+          "probability": 0.6849846243858337
+        },
+        {
+          "word": " London,",
+          "start": 106.0,
+          "end": 106.3,
+          "probability": 0.9885843992233276
+        },
+        {
+          "word": " New",
+          "start": 106.92,
+          "end": 107.08,
+          "probability": 0.9914612770080566
+        },
+        {
+          "word": " York",
+          "start": 107.08,
+          "end": 107.32,
+          "probability": 0.9925438165664673
+        },
+        {
+          "word": " and",
+          "start": 107.32,
+          "end": 107.56,
+          "probability": 0.971146285533905
+        },
+        {
+          "word": " Sydney",
+          "start": 107.56,
+          "end": 107.78,
+          "probability": 0.2890930473804474
+        },
+        {
+          "word": " banks,",
+          "start": 107.78,
+          "end": 108.3,
+          "probability": 0.8875856399536133
+        },
+        {
+          "word": " they",
+          "start": 108.82,
+          "end": 108.98,
+          "probability": 0.9621947407722473
+        },
+        {
+          "word": " report",
+          "start": 108.98,
+          "end": 109.32,
+          "probability": 0.998770534992218
+        },
+        {
+          "word": " their",
+          "start": 109.32,
+          "end": 109.54,
+          "probability": 0.9983166456222534
+        },
+        {
+          "word": " data",
+          "start": 109.54,
+          "end": 109.82,
+          "probability": 0.9991770386695862
+        },
+        {
+          "word": " to",
+          "start": 109.82,
+          "end": 110.0,
+          "probability": 0.9981924891471863
+        },
+        {
+          "word": " another",
+          "start": 110.0,
+          "end": 110.28,
+          "probability": 0.998458743095398
+        },
+        {
+          "word": " big",
+          "start": 110.28,
+          "end": 110.58,
+          "probability": 0.9883099794387817
+        },
+        {
+          "word": " institution.",
+          "start": 110.58,
+          "end": 111.2,
+          "probability": 0.9927976727485657
+        }
+      ]
+    },
+    {
+      "start_time": 112.24,
+      "end_time": 119.68,
+      "text": "And, when this big institute add and record their data into a digital system, it reflects us as this forex trading chart.",
+      "words": [
+        {
+          "word": " And,",
+          "start": 112.24,
+          "end": 112.64,
+          "probability": 0.9549848437309265
+        },
+        {
+          "word": " when",
+          "start": 113.06,
+          "end": 113.24,
+          "probability": 0.9903950095176697
+        },
+        {
+          "word": " this",
+          "start": 113.24,
+          "end": 113.46,
+          "probability": 0.9978492259979248
+        },
+        {
+          "word": " big",
+          "start": 113.46,
+          "end": 113.7,
+          "probability": 0.9629641771316528
+        },
+        {
+          "word": " institute",
+          "start": 113.7,
+          "end": 114.16,
+          "probability": 0.9127474427223206
+        },
+        {
+          "word": " add",
+          "start": 114.16,
+          "end": 114.46,
+          "probability": 0.9660837054252625
+        },
+        {
+          "word": " and",
+          "start": 114.46,
+          "end": 114.68,
+          "probability": 0.9454561471939087
+        },
+        {
+          "word": " record",
+          "start": 114.68,
+          "end": 115.0,
+          "probability": 0.9991115927696228
+        },
+        {
+          "word": " their",
+          "start": 115.0,
+          "end": 115.22,
+          "probability": 0.9977040886878967
+        },
+        {
+          "word": " data",
+          "start": 115.22,
+          "end": 115.54,
+          "probability": 0.999516487121582
+        },
+        {
+          "word": " into",
+          "start": 115.54,
+          "end": 115.78,
+          "probability": 0.9942634701728821
+        },
+        {
+          "word": " a",
+          "start": 115.78,
+          "end": 116.0,
+          "probability": 0.9979872703552246
+        },
+        {
+          "word": " digital",
+          "start": 116.0,
+          "end": 116.24,
+          "probability": 0.9934669137001038
+        },
+        {
+          "word": " system,",
+          "start": 116.24,
+          "end": 116.78,
+          "probability": 0.998843789100647
+        },
+        {
+          "word": " it",
+          "start": 117.28,
+          "end": 117.44,
+          "probability": 0.9834346175193787
+        },
+        {
+          "word": " reflects",
+          "start": 117.44,
+          "end": 117.76,
+          "probability": 0.9957029223442078
+        },
+        {
+          "word": " us",
+          "start": 117.76,
+          "end": 118.08,
+          "probability": 0.9947870969772339
+        },
+        {
+          "word": " as",
+          "start": 118.08,
+          "end": 118.28,
+          "probability": 0.9980927109718323
+        },
+        {
+          "word": " this",
+          "start": 118.28,
+          "end": 118.46,
+          "probability": 0.9844464659690857
+        },
+        {
+          "word": " forex",
+          "start": 118.46,
+          "end": 118.9,
+          "probability": 0.7763116955757141
+        },
+        {
+          "word": " trading",
+          "start": 118.9,
+          "end": 119.24,
+          "probability": 0.9942736029624939
+        },
+        {
+          "word": " chart.",
+          "start": 119.24,
+          "end": 119.68,
+          "probability": 0.9983585476875305
+        }
+      ]
+    },
+    {
+      "start_time": 120.66,
+      "end_time": 125.94,
+      "text": "Now, I expect that you guys have brief understanding that how forex market actually works.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 120.66,
+          "end": 120.98,
+          "probability": 0.9905961751937866
+        },
+        {
+          "word": " I",
+          "start": 121.38,
+          "end": 121.54,
+          "probability": 0.9832383394241333
+        },
+        {
+          "word": " expect",
+          "start": 121.54,
+          "end": 121.88,
+          "probability": 0.9965296387672424
+        },
+        {
+          "word": " that",
+          "start": 121.88,
+          "end": 122.14,
+          "probability": 0.9968400001525879
+        },
+        {
+          "word": " you",
+          "start": 122.14,
+          "end": 122.3,
+          "probability": 0.9977231621742249
+        },
+        {
+          "word": " guys",
+          "start": 122.3,
+          "end": 122.56,
+          "probability": 0.9982436895370483
+        },
+        {
+          "word": " have",
+          "start": 122.56,
+          "end": 122.82,
+          "probability": 0.9992383718490601
+        },
+        {
+          "word": " brief",
+          "start": 122.82,
+          "end": 123.06,
+          "probability": 0.9675058126449585
+        },
+        {
+          "word": " understanding",
+          "start": 123.06,
+          "end": 123.66,
+          "probability": 0.9974253177642822
+        },
+        {
+          "word": " that",
+          "start": 123.66,
+          "end": 124.02,
+          "probability": 0.9893378019332886
+        },
+        {
+          "word": " how",
+          "start": 124.02,
+          "end": 124.24,
+          "probability": 0.9946356415748596
+        },
+        {
+          "word": " forex",
+          "start": 124.24,
+          "end": 124.7,
+          "probability": 0.8660620450973511
+        },
+        {
+          "word": " market",
+          "start": 124.7,
+          "end": 125.02,
+          "probability": 0.9856805801391602
+        },
+        {
+          "word": " actually",
+          "start": 125.02,
+          "end": 125.54,
+          "probability": 0.9957299828529358
+        },
+        {
+          "word": " works.",
+          "start": 125.54,
+          "end": 125.94,
+          "probability": 0.9983375072479248
+        }
+      ]
+    },
+    {
+      "start_time": 127.72,
+      "end_time": 131.14,
+      "text": "Now, let's discuss about forex trading sessions.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 127.72,
+          "end": 128.48,
+          "probability": 0.2621802091598511
+        },
+        {
+          "word": " let's",
+          "start": 128.92,
+          "end": 129.26,
+          "probability": 0.936614066362381
+        },
+        {
+          "word": " discuss",
+          "start": 129.26,
+          "end": 129.56,
+          "probability": 0.9811651706695557
+        },
+        {
+          "word": " about",
+          "start": 129.56,
+          "end": 129.96,
+          "probability": 0.9890111684799194
+        },
+        {
+          "word": " forex",
+          "start": 129.96,
+          "end": 130.42,
+          "probability": 0.6934062838554382
+        },
+        {
+          "word": " trading",
+          "start": 130.42,
+          "end": 130.7,
+          "probability": 0.9948628544807434
+        },
+        {
+          "word": " sessions.",
+          "start": 130.7,
+          "end": 131.14,
+          "probability": 0.9806297421455383
+        }
+      ]
+    },
+    {
+      "start_time": 132.32,
+      "end_time": 135.48,
+      "text": "We will discuss how forex market works 24 hours.",
+      "words": [
+        {
+          "word": " We",
+          "start": 132.32,
+          "end": 132.5,
+          "probability": 0.9559305310249329
+        },
+        {
+          "word": " will",
+          "start": 132.5,
+          "end": 132.64,
+          "probability": 0.9950610995292664
+        },
+        {
+          "word": " discuss",
+          "start": 132.64,
+          "end": 132.94,
+          "probability": 0.9972829818725586
+        },
+        {
+          "word": " how",
+          "start": 132.94,
+          "end": 133.3,
+          "probability": 0.9891852140426636
+        },
+        {
+          "word": " forex",
+          "start": 133.3,
+          "end": 133.76,
+          "probability": 0.7805406749248505
+        },
+        {
+          "word": " market",
+          "start": 133.76,
+          "end": 134.08,
+          "probability": 0.967993438243866
+        },
+        {
+          "word": " works",
+          "start": 134.08,
+          "end": 134.48,
+          "probability": 0.9981780052185059
+        },
+        {
+          "word": " 24",
+          "start": 134.48,
+          "end": 135.08,
+          "probability": 0.9733573794364929
+        },
+        {
+          "word": " hours.",
+          "start": 135.08,
+          "end": 135.48,
+          "probability": 0.951132595539093
+        }
+      ]
+    },
+    {
+      "start_time": 136.52,
+      "end_time": 139.76,
+      "text": "Consider, this is a time window of 24 hours.",
+      "words": [
+        {
+          "word": " Consider,",
+          "start": 136.52,
+          "end": 136.92,
+          "probability": 0.9279252886772156
+        },
+        {
+          "word": " this",
+          "start": 137.46,
+          "end": 137.68,
+          "probability": 0.9553688168525696
+        },
+        {
+          "word": " is",
+          "start": 137.68,
+          "end": 137.88,
+          "probability": 0.995707094669342
+        },
+        {
+          "word": " a",
+          "start": 137.88,
+          "end": 138.0,
+          "probability": 0.9943201541900635
+        },
+        {
+          "word": " time",
+          "start": 138.0,
+          "end": 138.24,
+          "probability": 0.9793646931648254
+        },
+        {
+          "word": " window",
+          "start": 138.24,
+          "end": 138.56,
+          "probability": 0.9909408688545227
+        },
+        {
+          "word": " of",
+          "start": 138.56,
+          "end": 138.78,
+          "probability": 0.9977174997329712
+        },
+        {
+          "word": " 24",
+          "start": 138.78,
+          "end": 139.28,
+          "probability": 0.9907790422439575
+        },
+        {
+          "word": " hours.",
+          "start": 139.28,
+          "end": 139.76,
+          "probability": 0.978689968585968
+        }
+      ]
+    },
+    {
+      "start_time": 140.76,
+      "end_time": 145.0,
+      "text": "When a forex trading day starts, it actually begins with Asian session.",
+      "words": [
+        {
+          "word": " When",
+          "start": 140.76,
+          "end": 140.98,
+          "probability": 0.9758235812187195
+        },
+        {
+          "word": " a",
+          "start": 140.98,
+          "end": 141.1,
+          "probability": 0.996441662311554
+        },
+        {
+          "word": " forex",
+          "start": 141.1,
+          "end": 141.5,
+          "probability": 0.9847249090671539
+        },
+        {
+          "word": " trading",
+          "start": 141.5,
+          "end": 141.86,
+          "probability": 0.9986758828163147
+        },
+        {
+          "word": " day",
+          "start": 141.86,
+          "end": 142.14,
+          "probability": 0.9901251792907715
+        },
+        {
+          "word": " starts,",
+          "start": 142.14,
+          "end": 142.56,
+          "probability": 0.9970008730888367
+        },
+        {
+          "word": " it",
+          "start": 143.06,
+          "end": 143.24,
+          "probability": 0.9886964559555054
+        },
+        {
+          "word": " actually",
+          "start": 143.24,
+          "end": 143.64,
+          "probability": 0.9967892169952393
+        },
+        {
+          "word": " begins",
+          "start": 143.64,
+          "end": 144.12,
+          "probability": 0.9965883493423462
+        },
+        {
+          "word": " with",
+          "start": 144.12,
+          "end": 144.36,
+          "probability": 0.999221682548523
+        },
+        {
+          "word": " Asian",
+          "start": 144.36,
+          "end": 144.62,
+          "probability": 0.858969509601593
+        },
+        {
+          "word": " session.",
+          "start": 144.62,
+          "end": 145.0,
+          "probability": 0.8194186687469482
+        }
+      ]
+    },
+    {
+      "start_time": 145.64,
+      "end_time": 150.82,
+      "text": "During this Asian session window, London session start and overlap with Asian session.",
+      "words": [
+        {
+          "word": " During",
+          "start": 145.64,
+          "end": 146.28,
+          "probability": 0.9890275001525879
+        },
+        {
+          "word": " this",
+          "start": 146.28,
+          "end": 146.56,
+          "probability": 0.9978914856910706
+        },
+        {
+          "word": " Asian",
+          "start": 146.56,
+          "end": 146.84,
+          "probability": 0.9751604199409485
+        },
+        {
+          "word": " session",
+          "start": 146.84,
+          "end": 147.2,
+          "probability": 0.9522435069084167
+        },
+        {
+          "word": " window,",
+          "start": 147.2,
+          "end": 147.56,
+          "probability": 0.9957063794136047
+        },
+        {
+          "word": " London",
+          "start": 148.1,
+          "end": 148.36,
+          "probability": 0.9621694684028625
+        },
+        {
+          "word": " session",
+          "start": 148.36,
+          "end": 148.74,
+          "probability": 0.5485045313835144
+        },
+        {
+          "word": " start",
+          "start": 148.74,
+          "end": 149.16,
+          "probability": 0.9793713092803955
+        },
+        {
+          "word": " and",
+          "start": 149.16,
+          "end": 149.42,
+          "probability": 0.967491865158081
+        },
+        {
+          "word": " overlap",
+          "start": 149.42,
+          "end": 149.82,
+          "probability": 0.9957332015037537
+        },
+        {
+          "word": " with",
+          "start": 149.82,
+          "end": 150.14,
+          "probability": 0.9983556866645813
+        },
+        {
+          "word": " Asian",
+          "start": 150.14,
+          "end": 150.38,
+          "probability": 0.9929376244544983
+        },
+        {
+          "word": " session.",
+          "start": 150.38,
+          "end": 150.82,
+          "probability": 0.9956908822059631
+        }
+      ]
+    },
+    {
+      "start_time": 151.66000000000003,
+      "end_time": 159.3,
+      "text": "Similarly, before ending of London session, New York session start and overlap with London session and market work continuously.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 151.66000000000003,
+          "end": 152.3,
+          "probability": 0.14254209399223328
+        },
+        {
+          "word": " before",
+          "start": 152.94,
+          "end": 153.2,
+          "probability": 0.9449738264083862
+        },
+        {
+          "word": " ending",
+          "start": 153.2,
+          "end": 153.52,
+          "probability": 0.9758816957473755
+        },
+        {
+          "word": " of",
+          "start": 153.52,
+          "end": 153.78,
+          "probability": 0.9596592783927917
+        },
+        {
+          "word": " London",
+          "start": 153.78,
+          "end": 154.0,
+          "probability": 0.9700433611869812
+        },
+        {
+          "word": " session,",
+          "start": 154.0,
+          "end": 154.44,
+          "probability": 0.5815457701683044
+        },
+        {
+          "word": " New",
+          "start": 155.04,
+          "end": 155.24,
+          "probability": 0.9204685091972351
+        },
+        {
+          "word": " York",
+          "start": 155.24,
+          "end": 155.48,
+          "probability": 0.9907940030097961
+        },
+        {
+          "word": " session",
+          "start": 155.48,
+          "end": 155.76,
+          "probability": 0.7870339155197144
+        },
+        {
+          "word": " start",
+          "start": 155.76,
+          "end": 156.18,
+          "probability": 0.9690543413162231
+        },
+        {
+          "word": " and",
+          "start": 156.18,
+          "end": 156.42,
+          "probability": 0.8987636566162109
+        },
+        {
+          "word": " overlap",
+          "start": 156.42,
+          "end": 156.86,
+          "probability": 0.9927353858947754
+        },
+        {
+          "word": " with",
+          "start": 156.86,
+          "end": 157.14,
+          "probability": 0.9952486157417297
+        },
+        {
+          "word": " London",
+          "start": 157.14,
+          "end": 157.42,
+          "probability": 0.9972642660140991
+        },
+        {
+          "word": " session",
+          "start": 157.42,
+          "end": 157.84,
+          "probability": 0.977989137172699
+        },
+        {
+          "word": " and",
+          "start": 157.84,
+          "end": 158.12,
+          "probability": 0.9869784116744995
+        },
+        {
+          "word": " market",
+          "start": 158.12,
+          "end": 158.42,
+          "probability": 0.9082181453704834
+        },
+        {
+          "word": " work",
+          "start": 158.42,
+          "end": 158.76,
+          "probability": 0.977506160736084
+        },
+        {
+          "word": " continuously.",
+          "start": 158.76,
+          "end": 159.3,
+          "probability": 0.948161244392395
+        }
+      ]
+    },
+    {
+      "start_time": 160.6,
+      "end_time": 167.44,
+      "text": "At the end of the trading day, Sydney session start with overlap of New York session and market keep working 24 hours.",
+      "words": [
+        {
+          "word": " At",
+          "start": 160.6,
+          "end": 160.76,
+          "probability": 0.9673352837562561
+        },
+        {
+          "word": " the",
+          "start": 160.76,
+          "end": 160.9,
+          "probability": 0.9981364011764526
+        },
+        {
+          "word": " end",
+          "start": 160.9,
+          "end": 161.12,
+          "probability": 0.9992247819900513
+        },
+        {
+          "word": " of",
+          "start": 161.12,
+          "end": 161.24,
+          "probability": 0.9996241331100464
+        },
+        {
+          "word": " the",
+          "start": 161.24,
+          "end": 161.36,
+          "probability": 0.991701066493988
+        },
+        {
+          "word": " trading",
+          "start": 161.36,
+          "end": 161.66,
+          "probability": 0.9820858240127563
+        },
+        {
+          "word": " day,",
+          "start": 161.66,
+          "end": 162.0,
+          "probability": 0.9938257932662964
+        },
+        {
+          "word": " Sydney",
+          "start": 162.44,
+          "end": 162.78,
+          "probability": 0.9774292707443237
+        },
+        {
+          "word": " session",
+          "start": 162.78,
+          "end": 163.14,
+          "probability": 0.9638288021087646
+        },
+        {
+          "word": " start",
+          "start": 163.14,
+          "end": 163.54,
+          "probability": 0.9932039976119995
+        },
+        {
+          "word": " with",
+          "start": 163.54,
+          "end": 163.78,
+          "probability": 0.9955409169197083
+        },
+        {
+          "word": " overlap",
+          "start": 163.78,
+          "end": 164.22,
+          "probability": 0.9964097142219543
+        },
+        {
+          "word": " of",
+          "start": 164.22,
+          "end": 164.5,
+          "probability": 0.9927070736885071
+        },
+        {
+          "word": " New",
+          "start": 164.5,
+          "end": 164.66,
+          "probability": 0.9823136925697327
+        },
+        {
+          "word": " York",
+          "start": 164.66,
+          "end": 164.88,
+          "probability": 0.9984531402587891
+        },
+        {
+          "word": " session",
+          "start": 164.88,
+          "end": 165.2,
+          "probability": 0.988649845123291
+        },
+        {
+          "word": " and",
+          "start": 165.2,
+          "end": 165.48,
+          "probability": 0.9974138140678406
+        },
+        {
+          "word": " market",
+          "start": 165.48,
+          "end": 165.78,
+          "probability": 0.9911209940910339
+        },
+        {
+          "word": " keep",
+          "start": 165.78,
+          "end": 166.06,
+          "probability": 0.9867174625396729
+        },
+        {
+          "word": " working",
+          "start": 166.06,
+          "end": 166.4,
+          "probability": 0.9981131553649902
+        },
+        {
+          "word": " 24",
+          "start": 166.4,
+          "end": 166.98,
+          "probability": 0.9586082100868225
+        },
+        {
+          "word": " hours.",
+          "start": 166.98,
+          "end": 167.44,
+          "probability": 0.952404260635376
+        }
+      ]
+    },
+    {
+      "start_time": 168.48,
+      "end_time": 172.3,
+      "text": "Now, let's talk about the nature of forex trading sessions.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 168.48,
+          "end": 168.72,
+          "probability": 0.932834267616272
+        },
+        {
+          "word": " let's",
+          "start": 169.46,
+          "end": 169.94,
+          "probability": 0.8834614753723145
+        },
+        {
+          "word": " talk",
+          "start": 169.94,
+          "end": 170.14,
+          "probability": 0.998335063457489
+        },
+        {
+          "word": " about",
+          "start": 170.14,
+          "end": 170.42,
+          "probability": 0.9989689588546753
+        },
+        {
+          "word": " the",
+          "start": 170.42,
+          "end": 170.62,
+          "probability": 0.990935742855072
+        },
+        {
+          "word": " nature",
+          "start": 170.62,
+          "end": 170.84,
+          "probability": 0.9928526282310486
+        },
+        {
+          "word": " of",
+          "start": 170.84,
+          "end": 171.12,
+          "probability": 0.9990668892860413
+        },
+        {
+          "word": " forex",
+          "start": 171.12,
+          "end": 171.52,
+          "probability": 0.778245747089386
+        },
+        {
+          "word": " trading",
+          "start": 171.52,
+          "end": 171.84,
+          "probability": 0.9922441840171814
+        },
+        {
+          "word": " sessions.",
+          "start": 171.84,
+          "end": 172.3,
+          "probability": 0.9865216612815857
+        }
+      ]
+    },
+    {
+      "start_time": 173.36,
+      "end_time": 179.22,
+      "text": "First, when market actually start, market is ranging or you can say it's consolidating.",
+      "words": [
+        {
+          "word": " First,",
+          "start": 173.36,
+          "end": 173.84,
+          "probability": 0.9627905488014221
+        },
+        {
+          "word": " when",
+          "start": 174.4,
+          "end": 174.6,
+          "probability": 0.9614614844322205
+        },
+        {
+          "word": " market",
+          "start": 174.6,
+          "end": 174.94,
+          "probability": 0.9920187592506409
+        },
+        {
+          "word": " actually",
+          "start": 174.94,
+          "end": 175.42,
+          "probability": 0.9910310506820679
+        },
+        {
+          "word": " start,",
+          "start": 175.42,
+          "end": 175.92,
+          "probability": 0.9874337315559387
+        },
+        {
+          "word": " market",
+          "start": 176.38,
+          "end": 176.76,
+          "probability": 0.9654581546783447
+        },
+        {
+          "word": " is",
+          "start": 176.76,
+          "end": 177.02,
+          "probability": 0.9986911416053772
+        },
+        {
+          "word": " ranging",
+          "start": 177.02,
+          "end": 177.36,
+          "probability": 0.97917240858078
+        },
+        {
+          "word": " or",
+          "start": 177.36,
+          "end": 177.66,
+          "probability": 0.9659748673439026
+        },
+        {
+          "word": " you",
+          "start": 177.66,
+          "end": 177.84,
+          "probability": 0.9922125935554504
+        },
+        {
+          "word": " can",
+          "start": 177.84,
+          "end": 178.0,
+          "probability": 0.9987732768058777
+        },
+        {
+          "word": " say",
+          "start": 178.0,
+          "end": 178.26,
+          "probability": 0.997063934803009
+        },
+        {
+          "word": " it's",
+          "start": 178.26,
+          "end": 178.52,
+          "probability": 0.9139468371868134
+        },
+        {
+          "word": " consolidating.",
+          "start": 178.52,
+          "end": 179.22,
+          "probability": 0.9951738119125366
+        }
+      ]
+    },
+    {
+      "start_time": 179.22,
+      "end_time": 182.88,
+      "text": "This behavior is mostly observed in Asian session.",
+      "words": [
+        {
+          "word": " This",
+          "start": 179.22,
+          "end": 180.4,
+          "probability": 0.06141151860356331
+        },
+        {
+          "word": " behavior",
+          "start": 180.4,
+          "end": 180.82,
+          "probability": 0.7099420428276062
+        },
+        {
+          "word": " is",
+          "start": 180.82,
+          "end": 181.14,
+          "probability": 0.9971152544021606
+        },
+        {
+          "word": " mostly",
+          "start": 181.14,
+          "end": 181.42,
+          "probability": 0.9871145486831665
+        },
+        {
+          "word": " observed",
+          "start": 181.42,
+          "end": 181.94,
+          "probability": 0.9977560639381409
+        },
+        {
+          "word": " in",
+          "start": 181.94,
+          "end": 182.2,
+          "probability": 0.9975652694702148
+        },
+        {
+          "word": " Asian",
+          "start": 182.2,
+          "end": 182.48,
+          "probability": 0.9547083377838135
+        },
+        {
+          "word": " session.",
+          "start": 182.48,
+          "end": 182.88,
+          "probability": 0.46449723839759827
+        }
+      ]
+    },
+    {
+      "start_time": 183.78,
+      "end_time": 187.08,
+      "text": "After Asian session, forex market start trending.",
+      "words": [
+        {
+          "word": " After",
+          "start": 183.78,
+          "end": 184.22,
+          "probability": 0.8918659090995789
+        },
+        {
+          "word": " Asian",
+          "start": 184.22,
+          "end": 184.54,
+          "probability": 0.9810982942581177
+        },
+        {
+          "word": " session,",
+          "start": 184.54,
+          "end": 185.0,
+          "probability": 0.9108685255050659
+        },
+        {
+          "word": " forex",
+          "start": 185.5,
+          "end": 185.96,
+          "probability": 0.7332189232110977
+        },
+        {
+          "word": " market",
+          "start": 185.96,
+          "end": 186.26,
+          "probability": 0.09150537103414536
+        },
+        {
+          "word": " start",
+          "start": 186.26,
+          "end": 186.66,
+          "probability": 0.9820712208747864
+        },
+        {
+          "word": " trending.",
+          "start": 186.66,
+          "end": 187.08,
+          "probability": 0.9844447374343872
+        }
+      ]
+    },
+    {
+      "start_time": 188.2,
+      "end_time": 192.74,
+      "text": "This is mostly occurred in London session which is much volatile as compared to Asian session.",
+      "words": [
+        {
+          "word": " This",
+          "start": 188.2,
+          "end": 188.36,
+          "probability": 0.9837967753410339
+        },
+        {
+          "word": " is",
+          "start": 188.36,
+          "end": 188.5,
+          "probability": 0.9555473923683167
+        },
+        {
+          "word": " mostly",
+          "start": 188.5,
+          "end": 188.78,
+          "probability": 0.986054003238678
+        },
+        {
+          "word": " occurred",
+          "start": 188.78,
+          "end": 189.28,
+          "probability": 0.9665704965591431
+        },
+        {
+          "word": " in",
+          "start": 189.28,
+          "end": 189.48,
+          "probability": 0.9987521171569824
+        },
+        {
+          "word": " London",
+          "start": 189.48,
+          "end": 189.72,
+          "probability": 0.9858226180076599
+        },
+        {
+          "word": " session",
+          "start": 189.72,
+          "end": 190.14,
+          "probability": 0.9213331937789917
+        },
+        {
+          "word": " which",
+          "start": 190.14,
+          "end": 190.42,
+          "probability": 0.9600511193275452
+        },
+        {
+          "word": " is",
+          "start": 190.42,
+          "end": 190.6,
+          "probability": 0.9970203042030334
+        },
+        {
+          "word": " much",
+          "start": 190.6,
+          "end": 190.84,
+          "probability": 0.9959408044815063
+        },
+        {
+          "word": " volatile",
+          "start": 190.84,
+          "end": 191.2,
+          "probability": 0.9820008873939514
+        },
+        {
+          "word": " as",
+          "start": 191.2,
+          "end": 191.48,
+          "probability": 0.992546021938324
+        },
+        {
+          "word": " compared",
+          "start": 191.48,
+          "end": 191.84,
+          "probability": 0.9969879984855652
+        },
+        {
+          "word": " to",
+          "start": 191.84,
+          "end": 192.1,
+          "probability": 0.9988014698028564
+        },
+        {
+          "word": " Asian",
+          "start": 192.1,
+          "end": 192.3,
+          "probability": 0.9821933507919312
+        },
+        {
+          "word": " session.",
+          "start": 192.3,
+          "end": 192.74,
+          "probability": 0.988235592842102
+        }
+      ]
+    },
+    {
+      "start_time": 193.5,
+      "end_time": 198.46,
+      "text": "Similarly, this trending or volatile nature continues in New York trading session.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 193.5,
+          "end": 194.18,
+          "probability": 0.9647006988525391
+        },
+        {
+          "word": " this",
+          "start": 194.86,
+          "end": 195.06,
+          "probability": 0.9807648062705994
+        },
+        {
+          "word": " trending",
+          "start": 195.06,
+          "end": 195.42,
+          "probability": 0.9636268615722656
+        },
+        {
+          "word": " or",
+          "start": 195.42,
+          "end": 195.7,
+          "probability": 0.9802979826927185
+        },
+        {
+          "word": " volatile",
+          "start": 195.7,
+          "end": 196.08,
+          "probability": 0.9719414710998535
+        },
+        {
+          "word": " nature",
+          "start": 196.08,
+          "end": 196.38,
+          "probability": 0.9960591793060303
+        },
+        {
+          "word": " continues",
+          "start": 196.38,
+          "end": 196.96,
+          "probability": 0.9915173053741455
+        },
+        {
+          "word": " in",
+          "start": 196.96,
+          "end": 197.28,
+          "probability": 0.9972996115684509
+        },
+        {
+          "word": " New",
+          "start": 197.28,
+          "end": 197.44,
+          "probability": 0.9739047884941101
+        },
+        {
+          "word": " York",
+          "start": 197.44,
+          "end": 197.66,
+          "probability": 0.9952296018600464
+        },
+        {
+          "word": " trading",
+          "start": 197.66,
+          "end": 198.04,
+          "probability": 0.8888965249061584
+        },
+        {
+          "word": " session.",
+          "start": 198.04,
+          "end": 198.46,
+          "probability": 0.9772899150848389
+        }
+      ]
+    },
+    {
+      "start_time": 199.38,
+      "end_time": 204.12,
+      "text": "Take notes, New York session is highly volatile for major or USD pairs.",
+      "words": [
+        {
+          "word": " Take",
+          "start": 199.38,
+          "end": 199.8,
+          "probability": 0.969238817691803
+        },
+        {
+          "word": " notes,",
+          "start": 199.8,
+          "end": 200.06,
+          "probability": 0.9511904120445251
+        },
+        {
+          "word": " New",
+          "start": 200.64,
+          "end": 200.84,
+          "probability": 0.9805092811584473
+        },
+        {
+          "word": " York",
+          "start": 200.84,
+          "end": 201.06,
+          "probability": 0.9976385831832886
+        },
+        {
+          "word": " session",
+          "start": 201.06,
+          "end": 201.38,
+          "probability": 0.9528023600578308
+        },
+        {
+          "word": " is",
+          "start": 201.38,
+          "end": 201.66,
+          "probability": 0.9986249208450317
+        },
+        {
+          "word": " highly",
+          "start": 201.66,
+          "end": 201.98,
+          "probability": 0.9931920170783997
+        },
+        {
+          "word": " volatile",
+          "start": 201.98,
+          "end": 202.36,
+          "probability": 0.9977774024009705
+        },
+        {
+          "word": " for",
+          "start": 202.36,
+          "end": 202.62,
+          "probability": 0.996696949005127
+        },
+        {
+          "word": " major",
+          "start": 202.62,
+          "end": 202.92,
+          "probability": 0.9708412289619446
+        },
+        {
+          "word": " or",
+          "start": 202.92,
+          "end": 203.22,
+          "probability": 0.992993175983429
+        },
+        {
+          "word": " USD",
+          "start": 203.22,
+          "end": 203.66,
+          "probability": 0.6948006749153137
+        },
+        {
+          "word": " pairs.",
+          "start": 203.66,
+          "end": 204.12,
+          "probability": 0.7032487392425537
+        }
+      ]
+    },
+    {
+      "start_time": 204.12,
+      "end_time": 211.16,
+      "text": "And finally, at the end of day, market again start ranging which usually happens in Sydney session.",
+      "words": [
+        {
+          "word": " And",
+          "start": 204.12,
+          "end": 205.36,
+          "probability": 0.1749698966741562
+        },
+        {
+          "word": " finally,",
+          "start": 205.36,
+          "end": 205.76,
+          "probability": 0.917708158493042
+        },
+        {
+          "word": " at",
+          "start": 206.26,
+          "end": 206.46,
+          "probability": 0.9790007472038269
+        },
+        {
+          "word": " the",
+          "start": 206.46,
+          "end": 206.58,
+          "probability": 0.9985136389732361
+        },
+        {
+          "word": " end",
+          "start": 206.58,
+          "end": 206.82,
+          "probability": 0.998624324798584
+        },
+        {
+          "word": " of",
+          "start": 206.82,
+          "end": 206.94,
+          "probability": 0.9968457818031311
+        },
+        {
+          "word": " day,",
+          "start": 206.94,
+          "end": 207.16,
+          "probability": 0.8849323391914368
+        },
+        {
+          "word": " market",
+          "start": 207.56,
+          "end": 207.94,
+          "probability": 0.925485372543335
+        },
+        {
+          "word": " again",
+          "start": 207.94,
+          "end": 208.26,
+          "probability": 0.9691239595413208
+        },
+        {
+          "word": " start",
+          "start": 208.26,
+          "end": 208.6,
+          "probability": 0.9820905327796936
+        },
+        {
+          "word": " ranging",
+          "start": 208.6,
+          "end": 208.98,
+          "probability": 0.9754610657691956
+        },
+        {
+          "word": " which",
+          "start": 208.98,
+          "end": 209.32,
+          "probability": 0.9130472540855408
+        },
+        {
+          "word": " usually",
+          "start": 209.32,
+          "end": 209.74,
+          "probability": 0.9951255917549133
+        },
+        {
+          "word": " happens",
+          "start": 209.74,
+          "end": 210.18,
+          "probability": 0.990035355091095
+        },
+        {
+          "word": " in",
+          "start": 210.18,
+          "end": 210.46,
+          "probability": 0.9969552755355835
+        },
+        {
+          "word": " Sydney",
+          "start": 210.46,
+          "end": 210.8,
+          "probability": 0.9494930505752563
+        },
+        {
+          "word": " session.",
+          "start": 210.8,
+          "end": 211.16,
+          "probability": 0.7017544507980347
+        }
+      ]
+    },
+    {
+      "start_time": 212.2,
+      "end_time": 223.7,
+      "text": "Now, you can understand and correlate that, Asian session build liquidity because of its consolidating nature and London and New York sessions are mostly trending sessions because of high trade volumes.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 212.2,
+          "end": 212.48,
+          "probability": 0.9818706512451172
+        },
+        {
+          "word": " you",
+          "start": 212.94,
+          "end": 213.08,
+          "probability": 0.9764178395271301
+        },
+        {
+          "word": " can",
+          "start": 213.08,
+          "end": 213.24,
+          "probability": 0.9991532564163208
+        },
+        {
+          "word": " understand",
+          "start": 213.24,
+          "end": 213.74,
+          "probability": 0.9967882633209229
+        },
+        {
+          "word": " and",
+          "start": 213.74,
+          "end": 214.04,
+          "probability": 0.9900339245796204
+        },
+        {
+          "word": " correlate",
+          "start": 214.04,
+          "end": 214.38,
+          "probability": 0.9819881319999695
+        },
+        {
+          "word": " that,",
+          "start": 214.38,
+          "end": 214.72,
+          "probability": 0.9965638518333435
+        },
+        {
+          "word": " Asian",
+          "start": 215.24,
+          "end": 215.48,
+          "probability": 0.9428831338882446
+        },
+        {
+          "word": " session",
+          "start": 215.48,
+          "end": 215.86,
+          "probability": 0.8735207319259644
+        },
+        {
+          "word": " build",
+          "start": 215.86,
+          "end": 216.22,
+          "probability": 0.9809213876724243
+        },
+        {
+          "word": " liquidity",
+          "start": 216.22,
+          "end": 216.7,
+          "probability": 0.9922903180122375
+        },
+        {
+          "word": " because",
+          "start": 216.7,
+          "end": 217.08,
+          "probability": 0.9905229210853577
+        },
+        {
+          "word": " of",
+          "start": 217.08,
+          "end": 217.3,
+          "probability": 0.9974536299705505
+        },
+        {
+          "word": " its",
+          "start": 217.3,
+          "end": 217.44,
+          "probability": 0.9387689232826233
+        },
+        {
+          "word": " consolidating",
+          "start": 217.44,
+          "end": 218.16,
+          "probability": 0.9899978041648865
+        },
+        {
+          "word": " nature",
+          "start": 218.16,
+          "end": 218.54,
+          "probability": 0.9745521545410156
+        },
+        {
+          "word": " and",
+          "start": 218.54,
+          "end": 218.98,
+          "probability": 0.40724730491638184
+        },
+        {
+          "word": " London",
+          "start": 218.98,
+          "end": 219.26,
+          "probability": 0.9878963232040405
+        },
+        {
+          "word": " and",
+          "start": 219.26,
+          "end": 219.74,
+          "probability": 0.9144771695137024
+        },
+        {
+          "word": " New",
+          "start": 219.74,
+          "end": 219.92,
+          "probability": 0.9816399216651917
+        },
+        {
+          "word": " York",
+          "start": 219.92,
+          "end": 220.12,
+          "probability": 0.9931984543800354
+        },
+        {
+          "word": " sessions",
+          "start": 220.12,
+          "end": 220.48,
+          "probability": 0.9641735553741455
+        },
+        {
+          "word": " are",
+          "start": 220.48,
+          "end": 220.78,
+          "probability": 0.9895859360694885
+        },
+        {
+          "word": " mostly",
+          "start": 220.78,
+          "end": 221.04,
+          "probability": 0.9951581358909607
+        },
+        {
+          "word": " trending",
+          "start": 221.04,
+          "end": 221.58,
+          "probability": 0.9892005920410156
+        },
+        {
+          "word": " sessions",
+          "start": 221.58,
+          "end": 222.0,
+          "probability": 0.9887509942054749
+        },
+        {
+          "word": " because",
+          "start": 222.0,
+          "end": 222.42,
+          "probability": 0.9840030074119568
+        },
+        {
+          "word": " of",
+          "start": 222.42,
+          "end": 222.68,
+          "probability": 0.9975084066390991
+        },
+        {
+          "word": " high",
+          "start": 222.68,
+          "end": 222.9,
+          "probability": 0.9853698015213013
+        },
+        {
+          "word": " trade",
+          "start": 222.9,
+          "end": 223.14,
+          "probability": 0.7919148206710815
+        },
+        {
+          "word": " volumes.",
+          "start": 223.14,
+          "end": 223.7,
+          "probability": 0.9932166934013367
+        }
+      ]
+    },
+    {
+      "start_time": 225.78,
+      "end_time": 228.86,
+      "text": "Now, let's talk about candlestick formation.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 225.78,
+          "end": 226.5,
+          "probability": 0.9722166657447815
+        },
+        {
+          "word": " let's",
+          "start": 226.9,
+          "end": 227.22,
+          "probability": 0.9618732631206512
+        },
+        {
+          "word": " talk",
+          "start": 227.22,
+          "end": 227.46,
+          "probability": 0.9985104203224182
+        },
+        {
+          "word": " about",
+          "start": 227.46,
+          "end": 227.78,
+          "probability": 0.9988540410995483
+        },
+        {
+          "word": " candlestick",
+          "start": 227.78,
+          "end": 228.48,
+          "probability": 0.987162172794342
+        },
+        {
+          "word": " formation.",
+          "start": 228.48,
+          "end": 228.86,
+          "probability": 0.9964039325714111
+        }
+      ]
+    },
+    {
+      "start_time": 230.02,
+      "end_time": 231.98,
+      "text": "This is interesting and valuable topic.",
+      "words": [
+        {
+          "word": " This",
+          "start": 230.02,
+          "end": 230.26,
+          "probability": 0.9887561202049255
+        },
+        {
+          "word": " is",
+          "start": 230.26,
+          "end": 230.42,
+          "probability": 0.9974422454833984
+        },
+        {
+          "word": " interesting",
+          "start": 230.42,
+          "end": 230.92,
+          "probability": 0.990317702293396
+        },
+        {
+          "word": " and",
+          "start": 230.92,
+          "end": 231.16,
+          "probability": 0.995971143245697
+        },
+        {
+          "word": " valuable",
+          "start": 231.16,
+          "end": 231.56,
+          "probability": 0.99703049659729
+        },
+        {
+          "word": " topic.",
+          "start": 231.56,
+          "end": 231.98,
+          "probability": 0.9976845979690552
+        }
+      ]
+    },
+    {
+      "start_time": 231.98,
+      "end_time": 234.74,
+      "text": "Yet this is underrated by traders.",
+      "words": [
+        {
+          "word": " Yet",
+          "start": 231.98,
+          "end": 233.16,
+          "probability": 0.03425607830286026
+        },
+        {
+          "word": " this",
+          "start": 233.16,
+          "end": 233.4,
+          "probability": 0.8381152749061584
+        },
+        {
+          "word": " is",
+          "start": 233.4,
+          "end": 233.56,
+          "probability": 0.9964595437049866
+        },
+        {
+          "word": " underrated",
+          "start": 233.56,
+          "end": 234.08,
+          "probability": 0.9803971350193024
+        },
+        {
+          "word": " by",
+          "start": 234.08,
+          "end": 234.34,
+          "probability": 0.9975947737693787
+        },
+        {
+          "word": " traders.",
+          "start": 234.34,
+          "end": 234.74,
+          "probability": 0.9842261672019958
+        }
+      ]
+    },
+    {
+      "start_time": 235.84,
+      "end_time": 242.56,
+      "text": "As we have discussed earlier that forex market continues 24 hours, and it consists on these four trading sessions.",
+      "words": [
+        {
+          "word": " As",
+          "start": 235.84,
+          "end": 236.0,
+          "probability": 0.926741898059845
+        },
+        {
+          "word": " we",
+          "start": 236.0,
+          "end": 236.18,
+          "probability": 0.9982317090034485
+        },
+        {
+          "word": " have",
+          "start": 236.18,
+          "end": 236.32,
+          "probability": 0.9930858612060547
+        },
+        {
+          "word": " discussed",
+          "start": 236.32,
+          "end": 236.62,
+          "probability": 0.9982333183288574
+        },
+        {
+          "word": " earlier",
+          "start": 236.62,
+          "end": 237.14,
+          "probability": 0.9988635778427124
+        },
+        {
+          "word": " that",
+          "start": 237.14,
+          "end": 237.44,
+          "probability": 0.9494698643684387
+        },
+        {
+          "word": " forex",
+          "start": 237.44,
+          "end": 237.88,
+          "probability": 0.6147499829530716
+        },
+        {
+          "word": " market",
+          "start": 237.88,
+          "end": 238.18,
+          "probability": 0.9850414395332336
+        },
+        {
+          "word": " continues",
+          "start": 238.18,
+          "end": 238.78,
+          "probability": 0.9932115077972412
+        },
+        {
+          "word": " 24",
+          "start": 238.78,
+          "end": 239.46,
+          "probability": 0.9676737785339355
+        },
+        {
+          "word": " hours,",
+          "start": 239.46,
+          "end": 239.84,
+          "probability": 0.934346616268158
+        },
+        {
+          "word": " and",
+          "start": 240.32,
+          "end": 240.56,
+          "probability": 0.9817883968353271
+        },
+        {
+          "word": " it",
+          "start": 240.56,
+          "end": 240.68,
+          "probability": 0.9977790713310242
+        },
+        {
+          "word": " consists",
+          "start": 240.68,
+          "end": 241.04,
+          "probability": 0.9910023808479309
+        },
+        {
+          "word": " on",
+          "start": 241.04,
+          "end": 241.36,
+          "probability": 0.9872525334358215
+        },
+        {
+          "word": " these",
+          "start": 241.36,
+          "end": 241.56,
+          "probability": 0.9962679743766785
+        },
+        {
+          "word": " four",
+          "start": 241.56,
+          "end": 241.78,
+          "probability": 0.7892860770225525
+        },
+        {
+          "word": " trading",
+          "start": 241.78,
+          "end": 242.18,
+          "probability": 0.9980360865592957
+        },
+        {
+          "word": " sessions.",
+          "start": 242.18,
+          "end": 242.56,
+          "probability": 0.9911331534385681
+        }
+      ]
+    },
+    {
+      "start_time": 243.76,
+      "end_time": 246.2,
+      "text": "Asian, London, New York and Sydney sessions.",
+      "words": [
+        {
+          "word": " Asian,",
+          "start": 243.76,
+          "end": 243.98,
+          "probability": 0.16061966121196747
+        },
+        {
+          "word": " London,",
+          "start": 244.54,
+          "end": 244.8,
+          "probability": 0.9778733253479004
+        },
+        {
+          "word": " New",
+          "start": 245.02,
+          "end": 245.12,
+          "probability": 0.9858537912368774
+        },
+        {
+          "word": " York",
+          "start": 245.12,
+          "end": 245.32,
+          "probability": 0.9941831231117249
+        },
+        {
+          "word": " and",
+          "start": 245.32,
+          "end": 245.52,
+          "probability": 0.8971347212791443
+        },
+        {
+          "word": " Sydney",
+          "start": 245.52,
+          "end": 245.84,
+          "probability": 0.9926584362983704
+        },
+        {
+          "word": " sessions.",
+          "start": 245.84,
+          "end": 246.2,
+          "probability": 0.8163133263587952
+        }
+      ]
+    },
+    {
+      "start_time": 247.32,
+      "end_time": 249.8,
+      "text": "Now let's talk about bullish candlestick formation.",
+      "words": [
+        {
+          "word": " Now",
+          "start": 247.32,
+          "end": 247.6,
+          "probability": 0.9858109951019287
+        },
+        {
+          "word": " let's",
+          "start": 247.6,
+          "end": 247.92,
+          "probability": 0.959477037191391
+        },
+        {
+          "word": " talk",
+          "start": 247.92,
+          "end": 248.14,
+          "probability": 0.999104917049408
+        },
+        {
+          "word": " about",
+          "start": 248.14,
+          "end": 248.48,
+          "probability": 0.9987975358963013
+        },
+        {
+          "word": " bullish",
+          "start": 248.48,
+          "end": 248.72,
+          "probability": 0.9896199107170105
+        },
+        {
+          "word": " candlestick",
+          "start": 248.72,
+          "end": 249.46,
+          "probability": 0.9890026648839315
+        },
+        {
+          "word": " formation.",
+          "start": 249.46,
+          "end": 249.8,
+          "probability": 0.9959002137184143
+        }
+      ]
+    },
+    {
+      "start_time": 250.94,
+      "end_time": 257.38,
+      "text": "This is market opening price, as we studied earlier that forex trading day actually start with Asian session.",
+      "words": [
+        {
+          "word": " This",
+          "start": 250.94,
+          "end": 251.26,
+          "probability": 0.9899945855140686
+        },
+        {
+          "word": " is",
+          "start": 251.26,
+          "end": 251.42,
+          "probability": 0.9978342652320862
+        },
+        {
+          "word": " market",
+          "start": 251.42,
+          "end": 251.74,
+          "probability": 0.9874372482299805
+        },
+        {
+          "word": " opening",
+          "start": 251.74,
+          "end": 252.12,
+          "probability": 0.9203599691390991
+        },
+        {
+          "word": " price,",
+          "start": 252.12,
+          "end": 252.6,
+          "probability": 0.996772825717926
+        },
+        {
+          "word": " as",
+          "start": 253.1,
+          "end": 253.32,
+          "probability": 0.9918891787528992
+        },
+        {
+          "word": " we",
+          "start": 253.32,
+          "end": 253.5,
+          "probability": 0.999308705329895
+        },
+        {
+          "word": " studied",
+          "start": 253.5,
+          "end": 253.82,
+          "probability": 0.9976081848144531
+        },
+        {
+          "word": " earlier",
+          "start": 253.82,
+          "end": 254.28,
+          "probability": 0.99935382604599
+        },
+        {
+          "word": " that",
+          "start": 254.28,
+          "end": 254.56,
+          "probability": 0.9937886595726013
+        },
+        {
+          "word": " forex",
+          "start": 254.56,
+          "end": 255.02,
+          "probability": 0.9572122097015381
+        },
+        {
+          "word": " trading",
+          "start": 255.02,
+          "end": 255.32,
+          "probability": 0.9959021210670471
+        },
+        {
+          "word": " day",
+          "start": 255.32,
+          "end": 255.64,
+          "probability": 0.9735419750213623
+        },
+        {
+          "word": " actually",
+          "start": 255.64,
+          "end": 256.08,
+          "probability": 0.9878491759300232
+        },
+        {
+          "word": " start",
+          "start": 256.08,
+          "end": 256.48,
+          "probability": 0.9880834221839905
+        },
+        {
+          "word": " with",
+          "start": 256.48,
+          "end": 256.74,
+          "probability": 0.9988558292388916
+        },
+        {
+          "word": " Asian",
+          "start": 256.74,
+          "end": 257.0,
+          "probability": 0.9442936182022095
+        },
+        {
+          "word": " session.",
+          "start": 257.0,
+          "end": 257.38,
+          "probability": 0.8884211778640747
+        }
+      ]
+    },
+    {
+      "start_time": 258.18,
+      "end_time": 262.68,
+      "text": "After Asian session, market will take make a quick move and start trending.",
+      "words": [
+        {
+          "word": " After",
+          "start": 258.18,
+          "end": 258.74,
+          "probability": 0.6230370998382568
+        },
+        {
+          "word": " Asian",
+          "start": 258.74,
+          "end": 259.08,
+          "probability": 0.8107953667640686
+        },
+        {
+          "word": " session,",
+          "start": 259.08,
+          "end": 259.46,
+          "probability": 0.47513705492019653
+        },
+        {
+          "word": " market",
+          "start": 260.02,
+          "end": 260.38,
+          "probability": 0.6762242913246155
+        },
+        {
+          "word": " will",
+          "start": 260.38,
+          "end": 260.66,
+          "probability": 0.9945574998855591
+        },
+        {
+          "word": " take",
+          "start": 260.66,
+          "end": 260.9,
+          "probability": 0.9910908937454224
+        },
+        {
+          "word": " make",
+          "start": 260.9,
+          "end": 261.14,
+          "probability": 0.9420608282089233
+        },
+        {
+          "word": " a",
+          "start": 261.14,
+          "end": 261.32,
+          "probability": 0.9834381937980652
+        },
+        {
+          "word": " quick",
+          "start": 261.32,
+          "end": 261.5,
+          "probability": 0.9976715445518494
+        },
+        {
+          "word": " move",
+          "start": 261.5,
+          "end": 261.76,
+          "probability": 0.9961226582527161
+        },
+        {
+          "word": " and",
+          "start": 261.76,
+          "end": 261.96,
+          "probability": 0.9889794588088989
+        },
+        {
+          "word": " start",
+          "start": 261.96,
+          "end": 262.26,
+          "probability": 0.991603434085846
+        },
+        {
+          "word": " trending.",
+          "start": 262.26,
+          "end": 262.68,
+          "probability": 0.9761432409286499
+        }
+      ]
+    },
+    {
+      "start_time": 263.66,
+      "end_time": 271.82,
+      "text": "Now, if we notice this sharp down and up move, this movement will balance the price, which will actually creates the wick of candlestick.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 263.66,
+          "end": 264.0,
+          "probability": 0.9773089289665222
+        },
+        {
+          "word": " if",
+          "start": 264.44,
+          "end": 264.58,
+          "probability": 0.9602701663970947
+        },
+        {
+          "word": " we",
+          "start": 264.58,
+          "end": 264.76,
+          "probability": 0.9979209303855896
+        },
+        {
+          "word": " notice",
+          "start": 264.76,
+          "end": 265.04,
+          "probability": 0.9946050047874451
+        },
+        {
+          "word": " this",
+          "start": 265.04,
+          "end": 265.3,
+          "probability": 0.8991410136222839
+        },
+        {
+          "word": " sharp",
+          "start": 265.3,
+          "end": 265.58,
+          "probability": 0.9194525480270386
+        },
+        {
+          "word": " down",
+          "start": 265.58,
+          "end": 265.86,
+          "probability": 0.9799133539199829
+        },
+        {
+          "word": " and",
+          "start": 265.86,
+          "end": 266.06,
+          "probability": 0.9738445281982422
+        },
+        {
+          "word": " up",
+          "start": 266.06,
+          "end": 266.22,
+          "probability": 0.9952746629714966
+        },
+        {
+          "word": " move,",
+          "start": 266.22,
+          "end": 266.46,
+          "probability": 0.9924492835998535
+        },
+        {
+          "word": " this",
+          "start": 267.0,
+          "end": 267.2,
+          "probability": 0.9823591113090515
+        },
+        {
+          "word": " movement",
+          "start": 267.2,
+          "end": 267.5,
+          "probability": 0.9904296398162842
+        },
+        {
+          "word": " will",
+          "start": 267.5,
+          "end": 267.82,
+          "probability": 0.99169921875
+        },
+        {
+          "word": " balance",
+          "start": 267.82,
+          "end": 268.18,
+          "probability": 0.9968926310539246
+        },
+        {
+          "word": " the",
+          "start": 268.18,
+          "end": 268.42,
+          "probability": 0.9960480332374573
+        },
+        {
+          "word": " price,",
+          "start": 268.42,
+          "end": 268.8,
+          "probability": 0.9964345693588257
+        },
+        {
+          "word": " which",
+          "start": 269.22,
+          "end": 269.44,
+          "probability": 0.991493821144104
+        },
+        {
+          "word": " will",
+          "start": 269.44,
+          "end": 269.66,
+          "probability": 0.9964525699615479
+        },
+        {
+          "word": " actually",
+          "start": 269.66,
+          "end": 270.0,
+          "probability": 0.9946245551109314
+        },
+        {
+          "word": " creates",
+          "start": 270.0,
+          "end": 270.56,
+          "probability": 0.9642791748046875
+        },
+        {
+          "word": " the",
+          "start": 270.56,
+          "end": 270.76,
+          "probability": 0.988721489906311
+        },
+        {
+          "word": " wick",
+          "start": 270.76,
+          "end": 270.96,
+          "probability": 0.8226954936981201
+        },
+        {
+          "word": " of",
+          "start": 270.96,
+          "end": 271.08,
+          "probability": 0.9975710511207581
+        },
+        {
+          "word": " candlestick.",
+          "start": 271.08,
+          "end": 271.82,
+          "probability": 0.9559462070465088
+        }
+      ]
+    },
+    {
+      "start_time": 272.46,
+      "end_time": 277.24,
+      "text": "After that market will keep trending, and this is mostly happen in London session.",
+      "words": [
+        {
+          "word": " After",
+          "start": 272.46,
+          "end": 273.02,
+          "probability": 0.9810210466384888
+        },
+        {
+          "word": " that",
+          "start": 273.02,
+          "end": 273.24,
+          "probability": 0.998429000377655
+        },
+        {
+          "word": " market",
+          "start": 273.24,
+          "end": 273.58,
+          "probability": 0.9476168155670166
+        },
+        {
+          "word": " will",
+          "start": 273.58,
+          "end": 273.86,
+          "probability": 0.9968230724334717
+        },
+        {
+          "word": " keep",
+          "start": 273.86,
+          "end": 274.08,
+          "probability": 0.9967646598815918
+        },
+        {
+          "word": " trending,",
+          "start": 274.08,
+          "end": 274.48,
+          "probability": 0.9926759600639343
+        },
+        {
+          "word": " and",
+          "start": 275.02,
+          "end": 275.24,
+          "probability": 0.9919635057449341
+        },
+        {
+          "word": " this",
+          "start": 275.24,
+          "end": 275.42,
+          "probability": 0.998519241809845
+        },
+        {
+          "word": " is",
+          "start": 275.42,
+          "end": 275.58,
+          "probability": 0.9955198764801025
+        },
+        {
+          "word": " mostly",
+          "start": 275.58,
+          "end": 275.88,
+          "probability": 0.9940469264984131
+        },
+        {
+          "word": " happen",
+          "start": 275.88,
+          "end": 276.34,
+          "probability": 0.9511299729347229
+        },
+        {
+          "word": " in",
+          "start": 276.34,
+          "end": 276.56,
+          "probability": 0.997802197933197
+        },
+        {
+          "word": " London",
+          "start": 276.56,
+          "end": 276.8,
+          "probability": 0.9680938720703125
+        },
+        {
+          "word": " session.",
+          "start": 276.8,
+          "end": 277.24,
+          "probability": 0.9409329295158386
+        }
+      ]
+    },
+    {
+      "start_time": 278.18,
+      "end_time": 286.26,
+      "text": "Now, if we note this move, from this point to this one, this will create candle body, because price keep moving in one direction.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 278.18,
+          "end": 278.56,
+          "probability": 0.9932438731193542
+        },
+        {
+          "word": " if",
+          "start": 278.96,
+          "end": 279.16,
+          "probability": 0.9813215136528015
+        },
+        {
+          "word": " we",
+          "start": 279.16,
+          "end": 279.32,
+          "probability": 0.9989270567893982
+        },
+        {
+          "word": " note",
+          "start": 279.32,
+          "end": 279.5,
+          "probability": 0.9730839133262634
+        },
+        {
+          "word": " this",
+          "start": 279.5,
+          "end": 279.7,
+          "probability": 0.9989163875579834
+        },
+        {
+          "word": " move,",
+          "start": 279.7,
+          "end": 280.02,
+          "probability": 0.9977108240127563
+        },
+        {
+          "word": " from",
+          "start": 280.5,
+          "end": 280.68,
+          "probability": 0.9874300360679626
+        },
+        {
+          "word": " this",
+          "start": 280.68,
+          "end": 280.9,
+          "probability": 0.9991477727890015
+        },
+        {
+          "word": " point",
+          "start": 280.9,
+          "end": 281.16,
+          "probability": 0.9984363913536072
+        },
+        {
+          "word": " to",
+          "start": 281.16,
+          "end": 281.34,
+          "probability": 0.9951358437538147
+        },
+        {
+          "word": " this",
+          "start": 281.34,
+          "end": 281.52,
+          "probability": 0.999087929725647
+        },
+        {
+          "word": " one,",
+          "start": 281.52,
+          "end": 281.8,
+          "probability": 0.9926163554191589
+        },
+        {
+          "word": " this",
+          "start": 282.28,
+          "end": 282.46,
+          "probability": 0.983915388584137
+        },
+        {
+          "word": " will",
+          "start": 282.46,
+          "end": 282.66,
+          "probability": 0.9962961077690125
+        },
+        {
+          "word": " create",
+          "start": 282.66,
+          "end": 283.02,
+          "probability": 0.9972902536392212
+        },
+        {
+          "word": " candle",
+          "start": 283.02,
+          "end": 283.38,
+          "probability": 0.7642698884010315
+        },
+        {
+          "word": " body,",
+          "start": 283.38,
+          "end": 283.74,
+          "probability": 0.9308792352676392
+        },
+        {
+          "word": " because",
+          "start": 284.2,
+          "end": 284.58,
+          "probability": 0.9944949746131897
+        },
+        {
+          "word": " price",
+          "start": 284.58,
+          "end": 284.94,
+          "probability": 0.9922119379043579
+        },
+        {
+          "word": " keep",
+          "start": 284.94,
+          "end": 285.18,
+          "probability": 0.9856790900230408
+        },
+        {
+          "word": " moving",
+          "start": 285.18,
+          "end": 285.46,
+          "probability": 0.9950326681137085
+        },
+        {
+          "word": " in",
+          "start": 285.46,
+          "end": 285.72,
+          "probability": 0.9983698725700378
+        },
+        {
+          "word": " one",
+          "start": 285.72,
+          "end": 285.92,
+          "probability": 0.9397041201591492
+        },
+        {
+          "word": " direction.",
+          "start": 285.92,
+          "end": 286.26,
+          "probability": 0.9976547956466675
+        }
+      ]
+    },
+    {
+      "start_time": 287.26,
+      "end_time": 293.9,
+      "text": "Similarly, as we discussed earlier, New York session will continue with the London session as a trending session.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 287.26,
+          "end": 287.86,
+          "probability": 0.7917762994766235
+        },
+        {
+          "word": " as",
+          "start": 288.46,
+          "end": 288.66,
+          "probability": 0.9836306571960449
+        },
+        {
+          "word": " we",
+          "start": 288.66,
+          "end": 288.84,
+          "probability": 0.9979397654533386
+        },
+        {
+          "word": " discussed",
+          "start": 288.84,
+          "end": 289.14,
+          "probability": 0.9990813732147217
+        },
+        {
+          "word": " earlier,",
+          "start": 289.14,
+          "end": 289.74,
+          "probability": 0.9992259740829468
+        },
+        {
+          "word": " New",
+          "start": 290.24,
+          "end": 290.42,
+          "probability": 0.9491087794303894
+        },
+        {
+          "word": " York",
+          "start": 290.42,
+          "end": 290.64,
+          "probability": 0.9932869076728821
+        },
+        {
+          "word": " session",
+          "start": 290.64,
+          "end": 290.96,
+          "probability": 0.49991685152053833
+        },
+        {
+          "word": " will",
+          "start": 290.96,
+          "end": 291.24,
+          "probability": 0.9956681728363037
+        },
+        {
+          "word": " continue",
+          "start": 291.24,
+          "end": 291.66,
+          "probability": 0.9987562894821167
+        },
+        {
+          "word": " with",
+          "start": 291.66,
+          "end": 291.94,
+          "probability": 0.9981669187545776
+        },
+        {
+          "word": " the",
+          "start": 291.94,
+          "end": 292.12,
+          "probability": 0.9839670062065125
+        },
+        {
+          "word": " London",
+          "start": 292.12,
+          "end": 292.34,
+          "probability": 0.9734883904457092
+        },
+        {
+          "word": " session",
+          "start": 292.34,
+          "end": 292.78,
+          "probability": 0.9453473687171936
+        },
+        {
+          "word": " as",
+          "start": 292.78,
+          "end": 293.06,
+          "probability": 0.9952629804611206
+        },
+        {
+          "word": " a",
+          "start": 293.06,
+          "end": 293.18,
+          "probability": 0.9974708557128906
+        },
+        {
+          "word": " trending",
+          "start": 293.18,
+          "end": 293.46,
+          "probability": 0.9632957577705383
+        },
+        {
+          "word": " session.",
+          "start": 293.46,
+          "end": 293.9,
+          "probability": 0.9968100190162659
+        }
+      ]
+    },
+    {
+      "start_time": 294.86,
+      "end_time": 299.14,
+      "text": "Now, if we note these level, in this zone market moved one directional.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 294.86,
+          "end": 295.22,
+          "probability": 0.990104615688324
+        },
+        {
+          "word": " if",
+          "start": 295.64,
+          "end": 295.8,
+          "probability": 0.9795183539390564
+        },
+        {
+          "word": " we",
+          "start": 295.8,
+          "end": 295.98,
+          "probability": 0.9985122084617615
+        },
+        {
+          "word": " note",
+          "start": 295.98,
+          "end": 296.18,
+          "probability": 0.9928802847862244
+        },
+        {
+          "word": " these",
+          "start": 296.18,
+          "end": 296.36,
+          "probability": 0.9939150214195251
+        },
+        {
+          "word": " level,",
+          "start": 296.36,
+          "end": 296.7,
+          "probability": 0.8597573041915894
+        },
+        {
+          "word": " in",
+          "start": 297.2,
+          "end": 297.38,
+          "probability": 0.9901701807975769
+        },
+        {
+          "word": " this",
+          "start": 297.38,
+          "end": 297.56,
+          "probability": 0.99812251329422
+        },
+        {
+          "word": " zone",
+          "start": 297.56,
+          "end": 297.84,
+          "probability": 0.9704493880271912
+        },
+        {
+          "word": " market",
+          "start": 297.84,
+          "end": 298.18,
+          "probability": 0.9397342205047607
+        },
+        {
+          "word": " moved",
+          "start": 298.18,
+          "end": 298.52,
+          "probability": 0.993110179901123
+        },
+        {
+          "word": " one",
+          "start": 298.52,
+          "end": 298.78,
+          "probability": 0.8954727649688721
+        },
+        {
+          "word": " directional.",
+          "start": 298.78,
+          "end": 299.14,
+          "probability": 0.9516962766647339
+        }
+      ]
+    },
+    {
+      "start_time": 300.22,
+      "end_time": 302.66,
+      "text": "So this will create another half of candle body.",
+      "words": [
+        {
+          "word": " So",
+          "start": 300.22,
+          "end": 300.52,
+          "probability": 0.9873659610748291
+        },
+        {
+          "word": " this",
+          "start": 300.52,
+          "end": 300.72,
+          "probability": 0.9869421124458313
+        },
+        {
+          "word": " will",
+          "start": 300.72,
+          "end": 300.92,
+          "probability": 0.9982612729072571
+        },
+        {
+          "word": " create",
+          "start": 300.92,
+          "end": 301.24,
+          "probability": 0.9988433122634888
+        },
+        {
+          "word": " another",
+          "start": 301.24,
+          "end": 301.5,
+          "probability": 0.996894121170044
+        },
+        {
+          "word": " half",
+          "start": 301.5,
+          "end": 301.88,
+          "probability": 0.9912358522415161
+        },
+        {
+          "word": " of",
+          "start": 301.88,
+          "end": 302.0,
+          "probability": 0.9975558519363403
+        },
+        {
+          "word": " candle",
+          "start": 302.0,
+          "end": 302.3,
+          "probability": 0.8531109690666199
+        },
+        {
+          "word": " body.",
+          "start": 302.3,
+          "end": 302.66,
+          "probability": 0.8951241970062256
+        }
+      ]
+    },
+    {
+      "start_time": 303.54,
+      "end_time": 310.16,
+      "text": "And, finally in the end of trading day, market will start ranging and this usually happens in Sydney session.",
+      "words": [
+        {
+          "word": " And,",
+          "start": 303.54,
+          "end": 303.94,
+          "probability": 0.9724846482276917
+        },
+        {
+          "word": " finally",
+          "start": 304.38,
+          "end": 304.72,
+          "probability": 0.9728696942329407
+        },
+        {
+          "word": " in",
+          "start": 304.72,
+          "end": 305.0,
+          "probability": 0.9785996675491333
+        },
+        {
+          "word": " the",
+          "start": 305.0,
+          "end": 305.1,
+          "probability": 0.999208390712738
+        },
+        {
+          "word": " end",
+          "start": 305.1,
+          "end": 305.34,
+          "probability": 0.9965429902076721
+        },
+        {
+          "word": " of",
+          "start": 305.34,
+          "end": 305.48,
+          "probability": 0.9960541725158691
+        },
+        {
+          "word": " trading",
+          "start": 305.48,
+          "end": 305.76,
+          "probability": 0.9279150366783142
+        },
+        {
+          "word": " day,",
+          "start": 305.76,
+          "end": 306.12,
+          "probability": 0.9942466616630554
+        },
+        {
+          "word": " market",
+          "start": 306.54,
+          "end": 306.88,
+          "probability": 0.9665260314941406
+        },
+        {
+          "word": " will",
+          "start": 306.88,
+          "end": 307.18,
+          "probability": 0.9958472847938538
+        },
+        {
+          "word": " start",
+          "start": 307.18,
+          "end": 307.48,
+          "probability": 0.9986258745193481
+        },
+        {
+          "word": " ranging",
+          "start": 307.48,
+          "end": 307.84,
+          "probability": 0.985900342464447
+        },
+        {
+          "word": " and",
+          "start": 307.84,
+          "end": 308.18,
+          "probability": 0.9815734028816223
+        },
+        {
+          "word": " this",
+          "start": 308.18,
+          "end": 308.38,
+          "probability": 0.9976953864097595
+        },
+        {
+          "word": " usually",
+          "start": 308.38,
+          "end": 308.76,
+          "probability": 0.9940817952156067
+        },
+        {
+          "word": " happens",
+          "start": 308.76,
+          "end": 309.2,
+          "probability": 0.9965709447860718
+        },
+        {
+          "word": " in",
+          "start": 309.2,
+          "end": 309.46,
+          "probability": 0.9988240599632263
+        },
+        {
+          "word": " Sydney",
+          "start": 309.46,
+          "end": 309.78,
+          "probability": 0.9442800283432007
+        },
+        {
+          "word": " session.",
+          "start": 309.78,
+          "end": 310.16,
+          "probability": 0.9433165788650513
+        }
+      ]
+    },
+    {
+      "start_time": 310.94,
+      "end_time": 320.64,
+      "text": "Here, if we notice this move, from this top to this level, as market moved up and down in same zone, this will create top of the wick of candlestick.",
+      "words": [
+        {
+          "word": " Here,",
+          "start": 310.94,
+          "end": 311.5,
+          "probability": 0.16257986426353455
+        },
+        {
+          "word": " if",
+          "start": 311.92,
+          "end": 312.14,
+          "probability": 0.9338744878768921
+        },
+        {
+          "word": " we",
+          "start": 312.14,
+          "end": 312.3,
+          "probability": 0.9938567280769348
+        },
+        {
+          "word": " notice",
+          "start": 312.3,
+          "end": 312.6,
+          "probability": 0.9940118193626404
+        },
+        {
+          "word": " this",
+          "start": 312.6,
+          "end": 312.86,
+          "probability": 0.991685152053833
+        },
+        {
+          "word": " move,",
+          "start": 312.86,
+          "end": 313.18,
+          "probability": 0.992429792881012
+        },
+        {
+          "word": " from",
+          "start": 313.64,
+          "end": 313.84,
+          "probability": 0.9810414910316467
+        },
+        {
+          "word": " this",
+          "start": 313.84,
+          "end": 314.06,
+          "probability": 0.9972983002662659
+        },
+        {
+          "word": " top",
+          "start": 314.06,
+          "end": 314.36,
+          "probability": 0.9943126440048218
+        },
+        {
+          "word": " to",
+          "start": 314.36,
+          "end": 314.52,
+          "probability": 0.9737138152122498
+        },
+        {
+          "word": " this",
+          "start": 314.52,
+          "end": 314.7,
+          "probability": 0.9986121654510498
+        },
+        {
+          "word": " level,",
+          "start": 314.7,
+          "end": 315.02,
+          "probability": 0.9965755343437195
+        },
+        {
+          "word": " as",
+          "start": 315.48,
+          "end": 315.7,
+          "probability": 0.9818248152732849
+        },
+        {
+          "word": " market",
+          "start": 315.7,
+          "end": 316.02,
+          "probability": 0.7602271437644958
+        },
+        {
+          "word": " moved",
+          "start": 316.02,
+          "end": 316.32,
+          "probability": 0.9932155609130859
+        },
+        {
+          "word": " up",
+          "start": 316.32,
+          "end": 316.54,
+          "probability": 0.9977914094924927
+        },
+        {
+          "word": " and",
+          "start": 316.54,
+          "end": 316.76,
+          "probability": 0.9970346689224243
+        },
+        {
+          "word": " down",
+          "start": 316.76,
+          "end": 317.0,
+          "probability": 0.9993022680282593
+        },
+        {
+          "word": " in",
+          "start": 317.0,
+          "end": 317.16,
+          "probability": 0.9976164102554321
+        },
+        {
+          "word": " same",
+          "start": 317.16,
+          "end": 317.42,
+          "probability": 0.9833937287330627
+        },
+        {
+          "word": " zone,",
+          "start": 317.42,
+          "end": 317.78,
+          "probability": 0.994807779788971
+        },
+        {
+          "word": " this",
+          "start": 318.26,
+          "end": 318.46,
+          "probability": 0.9768787026405334
+        },
+        {
+          "word": " will",
+          "start": 318.46,
+          "end": 318.64,
+          "probability": 0.9980539083480835
+        },
+        {
+          "word": " create",
+          "start": 318.64,
+          "end": 318.96,
+          "probability": 0.9982532858848572
+        },
+        {
+          "word": " top",
+          "start": 318.96,
+          "end": 319.32,
+          "probability": 0.9794066548347473
+        },
+        {
+          "word": " of",
+          "start": 319.32,
+          "end": 319.5,
+          "probability": 0.9772632718086243
+        },
+        {
+          "word": " the",
+          "start": 319.5,
+          "end": 319.62,
+          "probability": 0.9960590600967407
+        },
+        {
+          "word": " wick",
+          "start": 319.62,
+          "end": 319.8,
+          "probability": 0.8772377967834473
+        },
+        {
+          "word": " of",
+          "start": 319.8,
+          "end": 319.92,
+          "probability": 0.998544454574585
+        },
+        {
+          "word": " candlestick.",
+          "start": 319.92,
+          "end": 320.64,
+          "probability": 0.9929149746894836
+        }
+      ]
+    },
+    {
+      "start_time": 321.4,
+      "end_time": 322.36,
+      "text": "Now take notes.",
+      "words": [
+        {
+          "word": " Now",
+          "start": 321.4,
+          "end": 321.78,
+          "probability": 0.9541213512420654
+        },
+        {
+          "word": " take",
+          "start": 321.78,
+          "end": 322.0,
+          "probability": 0.9720147848129272
+        },
+        {
+          "word": " notes.",
+          "start": 322.0,
+          "end": 322.36,
+          "probability": 0.9938202500343323
+        }
+      ]
+    },
+    {
+      "start_time": 323.36,
+      "end_time": 331.24,
+      "text": "Remember, in bullish day, or you can say that bullish candlestick formation, market will post daily candle low in London session.",
+      "words": [
+        {
+          "word": " Remember,",
+          "start": 323.36,
+          "end": 323.72,
+          "probability": 0.9702205061912537
+        },
+        {
+          "word": " in",
+          "start": 324.26,
+          "end": 324.46,
+          "probability": 0.9881010055541992
+        },
+        {
+          "word": " bullish",
+          "start": 324.46,
+          "end": 324.72,
+          "probability": 0.9356151223182678
+        },
+        {
+          "word": " day,",
+          "start": 324.72,
+          "end": 325.04,
+          "probability": 0.9694094061851501
+        },
+        {
+          "word": " or",
+          "start": 325.46,
+          "end": 325.64,
+          "probability": 0.953423261642456
+        },
+        {
+          "word": " you",
+          "start": 325.64,
+          "end": 325.82,
+          "probability": 0.997211754322052
+        },
+        {
+          "word": " can",
+          "start": 325.82,
+          "end": 326.0,
+          "probability": 0.9988168478012085
+        },
+        {
+          "word": " say",
+          "start": 326.0,
+          "end": 326.22,
+          "probability": 0.9978475570678711
+        },
+        {
+          "word": " that",
+          "start": 326.22,
+          "end": 326.42,
+          "probability": 0.992793083190918
+        },
+        {
+          "word": " bullish",
+          "start": 326.42,
+          "end": 326.66,
+          "probability": 0.984970211982727
+        },
+        {
+          "word": " candlestick",
+          "start": 326.66,
+          "end": 327.4,
+          "probability": 0.9854956666628519
+        },
+        {
+          "word": " formation,",
+          "start": 327.4,
+          "end": 327.78,
+          "probability": 0.9969788789749146
+        },
+        {
+          "word": " market",
+          "start": 328.5,
+          "end": 328.86,
+          "probability": 0.9827083945274353
+        },
+        {
+          "word": " will",
+          "start": 328.86,
+          "end": 329.12,
+          "probability": 0.9986061453819275
+        },
+        {
+          "word": " post",
+          "start": 329.12,
+          "end": 329.48,
+          "probability": 0.9876329898834229
+        },
+        {
+          "word": " daily",
+          "start": 329.48,
+          "end": 329.74,
+          "probability": 0.991949200630188
+        },
+        {
+          "word": " candle",
+          "start": 329.74,
+          "end": 330.14,
+          "probability": 0.9186046719551086
+        },
+        {
+          "word": " low",
+          "start": 330.14,
+          "end": 330.4,
+          "probability": 0.9521930813789368
+        },
+        {
+          "word": " in",
+          "start": 330.4,
+          "end": 330.6,
+          "probability": 0.9977326393127441
+        },
+        {
+          "word": " London",
+          "start": 330.6,
+          "end": 330.84,
+          "probability": 0.88923180103302
+        },
+        {
+          "word": " session.",
+          "start": 330.84,
+          "end": 331.24,
+          "probability": 0.7825623750686646
+        }
+      ]
+    },
+    {
+      "start_time": 332.22,
+      "end_time": 333.08,
+      "text": "Note this point.",
+      "words": [
+        {
+          "word": " Note",
+          "start": 332.22,
+          "end": 332.52,
+          "probability": 0.950165331363678
+        },
+        {
+          "word": " this",
+          "start": 332.52,
+          "end": 332.74,
+          "probability": 0.9985430240631104
+        },
+        {
+          "word": " point.",
+          "start": 332.74,
+          "end": 333.08,
+          "probability": 0.9980785846710205
+        }
+      ]
+    },
+    {
+      "start_time": 333.85999999999996,
+      "end_time": 340.36,
+      "text": "Similarly, for bullish market or bullish candlestick, market will post high of the day in New York session.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 333.85999999999996,
+          "end": 334.46,
+          "probability": 0.39396923780441284
+        },
+        {
+          "word": " for",
+          "start": 335.1,
+          "end": 335.32,
+          "probability": 0.9786474704742432
+        },
+        {
+          "word": " bullish",
+          "start": 335.32,
+          "end": 335.6,
+          "probability": 0.9044776558876038
+        },
+        {
+          "word": " market",
+          "start": 335.6,
+          "end": 336.02,
+          "probability": 0.9844078421592712
+        },
+        {
+          "word": " or",
+          "start": 336.02,
+          "end": 336.28,
+          "probability": 0.9862020611763
+        },
+        {
+          "word": " bullish",
+          "start": 336.28,
+          "end": 336.58,
+          "probability": 0.996536135673523
+        },
+        {
+          "word": " candlestick,",
+          "start": 336.58,
+          "end": 337.36,
+          "probability": 0.980954905351003
+        },
+        {
+          "word": " market",
+          "start": 337.8,
+          "end": 338.14,
+          "probability": 0.9730834364891052
+        },
+        {
+          "word": " will",
+          "start": 338.14,
+          "end": 338.42,
+          "probability": 0.9968966245651245
+        },
+        {
+          "word": " post",
+          "start": 338.42,
+          "end": 338.76,
+          "probability": 0.9684497117996216
+        },
+        {
+          "word": " high",
+          "start": 338.76,
+          "end": 339.02,
+          "probability": 0.9763858318328857
+        },
+        {
+          "word": " of",
+          "start": 339.02,
+          "end": 339.16,
+          "probability": 0.9832958579063416
+        },
+        {
+          "word": " the",
+          "start": 339.16,
+          "end": 339.26,
+          "probability": 0.998377799987793
+        },
+        {
+          "word": " day",
+          "start": 339.26,
+          "end": 339.48,
+          "probability": 0.9976315498352051
+        },
+        {
+          "word": " in",
+          "start": 339.48,
+          "end": 339.62,
+          "probability": 0.998325526714325
+        },
+        {
+          "word": " New",
+          "start": 339.62,
+          "end": 339.8,
+          "probability": 0.9672767519950867
+        },
+        {
+          "word": " York",
+          "start": 339.8,
+          "end": 340.04,
+          "probability": 0.9978127479553223
+        },
+        {
+          "word": " session.",
+          "start": 340.04,
+          "end": 340.36,
+          "probability": 0.6380030512809753
+        }
+      ]
+    },
+    {
+      "start_time": 341.12,
+      "end_time": 345.62,
+      "text": "But, question is why London session post daily low in bullish market?",
+      "words": [
+        {
+          "word": " But,",
+          "start": 341.12,
+          "end": 341.72,
+          "probability": 0.9845904111862183
+        },
+        {
+          "word": " question",
+          "start": 342.2,
+          "end": 342.54,
+          "probability": 0.9847776889801025
+        },
+        {
+          "word": " is",
+          "start": 342.54,
+          "end": 342.86,
+          "probability": 0.9966392517089844
+        },
+        {
+          "word": " why",
+          "start": 342.86,
+          "end": 343.08,
+          "probability": 0.8815083503723145
+        },
+        {
+          "word": " London",
+          "start": 343.08,
+          "end": 343.32,
+          "probability": 0.9492580890655518
+        },
+        {
+          "word": " session",
+          "start": 343.32,
+          "end": 343.72,
+          "probability": 0.3871830701828003
+        },
+        {
+          "word": " post",
+          "start": 343.72,
+          "end": 344.1,
+          "probability": 0.891926109790802
+        },
+        {
+          "word": " daily",
+          "start": 344.1,
+          "end": 344.44,
+          "probability": 0.9848953485488892
+        },
+        {
+          "word": " low",
+          "start": 344.44,
+          "end": 344.74,
+          "probability": 0.982025146484375
+        },
+        {
+          "word": " in",
+          "start": 344.74,
+          "end": 344.92,
+          "probability": 0.9981030225753784
+        },
+        {
+          "word": " bullish",
+          "start": 344.92,
+          "end": 345.16,
+          "probability": 0.9946341514587402
+        },
+        {
+          "word": " market?",
+          "start": 345.16,
+          "end": 345.62,
+          "probability": 0.9974206686019897
+        }
+      ]
+    },
+    {
+      "start_time": 346.52,
+      "end_time": 355.68,
+      "text": "Well, as we have discussed liquidity concept in great details in start of this course, that if market want to go higher, market will sweep the low side.",
+      "words": [
+        {
+          "word": " Well,",
+          "start": 346.52,
+          "end": 346.86,
+          "probability": 0.9833202958106995
+        },
+        {
+          "word": " as",
+          "start": 347.34,
+          "end": 347.54,
+          "probability": 0.9919918179512024
+        },
+        {
+          "word": " we",
+          "start": 347.54,
+          "end": 347.74,
+          "probability": 0.9992961883544922
+        },
+        {
+          "word": " have",
+          "start": 347.74,
+          "end": 347.88,
+          "probability": 0.9955644607543945
+        },
+        {
+          "word": " discussed",
+          "start": 347.88,
+          "end": 348.2,
+          "probability": 0.9984778761863708
+        },
+        {
+          "word": " liquidity",
+          "start": 348.2,
+          "end": 348.74,
+          "probability": 0.9913697242736816
+        },
+        {
+          "word": " concept",
+          "start": 348.74,
+          "end": 349.26,
+          "probability": 0.9945664405822754
+        },
+        {
+          "word": " in",
+          "start": 349.26,
+          "end": 349.58,
+          "probability": 0.9986428618431091
+        },
+        {
+          "word": " great",
+          "start": 349.58,
+          "end": 349.82,
+          "probability": 0.9864557981491089
+        },
+        {
+          "word": " details",
+          "start": 349.82,
+          "end": 350.26,
+          "probability": 0.9798745512962341
+        },
+        {
+          "word": " in",
+          "start": 350.26,
+          "end": 350.54,
+          "probability": 0.985405683517456
+        },
+        {
+          "word": " start",
+          "start": 350.54,
+          "end": 350.8,
+          "probability": 0.9843644499778748
+        },
+        {
+          "word": " of",
+          "start": 350.8,
+          "end": 351.0,
+          "probability": 0.9967273473739624
+        },
+        {
+          "word": " this",
+          "start": 351.0,
+          "end": 351.14,
+          "probability": 0.998849630355835
+        },
+        {
+          "word": " course,",
+          "start": 351.14,
+          "end": 351.44,
+          "probability": 0.9986668825149536
+        },
+        {
+          "word": " that",
+          "start": 351.98,
+          "end": 352.16,
+          "probability": 0.992526650428772
+        },
+        {
+          "word": " if",
+          "start": 352.16,
+          "end": 352.28,
+          "probability": 0.9899064898490906
+        },
+        {
+          "word": " market",
+          "start": 352.28,
+          "end": 352.62,
+          "probability": 0.9960619807243347
+        },
+        {
+          "word": " want",
+          "start": 352.62,
+          "end": 352.92,
+          "probability": 0.9870973825454712
+        },
+        {
+          "word": " to",
+          "start": 352.92,
+          "end": 353.08,
+          "probability": 0.9974576830863953
+        },
+        {
+          "word": " go",
+          "start": 353.08,
+          "end": 353.24,
+          "probability": 0.9983383417129517
+        },
+        {
+          "word": " higher,",
+          "start": 353.24,
+          "end": 353.58,
+          "probability": 0.9931784868240356
+        },
+        {
+          "word": " market",
+          "start": 354.06,
+          "end": 354.42,
+          "probability": 0.9956045150756836
+        },
+        {
+          "word": " will",
+          "start": 354.42,
+          "end": 354.7,
+          "probability": 0.9982970356941223
+        },
+        {
+          "word": " sweep",
+          "start": 354.7,
+          "end": 354.98,
+          "probability": 0.9931951761245728
+        },
+        {
+          "word": " the",
+          "start": 354.98,
+          "end": 355.18,
+          "probability": 0.9989836812019348
+        },
+        {
+          "word": " low",
+          "start": 355.18,
+          "end": 355.38,
+          "probability": 0.9706258773803711
+        },
+        {
+          "word": " side.",
+          "start": 355.38,
+          "end": 355.68,
+          "probability": 0.9789693355560303
+        }
+      ]
+    },
+    {
+      "start_time": 356.58,
+      "end_time": 359.6,
+      "text": "This is a fake move to trap retail and breakout traders.",
+      "words": [
+        {
+          "word": " This",
+          "start": 356.58,
+          "end": 356.86,
+          "probability": 0.9914748668670654
+        },
+        {
+          "word": " is",
+          "start": 356.86,
+          "end": 357.02,
+          "probability": 0.9965882301330566
+        },
+        {
+          "word": " a",
+          "start": 357.02,
+          "end": 357.16,
+          "probability": 0.9979165196418762
+        },
+        {
+          "word": " fake",
+          "start": 357.16,
+          "end": 357.32,
+          "probability": 0.9939919114112854
+        },
+        {
+          "word": " move",
+          "start": 357.32,
+          "end": 357.58,
+          "probability": 0.9956899285316467
+        },
+        {
+          "word": " to",
+          "start": 357.58,
+          "end": 357.78,
+          "probability": 0.9991118311882019
+        },
+        {
+          "word": " trap",
+          "start": 357.78,
+          "end": 358.04,
+          "probability": 0.9961754083633423
+        },
+        {
+          "word": " retail",
+          "start": 358.04,
+          "end": 358.38,
+          "probability": 0.9779953956604004
+        },
+        {
+          "word": " and",
+          "start": 358.38,
+          "end": 358.74,
+          "probability": 0.9929568767547607
+        },
+        {
+          "word": " breakout",
+          "start": 358.74,
+          "end": 359.06,
+          "probability": 0.9066198468208313
+        },
+        {
+          "word": " traders.",
+          "start": 359.06,
+          "end": 359.6,
+          "probability": 0.9932119846343994
+        }
+      ]
+    },
+    {
+      "start_time": 360.6,
+      "end_time": 362.88,
+      "text": "This fake movement is known as Judas swing.",
+      "words": [
+        {
+          "word": " This",
+          "start": 360.54,
+          "end": 360.86,
+          "probability": 0.29733631014823914
+        },
+        {
+          "word": " fake",
+          "start": 360.86,
+          "end": 361.14,
+          "probability": 0.8880932331085205
+        },
+        {
+          "word": " movement",
+          "start": 361.14,
+          "end": 361.44,
+          "probability": 0.9879114627838135
+        },
+        {
+          "word": " is",
+          "start": 361.44,
+          "end": 361.74,
+          "probability": 0.9958940744400024
+        },
+        {
+          "word": " known",
+          "start": 361.74,
+          "end": 361.96,
+          "probability": 0.993961751461029
+        },
+        {
+          "word": " as",
+          "start": 361.96,
+          "end": 362.2,
+          "probability": 0.9975579977035522
+        },
+        {
+          "word": " Judas",
+          "start": 362.2,
+          "end": 362.48,
+          "probability": 0.5076920986175537
+        },
+        {
+          "word": " swing.",
+          "start": 362.48,
+          "end": 362.88,
+          "probability": 0.1648741364479065
+        }
+      ]
+    },
+    {
+      "start_time": 363.8,
+      "end_time": 367.46,
+      "text": "Similarly here, Asian session consolidate and build liquidity.",
+      "words": [
+        {
+          "word": " Similarly",
+          "start": 363.8,
+          "end": 364.28,
+          "probability": 0.9181133508682251
+        },
+        {
+          "word": " here,",
+          "start": 364.28,
+          "end": 364.72,
+          "probability": 0.9305415749549866
+        },
+        {
+          "word": " Asian",
+          "start": 365.18,
+          "end": 365.42,
+          "probability": 0.8938440084457397
+        },
+        {
+          "word": " session",
+          "start": 365.42,
+          "end": 365.82,
+          "probability": 0.6697043180465698
+        },
+        {
+          "word": " consolidate",
+          "start": 365.82,
+          "end": 366.42,
+          "probability": 0.9475967884063721
+        },
+        {
+          "word": " and",
+          "start": 366.42,
+          "end": 366.8,
+          "probability": 0.9938622713088989
+        },
+        {
+          "word": " build",
+          "start": 366.8,
+          "end": 367.02,
+          "probability": 0.9924565553665161
+        },
+        {
+          "word": " liquidity.",
+          "start": 367.02,
+          "end": 367.46,
+          "probability": 0.9912599921226501
+        }
+      ]
+    },
+    {
+      "start_time": 368.44,
+      "end_time": 377.12,
+      "text": "In bullish trend, market will sweep the Asian low side liquidity, grab this liquidity, post a low in London session and start moving higher.",
+      "words": [
+        {
+          "word": " In",
+          "start": 368.44,
+          "end": 368.7,
+          "probability": 0.9676382541656494
+        },
+        {
+          "word": " bullish",
+          "start": 368.7,
+          "end": 368.94,
+          "probability": 0.9848526120185852
+        },
+        {
+          "word": " trend,",
+          "start": 368.94,
+          "end": 369.38,
+          "probability": 0.9939711689949036
+        },
+        {
+          "word": " market",
+          "start": 369.84,
+          "end": 370.2,
+          "probability": 0.9144402146339417
+        },
+        {
+          "word": " will",
+          "start": 370.2,
+          "end": 370.48,
+          "probability": 0.991909921169281
+        },
+        {
+          "word": " sweep",
+          "start": 370.48,
+          "end": 370.78,
+          "probability": 0.9951187372207642
+        },
+        {
+          "word": " the",
+          "start": 370.78,
+          "end": 370.98,
+          "probability": 0.9921677708625793
+        },
+        {
+          "word": " Asian",
+          "start": 370.98,
+          "end": 371.24,
+          "probability": 0.9440022706985474
+        },
+        {
+          "word": " low",
+          "start": 371.24,
+          "end": 371.5,
+          "probability": 0.8729936480522156
+        },
+        {
+          "word": " side",
+          "start": 371.5,
+          "end": 371.8,
+          "probability": 0.6813157200813293
+        },
+        {
+          "word": " liquidity,",
+          "start": 371.8,
+          "end": 372.3,
+          "probability": 0.9908801317214966
+        },
+        {
+          "word": " grab",
+          "start": 372.88,
+          "end": 373.12,
+          "probability": 0.9577863812446594
+        },
+        {
+          "word": " this",
+          "start": 373.12,
+          "end": 373.36,
+          "probability": 0.9954914450645447
+        },
+        {
+          "word": " liquidity,",
+          "start": 373.36,
+          "end": 373.82,
+          "probability": 0.9976438879966736
+        },
+        {
+          "word": " post",
+          "start": 374.42,
+          "end": 374.74,
+          "probability": 0.9686834812164307
+        },
+        {
+          "word": " a",
+          "start": 374.74,
+          "end": 374.9,
+          "probability": 0.9852162599563599
+        },
+        {
+          "word": " low",
+          "start": 374.9,
+          "end": 375.08,
+          "probability": 0.9730667471885681
+        },
+        {
+          "word": " in",
+          "start": 375.08,
+          "end": 375.24,
+          "probability": 0.9842514991760254
+        },
+        {
+          "word": " London",
+          "start": 375.24,
+          "end": 375.46,
+          "probability": 0.979835033416748
+        },
+        {
+          "word": " session",
+          "start": 375.46,
+          "end": 375.86,
+          "probability": 0.9811409711837769
+        },
+        {
+          "word": " and",
+          "start": 375.86,
+          "end": 376.16,
+          "probability": 0.9880252480506897
+        },
+        {
+          "word": " start",
+          "start": 376.16,
+          "end": 376.44,
+          "probability": 0.9958322644233704
+        },
+        {
+          "word": " moving",
+          "start": 376.44,
+          "end": 376.76,
+          "probability": 0.9982536435127258
+        },
+        {
+          "word": " higher.",
+          "start": 376.76,
+          "end": 377.12,
+          "probability": 0.9941031336784363
+        }
+      ]
+    },
+    {
+      "start_time": 378.1,
+      "end_time": 382.62,
+      "text": "This is the basic and classical concept of candlestick formation on daily basis.",
+      "words": [
+        {
+          "word": " This",
+          "start": 378.1,
+          "end": 378.34,
+          "probability": 0.9918323755264282
+        },
+        {
+          "word": " is",
+          "start": 378.34,
+          "end": 378.52,
+          "probability": 0.9966926574707031
+        },
+        {
+          "word": " the",
+          "start": 378.52,
+          "end": 378.64,
+          "probability": 0.9854670763015747
+        },
+        {
+          "word": " basic",
+          "start": 378.64,
+          "end": 378.96,
+          "probability": 0.9842886328697205
+        },
+        {
+          "word": " and",
+          "start": 378.96,
+          "end": 379.22,
+          "probability": 0.9947583079338074
+        },
+        {
+          "word": " classical",
+          "start": 379.22,
+          "end": 379.64,
+          "probability": 0.9899898767471313
+        },
+        {
+          "word": " concept",
+          "start": 379.64,
+          "end": 380.24,
+          "probability": 0.9983131885528564
+        },
+        {
+          "word": " of",
+          "start": 380.24,
+          "end": 380.48,
+          "probability": 0.9979472756385803
+        },
+        {
+          "word": " candlestick",
+          "start": 380.48,
+          "end": 381.12,
+          "probability": 0.9838845133781433
+        },
+        {
+          "word": " formation",
+          "start": 381.12,
+          "end": 381.52,
+          "probability": 0.9958209991455078
+        },
+        {
+          "word": " on",
+          "start": 381.52,
+          "end": 381.9,
+          "probability": 0.9926584362983704
+        },
+        {
+          "word": " daily",
+          "start": 381.9,
+          "end": 382.16,
+          "probability": 0.981534481048584
+        },
+        {
+          "word": " basis.",
+          "start": 382.16,
+          "end": 382.62,
+          "probability": 0.9990203380584717
+        }
+      ]
+    },
+    {
+      "start_time": 385.06,
+      "end_time": 388.42,
+      "text": "Now, let's talk about bearish candlestick formation.",
+      "words": [
+        {
+          "word": " Now,",
+          "start": 385.06,
+          "end": 385.7,
+          "probability": 0.9650382995605469
+        },
+        {
+          "word": " let's",
+          "start": 386.12,
+          "end": 386.42,
+          "probability": 0.9396765232086182
+        },
+        {
+          "word": " talk",
+          "start": 386.42,
+          "end": 386.64,
+          "probability": 0.9989261031150818
+        },
+        {
+          "word": " about",
+          "start": 386.64,
+          "end": 386.94,
+          "probability": 0.9980822801589966
+        },
+        {
+          "word": " bearish",
+          "start": 386.94,
+          "end": 387.34,
+          "probability": 0.8770638108253479
+        },
+        {
+          "word": " candlestick",
+          "start": 387.34,
+          "end": 387.94,
+          "probability": 0.9964819947878519
+        },
+        {
+          "word": " formation.",
+          "start": 387.94,
+          "end": 388.42,
+          "probability": 0.9983668923377991
+        }
+      ]
+    },
+    {
+      "start_time": 389.2,
+      "end_time": 397.98,
+      "text": "Remember, in bearish market, or you can say that bearish candlestick formation, market will post daily candlestick high in London session.",
+      "words": [
+        {
+          "word": " Remember,",
+          "start": 389.2,
+          "end": 389.88,
+          "probability": 0.18653933703899384
+        },
+        {
+          "word": " in",
+          "start": 390.46,
+          "end": 390.64,
+          "probability": 0.9280199408531189
+        },
+        {
+          "word": " bearish",
+          "start": 390.64,
+          "end": 391.0,
+          "probability": 0.8265582919120789
+        },
+        {
+          "word": " market,",
+          "start": 391.0,
+          "end": 391.38,
+          "probability": 0.9424236416816711
+        },
+        {
+          "word": " or",
+          "start": 391.84,
+          "end": 392.02,
+          "probability": 0.9396498203277588
+        },
+        {
+          "word": " you",
+          "start": 392.02,
+          "end": 392.2,
+          "probability": 0.986708402633667
+        },
+        {
+          "word": " can",
+          "start": 392.2,
+          "end": 392.38,
+          "probability": 0.998737633228302
+        },
+        {
+          "word": " say",
+          "start": 392.38,
+          "end": 392.64,
+          "probability": 0.997186005115509
+        },
+        {
+          "word": " that",
+          "start": 392.64,
+          "end": 392.84,
+          "probability": 0.9842368364334106
+        },
+        {
+          "word": " bearish",
+          "start": 392.84,
+          "end": 393.22,
+          "probability": 0.9718436002731323
+        },
+        {
+          "word": " candlestick",
+          "start": 393.22,
+          "end": 393.84,
+          "probability": 0.9905920823415121
+        },
+        {
+          "word": " formation,",
+          "start": 393.84,
+          "end": 394.2,
+          "probability": 0.9897390007972717
+        },
+        {
+          "word": " market",
+          "start": 394.94,
+          "end": 395.28,
+          "probability": 0.8446041345596313
+        },
+        {
+          "word": " will",
+          "start": 395.28,
+          "end": 395.56,
+          "probability": 0.9955233335494995
+        },
+        {
+          "word": " post",
+          "start": 395.56,
+          "end": 395.9,
+          "probability": 0.9853993654251099
+        },
+        {
+          "word": " daily",
+          "start": 395.9,
+          "end": 396.18,
+          "probability": 0.9886332154273987
+        },
+        {
+          "word": " candlestick",
+          "start": 396.18,
+          "end": 396.94,
+          "probability": 0.9964174628257751
+        },
+        {
+          "word": " high",
+          "start": 396.94,
+          "end": 397.14,
+          "probability": 0.9559963345527649
+        },
+        {
+          "word": " in",
+          "start": 397.14,
+          "end": 397.32,
+          "probability": 0.9962433576583862
+        },
+        {
+          "word": " London",
+          "start": 397.32,
+          "end": 397.56,
+          "probability": 0.8244879841804504
+        },
+        {
+          "word": " session.",
+          "start": 397.56,
+          "end": 397.98,
+          "probability": 0.6689848303794861
+        }
+      ]
+    },
+    {
+      "start_time": 398.76,
+      "end_time": 399.82,
+      "text": "Note this point.",
+      "words": [
+        {
+          "word": " Note",
+          "start": 398.76,
+          "end": 399.26,
+          "probability": 0.739892303943634
+        },
+        {
+          "word": " this",
+          "start": 399.26,
+          "end": 399.48,
+          "probability": 0.9975774884223938
+        },
+        {
+          "word": " point.",
+          "start": 399.48,
+          "end": 399.82,
+          "probability": 0.9970303773880005
+        }
+      ]
+    },
+    {
+      "start_time": 400.82,
+      "end_time": 407.12,
+      "text": "Similarly, for bearish market or bearish candlestick, market will post low of the day in New York session.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 400.82,
+          "end": 401.18,
+          "probability": 0.9357205033302307
+        },
+        {
+          "word": " for",
+          "start": 401.84,
+          "end": 402.04,
+          "probability": 0.993777871131897
+        },
+        {
+          "word": " bearish",
+          "start": 402.04,
+          "end": 402.44,
+          "probability": 0.9963884651660919
+        },
+        {
+          "word": " market",
+          "start": 402.44,
+          "end": 402.8,
+          "probability": 0.9966315627098083
+        },
+        {
+          "word": " or",
+          "start": 402.8,
+          "end": 403.02,
+          "probability": 0.9873421788215637
+        },
+        {
+          "word": " bearish",
+          "start": 403.02,
+          "end": 403.42,
+          "probability": 0.9973671436309814
+        },
+        {
+          "word": " candlestick,",
+          "start": 403.42,
+          "end": 404.12,
+          "probability": 0.9962892532348633
+        },
+        {
+          "word": " market",
+          "start": 404.56,
+          "end": 404.92,
+          "probability": 0.9944000840187073
+        },
+        {
+          "word": " will",
+          "start": 404.92,
+          "end": 405.2,
+          "probability": 0.9988971948623657
+        },
+        {
+          "word": " post",
+          "start": 405.2,
+          "end": 405.52,
+          "probability": 0.9970635771751404
+        },
+        {
+          "word": " low",
+          "start": 405.52,
+          "end": 405.74,
+          "probability": 0.9896994233131409
+        },
+        {
+          "word": " of",
+          "start": 405.74,
+          "end": 405.92,
+          "probability": 0.9930682182312012
+        },
+        {
+          "word": " the",
+          "start": 405.92,
+          "end": 406.02,
+          "probability": 0.9973331689834595
+        },
+        {
+          "word": " day",
+          "start": 406.02,
+          "end": 406.22,
+          "probability": 0.9962689876556396
+        },
+        {
+          "word": " in",
+          "start": 406.22,
+          "end": 406.38,
+          "probability": 0.9986445307731628
+        },
+        {
+          "word": " New",
+          "start": 406.38,
+          "end": 406.54,
+          "probability": 0.9923294186592102
+        },
+        {
+          "word": " York",
+          "start": 406.54,
+          "end": 406.78,
+          "probability": 0.9951130747795105
+        },
+        {
+          "word": " session.",
+          "start": 406.78,
+          "end": 407.12,
+          "probability": 0.9828221201896667
+        }
+      ]
+    },
+    {
+      "start_time": 408.14,
+      "end_time": 412.4,
+      "text": "But, question is why London session post daily high in bearish market?",
+      "words": [
+        {
+          "word": " But,",
+          "start": 408.14,
+          "end": 408.48,
+          "probability": 0.9845561981201172
+        },
+        {
+          "word": " question",
+          "start": 408.94,
+          "end": 409.3,
+          "probability": 0.9851829409599304
+        },
+        {
+          "word": " is",
+          "start": 409.3,
+          "end": 409.62,
+          "probability": 0.9976429343223572
+        },
+        {
+          "word": " why",
+          "start": 409.62,
+          "end": 409.82,
+          "probability": 0.9227377772331238
+        },
+        {
+          "word": " London",
+          "start": 409.82,
+          "end": 410.08,
+          "probability": 0.9786439538002014
+        },
+        {
+          "word": " session",
+          "start": 410.08,
+          "end": 410.48,
+          "probability": 0.9145477414131165
+        },
+        {
+          "word": " post",
+          "start": 410.48,
+          "end": 410.84,
+          "probability": 0.9332938194274902
+        },
+        {
+          "word": " daily",
+          "start": 410.84,
+          "end": 411.18,
+          "probability": 0.9940453767776489
+        },
+        {
+          "word": " high",
+          "start": 411.18,
+          "end": 411.52,
+          "probability": 0.9819106459617615
+        },
+        {
+          "word": " in",
+          "start": 411.52,
+          "end": 411.68,
+          "probability": 0.9990748167037964
+        },
+        {
+          "word": " bearish",
+          "start": 411.68,
+          "end": 412.04,
+          "probability": 0.989182710647583
+        },
+        {
+          "word": " market?",
+          "start": 412.04,
+          "end": 412.4,
+          "probability": 0.9987196922302246
+        }
+      ]
+    },
+    {
+      "start_time": 412.4,
+      "end_time": 418.82,
+      "text": "Same liquidity concept will be applicable here, Asian session consolidate and build liquidity.",
+      "words": [
+        {
+          "word": " Same",
+          "start": 412.4,
+          "end": 413.64,
+          "probability": 0.34431761503219604
+        },
+        {
+          "word": " liquidity",
+          "start": 413.64,
+          "end": 414.04,
+          "probability": 0.968936562538147
+        },
+        {
+          "word": " concept",
+          "start": 414.04,
+          "end": 414.6,
+          "probability": 0.9969918727874756
+        },
+        {
+          "word": " will",
+          "start": 414.6,
+          "end": 414.92,
+          "probability": 0.9958546161651611
+        },
+        {
+          "word": " be",
+          "start": 414.92,
+          "end": 415.08,
+          "probability": 0.9995388984680176
+        },
+        {
+          "word": " applicable",
+          "start": 415.08,
+          "end": 415.52,
+          "probability": 0.9967525005340576
+        },
+        {
+          "word": " here,",
+          "start": 415.52,
+          "end": 415.9,
+          "probability": 0.9886647462844849
+        },
+        {
+          "word": " Asian",
+          "start": 416.38,
+          "end": 416.64,
+          "probability": 0.7272849678993225
+        },
+        {
+          "word": " session",
+          "start": 416.64,
+          "end": 417.06,
+          "probability": 0.6835463643074036
+        },
+        {
+          "word": " consolidate",
+          "start": 417.06,
+          "end": 417.7,
+          "probability": 0.9059737920761108
+        },
+        {
+          "word": " and",
+          "start": 417.7,
+          "end": 418.08,
+          "probability": 0.9927312731742859
+        },
+        {
+          "word": " build",
+          "start": 418.08,
+          "end": 418.32,
+          "probability": 0.9876928925514221
+        },
+        {
+          "word": " liquidity.",
+          "start": 418.32,
+          "end": 418.82,
+          "probability": 0.9928769469261169
+        }
+      ]
+    },
+    {
+      "start_time": 419.62,
+      "end_time": 428.98,
+      "text": "In bearish trend, market will sweep the Asian high side liquidity, grab this liquidity, market will post a high in London session and start moving lower.",
+      "words": [
+        {
+          "word": " In",
+          "start": 419.62,
+          "end": 420.0,
+          "probability": 0.9757986068725586
+        },
+        {
+          "word": " bearish",
+          "start": 420.0,
+          "end": 420.34,
+          "probability": 0.9437825083732605
+        },
+        {
+          "word": " trend,",
+          "start": 420.34,
+          "end": 420.68,
+          "probability": 0.9810830950737
+        },
+        {
+          "word": " market",
+          "start": 421.14,
+          "end": 421.5,
+          "probability": 0.8577870726585388
+        },
+        {
+          "word": " will",
+          "start": 421.5,
+          "end": 421.76,
+          "probability": 0.9965741634368896
+        },
+        {
+          "word": " sweep",
+          "start": 421.76,
+          "end": 422.06,
+          "probability": 0.9970198273658752
+        },
+        {
+          "word": " the",
+          "start": 422.06,
+          "end": 422.28,
+          "probability": 0.9928696751594543
+        },
+        {
+          "word": " Asian",
+          "start": 422.28,
+          "end": 422.54,
+          "probability": 0.9490342736244202
+        },
+        {
+          "word": " high",
+          "start": 422.54,
+          "end": 422.82,
+          "probability": 0.9295263290405273
+        },
+        {
+          "word": " side",
+          "start": 422.82,
+          "end": 423.08,
+          "probability": 0.69673091173172
+        },
+        {
+          "word": " liquidity,",
+          "start": 423.08,
+          "end": 423.6,
+          "probability": 0.9976254105567932
+        },
+        {
+          "word": " grab",
+          "start": 424.18,
+          "end": 424.42,
+          "probability": 0.9509501457214355
+        },
+        {
+          "word": " this",
+          "start": 424.42,
+          "end": 424.68,
+          "probability": 0.9972667694091797
+        },
+        {
+          "word": " liquidity,",
+          "start": 424.68,
+          "end": 425.12,
+          "probability": 0.9987541437149048
+        },
+        {
+          "word": " market",
+          "start": 425.66,
+          "end": 426.04,
+          "probability": 0.9812195897102356
+        },
+        {
+          "word": " will",
+          "start": 426.04,
+          "end": 426.3,
+          "probability": 0.9984815716743469
+        },
+        {
+          "word": " post",
+          "start": 426.3,
+          "end": 426.62,
+          "probability": 0.990014910697937
+        },
+        {
+          "word": " a",
+          "start": 426.62,
+          "end": 426.78,
+          "probability": 0.9869297742843628
+        },
+        {
+          "word": " high",
+          "start": 426.78,
+          "end": 426.98,
+          "probability": 0.9439436197280884
+        },
+        {
+          "word": " in",
+          "start": 426.98,
+          "end": 427.14,
+          "probability": 0.9884949326515198
+        },
+        {
+          "word": " London",
+          "start": 427.14,
+          "end": 427.34,
+          "probability": 0.9654141664505005
+        },
+        {
+          "word": " session",
+          "start": 427.34,
+          "end": 427.76,
+          "probability": 0.9509341716766357
+        },
+        {
+          "word": " and",
+          "start": 427.76,
+          "end": 428.06,
+          "probability": 0.9977154731750488
+        },
+        {
+          "word": " start",
+          "start": 428.06,
+          "end": 428.34,
+          "probability": 0.9957020878791809
+        },
+        {
+          "word": " moving",
+          "start": 428.34,
+          "end": 428.66,
+          "probability": 0.9985824823379517
+        },
+        {
+          "word": " lower.",
+          "start": 428.66,
+          "end": 428.98,
+          "probability": 0.9964021444320679
+        }
+      ]
+    },
+    {
+      "start_time": 429.96,
+      "end_time": 432.92,
+      "text": "This is a fake move to trap retail and breakout traders.",
+      "words": [
+        {
+          "word": " This",
+          "start": 429.96,
+          "end": 430.2,
+          "probability": 0.9913416504859924
+        },
+        {
+          "word": " is",
+          "start": 430.2,
+          "end": 430.36,
+          "probability": 0.996178388595581
+        },
+        {
+          "word": " a",
+          "start": 430.36,
+          "end": 430.5,
+          "probability": 0.9968847632408142
+        },
+        {
+          "word": " fake",
+          "start": 430.5,
+          "end": 430.66,
+          "probability": 0.9949931502342224
+        },
+        {
+          "word": " move",
+          "start": 430.66,
+          "end": 430.9,
+          "probability": 0.9958706498146057
+        },
+        {
+          "word": " to",
+          "start": 430.9,
+          "end": 431.12,
+          "probability": 0.9977604150772095
+        },
+        {
+          "word": " trap",
+          "start": 431.12,
+          "end": 431.36,
+          "probability": 0.9948908090591431
+        },
+        {
+          "word": " retail",
+          "start": 431.36,
+          "end": 431.74,
+          "probability": 0.9675977230072021
+        },
+        {
+          "word": " and",
+          "start": 431.74,
+          "end": 432.08,
+          "probability": 0.9952934384346008
+        },
+        {
+          "word": " breakout",
+          "start": 432.08,
+          "end": 432.4,
+          "probability": 0.9030188322067261
+        },
+        {
+          "word": " traders.",
+          "start": 432.4,
+          "end": 432.92,
+          "probability": 0.9869553446769714
+        }
+      ]
+    },
+    {
+      "start_time": 433.96,
+      "end_time": 436.18,
+      "text": "This fake movement is known as Judas swing.",
+      "words": [
+        {
+          "word": " This",
+          "start": 433.96,
+          "end": 434.24,
+          "probability": 0.9917685985565186
+        },
+        {
+          "word": " fake",
+          "start": 434.24,
+          "end": 434.48,
+          "probability": 0.9952358603477478
+        },
+        {
+          "word": " movement",
+          "start": 434.48,
+          "end": 434.78,
+          "probability": 0.995276689529419
+        },
+        {
+          "word": " is",
+          "start": 434.78,
+          "end": 435.08,
+          "probability": 0.999052107334137
+        },
+        {
+          "word": " known",
+          "start": 435.08,
+          "end": 435.3,
+          "probability": 0.9957736134529114
+        },
+        {
+          "word": " as",
+          "start": 435.3,
+          "end": 435.56,
+          "probability": 0.9985437393188477
+        },
+        {
+          "word": " Judas",
+          "start": 435.56,
+          "end": 435.82,
+          "probability": 0.764579713344574
+        },
+        {
+          "word": " swing.",
+          "start": 435.82,
+          "end": 436.18,
+          "probability": 0.33975735306739807
+        }
+      ]
+    },
+    {
+      "start_time": 436.18,
+      "end_time": 442.08,
+      "text": "This is the basic and classical concept of candlestick formation on daily bearish basis.",
+      "words": [
+        {
+          "word": " This",
+          "start": 436.18,
+          "end": 437.34,
+          "probability": 0.23217031359672546
+        },
+        {
+          "word": " is",
+          "start": 437.34,
+          "end": 437.56,
+          "probability": 0.9834967851638794
+        },
+        {
+          "word": " the",
+          "start": 437.56,
+          "end": 437.68,
+          "probability": 0.9789987802505493
+        },
+        {
+          "word": " basic",
+          "start": 437.68,
+          "end": 437.98,
+          "probability": 0.9642161130905151
+        },
+        {
+          "word": " and",
+          "start": 437.98,
+          "end": 438.2,
+          "probability": 0.9953011274337769
+        },
+        {
+          "word": " classical",
+          "start": 438.2,
+          "end": 438.64,
+          "probability": 0.9730140566825867
+        },
+        {
+          "word": " concept",
+          "start": 438.64,
+          "end": 439.22,
+          "probability": 0.9955578446388245
+        },
+        {
+          "word": " of",
+          "start": 439.22,
+          "end": 439.48,
+          "probability": 0.9977099895477295
+        },
+        {
+          "word": " candlestick",
+          "start": 439.48,
+          "end": 440.12,
+          "probability": 0.9819903373718262
+        },
+        {
+          "word": " formation",
+          "start": 440.12,
+          "end": 440.5,
+          "probability": 0.991361677646637
+        },
+        {
+          "word": " on",
+          "start": 440.5,
+          "end": 440.92,
+          "probability": 0.9726549386978149
+        },
+        {
+          "word": " daily",
+          "start": 440.92,
+          "end": 441.22,
+          "probability": 0.8624072074890137
+        },
+        {
+          "word": " bearish",
+          "start": 441.22,
+          "end": 441.68,
+          "probability": 0.9807571470737457
+        },
+        {
+          "word": " basis.",
+          "start": 441.68,
+          "end": 442.08,
+          "probability": 0.9971367120742798
+        }
+      ]
+    },
+    {
+      "start_time": 443.88,
+      "end_time": 449.92,
+      "text": "Well, every trader must have knowledge about OHLC values of candlestick and their importance.",
+      "words": [
+        {
+          "word": " Well,",
+          "start": 443.88,
+          "end": 444.6,
+          "probability": 0.8822906017303467
+        },
+        {
+          "word": " every",
+          "start": 445.12,
+          "end": 445.42,
+          "probability": 0.9730492830276489
+        },
+        {
+          "word": " trader",
+          "start": 445.42,
+          "end": 445.74,
+          "probability": 0.997281551361084
+        },
+        {
+          "word": " must",
+          "start": 445.74,
+          "end": 446.02,
+          "probability": 0.9981568455696106
+        },
+        {
+          "word": " have",
+          "start": 446.02,
+          "end": 446.28,
+          "probability": 0.9991379976272583
+        },
+        {
+          "word": " knowledge",
+          "start": 446.28,
+          "end": 446.62,
+          "probability": 0.9933326840400696
+        },
+        {
+          "word": " about",
+          "start": 446.62,
+          "end": 446.92,
+          "probability": 0.9966957569122314
+        },
+        {
+          "word": " OHLC",
+          "start": 446.92,
+          "end": 447.84,
+          "probability": 0.8422010838985443
+        },
+        {
+          "word": " values",
+          "start": 447.84,
+          "end": 448.26,
+          "probability": 0.9821312427520752
+        },
+        {
+          "word": " of",
+          "start": 448.26,
+          "end": 448.5,
+          "probability": 0.9982742071151733
+        },
+        {
+          "word": " candlestick",
+          "start": 448.5,
+          "end": 449.16,
+          "probability": 0.994065006573995
+        },
+        {
+          "word": " and",
+          "start": 449.16,
+          "end": 449.32,
+          "probability": 0.996618390083313
+        },
+        {
+          "word": " their",
+          "start": 449.32,
+          "end": 449.46,
+          "probability": 0.9989534616470337
+        },
+        {
+          "word": " importance.",
+          "start": 449.46,
+          "end": 449.92,
+          "probability": 0.9977917671203613
+        }
+      ]
+    },
+    {
+      "start_time": 450.92,
+      "end_time": 457.34,
+      "text": "Considering this candlestick, note that every candlestick's body present bank trading or actual trading volume.",
+      "words": [
+        {
+          "word": " Considering",
+          "start": 450.92,
+          "end": 451.46,
+          "probability": 0.9607394337654114
+        },
+        {
+          "word": " this",
+          "start": 451.46,
+          "end": 451.8,
+          "probability": 0.9980423450469971
+        },
+        {
+          "word": " candlestick,",
+          "start": 451.8,
+          "end": 452.52,
+          "probability": 0.9977118372917175
+        },
+        {
+          "word": " note",
+          "start": 452.96,
+          "end": 453.2,
+          "probability": 0.9537068605422974
+        },
+        {
+          "word": " that",
+          "start": 453.2,
+          "end": 453.4,
+          "probability": 0.9993104934692383
+        },
+        {
+          "word": " every",
+          "start": 453.4,
+          "end": 453.68,
+          "probability": 0.9881703853607178
+        },
+        {
+          "word": " candlestick's",
+          "start": 453.68,
+          "end": 454.48,
+          "probability": 0.9685803651809692
+        },
+        {
+          "word": " body",
+          "start": 454.48,
+          "end": 454.72,
+          "probability": 0.9867667555809021
+        },
+        {
+          "word": " present",
+          "start": 454.72,
+          "end": 455.12,
+          "probability": 0.8687111735343933
+        },
+        {
+          "word": " bank",
+          "start": 455.12,
+          "end": 455.44,
+          "probability": 0.7493965029716492
+        },
+        {
+          "word": " trading",
+          "start": 455.44,
+          "end": 455.82,
+          "probability": 0.9831367135047913
+        },
+        {
+          "word": " or",
+          "start": 455.82,
+          "end": 456.1,
+          "probability": 0.9943262934684753
+        },
+        {
+          "word": " actual",
+          "start": 456.1,
+          "end": 456.48,
+          "probability": 0.997885525226593
+        },
+        {
+          "word": " trading",
+          "start": 456.48,
+          "end": 456.88,
+          "probability": 0.9993792772293091
+        },
+        {
+          "word": " volume.",
+          "start": 456.88,
+          "end": 457.34,
+          "probability": 0.9954860806465149
+        }
+      ]
+    },
+    {
+      "start_time": 458.3,
+      "end_time": 463.0,
+      "text": "On other hand, WIC or shadow of candlestick present the retail trader's volume.",
+      "words": [
+        {
+          "word": " On",
+          "start": 458.3,
+          "end": 458.56,
+          "probability": 0.9842200875282288
+        },
+        {
+          "word": " other",
+          "start": 458.56,
+          "end": 458.78,
+          "probability": 0.9810616374015808
+        },
+        {
+          "word": " hand,",
+          "start": 458.78,
+          "end": 459.16,
+          "probability": 0.9969410300254822
+        },
+        {
+          "word": " WIC",
+          "start": 459.42,
+          "end": 459.54,
+          "probability": 0.8023797571659088
+        },
+        {
+          "word": " or",
+          "start": 459.54,
+          "end": 459.92,
+          "probability": 0.7239966988563538
+        },
+        {
+          "word": " shadow",
+          "start": 459.92,
+          "end": 460.28,
+          "probability": 0.23280206322669983
+        },
+        {
+          "word": " of",
+          "start": 460.28,
+          "end": 460.52,
+          "probability": 0.9975656270980835
+        },
+        {
+          "word": " candlestick",
+          "start": 460.52,
+          "end": 461.16,
+          "probability": 0.9956075151761373
+        },
+        {
+          "word": " present",
+          "start": 461.16,
+          "end": 461.52,
+          "probability": 0.9869622588157654
+        },
+        {
+          "word": " the",
+          "start": 461.52,
+          "end": 461.74,
+          "probability": 0.9970064759254456
+        },
+        {
+          "word": " retail",
+          "start": 461.74,
+          "end": 462.08,
+          "probability": 0.9831495881080627
+        },
+        {
+          "word": " trader's",
+          "start": 462.08,
+          "end": 462.66,
+          "probability": 0.8163379728794098
+        },
+        {
+          "word": " volume.",
+          "start": 462.66,
+          "end": 463.0,
+          "probability": 0.9972084164619446
+        }
+      ]
+    },
+    {
+      "start_time": 463.66,
+      "end_time": 469.06,
+      "text": "In bullish market, low of the candle will be on downside, as we discussed earlier.",
+      "words": [
+        {
+          "word": " In",
+          "start": 463.66,
+          "end": 464.22,
+          "probability": 0.11420652270317078
+        },
+        {
+          "word": " bullish",
+          "start": 464.22,
+          "end": 464.46,
+          "probability": 0.6420914530754089
+        },
+        {
+          "word": " market,",
+          "start": 464.46,
+          "end": 464.92,
+          "probability": 0.9544788002967834
+        },
+        {
+          "word": " low",
+          "start": 465.4,
+          "end": 465.64,
+          "probability": 0.894092857837677
+        },
+        {
+          "word": " of",
+          "start": 465.64,
+          "end": 465.82,
+          "probability": 0.9895089864730835
+        },
+        {
+          "word": " the",
+          "start": 465.82,
+          "end": 465.92,
+          "probability": 0.9983910322189331
+        },
+        {
+          "word": " candle",
+          "start": 465.92,
+          "end": 466.18,
+          "probability": 0.9955511093139648
+        },
+        {
+          "word": " will",
+          "start": 466.18,
+          "end": 466.42,
+          "probability": 0.9959167838096619
+        },
+        {
+          "word": " be",
+          "start": 466.42,
+          "end": 466.58,
+          "probability": 0.9992444515228271
+        },
+        {
+          "word": " on",
+          "start": 466.58,
+          "end": 466.76,
+          "probability": 0.9906110167503357
+        },
+        {
+          "word": " downside,",
+          "start": 466.76,
+          "end": 467.18,
+          "probability": 0.9292483925819397
+        },
+        {
+          "word": " as",
+          "start": 467.78,
+          "end": 467.98,
+          "probability": 0.9879888296127319
+        },
+        {
+          "word": " we",
+          "start": 467.98,
+          "end": 468.16,
+          "probability": 0.9972150325775146
+        },
+        {
+          "word": " discussed",
+          "start": 468.16,
+          "end": 468.46,
+          "probability": 0.9985705614089966
+        },
+        {
+          "word": " earlier.",
+          "start": 468.46,
+          "end": 469.06,
+          "probability": 0.998448371887207
+        }
+      ]
+    },
+    {
+      "start_time": 470.02,
+      "end_time": 473.9,
+      "text": "Because in bullish market, London session will post the low of the day.",
+      "words": [
+        {
+          "word": " Because",
+          "start": 470.02,
+          "end": 470.32,
+          "probability": 0.9616343975067139
+        },
+        {
+          "word": " in",
+          "start": 470.32,
+          "end": 470.56,
+          "probability": 0.9889776110649109
+        },
+        {
+          "word": " bullish",
+          "start": 470.56,
+          "end": 470.82,
+          "probability": 0.995992124080658
+        },
+        {
+          "word": " market,",
+          "start": 470.82,
+          "end": 471.3,
+          "probability": 0.995256245136261
+        },
+        {
+          "word": " London",
+          "start": 471.76,
+          "end": 472.06,
+          "probability": 0.9061827659606934
+        },
+        {
+          "word": " session",
+          "start": 472.06,
+          "end": 472.46,
+          "probability": 0.29804152250289917
+        },
+        {
+          "word": " will",
+          "start": 472.46,
+          "end": 472.74,
+          "probability": 0.9966433048248291
+        },
+        {
+          "word": " post",
+          "start": 472.74,
+          "end": 473.06,
+          "probability": 0.9868573546409607
+        },
+        {
+          "word": " the",
+          "start": 473.06,
+          "end": 473.24,
+          "probability": 0.9899465441703796
+        },
+        {
+          "word": " low",
+          "start": 473.24,
+          "end": 473.42,
+          "probability": 0.9867579340934753
+        },
+        {
+          "word": " of",
+          "start": 473.42,
+          "end": 473.58,
+          "probability": 0.9976668357849121
+        },
+        {
+          "word": " the",
+          "start": 473.58,
+          "end": 473.68,
+          "probability": 0.998082160949707
+        },
+        {
+          "word": " day.",
+          "start": 473.68,
+          "end": 473.9,
+          "probability": 0.9928070306777954
+        }
+      ]
+    },
+    {
+      "start_time": 474.62,
+      "end_time": 480.04,
+      "text": "Similarly, this is the open, high, low and close values of bearish candlesticks.",
+      "words": [
+        {
+          "word": " Similarly,",
+          "start": 474.62,
+          "end": 475.18,
+          "probability": 0.943493664264679
+        },
+        {
+          "word": " this",
+          "start": 475.84,
+          "end": 476.04,
+          "probability": 0.9861233234405518
+        },
+        {
+          "word": " is",
+          "start": 476.04,
+          "end": 476.22,
+          "probability": 0.9989062547683716
+        },
+        {
+          "word": " the",
+          "start": 476.22,
+          "end": 476.36,
+          "probability": 0.998449444770813
+        },
+        {
+          "word": " open,",
+          "start": 476.36,
+          "end": 476.64,
+          "probability": 0.9596297144889832
+        },
+        {
+          "word": " high,",
+          "start": 476.92,
+          "end": 477.16,
+          "probability": 0.9957507848739624
+        },
+        {
+          "word": " low",
+          "start": 477.36,
+          "end": 477.58,
+          "probability": 0.997334361076355
+        },
+        {
+          "word": " and",
+          "start": 477.58,
+          "end": 477.88,
+          "probability": 0.5944725275039673
+        },
+        {
+          "word": " close",
+          "start": 477.88,
+          "end": 478.22,
+          "probability": 0.9950283169746399
+        },
+        {
+          "word": " values",
+          "start": 478.22,
+          "end": 478.64,
+          "probability": 0.994809627532959
+        },
+        {
+          "word": " of",
+          "start": 478.64,
+          "end": 478.9,
+          "probability": 0.9983118772506714
+        },
+        {
+          "word": " bearish",
+          "start": 478.9,
+          "end": 479.28,
+          "probability": 0.9810349941253662
+        },
+        {
+          "word": " candlesticks.",
+          "start": 479.28,
+          "end": 480.04,
+          "probability": 0.7635608712832133
+        }
+      ]
+    },
+    {
+      "start_time": 480.78,
+      "end_time": 486.26,
+      "text": "Remember the concept, London session will manipulate the high side liquidity in bearish market.",
+      "words": [
+        {
+          "word": " Remember",
+          "start": 480.78,
+          "end": 481.34,
+          "probability": 0.9856681823730469
+        },
+        {
+          "word": " the",
+          "start": 481.34,
+          "end": 481.6,
+          "probability": 0.9946393370628357
+        },
+        {
+          "word": " concept,",
+          "start": 481.6,
+          "end": 482.04,
+          "probability": 0.9970603585243225
+        },
+        {
+          "word": " London",
+          "start": 482.6,
+          "end": 482.88,
+          "probability": 0.8492271304130554
+        },
+        {
+          "word": " session",
+          "start": 482.88,
+          "end": 483.3,
+          "probability": 0.942304253578186
+        },
+        {
+          "word": " will",
+          "start": 483.3,
+          "end": 483.58,
+          "probability": 0.9973459243774414
+        },
+        {
+          "word": " manipulate",
+          "start": 483.58,
+          "end": 484.04,
+          "probability": 0.9974888563156128
+        },
+        {
+          "word": " the",
+          "start": 484.04,
+          "end": 484.32,
+          "probability": 0.9933419823646545
+        },
+        {
+          "word": " high",
+          "start": 484.32,
+          "end": 484.5,
+          "probability": 0.9851506352424622
+        },
+        {
+          "word": " side",
+          "start": 484.5,
+          "end": 484.76,
+          "probability": 0.7277209758758545
+        },
+        {
+          "word": " liquidity",
+          "start": 484.76,
+          "end": 485.2,
+          "probability": 0.9894673228263855
+        },
+        {
+          "word": " in",
+          "start": 485.2,
+          "end": 485.56,
+          "probability": 0.996190071105957
+        },
+        {
+          "word": " bearish",
+          "start": 485.56,
+          "end": 485.92,
+          "probability": 0.9869933724403381
+        },
+        {
+          "word": " market.",
+          "start": 485.92,
+          "end": 486.26,
+          "probability": 0.9959492683410645
+        }
+      ]
+    },
+    {
+      "start_time": 487.12,
+      "end_time": 490.46,
+      "text": "I hope now you can observe and analyze the market in better ways.",
+      "words": [
+        {
+          "word": " I",
+          "start": 487.12,
+          "end": 487.38,
+          "probability": 0.9893733859062195
+        },
+        {
+          "word": " hope",
+          "start": 487.38,
+          "end": 487.56,
+          "probability": 0.9976930022239685
+        },
+        {
+          "word": " now",
+          "start": 487.56,
+          "end": 487.78,
+          "probability": 0.9950908422470093
+        },
+        {
+          "word": " you",
+          "start": 487.78,
+          "end": 487.98,
+          "probability": 0.9976016879081726
+        },
+        {
+          "word": " can",
+          "start": 487.98,
+          "end": 488.16,
+          "probability": 0.9992707371711731
+        },
+        {
+          "word": " observe",
+          "start": 488.16,
+          "end": 488.44,
+          "probability": 0.9974406957626343
+        },
+        {
+          "word": " and",
+          "start": 488.44,
+          "end": 488.68,
+          "probability": 0.9811965227127075
+        },
+        {
+          "word": " analyze",
+          "start": 488.68,
+          "end": 489.08,
+          "probability": 0.5928604006767273
+        },
+        {
+          "word": " the",
+          "start": 489.08,
+          "end": 489.36,
+          "probability": 0.9983009696006775
+        },
+        {
+          "word": " market",
+          "start": 489.36,
+          "end": 489.64,
+          "probability": 0.9974679946899414
+        },
+        {
+          "word": " in",
+          "start": 489.64,
+          "end": 489.9,
+          "probability": 0.9970563650131226
+        },
+        {
+          "word": " better",
+          "start": 489.9,
+          "end": 490.14,
+          "probability": 0.9984976053237915
+        },
+        {
+          "word": " ways.",
+          "start": 490.14,
+          "end": 490.46,
+          "probability": 0.9965237975120544
+        }
+      ]
+    },
+    {
+      "start_time": 491.22,
+      "end_time": 494.12,
+      "text": "Practice this concept and be a profitable trader.",
+      "words": [
+        {
+          "word": " Practice",
+          "start": 491.22,
+          "end": 491.86,
+          "probability": 0.415020227432251
+        },
+        {
+          "word": " this",
+          "start": 491.86,
+          "end": 492.2,
+          "probability": 0.9975969195365906
+        },
+        {
+          "word": " concept",
+          "start": 492.2,
+          "end": 492.66,
+          "probability": 0.9965625405311584
+        },
+        {
+          "word": " and",
+          "start": 492.66,
+          "end": 492.94,
+          "probability": 0.9915040135383606
+        },
+        {
+          "word": " be",
+          "start": 492.94,
+          "end": 493.1,
+          "probability": 0.992803156375885
+        },
+        {
+          "word": " a",
+          "start": 493.1,
+          "end": 493.22,
+          "probability": 0.9908658862113953
+        },
+        {
+          "word": " profitable",
+          "start": 493.22,
+          "end": 493.64,
+          "probability": 0.9951247572898865
+        },
+        {
+          "word": " trader.",
+          "start": 493.64,
+          "end": 494.12,
+          "probability": 0.9769495129585266
+        }
+      ]
+    },
+    {
+      "start_time": 495.34000000000003,
+      "end_time": 499.94,
+      "text": "If you have any question related to this lecture, email us on this id.",
+      "words": [
+        {
+          "word": " If",
+          "start": 495.34000000000003,
+          "end": 495.98,
+          "probability": 0.9428495764732361
+        },
+        {
+          "word": " you",
+          "start": 495.98,
+          "end": 496.14,
+          "probability": 0.9976170659065247
+        },
+        {
+          "word": " have",
+          "start": 496.14,
+          "end": 496.3,
+          "probability": 0.9989822506904602
+        },
+        {
+          "word": " any",
+          "start": 496.3,
+          "end": 496.52,
+          "probability": 0.9985014200210571
+        },
+        {
+          "word": " question",
+          "start": 496.52,
+          "end": 496.96,
+          "probability": 0.9578514099121094
+        },
+        {
+          "word": " related",
+          "start": 496.96,
+          "end": 497.4,
+          "probability": 0.9966093301773071
+        },
+        {
+          "word": " to",
+          "start": 497.4,
+          "end": 497.68,
+          "probability": 0.9995699524879456
+        },
+        {
+          "word": " this",
+          "start": 497.68,
+          "end": 497.86,
+          "probability": 0.9992899894714355
+        },
+        {
+          "word": " lecture,",
+          "start": 497.86,
+          "end": 498.2,
+          "probability": 0.9917581677436829
+        },
+        {
+          "word": " email",
+          "start": 498.74,
+          "end": 499.0,
+          "probability": 0.848957359790802
+        },
+        {
+          "word": " us",
+          "start": 499.0,
+          "end": 499.32,
+          "probability": 0.9945703148841858
+        },
+        {
+          "word": " on",
+          "start": 499.32,
+          "end": 499.5,
+          "probability": 0.9973422884941101
+        },
+        {
+          "word": " this",
+          "start": 499.5,
+          "end": 499.66,
+          "probability": 0.9986408352851868
+        },
+        {
+          "word": " id.",
+          "start": 499.66,
+          "end": 499.94,
+          "probability": 0.4501281976699829
+        }
+      ]
+    }
+  ]
+}

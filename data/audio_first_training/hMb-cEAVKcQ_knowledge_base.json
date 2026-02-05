@@ -1,0 +1,117 @@
+{
+  "video_id": "hMb-cEAVKcQ",
+  "generated_at": "2026-02-05T13:52:14.364919",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 457.9283721446991,
+  "processing_stats": {
+    "teaching_units": 46,
+    "vision_analyses": 72,
+    "concepts_extracted": 7,
+    "total_audio_duration": 1229.0200000000004,
+    "total_words": 3268
+  },
+  "concepts": {
+    "fair value gap": {
+      "llm_summary": "The \"FAIR VALUE GAP\" concept in the context of trading refers to a situation where a trader identifies a fair value gap, which is a gap between the fair value of a trade and the actual price at which the trade is executed. The term \"FAIR VALUE GAP\" is used to describe a gap between the fair value of a trade and the actual price at which the trade is executed, which can lead to a loss if the trade is executed at a price lower than the fair value gap.\n\nThe concept of FAIR VALUE GAP is important in trading because it can indicate a potential risk of loss if the trade is executed at a price lower than the fair value gap. Traders who are aware of FAIR VALUE GAP can use it as a trading strategy to enter trades at a price higher than the fair value gap, which can increase the likelihood of a profit if the trade is executed at a price higher than the fair value gap.\n\nThe term \"FAIR VALUE GAP\" is used to describe a gap between the fair value of a trade and the actual price at which the trade is executed, which can lead to a loss if the trade is executed at a price lower than the fair value gap. Traders who are aware of FAIR VALUE GAP can use it as a trading strategy to enter trades at a price higher than the fair value gap, which can increase the likelihood of a profit if the trade is executed at a price higher than the fair value gap.",
+      "generation_time_seconds": 55.9418089389801,
+      "statistics": {
+        "teaching_duration_seconds": 590.9399999999999,
+        "word_count": 1548,
+        "teaching_units": 24,
+        "frames_analyzed": 36,
+        "deictic_references": 34
+      },
+      "teaching_types": {
+        "explanation": 23,
+        "summary": 1
+      }
+    },
+    "liquidity": {
+      "llm_summary": "The \"LIQUIDITY\" concept in the context of trading refers to the availability and ease of buying and selling in a market. It is a crucial factor in determining the price of a financial instrument, as liquidity affects how quickly and easily a trade can be executed. The term \"LIQUIDITY\" is often used to describe the market's ability to handle transactions, particularly in the context of financial markets where liquidity refers to the ease with which financial instruments can be bought and sold.",
+      "generation_time_seconds": 49.412672996520996,
+      "statistics": {
+        "teaching_duration_seconds": 730.8600000000002,
+        "word_count": 1944,
+        "teaching_units": 22,
+        "frames_analyzed": 39,
+        "deictic_references": 46
+      },
+      "teaching_types": {
+        "explanation": 21,
+        "definition": 1
+      }
+    },
+    "imbalance": {
+      "llm_summary": "The \"IMBALANCE\" concept in the context of trading refers to a situation where the price of a financial instrument moves sharply in one direction, creating a gap between the high and low prices. This gap is often referred to as a \"fair value gap\" or \"price imbalance.\" The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled",
+      "generation_time_seconds": 91.05924916267395,
+      "statistics": {
+        "teaching_duration_seconds": 328.4000000000001,
+        "word_count": 881,
+        "teaching_units": 9,
+        "frames_analyzed": 19,
+        "deictic_references": 21
+      },
+      "teaching_types": {
+        "explanation": 8,
+        "definition": 1
+      }
+    },
+    "market structure": {
+      "llm_summary": "**Market Structure**:\n\n1. **Definition**: Market structure refers to the overall layout, organization, and dynamics of a financial market, including the relationships between different market participants, the types of transactions, and the overall market behavior.\n\n2. **Identification**: To spot market structure on a chart, look for specific visual characteristics such as:\n\n   - Highs and lows: The price highs and lows are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These are moving averages that provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These are averages of the price over a specific period, helping to identify the trend direction.\n   - Volume indicators: The volume of trading can provide insights into the strength of the market.\n   - Trend line: A line drawn on the chart that represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n3. **Trading Application**: ICT recommends trading market structure patterns based on the following key price levels:\n\n   - Highs and lows: These are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These moving averages provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These averages help to identify the trend direction.\n   - Volume indicators: These provide insights into the strength of the market.\n   - Trend line: This line represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n4. **Key Price Levels**: The key price levels identified in market structure patterns are crucial for trading. They include:\n\n   - Highs and lows: These are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These moving averages provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These averages help to identify the trend direction.\n   - Volume indicators: These provide insights into the strength of the market.\n   - Trend line: This line represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n**Summary**:\n\nMarket structure refers to the overall layout, organization, and dynamics of a financial market, including the relationships between different market participants, the types of transactions, and the overall market behavior. To identify market structure on a chart, look for specific visual characteristics such as highs and lows, Bollinger Bands, moving averages, volume indicators, trend lines, support and resistance levels, and MACD line. These patterns can provide insights into the strength and direction of the market, and can be used to make informed trading decisions.",
+      "generation_time_seconds": 88.39071488380432,
+      "statistics": {
+        "teaching_duration_seconds": 8.060000000000002,
+        "word_count": 23,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 0
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the Inner Circle Trader (ICT) methodology. It involves identifying specific price levels or trading zones, which are considered high probability for buy and sell setups. The key visual characteristics of an ORDER BLOCK include:\n\n1. **Visible Price Levels**: The chart includes specific price levels or price ranges, such as the highest, lowest, and middle price levels, and the price range between these levels.\n2. **Annotations, Markings, or High-Low Zones**: The chart patterns and price levels are annotated, marked, or highlighted to indicate specific trading zones.\n3. **Key Price Levels**: The most important price levels are identified, such as the highest and lowest price levels, and the middle price level.\n4. **Key Visual Characteristics**: The chart patterns and price levels are visually distinct, such as horizontal lines, specific color coding, and annotations, to highlight the ORDER BLOCK.\n\n**Trading Application**:\n- **Identification**: The ORDER BLOCK concept involves identifying specific price levels or trading zones, which are considered high probability for buy and sell setups.\n- **Application**: The trading strategy involves using these identified price levels to formulate trade entries, aiming to gain liquidity and gain market driving force.\n- **Key Price Levels**: The identified price levels are crucial in determining the trading strategy, as they represent potential entry points for buying or selling.\n\n**Key Price Levels**:\n- **Highest Price Level**: The highest price level is a critical point for identifying potential entry points for buying.\n- **Lowest Price Level**: The lowest price level is a critical point for identifying potential entry points for selling.\n- **Middle Price Level**: The middle price level is a critical point for identifying potential entry points for trading.\n- **Price Range**: The price range between these levels is a critical point for identifying potential entry points for trading.\n\n**Summary**:\n- **Definition**: ORDER BLOCK is a trading strategy used in the Inner Circle Trader (ICT) methodology, involving identifying specific price levels or trading zones, which are considered high probability for buy and sell setups.\n- **Identification**: The ORDER BLOCK concept involves identifying specific price levels or trading zones, which are visually distinct and annotated, to highlight potential entry points for trading.\n- **Trading Application**: The trading strategy involves using these identified price levels to formulate trade entries, aiming to gain liquidity and gain market driving force.\n- **Key Price Levels**: The identified price levels are crucial in determining the trading strategy, as they represent potential entry points for buying or selling.",
+      "generation_time_seconds": 70.39078092575073,
+      "statistics": {
+        "teaching_duration_seconds": 345.8199999999999,
+        "word_count": 917,
+        "teaching_units": 10,
+        "frames_analyzed": 15,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 9,
+        "definition": 1
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading in specific price gaps or fair value gaps. To spot this pattern, the market is in a consolidation phase, and the wick-to-wick gap is a fair value gap. The key visual characteristics to look for include:\n\n1. **Price Levels**: The top price level, bottom price level, and middle price level are important. These levels are drawn from the highest candle wick, and they are considered fair value gaps.\n\n2. **Chart Patterns and Price Levels**: The chart shows a range or consolidation phase, with specific price levels mentioned or visible. These levels are crucial for identifying the optimal entry point for trading.\n\n3. **Trading Application**: The ICT recommends trading in these fair value gaps. The focus is on identifying the highest candle wick, which represents the fair value gap. Once identified, the optimal entry point is to buy or sell, depending on the direction of the price movement.\n\n4. **Key Price Levels**: The top price level, bottom price level, and middle price level are important. These levels are drawn from the highest candle wick, and they are considered fair value gaps.\n\nBy identifying and trading in these fair value gaps, the Inner Circle Trader aims to capitalize on potential price movements within the consolidation phase.",
+      "generation_time_seconds": 56.03499698638916,
+      "statistics": {
+        "teaching_duration_seconds": 98.57999999999998,
+        "word_count": 256,
+        "teaching_units": 4,
+        "frames_analyzed": 5,
+        "deictic_references": 11
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "fibonacci": {
+      "llm_summary": "The \"Fibonacci\" concept in the context of trading refers to a specific price pattern identified on a chart, characterized by a series of price points that form a sequence where each point is a Fibonacci number, i.e., a number that is the sum of the two preceding ones (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, etc.). The Fibonacci tool is used to find the 50% level, which is a significant price level, and the 100% level, which is another significant price level. The chart patterns and price levels identified on the chart support the trading application, suggesting that the Fibonacci tool can be used to identify and trade specific price patterns.",
+      "generation_time_seconds": 46.05406475067139,
+      "statistics": {
+        "teaching_duration_seconds": 12.540000000000077,
+        "word_count": 35,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

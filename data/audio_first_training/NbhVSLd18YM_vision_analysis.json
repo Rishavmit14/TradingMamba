@@ -1,0 +1,605 @@
+{
+  "video_id": "NbhVSLd18YM",
+  "total_frames": 99,
+  "successful": 0,
+  "failed": 99,
+  "total_time_seconds": 31.49978756904602,
+  "avg_time_per_frame": 31.49978756904602,
+  "results": [
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00006.00s.jpg",
+      "teaching_unit_id": "unit_000",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00018.00s.jpg",
+      "teaching_unit_id": "unit_001",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00033.00s.jpg",
+      "teaching_unit_id": "unit_002",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00045.00s.jpg",
+      "teaching_unit_id": "unit_003",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00048.00s.jpg",
+      "teaching_unit_id": "unit_003",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00066.00s.jpg",
+      "teaching_unit_id": "unit_004",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00087.00s.jpg",
+      "teaching_unit_id": "unit_004",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00108.00s.jpg",
+      "teaching_unit_id": "unit_005",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00138.00s.jpg",
+      "teaching_unit_id": "unit_006",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00156.00s.jpg",
+      "teaching_unit_id": "unit_007",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00165.00s.jpg",
+      "teaching_unit_id": "unit_008",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00168.00s.jpg",
+      "teaching_unit_id": "unit_008",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00180.00s.jpg",
+      "teaching_unit_id": "unit_009",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00189.00s.jpg",
+      "teaching_unit_id": "unit_010",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00204.00s.jpg",
+      "teaching_unit_id": "unit_011",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00216.00s.jpg",
+      "teaching_unit_id": "unit_012",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00228.00s.jpg",
+      "teaching_unit_id": "unit_013",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00234.00s.jpg",
+      "teaching_unit_id": "unit_014",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00237.00s.jpg",
+      "teaching_unit_id": "unit_014",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00246.00s.jpg",
+      "teaching_unit_id": "unit_014",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00249.00s.jpg",
+      "teaching_unit_id": "unit_014",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00252.00s.jpg",
+      "teaching_unit_id": "unit_014",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00255.00s.jpg",
+      "teaching_unit_id": "unit_015",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00261.00s.jpg",
+      "teaching_unit_id": "unit_015",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00264.00s.jpg",
+      "teaching_unit_id": "unit_015",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00267.00s.jpg",
+      "teaching_unit_id": "unit_015",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00270.00s.jpg",
+      "teaching_unit_id": "unit_015",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00291.00s.jpg",
+      "teaching_unit_id": "unit_016",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00312.00s.jpg",
+      "teaching_unit_id": "unit_017",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00315.00s.jpg",
+      "teaching_unit_id": "unit_017",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00336.00s.jpg",
+      "teaching_unit_id": "unit_018",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00354.00s.jpg",
+      "teaching_unit_id": "unit_019",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00366.00s.jpg",
+      "teaching_unit_id": "unit_020",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00369.00s.jpg",
+      "teaching_unit_id": "unit_020",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00396.00s.jpg",
+      "teaching_unit_id": "unit_021",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00408.00s.jpg",
+      "teaching_unit_id": "unit_022",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00411.00s.jpg",
+      "teaching_unit_id": "unit_022",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00423.00s.jpg",
+      "teaching_unit_id": "unit_023",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00447.00s.jpg",
+      "teaching_unit_id": "unit_024",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00459.00s.jpg",
+      "teaching_unit_id": "unit_025",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00465.00s.jpg",
+      "teaching_unit_id": "unit_026",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00468.00s.jpg",
+      "teaching_unit_id": "unit_026",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00471.00s.jpg",
+      "teaching_unit_id": "unit_026",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00486.00s.jpg",
+      "teaching_unit_id": "unit_027",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00489.00s.jpg",
+      "teaching_unit_id": "unit_027",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00498.00s.jpg",
+      "teaching_unit_id": "unit_028",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00516.00s.jpg",
+      "teaching_unit_id": "unit_029",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00531.00s.jpg",
+      "teaching_unit_id": "unit_030",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00534.00s.jpg",
+      "teaching_unit_id": "unit_030",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00552.00s.jpg",
+      "teaching_unit_id": "unit_031",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00567.00s.jpg",
+      "teaching_unit_id": "unit_032",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00588.00s.jpg",
+      "teaching_unit_id": "unit_033",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00597.00s.jpg",
+      "teaching_unit_id": "unit_034",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00600.00s.jpg",
+      "teaching_unit_id": "unit_034",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00618.00s.jpg",
+      "teaching_unit_id": "unit_034",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00621.00s.jpg",
+      "teaching_unit_id": "unit_035",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00630.00s.jpg",
+      "teaching_unit_id": "unit_036",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00645.00s.jpg",
+      "teaching_unit_id": "unit_037",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00663.00s.jpg",
+      "teaching_unit_id": "unit_038",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00675.00s.jpg",
+      "teaching_unit_id": "unit_039",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00705.00s.jpg",
+      "teaching_unit_id": "unit_040",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00708.00s.jpg",
+      "teaching_unit_id": "unit_040",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00720.00s.jpg",
+      "teaching_unit_id": "unit_041",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00723.00s.jpg",
+      "teaching_unit_id": "unit_041",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00732.00s.jpg",
+      "teaching_unit_id": "unit_042",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00747.00s.jpg",
+      "teaching_unit_id": "unit_043",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00765.00s.jpg",
+      "teaching_unit_id": "unit_044",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00768.00s.jpg",
+      "teaching_unit_id": "unit_044",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00786.00s.jpg",
+      "teaching_unit_id": "unit_044",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00786.00s.jpg",
+      "teaching_unit_id": "unit_045",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00798.00s.jpg",
+      "teaching_unit_id": "unit_046",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00810.00s.jpg",
+      "teaching_unit_id": "unit_047",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00828.00s.jpg",
+      "teaching_unit_id": "unit_048",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00831.00s.jpg",
+      "teaching_unit_id": "unit_048",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00849.00s.jpg",
+      "teaching_unit_id": "unit_049",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00852.00s.jpg",
+      "teaching_unit_id": "unit_049",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00882.00s.jpg",
+      "teaching_unit_id": "unit_050",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00903.00s.jpg",
+      "teaching_unit_id": "unit_051",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00927.00s.jpg",
+      "teaching_unit_id": "unit_052",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00948.00s.jpg",
+      "teaching_unit_id": "unit_053",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00960.00s.jpg",
+      "teaching_unit_id": "unit_054",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00972.00s.jpg",
+      "teaching_unit_id": "unit_055",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_00990.00s.jpg",
+      "teaching_unit_id": "unit_056",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01011.00s.jpg",
+      "teaching_unit_id": "unit_057",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01023.00s.jpg",
+      "teaching_unit_id": "unit_058",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01038.00s.jpg",
+      "teaching_unit_id": "unit_059",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01053.00s.jpg",
+      "teaching_unit_id": "unit_060",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01056.00s.jpg",
+      "teaching_unit_id": "unit_060",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01080.00s.jpg",
+      "teaching_unit_id": "unit_061",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01095.00s.jpg",
+      "teaching_unit_id": "unit_062",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01107.00s.jpg",
+      "teaching_unit_id": "unit_063",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01128.00s.jpg",
+      "teaching_unit_id": "unit_064",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01137.00s.jpg",
+      "teaching_unit_id": "unit_065",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01146.00s.jpg",
+      "teaching_unit_id": "unit_066",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01167.00s.jpg",
+      "teaching_unit_id": "unit_067",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01170.00s.jpg",
+      "teaching_unit_id": "unit_067",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01185.00s.jpg",
+      "teaching_unit_id": "unit_068",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01194.00s.jpg",
+      "teaching_unit_id": "unit_069",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    },
+    {
+      "frame_path": "data/video_frames/NbhVSLd18YM/frame_01206.00s.jpg",
+      "teaching_unit_id": "unit_070",
+      "success": false,
+      "error": "[Errno 32] Broken pipe"
+    }
+  ],
+  "completed_at": "2026-02-04T22:20:18.393554"
+}

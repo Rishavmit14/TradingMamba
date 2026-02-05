@@ -1,0 +1,141 @@
+{
+  "video_id": "hdnldU2yQMw",
+  "generated_at": "2026-02-05T17:24:50.445271",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 297.35775995254517,
+  "processing_stats": {
+    "teaching_units": 37,
+    "vision_analyses": 52,
+    "concepts_extracted": 9,
+    "total_audio_duration": 666.6600000000001,
+    "total_words": 1689
+  },
+  "concepts": {
+    "market structure": {
+      "llm_summary": "**Market Structure** is a fundamental concept in trading, referring to the internal structure and dynamics of the market. It encompasses various elements such as price cycle, price imbalance, and order blocks, which collectively form the basis for identifying and trading specific market phases. \n\n**Identification**:\n- **Red Circle with a Red Arrow**: Represents a consolidation phase, where prices are moving between two levels. This phase is characterized by a lack of direction and is often used as a trading opportunity.\n- **Orange Circle with an Orange Arrow**: Indicates an expanding phase, where prices are moving higher than the previous high. This phase suggests a potential for further gains and is often used for long-term trades.\n- **Blue Circle with a Blue Arrow**: Shows a retracing phase, where prices are moving back to the previous high. This phase indicates a potential for a correction and is used for short-term trades.\n- **Pink Circle with a Pink Arrow**: Represents a reversing phase, where prices are moving lower than the previous low. This phase suggests a potential for further losses and is often used for short-term trades.\n- **Green Circle with a Green Arrow**: Indicates a consolidation phase, similar to the red circle, but with a lower price level. This phase is used for trading opportunities that are not as risky as those in the expanding phase.\n\n**Trading Application**:\n- **Red Circle with a Red Arrow**: ICT recommends trading this pattern for long-term trades, as it represents a consolidation phase where prices are moving between two levels, providing a stable environment for trading.\n- **Orange Circle with an Orange Arrow**: For short-term trades, the expanding phase is used, as it suggests potential gains and is a good opportunity for quick profits.\n- **Blue Circle with a Blue Arrow**: The retracing phase is used for short-term trades, as it indicates a potential for a correction and is a good opportunity for quick profits.\n- **Pink Circle with a Pink Arrow**: For short-term trades, the reversing phase is used, as it suggests potential losses and is a good opportunity for quick profits.\n- **Green Circle with a Green Arrow**: For trading opportunities that are not as risky as those in the expanding phase, the consolidation phase is used, as it represents a stable environment for trading.\n\n**Key Price Levels**:\n- **Red Circle with a Red Arrow**: Represents a consolidation phase, where prices are moving between two levels.\n- **Orange Circle with an Orange Arrow**: Represents an expanding phase, where prices are moving higher than the previous high.\n- **Blue Circle with a Blue Arrow**: Represents a retracing phase, where prices are moving back to the previous high.\n- **Pink Circle with a Pink Arrow**: Represents a reversing phase, where prices are moving lower than the previous low.\n- **Green Circle with a Green Arrow**: Represents a consolidation phase, similar to the red circle, but with a lower price level.\n\n**Summary**:\nMarket structure is a critical element in trading, as it provides the framework for identifying and trading specific market phases. By understanding the internal structure and dynamics of the market, traders can make informed decisions and capitalize on opportunities. The identification of specific market phases, such as consolidation, expanding, retracing, and reversing, is crucial for successful trading. The key price levels, such as red circles, orange circles, blue circles, and pink circles, are used to identify these phases and make trading decisions.",
+      "generation_time_seconds": 45.09725999832153,
+      "statistics": {
+        "teaching_duration_seconds": 197.47999999999996,
+        "word_count": 489,
+        "teaching_units": 9,
+        "frames_analyzed": 12,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 9
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the availability and ease of buying and selling a financial instrument. It is crucial for identifying potential trading opportunities and determining the direction of price movements. \n\n**Identification**:\n- **Price Imbalance**: The primary indicator of liquidity is the price imbalance, which occurs when the price of a financial instrument is not in line with the supply and demand of the market. This imbalance can be identified by observing the gap between the high and low prices of a security or the spread between the bid and ask prices.\n- **Structure Mapping**: The structure mapping, which is the road labeled \"Structure Mapping,\" helps to identify the underlying structure of the market. This can reveal the potential for liquidity to flow from one side of the market to the other, creating opportunities for traders to enter or exit the market.\n\n**Trading Application**:\n- **Spotting Liquidity**: Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities. These opportunities can arise when the price is not in line with the supply and demand of the market.\n- **Market Analysis**: Liquidity can also be analyzed through market analysis, which involves studying the overall market conditions and identifying areas where liquidity is high or low. This can help traders make informed decisions about when to enter or exit the market.\n\n**Key Price Levels**:\n- **High Price**: The high price is a critical level for identifying potential trading opportunities. Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities.\n- **Low Price**: The low price is also a critical level for identifying potential trading opportunities. Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities.\n- **Market Resistance**: The market resistance is a critical level for identifying potential trading opportunities. Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities.\n- **Market Support**: The market support is a critical level for identifying potential trading opportunities. Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities.\n\n**Conclusion**:\nLiquidity is a critical concept in trading, representing the availability and ease of buying and selling a financial instrument. Traders should look for signs of liquidity, such as price imbalances, to identify potential trading opportunities. Liquidity can also be analyzed through market analysis, which involves studying the overall market conditions and identifying areas where liquidity is high or low.",
+      "generation_time_seconds": 39.480204820632935,
+      "statistics": {
+        "teaching_duration_seconds": 221.42000000000007,
+        "word_count": 554,
+        "teaching_units": 15,
+        "frames_analyzed": 19,
+        "deictic_references": 18
+      },
+      "teaching_types": {
+        "explanation": 15
+      }
+    },
+    "imbalance": {
+      "llm_summary": "The \"IMBALANCE\" concept in the context of trading refers to a situation where the price of a security or asset is not in line with its intrinsic value, typically due to market manipulation or other factors. The term \"imbalance\" refers to the discrepancy between the price of the asset and its intrinsic value, which can be due to various factors such as supply and demand, economic conditions, and other market forces.\n\nTo spot an imbalance on a chart, traders should look for patterns where the price of the asset is not aligned with its intrinsic value. Key visual characteristics to look for include:\n\n1. **Price Imbalance**: The road labeled \"Price Imbalance\" intersects with the \"Structure Mapping\" road, indicating a potential imbalance in the price of the asset.\n2. **Structure Mapping**: The road labeled \"Structure Mapping\" intersects with the \"Price Delivery\" road, suggesting that the structure of the market may not be accurately represented by the price data.\n3. **Annotations and Markings**: The main road or highway is marked with a red circle, and the \"Structure Mapping\" road is marked with a red circle, indicating that these areas are important for identifying potential imbalances.\n\nIntriguingly, the chart analysis provided in the teaching transcript shows a specific chart pattern and annotations that highlight the \"IMBALANCE\" concept. The chart patterns and annotations indicate that the main road or highway intersects with the \"Structure Mapping\" road, suggesting that the structure of the market may not be accurately represented by the price data. This intersection points to potential imbalances in the price of the asset, which traders should consider when formulating their trading strategies.",
+      "generation_time_seconds": 34.63474893569946,
+      "statistics": {
+        "teaching_duration_seconds": 55.97999999999999,
+        "word_count": 141,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a fundamental concept in trading, particularly in the context of intraday trading. It refers to a specific price level or range where there are significant orders, indicating the presence of smart money, which are likely to influence the market. The identification of an order block can be achieved through various visual characteristics, such as curved lines or arrows, which represent the price levels or expansion phases, and straight lines or markers, which indicate the direction or movement of these price levels.\n\n**ORDER BLOCK** plays a crucial role in trading strategies, particularly those involving high probability setups. ICT (Inner Circle Trader) methodology recommends trading this pattern by identifying specific price levels or expansion phases, which are likely to be influenced by smart money. These price levels or expansion phases are important in determining the potential direction and magnitude of the market's response.\n\n**ORDER BLOCK** is a key element in risk management, as it helps traders to set up risk levels and reward levels. By identifying specific price levels or expansion phases, traders can set up a risk to reward ratio, which is a critical aspect of risk management in trading. This allows traders to manage their risk exposure more effectively, ensuring that they are not taking on excessive risk in their trading strategies.\n\n**ORDER BLOCK** is also a fundamental concept in the context of trading strategies, particularly those involving high probability setups. By identifying specific price levels or expansion phases, traders can set up high probability setups, which are likely to result in significant profits. These setups are important in determining the potential profitability of a trading strategy and can help traders to make informed decisions about when to enter and exit a trade.\n\nIn conclusion, **ORDER BLOCK** is a fundamental concept in trading, particularly in the context of intraday trading. It refers to a specific price level or range where there are significant orders, indicating the presence of smart money. The identification of an order block can be achieved through various visual characteristics, such as curved lines or arrows, which represent the price levels or expansion phases, and straight lines or markers, which indicate the direction or movement of these price levels. **ORDER BLOCK** plays a crucial role in trading strategies, particularly those involving high probability setups, and helps traders to manage their risk exposure more effectively, ensuring that they are not taking on excessive risk in their trading strategies.",
+      "generation_time_seconds": 37.40573191642761,
+      "statistics": {
+        "teaching_duration_seconds": 127.66,
+        "word_count": 338,
+        "teaching_units": 6,
+        "frames_analyzed": 7,
+        "deictic_references": 7
+      },
+      "teaching_types": {
+        "explanation": 6
+      }
+    },
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy based on order block theory, where smart money orders are identified on a chart. The strategy involves waiting for market to create an inducement, which helps to create internal liquidity. When market follows these rules, big institutions or smart money will try to reach a specific level to mitigate their pending orders. The key price levels important in SMART MONEY are the expansion phase, which indicates the footprint of smart money.",
+      "generation_time_seconds": 24.8454692363739,
+      "statistics": {
+        "teaching_duration_seconds": 43.72000000000003,
+        "word_count": 120,
+        "teaching_units": 3,
+        "frames_analyzed": 4,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader methodology, involves identifying specific price levels on a chart that indicate the presence of institutional trading. These institutions are likely to distribute their orders, which can create liquidity in the market. The chart analysis shows a specific price level, which is highlighted in red, intersecting with a horizontal line, suggesting a potential entry point for an optimal trade. The annotations or markings highlight the presence of institutional trading, which is a key concept in the trading strategy being explained. The optimal trade entry is identified by the intersection of these price levels, indicating a high probability for trading.",
+      "generation_time_seconds": 25.47602915763855,
+      "statistics": {
+        "teaching_duration_seconds": 83.78000000000003,
+        "word_count": 211,
+        "teaching_units": 5,
+        "frames_analyzed": 5,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 5
+      }
+    },
+    "institutional": {
+      "llm_summary": "The \"INSTITUTIONAL\" concept in the trading methodology taught by the Inner Circle Trader involves identifying and trading with large, institutional investors. The key visual characteristics of this pattern include:\n\n1. **Optimal Trade Entry**: The chart shows a specific price level, which is highlighted in red, indicating a potential entry point for an optimal trade. The red line intersects with a horizontal line, suggesting a potential entry point for an optimal trade.\n\n2. **Identification**: The chart includes annotations or markings indicating the presence of institutional trading. The red line intersects with a horizontal line, suggesting a potential entry point for an optimal trade. The annotations or markings highlight the presence of institutional trading, which is a key concept in the trading strategy being explained.\n\n3. **Trading Application**: The Inner Circle Trader recommends trading with this pattern by entering the market at the highlighted price level, which is a potential entry point for an optimal trade. The annotations or markings highlight the presence of institutional trading, which is a key concept in the trading strategy being explained.\n\n4. **Key Price Levels**: The specific price level highlighted in red is a key price level to enter the market. The annotations or markings highlight the presence of institutional trading, which is a key concept in the trading strategy being explained.\n\nBy following these steps, traders can identify and trade with large, institutional investors, potentially increasing their chances of making a profit.",
+      "generation_time_seconds": 28.7612521648407,
+      "statistics": {
+        "teaching_duration_seconds": 21.460000000000036,
+        "word_count": 63,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "fair value gap": {
+      "llm_summary": "The \"FAIR VALUE GAP\" concept, as taught by the Inner Circle Trader methodology, involves identifying specific chart patterns and annotations that indicate a fair value gap. These patterns include:\n\n1. **Fair Value Gap**: A triangular formation with a red triangle (indicating a fair value gap) and a black triangle (indicating a liquidity gap). The red triangle is positioned above the black triangle, indicating a fair value gap.\n\n2. **Order Block**: A red line extending from the top of the red triangle to the bottom of the black triangle. This line represents a significant order or market action that has been taken out.\n\n3. **Liquidity**: A yellow triangle (indicating liquidity) positioned below the black triangle. This triangle represents a period of low liquidity or low market activity.\n\n4. **Market Structure Shift**: The chart shows a triangular formation with a red triangle and a black triangle, indicating a fair value gap. The red triangle is positioned above the black triangle, indicating a fair value gap.\n\nThe \"FAIR VALUE GAP\" concept is recommended for trading by the Inner Circle Trader methodology. The trading application involves identifying and trading these specific chart patterns and annotations, which can indicate fair value gaps and potential opportunities for trading.",
+      "generation_time_seconds": 27.53001880645752,
+      "statistics": {
+        "teaching_duration_seconds": 23.079999999999984,
+        "word_count": 61,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "mitigation": {
+      "llm_summary": "The MITIGATION concept, as taught by the Inner Circle Trader methodology, involves identifying and mitigating potential risks in trading. This is achieved by monitoring market conditions and identifying patterns that indicate potential changes in market direction or volume. The key visual characteristics of MITIGATION include:\n\n1. **Chart Patterns**:\n   - The chart shows a triangle formation, which is a common trading pattern in technical analysis.\n   - The triangle is marked with a red triangle, indicating a bullish trend.\n   - The triangle is labeled with \"Market Structure Shift\" and \"Inducement,\" suggesting that the market structure is shifting and there is an inducement for traders to enter the market.\n\n2. **Price Levels**:\n   - The chart shows price levels at $$$ and $$$, which are likely important support and resistance levels.\n   - The price level at $$$ is marked with a green triangle, indicating a bullish trend.\n   - The price level at $$$ is marked with a red triangle, indicating a bearish trend.\n\n3. **Key Price Levels**:\n   - The important price levels to consider are $$$ and $$$, which are crucial for identifying potential entry points and risk management strategies.\n\n4. **Mitigation Strategies**:\n   - The Inner Circle Trader methodology recommends using these patterns to identify potential entry points and exit strategies.\n   - The focus is on identifying and mitigating potential risks, such as market direction changes or volume fluctuations, to protect profits and avoid losses.\n\n5. **Application**:\n   - The MITIGATION concept is applied by monitoring market conditions and identifying patterns that indicate potential changes in market direction or volume.\n   - Traders should use these patterns to adjust their trading strategies and risk management approaches, aiming to mitigate potential risks and maximize profits.\n\nBy following MITIGATION, traders can better understand and manage potential risks in their trading, leading to more successful and profitable trading outcomes.",
+      "generation_time_seconds": 33.41762709617615,
+      "statistics": {
+        "teaching_duration_seconds": 11.900000000000034,
+        "word_count": 35,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "video_id": "hRuUCLE7i6U",
+  "generated_at": "2026-02-05T18:26:06.335362",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 138.7586510181427,
+  "processing_stats": {
+    "teaching_units": 20,
+    "vision_analyses": 32,
+    "concepts_extracted": 5,
+    "total_audio_duration": 452.34000000000003,
+    "total_words": 1110
+  },
+  "concepts": {
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading in small banks, which are typically smaller banks operating within a country or region. To spot SMART MONEY on a chart, look for specific visual characteristics such as high-frequency trading, large volume, and high trading volume. The trading application for SMART MONEY involves entering data from small banks into a digital record system, which is then shared with larger banks or state banks. Key price levels for SMART MONEY include high and low prices, and the trading performance is typically hypothesized to be high and low.",
+      "generation_time_seconds": 24.564738035202026,
+      "statistics": {
+        "teaching_duration_seconds": 69.62,
+        "word_count": 174,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "institutional": {
+      "llm_summary": "The \"INSTITUTIONAL\" concept refers to large financial institutions, such as banks, insurance companies, and fund management companies, which are responsible for managing and investing large amounts of money. These institutions are typically involved in trading and financial markets, and they have access to a wide range of financial instruments and markets.\n\nTo spot an institutional pattern on a chart, look for patterns that are associated with large financial institutions, such as high volume, high frequency trading, and high volume, low frequency trading. These patterns are often characterized by high volume, high frequency trading, and high volume, low frequency trading, which are patterns that are associated with large financial institutions.\n\nIn terms of trading application, the \"INSTITUTIONAL\" concept suggests that large financial institutions are likely to be involved in trading and financial markets. Therefore, traders should focus on large financial institutions and their trading activities, and look for opportunities to trade with these institutions.\n\nKey price levels to consider include high volume, high frequency trading, and high volume, low frequency trading. These patterns are associated with large financial institutions and are likely to be profitable trading opportunities.",
+      "generation_time_seconds": 29.17254090309143,
+      "statistics": {
+        "teaching_duration_seconds": 69.62,
+        "word_count": 174,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "order block": {
+      "llm_summary": "The \"ORDER BLOCK\" concept in the context of the Inner Circle Trader methodology involves identifying and trading specific patterns or blocks of orders in the forex market. This behavior is observed in Asian session and is more prevalent in London session, which is known for its volatility. The concept is based on the idea of identifying and trading specific price levels or trading ranges, which can provide opportunities for profitable trading. The chart analysis provided shows horizontal bars representing different trading sessions, with the purple bar representing the London Session, the green bar representing the New York Session, and the yellow bar representing the Sydney Session. The chart does not explicitly show specific price levels, but the horizontal bars are spaced out, suggesting different time periods or trading ranges. The key visual characteristics to spot an ORDER BLOCK are the presence of horizontal bars, the different colored bars representing different sessions, and the spacing of the bars indicating different time periods or trading ranges. The trading application of ORDER BLOCK involves identifying and trading specific price levels or trading ranges, which can provide opportunities for profitable trading.",
+      "generation_time_seconds": 26.589468240737915,
+      "statistics": {
+        "teaching_duration_seconds": 32.06,
+        "word_count": 78,
+        "teaching_units": 2,
+        "frames_analyzed": 4,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading in specific candlestick patterns. The key visual characteristics of these patterns include:\n\n1. **Candle Body Formation**: The candle body is a significant portion of the candle, representing the price range within which the candle is formed. This is where the trade entry is made.\n\n2. **Key Price Levels**: The candle body is often used to identify key price levels, such as the high and low of the day, which can be used to make trades.\n\n3. **Trading Application**: The optimal trade entry is made when the candle body is in a specific range, such as a bullish candle body in a bullish market. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\n4. **Key Price Levels**: The candle body is used to identify key price levels, such as the high and low of the day, which can be used to make trades. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\n5. **Trading Strategy**: The optimal trade entry is a strategy that involves making trades when the candle body is in a specific range, such as a bullish candle body in a bullish market. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\nThe optimal trade entry concept is based on the idea that the price action in the candle body is a good indicator of the direction of the market. By making trades when the price is below the high of the candle body and above the low of the candle body, traders can take advantage of the bullish trend in the market.",
+      "generation_time_seconds": 32.11487007141113,
+      "statistics": {
+        "teaching_duration_seconds": 94.47999999999999,
+        "word_count": 231,
+        "teaching_units": 5,
+        "frames_analyzed": 6,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 5
+      }
+    },
+    "liquidity": {
+      "llm_summary": "LIQUIDITY is a concept in trading that refers to the ease with which a security can be bought or sold. It is a measure of the liquidity of a security, indicating how quickly and easily it can be bought or sold. Liquidity is important in trading because it affects the price of a security and the trading volume of a security. When a security is highly liquid, it means that it is easy to buy or sell, and the price of the security is more stable. When a security is less liquid, it means that it is difficult to buy or sell, and the price of the security is more volatile.",
+      "generation_time_seconds": 25.88265609741211,
+      "statistics": {
+        "teaching_duration_seconds": 85.12000000000006,
+        "word_count": 209,
+        "teaching_units": 3,
+        "frames_analyzed": 6,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    }
+  }
+}

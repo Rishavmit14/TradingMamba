@@ -1,0 +1,869 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.16,
+    "end_time": 35.46,
+    "duration": 25.3,
+    "text": "inducement and engineered liquidity. As you know, sometime a swing has more than one inducement levels, and some students get confused which inducement level we must use, so in this lecture, we will cover this topic. Secondly, we will study about engineered liquidity. Because in last lecture we studied about change of character or shock. To confirm fake change of",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        11.924166666666666,
+        "this"
+      ]
+    ],
+    "confidence": 0.8333333333333334,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00009.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      9.0,
+      12.0
+    ],
+    "word_count": 60
+  },
+  {
+    "id": "unit_001",
+    "start_time": 40.48,
+    "end_time": 68.46,
+    "duration": 27.979999999999997,
+    "text": "liquidity. Free mentorship lectures with premium content available on YouTube playlist in English language. You can also get these lectures in Urdu and Hindi. Please subscribe, like and share this channel to receive new lecture notifications. Now, let's discuss about a swing with multiple inducement levels. Basically, inducement is first valid pullback in a swing.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        42.40981818181818,
+        "this"
+      ]
+    ],
+    "confidence": 0.9090909090909091,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00039.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00042.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00045.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00060.00s.jpg"
+    ],
+    "frame_timestamps": [
+      39.0,
+      42.0,
+      45.0,
+      60.0
+    ],
+    "word_count": 55
+  },
+  {
+    "id": "unit_002",
+    "start_time": 69.44000000000001,
+    "end_time": 80.12,
+    "duration": 10.679999999999993,
+    "text": "Sometime a swing can have single inducement and sometime more than one. I mean two or three inducement levels. Few students sent me an email that which inducement to choose.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00069.00s.jpg"
+    ],
+    "frame_timestamps": [
+      69.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_003",
+    "start_time": 81.1,
+    "end_time": 150.1,
+    "duration": 69.0,
+    "text": "So, in this lecture we will cover the details that which inducement need to be considered to plan a sell or buy setup. Before discussing the high probability inducement, let me tell you that there are two type of inducement levels. First one is minor inducement which is created in result of shorter pullback. Second one is major inducement level which is created by deeper pullback. Let's understand these points with simple schematic diagrams. In this diagram, if you notice that this first one is deeper pullback as compared to others. So, we will mark this level as major inducement level. These two are short pullbacks as compared to this one. So we will mark them as minor inducements levels. Here is another diagram. There are multiple inducement levels in this swing. Now you can understand that this is our minor inducement. This is our major inducement. And this is our minor inducement level. Similarly, in this diagram, first two are our minor inducement levels and this last one is our major inducement level.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        81.21747126436782,
+        "this"
+      ],
+      [
+        83.15574712643678,
+        "here"
+      ],
+      [
+        85.74011494252873,
+        "notice"
+      ]
+    ],
+    "confidence": 0.28735632183908044,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00081.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00084.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      81.0,
+      84.0,
+      87.0
+    ],
+    "word_count": 174
+  },
+  {
+    "id": "unit_004",
+    "start_time": 151.0,
+    "end_time": 160.88,
+    "duration": 9.879999999999995,
+    "text": "Now, you can understand that a swing with multiple inducements levels, it can has both minor and major inducements. Remember that major inducement levels are",
+    "detected_concepts": [],
+    "teaching_type": "summary",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00150.00s.jpg"
+    ],
+    "frame_timestamps": [
+      150.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_005",
+    "start_time": 160.88,
+    "end_time": 168.56,
+    "duration": 7.680000000000007,
+    "text": "high probability inducement levels. You can plan your buy or sell setups on any time by considering the high probability setups.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00162.00s.jpg"
+    ],
+    "frame_timestamps": [
+      162.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_006",
+    "start_time": 170.8,
+    "end_time": 181.0,
+    "duration": 10.199999999999989,
+    "text": "Now, question is if a swing has only one inducement level? Or, if a swing has multiple inducement levels but they has no major difference in pullback size.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00171.00s.jpg"
+    ],
+    "frame_timestamps": [
+      171.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_007",
+    "start_time": 182.0,
+    "end_time": 190.62,
+    "duration": 8.620000000000005,
+    "text": "Note here, these two inducement levels look like same size, similarly, these three inducements are relatively same size inducement levels.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        182.069,
+        "here"
+      ],
+      [
+        182.414,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00183.00s.jpg"
+    ],
+    "frame_timestamps": [
+      183.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_008",
+    "start_time": 191.6,
+    "end_time": 201.72,
+    "duration": 10.120000000000005,
+    "text": "Now you can take notes that whenever a swing has a single inducement level, or multiple inducements of same size, then we will consider the first one has high probability inducement.",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00192.00s.jpg"
+    ],
+    "frame_timestamps": [
+      192.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_009",
+    "start_time": 204.3,
+    "end_time": 229.74,
+    "duration": 25.439999999999998,
+    "text": "Now, let's check some real market sample size to understand the concept of high probability inducements. Here, this is euro-dollar chart on H1 time frame. If you notice that this first one is shorter pullback as compared to these two pullbacks. So, we will mark this first one as minor inducement level. Similarly, this shorter pullback is also our minor pullback level.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        205.31451612903226,
+        "this"
+      ],
+      [
+        205.25483870967744,
+        "here"
+      ],
+      [
+        205.91129032258067,
+        "notice"
+      ]
+    ],
+    "confidence": 0.8064516129032259,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00204.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00207.00s.jpg"
+    ],
+    "frame_timestamps": [
+      204.0,
+      207.0
+    ],
+    "word_count": 62
+  },
+  {
+    "id": "unit_010",
+    "start_time": 230.64,
+    "end_time": 238.06,
+    "duration": 7.420000000000016,
+    "text": "Now if you are noticing this pullback, this is deeper than other two. So we will mark this level as major inducement level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        230.9073913043478,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00231.00s.jpg"
+    ],
+    "frame_timestamps": [
+      231.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_011",
+    "start_time": 239.02,
+    "end_time": 253.68,
+    "duration": 14.659999999999997,
+    "text": "Now, let's check price reaction on these levels. Price started moved down, took this first inducement and reacted aggressively. But later on price moved down to take out this major inducement level and moved into major direction.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        239.8245945945946,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00240.00s.jpg"
+    ],
+    "frame_timestamps": [
+      240.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_012",
+    "start_time": 254.64,
+    "end_time": 261.98,
+    "duration": 7.340000000000032,
+    "text": "Now notice that minor inducement produced a minor move but this major inducement, this inducement level created a major price move.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        255.2638095238095,
+        "this"
+      ],
+      [
+        254.70238095238093,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00255.00s.jpg"
+    ],
+    "frame_timestamps": [
+      255.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_013",
+    "start_time": 262.86,
+    "end_time": 295.32,
+    "duration": 32.45999999999998,
+    "text": "Now take notes that magnitude of price move after taking inducement, depends on the size of inducement. Minor inducement leads to minor move and major inducement can cause major price move. Here is another real market sample size. This is pound dollar chart on H1 time frame. If you check from this high, this swing has many inducement levels. This is inducement, this is another inducement, similarly here, this one, there are multiple minor inducement levels.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        265.165,
+        "this"
+      ],
+      [
+        264.7403947368421,
+        "here"
+      ]
+    ],
+    "confidence": 0.6578947368421053,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00264.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00276.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00279.00s.jpg"
+    ],
+    "frame_timestamps": [
+      264.0,
+      276.0,
+      279.0
+    ],
+    "word_count": 76
+  },
+  {
+    "id": "unit_014",
+    "start_time": 296.34,
+    "end_time": 305.76,
+    "duration": 9.420000000000016,
+    "text": "Now, check this major pullback, a deeper pullback than other ones, so we will mark this as major inducement level which is also high probability inducement.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        296.46,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00297.00s.jpg"
+    ],
+    "frame_timestamps": [
+      297.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_015",
+    "start_time": 306.48,
+    "end_time": 339.82,
+    "duration": 33.339999999999975,
+    "text": "Let's check price reaction now. Notice that price made a major move after taking out this high probability inducement level. Take notes that we will use mostly high probability major inducement levels to design out trading setups. Now, as we discussed that if a price swing has multiple inducement levels of same size, then what happened? Check this sample size, note that this swing has many inducement levels of same size. All these pullbacks has no major difference in magnitude,",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        307.38375,
+        "this"
+      ],
+      [
+        306.78125,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00306.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00324.00s.jpg"
+    ],
+    "frame_timestamps": [
+      306.0,
+      324.0
+    ],
+    "word_count": 80
+  },
+  {
+    "id": "unit_016",
+    "start_time": 340.4,
+    "end_time": 351.12,
+    "duration": 10.720000000000027,
+    "text": "so we will mark them as equally important inducement levels. Now let's check price reaction here. In such case, when all inducement levels are of same size,",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        341.26666666666665,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00339.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00342.00s.jpg"
+    ],
+    "frame_timestamps": [
+      339.0,
+      342.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_017",
+    "start_time": 351.6,
+    "end_time": 361.88,
+    "duration": 10.279999999999973,
+    "text": "then we will consider first one as high probability inducement level to design our setups. I hope now can have clear understanding that how to use a swing with multiple inducement levels.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00351.00s.jpg"
+    ],
+    "frame_timestamps": [
+      351.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_018",
+    "start_time": 363.92,
+    "end_time": 377.46,
+    "duration": 13.539999999999964,
+    "text": "Our next topic of high importance is engineered liquidity. In previous lecture, we studied about change of character. To find a fake change of character, we must have discrete knowledge of engineered liquidity.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00363.00s.jpg"
+    ],
+    "frame_timestamps": [
+      363.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_019",
+    "start_time": 378.58,
+    "end_time": 386.08,
+    "duration": 7.5,
+    "text": "Let's study about it. This is just an overview of liquidity as we have covered this topic in complete details in second",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        378.7963636363636,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00378.00s.jpg"
+    ],
+    "frame_timestamps": [
+      378.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_020",
+    "start_time": 391.8,
+    "end_time": 407.98,
+    "duration": 16.180000000000007,
+    "text": "stop losses, by limits, by stops and sell orders are part of liquidity. Similarly, equal highs and equal lows, and retail trend lines are also liquidity. For complete understanding, you can watch second lecture in playlist.",
+    "detected_concepts": [
+      "liquidity",
+      "equal highs",
+      "equal lows"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        393.72027777777777,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00393.00s.jpg"
+    ],
+    "frame_timestamps": [
+      393.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_021",
+    "start_time": 409.74,
+    "end_time": 429.74,
+    "duration": 20.0,
+    "text": "Let's study about engineered liquidity. Engineered liquidity is an area where retail support and resistance-based traders are being trapped by smart money to create liquidity. Marlotte designs some fake support and resistance levels to trap retail traders. To understand this, we have this simple schematic diagram.",
+    "detected_concepts": [
+      "liquidity",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        412.41065217391304,
+        "this"
+      ],
+      [
+        410.49326086956523,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00411.00s.jpg"
+    ],
+    "frame_timestamps": [
+      411.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_022",
+    "start_time": 430.56,
+    "end_time": 440.08,
+    "duration": 9.519999999999982,
+    "text": "Note that market created so many high and lows. Here market made a move to create a high. Price came down and showed some reaction on this level.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        431.9064285714286,
+        "this"
+      ],
+      [
+        431.0260714285714,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00432.00s.jpg"
+    ],
+    "frame_timestamps": [
+      432.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_023",
+    "start_time": 441.1,
+    "end_time": 450.2,
+    "duration": 9.099999999999966,
+    "text": "Now, retail traders will consider it strong support as price tested this level two times. He will look to buy here and executed their orders here.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        441.71769230769235,
+        "this"
+      ],
+      [
+        442.223076923077,
+        "here"
+      ],
+      [
+        442.05461538461543,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00441.00s.jpg"
+    ],
+    "frame_timestamps": [
+      441.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_024",
+    "start_time": 451.08,
+    "end_time": 486.3,
+    "duration": 35.22000000000003,
+    "text": "This is point of consideration now that such levels are engineered liquidity to trap retail traders. Price moved higher and correcting itself in a channel form. Here pattern-based retail traders will consider it a bullish flag and they will execute their orders here. Price made a move to higher side to manipulate retail traders mind. Market convinced them to execute more orders at this level considering a trend continuation breakout. Now market has created so much liquidity at these points, this fake support level and this one, trend line-based liquidity.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        451.08,
+        "this"
+      ],
+      [
+        452.7006666666667,
+        "here"
+      ]
+    ],
+    "confidence": 0.5555555555555556,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00450.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00453.00s.jpg"
+    ],
+    "frame_timestamps": [
+      450.0,
+      453.0
+    ],
+    "word_count": 90
+  },
+  {
+    "id": "unit_025",
+    "start_time": 487.38,
+    "end_time": 514.68,
+    "duration": 27.299999999999955,
+    "text": "Now, market took a quick dip, an efficient and fast move to grab all of these liquidity and moved higher. Have you noticed that how price manipulated retail traders mind to create a engineered liquidity? Similarly, check this top, this is another engineered liquidity level that's why market made a quick move to higher side to grab this liquidity. I hope now have a good concept of engineered liquidity and how market move by using these levels.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        489.52311688311687,
+        "this"
+      ],
+      [
+        488.6542857142857,
+        "notice"
+      ]
+    ],
+    "confidence": 0.6493506493506493,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00486.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00489.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0,
+      489.0
+    ],
+    "word_count": 77
+  },
+  {
+    "id": "unit_026",
+    "start_time": 516.78,
+    "end_time": 532.78,
+    "duration": 16.0,
+    "text": "Let's study a real market sample size for better understanding. This is a chart and price created this low. Check this level, market created a retail support level to trap them for early buying. This retail support is basically an engineered",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        517.3678048780488,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00516.00s.jpg"
+    ],
+    "frame_timestamps": [
+      516.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_027",
+    "start_time": 539.2,
+    "end_time": 585.24,
+    "duration": 46.039999999999964,
+    "text": "Now, check this level, this is another engineered liquidity level which trapped retail traders to sell here. Noticed, how price reacted at this point, grabbed this buy side liquidity before moving down. Now, check this level, this is another engineered liquidity level which trapped retail traders to buy here. Retail traders consider engineered liquidity level as support and resistance that's why they mostly become part of market trap. Here, price again grabbed sell side liquidity before making a bullish move. Now, where is price heading next? Check these levels. This is our equal highs or engineered liquidity. Mark made a move and grabbed this liquidity and dipped down.",
+    "detected_concepts": [
+      "liquidity",
+      "equal highs"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        539.3255555555556,
+        "this"
+      ],
+      [
+        540.2044444444444,
+        "here"
+      ],
+      [
+        540.2672222222222,
+        "notice"
+      ]
+    ],
+    "confidence": 0.9259259259259258,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00540.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00561.00s.jpg"
+    ],
+    "frame_timestamps": [
+      540.0,
+      561.0
+    ],
+    "word_count": 108
+  },
+  {
+    "id": "unit_028",
+    "start_time": 585.84,
+    "end_time": 640.52,
+    "duration": 54.67999999999995,
+    "text": "Now, I would ask you where price will target next? Noticed anything? Check this level, this is another engineered liquidity level created by market. So price will target these levels. Notice that how price reacted at this point, again grabbed this liquidity and made a strong bullish move. Now, can you tell me where price is heading now? Check these levels, price already had created this level to trap retail traders, which is engineered liquidity. Price hunted down this liquidity, absorbed this liquidity and moved down. Hopefully, this concept was logical and interesting for you. Price move from one pool of liquidity to another liquidity pool. When price grab liquidity from one side, then mostly price target opposite side of liquidity pool. We have studied this chart on",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        586.6311718750001,
+        "this"
+      ],
+      [
+        586.2051562500001,
+        "here"
+      ],
+      [
+        586.44859375,
+        "notice"
+      ]
+    ],
+    "confidence": 0.390625,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00585.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00588.00s.jpg"
+    ],
+    "frame_timestamps": [
+      585.0,
+      588.0
+    ],
+    "word_count": 128
+  },
+  {
+    "id": "unit_029",
+    "start_time": 640.52,
+    "end_time": 677.1,
+    "duration": 36.58000000000004,
+    "text": "base on support and resistance s and our retail traders approach. Now let's observe this same chart from another angle. This is same chart but we will check it with trend line based trader approach. A different approach other than support and resistance based traders. A trend line trader will find a bullish or bearish channel to find its entry point. For example, this is a rising bearish flag, trend line retail trader will expect that price will move down to this bottom. He will execute trades at this level ADN later on, after this breakout, retail",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        641.319587628866,
+        "this"
+      ]
+    ],
+    "confidence": 0.5154639175257733,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00642.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00675.00s.jpg"
+    ],
+    "frame_timestamps": [
+      642.0,
+      675.0
+    ],
+    "word_count": 97
+  },
+  {
+    "id": "unit_030",
+    "start_time": 677.1,
+    "end_time": 711.06,
+    "duration": 33.95999999999992,
+    "text": "traders will add more orders here. Be careful, such orders are part of engineered liquidity. Notice that how price reacted at these levels, price grabbed all liquidity from both sides and moved into opposite direction. So, do not trade like a retail trader. Be a true smart money traders, follow these rules, carry these concepts to be a high profitable trader. Take notes that we will use this engineered liquidity concept in next lecture, to differentiate between valid and invalid or fake change of characters.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        681.1436470588236,
+        "this"
+      ],
+      [
+        677.4017647058823,
+        "here"
+      ],
+      [
+        678.005294117647,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00678.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00681.00s.jpg"
+    ],
+    "frame_timestamps": [
+      678.0,
+      681.0
+    ],
+    "word_count": 85
+  },
+  {
+    "id": "unit_031",
+    "start_time": 713.1,
+    "end_time": 729.1,
+    "duration": 16.0,
+    "text": "If you have any question related to this lecture or previous lectures, feel free to contact us on this email id, or you can contact us on Instagram or Telegram. Subscribe this channel, until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        713.4939534883721,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00714.00s.jpg"
+    ],
+    "frame_timestamps": [
+      714.0
+    ],
+    "word_count": 43
+  }
+]

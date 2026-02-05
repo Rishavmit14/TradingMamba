@@ -1,0 +1,99 @@
+{
+  "video_id": "DabKey96qmE",
+  "generated_at": "2026-02-04T19:19:53.027691",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 557.2369611263275,
+  "processing_stats": {
+    "teaching_units": 18,
+    "vision_analyses": 32,
+    "concepts_extracted": 6,
+    "total_audio_duration": 502.2999999999999,
+    "total_words": 1257
+  },
+  "concepts": {
+    "higher high": {
+      "llm_summary": "### Higher High in ICT Trading\n\n#### Definition\nA higher high is a price point where the market closes above the previous high, indicating a new high in the price action. This pattern is typically seen in bullish market conditions, where the market is moving higher and creating new highs.\n\n#### Identification\nTo spot a higher high, look for a price point where the market closes above the previous high. This can be identified by observing the chart and identifying the highest price point that is followed by a close above the previous high. The key visual characteristics include:\n- A price point where the market closes above the previous high.\n- The market is in a bullish trend.\n- The market is creating new highs.\n- The market is not in a bearish trend.\n\n#### Trading Application\nIn a bullish trend, higher highs are considered valid higher highs. They indicate a new high in the price action, which is a positive sign for traders. Higher lows, on the other hand, are considered valid higher lows, indicating a new low in the price action, which is also a positive sign for traders.\n\n#### Key Price Levels\nThe higher highs and lower lows are important price levels in trading. They can be used to identify potential support and resistance levels, which can be used to make trading decisions. The higher highs and lower lows can also be used to identify potential buy and sell signals, which can be used to enter or exit trades.\n\n#### Conclusion\nHigher highs and lower lows are critical price patterns in trading, and they can be used to identify potential support and resistance levels, as well as potential buy and sell signals. Traders should monitor these patterns closely and use them as tools to make informed trading decisions.",
+      "generation_time_seconds": 96.53515601158142,
+      "statistics": {
+        "teaching_duration_seconds": 278.17999999999984,
+        "word_count": 714,
+        "teaching_units": 9,
+        "frames_analyzed": 17,
+        "deictic_references": 15
+      },
+      "teaching_types": {
+        "explanation": 9
+      }
+    },
+    "market structure": {
+      "llm_summary": "**Market Structure** is a fundamental concept in trading that refers to the underlying structure or framework of a market, which helps traders identify and analyze market trends. It involves identifying key price levels, trend lines, and annotations on a chart to understand the direction and magnitude of market movements.\n\n**Identification**:\n- **Trend Lines**: Key upward and downward trend lines are critical for identifying market structure. These lines represent the direction of the market's movement.\n- **Price Levels**: Specific price levels, such as \"HH\" (high high) and \"LL\" (low low), are important for identifying the strength and direction of the market.\n- **Annotations and Markings**: Specific annotations and markings, such as arrows and arrows pointing upwards or downwards, help in identifying the direction and magnitude of the market's movement.\n\n**Trading Application**:\n- **Trading Strategy**: ICT recommends trading this pattern by identifying key price levels and trend lines, which can help in identifying potential buying and selling opportunities.\n- **Risk Management**: The chart patterns can also be used to manage risk by identifying potential support and resistance levels.\n- **Profit Potential**: The chart patterns can provide insights into potential profit opportunities, such as when the market closes above the high high and below the low low.\n\n**Key Price Levels**:\n- **HH (High High)**: Represents the highest price in the chart.\n- **LL (Low Low)**: Represents the lowest price in the chart.\n- **HH and LL**: Represents the high and low of the chart, respectively.\n\n**Summary**:\nMarket structure is a fundamental concept in trading that involves identifying key price levels, trend lines, and annotations on a chart to understand the direction and magnitude of market movements. By identifying these key elements, traders can identify potential buying and selling opportunities, manage risk, and increase their winning ratio.",
+      "generation_time_seconds": 77.55068802833557,
+      "statistics": {
+        "teaching_duration_seconds": 51.57999999999994,
+        "word_count": 122,
+        "teaching_units": 3,
+        "frames_analyzed": 5,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a specific trading pattern identified by the Inner Circle Trader (ICT) methodology. It involves a specific price level, typically a key resistance or support level, where traders can enter a trade. The pattern is characterized by a high probability entry, which is based on the overall direction of the market trend.\n\n**Identification**:\n- Trend mapping: The chart shows a trend mapping, which helps traders identify the overall direction of the market.\n- Price levels: The chart includes specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- Annotations, markings, or highlighted areas: The chart contains annotations, markings, or highlighted areas that provide additional context or information, such as specific price points, candlestick patterns, or other technical indicators.\n\n**Trading Application**:\n- ICT recommends trading the **ORDER BLOCK** pattern by entering a trade at a specific price level, typically a key resistance or support level, and holding the position until the market moves in the opposite direction, which is a high probability entry.\n- The pattern is characterized by a high probability entry, which is based on the overall direction of the market trend.\n\n**Key Price Levels**:\n- The **ORDER BLOCK** pattern is characterized by specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- The pattern is based on the overall direction of the market trend, which helps traders to identify potential entry and exit points.\n\n**Summary**:\n- **ORDER BLOCK** is a specific trading pattern identified by the Inner Circle Trader (ICT) methodology, characterized by a high probability entry based on the overall direction of the market trend.\n- The pattern involves entering a trade at a specific price level, typically a key resistance or support level, and holding the position until the market moves in the opposite direction, which is a high probability entry.\n- The pattern is characterized by specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- The pattern is based on the overall direction of the market trend, which helps traders to identify potential entry and exit points.",
+      "generation_time_seconds": 84.64869785308838,
+      "statistics": {
+        "teaching_duration_seconds": 14.5,
+        "word_count": 30,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the ability of a financial instrument to be bought and sold at a price close to its current price. It is a measure of the liquidity of a financial instrument, indicating how easily it can be bought or sold at a given price. The higher the liquidity, the more easily the instrument can be bought or sold, and the lower the liquidity, the more difficult it is to buy or sell the instrument.\n\n**Identification of LIQUIDITY on a chart**:\n- **Key Visual Characteristics**:\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and",
+      "generation_time_seconds": 118.44818568229675,
+      "statistics": {
+        "teaching_duration_seconds": 108.9600000000001,
+        "word_count": 259,
+        "teaching_units": 3,
+        "frames_analyzed": 6,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "manipulation": {
+      "llm_summary": "**Definition of Manipulation:**\n\nManipulation refers to the actions of traders or market participants who create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Identification of Manipulation on a Chart:**\n\nTo spot manipulation on a chart, look for specific price patterns and key visual characteristics. Key patterns include:\n\n1. **Higher Highs (HH)**: The green line (upward trend) crosses over the red line (downward trend).\n2. **Lower Lows (LL)**: The red line crosses over the green line.\n3. **Manipulation Indicators**: The term \"manipulation\" is used to describe actions that create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Trading Application of Manipulation:**\n\nWhen identifying manipulation on a chart, traders should consider the following:\n\n1. **Market Sentiment**: Analyze the overall market sentiment and the direction of the price. Manipulation can occur when market sentiment is strong and the price is being manipulated to support that sentiment.\n2. **Technical Indicators**: Use technical indicators to identify potential manipulation. These can include moving averages, Fibonacci retracement levels, and other technical signals.\n3. **Market Patterns**: Look for specific market patterns that are consistent with manipulation. For example, higher highs and lower lows can indicate manipulation.\n4. **Market Reactions**: Monitor the market's reaction to manipulation. Manipulation can lead to significant price movements, which traders should consider when making trading decisions.\n\n**Key Price Levels:**\n\nKey price levels to consider in identifying manipulation include:\n\n1. **Higher Highs (HH)**: The green line (upward trend) crosses over the red line (downward trend).\n2. **Lower Lows (LL)**: The red line crosses over the green line.\n3. **Manipulation Indicators**: The term \"manipulation\" is used to describe actions that create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Summary:**\n\nManipulation refers to the actions of traders or market participants who create or manipulate price movements to gain an advantage. To identify manipulation on a chart, traders should look for specific price patterns and key visual characteristics, such as higher highs and lower lows. When identifying manipulation, traders should consider market sentiment, technical indicators, and market reactions. Key price levels to consider include higher highs and lower lows, as well as manipulation indicators.",
+      "generation_time_seconds": 90.02470016479492,
+      "statistics": {
+        "teaching_duration_seconds": 42.69999999999999,
+        "word_count": 122,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading on specific price patterns. The key visual characteristics of SMART MONEY are:\n\n1. **Must Close Below Inducement**: The chart shows a price level below which the market must close to trigger the SMART MONEY strategy. This is a key price level that traders use to identify potential buying opportunities.\n\n2. **Above High**: The SMART MONEY strategy also involves identifying price levels above which the market must close to trigger the strategy. This is a key price level that traders use to identify potential selling opportunities.\n\n3. **Candle Closing Above Recent High**: The SMART MONEY strategy involves trading on candlestick patterns where the market closes above a recent high. This is a common strategy for traders to identify potential buying opportunities.\n\n4. **Market as Liquidity Sweep**: The SMART MONEY strategy involves trading on market movements that create liquidity. This is a key price level that traders use to identify potential buying opportunities.\n\n5. **Risk Management**: SMART MONEY involves risk management, as traders must be aware of potential risks associated with using an Internet-based trading system. This includes the risk of hardware failure, software failure, and Internet connection issues.\n\n6. **Trading Application**: The SMART MONEY strategy involves trading on specific price patterns, such as closing below an inducement, above a high, or closing above a recent high. Traders use these patterns to identify potential buying or selling opportunities.\n\n7. **Key Price Levels**: The SMART MONEY strategy involves identifying specific price levels, such as closing below an inducement, above a high, or closing above a recent high, to trigger the strategy. These price levels are important for traders to identify potential buying or selling opportunities.\n\nBy following these key visual characteristics and identifying specific price patterns, traders can use the SMART MONEY strategy to identify potential buying or selling opportunities in the forex market.",
+      "generation_time_seconds": 86.302011013031,
+      "statistics": {
+        "teaching_duration_seconds": 72.94,
+        "word_count": 173,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    }
+  }
+}

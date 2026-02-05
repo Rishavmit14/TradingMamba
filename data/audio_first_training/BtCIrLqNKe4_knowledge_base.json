@@ -1,0 +1,183 @@
+{
+  "video_id": "BtCIrLqNKe4",
+  "generated_at": "2026-02-04T19:33:03.782591",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 781.1608331203461,
+  "processing_stats": {
+    "teaching_units": 38,
+    "vision_analyses": 49,
+    "concepts_extracted": 12,
+    "total_audio_duration": 599.9399999999998,
+    "total_words": 1588
+  },
+  "concepts": {
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the ease with which assets can be bought and sold. It is crucial for market participants to identify and utilize liquidity to execute trades effectively. \n\n**Identification**:\n- Liquidity can be identified by horizontal lines on a chart, which represent stop losses and pending orders. These lines indicate areas where these types of orders are resting.\n- Retail traders often mark these horizontal lines as support and resistance levels, which are important for identifying potential buying and selling opportunities.\n- Trend lines, such as double tops and bottoms, can also act as liquidity pools, as they represent areas where the market is trying to break even or maintain momentum.\n\n**Trading Application**:\n- Retail traders can use these liquidity patterns to identify potential entry points for trades. By identifying support and resistance levels, they can enter trades when the market is near these levels, taking advantage of the market's willingness to trade at these levels.\n- Traders can also use these patterns to identify potential exit points, as they can exit trades when the market is near these levels, taking advantage of the market's willingness to trade at these levels.\n\n**Key Price Levels**:\n- The horizontal lines at specific price levels, such as 100, 200, 300, and 400, are important support and resistance levels. These levels can act as important price points for traders to identify potential entry and exit points.\n- Retail traders can use these levels to identify potential entry points for trades, as they can enter trades when the market is near these levels, taking advantage of the market's willingness to trade at these levels.\n- Traders can also use these levels to identify potential exit points, as they can exit trades when the market is near these levels, taking advantage of the market's willingness to trade at these levels.\n\n**Conclusion**:\nLiquidity is a critical concept in trading, representing the ease with which assets can be bought and sold. Retail traders can use liquidity patterns to identify potential entry and exit points for trades, taking advantage of the market's willingness to trade at these levels. Understanding and identifying liquidity can help traders execute trades more effectively and profitably.",
+      "generation_time_seconds": 81.8399019241333,
+      "statistics": {
+        "teaching_duration_seconds": 147.03999999999996,
+        "word_count": 383,
+        "teaching_units": 9,
+        "frames_analyzed": 11,
+        "deictic_references": 11
+      },
+      "teaching_types": {
+        "explanation": 9
+      }
+    },
+    "equal highs": {
+      "llm_summary": "The \"EQUAL HIGHS\" concept, as taught by the Inner Circle Trader methodology, involves identifying and trading patterns that occur at equal highs or equal lows, which are considered to be support and resistance levels, respectively. These patterns are identified by retail traders and marked as such. The key visual characteristics of equal highs or equal lows are the price points where the price action is equal, indicating a lack of direction or momentum. The trading application of equal highs or equal lows involves identifying these patterns and using them as entry and exit points for trades, aiming to profit from the price action. The important price levels to consider in trading equal highs or equal lows are the highs and lows themselves, as well as the price points where the price action is equal. The leverage factor in forex trading, which can affect the price action and the potential for profit, is also considered in the trading strategy.",
+      "generation_time_seconds": 52.875909090042114,
+      "statistics": {
+        "teaching_duration_seconds": 26.240000000000002,
+        "word_count": 64,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "equal lows": {
+      "llm_summary": "The \"EQUAL LOWS\" concept, as taught by the Inner Circle Trader methodology, involves identifying and trading the pattern of equal lows, which are double bottom or double bottom patterns. These patterns are identified by retail traders as support and resistance, respectively. The concept emphasizes the importance of identifying and trading these patterns, as they represent significant support and resistance levels in the market. The key visual characteristics of equal lows include the formation of two parallel lines, one above the other, forming a double bottom or double bottom pattern. The trading application of equal lows involves identifying these patterns and taking positions based on the proximity to these levels, as they represent potential support or resistance levels. The key price levels to consider in trading equal lows include the highs and lows of the pattern, as well as the support and resistance levels identified by retail traders. The leverage factor in forex trading, which can affect the price movements and potential losses, is also a consideration in trading equal lows.",
+      "generation_time_seconds": 61.53999209403992,
+      "statistics": {
+        "teaching_duration_seconds": 26.240000000000002,
+        "word_count": 64,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "buy stops": {
+      "llm_summary": "The \"BUY STOPS\" concept in the context of trading refers to the practice of setting buy stops above the current price range. This involves placing buy orders above the current price level, which can help traders protect their positions and prevent losses if the price moves higher. The concept is based on the idea that by setting buy stops above the current price, traders can limit potential losses and increase their chances of making a profit if the price moves higher. The chart analysis provided shows specific chart patterns and annotations, such as \"Double Top\" and \"Breakout Trading,\" which are common in the trading market. The \"BUY STOPS\" concept is recommended by traders who employ breakout trading strategies, as it allows them to take advantage of potential price movements.",
+      "generation_time_seconds": 61.47568202018738,
+      "statistics": {
+        "teaching_duration_seconds": 8.900000000000006,
+        "word_count": 27,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "sell stops": {
+      "llm_summary": "The \"SELL STOPS\" concept in the context of trading, as taught by the Inner Circle Trader methodology, involves setting stop-loss orders below the current price of the trade. This strategy is commonly used by breakout traders to protect profits and limit potential losses. The concept is based on identifying and taking advantage of price patterns, such as double bottoms, which are bullish reversals. The key visual characteristics to spot a sell stop are the midpoint of the double bottom, the midpoint of the pattern, and the bottom of the double bottom. The sell stop is typically set below these levels to prevent further losses if the price moves lower. The Inner Circle Trader recommends trading this pattern by setting sell stops below the midpoint of the double bottom, as this will protect the trade and limit potential losses.",
+      "generation_time_seconds": 56.31423473358154,
+      "statistics": {
+        "teaching_duration_seconds": 8.260000000000005,
+        "word_count": 22,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading in specific patterns on a chart. The key visual characteristics to spot are equal highs and equal lows, which indicate potential gains or losses. The trading application involves identifying these patterns and taking positions when they occur, focusing on important price levels such as highs and lows. The key price levels to consider are the higher highs and lower lows, which are important points where the price tends to pause or reverse direction. The chart patterns and annotations on the chart are used to identify these patterns and make trading decisions.",
+      "generation_time_seconds": 54.807776927948,
+      "statistics": {
+        "teaching_duration_seconds": 167.4200000000001,
+        "word_count": 477,
+        "teaching_units": 9,
+        "frames_analyzed": 11,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 9
+      }
+    },
+    "manipulation": {
+      "llm_summary": "The \"MANIPULATION\" concept in the context of the teaching transcript and chart analysis involves leveraging the actions of traders to create market conditions that benefit specific trading strategies. Here's a comprehensive summary:\n\n1. **Definition**: Manipulation refers to the manipulation of market conditions to create favorable market conditions for specific trading strategies, often at the expense of other traders.\n\n2. **Identification**: To spot manipulation on a chart, look for patterns where the market is exhibiting high or low price action, which can indicate a period of high or low trading volume. For example, equal highs or equal lows can indicate periods of high or low price action, respectively. Additionally, retail support and resistance levels can be important indicators, as they represent areas where traders are considering buying or selling based on the price action.\n\n3. **Trading Application**: ICT recommends trading the \"MANIPULATION\" pattern by focusing on the high or low price action periods, as these can create opportunities for specific trading strategies. Retail traders should consider the retail support and resistance levels, as these can provide entry points for buying or selling based on the price action. The breakeven level can also be important, as traders are considering buying or selling based on the price action.\n\n4. **Key Price Levels**: The key price levels to consider in the \"MANIPULATION\" pattern are the equal highs and equal lows, as these can indicate periods of high or low trading volume. The retail support and resistance levels, as well as the breakeven level, can also be important indicators.\n\n5. **Key Visual Characteristics**:\n   - **Equal Highs**: High price action periods.\n   - **Equal Lows**: Low price action periods.\n   - **Retail Support**: Support level for retail traders.\n   - **Retail Resistance**: Resistance level for retail traders.\n   - **Breakeven**: Level where traders are considering buying or selling based on the price action.\n\n6. **Key Trading Strategies**:\n   - **High Price Action**: Focus on high price action periods for specific trading strategies.\n   - **Retail Support**: Consider buying at retail support levels.\n   - **Retail Resistance**: Consider selling at retail resistance levels.\n   - **Breakeven**: Consider buying or selling based on the breakeven level.\n\n7. **Key Considerations**:\n   - **Risk Management**: Be aware of the potential risks associated with manipulation, such as the possibility of market manipulation.\n   - **Market Movement**: Be prepared for any market movement, as manipulation can create opportunities for specific trading strategies.\n   - **Market Volatility**: Be aware of the potential for market volatility, as manipulation can create opportunities for specific trading strategies.\n   - **Market Timing**: Be aware of the potential for market timing, as manipulation can create opportunities for specific trading strategies.\n\nBy focusing on these key visual characteristics and trading strategies, traders can effectively identify and trade the \"MANIPULATION\" pattern, leveraging the actions of traders to create favorable market conditions for specific trading strategies.",
+      "generation_time_seconds": 87.76147890090942,
+      "statistics": {
+        "teaching_duration_seconds": 14.879999999999995,
+        "word_count": 39,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading with patterns of liquidity and smart money. The term \"liquidity\" refers to the ease with which a trade can be executed, while \"smart money\" refers to a group of investors who are actively buying and selling stocks. The strategy involves identifying these patterns on a chart and entering trades at key price levels, such as \"Optimal Trade Entry\" and \"Smart Money.\" The goal is to take advantage of the liquidity and smart money movement to make profits.",
+      "generation_time_seconds": 49.97628092765808,
+      "statistics": {
+        "teaching_duration_seconds": 38.86000000000004,
+        "word_count": 119,
+        "teaching_units": 4,
+        "frames_analyzed": 4,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "higher high": {
+      "llm_summary": "### Higher High and Higher Low in ICT (Inner Circle Trader) Methodology\n\n#### Definition\n- **Higher High**: A high point that is higher than the previous high point.\n- **Higher Low**: A low point that is lower than the previous low point.\n\n#### Identification\n- **Visual Characteristics**:\n  - The chart shows a specific high point, which is labeled as \"Higher High\" and \"Higher Low\".\n  - The chart also indicates that this high point is a \"higher high\" and a \"higher low\".\n\n#### Trading Application\n- **ICT Recommends Trading**:\n  - The chart mentions \"optimal trade entry\" and \"inducement sweep\".\n  - The \"inducement sweep\" is a term used in trading to indicate a specific price level where the price will take out an inducement.\n  - The \"inducement sweep\" is followed by a \"new swing\" which is a new price swing after the inducement sweep.\n\n#### Key Price Levels\n- **Important Price Levels**:\n  - The chart shows a green line (indicating a new price swing) and a brown line (indicating a second swing).\n  - The chart also in",
+      "generation_time_seconds": 57.97221302986145,
+      "statistics": {
+        "teaching_duration_seconds": 132.01999999999998,
+        "word_count": 357,
+        "teaching_units": 4,
+        "frames_analyzed": 8,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "order block": {
+      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the Inner Circle Trader (ICT) methodology. It involves identifying a significant amount of buying or selling pressure, which is represented by a prominent, vertical, and jagged line on a chart, commonly referred to as an \"order block\" or \"order flow.\" This indicates a strong trend or momentum in the market.\n\n**Identification**:\n- The chart shows a prominent, vertical, and jagged line, which is commonly referred to as an \"order block\" or \"order flow.\"\n- The chart shows a pull back or a decline in price after an initial upward trend.\n\n**Trading Application**:\n- ICT recommends trading this pattern by identifying the order block and moving higher and higher.\n- The chart patterns and annotations highlight the importance of identifying the order block and moving higher, as this is a critical support or resistance level.\n\n**Key Price Levels**:\n- The chart shows a price level at approximately $100, which is a critical support or resistance level.\n- The chart also shows a price level at approximately $200, which is a critical resistance level.\n\n**Key Visual Characteristics**:\n- The chart shows a prominent, vertical, and jagged line, which is commonly referred to as an \"order block\" or \"order flow.\"\n- The chart shows a pull back or a decline in price after an initial upward trend.\n- The chart includes annotations and markings, which provide additional context and guidance for traders.\n\n**Summary**:\n- **Definition**: ORDER BLOCK refers to a significant amount of buying or selling pressure, represented by a prominent, vertical, and jagged line on a chart.\n- **Identification**: The chart shows a prominent, vertical, and jagged line, which is commonly referred to as an \"order block\" or \"order flow.\"\n- **Trading Application**: ICT recommends trading this pattern by identifying the order block and moving higher, as it is a critical support or resistance level.\n- **Key Price Levels**: The chart shows a price level at approximately $100, which is a critical support or resistance level, and a price level at approximately $200, which is a critical resistance level.\n- **Key Visual Characteristics**: The chart shows a prominent, vertical, and jagged line, which is commonly referred to as an \"order block\" or \"order flow,\" and includes annotations and markings, which provide additional context and guidance for traders.",
+      "generation_time_seconds": 74.15660071372986,
+      "statistics": {
+        "teaching_duration_seconds": 59.460000000000036,
+        "word_count": 155,
+        "teaching_units": 4,
+        "frames_analyzed": 5,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    },
+    "swing low": {
+      "llm_summary": "The \"SWING LOW\" concept in the context of trading refers to a specific trading pattern where the price of a financial instrument, such as a currency or stock, is moving between two high and low prices, forming a \"swing\" pattern. The term \"swing low\" is used to describe a specific price level where the price is moving between two high and low prices, indicating a potential trading opportunity.\n\nTo spot a swing low on a chart, traders should look for a price pattern where the price is moving up from a lower high to a higher high, indicating a potential buying opportunity. Conversely, the price is moving down from a higher low to a lower low, indicating a potential selling opportunity.\n\nICT (Inner Circle Trader) methodology recommends trading the \"swing low\" pattern by setting a break-even level to protect trades. Some traders may set their stop loss below this swing low as a protection, ensuring that they do not lose all their money in a single trade.\n\nKey price levels important in the \"swing low\" pattern include the swing high and swing low, which are the high and low prices that form the swing pattern. These levels are crucial for traders to identify potential buying and selling opportunities.\n\nThe \"swing low\" pattern is particularly useful for traders who employ the \"induced buying\" and \"induced selling\" strategies, where the price is moving up due to the presence of other traders, creating buying pressure, or moving down due to the presence of other traders, creating selling pressure. These patterns can be used to identify potential buying and selling opportunities, respectively.\n\nThe \"swing low\" pattern is also useful for traders who employ the \"induced pullback\" strategy, where the price is moving down from a higher low to a lower low, indicating a potential selling opportunity. This pattern can be used to identify potential selling opportunities, particularly when the price is moving down from a higher low to a lower low.\n\nOverall, the \"swing low\" pattern is a useful trading tool for traders who employ specific trading strategies, such as the \"induced buying\" and \"induced selling\" strategies, and can be used to identify potential buying and selling opportunities.",
+      "generation_time_seconds": 71.68364906311035,
+      "statistics": {
+        "teaching_duration_seconds": 7.860000000000014,
+        "word_count": 27,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "market structure": {
+      "llm_summary": "**Market Structure** is a fundamental concept in trading and financial analysis, referring to the underlying structure or framework of a market or market system. It encompasses various aspects such as market rules, market participants, market dynamics, and market behavior. Understanding market structure is crucial for making informed trading decisions and analyzing market trends.\n\n**Identification of Market Structure**:\n- **Key Visual Characteristics**:\n  - **Chart Patterns**: The chart patterns, such as \"HH\" and \"HHH,\" represent specific market conditions or market drivers.\n  - **Annotations and Markings**: Annotations and markings, such as \"No Inducement\" and \"Inducement,\" indicate specific market conditions or market drivers.\n- **Trading Application**:\n  - **Smart Money Marking**: ICT recommends trading patterns based on smart money marking, which involves identifying specific market conditions or market drivers.\n  - **Inducement Level**: The inducement level, which is the level at which retail traders are induced to buy, plays a crucial role in identifying market structure.\n- **Key Price Levels**:\n  - **HH and HHH Levels**: These levels represent higher highs or higher highs higher highs, which are important price levels in identifying market structure.\n  - **No Inducement and Inducement Levels**: These levels indicate specific market conditions or market drivers, which are important in identifying market structure.\n\n**Summary**:\nMarket structure refers to the underlying framework or structure of a market or market system, which encompasses various aspects such as market rules, market participants, market dynamics, and market behavior. Understanding market structure is crucial for making informed trading decisions and analyzing market trends. Key visual characteristics include chart patterns, annotations, and markings, and key price levels such as \"HH\" and \"HHH.\" Smart money marking and inducement level play a crucial role in identifying market structure.",
+      "generation_time_seconds": 67.05610013008118,
+      "statistics": {
+        "teaching_duration_seconds": 69.39999999999998,
+        "word_count": 180,
+        "teaching_units": 4,
+        "frames_analyzed": 6,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 4
+      }
+    }
+  }
+}

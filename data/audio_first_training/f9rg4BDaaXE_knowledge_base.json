@@ -1,0 +1,75 @@
+{
+  "video_id": "f9rg4BDaaXE",
+  "generated_at": "2026-02-04T19:33:45.969765",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 34.133923053741455,
+  "processing_stats": {
+    "teaching_units": 34,
+    "vision_analyses": 49,
+    "concepts_extracted": 6,
+    "total_audio_duration": 505.15999999999985,
+    "total_words": 1287
+  },
+  "concepts": {
+    "optimal trade entry": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 57.44000000000003,
+        "word_count": 135,
+        "teaching_units": 5,
+        "frames_analyzed": 7
+      }
+    },
+    "liquidity": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 169.94000000000003,
+        "word_count": 450,
+        "teaching_units": 9,
+        "frames_analyzed": 13
+      }
+    },
+    "smart money": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 54.620000000000005,
+        "word_count": 156,
+        "teaching_units": 2,
+        "frames_analyzed": 3
+      }
+    },
+    "institutional": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 46.68000000000001,
+        "word_count": 134,
+        "teaching_units": 1,
+        "frames_analyzed": 2
+      }
+    },
+    "buy stops": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.299999999999983,
+        "word_count": 60,
+        "teaching_units": 2,
+        "frames_analyzed": 3
+      }
+    },
+    "sell stops": {
+      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 33.5,
+        "word_count": 86,
+        "teaching_units": 3,
+        "frames_analyzed": 4
+      }
+    }
+  }
+}

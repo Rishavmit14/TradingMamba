@@ -1,0 +1,99 @@
+{
+  "video_id": "Yq-Tw3PEU5U",
+  "generated_at": "2026-02-04T21:31:41.868567",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 188.85434818267822,
+  "processing_stats": {
+    "teaching_units": 31,
+    "vision_analyses": 40,
+    "concepts_extracted": 6,
+    "total_audio_duration": 462.19999999999976,
+    "total_words": 1199
+  },
+  "concepts": {
+    "liquidity": {
+      "llm_summary": "**LIQUIDITY** is a trading strategy that involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. The key visual characteristics of liquidity sweep are:\n1. **Inducement**: Inducement is not required to mark liquidity sweep. This is independent from inducement.\n2. **Candle Closing Below Inducement**: Candle closing below inducement will invalidate the liquidity sweep. To understand the concept of liquidity sweep, you can click on I button on right corner for its complete understanding.\n\n**Trading Application**:\n- **Identification**: ICT recommends trading liquidity sweep by identifying price movements that are not necessarily continuous but have a pattern of high and low prices.\n- **Trading Strategy**: Once identified, traders should focus on trading in these price movements, as they are not necessarily continuous but have a pattern of high and low prices.\n\n**Key Price Levels**:\n- **Swing High**: Swing high is a high price that is not necessarily followed by a high price, indicating a period of price stability or consolidation.\n- **Swing Low**: Swing low is a low price that is not necessarily followed by a low price, indicating a period of price stability or consolidation.\n\n**Summary**:\nLIQUIDITY is a trading strategy that involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. The key visual characteristics of liquidity sweep are inducement, candle closing below inducement, and swing highs and lows. Traders should focus on trading in these price movements, as they are not necessarily continuous but have a pattern of high and low prices.",
+      "generation_time_seconds": 28.43695306777954,
+      "statistics": {
+        "teaching_duration_seconds": 145.0999999999999,
+        "word_count": 378,
+        "teaching_units": 10,
+        "frames_analyzed": 11,
+        "deictic_references": 16
+      },
+      "teaching_types": {
+        "explanation": 10
+      }
+    },
+    "market structure": {
+      "llm_summary": "**Market Structure**:\n\n1. **Definition**: Market structure refers to the overall organization, organization, and organization of the market, including the distribution of supply and demand, and the relationships between different market participants.\n\n2. **Identification**: To identify market structure, one must look at the overall organization and organization of the market, including the distribution of supply and demand, and the relationships between different market participants. This can be done by examining the price levels, the types of transactions, and the types of market participants involved.\n\n3. **Trading Application**: ICT recommends trading market structure by identifying the types of market participants involved, the types of transactions, and the overall organization of the market. This can be done by examining the price levels, the types of transactions, and the overall organization of the market.\n\n4. **Key Price Levels**: Key price levels in market structure include swing highs and lows, which are price movements that are not necessarily continuous but have a pattern of high and low prices. Swing highs and lows are important in identifying market structure.\n\n5. **Key Visual Characteristics**: Key visual characteristics in market structure include break of structure, which is a significant change in the price action, and swing highs and lows, which are price movements that are not necessarily continuous but have a pattern of high and low prices. These visual characteristics are important in identifying market structure.\n\n6. **Key Trading Strategies**: ICT recommends trading market structure by identifying the types of market participants involved, the types of transactions, and the overall organization of the market. This can be done by examining the price levels, the types of transactions, and the overall organization of the market. ICT recommends trading strategies based on the identification of market structure.",
+      "generation_time_seconds": 33.57659697532654,
+      "statistics": {
+        "teaching_duration_seconds": 234.61999999999986,
+        "word_count": 607,
+        "teaching_units": 15,
+        "frames_analyzed": 21,
+        "deictic_references": 21
+      },
+      "teaching_types": {
+        "explanation": 15
+      }
+    },
+    "swing high": {
+      "llm_summary": "The \"SWING HIGH\" concept in the context of the Inner Circle Trader methodology involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. To spot a swing high, market must take out the inducement, which is a significant change in the price action. Swing highs are important because they indicate periods of price stability or consolidation, which can be used to enter trades. The key price levels to monitor are swing highs, and the chart patterns to look for include a break of structure, which indicates a significant change in the price action. The trading application for swing highs involves entering trades when the price action reaches a swing high, which can be a good entry point for a short-term trade. The key price levels to monitor are swing highs, and the chart patterns to look for include a break of structure, which indicates a significant change in the price action. The trading application for swing highs involves entering trades when the price action reaches a swing high, which can be a good entry point for a short-term trade.",
+      "generation_time_seconds": 32.35718584060669,
+      "statistics": {
+        "teaching_duration_seconds": 174.4999999999999,
+        "word_count": 453,
+        "teaching_units": 11,
+        "frames_analyzed": 15,
+        "deictic_references": 14
+      },
+      "teaching_types": {
+        "explanation": 11
+      }
+    },
+    "swing low": {
+      "llm_summary": "The \"SWING LOW\" concept in the context of the Inner Circle Trader methodology involves identifying and trading in price patterns that are not necessarily continuous but have a pattern of high and low prices. To identify a swing low, the market must take out the inducement, which is a significant change in price action. The candle body must close above the previous high in a bullish market. Swing lows are important in the trading process as they can provide opportunities for profitable trades. The key price levels to watch for swing lows are the swing highs and the swing lows themselves. The swing lows are important as they can indicate potential support levels for the market. The swing highs are important as they can indicate potential resistance levels for the market. The swing lows and highs are important in the trading process as they can provide opportunities for profitable trades.",
+      "generation_time_seconds": 34.1691792011261,
+      "statistics": {
+        "teaching_duration_seconds": 123.35999999999991,
+        "word_count": 312,
+        "teaching_units": 7,
+        "frames_analyzed": 8,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 7
+      }
+    },
+    "smart money": {
+      "llm_summary": "SMART MONEY is a trading strategy based on three key rules: inducement, candle closing below inducement, and candle body closing below inducement. To spot SMART MONEY on a chart, look for a specific price level labeled \"Inducement\" and candle patterns closing below this level. The trading application for SMART MONEY involves identifying potential buying opportunities when the candle body closing price is below the inducement level. Key price levels to monitor include the inducement level, candle closing below inducement, and candle body closing below inducement.",
+      "generation_time_seconds": 30.419891834259033,
+      "statistics": {
+        "teaching_duration_seconds": 51.38,
+        "word_count": 140,
+        "teaching_units": 1,
+        "frames_analyzed": 3,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader methodology, involves identifying and entering trades when the candle wick sweeps the inducement or when the candle body closes below the inducement level. This rule is applied in both cases, fulfilling the second rule of the liquidity sweep. The optimal trade entry is recommended for trading patterns that highlight inducement and the Optimal Trade Entry term.",
+      "generation_time_seconds": 29.01216173171997,
+      "statistics": {
+        "teaching_duration_seconds": 139.59999999999982,
+        "word_count": 366,
+        "teaching_units": 11,
+        "frames_analyzed": 15,
+        "deictic_references": 15
+      },
+      "teaching_types": {
+        "explanation": 11
+      }
+    }
+  }
+}

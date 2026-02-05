@@ -1,0 +1,1090 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 3.880000000000001,
+    "end_time": 17.6,
+    "duration": 13.72,
+    "text": "Welcome back and welcome to forex minions. Today our topic of discussion is price delivery cycle. In this lecture, we will study the complete price cycle, that how price actually delivered in forex.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        4.9,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00003.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00006.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3.0,
+      6.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_001",
+    "start_time": 18.14,
+    "end_time": 26.1,
+    "duration": 7.960000000000001,
+    "text": "As in last topic, we have covered complete structure mapping concept, which is important tool to find the actual market trend.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00018.00s.jpg"
+    ],
+    "frame_timestamps": [
+      18.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_002",
+    "start_time": 26.1,
+    "end_time": 61.04,
+    "duration": 34.94,
+    "text": "And once we know the trend, our objective is how to design a entry setup. Well, to understand the entry techniques, we must understand the concept of price cycle. As I have mentioned in introduction, that we will study entry techniques now to onward. But question is, shall we directly start to learn the entry techniques? Or do we need to learn some basics as well? I would to ask this question to you. Do you want any shortcut to reach this objective, without knowing this complete roadmap?",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        30.013636363636365,
+        "this"
+      ]
+    ],
+    "confidence": 0.5681818181818182,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00027.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00030.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00039.00s.jpg"
+    ],
+    "frame_timestamps": [
+      27.0,
+      30.0,
+      39.0
+    ],
+    "word_count": 88
+  },
+  {
+    "id": "unit_003",
+    "start_time": 61.88,
+    "end_time": 123.26,
+    "duration": 61.38,
+    "text": "Or you want to study complete roadmap, starting of structure mapping and moving forward step by step? You can post your answers in comment session. Well, when some person listen about forex market, they think that this is a jackpot to make money. Most of them want shortcuts, I mean when they join forex market, either they start looking for signal provider or any account management service. And this is the first step of their failure who always look for shortcuts. Because they do not understand the forex market norms, they do not want to understand the mechanics of forex market, no psychology training, no assessment of risk involved. These are biggest reasons of their failure which is actually choosing a shortcuts over a complete roadmap. Well, to be a successful trader, we must understand the dynamics behind this roadmap. As we have studied the structure mapping in complete details, now we can find market trend on any time easily.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        64.004,
+        "this"
+      ],
+      [
+        65.302,
+        "look"
+      ]
+    ],
+    "confidence": 0.3125,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00063.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00066.00s.jpg"
+    ],
+    "frame_timestamps": [
+      63.0,
+      66.0
+    ],
+    "word_count": 160
+  },
+  {
+    "id": "unit_004",
+    "start_time": 131.2,
+    "end_time": 147.08,
+    "duration": 15.880000000000024,
+    "text": "Now, what we need to study after structure mapping? Our next target is to understand the price theory. In price theory, we will study these concepts. A complete price delivery cycle which is our topic of discussion today.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00132.00s.jpg"
+    ],
+    "frame_timestamps": [
+      132.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_005",
+    "start_time": 147.92,
+    "end_time": 174.42,
+    "duration": 26.5,
+    "text": "Next we will study the premium and discounts zone and how mark find them. Basically, in our routine life, when we want to buy something online or any store, we always wait for for discounted price to get some extra benefit. We will apply same concept in forex market. Secondly, we will study about premium zone. It's mean whenever we want to sell something, we always wait for higher prices.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00147.00s.jpg"
+    ],
+    "frame_timestamps": [
+      147.0
+    ],
+    "word_count": 70
+  },
+  {
+    "id": "unit_006",
+    "start_time": 175.24,
+    "end_time": 240.24,
+    "duration": 65.0,
+    "text": "Next we will study buy and sell zones. In which we will study order block, supply and demand, price imbalance and all possible entry zones. We will also study the role of price cycle in entry techniques. Finally, we will discuss about candlestick formation theory, which is most interesting and very discrete concept to understand the market behavior. After price theory, we will study about macro analysis approach. To trade in forex market, we must adopt the habit to watch it in bigger spectrum. I mean, we must understand the price behavior on macro level. In this topic, we will study the commitment of traders report, which is also known as COT report, you can say at COT report. This actually indicates, how big institutes trade in forex market. We will study the open float and open interest in complete details. As interest rate has huge impact on forex market, we will cover this topic in upcoming lectures as well.",
+    "detected_concepts": [
+      "order block",
+      "imbalance"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        180.79000000000002,
+        "this"
+      ],
+      [
+        179.8071875,
+        "watch"
+      ]
+    ],
+    "confidence": 0.625,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00174.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00180.00s.jpg"
+    ],
+    "frame_timestamps": [
+      174.0,
+      180.0
+    ],
+    "word_count": 160
+  },
+  {
+    "id": "unit_007",
+    "start_time": 241.04,
+    "end_time": 291.8,
+    "duration": 50.76000000000002,
+    "text": "Similarly, effects of bond market and treasury notes will also be part of this free mentorship. As you know, every country use to trade bonds as well, so this bond market has really a significant effect on forex market. And finally, we will cover the seasonal tendency topic as well. Basically, seasonal tendency reflects the market behavior in every month. What does it mean? Actually, seasonal tendency is based on 30 to 40 years of historical data. And we can use this data to understand the price behavior, or you can say market trend in every month of year specifically. Every month has its own characteristics. Seasonal tendency anticipate that how market will react in January, February, March, and in upcoming every month.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        241.81154471544716,
+        "this"
+      ]
+    ],
+    "confidence": 0.4065040650406504,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00240.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00243.00s.jpg"
+    ],
+    "frame_timestamps": [
+      240.0,
+      243.0
+    ],
+    "word_count": 123
+  },
+  {
+    "id": "unit_008",
+    "start_time": 292.62,
+    "end_time": 313.28,
+    "duration": 20.659999999999968,
+    "text": "So this is very interesting topic to understand. Next we will study the intermarket analysis. As you know, in forex market every currency is in pair form. That's why to understand every pair behavior, we must study the both currency which is forming a pair. This is called correlation base analysis.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        292.6786274509804,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00294.00s.jpg"
+    ],
+    "frame_timestamps": [
+      294.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_009",
+    "start_time": 319.92,
+    "end_time": 331.96,
+    "duration": 12.039999999999964,
+    "text": "This is very a huge technical tool that we will use in forex market to find a high probability entry. We will discuss about the interest rate differentials which actually affects the currency movement.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        319.92,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00321.00s.jpg"
+    ],
+    "frame_timestamps": [
+      321.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_010",
+    "start_time": 332.9,
+    "end_time": 403.82,
+    "duration": 70.92000000000002,
+    "text": "Next, we will cover price and time theory. The most awaited and most demanding topic in forex. Basically, in this topic we will cover weekly and daily profiles. Actually, we will study how to anticipate market move on every day of the week, like Monday, Tuesday, and so on. And what is role of weekly profiles in weekly candle formation? Similarly, we will study the daily candle profile. In this topic, we will study the market sessions. As daily candle is based on 24 hours, so we will study the effect of every hour in daily profile. We will study Asian session, London session, and New York session as well in complete details. Finally, we will study the swing point entry techniques. How to map out a swing entry setup? We will study complete top-down analysis approach, setup designing, trade and risk management. Considering these points, we will study the intraday and scalping model as well. As many of you are trading funded accounts, so you all need a quick profit-making model.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        333.99249999999995,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00333.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00369.00s.jpg"
+    ],
+    "frame_timestamps": [
+      333.0,
+      369.0
+    ],
+    "word_count": 172
+  },
+  {
+    "id": "unit_011",
+    "start_time": 425.90000000000003,
+    "end_time": 461.4,
+    "duration": 35.49999999999994,
+    "text": "Now, let's start with price delivery cycle. To understand this topic, we must understand the elements required for a price cycle. These are four elements. First one is consolidation, which is also known as range or ranging market. Second one is expansion, its mean a trending condition. Third, retracement or pullback, which is also known as correction. And finally, reversal point which actually indicates the trend reversal. We will study these points one by one in complete details.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        426.4596153846154,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00426.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00444.00s.jpg"
+    ],
+    "frame_timestamps": [
+      426.0,
+      444.0
+    ],
+    "word_count": 78
+  },
+  {
+    "id": "unit_012",
+    "start_time": 463.16,
+    "end_time": 482.78,
+    "duration": 19.619999999999948,
+    "text": "Let's start with consolidation. Consolidation is an area where price is moving in a range between two points. You can say consolidation is basically a defined range. Consolidation indicates the lack of a trend in a particular trading range. Its mean there is no clear trend in consolidation phase.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        463.70551020408163,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00462.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00465.00s.jpg"
+    ],
+    "frame_timestamps": [
+      462.0,
+      465.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_013",
+    "start_time": 483.84,
+    "end_time": 495.36,
+    "duration": 11.520000000000039,
+    "text": "Now question is, what is importance of consolidation? Basically, consolidation is a process of making something stronger, but how this actually benefits us forex market.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        485.1244,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00483.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00486.00s.jpg"
+    ],
+    "frame_timestamps": [
+      483.0,
+      486.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_014",
+    "start_time": 496.09999999999997,
+    "end_time": 510.4,
+    "duration": 14.300000000000011,
+    "text": "Actually, consolidation creates liquidity which is basic need to move market, because most of breakout traders will set their orders on both side of the consolidation or price range. And we know that such pending orders create liquidity.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00495.00s.jpg"
+    ],
+    "frame_timestamps": [
+      495.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_015",
+    "start_time": 511.54,
+    "end_time": 524.56,
+    "duration": 13.019999999999925,
+    "text": "So, hire the number of orders, hire the liquidity. And if there is a bigger liquidity pool, then market will grab it to make a move a bigger move. That's why we can expect a big move after consolidation.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        512.1646153846154,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00513.00s.jpg"
+    ],
+    "frame_timestamps": [
+      513.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_016",
+    "start_time": 532.02,
+    "end_time": 547.88,
+    "duration": 15.860000000000014,
+    "text": "Let's understand consolidation or trading range by a simple schematic diagram. Here you can see price is ranging between two levels. Upper level is marked as resistance, and lower level is usually marked as support by retail traders.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        532.6944736842105,
+        "here"
+      ],
+      [
+        532.8784210526316,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00531.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00534.00s.jpg"
+    ],
+    "frame_timestamps": [
+      531.0,
+      534.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_017",
+    "start_time": 548.92,
+    "end_time": 569.02,
+    "duration": 20.100000000000023,
+    "text": "Those students who have seen the liquidity concept lecture, they can easily understand that how consolidation creates liquidity. Because breakout traders will set their pending orders on high of this level, and on the lower side of this range. This is a candlestick form of consolidation phase, or you can call it a trading range as well.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        550.639649122807,
+        "this"
+      ],
+      [
+        549.1571929824561,
+        "see"
+      ],
+      [
+        551.1140350877192,
+        "this range"
+      ]
+    ],
+    "confidence": 0.8771929824561404,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00549.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00552.00s.jpg"
+    ],
+    "frame_timestamps": [
+      549.0,
+      552.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_018",
+    "start_time": 571.02,
+    "end_time": 586.3,
+    "duration": 15.279999999999973,
+    "text": "Now, what is expansion? Expansion is a sign of trend continuation and we know that break of structure is also indicates the trend continuation. Most important things, expansion occurs when price moves quickly after consolidation.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00570.00s.jpg"
+    ],
+    "frame_timestamps": [
+      570.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_019",
+    "start_time": 587.44,
+    "end_time": 613.3,
+    "duration": 25.8599999999999,
+    "text": "Now, what is its importance in price cycle? Basically, expansion is an indication of smart money footprints. What does it mean? It's mean where it an expansion, it will indicates that smart money is entered at this point. Secondly, we will always look for entry zone near start of expansion. I repeat, the starting zone of expansion will provide us entry zone.",
+    "detected_concepts": [
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        589.5303225806452,
+        "this"
+      ],
+      [
+        588.8335483870968,
+        "here"
+      ],
+      [
+        589.8787096774195,
+        "look"
+      ]
+    ],
+    "confidence": 0.8064516129032259,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00588.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00591.00s.jpg"
+    ],
+    "frame_timestamps": [
+      588.0,
+      591.0
+    ],
+    "word_count": 62
+  },
+  {
+    "id": "unit_020",
+    "start_time": 620.0,
+    "end_time": 642.54,
+    "duration": 22.539999999999964,
+    "text": "Let's understand it by a simple schematic diagram. This is consolidation phase, which actually used to create liquidity by smart money. When there is large liquidity on either side of this range, market will expand aggressively and quickly. Have you noticed something here? This is liquidity grab or you can call it manipulation by smart money.",
+    "detected_concepts": [
+      "liquidity",
+      "manipulation",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        620.4914285714286,
+        "this"
+      ],
+      [
+        621.4128571428571,
+        "here"
+      ],
+      [
+        622.4571428571429,
+        "notice"
+      ],
+      [
+        621.8428571428572,
+        "this range"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00621.00s.jpg"
+    ],
+    "frame_timestamps": [
+      621.0
+    ],
+    "word_count": 56
+  },
+  {
+    "id": "unit_021",
+    "start_time": 651.26,
+    "end_time": 658.44,
+    "duration": 7.180000000000064,
+    "text": "And before expansion, market will try to grab the large liquidity pool on either side of this consolidation or trading range.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        652.212380952381,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00651.00s.jpg"
+    ],
+    "frame_timestamps": [
+      651.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_022",
+    "start_time": 669.56,
+    "end_time": 680.02,
+    "duration": 10.460000000000036,
+    "text": "This is manipulation or liquidity grab by smart money or big institutions. And finally, what do we look for near the start of expansion? An entry zone.",
+    "detected_concepts": [
+      "liquidity",
+      "manipulation",
+      "smart money",
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        669.56,
+        "this"
+      ],
+      [
+        670.5107407407406,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00669.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00672.00s.jpg"
+    ],
+    "frame_timestamps": [
+      669.0,
+      672.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_023",
+    "start_time": 681.04,
+    "end_time": 690.92,
+    "duration": 9.879999999999995,
+    "text": "So, this can be our entry zone at the start of expansion which is order block or demand zone. I hope now you have complete understanding of expansion and its importance.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        681.0945161290322,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00681.00s.jpg"
+    ],
+    "frame_timestamps": [
+      681.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_024",
+    "start_time": 712.34,
+    "end_time": 742.98,
+    "duration": 30.639999999999986,
+    "text": "Now question is why this is also known as correction? Because correction mean to correct the market cycle, in other words to balance the imbalance price. That's why retracement used to fill the price imbalance and liquidity voids. Please note fair value gap is a refined form of liquidity void and we will cover these entry zones in complete details in next lecture. This is a simple schematic diagram of retracement. As we discussed, retracement mostly occur after expansion.",
+    "detected_concepts": [
+      "fair value gap",
+      "liquidity",
+      "imbalance",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        712.5810126582279,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00711.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00714.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00738.00s.jpg"
+    ],
+    "frame_timestamps": [
+      711.0,
+      714.0,
+      738.0
+    ],
+    "word_count": 79
+  },
+  {
+    "id": "unit_025",
+    "start_time": 745.08,
+    "end_time": 767.76,
+    "duration": 22.67999999999995,
+    "text": "This is real market sample size. Notice this zone? This is basically a price imbalance. Just for a short note, please note that price imbalance mean where price only moves in one direction. Whenever we will see one sided price move, that area will be marked as price imbalance zone, or we can also market liquidity void.",
+    "detected_concepts": [
+      "liquidity",
+      "imbalance",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        745.08,
+        "this"
+      ],
+      [
+        746.5957894736842,
+        "here"
+      ],
+      [
+        747.101052631579,
+        "see"
+      ],
+      [
+        745.4168421052632,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00744.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00747.00s.jpg"
+    ],
+    "frame_timestamps": [
+      744.0,
+      747.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_026",
+    "start_time": 768.72,
+    "end_time": 778.52,
+    "duration": 9.799999999999955,
+    "text": "Now, this is a expansion phase. Right? Now check this gray area, this is basically a retracement that market created to fill this void.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        768.77625,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00768.00s.jpg"
+    ],
+    "frame_timestamps": [
+      768.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_027",
+    "start_time": 786.3000000000001,
+    "end_time": 798.7,
+    "duration": 12.399999999999977,
+    "text": "Now let's study about reversal. Reversal is a sign of change of character. A reversal occur when the direction of a price trend has changed, I mean from going up to going down and vice versa.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00786.00s.jpg"
+    ],
+    "frame_timestamps": [
+      786.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_028",
+    "start_time": 798.7,
+    "end_time": 808.36,
+    "duration": 9.659999999999968,
+    "text": "Now, what is its importance? Reversal gives a advance warning to trend traders, who use to follow trend to design thereby and sell models.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        799.9075,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00798.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00801.00s.jpg"
+    ],
+    "frame_timestamps": [
+      798.0,
+      801.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_029",
+    "start_time": 817.44,
+    "end_time": 831.94,
+    "duration": 14.5,
+    "text": "Now, remind a sweep basis change of character model which we have covered in last lecture in complete details. This is a simple schematic diagram of reversal point. Notice that price was bullish and then trend changed to bearish side.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        818.5515,
+        "this"
+      ],
+      [
+        819.0780000000001,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00816.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00819.00s.jpg"
+    ],
+    "frame_timestamps": [
+      816.0,
+      819.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_030",
+    "start_time": 843.46,
+    "end_time": 851.6,
+    "duration": 8.139999999999986,
+    "text": "This was large liquidity pool and market sweeped it, grabbed this liquidity and moved into other direction. This is our reversal point.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        843.46,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00843.00s.jpg"
+    ],
+    "frame_timestamps": [
+      843.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_031",
+    "start_time": 852.5,
+    "end_time": 869.48,
+    "duration": 16.980000000000018,
+    "text": "Now, we have studied all of four elements in complete details. Now, let's study price cycle. For price, these are four main pillars, or you can say four basic elements. Consolidation, expansion, retracement and reversal.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00852.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00861.00s.jpg"
+    ],
+    "frame_timestamps": [
+      852.0,
+      861.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_032",
+    "start_time": 870.5,
+    "end_time": 895.18,
+    "duration": 24.67999999999995,
+    "text": "Now question is how the elements actually works in form of cycle? Well, whenever there is consolidation, market will mostly proceed towards an expansion phase. After expansion, market go through the retracement phase to fill the voids. After retracement, a reversal can be occur. And if there is a reversal, market will go through a consolidation phase again.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        871.428448275862,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00870.00s.jpg"
+    ],
+    "frame_timestamps": [
+      870.0
+    ],
+    "word_count": 58
+  },
+  {
+    "id": "unit_033",
+    "start_time": 910.28,
+    "end_time": 931.6,
+    "duration": 21.32000000000005,
+    "text": "Now, what we can expect next? First, we can move into a retracement phase. But what if market do not go through retracement, then? Well, in such condition, after expansion market can go to consolidation phase. And after consolidation, market can go to reversal zone.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00909.00s.jpg"
+    ],
+    "frame_timestamps": [
+      909.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_034",
+    "start_time": 932.6,
+    "end_time": 947.16,
+    "duration": 14.559999999999945,
+    "text": "Now what can happen after reversal? Again consolidation or something else can also occur. Market can also go to retracement after reversal point. Similarly, after retracement market can again expand.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00933.00s.jpg"
+    ],
+    "frame_timestamps": [
+      933.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_035",
+    "start_time": 948.26,
+    "end_time": 963.52,
+    "duration": 15.259999999999991,
+    "text": "So, what is summary of this cycle? Basically, price will always moved in this cycle, and these states are interchangeable. They can reciprocate themselves to stay in price cycle, to follow the price cycle though or in natural way.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        948.5548717948718,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00948.00s.jpg"
+    ],
+    "frame_timestamps": [
+      948.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_036",
+    "start_time": 965.96,
+    "end_time": 995.76,
+    "duration": 29.799999999999955,
+    "text": "Now, be careful while analyzing the price. Price cannot bypass this cycle, these elements are not directly interlinked. Let me repeat, price cannot bypass this complete cycle. It's mean if market want to adopt any state, it has to follow this cycle and these steps as a natural process. For example, after expansion, reversal cannot occur. Market cannot go to reversal zone directly after expansion.",
+    "detected_concepts": [],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        966.5738461538461,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00966.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00996.00s.jpg"
+    ],
+    "frame_timestamps": [
+      966.0,
+      996.0
+    ],
+    "word_count": 65
+  },
+  {
+    "id": "unit_037",
+    "start_time": 996.48,
+    "end_time": 1016.42,
+    "duration": 19.93999999999994,
+    "text": "Please note some abnormality can be seen, but price has to follow this cycle and we will only anticipate market in this cycle. Similarly, market cannot go to retracement after consolidation, and after retracement, market cannot directly go to consolidation. I hope this make sense to you.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        997.2153191489361,
+        "this"
+      ],
+      [
+        996.8476595744681,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00996.00s.jpg"
+    ],
+    "frame_timestamps": [
+      996.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_038",
+    "start_time": 1017.3,
+    "end_time": 1027.4,
+    "duration": 10.100000000000136,
+    "text": "Let's understand this concept by some real market samples. Let's study the consolidation to expansion cycle. This is a real market sample size.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1017.4243478260869,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_01017.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_01023.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1017.0,
+      1023.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_039",
+    "start_time": 1053.74,
+    "end_time": 1064.36,
+    "duration": 10.61999999999989,
+    "text": "Let's check another sample size. Let's study the consolidation to expansion, and expansion to retracement cycle. This is a real market sample size.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1054.7626086956523,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_01053.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_01056.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1053.0,
+      1056.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_040",
+    "start_time": 1065.32,
+    "end_time": 1074.1,
+    "duration": 8.779999999999973,
+    "text": "Now, this is price consolidation zone. As per price cycle, when there is a consolidation, we can expect an expansion.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1065.3785,
+        "this"
+      ],
+      [
+        1066.022,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_01065.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1065.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_041",
+    "start_time": 1103.3400000000001,
+    "end_time": 1120.54,
+    "duration": 17.199999999999818,
+    "text": "Now you have complete understanding of the price cycle and how it actually works. If you have any question related to this lecture or any other previous lecture, you can contact us on this email id. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1104.508695652174,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_01104.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_01110.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1104.0,
+      1110.0
+    ],
+    "word_count": 46
+  }
+]

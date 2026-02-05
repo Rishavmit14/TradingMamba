@@ -1,0 +1,115 @@
+{
+  "video_id": "NbhVSLd18YM",
+  "generated_at": "2026-02-04T22:21:04.964816",
+  "generation_method": "LLM per concept (MLX-VLM)",
+  "total_generation_time_seconds": 45.46419715881348,
+  "processing_stats": {
+    "teaching_units": 71,
+    "vision_analyses": 99,
+    "concepts_extracted": 10,
+    "total_audio_duration": 970.24,
+    "total_words": 2583
+  },
+  "concepts": {
+    "institutional": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 16.260000000000005,
+        "word_count": 42,
+        "teaching_units": 1,
+        "frames_analyzed": 0
+      }
+    },
+    "smart money": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 85.36000000000007,
+        "word_count": 219,
+        "teaching_units": 6,
+        "frames_analyzed": 0
+      }
+    },
+    "optimal trade entry": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 176.7799999999998,
+        "word_count": 484,
+        "teaching_units": 12,
+        "frames_analyzed": 0
+      }
+    },
+    "swing high": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 62.94,
+        "word_count": 182,
+        "teaching_units": 5,
+        "frames_analyzed": 0
+      }
+    },
+    "higher high": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 144.08000000000004,
+        "word_count": 371,
+        "teaching_units": 10,
+        "frames_analyzed": 0
+      }
+    },
+    "swing low": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 34.71999999999994,
+        "word_count": 101,
+        "teaching_units": 4,
+        "frames_analyzed": 0
+      }
+    },
+    "lower low": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 43.87999999999997,
+        "word_count": 117,
+        "teaching_units": 3,
+        "frames_analyzed": 0
+      }
+    },
+    "market structure": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 184.54000000000042,
+        "word_count": 525,
+        "teaching_units": 15,
+        "frames_analyzed": 0
+      }
+    },
+    "liquidity": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 49.75999999999999,
+        "word_count": 127,
+        "teaching_units": 4,
+        "frames_analyzed": 0
+      }
+    },
+    "order block": {
+      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 15.019999999999982,
+        "word_count": 38,
+        "teaching_units": 1,
+        "frames_analyzed": 0
+      }
+    }
+  }
+}
