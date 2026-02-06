@@ -249,6 +249,98 @@ function LiveChart() {
     rayOverlaysRef.current = [];
   }, []);
 
+  // Fast ray position update using requestAnimationFrame (no DOM recreation)
+  const updateRayPositions = useCallback(() => {
+    if (!chartRef.current || !candlestickSeriesRef.current || !chartContainerRef.current) return;
+
+    const series = candlestickSeriesRef.current;
+    const chart = chartRef.current;
+    const timeScale = chart.timeScale();
+    const chartElement = chartContainerRef.current;
+    const chartWidth = chartElement.clientWidth;
+    const rightEdge = chartWidth - 70;
+
+    // Update each ray element's position based on current chart state
+    rayOverlaysRef.current.forEach(el => {
+      if (!el || !el.dataset) return;
+
+      const price = parseFloat(el.dataset.price);
+      const startTime = parseInt(el.dataset.startTime);
+      const elementType = el.dataset.type; // 'ray', 'label', 'marker', 'priceLabel'
+
+      if (isNaN(price)) return;
+
+      // Get new Y coordinate for this price
+      const y = series.priceToCoordinate(price);
+      if (y === null || y < -50 || y > chartElement.clientHeight + 50) {
+        el.style.display = 'none';
+        return;
+      }
+      el.style.display = '';
+
+      // Get new X coordinate for the start time
+      let startX = startTime ? timeScale.timeToCoordinate(startTime) : 0;
+      if (startX === null || startX < 0) startX = 0;
+
+      // Calculate ray width
+      let rayWidth = rightEdge - startX;
+      if (rayWidth < 20) {
+        startX = 0;
+        rayWidth = rightEdge;
+      }
+
+      // Update position based on element type
+      if (elementType === 'ray') {
+        el.style.left = `${startX}px`;
+        el.style.top = `${y}px`;
+        el.style.width = `${rayWidth}px`;
+      } else if (elementType === 'label') {
+        const labelX = startX + rayWidth / 2 - 30;
+        el.style.left = `${labelX}px`;
+        el.style.top = `${y - 10}px`;
+      } else if (elementType === 'marker') {
+        el.style.left = `${startX - 4}px`;
+        el.style.top = `${y - 4}px`;
+        el.style.display = startX > 0 ? '' : 'none';
+      } else if (elementType === 'priceLabel') {
+        el.style.top = `${y - 9}px`;
+      }
+    });
+
+    // Also update pattern box overlays
+    patternOverlaysRef.current.forEach(el => {
+      if (!el || !el.dataset) return;
+
+      const high = parseFloat(el.dataset.high);
+      const low = parseFloat(el.dataset.low);
+      const startTime = parseInt(el.dataset.startTime);
+      const endTime = parseInt(el.dataset.endTime);
+
+      if (isNaN(high) || isNaN(low)) return;
+
+      const yHigh = series.priceToCoordinate(high);
+      const yLow = series.priceToCoordinate(low);
+      if (yHigh === null || yLow === null) {
+        el.style.display = 'none';
+        return;
+      }
+
+      let xStart = startTime ? timeScale.timeToCoordinate(startTime) : null;
+      let xEnd = endTime ? timeScale.timeToCoordinate(endTime) : null;
+
+      if (xStart === null || xEnd === null) {
+        el.style.display = 'none';
+        return;
+      }
+
+      el.style.display = '';
+      el.style.left = `${Math.min(xStart, xEnd)}px`;
+      el.style.top = `${Math.min(yHigh, yLow)}px`;
+      el.style.width = `${Math.abs(xEnd - xStart)}px`;
+      el.style.height = `${Math.abs(yLow - yHigh)}px`;
+    });
+  }, []);
+
   // Reusable: filter API patterns for the current visible price range
   // IMPORTANT: Now strictly filters by current timeframe (playlist-specific patterns)
   const getRelevantPatterns = useCallback((allPatterns, candles, signalDirection) => {
@@ -673,6 +765,10 @@ function LiveChart() {
         // Create the horizontal ray line (solid line) - always at true price
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
+        // Store data for fast position updates
+        rayLine.dataset.type = 'ray';
+        rayLine.dataset.price = price;
+        rayLine.dataset.startTime = startTime;
 
         // All rays use solid line style
         rayLine.style.cssText = `
@@ -690,6 +786,10 @@ function LiveChart() {
         // Create the annotation label with pattern name
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
+        // Store data for fast position updates
+        labelEl.dataset.type = 'label';
+        labelEl.dataset.price = price;
+        labelEl.dataset.startTime = startTime;
 
         // Position label in the center of the ray for all patterns
         const labelX = startX + rayWidth / 2 - 30;
@@ -716,6 +816,10 @@ function LiveChart() {
         if (startX > 0) {
           const startMarker = document.createElement('div');
           startMarker.className = 'pattern-ray-overlay';
+          // Store data for fast position updates
+          startMarker.dataset.type = 'marker';
+          startMarker.dataset.price = price;
+          startMarker.dataset.startTime = startTime;
           startMarker.style.cssText = `
             position: absolute;
             left: ${startX - 4}px;
@@ -736,6 +840,9 @@ function LiveChart() {
         if (isSwingMarker) {
           const priceLabel = document.createElement('div');
           priceLabel.className = 'pattern-ray-overlay';
+          // Store data for fast position updates
+          priceLabel.dataset.type = 'priceLabel';
+          priceLabel.dataset.price = price;
           // Format price with appropriate decimals
           const formattedPrice = price > 1000 ? price.toFixed(2) : price > 1 ? price.toFixed(4) : price.toFixed(6);
           priceLabel.style.cssText = `
@@ -1117,6 +1224,14 @@ function LiveChart() {
       // Scroll/pan handler: re-filter patterns for visible range and redraw
       // Also detects when user scrolls to left edge to load more historical data
       chart.timeScale().subscribeVisibleLogicalRangeChange(async (logicalRange) => {
+        // FAST UPDATE: Immediately update ray positions using requestAnimationFrame
+        // This runs every frame for smooth visual feedback
+        if (window.rafUpdateId) cancelAnimationFrame(window.rafUpdateId);
+        window.rafUpdateId = requestAnimationFrame(() => {
+          updateRayPositions();
+        });
+
+        // DEBOUNCED UPDATE: Full pattern recalculation (expensive, runs less often)
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
         window.patternUpdateTimeout = setTimeout(async () => {
           const candles = candlesDataRef.current;
@@ -1198,6 +1313,7 @@ function LiveChart() {
       return () => {
         window.removeEventListener('resize', handleResize);
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
+        if (window.rafUpdateId) cancelAnimationFrame(window.rafUpdateId);
       };
     };
 
