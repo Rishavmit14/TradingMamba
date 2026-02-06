@@ -1,74 +1,89 @@
 {
   "video_id": "f9rg4BDaaXE",
-  "generated_at": "2026-02-04T19:33:45.969765",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 34.133923053741455,
+  "generated_at": "2026-02-05T15:45:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 34,
     "vision_analyses": 49,
-    "concepts_extracted": 6,
-    "total_audio_duration": 505.15999999999985,
+    "concepts_extracted": 5,
+    "total_audio_duration": 721.6,
     "total_words": 1287
   },
   "concepts": {
-    "optimal trade entry": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+    "pullback": {
+      "llm_summary": "### Pullback — Foundation for Valid Inducement\n\n#### Definition\nA pullback occurs when price takes a break, pauses, and corrects itself or goes against the trend. It is a temporary dip in a generally trending market — also called a correction. Pullbacks are the building blocks for identifying inducement levels.\n\n#### Types of Pullback\n- **Bullish Pullback**: In an uptrend, price temporarily moves down before continuing higher. Can be very short or extended.\n- **Bearish Pullback**: In a downtrend, price temporarily moves up before continuing lower. Can be minor or in the form of deeper correction.\n\n#### Critical Question: Which Pullback is Valid?\nNOT every pullback is valid. The teacher emphasizes that validity must be confirmed — and the ONLY factor for confirmation is a liquidity sweep. A pullback without a liquidity sweep is not a valid pullback.\n\n#### Trading Application\nPullbacks are the prerequisite for identifying valid inducement. Understanding pullbacks is necessary before you can correctly mark inducement levels on charts. Without valid pullback identification, your inducement marking will be incorrect.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 57.44000000000003,
-        "word_count": 135,
+        "teaching_duration_seconds": 60.0,
+        "word_count": 180,
+        "teaching_units": 4,
+        "frames_analyzed": 6,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 3,
+        "example": 1
+      }
+    },
+    "valid pullback": {
+      "llm_summary": "### Valid Pullback — The Liquidity Sweep Confirmation\n\n#### Definition\nA valid pullback is a pullback that has been confirmed by a liquidity sweep. When price takes out (sweeps) the previous candle's high or low, the pullback is validated. This is the ONLY confirmation factor — no liquidity sweep means no valid pullback.\n\n#### Rules for Valid Pullback\n**Bullish Market (Pullback Down)**:\n- Find the HIGHEST candle in the swing up\n- The LOW of this highest candle must be broken (swept) by the next candle(s)\n- Both wick-based sweep and body-based close below are valid\n- The next candle does NOT need to break the high of the sweeping candle — both conditions are okay\n\n**Bearish Market (Pullback Up)**:\n- Find the LOWEST candle in the swing down\n- The HIGH of this lowest candle must be broken (swept) by the next candle(s)\n- Both wick-based sweep and body-based close above are valid\n- The next candle does NOT need to break the low of the sweeping candle\n\n#### Common Retail Mistake\nRetail traders often mark the wrong candle. The teacher demonstrates with lettered examples (A, B, C, D):\n- Retail traders might mark candle C as the lowest candle and declare the pullback invalid\n- But the ACTUAL lowest candle is candle D, which is lower than C\n- When D's high is broken by the next candle, the pullback IS valid\n- Key: Always find the TRUE lowest (bearish) or highest (bullish) candle, not just any candle\n\n#### Four Worked Examples (Bearish)\n1. Candle 1 = lowest, candle 2 breaks its high → Valid ✓\n2. Candle 3 = lowest, candle 4 breaks its high → Valid ✓\n3. Candle 5 = lowest, candles 6-8 do NOT break its high → Invalid ✗\n4. Candle A = lowest, candle B breaks its high → Valid ✓ (C/D are a tricky sub-example showing retail traders pick the wrong candle)\n\n#### Four Worked Examples (Bullish)\nMirror rules: find highest candle, check if its low is broken. Same four example patterns with matching valid/invalid outcomes.\n\n#### Notation\nLiquidity sweep is marked with 'X' cross on the chart to indicate where the sweep occurred.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 300.0,
+        "word_count": 600,
+        "teaching_units": 16,
+        "frames_analyzed": 20,
+        "deictic_references": 18
+      },
+      "teaching_types": {
+        "explanation": 6,
+        "example": 10
+      }
+    },
+    "liquidity sweep": {
+      "llm_summary": "### Liquidity Sweep — Institutional Execution Footprint\n\n#### Definition (Expanded from Video 2)\nLiquidity sweeps are used by institutional traders and banks (smart money) to execute their large orders. The sweeping move is very quick and efficient, and it reflects the footprint of smart money executions.\n\n#### Why Liquidity Sweeps Happen\nThe teacher uses a concrete example: if you want to sell 10,000 orders, you need a huge buyer pool. Smart money needs bigger liquidity pools (buyers or sellers with open interest) to fill their large positions. Once they execute at a favorable price, they won't allow that price to be reached again.\n\n#### Directional Targeting\nThe teacher demonstrates with a ranging market schematic:\n- Buy stops above range = 100 orders\n- Sell stops below range = 10,000 orders (100x more)\n- Smart money targets the LARGER liquidity pool side first\n- In this example, market sweeps the sell side (Low Sweep / Sell Side Liquidity Sweep) and moves up\n- If buy side had more orders, market would sweep buy side first (Buy Side Sweep)\n\n#### Candlestick Representation\nThe teacher maps the ranging market schematic to candlestick form:\n- Market ranging = candle body (open to close)\n- High/low levels = wicks\n- Buy stops/sell stops = orders above/below the range\n- Sell side sweep = wick below the body (open to low is wick), then bullish close\n- Marked with 'X' cross notation at the sweep point\n\n#### Trading Application\n- Identify which side has more liquidity (sell side or buy side)\n- Expect smart money to sweep the larger pool first\n- The sweep is quick and efficient — don't chase it\n- Use the sweep as confirmation for valid pullback, which leads to valid inducement",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 180.0,
+        "word_count": 300,
+        "teaching_units": 8,
+        "frames_analyzed": 12,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 4
+      }
+    },
+    "valid inducement": {
+      "llm_summary": "### Valid Inducement — First Valid Pullback on Left Side\n\n#### Definition\nValid inducement is the FIRST VALID PULLBACK on the left side of the recent high (bullish) or recent low (bearish). The teacher explicitly states: 'Inducement is basically first valid pullback. I repeat, first valid pullback on left side of recent high or recent low.' It is a trap before an area of interest (order block, supply, or demand zone).\n\n#### How to Identify Valid Inducement\nThe teacher provides a systematic process:\n1. Find the recent swing high (bullish) or swing low (bearish)\n2. Look to the LEFT of that swing point\n3. Find the FIRST pullback\n4. Check if that pullback is VALID using the pullback validation rules:\n   - Find the highest candle (bullish pullback) or lowest candle (bearish pullback)\n   - Check if its low/high was swept by the next candle\n5. If the pullback is valid → it IS the inducement (mark with IDM)\n6. If the pullback is NOT valid → it is NOT inducement, look for the next pullback\n\n#### Worked Example 1 (Candlestick Chart)\n- First pullback identified on left side of recent high\n- Find highest candle in the pullback area\n- Mark its low\n- Check: did next candles take out this low? NO → Not valid pullback → NOT inducement\n- Move to next pullback: find highest candle, mark its low, check sweep → YES → Valid inducement\n\n#### Worked Example 2\n- Pullback appears to be inducement\n- Find highest candle, mark its low\n- Next candles did NOT take out the low → NOT valid pullback → NOT inducement\n\n#### Key Distinction: Valid vs Fake Inducement\n- A pullback that does not have a liquidity sweep is a FAKE inducement\n- Only the first pullback WITH a confirmed liquidity sweep qualifies as valid inducement\n- This is why understanding valid pullback rules is prerequisite for marking inducement\n\n#### Trading Application\n- Before marking any inducement on your chart, validate it with the pullback rules\n- Many pullbacks that LOOK like inducement are actually fake (no liquidity sweep)\n- Trading based on fake inducement leads to losses\n- The valid inducement level is where you expect smart money to sweep before the real move",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 140.0,
+        "word_count": 350,
+        "teaching_units": 6,
+        "frames_analyzed": 8,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 3,
+        "example": 3
+      }
+    },
+    "candlestick analysis": {
+      "llm_summary": "### Candlestick Analysis — Reading Sweep Patterns\n\n#### Candlestick Anatomy in Liquidity Context\nThe teacher provides a detailed mapping from schematic price action to candlestick form:\n- **Open to Close** = Candle Body (represents the trading range)\n- **High and Low beyond body** = Wicks (represents the sweep/liquidity grab zones)\n- A wick below the body in an uptrend represents a sell-side liquidity sweep\n- A wick above the body in a downtrend represents a buy-side liquidity sweep\n\n#### Body vs Wick Sweep\n- **Wick-based sweep**: Price pierces through a level with the wick but closes back inside → marked with X\n- **Body-based sweep**: Candle body closes beyond the level → also valid for pullback confirmation\n- Both types are valid for confirming pullbacks\n\n#### Practical Application\nThe teacher uses extensive candlestick diagram examples (numbered candles 1-8, lettered candles A-F) to show:\n- How to identify the highest/lowest candle in a group\n- How to determine if the next candle(s) swept the critical level\n- The tricky cases where retail traders identify the wrong candle\n- Why the TRUE highest/lowest candle matters for correct validation",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 100.0,
+        "word_count": 250,
         "teaching_units": 5,
-        "frames_analyzed": 7
-      }
-    },
-    "liquidity": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 169.94000000000003,
-        "word_count": 450,
-        "teaching_units": 9,
-        "frames_analyzed": 13
-      }
-    },
-    "smart money": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 54.620000000000005,
-        "word_count": 156,
-        "teaching_units": 2,
-        "frames_analyzed": 3
-      }
-    },
-    "institutional": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 46.68000000000001,
-        "word_count": 134,
-        "teaching_units": 1,
-        "frames_analyzed": 2
-      }
-    },
-    "buy stops": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 25.299999999999983,
-        "word_count": 60,
-        "teaching_units": 2,
-        "frames_analyzed": 3
-      }
-    },
-    "sell stops": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 33.5,
-        "word_count": 86,
-        "teaching_units": 3,
-        "frames_analyzed": 4
+        "frames_analyzed": 8,
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "explanation": 2,
+        "example": 3
       }
     }
   }

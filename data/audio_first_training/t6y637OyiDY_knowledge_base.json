@@ -1,81 +1,111 @@
 {
   "video_id": "t6y637OyiDY",
-  "generated_at": "2026-02-01T11:33:56.821690",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 192.2105839252472,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
-    "teaching_units": 12,
-    "vision_analyses": 20,
-    "concepts_extracted": 5,
-    "total_audio_duration": 179.27999999999997,
-    "total_words": 546
+    "teaching_units": 10,
+    "vision_analyses": 0,
+    "concepts_extracted": 7,
+    "total_audio_duration": 201.62,
+    "total_words": 550
   },
   "concepts": {
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the ICT, involves identifying and entering trades at specific price levels to maximize profits. To spot it on a chart, key visual characteristics include high and low price levels, significant price movement, and a trading range or volatility of the market. The focus is on identifying and entering trades at specific price levels to maximize profits.",
-      "generation_time_seconds": 31.2620689868927,
+    "bearish optimal trade entry": {
+      "llm_summary": "## Definition\nThe Bearish Optimal Trade Entry is ICT's short-selling entry methodology applied to downward price movements. It uses Fibonacci retracement from a swing high to a swing low, with entries taken when price retraces UP into the 62%-79% zone before continuing lower.\n\n## Rules\n1. Identify a clear swing high and swing low on your timeframe\n2. Apply Fibonacci retracement from swing HIGH to swing LOW (reversed from bullish setup)\n3. Wait for price to retrace UP into the OTE zone (62%-79% retracement)\n4. Enter short positions at the 62%, 70.5%, or 79% retracement level\n5. Place stop loss ABOVE the swing high\n6. Target sell-side liquidity below the previous day's low\n7. Use standard deviation extensions for profit targets (low of range, -0.5, -1.0)\n\n## Identification\n- Price has made a lower high relative to the daily chart structure\n- The market shows willingness to trade below previous days' lows\n- Look for bearish order blocks near the OTE zone for added confluence\n- Entry ideally occurs when price retraces to the OTE zone after taking buy-side liquidity\n- The daily chart should show bearish bias (lower highs, lower lows)",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 37.29999999999999,
-        "word_count": 96,
-        "teaching_units": 2,
-        "frames_analyzed": 3,
-        "deictic_references": 3
+        "teaching_duration_seconds": 60.0,
+        "word_count": 180,
+        "teaching_units": 3,
+        "frames_analyzed": 0,
+        "deictic_references": 6
       },
       "teaching_types": {
-        "explanation": 2
+        "explanation": 2,
+        "demonstration": 1
       }
     },
-    "order block": {
-      "llm_summary": "The \"ORDER BLOCK\" concept refers to a bearish trading strategy where the trader enters a trade into the lower end of a candle, typically a large candle, and the stop loss is placed above the high of the candle. The specific chart patterns ICT is referencing include bearish leading up and setups for specific price levels. The key visual characteristics to spot an ORDER BLOCK are the bearish trend, the large candle, and the specific price levels mentioned or visible on the chart. The trading application for this pattern is to enter a trade into the lower end of a candle and place a stop loss above the high of the candle. The key price levels important in this pattern include the high of the candle, the high of the candle, and the high of the candle.",
-      "generation_time_seconds": 27.815787076950073,
+    "sell-side liquidity": {
+      "llm_summary": "## Definition\nSell-side liquidity refers to clusters of buy stop orders resting below swing lows, previous daily lows, and support levels. These are primarily stop-loss orders from traders who are long, and smart money targets these pools to fill their large short positions at favorable prices.\n\n## Rules\n1. Sell-side liquidity pools exist below previous daily lows\n2. The market seeks this liquidity - it's the REASON price moves down, not the Fibonacci\n3. Price doesn't always reach liquidity in a single run - expect multiple passes\n4. Use the liquidity pool as your profit target framework\n5. Once liquidity is taken, expect potential reversal or continuation to next liquidity pool\n6. The Fib has 'absolutely nothing to do with' why price moves - liquidity is the true driver\n\n## Identification\n- Mark the previous day's low on your chart - sell-side liquidity rests below it\n- Look for areas where multiple lows cluster at similar price levels\n- Price gravitates toward these levels during bearish market conditions\n- The 12th day low, Monday's low, or any significant swing low contains sell-side liquidity\n- Watch for price to sweep below these levels before reversing",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 22.040000000000006,
-        "word_count": 60,
+        "teaching_duration_seconds": 40.0,
+        "word_count": 170,
         "teaching_units": 2,
-        "frames_analyzed": 3,
-        "deictic_references": 3
-      },
-      "teaching_types": {
-        "explanation": 2
-      }
-    },
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a term used in trading to describe the availability of buying and selling opportunities in a market. It refers to the ease with which a large number of buyers and sellers can enter and exit the market at a given price level. In the context of the provided chart analysis, liquidity can be identified by the presence of several bullish indicators, such as \"OB Inside OTE\" patterns, \"+50 handles on 2nd Partial\" patterns, \"+75 handles on 3rd Partial\" patterns, and \"OFF\" patterns, which are all bullish indicators. These patterns indicate that there is a high level of demand and supply in the market, which can lead to increased liquidity. The chart shows a bearish market structure, with the bearish trend visible, and several \"OB Inside OTE\" patterns, which are bullish indicators, supporting the presence of liquidity. The chart also shows annotations and markings, such as \"OFF\" patterns, which are also bullish indicators, and \"OB Inside OTE\" patterns, which are bullish indicators, supporting the presence of liquidity. The chart analysis suggests that liquidity can be identified by the presence of bullish indicators, such as \"OB Inside OTE\" patterns, \"+50 handles on 2nd Partial\" patterns, \"+75 handles on 3rd Partial\" patterns, and \"OFF\" patterns, which are all bullish indicators. The chart analysis also suggests that liquidity can be identified by the presence of bullish indicators, such as \"OB Inside OTE\" patterns, \"+50 handles on 2nd Partial\" patterns, \"+75 handles on 3rd Partial\" patterns, and \"OFF\" patterns, which are all bullish indicators.",
-      "generation_time_seconds": 40.01393008232117,
-      "statistics": {
-        "teaching_duration_seconds": 35.31999999999999,
-        "word_count": 124,
-        "teaching_units": 2,
-        "frames_analyzed": 4,
+        "frames_analyzed": 0,
         "deictic_references": 5
       },
       "teaching_types": {
         "explanation": 2
       }
     },
-    "market structure": {
-      "llm_summary": "The \"MARKET STRUCTURE\" concept refers to the overall pattern and direction of price movements in a financial market. It involves identifying key visual characteristics, such as the presence of \"OB Inside OTE\" patterns, which are bullish indicators, and \"+50 handles on 2nd Partial\" patterns, which are also bullish indicators. These patterns indicate a bearish market structure, with the bearish trend visible on the hourly chart. The bearish trend is further supported by the presence of several \"+75 handles on 3rd Partial\" patterns, which are also bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+50 handles on 2nd Partial\" patterns, which are bullish indicators. The bearish trend is also supported by the presence of several \"+5",
-      "generation_time_seconds": 55.54726982116699,
+    "bearish order block": {
+      "llm_summary": "## Definition\nA bearish order block is the last up-close (bullish) candle before a significant down move. It represents an area where institutional selling occurred, and price is likely to return to this zone during retracements, providing high-probability short entry opportunities.\n\n## Rules\n1. Identify the last bullish candle before a strong bearish impulse move\n2. The order block zone extends from the candle's open to its high\n3. When price retraces to the order block, it provides an entry opportunity\n4. Bearish order blocks align with the OTE zone for confluence\n5. The stop loss goes above the order block high\n6. Order blocks work best when they coincide with other ICT concepts (liquidity, OTE)\n\n## Identification\n- Look for the last green/bullish candle before a sharp decline\n- The candle should have displacement (strong move away from it)\n- Price returning to this zone should show rejection or reversal signs\n- Bearish order blocks in the OTE zone provide the highest probability setups\n- The body of the candle is more significant than its wicks",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 12.460000000000008,
-        "word_count": 34,
+        "teaching_duration_seconds": 30.0,
+        "word_count": 150,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1,
+        "demonstration": 1
+      }
+    },
+    "standard deviation targets for indices": {
+      "llm_summary": "## Definition\nStandard deviation targets for indices (like E-Mini S&P) use 'handles' instead of pips to measure profit objectives. The concept remains the same - projecting the initial range as extensions for systematic profit-taking levels.\n\n## Rules\n1. First partial: Low of the OTE range (approximately 30+ handles on S&P)\n2. Second partial: Half standard deviation (-0.5 extension) - approximately 50 handles\n3. Third partial: One full standard deviation (-1.0 extension) - approximately 75 handles\n4. Handles are index-specific units (1 handle = 1 full point on S&P futures)\n5. Adjust position sizing based on handle targets rather than pip targets\n6. Round targets to quarter levels for practical execution\n\n## Identification\n- Calculate the range from swing high to swing low in handles\n- Project this range as extensions below the swing low for bearish setups\n- S&P often moves in 25-handle increments at key levels\n- Quarter levels (2788.75, 2800.00) often coincide with standard deviation targets\n- Use partial profit-taking at each standard deviation level",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 35.0,
+        "word_count": 160,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "fibonacci as framework": {
+      "llm_summary": "## Definition\nIn ICT methodology, Fibonacci is explicitly stated as a framework for trade management, NOT the reason why price moves. The true driver of price is liquidity - Fibonacci simply helps traders identify potential entry zones and profit targets within the context of liquidity-driven price action.\n\n## Rules\n1. The fib has 'absolutely nothing to do with the reasons why price is going' to certain levels\n2. Use Fib as a measuring tool, not as a predictive indicator\n3. Liquidity below/above key levels is the REASON for price movement\n4. Fib levels help structure entries and exits systematically\n5. Don't worship Fibonacci - understand the underlying market mechanics (liquidity)\n6. Combine Fib with time of day and liquidity concepts for proper context\n\n## Identification\n- Apply Fib to measure ranges and project targets\n- Always ask: 'Where is the liquidity?' rather than 'What does Fib say?'\n- Look for confluences between Fib levels and liquidity pools\n- Use Fib to time entries within the context of a liquidity-driven narrative\n- The framework helps organize trades, not predict exact price levels",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 160,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "multiple passes to liquidity": {
+      "llm_summary": "## Definition\nThe market doesn't always reach liquidity pools in a single directional move. Instead, price often takes 'several passes' with retracements along the way. This understanding helps traders avoid premature exits and recognize re-entry opportunities during the journey to liquidity.\n\n## Rules\n1. Don't expect a single run down to liquidity - anticipate multiple passes\n2. Each retracement provides a potential re-entry opportunity at OTE levels\n3. The ultimate target (liquidity pool) remains the same despite pullbacks\n4. Use partial profit-taking to secure gains during volatile moves\n5. Re-entries during retracements should be at swing high/low OTE zones\n6. Patience is required - liquidity runs may take multiple sessions to complete\n\n## Identification\n- Watch for price to stall before reaching the liquidity target\n- Look for new swing highs forming during the decline (retracements)\n- Each new swing provides a fresh Fib application opportunity\n- The market 'gravitates' back toward liquidity after retracements\n- Multiple attempts to break through a level signal strong liquidity interest",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 150,
         "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 2
+        "frames_analyzed": 0,
+        "deictic_references": 3
       },
       "teaching_types": {
         "explanation": 1
       }
     },
-    "fibonacci": {
-      "llm_summary": "The \"FIBONACCI\" concept, as taught by the ICT (Inner Circle Trader), refers to a specific trading pattern identified on a chart. The pattern involves a trendline or moving average, which is a common indicator used in technical analysis. The chart also features several candlestick patterns, which are used to identify price action and potential support or resistance levels.\n\nThe ICT recommends trading this pattern by identifying the low of the previous day, the low of the current trading session, and the high of the previous day. The price is at or near these levels, which are important price levels to consider. The pattern is particularly useful for identifying potential support or resistance levels, as it can indicate where the market is seeking to find liquidity.\n\nThe \"FIBONACCI\" concept is based on the Fibonacci sequence, a series of numbers where each number is the sum of the two preceding numbers. In trading, the Fibonacci sequence can be used to identify potential retracement levels, where the market retraces a portion of its previous move. The \"FIBONACCI\" pattern can be used to identify these retracement levels, which can be important for traders looking to enter or exit trades.",
-      "generation_time_seconds": 34.94827699661255,
+    "index trading adaptation": {
+      "llm_summary": "## Definition\nICT concepts originally developed for forex apply equally to index futures like the E-Mini S&P. The adaptation requires translating pip-based measurements to handles and understanding index-specific price action characteristics while maintaining the core liquidity and OTE principles.\n\n## Rules\n1. Replace 'pips' with 'handles' for index trading (1 handle = 1 full point)\n2. Use the same OTE levels (62%, 70.5%, 79%) regardless of instrument\n3. Index futures have different session characteristics than forex\n4. S&P liquidity pools form at round numbers (2800, 2850, 2900)\n5. Standard deviation targets scale to index volatility (30, 50, 75 handles typical)\n6. Daily chart analysis remains the foundation for directional bias\n\n## Identification\n- Apply the same swing high/low identification process\n- Mark previous day's high and low for liquidity reference\n- Use handles instead of pips when calculating risk/reward\n- Index futures often gap - account for this in stop placement\n- Round number levels often coincide with institutional liquidity pools",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 22.859999999999985,
-        "word_count": 90,
+        "teaching_duration_seconds": 15.0,
+        "word_count": 150,
         "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 3
+        "frames_analyzed": 0,
+        "deictic_references": 2
       },
       "teaching_types": {
         "explanation": 1

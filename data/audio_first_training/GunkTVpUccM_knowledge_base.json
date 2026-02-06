@@ -1,95 +1,87 @@
 {
   "video_id": "GunkTVpUccM",
-  "generated_at": "2026-02-04T19:35:30.115115",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 43.87016272544861,
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 33,
     "vision_analyses": 52,
-    "concepts_extracted": 8,
-    "total_audio_duration": 653.0399999999998,
-    "total_words": 1629
+    "concepts_extracted": 6,
+    "total_audio_duration": 653.04,
+    "total_words": 1777
   },
   "concepts": {
-    "market structure": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+    "break_of_structure": {
+      "llm_summary": "### Break of Structure (BOS)\n\n#### Definition\nBreak of Structure (BOS) is an ICT/Smart Money concept that indicates the **continuation of a forex trend**. It occurs when price breaks beyond a previous swing point in the direction of the prevailing trend. In a bullish market, BOS occurs when price breaks above the previous swing high. In a bearish market, BOS occurs when price breaks below the previous swing low. BOS is an abbreviation commonly used in Smart Money Concepts (SMC) trading.\n\n#### Identification\n- **Bullish BOS**: Price breaks and closes above the previous swing high, confirming bullish trend continuation.\n- **Bearish BOS**: Price breaks and closes below the previous swing low, confirming bearish trend continuation.\n- **Time Frame Dependency**: BOS is relative to the time frame being analyzed. The daily chart has its own BOS levels, H4 has its own, H1 has its own, and M15 has its own. Each time frame's structure is independent.\n- BOS is a **signal of trend continuation**, not a confirmation of reversal. The instructor emphasizes that BOS is an indication, not a guarantee.\n\n#### Trading Application\n- BOS is used to map the current market structure and determine the prevailing trend direction.\n- Traders use BOS to identify whether the market is in a bullish or bearish phase on their chosen time frame.\n- BOS helps traders align their trades with the overall trend by confirming that the market structure remains intact.\n- Understanding BOS across multiple time frames allows traders to build confluence and find higher-probability entries.\n- The instructor stresses that not every break of a high or low qualifies as a valid BOS -- specific validation rules must be applied (see BOS validation rules concept).",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 439.74,
-        "word_count": 1098,
-        "teaching_units": 21,
-        "frames_analyzed": 35
-      }
+        "teaching_duration_seconds": 180,
+        "word_count": 450,
+        "teaching_units": 8,
+        "frames_analyzed": 10,
+        "deictic_references": 6
+      },
+      "teaching_types": { "explanation": 5, "example": 3 }
     },
-    "swing high": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+    "bos_validation_rules": {
+      "llm_summary": "### BOS Validation Rules (Two-Rule System)\n\n#### Definition\nThe BOS Validation Rules are a two-part framework taught in Smart Money Concepts (SMC) for determining whether a break of structure is genuine (valid) or fake (invalid). The instructor emphasizes that everything in trading is based on rules that minimize risk, and BOS mapping is no exception. Without these rules, traders risk acting on false signals.\n\n#### Identification\nThere are exactly **two rules** that must both be satisfied for a BOS to be considered valid:\n\n**Rule 1 - Inducement Takeout**: Before making a new higher high (bullish) or lower low (bearish), price must first take out the inducement level. The inducement is the minor counter-trend liquidity resting between swing points. The candle does not need to close beyond the inducement -- a wick sweep through the inducement level is sufficient. Both candle wick and candle body closes are valid for this rule.\n\n**Rule 2 - Candle Closing Beyond Previous Swing**: After taking out inducement, a candle body must close above the previous swing high (for bullish BOS) or below the previous swing low (for bearish BOS). This is the more critical rule. A mere wick beyond the level does NOT satisfy this rule -- the candle body must close beyond it.\n\nIf either rule is not met, the break is classified as an **invalid/fake BOS**. If price moves higher without taking out any inducement first, the first rule fails and the BOS is invalid regardless of candle closing.\n\n#### Trading Application\n- Apply both rules sequentially: first check inducement takeout, then check candle closing.\n- These rules filter out many false breakouts that trap retail traders.\n- If both rules are satisfied, the trader can confidently mark the level as valid BOS and use it for structure mapping and trade planning.\n- If either rule fails, the break should be treated as a potential liquidity sweep or false breakout, and the trader should wait for a valid BOS before taking action.\n- The instructor recommends drawing these rules as schematic diagrams on paper for memorization, as they are fundamental to profitable ICT trading.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 8.880000000000003,
-        "word_count": 26,
-        "teaching_units": 1,
-        "frames_analyzed": 1
-      }
+        "teaching_duration_seconds": 220,
+        "word_count": 520,
+        "teaching_units": 10,
+        "frames_analyzed": 12,
+        "deictic_references": 14
+      },
+      "teaching_types": { "explanation": 5, "example": 5 }
     },
-    "swing low": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
+    "inducement_and_bos": {
+      "llm_summary": "### Inducement and BOS (Rule 1)\n\n#### Definition\nInducement in the context of BOS validation refers to the minor counter-trend liquidity that must be taken out before a valid break of structure can occur. The inducement level sits between swing points in a trending market -- it represents the minor pullback lows in a bullish trend or minor pullback highs in a bearish trend. For a BOS to be valid, price must sweep or close through the inducement level before making a new swing high or low.\n\n#### Identification\n- **In a bullish trend**: The inducement is the minor low (pullback low) that forms between two swing highs. Price must dip down and take out this inducement before making a valid higher high.\n- **In a bearish trend**: The inducement is the minor high (pullback high) that forms between two swing lows. Price must rally up and take out this inducement before making a valid lower low.\n- **Sweep vs Close**: For Rule 1, both a candle wick sweep through the inducement level and a candle body close beyond it are valid. The candle does not need to close beyond the inducement -- just touching/sweeping it is sufficient.\n- **No Inducement = Invalid BOS**: If a swing moves directly from one high to a higher high without any pullback that creates inducement, and price doesn't take out any prior inducement, then Rule 1 fails and the resulting BOS is automatically invalid.\n\n#### Trading Application\n- Before marking any BOS level, always check whether price took out the inducement level first.\n- The inducement concept links to the Forex Minions lectures 3 and 4 (the instructor references these for detailed understanding of inducement).\n- Smart money uses inducement levels to accumulate orders. When retail traders place stops at these minor swing points, smart money sweeps those stops (inducement) before driving price to make a genuine structural break.\n- On the real chart example shown in the video, the instructor identifies a swing that moved up without any inducement, marking it as an invalid BOS because the first rule was not met (labeled as '1st Rule Failed -- Swing Without Inducement').\n- Missing inducement is the most common reason for invalid BOS in the examples shown.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 8.880000000000003,
-        "word_count": 26,
-        "teaching_units": 1,
-        "frames_analyzed": 1
-      }
-    },
-    "smart money": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 35.12000000000003,
-        "word_count": 79,
-        "teaching_units": 1,
-        "frames_analyzed": 3
-      }
-    },
-    "higher high": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 20.28,
-        "word_count": 52,
-        "teaching_units": 1,
-        "frames_analyzed": 1
-      }
-    },
-    "order block": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 11.360000000000014,
-        "word_count": 28,
-        "teaching_units": 1,
-        "frames_analyzed": 1
-      }
-    },
-    "liquidity": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 36.739999999999895,
-        "word_count": 90,
-        "teaching_units": 2,
-        "frames_analyzed": 3
-      }
-    },
-    "optimal trade entry": {
-      "llm_summary": "Error generating summary after 3 attempts: [Errno 32] Broken pipe",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 137.76,
-        "word_count": 323,
+        "teaching_duration_seconds": 140,
+        "word_count": 380,
         "teaching_units": 7,
-        "frames_analyzed": 11
-      }
+        "frames_analyzed": 8,
+        "deictic_references": 10
+      },
+      "teaching_types": { "explanation": 4, "example": 3 }
+    },
+    "candle_closing_rules_for_bos": {
+      "llm_summary": "### Candle Closing Rules for BOS (Rule 2)\n\n#### Definition\nThe Candle Closing Rules for BOS constitute the second validation rule for Break of Structure. After inducement has been taken out (Rule 1), a candle's body must close above the previous swing high (bullish) or below the previous swing low (bearish) to confirm a valid BOS. This rule distinguishes between a genuine structural break and a mere liquidity sweep where price only wicks beyond the level.\n\n#### Identification\n**Clear Valid BOS**: When a candle body closes clearly above the previous highest candle's high (bullish), the BOS is valid. This is the straightforward case.\n\n**Clear Invalid BOS (Liquidity Sweep)**: When a candle only wicks above the previous high but the body closes back below the high of the previous highest candle, this is NOT a valid BOS. It is classified as a liquidity sweep.\n\n**Tricky Scenario - Next Candle Confirmation**: If the initial candle sweeps the previous high with a wick (appearing as a liquidity sweep), but the NEXT candle opens and its body closes above the high of that sweeping candle's wick, then the BOS becomes valid. The rule is: always wait for the next candle. If the next candle's body closes above the sweeping candle's high (the wick high), then it is a valid BOS.\n\n**Key Distinction**: The candle body must close above the high of the previous HIGHEST candle (including its wick). If a candle's wick crosses the previous candle's wick but its body closes below that wick high, it remains invalid BOS.\n\n#### Trading Application\n- In the bullish market examples shown, the instructor demonstrates three scenarios side by side: (1) valid BOS with clear candle close above, (2) invalid BOS where the candle only swept the high (liquidity sweep), and (3) a tricky case where the initial sweep looked invalid but the next candle confirmed it as valid BOS.\n- The same rules apply in reverse for bearish markets: candle body must close below the previous swing low.\n- Traders should always wait for candle closure before determining BOS validity. Never act on a candle that is still forming.\n- The visual frames show detailed candlestick chart examples with inducement levels marked, valid BOS with green checkmarks, and invalid BOS/liquidity sweeps with red X marks.\n- The instructor recommends doing paperwork (drawing schematic diagrams) to internalize these candle closing patterns.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 200,
+        "word_count": 480,
+        "teaching_units": 9,
+        "frames_analyzed": 10,
+        "deictic_references": 18
+      },
+      "teaching_types": { "explanation": 4, "example": 5 }
+    },
+    "liquidity_sweep_vs_bos": {
+      "llm_summary": "### Liquidity Sweep vs Break of Structure\n\n#### Definition\nA liquidity sweep occurs when price moves beyond a previous swing high or low (sweeping the liquidity resting there) but fails to close beyond that level, resulting in a wick rejection. This is fundamentally different from a valid BOS where the candle body closes beyond the previous swing point. When a candle sweeps a high with its wick but closes back below, it is a liquidity sweep, NOT a break of structure. The instructor explicitly states that such cases should be marked as liquidity sweeps.\n\n#### Identification\n- **Liquidity Sweep**: Price wicks above/below a swing point but the candle body closes back on the same side. The wick crossed the level but the body did not close beyond it. On the video frames, these are marked with a red X on the BOS label and a green checkmark on the 'Liquidity Sweep' label.\n- **Valid BOS**: Price moves beyond the swing point AND the candle body closes beyond it. Marked with a green checkmark on BOS.\n- **The Key Differentiator**: The candle body close position relative to the previous swing high/low determines whether the event is a liquidity sweep or a genuine BOS.\n- **Next Candle Exception**: If a sweep occurs but the very next candle's body closes above the sweeping candle's wick high (bullish) or below its wick low (bearish), then it converts from liquidity sweep to valid BOS.\n\n#### Trading Application\n- Liquidity sweeps are traps for retail traders who enter on breakouts. Smart money creates these sweeps to fill their orders at better prices before the real move.\n- When you identify a liquidity sweep instead of a valid BOS, do NOT treat it as trend continuation. Instead, it may signal that smart money is accumulating/distributing.\n- The video frames show side-by-side comparisons of valid BOS (left panels) and liquidity sweeps (right panels) for both bullish and bearish markets, making the distinction visually clear.\n- Being able to differentiate liquidity sweeps from genuine BOS is one of the core skills that separates retail traders from smart money traders.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 100,
+        "word_count": 300,
+        "teaching_units": 5,
+        "frames_analyzed": 8,
+        "deictic_references": 8
+      },
+      "teaching_types": { "explanation": 3, "example": 2 }
+    },
+    "retail_vs_smart_money_structure_mapping": {
+      "llm_summary": "### Retail vs Smart Money Structure Mapping\n\n#### Definition\nThis concept contrasts how retail traders and Smart Money Concepts (SMC) traders approach structure mapping, specifically regarding Break of Structure identification. Retail traders mark every break of a swing high or low as a valid BOS, while SMC traders apply the two validation rules (inducement takeout + candle closing) to filter valid from invalid BOS levels. The difference in approach leads to dramatically different trade decisions.\n\n#### Identification\n- **Retail Trader Approach**: The retail trader marks every single break of a previous high as BOS. In the schematic shown, the retail trader marks 5 consecutive BOS levels on a bullish structure without any filtering. This is described as happening due to 'lack of knowledge and no rules.'\n- **Smart Money Approach**: Using the same structure, SMC traders mark only 2 of the 5 breakout points as valid BOS. The remaining 3 are marked as fake/invalid BOS (shown with red X marks). The valid ones (shown with green checkmarks) are the breaks where both rules were satisfied: inducement was taken out AND candle closed beyond the previous swing.\n- The visual frames show both approaches side by side on the same schematic structure, making the contrast stark.\n\n#### Trading Application\n- The retail approach leads to overtrading and entering on false breakouts, resulting in losses.\n- The SMC approach filters for high-probability continuation signals, reducing false entries.\n- The instructor uses this contrast as the motivating example for learning the two BOS validation rules.\n- On the real chart market sample (shown at ~660s), the instructor walks through multiple BOS levels, marking some valid (green check) and others invalid (red X), with annotations showing 'IDM' (inducement) levels and '1st Rule Failed' labels where swings lacked inducement.\n- This structured approach to analyzing BOS is presented as a core competency for any SMC/ICT trader.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 120,
+        "word_count": 350,
+        "teaching_units": 6,
+        "frames_analyzed": 8,
+        "deictic_references": 12
+      },
+      "teaching_types": { "explanation": 3, "example": 3 }
     }
   }
 }

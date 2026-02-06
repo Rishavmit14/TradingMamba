@@ -1,64 +1,71 @@
-# ICT Knowledge Base (LLM-Generated)
+# ICT Knowledge Base (Claude Code Expert Analysis)
 
 **Video ID**: f9rg4BDaaXE
-**Generated**: 2026-02-04T19:33:45.969765
-**Method**: LLM generation per concept using MLX-VLM
-**Total Time**: 34.1 seconds (0.6 minutes)
+**Title**: 03-Pullback & Valid Inducement (Forex Minions)
+**Generated**: 2026-02-05
+**Method**: Claude Code expert analysis of transcript + video frames
+**Video Duration**: 12.0 minutes
 
 ## Processing Statistics
 
 - Teaching Units: 34
-- Vision Analyses: 49
-- Concepts Extracted: 6
-- Total Audio: 8.4 minutes
+- Frames Analyzed: 49
+- Concepts Extracted: 5
+- Total Audio: 10.0 minutes
 
 ---
 
-## BUY STOPS
+## PULLBACK
 
-*Teaching time: 0.4 min | Words: 60 | Frames: 3 | Generation time: 0.0s*
+*Teaching time: 1.0 min | Words: 180 | Frames: 6*
 
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
+### Pullback — Foundation for Valid Inducement
 
----
-
-## INSTITUTIONAL
-
-*Teaching time: 0.8 min | Words: 134 | Frames: 2 | Generation time: 0.0s*
-
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
+A pullback occurs when price pauses and corrects itself or goes against the trend. It is a temporary dip in a trending market. NOT every pullback is valid — validity must be confirmed by a liquidity sweep.
 
 ---
 
-## LIQUIDITY
+## VALID PULLBACK
 
-*Teaching time: 2.8 min | Words: 450 | Frames: 13 | Generation time: 0.0s*
+*Teaching time: 5.0 min | Words: 600 | Frames: 20*
 
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
+### Valid Pullback — The Liquidity Sweep Confirmation
 
----
+The ONLY confirmation factor for a valid pullback is a liquidity sweep.
 
-## OPTIMAL TRADE ENTRY
+**Bullish Market**: Find the HIGHEST candle, the LOW must be broken by next candle(s).
+**Bearish Market**: Find the LOWEST candle, the HIGH must be broken by next candle(s).
 
-*Teaching time: 1.0 min | Words: 135 | Frames: 7 | Generation time: 0.0s*
-
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
-
----
-
-## SELL STOPS
-
-*Teaching time: 0.6 min | Words: 86 | Frames: 4 | Generation time: 0.0s*
-
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
+Both wick-based and body-based sweeps are valid. Teacher provides 8 worked examples with numbered/lettered candles showing valid/invalid cases. Common retail mistake: picking the wrong candle as highest/lowest.
 
 ---
 
-## SMART MONEY
+## LIQUIDITY SWEEP
 
-*Teaching time: 0.9 min | Words: 156 | Frames: 3 | Generation time: 0.0s*
+*Teaching time: 3.0 min | Words: 300 | Frames: 12*
 
-Error generating summary after 3 attempts: [Errno 32] Broken pipe
+### Liquidity Sweep — Institutional Execution Footprint
+
+Expanded from Video 2: sweeps are used by institutions to execute large orders. Smart money targets the LARGER liquidity pool side first. Demonstrated with buy stops (n=100) vs sell stops (n=10,000) example. Mapped from schematic to candlestick form with X cross notation.
 
 ---
 
+## VALID INDUCEMENT
+
+*Teaching time: 2.3 min | Words: 350 | Frames: 8*
+
+### Valid Inducement — First Valid Pullback on Left Side
+
+Inducement is the FIRST VALID PULLBACK on the left side of recent high/low. Systematic identification: find swing point → look left → find first pullback → validate with pullback rules → if valid, mark as IDM. Pullbacks without liquidity sweep are FAKE inducement.
+
+---
+
+## CANDLESTICK ANALYSIS
+
+*Teaching time: 1.7 min | Words: 250 | Frames: 8*
+
+### Candlestick Analysis — Reading Sweep Patterns
+
+Open to Close = body, High/Low beyond body = wicks (sweep zones). Both wick-based and body-based sweeps are valid for pullback confirmation.
+
+---

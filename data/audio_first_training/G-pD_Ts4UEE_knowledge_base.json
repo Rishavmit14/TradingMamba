@@ -1,140 +1,119 @@
 {
   "video_id": "G-pD_Ts4UEE",
-  "generated_at": "2026-02-05T11:43:54.409154",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 307.062784910202,
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 42,
     "vision_analyses": 66,
-    "concepts_extracted": 9,
-    "total_audio_duration": 897.9399999999993,
-    "total_words": 2219
+    "concepts_extracted": 7,
+    "total_audio_duration": 897.94,
+    "total_words": 2598
   },
   "concepts": {
-    "market structure": {
-      "llm_summary": "**MARKET STRUCTURE**:\n\n1. **Definition**: Market structure refers to the overall framework and dynamics of a market, including the relationships between different market participants, the types of transactions, and the overall market volume and liquidity.\n\n2. **Identification**: To spot market structure on a chart, look for key visual characteristics such as:\n   - The distribution of market participants (e.g., the number of buyers and sellers).\n   - The types of transactions (e.g., buy, sell, and trade).\n   - The overall market volume and liquidity (e.g., the number of transactions and the size of the trades).\n   - The price levels and price movements (e.g., high, low, and close prices).\n   - The time frame and the time of day (e.g., daily, weekly, and hourly data).\n   - The presence of specific market patterns (e.g., trend, consolidation, and reversal).\n\n3. **Trading Application**: ICT recommends trading market structure patterns by focusing on key price levels and identifying the direction of price movement. For example, a bullish candlestick pattern indicates a strong upward trend, while a bearish candlestick pattern indicates a strong downward trend. Traders should also pay attention to the overall market volume and liquidity, as these factors can influence the direction of price movements.\n\n4. **Key Price Levels**: Key price levels in market structure charts include:\n   - High price\n   - Low price\n   - Close price\n   - Open price\n   - High price\n   - Low price\n   - Close price\n   - High price\n   - Low price\n   - Close price\n\n**Summary**:\nMarket structure is a fundamental aspect of trading, providing insights into the overall dynamics and relationships within a market. Traders should focus on identifying key visual characteristics such as distribution of market participants, types of transactions, overall market volume and liquidity, and specific market patterns. By understanding market structure, traders can make informed decisions and potentially capitalize on opportunities in the market.",
-      "generation_time_seconds": 31.42078423500061,
+    "price delivery cycle": {
+      "llm_summary": "### Price Delivery Cycle\n\n#### Definition\nThe Price Delivery Cycle is the fundamental framework describing how price is delivered in the forex market. It consists of four core elements that operate in a cyclical, repeating pattern: Consolidation (Range), Expansion (Break of Structure), Retracement (Pullback/Correction), and Reversal (Change of Character / CHoCH). These four elements are the pillars of all price movement, and price always moves through this cycle in a natural process.\n\n#### Identification\nTo identify where the market is within the price delivery cycle, traders must recognize which of the four states price is currently in:\n- **Consolidation**: Price is moving sideways in a defined range between two levels (what retail traders call support and resistance). There is no clear trend.\n- **Expansion**: Price moves quickly and aggressively out of a consolidation zone, indicating smart money entry. This aligns with Break of Structure (BOS).\n- **Retracement**: A pullback occurs after expansion, where price retraces to fill imbalance zones and liquidity voids created during expansion.\n- **Reversal**: A Change of Character (CHoCH) occurs where the direction of the price trend changes completely, typically triggered after market grabs a large liquidity pool.\n\nThe cycle is visualized as a four-node diagram: Consolidation -> Expansion -> Retracement -> Reversal -> back to Consolidation.\n\n#### Trading Application\nThe price delivery cycle is the foundation for anticipating what comes next in the market. After identifying the current state, traders can predict the next probable state. Consolidation is the beginning of everything in the price cycle. After consolidation, expect expansion. After expansion, expect retracement or consolidation. After retracement, expect expansion or reversal. After reversal, expect consolidation or retracement. This cycle repeats indefinitely on all timeframes. The cycle applies to all forex pairs and timeframes, forming the basis for designing entry setups within the broader ICT methodology covering price theory, macro analysis, intermarket analysis, and price-and-time theory.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 100.5,
-        "word_count": 254,
-        "teaching_units": 4,
-        "frames_analyzed": 5,
-        "deictic_references": 2
+        "teaching_duration_seconds": 1122.0,
+        "word_count": 2598,
+        "teaching_units": 42,
+        "frames_analyzed": 14,
+        "deictic_references": 25
       },
       "teaching_types": {
-        "explanation": 4
+        "explanation": 30,
+        "example": 12
       }
     },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a technical trading tool used in the forex market to identify potential entry points. It involves identifying a specific price level, such as a high or low, and then identifying the order book at that price level. The order book represents the number of shares of a particular stock or other security that are available for sale or purchase at a given price. When an order is placed at a specific price level, the order book will show the number of shares available for sale or purchase at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the order book at that price level. The order block concept is used to identify potential entry points in the forex market by identifying a specific price level and then identifying the",
-      "generation_time_seconds": 45.59128499031067,
+    "consolidation": {
+      "llm_summary": "### Consolidation\n\n#### Definition\nConsolidation is an area where price creates a range between two points, moving within a defined range. It indicates the lack of a clear trend in a particular trading range. In retail terminology, the upper level is called resistance and the lower level is called support, though from an ICT perspective these are liquidity levels. Consolidation is also referred to as a ranging market or trading range.\n\n#### Identification\nConsolidation is identified on a chart by recognizing a sideways price pattern where price oscillates between a defined upper boundary and lower boundary. On a candlestick chart, it appears as a series of candles contained within a horizontal channel. The schematic diagram shows price bouncing between resistance (upper line) and support (lower line) with no directional bias. The range is clearly defined with visible highs and lows that respect these horizontal levels.\n\n#### Importance\nConsolidation is the starting point of the entire price delivery cycle. It serves as the process of making something stronger because it creates liquidity. Breakout traders set their pending orders on both sides of the consolidation range (above resistance and below support). These pending orders create liquidity pools. The higher the number of orders, the higher the liquidity. When there is a bigger liquidity pool, the market will grab it to make a bigger move. This is why a significant price move can be expected after a consolidation phase.\n\n#### Trading Application\nTraders should recognize consolidation as a setup phase rather than a trading phase. It signals that a large move (expansion) is likely to follow. The key is to wait for the consolidation to complete and identify the liquidity grab (manipulation) that typically precedes expansion. Consolidation is the beginning of the price cycle, and recognizing it allows traders to prepare for the expansion phase where entry opportunities arise.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 121.85999999999996,
-        "word_count": 313,
-        "teaching_units": 4,
-        "frames_analyzed": 7,
-        "deictic_references": 5
-      },
-      "teaching_types": {
-        "explanation": 4
-      }
-    },
-    "imbalance": {
-      "llm_summary": "### Summary of IMBALANCE Concept\n\n#### Definition\nImbalance refers to a condition where the price action does not align with the expected direction, indicating potential for price action to retrace or correct. This can occur after an expansion phase, where the price line is not perfectly aligned with the trend.\n\n#### Identification\nImbalance can be identified by observing specific chart patterns and price levels. Key visual characteristics include:\n1. **Order Block**:\n   - Highlighted areas on a chart where the order block is present, indicating critical price levels or zones where traders are likely to enter or exit the trade.\n\n#### Trading Application\nICT recommends trading this pattern by focusing on specific entry zones, such as retracement areas, which occur after an expansion phase. These entry zones are crucial for identifying potential retracement opportunities, which can fill the price imbalance and liquidity voids.\n\n#### Key Price Levels\nKey price levels important for trading IMBALANCE include:\n1. **Retracement**:\n   - A common pattern where the price line retraces after an expansion phase, indicating potential retracement opportunities.\n\n#### Conclusion\nImbalance is a critical concept in trading, representing a price imbalance where the price action does not align with the expected direction. By identifying specific chart patterns and price levels, traders can effectively trade this pattern, focusing on retracement areas to fill the price imbalance and liquidity voids.",
-      "generation_time_seconds": 26.907663106918335,
-      "statistics": {
-        "teaching_duration_seconds": 118.31999999999994,
-        "word_count": 296,
-        "teaching_units": 3,
-        "frames_analyzed": 7,
-        "deictic_references": 7
-      },
-      "teaching_types": {
-        "explanation": 3
-      }
-    },
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying specific areas on a trading chart that relate to optimal trade entry. These areas include:\n\n1. **Effects of Bond Market and Treasury Notes**: The chart focuses on identifying specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n2. **Identification**: The chart identifies specific areas on the trading chart that relate to optimal trade entry. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n3. **Trading Application**: The chart recommends trading this pattern by focusing on specific areas on the trading chart that relate to optimal trade entry. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n4. **Key Price Levels**: The chart mentions specific price levels, such as:\n   - Price levels\n\n5. **Key Visual Characteristics**: The chart focuses on identifying specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n6. **Trading Application**: The chart recommends trading this pattern by focusing on specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n7. **Key Price Levels**: The chart mentions specific price levels, such as:\n   - Price levels\n\n8. **Key Visual Characteristics**: The chart focuses on identifying specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n9. **Trading Application**: The chart recommends trading this pattern by focusing on specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n   - Effects of bond market and treasury notes\n   - Seasonal tendency\n   - Price theory\n   - Induced structure mapping\n   - Macro-analysis\n\n10. **Key Price Levels**: The chart mentions specific price levels, such as:\n    - Price levels\n\n11. **Key Visual Characteristics**: The chart focuses on identifying specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n    - Effects of bond market and treasury notes\n    - Seasonal tendency\n    - Price theory\n    - Induced structure mapping\n    - Macro-analysis\n\n12. **Trading Application**: The chart recommends trading this pattern by focusing on specific areas on the trading chart that relate to optimal trade entry, such as effects of bond market and treasury notes, seasonal tendency, price theory, induced structure mapping, and macro-analysis. These areas include:\n    - Effects of",
-      "generation_time_seconds": 44.88077092170715,
-      "statistics": {
-        "teaching_duration_seconds": 124.0199999999999,
-        "word_count": 306,
-        "teaching_units": 4,
-        "frames_analyzed": 8,
+        "teaching_duration_seconds": 140.0,
+        "word_count": 500,
+        "teaching_units": 10,
+        "frames_analyzed": 4,
         "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 4
+        "explanation": 7,
+        "example": 3
       }
     },
-    "liquidity": {
-      "llm_summary": "The \"LIQUIDITY\" concept in the context of the Inner Circle Trader methodology involves the creation of market liquidity through consolidation. This occurs when breakout traders set their orders on both sides of a price range, creating pending orders that contribute to the overall market liquidity. The consolidation phase, or trading range, is characterized by specific price levels, such as the high and low of the consolidation range, and is marked by annotations and markings, such as the high. The liquidity concept is essential for market movement, as it allows for the capture of market momentum by larger liquidity pools. The trading application of this pattern involves identifying and trading the consolidation phase, which can lead to significant market movements.",
-      "generation_time_seconds": 21.833741188049316,
+    "expansion": {
+      "llm_summary": "### Expansion\n\n#### Definition\nExpansion is a sign of trend continuation and corresponds to a Break of Structure (BOS). It occurs when price moves quickly and aggressively after a consolidation phase, in the form of speed or displacement. Expansion represents the phase where smart money has entered the market and pushed price directionally with force.\n\n#### Identification\nExpansion is identified by rapid, one-directional price movement following a period of consolidation. On a candlestick chart, it appears as a series of strong, large-bodied candles moving in one direction with minimal wicks on the opposing side. The price breaks out of the consolidation range with momentum. Before the expansion, there is typically a liquidity grab or manipulation move where price briefly moves against the eventual expansion direction to sweep liquidity on one side of the range.\n\n#### Importance\nExpansion is critically important because it indicates smart money footprints, meaning institutional traders have entered the market at this point. The start of expansion provides the entry zone for traders. Entry zones found near the start of expansion can take the form of: Bullish or Bearish Order Blocks, Liquidity Voids or Price Imbalance zones, and Supply/Demand Zones. The expansion creates imbalance in price (one-sided movement) which will later need to be corrected through retracement.\n\n#### Trading Application\nTraders should always look for entry zones near the start of expansion. The starting zone of expansion provides the entry zone. When a consolidation phase is identified, traders should anticipate that expansion will follow and prepare to identify the entry zone at the origin of the expansion move. The entry zone is where smart money initiated the aggressive price move, and trading from this zone aligns the retail trader with institutional order flow. The liquidity grab or manipulation that occurs before expansion serves as a confirmation signal.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 149.05999999999995,
-        "word_count": 396,
-        "teaching_units": 9,
-        "frames_analyzed": 14,
-        "deictic_references": 17
-      },
-      "teaching_types": {
-        "explanation": 9
-      }
-    },
-    "smart money": {
-      "llm_summary": "SMART MONEY is a trading methodology that focuses on identifying and trading in the expansion phase of a price cycle. The key visual characteristics of SMART MONEY include:\n\n1. **Expansion Pattern**: The chart shows a purple expansion pattern, indicating a significant increase in price.\n2. **Entry Zone**: The chart mentions looking for entry zones near the start of the expansion pattern, suggesting these are critical points where the price action starts to increase significantly.\n3. **Price Levels**: Specific price levels, such as the start of the expansion pattern, are important, as they provide critical entry points for trading.\n\nBased on the teaching transcript and chart analysis, SMART MONEY recommends trading in the expansion phase of a price cycle. The methodology suggests looking for entry zones near the start of the expansion pattern, as these are critical points where the price action starts to increase significantly. The purple expansion pattern on the chart visually represents the expansion phase, and the entry zones near the start of the expansion pattern are important for identifying potential trading opportunities.",
-      "generation_time_seconds": 28.18421506881714,
-      "statistics": {
-        "teaching_duration_seconds": 58.8599999999999,
-        "word_count": 145,
-        "teaching_units": 3,
+        "teaching_duration_seconds": 170.0,
+        "word_count": 530,
+        "teaching_units": 10,
         "frames_analyzed": 5,
-        "deictic_references": 9
+        "deictic_references": 10
       },
       "teaching_types": {
-        "explanation": 3
+        "explanation": 6,
+        "example": 4
       }
     },
-    "manipulation": {
-      "llm_summary": "The \"MANIPULATION\" concept in the context of the ICT (Inner Circle Trader) methodology involves the manipulation of market conditions by smart money, typically large institutions or high-frequency traders. The key visual characteristics of manipulation on a chart include:\n\n1. **Consolidation Phase**: The chart shows a period of price stability or inactivity, indicating a lack of significant price movement.\n2. **Expansion Phase**: Following the consolidation phase, there is a period of rapid price movement, characterized by large liquidity on either side of the range, indicating a strong buying or selling pressure.\n3. **Entry Zone**: The start of the expansion phase is marked by an entry zone, which is a specific price level where traders enter the market.\n4. **Key Price Levels**: The chart does not explicitly mention specific price levels, but the consolidation phase is typically characterized by a range of prices, and the expansion phase follows with a wider range.\n5. **Annotations, Markings, and Annotations**: The chart may include annotations, markings, and annotations to highlight specific price movements or patterns.\n\nThe trading application of manipulation involves identifying the entry zone and entering the market at that specific price level. Once the market expands, traders can take positions based on the new price levels, aiming to profit from the increased liquidity and potential for further price movement. The key price levels are important for traders to enter the market and execute trades, and the consolidation phase provides a period of price stability to build momentum and confidence in the expansion phase.",
-      "generation_time_seconds": 31.61517882347107,
+    "retracement": {
+      "llm_summary": "### Retracement\n\n#### Definition\nRetracement is a pullback within the price range that mostly occurs after expansion. It is also known as correction. The term correction refers to the market correcting itself by balancing imbalanced price. Retracement is the mechanism by which the market fills price imbalance zones and liquidity voids that were created during the expansion phase.\n\n#### Identification\nRetracement is identified as a price movement that goes against the direction of the prior expansion. After an expansion move upward, retracement appears as a downward pullback. On a chart, it can be seen as price returning to an area where one-sided movement previously occurred (the imbalance zone). The retracement area often overlaps with the price imbalance or liquidity void zones from the prior expansion. A Fair Value Gap (FVG) is noted as a refined form of liquidity void, relevant to identifying retracement targets.\n\n#### Importance\nRetracement corrects the market by balancing the imbalance price created during expansion. Where price only moves in one direction (creating imbalance), retracement fills that void. This is critical because price imbalance means price only moved one way, and the market naturally seeks to revisit and fill these zones. Retracement fills: Price Imbalance / Liquidity Voids and Fair Value Gaps (FVG), which are a refined form of liquidity void.\n\n#### Trading Application\nAfter identifying an expansion phase, traders should anticipate retracement as the next likely state. The retracement zone is where price returns to fill the imbalance created during expansion. Understanding retracement helps traders avoid entering at the end of an expansion move and instead wait for the pullback to find better entry points. After retracement completes its purpose of filling the void, the market typically expands again, creating a new trading opportunity.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 33.0,
-        "word_count": 83,
-        "teaching_units": 2,
+        "teaching_duration_seconds": 120.0,
+        "word_count": 380,
+        "teaching_units": 7,
+        "frames_analyzed": 4,
+        "deictic_references": 7
+      },
+      "teaching_types": {
+        "explanation": 5,
+        "example": 2
+      }
+    },
+    "reversal": {
+      "llm_summary": "### Reversal\n\n#### Definition\nReversal is a sign of Change of Character (CHoCH). It occurs when the direction of a price trend has changed, from going up to going down, or vice versa. A reversal marks the transition point where the prevailing trend ends and a new trend in the opposite direction begins. This concept connects directly to the Sweep Base CHoCH model covered in prior lectures on structure mapping.\n\n#### Identification\nReversal is identified on a chart by observing a trend change. In a bullish-to-bearish reversal, price was making higher highs and higher lows, then after the reversal point, begins making lower highs and lower lows. The key visual characteristic is the sweeping of a large liquidity pool followed by aggressive movement in the opposite direction. The reversal point itself is the specific price level where the direction change occurs. On the real market chart example shown, price was bullish, swept a large liquidity pool at the highs, and then transitioned to the bearish side.\n\n#### Importance\nReversal gives an advance warning to trend traders who follow the trend to design their buy and sell models. It signals that the current trend is ending and a new one is forming. Critically, reversal mostly happens when the market grabs a large liquidity pool. This connects to the Sweep Base CHoCH model from structure mapping. Understanding reversal is essential for avoiding being caught on the wrong side of a trend change and for identifying the beginning of new trending opportunities.\n\n#### Trading Application\nTraders should watch for liquidity pool sweeps as precursors to reversals. When a large liquidity pool is grabbed and price shows Change of Character, this signals a reversal. After a reversal occurs, the cycle returns to consolidation or retracement, providing the framework for anticipating the next phase. Trend traders must be aware of reversal signals to protect existing positions and identify new directional opportunities in the reversed trend.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 100.0,
+        "word_count": 300,
+        "teaching_units": 6,
         "frames_analyzed": 3,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 2
+      }
+    },
+    "price cycle interchangeability rules": {
+      "llm_summary": "### Price Cycle Interchangeability Rules\n\n#### Definition\nThe price cycle interchangeability rules define the allowed and prohibited transitions between the four elements of the price delivery cycle. While the four states (Consolidation, Expansion, Retracement, Reversal) are interchangeable, they follow specific rules about which state can follow which. Price cannot bypass the cycle; the elements are not directly interlinked in arbitrary ways. Each state transition must follow the natural process of the cycle.\n\n#### Allowed Transitions\nThe following transitions are permitted within the price cycle:\n- **Consolidation** can lead to: Expansion or Reversal\n- **Expansion** can lead to: Retracement or Consolidation\n- **Retracement** can lead to: Expansion or Reversal\n- **Reversal** can lead to: Consolidation or Retracement\n\n#### Prohibited Transitions\nThe following transitions cannot occur (price cannot bypass these rules):\n- **After Expansion, Reversal cannot occur directly** - Market cannot go to reversal zone directly after expansion; it must pass through retracement or consolidation first.\n- **After Consolidation, Retracement cannot occur** - Market cannot go to retracement after consolidation.\n- **After Retracement, Consolidation cannot occur directly** - Market cannot directly go to consolidation after retracement.\n\n#### Trading Application\nThese rules provide a structured framework for anticipating the next market state. When a trader identifies the current phase, they can narrow down the possible next states to only two options, significantly improving trade anticipation. For example, if the market is in expansion, the trader knows only retracement or consolidation can follow, never a direct reversal. This eliminates incorrect market expectations and helps traders position themselves for the most probable next move. Some abnormalities may be seen, but the cycle should be the primary framework for anticipation.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 180.0,
+        "word_count": 420,
+        "teaching_units": 10,
+        "frames_analyzed": 4,
         "deictic_references": 6
       },
       "teaching_types": {
-        "explanation": 2
+        "explanation": 8,
+        "example": 2
       }
     },
-    "institutional": {
-      "llm_summary": "The \"INSTITUTIONAL\" concept refers to large, possibly institutional, traders who are identified by the term \"smart money\" and are known for their liquidity and ability to control market prices. These traders are often seen as the primary drivers of market expansion and are important for the overall health and stability of the market. The term \"institutional\" is used to describe these traders because they are large enough to have a significant impact on the market, and they are often seen as the primary drivers of market expansion and growth.",
-      "generation_time_seconds": 25.003752946853638,
+    "liquidity in price cycle": {
+      "llm_summary": "### Liquidity in Price Cycle\n\n#### Definition\nLiquidity in the context of the price delivery cycle refers to the pool of pending orders that accumulate around key price levels, particularly at the boundaries of consolidation ranges. This liquidity is the fuel that enables market movement. Consolidation creates liquidity, and smart money uses this liquidity to initiate expansion moves. The concept of liquidity connects consolidation to expansion through the mechanism of manipulation or liquidity grabs.\n\n#### Identification\nLiquidity accumulates at the highs and lows of a consolidation range where breakout traders place their pending orders. What retail traders label as resistance (upper range boundary) and support (lower range boundary) are actually liquidity zones from the ICT perspective. On charts, the liquidity grab appears as a brief price spike beyond the consolidation range boundary before the true expansion occurs. This is labeled as manipulation by smart money. In schematic diagrams, it is shown as price sweeping below support or above resistance before reversing into the expansion direction.\n\n#### Role in the Cycle\nLiquidity serves multiple roles throughout the price delivery cycle:\n1. **In Consolidation**: Breakout traders set orders on both sides of the range, building liquidity pools. Higher order count equals higher liquidity.\n2. **In Manipulation/Expansion Transition**: Smart money grabs the large liquidity pool on one side of the range before expanding in the opposite direction. This liquidity grab funds the expansion move.\n3. **In Reversal**: Reversals mostly happen when the market grabs a large liquidity pool, typically at significant swing highs or lows.\n\n#### Trading Application\nTraders should recognize that consolidation zones are liquidity-building zones, not trading zones. The larger the consolidation (more orders/liquidity), the bigger the expected expansion move. Always watch for the manipulation/liquidity grab that precedes expansion as a confirmation signal. At reversal points, the sweeping of a large liquidity pool triggers the CHoCH. Understanding liquidity flow through the cycle helps traders avoid being the liquidity (retail stop hunts) and instead trade alongside smart money after the grab occurs.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 10.460000000000036,
-        "word_count": 27,
-        "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 2
+        "teaching_duration_seconds": 160.0,
+        "word_count": 400,
+        "teaching_units": 9,
+        "frames_analyzed": 5,
+        "deictic_references": 10
       },
       "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "fair value gap": {
-      "llm_summary": "The \"FAIR VALUE GAP\" concept in trading refers to a significant difference in price between two points on a chart, often used to identify potential entry zones for traders. To spot it on a chart, key visual characteristics include identifying specific areas labeled \"Fair Value Gap\" and focusing on price levels and patterns that indicate a gap between two points. Traders can use this concept to identify opportunities to enter the market, as the fair value gap represents a potential price imbalance that can be filled with liquidity. The fair value gap is a refined form of liquidity void and is recommended for trading based on the trading-focused summary provided.",
-      "generation_time_seconds": 50.72387981414795,
-      "statistics": {
-        "teaching_duration_seconds": 30.639999999999986,
-        "word_count": 79,
-        "teaching_units": 1,
-        "frames_analyzed": 3,
-        "deictic_references": 1
-      },
-      "teaching_types": {
-        "explanation": 1
+        "explanation": 7,
+        "example": 2
       }
     }
   }

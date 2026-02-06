@@ -575,6 +575,17 @@ async def analyze_symbol(
                         'mitigated': bool(ob.mitigated),
                     })
 
+                # Mitigated order blocks (faded visualization)
+                for mob in analysis.mitigated_order_blocks:
+                    all_patterns.append({
+                        'pattern_type': f'{mob.type}_mitigation_block',
+                        'high': float(mob.high),
+                        'low': float(mob.low),
+                        'start_index': int(mob.start_index),
+                        'timeframe': tf,
+                        'mitigated': True,
+                    })
+
                 for fvg in analysis.fair_value_gaps:
                     if fvg.filled:
                         continue  # Skip filled FVGs
@@ -588,9 +599,10 @@ async def analyze_symbol(
                         'fill_percentage': float(fvg.fill_percentage) if fvg.fill_percentage else 0.0,
                     })
 
-                # Also add market structure events (BOS/CHoCH)
+                # Also add market structure events (BOS/CHoCH + HH/HL/LH/LL)
                 for event in analysis.structure_events:
-                    if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish']:
+                    if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
+                                       'higher_high', 'higher_low', 'lower_high', 'lower_low']:
                         all_patterns.append({
                             'pattern_type': event.type,
                             'price': float(event.level),
@@ -688,6 +700,39 @@ async def analyze_symbol(
                             'timeframe': tf,
                             'distance_pct': float(ss.get('distance_pct', 0)),
                         })
+
+                # Swing point markers (most recent 3 highs + 3 lows)
+                swing_highs = [sp for sp in analysis.swing_points if sp.type == 'high'][-3:]
+                swing_lows = [sp for sp in analysis.swing_points if sp.type == 'low'][-3:]
+                for sp in swing_highs + swing_lows:
+                    all_patterns.append({
+                        'pattern_type': f'swing_{sp.type}',  # 'swing_high' or 'swing_low'
+                        'price': float(sp.price),
+                        'start_index': int(sp.index),
+                        'timeframe': tf,
+                        'strength': int(sp.strength),
+                    })
+
+                # Premium/Discount zone overlay
+                pd_data = analysis.premium_discount
+                if pd_data.get('range_high') and pd_data.get('range_low') and pd_data.get('equilibrium'):
+                    all_patterns.append({
+                        'pattern_type': 'premium_zone',
+                        'high': float(pd_data['range_high']),
+                        'low': float(pd_data['equilibrium']),
+                        'timeframe': tf,
+                    })
+                    all_patterns.append({
+                        'pattern_type': 'discount_zone',
+                        'high': float(pd_data['equilibrium']),
+                        'low': float(pd_data['range_low']),
+                        'timeframe': tf,
+                    })
+                    all_patterns.append({
+                        'pattern_type': 'equilibrium',
+                        'price': float(pd_data['equilibrium']),
+                        'timeframe': tf,
+                    })
 
                 analyses[tf] = {
                     'bias': analysis.bias.value,
@@ -2014,10 +2059,18 @@ async def get_ml_pattern_knowledge():
         engine = get_ml_engine()
         summary = engine.get_knowledge_summary()
 
+        # Count expert-trained patterns
+        patterns_learned = summary.get('patterns_learned', [])
+        expert_count = 0
+        if hasattr(engine, 'knowledge_base') and engine.knowledge_base:
+            for p in engine.knowledge_base.patterns_learned.values():
+                if p.learned_traits.get('expert_trained', False):
+                    expert_count += 1
+
         return {
             "status": summary.get('status', 'unknown'),
             "message": summary.get('message', ''),
-            "patterns_learned": summary.get('patterns_learned', []),
+            "patterns_learned": patterns_learned,
             "patterns_not_learned": summary.get('patterns_not_learned', []),
             "training_stats": {
                 "total_videos": summary.get('total_videos', 0),
@@ -2025,10 +2078,16 @@ async def get_ml_pattern_knowledge():
                 "chart_frames": summary.get('chart_frames', 0),
                 "last_trained": summary.get('last_trained'),
             },
+            "training_method": {
+                "primary": "Claude Code expert analysis",
+                "fallback": "MLX-VLM (Qwen2-VL-2B)",
+                "expert_trained_patterns": expert_count,
+                "total_patterns": len(patterns_learned),
+            },
             "training_sources": summary.get('training_sources', []),
             "usage_info": {
                 "note": "Live charts ONLY detect patterns from 'patterns_learned' list.",
-                "to_learn_more": "Train more videos using Vision Training to expand ML knowledge.",
+                "to_learn_more": "Train new playlists using Claude Code for expert-quality knowledge.",
             }
         }
     except Exception as e:
@@ -2849,9 +2908,14 @@ async def websocket_live_price(websocket: WebSocket, symbol: str):
 async def get_live_ohlcv(
     symbol: str,
     timeframe: str = Query("M1", description="Timeframe"),
-    limit: int = Query(100, description="Number of candles")
+    limit: int = Query(100, description="Number of candles"),
+    end_time: Optional[int] = Query(None, description="End time (Unix timestamp in seconds) - fetch candles before this time for historical scrollback")
 ):
-    """Get OHLCV data for live charting - uses Binance Futures for crypto"""
+    """Get OHLCV data for live charting - uses Binance Futures for crypto
+
+    If end_time is provided, fetches historical data ending at that timestamp.
+    This enables infinite scrollback when user pans left on the chart.
+    """
     import httpx
 
     # Crypto symbols that use Binance Futures
@@ -2882,13 +2946,18 @@ async def get_live_ohlcv(
         if is_crypto and binance_symbol:
             # Use Binance Futures API for crypto OHLCV data
             async with httpx.AsyncClient() as client:
+                params = {
+                    'symbol': binance_symbol,
+                    'interval': binance_interval,
+                    'limit': limit
+                }
+                # Add endTime for historical scrollback (Binance uses milliseconds)
+                if end_time:
+                    params['endTime'] = end_time * 1000
+
                 response = await client.get(
                     "https://fapi.binance.com/fapi/v1/klines",
-                    params={
-                        'symbol': binance_symbol,
-                        'interval': binance_interval,
-                        'limit': limit
-                    },
+                    params=params,
                     timeout=10.0
                 )
 
@@ -2919,7 +2988,7 @@ async def get_live_ohlcv(
             from .services.free_market_data import FreeMarketDataService
 
             market_service = FreeMarketDataService()
-            df = market_service.get_ohlcv(symbol, timeframe, limit=limit)
+            df = market_service.get_ohlcv(symbol, timeframe, limit=limit, end_time=end_time)
 
             if df is None or df.empty:
                 raise HTTPException(status_code=404, detail=f"No data for {symbol}")

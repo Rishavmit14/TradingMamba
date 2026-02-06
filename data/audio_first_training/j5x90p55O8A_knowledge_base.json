@@ -1,84 +1,99 @@
 {
   "video_id": "j5x90p55O8A",
-  "generated_at": "2026-02-03T11:53:57.597031",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 190.54260182380676,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
-    "teaching_units": 12,
-    "vision_analyses": 18,
-    "concepts_extracted": 5,
-    "total_audio_duration": 198.17999999999998,
-    "total_words": 532
+    "teaching_units": 8,
+    "vision_analyses": 0,
+    "concepts_extracted": 6,
+    "total_audio_duration": 253.93,
+    "total_words": 600
   },
   "concepts": {
     "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the ICT (Inner Circle Trader), involves identifying and entering trades based on specific price levels and Fibonacci retracement levels. The concept is based on the idea of identifying potential support and resistance levels in the market, which can be used to enter trades with a higher probability of success. The chart analysis provided in the video shows the formation of a bearish trend in the Australian Dollar (AUD) versus the U.S. Dollar (USD) currency pair, with specific price levels and annotations. The traders recommend entering trades at key Fibonacci retracement levels, such as the 79th retracement level, which is a sweet spot and price expands above. The stops are set at the 70.5 level, and the targets are projected up for potential targets. The traders also emphasize the importance of risk management and the need to consider all risks associated with off-exchange foreign currency trading.",
-      "generation_time_seconds": 27.305067777633667,
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) is ICT's signature entry methodology that uses Fibonacci retracement levels to identify high-probability entry zones during price retracements. The OTE zone specifically targets the 62% to 79% retracement area, with the 70.5% level considered the 'sweet spot' for entries.\n\n## Rules\n1. Identify a clear swing high and swing low on your timeframe\n2. Apply Fibonacci retracement from swing low to swing high (for longs) or high to low (for shorts)\n3. Wait for price to retrace into the OTE zone (62%-79% retracement)\n4. The 70.5% level is the optimal entry point within this zone\n5. Use a 10-pip stop loss below the swing low for longs (or above swing high for shorts)\n6. Target standard deviation levels (-0.5, -1.0, -1.5, -2.0) for profit taking\n\n## Identification\n- Look for price to 'pierce' a key liquidity level (previous daily high/low)\n- Wait for price to retrace during the New York session\n- Entry confirmation comes when price touches the 70.5% or 79% retracement level\n- Multiple touches of the OTE zone increase confluence\n- The entry candle should show signs of rejection or reversal",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 57.34000000000001,
-        "word_count": 160,
+        "teaching_duration_seconds": 80.0,
+        "word_count": 200,
+        "teaching_units": 4,
+        "frames_analyzed": 0,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 3,
+        "demonstration": 1
+      }
+    },
+    "fibonacci retracement": {
+      "llm_summary": "## Definition\nFibonacci retracement in ICT methodology uses specific levels derived from the Fibonacci sequence to identify potential support and resistance zones. Unlike traditional Fibonacci usage, ICT emphasizes the 62%, 70.5%, and 79% levels as the primary OTE zone, with additional standard deviation extensions for profit targets.\n\n## Rules\n1. Apply Fib from swing low to swing high for bullish setups (0 at low, 100 at high)\n2. Apply Fib from swing high to swing low for bearish setups (0 at high, 100 at low)\n3. Key retracement levels: 62% (0.62), 70.5% (0.705), 79% (0.79)\n4. Extension levels for targets: -0.5 (half standard deviation), -1.0 (one standard deviation), -1.5, -2.0\n5. Use Fib as a framework, not as exact price levels - round to nearby institutional levels\n6. Big figure levels (e.g., 0.6600) often align with Fib extensions\n\n## Identification\n- Identify the most recent significant swing high and swing low\n- The swing should be clear and definitive on the timeframe being analyzed\n- Fib levels provide a 'rough idea' of trade structure, not exact execution prices\n- Always combine with time of day (New York session) for higher probability",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 60.0,
+        "word_count": 180,
         "teaching_units": 3,
-        "frames_analyzed": 4,
-        "deictic_references": 5
+        "frames_analyzed": 0,
+        "deictic_references": 6
       },
       "teaching_types": {
         "explanation": 3
       }
     },
-    "fibonacci": {
-      "llm_summary": "The \"FIBONACCI\" concept refers to a trading strategy used in financial markets, particularly in trading of foreign exchange (FX) and futures. The Fibonacci retracement levels are significant points on a chart where the price may pause or reverse. These levels are used to identify potential support and resistance levels in trading.\n\nTo spot the Fibonacci retracement levels on a chart, look for key visual characteristics such as Fibonacci retracement levels at 79% and 70.5%. These levels are important points where the price may pause or reverse. The Fibonacci retracement levels are used to identify potential support and resistance levels in trading.\n\nThe \"FIBONACCI\" concept is recommended for trading by the Inner Circle Trader (ICT) methodology. The ICT recommends trading above the 0.6600 level, which is a key resistance level. The price expands above this level, and the chart indicates that the price runs and expands above the 0.6600 level. This suggests that the price may have found some support at this level and is now looking to expand higher.\n\nThe \"FIBONACCI\" concept involves identifying potential support and resistance levels in trading. The Fibonacci retracement levels are used to identify these levels, and the ICT recommends trading above these levels to capitalize on potential gains.",
-      "generation_time_seconds": 32.79120111465454,
+    "standard deviation targets": {
+      "llm_summary": "## Definition\nStandard deviation targets in ICT trading represent measured move projections based on the initial price range (swing high to swing low). These extensions project where price is likely to travel once the OTE entry is triggered, providing systematic profit-taking levels.\n\n## Rules\n1. Half standard deviation (-0.5): First partial profit target, represents 50% of the measured range\n2. One standard deviation (-1.0): Second target, equals the full measured range extended from entry\n3. One and a half standard deviation (-1.5): Third target, optional extension\n4. Two standard deviations (-2.0): Maximum extension target, represents 2x the measured range\n5. Round targets to nearby institutional levels (big figures, quarter levels)\n6. Don't demand exact Fib levels - use them as a framework for trade management\n\n## Identification\n- Calculate the range between swing high and swing low\n- Project this range as extensions beyond the OTE zone\n- Standard deviation levels often align with psychological price levels\n- Use these levels for scaling out of positions (partial profits)\n- The big figure level often provides natural resistance/support near standard deviation targets",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 76.82,
-        "word_count": 204,
-        "teaching_units": 4,
-        "frames_analyzed": 6,
-        "deictic_references": 5
-      },
-      "teaching_types": {
-        "explanation": 4
-      }
-    },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a technical trading strategy that involves buying or selling a security when the price gap between the high and low of a given period is significant. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Identification** of an ORDER BLOCK can be done by observing a significant price gap between the high and low, which is typically around 0.0010 or more. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Trading Application** of an ORDER BLOCK involves buying or selling a security when the price gap between the high and low is significant. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period.\n\n**Key Price Levels** of an ORDER BLOCK include the high and low, which are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference between the highest and lowest prices in that period. The high and low are typically the highest and lowest prices in a given period, such as a day or a week. The gap between the high and low is the difference",
-      "generation_time_seconds": 53.93492126464844,
-      "statistics": {
-        "teaching_duration_seconds": 6.180000000000007,
-        "word_count": 28,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 0
-      },
-      "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "market structure": {
-      "llm_summary": "**Market Structure**:\n\n1. **Definition**: The market structure refers to the overall direction and trend of a market, which can be influenced by various factors such as supply and demand, economic conditions, and geopolitical events. It provides a framework for identifying potential entry points and stop-loss levels for trades.\n\n2. **Identification**: The market structure can be identified on a chart by observing the price movement over a period of time. Key visual characteristics include the trend line, which indicates the direction of price movement. The chart highlights specific price levels, such as -1.5, -1.0, and -0.5, which are potential entry points for trades. The annotations indicate that these entry points are based on the market structure and the trend line.\n\n3. **Trading Application**: ICT recommends trading the market structure by identifying potential entry points and stop-loss levels. The chart provides a visual representation of the market structure, which can be used to identify these entry points. The annotations highlight these entry points, which are based on the market structure and the trend line. The chart is a daily timeframe, and the trading pair is the Australian Dollar (AUD) against the U.S. Dollar (USD).\n\n4. **Key Price Levels**: The -1.5, -1.0, and -0.5 price levels are important as they represent potential entry points for trades. These levels are based on the market structure and the trend line, which indicates the direction of price movement. The annotations indicate that these entry points are based on the market structure and the trend line, providing a clear and actionable approach for traders.",
-      "generation_time_seconds": 33.59338593482971,
-      "statistics": {
-        "teaching_duration_seconds": 9.140000000000015,
-        "word_count": 30,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 1
-      },
-      "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** in the context of trading refers to the ease with which a financial instrument, such as a stock or currency, can be bought and sold. It indicates the liquidity of a market, meaning the ability to buy or sell a financial instrument quickly and at a price close to the current market price. \n\n**Identification of LIQUIDITY on a chart**:\n- **Visible Price Levels**: The chart displays specific price levels, which are important for identifying liquidity. These levels include -2.0000, -1.5000, -1.0000, -0.5000, and -0.5000. These levels are crucial for traders to monitor and make decisions based on the current market conditions.\n- **Chart Patterns**: The chart patterns, such as the trading pair and the trading timeframe, provide context for the liquidity. The trading pair is the Australian Dollar (AUD) against the U.S. Dollar (USD), and the trading timeframe is likely a daily or weekly timeframe, which is common in trading pairs.\n- **Key Visual Characteristics**: The chart includes vertical lines or boxes at specific price levels, which are important for traders to identify potential buying and selling opportunities. These visual characteristics help in identifying the liquidity of the market at different price points.\n\n**Trading Application of LIQUIDITY**:\n- **Traders** should focus on the liquidity levels to make informed trading decisions. Traders should monitor the liquidity levels to identify potential buying and selling opportunities.\n- **Risk Management**:\n  - **Risk Associated with LIQUIDITY**: Traders should be aware of the risk associated with liquidity. High liquidity can lead to higher trading volumes, which can increase the risk of price fluctuations.\n  - **Risk Management Strategies**:\n    - **Stop Losses**: Traders can implement stop losses to limit potential losses in case of sudden price movements.\n    - **Slippage Costs**: Traders should consider the slippage costs associated with liquidity, which can affect the overall profitability of their trades.\n- **Independent Financial Advisor**:\n  - **Advice from an Independent Financial Advisor**: Traders should seek advice from an independent financial advisor to understand the risks and potential outcomes of their trading strategies. Independent financial advisors can provide guidance on risk management and help traders make informed decisions.",
-      "generation_time_seconds": 42.40037202835083,
-      "statistics": {
-        "teaching_duration_seconds": 25.17999999999998,
-        "word_count": 64,
+        "teaching_duration_seconds": 40.0,
+        "word_count": 160,
         "teaching_units": 2,
-        "frames_analyzed": 3,
-        "deictic_references": 3
+        "frames_analyzed": 0,
+        "deictic_references": 4
       },
       "teaching_types": {
         "explanation": 2
+      }
+    },
+    "liquidity": {
+      "llm_summary": "## Definition\nLiquidity in ICT methodology refers to clusters of stop-loss orders resting above swing highs (buy-side liquidity) or below swing lows (sell-side liquidity). Smart money targets these pools of orders to fill their large positions before reversing price in the opposite direction.\n\n## Rules\n1. Previous daily highs contain buy-side liquidity (stop losses from shorts)\n2. Previous daily lows contain sell-side liquidity (stop losses from longs)\n3. Price runs liquidity BEFORE establishing the true directional move\n4. A 'modest pierce' above/below the liquidity level is sufficient - no need for a large break\n5. After liquidity is taken, look for price to retrace into the OTE zone\n6. Use old highs/lows as the 'real framework' for trade direction, not just Fib levels\n\n## Identification\n- Mark Tuesday's previous daily high/low on intraday charts\n- Look for price to reach up/down to these levels during London or NY session\n- A slight pierce followed by reversal signals liquidity has been taken\n- Multiple equal highs/lows create stronger liquidity pools\n- Price expansion occurs AFTER liquidity has been absorbed",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 35.0,
+        "word_count": 170,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "new york session": {
+      "llm_summary": "## Definition\nThe New York session (typically 7:00 AM - 12:00 PM EST) is ICT's preferred trading window for Optimal Trade Entry setups. This time window provides the highest probability for capturing directional moves as it coincides with institutional order flow and major market participation.\n\n## Rules\n1. Focus trading activity within the New York session time window\n2. Look for setups that develop during this period for highest probability\n3. Price often runs liquidity from the London session during NY open\n4. The retracement into OTE typically occurs within the first 2-3 hours of NY session\n5. Combine time of day with liquidity runs and OTE for confluence\n6. Avoid trading outside of this window unless clear setup develops\n\n## Identification\n- Delineate the New York session on your chart with vertical lines\n- Watch for price to retrace into OTE zone during this time\n- The highest probability entries occur when time, price, and liquidity align\n- NY session provides the 'time of day' component for OTE pattern recognition",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 150,
+        "teaching_units": 1,
+        "frames_analyzed": 0,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "big figure levels": {
+      "llm_summary": "## Definition\nBig figure levels are psychological price points ending in round numbers (e.g., 0.6600, 1.3000, 107.00) that act as natural support and resistance. In ICT methodology, these levels often coincide with standard deviation targets and provide reference points for trade management.\n\n## Rules\n1. Big figures often align with standard deviation extension levels\n2. When targeting profits, round to nearby big figure levels\n3. Price tends to expand above/below big figures after taking liquidity\n4. Use big figures as reference for stop placement and profit targets\n5. Don't demand exact Fib level hits - use big figures as practical targets\n6. Institutional orders cluster around these psychological levels\n\n## Identification\n- Identify the nearest big figure level to your calculated standard deviation target\n- Look for price to respect or pierce these levels\n- Big figures like 0.6600 on AUD/USD represent institutional reference points\n- Combine big figure levels with Fibonacci extensions for confluence\n- These levels help translate theoretical Fib levels into practical trading levels",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 18.0,
+        "word_count": 140,
+        "teaching_units": 1,
+        "frames_analyzed": 0,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
       }
     }
   }

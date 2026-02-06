@@ -1,115 +1,111 @@
 {
   "video_id": "NbhVSLd18YM",
-  "generated_at": "2026-02-04T22:21:04.964816",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 45.46419715881348,
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 71,
     "vision_analyses": 99,
-    "concepts_extracted": 10,
+    "concepts_extracted": 8,
     "total_audio_duration": 970.24,
     "total_words": 2583
   },
   "concepts": {
-    "institutional": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+    "change_of_character_choch": {
+      "llm_summary": "### Change of Character (CHoCH)\n\n#### Definition\nChange of Character (CHoCH), also abbreviated as \"chalk\" in the video, is a Smart Money Concept (SMC) that signals a potential trend reversal in the forex market. It occurs when price breaks a key structural swing point, indicating the market is shifting from one trend direction to the opposite.\n\n- In a **bullish market**, CHoCH occurs when price breaks below the current **strong swing higher low (HL)**. This signals a potential shift from bullish to bearish structure.\n- In a **bearish market**, CHoCH occurs when price breaks above the current **strong swing lower high (LH)**. This signals a potential shift from bearish to bullish structure.\n\nCHoCH is specifically an *indication* of trend reversal, not a full confirmation. Full confirmation comes when the market subsequently forms a lower low and lower high (for bearish reversal) or a higher high and higher low (for bullish reversal) after the CHoCH level is broken.\n\n#### Identification\n1. Map out the current market structure by identifying valid swing highs and swing lows using the inducement-based approach (not the retail approach of marking every high and low).\n2. Identify the most recent strong swing higher low (in bullish) or strong swing lower high (in bearish).\n3. Wait for price to break that level with a candle body close beyond it (not just a wick).\n4. The break of the strong swing point constitutes the CHoCH level.\n5. Confirmation comes when subsequent price action forms structure in the new trend direction (e.g., lower lows and lower highs after a bullish-to-bearish CHoCH).\n\n**Critical distinction**: CHoCH depends on the time frame being analyzed. Each time frame (Daily, H4, H1, M15) has its own swing points and therefore its own CHoCH level.\n\n#### Trading Application\n- CHoCH provides an early warning of trend reversal, allowing traders to prepare for directional shifts.\n- Traders should wait for CHoCH confirmation (subsequent structure in the new direction) before entering reversal trades.\n- CHoCH is used in conjunction with inducement levels, break of structure, and liquidity sweeps as part of a complete structure mapping framework.\n- Retail traders who mark every minor high/low as swing points frequently identify false CHoCH levels. The SMC approach of using inducement-validated swing points dramatically reduces false signals.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 16.260000000000005,
-        "word_count": 42,
-        "teaching_units": 1,
-        "frames_analyzed": 0
-      }
+        "teaching_duration_seconds": 420,
+        "word_count": 850,
+        "teaching_units": 22,
+        "frames_analyzed": 6,
+        "deictic_references": 28
+      },
+      "teaching_types": { "explanation": 10, "example": 12 }
     },
-    "smart money": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+    "retail_vs_smart_money_structure_mapping": {
+      "llm_summary": "### Retail vs Smart Money Structure Mapping\n\n#### Definition\nThis concept contrasts two fundamentally different approaches to mapping market structure and identifying trend reversals. The retail trader approach marks every visible high and low as significant swing points, while the Smart Money Concept (SMC) approach uses inducement levels to filter for only valid, structural swing points.\n\n#### Identification\n**Retail Trader Approach (Flawed)**:\n- Marks every high as Higher High (HH) and every low as Higher Low (HL) in an uptrend.\n- When price breaks below any marked HL, the retail trader calls it CHoCH.\n- This produces multiple false CHoCH signals because many of the lows the retail trader marks are actually inducement levels, not true swing lows.\n- As shown in the schematic diagram and live chart example, the retail trader marks CHoCH repeatedly, but each time the market continues in the original trend direction. The false CHoCH levels are actually smart money traps.\n\n**Smart Money Approach (Correct)**:\n- Starts from the most recent high and identifies the inducement level (IDM) - the first valid pullback to the left of that high.\n- Only marks a swing point as valid HH or HL after the inducement has been taken out (price traded through the inducement level) AND a candle body closed beyond the previous high.\n- This approach correctly identifies that the points where retail traders were marking CHoCH were actually just inducement levels being swept.\n- The actual CHoCH only occurs when the true strong swing low (validated through the inducement process) is broken.\n\n#### Trading Application\n- The key insight is that accurate knowledge of structure mapping is the difference between profitable and unprofitable trading. The video attributes 65% of trader failure to lack of accurate knowledge.\n- Traders must use the inducement-based approach to avoid the smart money trap where retail traders repeatedly identify false reversal points.\n- When the same chart is analyzed using both approaches, the SMC approach produces far fewer but far more accurate CHoCH signals.\n- The retail approach leads to repeatedly being on the wrong side of the market as smart money uses inducement levels to trap retail traders.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 85.36000000000007,
-        "word_count": 219,
+        "teaching_duration_seconds": 280,
+        "word_count": 620,
+        "teaching_units": 16,
+        "frames_analyzed": 4,
+        "deictic_references": 22
+      },
+      "teaching_types": { "explanation": 8, "example": 8 }
+    },
+    "structure_mapping_complete_process": {
+      "llm_summary": "### Structure Mapping - Complete Process\n\n#### Definition\nStructure mapping is the systematic process of identifying and annotating valid swing highs, swing lows, break of structure (BOS), inducement levels (IDM), liquidity sweeps, and change of character (CHoCH) on a price chart. The video presents this as the culmination of combining smaller building blocks learned in previous lectures into a unified analytical framework.\n\n#### Identification\nThe complete structure mapping process follows these sequential steps:\n\n1. **Start from the most recent high** - Always begin mapping from the current or most recent significant high on the chart.\n2. **Find the inducement level (IDM)** - Look to the left of the recent high and find the first valid pullback. Mark it as IDM. A valid pullback requires that the candle's high/low is broken by subsequent candles (the highest candle's low must be broken to constitute a valid pullback).\n3. **Check inducement takeout** - Verify that price traded through (took out) the inducement level. A candle body must close below the IDM level.\n4. **Validate the swing point** - After inducement is taken, check if a candle body closed above the previous high. If yes, mark it as Higher High / Break of Structure (HH/BOS). The corresponding low becomes the valid Higher Low (HL).\n5. **Repeat the process** - Continue finding new IDM levels and validating new swing points as the structure progresses.\n6. **Handle non-inducement moves** - When price creates new highs without taking inducement, these are not valid BOS. The inducement may shift to a new level as per the inducement shift rule.\n7. **Identify liquidity sweeps** - When price trades beyond a level by wick only (candle body does not close beyond), mark it as a liquidity sweep (X), not as a BOS.\n8. **Mark CHoCH** - When price breaks the most recent valid strong swing low (in bullish) or swing high (in bearish) with a candle body close, mark it as CHoCH.\n\n#### Trading Application\n- The live chart demonstration was performed on GBPUSD daily timeframe, showing this is applicable to real market conditions.\n- Annotations used: X for liquidity sweep, BOS for break of structure, CHoCH for change of character, IDM for inducement, HH for higher high, HL for higher low.\n- This complete structure map provides the foundation for identifying optimal trade entries, which are covered in subsequent lectures.\n- Every point on the chart is not a swing high or low - only those validated through the inducement process qualify as valid swing points for structure mapping.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 350,
+        "word_count": 700,
+        "teaching_units": 18,
+        "frames_analyzed": 6,
+        "deictic_references": 35
+      },
+      "teaching_types": { "explanation": 8, "example": 10 }
+    },
+    "inducement_in_structure_mapping": {
+      "llm_summary": "### Inducement (IDM) in Structure Mapping\n\n#### Definition\nInducement (IDM) is a key level used in Smart Money Concept structure mapping to validate swing points. It is the first valid pullback to the left of a recent high (in bullish structure) or recent low (in bearish structure). Inducement levels serve as the gatekeeper for determining which swing points are structurally significant.\n\n#### Identification\n1. **Finding IDM from a high**: Starting from a recent high, move left (backward in time) to find the first valid pullback. This pullback low is the inducement level.\n2. **Valid pullback rule**: A pullback is valid only if subsequent candles break the highest candle's low within that swing. If the highest candle's high and low are both protected (no subsequent candle breaks them), that low is NOT a valid inducement.\n3. **Inducement shift rule**: When price creates a new high without taking the previous inducement, the inducement shifts from the old level to a new level closer to the new high.\n4. **Impulse move as inducement**: When price moves in the form of an impulse (straight move without pullback) from a low to a high, that low itself acts as the inducement level.\n5. **Inducement takeout verification**: After identifying the IDM, check whether a candle's body (not just wick) closed below the inducement level. A wick-only sweep of inducement is treated differently than a body close.\n\n#### Trading Application\n- Inducement is critical for filtering false CHoCH signals. The retail trader's false CHoCH levels are often just inducement levels being swept by smart money.\n- Only when inducement is properly taken out AND price closes beyond the previous high can a valid Higher High / Break of Structure be confirmed.\n- In the live GBPUSD chart demonstration, multiple inducement levels were identified and tracked as the structure progressed, showing how they shift and how price reacts to them.\n- Smart money uses inducement levels to trap retail traders who mistake them for swing points.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 250,
+        "word_count": 530,
+        "teaching_units": 14,
+        "frames_analyzed": 4,
+        "deictic_references": 18
+      },
+      "teaching_types": { "explanation": 7, "example": 7 }
+    },
+    "break_of_structure_bos": {
+      "llm_summary": "### Break of Structure (BOS)\n\n#### Definition\nBreak of Structure (BOS) is a confirmation that the prevailing trend is continuing. It occurs when price creates a new Higher High in a bullish trend or a new Lower Low in a bearish trend, validated through the inducement-based process. BOS is the trend continuation counterpart to CHoCH (which signals trend reversal).\n\n#### Identification\nFor a valid BOS in a bullish market:\n1. Price must first take out (sweep) the inducement level associated with the previous swing.\n2. A candle body must close above the previous swing high.\n3. Both conditions must be met - inducement takeout AND candle body close above the high.\n\nFor the break to be invalid (not a BOS):\n- If price creates a new high WITHOUT taking the associated inducement from the previous swing, it is NOT a valid BOS, even if price trades above the previous high.\n- If price only sweeps the previous high with a wick (candle body does not close above), it is a liquidity sweep, not a BOS.\n\n#### Trading Application\n- BOS confirms trend continuation and is used to annotate valid Higher Highs (HH) in bullish structure.\n- In the live chart example, BOS was marked alongside HH (noted as \"HH/BOS\") when both inducement takeout and candle close conditions were satisfied.\n- Distinguishing between valid BOS and liquidity sweeps prevents false trend continuation signals.\n- BOS and CHoCH work as complementary signals: consecutive BOS signals confirm trend health, while CHoCH signals the trend has ended.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 130,
+        "word_count": 280,
+        "teaching_units": 8,
+        "frames_analyzed": 3,
+        "deictic_references": 10
+      },
+      "teaching_types": { "explanation": 4, "example": 4 }
+    },
+    "liquidity_sweep": {
+      "llm_summary": "### Liquidity Sweep\n\n#### Definition\nA liquidity sweep occurs when price trades beyond a key level (such as a previous high or low, or an inducement level) using only a candle wick, without the candle body closing beyond that level. It is annotated with 'X' on the chart. Liquidity sweeps are distinct from Break of Structure (BOS) because they do not represent genuine structural breaks.\n\n#### Identification\n1. **At highs**: When a candle's wick trades above a previous high but the candle body closes below that high, it is a liquidity sweep of that high, not a BOS.\n2. **At inducement levels**: When a candle sweeps an inducement level with its wick, check the next candle's reaction. Draw a horizontal line from the sweeping candle's low. If the next candle body does not close below this line, the sweep may be just liquidity collection.\n3. **Key rule**: Candle body close is the determining factor. Wick-only penetration of levels = liquidity sweep. Body close beyond a level = potential BOS or CHoCH.\n\n#### Trading Application\n- Liquidity sweeps are a smart money tool for collecting orders sitting above/below key levels before the actual move.\n- Misidentifying a liquidity sweep as a BOS leads to false structure mapping and incorrect trend assessment.\n- In the live chart, multiple liquidity sweeps were identified at both highs (marked with X) and around inducement areas, showing that not every price movement beyond a level constitutes a structural break.\n- Understanding liquidity sweeps helps traders avoid premature entries based on wick-only breaks.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 100,
+        "word_count": 220,
         "teaching_units": 6,
-        "frames_analyzed": 0
-      }
+        "frames_analyzed": 3,
+        "deictic_references": 8
+      },
+      "teaching_types": { "explanation": 3, "example": 3 }
     },
-    "optimal trade entry": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+    "valid_swing_points": {
+      "llm_summary": "### Valid Swing Points (Strong vs Weak)\n\n#### Definition\nValid swing points are structurally significant Higher Highs (HH), Higher Lows (HL), Lower Highs (LH), and Lower Lows (LL) that have been validated through the inducement-based process. Not every visible high or low on a chart qualifies as a valid swing point. Only those points that obey the inducement rules (referred to as 'OUE rules' in the video) are considered valid for structure mapping and CHoCH identification.\n\n#### Identification\n**Higher High (HH) validation**:\n- The inducement level for the swing must have been taken out (candle body close below IDM).\n- A candle body must close above the previous swing high.\n- If both conditions are met, the high is a valid HH.\n\n**Higher Low (HL) validation**:\n- The HL is the swing low that corresponds to a validated HH.\n- Once a valid HH is confirmed, the low between the previous HH and this new HH becomes the valid HL.\n\n**Strong swing points**:\n- Strong swing points are the ones whose inducement was properly taken before the structure continued.\n- These are the levels that matter for CHoCH identification.\n\n**Weak/Invalid points**:\n- Points that the retail trader marks as swing highs/lows but are actually just inducement levels.\n- Price making a new high without taking inducement does not create a valid swing point.\n\n#### Trading Application\n- CHoCH is only valid when it breaks a strong/valid swing point. Breaking an invalid point (actually an inducement level) produces a false CHoCH signal.\n- The distinction between strong and weak swing points is what separates the SMC approach from the retail approach, and it is what makes the SMC structure mapping dramatically more accurate.\n- Each time frame has its own set of valid swing points, which is why each time frame has its own CHoCH level.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 176.7799999999998,
-        "word_count": 484,
-        "teaching_units": 12,
-        "frames_analyzed": 0
-      }
-    },
-    "swing high": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 62.94,
-        "word_count": 182,
-        "teaching_units": 5,
-        "frames_analyzed": 0
-      }
-    },
-    "higher high": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 144.08000000000004,
-        "word_count": 371,
+        "teaching_duration_seconds": 150,
+        "word_count": 350,
         "teaching_units": 10,
-        "frames_analyzed": 0
-      }
+        "frames_analyzed": 3,
+        "deictic_references": 12
+      },
+      "teaching_types": { "explanation": 5, "example": 5 }
     },
-    "swing low": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
+    "smart_money_trap": {
+      "llm_summary": "### Smart Money Trap\n\n#### Definition\nA smart money trap is a market condition where institutional traders (smart money) engineer price movements that create false signals for retail traders. Specifically in the context of CHoCH, it occurs when price breaks below an inducement level that retail traders mistakenly identify as a swing low, causing them to believe a trend reversal has occurred when the major trend is actually still intact.\n\n#### Identification\n1. In a bullish trend, price breaks below a level that appears to be a Higher Low (but is actually an inducement level).\n2. Retail traders mark this as CHoCH and begin taking bearish positions.\n3. Price then continues in the original bullish trend direction, creating a new higher high.\n4. The retail traders who sold based on the false CHoCH are trapped and lose their positions.\n5. This pattern can repeat multiple times in the same trend, as demonstrated in the schematic diagram showing three consecutive false CHoCH signals before the actual reversal.\n\n#### Trading Application\n- Recognizing smart money traps requires understanding that not every break of a low constitutes a CHoCH - only breaks of valid strong swing lows (validated through inducement) are true CHoCH signals.\n- The video emphasizes that this trap mechanism is a primary reason why 95% of retail traders fail.\n- Traders can protect themselves by only trading CHoCH signals that break inducement-validated swing points rather than every visible swing point on the chart.\n- The fake CHoCH levels demonstrated in the retail trader approach show how repeatedly falling for smart money traps compounds losses.",
       "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 34.71999999999994,
-        "word_count": 101,
-        "teaching_units": 4,
-        "frames_analyzed": 0
-      }
-    },
-    "lower low": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 43.87999999999997,
-        "word_count": 117,
-        "teaching_units": 3,
-        "frames_analyzed": 0
-      }
-    },
-    "market structure": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 184.54000000000042,
-        "word_count": 525,
-        "teaching_units": 15,
-        "frames_analyzed": 0
-      }
-    },
-    "liquidity": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 49.75999999999999,
-        "word_count": 127,
-        "teaching_units": 4,
-        "frames_analyzed": 0
-      }
-    },
-    "order block": {
-      "llm_summary": "Error generating summary after 3 attempts: local variable 'MLXVisionModel' referenced before assignment",
-      "generation_time_seconds": 0,
-      "statistics": {
-        "teaching_duration_seconds": 15.019999999999982,
-        "word_count": 38,
-        "teaching_units": 1,
-        "frames_analyzed": 0
-      }
+        "teaching_duration_seconds": 120,
+        "word_count": 280,
+        "teaching_units": 7,
+        "frames_analyzed": 2,
+        "deictic_references": 10
+      },
+      "teaching_types": { "explanation": 3, "example": 4 }
     }
   }
 }

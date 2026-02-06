@@ -103,10 +103,21 @@ class MLKnowledgeBase:
             'order blocks': 'order_block',
             'order block': 'order_block',
             'ob': 'order_block',
+            'valid order block': 'valid_order_block',
+            'valid_order_block': 'valid_order_block',
+            'valid order block rules': 'valid_order_block',
+            'valid_order_block_rules': 'valid_order_block',
+            'valid ob': 'valid_order_block',
+            'order block mitigation': 'order_block_mitigation',
+            'order_block_mitigation': 'order_block_mitigation',
+            'order_block_mitigation_and_trade_entry': 'order_block_mitigation',
             # Fair Value Gap
             'fvg': 'fvg',
             'fair value gap': 'fvg',
             'fair value gaps': 'fvg',
+            'fair_value_gap': 'fvg',
+            'valid fvg': 'fvg',
+            'valid_fvg_confirmation_rules': 'fvg',
             # Breaker Block
             'breaker block': 'breaker_block',
             'breaker blocks': 'breaker_block',
@@ -119,12 +130,35 @@ class MLKnowledgeBase:
             'liquidity': 'liquidity',
             'buy side liquidity': 'liquidity',
             'sell side liquidity': 'liquidity',
+            # Liquidity Sweep
+            'liquidity sweep': 'liquidity_sweep',
+            'liquidity_sweep': 'liquidity_sweep',
+            'sweep': 'liquidity_sweep',
+            'liquidity grab': 'liquidity_sweep',
             # Market Structure
             'market structure': 'market_structure',
-            'bos': 'market_structure',
-            'break of structure': 'market_structure',
-            'choch': 'market_structure',
-            'change of character': 'market_structure',
+            'market_structure': 'market_structure',
+            # Break of Structure
+            'bos': 'break_of_structure',
+            'break of structure': 'break_of_structure',
+            'break_of_structure': 'break_of_structure',
+            'structure break': 'break_of_structure',
+            'bos validation': 'bos_validation',
+            'bos_validation': 'bos_validation',
+            'bos_validation_rules': 'bos_validation',
+            'single_candle_bos': 'bos_validation',
+            # Change of Character
+            'choch': 'change_of_character',
+            'change of character': 'change_of_character',
+            'change_of_character': 'change_of_character',
+            'change_of_character_choch': 'change_of_character',
+            'choch confirmation': 'choch_confirmation',
+            'choch_confirmation': 'choch_confirmation',
+            'choch_confirmation_overview': 'choch_confirmation',
+            # Fake CHoCH
+            'fake choch': 'fake_choch',
+            'fake_choch': 'fake_choch',
+            'fake change of character': 'fake_choch',
             # Optimal Trade Entry / Fibonacci
             'optimal trade entry': 'optimal_trade_entry',
             'ote': 'optimal_trade_entry',
@@ -138,6 +172,9 @@ class MLKnowledgeBase:
             'swing low': 'swing_high_low',
             'swing high/low': 'swing_high_low',
             'swing_high_low': 'swing_high_low',
+            'weak swing point': 'weak_swing_point',
+            'weak_swing_point': 'weak_swing_point',
+            'weak_swing_point_rule': 'weak_swing_point',
             # Equal Highs/Lows
             'equal highs': 'equal_highs_lows',
             'equal lows': 'equal_highs_lows',
@@ -155,12 +192,92 @@ class MLKnowledgeBase:
             'sell_stops': 'sell_stops',
             'buy stops': 'buy_stops',
             'buy_stops': 'buy_stops',
-            # Higher High
+            # Higher High / Higher Low / Lower Low / Lower High
             'higher high': 'higher_high',
             'higher_high': 'higher_high',
+            'higher low': 'higher_low',
+            'higher_low': 'higher_low',
+            'lower low': 'lower_low',
+            'lower_low': 'lower_low',
+            'lower high': 'lower_high',
+            'lower_high': 'lower_high',
             # Smart Money
             'smart money': 'smart_money',
             'smart_money': 'smart_money',
+            # Inducement
+            'inducement': 'inducement',
+            'idm': 'inducement',
+            'valid inducement': 'inducement',
+            'valid_inducement': 'inducement',
+            'inducement shift': 'inducement_shift',
+            'inducement_shift': 'inducement_shift',
+            # Pullback
+            'pullback': 'valid_pullback',
+            'valid pullback': 'valid_pullback',
+            'valid_pullback': 'valid_pullback',
+            # Smart Money Traps
+            'smart money trap': 'smart_money_trap',
+            'smart_money_trap': 'smart_money_trap',
+            'smart_money_traps': 'smart_money_trap',
+            'retail trap': 'smart_money_trap',
+            'retail_trap': 'smart_money_trap',
+            # Premium / Discount
+            'premium zone': 'premium_discount',
+            'premium_zone': 'premium_discount',
+            'discount zone': 'premium_discount',
+            'discount_zone': 'premium_discount',
+            'premium': 'premium_discount',
+            'discount': 'premium_discount',
+            'premium_and_discount_zones': 'premium_discount',
+            # Equilibrium
+            'equilibrium': 'equilibrium',
+            'equilibrium_level': 'equilibrium',
+            # Price Delivery Cycle
+            'price delivery cycle': 'price_delivery_cycle',
+            'price_delivery_cycle': 'price_delivery_cycle',
+            'price cycle': 'price_delivery_cycle',
+            # Expansion / Retracement
+            'expansion': 'expansion',
+            'retracement': 'retracement',
+            # Judas Swing
+            'judas swing': 'judas_swing',
+            'judas_swing': 'judas_swing',
+            'judas': 'judas_swing',
+            'judas_swing_and_liquidity_sweep': 'judas_swing',
+            # Forex Sessions
+            'forex sessions': 'forex_sessions',
+            'forex_sessions': 'forex_sessions',
+            'forex_trading_sessions': 'forex_sessions',
+            # Millions Dollar Setup
+            'millions dollar setup': 'millions_dollar_setup',
+            'millions_dollar_setup': 'millions_dollar_setup',
+            'millions_dollar_setup_overview': 'millions_dollar_setup',
+            # Engineered Liquidity
+            'engineered liquidity': 'engineered_liquidity',
+            'engineered_liquidity': 'engineered_liquidity',
+            # Candlestick Analysis
+            'candlestick analysis': 'candlestick_analysis',
+            'candlestick_analysis': 'candlestick_analysis',
+            # Manipulation / Accumulation / Distribution
+            'manipulation': 'manipulation',
+            'accumulation': 'accumulation',
+            'distribution': 'distribution',
+            # Risk Management
+            'risk_reward_management': 'risk_management',
+            'risk management': 'risk_management',
+            # Swing Failure Pattern
+            'swing_failure_pattern': 'swing_failure_pattern',
+            'sfp': 'swing_failure_pattern',
+            # Three SMC Rules
+            'three_smc_rules': 'three_smc_rules',
+            'three_smc_rules_framework': 'three_smc_rules',
+            # High Probability Inducement
+            'high_probability_inducement': 'high_probability_inducement',
+            'high probability inducement': 'high_probability_inducement',
+            # Power of Three
+            'power of three': 'power_of_three',
+            'power_of_three': 'power_of_three',
+            'po3': 'power_of_three',
         }
 
         return mappings.get(normalized, normalized.replace(' ', '_'))
@@ -505,14 +622,24 @@ class MLPatternEngine:
                         teaching_units = concept_stats.get('teaching_units', 1)
                         frames_analyzed = concept_stats.get('frames_analyzed', 0)
 
+                        # Detect if this is expert-trained data (Claude Code)
+                        generation_method = kb_data.get('generation_method', '')
+                        is_expert = generation_method == "Claude Code expert analysis"
+
                         if normalized in self.knowledge_base.patterns_learned:
                             # MERGE with existing pattern - audio-first supplements
                             existing = self.knowledge_base.patterns_learned[normalized]
                             existing.frequency += teaching_units
 
-                            # Store LLM summary in learned_traits (keep best/longest)
+                            # Store LLM summary in learned_traits
+                            # Prefer Claude Code expert summaries over MLX-VLM output
                             existing_summary = existing.learned_traits.get('llm_summary', '')
-                            if len(llm_summary) > len(existing_summary):
+                            existing_is_expert = existing.learned_traits.get('expert_trained', False)
+                            if is_expert and not existing_is_expert:
+                                # Expert data always wins over non-expert
+                                existing.learned_traits['llm_summary'] = llm_summary
+                                existing.learned_traits['expert_trained'] = True
+                            elif len(llm_summary) > len(existing_summary) and not existing_is_expert:
                                 existing.learned_traits['llm_summary'] = llm_summary
 
                             # Add teaching context from summary (first 120 chars)
@@ -550,8 +677,8 @@ class MLPatternEngine:
 
                         else:
                             # NEW pattern from audio-first training
-                            # Calculate confidence based on depth of training
-                            confidence = 0.5  # Base for audio-first
+                            # Graduated confidence formula based on training depth
+                            confidence = 0.50  # Base for audio-first
                             if teaching_units >= 3:
                                 confidence += 0.15
                             if frames_analyzed >= 5:
@@ -560,7 +687,10 @@ class MLPatternEngine:
                                 confidence += 0.05
                             if concept_stats.get('deictic_references', 0) >= 5:
                                 confidence += 0.05
-                            confidence = min(confidence, 0.90)
+                            # Bonus for expert-trained data (Claude Code)
+                            if is_expert:
+                                confidence += 0.10
+                            confidence = min(confidence, 0.95)
 
                             # Build teaching contexts from LLM summary
                             teaching_contexts = []
@@ -575,6 +705,8 @@ class MLPatternEngine:
                                 f"Audio-first trained ({teaching_units} teaching units, {frames_analyzed} frames)",
                                 f"Learned from ICT video {video_id}",
                             ]
+                            if is_expert:
+                                characteristics.append("Expert-trained via Claude Code")
 
                             # Build learned traits
                             learned_traits = {
@@ -586,6 +718,7 @@ class MLPatternEngine:
                                 'teaching_types': teaching_types,
                                 'video_ids': [video_id],
                                 'audio_first': True,
+                                'expert_trained': is_expert,
                             }
 
                             self.knowledge_base.patterns_learned[normalized] = LearnedPattern(
@@ -980,8 +1113,8 @@ class MLPatternEngine:
                 # PRIORITY 0: Use LLM summary from audio-first training (richest source)
                 llm_summary = learned.learned_traits.get('llm_summary', '')
                 if llm_summary and len(llm_summary) > 20:
-                    # Use first 200 chars of the LLM-generated summary
-                    summary_text = llm_summary[:200].strip()
+                    # Use first 400 chars of the LLM-generated summary for richer reasoning
+                    summary_text = llm_summary[:400].strip()
                     if not summary_text.endswith('.'):
                         # Cut at last complete sentence
                         last_period = summary_text.rfind('.')

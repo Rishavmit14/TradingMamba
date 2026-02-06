@@ -1,116 +1,90 @@
 {
   "video_id": "hMb-cEAVKcQ",
-  "generated_at": "2026-02-05T13:52:14.364919",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 457.9283721446991,
+  "title": "13-Fair Value Gap",
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 46,
     "vision_analyses": 72,
-    "concepts_extracted": 7,
-    "total_audio_duration": 1229.0200000000004,
-    "total_words": 3268
+    "concepts_extracted": 5,
+    "total_audio_duration": 1229.02,
+    "total_words": 3480
   },
   "concepts": {
-    "fair value gap": {
-      "llm_summary": "The \"FAIR VALUE GAP\" concept in the context of trading refers to a situation where a trader identifies a fair value gap, which is a gap between the fair value of a trade and the actual price at which the trade is executed. The term \"FAIR VALUE GAP\" is used to describe a gap between the fair value of a trade and the actual price at which the trade is executed, which can lead to a loss if the trade is executed at a price lower than the fair value gap.\n\nThe concept of FAIR VALUE GAP is important in trading because it can indicate a potential risk of loss if the trade is executed at a price lower than the fair value gap. Traders who are aware of FAIR VALUE GAP can use it as a trading strategy to enter trades at a price higher than the fair value gap, which can increase the likelihood of a profit if the trade is executed at a price higher than the fair value gap.\n\nThe term \"FAIR VALUE GAP\" is used to describe a gap between the fair value of a trade and the actual price at which the trade is executed, which can lead to a loss if the trade is executed at a price lower than the fair value gap. Traders who are aware of FAIR VALUE GAP can use it as a trading strategy to enter trades at a price higher than the fair value gap, which can increase the likelihood of a profit if the trade is executed at a price higher than the fair value gap.",
-      "generation_time_seconds": 55.9418089389801,
+    "liquidity_sweep": {
+      "llm_summary": "### Liquidity Sweep\n\n#### Definition\nA liquidity sweep occurs when price briefly moves beyond a previous swing high or swing low (using a candle wick) to trigger stop-loss orders and pending orders resting at that level, then reverses direction. The purpose is for the market maker to collect (sweep) the resting liquidity before driving price in the intended trend direction. Liquidity sweep is one of two mechanisms (alongside liquidity grab) by which the market gains the liquidity it needs as a driving force for its next move.\n\n#### Identification\n- **Buy Side Liquidity Sweep (bearish context):** In a bearish market, price creates a new high that sweeps above a previous high using only the candle wick, then reverses downward. The wick exceeds the prior high but the body does not sustain above it. This traps buy-side traders who were waiting for an upside breakout.\n- **Sell Side Liquidity Sweep (bullish context):** In a bullish market, price creates a new low that sweeps below a previous low using the candle wick, then reverses upward. This traps sell-side traders who anticipated a downside breakout.\n- **Candlestick form:** For a buy side sweep, the next candle's wick sweeps the high of the previous candle. For a sell side sweep, the next candle's wick sweeps the low of the previous candle.\n\n#### Trading Application\nLiquidity sweeps are used as a prerequisite confirmation before entering trades. A valid fair value gap or order block entry should ideally occur after a liquidity sweep has taken place, confirming that the market maker has collected the necessary liquidity for the next directional move. The sweep signals that trapped traders' stop-losses have been triggered, providing fuel for the subsequent move in the trend direction.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 590.9399999999999,
-        "word_count": 1548,
-        "teaching_units": 24,
-        "frames_analyzed": 36,
-        "deictic_references": 34
+        "teaching_duration_seconds": 148.0,
+        "word_count": 460,
+        "teaching_units": 10,
+        "frames_analyzed": 4,
+        "deictic_references": 12
       },
       "teaching_types": {
-        "explanation": 23,
-        "summary": 1
+        "explanation": 7,
+        "example": 3
       }
     },
-    "liquidity": {
-      "llm_summary": "The \"LIQUIDITY\" concept in the context of trading refers to the availability and ease of buying and selling in a market. It is a crucial factor in determining the price of a financial instrument, as liquidity affects how quickly and easily a trade can be executed. The term \"LIQUIDITY\" is often used to describe the market's ability to handle transactions, particularly in the context of financial markets where liquidity refers to the ease with which financial instruments can be bought and sold.",
-      "generation_time_seconds": 49.412672996520996,
+    "liquidity_grab": {
+      "llm_summary": "### Liquidity Grab\n\n#### Definition\nA liquidity grab occurs when price breaks out of a consolidation or ranging phase on one side, trapping breakout traders, and then reverses sharply to move in the opposite direction. Unlike a liquidity sweep (which uses a single candle wick against a swing point), a liquidity grab involves a full candle body close beyond a consolidation range before the reversal. The objective is the same as a liquidity sweep: to gain liquidity as the market's driving force.\n\n#### Identification\n- **Buy Side Liquidity Grab (bearish context):** Market enters a consolidation/ranging phase, building liquidity on both sides. Price then breaks out above the consolidation with a candle body closing above the range. Breakout traders and less-informed traders enter buy positions. The market then reverses sharply (in speed/expansion form) and closes below the consolidation range, moving in the bearish trend direction.\n- **Sell Side Liquidity Grab (bullish context):** Market ranges and builds liquidity. Price breaks below the consolidation with a candle body close below the range. Sell-side traders enter. The market then reverses sharply upward (in speed/expansion form) and closes above the consolidation, continuing the bullish trend.\n- **Key requirement:** The reversal move must be in speed or expansion form (sharp, fast movement). Only then is it considered a valid liquidity grab.\n\n#### Trading Application\nLiquidity grabs serve as confirmation signals before entering trades, similar to liquidity sweeps. When a liquidity grab occurs in the direction opposite to the prevailing trend, it signals that the market has collected enough liquidity to drive the next move. Traders should look for FVG or order block entries after a confirmed liquidity grab, trading in the direction of the prevailing trend.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 730.8600000000002,
-        "word_count": 1944,
-        "teaching_units": 22,
-        "frames_analyzed": 39,
-        "deictic_references": 46
+        "teaching_duration_seconds": 165.0,
+        "word_count": 490,
+        "teaching_units": 10,
+        "frames_analyzed": 4,
+        "deictic_references": 14
       },
       "teaching_types": {
-        "explanation": 21,
-        "definition": 1
+        "explanation": 6,
+        "example": 4
       }
     },
-    "imbalance": {
-      "llm_summary": "The \"IMBALANCE\" concept in the context of trading refers to a situation where the price of a financial instrument moves sharply in one direction, creating a gap between the high and low prices. This gap is often referred to as a \"fair value gap\" or \"price imbalance.\" The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled to complete the trading process. These pending orders create liquidity in the market, which is why price imbalance is also known as liquidity void. The term \"imbalance\" is used to describe the incomplete nature of the trading market, where there are pending orders that need to be filled",
-      "generation_time_seconds": 91.05924916267395,
+    "price_imbalance_liquidity_void": {
+      "llm_summary": "### Price Imbalance / Liquidity Void\n\n#### Definition\nPrice imbalance (also known as liquidity void) is an area on the chart where price moves sharply in one direction, creating an incomplete auction between buyers and sellers. Within this zone, there are pending orders that were not filled during the sharp move, and these pending orders create liquidity. The zone is called a \"liquidity void\" because it represents an area of unfilled liquidity where buyers and sellers still need to transact and complete their orders. The market needs this liquidity for its next move.\n\n#### Identification\n- **Visual appearance:** One or more consecutive candles moving sharply in a single direction (bearish or bullish). The zone is measured from the wick of the first candle to the wick of the last candle in the sharp move.\n- **Number of candles does not matter:** Whether the sharp move consists of 2, 3, or more candles, the key criterion is that the movement is one-sided and fast. The entire one-sided zone is marked as the liquidity void.\n- **Bearish liquidity void:** A sharp downward move creating an unfilled zone on the sell side.\n- **Bullish liquidity void:** A sharp upward move creating an unfilled zone on the buy side.\n- **Trend alignment:** Liquidity voids in the direction of the prevailing trend are more effective and considered high probability. Liquidity voids against the trend are lower probability.\n\n#### Trading Application\n- **Market will fill the void:** The market will always come back to fill a liquidity void at some point in the future. There is no time limit; it may be filled within an hour, a day, a week, or a month.\n- **100% or partial fill:** Price can fill 100% of the liquidity void. For trade entry purposes, target the minimum 50% level of the void.\n- **Using Fibonacci:** Apply the Fibonacci tool to the liquidity void zone to identify the 50% retracement level as a potential entry point.\n- **Entry model:** When price returns to fill the liquidity void (especially at or near the 50% level), enter in the direction of the prevailing trend. The void acts as a zone of interest where price is likely to react and continue in the trend direction.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 328.4000000000001,
-        "word_count": 881,
-        "teaching_units": 9,
-        "frames_analyzed": 19,
-        "deictic_references": 21
+        "teaching_duration_seconds": 310.0,
+        "word_count": 870,
+        "teaching_units": 14,
+        "frames_analyzed": 6,
+        "deictic_references": 18
+      },
+      "teaching_types": {
+        "explanation": 10,
+        "example": 4
+      }
+    },
+    "fair_value_gap": {
+      "llm_summary": "### Fair Value Gap (FVG)\n\n#### Definition\nA Fair Value Gap (FVG) is the refined form of a liquidity void or price imbalance. It is a specific area where price moves sharply in one direction, leaving pending orders behind as liquidity. While a liquidity void encompasses the entire one-sided sharp move, the FVG is measured precisely from wick to wick of adjacent candles within that move, making it a more precise entry zone.\n\n#### Identification\n- **Wick-to-wick measurement:** The FVG is measured as the gap between the wick of one candle and the wick of the candle two positions later (skipping the middle candle). In a 3-candle sequence where the middle candle moves sharply, the FVG is the gap between Candle 1's wick (low wick for bearish, high wick for bullish) and Candle 3's wick.\n- **Derived from liquidity void:** Take a liquidity void zone and transpose it into wick-to-wick gaps. Each wick-to-wick gap within the void is a separate FVG zone.\n- **Multiple FVGs possible:** Within a single liquidity void, there can be multiple FVG zones, one for each consecutive wick-to-wick gap.\n- **Bearish FVG:** In a downward sharp move, the gap between the low wick of an upper candle and the high wick of a lower candle (where the middle candle's body spans through without overlapping wicks).\n- **Bullish FVG:** In an upward sharp move, the gap between the high wick of a lower candle and the low wick of an upper candle.\n\n#### Trading Application\n- **Trend direction:** For bullish trends, buy-side FVGs are high probability. For bearish trends, sell-side FVGs are high probability. Always trade FVGs in the direction of the prevailing trend.\n- **After liquidity event:** Always trade any FVG after a confirmed liquidity sweep or liquidity grab has occurred.\n- **Confluence with other tools:** FVG zones coupled with an order block or supply and demand zone are considered highly probable setups.\n- **50% entry:** Use the 50% level of the FVG zone to formulate trade entries, similar to the liquidity void approach.\n- **Preferable after inducement:** It is preferable to trade an FVG zone after an inducement or FTR (Failed To Reach) level for additional confirmation.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 200.0,
+        "word_count": 650,
+        "teaching_units": 12,
+        "frames_analyzed": 6,
+        "deictic_references": 16
       },
       "teaching_types": {
         "explanation": 8,
-        "definition": 1
+        "example": 4
       }
     },
-    "market structure": {
-      "llm_summary": "**Market Structure**:\n\n1. **Definition**: Market structure refers to the overall layout, organization, and dynamics of a financial market, including the relationships between different market participants, the types of transactions, and the overall market behavior.\n\n2. **Identification**: To spot market structure on a chart, look for specific visual characteristics such as:\n\n   - Highs and lows: The price highs and lows are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These are moving averages that provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These are averages of the price over a specific period, helping to identify the trend direction.\n   - Volume indicators: The volume of trading can provide insights into the strength of the market.\n   - Trend line: A line drawn on the chart that represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n3. **Trading Application**: ICT recommends trading market structure patterns based on the following key price levels:\n\n   - Highs and lows: These are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These moving averages provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These averages help to identify the trend direction.\n   - Volume indicators: These provide insights into the strength of the market.\n   - Trend line: This line represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n4. **Key Price Levels**: The key price levels identified in market structure patterns are crucial for trading. They include:\n\n   - Highs and lows: These are critical points that indicate the overall direction of the market.\n   - Bollinger Bands: These moving averages provide a range of price fluctuations, indicating the volatility of the market.\n   - Moving Averages: These averages help to identify the trend direction.\n   - Volume indicators: These provide insights into the strength of the market.\n   - Trend line: This line represents the overall direction of the market.\n   - Support and resistance levels: These are key levels where the market tends to pause or reverse, indicating potential support or resistance.\n   - Moving average convergence/divergence (MACD) line: This line helps to identify the strength and direction of the market.\n   - Price gap: A large price change, such as a gap up or gap down, can indicate a significant change in the market.\n\n**Summary**:\n\nMarket structure refers to the overall layout, organization, and dynamics of a financial market, including the relationships between different market participants, the types of transactions, and the overall market behavior. To identify market structure on a chart, look for specific visual characteristics such as highs and lows, Bollinger Bands, moving averages, volume indicators, trend lines, support and resistance levels, and MACD line. These patterns can provide insights into the strength and direction of the market, and can be used to make informed trading decisions.",
-      "generation_time_seconds": 88.39071488380432,
+    "valid_fvg_confirmation_rules": {
+      "llm_summary": "### Valid FVG Confirmation Rules\n\n#### Definition\nNot every Fair Value Gap zone is valid for trading. The video teaches specific rules to distinguish valid FVG zones from invalid ones. A valid FVG is one that meets structural criteria related to the highest or lowest candle in the swing, ensuring the gap was created at a significant price level rather than at an arbitrary point in the move.\n\n#### Rules for Bearish (Sell) Trend\n1. **Highest candle rule:** For a sell trend, always draw the FVG from the highest candle's wick in the swing. The FVG zone must originate from the candle that reaches the highest point (the swing high). If the FVG is drawn from a candle that is not the highest candle, the zone is invalid.\n2. **Valid pullback requirement:** To mark an FVG in a pullback, the pullback itself must be valid. A valid pullback in a bearish context means the pullback candle must sweep the liquidity from a previous high (creating a new local high), confirming the pullback's significance before the FVG is drawn from it.\n\n#### Rules for Bullish (Buy) Trend\n1. **Lowest candle rule:** For a buy trend, always draw the FVG from the lowest candle's wick in the swing. The FVG zone must originate from the candle that reaches the lowest point (the swing low). If the FVG is drawn from a candle that is not the lowest candle, the zone is invalid.\n2. **Valid pullback requirement:** Same as bearish but inverted. The pullback candle must sweep liquidity from a previous low to be considered valid before marking an FVG from it.\n\n#### Identification Examples\n- **Valid bearish FVG:** FVG zone marked from the wick of the highest candle in the swing. Shown with green checkmarks in the video diagrams (examples A through K evaluated).\n- **Invalid bearish FVG:** FVG zone marked from a candle that is NOT the highest candle. Shown with red X marks. Examples C, D, E, G, and I in the video were all invalid because the selected candle was not the highest.\n- **Valid bullish FVG:** FVG zone marked from the wick of the lowest candle in the swing.\n- **Invalid bullish FVG:** FVG zone marked from a candle that is NOT the lowest candle.\n\n#### Trading Application\n- Only trade FVG zones that pass the highest/lowest candle wick validation rule.\n- Verify that any pullback-based FVG comes from a valid pullback (one that swept prior liquidity).\n- FVGs must be traded in trend direction, after a liquidity sweep or grab, and ideally coupled with an order block or supply/demand zone.\n- Use horizontal lines to verify which candle is actually the highest/lowest in the swing when it is not visually obvious.\n- Market respects trend-based valid FVGs; price returns to these zones, fills the gap, and continues in the trend direction. Invalid FVGs may be rejected or ignored by the market, potentially hitting stop losses.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 8.060000000000002,
-        "word_count": 23,
-        "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 0
+        "teaching_duration_seconds": 406.0,
+        "word_count": 1010,
+        "teaching_units": 18,
+        "frames_analyzed": 8,
+        "deictic_references": 28
       },
       "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the Inner Circle Trader (ICT) methodology. It involves identifying specific price levels or trading zones, which are considered high probability for buy and sell setups. The key visual characteristics of an ORDER BLOCK include:\n\n1. **Visible Price Levels**: The chart includes specific price levels or price ranges, such as the highest, lowest, and middle price levels, and the price range between these levels.\n2. **Annotations, Markings, or High-Low Zones**: The chart patterns and price levels are annotated, marked, or highlighted to indicate specific trading zones.\n3. **Key Price Levels**: The most important price levels are identified, such as the highest and lowest price levels, and the middle price level.\n4. **Key Visual Characteristics**: The chart patterns and price levels are visually distinct, such as horizontal lines, specific color coding, and annotations, to highlight the ORDER BLOCK.\n\n**Trading Application**:\n- **Identification**: The ORDER BLOCK concept involves identifying specific price levels or trading zones, which are considered high probability for buy and sell setups.\n- **Application**: The trading strategy involves using these identified price levels to formulate trade entries, aiming to gain liquidity and gain market driving force.\n- **Key Price Levels**: The identified price levels are crucial in determining the trading strategy, as they represent potential entry points for buying or selling.\n\n**Key Price Levels**:\n- **Highest Price Level**: The highest price level is a critical point for identifying potential entry points for buying.\n- **Lowest Price Level**: The lowest price level is a critical point for identifying potential entry points for selling.\n- **Middle Price Level**: The middle price level is a critical point for identifying potential entry points for trading.\n- **Price Range**: The price range between these levels is a critical point for identifying potential entry points for trading.\n\n**Summary**:\n- **Definition**: ORDER BLOCK is a trading strategy used in the Inner Circle Trader (ICT) methodology, involving identifying specific price levels or trading zones, which are considered high probability for buy and sell setups.\n- **Identification**: The ORDER BLOCK concept involves identifying specific price levels or trading zones, which are visually distinct and annotated, to highlight potential entry points for trading.\n- **Trading Application**: The trading strategy involves using these identified price levels to formulate trade entries, aiming to gain liquidity and gain market driving force.\n- **Key Price Levels**: The identified price levels are crucial in determining the trading strategy, as they represent potential entry points for buying or selling.",
-      "generation_time_seconds": 70.39078092575073,
-      "statistics": {
-        "teaching_duration_seconds": 345.8199999999999,
-        "word_count": 917,
-        "teaching_units": 10,
-        "frames_analyzed": 15,
-        "deictic_references": 10
-      },
-      "teaching_types": {
-        "explanation": 9,
-        "definition": 1
-      }
-    },
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading in specific price gaps or fair value gaps. To spot this pattern, the market is in a consolidation phase, and the wick-to-wick gap is a fair value gap. The key visual characteristics to look for include:\n\n1. **Price Levels**: The top price level, bottom price level, and middle price level are important. These levels are drawn from the highest candle wick, and they are considered fair value gaps.\n\n2. **Chart Patterns and Price Levels**: The chart shows a range or consolidation phase, with specific price levels mentioned or visible. These levels are crucial for identifying the optimal entry point for trading.\n\n3. **Trading Application**: The ICT recommends trading in these fair value gaps. The focus is on identifying the highest candle wick, which represents the fair value gap. Once identified, the optimal entry point is to buy or sell, depending on the direction of the price movement.\n\n4. **Key Price Levels**: The top price level, bottom price level, and middle price level are important. These levels are drawn from the highest candle wick, and they are considered fair value gaps.\n\nBy identifying and trading in these fair value gaps, the Inner Circle Trader aims to capitalize on potential price movements within the consolidation phase.",
-      "generation_time_seconds": 56.03499698638916,
-      "statistics": {
-        "teaching_duration_seconds": 98.57999999999998,
-        "word_count": 256,
-        "teaching_units": 4,
-        "frames_analyzed": 5,
-        "deictic_references": 11
-      },
-      "teaching_types": {
-        "explanation": 4
-      }
-    },
-    "fibonacci": {
-      "llm_summary": "The \"Fibonacci\" concept in the context of trading refers to a specific price pattern identified on a chart, characterized by a series of price points that form a sequence where each point is a Fibonacci number, i.e., a number that is the sum of the two preceding ones (1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, etc.). The Fibonacci tool is used to find the 50% level, which is a significant price level, and the 100% level, which is another significant price level. The chart patterns and price levels identified on the chart support the trading application, suggesting that the Fibonacci tool can be used to identify and trade specific price patterns.",
-      "generation_time_seconds": 46.05406475067139,
-      "statistics": {
-        "teaching_duration_seconds": 12.540000000000077,
-        "word_count": 35,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 2
-      },
-      "teaching_types": {
-        "explanation": 1
+        "explanation": 10,
+        "example": 8
       }
     }
   }

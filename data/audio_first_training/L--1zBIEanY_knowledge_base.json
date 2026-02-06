@@ -1,38 +1,108 @@
 {
   "video_id": "L--1zBIEanY",
-  "generated_at": "2026-02-03T22:15:26.290151",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 71.52273106575012,
+  "generated_at": "2026-02-06T00:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 5,
-    "vision_analyses": 10,
-    "concepts_extracted": 2,
-    "total_audio_duration": 236.89999999999998,
+    "vision_analyses": 5,
+    "concepts_extracted": 7,
+    "total_audio_duration": 278.0,
     "total_words": 653
   },
   "concepts": {
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the foreign exchange market. It involves identifying a gap between the high and low prices, which is often used as a reference point for identifying potential order blocks. The chart analysis shows specific price levels, such as +86 Pips, +47 Pips, and +12 Pips, which are used as entry points for trading strategies. The chart also includes annotations and markings, such as the \"previous Day High\" and \"previous Day Low,\" which are used to identify the high and low price points for the previous trading day. The possibility exists that you could sustain a loss of some or all of your initial investment and, therefore, you should not invest money that you cannot afford to lose.",
-      "generation_time_seconds": 37.45517015457153,
+    "optimal trade entry": {
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) is ICT's cornerstone entry model that identifies the highest probability entry zone within a price swing retracement. This video, being the final in the OTE series (#20), demonstrates the complete framework from higher timeframe analysis to trade execution and management.\n\n## Rules\n1. Start with higher timeframe (daily) to establish directional bias and identify draw on liquidity\n2. Identify the Previous Day High as the buy side liquidity target (DOL)\n3. Drop to execution timeframe (5-minute) during New York Session kill zone\n4. Apply Fibonacci from swing high to swing low for buy setups\n5. Entry zone is the 62%-79% retracement (OTE zone), with 70.5% as the sweet spot\n6. Stop loss below the swing low - in this example, 30 pip stop\n7. Targets at standard deviation levels: +47 pips, +86 pips, +124 pips\n8. Minimal drawdown (8 pips in this example) when entry is well-timed\n\n## Identification\n- This video shows EURUSD setup targeting Previous Day High as DOL\n- 5-minute chart shows entry at 1.1250 with 30 pip stop loss\n- Fibonacci levels clearly marked: 0.62 at 1.12245, 0.705 at 1.12180, 0.79 at 1.12114\n- Entry achieves only 8 pips of drawdown before moving to target\n- Trade reaches standard deviation targets: +47 pips, +86 pips, and +124 pips\n- Frame at 60s shows the complete OTE setup with Previous Day High as the draw on liquidity",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 110.94000000000001,
+        "teaching_duration_seconds": 110.94,
         "word_count": 320,
+        "teaching_units": 3,
+        "frames_analyzed": 5,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 3
+      }
+    },
+    "previous day high": {
+      "llm_summary": "## Definition\nPrevious Day High (PDH) is the highest price reached during the prior trading session. In ICT methodology, PDH represents an obvious level of buy side liquidity where retail traders place sell orders and where buy stops accumulate above, making it a primary draw on liquidity target.\n\n## Rules\n1. Mark the Previous Day High before the new trading session begins\n2. PDH acts as buy side liquidity - expect price to be drawn toward it\n3. Once PDH is swept (price trades above it), the liquidity has been taken\n4. Use PDH as a directional bias indicator - if price hasn't reached PDH, expect it to be targeted\n5. PDH becomes even more significant when combined with other confluence factors\n6. After sweeping PDH, look for reversal setups or continuation to next liquidity level\n\n## Identification\n- Draw a horizontal line at the exact high of the previous completed daily candle\n- In this video, EURUSD shows PDH clearly marked on the chart\n- The PDH acts as the draw on liquidity, establishing bullish bias for the day\n- Frame at 60s shows price at 1.1250 entry with PDH above as the target\n- Frame at 120s shows the wider view with PDH horizontal line and OTE setup below it\n- Trade targets PDH and achieves +124 pips as price draws toward and through this level",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 75,
         "teaching_units": 1,
         "frames_analyzed": 3,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "standard deviation targets": {
+      "llm_summary": "## Definition\nStandard Deviation (SD) Targets are profit objectives calculated as extensions from the swing origin point. ICT uses these levels to define where price is statistically likely to reach based on average daily range expansion, providing objective take-profit levels.\n\n## Rules\n1. Calculate SD levels from the swing low (for longs) projecting upward\n2. -0.5 SD from swing high = First conservative target (approximately half daily range)\n3. -1 SD from swing high = Standard daily range expectation\n4. -1.5 SD from swing high = Extended move target\n5. -2 SD from swing high = Maximum typical daily expansion\n6. Scale out at each level: take partials at -0.5 SD, more at -1 SD, remainder at -1.5 SD\n7. Move stop to break-even after first target hit\n\n## Identification\n- Apply Fibonacci extension tool with custom SD levels\n- In this video, EURUSD shows entry at 1.1250 with targets:\n  - +47 pips (0.5 SD) at 1.12724\n  - +86 pips (1 SD) at 1.13110\n  - +124 pips (1.5 SD) at 1.13496\n- Frame at 60s displays all three target levels color-coded on the chart\n- The shaded zones (beige, pink, orange) represent each SD target zone\n- Video demonstrates price reaching all three SD targets during the New York Session",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 30.0,
+        "word_count": 85,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "stop loss placement": {
+      "llm_summary": "## Definition\nStop Loss Placement in ICT methodology follows a precise structure-based approach rather than arbitrary pip values. The stop is placed beyond the swing point that defines the setup, ensuring invalidation of the trade thesis if hit while minimizing unnecessary risk.\n\n## Rules\n1. For buy setups: Stop loss below the swing low that defines the OTE structure\n2. For sell setups: Stop loss above the swing high that defines the OTE structure\n3. Add a small buffer (5-10 pips) beyond the exact swing point for slippage/spread\n4. Never use arbitrary pip-based stops (like 20 pips) - always structure-based\n5. If stop loss is too wide relative to account risk, reduce position size or skip trade\n6. The invalidation point is clear: if price exceeds the swing extreme, the setup has failed\n\n## Identification\n- Identify the swing low (for longs) or swing high (for shorts) that defines the setup\n- In this video, EURUSD shows 30 pip stop loss from entry at 1.1250\n- Stop placed below swing low at 1.11952 (the 100% Fibonacci level)\n- Frame at 60s shows '30 Pip Stop' clearly labeled on the chart\n- The trade achieves only 8 pips drawdown, demonstrating well-timed entry\n- Risk:Reward ratio with 30 pip stop to +124 pip target = 1:4.1",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 60,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
         "deictic_references": 3
       },
       "teaching_types": {
         "explanation": 1
       }
     },
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying potential entry points on a chart. The key visual characteristics to spot are high and low price levels, support and resistance levels, Bollinger Bands, moving averages, and chill zones. These patterns are important for identifying potential entry points in the market. The Inner Circle Trader recommends trading these patterns by entering when the price crosses a support or resistance level, or when the Bollinger Bands are in a specific range. The key price levels to watch are the highs and lows, support and resistance levels, and moving averages. The Inner Circle Trader also emphasizes the importance of risk management, suggesting that you should not invest money that you cannot afford to lose.",
-      "generation_time_seconds": 33.698697090148926,
+    "drawdown management": {
+      "llm_summary": "## Definition\nDrawdown refers to the maximum adverse movement price makes against your entry before moving in your favor. ICT emphasizes minimizing drawdown through precise OTE entries, with the goal of price moving immediately in your direction after entry.\n\n## Rules\n1. Well-timed OTE entries should experience minimal drawdown (under 10 pips ideally)\n2. If drawdown exceeds 50% of stop loss, entry timing was likely suboptimal\n3. Entry at the 70.5% level typically provides the best risk:drawdown ratio\n4. Wait for displacement candle (strong momentum) after price enters OTE zone\n5. Excessive drawdown often indicates entering too early or wrong market conditions\n6. Track your average drawdown to assess entry quality over time\n\n## Identification\n- Measure the distance price moves against you before moving in favor\n- In this video, EURUSD shows only 8 pip drawdown (DD) from entry at 1.1250\n- Frame at 60s shows '8 Pips DD' annotated on the chart\n- With a 30 pip stop, 8 pip drawdown represents only 27% of maximum risk used\n- This demonstrates the power of precise OTE entries - minimal heat on the trade\n- Compare to typical retail entries that often use most of their stop before working",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 44.21999999999997,
-        "word_count": 115,
+        "teaching_duration_seconds": 20.0,
+        "word_count": 65,
         "teaching_units": 1,
-        "frames_analyzed": 3,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "kill zone timing": {
+      "llm_summary": "## Definition\nKill Zones are specific time windows during the trading day when institutional order flow is highest and OTE setups have the greatest probability of success. The primary kill zones are London Open, New York Open, and London Close.\n\n## Rules\n1. New York Session Kill Zone: 8:30 AM - 11:00 AM EST (highest probability)\n2. London Session Kill Zone: 2:00 AM - 5:00 AM EST\n3. London Close Kill Zone: 10:00 AM - 12:00 PM EST\n4. Asian Session: Generally avoid except for specific pairs (JPY, AUD)\n5. OTE setups outside kill zones have significantly lower probability\n6. Wait for kill zone even if setup appears earlier - patience is rewarded\n\n## Identification\n- Mark kill zone hours on your chart platform\n- Use session highlighting tools for visual reference\n- In this video, EURUSD entry occurs during New York Session (labeled on chart)\n- Frame at 60s shows 'New York Session' indicator on the chart\n- Entry timing coincides with NY Session kill zone for maximum probability\n- The strong directional move to targets occurs within the NY Session window",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 15.0,
+        "word_count": 50,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "risk to reward": {
+      "llm_summary": "## Definition\nRisk to Reward (R:R) ratio compares the potential loss (distance to stop) versus potential gain (distance to target). ICT methodology emphasizes high R:R trades through precise OTE entries and standard deviation targets, typically aiming for minimum 1:3 R:R.\n\n## Rules\n1. Minimum acceptable R:R is 1:3 for standard trades\n2. OTE entries enable higher R:R through tighter stops (structure-based)\n3. Calculate R:R before entering: potential profit divided by risk\n4. First SD target should offer minimum 1:1.5 R:R\n5. Full position management to -1.5 SD target should yield 1:4+ R:R\n6. Never take trades with R:R less than 1:2 (break-even accounting for spread/commission)\n\n## Identification\n- In this video, EURUSD demonstrates exceptional R:R:\n  - Entry: 1.1250\n  - Stop: 30 pips below (1.1220)\n  - Target 1: +47 pips = 1:1.57 R:R\n  - Target 2: +86 pips = 1:2.87 R:R  \n  - Target 3: +124 pips = 1:4.13 R:R\n- Frame at 60s shows all levels clearly marked allowing R:R calculation\n- This demonstrates how OTE methodology provides excellent risk:reward profiles\n- The minimal drawdown (8 pips) further enhances the effective R:R on winning trades",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 70,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
         "deictic_references": 3
       },
       "teaching_types": {

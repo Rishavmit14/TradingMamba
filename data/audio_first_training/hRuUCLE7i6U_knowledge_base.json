@@ -1,81 +1,98 @@
 {
   "video_id": "hRuUCLE7i6U",
-  "generated_at": "2026-02-05T18:26:06.335362",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 138.7586510181427,
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 20,
     "vision_analyses": 32,
-    "concepts_extracted": 5,
-    "total_audio_duration": 452.34000000000003,
+    "concepts_extracted": 6,
+    "total_audio_duration": 452.34,
     "total_words": 1110
   },
   "concepts": {
-    "smart money": {
-      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading in small banks, which are typically smaller banks operating within a country or region. To spot SMART MONEY on a chart, look for specific visual characteristics such as high-frequency trading, large volume, and high trading volume. The trading application for SMART MONEY involves entering data from small banks into a digital record system, which is then shared with larger banks or state banks. Key price levels for SMART MONEY include high and low prices, and the trading performance is typically hypothesized to be high and low.",
-      "generation_time_seconds": 24.564738035202026,
+    "forex_market_working_principle": {
+      "llm_summary": "### Forex Market Working Principle\n\n#### Definition\nThe forex market operates on a 24-hours-a-day, 5-days-a-week basis (24/5), driven by the global banking system. The term 'smart money' refers to the major market participants: big institutions, big banks, insurance companies, and fund hedgers (hedge funds). The market is closed on Saturday and Sunday because the banking system is closed on weekends. The forex chart we see is the aggregate digital record of all transaction data reported from banking systems across the four major global regions.\n\n#### Identification\nThe forex market structure is built from the bottom up: small regional banks in each geography (Asian, London, New York, Sydney) report their transaction data to their respective state/central banks. These central banks then report to a larger global institution, which aggregates and records the data into a digital system. This aggregated data is what produces the forex trading chart that traders analyze. The visual schematic shows four regional banking clusters (Asian in green, London in pink, New York in yellow, Sydney in purple), each flowing through a central bank icon to a digital network, which then feeds into a single centralized institution, ultimately producing the candlestick chart.\n\n#### Trading Application\nUnderstanding this principle is foundational: the forex chart reflects institutional and banking activity, not retail trader behavior. Smart money (institutions) drives the market. Retail traders must learn to read the chart through the lens of institutional order flow rather than retail indicators. The 24/5 schedule means traders must plan around weekend gaps and understand that continuous session overlap keeps the market moving throughout the trading week.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 69.62,
-        "word_count": 174,
-        "teaching_units": 1,
-        "frames_analyzed": 3,
-        "deictic_references": 2
+        "teaching_duration_seconds": 122.0,
+        "word_count": 280,
+        "teaching_units": 4,
+        "frames_analyzed": 6,
+        "deictic_references": 3
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 4
       }
     },
-    "institutional": {
-      "llm_summary": "The \"INSTITUTIONAL\" concept refers to large financial institutions, such as banks, insurance companies, and fund management companies, which are responsible for managing and investing large amounts of money. These institutions are typically involved in trading and financial markets, and they have access to a wide range of financial instruments and markets.\n\nTo spot an institutional pattern on a chart, look for patterns that are associated with large financial institutions, such as high volume, high frequency trading, and high volume, low frequency trading. These patterns are often characterized by high volume, high frequency trading, and high volume, low frequency trading, which are patterns that are associated with large financial institutions.\n\nIn terms of trading application, the \"INSTITUTIONAL\" concept suggests that large financial institutions are likely to be involved in trading and financial markets. Therefore, traders should focus on large financial institutions and their trading activities, and look for opportunities to trade with these institutions.\n\nKey price levels to consider include high volume, high frequency trading, and high volume, low frequency trading. These patterns are associated with large financial institutions and are likely to be profitable trading opportunities.",
-      "generation_time_seconds": 29.17254090309143,
+    "forex_trading_sessions": {
+      "llm_summary": "### Forex Trading Sessions\n\n#### Definition\nThe forex market operates continuously for 24 hours through four overlapping trading sessions: Asian, London, New York, and Sydney. Each session has a distinct character and role in the daily price action cycle. The trading day begins with the Asian session, followed by the London session which overlaps with Asian, then the New York session which overlaps with London, and finally the Sydney session which overlaps with New York to complete the 24-hour cycle.\n\n#### Identification\nEach session is visually represented as a colored horizontal bar on a 00:00 to 24:00 timeline, with overlapping zones where two sessions run simultaneously. The key behavioral characteristics of each session are:\n- **Asian Session**: Market is ranging/consolidating. Price moves sideways within a defined range, building liquidity on both sides (highs and lows of the range). This is the accumulation phase.\n- **London Session**: Market becomes trending and volatile. This is where the major directional move of the day typically initiates. London session has significantly higher trade volume than Asian session.\n- **New York Session**: Market continues trending, especially volatile for major/USD pairs. New York overlaps with London and continues the directional bias established by London.\n- **Sydney Session**: Market returns to ranging behavior at the end of the trading day, consolidating before the next Asian session begins.\n\n#### Trading Application\nThe session framework is critical for intraday trading. Traders should recognize that Asian session consolidation builds the liquidity pools that London session will target. The trending nature of London and New York sessions is where the highest-probability directional trades occur. New York session is particularly important for USD pairs due to high volatility. Sydney session is a low-probability trading environment similar to Asian session. Understanding session overlap zones helps identify when volatility transitions occur.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 69.62,
-        "word_count": 174,
-        "teaching_units": 1,
-        "frames_analyzed": 3,
-        "deictic_references": 2
-      },
-      "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "order block": {
-      "llm_summary": "The \"ORDER BLOCK\" concept in the context of the Inner Circle Trader methodology involves identifying and trading specific patterns or blocks of orders in the forex market. This behavior is observed in Asian session and is more prevalent in London session, which is known for its volatility. The concept is based on the idea of identifying and trading specific price levels or trading ranges, which can provide opportunities for profitable trading. The chart analysis provided shows horizontal bars representing different trading sessions, with the purple bar representing the London Session, the green bar representing the New York Session, and the yellow bar representing the Sydney Session. The chart does not explicitly show specific price levels, but the horizontal bars are spaced out, suggesting different time periods or trading ranges. The key visual characteristics to spot an ORDER BLOCK are the presence of horizontal bars, the different colored bars representing different sessions, and the spacing of the bars indicating different time periods or trading ranges. The trading application of ORDER BLOCK involves identifying and trading specific price levels or trading ranges, which can provide opportunities for profitable trading.",
-      "generation_time_seconds": 26.589468240737915,
-      "statistics": {
-        "teaching_duration_seconds": 32.06,
-        "word_count": 78,
-        "teaching_units": 2,
-        "frames_analyzed": 4,
-        "deictic_references": 2
-      },
-      "teaching_types": {
-        "explanation": 2
-      }
-    },
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading in specific candlestick patterns. The key visual characteristics of these patterns include:\n\n1. **Candle Body Formation**: The candle body is a significant portion of the candle, representing the price range within which the candle is formed. This is where the trade entry is made.\n\n2. **Key Price Levels**: The candle body is often used to identify key price levels, such as the high and low of the day, which can be used to make trades.\n\n3. **Trading Application**: The optimal trade entry is made when the candle body is in a specific range, such as a bullish candle body in a bullish market. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\n4. **Key Price Levels**: The candle body is used to identify key price levels, such as the high and low of the day, which can be used to make trades. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\n5. **Trading Strategy**: The optimal trade entry is a strategy that involves making trades when the candle body is in a specific range, such as a bullish candle body in a bullish market. The trade entry is made when the price is below the high of the candle body and above the low of the candle body.\n\nThe optimal trade entry concept is based on the idea that the price action in the candle body is a good indicator of the direction of the market. By making trades when the price is below the high of the candle body and above the low of the candle body, traders can take advantage of the bullish trend in the market.",
-      "generation_time_seconds": 32.11487007141113,
-      "statistics": {
-        "teaching_duration_seconds": 94.47999999999999,
-        "word_count": 231,
+        "teaching_duration_seconds": 96.0,
+        "word_count": 220,
         "teaching_units": 5,
         "frames_analyzed": 6,
-        "deictic_references": 5
+        "deictic_references": 4
       },
       "teaching_types": {
         "explanation": 5
       }
     },
-    "liquidity": {
-      "llm_summary": "LIQUIDITY is a concept in trading that refers to the ease with which a security can be bought or sold. It is a measure of the liquidity of a security, indicating how quickly and easily it can be bought or sold. Liquidity is important in trading because it affects the price of a security and the trading volume of a security. When a security is highly liquid, it means that it is easy to buy or sell, and the price of the security is more stable. When a security is less liquid, it means that it is difficult to buy or sell, and the price of the security is more volatile.",
-      "generation_time_seconds": 25.88265609741211,
+    "bullish_daily_candlestick_formation": {
+      "llm_summary": "### Bullish Daily Candlestick Formation\n\n#### Definition\nA bullish daily candlestick is not simply a green candle -- it is formed through a specific sequence of price action across the four trading sessions within a single 24-hour period. The formation follows a precise ICT framework: the Asian session opens and consolidates (creating the open price and building liquidity), the London session sweeps the Asian low-side liquidity and posts the daily low, then price reverses and trends upward through London and New York sessions (creating the candle body), the New York session posts the daily high, and the Sydney session ranges near the highs (creating the upper wick) before the candle closes.\n\n#### Identification\nOn the visual diagram, the bullish candlestick formation shows: (1) Asian session as a zigzag ranging pattern near the open price with '$$$' marking liquidity above and below the range; (2) London session beginning with a sharp drop below the Asian range low (the liquidity sweep / Judas swing) which forms the lower wick, then a strong reversal upward that creates the lower portion of the candle body; (3) New York session continuing the upward trend to post the high of the day, forming the upper portion of the candle body; (4) Sydney session showing a small zigzag ranging pattern near the highs, creating the upper wick. The resulting daily candlestick on the right side of the diagram shows a bullish candle with a lower wick (London manipulation), a large body (London + New York trending), and a small upper wick (Sydney ranging).\n\n#### Trading Application\nFor bullish days, the key trade setup is to wait for the London session to sweep the Asian session low (Judas swing), then enter long after the reversal. The daily low is posted in London session -- this is the optimal entry zone. The candle body represents the institutional/bank trading volume moving price directionally from London through New York. Traders should anticipate that the high of the day will be posted during New York session. The practical rule: on bullish bias days, look for London session to take out Asian lows before going long.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 85.12000000000006,
-        "word_count": 209,
+        "teaching_duration_seconds": 154.0,
+        "word_count": 350,
+        "teaching_units": 6,
+        "frames_analyzed": 6,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 2
+      }
+    },
+    "bearish_daily_candlestick_formation": {
+      "llm_summary": "### Bearish Daily Candlestick Formation\n\n#### Definition\nA bearish daily candlestick forms through the mirror-image sequence of the bullish formation. The Asian session opens and consolidates (building liquidity on both sides), the London session sweeps the Asian high-side liquidity and posts the daily high (Judas swing to the upside), then price reverses sharply downward and trends lower through London and New York sessions (creating the candle body), the New York session posts the daily low, and the Sydney session ranges near the lows before the candle closes.\n\n#### Identification\nOn the visual diagram, the bearish candlestick formation shows: (1) Asian session as a zigzag consolidation near the open with '$$$' marking liquidity pools above and below; (2) London session beginning with a spike above the Asian range high (the upside liquidity sweep / Judas swing labeled as 'Liquidity Sweep / Liquidity Grab / Manipulation / Judas Swing') which forms the upper wick, followed by a sharp reversal downward creating the upper portion of the bearish candle body; (3) New York session continuing the downward trend to post the low of the day, forming the lower portion of the candle body; (4) Sydney session showing ranging behavior near the lows, creating the lower wick. The resulting daily candlestick is bearish (red) with an upper wick (London manipulation), a large red body (London + New York trending down), and a small lower wick (Sydney ranging).\n\n#### Trading Application\nFor bearish days, the key trade setup is to wait for the London session to sweep the Asian session high (Judas swing to upside), then enter short after the reversal. The daily high is posted in London session -- this is the optimal entry zone for shorts. Traders should anticipate that the low of the day will be posted during New York session, which serves as the take-profit target zone. The practical rule: on bearish bias days, look for London session to take out Asian highs before going short.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 57.0,
+        "word_count": 140,
         "teaching_units": 3,
         "frames_analyzed": 6,
-        "deictic_references": 4
+        "deictic_references": 6
+      },
+      "teaching_types": {
+        "explanation": 2,
+        "example": 1
+      }
+    },
+    "judas_swing_and_liquidity_sweep": {
+      "llm_summary": "### Judas Swing and Liquidity Sweep\n\n#### Definition\nThe Judas swing is a deceptive price movement that occurs at the beginning of the London session, designed to trap retail and breakout traders. It is a fake directional move that sweeps the liquidity built up during the Asian session consolidation before the market reverses and moves in the true intended direction. The term 'Judas' refers to the betrayal -- the initial move looks like a legitimate breakout but is actually a manipulation by smart money to grab liquidity. The video also uses the terms 'liquidity sweep', 'liquidity grab', and 'manipulation' interchangeably with Judas swing.\n\n#### Identification\nThe Judas swing is identified by the following sequence: (1) Asian session consolidates in a range, building equal liquidity (marked as '$$') on both the high and low sides of the range; (2) At the start of London session, price breaks out of the Asian range in the OPPOSITE direction of the true daily trend -- in a bullish day, it breaks below the Asian low; in a bearish day, it breaks above the Asian high; (3) After sweeping the liquidity (stop losses of traders positioned within the Asian range), price sharply reverses in the true trending direction. On the chart diagrams, the Judas swing is circled and labeled, occurring precisely at the transition from Asian to London session.\n\n#### Trading Application\nThe Judas swing is the single most important concept for daily trade timing in ICT methodology. Traders must NOT trade the initial London session breakout of the Asian range, as this is the trap/manipulation move. Instead, traders should wait for the sweep to complete and the reversal to begin before entering in the true direction. In bullish markets: the Judas swing sweeps Asian lows, then reverses up -- enter long after the reversal. In bearish markets: the Judas swing sweeps Asian highs, then reverses down -- enter short after the reversal. This concept directly links the session structure to actionable trade entries.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 75.0,
+        "word_count": 175,
+        "teaching_units": 4,
+        "frames_analyzed": 6,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 3,
+        "example": 1
+      }
+    },
+    "candlestick_ohlc_body_vs_wick": {
+      "llm_summary": "### Candlestick OHLC -- Body vs Wick Meaning\n\n#### Definition\nEvery candlestick has four key price values: Open, High, Low, and Close (OHLC). The candle body represents the range between the open and close prices. The wicks (also called shadows) extend from the body to the high and low of the candle. In ICT methodology, the candle body and wick have a deeper institutional meaning: the candle body represents bank trading volume (institutional/smart money activity), while the candle wick or shadow represents retail trader volume (the manipulated portion of price action).\n\n#### Identification\nThe visual diagram shows three candlestick illustrations side by side: (1) A generic candlestick with labels showing 'Candle Body (Bank Trading)' for the filled center portion and 'Candle Wick / Shadow (Retail Trading)' for both the upper and lower extensions; (2) A bullish candle (purple) with Open at the bottom of the body, Close at the top, Low at the bottom of the lower wick, and High at the top of the upper wick; (3) A bearish candle (red) with Open at the top of the body, Close at the bottom, High at the top of the upper wick, and Low at the bottom of the lower wick. For bullish candles, the low (bottom of wick) is on the downside because London session posts the daily low via the Judas swing. For bearish candles, the high (top of wick) is the London session manipulation to the upside.\n\n#### Trading Application\nTraders should focus on the candle body as the representation of institutional intent -- the body shows where smart money moved price with conviction. The wicks represent manipulation zones where retail traders were trapped. When analyzing daily candlesticks, the lower wick of a bullish candle corresponds to the London session liquidity sweep (Judas swing below Asian range), and the upper wick of a bearish candle corresponds to the London session liquidity sweep above the Asian range. Understanding this distinction helps traders avoid being trapped in wick zones and instead trade with the body (institutional direction).",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 47.0,
+        "word_count": 120,
+        "teaching_units": 3,
+        "frames_analyzed": 6,
+        "deictic_references": 5
       },
       "teaching_types": {
         "explanation": 3

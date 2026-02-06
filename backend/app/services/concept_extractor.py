@@ -93,13 +93,18 @@ class ConceptExtractor:
 
     @property
     def anthropic_client(self):
-        """Lazy load Anthropic client"""
+        """Lazy load Anthropic client.
+
+        NOTE: Claude API is optional. Primary training is via Claude Code (Max plan).
+        This client is only used for extract_concepts_ai() which provides supplementary
+        AI-powered concept extraction. The system works fully without it.
+        """
         if self._anthropic_client is None and settings.ANTHROPIC_API_KEY:
             try:
                 from anthropic import Anthropic
                 self._anthropic_client = Anthropic(api_key=settings.ANTHROPIC_API_KEY)
             except ImportError:
-                logger.warning("anthropic package not installed")
+                logger.warning("anthropic package not installed — Claude API extraction disabled (optional)")
         return self._anthropic_client
 
     def extract_concepts_basic(self, transcript: Transcript) -> List[ConceptMention]:
@@ -149,14 +154,27 @@ class ConceptExtractor:
 
     def extract_concepts_ai(self, transcript: Transcript) -> Tuple[List[ConceptMention], List[ConceptRule]]:
         """
-        AI-powered concept extraction using Claude
+        AI-powered concept extraction.
 
-        This provides:
-        - Higher accuracy concept detection
-        - Context-aware mentions
-        - Rule extraction
-        - Quality assessment
+        DISABLED: Paid Claude API calls have been disabled to use Claude Code Max plan instead.
+
+        All concept extraction is now pre-computed by Claude Code and stored in:
+        - data/audio_first_training/{video_id}_knowledge_base.json
+
+        This method now falls back to basic keyword extraction which is FREE.
+        The pre-computed knowledge bases provide superior quality anyway.
+
+        To re-enable paid API (NOT RECOMMENDED):
+        - Set environment variable: ENABLE_PAID_CONCEPT_API=true
         """
+        import os
+
+        # Check if paid API is explicitly enabled (default: disabled)
+        if os.environ.get('ENABLE_PAID_CONCEPT_API', '').lower() != 'true':
+            logger.info("Using FREE keyword extraction (paid API disabled - using Claude Code pre-computed data)")
+            return self.extract_concepts_basic(transcript), []
+
+        # === PAID API PATH (disabled by default) ===
         if not self.anthropic_client:
             logger.warning("Anthropic client not available, falling back to basic extraction")
             return self.extract_concepts_basic(transcript), []
@@ -170,7 +188,7 @@ class ConceptExtractor:
         all_rules = []
 
         for i, chunk in enumerate(chunks):
-            logger.info(f"Processing chunk {i+1}/{len(chunks)}")
+            logger.info(f"Processing chunk {i+1}/{len(chunks)} [PAID API - consider using Claude Code instead]")
 
             prompt = self._build_extraction_prompt(chunk, i, len(chunks))
 

@@ -136,7 +136,8 @@ class FreeMarketDataService:
         self,
         symbol: str,
         timeframe: str = 'H1',
-        limit: int = 200
+        limit: int = 200,
+        end_time: int = None
     ) -> Optional['pd.DataFrame']:
         """
         Get OHLCV data for a symbol
@@ -145,10 +146,13 @@ class FreeMarketDataService:
             symbol: Trading symbol (e.g., 'EURUSD', 'XAUUSD')
             timeframe: M1, M5, M15, M30, H1, H4, D1, W1, MN
             limit: Number of candles
+            end_time: Unix timestamp (seconds) - fetch data ending at this time for scrollback
 
         Returns:
             DataFrame with columns: open, high, low, close, volume
         """
+        from datetime import datetime, timedelta
+
         yahoo_symbol = self.get_yahoo_symbol(symbol)
         interval = TIMEFRAME_MAP.get(timeframe, '1h')
         period = PERIOD_MAP.get(timeframe, '60d')
@@ -156,23 +160,53 @@ class FreeMarketDataService:
         try:
             ticker = yf.Ticker(yahoo_symbol)
 
-            # Special handling for H4 (not native in Yahoo)
-            if timeframe == 'H4':
-                # Get H1 data and resample
-                df = ticker.history(period=period, interval='1h')
-                if df.empty:
-                    return None
+            # If end_time is specified, calculate date range for historical scrollback
+            if end_time:
+                end_date = datetime.fromtimestamp(end_time)
+                # Calculate start date based on timeframe and limit
+                # Approximate duration per candle in minutes
+                tf_minutes = {
+                    'M1': 1, 'M5': 5, 'M15': 15, 'M30': 30,
+                    'H1': 60, 'H4': 240, 'D1': 1440, 'W1': 10080, 'MN': 43200
+                }
+                minutes_per_candle = tf_minutes.get(timeframe, 60)
+                # Add some buffer to ensure we get enough candles
+                total_minutes = minutes_per_candle * limit * 1.5
+                start_date = end_date - timedelta(minutes=total_minutes)
 
-                # Resample to 4H
-                df = df.resample('4h').agg({
-                    'Open': 'first',
-                    'High': 'max',
-                    'Low': 'min',
-                    'Close': 'last',
-                    'Volume': 'sum'
-                }).dropna()
+                # Special handling for H4 (not native in Yahoo)
+                if timeframe == 'H4':
+                    df = ticker.history(start=start_date, end=end_date, interval='1h')
+                    if df.empty:
+                        return None
+                    df = df.resample('4h').agg({
+                        'Open': 'first',
+                        'High': 'max',
+                        'Low': 'min',
+                        'Close': 'last',
+                        'Volume': 'sum'
+                    }).dropna()
+                else:
+                    df = ticker.history(start=start_date, end=end_date, interval=interval)
             else:
-                df = ticker.history(period=period, interval=interval)
+                # Default behavior: use period for recent data
+                # Special handling for H4 (not native in Yahoo)
+                if timeframe == 'H4':
+                    # Get H1 data and resample
+                    df = ticker.history(period=period, interval='1h')
+                    if df.empty:
+                        return None
+
+                    # Resample to 4H
+                    df = df.resample('4h').agg({
+                        'Open': 'first',
+                        'High': 'max',
+                        'Low': 'min',
+                        'Close': 'last',
+                        'Volume': 'sum'
+                    }).dropna()
+                else:
+                    df = ticker.history(period=period, interval=interval)
 
             if df.empty:
                 logger.warning(f"No data for {symbol}")

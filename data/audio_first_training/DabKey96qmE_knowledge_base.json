@@ -1,98 +1,119 @@
 {
   "video_id": "DabKey96qmE",
-  "generated_at": "2026-02-04T19:19:53.027691",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 557.2369611263275,
+  "generated_at": "2026-02-05T14:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 18,
     "vision_analyses": 32,
-    "concepts_extracted": 6,
-    "total_audio_duration": 502.2999999999999,
+    "concepts_extracted": 7,
+    "total_audio_duration": 502.3,
     "total_words": 1257
   },
   "concepts": {
-    "higher high": {
-      "llm_summary": "### Higher High in ICT Trading\n\n#### Definition\nA higher high is a price point where the market closes above the previous high, indicating a new high in the price action. This pattern is typically seen in bullish market conditions, where the market is moving higher and creating new highs.\n\n#### Identification\nTo spot a higher high, look for a price point where the market closes above the previous high. This can be identified by observing the chart and identifying the highest price point that is followed by a close above the previous high. The key visual characteristics include:\n- A price point where the market closes above the previous high.\n- The market is in a bullish trend.\n- The market is creating new highs.\n- The market is not in a bearish trend.\n\n#### Trading Application\nIn a bullish trend, higher highs are considered valid higher highs. They indicate a new high in the price action, which is a positive sign for traders. Higher lows, on the other hand, are considered valid higher lows, indicating a new low in the price action, which is also a positive sign for traders.\n\n#### Key Price Levels\nThe higher highs and lower lows are important price levels in trading. They can be used to identify potential support and resistance levels, which can be used to make trading decisions. The higher highs and lower lows can also be used to identify potential buy and sell signals, which can be used to enter or exit trades.\n\n#### Conclusion\nHigher highs and lower lows are critical price patterns in trading, and they can be used to identify potential support and resistance levels, as well as potential buy and sell signals. Traders should monitor these patterns closely and use them as tools to make informed trading decisions.",
-      "generation_time_seconds": 96.53515601158142,
+    "market structure": {
+      "llm_summary": "### Market Structure (Forex Structure Mapping)\n\n#### Definition\nMarket structure, also called structure mapping or trend mapping, is the foundational framework for identifying the true direction of a market. According to the Forex Minions / ICT methodology, 50% of forex trading success depends on valid structural mapping. Market structure defines whether the market is in a bullish (upward) or bearish (downward) trend by analyzing the sequence of swing highs and swing lows.\n\n#### Identification\n- **Bullish Structure**: Market creates a sequence of Higher Highs (HH) and Higher Lows (HL). Each new swing high is above the previous swing high, and each new swing low is above the previous swing low.\n- **Bearish Structure**: Market creates a sequence of Lower Highs (LH) and Lower Lows (LL). Each new swing high is below the previous one, and each new swing low is below the previous one.\n- **Critical Distinction**: Not every peak is a valid HH and not every trough is a valid HL. Smart Money traders apply specific validation rules (inducement + candle close) to determine which swing points are truly valid. Retail traders incorrectly label every swing as valid.\n\n#### Trading Application\nValid structure mapping is the first step before any trade entry. If you cannot correctly identify the real trend direction, all subsequent analysis (order blocks, FVG, entry points) will be based on a false premise. The teacher emphasizes that getting structure right prevents being trapped by fake breakouts and manipulation moves.\n\n#### Key Price Levels\n- HH (Higher High) and HL (Higher Low) in bullish trends\n- LH (Lower High) and LL (Lower Low) in bearish trends\n- Inducement levels that validate or invalidate swing points",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 278.17999999999984,
+        "teaching_duration_seconds": 120.0,
+        "word_count": 350,
+        "teaching_units": 5,
+        "frames_analyzed": 8,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 3,
+        "example": 2
+      }
+    },
+    "higher high": {
+      "llm_summary": "### Higher High (HH) — Smart Money Validation\n\n#### Definition\nA Higher High is a swing high that is higher than the previous swing high, confirming bullish continuation. However, in the Smart Money / ICT approach, NOT every high above the previous high qualifies as a valid Higher High. A valid HH must pass TWO specific rules that distinguish Smart Money structure mapping from the flawed retail approach.\n\n#### The Two Rules for Valid Higher High\n**Rule 1 — Inducement Takeout**: The market must take out (trade through) the first recent inducement from the previous swing. The inducement is the first pullback on the LEFT side of the current swing high. If the market moves higher WITHOUT taking out the inducement, the new high is NOT a valid Higher High.\n\n**Rule 2 — Candle Body Close**: The candle body must close below the inducement level AND above the previous high. If the candle wick pierces above the high but the body does not close properly, it is classified as a Liquidity Sweep, not a valid Higher High.\n\n#### Retail vs Smart Money\n- **Retail traders** mark every high above the previous high as HH, and every low above the previous low as HL. This leads to false structure mapping and getting trapped by manipulation moves.\n- **Smart Money traders** only mark a swing as valid HH/HL after both rules are satisfied. Invalid swings are marked with 'X' (not valid) and may represent liquidity sweeps or manipulation traps.\n\n#### Identification on Chart\n- Look for the zigzag pattern of price swings\n- Identify the inducement (first pullback on left side of swing high)\n- Verify the inducement was taken out by subsequent price action\n- Confirm candle body closes properly (below inducement, above previous high)\n- If both rules pass: mark as valid HH. If not: mark as invalid or liquidity sweep.\n\n#### Trading Application\nOnly trade in the direction confirmed by valid HH/HL sequences. When structure shows valid HH + HL in sequence, the bullish trend is confirmed and you look for buying opportunities at the next valid Higher Low. This filters out 'fake breakouts' that trap retail traders.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 278.18,
         "word_count": 714,
         "teaching_units": 9,
         "frames_analyzed": 17,
         "deictic_references": 15
       },
       "teaching_types": {
-        "explanation": 9
+        "explanation": 6,
+        "example": 3
       }
     },
-    "market structure": {
-      "llm_summary": "**Market Structure** is a fundamental concept in trading that refers to the underlying structure or framework of a market, which helps traders identify and analyze market trends. It involves identifying key price levels, trend lines, and annotations on a chart to understand the direction and magnitude of market movements.\n\n**Identification**:\n- **Trend Lines**: Key upward and downward trend lines are critical for identifying market structure. These lines represent the direction of the market's movement.\n- **Price Levels**: Specific price levels, such as \"HH\" (high high) and \"LL\" (low low), are important for identifying the strength and direction of the market.\n- **Annotations and Markings**: Specific annotations and markings, such as arrows and arrows pointing upwards or downwards, help in identifying the direction and magnitude of the market's movement.\n\n**Trading Application**:\n- **Trading Strategy**: ICT recommends trading this pattern by identifying key price levels and trend lines, which can help in identifying potential buying and selling opportunities.\n- **Risk Management**: The chart patterns can also be used to manage risk by identifying potential support and resistance levels.\n- **Profit Potential**: The chart patterns can provide insights into potential profit opportunities, such as when the market closes above the high high and below the low low.\n\n**Key Price Levels**:\n- **HH (High High)**: Represents the highest price in the chart.\n- **LL (Low Low)**: Represents the lowest price in the chart.\n- **HH and LL**: Represents the high and low of the chart, respectively.\n\n**Summary**:\nMarket structure is a fundamental concept in trading that involves identifying key price levels, trend lines, and annotations on a chart to understand the direction and magnitude of market movements. By identifying these key elements, traders can identify potential buying and selling opportunities, manage risk, and increase their winning ratio.",
-      "generation_time_seconds": 77.55068802833557,
+    "inducement": {
+      "llm_summary": "### Inducement — The Key to Valid Structure\n\n#### Definition\nInducement is the first valid pullback on the LEFT side of the current swing high (in a bullish trend) or swing low (in a bearish trend). It is the most critical concept for validating market structure in the Smart Money / ICT methodology. The teacher describes inducement as one of the 'two major driving forces' of the forex market, alongside liquidity.\n\n#### Identification\n- In a bullish swing: Look at the price move from a low to a high. The inducement is the FIRST minor pullback (retracement) that occurs within that swing, found on the left side of the swing high.\n- It represents a minor counter-trend move within the larger swing — essentially the first internal correction before the swing high is formed.\n- On a chart diagram, the inducement appears as a small dip within an upward swing, occurring before the final push to the swing high.\n\n#### Role in Structure Validation (Rule 1)\nFor a Higher High to be valid, the subsequent price action MUST 'take out' (trade through) this inducement level. This means price must retrace to the inducement level and break through it before continuing higher. If price moves to a new high WITHOUT taking out the inducement from the previous swing, that high is NOT a valid Higher High — it has no structural confirmation.\n\n#### Inducement vs Smart Money Trap\nThe teacher notes that inducement is 'also known as smart money trap.' This is because the inducement level acts as a trap — when price takes out the inducement, it triggers stop losses and pending orders placed by retail traders at that level, providing liquidity for smart money to enter positions.\n\n#### Key Visual Pattern\nOn the annotated chart frames, inducement is shown as a horizontal level drawn at the first pullback point within a swing, with arrows showing whether price successfully took it out. Swings where inducement was NOT taken out are marked with 'X' (invalid) and labeled 'No Inducement.'",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 51.57999999999994,
-        "word_count": 122,
-        "teaching_units": 3,
-        "frames_analyzed": 5,
-        "deictic_references": 5
+        "teaching_duration_seconds": 180.0,
+        "word_count": 450,
+        "teaching_units": 6,
+        "frames_analyzed": 10,
+        "deictic_references": 12
       },
       "teaching_types": {
-        "explanation": 3
-      }
-    },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a specific trading pattern identified by the Inner Circle Trader (ICT) methodology. It involves a specific price level, typically a key resistance or support level, where traders can enter a trade. The pattern is characterized by a high probability entry, which is based on the overall direction of the market trend.\n\n**Identification**:\n- Trend mapping: The chart shows a trend mapping, which helps traders identify the overall direction of the market.\n- Price levels: The chart includes specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- Annotations, markings, or highlighted areas: The chart contains annotations, markings, or highlighted areas that provide additional context or information, such as specific price points, candlestick patterns, or other technical indicators.\n\n**Trading Application**:\n- ICT recommends trading the **ORDER BLOCK** pattern by entering a trade at a specific price level, typically a key resistance or support level, and holding the position until the market moves in the opposite direction, which is a high probability entry.\n- The pattern is characterized by a high probability entry, which is based on the overall direction of the market trend.\n\n**Key Price Levels**:\n- The **ORDER BLOCK** pattern is characterized by specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- The pattern is based on the overall direction of the market trend, which helps traders to identify potential entry and exit points.\n\n**Summary**:\n- **ORDER BLOCK** is a specific trading pattern identified by the Inner Circle Trader (ICT) methodology, characterized by a high probability entry based on the overall direction of the market trend.\n- The pattern involves entering a trade at a specific price level, typically a key resistance or support level, and holding the position until the market moves in the opposite direction, which is a high probability entry.\n- The pattern is characterized by specific price levels, such as key resistance and support levels, which are crucial for traders to identify potential entry and exit points.\n- The pattern is based on the overall direction of the market trend, which helps traders to identify potential entry and exit points.",
-      "generation_time_seconds": 84.64869785308838,
-      "statistics": {
-        "teaching_duration_seconds": 14.5,
-        "word_count": 30,
-        "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 1
-      },
-      "teaching_types": {
-        "explanation": 1
+        "explanation": 4,
+        "example": 2
       }
     },
     "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the ability of a financial instrument to be bought and sold at a price close to its current price. It is a measure of the liquidity of a financial instrument, indicating how easily it can be bought or sold at a given price. The higher the liquidity, the more easily the instrument can be bought or sold, and the lower the liquidity, the more difficult it is to buy or sell the instrument.\n\n**Identification of LIQUIDITY on a chart**:\n- **Key Visual Characteristics**:\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and high volume.\n  - Higher Higher Higher (HHHH) patterns: These patterns indicate a high level of liquidity, as they represent a high price and",
-      "generation_time_seconds": 118.44818568229675,
+      "llm_summary": "### Liquidity in ICT/Smart Money Context\n\n#### Definition\nLiquidity, as taught in this video, refers to resting orders in the market — specifically pending orders, stop losses, breakeven levels, and price levels at swing highs and lows where traders have placed orders. These pools of orders act as 'magnets' that attract price. The teacher states that liquidity is one of the 'two major driving forces' of the forex market (alongside inducement).\n\n#### Identification\n- **Where liquidity rests**: Above swing highs (buy stops from short sellers' stop losses), below swing lows (sell stops from long traders' stop losses), at breakeven levels, and at pending order levels.\n- **Liquidity pools**: Clusters of orders at obvious price levels — the more traders have orders at a level, the more liquidity exists there.\n- The teacher emphasizes: 'All pending orders, stop losses, break even, high and lows act as liquidity.'\n\n#### Liquidity Sweep\nA Liquidity Sweep occurs when price moves through a previous high (or low) but the candle body does NOT close above the high (Rule 2 fails). The wick pierces through the level — sweeping the stop losses and pending orders resting there — but then reverses. This is NOT a valid Higher High; it is a liquidity grab by smart money.\n\n#### Trading Application\nUnderstanding liquidity helps traders:\n1. Identify WHERE price is likely to move next (toward liquidity pools)\n2. Distinguish between valid breakouts (HH) and liquidity sweeps (fake breakouts)\n3. Avoid placing stop losses at obvious liquidity levels where they will be hunted\n4. Recognize that smart money needs liquidity to fill large positions — they drive price to these levels intentionally",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 108.9600000000001,
+        "teaching_duration_seconds": 108.96,
         "word_count": 259,
         "teaching_units": 3,
         "frames_analyzed": 6,
         "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 3
-      }
-    },
-    "manipulation": {
-      "llm_summary": "**Definition of Manipulation:**\n\nManipulation refers to the actions of traders or market participants who create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Identification of Manipulation on a Chart:**\n\nTo spot manipulation on a chart, look for specific price patterns and key visual characteristics. Key patterns include:\n\n1. **Higher Highs (HH)**: The green line (upward trend) crosses over the red line (downward trend).\n2. **Lower Lows (LL)**: The red line crosses over the green line.\n3. **Manipulation Indicators**: The term \"manipulation\" is used to describe actions that create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Trading Application of Manipulation:**\n\nWhen identifying manipulation on a chart, traders should consider the following:\n\n1. **Market Sentiment**: Analyze the overall market sentiment and the direction of the price. Manipulation can occur when market sentiment is strong and the price is being manipulated to support that sentiment.\n2. **Technical Indicators**: Use technical indicators to identify potential manipulation. These can include moving averages, Fibonacci retracement levels, and other technical signals.\n3. **Market Patterns**: Look for specific market patterns that are consistent with manipulation. For example, higher highs and lower lows can indicate manipulation.\n4. **Market Reactions**: Monitor the market's reaction to manipulation. Manipulation can lead to significant price movements, which traders should consider when making trading decisions.\n\n**Key Price Levels:**\n\nKey price levels to consider in identifying manipulation include:\n\n1. **Higher Highs (HH)**: The green line (upward trend) crosses over the red line (downward trend).\n2. **Lower Lows (LL)**: The red line crosses over the green line.\n3. **Manipulation Indicators**: The term \"manipulation\" is used to describe actions that create or manipulate price movements to gain an advantage. This can involve\u6545\u610f altering price data, using technical indicators, or engaging in other tactics to influence market behavior.\n\n**Summary:**\n\nManipulation refers to the actions of traders or market participants who create or manipulate price movements to gain an advantage. To identify manipulation on a chart, traders should look for specific price patterns and key visual characteristics, such as higher highs and lower lows. When identifying manipulation, traders should consider market sentiment, technical indicators, and market reactions. Key price levels to consider include higher highs and lower lows, as well as manipulation indicators.",
-      "generation_time_seconds": 90.02470016479492,
-      "statistics": {
-        "teaching_duration_seconds": 42.69999999999999,
-        "word_count": 122,
-        "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 2
-      },
-      "teaching_types": {
-        "explanation": 1
+        "explanation": 2,
+        "example": 1
       }
     },
     "smart money": {
-      "llm_summary": "SMART MONEY is a trading strategy that involves identifying and trading on specific price patterns. The key visual characteristics of SMART MONEY are:\n\n1. **Must Close Below Inducement**: The chart shows a price level below which the market must close to trigger the SMART MONEY strategy. This is a key price level that traders use to identify potential buying opportunities.\n\n2. **Above High**: The SMART MONEY strategy also involves identifying price levels above which the market must close to trigger the strategy. This is a key price level that traders use to identify potential selling opportunities.\n\n3. **Candle Closing Above Recent High**: The SMART MONEY strategy involves trading on candlestick patterns where the market closes above a recent high. This is a common strategy for traders to identify potential buying opportunities.\n\n4. **Market as Liquidity Sweep**: The SMART MONEY strategy involves trading on market movements that create liquidity. This is a key price level that traders use to identify potential buying opportunities.\n\n5. **Risk Management**: SMART MONEY involves risk management, as traders must be aware of potential risks associated with using an Internet-based trading system. This includes the risk of hardware failure, software failure, and Internet connection issues.\n\n6. **Trading Application**: The SMART MONEY strategy involves trading on specific price patterns, such as closing below an inducement, above a high, or closing above a recent high. Traders use these patterns to identify potential buying or selling opportunities.\n\n7. **Key Price Levels**: The SMART MONEY strategy involves identifying specific price levels, such as closing below an inducement, above a high, or closing above a recent high, to trigger the strategy. These price levels are important for traders to identify potential buying or selling opportunities.\n\nBy following these key visual characteristics and identifying specific price patterns, traders can use the SMART MONEY strategy to identify potential buying or selling opportunities in the forex market.",
-      "generation_time_seconds": 86.302011013031,
+      "llm_summary": "### Smart Money Concept (SMC) — Structure Mapping Approach\n\n#### Definition\nSmart Money refers to institutional traders, banks, and market makers who move the market with large positions. The Smart Money Concept (SMC) approach to structure mapping applies specific validation rules to determine the true market trend, as opposed to the naive retail approach that labels every swing as valid.\n\n#### Smart Money vs Retail Approach\nThe video's central comparison:\n- **Retail Traders**: Mark every high above previous high as HH, every low above previous low as HL. No validation rules. Result: they get trapped by fake breakouts and 'manipulation' moves.\n- **Smart Money Traders**: Apply two rules (inducement takeout + candle body close) to validate each swing point. Only confirmed swings are marked as valid HH/HL. Result: they correctly identify the real trend and avoid traps.\n\n#### The Two Validation Rules (Smart Money)\n1. Market must take out the first (recent) inducement from the previous swing\n2. Candle body must close below inducement AND above the previous high. Otherwise, mark as Liquidity Sweep.\n\n#### Key Teaching\nThe teacher demonstrates this with side-by-side diagrams showing the same price action mapped by retail traders (left side, every swing labeled) vs smart money traders (right side, many swings marked with 'X' as invalid). Then applies the same concept to real forex candlestick charts showing Liquidity Sweeps, Inducement levels, and confirmed Higher Highs.\n\n#### Trading Application\nThe Smart Money approach to structure mapping filters out fake signals and provides high-probability trade setups. By correctly identifying valid structure, traders can:\n- Avoid selling at false 'breakout' points that trap retail traders\n- Identify genuine trend continuation points\n- Trade with the institutional order flow rather than against it",
+      "generation_time_seconds": 0,
       "statistics": {
         "teaching_duration_seconds": 72.94,
         "word_count": 173,
-        "teaching_units": 1,
-        "frames_analyzed": 3,
+        "teaching_units": 3,
+        "frames_analyzed": 5,
         "deictic_references": 6
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2,
+        "example": 1
+      }
+    },
+    "manipulation": {
+      "llm_summary": "### Market Manipulation — The Retail Trader Trap\n\n#### Definition\nIn this video, manipulation refers to price movements that appear to be breakouts but are actually designed to trap retail traders into wrong-side positions. The teacher shows specific chart examples where retail traders see a 'breakout' below a Higher Low, sell expecting continuation, but then the market reverses and creates new highs — trapping the sellers.\n\n#### How Manipulation Works\n1. Market creates what retail traders identify as HH and HL using their simple approach (no validation rules)\n2. Price dips below what retail traders marked as HL — they interpret this as a bearish breakout\n3. Retail traders sell at the 'breakout' point, expecting the market to continue down\n4. Instead, the market reverses and creates a new high, stopping out the retail sellers\n5. Retail traders blame 'manipulation' — but the real problem is their incorrect structure mapping\n\n#### The Real Cause\nThe teacher explains that what retail traders call 'manipulation' is actually predictable behavior when you understand Smart Money structure. The retail traders' structure was wrong because they didn't validate their swing points using the inducement rules. If they had applied the two SMC rules, they would have known the swing points were invalid and would not have sold.\n\n#### Key Visual Example\nThe video shows a real forex chart where retail traders marked multiple HH/HL points, sold at what they thought was a breakout, and got trapped — twice. A Minion character saying 'WHAAAA?!?!' illustrates the retail trader's confusion. The smart money approach would have correctly identified these moves as invalid swings.\n\n#### Trading Application\nTo avoid manipulation traps:\n- Never trade a breakout without validating structure using the inducement rules\n- If structure points were not validated with both rules, do not trade them as breakouts\n- What looks like 'manipulation' is often just price seeking liquidity at invalid structure levels",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 42.7,
+        "word_count": 122,
+        "teaching_units": 2,
+        "frames_analyzed": 4,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1,
+        "example": 1
+      }
+    },
+    "higher low": {
+      "llm_summary": "### Higher Low (HL) — Confirmed by Structure Validation\n\n#### Definition\nA Higher Low is a swing low that is higher than the previous swing low in a bullish trend. Like Higher Highs, a valid Higher Low in the Smart Money approach is only confirmed when the associated Higher High passes both validation rules (inducement takeout + candle close). The HL is the low point between two valid Higher Highs.\n\n#### Identification\n- A valid HL is the swing low that forms between two confirmed Higher Highs\n- It must be higher than the previous swing low\n- It is automatically validated when the next HH is confirmed via the two rules\n- If the HH above it is invalid (failed the inducement/candle close rules), the HL is also invalid\n\n#### Retail vs Smart Money\n- **Retail traders**: Mark every low that is above the previous low as HL. This creates false support levels that get broken, triggering 'breakout' sells that trap them.\n- **Smart Money traders**: Only mark a low as valid HL if the corresponding HH above it was validated. Invalid HLs are not treated as support levels.\n\n#### Trading Application\nValid Higher Lows are potential entry zones for long positions in a confirmed bullish trend. When price pulls back to a valid HL level after a confirmed HH, it represents a buying opportunity. Invalid HLs should NOT be used as trade entry or stop-loss reference points.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 60.0,
+        "word_count": 150,
+        "teaching_units": 3,
+        "frames_analyzed": 5,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2,
+        "example": 1
       }
     }
   }

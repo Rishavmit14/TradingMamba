@@ -4,6 +4,36 @@ Audio-First Rapid Training Pipeline - Complete End-to-End ML Training
 This module provides a complete end-to-end pipeline for training ML from YouTube videos.
 Just provide a URL and everything happens automatically.
 
+=============================================================================
+RECOMMENDED: CLAUDE CODE MAX TRAINING WORKFLOW (Expert Quality, $0 Cost)
+=============================================================================
+
+For best results, use Claude Code (CLI) to train new playlists:
+
+1. Run Phase 0 (automated - downloads, extracts frames, transcribes):
+   ```python
+   from backend.app.ml.video_preprocessor import VideoPreprocessor
+   preprocessor = VideoPreprocessor()
+   preprocessor.prepare('https://youtube.com/watch?v=VIDEO_ID')
+   ```
+
+2. Ask Claude Code to complete training:
+   "Read the transcript at data/transcripts/{video_id}.json,
+    view key frames at data/video_frames/{video_id}/,
+    and write expert knowledge_base.json"
+
+Benefits of Claude Code training:
+- Expert-quality vision analysis (vs MLX-VLM's generic output)
+- Expert-quality knowledge summaries (vs MLX-VLM's repetition/artifacts)
+- $0 cost (included in Claude Code Max plan)
+- 10x faster (minutes vs hours)
+
+See docs/CLAUDE_CODE_TRAINING_WORKFLOW.md for full guide.
+
+=============================================================================
+FALLBACK: AUTOMATED TRAINING (Lower Quality, Still Works)
+=============================================================================
+
 USAGE:
     # Single video - end-to-end
     from backend.app.ml.audio_first_learning import train_from_url
@@ -29,13 +59,15 @@ PIPELINE PHASES:
         - Detect teaching units and ICT concepts
         - Smart frame selection based on teaching context
 
-    Phase 4: Vision Analysis
+    Phase 4: Vision Analysis (MLX-VLM fallback)
         - Analyze selected frames with context-enriched prompts
         - MLX-VLM for fast inference on Apple Silicon
+        - NOTE: Lower quality than Claude Code - recommend retraining
 
-    Phase 5: Knowledge Synthesis
+    Phase 5: Knowledge Synthesis (MLX-VLM fallback)
         - Generate LLM summaries per ICT concept
         - Output: knowledge_base.json + knowledge_summary.md
+        - NOTE: Lower quality than Claude Code - recommend retraining
 
 KEY INNOVATION:
     Audio-First approach where audio is PRIMARY, frames are SECONDARY.
@@ -46,9 +78,11 @@ KEY INNOVATION:
 PERFORMANCE (for ~18 min video):
     - Phase 0: ~2-5 min (depends on download speed)
     - Phase 1-3: ~1 second
-    - Phase 4: ~35 min (vision analysis)
+    - Phase 4: ~35 min (vision analysis with MLX-VLM)
     - Phase 5: ~3 min (knowledge synthesis)
     - Total: ~40-45 minutes
+
+    With Claude Code: Phase 4+5 take ~2-5 minutes total with expert quality!
 """
 
 import os
@@ -160,28 +194,30 @@ class AudioFirstResult:
 # ICT-specific trading concepts to detect
 ICT_CONCEPTS = {
     # Core Concepts
-    "fair value gap": ["fair value gap", "fvg", "fair value gaps", "fvgs"],
+    "fair value gap": ["fair value gap", "fvg", "fair value gaps", "fvgs", "valid fvg"],
     "order block": ["order block", "order blocks", "ob", "bullish order block", "bearish order block"],
     "liquidity": ["liquidity", "liquidity pool", "liquidity void", "buy side liquidity", "sell side liquidity"],
     "displacement": ["displacement", "displaced"],
     "imbalance": ["imbalance", "imbalances"],
     "breaker": ["breaker", "breaker block"],
-    "mitigation": ["mitigation", "mitigate", "mitigated"],
+    "mitigation": ["mitigation", "mitigate", "mitigated", "order block mitigation"],
 
     # Price Action
     "buy stops": ["buy stops", "buy stop"],
     "sell stops": ["sell stops", "sell stop"],
     "stop hunt": ["stop hunt", "stop run", "running stops"],
     "turtle soup": ["turtle soup"],
-    "equal highs": ["equal highs", "equal high"],
-    "equal lows": ["equal lows", "equal low"],
+    "equal highs": ["equal highs", "equal high", "double top"],
+    "equal lows": ["equal lows", "equal low", "double bottom"],
 
     # Market Structure
     "market structure": ["market structure", "structure"],
     "swing high": ["swing high", "swing highs"],
     "swing low": ["swing low", "swing lows"],
     "higher high": ["higher high", "higher highs"],
+    "higher low": ["higher low", "higher lows"],
     "lower low": ["lower low", "lower lows"],
+    "lower high": ["lower high", "lower highs"],
 
     # Time & Sessions
     "kill zone": ["kill zone", "kill zones"],
@@ -189,6 +225,7 @@ ICT_CONCEPTS = {
     "accumulation": ["accumulation"],
     "manipulation": ["manipulation"],
     "distribution": ["distribution"],
+    "forex sessions": ["london session", "new york session", "asian session", "tokyo session", "trading session", "forex session"],
 
     # Entries
     "optimal trade entry": ["optimal trade entry", "ote"],
@@ -198,7 +235,80 @@ ICT_CONCEPTS = {
     "smart money": ["smart money"],
     "institutional": ["institutional", "institutions"],
     "market maker": ["market maker", "market makers"],
+
+    # Inducement & Traps (from Forex Minions training)
+    "inducement": ["inducement", "inducements", "induce", "induced", "idm"],
+    "inducement shift": ["inducement shift", "shift of inducement", "inducement shifts"],
+    "valid pullback": ["valid pullback", "pullback", "pullbacks", "valid pullbacks"],
+    "smart money trap": ["smart money trap", "retail trap", "trap", "trapped traders", "early buying"],
+    "liquidity sweep": ["liquidity sweep", "sweep", "sweeps", "swept", "liquidity grab"],
+    "retail trap": ["retail trader", "retail traders", "retail approach", "retail mistake"],
+
+    # Structure Concepts (from Forex Minions training)
+    "break of structure": ["break of structure", "bos", "structure break", "broke structure"],
+    "change of character": ["change of character", "choch", "character change"],
+    "fake choch": ["fake choch", "fake change of character", "invalid choch"],
+    "bos validation": ["bos validation", "valid bos", "single candle bos", "multi candle bos"],
+    "swing failure pattern": ["swing failure", "swing failure pattern", "sfp"],
+
+    # Advanced SMC (from Forex Minions training)
+    "premium zone": ["premium", "premium zone", "premium area", "above equilibrium"],
+    "discount zone": ["discount", "discount zone", "discount area", "below equilibrium"],
+    "equilibrium": ["equilibrium", "50 percent", "50%", "equilibrium level"],
+    "price delivery cycle": ["price delivery cycle", "price cycle", "expansion", "retracement"],
+    "expansion": ["expansion", "expansion phase", "impulse"],
+    "retracement": ["retracement", "retrace", "retracement phase"],
+    "valid order block": ["valid order block", "valid ob", "order block rules"],
+    "judas swing": ["judas swing", "judas", "false move", "fake move"],
+    "millions dollar setup": ["millions dollar setup", "million dollar", "million dollar setup"],
+    "engineered liquidity": ["engineered liquidity", "engineered", "liquidity engineering"],
+    "weak swing point": ["weak swing", "weak swing point", "weak high", "weak low"],
+    "candlestick analysis": ["candlestick", "candle body", "candle wick", "open to close"],
 }
+
+
+def detect_garbage_output(text: str) -> tuple:
+    """
+    Detect degraded MLX-VLM output (repetition loops, CJK bleeding, n-gram loops).
+
+    Returns (is_garbage: bool, reason: str).
+    Primary training is via Claude Code; this guards the MLX-VLM fallback path.
+    """
+    if not text or len(text.strip()) < 20:
+        return True, "Output too short"
+
+    # CJK character detection — reject if >5% non-ASCII
+    non_ascii = sum(1 for c in text if ord(c) > 127)
+    if len(text) > 0 and (non_ascii / len(text)) > 0.05:
+        return True, f"Non-ASCII ratio {non_ascii/len(text):.0%} exceeds 5% threshold (possible CJK bleed)"
+
+    # Repetition detection — reject if any sentence appears 3+ times
+    sentences = [s.strip() for s in re.split(r'[.!?\n]', text) if len(s.strip()) > 10]
+    if sentences:
+        from collections import Counter
+        sentence_counts = Counter(sentences)
+        repeated = [(s, c) for s, c in sentence_counts.items() if c >= 3]
+        if repeated:
+            worst = max(repeated, key=lambda x: x[1])
+            return True, f"Sentence repeated {worst[1]}x: '{worst[0][:60]}...'"
+
+    # N-gram loop detection — reject if >20% of 4-grams are duplicates
+    words = text.lower().split()
+    if len(words) >= 8:
+        ngrams = [tuple(words[i:i+4]) for i in range(len(words) - 3)]
+        if ngrams:
+            unique_ratio = len(set(ngrams)) / len(ngrams)
+            if unique_ratio < 0.80:
+                return True, f"4-gram uniqueness {unique_ratio:.0%} below 80% threshold (repetition loop)"
+
+    # Minimum quality — reject if <50 meaningful words after dedup
+    unique_words = set(words)
+    meaningful = [w for w in unique_words if len(w) > 2 and w.isalpha()]
+    if len(meaningful) < 50 and len(words) > 100:
+        return True, f"Only {len(meaningful)} unique meaningful words in {len(words)} total (low quality)"
+
+    return False, "OK"
+
 
 # Deictic words that indicate visual reference
 DEICTIC_WORDS = [
@@ -1346,11 +1456,12 @@ class AudioFirstTrainer:
             data = concept_data[concept]
             concept_start = time.time()
 
-            # Build rich context
-            transcript_context = "\n\n".join(data['transcript_texts'][:3])[:1500]
-            vision_context = "\n\n".join(data['vision_texts'][:2])[:800]
+            # Build rich context (expanded windows for better MLX-VLM output)
+            transcript_context = "\n\n".join(data['transcript_texts'][:5])[:3000]
+            vision_context = "\n\n".join(data['vision_texts'][:3])[:1500]
 
-            prompt = f"""You are an expert on ICT (Inner Circle Trader) methodology. Based on the teaching transcript and chart analysis below, provide a comprehensive summary of the "{concept.upper()}" concept.
+            prompt = f"""You are an expert on ICT (Inner Circle Trader) / Smart Money Concepts methodology.
+Analyze the teaching transcript and chart analysis below for the concept: "{concept.upper()}"
 
 === ICT TEACHING TRANSCRIPT ===
 {transcript_context}
@@ -1358,17 +1469,28 @@ class AudioFirstTrainer:
 === CHART ANALYSIS ===
 {vision_context}
 
-=== YOUR TASK ===
-Write a trading-focused summary of {concept.upper()} that includes:
+=== INSTRUCTIONS ===
+Write a structured summary using proper ICT terminology:
 
-1. **Definition**: What is {concept}? (2-3 sentences)
-2. **Identification**: How to spot it on a chart? (key visual characteristics)
-3. **Trading Application**: How does ICT recommend trading this pattern?
-4. **Key Price Levels**: What levels are important?
+### {concept.upper()} — [Descriptive Subtitle]
 
-Keep the summary practical and actionable. Use ICT terminology."""
+#### Definition
+What is {concept}? Include the precise ICT definition. (2-3 sentences)
+
+#### Rules & Conditions
+What specific rules determine valid vs invalid {concept}? List numbered conditions.
+
+#### Identification on Charts
+How to spot this on a candlestick chart? What visual characteristics confirm it?
+
+#### Trading Application
+How should a trader use {concept} for entries, exits, or confluence?
+
+Be precise, use ICT terminology (inducement, liquidity sweep, order block, BOS, CHoCH, etc.)."""
 
             # Retry mechanism for resilience
+            # NOTE: Primary training is via Claude Code (expert quality).
+            # This MLX-VLM path is the fallback trainer.
             max_retries = 3
             summary = None
 
@@ -1387,8 +1509,18 @@ Keep the summary practical and actionable. Use ICT terminology."""
                     summary = mlx_model.analyze(
                         image_path=first_frame,
                         prompt=prompt,
-                        max_tokens=800
+                        max_tokens=1200
                     )
+
+                    # Check for garbage output before accepting
+                    is_garbage, reason = detect_garbage_output(summary)
+                    if is_garbage:
+                        logger.warning(f"    Garbage output detected for {concept}: {reason}")
+                        if retry < max_retries - 1:
+                            continue  # Retry with reinitialized model
+                        else:
+                            logger.error(f"    All retries produced garbage for {concept}")
+                            summary = f"[MLX-VLM output rejected: {reason}] Retrain with Claude Code for expert quality."
 
                     concept_time = time.time() - concept_start
 
@@ -1885,6 +2017,341 @@ Keep the summary practical and actionable. Use ICT terminology."""
 
         logger.info(f"Progress saved: {len(results)}/{len(all_video_ids)} videos")
 
+    # =========================================================================
+    # Claude Code Integration (Expert Quality Training)
+    # =========================================================================
+
+    def prepare_for_claude_code(
+        self,
+        url: str,
+        force_preprocess: bool = False,
+        progress_callback=None,
+    ) -> Dict[str, Any]:
+        """
+        Prepare a video for Claude Code training (Phase 0-3 only).
+
+        This downloads the video, extracts frames, transcribes audio, and
+        detects teaching units - but SKIPS Phase 4-5 (vision/synthesis).
+
+        Claude Code should then be asked to:
+        1. Read the transcript
+        2. View key frames
+        3. Generate expert knowledge_base.json
+
+        Args:
+            url: YouTube video URL or video ID
+            force_preprocess: Force re-download and re-process
+            progress_callback: Optional callback(phase, message)
+
+        Returns:
+            Preparation results with Claude Code instructions
+        """
+        import time
+        from .video_preprocessor import VideoPreprocessor
+
+        total_start = time.time()
+
+        logger.info("\n" + "="*70)
+        logger.info("   CLAUDE CODE TRAINING PREPARATION (Phase 0-3)")
+        logger.info("="*70)
+
+        # Initialize preprocessor
+        preprocessor = VideoPreprocessor(data_dir=str(self.data_dir))
+
+        # Extract video ID
+        video_id = preprocessor.extract_video_id(url)
+        if not video_id:
+            raise ValueError(f"Could not extract video ID from: {url}")
+
+        logger.info(f"\nVideo ID: {video_id}")
+        logger.info(f"URL: {url}")
+
+        # =================================================================
+        # PHASE 0: Prerequisites
+        # =================================================================
+        if progress_callback:
+            progress_callback("phase0", "Preparing prerequisites...")
+
+        logger.info("\n" + "-"*60)
+        logger.info("[PHASE 0] PREREQUISITES")
+        logger.info("-"*60)
+
+        preprocess_result = preprocessor.prepare(
+            url,
+            force=force_preprocess,
+            progress_callback=progress_callback,
+        )
+
+        if not preprocess_result.success:
+            raise RuntimeError(f"Phase 0 failed: {preprocess_result.error}")
+
+        phase0_time = preprocess_result.total_time
+
+        logger.info(f"\nPhase 0 Complete:")
+        logger.info(f"  Audio: {preprocess_result.audio_path}")
+        logger.info(f"  Frames: {preprocess_result.frame_count}")
+        logger.info(f"  Transcript: {preprocess_result.transcript_segments} segments")
+        logger.info(f"  Time: {phase0_time:.1f}s")
+
+        # =================================================================
+        # PHASE 1-3: Teaching Unit Detection + Frame Selection
+        # =================================================================
+        if progress_callback:
+            progress_callback("training", "Detecting teaching units...")
+
+        logger.info("\n" + "-"*60)
+        logger.info("[PHASE 1-3] TEACHING UNITS + FRAME SELECTION")
+        logger.info("-"*60)
+
+        training_result = self.train(video_id)
+
+        # =================================================================
+        # Generate Claude Code Instructions
+        # =================================================================
+        instructions = self.generate_claude_code_instructions(video_id)
+
+        # Save marker file for pending Claude Code training
+        self._save_claude_code_pending(video_id)
+
+        total_time = time.time() - total_start
+
+        result = {
+            'video_id': video_id,
+            'url': url,
+            'status': 'ready_for_claude_code',
+            'total_time_seconds': total_time,
+
+            # Phase 0 results
+            'preprocessing': {
+                'audio_path': preprocess_result.audio_path,
+                'frames_dir': preprocess_result.frames_dir,
+                'transcript_path': preprocess_result.transcript_path,
+                'duration_seconds': preprocess_result.duration_seconds,
+                'frame_count': preprocess_result.frame_count,
+                'transcript_segments': preprocess_result.transcript_segments,
+            },
+
+            # Phase 1-3 results
+            'training': {
+                'teaching_units': len(training_result.teaching_units),
+                'frames_selected': training_result.frames_selected,
+                'audio_coverage': training_result.audio_coverage_percent,
+                'concepts_detected': training_result.total_concepts_detected,
+            },
+
+            # Claude Code instructions
+            'claude_code_instructions': instructions,
+
+            # Metadata
+            'title': preprocess_result.title,
+            'channel': preprocess_result.channel,
+            'completed_at': datetime.now().isoformat(),
+        }
+
+        # Final summary
+        logger.info("\n" + "="*70)
+        logger.info("   READY FOR CLAUDE CODE TRAINING")
+        logger.info("="*70)
+        logger.info(f"  Video: {preprocess_result.title}")
+        logger.info(f"  Video ID: {video_id}")
+        logger.info(f"  Preparation Time: {total_time:.1f}s")
+        logger.info(f"  Teaching Units: {len(training_result.teaching_units)}")
+        logger.info(f"  Frames Available: {preprocess_result.frame_count}")
+        logger.info("\n" + "-"*60)
+        logger.info("  NEXT STEP: Ask Claude Code to complete training:")
+        logger.info("-"*60)
+        logger.info(instructions['prompt'])
+        logger.info("="*70)
+
+        return result
+
+    def generate_claude_code_instructions(self, video_id: str) -> Dict[str, Any]:
+        """
+        Generate instructions for Claude Code to complete video training.
+
+        Returns paths to files that Claude Code should read/view, and a
+        prompt to use.
+
+        Args:
+            video_id: YouTube video ID
+
+        Returns:
+            Dict with transcript_path, frames_dir, selected_frames, and prompt
+        """
+        transcript_path = self.transcripts_dir / f"{video_id}.json"
+        frames_dir = self.frames_dir / video_id
+        units_path = self.output_dir / f"{video_id}_teaching_units.json"
+        selected_frames_path = self.output_dir / f"{video_id}_selected_frames.json"
+        output_kb_path = self.output_dir / f"{video_id}_knowledge_base.json"
+        output_md_path = self.output_dir / f"{video_id}_knowledge_summary.md"
+
+        # Get selected frames if available
+        selected_frames = []
+        frame_paths = []
+        if selected_frames_path.exists():
+            with open(selected_frames_path, 'r') as f:
+                frame_data = json.load(f)
+                # Handle both dict format (with 'path' key) and string format
+                for item in frame_data:
+                    if isinstance(item, dict):
+                        frame_paths.append(item.get('path', ''))
+                    else:
+                        frame_paths.append(str(item))
+                selected_frames = frame_data
+        elif frames_dir.exists():
+            # Fall back to first 10 frames
+            frames = sorted(frames_dir.glob("frame_*.jpg"))[:10]
+            frame_paths = [str(f) for f in frames]
+            selected_frames = frame_paths
+
+        # Get concepts detected
+        concepts = []
+        if units_path.exists():
+            with open(units_path, 'r') as f:
+                units = json.load(f)
+                for unit in units:
+                    concepts.extend(unit.get('detected_concepts', []))
+                concepts = list(set(concepts))
+
+        # Format frame paths for prompt
+        frame_list = ', '.join(frame_paths[:8]) if frame_paths else 'No frames available'
+
+        prompt = f"""Complete the training for video: {video_id}
+
+1. Read the transcript: {transcript_path}
+2. View these key frames: {frame_list}
+3. Extract all ICT/SMC concepts taught in this video
+4. Write expert knowledge base to: {output_kb_path}
+5. Write markdown summary to: {output_md_path}
+
+Concepts detected so far: {', '.join(concepts) if concepts else 'None - extract from transcript'}
+
+Use the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."""
+
+        return {
+            'video_id': video_id,
+            'transcript_path': str(transcript_path),
+            'frames_dir': str(frames_dir),
+            'selected_frames': frame_paths[:10],
+            'teaching_units_path': str(units_path),
+            'output_knowledge_base': str(output_kb_path),
+            'output_markdown': str(output_md_path),
+            'concepts_detected': concepts,
+            'prompt': prompt,
+        }
+
+    def _save_claude_code_pending(self, video_id: str):
+        """Save a marker file indicating this video needs Claude Code training."""
+        pending_file = self.output_dir / f"{video_id}_claude_code_pending.json"
+        with open(pending_file, 'w') as f:
+            json.dump({
+                'video_id': video_id,
+                'status': 'pending_claude_code',
+                'created_at': datetime.now().isoformat(),
+                'instructions': self.generate_claude_code_instructions(video_id),
+            }, f, indent=2)
+        logger.info(f"Claude Code pending marker saved: {pending_file}")
+
+    def clear_claude_code_pending(self, video_id: str):
+        """Clear the Claude Code pending marker (after training is complete)."""
+        pending_file = self.output_dir / f"{video_id}_claude_code_pending.json"
+        if pending_file.exists():
+            pending_file.unlink()
+            logger.info(f"Claude Code pending marker cleared: {video_id}")
+
+    def get_pending_claude_code_videos(self) -> List[Dict[str, Any]]:
+        """Get list of all videos pending Claude Code training."""
+        pending_files = list(self.output_dir.glob("*_claude_code_pending.json"))
+        pending = []
+        for f in pending_files:
+            with open(f, 'r') as fp:
+                pending.append(json.load(fp))
+        return pending
+
+    def prepare_playlist_for_claude_code(
+        self,
+        playlist_url: str,
+        max_videos: int = 0,
+        force_preprocess: bool = False,
+        progress_callback=None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Prepare all videos in a playlist for Claude Code training.
+
+        This runs Phase 0-3 for each video, generating instructions for
+        Claude Code to complete the training.
+
+        Args:
+            playlist_url: YouTube playlist URL
+            max_videos: Max videos to process (0 = all)
+            force_preprocess: Force re-download
+            progress_callback: Optional callback
+
+        Returns:
+            List of preparation results with Claude Code instructions
+        """
+        import gc
+        import time
+        from .video_preprocessor import VideoPreprocessor
+
+        logger.info("\n" + "="*70)
+        logger.info("   PLAYLIST PREPARATION FOR CLAUDE CODE")
+        logger.info("="*70)
+
+        preprocessor = VideoPreprocessor(data_dir=str(self.data_dir))
+        video_ids = preprocessor._get_playlist_videos(playlist_url)
+
+        if not video_ids:
+            raise ValueError(f"Could not get videos from playlist: {playlist_url}")
+
+        if max_videos > 0:
+            video_ids = video_ids[:max_videos]
+
+        total_videos = len(video_ids)
+        logger.info(f"Found {total_videos} videos in playlist")
+
+        results = []
+        start_time = time.time()
+
+        for i, video_id in enumerate(video_ids):
+            logger.info(f"\n[{i+1}/{total_videos}] Preparing: {video_id}")
+
+            if progress_callback:
+                progress_callback(i, total_videos, video_id, "preparing")
+
+            gc.collect()
+
+            try:
+                result = self.prepare_for_claude_code(
+                    video_id,
+                    force_preprocess=force_preprocess,
+                )
+                results.append(result)
+                logger.info(f"  ✅ Ready for Claude Code")
+
+            except Exception as e:
+                logger.error(f"  ❌ Failed: {e}")
+                results.append({
+                    'video_id': video_id,
+                    'status': 'failed',
+                    'error': str(e),
+                })
+
+            gc.collect()
+
+        total_time = time.time() - start_time
+        successful = sum(1 for r in results if r.get('status') == 'ready_for_claude_code')
+
+        logger.info("\n" + "="*70)
+        logger.info("   PLAYLIST PREPARATION COMPLETE")
+        logger.info("="*70)
+        logger.info(f"  Videos Prepared: {successful}/{total_videos}")
+        logger.info(f"  Total Time: {total_time/60:.1f} minutes")
+        logger.info("\n  NEXT: Ask Claude Code to complete training for each video.")
+        logger.info("="*70)
+
+        return results
+
 
 # =============================================================================
 # Convenience Functions
@@ -1932,6 +2399,60 @@ def train_playlist(playlist_url: str, data_dir: str = "data", **kwargs) -> List[
     return trainer.train_playlist(playlist_url, **kwargs)
 
 
+def prepare_for_claude_code(url: str, data_dir: str = "data", **kwargs) -> Dict[str, Any]:
+    """
+    Prepare a video for Claude Code training (RECOMMENDED).
+
+    This runs Phase 0-3 (download, transcribe, detect teaching units) and
+    generates instructions for Claude Code to complete the training with
+    expert-quality vision analysis and knowledge synthesis.
+
+    Args:
+        url: YouTube video URL or video ID
+        data_dir: Base data directory
+        **kwargs: Additional arguments
+
+    Returns:
+        Preparation results with Claude Code instructions
+
+    Usage:
+        from backend.app.ml.audio_first_learning import prepare_for_claude_code
+        result = prepare_for_claude_code('https://youtube.com/watch?v=VIDEO_ID')
+        print(result['claude_code_instructions']['prompt'])
+    """
+    trainer = AudioFirstTrainer(data_dir=data_dir)
+    return trainer.prepare_for_claude_code(url, **kwargs)
+
+
+def prepare_playlist_for_claude_code(
+    playlist_url: str,
+    data_dir: str = "data",
+    **kwargs
+) -> List[Dict[str, Any]]:
+    """
+    Prepare all videos in a playlist for Claude Code training (RECOMMENDED).
+
+    This runs Phase 0-3 for each video and generates Claude Code instructions.
+    After this completes, ask Claude Code to complete training for each video.
+
+    Args:
+        playlist_url: YouTube playlist URL
+        data_dir: Base data directory
+        **kwargs: Additional arguments
+
+    Returns:
+        List of preparation results with Claude Code instructions
+
+    Usage:
+        from backend.app.ml.audio_first_learning import prepare_playlist_for_claude_code
+        results = prepare_playlist_for_claude_code('https://youtube.com/playlist?list=PLxxx')
+        for r in results:
+            print(r['claude_code_instructions']['prompt'])
+    """
+    trainer = AudioFirstTrainer(data_dir=data_dir)
+    return trainer.prepare_playlist_for_claude_code(playlist_url, **kwargs)
+
+
 def run_audio_first_training(video_id: str, data_dir: str = "data") -> AudioFirstResult:
     """
     Convenience function to run Audio-First training.
@@ -1963,17 +2484,23 @@ if __name__ == "__main__":
         print("Audio-First ML Training Pipeline")
         print("="*50)
         print("\nUsage:")
-        print("  python audio_first_learning.py <url_or_id>              # Train single video")
-        print("  python audio_first_learning.py <playlist_url> --playlist  # Train playlist")
-        print("  python audio_first_learning.py <video_id> --phases-only   # Phases 1-5 only (no download)")
+        print("  python audio_first_learning.py <url_or_id>                     # Train single video (MLX-VLM)")
+        print("  python audio_first_learning.py <url_or_id> --claude-code       # Prepare for Claude Code (RECOMMENDED)")
+        print("  python audio_first_learning.py <playlist_url> --playlist       # Train playlist (MLX-VLM)")
+        print("  python audio_first_learning.py <playlist_url> --playlist --claude-code  # Prepare playlist for Claude Code")
+        print("  python audio_first_learning.py <video_id> --phases-only        # Phases 1-5 only (no download)")
         print("\nExamples:")
-        print("  python audio_first_learning.py 'https://youtube.com/watch?v=FgacYSN9QEo'")
-        print("  python audio_first_learning.py FgacYSN9QEo")
-        print("  python audio_first_learning.py 'https://youtube.com/playlist?list=PLxxx' --playlist")
+        print("  python audio_first_learning.py 'https://youtube.com/watch?v=VIDEO_ID' --claude-code")
+        print("  python audio_first_learning.py 'https://youtube.com/playlist?list=PLxxx' --playlist --claude-code")
         print("\nOptions:")
+        print("  --claude-code   Prepare for Claude Code training (RECOMMENDED - expert quality)")
         print("  --playlist      Process as YouTube playlist")
         print("  --phases-only   Skip Phase 0 (assume prerequisites exist)")
         print("  --force         Force re-download and re-process")
+        print("\nClaude Code Training Workflow:")
+        print("  1. Run with --claude-code to prepare video (downloads, transcribes, selects frames)")
+        print("  2. Ask Claude Code to read transcript, view frames, and write knowledge_base.json")
+        print("  3. See docs/CLAUDE_CODE_TRAINING_WORKFLOW.md for details")
 
     if len(sys.argv) < 2:
         print_usage()
@@ -1982,11 +2509,34 @@ if __name__ == "__main__":
     url_or_id = sys.argv[1]
     is_playlist = '--playlist' in sys.argv
     phases_only = '--phases-only' in sys.argv
+    claude_code = '--claude-code' in sys.argv
     force = '--force' in sys.argv
 
     trainer = AudioFirstTrainer()
 
-    if is_playlist:
+    if is_playlist and claude_code:
+        # Prepare playlist for Claude Code
+        print(f"\nPreparing playlist for Claude Code: {url_or_id}")
+        results = trainer.prepare_playlist_for_claude_code(url_or_id, force_preprocess=force)
+
+        successful = sum(1 for r in results if r.get('status') == 'ready_for_claude_code')
+        print(f"\nPlaylist Preparation Complete!")
+        print(f"  Videos Ready: {successful}/{len(results)}")
+        print("\nNext: Ask Claude Code to complete training for each video.")
+
+    elif claude_code:
+        # Prepare single video for Claude Code
+        print(f"\nPreparing for Claude Code: {url_or_id}")
+        result = trainer.prepare_for_claude_code(url_or_id, force_preprocess=force)
+
+        print(f"\nPreparation Complete!")
+        print(f"  Video: {result.get('title', result['video_id'])}")
+        print(f"  Teaching Units: {result['training']['teaching_units']}")
+        print(f"  Frames Available: {result['preprocessing']['frame_count']}")
+        print("\nNext: Ask Claude Code to complete training:")
+        print(result['claude_code_instructions']['prompt'])
+
+    elif is_playlist:
         # Train entire playlist
         print(f"\nTraining playlist: {url_or_id}")
         results = trainer.train_playlist(url_or_id, force_preprocess=force)

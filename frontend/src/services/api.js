@@ -129,11 +129,14 @@ export const getAvailablePlaylists = async () => {
 
 // Live OHLCV data for real-time charting
 // Falls back to market/ohlcv if live endpoint fails (e.g., IP banned by Binance)
-export const getLiveOHLCV = async (symbol, timeframe = 'M1', limit = 100) => {
+// end_time parameter enables historical scrollback (fetch candles before this timestamp)
+export const getLiveOHLCV = async (symbol, timeframe = 'M1', limit = 100, end_time = null) => {
   try {
-    const response = await api.get(`/live/ohlcv/${symbol}`, {
-      params: { timeframe, limit },
-    });
+    const params = { timeframe, limit };
+    if (end_time) {
+      params.end_time = end_time;
+    }
+    const response = await api.get(`/live/ohlcv/${symbol}`, { params });
     return response.data;
   } catch (error) {
     // Fallback to market OHLCV endpoint

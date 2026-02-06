@@ -1,21 +1,21 @@
 {
   "video_id": "TmbLhchNrAM",
-  "generated_at": "2026-01-31T18:32:44.519814",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 187.2031569480896,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 21,
     "vision_analyses": 33,
-    "concepts_extracted": 6,
-    "total_audio_duration": 341.2200000000001,
+    "concepts_extracted": 7,
+    "total_audio_duration": 392.44,
     "total_words": 1018
   },
   "concepts": {
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying and trading in specific price levels, particularly those near 2825.00, 2828.00, 2830.00, and 2832.00. The trading strategy is to enter trades when the price falls short of these levels, and exit trades when the price returns above these levels. The focus is on identifying and trading in these specific price levels, which are important for the optimal trade entry.",
-      "generation_time_seconds": 22.67551589012146,
+    "optimal_trade_entry": {
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) is a universal pattern that works across all markets including forex, futures, commodities, and indices. This video demonstrates OTE on the S&P 500 E-mini futures (June 2020 contract), proving the pattern is not limited to forex. The OTE zone remains the 62%-79% Fibonacci retracement level.\n\n## Rules\n1. **Market Agnostic**: OTE works on any liquid market - forex, futures, indices, commodities\n2. **Timeframe Scalable**: The pattern can be applied to any timeframe from 1-minute to daily charts\n3. **Daily Context**: Frame trades within the larger daily optimal trade entry zone for higher probability\n4. **79% Level Significance**: Price falling short of the 79% retracement level is common and still valid\n5. **Liquidity Focus**: The real edge is targeting liquidity, not just hitting Fibonacci levels\n\n## Identification\n- On S&P E-mini: Identify swing low to swing high, apply Fibonacci\n- Price retraced to near the 79% level (just fell short) which is still valid\n- Look for swing low, swing high, and retracement pattern forming\n- The daily chart shows price in a 'larger daily optimal trade entry' zone\n- Entry occurs when lower timeframe aligns with daily OTE context",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 50.220000000000006,
+        "teaching_duration_seconds": 50.22,
         "word_count": 148,
         "teaching_units": 4,
         "frames_analyzed": 5,
@@ -25,25 +25,11 @@
         "explanation": 4
       }
     },
-    "swing high": {
-      "llm_summary": "The \"Swing High\" concept in the context of the Inner Circle Trader (ICT) methodology refers to a price action where the price moves above and below a certain level, and then continues to move higher or lower. The specific chart patterns ICT is referencing include a swing high, a swing low, and a retracement. The swing high is a price action where the price moves above and below a certain level, and then continues to move higher, and the swing low is a price action where the price moves below and above a certain level, and then continues to move lower. The swing high and swing low are important levels to consider when trading, as they can indicate potential support and resistance levels. The swing high and swing low can also be used to identify potential trading opportunities, as they can indicate when the price is likely to move higher or lower. The swing high and swing low can also be used to identify potential risk levels, as they can indicate when the price is likely to move higher or lower, and the potential risk associated with that move.",
-      "generation_time_seconds": 25.796435832977295,
+    "swing_high_swing_low": {
+      "llm_summary": "## Definition\nSwing highs and swing lows are the foundational price action structures used to identify market direction and anchor Fibonacci retracements. A swing high is a high with lower highs on both sides; a swing low is a low with higher lows on both sides. These points define the price legs used for OTE analysis.\n\n## Rules\n1. **Swing High Definition**: A candle high with at least one lower high on each side\n2. **Swing Low Definition**: A candle low with at least one higher low on each side\n3. **Leg Structure**: Price moves from swing low to swing high (or vice versa) form tradeable legs\n4. **Retracement Anchor**: Always draw Fibonacci from swing low to swing high for bullish setups\n5. **Market Structure**: Breaking swing highs/lows indicates trend continuation or reversal\n\n## Identification\n- On the chart: 'We have a swing low, swing high and a retracement here'\n- The swing low forms the origin point for Fibonacci measurement\n- The swing high marks the terminus before retracement begins\n- After retracement, price moving beyond the swing high confirms the bullish structure\n- In this video: Clear swing low around 2717, swing high around 2965 on S&P E-mini",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 23.240000000000002,
-        "word_count": 68,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 4
-      },
-      "teaching_types": {
-        "explanation": 1
-      }
-    },
-    "swing low": {
-      "llm_summary": "The \"Swing Low\" concept in the context of the Inner Circle Trader (ICT) methodology refers to a price action where the price moves above and below a certain level, and then continues to move higher or lower. The specific chart patterns ICT is referencing include a swing high, a swing low, and a retracement. The swing high is around 2928.50, and the swing low is around 2880.00. The swing low is a key visual characteristic to identify a swing low. ICT recommends trading this pattern by being in the market like this and not being in the market like that. The swing low is important because it represents a potential opportunity for trading. The swing high and swing low are important because they represent potential price action and can be used to identify potential trading opportunities. The swing low is important because it represents a potential opportunity for trading. The swing high and swing low are important because they represent potential price action and can be used to identify potential trading opportunities.",
-      "generation_time_seconds": 27.94069790840149,
-      "statistics": {
-        "teaching_duration_seconds": 23.240000000000002,
+        "teaching_duration_seconds": 23.24,
         "word_count": 68,
         "teaching_units": 1,
         "frames_analyzed": 1,
@@ -54,10 +40,10 @@
       }
     },
     "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a fundamental concept in trading, representing the willingness of market participants to buy or sell at a given price. It is a critical factor in determining the direction and magnitude of price movements in the market. The **identification** of liquidity can be achieved through visual characteristics such as the presence of green bars (buying pressure) and black bars (selling pressure) on a chart, as well as the gap between buying and selling pressure. **Trading application** of **LIQUIDITY** involves identifying opportunities to take advantage of the market's willingness to trade at specific price levels, such as the **0.22 (2211.50)**, **0.25 (2511.50)**, **0.28 (2811.50)**, and **0.32 (3211.50)** price levels. **Key price levels** are important for traders to consider when making decisions, as they can indicate potential support or resistance levels. **LIQUIDITY** is a key factor in determining the strength of a market trend, as it can influence the market's ability to absorb or dissipate liquidity, which in turn affects the market's overall direction.",
-      "generation_time_seconds": 31.884601831436157,
+      "llm_summary": "## Definition\nLiquidity in ICT methodology refers to resting orders in the market - specifically stop losses and pending orders that smart money targets. The 'magic is not the fib, it's the target of liquidity.' Fibonacci levels work because they often coincide with areas where retail traders place stops, creating liquidity pools.\n\n## Rules\n1. **Liquidity Over Fib**: Fibonacci is a framework; liquidity targeting is the real edge\n2. **Buy-Side Liquidity**: Resting above swing highs (retail sell stops, breakout buy orders)\n3. **Sell-Side Liquidity**: Resting below swing lows (retail buy stops, breakout sell orders)\n4. **Previous Day High/Low**: Key liquidity pools that price gravitates toward\n5. **Context Framework**: 'The fib just helps me frame an underlying context'\n\n## Identification\n- Identify where retail traders would logically place stop losses\n- Previous day's highs and lows are primary liquidity targets\n- 'We want to look for a signature in price that would lend well to aiming for our previous days high or low'\n- Equal highs/lows represent concentrated liquidity pools\n- In this video: Focus on targeting previous day's high or low as the liquidity objective",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 54.18000000000001,
+        "teaching_duration_seconds": 54.18,
         "word_count": 173,
         "teaching_units": 2,
         "frames_analyzed": 4,
@@ -67,11 +53,11 @@
         "explanation": 2
       }
     },
-    "order block": {
-      "llm_summary": "The \"ORDER BLOCK\" concept in the context of the Inner Circle Trader methodology refers to a situation where the price of a trading pair is significantly higher than the price of the underlying asset, with a notable gap between the two prices. This gap is typically between $15 and $20, and it indicates a potential order block, which means that there are likely orders from both sides of the market that are trying to buy or sell at the current price.\n\nThe identification of an ORDER BLOCK on a chart involves observing the following key visual characteristics:\n\n1. **Price Gap**: The high price is around $2965, and the low price is around $2950, with a gap between these two prices of approximately $15.\n2. **High Price**: The high price is $2965.\n3. **Low Price**: The low price is $2950.\n4. **Annotations, Markings, or Highlighted Areas**: The chart includes annotations, markings, or highlighted areas, which are not explicitly mentioned in the provided chart analysis but are common in trading charts to highlight important price points or patterns.\n\nBased on these characteristics, the Inner Circle Trader methodology recommends trading the ORDER BLOCK pattern by:\n\n1. **Identifying the Gap**: Recognize the significant price gap between the high and low prices, which is a potential order block.\n2. **Monitoring Orders**: Keep an eye on the trading pair, as there are likely orders from both sides of the market trying to buy or sell at the current price.\n3. **Potential for Profit**: The high price is likely to be a potential entry point for traders looking to profit from the gap, as the gap suggests a potential for a price move.\n4. **Risk Management**: The high price is a high-risk trade, and traders should carefully consider the potential risks associated with the trade, such as the possibility of a price move in the opposite direction.\n\nThe key price levels mentioned in the chart analysis are important for traders to monitor and consider when making trading decisions. These levels include the high price of $2965 and the low price of $2950, which are critical points for identifying potential entry and exit points for the ORDER BLOCK pattern.",
-      "generation_time_seconds": 36.821852922439575,
+    "order_block": {
+      "llm_summary": "## Definition\nAn order block represents institutional order flow footprint - the last candle of opposite color before a significant displacement move. On the S&P E-mini futures chart, order blocks appear at key reversal points where price shows strong reactions after returning to these zones.\n\n## Rules\n1. **Bullish OB**: Last bearish candle before bullish displacement (price breaks up aggressively)\n2. **Bearish OB**: Last bullish candle before bearish displacement (price breaks down aggressively)\n3. **Body Focus**: The order block zone is defined by the candle body (open to close)\n4. **Mitigation**: Order blocks are 'used up' after being revisited and may not hold again\n5. **Displacement Required**: Only valid if followed by impulsive price move away\n\n## Identification\n- Find where price made a significant move breaking structure\n- Look back to find the last opposite-color candle before that move\n- The body of that candle is your order block zone\n- Wait for price to return to that zone for entry\n- In this video: Order block concepts applied to S&P E-mini futures intraday charts",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 9.859999999999985,
+        "teaching_duration_seconds": 9.86,
         "word_count": 25,
         "teaching_units": 1,
         "frames_analyzed": 1,
@@ -81,11 +67,11 @@
         "explanation": 1
       }
     },
-    "fibonacci": {
-      "llm_summary": "The \"Fibonacci\" concept in the context of the \"Inner Circle Trader\" methodology involves identifying potential support and resistance levels in financial trading. The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding numbers, starting from any number in the sequence. This concept is often used in trading to identify potential support and resistance levels, which can be used to make informed trading decisions.\n\nTo spot the Fibonacci pattern on a chart, look for specific price levels, such as Fibonacci retracement levels, which are significant levels of support or resistance. These levels are identified by the Fibonacci sequence and can be used to identify potential entry points for trades. The chart in the teaching transcript shows Fibonacci levels at 2900, 2901, and 2902, which are significant Fibonacci retracement levels.\n\nThe \"Inner Circle Trader\" methodology recommends trading the Fibonacci pattern by identifying potential entry points at these levels. The chart in the teaching transcript shows specific price levels mentioned or visible, such as 2900, 2901, and 2902, which are significant Fibonacci retracement levels. These levels can be used to identify potential entry points for trades, as the market may gravitate towards these levels due to the trend being bullish.\n\nThe \"Fibonacci\" concept is a useful tool for traders to identify potential support and resistance levels, which can be used to make informed trading decisions. The chart in the teaching transcript shows specific price levels mentioned or visible, such as 2900, 2901, and 2902, which are significant Fibonacci retracement levels. These levels can be used to identify potential entry points for trades, as the market may gravitate towards these levels due to the trend being bullish.",
-      "generation_time_seconds": 39.11321997642517,
+    "fibonacci_retracement": {
+      "llm_summary": "## Definition\nFibonacci retracement in this video is shown on the S&P E-mini daily chart with specific levels at 0.62 (2811.50), 0.705 (2795.25), and 0.79 (2779.25). The framework shows how these levels create an entry zone where institutional accumulation occurs.\n\n## Rules\n1. **Key Levels**: 62%, 70.5%, and 79% form the optimal entry zone\n2. **Level Labels**: Chart shows specific price levels at each Fibonacci percentage\n3. **Falling Short Valid**: Price just 'fell short of hitting the 79% tradesman level' - still valid entry\n4. **Framework Purpose**: 'It just gives you a framework' - not absolute targets\n5. **Daily Anchor**: Use daily chart Fibonacci to frame intraday entries\n\n## Identification\n- On S&P chart: 0.62 at 2811.50, 0.705 at 2795.25, 0.79 at 2779.25\n- Swing from 2717.25 (1.0 level) to 2965.00 (0 level)\n- The retracement zone is shaded showing the OTE area\n- Price reaction within this zone validates the setup\n- In this video: Price retraced into the zone and held, confirming bullish bias",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 70.10000000000002,
+        "teaching_duration_seconds": 70.1,
         "word_count": 221,
         "teaching_units": 2,
         "frames_analyzed": 5,
@@ -93,6 +79,34 @@
       },
       "teaching_types": {
         "explanation": 2
+      }
+    },
+    "futures_market_application": {
+      "llm_summary": "## Definition\nThis video demonstrates that ICT concepts are not limited to forex but apply equally to index futures like the S&P 500 E-mini. The pattern recognition series shows OTE working on the June 2020 delivery contract, proving the methodology's universality across asset classes.\n\n## Rules\n1. **Universality**: 'One of the central tenets to this pattern is it's not limited to forex'\n2. **Contract Selection**: Trade the most liquid delivery month (June 2020 in this example)\n3. **Same Framework**: Apply identical OTE rules regardless of market\n4. **Short-term Focus**: 'Focusing primarily on a very short term timeframe'\n5. **Scalability**: 'The pattern can be scaled to whatever timeframe you really want'\n\n## Identification\n- S&P 500 E-MINI FUTURES (JUN 2020) shown on daily chart\n- CME_MINI ticker with price around 2825-2965 range\n- Same swing high/low and retracement analysis as forex\n- The daily chart shows the broader market context for intraday trading\n- In this video: Clear demonstration that OTE works identically on equity futures",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 40.0,
+        "word_count": 90,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "previous_day_high_low": {
+      "llm_summary": "## Definition\nThe previous day's high and low serve as key liquidity targets and reference points for daily bias. ICT emphasizes looking for 'a signature in price that would lend well to aiming for our previous days high or low' as the primary objective.\n\n## Rules\n1. **Liquidity Pools**: Previous day's highs/lows contain resting orders (liquidity)\n2. **Daily Targets**: These become the natural objectives for intraday moves\n3. **Bias Determination**: Direction toward previous day's high = bullish; toward low = bearish\n4. **Sweep Potential**: Price often sweeps these levels before reversing\n5. **Framework Alignment**: Use OTE entries that align with targeting these levels\n\n## Identification\n- Mark yesterday's high and low on your intraday chart\n- Look for OTE setups that align with targeting these levels\n- If in bullish OTE, previous day's high becomes the target\n- If in bearish OTE, previous day's low becomes the target\n- In this video: Previous day's high/low referenced as the primary liquidity objective",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 75,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
       }
     }
   }

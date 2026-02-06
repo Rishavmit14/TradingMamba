@@ -1,0 +1,135 @@
+{
+  "video_id": "pv2-R-STviA",
+  "generated_at": "2026-02-06T10:40:30.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
+  "processing_stats": {
+    "teaching_units": 52,
+    "vision_analyses": 81,
+    "concepts_extracted": 8,
+    "total_audio_duration": 1251.3,
+    "total_words": 3850
+  },
+  "concepts": {
+    "market_maker_trap": {
+      "llm_summary": "### MARKET MAKER TRAP -- False Breakout Strategy\n\n#### Definition\nA Market Maker Trap is a deliberate price manipulation where institutional traders (market makers) engineer false breakouts above or below price consolidations to trigger retail traders' stop orders. The market maker then uses these triggered orders as counterparty liquidity to fill their own positions in the opposite direction.\n\n#### Rules & Conditions\n1. **Bearish Market Context**: False breakouts ABOVE consolidation occur in primarily bearish markets - market makers run buy stops above ranges before continuing lower\n2. **Bullish Market Context**: False breakouts BELOW consolidation occur in primarily bullish markets - market makers run sell stops below ranges before continuing higher\n3. **Equilibrium Prerequisite**: The market must first reach some measure of equilibrium (trading range/consolidation) before the trap can be set\n4. **Order Pool Buildup**: Neophyte/breakout traders bracket the range with buy stops above highs and sell stops below lows\n5. **Stop Neutralization**: Market makers specifically target one side of the marketplace to neutralize those stops\n6. **Reversal Confirmation**: After the false breakout, price quickly reverses and moves in the opposite direction\n\n#### Identification on Charts\n- Look for price consolidations (gray shaded rectangles in the teaching)\n- Identify buy stop zones above consolidation highs (marked in red/pink)\n- Identify sell stop zones below consolidation lows (marked in cyan/teal)\n- Watch for price to break one side, trigger stops, then quickly reverse\n- The body of candles holds most volume - liquidity rests above/below candle bodies, not just wicks\n\n#### Trading Application\n- **Do NOT** trade breakouts like retail traders - this is the trap\n- Wait for the false breakout to complete (stop run) before entering\n- Enter in the direction of the underlying trend AFTER the trap triggers\n- Use the stop run level as your stop loss placement\n- Target the opposite side's liquidity pool for take profit",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 400.0,
+        "word_count": 1200,
+        "teaching_units": 18,
+        "frames_analyzed": 25,
+        "deictic_references": 22
+      },
+      "teaching_types": {
+        "explanation": 8,
+        "example": 10
+      }
+    },
+    "false_breakout": {
+      "llm_summary": "### FALSE BREAKOUT -- Stop Hunt Mechanism\n\n#### Definition\nA false breakout occurs when price temporarily moves beyond a consolidation's high or low, triggers pending orders (stops), and then reverses direction. This is NOT a failed breakout attempt - it is a deliberate institutional move to access liquidity pools where retail orders are clustered.\n\n#### Rules & Conditions\n1. **Above Consolidation**: In bearish markets, expect false breakouts ABOVE the range - market makers target buy stops\n2. **Below Consolidation**: In bullish markets, expect false breakouts BELOW the range - market makers target sell stops\n3. **Quick Reversal**: True false breakouts reverse quickly after triggering stops - extended moves suggest genuine breakout\n4. **Volume Concentration**: Most volume (and thus liquidity) is at candle bodies, not wicks - focus on body levels\n5. **Repetitive Pattern**: In trending markets, this pattern repeats at each new consolidation level\n\n#### Identification on Charts\n- Price breaks above/below consolidation by a small amount\n- Immediate reversal candle(s) follow the breakout\n- The breakout candle often leaves a long wick (stop hunt signature)\n- Subsequent price action moves decisively in opposite direction\n- Look for consolidation boxes with clear high/low boundaries\n\n#### Trading Application\n- Anticipate false breakouts in the direction OPPOSITE to the underlying trend\n- Use false breakout completion as entry signal (enter after the reversal confirms)\n- Place stops beyond the false breakout extreme\n- Target: Liquidity on the opposite side of the consolidation, then next consolidation's opposite liquidity",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 300.0,
+        "word_count": 800,
+        "teaching_units": 14,
+        "frames_analyzed": 20,
+        "deictic_references": 18
+      },
+      "teaching_types": {
+        "explanation": 6,
+        "example": 8
+      }
+    },
+    "liquidity_pool": {
+      "llm_summary": "### LIQUIDITY POOL -- Order Cluster Zones\n\n#### Definition\nLiquidity pools are price levels where clusters of pending orders (buy stops and sell stops) accumulate. These form above swing highs (buy stops) and below swing lows (sell stops). Market makers actively seek these pools to fill their large institutional orders because retail traders predictably place their stops at these obvious levels.\n\n#### Rules & Conditions\n1. **Buy Stops Location**: Always rest ABOVE highs - includes breakout traders' entries AND short positions' stop losses\n2. **Sell Stops Location**: Always rest BELOW lows - includes breakdown traders' entries AND long positions' stop losses\n3. **Body vs Wick**: The candle BODY contains most volume - primary liquidity rests above/below bodies, not just wicks\n4. **Clean Levels**: Equal highs/lows create larger liquidity pools (clean highs/lows mentioned from September mentorship)\n5. **Pool Depletion**: Once a liquidity pool is swept, that level becomes less significant\n\n#### Identification on Charts\n- Red/pink zones above consolidations = buy stop liquidity\n- Cyan/teal zones below consolidations = sell stop liquidity\n- Equal highs form concentrated buy stop pools\n- Equal lows form concentrated sell stop pools\n- Previous swing highs/lows that haven't been swept\n\n#### Trading Application\n- Identify where retail traders would place stops (obvious highs/lows)\n- Expect price to target these pools before reversing\n- Use liquidity pools as profit targets when trading with institutions\n- Avoid placing stops at obvious levels - place them beyond where the sweep is likely to reach\n- After a pool is swept, look for expansion toward the opposite pool",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 350.0,
+        "word_count": 900,
+        "teaching_units": 15,
+        "frames_analyzed": 22,
+        "deictic_references": 20
+      },
+      "teaching_types": {
+        "explanation": 7,
+        "example": 8
+      }
+    },
+    "buy_stops": {
+      "llm_summary": "### BUY STOPS -- Liquidity Above Market\n\n#### Definition\nBuy stops are pending orders that rest ABOVE current price. They include: (1) breakout traders' buy entries waiting to go long on strength, (2) short sellers' stop losses to exit losing positions. When price reaches these levels, buy stops trigger as market buy orders, creating buying pressure that market makers use to sell into (pair their short positions or exit longs).\n\n#### Rules & Conditions\n1. **Resting Location**: Always above swing highs, consolidation highs, and equal highs\n2. **Dual Purpose**: Serves both as breakout entries (bulls) and stop losses (bears)\n3. **Institutional Usage**: Smart money uses buy stops to SELL - they pair long selling (exit longs or enter shorts)\n4. **Targeting Sequence**: In bullish markets, buy stops are used to scale out of longs at profit targets\n5. **Volume Principle**: Most buy stops rest above candle bodies, not just above wicks\n\n#### Identification on Charts\n- Marked as red/pink horizontal zones above price highs\n- Label: \"Buy Stops Used To Pair Long Selling\" or \"Buy Stops Used To Pair Long Exits\"\n- Located above consolidation ranges\n- Above equal highs (clean highs)\n- Above recent swing highs\n\n#### Trading Application\n- In bullish markets: Use buy stop levels as take profit targets for long positions\n- In bearish markets: Expect price to sweep buy stops before continuing lower\n- Don't place your stops at obvious buy stop levels - you'll get hunted\n- Use the sweep of buy stops as a potential short entry signal in bearish conditions",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 250.0,
+        "word_count": 600,
+        "teaching_units": 10,
+        "frames_analyzed": 15,
+        "deictic_references": 12
+      },
+      "teaching_types": {
+        "explanation": 5,
+        "example": 5
+      }
+    },
+    "sell_stops": {
+      "llm_summary": "### SELL STOPS -- Liquidity Below Market\n\n#### Definition\nSell stops are pending orders that rest BELOW current price. They include: (1) breakdown traders' sell entries waiting to go short on weakness, (2) long traders' stop losses to exit losing positions. When price reaches these levels, sell stops trigger as market sell orders. Smart money BUYS into this selling pressure - they use sell stops as counterparties for their long positions.\n\n#### Rules & Conditions\n1. **Resting Location**: Always below swing lows, consolidation lows, and equal lows\n2. **Dual Purpose**: Serves both as breakdown entries (bears) and stop losses (bulls)\n3. **Institutional Usage**: Smart money uses sell stops to BUY - they pair long orders (enter longs)\n4. **Bullish Signal**: When market repeatedly sweeps sell stops and rallies, this confirms bullish bias\n5. **Absorption Mechanism**: Market makers absorb sell stop orders to accumulate long positions\n\n#### Identification on Charts\n- Marked as cyan/teal horizontal zones below price lows\n- Label: \"Sell Stops Used To Pair Long Orders\"\n- Located below consolidation ranges\n- Below equal lows (clean lows)\n- Below recent swing lows\n\n#### Trading Application\n- In bullish markets: Use sell stop sweeps as long entry opportunities\n- After sell stops are swept, expect price expansion toward buy stops above\n- The sweep of sell stops in a bullish market = institutional accumulation\n- Target buy stop levels above for take profit after entering on sell stop sweep\n- Place your actual stops BELOW where the institutional sweep is likely to reach",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 250.0,
+        "word_count": 600,
+        "teaching_units": 10,
+        "frames_analyzed": 15,
+        "deictic_references": 12
+      },
+      "teaching_types": {
+        "explanation": 5,
+        "example": 5
+      }
+    },
+    "consolidation": {
+      "llm_summary": "### CONSOLIDATION -- Trading Range Formation\n\n#### Definition\nConsolidation is a period where price moves sideways within a defined range, representing equilibrium between buyers and sellers. In ICT methodology, consolidations are NOT random - they are engineered by market makers to allow stop orders to accumulate above and below the range. These accumulated stops become the liquidity that market makers will later target.\n\n#### Rules & Conditions\n1. **Equilibrium State**: Consolidation forms at some measure of price equilibrium\n2. **Order Accumulation**: During consolidation, breakout traders bracket the range with buy stops above and sell stops below\n3. **Predetermined Target**: Market makers know in advance which side they will target based on overall market bias\n4. **Repetitive Process**: After one consolidation is resolved, price often forms a new consolidation at the next level\n5. **Range Boundaries**: The highs and lows of consolidation define where liquidity pools form\n\n#### Identification on Charts\n- Shown as gray shaded rectangular boxes on the chart\n- Clear upper boundary (resistance) and lower boundary (support)\n- Price oscillates between boundaries without clear direction\n- Duration can vary from minutes to days depending on timeframe\n- Often forms after a strong directional move\n\n#### Trading Application\n- Do NOT trade breakouts from consolidation - this is the retail trap\n- Identify the underlying market bias (bullish or bearish)\n- Anticipate which side of the consolidation will be swept first\n- Wait for the false breakout/stop sweep before entering\n- Use the consolidation range for measuring potential price targets (measured moves)",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 200.0,
+        "word_count": 500,
+        "teaching_units": 8,
+        "frames_analyzed": 12,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 4
+      }
+    },
+    "ipda": {
+      "llm_summary": "### IPDA -- Interbank Price Delivery Algorithm\n\n#### Definition\nThe Interbank Price Delivery Algorithm (IPDA) is ICT's concept describing how institutional price delivery works. It refers to the systematic way that market makers move price from one liquidity pool to another. The algorithm \"expands\" price away from swept liquidity toward the next pool of resting orders. This creates the rhythmic pattern of stop runs followed by expansions that characterizes institutional price action.\n\n#### Rules & Conditions\n1. **Expansion Principle**: After sweeping one liquidity pool, price EXPANDS toward the opposite liquidity\n2. **Liquidity Seeking**: The algorithm continuously seeks liquidity - it moves from one pool to another\n3. **Predictable Targets**: Once you identify swept liquidity, the next target is usually the opposite side's liquidity\n4. **Measured Moves**: The expansion from one sweep often mirrors previous expansions (measured move concept)\n5. **Continuous Cycle**: The process repeats: sweep → expand → consolidate → sweep → expand\n\n#### Identification on Charts\n- After sell stops are swept (cyan zones), watch for expansion UP toward buy stops (red zones)\n- After buy stops are swept (red zones), watch for expansion DOWN toward sell stops (cyan zones)\n- The expansion creates strong directional candles\n- Clean, impulsive moves between liquidity pools\n\n#### Trading Application\n- Think in terms of \"where is price expanding TO\" rather than just \"where did price come FROM\"\n- After a stop sweep, immediately identify the next liquidity target\n- Use IPDA logic to set profit targets - aim for the opposite liquidity pool\n- The algorithm gives context for why price moves the way it does\n- Use measured moves from previous expansions to project targets",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 180.0,
+        "word_count": 450,
+        "teaching_units": 7,
+        "frames_analyzed": 10,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 3
+      }
+    },
+    "market_efficiency_paradigm": {
+      "llm_summary": "### MARKET EFFICIENCY PARADIGM -- Institutional Order Flow Model\n\n#### Definition\nThe Market Efficiency Paradigm is ICT's framework for understanding how smart money enters and exits positions efficiently. It explains that market makers must find willing counterparties for their large orders, and those counterparties are found at predictable liquidity pools (buy stops and sell stops). This paradigm shifts thinking from \"price discovery\" to \"liquidity hunting.\"\n\n#### Rules & Conditions\n1. **Entry via Stops**: Smart money enters positions by triggering opposing stop orders (buy using sell stops, sell using buy stops)\n2. **Exit via Stops**: Smart money exits positions by triggering same-direction stops (exit longs using buy stops, exit shorts using sell stops)\n3. **Counterparty Necessity**: Large institutional orders REQUIRE counterparty liquidity - they can't just buy/sell at will\n4. **Bullish Confirmation**: Repeated sell stop sweeps followed by rallies = bullish market profile\n5. **Bearish Confirmation**: Repeated buy stop sweeps followed by declines = bearish market profile\n6. **Scaling**: Institutions scale in and out at multiple liquidity pools, not at single prices\n\n#### Identification on Charts\n- Pattern of consolidation → stop sweep → expansion → new consolidation\n- In bullish markets: Each consolidation break below (sell stop sweep) leads to higher prices\n- In bearish markets: Each consolidation break above (buy stop sweep) leads to lower prices\n- Multiple cyan zones (entries) in bullish markets, multiple red zones (exits) above\n\n#### Trading Application\n- Align your trades with how institutions are booking positions\n- If they're repeatedly sweeping sell stops and rallying = be a buyer on sweeps\n- If they're repeatedly sweeping buy stops and declining = be a seller on sweeps\n- Use this paradigm to determine market bias - it's more reliable than trend lines\n- Think: \"Where do institutions need to go to find liquidity for their orders?\"",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 220.0,
+        "word_count": 550,
+        "teaching_units": 9,
+        "frames_analyzed": 14,
+        "deictic_references": 11
+      },
+      "teaching_types": {
+        "explanation": 5,
+        "example": 4
+      }
+    }
+  }
+}

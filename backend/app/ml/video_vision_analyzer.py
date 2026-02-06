@@ -768,15 +768,29 @@ class MLXVisionModel:
 
                 # Generate response using Metal GPU
                 # Signature: generate(model, processor, prompt, image=None, verbose=False, **kwargs)
-                response = self._generate(
-                    self._model,
-                    self._processor,
-                    formatted_prompt,  # prompt comes before image
-                    image=image_path,  # image as keyword arg
-                    max_tokens=max_tokens,
-                    temp=0.1,  # Low temperature for consistent analysis
-                    verbose=False
-                )
+                # NOTE: MLX-VLM is the fallback trainer. Primary training is via Claude Code.
+                try:
+                    response = self._generate(
+                        self._model,
+                        self._processor,
+                        formatted_prompt,  # prompt comes before image
+                        image=image_path,  # image as keyword arg
+                        max_tokens=max_tokens,
+                        temp=0.1,  # Low temperature for consistent analysis
+                        repetition_penalty=1.3,  # Reduce repetition loops in output
+                        verbose=False
+                    )
+                except TypeError:
+                    # Older mlx-vlm versions may not support repetition_penalty
+                    response = self._generate(
+                        self._model,
+                        self._processor,
+                        formatted_prompt,
+                        image=image_path,
+                        max_tokens=max_tokens,
+                        temp=0.1,
+                        verbose=False
+                    )
 
                 elapsed = time.time() - start_time
                 logger.debug(f"✅ MLX-VLM analyzed {frame_name} in {elapsed:.1f}s")
@@ -1236,6 +1250,22 @@ Respond in JSON:
             raise RuntimeError("No vision model available! Install MLX-VLM or Ollama.")
 
         elif self.provider == "anthropic":
+            # =========================================================================
+            # PAID API DISABLED - Use Claude Code Max plan instead
+            # =========================================================================
+            # All vision analysis is now pre-computed by Claude Code and stored in:
+            # - data/audio_first_training/{video_id}_vision_analysis.json
+            # - data/audio_first_training/{video_id}_knowledge_base.json
+            #
+            # To re-enable paid API (NOT RECOMMENDED - costs ~$1.50/image):
+            # Set environment variable: ENABLE_PAID_VISION_API=true
+            # =========================================================================
+            import os
+            if os.environ.get('ENABLE_PAID_VISION_API', '').lower() != 'true':
+                logger.warning("PAID Anthropic Vision API disabled. Using pre-computed Claude Code data.")
+                logger.info("Set ENABLE_PAID_VISION_API=true to enable (NOT RECOMMENDED - use Claude Code instead)")
+                raise RuntimeError("Paid vision API disabled. Use pre-computed knowledge bases from Claude Code.")
+
             response = self.client.messages.create(
                 model="claude-sonnet-4-20250514",
                 max_tokens=2000,
@@ -1254,6 +1284,15 @@ Respond in JSON:
             return response.content[0].text
 
         elif self.provider == "openai":
+            # =========================================================================
+            # PAID API DISABLED - Use Claude Code Max plan instead
+            # =========================================================================
+            import os
+            if os.environ.get('ENABLE_PAID_VISION_API', '').lower() != 'true':
+                logger.warning("PAID OpenAI Vision API disabled. Using pre-computed Claude Code data.")
+                logger.info("Set ENABLE_PAID_VISION_API=true to enable (NOT RECOMMENDED - use Claude Code instead)")
+                raise RuntimeError("Paid vision API disabled. Use pre-computed knowledge bases from Claude Code.")
+
             response = self.client.chat.completions.create(
                 model="gpt-4o",
                 max_tokens=2000,

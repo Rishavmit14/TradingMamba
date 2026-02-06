@@ -15,7 +15,13 @@ import {
   ChevronDown,
   X,
   Wifi,
-  WifiOff
+  WifiOff,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Home,
+  Minus,
+  Plus
 } from 'lucide-react';
 import { getLiveOHLCV, getSignalAnalysis, getWebSocketUrl, predictPrice, getAvailablePlaylists } from '../services/api';
 
@@ -78,6 +84,21 @@ const PATTERN_TYPE_MAP = {
   'bearish_breaker': { short: 'BRK', color: '#ff6d00', direction: 'bearish' },
   'buy_stops': { short: 'BST', color: '#ff5252', direction: 'neutral' },
   'sell_stops': { short: 'SST', color: '#69f0ae', direction: 'neutral' },
+  // Swing point markers
+  'swing_high': { short: 'SH', color: '#ff7043', direction: 'neutral' },
+  'swing_low': { short: 'SL', color: '#42a5f5', direction: 'neutral' },
+  // Market structure labels (HH/HL/LH/LL)
+  'higher_high': { short: 'HH', color: '#00e676', direction: 'bullish' },
+  'higher_low': { short: 'HL', color: '#69f0ae', direction: 'bullish' },
+  'lower_high': { short: 'LH', color: '#ff5252', direction: 'bearish' },
+  'lower_low': { short: 'LL', color: '#ff8a80', direction: 'bearish' },
+  // Mitigated order blocks
+  'bullish_mitigation_block': { short: 'MB', color: '#26a69a', direction: 'bullish' },
+  'bearish_mitigation_block': { short: 'MB', color: '#ff9800', direction: 'bearish' },
+  // Premium/Discount zones
+  'premium_zone': { short: 'PREM', color: '#ff5252', direction: 'bearish' },
+  'discount_zone': { short: 'DISC', color: '#69f0ae', direction: 'bullish' },
+  'equilibrium': { short: 'EQ', color: '#ffd740', direction: 'neutral' },
 };
 
 function LiveChart() {
@@ -96,6 +117,8 @@ function LiveChart() {
   const [priceChange, setPriceChange] = useState(0);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState('all');
+  const [loadingHistory, setLoadingHistory] = useState(false);  // Loading state for historical data
+  const [atLeftEdge, setAtLeftEdge] = useState(false);  // Track if user is at left edge
 
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
@@ -110,6 +133,8 @@ function LiveChart() {
   const analysisPatternsRef = useRef([]);
   const allApiPatternsRef = useRef([]);      // ALL patterns from API (unfiltered)
   const signalDirectionRef = useRef(null);   // Signal direction for pattern filtering
+  const isLoadingHistoryRef = useRef(false); // Prevent multiple historical data requests
+  const oldestTimestampRef = useRef(null);   // Track oldest candle for scrollback
 
   // Format price with appropriate decimals
   const formatPrice = (price, sym = symbol) => {
@@ -136,6 +161,64 @@ function LiveChart() {
     const labels = { 'M1': '1m', 'M5': '5m', 'M15': '15m', 'M30': '30m', 'H1': '1H', 'H4': '4H', 'D1': '1D' };
     return labels[tf] || tf;
   };
+
+  // Chart control functions (zoom in, zoom out, reset)
+  const handleZoomIn = useCallback(() => {
+    if (!chartRef.current) return;
+    const timeScale = chartRef.current.timeScale();
+    const currentRange = timeScale.getVisibleLogicalRange();
+    if (currentRange) {
+      const center = (currentRange.from + currentRange.to) / 2;
+      const newRange = (currentRange.to - currentRange.from) * 0.7; // Zoom in by 30%
+      timeScale.setVisibleLogicalRange({
+        from: center - newRange / 2,
+        to: center + newRange / 2,
+      });
+    }
+  }, []);
+
+  const handleZoomOut = useCallback(() => {
+    if (!chartRef.current) return;
+    const timeScale = chartRef.current.timeScale();
+    const currentRange = timeScale.getVisibleLogicalRange();
+    if (currentRange) {
+      const center = (currentRange.from + currentRange.to) / 2;
+      const newRange = (currentRange.to - currentRange.from) * 1.4; // Zoom out by 40%
+      const candles = candlesDataRef.current;
+      // Clamp to available data
+      const from = Math.max(0, center - newRange / 2);
+      const to = Math.min(candles.length - 1, center + newRange / 2);
+      timeScale.setVisibleLogicalRange({ from, to });
+    }
+  }, []);
+
+  const handleResetChart = useCallback(() => {
+    if (!chartRef.current || !candlesDataRef.current.length) return;
+    const timeScale = chartRef.current.timeScale();
+    const candles = candlesDataRef.current;
+    // Show last 200 candles (or all if less)
+    const visibleCount = Math.min(200, candles.length);
+    timeScale.setVisibleLogicalRange({
+      from: candles.length - visibleCount,
+      to: candles.length - 1,
+    });
+  }, []);
+
+  const handleFitAll = useCallback(() => {
+    if (!chartRef.current || !candlesDataRef.current.length) return;
+    const timeScale = chartRef.current.timeScale();
+    const candles = candlesDataRef.current;
+    // Fit all loaded candles in view
+    timeScale.setVisibleLogicalRange({
+      from: 0,
+      to: candles.length - 1,
+    });
+  }, []);
+
+  const handleScrollToLatest = useCallback(() => {
+    if (!chartRef.current) return;
+    chartRef.current.timeScale().scrollToRealTime();
+  }, []);
 
   // Fetch available playlists for the dropdown
   useEffect(() => {
@@ -222,7 +305,8 @@ function LiveChart() {
       const baseType = pt.replace('bullish_', '').replace('bearish_', '');
       const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
       typeCounts[baseType] = (typeCounts[baseType] || 0) + 1;
-      if (typeCounts[baseType] > 2) continue;
+      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
+      if (typeCounts[baseType] > (isMarkerType ? 4 : 2)) continue;
       const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
       if (isBoxType) {
         if (seenZones.some(z => Math.abs(z - mid) / mid < 0.03)) continue;
@@ -247,6 +331,7 @@ function LiveChart() {
       'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
       'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity', 'buy_stops', 'sell_stops',
+      'equilibrium',
     ];
     const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
     const rayPats = sortedPatterns.filter(p => rayTypes.includes(p.pattern_type));
@@ -276,7 +361,11 @@ function LiveChart() {
         const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
         if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
       }
-      return [...bosCh.slice(0, 2), ...boxPats.slice(0, 5), ...uniqRays.slice(0, 5)];
+      // Separate lightweight marker patterns from box patterns
+      const markerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
+      const markerPats = sortedPatterns.filter(p => markerTypes.includes(p.pattern_type));
+      const actualBoxPats = boxPats.filter(p => !markerTypes.includes(p.pattern_type));
+      return [...bosCh.slice(0, 2), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...markerPats.slice(0, 8)];
     }
   }, [timeframe]);
 
@@ -320,6 +409,7 @@ function LiveChart() {
       'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
+      'equilibrium',
     ];
 
     // Get annotation labels for each pattern type (all solid lines now)
@@ -337,6 +427,7 @@ function LiveChart() {
         'sellside_liquidity': { text: 'SSL', color: '#66bb6a' },
         'buy_stops': { text: 'BST 🎯', color: '#ff5252' },
         'sell_stops': { text: 'SST 🎯', color: '#69f0ae' },
+        'equilibrium': { text: 'EQ (50%)', color: '#ffd740' },
       };
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
@@ -357,6 +448,44 @@ function LiveChart() {
 
       // Skip if price level is outside visible chart area
       if (y === null || y < 0 || y > chartHeight) return;
+
+      // Equilibrium: special case — always span from left of chart
+      if (patternType === 'equilibrium') {
+        try {
+          const timeScale = chart.timeScale();
+          const chartWidth = chartElement.clientWidth;
+          const rightEdge = chartWidth - 70;
+          const startX = 0;
+          const rayWidth = rightEdge;
+          const annotation = getAnnotation(patternType);
+          const lineEl = document.createElement('div');
+          lineEl.className = 'ray-overlay';
+          lineEl.style.cssText = `
+            position: absolute; left: ${startX}px; top: ${y - 1}px;
+            width: ${rayWidth}px; height: 2px;
+            background: linear-gradient(to right, ${annotation.color}40, ${annotation.color}80, ${annotation.color}40);
+            border-top: 1px dashed ${annotation.color}60;
+            pointer-events: none; z-index: 4;
+          `;
+          const labelEl = document.createElement('div');
+          const labelY = findNonOverlappingYRay(y - LABEL_HEIGHT / 2);
+          labelEl.className = 'ray-overlay';
+          labelEl.style.cssText = `
+            position: absolute; right: 75px; top: ${labelY}px;
+            color: ${annotation.color}; font-size: 10px; font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+            padding: 1px 5px; background: rgba(0,0,0,0.8);
+            border: 1px solid ${annotation.color}60; border-radius: 3px;
+            pointer-events: none; z-index: 6; white-space: nowrap;
+          `;
+          labelEl.textContent = `${annotation.text} ${pattern.timeframe || ''}`;
+          chartElement.appendChild(lineEl);
+          chartElement.appendChild(labelEl);
+          rayOverlaysRef.current.push(lineEl);
+          rayOverlaysRef.current.push(labelEl);
+        } catch (e) { /* skip */ }
+        return;
+      }
 
       // Determine if this is a high-type or low-type pattern
       const isHighPattern = patternType.includes('high') || patternType.includes('bullish') ||
@@ -535,6 +664,8 @@ function LiveChart() {
       'bullish_ote', 'bearish_ote',
       'bullish_displacement', 'bearish_displacement',
       'bullish_breaker', 'bearish_breaker',
+      'bullish_mitigation_block', 'bearish_mitigation_block',
+      'premium_zone', 'discount_zone',
     ];
     // Pattern types that are drawn as horizontal rays (skip them here)
     const rayPatternTypes = [
@@ -544,6 +675,7 @@ function LiveChart() {
       'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
+      'equilibrium',
     ];
     const markers = [];
     // Reset shared label position tracking
@@ -715,6 +847,11 @@ function LiveChart() {
         const height = Math.max(Math.abs(y2 - y1), 15);
 
         const boxTop = Math.min(y1, y2);
+        const isMitigated = patternType.includes('mitigation_block');
+        const isZone = patternType === 'premium_zone' || patternType === 'discount_zone';
+        const bgAlpha = isZone ? '0a' : isMitigated ? '12' : '20';
+        const borderStyle = isMitigated ? 'dashed' : 'solid';
+        const boxOpacity = isMitigated ? 'opacity: 0.5;' : isZone ? 'opacity: 0.25;' : '';
         const overlay = document.createElement('div');
         overlay.className = 'pattern-box-overlay';
         overlay.style.cssText = `
@@ -723,12 +860,13 @@ function LiveChart() {
           top: ${boxTop}px;
           width: ${width}px;
           height: ${height}px;
-          background-color: ${patternInfo.color}20;
-          border-left: 3px solid ${patternInfo.color};
-          border-top: 1px solid ${patternInfo.color}60;
-          border-bottom: 1px solid ${patternInfo.color}60;
+          background-color: ${patternInfo.color}${bgAlpha};
+          border-left: 3px ${borderStyle} ${patternInfo.color};
+          border-top: 1px ${borderStyle} ${patternInfo.color}60;
+          border-bottom: 1px ${borderStyle} ${patternInfo.color}60;
           pointer-events: none;
           z-index: 3;
+          ${boxOpacity}
         `;
 
         // Label positioned at right side of box, with anti-overlap
@@ -819,6 +957,9 @@ function LiveChart() {
           borderColor: '#e5e7eb',
           timeVisible: true,
           secondsVisible: false,
+          barSpacing: 3,  // Smaller bar spacing to fit more candles
+          minBarSpacing: 1,  // Allow very small bars when zoomed out
+          rightOffset: 5,  // Small offset on right side
         },
       });
 
@@ -834,18 +975,22 @@ function LiveChart() {
       chartRef.current = chart;
       candlestickSeriesRef.current = candlestickSeries;
 
-      // Resize handler
+      // Resize handler - update both width and height
       const handleResize = () => {
         if (chartContainerRef.current && chart) {
-          chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+          chart.applyOptions({
+            width: chartContainerRef.current.clientWidth,
+            height: chartContainerRef.current.clientHeight
+          });
         }
       };
       window.addEventListener('resize', handleResize);
 
       // Scroll/pan handler: re-filter patterns for visible range and redraw
-      chart.timeScale().subscribeVisibleLogicalRangeChange((logicalRange) => {
+      // Also detects when user scrolls to left edge to load more historical data
+      chart.timeScale().subscribeVisibleLogicalRangeChange(async (logicalRange) => {
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
-        window.patternUpdateTimeout = setTimeout(() => {
+        window.patternUpdateTimeout = setTimeout(async () => {
           const candles = candlesDataRef.current;
           const allPatterns = allApiPatternsRef.current;
           if (allPatterns.length > 0 && candles.length > 0 && logicalRange) {
@@ -858,6 +1003,65 @@ function LiveChart() {
               analysisPatternsRef.current = relevant;
               clearPatternOverlays();
               drawPatternBoxes(relevant, candles);
+            }
+          }
+
+          // Dynamic historical data loading: detect when user scrolls to left edge
+          // Load more historical data when user reaches the left edge of loaded candles
+          if (logicalRange && candles.length > 0 && !isLoadingHistoryRef.current) {
+            const leftEdgeThreshold = 20; // Load more when within 20 candles of left edge
+            const isAtLeftEdge = logicalRange.from <= leftEdgeThreshold;
+            setAtLeftEdge(isAtLeftEdge);
+
+            if (isAtLeftEdge) {
+              console.log(`[LiveChart] User scrolled to left edge (from: ${logicalRange.from}), loading more history...`);
+              isLoadingHistoryRef.current = true;
+              setLoadingHistory(true);
+
+              try {
+                // Get the oldest candle's timestamp to fetch data before it
+                const oldestCandle = candles[0];
+                const endTime = oldestCandle.time;
+                console.log(`[LiveChart] Fetching history before timestamp: ${endTime} (${new Date(endTime * 1000).toISOString()})`);
+
+                const historyData = await getLiveOHLCV(symbol, timeframe, 500, endTime);
+
+                if (historyData?.candles?.length > 0) {
+                  // Filter out any candles we already have (by timestamp)
+                  const existingTimes = new Set(candles.map(c => c.time));
+                  const newCandles = historyData.candles.filter(c => !existingTimes.has(c.time));
+
+                  if (newCandles.length > 0) {
+                    console.log(`[LiveChart] Adding ${newCandles.length} historical candles`);
+                    // Prepend new historical candles
+                    const mergedCandles = [...newCandles, ...candles].sort((a, b) => a.time - b.time);
+                    candlesDataRef.current = mergedCandles;
+
+                    // Update chart with merged data
+                    if (candlestickSeriesRef.current) {
+                      candlestickSeriesRef.current.setData(mergedCandles);
+
+                      // Maintain the user's current view position
+                      // Calculate where the user was looking and keep them there
+                      const shiftAmount = newCandles.length;
+                      chartRef.current.timeScale().setVisibleLogicalRange({
+                        from: logicalRange.from + shiftAmount,
+                        to: logicalRange.to + shiftAmount,
+                      });
+                    }
+                  } else {
+                    console.log('[LiveChart] No new candles available (reached end of history)');
+                  }
+                }
+              } catch (err) {
+                console.error('[LiveChart] Error loading historical data:', err);
+              } finally {
+                setLoadingHistory(false);
+                // Add a cooldown to prevent too many requests
+                setTimeout(() => {
+                  isLoadingHistoryRef.current = false;
+                }, 1000);
+              }
             }
           }
         }, 150);
@@ -874,14 +1078,19 @@ function LiveChart() {
       setError(null);
 
       try {
-        // Request more candles for higher timeframes to show more history
-        const candleLimit = ['D1', 'W1', 'MN'].includes(timeframe) ? 500 :
-                           ['H4', 'H1'].includes(timeframe) ? 300 : 200;
+        // Request maximum candles for all timeframes to show full history
+        const candleLimit = 2000;  // Maximum candles for all timeframes
+        console.log(`[LiveChart] Requesting ${candleLimit} candles for ${symbol} ${timeframe}`);
         const ohlcvData = await getLiveOHLCV(symbol, timeframe, candleLimit);
+        console.log(`[LiveChart] Received ${ohlcvData?.candles?.length || 0} candles`);
 
         if (ohlcvData?.candles?.length > 0) {
           const candles = ohlcvData.candles;
           candlesDataRef.current = candles;
+          // Track oldest timestamp for historical scrollback
+          oldestTimestampRef.current = candles[0]?.time;
+          // Reset history loading flag for new symbol/timeframe
+          isLoadingHistoryRef.current = false;
 
           if (candlestickSeriesRef.current) {
             candlestickSeriesRef.current.setData(candles);
@@ -893,7 +1102,20 @@ function LiveChart() {
               setPriceChange(((lastCandleRef.current.close - prevClose) / prevClose) * 100);
             }
 
-            chartRef.current?.timeScale().fitContent();
+            // For initial load, show recent candles (not all 2000 at once)
+            // User can scroll left to load more history dynamically
+            if (chartRef.current && candles.length > 0) {
+              const numCandles = candles.length;
+              console.log(`[LiveChart] Loaded ${numCandles} candles, showing last 200`);
+
+              // Show the most recent ~200 candles initially
+              // User can scroll left to see older data and trigger dynamic loading
+              const visibleCount = Math.min(200, numCandles);
+              chartRef.current.timeScale().setVisibleLogicalRange({
+                from: numCandles - visibleCount,
+                to: numCandles - 1,
+              });
+            }
           }
         } else {
           setError('No data available');
@@ -1042,23 +1264,53 @@ function LiveChart() {
     return () => { if (wsRef.current) wsRef.current.close(); };
   }, [symbol, timeframe]);
 
+  // Handle chart resize when sidebar is toggled or fullscreen mode changes
+  useEffect(() => {
+    // Small delay to allow DOM to update before measuring new dimensions
+    const resizeTimer = setTimeout(() => {
+      if (chartRef.current && chartContainerRef.current) {
+        const newWidth = chartContainerRef.current.clientWidth;
+        const newHeight = chartContainerRef.current.clientHeight;
+
+        // Update both width AND height - critical for fullscreen mode
+        chartRef.current.applyOptions({
+          width: newWidth,
+          height: newHeight
+        });
+
+        // Fit content to show all data after resize
+        chartRef.current.timeScale().fitContent();
+
+        // Also redraw pattern overlays as they're positioned absolutely
+        if (analysisPatternsRef.current.length > 0 && candlesDataRef.current.length > 0) {
+          clearPatternOverlays();
+          drawPatternBoxes(analysisPatternsRef.current, candlesDataRef.current);
+        }
+      }
+    }, 100);
+
+    return () => clearTimeout(resizeTimer);
+  }, [showLegend, fullscreen, clearPatternOverlays, drawPatternBoxes]);
+
   const signal = analysis?.signal;
   const isBullish = signal?.direction === 'bullish';
   const isBearish = signal?.direction === 'bearish';
 
   return (
-    <div className={`space-y-4 ${fullscreen ? 'fixed inset-0 z-50 bg-[#0a0a0f] p-4 overflow-auto' : ''}`}>
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/20">
-            <BarChart2 className="w-6 h-6 text-indigo-400" />
-          </div>
+    <div className={`${fullscreen ? 'fixed inset-0 z-50 bg-[#0a0a0f] p-2 overflow-y-auto' : 'space-y-4'}`}>
+      {/* Header - Compact in fullscreen mode */}
+      <div className={`flex flex-col lg:flex-row lg:items-center justify-between flex-shrink-0 ${fullscreen ? 'gap-1' : 'gap-4'}`}>
+        <div className={`flex items-center ${fullscreen ? 'gap-2' : 'gap-4'}`}>
+          {!fullscreen && (
+            <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/20">
+              <BarChart2 className="w-6 h-6 text-indigo-400" />
+            </div>
+          )}
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-white">{symbol}</h1>
+              <h1 className={`font-bold text-white ${fullscreen ? 'text-lg' : 'text-2xl'}`}>{symbol}</h1>
               {currentPrice && (
-                <span className="text-2xl font-bold text-white">{formatPrice(currentPrice)}</span>
+                <span className={`font-bold text-white ${fullscreen ? 'text-lg' : 'text-2xl'}`}>{formatPrice(currentPrice)}</span>
               )}
               {priceChange !== 0 && (
                 <span className={`text-sm font-semibold px-2 py-1 rounded ${
@@ -1068,14 +1320,16 @@ function LiveChart() {
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              {isConnected ? (
-                <span className="flex items-center gap-1 text-emerald-400"><Wifi className="w-3 h-3" /> Live</span>
-              ) : (
-                <span className="flex items-center gap-1 text-yellow-400"><WifiOff className="w-3 h-3" /> Connecting...</span>
-              )}
-              {lastUpdate && <span>Updated: {lastUpdate.toLocaleTimeString()}</span>}
-            </div>
+            {!fullscreen && (
+              <div className="flex items-center gap-2 text-sm text-slate-400">
+                {isConnected ? (
+                  <span className="flex items-center gap-1 text-emerald-400"><Wifi className="w-3 h-3" /> Live</span>
+                ) : (
+                  <span className="flex items-center gap-1 text-yellow-400"><WifiOff className="w-3 h-3" /> Connecting...</span>
+                )}
+                {lastUpdate && <span>Updated: {lastUpdate.toLocaleTimeString()}</span>}
+              </div>
+            )}
           </div>
         </div>
 
@@ -1171,14 +1425,14 @@ function LiveChart() {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
+      <div className={`grid grid-cols-1 xl:grid-cols-4 ${fullscreen ? 'gap-2' : 'gap-4'}`}>
         {/* Chart Area */}
         <div className={`${showLegend ? 'xl:col-span-3' : 'xl:col-span-4'}`}>
           <div className="card-dark rounded-xl overflow-hidden relative">
             <div
               ref={chartContainerRef}
-              className="w-full bg-white"
-              style={{ height: fullscreen ? 'calc(100vh - 200px)' : '500px' }}
+              className="w-full"
+              style={{ height: fullscreen ? 'calc(100vh - 70px)' : '500px', backgroundColor: '#131722' }}
             />
 
             {loading && (
@@ -1189,6 +1443,60 @@ function LiveChart() {
                 </div>
               </div>
             )}
+
+            {/* Historical data loading indicator - shows when scrolling left to load more */}
+            {loadingHistory && (
+              <div className="absolute top-2 left-2 bg-indigo-600/90 text-white px-3 py-1 rounded-lg text-xs flex items-center gap-2 z-20 animate-pulse">
+                <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Loading historical data...
+              </div>
+            )}
+
+            {/* Chart Control Buttons - TradingView style */}
+            <div className="absolute bottom-4 left-4 flex flex-col gap-1 z-20">
+              {/* Zoom Controls */}
+              <div className="flex flex-col bg-slate-800/90 rounded-lg shadow-lg border border-slate-700/50 overflow-hidden">
+                <button
+                  onClick={handleZoomIn}
+                  className="p-2 hover:bg-slate-700/80 text-slate-300 hover:text-white transition-colors border-b border-slate-700/50"
+                  title="Zoom In"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleZoomOut}
+                  className="p-2 hover:bg-slate-700/80 text-slate-300 hover:text-white transition-colors"
+                  title="Zoom Out"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Reset/Navigation Controls */}
+              <div className="flex flex-col bg-slate-800/90 rounded-lg shadow-lg border border-slate-700/50 overflow-hidden mt-1">
+                <button
+                  onClick={handleResetChart}
+                  className="p-2 hover:bg-slate-700/80 text-slate-300 hover:text-white transition-colors border-b border-slate-700/50"
+                  title="Reset View (Show Recent)"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleFitAll}
+                  className="p-2 hover:bg-slate-700/80 text-slate-300 hover:text-white transition-colors border-b border-slate-700/50"
+                  title="Fit All Data"
+                >
+                  <Maximize2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleScrollToLatest}
+                  className="p-2 hover:bg-slate-700/80 text-slate-300 hover:text-white transition-colors"
+                  title="Go to Latest"
+                >
+                  <Home className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
 
             {error && !loading && (
               <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-4 z-10">
@@ -1231,9 +1539,26 @@ function LiveChart() {
                     <div className="flex items-center gap-2 mb-2">
                       <Eye className="w-4 h-4 text-indigo-400" />
                       <span className="font-semibold text-indigo-400">ML Analysis Reasoning</span>
+                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 ml-auto">Expert-trained</span>
                     </div>
-                    <div className="text-slate-300 leading-relaxed whitespace-pre-line text-xs">
-                      {analysis.ml_reasoning}
+                    <div className="text-slate-300 leading-relaxed text-xs max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+                      {analysis.ml_reasoning.split('\n').map((line, idx) => {
+                        // Format bold text (**text**)
+                        const parts = line.split(/(\*\*[^*]+\*\*)/g);
+                        const formatted = parts.map((part, pidx) => {
+                          if (part.startsWith('**') && part.endsWith('**')) {
+                            return <span key={pidx} className="font-semibold text-white">{part.slice(2, -2)}</span>;
+                          }
+                          return part;
+                        });
+                        // Indent lines starting with arrow or bullet
+                        const isIndented = line.trim().startsWith('↳') || line.trim().startsWith('-') || line.trim().startsWith('•');
+                        return (
+                          <div key={idx} className={isIndented ? 'pl-4 text-slate-400' : ''}>
+                            {formatted}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -1514,6 +1839,9 @@ function LiveChart() {
                                 <span className="text-white font-medium">{info.short}</span>
                                 {isActivelyDetected && (
                                   <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                                )}
+                                {confidence >= 0.85 && (
+                                  <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
                                 )}
                               </div>
                               <div className="flex items-center gap-2">

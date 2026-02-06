@@ -117,6 +117,7 @@ class SmartMoneyAnalysisResult:
     bias_reasoning: str = ""
     current_price: float = 0.0
     analysis_timestamp: datetime = field(default_factory=datetime.utcnow)
+    mitigated_order_blocks: List[OrderBlock] = field(default_factory=list)
     # New ICT pattern results (from Audio-First Training)
     displacements: List[Dict] = field(default_factory=list)
     ote_zones: List[Dict] = field(default_factory=list)
@@ -213,8 +214,9 @@ class SmartMoneyAnalyzer:
 
         # Step 3: Find order blocks - ONLY IF ML LEARNED
         order_blocks = []
+        mitigated_obs = []
         if self._can_detect('order_block'):
-            order_blocks = self.find_order_blocks(data, structure)
+            order_blocks, mitigated_obs = self.find_order_blocks(data, structure)
             if order_blocks:
                 ml_patterns_used.append('order_block')
                 ml_confidence_scores['order_block'] = self._get_ml_confidence('order_block')
@@ -305,6 +307,57 @@ class SmartMoneyAnalyzer:
         else:
             ml_patterns_not_learned.append('equal_highs_lows')
 
+        # Step 10a: Inducement detection - ONLY IF ML LEARNED
+        # Inducement = first valid pullback on left side of swing high/low
+        if self._can_detect('inducement'):
+            ml_patterns_used.append('inducement')
+            ml_confidence_scores['inducement'] = self._get_ml_confidence('inducement')
+        else:
+            ml_patterns_not_learned.append('inducement')
+
+        # Step 10b: Smart Money Trap detection - ONLY IF ML LEARNED
+        # False breakout + quick reversal = retail trap
+        if self._can_detect('smart_money_trap'):
+            ml_patterns_used.append('smart_money_trap')
+            ml_confidence_scores['smart_money_trap'] = self._get_ml_confidence('smart_money_trap')
+        else:
+            ml_patterns_not_learned.append('smart_money_trap')
+
+        # Step 10c: Premium/Discount zone detection (ML-enhanced) - ONLY IF ML LEARNED
+        if self._can_detect('premium_discount'):
+            ml_patterns_used.append('premium_discount')
+            ml_confidence_scores['premium_discount'] = self._get_ml_confidence('premium_discount')
+        else:
+            ml_patterns_not_learned.append('premium_discount')
+
+        # Step 10d: Valid Pullback detection - ONLY IF ML LEARNED
+        # Pullback with liquidity sweep confirmation
+        if self._can_detect('valid_pullback'):
+            ml_patterns_used.append('valid_pullback')
+            ml_confidence_scores['valid_pullback'] = self._get_ml_confidence('valid_pullback')
+        else:
+            ml_patterns_not_learned.append('valid_pullback')
+
+        # Step 10e: Break of Structure / CHoCH - ONLY IF ML LEARNED
+        if self._can_detect('break_of_structure'):
+            ml_patterns_used.append('break_of_structure')
+            ml_confidence_scores['break_of_structure'] = self._get_ml_confidence('break_of_structure')
+        else:
+            ml_patterns_not_learned.append('break_of_structure')
+
+        if self._can_detect('change_of_character'):
+            ml_patterns_used.append('change_of_character')
+            ml_confidence_scores['change_of_character'] = self._get_ml_confidence('change_of_character')
+        else:
+            ml_patterns_not_learned.append('change_of_character')
+
+        # Step 10f: Liquidity Sweep detection - ONLY IF ML LEARNED
+        if self._can_detect('liquidity_sweep'):
+            ml_patterns_used.append('liquidity_sweep')
+            ml_confidence_scores['liquidity_sweep'] = self._get_ml_confidence('liquidity_sweep')
+        else:
+            ml_patterns_not_learned.append('liquidity_sweep')
+
         # Step 11: Map liquidity levels (basic analysis - swing-based)
         liquidity = self.find_liquidity_levels(swing_points, data)
 
@@ -333,6 +386,7 @@ class SmartMoneyAnalyzer:
             market_structure=structure,
             structure_events=events,
             order_blocks=order_blocks,
+            mitigated_order_blocks=mitigated_obs,
             fair_value_gaps=fvgs,
             liquidity_levels=liquidity,
             premium_discount=premium_discount,
@@ -437,6 +491,39 @@ class SmartMoneyAnalyzer:
         hl = recent_lows[-1].price > recent_lows[-2].price    # Higher Low
         lh = recent_highs[-1].price < recent_highs[-2].price  # Lower High
         ll = recent_lows[-1].price < recent_lows[-2].price    # Lower Low
+
+        # Emit HH/HL/LH/LL labels as structure events for chart visualization
+        if hh:
+            events.append(StructureEvent(type='higher_high', level=recent_highs[-1].price,
+                                          timestamp=recent_highs[-1].timestamp, description='Higher High'))
+        if hl:
+            events.append(StructureEvent(type='higher_low', level=recent_lows[-1].price,
+                                          timestamp=recent_lows[-1].timestamp, description='Higher Low'))
+        if lh:
+            events.append(StructureEvent(type='lower_high', level=recent_highs[-1].price,
+                                          timestamp=recent_highs[-1].timestamp, description='Lower High'))
+        if ll:
+            events.append(StructureEvent(type='lower_low', level=recent_lows[-1].price,
+                                          timestamp=recent_lows[-1].timestamp, description='Lower Low'))
+
+        # Also emit previous swing point labels for fuller structure visualization
+        if len(recent_highs) >= 3 and len(recent_lows) >= 3:
+            prev_hh = recent_highs[-2].price > recent_highs[-3].price
+            prev_hl = recent_lows[-2].price > recent_lows[-3].price
+            prev_lh = recent_highs[-2].price < recent_highs[-3].price
+            prev_ll = recent_lows[-2].price < recent_lows[-3].price
+            if prev_hh:
+                events.append(StructureEvent(type='higher_high', level=recent_highs[-2].price,
+                                              timestamp=recent_highs[-2].timestamp, description='Higher High'))
+            if prev_hl:
+                events.append(StructureEvent(type='higher_low', level=recent_lows[-2].price,
+                                              timestamp=recent_lows[-2].timestamp, description='Higher Low'))
+            if prev_lh:
+                events.append(StructureEvent(type='lower_high', level=recent_highs[-2].price,
+                                              timestamp=recent_highs[-2].timestamp, description='Lower High'))
+            if prev_ll:
+                events.append(StructureEvent(type='lower_low', level=recent_lows[-2].price,
+                                              timestamp=recent_lows[-2].timestamp, description='Lower Low'))
 
         # Bullish structure: HH + HL
         if hh and hl:
@@ -629,9 +716,11 @@ class SmartMoneyAnalyzer:
                 )
                 order_blocks.append(ob)
 
-        # Return only unmitigated order blocks, most recent first
-        unmitigated = [ob for ob in order_blocks if not ob.mitigated]
-        return sorted(unmitigated, key=lambda x: x.start_index, reverse=True)[:10]
+        # Return unmitigated + mitigated order blocks separately
+        all_sorted = sorted(order_blocks, key=lambda x: x.start_index, reverse=True)
+        unmitigated = [ob for ob in all_sorted if not ob.mitigated][:10]
+        mitigated = [ob for ob in all_sorted if ob.mitigated][:5]
+        return unmitigated, mitigated
 
     def find_fair_value_gaps(self, data: 'pd.DataFrame') -> List[FairValueGap]:
         """

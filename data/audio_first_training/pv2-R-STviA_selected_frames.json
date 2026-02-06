@@ -1,0 +1,326 @@
+[
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00030.00s.jpg",
+    "timestamp": 30.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00033.00s.jpg",
+    "timestamp": 33.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00042.00s.jpg",
+    "timestamp": 42.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00060.00s.jpg",
+    "timestamp": 60.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00075.00s.jpg",
+    "timestamp": 75.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00093.00s.jpg",
+    "timestamp": 93.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00123.00s.jpg",
+    "timestamp": 123.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00144.00s.jpg",
+    "timestamp": 144.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00147.00s.jpg",
+    "timestamp": 147.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00156.00s.jpg",
+    "timestamp": 156.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00195.00s.jpg",
+    "timestamp": 195.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00204.00s.jpg",
+    "timestamp": 204.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00213.00s.jpg",
+    "timestamp": 213.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00228.00s.jpg",
+    "timestamp": 228.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00234.00s.jpg",
+    "timestamp": 234.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00252.00s.jpg",
+    "timestamp": 252.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00255.00s.jpg",
+    "timestamp": 255.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00279.00s.jpg",
+    "timestamp": 279.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00294.00s.jpg",
+    "timestamp": 294.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00300.00s.jpg",
+    "timestamp": 300.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00354.00s.jpg",
+    "timestamp": 354.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00357.00s.jpg",
+    "timestamp": 357.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00378.00s.jpg",
+    "timestamp": 378.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00390.00s.jpg",
+    "timestamp": 390.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00405.00s.jpg",
+    "timestamp": 405.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00408.00s.jpg",
+    "timestamp": 408.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00420.00s.jpg",
+    "timestamp": 420.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00423.00s.jpg",
+    "timestamp": 423.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00426.00s.jpg",
+    "timestamp": 426.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00480.00s.jpg",
+    "timestamp": 480.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00495.00s.jpg",
+    "timestamp": 495.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00510.00s.jpg",
+    "timestamp": 510.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00513.00s.jpg",
+    "timestamp": 513.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00540.00s.jpg",
+    "timestamp": 540.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00564.00s.jpg",
+    "timestamp": 564.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00600.00s.jpg",
+    "timestamp": 600.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00603.00s.jpg",
+    "timestamp": 603.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00618.00s.jpg",
+    "timestamp": 618.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00639.00s.jpg",
+    "timestamp": 639.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00660.00s.jpg",
+    "timestamp": 660.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00681.00s.jpg",
+    "timestamp": 681.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00693.00s.jpg",
+    "timestamp": 693.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00705.00s.jpg",
+    "timestamp": 705.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00708.00s.jpg",
+    "timestamp": 708.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00744.00s.jpg",
+    "timestamp": 744.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00747.00s.jpg",
+    "timestamp": 747.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00756.00s.jpg",
+    "timestamp": 756.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00780.00s.jpg",
+    "timestamp": 780.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00783.00s.jpg",
+    "timestamp": 783.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00786.00s.jpg",
+    "timestamp": 786.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00831.00s.jpg",
+    "timestamp": 831.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00837.00s.jpg",
+    "timestamp": 837.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00840.00s.jpg",
+    "timestamp": 840.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00855.00s.jpg",
+    "timestamp": 855.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00873.00s.jpg",
+    "timestamp": 873.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00888.00s.jpg",
+    "timestamp": 888.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00891.00s.jpg",
+    "timestamp": 891.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00909.00s.jpg",
+    "timestamp": 909.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00927.00s.jpg",
+    "timestamp": 927.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00930.00s.jpg",
+    "timestamp": 930.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00933.00s.jpg",
+    "timestamp": 933.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_00969.00s.jpg",
+    "timestamp": 969.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01002.00s.jpg",
+    "timestamp": 1002.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01005.00s.jpg",
+    "timestamp": 1005.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01035.00s.jpg",
+    "timestamp": 1035.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01050.00s.jpg",
+    "timestamp": 1050.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01071.00s.jpg",
+    "timestamp": 1071.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01074.00s.jpg",
+    "timestamp": 1074.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01086.00s.jpg",
+    "timestamp": 1086.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01113.00s.jpg",
+    "timestamp": 1113.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01116.00s.jpg",
+    "timestamp": 1116.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01131.00s.jpg",
+    "timestamp": 1131.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01134.00s.jpg",
+    "timestamp": 1134.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01149.00s.jpg",
+    "timestamp": 1149.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01152.00s.jpg",
+    "timestamp": 1152.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01155.00s.jpg",
+    "timestamp": 1155.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01191.00s.jpg",
+    "timestamp": 1191.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01194.00s.jpg",
+    "timestamp": 1194.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01203.00s.jpg",
+    "timestamp": 1203.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01206.00s.jpg",
+    "timestamp": 1206.0
+  },
+  {
+    "path": "data/video_frames/pv2-R-STviA/frame_01221.00s.jpg",
+    "timestamp": 1221.0
+  }
+]

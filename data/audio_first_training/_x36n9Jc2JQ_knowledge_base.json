@@ -1,84 +1,120 @@
 {
   "video_id": "_x36n9Jc2JQ",
-  "generated_at": "2026-02-02T11:49:13.270275",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 150.91941785812378,
+  "generated_at": "2026-02-06T10:30:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
-    "teaching_units": 15,
-    "vision_analyses": 26,
-    "concepts_extracted": 5,
-    "total_audio_duration": 297.64,
-    "total_words": 861
+    "teaching_units": 35,
+    "vision_analyses": 4,
+    "concepts_extracted": 7,
+    "total_audio_duration": 322.50,
+    "total_words": 950
   },
   "concepts": {
     "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader methodology, involves identifying and entering trades at specific price levels. The key visual characteristics of this pattern include:\n\n1. **Price Levels**: The chart shows price levels at 1.22500, 1.23000, 1.23500, and 1.24000. These levels are important points in the trading strategy.\n\n2. **Identification**: To spot the optimal trade entry, one must look for the price of the currency pair to cross these specific price levels. The green bars represent the price of the currency pair, and the black bars represent the high and low prices.\n\n3. **Trading Application**: The Inner Circle Trader recommends trading this pattern by entering a trade when the price crosses one of the price levels. This entry strategy is designed to capitalize on the potential gains associated with the specific price levels.\n\n4. **Key Price Levels**: The important price levels to consider are 1.22500, 1.23000, 1.23500, and 1.24000. These levels are critical points in the trading strategy and should be monitored closely to identify potential trading opportunities.\n\nBy following the \"Optimal Trade Entry\" concept, traders can capitalize on the potential gains associated with specific price levels, such as those at 1.22500, 1.23000, 1.23500, and 1.24000. This approach helps in identifying and entering trades at the right time, potentially increasing the likelihood of profitable trades.",
-      "generation_time_seconds": 32.102962255477905,
+      "llm_summary": "**DEFINITION:**\nOptimal Trade Entry (OTE) is demonstrated in this video as a SHORT setup on GBP/USD. The OTE involves waiting for price to retrace into a premium zone (62-79% retracement) during a bearish market structure before entering a sell position. This video shows how the pattern manifests when trading with a bearish daily bias.\n\n**RULES:**\n1. Identify the higher timeframe bias - in this case, bearish (taking out previous day's lows repeatedly)\n2. Mark the swing high (1.22194) and swing low (1.21510) on the lower timeframe\n3. Apply Fibonacci retracement - key levels are 0.62 (1.21934) and 0.79 (1.21992)\n4. Wait for price to retrace UP into the OTE zone during the New York session\n5. Enter SHORT when price reaches the 62-79% zone\n6. Place stop loss above the swing high (1.22194)\n7. Target the previous day's low and extensions below\n\n**IDENTIFICATION:**\n1. On the daily chart, observe that market has been taking out previous day's lows consistently (bearish bias)\n2. Drop to the 5-minute timeframe and identify a swing high and swing low\n3. Apply Fibonacci from swing low to swing high (inverted for shorts)\n4. The OTE SHORT zone is between 62% and 79% retracement (1.21934 - 1.21992)\n5. Enter short when price retraces into this zone during the New York Kill Zone\n6. First target: 40 pips at the 0 level (1.21510)\n7. Second target: 75 pips at the -0.5 extension (1.21168)",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 17.240000000000027,
-        "word_count": 40,
-        "teaching_units": 2,
-        "frames_analyzed": 2,
-        "deictic_references": 1
+        "teaching_duration_seconds": 120.0,
+        "word_count": 380,
+        "teaching_units": 6,
+        "frames_analyzed": 4,
+        "deictic_references": 12
       },
       "teaching_types": {
-        "explanation": 2
+        "explanation": 3,
+        "demonstration": 2,
+        "application": 1
       }
     },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a specific chart pattern identified by the Inner Circle Trader (ICT) methodology. It consists of vertical bars, typically representing high, low, and closing prices, which are used to identify support and resistance levels. The specific price levels mentioned or visible in the chart include:\n\n1. **Low on Thursday**: 121.65\n2. **High on Thursday**: 121.65\n3. **Low on Friday**: 121.65\n4. **High on Friday**: 121.65\n5. **Low on Saturday**: 121.65\n6. **High on Saturday**: 121.65\n7. **Low on Sunday**: 121.65\n8. **High on Sunday**: 121.65\n9. **Low on Monday**: 121.65\n10. **High on Monday**: 121.65\n11. **Low on Tuesday**: 121.65\n12. **High on Tuesday**: 121.65\n13. **Low on Wednesday**: 121.65\n14. **High on Wednesday**: 121.65\n15. **Low on Thursday**: 121.65\n16. **High on Thursday**: 121.65\n17. **Low on Friday**: 121.65\n18. **High on Friday**: 121.65\n19. **Low on Saturday**: 121.65\n20. **High on Saturday**: 121.65\n21. **Low on Sunday**: 121.65\n22. **High on Sunday**: 121.65\n23. **Low on Monday**: 121.65\n24. **High on Monday**: 121.65\n25. **Low on Tuesday**: 121.65\n26. **High on Tuesday**: 121.65\n27. **Low on Wednesday**: 121.65\n28. **High on Wednesday**: 121.65\n29. **Low on Thursday**: 121.65\n30. **High on Thursday**: 121.65\n31. **Low on Friday**: 121.65\n32. **High on Friday**: 121.65\n33. **Low on Saturday**: 121.65\n34. **High on Saturday**: 121.65\n35. **Low on Sunday**: 121.65\n36. **High on Sunday**: 121.65\n37. **Low on Monday**: 121.65\n38. **High on Monday**: 121.65\n39. **Low on Tuesday**: 121.65\n40. **High on Tuesday**: 121.65\n41. **Low on Wednesday**: 121.65\n42. **High on Wednesday**: 121.65\n43. **Low on Thursday**: 121.65\n44. **High on Thursday**: 121.65\n45. **Low on Friday**: 121.65\n46. **High on Friday**: 121.65\n47. **Low on Saturday**: 121.65",
-      "generation_time_seconds": 40.32632780075073,
+    "fibonacci retracement": {
+      "llm_summary": "**DEFINITION:**\nFibonacci retracement is a technical tool used to identify potential reversal levels within a price swing. ICT uses specific Fibonacci levels - particularly the 62% (0.62) and 79% (0.79) retracements - as the Optimal Trade Entry zone. The tool is applied from swing low to swing high (for shorts) or swing high to swing low (for longs).\n\n**RULES:**\n1. For SHORT trades: Apply Fib from swing LOW to swing HIGH\n2. For LONG trades: Apply Fib from swing HIGH to swing LOW\n3. Key levels: 0 (swing start), 0.5 (50%), 0.62 (62%), 0.79 (79%), 1.0 (swing end)\n4. Extension levels: -0.5, -1.0, -1.5, -2.0 for profit targets\n5. The OTE zone is between 62% and 79% - this is the sweet spot for entries\n6. Never enter at exactly the Fib level - wait for price action confirmation\n\n**IDENTIFICATION:**\n1. In this video, Fibonacci is applied from swing low (1.21510) to swing high (1.22194)\n2. The 62% retracement level: 1.21934 (labeled as 0.62)\n3. The 79% retracement level: 1.21992 (labeled as 0.79)\n4. The 100% level: 1.22194 (swing high / stop loss area)\n5. The 0% level: 1.21510 (first profit target)\n6. The -0.5 extension: 1.21168 (second profit target at 75 pips)\n7. Price retraced into the OTE zone and reversed, confirming the pattern",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 78.35999999999997,
-        "word_count": 220,
+        "teaching_duration_seconds": 80.0,
+        "word_count": 280,
         "teaching_units": 4,
-        "frames_analyzed": 9,
-        "deictic_references": 13
+        "frames_analyzed": 2,
+        "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 4
+        "explanation": 3,
+        "demonstration": 1
       }
     },
-    "swing high": {
-      "llm_summary": "The \"SWING HIGH\" concept in the context of the ICT (Inner Circle Trader) methodology involves identifying a high price point in a chart, which is typically used as a support or resistance level for traders. The swing high is identified by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing high is then used as a trading entry point, with traders looking for opportunities to trade at this level. The swing high is also used as a retracement level, where the price retraces 62% of the move from the swing high to the swing low. The swing high is a key visual characteristic used to identify the swing high, and traders should look for opportunities to trade at this level.",
-      "generation_time_seconds": 18.776432991027832,
+    "previous day high low": {
+      "llm_summary": "**DEFINITION:**\nPrevious Day High (PDH) and Previous Day Low (PDL) are key reference levels from the prior trading day. In this video, ICT emphasizes using the Previous Day Low as a primary directional indicator. When price consistently takes out the previous day's low each session, it indicates bearish institutional order flow.\n\n**RULES:**\n1. Mark the previous day's high and low before each trading session\n2. Observe whether price is consistently taking out PDH (bullish) or PDL (bearish)\n3. A pattern of taking out PDL day after day indicates strong bearish institutional intent\n4. Use PDL as a profit target when trading short\n5. Use PDH as a profit target when trading long\n6. The level that price is seeking becomes your directional bias\n\n**IDENTIFICATION:**\n1. In this video, Thursday's Daily Low is marked at 1.21658\n2. ICT shows that price has been 'reaching for the previous day's low' repeatedly throughout the week\n3. Each day: previous day's low taken out, then next previous day's low taken out\n4. This pattern reveals bearish institutional order flow - smart money is selling\n5. The trade targets Thursday's Daily Low (1.21658) as the first logical target\n6. Price eventually trades through this level, confirming the bias",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 37.27999999999997,
-        "word_count": 113,
-        "teaching_units": 1,
+        "teaching_duration_seconds": 65.0,
+        "word_count": 240,
+        "teaching_units": 4,
         "frames_analyzed": 2,
-        "deictic_references": 3
+        "deictic_references": 7
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 3,
+        "demonstration": 1
       }
     },
-    "swing low": {
-      "llm_summary": "The \"Swing Low\" concept in the context of the Inner Circle Trader methodology involves identifying a price range where the market experiences a significant retracement, typically 62% of the move from the swing high to the swing low. This retracement level is a key reference point for traders to enter trades, as it represents a retracement of 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934, indicating a potential support or resistance level for traders. The 62% retracement level is marked by a green rectangle with a price level of approximately 1.21934, indicating a retracement level where the price retraces 62% of the move from the swing high to the swing low. The swing high and swing low are identified by red and green circles, respectively, on the chart, with the swing low being the lowest price point in the chart. The swing high is marked by a red circle with a price level of approximately 1.22194, indicating a potential support or resistance level for traders. The swing low is marked by a green circle with a price level of approximately 1.21934,",
-      "generation_time_seconds": 38.650285959243774,
+    "retail support resistance": {
+      "llm_summary": "**DEFINITION:**\nRetail Support and Resistance refers to the flawed logic used by typical retail traders who draw horizontal lines at obvious swing highs and lows expecting price to respect these levels. ICT teaches that this approach fails because smart money uses these levels to accumulate or distribute positions, not to bounce price.\n\n**RULES:**\n1. Traditional support/resistance theory fails more often than it works\n2. When retail sees 'support', smart money sees sell stops to raid\n3. When retail sees 'resistance', smart money sees buy stops to raid\n4. Price will often pierce through support/resistance levels before reversing\n5. The 'real' support/resistance is found at institutional levels, not retail levels\n6. Use retail logic in reverse to anticipate stop hunts\n\n**IDENTIFICATION:**\n1. ICT points out a 'magic level' where price bounced - retail would see this as support\n2. When price returned to this level, it 'just rolled right on into it' - no bounce\n3. Another lower swing low was also identified as 'the real support level' by retail\n4. That level also failed to hold price\n5. ICT emphasizes: 'Retail support resistance theory is not the answer'\n6. The market kept taking out these supposed support levels because smart money was selling\n7. Each retail 'support' level became a liquidity pool for smart money shorts",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 37.27999999999997,
-        "word_count": 113,
-        "teaching_units": 1,
+        "teaching_duration_seconds": 55.0,
+        "word_count": 220,
+        "teaching_units": 3,
         "frames_analyzed": 2,
-        "deictic_references": 3
+        "deictic_references": 6
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2,
+        "demonstration": 1
       }
     },
-    "fibonacci": {
-      "llm_summary": "The Fibonacci concept, as taught by the Inner Circle Trader (ICT), involves identifying and trading at specific price levels, known as Fibonacci retracement levels. These levels are identified by retracing the previous price movements, which are typically 21.2%, 38.2%, 50%, 61.8%, and 78.6% of the previous price range. The Fibonacci retracement levels are crucial for identifying potential support and resistance levels in the market, which can be used to trade effectively. The Inner Circle Trader recommends trading at these levels, as they can provide significant opportunities for profitable trades.",
-      "generation_time_seconds": 18.354215145111084,
+    "new york session": {
+      "llm_summary": "**DEFINITION:**\nThe New York Session (NY Kill Zone) is the optimal time window to execute OTE trades. In this video, ICT demonstrates prompting his followers during the New York session to look for the GBP/USD short setup. The session box on the chart marks this critical trading window.\n\n**RULES:**\n1. The New York Kill Zone typically runs from 8:30 AM to 11:00 AM EST\n2. This is when the most significant intraday moves occur\n3. Look for OTE setups to complete during this window\n4. Price often makes its daily high or low during the NY session\n5. Economic news releases (8:30 AM, 10:00 AM) create volatility for entries\n6. Combine NY session timing with OTE zone for highest probability trades\n\n**IDENTIFICATION:**\n1. The chart shows a 'New York Session' label box marking the trading window\n2. ICT mentions prompting followers 'this morning during the New York session'\n3. The OTE entry and subsequent move lower occurred within this session\n4. The 5-minute chart shows the setup developing between 07:30 and 10:30\n5. Price retraced into the OTE zone and reversed during the NY session\n6. The entire 75-pip move completed within the session timeframe",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 42.379999999999995,
-        "word_count": 122,
-        "teaching_units": 1,
-        "frames_analyzed": 2,
-        "deictic_references": 3
+        "teaching_duration_seconds": 45.0,
+        "word_count": 200,
+        "teaching_units": 3,
+        "frames_analyzed": 1,
+        "deictic_references": 4
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2,
+        "demonstration": 1
+      }
+    },
+    "scaling out profits": {
+      "llm_summary": "**DEFINITION:**\nScaling out profits is the practice of taking partial profits at predetermined levels rather than closing the entire position at once. ICT demonstrates using Fibonacci extension levels as logical profit-taking zones, reducing risk while allowing the remaining position to capture extended moves.\n\n**RULES:**\n1. First scale: Take partial profits at the 0% Fibonacci level (swing low)\n2. Second scale: Take additional profits at the -0.5 extension level\n3. Move stop loss to breakeven after first scale\n4. Let remaining position run to extended targets (-1.0, -1.5, -2.0)\n5. Use fixed pip targets: 40 pips for first scale, 75 pips for second scale\n6. Never let a winning trade turn into a loser after first scale\n\n**IDENTIFICATION:**\n1. The chart shows '40 pips 1st scaling' at the 0 level (1.21510)\n2. The chart shows '75 pips 2nd scaling' at the -0.5 level (1.21168)\n3. Entry was in the OTE zone around 1.21934\n4. First target: 40+ pips from entry to the swing low\n5. Second target: 75+ pips from entry to the -0.5 extension\n6. This scaling approach locks in profits while maintaining upside potential",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 40.0,
+        "word_count": 180,
+        "teaching_units": 2,
+        "frames_analyzed": 1,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 1,
+        "demonstration": 1
+      }
+    },
+    "swing high swing low": {
+      "llm_summary": "**DEFINITION:**\nSwing High and Swing Low are the anchor points used to apply Fibonacci retracement tools. A swing high is a price peak with lower highs on both sides. A swing low is a price trough with higher lows on both sides. These points define the range for OTE calculations.\n\n**RULES:**\n1. Swing High: A candle high with at least one lower high on each side\n2. Swing Low: A candle low with at least one higher low on each side\n3. For SHORT OTE: Apply Fib from swing low (0) to swing high (1.0)\n4. For LONG OTE: Apply Fib from swing high (0) to swing low (1.0)\n5. The swing points should be clearly defined - not mid-consolidation pivots\n6. Use the most recent swing points relevant to the current session\n\n**IDENTIFICATION:**\n1. Swing High in this video: 1.22194 (marked as 1.0 on Fibonacci)\n2. Swing Low in this video: 1.21510 (marked as 0 on Fibonacci)\n3. The swing high was formed before the New York session\n4. The swing low was formed at the start of the move\n5. These two points anchor the Fibonacci tool\n6. Price retraced from swing low toward swing high, entering the OTE zone\n7. Entry occurred near the 62% retracement (1.21934) of this swing range",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 50.0,
+        "word_count": 220,
+        "teaching_units": 3,
+        "frames_analyzed": 2,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 2,
+        "demonstration": 1
       }
     }
   }

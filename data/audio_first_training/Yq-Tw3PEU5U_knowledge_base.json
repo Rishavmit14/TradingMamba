@@ -1,98 +1,119 @@
 {
   "video_id": "Yq-Tw3PEU5U",
-  "generated_at": "2026-02-04T21:31:41.868567",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 188.85434818267822,
+  "generated_at": "2026-02-05T16:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 31,
     "vision_analyses": 40,
-    "concepts_extracted": 6,
-    "total_audio_duration": 462.19999999999976,
+    "concepts_extracted": 7,
+    "total_audio_duration": 462.2,
     "total_words": 1199
   },
   "concepts": {
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a trading strategy that involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. The key visual characteristics of liquidity sweep are:\n1. **Inducement**: Inducement is not required to mark liquidity sweep. This is independent from inducement.\n2. **Candle Closing Below Inducement**: Candle closing below inducement will invalidate the liquidity sweep. To understand the concept of liquidity sweep, you can click on I button on right corner for its complete understanding.\n\n**Trading Application**:\n- **Identification**: ICT recommends trading liquidity sweep by identifying price movements that are not necessarily continuous but have a pattern of high and low prices.\n- **Trading Strategy**: Once identified, traders should focus on trading in these price movements, as they are not necessarily continuous but have a pattern of high and low prices.\n\n**Key Price Levels**:\n- **Swing High**: Swing high is a high price that is not necessarily followed by a high price, indicating a period of price stability or consolidation.\n- **Swing Low**: Swing low is a low price that is not necessarily followed by a low price, indicating a period of price stability or consolidation.\n\n**Summary**:\nLIQUIDITY is a trading strategy that involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. The key visual characteristics of liquidity sweep are inducement, candle closing below inducement, and swing highs and lows. Traders should focus on trading in these price movements, as they are not necessarily continuous but have a pattern of high and low prices.",
-      "generation_time_seconds": 28.43695306777954,
+    "break_of_structure": {
+      "llm_summary": "### Break of Structure (BOS)\n\n#### Definition\nBreak of Structure (BOS) is a validated move where price creates a new high (in bullish markets) or new low (in bearish markets) after fulfilling all three SMC structural rules. It represents a genuine continuation of the prevailing trend direction and confirms that the market structure remains intact. BOS is one of the most important confirmations in Smart Money Concepts trading because it validates that institutional order flow is driving price in a specific direction.\n\n#### Identification\nTo identify a valid Break of Structure in a bullish market, all three rules must be satisfied:\n\n1. **Inducement Rule**: Market MUST take out the inducement level before a BOS can be marked. This is a primary and very basic requirement. Without inducement being taken, the move cannot be classified as BOS.\n\n2. **Candle Close Below Inducement**: After taking out inducement, BOTH candle wick AND candle body closing below inducement are valid for BOS. If the candle wick sweeps the inducement, the rule is fulfilled. If the candle body closes below the inducement, the rule is also fulfilled. Either method satisfies this requirement.\n\n3. **Candle Body Close Above Previous High**: After the first two rules are completed, the candle body MUST close above the previous high in a bullish market (or below the previous low in a bearish market). Only the candle body close counts here, not just the wick.\n\nFor bearish markets, the rules are mirrored: inducement must be taken out, candle must interact with inducement, and candle body must close below the previous low.\n\n#### Trading Application\nBOS confirms trend continuation and validates the current market structure direction. When a valid BOS occurs, traders can look for entries on pullbacks to order blocks or fair value gaps created during the BOS move. BOS is used to confirm that smart money is actively pushing price in the trend direction. The key distinction is that BOS has the most lenient inducement interaction rule among the three concepts: either wick or body below inducement qualifies. This makes BOS easier to identify than valid swing highs/lows.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 145.0999999999999,
-        "word_count": 378,
+        "teaching_duration_seconds": 180,
+        "word_count": 450,
+        "teaching_units": 12,
+        "frames_analyzed": 8,
+        "deictic_references": 18
+      },
+      "teaching_types": {
+        "explanation": 8,
+        "example": 4
+      }
+    },
+    "liquidity_sweep": {
+      "llm_summary": "### Liquidity Sweep\n\n#### Definition\nA Liquidity Sweep occurs when price moves beyond a previous high or low using only the candle wick, without the candle body closing beyond that level. It represents a false breakout where smart money is grabbing liquidity (stop losses) resting above highs or below lows, without genuine structural change. A liquidity sweep is NOT a real break of the level; it is a temporary pierce designed to fill institutional orders.\n\n#### Identification\nLiquidity Sweep is identified through a distinct set of rules that differ from BOS and Swing High/Low:\n\n1. **Inducement Rule**: Inducement is NOT compulsory to mark a liquidity sweep. Liquidity sweeps are independent from inducement. This is the key differentiator in the first rule: BOS and Swing High/Low both require inducement, but liquidity sweep does not.\n\n2. **Candle Interaction at Inducement**: For liquidity sweep, only the candle wick counts. If the candle body closes below inducement (in a bullish context) or above inducement (bearish), the move is invalidated as a liquidity sweep.\n\n3. **Candle Interaction at Previous High/Low**: Only the candle wick trading beyond the previous high or low qualifies as a liquidity sweep. If the candle body closes above the previous high (bullish) or below the previous low (bearish), it is NOT a valid liquidity sweep. The body must remain on the original side of the level.\n\nIn summary, a liquidity sweep is characterized by wick-only interaction at the key level, with the candle body closing back on the other side.\n\n#### Trading Application\nLiquidity sweeps signal potential reversals or at minimum a rejection of the level. When price sweeps a high by wick only and the body closes back below, this indicates that the move above was to grab stop losses, not to genuinely break structure. Traders can use liquidity sweeps as entry signals for counter-trend trades or as confirmation that the level is holding. If you see a wick-only sweep of a previous high with the body closing below it, this is a strong indication that the breakout is fake and price may reverse.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 145,
+        "word_count": 380,
         "teaching_units": 10,
-        "frames_analyzed": 11,
-        "deictic_references": 16
-      },
-      "teaching_types": {
-        "explanation": 10
-      }
-    },
-    "market structure": {
-      "llm_summary": "**Market Structure**:\n\n1. **Definition**: Market structure refers to the overall organization, organization, and organization of the market, including the distribution of supply and demand, and the relationships between different market participants.\n\n2. **Identification**: To identify market structure, one must look at the overall organization and organization of the market, including the distribution of supply and demand, and the relationships between different market participants. This can be done by examining the price levels, the types of transactions, and the types of market participants involved.\n\n3. **Trading Application**: ICT recommends trading market structure by identifying the types of market participants involved, the types of transactions, and the overall organization of the market. This can be done by examining the price levels, the types of transactions, and the overall organization of the market.\n\n4. **Key Price Levels**: Key price levels in market structure include swing highs and lows, which are price movements that are not necessarily continuous but have a pattern of high and low prices. Swing highs and lows are important in identifying market structure.\n\n5. **Key Visual Characteristics**: Key visual characteristics in market structure include break of structure, which is a significant change in the price action, and swing highs and lows, which are price movements that are not necessarily continuous but have a pattern of high and low prices. These visual characteristics are important in identifying market structure.\n\n6. **Key Trading Strategies**: ICT recommends trading market structure by identifying the types of market participants involved, the types of transactions, and the overall organization of the market. This can be done by examining the price levels, the types of transactions, and the overall organization of the market. ICT recommends trading strategies based on the identification of market structure.",
-      "generation_time_seconds": 33.57659697532654,
-      "statistics": {
-        "teaching_duration_seconds": 234.61999999999986,
-        "word_count": 607,
-        "teaching_units": 15,
-        "frames_analyzed": 21,
-        "deictic_references": 21
-      },
-      "teaching_types": {
-        "explanation": 15
-      }
-    },
-    "swing high": {
-      "llm_summary": "The \"SWING HIGH\" concept in the context of the Inner Circle Trader methodology involves identifying and trading in price movements that are not necessarily continuous but have a pattern of high and low prices. To spot a swing high, market must take out the inducement, which is a significant change in the price action. Swing highs are important because they indicate periods of price stability or consolidation, which can be used to enter trades. The key price levels to monitor are swing highs, and the chart patterns to look for include a break of structure, which indicates a significant change in the price action. The trading application for swing highs involves entering trades when the price action reaches a swing high, which can be a good entry point for a short-term trade. The key price levels to monitor are swing highs, and the chart patterns to look for include a break of structure, which indicates a significant change in the price action. The trading application for swing highs involves entering trades when the price action reaches a swing high, which can be a good entry point for a short-term trade.",
-      "generation_time_seconds": 32.35718584060669,
-      "statistics": {
-        "teaching_duration_seconds": 174.4999999999999,
-        "word_count": 453,
-        "teaching_units": 11,
-        "frames_analyzed": 15,
+        "frames_analyzed": 8,
         "deictic_references": 14
       },
       "teaching_types": {
-        "explanation": 11
+        "explanation": 7,
+        "example": 3
       }
     },
-    "swing low": {
-      "llm_summary": "The \"SWING LOW\" concept in the context of the Inner Circle Trader methodology involves identifying and trading in price patterns that are not necessarily continuous but have a pattern of high and low prices. To identify a swing low, the market must take out the inducement, which is a significant change in price action. The candle body must close above the previous high in a bullish market. Swing lows are important in the trading process as they can provide opportunities for profitable trades. The key price levels to watch for swing lows are the swing highs and the swing lows themselves. The swing lows are important as they can indicate potential support levels for the market. The swing highs are important as they can indicate potential resistance levels for the market. The swing lows and highs are important in the trading process as they can provide opportunities for profitable trades.",
-      "generation_time_seconds": 34.1691792011261,
+    "swing_high_and_swing_low": {
+      "llm_summary": "### Swing High and Swing Low\n\n#### Definition\nSwing Highs and Swing Lows are validated structural pivot points that define the market's directional framework. They represent the true turning points in price action where the market changes direction after all three SMC rules are satisfied with the strictest criteria. Swing Highs and Swing Lows are used for true structure mapping and are considered the highest-quality structural markers in the SMC framework.\n\n#### Identification\nTo mark valid Swing Highs and Swing Lows in a bullish market, all three rules must be met with the strictest interpretation:\n\n1. **Inducement Rule**: Market MUST take out the inducement level. This is the same requirement as for BOS; inducement must be swept before a valid swing point can be marked.\n\n2. **Candle Close Below Inducement**: This is the STRICTEST rule and the key differentiator from BOS. For swing high/low marking, ONLY a candle body closing below inducement is valid. A candle wick sweeping below inducement is INVALID and does NOT qualify. This means that the candle body must physically close below the inducement level, not merely pierce it with a wick.\n\n3. **Candle Body Close Above Previous High**: After the first two rules are completed, the candle body must close above the previous high in a bullish market. This is the same as BOS.\n\nThe critical distinction from BOS lies in Rule 2: BOS accepts both wick and body below inducement, while Swing High/Low requires only the candle body close below inducement.\n\n#### Trading Application\nValid Swing Highs and Swing Lows provide the framework for mapping market structure. They are used to identify Higher Highs (HH) and Higher Lows (HL) in bullish markets, and Lower Highs (LH) and Lower Lows (LL) in bearish markets. The key relationship taught in this video is: every valid Swing High is also a Break of Structure, but NOT every Break of Structure qualifies as a Swing High. This is because Swing Highs have a stricter requirement for the inducement interaction (body close only, not wick). Swing points are the foundation of professional structure mapping and should be used for higher-timeframe directional bias.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 123.35999999999991,
-        "word_count": 312,
-        "teaching_units": 7,
+        "teaching_duration_seconds": 150,
+        "word_count": 370,
+        "teaching_units": 10,
         "frames_analyzed": 8,
-        "deictic_references": 5
+        "deictic_references": 12
       },
       "teaching_types": {
-        "explanation": 7
+        "explanation": 7,
+        "example": 3
       }
     },
-    "smart money": {
-      "llm_summary": "SMART MONEY is a trading strategy based on three key rules: inducement, candle closing below inducement, and candle body closing below inducement. To spot SMART MONEY on a chart, look for a specific price level labeled \"Inducement\" and candle patterns closing below this level. The trading application for SMART MONEY involves identifying potential buying opportunities when the candle body closing price is below the inducement level. Key price levels to monitor include the inducement level, candle closing below inducement, and candle body closing below inducement.",
-      "generation_time_seconds": 30.419891834259033,
+    "three_smc_rules_framework": {
+      "llm_summary": "### Three SMC Rules Framework\n\n#### Definition\nThe Three SMC Rules Framework is the foundational rule system used to differentiate between Liquidity Sweep, Break of Structure, and Swing High/Low. According to Smart Money Concepts, everything is based on these three rules. The framework provides a systematic, rule-based approach to classify any price move at a structural level into one of three categories, eliminating ambiguity in structure analysis.\n\n#### Identification\nThe three rules, applied in sequence, are:\n\n**Rule 1 - Inducement (IDM)**:\n- Liquidity Sweep: Inducement is NOT compulsory\n- Break of Structure: Market MUST take out inducement\n- Swing High/Low: Market MUST take out inducement\n\n**Rule 2 - Candle Closing Below Inducement**:\n- Liquidity Sweep: Only candle wick counts; candle body closing is NOT valid\n- Break of Structure: Both candle wick below inducement AND candle body below inducement are valid\n- Swing High/Low: Candle wick below inducement is INVALID; only candle body close below inducement is valid\n\n**Rule 3 - Candle Body Closing Above Previous High (Bullish)**:\n- Liquidity Sweep: Only candle wick counts; candle body closing above previous high is NOT valid (invalidates the sweep)\n- Break of Structure: Candle body MUST close above previous high\n- Swing High/Low: Candle body MUST close above previous high\n\nAll rules are presented for bullish market structure but are 100% applicable to bearish structure by mirroring the directions.\n\n#### Trading Application\nThis framework is the master classification system. When encountering any move at a previous high or low, traders should apply these three rules sequentially to determine whether the move is a liquidity sweep (fake breakout), a break of structure (trend continuation), or a valid swing point (structural pivot). The framework resolves the common confusion between these three concepts by providing clear, objective criteria. Traders who understand this framework can immediately classify price action and make informed decisions about trade direction, entry points, and structure validity.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 51.38,
-        "word_count": 140,
-        "teaching_units": 1,
-        "frames_analyzed": 3,
-        "deictic_references": 3
+        "teaching_duration_seconds": 130,
+        "word_count": 350,
+        "teaching_units": 8,
+        "frames_analyzed": 6,
+        "deictic_references": 10
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 6,
+        "example": 2
       }
     },
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader methodology, involves identifying and entering trades when the candle wick sweeps the inducement or when the candle body closes below the inducement level. This rule is applied in both cases, fulfilling the second rule of the liquidity sweep. The optimal trade entry is recommended for trading patterns that highlight inducement and the Optimal Trade Entry term.",
-      "generation_time_seconds": 29.01216173171997,
+    "inducement_role_in_structure": {
+      "llm_summary": "### Inducement Role in Structure Classification\n\n#### Definition\nInducement (IDM) is a key price level that serves as the first filter in the three-rule framework for distinguishing between Liquidity Sweep, Break of Structure, and Swing High/Low. The way price interacts with inducement (whether it takes it out or not, and whether by wick or body) is fundamental to classifying the resulting price move. Inducement was taught in detail in earlier lectures (Lectures 2 and 3 of the Forex Minions series).\n\n#### Identification\nInducement serves different roles depending on which concept is being evaluated:\n\n- **For Liquidity Sweep**: Inducement is completely independent. A liquidity sweep can occur with or without inducement being taken out. This makes liquidity sweeps the only concept where inducement is not a prerequisite.\n\n- **For Break of Structure**: Inducement MUST be taken out. This is described as the primary and very basic rule to identify BOS. Both candle wick sweeping inducement and candle body closing below inducement satisfy the inducement interaction requirement for BOS.\n\n- **For Swing High/Low**: Inducement MUST be taken out, AND the candle body must close below inducement. A wick-only sweep of inducement is NOT sufficient. This is the strictest inducement requirement among the three concepts.\n\nThe inducement rule for BOS and Swing High/Low is the same at the first level (both require it), but differs at the second level (how the candle interacts with inducement).\n\n#### Trading Application\nUnderstanding inducement's role helps traders quickly filter price action. If inducement has not been taken out and price creates a new high, the move can only be a liquidity sweep (never BOS or swing high). If inducement was swept by wick only, it can be BOS but not a swing high. If inducement was closed below by candle body, the move qualifies for all three categories and further rules must be checked. This hierarchical filtering makes real-time analysis efficient.",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 139.59999999999982,
-        "word_count": 366,
-        "teaching_units": 11,
-        "frames_analyzed": 15,
-        "deictic_references": 15
+        "teaching_duration_seconds": 90,
+        "word_count": 280,
+        "teaching_units": 7,
+        "frames_analyzed": 6,
+        "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 11
+        "explanation": 5,
+        "example": 2
+      }
+    },
+    "candle_body_vs_wick_validation": {
+      "llm_summary": "### Candle Body vs Wick Validation\n\n#### Definition\nCandle Body vs Wick Validation is the critical distinction used throughout the three-rule framework to differentiate between Liquidity Sweep, Break of Structure, and Swing High/Low. The distinction between whether a candle's body or only its wick interacts with a key level determines the classification of the price move. This concept is the single most important differentiator in the entire BOS vs Liquidity Sweep comparison.\n\n#### Identification\nThe body vs wick distinction applies at two key levels:\n\n**At the Inducement Level (Rule 2):**\n- Liquidity Sweep: Only candle wick interaction is considered; body close is not valid\n- BOS: Both wick sweep and body close below inducement are valid\n- Swing High/Low: ONLY candle body close below inducement is valid; wick is invalid\n\n**At the Previous High/Low Level (Rule 3):**\n- Liquidity Sweep: Only candle wick above the previous high counts; if the body closes above it, the liquidity sweep is INVALIDATED\n- BOS: Candle body MUST close above the previous high\n- Swing High/Low: Candle body MUST close above the previous high\n\nThe pattern is clear: Liquidity Sweep = wick only at both levels. BOS = lenient (either wick or body at inducement, body at previous high). Swing High/Low = strictest (body only at both levels).\n\n#### Trading Application\nWhen analyzing any candle that reaches a key level, traders must immediately assess whether the candle body closed beyond the level or only the wick pierced it. If only the wick pierced the previous high and the body closed back below, this is a liquidity sweep signal. If the body closed above the previous high, the move could be BOS or a swing point depending on how the inducement was taken out. This body-vs-wick analysis is the fastest way to classify moves in real time on a live chart.",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 100,
+        "word_count": 300,
+        "teaching_units": 8,
+        "frames_analyzed": 6,
+        "deictic_references": 10
+      },
+      "teaching_types": {
+        "explanation": 6,
+        "example": 2
+      }
+    },
+    "bos_vs_swing_high_relationship": {
+      "llm_summary": "### BOS vs Swing High Relationship\n\n#### Definition\nThe BOS vs Swing High Relationship is a key insight taught in this video establishing the hierarchical relationship between Break of Structure and Swing Highs. The fundamental rule stated is: every Swing High is also a Break of Structure, but NOT every Break of Structure is a Swing High. This asymmetric relationship exists because Swing Highs have stricter validation rules than BOS.\n\n#### Identification\nThe relationship becomes visible when comparing the BOS and Swing High/Low rule sets side by side:\n\n- Both BOS and Swing High require inducement to be taken out (Rule 1 is identical)\n- Both BOS and Swing High require candle body to close above previous high (Rule 3 is identical)\n- The difference is in Rule 2: BOS accepts either wick or body below inducement, while Swing High requires ONLY body close below inducement\n\nThis means that any scenario where the candle body closes below inducement automatically satisfies both the BOS rule AND the Swing High rule. In this specific case, the move is both a valid BOS and a valid Swing High simultaneously. However, when the candle only sweeps inducement by wick (without body closing below it), the move satisfies BOS rules but fails the Swing High requirement.\n\nThe video demonstrates this with sample chart diagrams showing that when the inducement is taken by candle body close, the two example boxes (BOS and Swing High) look identical because all three rules produce the same outcome.\n\n#### Trading Application\nThis relationship is crucial for proper structure mapping. If a trader identifies a valid Swing High, they can automatically mark it as BOS as well, since the Swing High is a subset of BOS. However, when mapping structure, traders should prefer identifying Swing Highs because they represent higher-quality structural points with stricter validation. On a real chart (AUDUSD 4H demonstrated in the video), this means some highs are marked as Liquidity Sweeps (wick only), some as BOS (inducement taken by wick, body close above high), and the highest-quality ones as Swing Highs (inducement taken by body, body close above high).",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 80,
+        "word_count": 260,
+        "teaching_units": 6,
+        "frames_analyzed": 6,
+        "deictic_references": 8
+      },
+      "teaching_types": {
+        "explanation": 4,
+        "example": 2
       }
     }
   }

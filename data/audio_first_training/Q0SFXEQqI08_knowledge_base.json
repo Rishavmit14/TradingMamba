@@ -1,38 +1,38 @@
 {
   "video_id": "Q0SFXEQqI08",
-  "generated_at": "2026-01-31T18:46:00.803823",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 177.65463495254517,
+  "generated_at": "2026-02-06T00:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 25,
-    "vision_analyses": 36,
-    "concepts_extracted": 7,
+    "vision_analyses": 5,
+    "concepts_extracted": 9,
     "total_audio_duration": 411.32,
     "total_words": 1221
   },
   "concepts": {
     "optimal trade entry": {
-      "llm_summary": "**Optimal Trade Entry**:\n\n1. **Definition**: Optimal trade entry refers to the timing of entering a trade in a currency pair, aiming to capture the most profitable opportunities within a given timeframe. It involves identifying and timing the entry point to maximize potential gains while minimizing risk.\n\n2. **Identification**: To identify an optimal trade entry, one should look for specific visual characteristics on a chart, such as:\n   - **Highs**: The highest price action in the pair.\n   - **Buy Side Liquidity**: The presence of buy stops, which are buy orders that are triggered when the price reaches a certain level.\n   - **Market Action**: Sharp, sudden movements that run previous highs, indicating a potential trend.\n\n3. **Trading Application**: ICT recommends trading the optimal trade entry pattern by:\n   - **Identifying Highs**: Look for the highest price action in the pair.\n   - **Buy Side Liquidity**: Identify buy stops, which are buy orders triggered by the market action.\n   - **Market Action**: Monitor for sharp, sudden movements that run previous highs, indicating a potential trend.\n\n4. **Key Price Levels**: The high price action, buy stops, and market action are the key price levels to focus on. These levels can provide insights into potential trading opportunities.\n\n5. **Risk Management**: Optimal trade entry involves managing risk effectively. It is important to consider the potential risk associated with the trade, such as the amount of capital at risk, and to adjust the trade size accordingly. The risk associated with the trade should be balanced with the potential reward, ensuring that the trade is not overly risky.\n\n6. **Risk Management**: The risk associated with the trade should be balanced with the potential reward, ensuring that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be balanced with the potential reward, ensuring that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to the trade size to ensure that the trade is not overly risky. The risk associated with the trade should be considered, and adjustments made to",
-      "generation_time_seconds": 50.19140815734863,
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) in trendless/ranging market conditions requires additional confirmation beyond standard trending market setups. This video (OTE Series #4) specifically addresses how to apply OTE when traditional support and resistance appear to be holding, but are actually liquidity targets waiting to be swept.\n\n## Rules\n1. In ranging markets, identify the range high and low as liquidity pools (not support/resistance)\n2. Expect price to sweep above range high (buy side liquidity) or below range low (sell side liquidity)\n3. After the liquidity sweep, look for OTE setup in the opposite direction\n4. The sweep creates the swing structure needed for Fibonacci application\n5. Higher timeframe bias still matters - align with daily/weekly direction when possible\n6. Range-bound OTE setups require the sweep as confirmation before entry\n7. False breakouts in ranges are actually liquidity sweeps - trade the reversal\n\n## Identification\n- This video shows GBPUSD hourly chart with apparent support and resistance levels\n- Frame at 120s shows 'Support & Resistance?' questioning the retail interpretation\n- The key insight: these levels are liquidity pools, not reversal zones\n- After buy side liquidity is swept above resistance, bearish OTE setup forms\n- Frame at 180s shows 'Buyside Liquidity' labeled above the high, and 'ICT Bearish Breaker' below\n- The Market Efficiency Paradigm explains why price must seek liquidity before reversing",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 144.03999999999996,
+        "teaching_duration_seconds": 144.04,
         "word_count": 428,
         "teaching_units": 6,
-        "frames_analyzed": 0,
+        "frames_analyzed": 5,
         "deictic_references": 15
       },
       "teaching_types": {
         "explanation": 6
       }
     },
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a term used in trading to describe the ability of a market to accommodate a large number of buyers and sellers. It is a measure of the market's liquidity, or the ease with which it can be traded. Liquidity is important in trading because it affects the price of a security, as a more liquid market will have a greater number of buyers and sellers, which can lead to higher prices. The **identification** of liquidity can be seen on a chart by observing the **volume** of trading, which is the number of units traded in a given time period. The **trading application** of liquidity is to use it to make informed trading decisions, such as buying or selling at the best possible price. The **key price levels** to watch for liquidity are the **highs and lows** of the market, as these can indicate the market's willingness to move. The **risk associated with liquidity** is that it can lead to higher risk, as a more liquid market can lead to more volatility and price fluctuations.",
-      "generation_time_seconds": 19.6092050075531,
+    "buyside liquidity": {
+      "llm_summary": "## Definition\nBuyside Liquidity refers to the pool of resting buy orders that accumulate above swing highs, equal highs, and obvious resistance levels. These orders include buy stop orders (stop losses from shorts and buy stop entries) that smart money targets to fill large sell orders.\n\n## Rules\n1. Buy side liquidity exists above every swing high - the more obvious, the larger the pool\n2. Retail traders place sell orders at resistance, with stops above = concentrated buy stops\n3. Sharp moves that 'run' previous highs are targeting buy side liquidity (stop hunts)\n4. After buy side liquidity is taken, expect bearish reversal (liquidity consumed)\n5. The sweep above buy side liquidity creates the swing high for bearish OTE setup\n6. Multiple levels of buy side liquidity can exist - price may sweep one and continue\n\n## Identification\n- Mark all obvious swing highs and equal highs on your chart\n- Resistance levels and trendline tops represent concentrated buy side liquidity\n- In this video, GBPUSD hourly shows price ramming through previous highs\n- Frame at 180s shows 'Buyside Liquidity' clearly labeled above the high\n- The sharp move up that runs previous highs is not a breakout - it's a liquidity raid\n- After sweeping this liquidity, price reverses bearish providing OTE sell opportunity\n- Video emphasizes: sharp moves running highs are 'highly suspect' - smart money selling into strength",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 51.56000000000003,
+        "teaching_duration_seconds": 51.56,
         "word_count": 160,
         "teaching_units": 2,
-        "frames_analyzed": 0,
+        "frames_analyzed": 3,
         "deictic_references": 6
       },
       "teaching_types": {
@@ -40,73 +40,101 @@
       }
     },
     "buy stops": {
-      "llm_summary": "The \"BUY STOPS\" concept, as taught by the Inner Circle Trader methodology, involves identifying and trading patterns where the market rams through previous highs, creating buy stops. These buy stops are typically in the form of buy orders for new entries going long, or buy orders protecting existing shorts. The concept is based on the idea that sharp moves that run previous highs are highly suspect and may not be suitable for all investors, as they carry a high level of risk and may not be suitable for all investors. The trading application for this pattern is to seek advice from an independent financial advisor before making any investment decisions, as the high degree of leverage can work against you as well as for you. The concept is also associated with the risk of sustaining a loss of some or all of your initial investment, and the need to consider your investment objectives, level of experience, and risk appetite before making any investment decisions.",
-      "generation_time_seconds": 18.591602087020874,
+      "llm_summary": "## Definition\nBuy Stops are pending buy orders placed above current price that execute when price rises to that level. They consist of stop losses from short positions and buy stop entries from breakout traders. Smart money targets these concentrations of buy stops to fill their large sell orders.\n\n## Rules\n1. Buy stops accumulate above swing highs and obvious resistance levels\n2. Two types: (1) Stop losses protecting short positions, (2) Buy stop entries for breakouts\n3. Smart money needs buy stops to sell into - they create demand for their supply\n4. When price 'runs' highs aggressively, it's absorbing buy stops (liquidity raid)\n5. After buy stops are absorbed, selling pressure dominates (liquidity exhausted)\n6. The sharper the move into buy stops, the more likely reversal follows\n\n## Identification\n- Identify where shorts would place protective stops (above resistance, swing highs)\n- Identify where breakout traders would place buy stop entries (above resistance)\n- In this video, GBPUSD demonstrates price running into buy stops above resistance\n- Frame at 180s shows the area where buy stops accumulated above the swing high\n- The transcript describes 'buy stops' as 'buy orders for new entries going long' and 'buy orders protecting existing shorts'\n- Price sweeps these buy stops before reversing, demonstrating the liquidity raid concept",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 45.58000000000001,
+        "teaching_duration_seconds": 45.58,
         "word_count": 131,
         "teaching_units": 1,
-        "frames_analyzed": 0,
+        "frames_analyzed": 2,
         "deictic_references": 4
       },
       "teaching_types": {
         "explanation": 1
       }
     },
-    "breaker": {
-      "llm_summary": "**Breaker** is a trading strategy used in the trading of foreign exchange (FX) markets. It involves identifying a specific price level, which is typically a low or high price, and then trading above or below that level. The strategy is based on the idea that the market will eventually move back to the original price level, which is considered a support or resistance level, respectively. The breaker concept is often used in conjunction with other trading strategies, such as the \"breakout\" or \"reverse\" patterns, to increase the chances of profitable trades.",
-      "generation_time_seconds": 16.274333000183105,
+    "ict bearish breaker": {
+      "llm_summary": "## Definition\nThe ICT Bearish Breaker is a price action pattern that forms when a bullish order block fails and gets violated to the downside. The failed order block then becomes a bearish point of interest (POI) that acts as resistance when retested, providing high-probability short entry opportunities.\n\n## Rules\n1. A bullish order block forms (last down candle before a significant up move)\n2. Price later returns and breaks below this bullish order block (failure)\n3. The broken bullish order block is now a Bearish Breaker\n4. When price retraces back to the Bearish Breaker, it acts as resistance\n5. Entry is on the retest of the Bearish Breaker with stop above the breaker high\n6. The Bearish Breaker represents trapped longs who will add selling pressure on retest\n\n## Identification\n- First, identify a bullish order block that formed during a rally\n- Mark the candle body (not wicks) of the last bearish candle before the rally\n- When price breaks below this zone, label it as 'Bearish Breaker'\n- In this video, GBPUSD hourly shows 'ICT Bearish Breaker' labeled at 1.2375\n- Frame at 180s clearly shows the Bearish Breaker level with annotation\n- The Bearish Breaker forms after buy side liquidity is swept above\n- Entry on retest of Bearish Breaker aligns with OTE principles for the sell setup",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 44.67999999999998,
+        "teaching_duration_seconds": 44.68,
         "word_count": 130,
         "teaching_units": 3,
-        "frames_analyzed": 0,
+        "frames_analyzed": 3,
         "deictic_references": 7
       },
       "teaching_types": {
         "explanation": 3
       }
     },
-    "market structure": {
-      "llm_summary": "**Market Structure**:\n\n1. **Definition**: Market structure refers to the overall framework and dynamics of a financial market, including the relationships between different market participants, the types of transactions, and the overall market behavior.\n\n2. **Identification**: To spot market structure on a chart, look for several key visual characteristics:\n   - **Volume and Volume Trends**: High volume on a chart indicates a high level of trading activity, which can indicate a strong market structure.\n   - **Price and Price Trends**: Trends in price can provide insights into the overall direction of the market. A consistent upward or downward trend can indicate a strong market structure.\n   - **Volume and Price Ratios**: High volume relative to price can indicate a strong market structure, as it suggests that the market is actively trading and not just a static market.\n   - **Volume and Price Ratios**: High volume relative to price can indicate a strong market structure, as it suggests that the market is actively trading and not just a static market.\n\n3. **Trading Application**: ICT recommends trading in a market structure when:\n   - The market is showing signs of high trading volume and price trends.\n   - The market is showing signs of high volume relative to price, indicating active trading and not just static market behavior.\n   - The market is showing signs of high volume relative to price, indicating active trading and not just static market behavior.\n\n4. **Key Price Levels**: Key price levels to watch in a market structure include:\n   - The high and low price levels, which can provide insights into the overall direction of the market.\n   - The support and resistance levels, which can provide support and resistance to the market.\n   - The moving averages, which can provide a long-term view of the market and can be used to identify potential support and resistance levels.\n\n5. **Key Indicators**: Key indicators to watch in a market structure include:\n   - The trading volume, which can provide insights into the overall trading activity and the strength of the market.\n   - The trading volume trend, which can provide insights into the overall trading activity and the strength of the market.\n   - The trading volume relative to price, which can provide insights into the overall trading activity and the strength of the market.\n   - The trading volume relative to price trend, which can provide insights into the overall trading activity and the strength of the market.",
-      "generation_time_seconds": 28.83061718940735,
+    "market efficiency paradigm": {
+      "llm_summary": "## Definition\nThe Market Efficiency Paradigm (MEP) is ICT's core theory explaining why price moves the way it does. It states that markets are algorithmically driven to seek liquidity and fill imbalances (Fair Value Gaps). Price is not random - it's efficiently delivering to liquidity pools and rebalancing inefficiencies.\n\n## Rules\n1. Price moves from liquidity pool to liquidity pool (buy stops to sell stops and vice versa)\n2. Fair Value Gaps (imbalances) act as magnets - price returns to fill them\n3. 'Support and Resistance' are retail illusions - in reality, they're liquidity targets\n4. Sharp, impulsive moves create inefficiencies that must be rebalanced\n5. The market is not random - it's an algorithm seeking liquidity and efficiency\n6. Understanding MEP reveals the true reason behind price movements\n\n## Identification\n- In this video, 'Market Efficiency Paradigm' is displayed prominently at frame 180s\n- GBPUSD hourly demonstrates MEP in action:\n  - Price sweeps buy side liquidity above 'resistance' (efficiency - seeking liquidity)\n  - After liquidity is taken, price reverses to seek sell side liquidity below\n  - The ICT Bearish Breaker forms as the turning point in this liquidity cycle\n- Video questions 'Support & Resistance?' - MEP reveals these are actually liquidity targets\n- Understanding MEP transforms how you read price action - from reactive to predictive",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 7.780000000000001,
-        "word_count": 26,
+        "teaching_duration_seconds": 35.0,
+        "word_count": 100,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 5
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "support and resistance failure": {
+      "llm_summary": "## Definition\nSupport and Resistance Failure refers to the consistent phenomenon where retail-identified support and resistance levels get swept (broken through) before price reverses. ICT methodology reveals these aren't failures - they're designed liquidity raids that smart money uses to enter positions.\n\n## Rules\n1. Traditional S/R levels mark where retail traders cluster orders\n2. Smart money knows these levels and targets them for liquidity\n3. 'Breakouts' beyond S/R are often stop hunts, not genuine trend continuation\n4. After S/R is swept, the move reverses - this is the entry opportunity\n5. Stop losses placed just beyond S/R are the exact target for smart money\n6. The failure of S/R is actually the confirmation signal, not the trade invalidation\n\n## Identification\n- Frame at 120s shows 'Support & Resistance?' questioning the retail concept\n- GBPUSD hourly displays clear horizontal levels that appear to be S/R\n- Multiple red lines mark apparent resistance at 1.24673, 1.24377, and 1.23974\n- Rather than reversing at these levels, price sweeps through them\n- This video demonstrates why trading bounces off S/R leads to consistent losses\n- ICT approach: wait for S/R to be violated, then trade the reversal\n- The sweep of apparent resistance creates the ICT Bearish Breaker opportunity",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 30.0,
+        "word_count": 90,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "stop hunt": {
+      "llm_summary": "## Definition\nA Stop Hunt is an engineered price movement designed to trigger clusters of stop loss orders before price reverses in the opposite direction. Smart money executes stop hunts to fill their large orders by triggering retail traders' stops, which provide the liquidity they need.\n\n## Rules\n1. Stop hunts target obvious levels where retail stops accumulate\n2. The move into stops is typically sharp and aggressive (displacement)\n3. Stop hunts occur at predictable locations: above highs, below lows, beyond S/R\n4. After stops are triggered, price reverses - this is the real move beginning\n5. Stop hunts often occur during kill zones when liquidity is highest\n6. The stop hunt creates the swing point for OTE setup application\n\n## Identification\n- Look for sharp, aggressive moves toward obvious liquidity levels\n- In this video, GBPUSD shows price running stops above resistance\n- The sharp move higher that 'rams through previous highs' is the stop hunt\n- Frame at 180s shows the aftermath - price at 1.23717 after reversing from the stop hunt\n- The video describes these moves as 'highly suspect' - meaning they're not genuine breakouts\n- After the stop hunt completes, the ICT Bearish Breaker provides the entry\n- Understanding stop hunts transforms 'losing trades' into high-probability setups",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 80,
         "teaching_units": 1,
-        "frames_analyzed": 0,
-        "deictic_references": 1
+        "frames_analyzed": 2,
+        "deictic_references": 3
       },
       "teaching_types": {
         "explanation": 1
       }
     },
-    "fibonacci": {
-      "llm_summary": "The \"FIBONACCI\" concept refers to a trading strategy used in financial markets, particularly in the context of currency pairs. The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, starting from a number called the \"first number\" (F1). The sequence is often used in financial analysis to identify potential support and resistance levels in price movements.\n\nIn trading, the Fibonacci sequence can be applied to identify key price levels, such as Fibonacci retracement levels, which are retracements of the price movement from a significant high or low. These retracement levels can provide opportunities for traders to enter or exit trades based on the price's relationship to these levels.\n\nThe \"FIBONACCI\" concept is often used in conjunction with other trading strategies, such as Fibonacci retracements, to create a more comprehensive trading plan. Traders can use Fibonacci retracements to identify potential buy or sell signals, and then apply other trading strategies, such as stop-loss orders or limit orders, to manage risk and take advantage of the price movement.\n\nOverall, the Fibonacci sequence is a powerful tool for traders to identify potential support and resistance levels in price movements, and can be used in conjunction with other trading strategies to create a more comprehensive trading plan.",
-      "generation_time_seconds": 23.146467924118042,
+    "ranging market structure": {
+      "llm_summary": "## Definition\nRanging Market Structure occurs when price oscillates between defined highs and lows without establishing a clear trend. ICT methodology views ranges differently from retail traders - the range boundaries are liquidity pools that will eventually be raided before a directional move begins.\n\n## Rules\n1. Identify range high and low on higher timeframe (4H or daily)\n2. Range highs = buy side liquidity; Range lows = sell side liquidity\n3. Price will sweep one side of the range before moving to the opposite side\n4. The sweep provides the entry signal - trade in direction of the sweep reversal\n5. Multiple sweeps can occur - each creates trading opportunity\n6. Eventually, price breaks the range decisively after accumulating positions through sweeps\n\n## Identification\n- Look for price contained between horizontal boundaries for extended periods\n- In this video, GBPUSD hourly shows a ranging structure with clear boundaries\n- Frame at 120s displays the range with multiple levels marked\n- Retail traders see this as 'support and resistance' - ICT sees liquidity pools\n- The video demonstrates how range highs get swept (buy side raid)\n- After the sweep, ICT Bearish Breaker forms for entry\n- Key insight: ranges are accumulation/distribution zones, not random consolidation",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 15.939999999999998,
-        "word_count": 41,
+        "teaching_duration_seconds": 20.0,
+        "word_count": 70,
         "teaching_units": 1,
-        "frames_analyzed": 0,
-        "deictic_references": 2
+        "frames_analyzed": 2,
+        "deictic_references": 3
       },
       "teaching_types": {
         "explanation": 1
       }
     },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the Foreign Exchange (FX) market. It involves buying or selling a currency pair when the price of the pair is at a specific level, known as the \"order block,\" and then holding the position until the price reaches a predetermined level, known as the \"order block.\" The strategy is based on the idea that the price of the currency pair will eventually move to the order block level, and that the price will then move to a higher level, known as the \"order block,\" and that the price will then move to a lower level, known as the \"order block.\" The strategy is used to generate profits by taking advantage of the price movements in the currency pair.",
-      "generation_time_seconds": 18.162049055099487,
+    "liquidity sweep reversal": {
+      "llm_summary": "## Definition\nLiquidity Sweep Reversal is the price action pattern where price sweeps beyond a liquidity level (taking stops) and then immediately reverses. This pattern is the foundation of many ICT entry models, as the sweep provides both confirmation and creates the swing structure for OTE application.\n\n## Rules\n1. Identify obvious liquidity level (swing high/low, equal highs/lows, S/R)\n2. Wait for price to sweep beyond this level (liquidity is taken)\n3. Look for immediate reversal signs: rejection wicks, displacement opposite\n4. The sweep creates the new swing extreme for Fibonacci/OTE measurement\n5. Entry on the reversal using OTE or Breaker patterns\n6. Stop loss goes beyond the sweep high/low\n\n## Identification\n- Watch for aggressive moves into liquidity that quickly reverse\n- In this video, GBPUSD demonstrates a textbook liquidity sweep reversal\n- Price sweeps above buy side liquidity (running previous highs)\n- Immediate reversal follows - this is the confirmation to get bearish\n- Frame at 180s shows the reversal underway with price at 1.23717\n- The sweep created the swing high for the bearish OTE/Breaker setup\n- The video emphasizes: sharp moves into liquidity that reverse are not breakouts\n- This pattern is highly reliable when combined with proper timing (kill zones)",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 6.480000000000018,
-        "word_count": 20,
-        "teaching_units": 1,
-        "frames_analyzed": 0,
-        "deictic_references": 2
+        "teaching_duration_seconds": 25.0,
+        "word_count": 75,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 4
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2
       }
     }
   }

@@ -1,58 +1,113 @@
 {
   "video_id": "uqptoSAGS30",
-  "generated_at": "2026-02-03T11:29:49.506036",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 84.10858988761902,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
-    "teaching_units": 4,
-    "vision_analyses": 12,
-    "concepts_extracted": 3,
-    "total_audio_duration": 228.43999999999997,
+    "teaching_units": 8,
+    "vision_analyses": 0,
+    "concepts_extracted": 7,
+    "total_audio_duration": 245.81,
     "total_words": 659
   },
   "concepts": {
-    "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the ICT, involves identifying and trading at specific price levels on a chart. The key visual characteristics to spot are high and low price levels, as well as the proximity of these levels. The concept suggests that taking a trade entry at a high price level and protecting it with a shallow run can lead to successful trading. The video emphasizes the importance of identifying and trading at these specific price levels, as they represent potential opportunities for profit.",
-      "generation_time_seconds": 24.42736792564392,
+    "shallow run": {
+      "llm_summary": "## Definition\nA shallow run refers to when price makes only a brief, minimal penetration above or below a key liquidity level (previous daily high/low) before reversing. Unlike a deep run that clears significant liquidity, a shallow run leaves 'unfinished business' - the market will typically return later to properly clear that liquidity with a more significant move.\n\n## Rules\n1. A shallow run occurs when price barely pierces above/below a key level then reverses\n2. Shallow runs indicate the market has not fully cleared the liquidity at that level\n3. The market wants to return later to properly run out that liquidity\n4. A shallow run does NOT negate taking a New York session trade in the anticipated direction\n5. Multiple shallow runs can occur before the market makes a significant move\n6. After a shallow run, look for price to run out opposing liquidity first, then return\n\n## Identification\n- Look for price to touch or barely exceed a previous daily high/low\n- The move beyond the level is minimal (just a few pips)\n- Price quickly reverses after the shallow penetration\n- Multiple shallow runs at the same level suggest building interest for a larger move\n- A shallow run above highs followed by a shallow run below lows creates a 'primed' condition",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 181.39999999999998,
-        "word_count": 510,
-        "teaching_units": 2,
-        "frames_analyzed": 8,
-        "deictic_references": 10
+        "teaching_duration_seconds": 60.0,
+        "word_count": 190,
+        "teaching_units": 3,
+        "frames_analyzed": 0,
+        "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 1,
-        "definition": 1
+        "explanation": 2,
+        "demonstration": 1
       }
     },
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a concept in trading that refers to the ease with which a financial instrument, such as a stock or currency, can be bought and sold. It is a measure of the liquidity of a financial instrument, indicating how quickly and easily it can be bought or sold at a given price. In the context of the teaching transcript and chart analysis, liquidity is identified by the following characteristics:\n\n1. **Visible Price Levels**: The chart shows specific price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity.\n\n2. **Optimal Trade Entry**: The chart indicates a specific entry point for a trade, which is based on the run above a specific high, indicating a potential for further gains.\n\n3. **Key Price Levels**: The chart shows important price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity.\n\n4. **Specific Chart Patterns**: The chart shows specific patterns, such as equal highs, which indicate potential gains and momentum in the market.\n\n5. **Trading Application**: The chart suggests using the New York Session time of day to look for an optimal trade entry, based on the specific entry point and the rules of the trading model.\n\n6. **Key Visual Characteristics**: The chart shows specific visual characteristics, such as equal highs, which indicate potential gains and momentum in the market.\n\n**Summary**:\nLIQUIDITY is a measure of the liquidity of a financial instrument, indicating how quickly and easily it can be bought or sold. It is identified by specific price levels, such as the Monday Daily Low, the initial daily low, and the Monday Low, which are important reference points for identifying liquidity. The chart analysis suggests using the New York Session time of day to look for an optimal trade entry, based on the specific entry point and the rules of the trading model.",
-      "generation_time_seconds": 34.06736612319946,
+    "relative equal highs": {
+      "llm_summary": "## Definition\nRelative equal highs are two or more swing highs that form at approximately the same price level, creating a visible horizontal resistance zone. These formations represent clustered buy-side liquidity (stop losses from shorts) and serve as high-probability targets for smart money to run before reversing price.\n\n## Rules\n1. Equal highs form a pool of buy-side liquidity above them\n2. The market is attracted to run above equal highs to trigger stop orders\n3. After running equal highs, expect a retracement or reversal\n4. Relative equal highs provide clearer liquidity targets than single highs\n5. Use equal highs as reference points for identifying trade direction\n6. A run above equal highs followed by rejection sets up short opportunities\n\n## Identification\n- Look for two or more highs forming at similar price levels\n- The highs don't need to be exactly equal - 'relative' equality is sufficient\n- Mark these levels as potential liquidity targets\n- When price runs above equal highs and rejects, look for OTE short entries\n- Equal highs from previous days carry more significance than intraday formations",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 107.93999999999998,
-        "word_count": 321,
+        "teaching_duration_seconds": 30.0,
+        "word_count": 160,
         "teaching_units": 2,
-        "frames_analyzed": 6,
-        "deictic_references": 6
-      },
-      "teaching_types": {
-        "definition": 1,
-        "explanation": 1
-      }
-    },
-    "equal highs": {
-      "llm_summary": "**Equal Highs** concept is a trading strategy used in the trading market. It involves identifying instances where the price runs above a specific high, indicating potential gains. The strategy is based on the idea that the price will continue to run above the high, potentially leading to further gains. The trading application involves identifying the run above the high, which is a key visual characteristic, and using the New York Session time frame to look for an optimal trade entry. The strategy recommends using the 62% retracement level, which is a key price level, and the 166.97 level, which is a key entry point. The strategy also recommends using a stop-loss level at the high and a drawdown level of 7 pips. The strategy aims to minimize risk and maximize potential gains.",
-      "generation_time_seconds": 25.3142249584198,
-      "statistics": {
-        "teaching_duration_seconds": 91.89999999999999,
-        "word_count": 264,
-        "teaching_units": 1,
-        "frames_analyzed": 4,
+        "frames_analyzed": 0,
         "deictic_references": 4
       },
       "teaching_types": {
-        "definition": 1
+        "explanation": 2
+      }
+    },
+    "cross-pair analysis": {
+      "llm_summary": "## Definition\nCross-pair analysis involves analyzing currency pairs that don't include the US dollar (like EUR/AUD, GBP/JPY) using the same ICT concepts applied to major pairs. The OTE methodology, liquidity concepts, and time-of-day principles work universally across all forex pairs, not just EUR/USD or GBP/USD.\n\n## Rules\n1. ICT concepts (OTE, liquidity, time of day) apply to ALL forex pairs\n2. Cross pairs like EUR/AUD follow the same rules as major pairs\n3. Previous daily highs and lows serve as liquidity reference on any pair\n4. New York session timing works regardless of the pair being traded\n5. Standard deviation targets apply universally across all pairs\n6. Use the same swing high/low identification process on crosses\n\n## Identification\n- Apply the same technical analysis framework to cross pairs\n- Mark previous daily high/low as liquidity targets\n- Use Fibonacci from swing high to swing low identically\n- Look for New York session setups on any pair\n- The principles demonstrated on majors translate directly to crosses",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 150,
+        "teaching_units": 1,
+        "frames_analyzed": 0,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "weekly pip target": {
+      "llm_summary": "## Definition\nICT advocates for a conservative weekly pip target approach rather than overtrading. Capturing 50-75 pips per week through high-probability OTE setups is sufficient for professional trading. This philosophy emphasizes quality over quantity and reduces exposure to unnecessary risk.\n\n## Rules\n1. Target 50-75 pips per week as a reasonable expectation\n2. Look for one high-quality OTE setup per week rather than multiple mediocre trades\n3. Once the weekly target is achieved, 'you're pretty much done'\n4. Don't force trades - be patient for ideal conditions\n5. This approach reduces overtrading and emotional decision-making\n6. Quality of setup matters more than frequency of trading\n\n## Identification\n- Track weekly pip capture rather than daily\n- One well-executed OTE trade can achieve the weekly target\n- 30 pips first partial + 50 pips second partial = weekly goal achieved\n- If the week doesn't present ideal setups, don't force trades\n- Focus on the New York session for highest probability weekly setups",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 15.0,
+        "word_count": 150,
+        "teaching_units": 1,
+        "frames_analyzed": 0,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "62% retracement entry": {
+      "llm_summary": "## Definition\nThe 62% retracement level represents the conservative entry point within the OTE zone. While the 70.5% is the 'sweet spot' and 79% offers the best risk/reward, the 62% level provides earlier entry confirmation and is used as the standard entry level in the ICT OTE model rules.\n\n## Rules\n1. The 62% level is used as the primary entry level 'keeping with the rules of this model'\n2. Price may retrace to 70.5% or deeper, but 62% confirms entry\n3. Entry at 62% provides reasonable drawdown expectations\n4. Stop loss goes above/below the swing high/low defining the OTE zone\n5. The 62% entry typically experiences 7-10 pips of drawdown theoretically\n6. This level offers a balance between confirmation and optimal entry\n\n## Identification\n- Calculate 62% retracement from swing high to swing low (or vice versa)\n- In this example: 166.97 and 5 pipettes as entry at 62%\n- Mark this level as the official trade entry point\n- Price touching this level during New York session confirms the setup\n- Don't demand price hit exactly - minor variance is acceptable",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 160,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "partial profit taking": {
+      "llm_summary": "## Definition\nPartial profit taking is a systematic approach to locking in gains at predetermined levels rather than holding for a single target. The ICT model recommends taking first partial at the initial target (previous low/high or range low), second partial at half standard deviation, with runners left for full standard deviation.\n\n## Rules\n1. First partial: Take profit at the short-term low/high or initial liquidity target (30 pips)\n2. Second partial: Take profit at half standard deviation of the dealing range (50 pips)\n3. Third partial: One full standard deviation of the range\n4. This approach locks in profits while allowing runners for larger moves\n5. Price often retraces after hitting first partial - this is expected\n6. Partial taking reduces risk of giving back profits during consolidation\n\n## Identification\n- Mark the short-term low as first target (first partial)\n- Calculate half standard deviation as second target\n- Full standard deviation serves as third target\n- Example: 30 pips offered at first partial, 50 pips at half standard deviation\n- Manage position size to allow for multiple partials",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 35.0,
+        "word_count": 160,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "price expansion after OTE": {
+      "llm_summary": "## Definition\nPrice expansion refers to the directional move that occurs after price enters the OTE zone. Once the OTE entry is triggered, price is expected to expand (move strongly) in the anticipated direction toward the liquidity target. This expansion validates the OTE setup and provides the profit opportunity.\n\n## Rules\n1. Expansion down takes out the short-term low as the first target\n2. After initial expansion, expect potential consolidation before further expansion\n3. Further expansion targets the half standard deviation and full standard deviation levels\n4. Price expansion often occurs in waves with retracements between moves\n5. The dealing range (swing used for Fib) defines the expected expansion magnitude\n6. Expansion confirms the OTE setup was valid and correctly identified\n\n## Identification\n- After OTE entry, watch for strong directional candles (expansion candles)\n- Price should move toward the identified liquidity target\n- Expansion candles often have large bodies and small wicks\n- Consolidation after expansion is normal - don't panic exit\n- Multiple expansion phases separated by consolidation/retracement is typical",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 30.0,
+        "word_count": 150,
+        "teaching_units": 2,
+        "frames_analyzed": 0,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2
       }
     }
   }

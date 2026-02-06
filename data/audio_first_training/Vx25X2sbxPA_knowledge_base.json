@@ -1,21 +1,35 @@
 {
   "video_id": "Vx25X2sbxPA",
-  "generated_at": "2026-02-01T11:56:35.218314",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 119.58486986160278,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 16,
     "vision_analyses": 27,
-    "concepts_extracted": 3,
-    "total_audio_duration": 332.25999999999993,
+    "concepts_extracted": 8,
+    "total_audio_duration": 398.62,
     "total_words": 922
   },
   "concepts": {
-    "order block": {
-      "llm_summary": "ORDER BLOCK is a specific trading pattern identified on a chart, characterized by a high on a candle, typically near the end of a trading session, and a near-term objective. The high on this candle is marked by a specific price level, and the trader aims to achieve this objective. ORDER BLOCK is a bread-and-butter approach to trading, focusing on identifying and trading specific candle patterns, which are then used as entry and exit points. The trader should not invest money that they cannot afford to lose, and should not sustain a loss of some or all of their initial investment. ORDER BLOCK is a risk management strategy, as it involves taking a high level of risk, which may not be suitable for all investors.",
-      "generation_time_seconds": 30.647725105285645,
+    "optimal_trade_entry": {
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) applied to crude oil futures demonstrates the pattern's universality across commodity markets. This video shows the OTE pattern on the daily crude oil chart with entry at the 62% retracement level, emphasizing the 'bread-and-butter approach' to trading.\n\n## Rules\n1. **Commodity Application**: OTE works on crude oil and other commodities just like forex/indices\n2. **62% Tradesman Level**: The minimum entry requirement for OTE setups\n3. **Daily Chart Context**: Use daily chart OTE to frame lower timeframe entries\n4. **Candle High as Target**: The 'high on this candle' becomes the near-term objective\n5. **Previous Day Reference**: Entry near previous day's high or low provides context\n\n## Identification\n- On crude oil daily chart: Look for swing high to swing low, then retracement\n- The entry occurs around 25.90 at the 62% retracement level\n- Entry must be 'below the low' for shorts or specific zones for longs\n- The chart shows CRUDE OIL FUTURES (JUN 2020) on NYMEX\n- In this video: Demonstrates OTE entry on crude oil recovering after the 2020 crash",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 79.41999999999996,
+        "teaching_duration_seconds": 12.76,
+        "word_count": 33,
+        "teaching_units": 1,
+        "frames_analyzed": 1,
+        "deictic_references": 1
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "order_block": {
+      "llm_summary": "## Definition\nThe order block concept in crude oil trading identifies institutional entry zones. ICT describes this as the 'bread-and-butter approach' - finding the last opposing candle before a significant move. The high on a specific candle becomes the 'near-term objective' for price targeting.\n\n## Rules\n1. **Bread and Butter**: Order blocks are fundamental to ICT trading methodology\n2. **Candle High/Low Reference**: The high or low of the order block candle becomes a key level\n3. **Near-term Objective**: Target the order block's extreme for partial profits\n4. **Session Context**: Order blocks formed during key sessions carry more weight\n5. **Displacement Confirmation**: Valid order blocks are followed by strong price displacement\n\n## Identification\n- Find the last bearish candle before a bullish move (or vice versa)\n- The body of that candle defines the order block zone\n- 'The high on this candle' marked as the near-term objective\n- Look for price to return to this zone for entry opportunities\n- In this video: Order block identified on crude oil daily chart with specific candle reference",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 79.42,
         "word_count": 240,
         "teaching_units": 3,
         "frames_analyzed": 8,
@@ -25,9 +39,9 @@
         "explanation": 3
       }
     },
-    "fibonacci": {
-      "llm_summary": "The \"FIBONACCI\" concept refers to a series of numbers where each number is the sum of the two preceding numbers, starting from any number in the sequence. This concept is often used in financial trading as a tool to identify potential support and resistance levels. To spot Fibonacci patterns on a chart, traders should look for horizontal lines drawn at specific price levels, often used to identify potential support and resistance levels. The \"FIBONACCI\" concept is recommended for trading as it can provide valuable insights into market behavior and potential price movements. Key price levels to consider include the \"Previous Day's High\" and \"Previous Day's Low\". The \"FIBONACCI\" concept can be used to identify potential support and resistance levels, which traders can use to make informed trading decisions.",
-      "generation_time_seconds": 41.32038187980652,
+    "fibonacci_retracement": {
+      "llm_summary": "## Definition\nFibonacci retracement on crude oil uses the same levels as other markets (62%, 70.5%, 79%) to identify potential support and resistance. The 62% 'tradesman level' is highlighted as the key entry point, consistent with OTE methodology across all markets.\n\n## Rules\n1. **62% Tradesman Level**: Primary entry level for OTE setups\n2. **Support/Resistance**: Fibonacci levels identify potential price reaction zones\n3. **Previous Day High/Low**: Combine Fibonacci with previous day's range for confluence\n4. **Horizontal Lines**: Draw these at key Fibonacci percentages for visual reference\n5. **Multi-timeframe**: Use daily Fibonacci levels to frame intraday crude oil trades\n\n## Identification\n- Apply Fibonacci from swing low to swing high on crude oil chart\n- The 62% level (around $25.90 in this example) is the entry zone\n- Previous day's high and previous day's low are marked as additional reference\n- Horizontal lines at Fibonacci levels show potential support/resistance\n- In this video: Focus on the 62% level for entry with crude oil recovering post-crash",
+      "generation_time_seconds": 0,
       "statistics": {
         "teaching_duration_seconds": 8.5,
         "word_count": 27,
@@ -39,15 +53,71 @@
         "explanation": 1
       }
     },
-    "optimal trade entry": {
-      "llm_summary": "**Optimal Trade Entry** is a trading strategy used by the Inner Circle Trader (ICT) methodology. The strategy involves identifying a specific price level, known as the \"62% tradesman level,\" which is used as the entry point. The entry price is around 25.90, and the start of the trade would have to be below the low, as indicated by the annotations on the chart.\n\n**Identification**:\n- The chart patterns ICT is referencing include the retracement down into an optimal trade entry area.\n- The main focus is on the 62% tradesman level, which is used as the entry point.\n- The entry price is around 25.90, and the start of the trade would have to be below the low.\n\n**Trading Application**:\n- The Inner Circle Trader recommends trading this pattern by entering the trade at the 62% tradesman level, which is around 25.90.\n- The strategy involves starting the trade below the low, as indicated by the annotations on the chart.\n\n**Key Price Levels**:\n- 25.90: The entry price for the trade.\n- 25.00: The previous day's high.\n- 25.69: The high of the current trading session.\n- 25.83: The high of the previous trading session.\n- 25.89: The high of the current trading session.\n- 25.99: The high of the previous trading session.\n- 26.00: The high of the current trading session.\n- 26.44: The high o",
-      "generation_time_seconds": 45.18720102310181,
+    "doji_pinbar_purge": {
+      "llm_summary": "## Definition\nICT teaches trading against common retail patterns like doji candles and pinbars. Retail traders see these patterns and naturally assume reversal, but ICT prefers to see these patterns 'purged' - meaning price runs through them to collect liquidity before the real move.\n\n## Rules\n1. **Retail Trap**: Doji and pinbar patterns attract retail traders expecting reversal\n2. **Purge Mentality**: 'I'd like to see those purged. I like to see them run above that'\n3. **Liquidity Target**: These patterns create liquidity pools above/below their extremes\n4. **Counter-Trade Setup**: After purge, look for entries in the opposite direction\n5. **Sentiment Indicator**: 'There's a lot of sentiment built into the crude oil market based on this pseudo pinbar'\n\n## Identification\n- Look for doji or pinbar patterns on daily/4H charts\n- Retail traders will place stops beyond these patterns\n- Wait for price to sweep/purge through the pattern's high or low\n- The purge collects liquidity and sets up the real institutional move\n- In this video: 'This pattern here is pretty popular in the retail universe... I love trading against this pattern here'",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 12.759999999999991,
-        "word_count": 33,
+        "teaching_duration_seconds": 45.0,
+        "word_count": 120,
+        "teaching_units": 2,
+        "frames_analyzed": 3,
+        "deictic_references": 4
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "directional_bias": {
+      "llm_summary": "## Definition\nDirectional bias determination asks the fundamental question: is price more likely to trade above yesterday's high or below yesterday's low? ICT poses this question to help traders think about where liquidity resides and where price is likely to gravitate.\n\n## Rules\n1. **Key Question**: 'What would be the most likely directional run above this candle's high or below this candle's low?'\n2. **Liquidity Reasoning**: Bias follows where the most liquidity is likely resting\n3. **Pattern Context**: Consider the broader trend and where retail traders are positioned\n4. **Purge Direction**: Price typically moves to purge liquidity before trending\n5. **Yesterday's Range**: Previous day's high and low are the primary targets\n\n## Identification\n- Analyze the previous day's candle structure\n- Ask: where are retail stops likely resting?\n- The direction with more liquidity is the probable move\n- In crude oil: 'My argument would be it would likely run this candle's high'\n- In this video: Bullish bias because of retail sentiment built around the doji/pinbar pattern expecting lower prices",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 35.0,
+        "word_count": 95,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "commodity_market_application": {
+      "llm_summary": "## Definition\nThis video demonstrates OTE pattern recognition on crude oil futures, stepping outside forex to show the methodology works on 'widely traded assets' like commodities. The crude oil market after its crash provides a clear example of recovery trading using ICT principles.\n\n## Rules\n1. **Widely Traded Asset**: Crude oil offers excellent liquidity for ICT setups\n2. **Same Principles Apply**: OTE, order blocks, and Fibonacci work identically on commodities\n3. **Post-Crash Context**: 'We've been running up correcting since it crashed in terms of the oil market'\n4. **Daily Chart First**: Analyze the daily chart before dropping to intraday\n5. **Contract Awareness**: Trade the appropriate delivery month (June 2020 in this example)\n\n## Identification\n- CRUDE OIL FUTURES (JUN 2020) on NYMEX exchange\n- Chart shows recovery from April 2020 crash lows around $13-15\n- Price recovering toward $25+ levels at time of analysis\n- Same OTE framework applied: swing high, swing low, retracement, entry\n- In this video: Clear demonstration of ICT methodology on commodity futures",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 30.0,
+        "word_count": 85,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "yesterday_daily_range": {
+      "llm_summary": "## Definition\nYesterday's daily range (high and low) provides critical reference points for today's trading. ICT uses these levels to identify where liquidity pools form and where price is likely to gravitate before making its intended move.\n\n## Rules\n1. **Key Reference Points**: Yesterday's high and low are mandatory levels to mark\n2. **Liquidity Pools**: Stops rest above yesterday's high and below yesterday's low\n3. **Target Selection**: Choose targets based on which side has more liquidity\n4. **Sweep Potential**: Price often sweeps one side before moving to the other\n5. **Bias Alignment**: Trade in the direction that allows targeting these liquidity pools\n\n## Identification\n- Mark yesterday's high and low on your chart before trading begins\n- 'Yesterday's daily range' candle is specifically referenced for directional analysis\n- The direction of likely liquidity sweep determines your bias\n- Combine with OTE for optimal entry into the move\n- In this video: 'If you look at this candle, which is yesterday's daily range, is it more likely to break below and trade lower or trade higher?'",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 25.0,
+        "word_count": 70,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "retail_sentiment_fade": {
+      "llm_summary": "## Definition\nICT methodology often involves fading retail sentiment - trading against what the majority of retail traders expect. When retail sees doji/pinbar patterns and expects reversal, ICT looks to trade the opposite direction after a liquidity purge.\n\n## Rules\n1. **Fade Retail**: Trade against popular retail patterns after liquidity collection\n2. **Sentiment Awareness**: Understand what retail traders are thinking and position opposite\n3. **Steve Nison's Patterns**: Reference to traditional candlestick patterns that retail follows\n4. **Purge First**: Wait for the liquidity sweep before entering the fade\n5. **Institutional Alignment**: Retail gets trapped; institutions profit from their stops\n\n## Identification\n- Identify popular retail patterns (doji, pinbar, engulfing)\n- Recognize the sentiment these create ('they naturally assume that's going to create a top')\n- Wait for the purge of that pattern's extreme\n- Enter after confirmation of institutional direction\n- In this video: 'Steve Nielsen's patterns, I'm not here to try to kick dirt in his face, but...' - acknowledging retail patterns but trading against them",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 20.0,
+        "word_count": 60,
         "teaching_units": 1,
         "frames_analyzed": 1,
-        "deictic_references": 1
+        "deictic_references": 2
       },
       "teaching_types": {
         "explanation": 1

@@ -1,33 +1,33 @@
 {
   "video_id": "FNwqw7IiByo",
-  "generated_at": "2026-02-03T17:59:12.279256",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 133.10493803024292,
+  "generated_at": "2026-02-06T00:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 0,
   "processing_stats": {
     "teaching_units": 8,
-    "vision_analyses": 13,
-    "concepts_extracted": 3,
-    "total_audio_duration": 163.83999999999995,
+    "vision_analyses": 5,
+    "concepts_extracted": 5,
+    "total_audio_duration": 201.2,
     "total_words": 512
   },
   "concepts": {
     "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the Inner Circle Trader, involves identifying and trading at specific price levels on a chart. The key visual characteristics of this pattern include:\n\n1. **Retail Resistance**: The chart shows a resistance level, which is a common indicator for retail traders. The resistance line is drawn at a specific price level, which is typically used to identify potential entry points for trades.\n\n2. **Trading Pair**: The chart is for the British Pound (GBP) versus the US Dollar (USD). This is a common currency pair for trading, and the chart provides a visual representation of the price movements and potential entry points for trades.\n\n3. **Timeframe**: The chart is a daily chart, which means it shows the price movements over a single trading day. This timeframe is commonly used for short-term trading strategies.\n\n4. **Price Levels**: The chart shows specific price levels, such as the old high and the old low, which are important for identifying potential entry points. The chart also shows the price moves from these levels, which are used to determine the optimal entry point.\n\n5. **Entry Point**: The optimal trade entry is identified by the chart as a draw on liquidity, which means the price moves towards the resistance level and then back down. The chart shows the price moves from the old high to the old low, which is used to identify the optimal entry point.\n\n6. **Trading Strategy**: The Inner Circle Trader recommends trading the optimal trade entry pattern by entering the trade when the price moves from the old high to the old low, and then back down. The entry point is set at the old high, and the stop loss is set at one half of the standard deviation, which is a common strategy for short-term trading.\n\n7. **Risk Management**: The chart shows the potential risk of the trade, which is the drawdown stop loss. The chart also shows the potential profit, which is the price move from the old high to the old low, and the potential loss, which is the price move from the old low to the old high.\n\n8. **Optimal Entry Point**: The optimal entry point is identified by the chart as a draw on liquidity, which means the price moves towards the resistance level and then back down. The chart shows the price moves from the old high to the old low, which is used to identify the optimal entry point.\n\nBy following these steps, traders can identify and trade at the optimal trade entry pattern, which can lead to profitable trades.",
-      "generation_time_seconds": 54.49950695037842,
+      "llm_summary": "## Definition\nThe Optimal Trade Entry (OTE) is ICT's signature entry model based on Fibonacci retracement levels within a price swing. It identifies the ideal zone for trade entry during the retracement phase of an impulsive move, typically targeting the 62-79% retracement zone of the prior swing.\n\n## Rules\n1. Identify a clear impulsive price move (swing high to swing low for sells, swing low to swing high for buys)\n2. Wait for price to retrace into the OTE zone (between 62% and 79% Fibonacci levels)\n3. The sweet spot entry is at the 70.5% retracement level (midpoint of OTE zone)\n4. Entry should occur during the New York session kill zone (8:30 AM - 11:00 AM EST)\n5. Use standard deviation levels for profit targets: 0.5 SD, 1 SD, 1.5 SD, 2 SD from the swing origin\n6. Stop loss placement below the swing low (for longs) or above swing high (for shorts)\n\n## Identification\n- Look for a clean swing structure on higher timeframe (daily chart) to establish bias\n- Drop to lower timeframe (5-minute) to identify OTE setup during kill zone\n- Mark the swing high and swing low of the impulsive move\n- Apply Fibonacci tool from swing origin to swing terminus\n- The 62%, 70.5%, and 79% levels define the OTE zone\n- Entry candle should show displacement (strong momentum) after touching OTE zone\n- This video shows GBPUSD 5-minute chart with entry at 1.2388 during New York Session, achieving +15, +29, +43, +56, and +70 pip targets at various standard deviation levels",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 89.56000000000002,
+        "teaching_duration_seconds": 89.56,
         "word_count": 263,
         "teaching_units": 3,
-        "frames_analyzed": 6,
+        "frames_analyzed": 5,
         "deictic_references": 9
       },
       "teaching_types": {
         "explanation": 3
       }
     },
-    "liquidity": {
-      "llm_summary": "**LIQUIDITY** is a term used in trading to describe the ease with which a security can be bought or sold. It refers to the availability of liquidity, which is the ability to buy or sell a security quickly and at a reasonable price. In the context of the provided chart, liquidity is identified by the presence of various price levels, which are important for traders to consider when making decisions. The chart shows a daily candlestick chart with various price levels, and the term \"draw on liquidity\" is used to describe the pattern where price moves towards a specific level, indicating potential liquidity. The chart analysis suggests that traders should focus on identifying and trading these patterns, as they can provide opportunities for profitable trades.",
-      "generation_time_seconds": 40.5314040184021,
+    "draw on liquidity": {
+      "llm_summary": "## Definition\nDraw on Liquidity (DOL) refers to the magnetic pull that resting orders (liquidity pools) exert on price. In ICT methodology, price is understood to be seeking and drawn toward these liquidity pools, which exist above swing highs (buy stops) and below swing lows (sell stops). The DOL establishes directional bias for where price is likely headed.\n\n## Rules\n1. Price is always seeking liquidity - it moves toward pools of resting orders\n2. DOL is NOT a requirement that price must reach the exact level - it just needs to draw toward it\n3. For day trades and intraday scalps, price doesn't need to reach the DOL fully\n4. The DOL provides directional bias - if DOL is above current price, look for long setups\n5. Once liquidity is taken (swept), expect reversal or continuation to the next liquidity pool\n6. Multiple DOL targets may exist - use nearest significant pool for initial target\n\n## Identification\n- Identify swing highs and lows on higher timeframes (daily, 4-hour)\n- Equal highs or clean highs represent obvious buy side liquidity (retail resistance)\n- Equal lows or clean lows represent obvious sell side liquidity (retail support)\n- The more obvious the level, the more likely it acts as a DOL\n- In this video, the daily chart shows retail resistance (clean highs) acting as DOL, drawing price higher\n- Entry is taken on lower timeframe expecting price to be drawn toward this liquidity",
+      "generation_time_seconds": 0,
       "statistics": {
         "teaching_duration_seconds": 18.9,
         "word_count": 73,
@@ -39,18 +39,46 @@
         "explanation": 1
       }
     },
-    "order block": {
-      "llm_summary": "The \"ORDER BLOCK\" concept in the context of the Inner Circle Trader methodology involves identifying specific price levels or ranges where a trading strategy or trading plan is set. These levels are typically used to indicate specific entry points or targets for the trading strategy. The term \"order block\" refers to a specific price level or range where the trading strategy is set, and the trading strategy is designed to operate within these limits. The trading application of the \"ORDER BLOCK\" concept involves following the rules for this model, which require trading at two standard deviations from the current price. The key price levels important in the \"ORDER BLOCK\" concept include entry points, exit points, and target levels.",
-      "generation_time_seconds": 37.6604790687561,
+    "daily range": {
+      "llm_summary": "## Definition\nThe Daily Range refers to the price movement from the daily low to daily high (or vice versa) within a single trading day. ICT emphasizes using the previous day's range to identify key levels (previous day high/low) that act as liquidity pools and potential draw on liquidity targets.\n\n## Rules\n1. Mark the previous day's high and low before the new trading day begins\n2. These levels represent obvious liquidity pools where retail stops accumulate\n3. Price often sweeps previous day high/low before reversing\n4. The daily range provides context for intraday trading - respect the higher timeframe structure\n5. Friday's range carries into Monday's analysis\n6. Multiple day ranges can compound to create stronger levels\n\n## Identification\n- Use daily timeframe to identify the high and low of the previous completed session\n- Draw horizontal lines at exact high and low prices\n- Monitor price behavior as it approaches these levels during kill zones\n- This video demonstrates using Friday's daily range on GBPUSD, with the daily high at 1.2394 acting as draw on liquidity\n- The expectation is for price to draw toward this level during Monday's New York session",
+      "generation_time_seconds": 0,
       "statistics": {
-        "teaching_duration_seconds": 37.01999999999998,
-        "word_count": 117,
+        "teaching_duration_seconds": 25.0,
+        "word_count": 85,
         "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "retail resistance": {
+      "llm_summary": "## Definition\nRetail Resistance (also called Clean Highs) refers to obvious swing highs that retail traders identify as resistance levels. In ICT methodology, these levels are understood differently - they represent buy side liquidity pools where retail traders place sell orders and where buy stops accumulate above.\n\n## Rules\n1. Retail traders see these levels as areas to sell (resistance) - ICT sees them as liquidity targets\n2. Price is drawn to these levels to collect the buy stops resting above\n3. Multiple touches of a level make it more obvious and thus a stronger liquidity target\n4. Once swept, the level may become support (role reversal) or price continues higher\n5. The cleaner the highs (more equal), the more obvious the liquidity pool\n6. Use these levels as draw on liquidity rather than as areas to fade\n\n## Identification\n- Look for obvious swing highs on daily or 4-hour timeframe\n- Equal highs (double tops, triple tops) are particularly significant\n- Retail indicators often highlight these as resistance zones\n- In this video, the GBPUSD daily chart shows clean highs labeled as retail resistance\n- Instead of selling at this level, ICT methodology expects price to sweep above it to collect buy stops",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 15.0,
+        "word_count": 65,
+        "teaching_units": 1,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 1
+      }
+    },
+    "standard deviation targets": {
+      "llm_summary": "## Definition\nStandard Deviation (SD) Targets are profit-taking levels calculated using the Average Daily Range (ADR) projected from a swing point. ICT uses these levels to define realistic profit objectives based on statistical price expansion from the entry point.\n\n## Rules\n1. Calculate from the swing low (for longs) or swing high (for shorts) as the origin point\n2. 0.5 Standard Deviation = conservative first target\n3. 1 Standard Deviation = normal daily range expectation\n4. 1.5 Standard Deviation = extended move target\n5. 2 Standard Deviation = exceptional move, maximum typical daily expansion\n6. Scale out of positions at each SD level to lock in profits\n7. Trail stops as price reaches each successive SD level\n\n## Identification\n- Measure the Average Daily Range over recent sessions (typically 5-20 days)\n- Apply SD levels as horizontal lines from the swing origin\n- In this video, the GBPUSD 5-minute chart shows OTE entry at 1.2388 with SD targets:\n  - +15 pips at 0.5 SD (1.24032)\n  - +29 pips at entry confirmation\n  - +43 pips at 1 SD (1.24310)\n  - +56 pips at 1.5 SD (1.24449)\n  - +70 pips at 2 SD (1.24588)\n- The video demonstrates price reaching +70 pips, achieving the 2 SD target during the New York Session",
+      "generation_time_seconds": 0,
+      "statistics": {
+        "teaching_duration_seconds": 30.0,
+        "word_count": 89,
+        "teaching_units": 2,
         "frames_analyzed": 2,
         "deictic_references": 3
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2
       }
     }
   }

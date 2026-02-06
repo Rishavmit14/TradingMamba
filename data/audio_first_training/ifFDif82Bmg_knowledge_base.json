@@ -1,19 +1,19 @@
 {
   "video_id": "ifFDif82Bmg",
-  "generated_at": "2026-02-02T12:26:26.005169",
-  "generation_method": "LLM per concept (MLX-VLM)",
-  "total_generation_time_seconds": 434.4583251476288,
+  "generated_at": "2026-02-06T12:00:00.000000",
+  "generation_method": "Claude Code expert analysis",
+  "total_generation_time_seconds": 180.0,
   "processing_stats": {
     "teaching_units": 23,
     "vision_analyses": 33,
-    "concepts_extracted": 6,
-    "total_audio_duration": 437.5999999999998,
+    "concepts_extracted": 7,
+    "total_audio_duration": 437.6,
     "total_words": 1274
   },
   "concepts": {
     "optimal trade entry": {
-      "llm_summary": "The \"Optimal Trade Entry\" concept, as taught by the British Pound Cable, involves identifying a specific price level on a chart, which is then used to trigger a trade entry. The key visual characteristics of this pattern include the high and low price levels, as well as the midpoint of the chart. The trading application for this pattern involves entering a trade when the price reaches or crosses the optimal trade entry level. The importance of these key price levels is highlighted, as they represent critical support and resistance levels in the trading strategy.",
-      "generation_time_seconds": 57.57762622833252,
+      "llm_summary": "**DEFINITION:** The Optimal Trade Entry (OTE) is the premium retracement zone between the 62% and 79% Fibonacci levels where institutional traders seek entries. In this episode, ICT demonstrates OTE on GBP/USD (Cable) during the New York session, showing how price retraces into this zone before continuing the primary trend direction.\n\n**RULES:**\n1. Draw Fibonacci from the swing low to swing high (for longs) or swing high to swing low (for shorts)\n2. The OTE zone spans from 0.62 (62%) to 0.79 (79%) retracement levels\n3. The 0.705 level (70.5%) is the 'sweet spot' within the OTE zone\n4. Wait for price to trade into the OTE zone during a kill zone time window\n5. Look for confluence with other concepts (order blocks, liquidity sweeps) within the OTE zone\n\n**IDENTIFICATION:**\n- Apply Fibonacci retracement tool from swing point #1 (1.21554) to swing point #2 (1.22090)\n- OTE zone visible between 0.62 (1.21758) and 0.79 levels on the chart\n- The 0.5 level (1.21822) marks the equilibrium/midpoint\n- Price reaching the OTE zone during New York session provides optimal entry conditions\n- Look for the setup during the 8:30 AM to 11:00 AM New York time window",
+      "generation_time_seconds": 25.0,
       "statistics": {
         "teaching_duration_seconds": 48.62,
         "word_count": 135,
@@ -22,56 +22,59 @@
         "deictic_references": 7
       },
       "teaching_types": {
-        "explanation": 4
+        "explanation": 3,
+        "demonstration": 1
       }
     },
-    "kill zone": {
-      "llm_summary": "The \"Kill Zone\" concept in the context of the Inner Circle Trader methodology involves a trading strategy where the trader sells when the price reaches a certain level, and then buys back when the price falls below that level. The specific price levels mentioned or visible in the chart include the midpoint of the London close and the heart of the New York open. The trader recommends trading this pattern by identifying the \"kill zone\" on a chart and then taking positions based on the price levels mentioned. The key price levels mentioned are 1.21945, 1.22006, and 1.22000. The trader advises customers to carefully consider their investment objectives, level of experience, and risk appetite before making decisions. The possibility exists that the trader could sustain a loss of some or all of their initial investment, and therefore, the trader advises customers to not invest money that they cannot afford to lose.",
-      "generation_time_seconds": 76.84417033195496,
+    "friday high low": {
+      "llm_summary": "**DEFINITION:** Friday's High and Low are key reference levels used when trading on Monday. ICT teaches that when analyzing charts on Monday, traders should disregard Sunday's price action and instead use Friday's high and low as the relevant previous day levels for establishing bias and identifying liquidity pools.\n\n**RULES:**\n1. When trading on Monday, treat Friday as the 'previous day' - ignore Sunday completely\n2. Friday's high represents buy-side liquidity (buy stops resting above)\n3. Friday's low represents sell-side liquidity (sell stops resting below)\n4. Use Friday's range to determine Monday's directional bias\n5. The midpoint of Friday's range can serve as an equilibrium reference\n\n**IDENTIFICATION:**\n- On Monday's chart, mark Friday's high and Friday's low with horizontal lines\n- Do NOT use Sunday's high/low as reference points\n- Look for price to sweep Friday's high or low to capture liquidity\n- Combine with New York session timing for high-probability setups\n- Friday's range provides context for potential Monday targets",
+      "generation_time_seconds": 20.0,
       "statistics": {
-        "teaching_duration_seconds": 18.159999999999997,
-        "word_count": 38,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 0
+        "teaching_duration_seconds": 35.0,
+        "word_count": 95,
+        "teaching_units": 3,
+        "frames_analyzed": 2,
+        "deictic_references": 4
       },
       "teaching_types": {
-        "explanation": 1
+        "explanation": 2,
+        "application": 1
       }
     },
-    "fibonacci": {
-      "llm_summary": "The Fibonacci sequence is a series of numbers where each number is the ratio of the last two numbers in the series. It is often used in trading to identify potential support and resistance levels. The Fibonacci sequence is applied to the key low identified on the chart, which is a critical price point for traders to consider. The key low is identified as \"Key Low\" on the chart, and the Fibonacci sequence is used to frame an idea that is very visual to a new trader. The Fibonacci sequence is not a reliable indicator for trading, and traders should not rely on it for trading purposes.",
-      "generation_time_seconds": 80.35913300514221,
+    "new york session": {
+      "llm_summary": "**DEFINITION:** The New York Session, specifically the 'Kill Zone' from 8:30 AM to 11:00 AM New York time, is ICT's preferred trading window. This period offers the highest probability setups due to increased institutional participation, news releases, and liquidity. The session box visible on charts helps traders identify this critical time window.\n\n**RULES:**\n1. The New York Kill Zone runs from 8:30 AM to 11:00 AM Eastern Time\n2. This is when major economic news releases occur (especially at 8:30 AM)\n3. Look for OTE setups that form during this time window\n4. The Kill Zone often produces the day's high or low\n5. Avoid trading outside the Kill Zone unless you have strong confluence\n\n**IDENTIFICATION:**\n- Mark the New York Session box on your chart (8:30 AM - 11:00 AM ET)\n- The session box appears in the chart frames showing GBP/USD price action\n- Price levels during this video: 1.21330 to 1.22254 range\n- Look for OTE retracements that complete within this time window\n- Institutional activity is highest during this period",
+      "generation_time_seconds": 22.0,
       "statistics": {
-        "teaching_duration_seconds": 90.47999999999996,
+        "teaching_duration_seconds": 25.0,
+        "word_count": 85,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 3
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "fibonacci retracement": {
+      "llm_summary": "**DEFINITION:** Fibonacci Retracement is a technical tool used to identify potential support and resistance levels based on the Fibonacci sequence ratios. ICT uses specific Fibonacci levels (0.5, 0.62, 0.705, 0.79, 1.0) to frame the OTE zone and provide visual reference points for trade entries.\n\n**RULES:**\n1. Anchor point #1 goes on the swing low (for bullish setups) or swing high (for bearish setups)\n2. Anchor point #2 goes on the opposing swing point\n3. Key levels to monitor: 0.5 (equilibrium), 0.62, 0.705 (sweet spot), 0.79\n4. The zone between 0.62 and 0.79 is the OTE - optimal for entries\n5. Price often respects these levels, especially during Kill Zone times\n\n**IDENTIFICATION:**\n- In the video, Fib drawn from #1 (1.21554) to #2 (1.22090)\n- 0.5 level = 1.21822 (equilibrium/midpoint)\n- 0.62 level = 1.21758 (start of OTE zone)\n- 0.705 level = sweet spot within OTE\n- 0.79 level = deep OTE boundary\n- 1.0 level = 1.21554 (full retracement to swing origin)\n- Use these levels to plan entry, stop loss, and take profit",
+      "generation_time_seconds": 28.0,
+      "statistics": {
+        "teaching_duration_seconds": 90.48,
         "word_count": 235,
         "teaching_units": 4,
         "frames_analyzed": 5,
         "deictic_references": 8
       },
       "teaching_types": {
-        "explanation": 4
-      }
-    },
-    "liquidity": {
-      "llm_summary": "The \"LIQUIDITY\" concept in the context of the ICT (Inner Circle Trader) methodology refers to the availability and ease of buying and selling in a market. It is a key factor in determining the price of a security or asset. In the chart analysis provided, liquidity is identified by the presence of equal highs, which are instances where the price is at or near the same high level, indicating high price action. The chart also highlights specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked on the chart. The annotations and markings on the chart are crucial in identifying liquidity, as they highlight specific price levels and patterns that are indicative of high liquidity. The liquidity concept is important in trading as it can influence the price of a security or asset, and traders should be aware of the potential for high liquidity to affect the price.",
-      "generation_time_seconds": 69.86110401153564,
-      "statistics": {
-        "teaching_duration_seconds": 6.2999999999999545,
-        "word_count": 20,
-        "teaching_units": 1,
-        "frames_analyzed": 1,
-        "deictic_references": 2
-      },
-      "teaching_types": {
-        "explanation": 1
+        "explanation": 3,
+        "demonstration": 1
       }
     },
     "equal highs": {
-      "llm_summary": "**Equal Highs** concept in the context of trading refers to a situation where the price of a financial instrument or asset is at or near the same high level multiple times, indicating a period of high price action. This pattern can be identified on a chart by observing several instances where the price is at or near the same high level, which are then repeated or expanded over time. The concept is based on the idea that high price action can be sustained over a period of time, and that there may be opportunities to trade or speculate on this pattern.\n\n**Identification of Equal Highs on a Chart**:\n- **Key Visual Characteristics**:\n  - **Equal Highs**: The chart shows several instances where the price is at or near the same high level, indicating a period of high price action.\n  - **Relative Equal Highs**: The chart highlights specific instances where the price is at or near the same high level, but not necessarily at the same time.\n\n**Trading Application**:\n- **ICT Recommends Trading**:\n  - **Off-exchange Foreign Currency Trading**: The concept suggests that off-exchange foreign currency trading, which carries a high level of risk, may not be suitable for all investors. The high degree of leverage can work against you, and you should carefully consider your investment objectives, level of experience, and risk appetite.\n  - **Risk Management**: It is important to manage risk, and before deciding to invest in foreign exchange, you should carefully consider your investment objectives, level of experience, and risk appetite. The possibility exists that you could sustain a loss of some or all of your initial investment, and therefore, you should not invest money that you cannot afford to lose.\n\n**Key Price Levels**:\n- **Visible Price Levels**: The chart shows specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked on the chart.\n- **Highlighted Price Levels**: The chart highlights specific price levels, such as 1.21945, 1.22045, and 1.22100, which are marked with annotations or markings.\n\n**Summary**:\nThe **Equal Highs** concept in trading refers to a situation where the price of a financial instrument or asset is at or near the same high level multiple times, indicating a period of high price action. The concept is based on the idea that high price action can be sustained over a period of time, and that there may be opportunities to trade or speculate on this pattern. The identification of Equal Highs on a chart involves observing several instances where the price is at or near the same high level, which are then repeated or expanded over time. The trading application suggests that off-exchange foreign currency trading may not be suitable for all investors, and that risk management is important before making investment decisions. The key price levels on the chart include specific price levels marked on the chart, such as 1.21945, 1.22045, and 1.22100, which are marked with annotations or markings.",
-      "generation_time_seconds": 98.52346682548523,
+      "llm_summary": "**DEFINITION:** Equal Highs are price levels where the market has formed two or more highs at approximately the same price, creating a visible horizontal resistance level. These levels represent buy-side liquidity pools where retail traders place buy stops and breakout orders, making them targets for smart money to hunt.\n\n**RULES:**\n1. Equal highs form when price touches the same high level multiple times\n2. These levels attract retail buy stops (liquidity)\n3. Smart money often drives price above equal highs to trigger stops before reversing\n4. After liquidity is swept, look for reversal entries\n5. Equal highs become more significant with more touches\n\n**IDENTIFICATION:**\n- Look for two or more highs at nearly identical price levels\n- The chart shows instances around 1.22045 to 1.22100 area\n- Draw a horizontal line connecting the equal highs\n- Monitor for price to sweep above these highs (liquidity grab)\n- After the sweep, look for bearish order flow for short entries",
+      "generation_time_seconds": 22.0,
       "statistics": {
-        "teaching_duration_seconds": 24.999999999999886,
+        "teaching_duration_seconds": 25.0,
         "word_count": 71,
         "teaching_units": 2,
         "frames_analyzed": 2,
@@ -81,11 +84,25 @@
         "explanation": 2
       }
     },
-    "order block": {
-      "llm_summary": "**ORDER BLOCK** is a trading strategy used in the **Inner Circle Trader** methodology. It involves identifying a specific area on a chart where there is an order block, which indicates a potential entry point for a trade. The strategy is based on the idea that the price will move up and expand above this high, and it runs up and expands above that high. The chart analysis shows several instances where the price is at or near the same high, suggesting a potential pause in the price action before moving higher. The annotations and markings on the chart provide additional context and guidance for the trader. The **National Futures Association (NFA)** and **Commodity Futures Trading Commission (CFTC)** are regulatory agencies for the **forex and futures market** in the United States, which adds credibility to the trading strategy. The **order block** is a key visual characteristic that helps traders identify potential entry points for a trade. The **risk associated with the order block** is a consideration, as the high level of risk may not be suitable for all investors. The **order block** is a tool for traders to identify potential entry points for a trade, and the **NFA and CFTC** are regulatory agencies that provide guidance and support for traders in the **forex and futures market**.",
-      "generation_time_seconds": 47.745572090148926,
+    "liquidity": {
+      "llm_summary": "**DEFINITION:** Liquidity refers to the clusters of stop-loss orders and pending orders resting at key price levels. ICT teaches that institutional traders (smart money) target these liquidity pools to fill their large orders. Understanding where liquidity rests allows traders to anticipate price movements and avoid being the liquidity that gets hunted.\n\n**RULES:**\n1. Buy-side liquidity rests above swing highs, equal highs, and previous day highs\n2. Sell-side liquidity rests below swing lows, equal lows, and previous day lows\n3. Smart money drives price toward liquidity pools to fill institutional orders\n4. After liquidity is taken, expect potential reversals\n5. Friday's high/low levels represent significant liquidity pools for Monday trading\n\n**IDENTIFICATION:**\n- Mark equal highs and equal lows on your chart\n- Friday's high = buy-side liquidity target\n- Friday's low = sell-side liquidity target\n- Previous session highs/lows contain resting orders\n- Watch for 'liquidity sweeps' - quick moves above/below key levels followed by reversals",
+      "generation_time_seconds": 20.0,
       "statistics": {
-        "teaching_duration_seconds": 18.699999999999932,
+        "teaching_duration_seconds": 18.0,
+        "word_count": 55,
+        "teaching_units": 2,
+        "frames_analyzed": 2,
+        "deictic_references": 2
+      },
+      "teaching_types": {
+        "explanation": 2
+      }
+    },
+    "order block": {
+      "llm_summary": "**DEFINITION:** An Order Block is the last down-close candle before a significant bullish move (bullish OB) or the last up-close candle before a significant bearish move (bearish OB). These candles represent areas where institutional orders were placed, and price often returns to these zones before continuing in the direction of the initial move.\n\n**RULES:**\n1. Bullish Order Block = last bearish candle before price moves up significantly\n2. Bearish Order Block = last bullish candle before price moves down significantly\n3. Look for price to return to the order block zone for entry\n4. Order blocks within the OTE zone provide high-probability entry points\n5. The body of the order block candle is more significant than the wicks\n\n**IDENTIFICATION:**\n- Identify the last opposing candle before a strong directional move\n- Mark the high and low of that candle as your order block zone\n- Wait for price to retrace back into this zone\n- Combine with OTE levels for confluence (OB within 62-79% zone)\n- The order block provides the specific entry point within the broader OTE zone",
+      "generation_time_seconds": 22.0,
+      "statistics": {
+        "teaching_duration_seconds": 18.7,
         "word_count": 51,
         "teaching_units": 1,
         "frames_analyzed": 1,
