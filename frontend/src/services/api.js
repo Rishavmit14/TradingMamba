@@ -113,10 +113,13 @@ export const getChart = async (symbol, timeframe = 'H1', withSignal = true, with
   return response.data;
 };
 
-// Detailed Signal Analysis (playlist-aware)
+// Detailed Signal Analysis (playlist-aware, single timeframe)
 export const getSignalAnalysis = async (symbol, timeframe = 'H1', playlistId = 'all') => {
   const response = await api.get(`/signals/analyze/${symbol}`, {
-    params: { timeframe, playlist_id: playlistId },
+    params: {
+      timeframes: timeframe,  // Backend expects 'timeframes' param (can be comma-separated, but we send single TF)
+      playlist_id: playlistId
+    },
   });
   return response.data;
 };

@@ -250,6 +250,7 @@ function LiveChart() {
   }, []);
 
   // Reusable: filter API patterns for the current visible price range
+  // IMPORTANT: Now strictly filters by current timeframe (playlist-specific patterns)
   const getRelevantPatterns = useCallback((allPatterns, candles, signalDirection) => {
     if (!allPatterns || allPatterns.length === 0 || !candles || candles.length === 0) return [];
 
@@ -260,17 +261,35 @@ function LiveChart() {
     // Use midpoint of visible range as reference price for sorting
     const currentPrice = (visibleHigh + visibleLow) / 2;
 
+    // Timeframe hierarchy for determining what patterns to show
+    const tfOrder = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1'];
+    const currentTfIdx = tfOrder.indexOf(timeframe);
+
     const getTfPriority = (patternTf) => {
-      if (patternTf === timeframe) return 0;
-      const tfOrder = ['M1', 'M5', 'M15', 'M30', 'H1', 'H4', 'D1', 'W1'];
-      const currentIdx = tfOrder.indexOf(timeframe);
+      if (patternTf === timeframe) return 0;  // Exact match = highest priority
       const patternIdx = tfOrder.indexOf(patternTf);
-      if (patternIdx > currentIdx) return 1;
-      return 2;
+      if (patternIdx > currentTfIdx) return 1;  // Higher TF = show (confluence)
+      return 2;  // Lower TF = lower priority
     };
 
+    // Filter patterns:
+    // 1. Must match current timeframe OR be from a higher timeframe (for HTF confluence)
+    // 2. Must be in visible price range
+    // 3. Skip filled patterns
     const allVisible = allPatterns.filter(p => {
       if (p.filled) return false;
+
+      // Timeframe filter: only show patterns from current TF or higher TFs
+      const patternTf = p.timeframe;
+      if (patternTf) {
+        const patternTfIdx = tfOrder.indexOf(patternTf);
+        // Skip patterns from lower timeframes (e.g., don't show M5 patterns on H1 chart)
+        if (patternTfIdx !== -1 && patternTfIdx < currentTfIdx) {
+          return false;
+        }
+      }
+
+      // Price range filter
       const price = p.price || ((p.high || 0) + (p.low || 0)) / 2;
       return price >= (visibleLow - margin) && price <= (visibleHigh + margin);
     });
@@ -332,6 +351,8 @@ function LiveChart() {
       'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity', 'buy_stops', 'sell_stops',
       'equilibrium',
+      // Swing markers are now rays
+      'swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
     ];
     const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
     const rayPats = sortedPatterns.filter(p => rayTypes.includes(p.pattern_type));
@@ -361,11 +382,13 @@ function LiveChart() {
         const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
         if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
       }
-      // Separate lightweight marker patterns from box patterns
-      const markerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
-      const markerPats = sortedPatterns.filter(p => markerTypes.includes(p.pattern_type));
-      const actualBoxPats = boxPats.filter(p => !markerTypes.includes(p.pattern_type));
-      return [...bosCh.slice(0, 2), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...markerPats.slice(0, 8)];
+      // Swing markers are now in rayTypes, so they'll be in 'other' rays
+      // Filter to actual box patterns (excluding rays which are handled separately)
+      const actualBoxPats = boxPats;
+      // Include swing markers in the ray patterns
+      const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
+      const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
+      return [...bosCh.slice(0, 2), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8)];
     }
   }, [timeframe]);
 
@@ -410,6 +433,9 @@ function LiveChart() {
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
       'equilibrium',
+      // Swing point markers - now drawn as horizontal rays
+      'swing_high', 'swing_low',
+      'higher_high', 'higher_low', 'lower_high', 'lower_low',
     ];
 
     // Get annotation labels for each pattern type (all solid lines now)
@@ -428,6 +454,14 @@ function LiveChart() {
         'buy_stops': { text: 'BST 🎯', color: '#ff5252' },
         'sell_stops': { text: 'SST 🎯', color: '#69f0ae' },
         'equilibrium': { text: 'EQ (50%)', color: '#ffd740' },
+        // Swing point markers
+        'swing_high': { text: 'SH', color: '#ff7043' },
+        'swing_low': { text: 'SL', color: '#42a5f5' },
+        // Market structure (HH/HL/LH/LL)
+        'higher_high': { text: 'HH', color: '#00e676' },
+        'higher_low': { text: 'HL', color: '#69f0ae' },
+        'lower_high': { text: 'LH', color: '#ff5252' },
+        'lower_low': { text: 'LL', color: '#ff8a80' },
       };
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
@@ -556,49 +590,75 @@ function LiveChart() {
 
       if (!startTime) return;
 
+      // Check if this is a swing/structure marker type (should extend to right edge with price label)
+      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
+
       try {
         const timeScale = chart.timeScale();
         let startX = timeScale.timeToCoordinate(startTime);
         const chartWidth = chartElement.clientWidth;
 
+        // Right edge where price scale starts (leave room for price label)
         const rightEdge = chartWidth - 70;
-        // If start is off-screen left, show a shorter ray from the left portion
+
+        // If start is off-screen left, start from left edge
         if (startX === null || startX < 0) {
           startX = 0;
         }
 
-        // Cap ray width so it doesn't span the entire chart
-        const maxRayWidth = Math.min(rightEdge * 0.6, 500);
-        const rawRayWidth = rightEdge - startX;
-        const rayWidth = Math.max(Math.min(rawRayWidth, maxRayWidth), 50);
-        // Shift start so the ray ends at the right edge
-        startX = rightEdge - rayWidth;
+        // For swing markers: extend ray to the full right edge
+        // For other patterns: cap the width
+        let rayWidth;
+        if (isSwingMarker) {
+          // Swing markers extend to right edge (true horizontal ray)
+          rayWidth = rightEdge - startX;
+          if (rayWidth < 20) rayWidth = rightEdge; // If too short, span from left
+          if (startX > rightEdge - 50) startX = 0; // If start is too far right, start from left
+          rayWidth = rightEdge - startX;
+        } else {
+          // Other patterns: capped width
+          const maxRayWidth = Math.min(rightEdge * 0.6, 500);
+          const rawRayWidth = rightEdge - startX;
+          rayWidth = Math.max(Math.min(rawRayWidth, maxRayWidth), 50);
+          // Shift start so the ray ends at the right edge
+          startX = rightEdge - rayWidth;
+        }
 
         // Anti-overlap: adjust Y for ray label
         const adjustedRayY = findNonOverlappingYRay(y);
-        const labelOffsetY = adjustedRayY - y; // how much the label shifted
 
         // Create the horizontal ray line (solid line) - always at true price
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
+
+        // Swing markers use dashed line style, others use gradient
+        const lineStyle = isSwingMarker
+          ? `border-top: 1px dashed ${annotation.color}90;`
+          : `background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);`;
+
         rayLine.style.cssText = `
           position: absolute;
           left: ${startX}px;
           top: ${y}px;
           width: ${rayWidth}px;
-          height: 2px;
-          background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);
+          height: ${isSwingMarker ? '0px' : '2px'};
+          ${lineStyle}
           pointer-events: none;
           z-index: 4;
-          box-shadow: 0 0 4px ${annotation.color}60;
+          ${isSwingMarker ? '' : `box-shadow: 0 0 4px ${annotation.color}60;`}
         `;
 
-        // Create the annotation label - offset to avoid overlap
+        // Create the annotation label with pattern name
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
+
+        // For swing markers: position label at the start (left side)
+        // For others: position in the middle
+        const labelX = isSwingMarker ? startX + 5 : startX + rayWidth / 2 - 30;
+
         labelEl.style.cssText = `
           position: absolute;
-          left: ${startX + rayWidth / 2 - 30}px;
+          left: ${labelX}px;
           top: ${adjustedRayY - 10}px;
           color: ${annotation.color};
           font-size: 10px;
@@ -614,7 +674,7 @@ function LiveChart() {
         `;
         labelEl.textContent = annotation.text;
 
-        // Create small circle at the start point (only if visible)
+        // Create small circle at the start point (origin of the ray)
         if (startX > 0) {
           const startMarker = document.createElement('div');
           startMarker.className = 'pattern-ray-overlay';
@@ -632,6 +692,33 @@ function LiveChart() {
           `;
           chartElement.appendChild(startMarker);
           rayOverlaysRef.current.push(startMarker);
+        }
+
+        // For swing markers: Add price label at the right edge
+        if (isSwingMarker) {
+          const priceLabel = document.createElement('div');
+          priceLabel.className = 'pattern-ray-overlay';
+          // Format price with appropriate decimals
+          const formattedPrice = price > 1000 ? price.toFixed(2) : price > 1 ? price.toFixed(4) : price.toFixed(6);
+          priceLabel.style.cssText = `
+            position: absolute;
+            right: 75px;
+            top: ${y - 9}px;
+            color: ${annotation.color};
+            font-size: 9px;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+            white-space: nowrap;
+            padding: 1px 4px;
+            background: rgba(0,0,0,0.85);
+            border: 1px solid ${annotation.color}80;
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 6;
+          `;
+          priceLabel.textContent = formattedPrice;
+          chartElement.appendChild(priceLabel);
+          rayOverlaysRef.current.push(priceLabel);
         }
 
         chartElement.style.position = 'relative';
@@ -667,7 +754,7 @@ function LiveChart() {
       'bullish_mitigation_block', 'bearish_mitigation_block',
       'premium_zone', 'discount_zone',
     ];
-    // Pattern types that are drawn as horizontal rays (skip them here)
+    // Pattern types that are drawn as horizontal rays (skip them here in drawPatternBoxes)
     const rayPatternTypes = [
       'bos_bullish', 'bos_bearish',
       'choch_bullish', 'choch_bearish',
@@ -676,6 +763,9 @@ function LiveChart() {
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
       'equilibrium',
+      // Swing point markers - now drawn as horizontal rays
+      'swing_high', 'swing_low',
+      'higher_high', 'higher_low', 'lower_high', 'lower_low',
     ];
     const markers = [];
     // Reset shared label position tracking
