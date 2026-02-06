@@ -133,6 +133,7 @@ class SmartMoneyAnalysisResult:
     ote_zones: List[Dict] = field(default_factory=list)
     breaker_blocks: List[Dict] = field(default_factory=list)
     buy_sell_stops: Dict = field(default_factory=dict)
+    inducements: List[Dict] = field(default_factory=list)
     kill_zone_active: bool = False
     # ML Knowledge tracking
     ml_patterns_used: List[str] = field(default_factory=list)  # Patterns ML detected
@@ -261,6 +262,7 @@ class SmartMoneyAnalyzer:
         ote_zones = []
         breaker_blocks = []
         buy_sell_stops = {}
+        inducements = []
         kill_zone_active = False
 
         # Step 5: Detect displacement - ONLY IF ML LEARNED
@@ -331,8 +333,10 @@ class SmartMoneyAnalyzer:
         # Step 10a: Inducement detection - ONLY IF ML LEARNED
         # Inducement = first valid pullback on left side of swing high/low
         if self._can_detect('inducement'):
-            ml_patterns_used.append('inducement')
-            ml_confidence_scores['inducement'] = self._get_ml_confidence('inducement')
+            inducements = self.find_inducement(data, swing_points)
+            if inducements:
+                ml_patterns_used.append('inducement')
+                ml_confidence_scores['inducement'] = self._get_ml_confidence('inducement')
         else:
             ml_patterns_not_learned.append('inducement')
 
@@ -399,7 +403,7 @@ class SmartMoneyAnalyzer:
                 # Collect all detected patterns into a unified format
                 all_detected_patterns = self._collect_detected_patterns(
                     order_blocks, fvgs, displacements, ote_zones,
-                    breaker_blocks, events, swing_points
+                    breaker_blocks, events, swing_points, inducements
                 )
 
                 # Get market structure string for validation
@@ -507,6 +511,7 @@ class SmartMoneyAnalyzer:
             ote_zones=ote_zones,
             breaker_blocks=breaker_blocks,
             buy_sell_stops=buy_sell_stops,
+            inducements=inducements,
             kill_zone_active=kill_zone_active,
             # ML tracking
             ml_patterns_used=ml_patterns_used,
@@ -543,7 +548,8 @@ class SmartMoneyAnalyzer:
         ote_zones: List[Dict],
         breaker_blocks: List[Dict],
         events: List[StructureEvent],
-        swing_points: List[SwingPoint]
+        swing_points: List[SwingPoint],
+        inducements: List[Dict] = None
     ) -> List[Dict]:
         """
         Collect all detected patterns into a unified format for validation.
@@ -638,6 +644,18 @@ class SmartMoneyAnalyzer:
                 'price_low': sp.price if sp.type == 'low' else sp.price,
                 'confidence': min(0.5 + sp.strength * 0.05, 0.9),  # Higher strength = higher confidence
             })
+
+        # Convert Inducements
+        if inducements:
+            for i, idm in enumerate(inducements):
+                patterns.append({
+                    'pattern_type': f"{idm['type']}_inducement",
+                    'index': idm.get('index', 0),
+                    'price_high': idm.get('high', 0),
+                    'price_low': idm.get('low', 0),
+                    'confidence': 0.75,
+                    'taken_out': idm.get('taken_out', False),
+                })
 
         return patterns
 
@@ -1282,6 +1300,166 @@ class SmartMoneyAnalyzer:
                     })
 
         return displacements[-5:]  # Return last 5
+
+    def find_inducement(
+        self,
+        data: 'pd.DataFrame',
+        swing_points: List[SwingPoint]
+    ) -> List[Dict]:
+        """
+        Find inducement zones (ICT concept).
+
+        Inducement = the first pullback (minor swing) on the left side of a
+        major swing high/low. It's a liquidity pool where retail traders place
+        stop losses. Smart Money takes out inducement before valid structural moves.
+
+        ICT rules from training:
+        - Located at first pullback on left side of recent high/low
+        - Must be taken out (price must trade through it) for valid HH/HL
+        - Bullish inducement: first minor swing LOW before a swing HIGH
+          (the dip/pullback before price pushed to the high)
+        - Bearish inducement: first minor swing HIGH before a swing LOW
+          (the rally/pullback before price dropped to the low)
+
+        The inducement level is marked at the swing point price (the low of the
+        pullback for bullish, the high of the pullback for bearish), with a
+        narrow zone around it for visualization.
+        """
+        inducements = []
+        if len(swing_points) < 3:
+            return inducements
+
+        highs = data['high'].values
+        lows = data['low'].values
+        closes = data['close'].values
+
+        # For each major swing high, find bullish inducement
+        # (the first pullback LOW immediately to the left of the swing high)
+        for i, sh in enumerate(swing_points):
+            if sh.type != 'high':
+                continue
+
+            # Look for the nearest pullback (minor low) between this swing high
+            # and the previous swing low. Search backwards from the swing high.
+            prev_swing_low_idx = 0
+            for sp in swing_points:
+                if sp.type == 'low' and sp.index < sh.index:
+                    prev_swing_low_idx = sp.index
+
+            if prev_swing_low_idx == 0 and sh.index < 5:
+                continue  # Not enough data before this swing
+
+            # Search backwards from swing high to find the first pullback low
+            # A pullback low = a candle whose low is lower than both neighbors
+            best_pullback = None
+            search_start = max(prev_swing_low_idx + 1, sh.index - 15)  # Don't search too far back
+
+            for j in range(sh.index - 1, search_start - 1, -1):
+                if j <= 0 or j >= len(data) - 1:
+                    continue
+
+                # This candle made a local low (lower than both neighbors)
+                if lows[j] < lows[j - 1] and lows[j] < lows[j + 1]:
+                    # This is a pullback - the dip before the swing high
+                    # It must be BELOW the swing high (obvious) and represent
+                    # a genuine retracement, not just noise
+                    pullback_depth = (sh.price - lows[j]) / sh.price
+                    if pullback_depth > 0.005:  # At least 0.5% pullback
+                        best_pullback = {
+                            'index': j,
+                            'price': float(lows[j]),
+                        }
+                        break  # First one found (closest to swing high) is the inducement
+
+            if best_pullback:
+                idm_price = best_pullback['price']
+                idx = best_pullback['index']
+
+                # Create a narrow zone around the inducement level
+                # Use a small percentage of price for the zone width
+                zone_width = idm_price * 0.005  # 0.5% zone width
+
+                # Check if inducement was taken out (price traded below it after the pullback)
+                taken_out = False
+                for j in range(idx + 1, min(len(data), sh.index + 20)):
+                    if lows[j] < idm_price:
+                        taken_out = True
+                        break
+
+                inducements.append({
+                    'type': 'bullish',
+                    'high': idm_price + zone_width,
+                    'low': idm_price - zone_width,
+                    'price': idm_price,
+                    'index': idx,
+                    'parent_swing_index': sh.index,
+                    'parent_swing_price': float(sh.price),
+                    'taken_out': taken_out,
+                    'timestamp': data.index[idx] if hasattr(data.index, '__getitem__') else None,
+                })
+
+        # For each major swing low, find bearish inducement
+        # (the first pullback HIGH immediately to the left of the swing low)
+        for i, sl in enumerate(swing_points):
+            if sl.type != 'low':
+                continue
+
+            # Look for the nearest previous swing high
+            prev_swing_high_idx = 0
+            for sp in swing_points:
+                if sp.type == 'high' and sp.index < sl.index:
+                    prev_swing_high_idx = sp.index
+
+            if prev_swing_high_idx == 0 and sl.index < 5:
+                continue
+
+            # Search backwards from swing low to find the first pullback high
+            best_pullback = None
+            search_start = max(prev_swing_high_idx + 1, sl.index - 15)
+
+            for j in range(sl.index - 1, search_start - 1, -1):
+                if j <= 0 or j >= len(data) - 1:
+                    continue
+
+                # This candle made a local high (higher than both neighbors)
+                if highs[j] > highs[j - 1] and highs[j] > highs[j + 1]:
+                    # Genuine pullback up before the drop
+                    pullback_depth = (highs[j] - sl.price) / sl.price
+                    if pullback_depth > 0.005:  # At least 0.5% pullback
+                        best_pullback = {
+                            'index': j,
+                            'price': float(highs[j]),
+                        }
+                        break
+
+            if best_pullback:
+                idm_price = best_pullback['price']
+                idx = best_pullback['index']
+
+                zone_width = idm_price * 0.005
+
+                # Check if inducement was taken out (price traded above it after)
+                taken_out = False
+                for j in range(idx + 1, min(len(data), sl.index + 20)):
+                    if highs[j] > idm_price:
+                        taken_out = True
+                        break
+
+                inducements.append({
+                    'type': 'bearish',
+                    'high': idm_price + zone_width,
+                    'low': idm_price - zone_width,
+                    'price': idm_price,
+                    'index': idx,
+                    'parent_swing_index': sl.index,
+                    'parent_swing_price': float(sl.price),
+                    'taken_out': taken_out,
+                    'timestamp': data.index[idx] if hasattr(data.index, '__getitem__') else None,
+                })
+
+        # Sort by index and return recent ones
+        inducements.sort(key=lambda x: x['index'])
+        return inducements[-8:]
 
     def find_ote_zone(
         self,

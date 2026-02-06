@@ -58,6 +58,7 @@ const CONCEPT_INFO = {
   'liquidity': { name: 'Liquidity', short: 'LIQ', color: '#e91e63', description: 'Stop hunt zones' },
   'mitigation_block': { name: 'Mitigation Block', short: 'MB', color: '#00bcd4', description: 'Mitigation zone' },
   'rejection_block': { name: 'Rejection Block', short: 'RB', color: '#ff9800', description: 'Rejection zone' },
+  'inducement': { name: 'Inducement', short: 'IDM', color: '#a78bfa', description: 'Smart Money trap zone' },
 };
 
 // Map backend pattern types to display names
@@ -85,6 +86,8 @@ const PATTERN_TYPE_MAP = {
   'bearish_ote': { short: 'OTE', color: '#d500f9', direction: 'bearish' },
   'bullish_breaker': { short: 'BRK', color: '#00bfa5', direction: 'bullish' },
   'bearish_breaker': { short: 'BRK', color: '#ff6d00', direction: 'bearish' },
+  'bullish_inducement': { short: 'IDM', color: '#a78bfa', direction: 'bullish' },
+  'bearish_inducement': { short: 'IDM', color: '#ce93d8', direction: 'bearish' },
   'buy_stops': { short: 'BST', color: '#ff5252', direction: 'neutral' },
   'sell_stops': { short: 'SST', color: '#69f0ae', direction: 'neutral' },
   // Swing point markers
@@ -139,6 +142,7 @@ function LiveChart() {
   const signalDirectionRef = useRef(null);   // Signal direction for pattern filtering
   const isLoadingHistoryRef = useRef(false); // Prevent multiple historical data requests
   const oldestTimestampRef = useRef(null);   // Track oldest candle for scrollback
+  const getRelevantPatternsRef = useRef(null); // Ref to latest getRelevantPatterns to avoid stale closures
 
   // Format price with appropriate decimals
   const formatPrice = (price, sym = symbol) => {
@@ -390,8 +394,9 @@ function LiveChart() {
       const baseType = pt.replace('bullish_', '').replace('bearish_', '');
       const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
       typeCounts[baseType] = (typeCounts[baseType] || 0) + 1;
-      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
-      if (typeCounts[baseType] > (isMarkerType ? 4 : 2)) continue;
+      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
+                           'bullish_inducement', 'bearish_inducement'].includes(pt);
+      if (typeCounts[baseType] > (isMarkerType ? 8 : 2)) continue;
       const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
       if (isBoxType) {
         if (seenZones.some(z => Math.abs(z - mid) / mid < 0.03)) continue;
@@ -482,7 +487,7 @@ function LiveChart() {
         'displacement': ['displacement'],
         'expansion': ['displacement'],
         'smart_money_trap': ['displacement', 'liquidity_sweep_high', 'liquidity_sweep_low'],
-        'inducement': ['displacement', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'inducement': ['bullish_inducement', 'bearish_inducement'],
         'price_delivery_cycle': ['displacement', 'fvg'],
 
         // Swing/Structure variants
@@ -580,11 +585,20 @@ function LiveChart() {
       // Include swing markers in the ray patterns
       const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
       const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
+      // Include inducement rays separately (not deduped by price rounding)
+      const idmPats = sortedPatterns.filter(p => p.pattern_type === 'bullish_inducement' || p.pattern_type === 'bearish_inducement');
+      // Remove IDMs from uniqRays to avoid double-counting
+      const uniqRaysNoIdm = uniqRays.filter(p => p.pattern_type !== 'bullish_inducement' && p.pattern_type !== 'bearish_inducement');
       // Increased bosCh limit from 2 to 8 to ensure BOS/CHoCH patterns persist during zoom
-      const result = [...bosCh.slice(0, 8), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8)];
+      const result = [...bosCh.slice(0, 8), ...actualBoxPats.slice(0, 6), ...uniqRaysNoIdm.slice(0, 6), ...swingPats.slice(0, 8), ...idmPats.slice(0, 8)];
       return applyVisibilityFilter(result);
     }
   }, [timeframe, visiblePatterns]);
+
+  // Keep ref in sync so zoom/scroll handler always uses latest version
+  useEffect(() => {
+    getRelevantPatternsRef.current = getRelevantPatterns;
+  }, [getRelevantPatterns]);
 
   // Draw horizontal rays for BOS/CHoCH, liquidity, and equal highs/lows
   const drawHorizontalRays = useCallback((patterns, candles) => {
@@ -627,6 +641,8 @@ function LiveChart() {
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
       'equilibrium',
+      // Inducement zones - rays from origin extending right
+      'bullish_inducement', 'bearish_inducement',
       // Swing point markers - now drawn as horizontal rays
       'swing_high', 'swing_low',
       'higher_high', 'higher_low', 'lower_high', 'lower_low',
@@ -656,6 +672,9 @@ function LiveChart() {
         'higher_low': { text: 'HL', color: '#69f0ae' },
         'lower_high': { text: 'LH', color: '#ff5252' },
         'lower_low': { text: 'LL', color: '#ff8a80' },
+        // Inducement zones
+        'bullish_inducement': { text: 'Bullish IDM', color: '#a78bfa' },
+        'bearish_inducement': { text: 'Bearish IDM', color: '#ce93d8' },
       };
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
@@ -673,7 +692,6 @@ function LiveChart() {
 
       // Get Y coordinate for this price
       let y = series.priceToCoordinate(price);
-
       // Handle zoom: if y is null, price is outside current visible range
       // Skip only if truly null (price not in data range at all)
       if (y === null) return;
@@ -723,6 +741,9 @@ function LiveChart() {
         return;
       }
 
+      // Check if this is an inducement pattern
+      const isInducement = patternType === 'bullish_inducement' || patternType === 'bearish_inducement';
+
       // Determine if this is a high-type or low-type pattern
       const isHighPattern = patternType.includes('high') || patternType.includes('bullish') ||
                            patternType === 'buyside_liquidity' || patternType === 'equal_highs';
@@ -733,6 +754,22 @@ function LiveChart() {
       let startTime = null;
       let foundValidLevel = false;
       const tolerance = 0.005; // 0.5% tolerance
+
+      // Inducements: use exact timestamp from backend, fallback to price matching
+      if (isInducement && pattern.time) {
+        startTime = pattern.time;
+        foundValidLevel = true;
+      } else if (isInducement && candles.length > 0) {
+        // Fallback: find the candle closest to the inducement price
+        for (let i = 0; i < candles.length; i++) {
+          const c = candles[i];
+          if (Math.abs(c.low - price) / price < tolerance || Math.abs(c.high - price) / price < tolerance) {
+            startTime = c.time;
+            foundValidLevel = true;
+            break;
+          }
+        }
+      }
 
       // For high patterns (BSL, EQH, BOS bullish): find swing high candle
       // For low patterns (SSL, EQL, BOS bearish): find swing low candle
@@ -797,8 +834,9 @@ function LiveChart() {
       // Only skip if we have no way to position the pattern at all
       if (!startTime && candles.length === 0) return;
 
-      // Check if this is a swing/structure marker type (should extend to right edge with price label)
-      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
+      // Check if this is a swing/structure/inducement marker type (should extend to right edge with price label)
+      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
+                             'bullish_inducement', 'bearish_inducement'].includes(patternType);
 
       try {
         const timeScale = chart.timeScale();
@@ -834,9 +872,14 @@ function LiveChart() {
         // Anti-overlap: adjust Y for ray label
         const adjustedRayY = findNonOverlappingYRay(y);
 
-        // Create the horizontal ray line - solid line for all patterns
+        // Create the horizontal ray line
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
+
+        // Inducements use dashed line style
+        const rayBg = isInducement
+          ? `repeating-linear-gradient(90deg, ${annotation.color} 0px, ${annotation.color} 6px, transparent 6px, transparent 12px)`
+          : annotation.color;
 
         rayLine.style.cssText = `
           position: absolute;
@@ -844,7 +887,7 @@ function LiveChart() {
           top: ${y}px;
           width: ${rayWidth}px;
           height: 2px;
-          background: ${annotation.color};
+          background: ${rayBg};
           pointer-events: none;
           z-index: 4;
           box-shadow: 0 0 4px ${annotation.color}60;
@@ -965,6 +1008,8 @@ function LiveChart() {
       'buyside_liquidity', 'sellside_liquidity',
       'buy_stops', 'sell_stops',
       'equilibrium',
+      // Inducement zones - drawn as rays from origin
+      'bullish_inducement', 'bearish_inducement',
       // Swing point markers - now drawn as horizontal rays
       'swing_high', 'swing_low',
       'higher_high', 'higher_low', 'lower_high', 'lower_low',
@@ -1311,7 +1356,9 @@ function LiveChart() {
             // Use FULL candle array for pattern context - patterns are filtered by PRICE range
             // in getRelevantPatterns(), not by time range. This ensures patterns stay visible
             // at their price levels when scrolling left/right.
-            const relevant = getRelevantPatterns(allPatterns, candles, signalDirectionRef.current);
+            // Use ref to always get the latest version (avoids stale closure with old visiblePatterns)
+            const relevantFn = getRelevantPatternsRef.current || getRelevantPatterns;
+            const relevant = relevantFn(allPatterns, candles, signalDirectionRef.current);
             analysisPatternsRef.current = relevant;
             clearPatternOverlays();
             drawPatternBoxes(relevant, candles);

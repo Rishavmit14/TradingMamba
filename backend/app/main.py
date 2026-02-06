@@ -701,6 +701,27 @@ async def analyze_symbol(
                             'distance_pct': float(ss.get('distance_pct', 0)),
                         })
 
+                # Inducement zones
+                for idm in analysis.inducements:
+                    idm_entry = {
+                        'pattern_type': f'{idm["type"]}_inducement',
+                        'high': float(idm['high']),
+                        'low': float(idm['low']),
+                        'price': float(idm['price']),
+                        'start_index': int(idm.get('index', 0)),
+                        'timeframe': tf,
+                        'taken_out': idm.get('taken_out', False),
+                    }
+                    # Include unix timestamp for accurate chart positioning
+                    ts = idm.get('timestamp')
+                    if ts is not None:
+                        import pandas as pd
+                        if hasattr(ts, 'timestamp'):
+                            idm_entry['time'] = int(ts.timestamp())
+                        elif isinstance(ts, (int, float)):
+                            idm_entry['time'] = int(ts)
+                    all_patterns.append(idm_entry)
+
                 # Swing point markers (most recent 3 highs + 3 lows)
                 swing_highs = [sp for sp in analysis.swing_points if sp.type == 'high'][-3:]
                 swing_lows = [sp for sp in analysis.swing_points if sp.type == 'low'][-3:]
@@ -1093,6 +1114,18 @@ async def quick_signal(
                         'timeframe': 'H1',
                         'distance_pct': float(ss.get('distance_pct', 0)),
                     })
+
+            # Inducement zones
+            for idm in analysis.inducements:
+                patterns.append({
+                    'pattern_type': f'{idm["type"]}_inducement',
+                    'high': float(idm['high']),
+                    'low': float(idm['low']),
+                    'price': float(idm['price']),
+                    'start_index': int(idm.get('index', 0)),
+                    'timeframe': 'H1',
+                    'taken_out': idm.get('taken_out', False),
+                })
 
             # Determine kill zone status
             now = datetime.utcnow()
