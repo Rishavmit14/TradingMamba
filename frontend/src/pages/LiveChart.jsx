@@ -295,8 +295,8 @@ function LiveChart() {
         rayWidth = rightEdge;
       }
 
-      // Calculate label center position
-      const labelX = startX + rayWidth / 2 - 30;
+      // Calculate ray center position
+      const rayCenterX = startX + rayWidth / 2;
 
       // Update all elements in the group with consistent coordinates
       elements.forEach(el => {
@@ -312,8 +312,11 @@ function LiveChart() {
           el.style.top = `${y}px`;
           el.style.width = `${rayWidth}px`;
         } else if (elementType === 'label') {
-          el.style.left = `${labelX}px`;
+          // Use CSS transform to center the label on the ray
+          // Position at ray center, then translate left by 50% of label width
+          el.style.left = `${rayCenterX}px`;
           el.style.top = `${y - 10}px`;
+          el.style.transform = 'translateX(-50%)';
         } else if (elementType === 'marker') {
           el.style.left = `${startX - 4}px`;
           el.style.top = `${y - 4}px`;
@@ -653,10 +656,11 @@ function LiveChart() {
           const labelEl = document.createElement('div');
           const labelY = findNonOverlappingYRay(y - LABEL_HEIGHT / 2);
           labelEl.className = 'ray-overlay';
-          // Center the label on the equilibrium ray
-          const labelX = startX + rayWidth / 2 - 30;
+          // Center the label on the equilibrium ray using CSS transform
+          const rayCenterX = startX + rayWidth / 2;
           labelEl.style.cssText = `
-            position: absolute; left: ${labelX}px; top: ${labelY}px;
+            position: absolute; left: ${rayCenterX}px; top: ${labelY}px;
+            transform: translateX(-50%);
             color: ${annotation.color}; font-size: 10px; font-weight: 700;
             text-shadow: 0 1px 2px rgba(0,0,0,0.9);
             padding: 1px 5px; background: rgba(0,0,0,0.8);
@@ -813,13 +817,14 @@ function LiveChart() {
         labelEl.dataset.price = price;
         labelEl.dataset.startTime = startTime;
 
-        // Position label in the center of the ray for all patterns
-        const labelX = startX + rayWidth / 2 - 30;
+        // Position label in the center of the ray using CSS transform for perfect centering
+        const rayCenterX = startX + rayWidth / 2;
 
         labelEl.style.cssText = `
           position: absolute;
-          left: ${labelX}px;
+          left: ${rayCenterX}px;
           top: ${adjustedRayY - 10}px;
+          transform: translateX(-50%);
           color: ${annotation.color};
           font-size: 10px;
           font-weight: 700;
