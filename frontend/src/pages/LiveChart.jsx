@@ -469,9 +469,49 @@ function LiveChart() {
     // Filter to only ray patterns
     const rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
 
+    // Group patterns by price level (within 0.1% tolerance) to merge labels
+    const priceTolerance = 0.001; // 0.1% tolerance for grouping
+    const groupedPatterns = [];
+    const usedIndices = new Set();
+
     rayPatterns.forEach((pattern, idx) => {
+      if (usedIndices.has(idx)) return;
+
+      const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
+      if (!price) return;
+
+      // Find all patterns at similar price levels
+      const group = [pattern];
+      usedIndices.add(idx);
+
+      rayPatterns.forEach((otherPattern, otherIdx) => {
+        if (usedIndices.has(otherIdx)) return;
+        const otherPrice = otherPattern.price || otherPattern.high || otherPattern.low || otherPattern.price_high || otherPattern.price_low;
+        if (!otherPrice) return;
+
+        if (Math.abs(price - otherPrice) / price < priceTolerance) {
+          group.push(otherPattern);
+          usedIndices.add(otherIdx);
+        }
+      });
+
+      groupedPatterns.push(group);
+    });
+
+    // Draw one ray per price group with merged labels
+    groupedPatterns.forEach((group) => {
+      // Use the first pattern's data for the ray
+      const pattern = group[0];
       const patternType = pattern.pattern_type;
-      const annotation = getAnnotation(patternType);
+
+      // Merge all pattern types in the group into one label
+      const uniqueTypes = [...new Set(group.map(p => p.pattern_type))];
+      const mergedAnnotations = uniqueTypes.map(t => getAnnotation(t));
+      // Use the first color, combine text with "/"
+      const annotation = {
+        text: mergedAnnotations.map(a => a.text).join('/'),
+        color: mergedAnnotations[0].color
+      };
 
       // Get the price level for the ray
       const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
@@ -592,8 +632,9 @@ function LiveChart() {
 
       if (!startTime) return;
 
-      // Check if this is a swing/structure marker type (should extend to right edge with price label)
-      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
+      // Check if any pattern in the group is a swing/structure marker type (should extend to right edge with price label)
+      const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
+      const isSwingMarker = group.some(p => swingMarkerTypes.includes(p.pattern_type));
 
       try {
         const timeScale = chart.timeScale();
