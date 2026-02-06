@@ -258,53 +258,70 @@ function LiveChart() {
     const timeScale = chart.timeScale();
     const chartElement = chartContainerRef.current;
     const chartWidth = chartElement.clientWidth;
+    const chartHeight = chartElement.clientHeight;
     const rightEdge = chartWidth - 70;
 
-    // Update each ray element's position based on current chart state
+    // Group elements by their rayId for coordinated updates
+    const rayGroups = {};
     rayOverlaysRef.current.forEach(el => {
       if (!el || !el.dataset) return;
+      const rayId = el.dataset.rayId;
+      if (!rayId) return;
+      if (!rayGroups[rayId]) rayGroups[rayId] = [];
+      rayGroups[rayId].push(el);
+    });
 
-      const price = parseFloat(el.dataset.price);
-      const startTime = parseInt(el.dataset.startTime);
-      const elementType = el.dataset.type; // 'ray', 'label', 'marker', 'priceLabel'
+    // Update each ray group together (ray, label, marker, priceLabel share same coordinates)
+    Object.values(rayGroups).forEach(elements => {
+      // Get common data from first element
+      const firstEl = elements[0];
+      const price = parseFloat(firstEl.dataset.price);
+      const startTime = parseInt(firstEl.dataset.startTime);
 
       if (isNaN(price)) return;
 
       // Get new Y coordinate for this price
       const y = series.priceToCoordinate(price);
-      if (y === null || y < -50 || y > chartElement.clientHeight + 50) {
-        el.style.display = 'none';
-        return;
-      }
-      el.style.display = '';
+      const isVisible = y !== null && y >= -50 && y <= chartHeight + 50;
 
       // Get new X coordinate for the start time
       let startX = startTime ? timeScale.timeToCoordinate(startTime) : 0;
       if (startX === null || startX < 0) startX = 0;
 
-      // Calculate ray width
+      // Calculate ray width - if ray is too short, start from left edge
       let rayWidth = rightEdge - startX;
-      if (rayWidth < 20) {
+      if (rayWidth < 20 || startX > rightEdge - 50) {
         startX = 0;
         rayWidth = rightEdge;
       }
 
-      // Update position based on element type
-      if (elementType === 'ray') {
-        el.style.left = `${startX}px`;
-        el.style.top = `${y}px`;
-        el.style.width = `${rayWidth}px`;
-      } else if (elementType === 'label') {
-        const labelX = startX + rayWidth / 2 - 30;
-        el.style.left = `${labelX}px`;
-        el.style.top = `${y - 10}px`;
-      } else if (elementType === 'marker') {
-        el.style.left = `${startX - 4}px`;
-        el.style.top = `${y - 4}px`;
-        el.style.display = startX > 0 ? '' : 'none';
-      } else if (elementType === 'priceLabel') {
-        el.style.top = `${y - 9}px`;
-      }
+      // Calculate label center position
+      const labelX = startX + rayWidth / 2 - 30;
+
+      // Update all elements in the group with consistent coordinates
+      elements.forEach(el => {
+        if (!isVisible) {
+          el.style.display = 'none';
+          return;
+        }
+        el.style.display = '';
+
+        const elementType = el.dataset.type;
+        if (elementType === 'ray') {
+          el.style.left = `${startX}px`;
+          el.style.top = `${y}px`;
+          el.style.width = `${rayWidth}px`;
+        } else if (elementType === 'label') {
+          el.style.left = `${labelX}px`;
+          el.style.top = `${y - 10}px`;
+        } else if (elementType === 'marker') {
+          el.style.left = `${startX - 4}px`;
+          el.style.top = `${y - 4}px`;
+          el.style.display = startX > 0 ? '' : 'none';
+        } else if (elementType === 'priceLabel') {
+          el.style.top = `${y - 9}px`;
+        }
+      });
     });
 
     // Also update pattern box overlays
@@ -762,11 +779,15 @@ function LiveChart() {
         // Anti-overlap: adjust Y for ray label
         const adjustedRayY = findNonOverlappingYRay(y);
 
+        // Generate unique rayId for grouping related elements (ray, label, marker, priceLabel)
+        const rayId = `ray_${price}_${startTime}`;
+
         // Create the horizontal ray line (solid line) - always at true price
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
         // Store data for fast position updates
         rayLine.dataset.type = 'ray';
+        rayLine.dataset.rayId = rayId;
         rayLine.dataset.price = price;
         rayLine.dataset.startTime = startTime;
 
@@ -788,6 +809,7 @@ function LiveChart() {
         labelEl.className = 'pattern-ray-overlay';
         // Store data for fast position updates
         labelEl.dataset.type = 'label';
+        labelEl.dataset.rayId = rayId;
         labelEl.dataset.price = price;
         labelEl.dataset.startTime = startTime;
 
@@ -818,6 +840,7 @@ function LiveChart() {
           startMarker.className = 'pattern-ray-overlay';
           // Store data for fast position updates
           startMarker.dataset.type = 'marker';
+          startMarker.dataset.rayId = rayId;
           startMarker.dataset.price = price;
           startMarker.dataset.startTime = startTime;
           startMarker.style.cssText = `
@@ -842,6 +865,7 @@ function LiveChart() {
           priceLabel.className = 'pattern-ray-overlay';
           // Store data for fast position updates
           priceLabel.dataset.type = 'priceLabel';
+          priceLabel.dataset.rayId = rayId;
           priceLabel.dataset.price = price;
           // Format price with appropriate decimals
           const formattedPrice = price > 1000 ? price.toFixed(2) : price > 1 ? price.toFixed(4) : price.toFixed(6);
