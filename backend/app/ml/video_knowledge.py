@@ -53,14 +53,41 @@ CONCEPT_ALIASES = {
     'breaker_block': 'breaker',
 }
 
-# ICT rules extracted from methodology (what patterns require/imply)
+# =============================================================================
+# ICT PATTERN RULES — Extracted from 16 Forex Minions training videos via Claude Code
+# =============================================================================
+# These rules define what each pattern requires, implies, and how to validate it.
+# Source: Claude Code Max plan analysis of training data (FREE, no API cost)
+# =============================================================================
+
 ICT_PATTERN_RULES = {
+    # -------------------------------------------------------------------------
+    # CORE PATTERNS
+    # -------------------------------------------------------------------------
     'order_block': {
         'requires_displacement': True,
         'requires_structure_break': True,
         'significance_when_institutional': True,
         'fibonacci_related': False,
         'directional': True,  # has bullish/bearish variant
+        'validation_rules': [
+            'Must have displacement (strong move) away from the block',
+            'Candle body must close beyond the order block for confirmation',
+            'Look for return to the order block for entry',
+        ],
+    },
+    'valid_order_block': {
+        'requires_displacement': True,
+        'requires_structure_break': True,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Order block must lead to break of structure',
+            'Must have liquidity sweep before the order block forms',
+            'Entry on return to order block after displacement',
+            'Stop loss below/above the order block',
+        ],
     },
     'fvg': {
         'requires_displacement': True,
@@ -68,6 +95,11 @@ ICT_PATTERN_RULES = {
         'significance_when_institutional': False,
         'fibonacci_related': False,
         'directional': True,
+        'validation_rules': [
+            'Gap between candle 1 high and candle 3 low (bullish)',
+            'Gap between candle 1 low and candle 3 high (bearish)',
+            'Valid when price returns to fill the gap',
+        ],
     },
     'displacement': {
         'requires_displacement': False,  # IS displacement
@@ -82,6 +114,11 @@ ICT_PATTERN_RULES = {
         'significance_when_institutional': True,
         'fibonacci_related': True,  # 62-79% retracement
         'directional': True,
+        'validation_rules': [
+            'Entry at 62-79% Fibonacci retracement of impulse move',
+            'Must have prior displacement/impulse',
+            'Confluence with order block or FVG increases probability',
+        ],
     },
     'liquidity': {
         'requires_displacement': False,
@@ -89,6 +126,11 @@ ICT_PATTERN_RULES = {
         'significance_when_institutional': True,
         'fibonacci_related': False,
         'directional': False,
+        'validation_rules': [
+            'Equal highs/lows create liquidity pools',
+            'Stop losses cluster above highs and below lows',
+            'Smart money targets these pools before reversing',
+        ],
     },
     'breaker': {
         'requires_displacement': True,
@@ -103,6 +145,209 @@ ICT_PATTERN_RULES = {
         'significance_when_institutional': False,
         'fibonacci_related': False,
         'directional': False,
+        'validation_rules': [
+            'London: 2am-5am EST',
+            'New York: 7am-10am EST',
+            'Highest probability setups occur in these windows',
+        ],
+    },
+
+    # -------------------------------------------------------------------------
+    # INDUCEMENT PATTERNS (from Forex Minions)
+    # -------------------------------------------------------------------------
+    'inducement': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'First valid pullback on the left side of a swing high/low',
+            'Acts as a trap before order block/supply/demand zone',
+            '70% of forex trading works around inducement',
+            'Must be swept (liquidity taken) before valid move continues',
+        ],
+    },
+    'inducement_shift': {
+        'requires_displacement': True,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Rule 1: No sweep of inducement = shift to impulse low/high',
+            'Rule 2: Sweep but no candle close beyond = shift to impulse low/high',
+            'Rule 3: Impulse swing creates new inducement at its extreme',
+        ],
+    },
+    'valid_pullback': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': False,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Pullback must sweep the highest/lowest candle (liquidity sweep)',
+            'Candle body must close back inside the range',
+            'Creates valid inducement for continuation',
+        ],
+    },
+    'smart_money_trap': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Retail traders enter early expecting breakout',
+            'Smart money sweeps their stops before reversing',
+            'Look for failed breakouts with quick reversals',
+        ],
+    },
+
+    # -------------------------------------------------------------------------
+    # STRUCTURE PATTERNS (from Forex Minions)
+    # -------------------------------------------------------------------------
+    'break_of_structure': {
+        'requires_displacement': True,
+        'requires_structure_break': True,  # IS the structure break
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Candle body must CLOSE beyond the swing point',
+            'Wick-only break is NOT valid BOS',
+            'Single candle BOS = strongest confirmation',
+            'Multi-candle BOS = valid but weaker',
+        ],
+    },
+    'change_of_character': {
+        'requires_displacement': True,
+        'requires_structure_break': True,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'First break of structure in opposite direction',
+            'Signals potential trend reversal',
+            'Requires confirmation (not just indication)',
+            'Fake CHoCH occurs when inducement not swept',
+        ],
+    },
+    'fake_choch': {
+        'requires_displacement': False,
+        'requires_structure_break': True,
+        'significance_when_institutional': False,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'CHoCH that fails because inducement was not swept',
+            'Looks like reversal but continues original trend',
+            'Always check if inducement was taken before CHoCH',
+        ],
+    },
+
+    # -------------------------------------------------------------------------
+    # PREMIUM/DISCOUNT PATTERNS (from Forex Minions)
+    # -------------------------------------------------------------------------
+    'premium_discount': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': True,
+        'directional': False,
+        'validation_rules': [
+            'Premium zone: above 50% (equilibrium) of range - sell zone',
+            'Discount zone: below 50% of range - buy zone',
+            'Equilibrium is the 50% level of the range',
+            'Look for shorts in premium, longs in discount',
+        ],
+    },
+    'equilibrium': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': False,
+        'fibonacci_related': True,
+        'directional': False,
+        'validation_rules': [
+            'The 50% level of any price range',
+            'Divides premium from discount zones',
+            'Price often reacts at equilibrium',
+        ],
+    },
+
+    # -------------------------------------------------------------------------
+    # PRICE DELIVERY PATTERNS (from Forex Minions)
+    # -------------------------------------------------------------------------
+    'price_delivery_cycle': {
+        'requires_displacement': True,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': False,
+        'validation_rules': [
+            'Cycle: Expansion → Retracement → Reversal/Continuation',
+            'Expansion = strong directional move (displacement)',
+            'Retracement = pullback to key levels',
+            'Cycle repeats at all timeframes',
+        ],
+    },
+    'expansion': {
+        'requires_displacement': True,  # IS expansion
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+    },
+    'retracement': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': False,
+        'fibonacci_related': True,
+        'directional': True,
+    },
+    'judas_swing': {
+        'requires_displacement': True,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Fake move at session open to trap retail traders',
+            'Sweeps liquidity in one direction',
+            'Real move occurs in opposite direction',
+            'Common in London and NY sessions',
+        ],
+    },
+
+    # -------------------------------------------------------------------------
+    # LIQUIDITY PATTERNS (from Forex Minions)
+    # -------------------------------------------------------------------------
+    'liquidity_sweep': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': True,
+        'validation_rules': [
+            'Price briefly breaks a level to take stops',
+            'Candle wick extends beyond the level',
+            'Body closes back inside the range',
+            'Confirms valid pullback and inducement',
+        ],
+    },
+    'equal_highs_lows': {
+        'requires_displacement': False,
+        'requires_structure_break': False,
+        'significance_when_institutional': True,
+        'fibonacci_related': False,
+        'directional': False,
+        'validation_rules': [
+            'Multiple highs/lows at same level = liquidity pool',
+            'Buy stops above equal highs',
+            'Sell stops below equal lows',
+            'Smart money targets these before reversing',
+        ],
     },
 }
 

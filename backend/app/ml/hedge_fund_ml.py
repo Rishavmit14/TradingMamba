@@ -79,17 +79,19 @@ class GradingCriteria:
     freshness_score: float = 0.0     # Is this a fresh/untested level? (0-1)
     timeframe_score: float = 0.0     # Higher TF = higher score (0-1)
     historical_score: float = 0.0    # Historical success rate (0-1)
+    validation_score: float = 0.5    # ICT rule validation (0-1) - 0.5 default if not validated
 
     def total_score(self) -> float:
         """Calculate weighted total score"""
         weights = {
-            'size': 0.10,
-            'location': 0.20,        # Location is key in ICT
-            'structure': 0.20,       # Market structure alignment
-            'confluence': 0.15,      # Multiple factors
-            'freshness': 0.15,       # Fresh levels work better
-            'timeframe': 0.10,       # HTF preferred
-            'historical': 0.10,      # Backtest results
+            'size': 0.08,            # Reduced slightly
+            'location': 0.18,        # Location is key in ICT
+            'structure': 0.18,       # Market structure alignment
+            'confluence': 0.12,      # Multiple factors
+            'freshness': 0.12,       # Fresh levels work better
+            'timeframe': 0.08,       # HTF preferred
+            'historical': 0.08,      # Backtest results
+            'validation': 0.16,      # ICT rule validation - important for quality
         }
 
         return (
@@ -99,7 +101,8 @@ class GradingCriteria:
             self.confluence_score * weights['confluence'] +
             self.freshness_score * weights['freshness'] +
             self.timeframe_score * weights['timeframe'] +
-            self.historical_score * weights['historical']
+            self.historical_score * weights['historical'] +
+            self.validation_score * weights['validation']
         )
 
     def to_grade(self) -> PatternGrade:
@@ -145,6 +148,7 @@ class GradedPattern:
                 'freshness_score': float(self.criteria.freshness_score),
                 'timeframe_score': float(self.criteria.timeframe_score),
                 'historical_score': float(self.criteria.historical_score),
+                'validation_score': float(self.criteria.validation_score),
             },
             'strengths': self.strengths,
             'weaknesses': self.weaknesses,
@@ -218,7 +222,8 @@ class PatternGrader:
         pattern_type: str,
         pattern_data: Dict,
         market_context: Dict,
-        historical_stats: Optional[Dict] = None
+        historical_stats: Optional[Dict] = None,
+        validation_result: Optional[Dict] = None
     ) -> GradedPattern:
         """
         Grade a single pattern based on ICT methodology.
@@ -228,6 +233,7 @@ class PatternGrader:
             pattern_data: Raw pattern data (price levels, etc.)
             market_context: Current market context (bias, structure, etc.)
             historical_stats: Historical performance of this pattern type
+            validation_result: ICT rule validation result (from pattern_validator)
         """
         criteria = GradingCriteria()
         strengths = []
@@ -292,6 +298,23 @@ class PatternGrader:
                 weaknesses.append("Weak historical performance")
         else:
             criteria.historical_score = 0.5  # Neutral if no data
+
+        # 8. ICT RULE VALIDATION SCORING
+        if validation_result:
+            criteria.validation_score = self._score_validation(validation_result)
+            status = validation_result.get('status', 'unknown')
+            if status == 'valid':
+                strengths.append("Passes ICT rule validation")
+                if criteria.validation_score >= 0.8:
+                    strengths.append("Strong rule compliance")
+            elif status == 'partial':
+                weaknesses.append("Some ICT rules not satisfied")
+            elif status == 'invalid':
+                weaknesses.append("Fails critical ICT rules")
+                # Invalid patterns should significantly reduce grade
+                criteria.validation_score = max(0.1, criteria.validation_score)
+        else:
+            criteria.validation_score = 0.5  # Neutral if no validation data
 
         # Calculate final grade
         total_score = criteria.total_score()
@@ -472,6 +495,60 @@ class PatternGrader:
         combined = (win_rate * 0.6) + (fill_rate * 0.4)
         return min(combined, 1.0)
 
+    def _score_validation(self, validation_result: Dict) -> float:
+        """
+        Score based on ICT rule validation results.
+
+        Scoring:
+        - Valid patterns: 0.85-0.95 (based on adjusted confidence)
+        - Partial patterns: 0.4-0.7 (based on rules passed)
+        - Invalid patterns: 0.1-0.3 (penalized)
+
+        Args:
+            validation_result: Dict with 'status', 'adjusted_confidence',
+                              'rules_passed', 'rules_failed', 'critical_failures'
+        """
+        status = validation_result.get('status', 'unknown')
+        adjusted_confidence = validation_result.get('adjusted_confidence', 0.5)
+        rules_passed = validation_result.get('rules_passed', 0)
+        rules_failed = validation_result.get('rules_failed', 0)
+        critical_failures = validation_result.get('critical_failures', [])
+
+        if status == 'valid':
+            # Valid pattern - high score based on adjusted confidence
+            base_score = 0.85 + (adjusted_confidence * 0.1)
+            return min(base_score, 0.95)
+
+        elif status == 'partial':
+            # Partial pattern - score based on rules passed ratio
+            total_rules = rules_passed + rules_failed
+            if total_rules > 0:
+                pass_ratio = rules_passed / total_rules
+            else:
+                pass_ratio = 0.5
+
+            # Partial score between 0.4 and 0.7
+            base_score = 0.4 + (pass_ratio * 0.3)
+
+            # Apply adjusted confidence
+            return base_score * adjusted_confidence
+
+        elif status == 'invalid':
+            # Invalid pattern - low score
+            if critical_failures:
+                # Critical failures are very bad
+                return 0.1
+            else:
+                return 0.2 + (adjusted_confidence * 0.1)
+
+        elif status == 'pending':
+            # Waiting for prerequisites
+            return 0.4  # Conservative score
+
+        else:
+            # Unknown status
+            return 0.5  # Neutral
+
     def _generate_recommendation(
         self,
         grade: PatternGrade,
@@ -511,18 +588,34 @@ class PatternGrader:
         self,
         patterns: List[Dict],
         market_context: Dict,
-        historical_stats: Optional[Dict] = None
+        historical_stats: Optional[Dict] = None,
+        validation_results: Optional[Dict] = None
     ) -> List[GradedPattern]:
-        """Grade multiple patterns and sort by quality"""
-        graded = []
+        """
+        Grade multiple patterns and sort by quality.
 
-        for pattern in patterns:
+        Args:
+            patterns: List of pattern dictionaries
+            market_context: Current market context
+            historical_stats: Historical performance data by pattern type
+            validation_results: ICT rule validation results keyed by pattern_id
+        """
+        graded = []
+        validation_results = validation_results or {}
+
+        for i, pattern in enumerate(patterns):
             pattern_type = pattern.get('type', pattern.get('pattern_type', 'unknown'))
+            pattern_id = f"{pattern_type}_{i}"
+
+            # Get validation result for this pattern
+            validation_result = validation_results.get(pattern_id)
+
             graded_pattern = self.grade_pattern(
                 pattern_type=pattern_type,
                 pattern_data=pattern,
                 market_context=market_context,
-                historical_stats=historical_stats.get(pattern_type) if historical_stats else None
+                historical_stats=historical_stats.get(pattern_type) if historical_stats else None,
+                validation_result=validation_result
             )
             graded.append(graded_pattern)
 

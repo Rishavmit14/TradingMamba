@@ -2,148 +2,108 @@
   "concept_definitions": {
     "market_structure": {
       "examples": [
-        "we'll be dealing specifically with the reinforcing of fair value gaps and it's a concept of trading inside the range okay what is a fair value gap it is a range in price delivery where one side of the market liquidity is offered and typically confirmed with a liquidity void on the lower time frame c",
-        "75 about 25 pips that is our fair value gap and it's been left open there's been no trading outside of the movement of that range except for that down candle and no up movement at all on this time frame now when we're looking at fair value gaps okay it's important to remind you that if we're studyin",
-        "the buy side all green candles up then it comes down so this is all efficiently traded it's a full block of delivery deficiency up and down both ranges on both sides of the delivery of price dubai and the south side have been offered in here from this low to this high once we break this low here we'"
+        "And as I think, whatever I have learned in my 7th to 8th year experience, I'll give the credit to ICT and smart money concepts",
+        "If trader do not know real market trend, they will end up in losing trades",
+        "One is bullish trend",
+        "In bullish trend, market creates higher high and higher lows",
+        "In bearish trend or downtrend, the market is creating lower low and lower highs",
+        "It look like very easy and simple to see that a structure is going upward, which is our bullish trend",
+        "When you understand trend mapping, you can easily find your high probability entry",
+        "Because trend is your friend, then your 50% forex success will start here",
+        "Now, let's talk about the bullish trend",
+        "How do retail traders will mark this structure"
       ],
       "contexts": [],
-      "frequency": 3
-    },
-    "fair_value_gap": {
-      "examples": [
-        "we'll be dealing specifically with the reinforcing of fair value gaps and it's a concept of trading inside the range okay what is a fair value gap it is a range in price delivery where one side of the market liquidity is offered and typically confirmed with a liquidity void on the lower time frame c",
-        "75 about 25 pips that is our fair value gap and it's been left open there's been no trading outside of the movement of that range except for that down candle and no up movement at all on this time frame now when we're looking at fair value gaps okay it's important to remind you that if we're studyin",
-        "75 it's also run on liquidity in the form of a liquidity pool so it's running buy stops but also it's hitting that fair value gap also so straight into the fair value gap and i said in lower time frames many times this will create a liquidity void you see a movement lower here on this candle and the"
-      ],
-      "contexts": [],
-      "frequency": 3
+      "frequency": 39
     },
     "liquidity": {
       "examples": [
-        "we'll be dealing specifically with the reinforcing of fair value gaps and it's a concept of trading inside the range okay what is a fair value gap it is a range in price delivery where one side of the market liquidity is offered and typically confirmed with a liquidity void on the lower time frame c",
-        "75 about 25 pips that is our fair value gap and it's been left open there's been no trading outside of the movement of that range except for that down candle and no up movement at all on this time frame now when we're looking at fair value gaps okay it's important to remind you that if we're studyin",
-        "but i want to take you back over to the charts and give you something by way of understanding the overlap of liquidity voids and fair value gaps okay folks we're looking at at 104",
-        "75 it's also run on liquidity in the form of a liquidity pool so it's running buy stops but also it's hitting that fair value gap also so straight into the fair value gap and i said in lower time frames many times this will create a liquidity void you see a movement lower here on this candle and the",
-        "76 so it moves two pips up so from the opening to the high is buy side liquidity offered then it trades down for a down close then we gap down here there's a gap of buy side liquidity from these two candles from this candle's opening that's exactly where this price goes on the upside from the open t",
-        "that's the last point at which the buy side liquidity is offered on the up movement then it's all down from the opening it fills in that perfect delivery of price right there and then at that moment when you see this live you can be a seller at that moment and price does exactly what we mentioned ea",
-        "55 so if we drop that down to there 104 55 that's where the last point at which the low had traded up to the close so buy side liquidity has been delivered here it's all sell side liquidity at this moment here it's all sell side now nothing over here until we get over here so we created a gap down h",
-        "the buy side all green candles up then it comes down so this is all efficiently traded it's a full block of delivery deficiency up and down both ranges on both sides of the delivery of price dubai and the south side have been offered in here from this low to this high once we break this low here we'"
+        "Otherwise, we will market as liquidity sweep",
+        "Inducement and liquidity but we will cover them in details in next lecture",
+        "First one is liquidity",
+        "Otherwise, we will market as liquidity sweep",
+        "Now what is liquidity",
+        "But for now, just as a guideline, all pending orders, stop losses, break even, high and lows act as liquidity",
+        "Here, as candle body not closed above this high, so we will market as liquidity sweep",
+        "And it will be more crystal clear when you will see next lecture on liquidity and inducement",
+        "In next lecture, we will discuss about liquidity and inducement in detail"
       ],
       "contexts": [],
-      "frequency": 8
+      "frequency": 9
     },
-    "time_based": {
+    "premium_discount": {
       "examples": [
-        "we'll be dealing specifically with the reinforcing of fair value gaps and it's a concept of trading inside the range okay what is a fair value gap it is a range in price delivery where one side of the market liquidity is offered and typically confirmed with a liquidity void on the lower time frame c",
-        "75 about 25 pips that is our fair value gap and it's been left open there's been no trading outside of the movement of that range except for that down candle and no up movement at all on this time frame now when we're looking at fair value gaps okay it's important to remind you that if we're studyin"
+        "Let me tell you the purpose of this channel, considering the market condition and the unemployment rate, I want that my friends and people around me who want to learn forex and they cannot afford paid courses, I will share the free premium content with them free of cost"
+      ],
+      "contexts": [],
+      "frequency": 1
+    },
+    "entry_models": {
+      "examples": [
+        "Well they will consider it market manipulation due to lack of knowledge and again, they will mark this high as higher high and remove this higher low",
+        "Again they will consider it market manipulation due to lack of knowledge and they will mark this high as higher high and remove this low"
       ],
       "contexts": [],
       "frequency": 2
     },
-    "price_action": {
+    "institutional": {
       "examples": [
-        "we'll be dealing specifically with the reinforcing of fair value gaps and it's a concept of trading inside the range okay what is a fair value gap it is a range in price delivery where one side of the market liquidity is offered and typically confirmed with a liquidity void on the lower time frame c",
-        "70 on a limit when price trades back up to that level if it doesn't give us an opportunity to go on a limit we can trade it right as it hits it live it can be in front of the charts right there there's your cell now here's the thing look at the body's clothes on this candle right here the close is 1",
-        "72 the wick trades through the body but the bodies of the candle completely close in here so this gap between these two candles these two black down candles this gap in between the bodies have perfectly been filled in with this up candle so this is exactly what i'm referring to as efficiency in term"
+        "And as I think, whatever I have learned in my 7th to 8th year experience, I'll give the credit to ICT and smart money concepts",
+        "How do retail traders will mark this structure",
+        "Retail traders, when they see a structure, then what they do",
+        "But if we compare this concept with smart money concept, that how smart money traders will map the same structure, the point where the cursor is blinking, IIS it higher high or not",
+        "Answer is no as per smart money rules",
+        "But why there is so much difference in retail trend mapping and smart money trend mapping",
+        "Smart money follow some rules to map a trend, to find an actual trend",
+        "And second one inducement which is also known as smart money trap",
+        "Now let us discuss smart money trader approach",
+        "But being a smart money concept trader, we will find inducement in recent swing as this is our first rule"
       ],
       "contexts": [],
-      "frequency": 3
+      "frequency": 11
+    },
+    "price_action": {
+      "examples": [
+        "Second rule is candle body must close",
+        "I repeat, candle body must close below inducement and above recent high",
+        "Second rule, candle body must close below inducement and above high",
+        "Here, as candle body not closed above this high, so we will market as liquidity sweep"
+      ],
+      "contexts": [],
+      "frequency": 4
     }
   },
   "trading_rules": [
     {
-      "text": "you take that same range okay and  -> look at our down candle that created that fair value gap on the daily chart that",
+      "text": "you understand trend mapping -> can easily find your high probability entry",
       "type": "conditional",
       "concepts": [
-        "fair_value_gap",
-        "time_based"
+        "market_structure"
       ],
-      "source_video": "FgacYSN9QEo"
+      "source_video": "DabKey96qmE"
+    },
+    {
+      "text": "they see a structure -> what they do? they will mark every high and every low as valid higher high and v",
+      "type": "conditional",
+      "concepts": [
+        "market_structure"
+      ],
+      "source_video": "DabKey96qmE"
+    },
+    {
+      "text": "inducement and candle closing to map a real and accurate structure",
+      "type": "setup",
+      "concepts": [
+        "market_structure"
+      ],
+      "source_video": "DabKey96qmE"
     }
   ],
   "n_transcripts_processed": 1,
-  "last_training_time": "2026-01-29T17:35:23.701191",
+  "last_training_time": "2026-02-06T18:16:09.958369",
   "training_history": [
     {
-      "timestamp": "2026-01-29T13:14:05.849955",
-      "n_transcripts": 29,
-      "components": {
-        "classifier": {
-          "timestamp": "2026-01-29T13:14:19.014142",
-          "n_samples": 29,
-          "model_scores": {
-            "random_forest": 0.8167388167388167,
-            "logistic": 0.7789115646258503,
-            "gradient_boost": 0.9226190476190477
-          },
-          "ensemble_f1": 0.8663419913419913,
-          "model_weights": {
-            "random_forest": 0.3243254305272744,
-            "logistic": 0.30930430066817427,
-            "gradient_boost": 0.3663702688045514
-          }
-        },
-        "embeddings": {
-          "status": "trained",
-          "dim": 64
-        },
-        "sequence_analyzer": {
-          "status": "trained"
-        },
-        "definitions": {
-          "n_concepts": 11
-        },
-        "rules": {
-          "n_rules": 35
-        },
-        "database": {
-          "videos_recorded": 29,
-          "database_path": "/Users/kumarrishav/Desktop/TradingMamba/data/training_database.json"
-        }
-      },
-      "video_learnings": []
-    },
-    {
-      "timestamp": "2026-01-29T16:26:45.081116",
-      "n_transcripts": 1,
-      "components": {
-        "classifier": {
-          "timestamp": "2026-01-29T16:26:58.379278",
-          "n_samples": 30,
-          "model_scores": {
-            "random_forest": 0.9663518299881937,
-            "logistic": 0.8943181818181819,
-            "gradient_boost": 0.987012987012987
-          },
-          "ensemble_f1": 0.9560212514757971,
-          "model_weights": {
-            "random_forest": 0.3393467005944268,
-            "logistic": 0.3140511714923896,
-            "gradient_boost": 0.3466021279131836
-          }
-        },
-        "embeddings": {
-          "status": "trained",
-          "dim": 64
-        },
-        "sequence_analyzer": {
-          "status": "trained"
-        },
-        "definitions": {
-          "n_concepts": 5
-        },
-        "rules": {
-          "n_rules": 1
-        },
-        "database": {
-          "videos_recorded": 1,
-          "database_path": "/Users/kumarrishav/Desktop/TradingMamba/data/training_database.json"
-        }
-      },
-      "video_learnings": []
-    },
-    {
-      "timestamp": "2026-01-29T17:11:22.795152",
+      "timestamp": "2026-02-06T17:27:18.189619",
       "n_transcripts": 1,
       "training_mode": "synchronized",
       "extraction_mode": "sincere_student",
@@ -151,7 +111,7 @@
       "sync_window": 2.0,
       "components": {
         "classifier": {
-          "timestamp": "2026-01-29T17:35:23.511273",
+          "timestamp": "2026-02-06T18:16:09.629222",
           "n_samples": 1,
           "model_scores": {
             "random_forest": 1.0,
@@ -173,29 +133,20 @@
           "status": "trained"
         },
         "definitions": {
-          "n_concepts": 5
+          "n_concepts": 6
         },
         "rules": {
-          "n_rules": 1
+          "n_rules": 3
         },
         "database": {
           "videos_recorded": 1,
-          "database_path": "data/training_database.json"
+          "database_path": "/Users/kumarrishav/Desktop/TradingMamba/data/training_database.json"
         }
       },
       "vision_analysis": {
         "videos_analyzed": 1,
-        "visual_patterns": {
-          "FVG": 32,
-          "Order Blocks": 3,
-          "Order Block": 4,
-          "Support/Resistance": 1,
-          "Breaker Block": 1,
-          "Liquidity": 1,
-          "FVG/Order Block/Breaker/Liquidity/BOS/CHoCH": 1,
-          "FVG/Order Block/Breaker/Liquidity/BOS/CHoCh": 2
-        },
-        "visual_concepts": 8
+        "visual_patterns": {},
+        "visual_concepts": 0
       },
       "synchronization": {
         "total_moments_analyzed": 0,

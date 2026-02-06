@@ -21,7 +21,8 @@ import {
   RotateCcw,
   Home,
   Minus,
-  Plus
+  Plus,
+  Info
 } from 'lucide-react';
 import { getLiveOHLCV, getSignalAnalysis, getWebSocketUrl, predictPrice, getAvailablePlaylists } from '../services/api';
 
@@ -42,6 +43,8 @@ const TIMEFRAMES = [
   { value: 'H1', label: '1H' },
   { value: 'H4', label: '4H' },
   { value: 'D1', label: '1D' },
+  { value: 'W1', label: '1W' },
+  { value: 'MN', label: '1M' },
 ];
 
 // Smart Money concept descriptions (short names for display)
@@ -119,6 +122,7 @@ function LiveChart() {
   const [selectedPlaylist, setSelectedPlaylist] = useState('all');
   const [loadingHistory, setLoadingHistory] = useState(false);  // Loading state for historical data
   const [atLeftEdge, setAtLeftEdge] = useState(false);  // Track if user is at left edge
+  const [visiblePatterns, setVisiblePatterns] = useState({});  // Pattern visibility filter (checkbox states)
 
   const chartContainerRef = useRef(null);
   const chartRef = useRef(null);
@@ -158,9 +162,71 @@ function LiveChart() {
 
   // Get timeframe label for display
   const getTimeframeLabel = (tf) => {
-    const labels = { 'M1': '1m', 'M5': '5m', 'M15': '15m', 'M30': '30m', 'H1': '1H', 'H4': '4H', 'D1': '1D' };
+    const labels = { 'M1': '1m', 'M5': '5m', 'M15': '15m', 'M30': '30m', 'H1': '1H', 'H4': '4H', 'D1': '1D', 'W1': '1W', 'MN': '1M' };
     return labels[tf] || tf;
   };
+
+  // Filter ML reasoning based on selected patterns in Pattern Filter
+  // Only shows explanations for patterns the user has checked
+  const getFilteredMLReasoning = useCallback(() => {
+    if (!analysis?.ml_reasoning) {
+      return null;
+    }
+
+    // If no patterns selected, show prompt to select patterns
+    const checkedPatterns = Object.entries(visiblePatterns)
+      .filter(([_, checked]) => checked)
+      .map(([name, _]) => name.toLowerCase());
+
+    if (checkedPatterns.length === 0) {
+      return {
+        hasContent: false,
+        message: "Select patterns from the Pattern Filter above to see ML analysis for those specific patterns."
+      };
+    }
+
+    // Split reasoning into sections by pattern headers (🧠, 📚, 📊 followed by **PATTERN**)
+    // Each section starts with an emoji and bold pattern name
+    const fullText = analysis.ml_reasoning;
+    const sections = fullText.split(/(?=(?:🧠|📚|📊|🎯|💡)\s*\*\*)/);
+
+    // Filter sections that match selected patterns
+    const filteredSections = sections.filter(section => {
+      if (!section.trim()) return false;
+
+      // Extract pattern name from the section (between ** **)
+      const match = section.match(/\*\*([^*]+)\*\*/);
+      if (!match) return false;
+
+      const patternName = match[1].toLowerCase().replace(/[:\s]+/g, '_').replace(/_+$/, '');
+
+      // Check if this pattern matches any checked pattern
+      return checkedPatterns.some(checked => {
+        const checkedClean = checked.toLowerCase().replace(/[/\s]+/g, '_');
+        // Direct match or partial match
+        return patternName.includes(checkedClean) ||
+               checkedClean.includes(patternName) ||
+               // Handle common aliases
+               (checkedClean.includes('bos') && patternName.includes('break')) ||
+               (checkedClean.includes('choch') && patternName.includes('change')) ||
+               (checkedClean.includes('ob') && patternName.includes('order_block')) ||
+               (checkedClean.includes('fvg') && patternName.includes('fair_value'));
+      });
+    });
+
+    if (filteredSections.length === 0) {
+      return {
+        hasContent: false,
+        message: `No ML analysis available for selected patterns. The ML may not have learned detailed explanations for: ${checkedPatterns.join(', ')}`
+      };
+    }
+
+    return {
+      hasContent: true,
+      content: filteredSections.join('\n\n'),
+      patternCount: filteredSections.length
+    };
+  }, [analysis?.ml_reasoning, visiblePatterns]);
 
   // Chart control functions (zoom in, zoom out, reset)
   const handleZoomIn = useCallback(() => {
@@ -318,7 +384,7 @@ function LiveChart() {
 
     const typeCounts = {};
     const seenZones = [];
-    const visiblePatterns = [];
+    const limitedPatterns = [];  // Renamed to avoid shadowing visiblePatterns state
     for (const p of filtered) {
       const pt = p.pattern_type || '';
       const baseType = pt.replace('bullish_', '').replace('bearish_', '');
@@ -331,10 +397,10 @@ function LiveChart() {
         if (seenZones.some(z => Math.abs(z - mid) / mid < 0.03)) continue;
         seenZones.push(mid);
       }
-      visiblePatterns.push(p);
+      limitedPatterns.push(p);
     }
 
-    const sortedPatterns = [...visiblePatterns].sort((a, b) => {
+    const sortedPatterns = [...limitedPatterns].sort((a, b) => {
       const tpA = getTfPriority(a.timeframe), tpB = getTfPriority(b.timeframe);
       if (tpA !== tpB) return tpA - tpB;
       const bosA = a.pattern_type?.includes('bos') || a.pattern_type?.includes('choch');
@@ -357,22 +423,148 @@ function LiveChart() {
     const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
     const rayPats = sortedPatterns.filter(p => rayTypes.includes(p.pattern_type));
 
+    // Apply visibility filter based on user checkbox selections
+    // Maps ML pattern names to chart pattern types for comprehensive matching
+    const applyVisibilityFilter = (patterns) => {
+      // If no filters set (empty object), show NO patterns (user must check to see)
+      if (Object.keys(visiblePatterns).length === 0) {
+        return [];
+      }
+
+      // Get all checked ML pattern names (lowercase for comparison)
+      const checkedPatterns = Object.entries(visiblePatterns)
+        .filter(([_, checked]) => checked)
+        .map(([name, _]) => name.toLowerCase());
+
+      if (checkedPatterns.length === 0) {
+        return [];
+      }
+
+      // Comprehensive mapping: ML concept name → chart pattern types it should show
+      const mlToChartMapping = {
+        // Order Block variants
+        'ob': ['order_block'],
+        'order_block': ['order_block'],
+        'valid_order_block': ['order_block'],
+        'order_block_mitigation': ['order_block', 'mitigation'],
+        'order_block_definition': ['order_block'],
+        'order_block_definition_and_structure': ['order_block'],
+        'institutional_order_flow': ['order_block', 'displacement'],
+
+        // FVG variants
+        'fvg': ['fvg', 'bullish_fvg', 'bearish_fvg'],
+        'fair_value_gap': ['fvg', 'bullish_fvg', 'bearish_fvg'],
+
+        // BOS/CHoCH variants
+        'bos/choch': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
+        'bos': ['bos_bullish', 'bos_bearish'],
+        'choch': ['choch_bullish', 'choch_bearish'],
+        'break_of_structure': ['bos_bullish', 'bos_bearish'],
+        'change_of_character': ['choch_bullish', 'choch_bearish'],
+        'market_structure': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
+        'market_structure_shift': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
+        'bos_validation': ['bos_bullish', 'bos_bearish'],
+        'inducement_and_bos': ['bos_bullish', 'bos_bearish', 'displacement'],
+        'candle_closing_rules_for_bos': ['bos_bullish', 'bos_bearish'],
+        'liquidity_sweep_vs_bos': ['bos_bullish', 'bos_bearish', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'bos_vs_swing_high_relationship': ['bos_bullish', 'bos_bearish', 'swing_high', 'swing_low'],
+
+        // Liquidity variants
+        'liq': ['buyside_liquidity', 'sellside_liquidity', 'equal_highs', 'equal_lows', 'buy_stops', 'sell_stops', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'liquidity': ['buyside_liquidity', 'sellside_liquidity', 'equal_highs', 'equal_lows', 'buy_stops', 'sell_stops'],
+        'liquidity_sweep': ['liquidity_sweep_high', 'liquidity_sweep_low'],
+        'liquidity_in_price_cycle': ['buyside_liquidity', 'sellside_liquidity', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'buyside_liquidity': ['buyside_liquidity', 'equal_highs', 'buy_stops'],
+        'sellside_liquidity': ['sellside_liquidity', 'equal_lows', 'sell_stops'],
+        'equal_highs_lows': ['equal_highs', 'equal_lows'],
+
+        // Displacement/Expansion/Smart Money variants
+        'displacement': ['displacement'],
+        'expansion': ['displacement'],
+        'smart_money_trap': ['displacement', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'inducement': ['displacement', 'liquidity_sweep_high', 'liquidity_sweep_low'],
+        'price_delivery_cycle': ['displacement', 'fvg'],
+
+        // Swing/Structure variants
+        'swing': ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'],
+        'swing_high': ['swing_high'],
+        'swing_low': ['swing_low'],
+        'higher_high': ['higher_high'],
+        'higher_low': ['higher_low'],
+        'lower_high': ['lower_high'],
+        'lower_low': ['lower_low'],
+
+        // Premium/Discount
+        'premium': ['premium_zone'],
+        'discount': ['discount_zone'],
+        'premium_discount': ['premium_zone', 'discount_zone'],
+
+        // Breaker/Mitigation
+        'breaker': ['breaker_block', 'bullish_breaker', 'bearish_breaker'],
+        'breaker_block': ['breaker_block', 'bullish_breaker', 'bearish_breaker'],
+        'mitigation': ['mitigation_block'],
+        'mitigation_block': ['mitigation_block'],
+
+        // OTE variants
+        'ote': ['ote', 'optimal_trade_entry'],
+        'optimal_trade_entry': ['ote', 'optimal_trade_entry'],
+        'fibonacci_ote': ['ote', 'optimal_trade_entry'],
+      };
+
+      // Filter to only show patterns that match any checked ML concept
+      return patterns.filter(p => {
+        const pt = p.pattern_type.toLowerCase();
+        // Get base pattern type (e.g., bullish_fvg -> fvg)
+        const baseType = pt.replace('bullish_', '').replace('bearish_', '');
+
+        // Check if any checked pattern matches this chart pattern
+        return checkedPatterns.some(checked => {
+          const checkedLower = checked.toLowerCase();
+
+          // First check the comprehensive mapping
+          const mappedTypes = mlToChartMapping[checkedLower];
+          if (mappedTypes) {
+            if (mappedTypes.some(mapped => pt === mapped || baseType === mapped || pt.includes(mapped) || mapped.includes(baseType))) {
+              return true;
+            }
+          }
+
+          // Fallback: flexible matching for patterns not in mapping
+          // Direct match
+          if (pt === checkedLower || baseType === checkedLower) return true;
+
+          // Partial match (e.g., 'order_block' in 'order_block_mitigation')
+          if (checkedLower.includes(baseType) || baseType.includes(checkedLower.replace(/_/g, ''))) return true;
+
+          // Word-based matching (e.g., 'order' and 'block' both in pattern)
+          const checkedWords = checkedLower.split(/[_\s/]+/);
+          const patternWords = baseType.split(/[_\s]+/);
+          const matchingWords = checkedWords.filter(cw => patternWords.some(pw => pw.includes(cw) || cw.includes(pw)));
+          if (matchingWords.length >= Math.min(2, checkedWords.length)) return true;
+
+          return false;
+        });
+      });
+    };
+
     if (signalDirection === 'bullish') {
-      return [
+      const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bullish')).slice(0, 5),
         ...rayPats.filter(p => {
           const pt = p.pattern_type;
           return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity' || pt === 'sell_stops';
         }).slice(0, 6),
       ];
+      return applyVisibilityFilter(result);
     } else if (signalDirection === 'bearish') {
-      return [
+      const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bearish')).slice(0, 5),
         ...rayPats.filter(p => {
           const pt = p.pattern_type;
           return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity' || pt === 'buy_stops';
         }).slice(0, 6),
       ];
+      return applyVisibilityFilter(result);
     } else {
       const bosCh = rayPats.filter(p => p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch'));
       const other = rayPats.filter(p => !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch'));
@@ -388,9 +580,11 @@ function LiveChart() {
       // Include swing markers in the ray patterns
       const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
       const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
-      return [...bosCh.slice(0, 2), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8)];
+      // Increased bosCh limit from 2 to 8 to ensure BOS/CHoCH patterns persist during zoom
+      const result = [...bosCh.slice(0, 8), ...actualBoxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8)];
+      return applyVisibilityFilter(result);
     }
-  }, [timeframe]);
+  }, [timeframe, visiblePatterns]);
 
   // Draw horizontal rays for BOS/CHoCH, liquidity, and equal highs/lows
   const drawHorizontalRays = useCallback((patterns, candles) => {
@@ -478,10 +672,16 @@ function LiveChart() {
       if (!price) return;
 
       // Get Y coordinate for this price
-      const y = series.priceToCoordinate(price);
+      let y = series.priceToCoordinate(price);
 
-      // Skip if price level is outside visible chart area
-      if (y === null || y < 0 || y > chartHeight) return;
+      // Handle zoom: if y is null, price is outside current visible range
+      // Skip only if truly null (price not in data range at all)
+      if (y === null) return;
+
+      // Clamp Y to visible area with buffer - allows partial visibility at edges
+      // This prevents patterns from disappearing when zooming in/out
+      const buffer = 50; // Allow patterns to extend slightly beyond visible area
+      y = Math.max(-buffer, Math.min(y, chartHeight + buffer));
 
       // Equilibrium: special case — always span from left of chart
       if (patternType === 'equilibrium') {
@@ -497,22 +697,24 @@ function LiveChart() {
           lineEl.style.cssText = `
             position: absolute; left: ${startX}px; top: ${y - 1}px;
             width: ${rayWidth}px; height: 2px;
-            background: linear-gradient(to right, ${annotation.color}40, ${annotation.color}80, ${annotation.color}40);
-            border-top: 1px dashed ${annotation.color}60;
+            background: ${annotation.color};
             pointer-events: none; z-index: 4;
           `;
           const labelEl = document.createElement('div');
           const labelY = findNonOverlappingYRay(y - LABEL_HEIGHT / 2);
           labelEl.className = 'ray-overlay';
+          const labelText = `${annotation.text} ${pattern.timeframe || ''}`;
+          const labelX = startX + rayWidth / 2;
           labelEl.style.cssText = `
-            position: absolute; right: 75px; top: ${labelY}px;
+            position: absolute; left: ${labelX}px; top: ${labelY}px;
+            transform: translateX(-50%);
             color: ${annotation.color}; font-size: 10px; font-weight: 700;
             text-shadow: 0 1px 2px rgba(0,0,0,0.9);
             padding: 1px 5px; background: rgba(0,0,0,0.8);
             border: 1px solid ${annotation.color}60; border-radius: 3px;
             pointer-events: none; z-index: 6; white-space: nowrap;
           `;
-          labelEl.textContent = `${annotation.text} ${pattern.timeframe || ''}`;
+          labelEl.textContent = labelText;
           chartElement.appendChild(lineEl);
           chartElement.appendChild(labelEl);
           rayOverlaysRef.current.push(lineEl);
@@ -584,11 +786,16 @@ function LiveChart() {
         }
       }
 
-      // Skip this ray if we couldn't find a valid candle that created this level
-      // This prevents showing rays for price levels that don't exist on the current chart
-      if (!foundValidLevel) return;
+      // If we couldn't find a valid swing candle, still draw the pattern from the left edge
+      // This ensures patterns remain visible when zooming/scrolling even if their origin
+      // candle is not in the current visible range
+      // We use the pattern's own time if available, otherwise start from left edge
+      if (!foundValidLevel || !startTime) {
+        startTime = pattern.time || pattern.start_time || (candles.length > 0 ? candles[0].time : null);
+      }
 
-      if (!startTime) return;
+      // Only skip if we have no way to position the pattern at all
+      if (!startTime && candles.length === 0) return;
 
       // Check if this is a swing/structure marker type (should extend to right edge with price label)
       const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
@@ -627,39 +834,34 @@ function LiveChart() {
         // Anti-overlap: adjust Y for ray label
         const adjustedRayY = findNonOverlappingYRay(y);
 
-        // Create the horizontal ray line (solid line) - always at true price
+        // Create the horizontal ray line - solid line for all patterns
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
-
-        // Swing markers use dashed line style, others use gradient
-        const lineStyle = isSwingMarker
-          ? `border-top: 1px dashed ${annotation.color}90;`
-          : `background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);`;
 
         rayLine.style.cssText = `
           position: absolute;
           left: ${startX}px;
           top: ${y}px;
           width: ${rayWidth}px;
-          height: ${isSwingMarker ? '0px' : '2px'};
-          ${lineStyle}
+          height: 2px;
+          background: ${annotation.color};
           pointer-events: none;
           z-index: 4;
-          ${isSwingMarker ? '' : `box-shadow: 0 0 4px ${annotation.color}60;`}
+          box-shadow: 0 0 4px ${annotation.color}60;
         `;
 
-        // Create the annotation label with pattern name
+        // Create the annotation label with pattern name - centered on the ray
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
 
-        // For swing markers: position label at the start (left side)
-        // For others: position in the middle
-        const labelX = isSwingMarker ? startX + 5 : startX + rayWidth / 2 - 30;
+        // Position label at the center of the ray using CSS transform for perfect centering
+        const labelX = startX + rayWidth / 2;
 
         labelEl.style.cssText = `
           position: absolute;
           left: ${labelX}px;
           top: ${adjustedRayY - 10}px;
+          transform: translateX(-50%);
           color: ${annotation.color};
           font-size: 10px;
           font-weight: 700;
@@ -914,10 +1116,31 @@ function LiveChart() {
         const timeScale = chart.timeScale();
         const chartWidth = chartElement.clientWidth;
         let x1 = timeScale.timeToCoordinate(startTime);
-        const y1 = series.priceToCoordinate(highPrice);
-        const y2 = series.priceToCoordinate(lowPrice);
+        let y1 = series.priceToCoordinate(highPrice);
+        let y2 = series.priceToCoordinate(lowPrice);
 
-        if (y1 === null || y2 === null) return;
+        // Handle zoom: skip only if BOTH coordinates are null (completely outside data range)
+        if (y1 === null && y2 === null) return;
+
+        // Get chart height for clamping
+        const chartVisibleHeight = chartElement.clientHeight || 500;
+        const buffer = 50; // Allow patterns to extend slightly beyond visible area
+
+        // Clamp coordinates to allow partial visibility when zooming
+        // If one coordinate is null, estimate based on the other
+        if (y1 === null) {
+          y1 = highPrice > lowPrice ? -buffer : chartVisibleHeight + buffer;
+        }
+        if (y2 === null) {
+          y2 = highPrice > lowPrice ? chartVisibleHeight + buffer : -buffer;
+        }
+
+        // Clamp both to visible area with buffer
+        y1 = Math.max(-buffer, Math.min(y1, chartVisibleHeight + buffer));
+        y2 = Math.max(-buffer, Math.min(y2, chartVisibleHeight + buffer));
+
+        // If both are clamped to same edge and very close, pattern is fully outside view
+        if (Math.abs(y1 - y2) < 5 && (y1 <= 0 || y1 >= chartVisibleHeight)) return;
 
         // Extend to right edge of chart (minus price scale area ~60px)
         const rightEdge = chartWidth - 60;
@@ -1076,7 +1299,8 @@ function LiveChart() {
       };
       window.addEventListener('resize', handleResize);
 
-      // Scroll/pan handler: re-filter patterns for visible range and redraw
+      // Scroll/pan handler: reposition patterns for visible range
+      // Uses FULL candle array so patterns persist at their price levels when scrolling
       // Also detects when user scrolls to left edge to load more historical data
       chart.timeScale().subscribeVisibleLogicalRangeChange(async (logicalRange) => {
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
@@ -1084,16 +1308,13 @@ function LiveChart() {
           const candles = candlesDataRef.current;
           const allPatterns = allApiPatternsRef.current;
           if (allPatterns.length > 0 && candles.length > 0 && logicalRange) {
-            // Get only the visible candles based on the logical range
-            const from = Math.max(0, Math.floor(logicalRange.from));
-            const to = Math.min(candles.length - 1, Math.ceil(logicalRange.to));
-            const visibleCandles = candles.slice(from, to + 1);
-            if (visibleCandles.length > 0) {
-              const relevant = getRelevantPatterns(allPatterns, visibleCandles, signalDirectionRef.current);
-              analysisPatternsRef.current = relevant;
-              clearPatternOverlays();
-              drawPatternBoxes(relevant, candles);
-            }
+            // Use FULL candle array for pattern context - patterns are filtered by PRICE range
+            // in getRelevantPatterns(), not by time range. This ensures patterns stay visible
+            // at their price levels when scrolling left/right.
+            const relevant = getRelevantPatterns(allPatterns, candles, signalDirectionRef.current);
+            analysisPatternsRef.current = relevant;
+            clearPatternOverlays();
+            drawPatternBoxes(relevant, candles);
           }
 
           // Dynamic historical data loading: detect when user scrolls to left edge
@@ -1246,18 +1467,8 @@ function LiveChart() {
             });
             priceLinesRef.current = [];
 
-            if (signal.entry_zone?.length >= 2) {
-              priceLinesRef.current.push(candlestickSeriesRef.current.createPriceLine({
-                price: (signal.entry_zone[0] + signal.entry_zone[1]) / 2,
-                color: '#3b82f6', lineWidth: 2, lineStyle: 0, axisLabelVisible: true, title: 'Entry',
-              }));
-            }
-            if (signal.stop_loss) {
-              priceLinesRef.current.push(candlestickSeriesRef.current.createPriceLine({
-                price: signal.stop_loss,
-                color: '#ef4444', lineWidth: 2, lineStyle: 2, axisLabelVisible: true, title: 'SL',
-              }));
-            }
+            // Entry and Stop Loss lines removed to avoid confusion (SL conflicts with Swing Low)
+            // Only show Take Profit lines
             signal.take_profit?.forEach((tp, idx) => {
               priceLinesRef.current.push(candlestickSeriesRef.current.createPriceLine({
                 price: tp,
@@ -1382,6 +1593,19 @@ function LiveChart() {
     return () => clearTimeout(resizeTimer);
   }, [showLegend, fullscreen, clearPatternOverlays, drawPatternBoxes]);
 
+  // Redraw patterns when visibility filter changes
+  useEffect(() => {
+    if (!chartRef.current || !candlestickSeriesRef.current) return;
+    const candles = candlesDataRef.current;
+    const allPatterns = allApiPatternsRef.current;
+    if (allPatterns.length > 0 && candles.length > 0) {
+      const relevant = getRelevantPatterns(allPatterns, candles, signalDirectionRef.current);
+      analysisPatternsRef.current = relevant;
+      clearPatternOverlays();
+      drawPatternBoxes(relevant, candles);
+    }
+  }, [visiblePatterns, getRelevantPatterns, clearPatternOverlays, drawPatternBoxes]);
+
   const signal = analysis?.signal;
   const isBullish = signal?.direction === 'bullish';
   const isBearish = signal?.direction === 'bearish';
@@ -1464,7 +1688,7 @@ function LiveChart() {
             {TIMEFRAMES.map((tf) => (
               <button
                 key={tf.value}
-                onClick={() => setTimeframe(tf.value)}
+                onClick={() => { setTimeframe(tf.value); setVisiblePatterns({}); }}
                 className={`px-2 py-1 rounded text-xs font-medium transition-all ${
                   timeframe === tf.value ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white'
                 }`}
@@ -1624,34 +1848,59 @@ function LiveChart() {
 
               <div className="space-y-4 text-sm">
                 {/* ML Reasoning Section - Shows WHY based on learned knowledge */}
-                {analysis.ml_reasoning && (
-                  <div className="p-3 rounded-lg bg-indigo-500/5 border border-indigo-500/20">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Eye className="w-4 h-4 text-indigo-400" />
-                      <span className="font-semibold text-indigo-400">ML Analysis Reasoning</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 ml-auto">Expert-trained</span>
+                {/* Now dynamically filtered based on selected patterns in Pattern Filter */}
+                {(() => {
+                  const filteredReasoning = getFilteredMLReasoning();
+
+                  // If no analysis data at all, show nothing
+                  if (!filteredReasoning) return null;
+
+                  return (
+                    <div className="p-3 rounded-lg bg-indigo-500/5 border border-indigo-500/20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Eye className="w-4 h-4 text-indigo-400" />
+                        <span className="font-semibold text-indigo-400">ML Analysis Reasoning</span>
+                        {filteredReasoning.hasContent && filteredReasoning.patternCount && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300">
+                            {filteredReasoning.patternCount} pattern{filteredReasoning.patternCount > 1 ? 's' : ''} selected
+                          </span>
+                        )}
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 ml-auto">Expert-trained</span>
+                      </div>
+
+                      {/* Show prompt message if no patterns selected */}
+                      {!filteredReasoning.hasContent && (
+                        <div className="text-slate-400 text-xs italic flex items-center gap-2">
+                          <Info className="w-3 h-3" />
+                          {filteredReasoning.message}
+                        </div>
+                      )}
+
+                      {/* Show filtered content when patterns are selected */}
+                      {filteredReasoning.hasContent && (
+                        <div className="text-slate-300 leading-relaxed text-xs max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+                          {filteredReasoning.content.split('\n').map((line, idx) => {
+                            // Format bold text (**text**)
+                            const parts = line.split(/(\*\*[^*]+\*\*)/g);
+                            const formatted = parts.map((part, pidx) => {
+                              if (part.startsWith('**') && part.endsWith('**')) {
+                                return <span key={pidx} className="font-semibold text-white">{part.slice(2, -2)}</span>;
+                              }
+                              return part;
+                            });
+                            // Indent lines starting with arrow or bullet
+                            const isIndented = line.trim().startsWith('↳') || line.trim().startsWith('-') || line.trim().startsWith('•');
+                            return (
+                              <div key={idx} className={isIndented ? 'pl-4 text-slate-400' : ''}>
+                                {formatted}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                    <div className="text-slate-300 leading-relaxed text-xs max-h-64 overflow-y-auto pr-1 custom-scrollbar">
-                      {analysis.ml_reasoning.split('\n').map((line, idx) => {
-                        // Format bold text (**text**)
-                        const parts = line.split(/(\*\*[^*]+\*\*)/g);
-                        const formatted = parts.map((part, pidx) => {
-                          if (part.startsWith('**') && part.endsWith('**')) {
-                            return <span key={pidx} className="font-semibold text-white">{part.slice(2, -2)}</span>;
-                          }
-                          return part;
-                        });
-                        // Indent lines starting with arrow or bullet
-                        const isIndented = line.trim().startsWith('↳') || line.trim().startsWith('-') || line.trim().startsWith('•');
-                        return (
-                          <div key={idx} className={isIndented ? 'pl-4 text-slate-400' : ''}>
-                            {formatted}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
+                  );
+                })()}
 
                 {/* Entry Zone Explanation - From ML Knowledge */}
                 {analysis.signal.entry_zone && (
@@ -1897,93 +2146,72 @@ function LiveChart() {
               </div>
             )}
 
-            {/* ML Knowledge Status */}
+            {/* Pattern Filter Panel - Checkboxes to show/hide patterns on chart */}
             <div className="card-dark rounded-xl p-4">
               <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-purple-400" /> ML Pattern Knowledge
+                <Layers className="w-4 h-4 text-purple-400" /> Pattern Filter
+                {Object.keys(visiblePatterns).length > 0 && (
+                  <button
+                    onClick={() => setVisiblePatterns({})}
+                    className="ml-auto text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-400 hover:bg-slate-600 hover:text-white transition-colors"
+                  >
+                    Reset
+                  </button>
+                )}
               </h3>
 
-              {analysis?.ml_status === 'trained' ? (
-                <div className="space-y-3">
-                  {/* Learned Patterns - Show all patterns from ml_confidence_scores */}
-                  {analysis?.ml_confidence_scores && Object.keys(analysis.ml_confidence_scores).length > 0 && (
-                    <div>
-                      <div className="text-xs text-emerald-400 font-semibold mb-2 flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                        Patterns ML Has Learned ({Object.keys(analysis.ml_confidence_scores).length})
-                      </div>
-                      <div className="space-y-1.5">
-                        {Object.entries(analysis.ml_confidence_scores)
-                          .sort(([,a], [,b]) => b - a)  // Sort by confidence descending
-                          .map(([pattern, confidence]) => {
-                          const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#9ca3af', description: 'Pattern' };
-                          const isActivelyDetected = analysis.ml_patterns_detected?.includes(pattern);
-                          return (
-                            <div key={pattern} className={`flex items-center justify-between text-xs p-2 rounded-lg ${
-                              isActivelyDetected
-                                ? 'bg-emerald-500/10 border border-emerald-500/20'
-                                : 'bg-slate-800/50 border border-slate-600/30'
-                            }`}>
-                              <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
-                                <span className="text-white font-medium">{info.short}</span>
-                                {isActivelyDetected && (
-                                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
-                                )}
-                                {confidence >= 0.85 && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-slate-700 rounded-full overflow-hidden">
-                                  <div
-                                    className={`h-full rounded-full ${isActivelyDetected ? 'bg-emerald-400' : 'bg-slate-500'}`}
-                                    style={{ width: `${Math.round(confidence * 100)}%` }}
-                                  />
-                                </div>
-                                <span className={`font-mono w-10 text-right ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-400'}`}>
-                                  {Math.round(confidence * 100)}%
-                                </span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
+              {analysis?.ml_status === 'trained' && analysis?.ml_confidence_scores ? (
+                <div className="space-y-2">
+                  <div className="text-xs text-emerald-400 font-semibold mb-2 flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    ML Learned Patterns ({Object.keys(analysis.ml_confidence_scores).length})
+                  </div>
+                  <div className="space-y-1 max-h-64 overflow-y-auto">
+                    {Object.entries(analysis.ml_confidence_scores)
+                      .sort(([,a], [,b]) => b - a)
+                      .map(([pattern, confidence]) => {
+                        const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#9ca3af', description: 'Pattern' };
+                        const isActivelyDetected = analysis.ml_patterns_detected?.includes(pattern);
+                        // Check if pattern is selected (checked) - default to UNCHECKED (false)
+                        const isChecked = visiblePatterns[pattern] === true;
 
-                  {/* Not Yet Learned Patterns */}
-                  {analysis?.ml_patterns_not_learned && analysis.ml_patterns_not_learned.length > 0 && (
-                    <div>
-                      <div className="text-xs text-amber-400 font-semibold mb-2 flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-                        Not Yet Learned
-                      </div>
-                      <div className="space-y-1.5">
-                        {analysis.ml_patterns_not_learned.map((pattern) => {
-                          const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#6b7280', description: 'Pattern' };
-                          return (
-                            <div key={pattern} className="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-800/50 border border-slate-700/50 opacity-60">
-                              <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded bg-slate-600 border border-slate-500" />
-                                <span className="text-slate-400 font-medium">{info.short}</span>
-                              </div>
-                              <span className="text-slate-500 text-[10px]">Train to enable</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* ML Knowledge Summary */}
-                  {analysis?.ml_knowledge_status && (
-                    <div className="mt-3 pt-3 border-t border-slate-700/50">
-                      <p className="text-[10px] text-slate-500 leading-relaxed">
-                        {analysis.ml_knowledge_status}
-                      </p>
-                    </div>
-                  )}
+                        return (
+                          <label
+                            key={pattern}
+                            className={`flex items-center gap-2 text-xs p-2 rounded-lg cursor-pointer transition-all ${
+                              isChecked
+                                ? 'bg-purple-500/20 border border-purple-500/40'
+                                : isActivelyDetected
+                                  ? 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
+                                  : 'bg-slate-800/50 border border-slate-600/30 hover:bg-slate-700/50'
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                setVisiblePatterns(prev => ({ ...prev, [pattern]: e.target.checked }));
+                              }}
+                              className="w-3.5 h-3.5 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                            />
+                            <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
+                            <span className="text-white font-medium flex-1">{info.short}</span>
+                            {isActivelyDetected && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                            )}
+                            {confidence >= 0.85 && (
+                              <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
+                            )}
+                            <span className={`font-mono text-[10px] ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-500'}`}>
+                              {Math.round(confidence * 100)}%
+                            </span>
+                          </label>
+                        );
+                      })}
+                  </div>
+                  <p className="text-[10px] text-slate-500 mt-2 pt-2 border-t border-slate-700/50">
+                    Select patterns to display on chart. Resets on timeframe change.
+                  </p>
                 </div>
               ) : (
                 <div className="text-center py-4">
@@ -1992,7 +2220,7 @@ function LiveChart() {
                   </div>
                   <p className="text-xs text-amber-400 font-semibold mb-1">ML Not Trained</p>
                   <p className="text-[10px] text-slate-500">
-                    Train the ML from YouTube videos to enable pattern detection.
+                    Train the ML from YouTube videos to enable pattern filtering.
                   </p>
                 </div>
               )}

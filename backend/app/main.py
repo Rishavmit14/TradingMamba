@@ -1522,25 +1522,30 @@ async def train_ml_with_vision(
     extraction_mode: str = Query("sincere_student", description="Extraction mode")
 ):
     """
-    DEPRECATED: This endpoint now redirects to Synchronized Learning.
+    DEPRECATED: Use Claude Code training instead.
 
-    Synchronized Learning is superior because it:
-    1. Uses WhisperX word-level timestamps for precise audio-visual sync
-    2. Extracts frames at teaching moments (not blindly every N seconds)
-    3. Verifies audio matches visual before learning (prevents contamination)
+    This endpoint is deprecated because:
+    1. Local MLX-VLM is slow and often gets stuck
+    2. Claude Code provides expert-level ICT/SMC analysis
+    3. Claude Code training produces higher quality knowledge
 
-    Use /api/ml/train/synchronized/{playlist_id} directly for the full API.
+    Use /api/ml/train/claude-code/{video_id} for each video instead.
     """
-    # Redirect to synchronized learning
-    return await train_ml_synchronized(
-        playlist_id=playlist_id,
-        background_tasks=background_tasks,
-        vision_provider=vision_provider,
-        max_frames=max_frames,
-        extraction_mode=extraction_mode if extraction_mode in ['sincere_student', 'comprehensive', 'thorough', 'balanced'] else 'sincere_student',
-        alignment_threshold=0.6,
-        sync_window=2.0
-    )
+    return {
+        "status": "deprecated",
+        "message": "Vision training via local MLX-VLM is deprecated. Use Claude Code training instead.",
+        "recommended_endpoint": "/api/ml/train/claude-code/{video_id}",
+        "why": [
+            "Claude Code has expert ICT/SMC knowledge",
+            "Produces higher quality, verified training data",
+            "Doesn't require local GPU or slow local models"
+        ],
+        "how_to_use": [
+            "1. Call POST /api/ml/train/claude-code/{video_id} to prepare video",
+            "2. Use Claude Code to analyze frames and write knowledge_base.json",
+            "3. Call POST /api/ml/train/claude-code/complete/{video_id} to finish"
+        ]
+    }
 
 
 @app.get("/api/ml/train/vision/status/{job_id}")
@@ -1564,67 +1569,26 @@ async def train_single_video_with_vision(
     extraction_mode: str = Query("sincere_student", description="Extraction mode")
 ):
     """
-    DEPRECATED: Train a single video - now uses Synchronized Learning.
+    DEPRECATED: Use Claude Code training instead.
 
-    This creates a temporary playlist with just this video and runs
-    synchronized learning on it.
+    Use /api/ml/train/claude-code/{video_id} for expert-quality training.
     """
-    import uuid
-    import traceback
-
-    # Check if transcript exists
-    transcript_file = TRANSCRIPTS_DIR / f"{video_id}.json"
-    if not transcript_file.exists():
-        raise HTTPException(status_code=404, detail=f"Transcript not found for video: {video_id}")
-
-    # Load transcript to get title
-    with open(transcript_file) as f:
-        transcript_data = json.load(f)
-    video_title = transcript_data.get('title', video_id)
-
-    # Create a temporary single-video playlist
-    temp_playlist_id = f"_temp_single_{video_id}"
-    temp_playlist_file = PLAYLISTS_DIR / f"{temp_playlist_id}.json"
-
-    temp_playlist = {
-        "playlist_id": temp_playlist_id,
-        "title": f"Single Video: {video_title}",
-        "videos": [{"video_id": video_id, "title": video_title}],
-        "is_temporary": True
+    return {
+        "status": "deprecated",
+        "video_id": video_id,
+        "message": "Single video vision training is deprecated. Use Claude Code training instead.",
+        "recommended_endpoint": f"/api/ml/train/claude-code/{video_id}",
+        "why": [
+            "Claude Code has expert ICT/SMC knowledge",
+            "Produces higher quality, verified training data",
+            "Doesn't require local GPU or slow local models"
+        ],
+        "how_to_use": [
+            f"1. Call POST /api/ml/train/claude-code/{video_id} to prepare video",
+            "2. Use Claude Code to analyze frames and write knowledge_base.json",
+            f"3. Call POST /api/ml/train/claude-code/complete/{video_id} to finish"
+        ]
     }
-
-    with open(temp_playlist_file, 'w') as f:
-        json.dump(temp_playlist, f)
-
-    try:
-        # Use synchronized learning
-        result = await train_ml_synchronized(
-            playlist_id=temp_playlist_id,
-            background_tasks=background_tasks,
-            vision_provider=vision_provider,
-            max_frames=max_frames,
-            extraction_mode=extraction_mode if extraction_mode in ['sincere_student', 'comprehensive', 'thorough', 'balanced'] else 'sincere_student',
-            alignment_threshold=0.6,
-            sync_window=2.0
-        )
-
-        # Add video info to result
-        result["video_id"] = video_id
-        result["video_title"] = video_title
-        result["note"] = "Using Synchronized Learning (superior to standalone Vision Training)"
-
-        return result
-
-    finally:
-        # Clean up temp playlist after a delay (let the background task read it first)
-        import asyncio
-        async def cleanup_temp():
-            await asyncio.sleep(5)
-            try:
-                temp_playlist_file.unlink()
-            except:
-                pass
-        background_tasks.add_task(cleanup_temp)
 
 
 # ============================================================================
@@ -2097,6 +2061,145 @@ async def get_ml_pattern_knowledge():
             "patterns_learned": [],
             "patterns_not_learned": ["fvg", "order_block", "breaker_block", "market_structure"],
         }
+
+
+# ============================================================================
+# CLAUDE CODE TRAINING (RECOMMENDED - EXPERT QUALITY)
+# ============================================================================
+
+@app.post("/api/ml/train/claude-code/{video_id}")
+async def prepare_for_claude_code_training(
+    video_id: str,
+    force: bool = Query(False, description="Force re-preprocessing")
+):
+    """
+    Prepare a video for Claude Code expert training.
+
+    This is the RECOMMENDED training method because:
+    1. Claude Code has expert ICT/SMC knowledge
+    2. Can analyze charts with human-level understanding
+    3. Produces high-quality, verified training data
+
+    Workflow:
+    1. Call this endpoint to prepare video (download, frames, transcript)
+    2. Use the returned instructions to complete training with Claude Code
+    3. Claude Code writes the knowledge_base.json and summary.md files
+    4. Restart backend to load the new knowledge
+
+    Returns:
+        Instructions for Claude Code to complete the training
+    """
+    from .ml.audio_first_learning import AudioFirstTrainer
+
+    try:
+        learner = AudioFirstTrainer()
+
+        # Build URL from video_id
+        url = f"https://www.youtube.com/watch?v={video_id}"
+
+        # Prepare for Claude Code (Phase 0-3)
+        result = learner.prepare_for_claude_code(
+            url=url,
+            force_preprocess=force
+        )
+
+        return {
+            "status": "ready_for_claude_code",
+            "video_id": video_id,
+            "message": "Video prepared. Use Claude Code to complete training.",
+            "instructions": result.get('claude_code_instructions', {}),
+            "preprocessing": result.get('preprocessing', {}),
+            "training": result.get('training', {}),
+            "next_steps": [
+                "1. Read the transcript file",
+                "2. View the selected key frames",
+                "3. Extract ICT/SMC concepts from the video",
+                "4. Write knowledge_base.json with expert analysis",
+                "5. Write summary.md with human-readable summary",
+                "6. Restart backend to load new knowledge"
+            ]
+        }
+
+    except Exception as e:
+        import traceback
+        raise HTTPException(status_code=500, detail=f"Preparation failed: {str(e)}\n{traceback.format_exc()}")
+
+
+@app.get("/api/ml/train/claude-code/pending")
+async def get_pending_claude_code_training():
+    """
+    Get list of videos pending Claude Code training completion.
+
+    These are videos that have been prepared (Phase 0-3) but are waiting
+    for Claude Code to complete the expert analysis (Phase 4-5).
+    """
+    from .ml.audio_first_learning import AudioFirstTrainer
+
+    try:
+        learner = AudioFirstTrainer()
+        pending = learner.get_pending_claude_code_videos()
+
+        return {
+            "status": "success",
+            "pending_count": len(pending),
+            "pending_videos": pending
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "pending_videos": []
+        }
+
+
+@app.post("/api/ml/train/claude-code/complete/{video_id}")
+async def mark_claude_code_training_complete(video_id: str):
+    """
+    Mark a video's Claude Code training as complete.
+
+    Call this after Claude Code has written:
+    - {video_id}_knowledge_base.json
+    - {video_id}_knowledge_summary.md
+
+    This clears the "pending" marker and reloads the ML engine.
+    """
+    from pathlib import Path
+    from .ml.ml_pattern_engine import get_ml_engine
+
+    try:
+        # Check if knowledge base was created
+        kb_path = Path(DATA_DIR) / "audio_first_training" / f"{video_id}_knowledge_base.json"
+        if not kb_path.exists():
+            raise HTTPException(
+                status_code=400,
+                detail=f"Knowledge base not found: {kb_path}. Complete training first."
+            )
+
+        # Clear pending marker if it exists
+        pending_path = Path(DATA_DIR) / "audio_first_training" / f"{video_id}_claude_code_pending.json"
+        if pending_path.exists():
+            pending_path.unlink()
+
+        # Reload ML engine to pick up new knowledge
+        ml_engine = get_ml_engine()
+        ml_engine.reload_knowledge()
+
+        # Get updated summary
+        summary = ml_engine.get_knowledge_summary()
+
+        return {
+            "status": "completed",
+            "video_id": video_id,
+            "message": "Training complete! ML engine reloaded with new knowledge.",
+            "knowledge_loaded": True,
+            "patterns_learned": summary.get('patterns_learned', []),
+            "total_patterns": len(summary.get('patterns_learned', []))
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/api/market/price/{symbol}")

@@ -149,6 +149,22 @@ class Signal:
     # Historical Validation
     historical_validation: Dict[str, Any] = field(default_factory=dict)  # {fill_rate, win_rate, recommendation}
 
+    # =========================================================================
+    # PATTERN VALIDATION & CONFLICT RESOLUTION
+    # =========================================================================
+    # Pattern validation results (ICT rule checking)
+    pattern_validations: Dict[str, Dict] = field(default_factory=dict)  # {pattern_id: {status, confidence, rules}}
+    validation_summary: str = ""  # Human-readable summary
+
+    # Confluence detection (patterns that reinforce each other)
+    pattern_confluences: List[Dict] = field(default_factory=list)  # [{patterns, name, boost, description}]
+    confluence_confidence_boost: float = 0.0  # Total boost from confluences
+
+    # Conflict detection (patterns that contradict each other)
+    pattern_conflicts: List[Dict] = field(default_factory=list)  # [{patterns, type, severity, resolution}]
+    conflict_resolutions: List[Dict] = field(default_factory=list)  # How conflicts were resolved
+    has_unresolved_conflicts: bool = False  # True if should wait to trade
+
     def calculate_risk_reward(self) -> float:
         """Calculate risk:reward ratio"""
         if self.direction == TradingDirection.WAIT:
@@ -201,6 +217,14 @@ class Signal:
             "edge_statistics": self.edge_statistics,
             "grade_recommendation": self.grade_recommendation,
             "historical_validation": self.historical_validation,
+            # Pattern validation & conflict resolution
+            "pattern_validations": self.pattern_validations,
+            "validation_summary": self.validation_summary,
+            "pattern_confluences": self.pattern_confluences,
+            "confluence_confidence_boost": self.confluence_confidence_boost,
+            "pattern_conflicts": self.pattern_conflicts,
+            "conflict_resolutions": self.conflict_resolutions,
+            "has_unresolved_conflicts": self.has_unresolved_conflicts,
         }
 
     def to_notification_message(self) -> str:

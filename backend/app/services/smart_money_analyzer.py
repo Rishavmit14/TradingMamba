@@ -31,6 +31,16 @@ except ImportError:
 # Import ML Pattern Engine
 from ..ml.ml_pattern_engine import get_ml_engine, MLPatternEngine
 
+# Import Pattern Validation and Conflict Resolution
+try:
+    from ..ml.pattern_validator import PatternValidator, get_pattern_validator, PatternValidationResult
+    from ..ml.pattern_conflict_resolver import PatternConflictResolver, get_conflict_resolver
+    HAS_VALIDATION = True
+except ImportError:
+    HAS_VALIDATION = False
+    PatternValidator = None
+    PatternConflictResolver = None
+
 logger = logging.getLogger(__name__)
 
 
@@ -128,6 +138,17 @@ class SmartMoneyAnalysisResult:
     ml_patterns_used: List[str] = field(default_factory=list)  # Patterns ML detected
     ml_patterns_not_learned: List[str] = field(default_factory=list)  # Patterns ML can't detect yet
     ml_confidence_scores: Dict[str, float] = field(default_factory=dict)  # Confidence per pattern type
+
+    # Pattern Validation Results (ICT rule checking)
+    pattern_validations: Dict = field(default_factory=dict)  # Pattern ID -> ValidationResult
+    validation_summary: str = ""  # Human-readable summary of validation
+
+    # Confluence & Conflict Detection
+    pattern_confluences: List[Dict] = field(default_factory=list)  # Detected confluences
+    pattern_conflicts: List[Dict] = field(default_factory=list)  # Detected conflicts
+    conflict_resolutions: List[Dict] = field(default_factory=list)  # How conflicts were resolved
+    has_unresolved_conflicts: bool = False  # True if should wait to trade
+    confluence_confidence_boost: float = 0.0  # Bonus confidence from confluences
 
 
 class SmartMoneyAnalyzer:
@@ -364,6 +385,82 @@ class SmartMoneyAnalyzer:
         # Step 12: Calculate premium/discount (basic analysis)
         premium_discount = self.calculate_premium_discount(data, swing_points)
 
+        # Step 12a: Validate patterns against ICT rules and detect conflicts
+        pattern_validations = {}
+        pattern_confluences = []
+        pattern_conflicts = []
+        conflict_resolutions = []
+        has_unresolved_conflicts = False
+        confluence_confidence_boost = 0.0
+        validation_summary = ""
+
+        if HAS_VALIDATION and ml_patterns_used:
+            try:
+                # Collect all detected patterns into a unified format
+                all_detected_patterns = self._collect_detected_patterns(
+                    order_blocks, fvgs, displacements, ote_zones,
+                    breaker_blocks, events, swing_points
+                )
+
+                # Get market structure string for validation
+                market_structure_str = structure.value if structure else 'neutral'
+
+                # Run pattern validation
+                validator = get_pattern_validator()
+                validations = validator.validate_all_patterns(
+                    all_detected_patterns, data, market_structure_str
+                )
+                pattern_validations = {k: v.to_dict() for k, v in validations.items()}
+
+                # Generate validation summary
+                valid_count = sum(1 for v in validations.values() if v.status.value == 'valid')
+                partial_count = sum(1 for v in validations.values() if v.status.value == 'partial')
+                invalid_count = sum(1 for v in validations.values() if v.status.value == 'invalid')
+                validation_summary = f"Validated {len(validations)} patterns: {valid_count} valid, {partial_count} partial, {invalid_count} invalid"
+
+                # Update confidence scores based on validation
+                for pattern_id, validation in validations.items():
+                    pattern_type = validation.pattern_type.split('_')[0]  # Get base type
+                    if pattern_type in ml_confidence_scores:
+                        # Adjust confidence based on validation
+                        original = ml_confidence_scores[pattern_type]
+                        adjusted = validation.adjusted_confidence
+                        ml_confidence_scores[pattern_type] = (original + adjusted) / 2
+
+                # Run conflict detection and resolution
+                resolver = get_conflict_resolver()
+                detected_confluences = resolver.detect_confluences(all_detected_patterns)
+                detected_conflicts = resolver.detect_conflicts(all_detected_patterns)
+
+                pattern_confluences = detected_confluences
+                pattern_conflicts = [c.to_dict() for c in detected_conflicts]
+
+                # Calculate confluence boost
+                confluence_confidence_boost = resolver.calculate_confluence_boost(all_detected_patterns)
+
+                # Resolve conflicts if any
+                if detected_conflicts:
+                    # Determine HTF bias from structure
+                    htf_bias = structure.value if structure != MarketStructure.CONSOLIDATION else None
+
+                    resolution_result = resolver.resolve_conflicts(
+                        detected_conflicts,
+                        htf_bias=htf_bias,
+                        market_structure=market_structure_str,
+                        pattern_confidences=ml_confidence_scores
+                    )
+
+                    conflict_resolutions = resolution_result.resolutions
+                    has_unresolved_conflicts = resolution_result.should_wait
+
+                    if resolution_result.recommendation:
+                        validation_summary += f" | {resolution_result.recommendation}"
+
+                logger.info(f"Pattern validation complete: {validation_summary}")
+
+            except Exception as e:
+                logger.warning(f"Pattern validation failed (non-critical): {e}")
+
         # Step 13: Determine overall bias
         # Adjust confidence based on ML knowledge
         bias, confidence, reasoning = self.determine_bias(
@@ -376,6 +473,17 @@ class SmartMoneyAnalyzer:
             avg_ml_confidence = sum(ml_confidence_scores.values()) / len(ml_confidence_scores)
             confidence = min(confidence + (avg_ml_confidence * 0.2), 1.0)
             reasoning += f" [ML detected: {', '.join(ml_patterns_used)}]"
+
+            # Apply confluence confidence boost
+            if confluence_confidence_boost > 0:
+                confidence = min(confidence + confluence_confidence_boost, 0.95)
+                reasoning += f" [Confluence boost: +{confluence_confidence_boost:.0%}]"
+
+            # Reduce confidence if unresolved conflicts exist
+            if has_unresolved_conflicts:
+                confidence = confidence * 0.6
+                reasoning += " [WARNING: Unresolved conflicts - consider waiting]"
+
         elif ml_patterns_not_learned:
             # Lower confidence if key patterns couldn't be detected
             confidence = confidence * 0.7
@@ -404,6 +512,14 @@ class SmartMoneyAnalyzer:
             ml_patterns_used=ml_patterns_used,
             ml_patterns_not_learned=ml_patterns_not_learned,
             ml_confidence_scores=ml_confidence_scores,
+            # Pattern validation and conflict resolution
+            pattern_validations=pattern_validations,
+            validation_summary=validation_summary,
+            pattern_confluences=pattern_confluences,
+            pattern_conflicts=pattern_conflicts,
+            conflict_resolutions=conflict_resolutions,
+            has_unresolved_conflicts=has_unresolved_conflicts,
+            confluence_confidence_boost=confluence_confidence_boost,
         )
 
     def _can_detect(self, pattern_type: str) -> bool:
@@ -418,6 +534,112 @@ class SmartMoneyAnalyzer:
         if not self.ml_engine:
             return 0.5  # Default confidence
         return self.ml_engine.get_pattern_confidence(pattern_type)
+
+    def _collect_detected_patterns(
+        self,
+        order_blocks: List[OrderBlock],
+        fvgs: List[FairValueGap],
+        displacements: List[Dict],
+        ote_zones: List[Dict],
+        breaker_blocks: List[Dict],
+        events: List[StructureEvent],
+        swing_points: List[SwingPoint]
+    ) -> List[Dict]:
+        """
+        Collect all detected patterns into a unified format for validation.
+
+        Returns:
+            List of pattern dictionaries with consistent format:
+            {
+                'pattern_type': str,
+                'index': int,
+                'price_high': float,
+                'price_low': float,
+                'confidence': float,
+                ...original fields
+            }
+        """
+        patterns = []
+
+        # Convert Order Blocks
+        for i, ob in enumerate(order_blocks):
+            patterns.append({
+                'pattern_type': f"{ob.type}_order_block",
+                'index': ob.start_index,
+                'end_index': ob.end_index,
+                'price_high': ob.high,
+                'price_low': ob.low,
+                'confidence': ob.strength if ob.strength else 0.7,
+                'mitigated': ob.mitigated,
+            })
+
+        # Convert FVGs
+        for i, fvg in enumerate(fvgs):
+            patterns.append({
+                'pattern_type': f"{fvg.type}_fvg",
+                'index': fvg.index,
+                'price_high': fvg.high,
+                'price_low': fvg.low,
+                'confidence': 0.7 - (fvg.fill_percentage / 100 * 0.3),  # Lower conf if filled
+                'filled': fvg.filled,
+                'fill_percentage': fvg.fill_percentage,
+            })
+
+        # Convert Displacements
+        for i, disp in enumerate(displacements):
+            patterns.append({
+                'pattern_type': 'displacement',
+                'index': disp.get('index', 0),
+                'end_index': disp.get('end_index', disp.get('index', 0)),
+                'price_high': disp.get('high', disp.get('price_high', 0)),
+                'price_low': disp.get('low', disp.get('price_low', 0)),
+                'confidence': disp.get('confidence', 0.75),
+                **{k: v for k, v in disp.items() if k not in ['index', 'end_index', 'high', 'low', 'confidence']}
+            })
+
+        # Convert OTE Zones
+        for i, ote in enumerate(ote_zones):
+            patterns.append({
+                'pattern_type': 'optimal_trade_entry',
+                'index': ote.get('index', 0),
+                'price_high': ote.get('high', ote.get('price_high', 0)),
+                'price_low': ote.get('low', ote.get('price_low', 0)),
+                'confidence': ote.get('confidence', 0.7),
+                **{k: v for k, v in ote.items() if k not in ['index', 'high', 'low', 'confidence']}
+            })
+
+        # Convert Breaker Blocks
+        for i, bb in enumerate(breaker_blocks):
+            patterns.append({
+                'pattern_type': 'breaker_block',
+                'index': bb.get('index', 0),
+                'price_high': bb.get('high', bb.get('price_high', 0)),
+                'price_low': bb.get('low', bb.get('price_low', 0)),
+                'confidence': bb.get('confidence', 0.7),
+                **{k: v for k, v in bb.items() if k not in ['index', 'high', 'low', 'confidence']}
+            })
+
+        # Convert Structure Events (BOS/CHoCH)
+        for i, event in enumerate(events):
+            patterns.append({
+                'pattern_type': event.type,
+                'index': 0,  # Structure events don't have a specific index
+                'price_high': event.level,
+                'price_low': event.level,
+                'confidence': 0.8,  # Structure breaks are generally reliable
+            })
+
+        # Convert Swing Points (for validation reference)
+        for i, sp in enumerate(swing_points):
+            patterns.append({
+                'pattern_type': f"swing_{sp.type}",
+                'index': sp.index,
+                'price_high': sp.price if sp.type == 'high' else sp.price,
+                'price_low': sp.price if sp.type == 'low' else sp.price,
+                'confidence': min(0.5 + sp.strength * 0.05, 0.9),  # Higher strength = higher confidence
+            })
+
+        return patterns
 
     def find_swing_points(self, data: 'pd.DataFrame') -> List[SwingPoint]:
         """

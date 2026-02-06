@@ -118,6 +118,21 @@ class SignalGenerator:
         # Run Smart Money analysis
         analysis = self.analyzer.analyze(data)
 
+        # =====================================================================
+        # CHECK FOR PATTERN CONFLICTS (from validation system)
+        # =====================================================================
+        conflict_warning = ""
+        conflict_confidence_penalty = 0.0
+
+        if hasattr(analysis, 'has_unresolved_conflicts') and analysis.has_unresolved_conflicts:
+            # Major conflicts detected - consider reducing confidence or blocking signal
+            conflict_warning = " [WARNING: Pattern conflicts detected - reduced confidence]"
+            conflict_confidence_penalty = 0.15  # 15% confidence penalty
+
+        if hasattr(analysis, 'pattern_confluences') and analysis.pattern_confluences:
+            # Add confluence information to boost confidence
+            logger.info(f"Pattern confluences detected: {len(analysis.pattern_confluences)}")
+
         # Calculate signal score and factors
         score, factors = self._calculate_signal_score(analysis, htf_bias)
 
@@ -128,6 +143,20 @@ class SignalGenerator:
 
         # Check if we should generate a signal based on grade criteria
         should_signal, signal_reason = self._check_should_generate_signal(best_pattern, score)
+
+        # =====================================================================
+        # CONFLICT CHECK: Block signal if high-severity conflicts are unresolved
+        # =====================================================================
+        if should_signal and hasattr(analysis, 'has_unresolved_conflicts') and analysis.has_unresolved_conflicts:
+            # Check if any high-severity conflicts exist
+            high_severity_conflicts = [
+                c for c in getattr(analysis, 'pattern_conflicts', [])
+                if c.get('severity') == 'high'
+            ]
+            if high_severity_conflicts:
+                should_signal = False
+                signal_reason = f"High-severity conflicts detected: {len(high_severity_conflicts)} conflicting patterns. Wait for clarity."
+                logger.warning(f"Signal blocked due to conflicts: {signal_reason}")
 
         # Determine direction (may be WAIT if pattern grade is too low)
         if should_signal:
@@ -158,6 +187,17 @@ class SignalGenerator:
         # HEDGE FUND LEVEL: Adjust confidence based on pattern grade
         # =====================================================================
         final_confidence = self._adjust_confidence_with_grade(base_confidence, best_pattern)
+
+        # =====================================================================
+        # Apply conflict penalty and confluence boost
+        # =====================================================================
+        if conflict_confidence_penalty > 0:
+            final_confidence = max(0.3, final_confidence - conflict_confidence_penalty)
+            logger.info(f"Applied conflict penalty: -{conflict_confidence_penalty:.0%}")
+
+        if hasattr(analysis, 'confluence_confidence_boost') and analysis.confluence_confidence_boost > 0:
+            final_confidence = min(0.95, final_confidence + analysis.confluence_confidence_boost)
+            logger.info(f"Applied confluence boost: +{analysis.confluence_confidence_boost:.0%}")
 
         # Generate analysis text (includes grade analysis)
         analysis_text = self._generate_analysis_text(analysis, factors, direction)
@@ -273,6 +313,16 @@ class SignalGenerator:
             edge_statistics=edge_info,
             grade_recommendation=best_pattern.trade_recommendation if best_pattern else "No tradeable pattern found",
             historical_validation=historical_validation,
+            # =====================================================================
+            # PATTERN VALIDATION & CONFLICT RESOLUTION
+            # =====================================================================
+            pattern_validations=getattr(analysis, 'pattern_validations', {}),
+            validation_summary=getattr(analysis, 'validation_summary', ''),
+            pattern_confluences=getattr(analysis, 'pattern_confluences', []),
+            pattern_conflicts=getattr(analysis, 'pattern_conflicts', []),
+            conflict_resolutions=getattr(analysis, 'conflict_resolutions', []),
+            has_unresolved_conflicts=getattr(analysis, 'has_unresolved_conflicts', False),
+            confluence_confidence_boost=getattr(analysis, 'confluence_confidence_boost', 0.0),
         )
 
     def _calculate_signal_score(

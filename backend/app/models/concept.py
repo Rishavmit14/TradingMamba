@@ -17,6 +17,7 @@ class ConceptCategory(Enum):
     RISK_MANAGEMENT = "risk_management"
     LIQUIDITY = "liquidity"
     PRICE_ACTION = "price_action"
+    ADVANCED_SMC = "advanced_smc"
 
 
 @dataclass
@@ -432,6 +433,59 @@ SMART_MONEY_CONCEPT_TAXONOMY = {
                 "short_name": "Disp",
                 "keywords": ["displacement", "impulse", "aggressive move"],
                 "description": "Strong, fast price movement showing institutional involvement",
+            },
+        ]
+    },
+    "advanced_smc": {
+        "name": "Advanced Smart Money Concepts",
+        "concepts": [
+            {
+                "name": "Inducement",
+                "short_name": "IDM",
+                "keywords": ["inducement", "idm", "induce", "induced"],
+                "description": "A trap before an order block/supply/demand zone — the first valid pullback on the left side of a swing",
+            },
+            {
+                "name": "Inducement Shift",
+                "short_name": "IDM Shift",
+                "keywords": ["inducement shift", "shift of inducement"],
+                "description": "When impulse moves cause the inducement level to shift to the low/high of the impulse",
+            },
+            {
+                "name": "Break of Structure",
+                "short_name": "BOS",
+                "keywords": ["break of structure", "bos", "structure break"],
+                "description": "Price breaking above/below a previous swing point, confirmed with candle body close",
+            },
+            {
+                "name": "Change of Character",
+                "short_name": "CHoCH",
+                "keywords": ["change of character", "choch", "character change"],
+                "description": "First sign of trend reversal when price breaks structure in the opposite direction",
+            },
+            {
+                "name": "Valid Pullback",
+                "short_name": "VP",
+                "keywords": ["valid pullback", "pullback", "liquidity sweep confirmation"],
+                "description": "A pullback confirmed by a liquidity sweep of the highest/lowest candle",
+            },
+            {
+                "name": "Price Delivery Cycle",
+                "short_name": "PDC",
+                "keywords": ["price delivery cycle", "price cycle", "expansion", "retracement"],
+                "description": "The cyclical pattern of expansion, retracement, reversal, and continuation",
+            },
+            {
+                "name": "Fair Value Gap Confirmation",
+                "short_name": "Valid FVG",
+                "keywords": ["valid fvg", "fvg confirmation", "fair value gap rules"],
+                "description": "Rules for confirming whether an FVG is valid for trading",
+            },
+            {
+                "name": "Judas Swing",
+                "short_name": "Judas",
+                "keywords": ["judas swing", "judas", "false move"],
+                "description": "A deceptive price move at session open designed to trap retail traders before the real move",
             },
         ]
     },
