@@ -495,81 +495,13 @@ class MLPatternEngine:
                 visual_example_path=data['visual_path']
             )
 
-        # ALSO load concepts from knowledge_base.json (transcript/synchronized training)
-        # This integrates concepts learned from ICT video transcripts
-        # NOTE: Skip this global merged file when playlist-filtering is active,
-        # because it contains mixed knowledge from ALL videos.
-        kb_file = self.data_dir / 'ml_models' / 'knowledge_base.json'
-        if kb_file.exists() and self._video_ids is None:
-            try:
-                with open(kb_file, 'r') as f:
-                    kb_data = json.load(f)
-
-                concept_definitions = kb_data.get('concept_definitions', {})
-                trading_rules = kb_data.get('trading_rules', [])
-
-                for concept_name, concept_data in concept_definitions.items():
-                    normalized = self.knowledge_base._normalize_pattern_type(concept_name)
-
-                    # Skip if already learned from vision training
-                    if normalized in self.knowledge_base.patterns_learned:
-                        continue
-
-                    # Get frequency and examples from concept data
-                    if isinstance(concept_data, dict):
-                        frequency = concept_data.get('frequency', 1)
-                        examples = concept_data.get('examples', [])
-                    else:
-                        frequency = 1
-                        examples = []
-
-                    # Extract teaching contexts from examples
-                    teaching_contexts = []
-                    for ex in examples[:5]:
-                        if isinstance(ex, dict) and ex.get('text'):
-                            teaching_contexts.append(ex['text'][:200])
-                        elif isinstance(ex, str):
-                            teaching_contexts.append(ex[:200])
-
-                    # Calculate confidence based on frequency
-                    confidence = min(0.5 + (frequency * 0.05), 0.85)
-
-                    # Add rules that mention this concept as teaching context
-                    for rule in trading_rules:
-                        if isinstance(rule, dict):
-                            rule_concepts = rule.get('concepts', [])
-                            # Handle both string and dict concept formats
-                            normalized_concepts = []
-                            for c in rule_concepts:
-                                if isinstance(c, str):
-                                    normalized_concepts.append(self.knowledge_base._normalize_pattern_type(c))
-                                elif isinstance(c, dict) and c.get('name'):
-                                    normalized_concepts.append(self.knowledge_base._normalize_pattern_type(c['name']))
-
-                            if normalized in normalized_concepts and rule.get('text'):
-                                teaching_contexts.append(f"Rule: {rule['text'][:150]}")
-
-                    # Add as learned pattern
-                    self.knowledge_base.patterns_learned[normalized] = LearnedPattern(
-                        pattern_type=normalized,
-                        frequency=frequency,
-                        confidence=confidence,
-                        characteristics=[f"Learned from ICT transcript training"],
-                        example_locations=[],
-                        teaching_contexts=teaching_contexts[:5],
-                        visual_example_path=None
-                    )
-
-                    all_patterns[normalized] = {'frequency': frequency}
-                    logger.info(f"  + Added concept from transcript: {normalized} (confidence={confidence:.2f})")
-
-                # Update training sources
-                n_transcripts = kb_data.get('n_transcripts_processed', 0)
-                if n_transcripts > 0:
-                    sources.append(f"Transcript training ({n_transcripts} videos)")
-
-            except Exception as e:
-                logger.error(f"Error loading knowledge_base.json: {e}")
+        # NOTE: knowledge_base.json from transcript training is NOT loaded as patterns_learned.
+        # It contains generic topic categories (e.g., "institutional", "price_action", "entry_models")
+        # from keyword matching on transcripts — these are NOT actual chart patterns that the ML
+        # learned to detect from video analysis. Only audio-first training (Claude Code expert
+        # analysis) and vision training produce real, actionable patterns.
+        # The knowledge_base.json data is still used by the SmartMoneyKnowledgeBase for concept
+        # classification and text-based queries, but should not appear in the Pattern Filter.
 
         # =========================================================================
         # AUDIO-FIRST TRAINING KNOWLEDGE (from 20 ICT video trainings)

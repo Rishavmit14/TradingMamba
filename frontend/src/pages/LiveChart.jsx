@@ -249,118 +249,6 @@ function LiveChart() {
     rayOverlaysRef.current = [];
   }, []);
 
-  // Fast ray position update using requestAnimationFrame (no DOM recreation)
-  const updateRayPositions = useCallback(() => {
-    if (!chartRef.current || !candlestickSeriesRef.current || !chartContainerRef.current) return;
-
-    const series = candlestickSeriesRef.current;
-    const chart = chartRef.current;
-    const timeScale = chart.timeScale();
-    const chartElement = chartContainerRef.current;
-    const chartWidth = chartElement.clientWidth;
-    const chartHeight = chartElement.clientHeight;
-    const rightEdge = chartWidth - 70;
-
-    // Group elements by their rayId for coordinated updates
-    const rayGroups = {};
-    rayOverlaysRef.current.forEach(el => {
-      if (!el || !el.dataset) return;
-      const rayId = el.dataset.rayId;
-      if (!rayId) return;
-      if (!rayGroups[rayId]) rayGroups[rayId] = [];
-      rayGroups[rayId].push(el);
-    });
-
-    // Update each ray group together (ray, label, marker, priceLabel share same coordinates)
-    Object.values(rayGroups).forEach(elements => {
-      // Get common data from first element
-      const firstEl = elements[0];
-      const price = parseFloat(firstEl.dataset.price);
-      const startTime = parseInt(firstEl.dataset.startTime);
-
-      if (isNaN(price)) return;
-
-      // Get new Y coordinate for this price
-      const y = series.priceToCoordinate(price);
-      const isVisible = y !== null && y >= -50 && y <= chartHeight + 50;
-
-      // Get new X coordinate for the start time
-      let startX = startTime ? timeScale.timeToCoordinate(startTime) : 0;
-      if (startX === null || startX < 0) startX = 0;
-
-      // Calculate ray width - if ray is too short, start from left edge
-      let rayWidth = rightEdge - startX;
-      if (rayWidth < 20 || startX > rightEdge - 50) {
-        startX = 0;
-        rayWidth = rightEdge;
-      }
-
-      // Calculate ray center position
-      const rayCenterX = startX + rayWidth / 2;
-
-      // Update all elements in the group with consistent coordinates
-      elements.forEach(el => {
-        if (!isVisible) {
-          el.style.display = 'none';
-          return;
-        }
-        el.style.display = '';
-
-        const elementType = el.dataset.type;
-        if (elementType === 'ray') {
-          el.style.left = `${startX}px`;
-          el.style.top = `${y}px`;
-          el.style.width = `${rayWidth}px`;
-        } else if (elementType === 'label') {
-          // Use CSS transform to center the label on the ray
-          // Position at ray center, then translate left by 50% of label width
-          el.style.left = `${rayCenterX}px`;
-          el.style.top = `${y - 10}px`;
-          el.style.transform = 'translateX(-50%)';
-        } else if (elementType === 'marker') {
-          el.style.left = `${startX - 4}px`;
-          el.style.top = `${y - 4}px`;
-          el.style.display = startX > 0 ? '' : 'none';
-        } else if (elementType === 'priceLabel') {
-          el.style.top = `${y - 9}px`;
-        }
-      });
-    });
-
-    // Also update pattern box overlays
-    patternOverlaysRef.current.forEach(el => {
-      if (!el || !el.dataset) return;
-
-      const high = parseFloat(el.dataset.high);
-      const low = parseFloat(el.dataset.low);
-      const startTime = parseInt(el.dataset.startTime);
-      const endTime = parseInt(el.dataset.endTime);
-
-      if (isNaN(high) || isNaN(low)) return;
-
-      const yHigh = series.priceToCoordinate(high);
-      const yLow = series.priceToCoordinate(low);
-      if (yHigh === null || yLow === null) {
-        el.style.display = 'none';
-        return;
-      }
-
-      let xStart = startTime ? timeScale.timeToCoordinate(startTime) : null;
-      let xEnd = endTime ? timeScale.timeToCoordinate(endTime) : null;
-
-      if (xStart === null || xEnd === null) {
-        el.style.display = 'none';
-        return;
-      }
-
-      el.style.display = '';
-      el.style.left = `${Math.min(xStart, xEnd)}px`;
-      el.style.top = `${Math.min(yHigh, yLow)}px`;
-      el.style.width = `${Math.abs(xEnd - xStart)}px`;
-      el.style.height = `${Math.abs(yLow - yHigh)}px`;
-    });
-  }, []);
-
   // Reusable: filter API patterns for the current visible price range
   // IMPORTANT: Now strictly filters by current timeframe (playlist-specific patterns)
   const getRelevantPatterns = useCallback((allPatterns, candles, signalDirection) => {
@@ -581,49 +469,9 @@ function LiveChart() {
     // Filter to only ray patterns
     const rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
 
-    // Group patterns by price level (within 0.1% tolerance) to merge labels
-    const priceTolerance = 0.001; // 0.1% tolerance for grouping
-    const groupedPatterns = [];
-    const usedIndices = new Set();
-
     rayPatterns.forEach((pattern, idx) => {
-      if (usedIndices.has(idx)) return;
-
-      const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
-      if (!price) return;
-
-      // Find all patterns at similar price levels
-      const group = [pattern];
-      usedIndices.add(idx);
-
-      rayPatterns.forEach((otherPattern, otherIdx) => {
-        if (usedIndices.has(otherIdx)) return;
-        const otherPrice = otherPattern.price || otherPattern.high || otherPattern.low || otherPattern.price_high || otherPattern.price_low;
-        if (!otherPrice) return;
-
-        if (Math.abs(price - otherPrice) / price < priceTolerance) {
-          group.push(otherPattern);
-          usedIndices.add(otherIdx);
-        }
-      });
-
-      groupedPatterns.push(group);
-    });
-
-    // Draw one ray per price group with merged labels
-    groupedPatterns.forEach((group) => {
-      // Use the first pattern's data for the ray
-      const pattern = group[0];
       const patternType = pattern.pattern_type;
-
-      // Merge all pattern types in the group into one label
-      const uniqueTypes = [...new Set(group.map(p => p.pattern_type))];
-      const mergedAnnotations = uniqueTypes.map(t => getAnnotation(t));
-      // Use the first color, combine text with "/"
-      const annotation = {
-        text: mergedAnnotations.map(a => a.text).join('/'),
-        color: mergedAnnotations[0].color
-      };
+      const annotation = getAnnotation(patternType);
 
       // Get the price level for the ray
       const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
@@ -649,18 +497,15 @@ function LiveChart() {
           lineEl.style.cssText = `
             position: absolute; left: ${startX}px; top: ${y - 1}px;
             width: ${rayWidth}px; height: 2px;
-            background: ${annotation.color}80;
-            box-shadow: 0 0 4px ${annotation.color}60;
+            background: linear-gradient(to right, ${annotation.color}40, ${annotation.color}80, ${annotation.color}40);
+            border-top: 1px dashed ${annotation.color}60;
             pointer-events: none; z-index: 4;
           `;
           const labelEl = document.createElement('div');
           const labelY = findNonOverlappingYRay(y - LABEL_HEIGHT / 2);
           labelEl.className = 'ray-overlay';
-          // Center the label on the equilibrium ray using CSS transform
-          const rayCenterX = startX + rayWidth / 2;
           labelEl.style.cssText = `
-            position: absolute; left: ${rayCenterX}px; top: ${labelY}px;
-            transform: translateX(-50%);
+            position: absolute; right: 75px; top: ${labelY}px;
             color: ${annotation.color}; font-size: 10px; font-weight: 700;
             text-shadow: 0 1px 2px rgba(0,0,0,0.9);
             padding: 1px 5px; background: rgba(0,0,0,0.8);
@@ -745,9 +590,8 @@ function LiveChart() {
 
       if (!startTime) return;
 
-      // Check if any pattern in the group is a swing/structure marker type (should extend to right edge with price label)
-      const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
-      const isSwingMarker = group.some(p => swingMarkerTypes.includes(p.pattern_type));
+      // Check if this is a swing/structure marker type (should extend to right edge with price label)
+      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
 
       try {
         const timeScale = chart.timeScale();
@@ -783,48 +627,39 @@ function LiveChart() {
         // Anti-overlap: adjust Y for ray label
         const adjustedRayY = findNonOverlappingYRay(y);
 
-        // Generate unique rayId for grouping related elements (ray, label, marker, priceLabel)
-        const rayId = `ray_${price}_${startTime}`;
-
         // Create the horizontal ray line (solid line) - always at true price
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
-        // Store data for fast position updates
-        rayLine.dataset.type = 'ray';
-        rayLine.dataset.rayId = rayId;
-        rayLine.dataset.price = price;
-        rayLine.dataset.startTime = startTime;
 
-        // All rays use solid line style
+        // Swing markers use dashed line style, others use gradient
+        const lineStyle = isSwingMarker
+          ? `border-top: 1px dashed ${annotation.color}90;`
+          : `background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);`;
+
         rayLine.style.cssText = `
           position: absolute;
           left: ${startX}px;
           top: ${y}px;
           width: ${rayWidth}px;
-          height: 2px;
-          background: ${annotation.color};
+          height: ${isSwingMarker ? '0px' : '2px'};
+          ${lineStyle}
           pointer-events: none;
           z-index: 4;
-          box-shadow: 0 0 4px ${annotation.color}60;
+          ${isSwingMarker ? '' : `box-shadow: 0 0 4px ${annotation.color}60;`}
         `;
 
         // Create the annotation label with pattern name
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
-        // Store data for fast position updates
-        labelEl.dataset.type = 'label';
-        labelEl.dataset.rayId = rayId;
-        labelEl.dataset.price = price;
-        labelEl.dataset.startTime = startTime;
 
-        // Position label in the center of the ray using CSS transform for perfect centering
-        const rayCenterX = startX + rayWidth / 2;
+        // For swing markers: position label at the start (left side)
+        // For others: position in the middle
+        const labelX = isSwingMarker ? startX + 5 : startX + rayWidth / 2 - 30;
 
         labelEl.style.cssText = `
           position: absolute;
-          left: ${rayCenterX}px;
+          left: ${labelX}px;
           top: ${adjustedRayY - 10}px;
-          transform: translateX(-50%);
           color: ${annotation.color};
           font-size: 10px;
           font-weight: 700;
@@ -843,11 +678,6 @@ function LiveChart() {
         if (startX > 0) {
           const startMarker = document.createElement('div');
           startMarker.className = 'pattern-ray-overlay';
-          // Store data for fast position updates
-          startMarker.dataset.type = 'marker';
-          startMarker.dataset.rayId = rayId;
-          startMarker.dataset.price = price;
-          startMarker.dataset.startTime = startTime;
           startMarker.style.cssText = `
             position: absolute;
             left: ${startX - 4}px;
@@ -868,10 +698,6 @@ function LiveChart() {
         if (isSwingMarker) {
           const priceLabel = document.createElement('div');
           priceLabel.className = 'pattern-ray-overlay';
-          // Store data for fast position updates
-          priceLabel.dataset.type = 'priceLabel';
-          priceLabel.dataset.rayId = rayId;
-          priceLabel.dataset.price = price;
           // Format price with appropriate decimals
           const formattedPrice = price > 1000 ? price.toFixed(2) : price > 1 ? price.toFixed(4) : price.toFixed(6);
           priceLabel.style.cssText = `
@@ -1253,14 +1079,6 @@ function LiveChart() {
       // Scroll/pan handler: re-filter patterns for visible range and redraw
       // Also detects when user scrolls to left edge to load more historical data
       chart.timeScale().subscribeVisibleLogicalRangeChange(async (logicalRange) => {
-        // FAST UPDATE: Immediately update ray positions using requestAnimationFrame
-        // This runs every frame for smooth visual feedback
-        if (window.rafUpdateId) cancelAnimationFrame(window.rafUpdateId);
-        window.rafUpdateId = requestAnimationFrame(() => {
-          updateRayPositions();
-        });
-
-        // DEBOUNCED UPDATE: Full pattern recalculation (expensive, runs less often)
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
         window.patternUpdateTimeout = setTimeout(async () => {
           const candles = candlesDataRef.current;
@@ -1342,7 +1160,6 @@ function LiveChart() {
       return () => {
         window.removeEventListener('resize', handleResize);
         if (window.patternUpdateTimeout) clearTimeout(window.patternUpdateTimeout);
-        if (window.rafUpdateId) cancelAnimationFrame(window.rafUpdateId);
       };
     };
 
