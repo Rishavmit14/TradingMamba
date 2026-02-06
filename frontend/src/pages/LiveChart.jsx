@@ -497,15 +497,17 @@ function LiveChart() {
           lineEl.style.cssText = `
             position: absolute; left: ${startX}px; top: ${y - 1}px;
             width: ${rayWidth}px; height: 2px;
-            background: linear-gradient(to right, ${annotation.color}40, ${annotation.color}80, ${annotation.color}40);
-            border-top: 1px dashed ${annotation.color}60;
+            background: ${annotation.color}80;
+            box-shadow: 0 0 4px ${annotation.color}60;
             pointer-events: none; z-index: 4;
           `;
           const labelEl = document.createElement('div');
           const labelY = findNonOverlappingYRay(y - LABEL_HEIGHT / 2);
           labelEl.className = 'ray-overlay';
+          // Center the label on the equilibrium ray
+          const labelX = startX + rayWidth / 2 - 30;
           labelEl.style.cssText = `
-            position: absolute; right: 75px; top: ${labelY}px;
+            position: absolute; left: ${labelX}px; top: ${labelY}px;
             color: ${annotation.color}; font-size: 10px; font-weight: 700;
             text-shadow: 0 1px 2px rgba(0,0,0,0.9);
             padding: 1px 5px; background: rgba(0,0,0,0.8);
@@ -631,30 +633,25 @@ function LiveChart() {
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
 
-        // Swing markers use dashed line style, others use gradient
-        const lineStyle = isSwingMarker
-          ? `border-top: 1px dashed ${annotation.color}90;`
-          : `background: linear-gradient(to right, ${annotation.color}, ${annotation.color}80);`;
-
+        // All rays use solid line style
         rayLine.style.cssText = `
           position: absolute;
           left: ${startX}px;
           top: ${y}px;
           width: ${rayWidth}px;
-          height: ${isSwingMarker ? '0px' : '2px'};
-          ${lineStyle}
+          height: 2px;
+          background: ${annotation.color};
           pointer-events: none;
           z-index: 4;
-          ${isSwingMarker ? '' : `box-shadow: 0 0 4px ${annotation.color}60;`}
+          box-shadow: 0 0 4px ${annotation.color}60;
         `;
 
         // Create the annotation label with pattern name
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
 
-        // For swing markers: position label at the start (left side)
-        // For others: position in the middle
-        const labelX = isSwingMarker ? startX + 5 : startX + rayWidth / 2 - 30;
+        // Position label in the center of the ray for all patterns
+        const labelX = startX + rayWidth / 2 - 30;
 
         labelEl.style.cssText = `
           position: absolute;
