@@ -1,0 +1,37 @@
+{
+  "video_id": "hRuUCLE7i6U",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:50:20.759270",
+  "instructions": {
+    "video_id": "hRuUCLE7i6U",
+    "transcript_path": "data/transcripts/hRuUCLE7i6U.json",
+    "frames_dir": "data/video_frames/hRuUCLE7i6U",
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00003.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00030.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00036.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00039.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00102.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00129.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00147.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00168.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00171.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00213.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/hRuUCLE7i6U_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/hRuUCLE7i6U_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/hRuUCLE7i6U_knowledge_summary.md",
+    "concepts_detected": [
+      "candlestick analysis",
+      "order block",
+      "retail trap",
+      "forex sessions",
+      "smart money",
+      "liquidity",
+      "institutional",
+      "optimal trade entry",
+      "liquidity sweep"
+    ],
+    "prompt": "Complete the training for video: hRuUCLE7i6U\n\n1. Read the transcript: data/transcripts/hRuUCLE7i6U.json\n2. View these key frames: data/video_frames/hRuUCLE7i6U/frame_00003.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00030.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00036.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00039.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00102.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00129.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00147.00s.jpg, data/video_frames/hRuUCLE7i6U/frame_00168.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/hRuUCLE7i6U_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/hRuUCLE7i6U_knowledge_summary.md\n\nConcepts detected so far: candlestick analysis, order block, retail trap, forex sessions, smart money, liquidity, institutional, optimal trade entry, liquidity sweep\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

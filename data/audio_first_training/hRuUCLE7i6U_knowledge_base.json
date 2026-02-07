@@ -1,0 +1,175 @@
+{
+  "video_id": "hRuUCLE7i6U",
+  "title": "16 - Candlestick Analysis & Trading Sessions - Timing and Candle Patterns",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 369,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:45:00Z",
+  "expert_confidence": 0.91,
+
+  "processing_stats": {
+    "vision_analyses": 3,
+    "teaching_units_detected": 28,
+    "frames_extracted": 123,
+    "transcript_words": 1098
+  },
+
+  "concepts": {
+    "smc_candlestick_analysis": {
+      "llm_summary": "SMC Candlestick Analysis differs from traditional candlestick patterns. Instead of memorizing hundreds of patterns (doji, hammer, engulfing, etc.), SMC focuses on: 1) Candle body vs wick analysis for liquidity sweeps, 2) Candle close position relative to structure levels, 3) Candle that creates BOS/CHoCH, 4) Candle that forms Order Blocks. The emphasis is on WHERE candles appear in market structure and WHAT they represent (institutional activity) rather than pattern names. Body close validation is most critical element.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 24
+      },
+      "teaching_types": {
+        "definition": true,
+        "smc_vs_retail_approach": true,
+        "practical_application": true
+      },
+      "key_rules": [
+        "Focus on body close position, not pattern names",
+        "Analyze candles in context of market structure",
+        "Wick vs body determines liquidity sweep vs valid break",
+        "Last candle before BOS = Order Block",
+        "Candle close beyond swing = valid structure move"
+      ],
+      "smc_focus": [
+        "Body close validation (most important)",
+        "Wick analysis for liquidity sweeps",
+        "Structural candles (BOS, CHoCH, OB)",
+        "Context within market structure",
+        "Institutional footprint"
+      ]
+    },
+
+    "body_vs_wick": {
+      "llm_summary": "Body vs Wick is the fundamental SMC candlestick principle. Candle Body = real price acceptance and institutional activity. Candle Wick = liquidity hunt or rejection. Body close beyond level = valid break/confirmation. Wick beyond level without body close = liquidity sweep/fake breakout. This single principle filters majority of false signals. Retail traders often react to wicks (getting trapped). SMC traders wait for body close confirmation.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 140,
+        "frames_analyzed": 2,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "validation_rule": true,
+        "trading_application": true
+      },
+      "key_rules": [
+        "Body = price acceptance and institutional activity",
+        "Wick = liquidity hunt or rejection",
+        "Body close required for valid breaks",
+        "Wick-only = liquidity sweep (fake)",
+        "Always wait for body close confirmation"
+      ]
+    },
+
+    "trading_sessions": {
+      "llm_summary": "Trading Sessions are specific time periods when different financial centers are active: 1) Asian Session (Tokyo), 2) London Session (most liquid), 3) New York Session (highest volume). Each session has different characteristics and volatility levels. London and New York overlap (Kill Zone) provides highest volatility and best SMC setups. Asian session typically ranges. SMC setups have higher probability during active sessions (London/NY) compared to Asian ranging periods.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 2,
+        "mentions": 16
+      },
+      "teaching_types": {
+        "definition": true,
+        "session_characteristics": true,
+        "trading_implications": true
+      },
+      "sessions": {
+        "asian_tokyo": {
+          "characteristics": "ranging_low_volatility",
+          "best_for": "range_trading_or_avoid"
+        },
+        "london": {
+          "characteristics": "high_liquidity_trending",
+          "best_for": "smc_setups_high_probability"
+        },
+        "new_york": {
+          "characteristics": "highest_volume_volatile",
+          "best_for": "major_moves_smc_setups"
+        },
+        "london_ny_overlap": {
+          "characteristics": "kill_zone_maximum_volatility",
+          "best_for": "best_smc_setup_timing"
+        }
+      }
+    },
+
+    "kill_zone": {
+      "llm_summary": "Kill Zone is the specific time period during London-New York session overlap (typically 8am-11am NY time) when market volatility and institutional activity peak. This is when Smart Money makes major moves, taking out liquidity and initiating trends. SMC setups have highest probability during kill zones. The video emphasizes focusing trading activity on kill zones rather than trading all day. Quality timing over constant trading.",
+      "statistics": {
+        "teaching_units": 4,
+        "teaching_duration_seconds": 80,
+        "frames_analyzed": 1,
+        "mentions": 10
+      },
+      "teaching_types": {
+        "definition": true,
+        "timing_strategy": true
+      },
+      "key_rules": [
+        "Kill Zone = London-NY overlap (8-11am NY time typically)",
+        "Maximum institutional activity and volatility",
+        "Highest probability for SMC setups",
+        "Focus trading on kill zones, not all day",
+        "Major liquidity sweeps and BOS occur in kill zones"
+      ]
+    },
+
+    "session_based_strategy": {
+      "llm_summary": "Session-Based Strategy involves aligning SMC trading with optimal time periods. Strategy: 1) Avoid Asian session or trade tight ranges only, 2) Prepare during Asian - mark OBs, FVGs, structure, 3) Execute during London/NY sessions when setups activate, 4) Focus maximum attention on kill zones, 5) Avoid trading during low-liquidity periods (session transitions, weekends). Time-based filtering increases probability significantly.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 100,
+        "frames_analyzed": 2,
+        "mentions": 12
+      },
+      "teaching_types": {
+        "trading_strategy": true,
+        "timing_optimization": true
+      },
+      "strategy_elements": [
+        "Mark structure during Asian session (preparation)",
+        "Execute setups during London/NY (active sessions)",
+        "Focus on kill zones (peak timing)",
+        "Avoid low-liquidity periods",
+        "Session-aware increases probability"
+      ]
+    }
+  },
+
+  "key_insights": [
+    "SMC candlestick analysis focuses on body vs wick, not pattern names",
+    "Body close = price acceptance, Wick = liquidity hunt",
+    "Trading sessions matter - London/NY best for SMC setups",
+    "Kill Zone (London-NY overlap) = highest probability timing",
+    "Asian session for preparation, London/NY for execution",
+    "Context within market structure > traditional candle patterns",
+    "Time-based filtering significantly increases setup probability",
+    "Quality timing (kill zones) > trading all day"
+  ],
+
+  "related_concepts": [
+    "liquidity_sweep",
+    "order_block",
+    "break_of_structure",
+    "market_structure",
+    "institutional_order_flow",
+    "timing"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.91,
+    "expert_verified": true,
+    "primary_concepts": ["smc_candlestick_analysis", "body_vs_wick", "trading_sessions", "kill_zone"],
+    "difficulty_level": "intermediate",
+    "prerequisites": ["basic_candlestick_knowledge", "market_structure"],
+    "practical_application_focus": true
+  }
+}

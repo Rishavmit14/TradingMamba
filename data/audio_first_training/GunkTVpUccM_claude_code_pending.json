@@ -1,0 +1,42 @@
+{
+  "video_id": "GunkTVpUccM",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:31:14.412900",
+  "instructions": {
+    "video_id": "GunkTVpUccM",
+    "transcript_path": "data/transcripts/GunkTVpUccM.json",
+    "frames_dir": "data/video_frames/GunkTVpUccM",
+    "selected_frames": [
+      "data/video_frames/GunkTVpUccM/frame_00006.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00024.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00036.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00045.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00048.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00051.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00093.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00096.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00126.00s.jpg",
+      "data/video_frames/GunkTVpUccM/frame_00129.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/GunkTVpUccM_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/GunkTVpUccM_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/GunkTVpUccM_knowledge_summary.md",
+    "concepts_detected": [
+      "liquidity",
+      "swing high",
+      "liquidity sweep",
+      "smart money",
+      "candlestick analysis",
+      "break of structure",
+      "market structure",
+      "optimal trade entry",
+      "higher high",
+      "swing low",
+      "bos validation",
+      "inducement",
+      "order block",
+      "retail trap"
+    ],
+    "prompt": "Complete the training for video: GunkTVpUccM\n\n1. Read the transcript: data/transcripts/GunkTVpUccM.json\n2. View these key frames: data/video_frames/GunkTVpUccM/frame_00006.00s.jpg, data/video_frames/GunkTVpUccM/frame_00024.00s.jpg, data/video_frames/GunkTVpUccM/frame_00036.00s.jpg, data/video_frames/GunkTVpUccM/frame_00045.00s.jpg, data/video_frames/GunkTVpUccM/frame_00048.00s.jpg, data/video_frames/GunkTVpUccM/frame_00051.00s.jpg, data/video_frames/GunkTVpUccM/frame_00093.00s.jpg, data/video_frames/GunkTVpUccM/frame_00096.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/GunkTVpUccM_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/GunkTVpUccM_knowledge_summary.md\n\nConcepts detected so far: liquidity, swing high, liquidity sweep, smart money, candlestick analysis, break of structure, market structure, optimal trade entry, higher high, swing low, bos validation, inducement, order block, retail trap\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

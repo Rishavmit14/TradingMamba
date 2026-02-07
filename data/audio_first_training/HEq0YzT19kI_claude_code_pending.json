@@ -1,0 +1,51 @@
+{
+  "video_id": "HEq0YzT19kI",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:39:10.949775",
+  "instructions": {
+    "video_id": "HEq0YzT19kI",
+    "transcript_path": "data/transcripts/HEq0YzT19kI.json",
+    "frames_dir": "data/video_frames/HEq0YzT19kI",
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00012.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00033.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00045.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00057.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00075.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00102.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00114.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00132.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00153.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00156.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/HEq0YzT19kI_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/HEq0YzT19kI_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/HEq0YzT19kI_knowledge_summary.md",
+    "concepts_detected": [
+      "inducement",
+      "manipulation",
+      "change of character",
+      "retail trap",
+      "liquidity",
+      "market structure",
+      "swing high",
+      "smart money trap",
+      "lower low",
+      "candlestick analysis",
+      "imbalance",
+      "order block",
+      "swing low",
+      "fair value gap",
+      "liquidity sweep",
+      "equilibrium",
+      "valid pullback",
+      "higher low",
+      "smart money",
+      "break of structure",
+      "lower high",
+      "higher high",
+      "optimal trade entry"
+    ],
+    "prompt": "Complete the training for video: HEq0YzT19kI\n\n1. Read the transcript: data/transcripts/HEq0YzT19kI.json\n2. View these key frames: data/video_frames/HEq0YzT19kI/frame_00012.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00033.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00045.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00057.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00075.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00102.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00114.00s.jpg, data/video_frames/HEq0YzT19kI/frame_00132.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/HEq0YzT19kI_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/HEq0YzT19kI_knowledge_summary.md\n\nConcepts detected so far: inducement, manipulation, change of character, retail trap, liquidity, market structure, swing high, smart money trap, lower low, candlestick analysis, imbalance, order block, swing low, fair value gap, liquidity sweep, equilibrium, valid pullback, higher low, smart money, break of structure, lower high, higher high, optimal trade entry\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

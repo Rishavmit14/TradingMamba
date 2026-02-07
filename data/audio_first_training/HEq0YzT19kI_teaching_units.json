@@ -1,0 +1,1368 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 10.78,
+    "end_time": 25.96,
+    "duration": 15.180000000000001,
+    "text": "of character or trend reversal. In previous two lectures about change of character, we have studied its classical and advanced approach, in which we have learned the basics about change of character level and fake shock levels, which are smart money traps.",
+    "detected_concepts": [
+      "smart money",
+      "smart money trap",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_001",
+    "start_time": 34.36,
+    "end_time": 46.06,
+    "duration": 11.700000000000003,
+    "text": "most important, and final part to complete a structure mapping topic. In brief overview of structural mapping, I would like to recall the significance of structure mapping. Please",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00033.00s.jpg"
+    ],
+    "frame_timestamps": [
+      33.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_002",
+    "start_time": 46.06,
+    "end_time": 57.38,
+    "duration": 11.32,
+    "text": "note either you are smart money concept trader or ICT trader, you will not succeed without knowing daily candle bias. It is biggest confusion for ICT traders to find daily",
+    "detected_concepts": [
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00045.00s.jpg"
+    ],
+    "frame_timestamps": [
+      45.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_003",
+    "start_time": 57.38,
+    "end_time": 75.18,
+    "duration": 17.800000000000004,
+    "text": "bias easily. And for this confusion, one and only most reliable solution is structure mapping. Now, question is what we actually need to map a complete structure? We will study the checklist of items required for complete structural mapping. First one is",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        57.621904761904766,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00057.00s.jpg"
+    ],
+    "frame_timestamps": [
+      57.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_004",
+    "start_time": 75.18,
+    "end_time": 88.24,
+    "duration": 13.059999999999988,
+    "text": "understanding of inducement. Basically, inducement is a retail traders manipulation trap in which smart money induce them for early order execution. Secondly, how to mark valid inducement,",
+    "detected_concepts": [
+      "manipulation",
+      "smart money",
+      "inducement",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00075.00s.jpg"
+    ],
+    "frame_timestamps": [
+      75.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_005",
+    "start_time": 100.52,
+    "end_time": 113.28,
+    "duration": 12.760000000000005,
+    "text": "Fourth, liquidity and liquidity sweep which is most important thing to drive forex market. Please note without liquidity, market do not move. Fifth, marking of swing points in bullish",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00102.00s.jpg"
+    ],
+    "frame_timestamps": [
+      102.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_006",
+    "start_time": 113.28,
+    "end_time": 123.88,
+    "duration": 10.599999999999994,
+    "text": "and bearish trend, I mean higher highs, higher lows, lower highs and lower lows. We have studied complete swing points mapping in previous lectures in good details.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "lower low",
+      "lower high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00114.00s.jpg"
+    ],
+    "frame_timestamps": [
+      114.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_007",
+    "start_time": 130.76,
+    "end_time": 148.22,
+    "duration": 17.460000000000008,
+    "text": "Seventh, change of character and we studied its classical approach, in which we learn the basics about chalk level, that at which point market actually give indication of trend reversal. Eighth point, which is advance approach of chalk levels. In which we discuss the smart",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00132.00s.jpg"
+    ],
+    "frame_timestamps": [
+      132.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_008",
+    "start_time": 154.24,
+    "end_time": 181.02,
+    "duration": 26.78,
+    "text": "can evaluate yourself, that now either you are able for a structure mapping or do you need more knowledge and practice. If you know about these stated points, you can easily map out a complete structure. And finally, last point is change of character confirmation, that we have not discussed yet. Today, we will discuss this topic in complete details, which is last lecture to complete the subject of structure mapping.",
+    "detected_concepts": [
+      "market structure",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        157.48577464788733,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00153.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00156.00s.jpg"
+    ],
+    "frame_timestamps": [
+      153.0,
+      156.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_009",
+    "start_time": 182.4,
+    "end_time": 200.58,
+    "duration": 18.180000000000007,
+    "text": "Please note free mentorship lectures on smart money and ICT, all are available on our YouTube channel in both, English and Urdu Hindi language. Kindly subscribe, like and share our channel with your friends. Click on bell button so that you can receive next lectures notifications.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00183.00s.jpg"
+    ],
+    "frame_timestamps": [
+      183.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_010",
+    "start_time": 202.38,
+    "end_time": 234.62,
+    "duration": 32.24000000000001,
+    "text": "Now, let me tell you one most important thing about change of character, that when market break a major swing point, this is just an indication of reversal point, it's not complete confirmation of chalk. I repeat, chalk is just a first indication of trend reversal, not a confirmation. So, whenever we will get first indication of trend reversal, I mean chalk level, it doesn't mean you directly sell at this point. We need a set of rules to confirm the trend reversal at this point.",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        203.55941860465117,
+        "this"
+      ]
+    ],
+    "confidence": 0.5813953488372093,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00201.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00204.00s.jpg"
+    ],
+    "frame_timestamps": [
+      201.0,
+      204.0
+    ],
+    "word_count": 86
+  },
+  {
+    "id": "unit_011",
+    "start_time": 235.5,
+    "end_time": 274.68,
+    "duration": 39.18000000000001,
+    "text": "Let's study these rules in complete details. To confirm the change of character, we have designed change of character confirmation in two basic models. First one is swing based chalk model, which is also known as inducement based model. And secondly, sweep based change of character model, which is also known as chalk without inducement model. Now, swing based model is applicable only when candle body close above this previous high. And sweep based model is basically based on liquidity sweep, it's mean when candle body do not close above previous high.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement",
+      "liquidity sweep",
+      "change of character",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        239.61695652173913,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00237.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00240.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0,
+      240.0
+    ],
+    "word_count": 92
+  },
+  {
+    "id": "unit_012",
+    "start_time": 275.56,
+    "end_time": 286.24,
+    "duration": 10.680000000000007,
+    "text": "Now, let's study these both models one by one in complete details. Now, let's start about inducement based model which is also known as swing based model.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00276.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00282.00s.jpg"
+    ],
+    "frame_timestamps": [
+      276.0,
+      282.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_013",
+    "start_time": 293.08000000000004,
+    "end_time": 311.94,
+    "duration": 18.859999999999957,
+    "text": "And you also know that whenever market creates a higher high swing, it indicates the candle body is closed above this previous high. That's why we call it swing based model. Now, what are the rules to confirm trend reversal in swing based model? First rule is that price must break a major swing point.",
+    "detected_concepts": [
+      "higher high",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        294.1781818181819,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00294.00s.jpg"
+    ],
+    "frame_timestamps": [
+      294.0
+    ],
+    "word_count": 55
+  },
+  {
+    "id": "unit_014",
+    "start_time": 312.9,
+    "end_time": 327.38,
+    "duration": 14.480000000000018,
+    "text": "I mean price must break this major higher low in bullish trend. Secondly, candle body must close below swing points, it means candle body must below this higher low in bullish trend, and lower high in bearish trend.",
+    "detected_concepts": [
+      "higher low",
+      "lower high",
+      "candlestick analysis"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        313.18289473684206,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00312.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00327.00s.jpg"
+    ],
+    "frame_timestamps": [
+      312.0,
+      327.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_015",
+    "start_time": 328.32,
+    "end_time": 339.92,
+    "duration": 11.600000000000023,
+    "text": "Third, when there is a chalk point, price must create an inducement level. I mean after this chalk level. And finally, after creating a inducement level,",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        329.26153846153846,
+        "this"
+      ],
+      [
+        328.4965384615385,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00327.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00330.00s.jpg"
+    ],
+    "frame_timestamps": [
+      327.0,
+      330.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_016",
+    "start_time": 340.42,
+    "end_time": 352.34,
+    "duration": 11.919999999999959,
+    "text": "price must create a break of structure, I mean boss level to confirm trend reversal continuation. Now, most important thing. Those traders who follow only first two rules,",
+    "detected_concepts": [
+      "market structure",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00339.00s.jpg"
+    ],
+    "frame_timestamps": [
+      339.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_017",
+    "start_time": 352.88,
+    "end_time": 384.84,
+    "duration": 31.95999999999998,
+    "text": "they are aggressive traders and their win ratio is 50% only. You will understand the reason behind shortly. Secondly, the trader who follows first three rules, which is also a advance approach to confirm chalk level, their win ratio is significantly higher than aggressive traders, which is around 80%. And finally, conservative mind traders, they are basically swing traders, most patient and well disciplined, they wait for all of these four rules to confirm the trend reversal,",
+    "detected_concepts": [
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.6493506493506493,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00354.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00369.00s.jpg"
+    ],
+    "frame_timestamps": [
+      354.0,
+      369.0
+    ],
+    "word_count": 77
+  },
+  {
+    "id": "unit_018",
+    "start_time": 385.36,
+    "end_time": 394.98,
+    "duration": 9.620000000000005,
+    "text": "and their win ratio is higher than others. Please note, being a intraday trader, we mostly follow advance approach with defined risk to reward ratio.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00384.00s.jpg"
+    ],
+    "frame_timestamps": [
+      384.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_019",
+    "start_time": 395.8,
+    "end_time": 406.6,
+    "duration": 10.800000000000011,
+    "text": "Let's understand these rules on a simple schematic diagram. Here. This is a simple schematic diagram to understand swing base model, chalk confirmation.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        396.4608695652174,
+        "this"
+      ],
+      [
+        396.39478260869566,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00396.00s.jpg"
+    ],
+    "frame_timestamps": [
+      396.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_020",
+    "start_time": 413.44,
+    "end_time": 460.28,
+    "duration": 46.839999999999975,
+    "text": "for inducement level for each high. In this bullish chart example, for this high, we will find and mark this inducement level. When market take out inducement and move higher, I mean price break this previous high. At this point if candle body closed below this inducement and candle body closed above this previous high, then we can mark it as swing higher high and this low as swing higher low. For this high, we will mark this inducement level. When market take out inducement and move higher, then we can mark it as swing higher high and this low as swing higher low. Similarly, we can mark this high and lows. Because price taken out this inducement, so that we can mark it as swing higher high and higher low.",
+    "detected_concepts": [
+      "swing high",
+      "higher high",
+      "higher low",
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        413.8220610687023,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00414.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00438.00s.jpg"
+    ],
+    "frame_timestamps": [
+      414.0,
+      438.0
+    ],
+    "word_count": 131
+  },
+  {
+    "id": "unit_021",
+    "start_time": 461.18,
+    "end_time": 472.06,
+    "duration": 10.879999999999995,
+    "text": "Now, remember that swing base model is applicable only when candle body close above this previous high. And this higher high indicates the candle body is closed above this previous high.",
+    "detected_concepts": [
+      "higher high",
+      "candlestick analysis"
+    ],
+    "teaching_type": "summary",
+    "deictic_references": [
+      [
+        462.02,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00462.00s.jpg"
+    ],
+    "frame_timestamps": [
+      462.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_022",
+    "start_time": 483.38,
+    "end_time": 491.9,
+    "duration": 8.519999999999982,
+    "text": "Then inducement formation and then break of structure. Just for your learning purpose and understanding, let's mark this rules on this chart.",
+    "detected_concepts": [
+      "market structure",
+      "inducement",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        484.4695454545454,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00483.00s.jpg"
+    ],
+    "frame_timestamps": [
+      483.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_023",
+    "start_time": 509.88,
+    "end_time": 544.88,
+    "duration": 35.0,
+    "text": "This. When there is a chalk point, price must create an inducement level. Note that price has created this inducement level. And finally, price must take out this inducement level, move down and create a break of structure. As break of structure indicates the trend continuation, that why when chalk gives a trend reversal indication then break of structure confirms this trend reversal continuation. I hope you have clear understanding of these rules, and now you can easily find and confirm a trend reversal by following these four rules.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "inducement",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        509.88,
+        "this"
+      ],
+      [
+        510.0620224719101,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00510.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00528.00s.jpg"
+    ],
+    "frame_timestamps": [
+      510.0,
+      528.0
+    ],
+    "word_count": 89
+  },
+  {
+    "id": "unit_024",
+    "start_time": 547.42,
+    "end_time": 557.18,
+    "duration": 9.759999999999991,
+    "text": "Now, when higher time frame gives us indication of trend reversal, then how we can add an extra confirmation point to catch this trend reversal point.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        548.6892307692307,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00546.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00549.00s.jpg"
+    ],
+    "frame_timestamps": [
+      546.0,
+      549.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_025",
+    "start_time": 557.94,
+    "end_time": 567.56,
+    "duration": 9.61999999999989,
+    "text": "Please note, when high time frames give chalk level indication, then we find our point of interest, order block, or you can say that a supply zone in this swing.",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        559.4426666666667,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00558.00s.jpg"
+    ],
+    "frame_timestamps": [
+      558.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_026",
+    "start_time": 568.34,
+    "end_time": 588.86,
+    "duration": 20.519999999999982,
+    "text": "And when, after this inducement level, price approaches to our cell zone, as shown in this example, then we will look for a smaller time frame chalk level at this point. What does it mean? It's mean, we will wait for another lower time frame trend reversal indication, or chalk level to confirm out cell model.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        568.5060714285714,
+        "this"
+      ],
+      [
+        569.4471428571429,
+        "look"
+      ]
+    ],
+    "confidence": 0.8928571428571428,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00567.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00570.00s.jpg"
+    ],
+    "frame_timestamps": [
+      567.0,
+      570.0
+    ],
+    "word_count": 56
+  },
+  {
+    "id": "unit_027",
+    "start_time": 589.44,
+    "end_time": 596.74,
+    "duration": 7.2999999999999545,
+    "text": "Now I hope you can easily find and confirm a trend reversal. Keep in mind these four rules and this confirmation method,",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        590.4763636363637,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00588.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00591.00s.jpg"
+    ],
+    "frame_timestamps": [
+      588.0,
+      591.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_028",
+    "start_time": 612.52,
+    "end_time": 630.24,
+    "duration": 17.720000000000027,
+    "text": "Let's check out if market follows these four rules in inducement base model, does it really work or not? We have mapped out this small sample size, market created swing higher high and swing low points after taking out inducement. Market break this swing higher low which is our first rule.",
+    "detected_concepts": [
+      "swing high",
+      "swing low",
+      "higher high",
+      "higher low",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        613.8278431372548,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00612.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00615.00s.jpg"
+    ],
+    "frame_timestamps": [
+      612.0,
+      615.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_029",
+    "start_time": 636.64,
+    "end_time": 657.44,
+    "duration": 20.800000000000068,
+    "text": "Here, market created an inducement after change of character point. And finally market take out this inducement and created this break of structure point. This fourth rule, I mean boss level confirms the trend reversal continuation. As market followed all of four rules, now we can expect a major trend reversal.",
+    "detected_concepts": [
+      "market structure",
+      "inducement",
+      "break of structure",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        637.5576470588235,
+        "this"
+      ],
+      [
+        636.64,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00636.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00639.00s.jpg"
+    ],
+    "frame_timestamps": [
+      636.0,
+      639.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_030",
+    "start_time": 658.18,
+    "end_time": 674.68,
+    "duration": 16.5,
+    "text": "Let's zoom out this chart to see either it really happened or not. Notice here that price was in extremely bullish trend and after this confirmation, market turned into totally bearish. You can see how market momentum shifted from bullish to bearish after these four rules.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        658.3580434782608,
+        "this"
+      ],
+      [
+        659.0108695652174,
+        "here"
+      ],
+      [
+        658.5360869565217,
+        "see"
+      ],
+      [
+        658.9515217391304,
+        "notice"
+      ],
+      [
+        660.1384782608695,
+        "see how"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00657.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00660.00s.jpg"
+    ],
+    "frame_timestamps": [
+      657.0,
+      660.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_031",
+    "start_time": 675.3,
+    "end_time": 685.66,
+    "duration": 10.360000000000014,
+    "text": "So, practice these rules and never trade a trend reversal or chalk level without confirming these rules. As we have discussed a swing based model chalk rules,",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00675.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00681.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00684.00s.jpg"
+    ],
+    "frame_timestamps": [
+      675.0,
+      681.0,
+      684.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_032",
+    "start_time": 686.22,
+    "end_time": 701.6,
+    "duration": 15.379999999999995,
+    "text": "in which we studied that market must create an inducement level for confirmation. Now, question is, if market do not create any inducement after chalk level, then, how we can trade such swing based model without inducement?",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00687.00s.jpg"
+    ],
+    "frame_timestamps": [
+      687.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_033",
+    "start_time": 710.38,
+    "end_time": 724.18,
+    "duration": 13.799999999999955,
+    "text": "Now, if market do not create any inducement after chalk level, and reach our sell zone, then price may show a minor reaction at that point. But what will happen later on if market do not follow our third rule?",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00711.00s.jpg"
+    ],
+    "frame_timestamps": [
+      711.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_034",
+    "start_time": 732.8,
+    "end_time": 741.74,
+    "duration": 8.940000000000055,
+    "text": "I mean if trend was bullish, and market did not create any inducement after chalk level, then there is a high chance that market will resume its major trend.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        733.7744827586206,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00732.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00735.00s.jpg"
+    ],
+    "frame_timestamps": [
+      732.0,
+      735.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_035",
+    "start_time": 742.7,
+    "end_time": 753.18,
+    "duration": 10.479999999999905,
+    "text": "And such sell zones act smart money traps or fake chalk levels. We did not discuss this smart money trap in last lecture, because at that point you may not understand it.",
+    "detected_concepts": [
+      "smart money",
+      "smart money trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        743.5500000000001,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00744.00s.jpg"
+    ],
+    "frame_timestamps": [
+      744.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_036",
+    "start_time": 774.54,
+    "end_time": 783.4,
+    "duration": 8.860000000000014,
+    "text": "Let's check out this real market sample size, for swing based model without inducement. This is Australian versus American dollar chart.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        774.7342857142856,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00774.00s.jpg"
+    ],
+    "frame_timestamps": [
+      774.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_037",
+    "start_time": 797.0,
+    "end_time": 813.6,
+    "duration": 16.600000000000023,
+    "text": "Now, let's check out third rule which is inducement. We will check if market create inducement or not. If market do not create inducement, then we will check market reaction after this chalk point. Notice no inducement here and market moving higher and higher.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        798.8318181818182,
+        "this"
+      ],
+      [
+        799.1863636363636,
+        "here"
+      ],
+      [
+        799.0090909090909,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00798.00s.jpg"
+    ],
+    "frame_timestamps": [
+      798.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_038",
+    "start_time": 816.38,
+    "end_time": 829.12,
+    "duration": 12.740000000000009,
+    "text": "Here market moving up and created this new high. After this chalk point, candle body closed here and without inducement, market moving higher and higher, breaking previous high creating this fake chalk.",
+    "detected_concepts": [
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        816.75875,
+        "this"
+      ],
+      [
+        816.38,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00816.00s.jpg"
+    ],
+    "frame_timestamps": [
+      816.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_039",
+    "start_time": 830.08,
+    "end_time": 842.78,
+    "duration": 12.699999999999932,
+    "text": "So we must avoid such smart money traps. For swing based model, we must trade chalk with inducements for confirmation. And without inducement, such chalk levels are smart money traps.",
+    "detected_concepts": [
+      "smart money",
+      "inducement",
+      "smart money trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00831.00s.jpg"
+    ],
+    "frame_timestamps": [
+      831.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_040",
+    "start_time": 844.28,
+    "end_time": 863.38,
+    "duration": 19.100000000000023,
+    "text": "Now, let's start about sweep based model which is second model type. Please note sweep based model is applicable only when candle wick traded above this previous high. Sweep based model means, when there is only liquidity sweep. And candle body must close below this previous high.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [
+      [
+        845.7746808510637,
+        "this"
+      ],
+      [
+        846.3127659574468,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00843.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00846.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00861.00s.jpg"
+    ],
+    "frame_timestamps": [
+      843.0,
+      846.0,
+      861.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_041",
+    "start_time": 864.2,
+    "end_time": 905.56,
+    "duration": 41.3599999999999,
+    "text": "Now, what are the rules to confirm trend reversal in sweep based model? So, our first rule is, price must sweep liquidity from previous high by candle wick only. Secondly, candle body must close below the valid pullback in sweeping swings, then we will market as our chalk point. In sweep based model, we do not wait for inducement level. We can enter anytime when price will give us a pullback to this high. I repeat, in sweep based model, we do not wait for inducement after this chalk point. We can directly enter here after candle closing, or we can wait for a minor pullback for better risk to reward.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement",
+      "valid pullback",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        868.1308108108109,
+        "this"
+      ],
+      [
+        869.3318918918919,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00864.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00867.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_00870.00s.jpg"
+    ],
+    "frame_timestamps": [
+      864.0,
+      867.0,
+      870.0
+    ],
+    "word_count": 111
+  },
+  {
+    "id": "unit_042",
+    "start_time": 912.84,
+    "end_time": 924.42,
+    "duration": 11.579999999999927,
+    "text": "But, question is, if market create an inducement after this chalk level, then what will happen? Simply, if market create inducement in sweep based model,",
+    "detected_concepts": [
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        913.3908,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00912.00s.jpg"
+    ],
+    "frame_timestamps": [
+      912.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_043",
+    "start_time": 929.96,
+    "end_time": 938.32,
+    "duration": 8.360000000000014,
+    "text": "On a short note, we do not wait for inducement level in sweep based model, we can just enter after candle body closing below valid pullback.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement",
+      "valid pullback",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00930.00s.jpg"
+    ],
+    "frame_timestamps": [
+      930.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_044",
+    "start_time": 941.24,
+    "end_time": 959.86,
+    "duration": 18.620000000000005,
+    "text": "Here, we have categorized sweep based model in two types. First one, sweep based model without inducement which is mostly traded. Secondly, sweep based model with inducement which is advanced approach. Remember, we can trade sweep based model by both method.",
+    "detected_concepts": [
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        941.24,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00942.00s.jpg"
+    ],
+    "frame_timestamps": [
+      942.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_045",
+    "start_time": 970.02,
+    "end_time": 978.84,
+    "duration": 8.82000000000005,
+    "text": "Here you can see, at this point market did liquidity sweep by candlewick. Only candlewick traded high above this previous high to sweep liquidity",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        970.3220833333334,
+        "this"
+      ],
+      [
+        970.02,
+        "here"
+      ],
+      [
+        970.20125,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_00969.00s.jpg"
+    ],
+    "frame_timestamps": [
+      969.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_046",
+    "start_time": 1002.14,
+    "end_time": 1010.16,
+    "duration": 8.019999999999982,
+    "text": "Now, our entry can be this imbalance zone. We can enter here in this fair value gap or we can enter here on candle closing.",
+    "detected_concepts": [
+      "fair value gap",
+      "imbalance"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1002.386,
+        "this"
+      ],
+      [
+        1002.6812,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_01002.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1002.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_047",
+    "start_time": 1017.58,
+    "end_time": 1030.96,
+    "duration": 13.379999999999995,
+    "text": "Notice here that price was totally in bullish trend, making higher high. And after this jock confirmation in sweep based model, momentum totally changed. And price trend reversed from bullish to bearish.",
+    "detected_concepts": [
+      "higher high",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1018.468125,
+        "this"
+      ],
+      [
+        1017.6434375,
+        "here"
+      ],
+      [
+        1017.58,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_01017.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1017.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_048",
+    "start_time": 1033.46,
+    "end_time": 1046.9,
+    "duration": 13.440000000000055,
+    "text": "As a summary, we have studied two basic models. First, swing base model or you can say inducement base model. For this model, we must wait for inducement level to confirm trend reversal.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1034.6436363636365,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_01032.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_01035.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1032.0,
+      1035.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_049",
+    "start_time": 1047.8200000000002,
+    "end_time": 1061.9,
+    "duration": 14.079999999999927,
+    "text": "Secondly, sweep base model. In this model, we do not wait for inducement and we can directly enter on first pullback. I hope you have enjoyed this lecture and you have comprehensive knowledge about trend reversal confirmation.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1048.1254054054057,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_01047.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1047.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_050",
+    "start_time": 1063.04,
+    "end_time": 1097.02,
+    "duration": 33.98000000000002,
+    "text": "This was our last lecture on structure mapping. Now go through the checklist and evaluate yourself. If you like this content, kindly subscribe us and share with your friends. Do paperwork and follow these rules to be a professional successful trader. If you have any question related to complete structural mapping or about this lecture, you can write us an email on this ID. From next lecture, we will start studying entry technique. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1063.04,
+        "this"
+      ]
+    ],
+    "confidence": 0.6024096385542169,
+    "selected_frames": [
+      "data/video_frames/HEq0YzT19kI/frame_01062.00s.jpg",
+      "data/video_frames/HEq0YzT19kI/frame_01080.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1062.0,
+      1080.0
+    ],
+    "word_count": 83
+  }
+]

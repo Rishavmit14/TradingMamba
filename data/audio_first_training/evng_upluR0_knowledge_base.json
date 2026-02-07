@@ -1,0 +1,309 @@
+{
+  "video_id": "evng_upluR0",
+  "title": "08 - High Probability Inducement - Multiple Inducements & Engineered Liquidity",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 717,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T08:45:00Z",
+  "expert_confidence": 0.92,
+
+  "processing_stats": {
+    "vision_analyses": 6,
+    "teaching_units_detected": 46,
+    "frames_extracted": 239,
+    "transcript_words": 1654
+  },
+
+  "concepts": {
+    "multiple_inducements": {
+      "llm_summary": "Multiple Inducements occur when a single swing has more than one valid pullback level, creating 2-3 potential inducement zones. This is common in real market conditions where price makes several retracements before the final impulse move. Every valid pullback can technically act as an inducement. The critical question becomes: which inducement should be used for high probability setups? Understanding how to identify the HIGHEST PROBABILITY inducement among multiple candidates is essential for accurate structure mapping and entry planning.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 240,
+        "frames_analyzed": 3,
+        "mentions": 28
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "visual_example": true,
+        "problem_statement": true
+      },
+      "key_rules": [
+        "A swing can have 1, 2, or 3+ inducement levels",
+        "Every valid pullback is technically an inducement",
+        "Not all inducements have equal probability",
+        "Must identify highest probability inducement for setups"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00087.00s.jpg", "timestamp": 87, "description": "Multiple inducements diagram showing 1-3 inducement levels per swing"}
+      ]
+    },
+
+    "high_probability_inducement": {
+      "llm_summary": "High Probability Inducement is the inducement level with the highest likelihood of being taken out before a valid structural move. When multiple inducements exist, the selection criteria are: 1) If single inducement exists, use it. 2) If multiple inducements of DIFFERENT sizes exist, use the LARGEST/DEEPEST pullback as highest probability. 3) If multiple inducements of SAME size exist, use the MOST RECENT inducement. Larger inducements represent bigger liquidity pools that Smart Money prioritizes. Most recent inducements represent the freshest liquidity. This concept is critical for planning high probability trade entries.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 2,
+        "mentions": 22
+      },
+      "teaching_types": {
+        "definition": true,
+        "selection_criteria": true,
+        "explanation": true,
+        "visual_example": true
+      },
+      "key_rules": [
+        "Single inducement = use it (100% probability)",
+        "Multiple different sizes = use LARGEST/DEEPEST pullback",
+        "Multiple same sizes = use MOST RECENT inducement",
+        "Larger inducement = larger liquidity pool = higher priority for Smart Money"
+      ],
+      "selection_criteria": {
+        "scenario_1_single": "use_the_only_inducement",
+        "scenario_2_different_sizes": "use_largest_deepest_pullback",
+        "scenario_3_same_sizes": "use_most_recent_inducement"
+      },
+      "visual_evidence": [
+        {"frame": "frame_00192.00s.jpg", "timestamp": 192, "description": "High probability inducement selection criteria slide"}
+      ]
+    },
+
+    "inducement_size_priority": {
+      "llm_summary": "Inducement Size Priority is the principle that larger (deeper) pullbacks represent higher probability inducement levels compared to smaller pullbacks. When a swing has multiple inducements of different sizes, the LARGEST pullback creates the biggest liquidity pool with the most stop losses, pending orders, and retail positions. Smart Money prioritizes tapping larger liquidity pools before making structural moves. Therefore, the deepest pullback should be marked as the primary inducement for structure validation and trade planning.",
+      "statistics": {
+        "teaching_units": 5,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 2,
+        "mentions": 15
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "logic_reasoning": true
+      },
+      "key_rules": [
+        "Larger pullback = larger liquidity pool",
+        "Larger liquidity = higher Smart Money priority",
+        "When sizes differ, always choose largest/deepest",
+        "Size is measured by depth of retracement, not time"
+      ],
+      "logic": {
+        "larger_pullback": "more_retail_stops_and_orders",
+        "more_liquidity": "higher_smart_money_interest",
+        "result": "larger_inducement_taken_first"
+      }
+    },
+
+    "inducement_recency_priority": {
+      "llm_summary": "Inducement Recency Priority applies when multiple inducements exist with the SAME size. In this scenario, the MOST RECENT inducement (closest to the current high) has higher probability because it represents the freshest liquidity pool. Older inducements may have already been partially absorbed or may have stale orders. Recent inducements have active, fresh stop losses and pending orders that Smart Money will target. This is the tiebreaker rule when size-based selection cannot differentiate between inducements.",
+      "statistics": {
+        "teaching_units": 4,
+        "teaching_duration_seconds": 90,
+        "frames_analyzed": 1,
+        "mentions": 10
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "tiebreaker_rule": true
+      },
+      "key_rules": [
+        "Applies only when inducements have same size",
+        "Most recent = closest to current high/low",
+        "Recent liquidity is fresher and more active",
+        "Use as tiebreaker when size rule doesn't apply"
+      ],
+      "logic": {
+        "same_size": "cannot_differentiate_by_size",
+        "recency_factor": "fresh_liquidity_vs_stale_liquidity",
+        "result": "use_most_recent_inducement"
+      }
+    },
+
+    "engineered_liquidity": {
+      "llm_summary": "Engineered Liquidity (ENG LIQ) is a specific area where retail Support and Resistance based traders are being trapped by Smart Money to create concentrated liquidity pools. These are zones where retail traders place their stop losses and pending orders based on traditional S/R levels. Smart Money engineers price action to create these zones, then hunts them to gather liquidity for larger institutional orders. ENG LIQ zones appear as horizontal consolidation ranges, trendline support/resistance areas, or repeated highs/lows that attract retail attention. Identifying ENG LIQ helps traders avoid getting trapped and instead trade with Smart Money flow.",
+      "statistics": {
+        "teaching_units": 15,
+        "teaching_duration_seconds": 280,
+        "frames_analyzed": 3,
+        "mentions": 32
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "visual_example": true,
+        "chart_example": true,
+        "retail_trap_mechanism": true
+      },
+      "key_rules": [
+        "ENG LIQ = area where retail S/R traders are trapped",
+        "Appears as consolidation zones, trendlines, repeated levels",
+        "Smart Money creates these zones intentionally",
+        "These zones are hunted for liquidity before real moves",
+        "Avoid placing stops at obvious ENG LIQ levels"
+      ],
+      "detection_patterns": [
+        "Horizontal consolidation ranges",
+        "Trendline support/resistance that gets violated",
+        "Repeated swing highs/lows that attract retail stops",
+        "Equal highs or equal lows (liquidity pools)",
+        "Areas where retail would place obvious stop losses"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00498.00s.jpg", "timestamp": 498, "description": "Engineered liquidity concept diagram with ENG LIQ zones"},
+        {"frame": "frame_00678.00s.jpg", "timestamp": 678, "description": "Real chart showing trendline liquidity (ENG LIQ)"}
+      ]
+    },
+
+    "trendline_liquidity": {
+      "llm_summary": "Trendline Liquidity is a specific type of Engineered Liquidity where retail traders place stops and orders along trendlines (both support and resistance trendlines). Retail traders are taught to draw trendlines connecting swing lows (uptrend) or swing highs (downtrend) and place trades at trendline touches. Smart Money knows these trendline areas accumulate large concentrations of stop losses. Price often violates trendlines with stop hunts before making the real move in trend direction. The video demonstrates trendline liquidity on real charts where trendline breaks trap retail traders before price resumes the actual trend.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 150,
+        "frames_analyzed": 2,
+        "mentions": 18
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "chart_example": true,
+        "retail_trap_demonstration": true
+      },
+      "key_rules": [
+        "Trendlines are retail tool, Smart Money hunts them",
+        "Both support and resistance trendlines create liquidity",
+        "Trendline breaks often trap retail before real move",
+        "Don't place stops at obvious trendline levels",
+        "Use trendline violations as confirmation of liquidity hunt"
+      ],
+      "trading_implications": {
+        "retail_approach": "place_stops_below_trendline",
+        "smart_money_approach": "hunt_trendline_stops_then_resume_trend",
+        "proper_approach": "wait_for_trendline_violation_then_reentry"
+      },
+      "visual_evidence": [
+        {"frame": "frame_00678.00s.jpg", "timestamp": 678, "description": "Trendline liquidity zones marked on real chart"}
+      ]
+    },
+
+    "support_resistance_liquidity": {
+      "llm_summary": "Support and Resistance Liquidity refers to the accumulation of retail orders and stops at traditional horizontal S/R levels. Retail traders are taught to identify horizontal support and resistance zones and place trades with stops just beyond these levels. This creates predictable liquidity pools that Smart Money targets. When price approaches S/R levels, instead of bouncing as retail expects, Smart Money often breaks through to hunt stops, then reverses in the expected direction after collecting liquidity. S/R levels are some of the most obvious engineered liquidity zones.",
+      "statistics": {
+        "teaching_units": 5,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 2,
+        "mentions": 14
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "retail_vs_smart_money": true
+      },
+      "key_rules": [
+        "Horizontal S/R levels attract retail stops and orders",
+        "Smart Money breaks S/R to hunt stops before real move",
+        "Don't place stops at obvious S/R levels",
+        "S/R violations are liquidity hunts, not trend changes"
+      ],
+      "retail_trap_pattern": {
+        "retail_belief": "price_will_bounce_at_support_resistance",
+        "retail_action": "place_stops_just_beyond_sr_level",
+        "smart_money_action": "break_sr_to_hunt_stops",
+        "result": "retail_stopped_out_before_expected_move"
+      }
+    },
+
+    "liquidity_pool_hierarchy": {
+      "llm_summary": "Liquidity Pool Hierarchy is the prioritization of different liquidity sources by Smart Money. Not all liquidity is equal - larger pools get hunted before smaller pools, fresher pools before stale pools. The hierarchy from highest to lowest priority: 1) Large inducements (deepest pullbacks), 2) Engineered liquidity zones (S/R, trendlines), 3) Equal highs/lows, 4) Recent inducements over old inducements, 5) Small/shallow pullbacks. Understanding this hierarchy helps predict which levels Smart Money will target first and in what sequence, improving trade timing and entry selection.",
+      "statistics": {
+        "teaching_units": 4,
+        "teaching_duration_seconds": 90,
+        "frames_analyzed": 2,
+        "mentions": 8
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "priority_ranking": true
+      },
+      "hierarchy": [
+        "1. Large/deep inducements (biggest liquidity pools)",
+        "2. Engineered liquidity (S/R, trendlines, consolidation)",
+        "3. Equal highs/equal lows",
+        "4. Recent inducements (fresh liquidity)",
+        "5. Small/shallow pullbacks"
+      ],
+      "key_rules": [
+        "Smart Money hunts larger liquidity first",
+        "ENG LIQ zones are high priority targets",
+        "Fresh liquidity preferred over stale",
+        "Multiple small pools may be ignored if large pool exists"
+      ]
+    },
+
+    "smart_money_liquidity_strategy": {
+      "llm_summary": "Smart Money Liquidity Strategy is the institutional approach to accumulating liquidity before large positional moves. Smart Money cannot enter large positions without sufficient liquidity (opposing orders). They engineer scenarios where retail traders concentrate their stops and orders in predictable locations (inducements, S/R, trendlines), then hunt these levels to fill institutional orders. The strategy: 1) Identify where retail will place stops (ENG LIQ), 2) Drive price to these levels, 3) Collect liquidity by triggering stops, 4) Make the real move in intended direction with filled positions. Understanding this strategy allows SMC traders to avoid traps and trade with institutional flow.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "step_by_step_process": true,
+        "institutional_perspective": true
+      },
+      "strategy_steps": [
+        "1. Identify retail predictable stop placement zones",
+        "2. Engineer price action to create these zones (ENG LIQ)",
+        "3. Drive price to hunt these stops",
+        "4. Collect liquidity from triggered stops",
+        "5. Make real directional move with filled positions"
+      ],
+      "key_rules": [
+        "Institutions need liquidity to enter large positions",
+        "Retail provides this liquidity via predictable stops",
+        "Stop hunts are not random - they're systematic liquidity collection",
+        "After liquidity collection, real move begins"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00498.00s.jpg", "timestamp": 498, "description": "ENG LIQ zones where Smart Money traps retail"}
+      ]
+    }
+  },
+
+  "key_insights": [
+    "When multiple inducements exist, use LARGEST (different sizes) or MOST RECENT (same sizes)",
+    "Larger inducements represent larger liquidity pools with higher Smart Money priority",
+    "Engineered Liquidity (ENG LIQ) = areas where retail S/R traders are trapped",
+    "Trendline breaks are liquidity hunts, not trend reversals",
+    "Don't place stops at obvious S/R levels or trendlines - these are ENG LIQ zones",
+    "Smart Money hunts liquidity before making real directional moves",
+    "Understanding liquidity hierarchy helps predict which levels get hunted first",
+    "Every valid pullback is an inducement, but not all have equal probability"
+  ],
+
+  "related_concepts": [
+    "inducement",
+    "liquidity",
+    "liquidity_sweep",
+    "smart_money_trap",
+    "support_resistance",
+    "market_structure",
+    "stop_hunt"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.92,
+    "expert_verified": true,
+    "primary_concepts": ["high_probability_inducement", "engineered_liquidity", "multiple_inducements"],
+    "difficulty_level": "intermediate",
+    "prerequisites": ["inducement", "liquidity", "market_structure"]
+  }
+}

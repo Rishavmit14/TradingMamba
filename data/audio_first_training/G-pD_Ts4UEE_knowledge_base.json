@@ -1,0 +1,199 @@
+{
+  "video_id": "G-pD_Ts4UEE",
+  "title": "11 - Price Cycle Theory - Market Phases and Accumulation/Distribution",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 835,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:20:00Z",
+  "expert_confidence": 0.91,
+
+  "processing_stats": {
+    "vision_analyses": 4,
+    "teaching_units_detected": 48,
+    "frames_extracted": 278,
+    "transcript_words": 1968
+  },
+
+  "concepts": {
+    "price_cycle_theory": {
+      "llm_summary": "Price Cycle Theory describes the four repeating phases that market moves through: 1) Accumulation, 2) Markup (Bullish Expansion), 3) Distribution, 4) Markdown (Bearish Expansion). Every market cycle follows this pattern. Understanding which phase market is in allows traders to align with Smart Money activity and avoid trading against institutional positioning. Each phase has distinct characteristics, trading opportunities, and risks.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 280,
+        "frames_analyzed": 4,
+        "mentions": 32
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "phase_breakdown": true,
+        "chart_examples": true
+      },
+      "four_phases": [
+        "1. Accumulation - SM buys at low prices",
+        "2. Markup - Bullish expansion, retail FOMO",
+        "3. Distribution - SM sells at high prices",
+        "4. Markdown - Bearish expansion, retail panic"
+      ],
+      "key_rules": [
+        "All markets cycle through these 4 phases repeatedly",
+        "Each phase has specific Smart Money activity",
+        "Trade WITH the phase, not against it",
+        "Identify current phase before entering trades"
+      ]
+    },
+
+    "accumulation_phase": {
+      "llm_summary": "Accumulation is the phase where Smart Money quietly buys large positions at low prices while retail traders are fearful or uninterested. Market consolidates in a range, creating sideways movement. Retail sees 'boring' market with no clear direction. Smart Money uses this ranging phase to accumulate positions without moving price significantly. Low volume, tight ranges, and lack of retail participation characterize accumulation. This is the BEST buying zone for informed traders.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "characteristics": true,
+        "smart_money_behavior": true
+      },
+      "characteristics": [
+        "Sideways consolidation/ranging",
+        "Low volatility",
+        "Retail disinterest or fear",
+        "Smart Money buying quietly",
+        "Best buying opportunity"
+      ],
+      "key_rules": [
+        "Accumulation = SM buying at lows",
+        "Appears as consolidation to retail",
+        "Precedes Markup phase",
+        "Trade: accumulate long positions"
+      ]
+    },
+
+    "markup_phase": {
+      "llm_summary": "Markup (Bullish Expansion) is the phase where price moves aggressively upward after accumulation completes. Smart Money has accumulated positions and now allows price to rise. Retail traders experience FOMO (fear of missing out) and buy at higher prices. This phase features strong bullish momentum, higher highs, higher lows, and increasing retail participation. Smart Money is NOT buying in markup - they bought during accumulation. Retail buys during markup while SM prepares to distribute.",
+      "statistics": {
+        "teaching_units": 7,
+        "teaching_duration_seconds": 160,
+        "frames_analyzed": 2,
+        "mentions": 18
+      },
+      "teaching_types": {
+        "definition": true,
+        "characteristics": true,
+        "retail_vs_smart_money": true
+      },
+      "characteristics": [
+        "Strong upward movement",
+        "Higher highs, higher lows",
+        "Increasing volume",
+        "Retail FOMO buying",
+        "Smart Money holding (preparing to sell)"
+      ],
+      "key_rules": [
+        "Markup = bullish expansion after accumulation",
+        "Retail buys (FOMO), SM holds",
+        "Trade: ride trend if entered during accumulation",
+        "Late entries risky - distribution approaching"
+      ]
+    },
+
+    "distribution_phase": {
+      "llm_summary": "Distribution is the phase where Smart Money quietly sells their accumulated positions at high prices to retail buyers. Market consolidates at top, similar to accumulation but at high prices. Retail is euphoric, believes market will keep rising. Smart Money uses this ranging phase to distribute (sell) large positions without crashing price. After distribution completes, SM has exited and retail holds the bags. This precedes markdown phase.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 22
+      },
+      "teaching_types": {
+        "definition": true,
+        "characteristics": true,
+        "warning": true
+      },
+      "characteristics": [
+        "Sideways consolidation at highs",
+        "Retail euphoria",
+        "Smart Money selling quietly",
+        "Decreased bullish momentum",
+        "Precedes markdown"
+      ],
+      "key_rules": [
+        "Distribution = SM selling at highs",
+        "Appears as consolidation at top",
+        "Retail buys, SM sells",
+        "Trade: exit longs, prepare for shorts"
+      ]
+    },
+
+    "markdown_phase": {
+      "llm_summary": "Markdown (Bearish Expansion) is the phase where price moves aggressively downward after distribution completes. Smart Money has exited and now price crashes. Retail traders panic sell at low prices (the same prices where SM accumulated earlier). Features strong bearish momentum, lower lows, lower highs. Retail experiences maximum pain and capitulation. After markdown, cycle returns to accumulation as SM begins buying again at new lows.",
+      "statistics": {
+        "teaching_units": 7,
+        "teaching_duration_seconds": 160,
+        "frames_analyzed": 2,
+        "mentions": 16
+      },
+      "teaching_types": {
+        "definition": true,
+        "characteristics": true
+      },
+      "characteristics": [
+        "Strong downward movement",
+        "Lower lows, lower highs",
+        "Retail panic selling",
+        "Smart Money watching (will accumulate at bottom)",
+        "Cycle completes, returns to accumulation"
+      ],
+      "key_rules": [
+        "Markdown = bearish expansion after distribution",
+        "Retail sells (panic), SM waits",
+        "Trade: short if entered during distribution",
+        "Cycle returns to accumulation phase"
+      ]
+    },
+
+    "cycle_identification": {
+      "llm_summary": "Cycle Identification is the skill of determining which of the 4 phases market is currently in. Indicators: Accumulation = sideways at lows + low volume. Markup = strong uptrend + increasing volume. Distribution = sideways at highs + weakening momentum. Markdown = strong downtrend + panic. Knowing current phase determines trading strategy: accumulate in accumulation, hold in markup, distribute in distribution, short in markdown or wait for new accumulation.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 140,
+        "frames_analyzed": 2,
+        "mentions": 14
+      },
+      "teaching_types": {
+        "identification_technique": true,
+        "trading_strategy": true
+      }
+    }
+  },
+
+  "key_insights": [
+    "All markets cycle through: Accumulation → Markup → Distribution → Markdown",
+    "Smart Money buys during accumulation, sells during distribution",
+    "Retail buys during markup (FOMO), sells during markdown (panic)",
+    "Trade WITH the cycle phase, not against it",
+    "Accumulation and distribution look similar (consolidation) but at different price levels",
+    "Understanding current phase is critical for trading decisions",
+    "Markup and markdown are expansion phases with strong trends"
+  ],
+
+  "related_concepts": [
+    "smart_money",
+    "market_structure",
+    "consolidation",
+    "trend",
+    "retail_trap"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.91,
+    "expert_verified": true,
+    "primary_concepts": ["price_cycle_theory", "accumulation_phase", "distribution_phase"],
+    "difficulty_level": "intermediate",
+    "prerequisites": ["market_structure", "smart_money"]
+  }
+}

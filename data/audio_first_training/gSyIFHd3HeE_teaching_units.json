@@ -1,0 +1,925 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 3.6999999999999993,
+    "end_time": 16.48,
+    "duration": 12.780000000000001,
+    "text": "Welcome back and welcome to Forex Minions. Today our topic of discussion is premium and discount zone. As we are studying entry techniques, so this topic will help you a lot to design a high",
+    "detected_concepts": [
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        5.002857142857142,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00003.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00006.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3.0,
+      6.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_001",
+    "start_time": 16.48,
+    "end_time": 26.18,
+    "duration": 9.7,
+    "text": "probability trade setups. Because this will help us to understand the price behavior, and its sentiments in forex trading to execute a trade on better price.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        16.72153846153846,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00015.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00018.00s.jpg"
+    ],
+    "frame_timestamps": [
+      15.0,
+      18.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_002",
+    "start_time": 26.94,
+    "end_time": 48.0,
+    "duration": 21.06,
+    "text": "Let's discuss this topic in complete details. Now question is, what is the importance of premium and discount zones, and how we can use it in our entry techniques? To understand this concept, let's discuss a daily life example. Imagine you went to a grocery shop or electronic store and you want to buy",
+    "detected_concepts": [
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        27.051851851851854,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00027.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00030.00s.jpg"
+    ],
+    "frame_timestamps": [
+      27.0,
+      30.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_003",
+    "start_time": 54.120000000000005,
+    "end_time": 70.36,
+    "duration": 16.239999999999995,
+    "text": "Now we will look to buy the cell phone on cheaper price as compared to market price. I mean to say, if market price is $100, then we will look to buy it on less than $100, you can say that something near to $95 or $90.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        54.25914893617022,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00054.00s.jpg"
+    ],
+    "frame_timestamps": [
+      54.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_004",
+    "start_time": 71.58,
+    "end_time": 86.76,
+    "duration": 15.180000000000007,
+    "text": "Buying on lower price as compared to market price, this is called discounted price. Because we know that buying on discounted price will give us a price benefit. Similarly, if you want to sell a phone and its market price is $100.",
+    "detected_concepts": [
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        72.07285714285715,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00072.00s.jpg"
+    ],
+    "frame_timestamps": [
+      72.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_005",
+    "start_time": 88.02,
+    "end_time": 105.1,
+    "duration": 17.08,
+    "text": "Now we will look to sell this phone on higher price as compared to market price. I mean to say, if market price is $100, then we will look to sell it on higher than $100, you can say that something near to $105 or $110.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        88.30565217391305,
+        "this"
+      ],
+      [
+        88.16282608695651,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00087.00s.jpg"
+    ],
+    "frame_timestamps": [
+      87.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_006",
+    "start_time": 106.39999999999999,
+    "end_time": 121.78,
+    "duration": 15.38000000000001,
+    "text": "Selling on higher price as compared to market price, this is called premium price. Because we know that selling on higher price, or you can say that selling on premium will give us a price benefit and we can get more profit by selling on premium prices.",
+    "detected_concepts": [
+      "premium zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        106.88446808510638,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00105.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      105.0,
+      108.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_007",
+    "start_time": 122.6,
+    "end_time": 153.82,
+    "duration": 31.22,
+    "text": "So, this is a basic idea about premium and discounted prices or you can say that premium and discount zones. Before introduction to premium and discount zones, or we can call it as PD zones, let me tell you something interesting that every big institute, hedgers or big fund management companies, they always love to buy on discounted price and sell on higher price. Because premium and discount is a basic principle that can be used when selling and buying currencies in forex market.",
+    "detected_concepts": [
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        122.65773809523809,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00123.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00132.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00138.00s.jpg"
+    ],
+    "frame_timestamps": [
+      123.0,
+      132.0,
+      138.0
+    ],
+    "word_count": 84
+  },
+  {
+    "id": "unit_008",
+    "start_time": 160.96,
+    "end_time": 200.82,
+    "duration": 39.859999999999985,
+    "text": "Well, in forex market, we can use premium and discount zone as a confluence to design a buy and sell setup. Remember, we will use PD zones as a confluence, not as a confirmation. But still this can give you a great opportunities to design a good trading setup. In bullish trend, we will look to buy in discount zone and sell in premium zone in bullish trending market. Similarly, we will sell in discount zone and buy in premium zone for bearish trend. Remember, any trading setup designed in discounted zone will be high probability setup and similarly, any setup in premium zone will be low probability.",
+    "detected_concepts": [
+      "order block",
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        162.9766666666667,
+        "this"
+      ],
+      [
+        163.985,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00162.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00165.00s.jpg"
+    ],
+    "frame_timestamps": [
+      162.0,
+      165.0
+    ],
+    "word_count": 108
+  },
+  {
+    "id": "unit_009",
+    "start_time": 215.34,
+    "end_time": 234.94,
+    "duration": 19.599999999999994,
+    "text": "Moreover, PD zones can be used to filter out low probability trade setups, to improve risk to reward ratio as we discussed above. Finally, PD zones are highly effective on higher time frames or you can say in swing trading. Higher time frames means daily, H4 and H1 etc.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "definition",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00216.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00234.00s.jpg"
+    ],
+    "frame_timestamps": [
+      216.0,
+      234.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_010",
+    "start_time": 235.76,
+    "end_time": 253.36,
+    "duration": 17.600000000000023,
+    "text": "Now, there is always a risk associated to everything. So there is disadvantage of PD zones as well. This tool become less effective on lower time frame or scalping. Remember, less effective does not mean that we can not use it on lower time frame.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        236.748,
+        "this"
+      ],
+      [
+        235.86977777777776,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00237.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_011",
+    "start_time": 255.02,
+    "end_time": 264.66,
+    "duration": 9.640000000000015,
+    "text": "Now question is how to find these premium and discount zone levels. Well, we can use multiple tools to identify PD zones in forex market.",
+    "detected_concepts": [
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00255.00s.jpg"
+    ],
+    "frame_timestamps": [
+      255.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_012",
+    "start_time": 272.88,
+    "end_time": 288.74,
+    "duration": 15.860000000000014,
+    "text": "Let's start with Fibonacci retracement tool as this is most widely using tool in forex market. Fibonacci levels are commonly used when a market has made a large move either up or down side. This large move can be in form of expansion or break of structure.",
+    "detected_concepts": [
+      "market structure",
+      "fibonacci",
+      "break of structure",
+      "price delivery cycle",
+      "expansion",
+      "retracement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        273.2612765957447,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00273.00s.jpg"
+    ],
+    "frame_timestamps": [
+      273.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_013",
+    "start_time": 289.66,
+    "end_time": 311.98,
+    "duration": 22.319999999999993,
+    "text": "Now question is what comes after large move? As we studied in price cycle, there is always a retracement after expansion. That's why, we need to check the magnitude of this retracement, or you can say that the pullback or retracement against the expansion. To check that how much market can retrace, we will use Fibonacci retracement tool.",
+    "detected_concepts": [
+      "fibonacci",
+      "valid pullback",
+      "price delivery cycle",
+      "expansion",
+      "retracement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        291.4134482758621,
+        "this"
+      ],
+      [
+        290.53672413793106,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 58
+  },
+  {
+    "id": "unit_014",
+    "start_time": 311.98,
+    "end_time": 340.36,
+    "duration": 28.379999999999995,
+    "text": "Now what is importance of this tool in forex market? As discussed earlier, in forex market, Fibonacci tools can also be used to find premium and discount zone. Premium prices mean higher prices and discounted prices mean cheaper or lower prices. There is a level of 50% in Fibonacci retracement, and we call it as equilibrium point. Purpose of this equilibrium point is no premium no discount.",
+    "detected_concepts": [
+      "fibonacci",
+      "premium zone",
+      "discount zone",
+      "equilibrium",
+      "price delivery cycle",
+      "retracement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        312.27328358208956,
+        "this"
+      ],
+      [
+        314.44358208955225,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00312.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00315.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00321.00s.jpg"
+    ],
+    "frame_timestamps": [
+      312.0,
+      315.0,
+      321.0
+    ],
+    "word_count": 67
+  },
+  {
+    "id": "unit_015",
+    "start_time": 349.0,
+    "end_time": 373.56,
+    "duration": 24.560000000000002,
+    "text": "Let's check this simple schematic approach to understand this concept. We will consider bullish trend scenario first. Here we assume that price increased and in uptrend. This is origin of price, or you can say that starting point of price. And this is ending point or stop point of this swing. Simply, we will apply this tool from this starting point to this ending point.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        349.1144615384615,
+        "this"
+      ],
+      [
+        349.97292307692305,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00348.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00351.00s.jpg"
+    ],
+    "frame_timestamps": [
+      348.0,
+      351.0
+    ],
+    "word_count": 65
+  },
+  {
+    "id": "unit_016",
+    "start_time": 380.52,
+    "end_time": 398.58,
+    "duration": 18.060000000000002,
+    "text": "Remember, for bullish trend, this is discounted zone below 50% level. And this is premium zone above 50% level in bullish trend. As we discussed earlier, we will look to buy in discounted zone. That's why we will wait for price to come in our discounted zone.",
+    "detected_concepts": [
+      "premium zone",
+      "discount zone",
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        380.74042553191487,
+        "this"
+      ],
+      [
+        382.0629787234042,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00381.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00384.00s.jpg"
+    ],
+    "frame_timestamps": [
+      381.0,
+      384.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_017",
+    "start_time": 416.15999999999997,
+    "end_time": 431.22,
+    "duration": 15.06000000000006,
+    "text": "Now, let's discuss selling trend example. Here we assume that price decreased and in downtrend. This is origin of price, or you can say that starting point of price. And this is ending point or stop point of this swing.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        416.98125,
+        "this"
+      ],
+      [
+        416.4885,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00417.00s.jpg"
+    ],
+    "frame_timestamps": [
+      417.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_018",
+    "start_time": 432.22,
+    "end_time": 457.34,
+    "duration": 25.119999999999948,
+    "text": "Now, we will apply this tool from this starting point to this ending point. Now, if we apply Fibonacci tool for this sell trend, this is discounted zone above 50% level. And this is premium zone below 50% level in bearish or selling trend. As we discussed earlier, we will look to sell in discounted zone. That's why we will wait for price to come in our discounted zone.",
+    "detected_concepts": [
+      "fibonacci",
+      "premium zone",
+      "discount zone",
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        432.43507246376817,
+        "this"
+      ],
+      [
+        434.90840579710147,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00432.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00435.00s.jpg"
+    ],
+    "frame_timestamps": [
+      432.0,
+      435.0
+    ],
+    "word_count": 69
+  },
+  {
+    "id": "unit_019",
+    "start_time": 469.4,
+    "end_time": 480.76,
+    "duration": 11.360000000000014,
+    "text": "by waiting to let come price in this discounted zone and then executing a trade. Now, note this right side as there are some price mentioned now. Assume this is a euro-dollar chart.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        469.78393939393936,
+        "this"
+      ],
+      [
+        470.6066666666666,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00468.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      468.0,
+      471.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_020",
+    "start_time": 481.8,
+    "end_time": 492.76,
+    "duration": 10.95999999999998,
+    "text": "Now, for bullish trend, it is very clear that there are low prices for this discount zone. Notice these values, these low prices are for discounted zone for bullish trend.",
+    "detected_concepts": [
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        482.598,
+        "this"
+      ],
+      [
+        482.37,
+        "here"
+      ],
+      [
+        482.769,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00483.00s.jpg"
+    ],
+    "frame_timestamps": [
+      483.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_021",
+    "start_time": 493.54,
+    "end_time": 552.82,
+    "duration": 59.28000000000003,
+    "text": "Similarly, these are higher price for this premium zone in bullish trend. Well, this is easy to understand and digest this concept for bullish trend that low prices for discounted zone and higher prices for premium zone. But, if we discuss the selling trend, then you need to note that these are higher prices for discounted zone which seems against the rule, and these are lower prices in premium zone. How this is possible and what are the reasons behind this mechanism? Well, this is little piece of assignment for you. Find the reasons that why Forex chart is showing high price in discounted zone for sell trend. You can drop your answers in comment session or you can email me, or you can drop your assignment in telegram chat box as well. If you will not able to find the answer, we will discuss this in upcoming English webinar after 2 days. To join our weekly webinars for free, contact us on telegram.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        493.87329268292683,
+        "this"
+      ],
+      [
+        496.76182926829273,
+        "see"
+      ]
+    ],
+    "confidence": 0.9146341463414634,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00495.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00498.00s.jpg"
+    ],
+    "frame_timestamps": [
+      495.0,
+      498.0
+    ],
+    "word_count": 164
+  },
+  {
+    "id": "unit_022",
+    "start_time": 554.52,
+    "end_time": 568.74,
+    "duration": 14.220000000000027,
+    "text": "Now, let's check some real market sample size. Consider a bullish trend and market made a move. Price moved from this low price to this higher price. This is starting point and this looks like a swing end point.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        555.6020512820513,
+        "this"
+      ],
+      [
+        556.3053846153846,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00555.00s.jpg"
+    ],
+    "frame_timestamps": [
+      555.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_023",
+    "start_time": 569.74,
+    "end_time": 599.88,
+    "duration": 30.139999999999986,
+    "text": "Now, we will apply Fibnacci tool from this low point to this higher point. Now, as discussed earlier for bullish trend, this is discounted zone below 50% for buy trend. Here we'll wait for price to come into this discounted zone, secondly we will look for an order block, fair value gap or demand zone in this discounted area. When price will come back into this discounted zone, tapping into this imbalance or demand zone, then we can enter into buy trade.",
+    "detected_concepts": [
+      "fair value gap",
+      "order block",
+      "imbalance",
+      "fibonacci",
+      "discount zone",
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        570.1301219512195,
+        "this"
+      ],
+      [
+        571.4119512195122,
+        "here"
+      ],
+      [
+        572.1921951219513,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00570.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00573.00s.jpg"
+    ],
+    "frame_timestamps": [
+      570.0,
+      573.0
+    ],
+    "word_count": 82
+  },
+  {
+    "id": "unit_024",
+    "start_time": 612.16,
+    "end_time": 620.6,
+    "duration": 8.440000000000055,
+    "text": "Here price again created a swing low and moved higher. Again, we will apply Fibnacci tool from this swing low to this swing high point.",
+    "detected_concepts": [
+      "swing high",
+      "swing low",
+      "fibonacci"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        613.078,
+        "this"
+      ],
+      [
+        612.16,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00612.00s.jpg"
+    ],
+    "frame_timestamps": [
+      612.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_025",
+    "start_time": 621.56,
+    "end_time": 640.82,
+    "duration": 19.260000000000105,
+    "text": "Again this is discounted zone below 50%. Here we'll wait for price to come into this discounted zone, secondly we will look for an order block or demand zone in this discounted area. When price will come back into this discounted zone, tapping into this demand zone, then we can enter into buy trade.",
+    "detected_concepts": [
+      "order block",
+      "discount zone",
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        621.6155555555555,
+        "this"
+      ],
+      [
+        621.9488888888889,
+        "here"
+      ],
+      [
+        622.7266666666666,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00621.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00624.00s.jpg"
+    ],
+    "frame_timestamps": [
+      621.0,
+      624.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_026",
+    "start_time": 648.22,
+    "end_time": 654.5,
+    "duration": 6.279999999999973,
+    "text": "Now you can summarize it that every trade setup designed in discounted zone for bullish trend is high probability setup.",
+    "detected_concepts": [
+      "order block",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00648.00s.jpg"
+    ],
+    "frame_timestamps": [
+      648.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_027",
+    "start_time": 656.2600000000001,
+    "end_time": 670.92,
+    "duration": 14.659999999999854,
+    "text": "Now, let's check some real market sample size for sell trend. Consider a selling trend and market made a move. Price moved from this high price to this lower price. This is starting point and this is a swing end point.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        657.4829268292684,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00657.00s.jpg"
+    ],
+    "frame_timestamps": [
+      657.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_028",
+    "start_time": 676.94,
+    "end_time": 701.96,
+    "duration": 25.019999999999982,
+    "text": "Now, as discussed earlier for selling trend, this is discounted zone above 50% for sell trend. Here we'll wait for price to come into this discounted zone, secondly we will look for an order block or price imbalance in this discounted area. When price will come back into this discounted zone, tapping into this imbalance or supply zone, then we can enter into sell trade.",
+    "detected_concepts": [
+      "order block",
+      "imbalance",
+      "discount zone",
+      "equilibrium"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        677.3406153846155,
+        "this"
+      ],
+      [
+        677.8556923076924,
+        "here"
+      ],
+      [
+        678.6569230769231,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00678.00s.jpg"
+    ],
+    "frame_timestamps": [
+      678.0
+    ],
+    "word_count": 65
+  },
+  {
+    "id": "unit_029",
+    "start_time": 702.66,
+    "end_time": 714.94,
+    "duration": 12.280000000000086,
+    "text": "Let's check price reaction here. Notice that how price reacted in this discounted zone. Market just tapped into discount zone and price imbalance here and fell short heavily.",
+    "detected_concepts": [
+      "imbalance",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        703.3435714285714,
+        "this"
+      ],
+      [
+        702.9085714285713,
+        "here"
+      ],
+      [
+        702.9707142857143,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00702.00s.jpg"
+    ],
+    "frame_timestamps": [
+      702.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_030",
+    "start_time": 717.5200000000001,
+    "end_time": 753.54,
+    "duration": 36.01999999999987,
+    "text": "For premium and discount zone trading principle, remember one thing. Every order block, fair value gap or supply and demand zone in discounted zone is high probability. On opposite side, every order block, fair value gap or supply and demand zone in premium zone is low probability. I hope this concept will boost your trading skills a lot. If you have any query, drop us an email on this ID. Or you can contact us on telegram as well. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "fair value gap",
+      "order block",
+      "premium zone",
+      "discount zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        720.2342696629214,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00717.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00720.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00741.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00744.00s.jpg"
+    ],
+    "frame_timestamps": [
+      717.0,
+      720.0,
+      741.0,
+      744.0
+    ],
+    "word_count": 89
+  }
+]

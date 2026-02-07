@@ -1,0 +1,42 @@
+{
+  "video_id": "evng_upluR0",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:36:13.439101",
+  "instructions": {
+    "video_id": "evng_upluR0",
+    "transcript_path": "data/transcripts/evng_upluR0.json",
+    "frames_dir": "data/video_frames/evng_upluR0",
+    "selected_frames": [
+      "data/video_frames/evng_upluR0/frame_00009.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00012.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00039.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00042.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00045.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00060.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00069.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00081.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00084.00s.jpg",
+      "data/video_frames/evng_upluR0/frame_00087.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/evng_upluR0_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/evng_upluR0_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/evng_upluR0_knowledge_summary.md",
+    "concepts_detected": [
+      "inducement",
+      "fake choch",
+      "smart money trap",
+      "valid pullback",
+      "change of character",
+      "retail trap",
+      "premium zone",
+      "engineered liquidity",
+      "equal highs",
+      "optimal trade entry",
+      "order block",
+      "smart money",
+      "equal lows",
+      "liquidity"
+    ],
+    "prompt": "Complete the training for video: evng_upluR0\n\n1. Read the transcript: data/transcripts/evng_upluR0.json\n2. View these key frames: data/video_frames/evng_upluR0/frame_00009.00s.jpg, data/video_frames/evng_upluR0/frame_00012.00s.jpg, data/video_frames/evng_upluR0/frame_00039.00s.jpg, data/video_frames/evng_upluR0/frame_00042.00s.jpg, data/video_frames/evng_upluR0/frame_00045.00s.jpg, data/video_frames/evng_upluR0/frame_00060.00s.jpg, data/video_frames/evng_upluR0/frame_00069.00s.jpg, data/video_frames/evng_upluR0/frame_00081.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/evng_upluR0_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/evng_upluR0_knowledge_summary.md\n\nConcepts detected so far: inducement, fake choch, smart money trap, valid pullback, change of character, retail trap, premium zone, engineered liquidity, equal highs, optimal trade entry, order block, smart money, equal lows, liquidity\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

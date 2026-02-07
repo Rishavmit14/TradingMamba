@@ -1,0 +1,162 @@
+{
+  "video_id": "gSyIFHd3HeE",
+  "title": "12 - Premium & Discount Zones - Optimal Trade Entry Pricing",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 605,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:25:00Z",
+  "expert_confidence": 0.92,
+
+  "processing_stats": {
+    "vision_analyses": 4,
+    "teaching_units_detected": 38,
+    "frames_extracted": 202,
+    "transcript_words": 1432
+  },
+
+  "concepts": {
+    "premium_zone": {
+      "llm_summary": "Premium Zone is the upper 50% of a price range where price is considered expensive or overvalued. In bullish trend, premium = area above 50% equilibrium where Smart Money SELLS (takes profit or enters shorts). In this zone, retail often buys (FOMO) while SM distributes. Premium zones are optimal for SELLING, not buying. Measured from swing low to swing high - area from 50% to 100% (top) is premium. Trading rule: avoid buying in premium during bullish trends.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 4,
+        "mentions": 28
+      },
+      "teaching_types": {
+        "definition": true,
+        "calculation": true,
+        "trading_rules": true,
+        "visual_example": true
+      },
+      "key_rules": [
+        "Premium = upper 50% of price range (50%-100%)",
+        "Price is expensive/overvalued in premium",
+        "Smart Money sells in premium",
+        "Avoid buying in premium zones",
+        "Optimal for profit-taking on longs or entering shorts"
+      ],
+      "calculation": {
+        "range": "swing_low_to_swing_high",
+        "premium_zone": "50%_to_100%_of_range"
+      }
+    },
+
+    "discount_zone": {
+      "llm_summary": "Discount Zone is the lower 50% of a price range where price is considered cheap or undervalued. In bullish trend, discount = area below 50% equilibrium where Smart Money BUYS. This zone offers the best value for long positions. Measured from swing low to swing high - area from 0% (bottom) to 50% is discount. Trading rule: buy in discount, not premium. Retail often sells or ignores discount zones (fear) while SM accumulates. Discount zones are optimal for BUYING in bullish trends.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 4,
+        "mentions": 26
+      },
+      "teaching_types": {
+        "definition": true,
+        "calculation": true,
+        "trading_rules": true
+      },
+      "key_rules": [
+        "Discount = lower 50% of price range (0%-50%)",
+        "Price is cheap/undervalued in discount",
+        "Smart Money buys in discount",
+        "Optimal buying zone in bullish trends",
+        "Best risk/reward for long entries"
+      ],
+      "calculation": {
+        "range": "swing_low_to_swing_high",
+        "discount_zone": "0%_to_50%_of_range"
+      }
+    },
+
+    "equilibrium": {
+      "llm_summary": "Equilibrium (EQ) is the 50% midpoint of a price range - the line that separates premium from discount zones. At equilibrium, price is neither expensive nor cheap, it's at fair value. Equilibrium acts as a pivot: above EQ = premium territory, below EQ = discount territory. Many traders use equilibrium as a decision point: if trending up and price pulls back to EQ, it's entering discount (buy zone). EQ is also called the 50% retracement or fair value line.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 2,
+        "mentions": 15
+      },
+      "teaching_types": {
+        "definition": true,
+        "calculation": true,
+        "trading_application": true
+      },
+      "key_rules": [
+        "Equilibrium = 50% midpoint of range",
+        "Separates premium from discount",
+        "Fair value line",
+        "Acts as pivot for zone identification"
+      ]
+    },
+
+    "optimal_trade_entry": {
+      "llm_summary": "Optimal Trade Entry (OTE) is entering trades in the most favorable pricing zone based on trend direction. Bullish trend OTE = buy in discount zone (lower 50%). Bearish trend OTE = sell in premium zone (upper 50%). This ensures buying low and selling high, trading with Smart Money. Retail often does opposite: buys in premium (FOMO) and sells in discount (fear). OTE provides best risk/reward ratio and highest probability entries.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 160,
+        "frames_analyzed": 3,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "trading_strategy": true,
+        "risk_reward": true
+      },
+      "key_rules": [
+        "Bullish OTE = buy in discount zone",
+        "Bearish OTE = sell in premium zone",
+        "Provides best risk/reward",
+        "Trade WITH Smart Money pricing",
+        "Avoid counter-zone entries"
+      ]
+    },
+
+    "premium_discount_in_bearish_trend": {
+      "llm_summary": "In bearish trends, premium and discount zones are inverted in trading application. Premium zone (upper 50%) becomes the OPTIMAL SHORT ENTRY zone - price is expensive relative to downtrend, Smart Money sells here. Discount zone (lower 50%) is where Smart Money covers shorts or takes profit. For bearish trading: enter shorts in premium, take profit in discount. The zones are still measured same way (50% split) but trading actions are opposite of bullish trends.",
+      "statistics": {
+        "teaching_units": 4,
+        "teaching_duration_seconds": 100,
+        "frames_analyzed": 2,
+        "mentions": 10
+      },
+      "teaching_types": {
+        "definition": true,
+        "trading_rules": true
+      },
+      "key_rules": [
+        "Bearish trend: short in premium zone (expensive)",
+        "Take profit/cover shorts in discount (cheap)",
+        "Zones measured same way, actions inverted",
+        "Premium = optimal short entry in downtrends"
+      ]
+    }
+  },
+
+  "key_insights": [
+    "Premium = upper 50%, Discount = lower 50%, Equilibrium = 50% midpoint",
+    "Bullish trend: buy in discount, sell in premium",
+    "Bearish trend: short in premium, cover in discount",
+    "Smart Money buys discount, sells premium - retail does opposite",
+    "OTE (Optimal Trade Entry) = discount buys or premium shorts",
+    "Best risk/reward comes from premium/discount zone entries",
+    "Equilibrium line separates value zones"
+  ],
+
+  "related_concepts": [
+    "optimal_trade_entry",
+    "smart_money",
+    "market_structure",
+    "fair_value",
+    "fibonacci_retracement"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.92,
+    "expert_verified": true,
+    "primary_concepts": ["premium_zone", "discount_zone", "optimal_trade_entry"],
+    "difficulty_level": "intermediate",
+    "prerequisites": ["market_structure", "trend_identification"]
+  }
+}

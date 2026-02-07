@@ -1,0 +1,47 @@
+{
+  "video_id": "G-pD_Ts4UEE",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:40:58.904157",
+  "instructions": {
+    "video_id": "G-pD_Ts4UEE",
+    "transcript_path": "data/transcripts/G-pD_Ts4UEE.json",
+    "frames_dir": "data/video_frames/G-pD_Ts4UEE",
+    "selected_frames": [
+      "data/video_frames/G-pD_Ts4UEE/frame_00003.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00006.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00018.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00033.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00036.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00039.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00063.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00066.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00132.00s.jpg",
+      "data/video_frames/G-pD_Ts4UEE/frame_00147.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/G-pD_Ts4UEE_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/G-pD_Ts4UEE_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/G-pD_Ts4UEE_knowledge_summary.md",
+    "concepts_detected": [
+      "liquidity",
+      "forex sessions",
+      "valid pullback",
+      "optimal trade entry",
+      "imbalance",
+      "manipulation",
+      "price delivery cycle",
+      "market structure",
+      "smart money",
+      "discount zone",
+      "change of character",
+      "candlestick analysis",
+      "liquidity sweep",
+      "expansion",
+      "retracement",
+      "order block",
+      "fair value gap",
+      "premium zone",
+      "break of structure"
+    ],
+    "prompt": "Complete the training for video: G-pD_Ts4UEE\n\n1. Read the transcript: data/transcripts/G-pD_Ts4UEE.json\n2. View these key frames: data/video_frames/G-pD_Ts4UEE/frame_00003.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00006.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00018.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00033.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00036.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00039.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00063.00s.jpg, data/video_frames/G-pD_Ts4UEE/frame_00066.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/G-pD_Ts4UEE_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/G-pD_Ts4UEE_knowledge_summary.md\n\nConcepts detected so far: liquidity, forex sessions, valid pullback, optimal trade entry, imbalance, manipulation, price delivery cycle, market structure, smart money, discount zone, change of character, candlestick analysis, liquidity sweep, expansion, retracement, order block, fair value gap, premium zone, break of structure\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

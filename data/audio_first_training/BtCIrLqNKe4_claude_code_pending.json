@@ -1,0 +1,49 @@
+{
+  "video_id": "BtCIrLqNKe4",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:25:43.094291",
+  "instructions": {
+    "video_id": "BtCIrLqNKe4",
+    "transcript_path": "data/transcripts/BtCIrLqNKe4.json",
+    "frames_dir": "data/video_frames/BtCIrLqNKe4",
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00030.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00054.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00057.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00072.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00081.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00090.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00105.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00120.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00123.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00147.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/BtCIrLqNKe4_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/BtCIrLqNKe4_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/BtCIrLqNKe4_knowledge_summary.md",
+    "concepts_detected": [
+      "retail trap",
+      "higher high",
+      "order block",
+      "equal lows",
+      "manipulation",
+      "liquidity",
+      "optimal trade entry",
+      "smart money",
+      "inducement",
+      "expansion",
+      "sell stops",
+      "valid pullback",
+      "candlestick analysis",
+      "higher low",
+      "inducement shift",
+      "buy stops",
+      "equal highs",
+      "liquidity sweep",
+      "market structure",
+      "swing low",
+      "smart money trap"
+    ],
+    "prompt": "Complete the training for video: BtCIrLqNKe4\n\n1. Read the transcript: data/transcripts/BtCIrLqNKe4.json\n2. View these key frames: data/video_frames/BtCIrLqNKe4/frame_00030.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00054.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00057.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00072.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00081.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00090.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00105.00s.jpg, data/video_frames/BtCIrLqNKe4/frame_00120.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/BtCIrLqNKe4_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/BtCIrLqNKe4_knowledge_summary.md\n\nConcepts detected so far: retail trap, higher high, order block, equal lows, manipulation, liquidity, optimal trade entry, smart money, inducement, expansion, sell stops, valid pullback, candlestick analysis, higher low, inducement shift, buy stops, equal highs, liquidity sweep, market structure, swing low, smart money trap\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

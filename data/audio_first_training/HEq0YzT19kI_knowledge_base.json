@@ -1,0 +1,147 @@
+{
+  "video_id": "HEq0YzT19kI",
+  "title": "10 - CHoCH Confirmation - Trend Reversal Confirmation Rules",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 846,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:15:00Z",
+  "expert_confidence": 0.93,
+
+  "processing_stats": {
+    "vision_analyses": 5,
+    "teaching_units_detected": 50,
+    "frames_extracted": 282,
+    "transcript_words": 2103
+  },
+
+  "concepts": {
+    "choch_confirmation": {
+      "llm_summary": "CHoCH Confirmation is the final validation that a trend has truly reversed after an initial CHoCH signal. CHoCH alone indicates POTENTIAL reversal - confirmation requires market to create swing structure in the NEW trend direction. For bullish-to-bearish reversal: need LL (Lower Low) + LH (Lower High) after CHoCH. For bearish-to-bullish reversal: need HH (Higher High) + HL (Higher Low) after CHoCH. Without confirmation, CHoCH may be fake or just a deep pullback. This is the most important final part of structure mapping - separating true reversals from false signals.",
+      "statistics": {
+        "teaching_units": 15,
+        "teaching_duration_seconds": 320,
+        "frames_analyzed": 5,
+        "mentions": 38
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "validation_rules": true,
+        "chart_examples": true
+      },
+      "key_rules": [
+        "CHoCH alone = potential reversal (unconfirmed)",
+        "Bullish→Bearish confirmation: LL + LH after CHoCH",
+        "Bearish→Bullish confirmation: HH + HL after CHoCH",
+        "Trade reversal only after confirmation, not on CHoCH alone",
+        "Unconfirmed CHoCH may be deep pullback, not reversal"
+      ],
+      "confirmation_requirements": {
+        "bullish_to_bearish": "lower_low_plus_lower_high",
+        "bearish_to_bullish": "higher_high_plus_higher_low"
+      }
+    },
+
+    "unconfirmed_choch": {
+      "llm_summary": "Unconfirmed CHoCH is a CHoCH signal that has not yet formed opposite swing structure. After CHoCH occurs, if market fails to create LL+LH (bearish) or HH+HL (bullish), the CHoCH remains unconfirmed. Unconfirmed CHoCH is dangerous to trade - it may be fake CHoCH or just a deep pullback within the original trend. Many retail traders enter immediately on CHoCH without waiting for confirmation and get stopped out when price resumes the original trend. SMC traders wait for confirmation before entering reversal trades.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "warning": true,
+        "retail_trap": true
+      },
+      "key_rules": [
+        "Unconfirmed CHoCH = no opposite swing structure yet",
+        "Do NOT trade unconfirmed CHoCH",
+        "May turn out to be deep pullback, not reversal",
+        "Wait for LL+LH or HH+HL before entering"
+      ]
+    },
+
+    "confirmed_vs_unconfirmed": {
+      "llm_summary": "The distinction between Confirmed and Unconfirmed CHoCH is critical for trading decisions. Confirmed = CHoCH + opposite swing structure (LL+LH or HH+HL). Unconfirmed = CHoCH but no opposite structure yet. Trading implications: Confirmed CHoCH = high probability reversal trade. Unconfirmed CHoCH = wait, do not enter. The video demonstrates multiple examples showing how unconfirmed CHoCH often fails while confirmed CHoCH leads to successful trend reversals.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 220,
+        "frames_analyzed": 4,
+        "mentions": 25
+      },
+      "teaching_types": {
+        "comparison": true,
+        "chart_examples": true,
+        "trading_rules": true
+      }
+    },
+
+    "confirmation_sequence": {
+      "llm_summary": "Confirmation Sequence is the step-by-step process for validating trend reversal: 1) Identify CHoCH (swing break), 2) Wait for price reaction, 3) Look for first opposite swing (LL or HH), 4) Look for second opposite swing (LH or HL), 5) Confirm trend reversal only after both swings form, 6) Enter reversal trade with confidence. This systematic sequence prevents premature entries and filters out fake reversals.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 140,
+        "frames_analyzed": 2,
+        "mentions": 12
+      },
+      "teaching_types": {
+        "step_by_step_process": true,
+        "trading_workflow": true
+      },
+      "sequence_steps": [
+        "1. Identify CHoCH (swing break)",
+        "2. Wait - do not enter yet",
+        "3. Watch for first opposite swing",
+        "4. Watch for second opposite swing",
+        "5. Confirm when both swings present",
+        "6. Enter reversal trade"
+      ]
+    },
+
+    "structure_mapping_completion": {
+      "llm_summary": "Structure Mapping Completion brings together all previous lessons: inducement, swing highs/lows, CHoCH, fake CHoCH, and CHoCH confirmation. This video represents the final piece - without CHoCH confirmation, structure mapping is incomplete and trading decisions are premature. Complete structure mapping workflow: 1) Identify valid swings with inducement, 2) Map HH/HL or LL/LH structure, 3) Identify CHoCH when swing breaks, 4) Validate CHoCH (not fake), 5) Wait for confirmation (opposite swings), 6) Trade with full structural understanding.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 18
+      },
+      "teaching_types": {
+        "comprehensive_summary": true,
+        "integration": true
+      }
+    }
+  },
+
+  "key_insights": [
+    "CHoCH alone is NOT sufficient for trading - confirmation required",
+    "Confirmation = opposite swing structure (LL+LH or HH+HL)",
+    "Unconfirmed CHoCH often fails - wait for confirmation",
+    "This is the final critical piece of structure mapping",
+    "Retail traders fail by trading unconfirmed CHoCH",
+    "SMC traders wait for full confirmation before reversal trades",
+    "Confirmation sequence prevents premature entries and fake reversals"
+  ],
+
+  "related_concepts": [
+    "change_of_character",
+    "higher_high",
+    "higher_low",
+    "lower_high",
+    "lower_low",
+    "market_structure",
+    "fake_choch"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.93,
+    "expert_verified": true,
+    "primary_concepts": ["choch_confirmation", "confirmed_vs_unconfirmed", "confirmation_sequence"],
+    "difficulty_level": "advanced",
+    "prerequisites": ["change_of_character", "fake_choch", "market_structure"]
+  }
+}

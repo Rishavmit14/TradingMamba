@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 0.0,
+    "end_time": 24.68,
+    "duration": 24.68,
+    "text": "Watch this complete video and listen it carefully. This strategy will change your trading style and your living style forever. If you are a forex trader or a funded trader, and you want to get past your evaluation account, then this video is for you. This is best ever intraday trading strategy for all traders. If I say it, I mean it.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        0.054032258064516135,
+        "this"
+      ],
+      [
+        0.0,
+        "watch"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00000.00s.jpg"
+    ],
+    "frame_timestamps": [
+      0.0
+    ],
+    "word_count": 62
+  },
+  {
+    "id": "unit_001",
+    "start_time": 29.58,
+    "end_time": 57.54,
+    "duration": 27.96,
+    "text": "Welcome back and welcome to Forex Minions. Today, I'm going to disclose a million-dollar setup, a most successful trading strategy with you guys. Be sure, no one has told you this before. This is Forex Minions personal strategy that I use to trade since many years. I'm living an independent life as a forex trader, and I want all of you to be successful. People like Forex Minions by using this trading strategy.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        31.2772602739726,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00030.00s.jpg"
+    ],
+    "frame_timestamps": [
+      30.0
+    ],
+    "word_count": 73
+  },
+  {
+    "id": "unit_002",
+    "start_time": 58.54,
+    "end_time": 118.74,
+    "duration": 60.199999999999996,
+    "text": "Let's study this strategy in complete details. Well, there are a lot of prop firm providing great opportunity to be a successful funded trader, but they want all of you to get past evaluation accounts first. When I look around me, 99% of funded traders are failed to pass evaluation accounts. Reason is lack of discipline and lack of intraday trading strategy which provides best risk to reward. Well, is it really impossible to pass an evaluation account? Answer is yes, it was really impossible for you guys to be successful trader. But now, we will change your answer from yes to no, because Forex Minions is helping forex traders, and providing them a bridge from impossible to possible. Forex Minions strategy is ground breaking intraday strategy, with best risk to reward and highest accuracy rate. This strategy will lead you from evaluation accounts to real funded accounts.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        58.65918918918919,
+        "this"
+      ],
+      [
+        59.07635135135135,
+        "here"
+      ],
+      [
+        60.80459459459459,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00060.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00063.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00090.00s.jpg"
+    ],
+    "frame_timestamps": [
+      60.0,
+      63.0,
+      90.0
+    ],
+    "word_count": 148
+  },
+  {
+    "id": "unit_003",
+    "start_time": 119.84,
+    "end_time": 130.34,
+    "duration": 10.5,
+    "text": "Now this will be easy and very much possible for you to get success. Forex Minions will change impossible to I am, possible. Then what are you waiting for?",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        119.89344827586207,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00120.00s.jpg"
+    ],
+    "frame_timestamps": [
+      120.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_004",
+    "start_time": 142.22,
+    "end_time": 150.02,
+    "duration": 7.800000000000011,
+    "text": "The first and most basic element is structure mapping. You must have the knowledge about structure mapping, which is used to find trend.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00141.00s.jpg"
+    ],
+    "frame_timestamps": [
+      141.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_005",
+    "start_time": 150.96,
+    "end_time": 167.18,
+    "duration": 16.22,
+    "text": "Secondly, if you do not have the knowledge about price cycle theory, then you will not be able to trade this strategy perfectly. Price cycle will make you able to you identify market phase, either it's consolidating, expanding, retracing, or reversing.",
+    "detected_concepts": [
+      "price delivery cycle"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        152.18926829268293,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00150.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00153.00s.jpg"
+    ],
+    "frame_timestamps": [
+      150.0,
+      153.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_006",
+    "start_time": 167.88,
+    "end_time": 176.44,
+    "duration": 8.560000000000002,
+    "text": "Third, you must have complete understanding of price imbalance. This will provide you internal structure liquidity to formulate your setup.",
+    "detected_concepts": [
+      "liquidity",
+      "imbalance",
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        168.50549999999998,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00168.00s.jpg"
+    ],
+    "frame_timestamps": [
+      168.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_007",
+    "start_time": 177.26,
+    "end_time": 188.44,
+    "duration": 11.180000000000007,
+    "text": "Next stage on roadmap is entry zones. If you do not know what is order block, and how to mark a valid order block, then you will not be able to mark your entry zones perfectly.",
+    "detected_concepts": [
+      "order block",
+      "valid order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00177.00s.jpg"
+    ],
+    "frame_timestamps": [
+      177.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_008",
+    "start_time": 196.62,
+    "end_time": 244.04,
+    "duration": 47.41999999999999,
+    "text": "Once you will know about these four elements, structure mapping, price cycle, price imbalance and order blocks, then you can formulate a high probability setup for intraday trading. Finally, you must have brief knowledge about risk and reward management. This is most important part of trading, and every trader success is eccentric around risk management. We prefer one is to three risk to reward ratio. Well, by following this roadmap, I assure you that you will be a successful trader after back testing this strategy. If you are a funded trader, these tools will help you to pass your evaluation accounts. I hope you all know about these basic tools, we have studied these elements in great details in previous lectures.",
+    "detected_concepts": [
+      "order block",
+      "imbalance",
+      "market structure",
+      "price delivery cycle"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        198.95355371900826,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00198.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00219.00s.jpg"
+    ],
+    "frame_timestamps": [
+      198.0,
+      219.0
+    ],
+    "word_count": 121
+  },
+  {
+    "id": "unit_009",
+    "start_time": 244.94,
+    "end_time": 262.8,
+    "duration": 17.860000000000014,
+    "text": "Let's disclose the secret of intraday trading strategy. Well, now let me tell you secret behind this strategy. In last lecture, we have discussed these setups in great details. But there was a missing block in last lecture which I will disclose in today lecture.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        245.87155555555555,
+        "this"
+      ],
+      [
+        246.74488888888888,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00246.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      246.0,
+      249.0
+    ],
+    "word_count": 45
+  },
+  {
+    "id": "unit_010",
+    "start_time": 262.8,
+    "end_time": 283.26,
+    "duration": 20.45999999999998,
+    "text": "I have derived this strategy based on order block theory. As I have taught you in previous lecture, whenever there are smart money orders, price will expand from that level in form of speed, or you mark it as expansion. When market is in expanding, this expansion phase indicates the footprint of smart money.",
+    "detected_concepts": [
+      "order block",
+      "smart money",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        262.9716666666667,
+        "this"
+      ],
+      [
+        263.94444444444446,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00264.00s.jpg"
+    ],
+    "frame_timestamps": [
+      264.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_011",
+    "start_time": 290.88,
+    "end_time": 306.82,
+    "duration": 15.939999999999998,
+    "text": "How we can trade order blocks in rightful manner? How you will be able to find a high probability setup in forex market? Well, let's understand this strategy and uplift the black shade from forex minions best day trading strategy.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        292.375,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_012",
+    "start_time": 308.29999999999995,
+    "end_time": 329.76,
+    "duration": 21.460000000000036,
+    "text": "Now, let's understand the intraday trading strategy by a simple schematic diagram. In forex market, how we can find a logical setup for trading? First, let consider market is bullish, market made this move upward. Price showed a rejection to the downside and created this a psychological resistance level.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        310.29183673469385,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00309.00s.jpg"
+    ],
+    "frame_timestamps": [
+      309.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_013",
+    "start_time": 330.78,
+    "end_time": 337.1,
+    "duration": 6.32000000000005,
+    "text": "Now this short term high or you can say retail resistance, this will help to create a liquidity pool above this level.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        330.83363636363634,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00330.00s.jpg"
+    ],
+    "frame_timestamps": [
+      330.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_014",
+    "start_time": 338.08,
+    "end_time": 349.48,
+    "duration": 11.400000000000034,
+    "text": "Now as we studied this many time, that forex market need liquidity for next move. Market will grab this liquidity and moved into opposite side again, turned from bullish to bearish.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        338.3135483870968,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00339.00s.jpg"
+    ],
+    "frame_timestamps": [
+      339.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_015",
+    "start_time": 350.44,
+    "end_time": 360.0,
+    "duration": 9.560000000000002,
+    "text": "Now, if you note this zone, this is the area where big institutions distributed their orders, and made a sharp move, a big large move to the downside.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        350.6542857142857,
+        "this"
+      ],
+      [
+        351.0292857142857,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00351.00s.jpg"
+    ],
+    "frame_timestamps": [
+      351.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_016",
+    "start_time": 361.02,
+    "end_time": 379.34,
+    "duration": 18.319999999999993,
+    "text": "Market grabbed this liquidity, and secondly, market broke down this previous low in expansion form. Make notes, whenever price will grab liquidity and expanded, close below previous high or low, this will create a market structure shift, which is also known as MSS.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "optimal trade entry",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        361.1432558139535,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00360.00s.jpg"
+    ],
+    "frame_timestamps": [
+      360.0
+    ],
+    "word_count": 43
+  },
+  {
+    "id": "unit_017",
+    "start_time": 380.16,
+    "end_time": 403.24,
+    "duration": 23.079999999999984,
+    "text": "Now note down this point carefully, when market fulfill these three conditions, liquidity grab, expansion and market structure shift, only then this area will be tradable. As per these rules, we can mark this zone as valid cell zone. This cell zone will be high probability, if market will create a liquidity void or fair value gap zone in expansion phase.",
+    "detected_concepts": [
+      "fair value gap",
+      "order block",
+      "liquidity",
+      "market structure",
+      "optimal trade entry",
+      "liquidity sweep",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        380.3350819672131,
+        "this"
+      ],
+      [
+        381.3855737704918,
+        "this area"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00381.00s.jpg"
+    ],
+    "frame_timestamps": [
+      381.0
+    ],
+    "word_count": 61
+  },
+  {
+    "id": "unit_018",
+    "start_time": 404.28,
+    "end_time": 420.64,
+    "duration": 16.360000000000014,
+    "text": "Now, let's talk about the missing block in previous lecture. As a smart money concept trader, we must wait for market to create an inducement, which helps to create internal liquidity. If any setup has an inducement, this will be high probability setup.",
+    "detected_concepts": [
+      "order block",
+      "liquidity",
+      "smart money",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        406.456976744186,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00405.00s.jpg"
+    ],
+    "frame_timestamps": [
+      405.0
+    ],
+    "word_count": 43
+  },
+  {
+    "id": "unit_019",
+    "start_time": 427.2,
+    "end_time": 439.1,
+    "duration": 11.900000000000034,
+    "text": "Well, if market is following these rules, then we can expect that big institutions or smart money will try to reach this level to mitigate their pending orders. This is the secret behind this setup.",
+    "detected_concepts": [
+      "mitigation",
+      "smart money",
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        428.388,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00426.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00429.00s.jpg"
+    ],
+    "frame_timestamps": [
+      426.0,
+      429.0
+    ],
+    "word_count": 35
+  },
+  {
+    "id": "unit_020",
+    "start_time": 440.08,
+    "end_time": 451.78,
+    "duration": 11.699999999999989,
+    "text": "Now we can catch this move and execute our trades with proper risk and reward management. Hope you understand this strategy. Well, let's summarize this strategy in checklist form.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        440.32689655172413,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00441.00s.jpg"
+    ],
+    "frame_timestamps": [
+      441.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_021",
+    "start_time": 458.92,
+    "end_time": 467.82,
+    "duration": 8.899999999999977,
+    "text": "Second, there must be an expansion. Third, market price must close below the middle low, to confirm market structure shift.",
+    "detected_concepts": [
+      "market structure",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        459.043,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00459.00s.jpg"
+    ],
+    "frame_timestamps": [
+      459.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_022",
+    "start_time": 468.48,
+    "end_time": 485.62,
+    "duration": 17.139999999999986,
+    "text": "Next, expansion phase must have a liquidity void. There must be an inducement level which induce traders to create internal liquidity. After these rules, wait for market price to reach your target levels, and then you can trade this setup with minimum risk and high reward.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        470.7352173913044,
+        "this"
+      ],
+      [
+        469.0141304347826,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00468.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      468.0,
+      471.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_023",
+    "start_time": 490.90000000000003,
+    "end_time": 505.78,
+    "duration": 14.879999999999939,
+    "text": "Now, let's check out this real market sample size. Check this resistance level, this is point which has large liquidity pool above it. Market taken out this liquidity and move into opposite direction in expansion form.",
+    "detected_concepts": [
+      "liquidity",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        491.14222222222224,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00492.00s.jpg"
+    ],
+    "frame_timestamps": [
+      492.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_024",
+    "start_time": 505.78,
+    "end_time": 525.62,
+    "duration": 19.840000000000032,
+    "text": "Now, as per our rules, first when market grab liquidity, secondly, market break a low in expansion form, then we can mark that point as market structure shift. Please note market structure shift is not break of structure. This shift indicate the upcoming direction of market.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "optimal trade entry",
+      "break of structure",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        508.0517391304348,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00507.00s.jpg"
+    ],
+    "frame_timestamps": [
+      507.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_025",
+    "start_time": 526.48,
+    "end_time": 536.72,
+    "duration": 10.240000000000009,
+    "text": "Now, what next? Well, we will wait for market to create an inducement level. This is now inducement, which helps to create an internal liquidity.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        527.292,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00525.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00528.00s.jpg"
+    ],
+    "frame_timestamps": [
+      525.0,
+      528.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_026",
+    "start_time": 537.84,
+    "end_time": 554.04,
+    "duration": 16.199999999999932,
+    "text": "Now as discussed earlier, when market is meeting this criteria, liquidity taken out, expansion, market structure shift and inducement level, then this zone will be our sell zone. Well, this is simple, yet best forex trading strategy.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "inducement",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        538.3437837837838,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00537.00s.jpg"
+    ],
+    "frame_timestamps": [
+      537.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_027",
+    "start_time": 555.14,
+    "end_time": 566.26,
+    "duration": 11.120000000000005,
+    "text": "Now let's check market reaction here. Notice that, how beautifully price reacted in our sell zone, tapped our entry zone and crashed. Hope you like this strategy.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        556.64,
+        "this"
+      ],
+      [
+        555.4399999999999,
+        "here"
+      ],
+      [
+        555.5,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00555.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00558.00s.jpg"
+    ],
+    "frame_timestamps": [
+      555.0,
+      558.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_028",
+    "start_time": 581.6,
+    "end_time": 601.48,
+    "duration": 19.879999999999995,
+    "text": "Now as per our rules, when market grab liquidity and expanded, then we can mark that point as market structure shift. Market has created this inducement level, which helps to create an internal liquidity. Considering these elements, and as per our strategy rules, this is our sell zone.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        583.03,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00582.00s.jpg"
+    ],
+    "frame_timestamps": [
+      582.0
+    ],
+    "word_count": 48
+  },
+  {
+    "id": "unit_029",
+    "start_time": 602.46,
+    "end_time": 620.06,
+    "duration": 17.59999999999991,
+    "text": "Now let's check market reaction here. Notice that, how beautifully price reacted in our sell zone, tapped our entry zone and crashed. I hope you completely understand this strategy now. This is highly profitable, highly accurate, and quick profit yielding strategy.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        604.2051219512196,
+        "this"
+      ],
+      [
+        602.7831707317074,
+        "here"
+      ],
+      [
+        602.8478048780488,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00603.00s.jpg"
+    ],
+    "frame_timestamps": [
+      603.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_030",
+    "start_time": 622.22,
+    "end_time": 633.88,
+    "duration": 11.659999999999968,
+    "text": "Well, as we have discussed intraday strategy for selling or bearish market, we have defined some rules. Remember, these same rules are 100% applicable for bullish market.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00621.00s.jpg"
+    ],
+    "frame_timestamps": [
+      621.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_031",
+    "start_time": 634.68,
+    "end_time": 647.66,
+    "duration": 12.980000000000018,
+    "text": "Please note we must look for liquidity grab area first. This is the starting point of our strategy. Follow these rules in this proper sequence. Follow this complete trading plan to be profitable.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        635.2709090909091,
+        "this"
+      ],
+      [
+        634.9163636363636,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00636.00s.jpg"
+    ],
+    "frame_timestamps": [
+      636.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_032",
+    "start_time": 649.4,
+    "end_time": 663.22,
+    "duration": 13.82000000000005,
+    "text": "Let's consider this real market sample size for bullish setup. As per our strategy, market taken out this liquidity. After liquidity grab, market moved into opposite direction in expansion form.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep",
+      "price delivery cycle",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        649.5293333333333,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00648.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00651.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00660.00s.jpg"
+    ],
+    "frame_timestamps": [
+      648.0,
+      651.0,
+      660.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_033",
+    "start_time": 664.16,
+    "end_time": 683.38,
+    "duration": 19.220000000000027,
+    "text": "Now as per our rules, when market grab liquidity and expanded, then we can mark that point as market structure shift. Market has created this inducement level, which helps to create an internal liquidity. Considering these elements, and as per our strategy rules, this is our valid buy zone.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        665.585306122449,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00663.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00666.00s.jpg"
+    ],
+    "frame_timestamps": [
+      663.0,
+      666.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_034",
+    "start_time": 684.38,
+    "end_time": 735.48,
+    "duration": 51.10000000000002,
+    "text": "Now let's check market reaction here. Notice that, how beautifully price reacted in our buy zone, tapped our entry zone and boom. I hope you completely understand this strategy, both for sell setups and buy setups. These are setups shared by our students in forex minion discussion group on daily basis. You can see that how these people making low risk and high reward setups. Same strategy taught to all students, same rules, and see the outcome. If you want to join our discussion group, check the link in description. Or you can contact on our whatsapp number to get added. Finally, most frequently asked question. Which time frame is best? What time frame do we use to find point of interest and entry?",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        685.919435483871,
+        "this"
+      ],
+      [
+        684.6650806451613,
+        "here"
+      ],
+      [
+        687.4018548387097,
+        "see"
+      ],
+      [
+        684.7220967741936,
+        "notice"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00684.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00687.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00702.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00726.00s.jpg"
+    ],
+    "frame_timestamps": [
+      684.0,
+      687.0,
+      702.0,
+      726.0
+    ],
+    "word_count": 124
+  },
+  {
+    "id": "unit_035",
+    "start_time": 736.42,
+    "end_time": 748.64,
+    "duration": 12.220000000000027,
+    "text": "So, here is summary of time frame selection. Look into it and decide what type of trader you are. Finally, use this checklist to formulate your setup and then buy or sell accordingly.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        737.5845454545454,
+        "this"
+      ],
+      [
+        736.4754545454545,
+        "here"
+      ],
+      [
+        736.8636363636364,
+        "look"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00735.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00738.00s.jpg"
+    ],
+    "frame_timestamps": [
+      735.0,
+      738.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_036",
+    "start_time": 751.2,
+    "end_time": 759.5,
+    "duration": 8.299999999999955,
+    "text": "If you want to know more about prop firm trading strategies, and quick profit making scalping strategies, follow us at forex minions.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00750.00s.jpg"
+    ],
+    "frame_timestamps": [
+      750.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_037",
+    "start_time": 762.0600000000001,
+    "end_time": 769.94,
+    "duration": 7.8799999999999955,
+    "text": "If you have any question, write us an email on this id. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        762.5736363636364,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00762.00s.jpg"
+    ],
+    "frame_timestamps": [
+      762.0
+    ],
+    "word_count": 22
+  }
+]

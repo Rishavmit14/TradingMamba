@@ -1,0 +1,1110 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 30.24,
+    "end_time": 41.76,
+    "duration": 11.52,
+    "text": "Let's start with liquidity. Liquidity is just an area where stop losses and pending orders are resting in any market. Either it's forex market, commodities or assets class.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        30.854285714285712,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00030.00s.jpg"
+    ],
+    "frame_timestamps": [
+      30.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_001",
+    "start_time": 54.6,
+    "end_time": 70.16,
+    "duration": 15.559999999999995,
+    "text": "Retail trader mark them as support and resistance. And finally trend lines based liquidity. See, this is a schematic diagram just for understanding. Retail traders will mark these double top or equal highs as retail resistance.",
+    "detected_concepts": [
+      "liquidity",
+      "equal highs",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        55.545833333333334,
+        "this"
+      ],
+      [
+        55.48277777777778,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00054.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00057.00s.jpg"
+    ],
+    "frame_timestamps": [
+      54.0,
+      57.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_002",
+    "start_time": 71.18,
+    "end_time": 80.68,
+    "duration": 9.5,
+    "text": "And they will mark these double bottom or equal lows as retail support. Considering it as a price range, breakout traders will set their buy stops above it.",
+    "detected_concepts": [
+      "buy stops",
+      "equal lows"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00072.00s.jpg"
+    ],
+    "frame_timestamps": [
+      72.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_003",
+    "start_time": 81.32,
+    "end_time": 89.56,
+    "duration": 8.240000000000009,
+    "text": "And few traders will set their sell limits on this double top. Similarly, breakout traders will set their sell stops below it.",
+    "detected_concepts": [
+      "sell stops",
+      "equal highs"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        81.83545454545454,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00081.00s.jpg"
+    ],
+    "frame_timestamps": [
+      81.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_004",
+    "start_time": 90.42,
+    "end_time": 105.36,
+    "duration": 14.939999999999998,
+    "text": "And many traders will set their buy limits below this double bottom. People selling at this point will set their break even at this point to protect their profit and running trade. And people buying at this level will set their break even at this point to protect their entry.",
+    "detected_concepts": [
+      "equal lows",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        90.9168,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00090.00s.jpg"
+    ],
+    "frame_timestamps": [
+      90.0
+    ],
+    "word_count": 50
+  },
+  {
+    "id": "unit_005",
+    "start_time": 106.32,
+    "end_time": 118.54,
+    "duration": 12.220000000000013,
+    "text": "Now, what will happen? How market will treat them? Because these all pending orders and stop losses, break evens act as a liquidity pool and market need liquidity as a driving force.",
+    "detected_concepts": [
+      "liquidity"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00105.00s.jpg"
+    ],
+    "frame_timestamps": [
+      105.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_006",
+    "start_time": 119.24000000000001,
+    "end_time": 145.72,
+    "duration": 26.47999999999999,
+    "text": "So, when market move will start, it will trigger and trap buy side tarters, hit their break evens, neuter lasing their stop losses and will move in opposite direction. Here market will trap sell side traders to take liquidity and come back into trading range. At this point, retail trader will consider it market manipulation, but actually, this is liquidity sweep which actually forex needs as a catalyst.",
+    "detected_concepts": [
+      "liquidity",
+      "manipulation",
+      "smart money trap",
+      "liquidity sweep",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        121.9864705882353,
+        "this"
+      ],
+      [
+        120.9714705882353,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00120.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00123.00s.jpg"
+    ],
+    "frame_timestamps": [
+      120.0,
+      123.0
+    ],
+    "word_count": 68
+  },
+  {
+    "id": "unit_007",
+    "start_time": 146.52,
+    "end_time": 160.1,
+    "duration": 13.579999999999984,
+    "text": "Now note one thing, we do not have to be part of this liquidity. We have to understand the smart money move first and then we will find our setup. Hopefully, now you completely understand the concept of liquidity.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        147.17538461538462,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00147.00s.jpg"
+    ],
+    "frame_timestamps": [
+      147.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_008",
+    "start_time": 161.2,
+    "end_time": 197.9,
+    "duration": 36.70000000000002,
+    "text": "Let's move forward. Now, we will talk about inducement. Remember, this is very important point to understand and 70% forex market work around it. Because inducement is a trap before an area of order block, supply or demand. Price will induce impatient buyers and sellers into the market before the actual zone is met to create liquidity. Once the impatient traders get trapped and stopped out, the true move begins. In simple words, inducement is a smart money trap for retail traders and we do not have to part of this trap.",
+    "detected_concepts": [
+      "order block",
+      "liquidity",
+      "smart money",
+      "inducement",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        161.77065217391302,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00162.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00180.00s.jpg"
+    ],
+    "frame_timestamps": [
+      162.0,
+      180.0
+    ],
+    "word_count": 92
+  },
+  {
+    "id": "unit_009",
+    "start_time": 205.48,
+    "end_time": 219.26,
+    "duration": 13.780000000000001,
+    "text": "First one is swing without inducement or we can also call it without pullback. Send one is swing with inducement. Because this minor pullback or correction is known as inducement. And we will mark it with IDM notion.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        206.67368421052632,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00204.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00207.00s.jpg"
+    ],
+    "frame_timestamps": [
+      204.0,
+      207.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_010",
+    "start_time": 220.24,
+    "end_time": 231.7,
+    "duration": 11.45999999999998,
+    "text": "Next. This is another swing with inducement. And this swing has two inducement level. See, understood. We will mark these pullback as inducement.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        220.3030434782609,
+        "this"
+      ],
+      [
+        221.1226086956522,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00219.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00222.00s.jpg"
+    ],
+    "frame_timestamps": [
+      219.0,
+      222.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_011",
+    "start_time": 246.16,
+    "end_time": 270.72,
+    "duration": 24.56000000000003,
+    "text": "Retail traders will think that this is single price swing. This is two price swings because they will consider it one swing leg. And after correction, they will consider it second swing leg. Similarly, for this swing sample. They will mark it first T price swing. This is second price swings and this swing as third swing leg. And here, in fourth sample.",
+    "detected_concepts": [
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        246.44095238095238,
+        "this"
+      ],
+      [
+        249.4752380952381,
+        "here"
+      ]
+    ],
+    "confidence": 0.7936507936507936,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00246.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      246.0,
+      249.0
+    ],
+    "word_count": 63
+  },
+  {
+    "id": "unit_012",
+    "start_time": 271.68,
+    "end_time": 282.44,
+    "duration": 10.759999999999991,
+    "text": "They will consider it a swing with four impulse or four swing legs. But, this is not a logical answer. We will consider these whole swings as single or one price swing.",
+    "detected_concepts": [
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        272.415,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00273.00s.jpg"
+    ],
+    "frame_timestamps": [
+      273.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_013",
+    "start_time": 283.21999999999997,
+    "end_time": 291.04,
+    "duration": 7.82000000000005,
+    "text": "Reason, mark it did not take any inducement before moving it. If price will not take an inducement and create another high,",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00282.00s.jpg"
+    ],
+    "frame_timestamps": [
+      282.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_014",
+    "start_time": 291.46,
+    "end_time": 301.18,
+    "duration": 9.720000000000027,
+    "text": "we will consider it as a single price leg or single impulse from this low to next high. We will cover and understand this point in very next slide. Well.",
+    "detected_concepts": [
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        292.123,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_015",
+    "start_time": 308.24,
+    "end_time": 315.96,
+    "duration": 7.71999999999997,
+    "text": "So, this is also a single swing or single impulse. Same concept will be applied to this price sample as well.",
+    "detected_concepts": [
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        308.2919047619048,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00309.00s.jpg"
+    ],
+    "frame_timestamps": [
+      309.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_016",
+    "start_time": 318.3,
+    "end_time": 331.28,
+    "duration": 12.979999999999961,
+    "text": "Here again. You can see a price swing with an inducement. Price came down, dipped into this inducement. Taken out this idm level and moved higher and created this new inducement level.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        319.22,
+        "this"
+      ],
+      [
+        318.3,
+        "here"
+      ],
+      [
+        318.53000000000003,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00318.00s.jpg"
+    ],
+    "frame_timestamps": [
+      318.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_017",
+    "start_time": 332.14,
+    "end_time": 372.86,
+    "duration": 40.72000000000003,
+    "text": "Now, note this high point. As per SMC concept, this is our higher high and this is our higher low. Reason is price taken out this inducement which is our first rule to find higher high and higher lows. Note that whenever price will take out an inducement and move higher, we will mark it as new price swing. That is why I mark this first swing as green and second swing with brown color. Because after inducement sweep, new swing will start and we will count it as second swing. Hopefully, now you can understand why in previous slide, we was calling each swing as single leg because price was not taking out inducement and keep moving higher.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        332.2480672268907,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00333.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00354.00s.jpg"
+    ],
+    "frame_timestamps": [
+      333.0,
+      354.0
+    ],
+    "word_count": 119
+  },
+  {
+    "id": "unit_018",
+    "start_time": 373.82,
+    "end_time": 387.2,
+    "duration": 13.379999999999995,
+    "text": "Now, let's discuss and understand inducement in more depth. I hope at this point, questions running through your mind will clear out. Here. This is a schematic diagram of a forex market.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        374.5175,
+        "this"
+      ],
+      [
+        375.09875,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00375.00s.jpg"
+    ],
+    "frame_timestamps": [
+      375.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_019",
+    "start_time": 388.06,
+    "end_time": 396.58,
+    "duration": 8.519999999999982,
+    "text": "Note this swing has a order block. Please note this is just a schematic diagram to clear your concept. This is our order block.",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        388.11291666666665,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00387.00s.jpg"
+    ],
+    "frame_timestamps": [
+      387.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_020",
+    "start_time": 397.28,
+    "end_time": 409.94,
+    "duration": 12.660000000000025,
+    "text": "And, this is our inducement. Note that at this point market induced impatient traders to enter into trade. Convincing them, forcing them that market will not go down deeper than this.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        397.3390322580645,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00396.00s.jpg"
+    ],
+    "frame_timestamps": [
+      396.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_021",
+    "start_time": 416.98,
+    "end_time": 426.22,
+    "duration": 9.240000000000009,
+    "text": "They will start buying which is actually a early buying because they are going to be part of smart money trap. They will execute their buy orders and after some profit.",
+    "detected_concepts": [
+      "smart money",
+      "smart money trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00417.00s.jpg"
+    ],
+    "frame_timestamps": [
+      417.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_022",
+    "start_time": 427.12,
+    "end_time": 434.98,
+    "duration": 7.860000000000014,
+    "text": "They will set their break even at this point to protect their trades. Some traders will set their stop loss below this swing low as a protection.",
+    "detected_concepts": [
+      "swing low",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        427.4959259259259,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00426.00s.jpg"
+    ],
+    "frame_timestamps": [
+      426.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_023",
+    "start_time": 442.76,
+    "end_time": 449.94,
+    "duration": 7.180000000000007,
+    "text": "Sweeping these break evens and stop losses, taking out this liquidity pool and then, market will start its real move.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        443.2865,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00444.00s.jpg"
+    ],
+    "frame_timestamps": [
+      444.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_024",
+    "start_time": 456.22,
+    "end_time": 473.06,
+    "duration": 16.839999999999975,
+    "text": "How market create a liquidity pool and then sweep it for its own benefit. Well, now note this point, this is our higher high and this is our higher low. Remind the rules, higher high and higher low will confirm once market sweep this inducement and move higher with candle closing.",
+    "detected_concepts": [
+      "liquidity",
+      "higher high",
+      "higher low",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        457.1566666666667,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00456.00s.jpg"
+    ],
+    "frame_timestamps": [
+      456.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_025",
+    "start_time": 474.06,
+    "end_time": 485.0,
+    "duration": 10.939999999999998,
+    "text": "For better understand, let examine this real market or candlestick based sample. Note this level, market showed a breakout above, creating a retail support here.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        474.382,
+        "this"
+      ],
+      [
+        475.6056,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00474.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00477.00s.jpg"
+    ],
+    "frame_timestamps": [
+      474.0,
+      477.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_026",
+    "start_time": 485.96,
+    "end_time": 497.24,
+    "duration": 11.28000000000003,
+    "text": "This retail support will induce retail traders for early buying, so this point is our inducement. They will start buying and setting their break evens and stop losses above and below their entry.",
+    "detected_concepts": [
+      "inducement",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        485.96,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00486.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_027",
+    "start_time": 519.86,
+    "end_time": 530.74,
+    "duration": 10.879999999999995,
+    "text": "Triggering this pending order block and moving higher and higher. So, at this point, I believe that you have very brief understanding of inducement and how market react at this point.",
+    "detected_concepts": [
+      "order block",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        519.9190322580645,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00519.00s.jpg"
+    ],
+    "frame_timestamps": [
+      519.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_028",
+    "start_time": 540.02,
+    "end_time": 546.8,
+    "duration": 6.779999999999973,
+    "text": "We have studied it earlier but at that time, maybe it was ambiguous for you to understand the inducement and structure mapping.",
+    "detected_concepts": [
+      "market structure",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00540.00s.jpg"
+    ],
+    "frame_timestamps": [
+      540.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_029",
+    "start_time": 547.74,
+    "end_time": 557.44,
+    "duration": 9.700000000000045,
+    "text": "Now you can see and understand, why smart money mark this structure as follow. Note that inducement plays a vital role, a key role in structure mapping.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "smart money",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        548.302962962963,
+        "this"
+      ],
+      [
+        547.9088888888889,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00549.00s.jpg"
+    ],
+    "frame_timestamps": [
+      549.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_030",
+    "start_time": 567.9,
+    "end_time": 574.5,
+    "duration": 6.600000000000023,
+    "text": "Note this is our order block. Be sure, we will cover the order block theory in next lectures in details.",
+    "detected_concepts": [
+      "order block",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        567.952,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00567.00s.jpg"
+    ],
+    "frame_timestamps": [
+      567.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_031",
+    "start_time": 583.04,
+    "end_time": 592.06,
+    "duration": 9.019999999999982,
+    "text": "This swing, this swing is early buying. Reason. Because market induced retail traders to buy at this point which is our inducement level.",
+    "detected_concepts": [
+      "inducement",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        583.04,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00582.00s.jpg"
+    ],
+    "frame_timestamps": [
+      582.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_032",
+    "start_time": 592.06,
+    "end_time": 606.06,
+    "duration": 14.0,
+    "text": "Now, when market will resume and start moving, now we understand market will sweep this inducement, active this order block and start moving high. Hopefully, now you can easily identify inducement level.",
+    "detected_concepts": [
+      "order block",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        592.9481249999999,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00591.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00594.00s.jpg"
+    ],
+    "frame_timestamps": [
+      591.0,
+      594.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_033",
+    "start_time": 618.76,
+    "end_time": 626.62,
+    "duration": 7.860000000000014,
+    "text": "For this high point, where is out inducement? Because whenever we will analyze market, first we will mark our inducement.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        618.8205,
+        "this"
+      ],
+      [
+        619.0625,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00618.00s.jpg"
+    ],
+    "frame_timestamps": [
+      618.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_034",
+    "start_time": 627.3000000000001,
+    "end_time": 637.74,
+    "duration": 10.43999999999994,
+    "text": "So, here it is inducement level for this swing. Market taken out this inducement and moved higher. Check this point, here candle closed above or not.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        627.7011538461539,
+        "this"
+      ],
+      [
+        627.3573076923078,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00627.00s.jpg"
+    ],
+    "frame_timestamps": [
+      627.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_035",
+    "start_time": 645.42,
+    "end_time": 664.5,
+    "duration": 19.08000000000004,
+    "text": "This is actually a liquidity sweep. Understand. Now, check this high end for this impulsive swing, where is out inducement? Take notes and remember, whenever price will move in form of impulse, impulse mean without a pullback or inducement, its lowest point will act as inducement.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "inducement",
+      "valid pullback",
+      "liquidity sweep",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        645.42,
+        "this"
+      ],
+      [
+        646.4584782608695,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00645.00s.jpg"
+    ],
+    "frame_timestamps": [
+      645.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_036",
+    "start_time": 665.26,
+    "end_time": 673.72,
+    "duration": 8.460000000000036,
+    "text": "So, our inducement will shift from this level to this low. Again, we will cover this inducement shift in next lecture in great depth.",
+    "detected_concepts": [
+      "inducement",
+      "inducement shift"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        665.5925,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00666.00s.jpg"
+    ],
+    "frame_timestamps": [
+      666.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_037",
+    "start_time": 674.62,
+    "end_time": 693.24,
+    "duration": 18.620000000000005,
+    "text": "Now, check this new high. For this high, this is our inducement. Because always look for inducement on left side of the current high, and very first pullback is our inducement. Market followed both rules, taken out inducement and candle closing above high end below inducement.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        674.7404347826086,
+        "this"
+      ],
+      [
+        675.4630434782608,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00675.00s.jpg"
+    ],
+    "frame_timestamps": [
+      675.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_038",
+    "start_time": 694.0,
+    "end_time": 707.8,
+    "duration": 13.799999999999955,
+    "text": "So, these are our higher high level and this is our higher low. Now, consider this new high end for this high, this is our inducement. Market taken out inducement and candle closing above high end below inducement.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        694.4505263157895,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00693.00s.jpg"
+    ],
+    "frame_timestamps": [
+      693.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_039",
+    "start_time": 708.68,
+    "end_time": 745.16,
+    "duration": 36.48000000000002,
+    "text": "So, these are our higher high level and this is our higher low. At this point, I hope you have very good understanding of market structure mapping, trend mapping and complete knowledge of inducement. Do your paperwork, practice it to learn more. If you have any question or issue related to this, you can email us anytime. We will cover pullback and inducement shift in next lecture. Follow us for more videos. Subscribe this YouTube channel, click the bell icon button. Until next lesson, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "market structure",
+      "higher high",
+      "higher low",
+      "inducement",
+      "inducement shift",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        709.1432967032966,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/BtCIrLqNKe4/frame_00708.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00726.00s.jpg",
+      "data/video_frames/BtCIrLqNKe4/frame_00729.00s.jpg"
+    ],
+    "frame_timestamps": [
+      708.0,
+      726.0,
+      729.0
+    ],
+    "word_count": 91
+  }
+]

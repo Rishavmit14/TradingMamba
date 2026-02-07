@@ -1,0 +1,43 @@
+{
+  "video_id": "hdnldU2yQMw",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:49:13.099022",
+  "instructions": {
+    "video_id": "hdnldU2yQMw",
+    "transcript_path": "data/transcripts/hdnldU2yQMw.json",
+    "frames_dir": "data/video_frames/hdnldU2yQMw",
+    "selected_frames": [
+      "data/video_frames/hdnldU2yQMw/frame_00000.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00030.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00060.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00063.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00090.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00120.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00141.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00150.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00153.00s.jpg",
+      "data/video_frames/hdnldU2yQMw/frame_00168.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/hdnldU2yQMw_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/hdnldU2yQMw_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/hdnldU2yQMw_knowledge_summary.md",
+    "concepts_detected": [
+      "market structure",
+      "mitigation",
+      "institutional",
+      "liquidity sweep",
+      "expansion",
+      "price delivery cycle",
+      "optimal trade entry",
+      "liquidity",
+      "smart money",
+      "inducement",
+      "order block",
+      "break of structure",
+      "valid order block",
+      "fair value gap",
+      "imbalance"
+    ],
+    "prompt": "Complete the training for video: hdnldU2yQMw\n\n1. Read the transcript: data/transcripts/hdnldU2yQMw.json\n2. View these key frames: data/video_frames/hdnldU2yQMw/frame_00000.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00030.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00060.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00063.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00090.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00120.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00141.00s.jpg, data/video_frames/hdnldU2yQMw/frame_00150.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/hdnldU2yQMw_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/hdnldU2yQMw_knowledge_summary.md\n\nConcepts detected so far: market structure, mitigation, institutional, liquidity sweep, expansion, price delivery cycle, optimal trade entry, liquidity, smart money, inducement, order block, break of structure, valid order block, fair value gap, imbalance\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

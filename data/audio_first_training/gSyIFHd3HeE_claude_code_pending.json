@@ -1,0 +1,44 @@
+{
+  "video_id": "gSyIFHd3HeE",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:42:16.665499",
+  "instructions": {
+    "video_id": "gSyIFHd3HeE",
+    "transcript_path": "data/transcripts/gSyIFHd3HeE.json",
+    "frames_dir": "data/video_frames/gSyIFHd3HeE",
+    "selected_frames": [
+      "data/video_frames/gSyIFHd3HeE/frame_00003.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00006.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00015.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00018.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00027.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00030.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00054.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00072.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00087.00s.jpg",
+      "data/video_frames/gSyIFHd3HeE/frame_00105.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/gSyIFHd3HeE_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/gSyIFHd3HeE_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/gSyIFHd3HeE_knowledge_summary.md",
+    "concepts_detected": [
+      "equilibrium",
+      "expansion",
+      "imbalance",
+      "fibonacci",
+      "discount zone",
+      "swing high",
+      "valid pullback",
+      "optimal trade entry",
+      "retracement",
+      "fair value gap",
+      "order block",
+      "swing low",
+      "break of structure",
+      "premium zone",
+      "price delivery cycle",
+      "market structure"
+    ],
+    "prompt": "Complete the training for video: gSyIFHd3HeE\n\n1. Read the transcript: data/transcripts/gSyIFHd3HeE.json\n2. View these key frames: data/video_frames/gSyIFHd3HeE/frame_00003.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00006.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00015.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00018.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00027.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00030.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00054.00s.jpg, data/video_frames/gSyIFHd3HeE/frame_00072.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/gSyIFHd3HeE_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/gSyIFHd3HeE_knowledge_summary.md\n\nConcepts detected so far: equilibrium, expansion, imbalance, fibonacci, discount zone, swing high, valid pullback, optimal trade entry, retracement, fair value gap, order block, swing low, break of structure, premium zone, price delivery cycle, market structure\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

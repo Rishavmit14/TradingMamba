@@ -1,0 +1,347 @@
+{
+  "video_id": "Yq-Tw3PEU5U",
+  "title": "06 - BOS vs Liquidity Sweep vs Swing High/Low",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 657,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T03:00:00Z",
+  "expert_confidence": 0.95,
+
+  "processing_stats": {
+    "vision_analyses": 8,
+    "teaching_units_detected": 28,
+    "frames_extracted": 219,
+    "transcript_segments": 80
+  },
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "concepts_count": 4,
+    "key_emphasis": "Parallel comparison of 3 concepts using 3 rules to clarify differences and prevent confusion",
+    "builds_on": ["DabKey96qmE", "BtCIrLqNKe4", "f9rg4BDaaXE", "E1AgOEk-lfM", "GunkTVpUccM"],
+    "prerequisite_concepts": ["inducement", "liquidity_sweep", "break_of_structure", "swing_high", "swing_low", "valid_pullback"]
+  },
+
+  "concepts": {
+    "three_smc_rules_foundation": {
+      "llm_summary": "Everything in Smart Money Concepts is based on THREE fundamental rules that apply differently across different concepts. Rule 1: Inducement (IDM) - whether inducement must be taken out. Rule 2: Candle Body Close Below Inducement - whether candle body must close below inducement after sweep. Rule 3: Candle Body Close Above High - whether candle body must close above previous high (bullish) or below previous low (bearish). These same 3 rules are applied with DIFFERENT requirements for Liquidity Sweep, Break of Structure, and Swing High/Low identification. Understanding how these rules differ across concepts eliminates confusion and creates clarity in structure mapping.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 38
+      },
+      "teaching_types": {
+        "foundational_rules": true,
+        "comparative_framework": true,
+        "clarification": true,
+        "visual_table": true
+      },
+      "three_rules": {
+        "rule_1": {
+          "name": "Inducement (IDM)",
+          "description": "Whether price must take out inducement level",
+          "varies_by_concept": true
+        },
+        "rule_2": {
+          "name": "Candle Body Close Below Inducement",
+          "description": "Whether candle body must close below inducement after taking it out",
+          "varies_by_concept": true
+        },
+        "rule_3": {
+          "name": "Candle Body Close Above High",
+          "description": "Whether candle body must close above previous high (bullish) or below previous low (bearish)",
+          "varies_by_concept": true
+        }
+      },
+      "key_rules": [
+        "Everything in SMC is based on these 3 rules",
+        "Same 3 rules apply to all concepts but with different requirements",
+        "Understanding differences prevents confusion",
+        "Must know how each rule applies to each concept",
+        "This comparative framework is foundation of true SMC trading"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00060.00s.jpg", "timestamp": 60, "description": "Three SMC rules listed"},
+        {"frame": "frame_00180.00s.jpg", "timestamp": 180, "description": "Comparison table showing rule differences"}
+      ]
+    },
+
+    "parallel_comparison_liquidity_sweep_bos_swing": {
+      "llm_summary": "This is the DEFINITIVE comparison table for SMC: LIQUIDITY SWEEP - Rule 1: Inducement NOT compulsory. Rule 2: Only candle wick (body close NOT valid). Rule 3: Only candle wick (body close NOT valid). BREAK OF STRUCTURE - Rule 1: Must take out inducement. Rule 2: Wick sweep OR body close both valid. Rule 3: Body MUST close above high. SWING HIGH/LOW - Rule 1: Must take out inducement. Rule 2: ONLY body close valid (wick invalid). Rule 3: Body MUST close above high. Note the critical differences: Liquidity Sweep is independent from inducement and uses only wicks. BOS requires inducement but accepts wicks for Rule 2. Swing High/Low requires inducement AND body close for both Rules 2 and 3.",
+      "statistics": {
+        "teaching_units": 15,
+        "teaching_duration_seconds": 320,
+        "frames_analyzed": 4,
+        "mentions": 45
+      },
+      "teaching_types": {
+        "comparison_table": true,
+        "rule_by_rule_analysis": true,
+        "visual_examples": true,
+        "chart_examples": true,
+        "clarification": true
+      },
+      "comparison_table": {
+        "liquidity_sweep": {
+          "rule_1_inducement": {
+            "requirement": "Inducement is NOT compulsory to mark liquidity sweep",
+            "explanation": "Independent from inducement - can occur anywhere",
+            "compulsory": false
+          },
+          "rule_2_candle_close_below_inducement": {
+            "requirement": "Consider ONLY candle wick",
+            "explanation": "Candle body closing below inducement is NOT valid for liquidity sweep",
+            "valid_methods": ["Wick only"],
+            "invalid_methods": ["Body close"],
+            "compulsory_body_close": false
+          },
+          "rule_3_candle_close_above_high": {
+            "requirement": "Consider ONLY candle wick",
+            "explanation": "Candle body closing above previous high is NOT valid liquidity sweep",
+            "valid_methods": ["Wick only"],
+            "invalid_methods": ["Body close"],
+            "compulsory_body_close": false
+          },
+          "summary": "Liquidity sweep = wick-only moves without body closes"
+        },
+        "break_of_structure": {
+          "rule_1_inducement": {
+            "requirement": "Market MUST take out inducement",
+            "explanation": "Primary and very basic rule to identify BOS",
+            "compulsory": true
+          },
+          "rule_2_candle_close_below_inducement": {
+            "requirement": "Candle wick below inducement valid, candle body below inducement valid",
+            "explanation": "After taking out inducement, BOTH wick sweep AND body close validate BOS",
+            "valid_methods": ["Wick sweep", "Body close"],
+            "compulsory_body_close": false,
+            "flexibility": "Both methods acceptable"
+          },
+          "rule_3_candle_close_above_high": {
+            "requirement": "Candle body MUST close above previous high (bullish) or below previous low (bearish)",
+            "explanation": "After completing first two rules, body close is required",
+            "valid_methods": ["Body close only"],
+            "invalid_methods": ["Wick only"],
+            "compulsory_body_close": true
+          },
+          "summary": "BOS = inducement required + flexible Rule 2 + strict body close Rule 3"
+        },
+        "swing_high_low": {
+          "rule_1_inducement": {
+            "requirement": "Market MUST take out inducement",
+            "explanation": "For true structure mapping and valid swing high/low identification",
+            "compulsory": true,
+            "note": "Same as BOS for inducement rule"
+          },
+          "rule_2_candle_close_below_inducement": {
+            "requirement": "ONLY candle body close below inducement valid",
+            "explanation": "Candle wick below inducement is INVALID - will NOT mark swing high/low",
+            "valid_methods": ["Body close only"],
+            "invalid_methods": ["Wick sweep"],
+            "compulsory_body_close": true,
+            "critical_note": "If candle just sweeps inducement by wick, we will NOT mark swing high/low"
+          },
+          "rule_3_candle_close_above_high": {
+            "requirement": "Candle body MUST close above previous high (bullish) or below previous low (bearish)",
+            "explanation": "After completing first two rules, body close required",
+            "valid_methods": ["Body close only"],
+            "invalid_methods": ["Wick only"],
+            "compulsory_body_close": true
+          },
+          "summary": "Swing High/Low = strictest requirements - inducement + body close for both Rules 2 and 3"
+        }
+      },
+      "critical_differences": {
+        "inducement_requirement": {
+          "liquidity_sweep": "NOT required (independent)",
+          "break_of_structure": "REQUIRED",
+          "swing_high_low": "REQUIRED"
+        },
+        "rule_2_flexibility": {
+          "liquidity_sweep": "Wick only",
+          "break_of_structure": "Wick OR body (both valid)",
+          "swing_high_low": "Body only (wick invalid)"
+        },
+        "rule_3_strictness": {
+          "liquidity_sweep": "Wick only (body close invalidates it)",
+          "break_of_structure": "Body close required",
+          "swing_high_low": "Body close required"
+        }
+      },
+      "key_rules": [
+        "Liquidity Sweep: No inducement required, wick-only for Rules 2 & 3",
+        "BOS: Inducement required, flexible Rule 2 (wick or body), strict Rule 3 (body)",
+        "Swing H/L: Inducement required, strict Rules 2 & 3 (both need body close)",
+        "BOS and Swing H/L share same inducement rule",
+        "Swing H/L is STRICTEST (body close for Rules 2 & 3)",
+        "Liquidity Sweep is most flexible (no inducement, wick-only)"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00180.00s.jpg", "timestamp": 180, "description": "Complete comparison table with all 3 concepts and 3 rules"},
+        {"frame": "frame_00300.00s.jpg", "timestamp": 300, "description": "Table with chart examples for each concept"},
+        {"frame": "frame_00420.00s.jpg", "timestamp": 420, "description": "Final comparison with liquidity sweep examples"}
+      ]
+    },
+
+    "liquidity_sweep_identification_clarified": {
+      "llm_summary": "Liquidity Sweep identification is NOW CLARIFIED in parallel with BOS and Swing H/L. Key characteristics: (1) Inducement is NOT compulsory - liquidity sweeps can occur independently anywhere in market. (2) Only candle WICK counts - if candle body closes above previous high (bullish) or below previous low (bearish), it invalidates the liquidity sweep and becomes something else (possibly BOS). (3) Liquidity sweep is characterized by price wicking through a level but closing back inside the range. Examples: High liquidity sweep = wick above high, body closes below high. Low liquidity sweep = wick below low, body closes above low. If body closes beyond the level, it's NOT a liquidity sweep.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 110,
+        "frames_analyzed": 2,
+        "mentions": 15
+      },
+      "teaching_types": {
+        "clarification": true,
+        "examples": true,
+        "chart_examples": true,
+        "invalid_cases": true
+      },
+      "characteristics": {
+        "independence": "Not dependent on inducement - can occur anywhere",
+        "wick_only": "Only wick breaks count as liquidity sweep",
+        "body_invalidates": "Body close beyond level invalidates liquidity sweep",
+        "purpose": "Hunt stop losses and pending orders"
+      },
+      "valid_liquidity_sweep_examples": {
+        "high_liquidity_sweep": {
+          "wick": "Wick trades above previous high",
+          "body": "Body closes BELOW previous high",
+          "result": "Valid high liquidity sweep"
+        },
+        "low_liquidity_sweep": {
+          "wick": "Wick trades below previous low",
+          "body": "Body closes ABOVE previous low",
+          "result": "Valid low liquidity sweep"
+        }
+      },
+      "invalid_liquidity_sweep": {
+        "scenario": "Candle body closes above previous high (bullish) or below previous low (bearish)",
+        "result": "Invalid liquidity sweep - becomes something else (possibly BOS if inducement taken)",
+        "marking": "Do NOT mark as liquidity sweep"
+      },
+      "key_rules": [
+        "Inducement NOT required for liquidity sweep",
+        "Only wick counts - body close invalidates",
+        "Wick above high + body below high = valid high liquidity sweep",
+        "Wick below low + body above low = valid low liquidity sweep",
+        "Body close beyond level = NOT liquidity sweep",
+        "Independent concept - can occur anywhere in market"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00300.00s.jpg", "timestamp": 300, "description": "Liquidity sweep examples showing valid and invalid cases"}
+      ]
+    },
+
+    "bos_vs_swing_high_low_rule_2_difference": {
+      "llm_summary": "The CRITICAL DIFFERENCE between BOS and Swing High/Low is in Rule 2 (Candle Body Close Below Inducement). For BOS: After taking out inducement, BOTH candle wick sweep AND candle body close below inducement are VALID. This gives BOS flexibility - either method fulfills Rule 2. For Swing High/Low: After taking out inducement, ONLY candle body close below inducement is VALID. Candle wick sweep is INVALID - if candle just sweeps inducement by wick, we will NOT mark it as swing high/low. This is the key distinction: BOS accepts wick OR body for Rule 2, while Swing High/Low requires strict body close for Rule 2. Both share same requirements for Rules 1 (inducement required) and 3 (body close above high required).",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 140,
+        "frames_analyzed": 2,
+        "mentions": 22
+      },
+      "teaching_types": {
+        "comparison": true,
+        "critical_distinction": true,
+        "explanation": true,
+        "emphasis": true
+      },
+      "bos_rule_2": {
+        "requirement": "After taking out inducement, wick OR body both valid",
+        "flexibility": "High - accepts both methods",
+        "valid_scenarios": [
+          "Candle wick sweeps inducement (valid)",
+          "Candle body closes below inducement (valid)"
+        ],
+        "note": "Either method fulfills Rule 2 for BOS"
+      },
+      "swing_high_low_rule_2": {
+        "requirement": "After taking out inducement, ONLY body close valid",
+        "flexibility": "Low - strict body close requirement",
+        "valid_scenarios": [
+          "Candle body closes below inducement (valid)"
+        ],
+        "invalid_scenarios": [
+          "Candle wick sweeps inducement but body doesn't close below (invalid)"
+        ],
+        "critical_note": "If candle just sweeps inducement by wick, we will NOT mark swing high and lows",
+        "emphasis": "ONLY candle body close below inducement - I repeat, we will consider ONLY candle body close"
+      },
+      "why_this_matters": {
+        "structure_mapping": "Swing high/low mapping is stricter because it defines market structure",
+        "bos_indication": "BOS can be more lenient as it's just indication of trend continuation",
+        "precision": "Swing high/low requires precise body close for accurate structure",
+        "filtering": "Stricter swing high/low rules filter out false structure breaks"
+      },
+      "shared_rules": {
+        "rule_1": "Both require inducement to be taken out (same)",
+        "rule_3": "Both require body close above high/below low (same)",
+        "difference_only_in_rule_2": "The ONLY difference is Rule 2 strictness"
+      },
+      "key_rules": [
+        "BOS Rule 2: Wick OR body both valid (flexible)",
+        "Swing H/L Rule 2: ONLY body valid (strict)",
+        "Wick-only inducement sweep = Valid for BOS, Invalid for Swing H/L",
+        "This is the key distinction between BOS and Swing H/L",
+        "Rules 1 and 3 are identical for both concepts",
+        "Rule 2 is where they differ critically"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00180.00s.jpg", "timestamp": 180, "description": "Comparison table highlighting Rule 2 differences"}
+      ]
+    }
+  },
+
+  "key_quotes": [
+    "Today, we will discuss the difference between break of structure, liquidity sweep, and swing high and swing lows.",
+    "We will study this topic for bullish market structure and be sure, these rules and case study will be 100% applicable to bearish market structure as well.",
+    "Everything is based on these three rules.",
+    "First one is inducement. And if you do not have knowledge about inducement, then you must study second and third lecture.",
+    "Second rule is based on candle closing below inducement. It's mean either candle body closed below inducement or not after taking it out.",
+    "Third rule is based on candle body closing above previous high in bullish market and below previous low in bearish market.",
+    "If you have not watched the first five lectures, then these points and rules may confuse you.",
+    "We will study liquidity sweep, break of structure and swing high and lows in parallel comparison so that you can easily differentiate amongst these three.",
+    "Note that inducement is not compulsory to mark liquidity sweep. This is independent from inducement.",
+    "To mark a valid break of structure, market must take out the inducement. This is primary and very basic rule.",
+    "To mark valid swing high and lows, market must take out the inducement.",
+    "Note that inducement rule is same for BOS and swing high low mapping.",
+    "We will only count candle wick in liquidity sweep. Candle body closing above previous high or low will invalidate the liquidity sweep.",
+    "After taking out inducement, candle wick and candle body both validate the break of structure.",
+    "After taking out inducement, we will count only candle body closing below inducement. Make notes, I repeat, we will consider only candle body close below inducement.",
+    "If candle just sweep the inducement by wick, then we will not mark swing high and lows.",
+    "For liquidity sweep, we will only count candle wick. Remember candle body closing above previous high is not valid liquidity sweep.",
+    "After completing first two rules, candle body must close above the previous high in bullish market.",
+    "Because market respected all of these three rules."
+  ],
+
+  "critical_insights": {
+    "main_teaching": "Parallel comparison of 3 concepts using 3 rules eliminates confusion and creates clarity",
+    "framework": "Same 3 rules applied with different requirements across concepts",
+    "key_distinctions": {
+      "liquidity_sweep": "No inducement, wick-only for all rules",
+      "bos": "Inducement required, flexible Rule 2, strict Rule 3",
+      "swing_high_low": "Inducement required, strict Rules 2 & 3"
+    },
+    "builds_on": {
+      "videos_1_5": "All previous concepts about inducement, BOS, structure mapping"
+    },
+    "video_6_adds": "Definitive comparison table, rule-by-rule clarification, how same rules apply differently",
+    "practical_application": "Use comparison table to correctly identify which concept you're seeing on chart",
+    "prerequisite_warning": "Must watch Videos 1-5 first or this will be confusing"
+  },
+
+  "related_concepts": [
+    "inducement",
+    "liquidity_sweep",
+    "break_of_structure",
+    "swing_high",
+    "swing_low",
+    "market_structure",
+    "candle_close",
+    "wick_sweep",
+    "trend_continuation"
+  ]
+}

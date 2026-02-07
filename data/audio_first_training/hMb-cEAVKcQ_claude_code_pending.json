@@ -1,0 +1,43 @@
+{
+  "video_id": "hMb-cEAVKcQ",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:44:34.412433",
+  "instructions": {
+    "video_id": "hMb-cEAVKcQ",
+    "transcript_path": "data/transcripts/hMb-cEAVKcQ.json",
+    "frames_dir": "data/video_frames/hMb-cEAVKcQ",
+    "selected_frames": [
+      "data/video_frames/hMb-cEAVKcQ/frame_00003.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00006.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00033.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00036.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00051.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00054.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00066.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00087.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00090.00s.jpg",
+      "data/video_frames/hMb-cEAVKcQ/frame_00111.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/hMb-cEAVKcQ_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/hMb-cEAVKcQ_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/hMb-cEAVKcQ_knowledge_summary.md",
+    "concepts_detected": [
+      "fair value gap",
+      "candlestick analysis",
+      "smart money trap",
+      "price delivery cycle",
+      "imbalance",
+      "order block",
+      "inducement",
+      "expansion",
+      "valid pullback",
+      "fibonacci",
+      "equilibrium",
+      "market structure",
+      "liquidity",
+      "optimal trade entry",
+      "liquidity sweep"
+    ],
+    "prompt": "Complete the training for video: hMb-cEAVKcQ\n\n1. Read the transcript: data/transcripts/hMb-cEAVKcQ.json\n2. View these key frames: data/video_frames/hMb-cEAVKcQ/frame_00003.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00006.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00033.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00036.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00051.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00054.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00066.00s.jpg, data/video_frames/hMb-cEAVKcQ/frame_00087.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/hMb-cEAVKcQ_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/hMb-cEAVKcQ_knowledge_summary.md\n\nConcepts detected so far: fair value gap, candlestick analysis, smart money trap, price delivery cycle, imbalance, order block, inducement, expansion, valid pullback, fibonacci, equilibrium, market structure, liquidity, optimal trade entry, liquidity sweep\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

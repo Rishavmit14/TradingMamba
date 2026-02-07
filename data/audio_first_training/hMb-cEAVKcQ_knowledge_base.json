@@ -1,0 +1,196 @@
+{
+  "video_id": "hMb-cEAVKcQ",
+  "title": "13 - Fair Value Gap - Imbalance and Inefficiency Trading",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 1106,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:30:00Z",
+  "expert_confidence": 0.94,
+
+  "processing_stats": {
+    "vision_analyses": 5,
+    "teaching_units_detected": 62,
+    "frames_extracted": 369,
+    "transcript_words": 2604
+  },
+
+  "concepts": {
+    "fair_value_gap": {
+      "llm_summary": "Fair Value Gap (FVG) is a 3-candle price imbalance where middle candle's wick does NOT overlap with candles on either side, creating a 'gap' or inefficiency. This represents an area where price moved so fast that normal buying/selling didn't occur - an imbalance. FVG appears when strong momentum causes price to skip levels. Smart Money typically returns to fill these gaps (rebalance). FVGs act as support/resistance and optimal entry zones. Bullish FVG = gap below current price (support). Bearish FVG = gap above current price (resistance).",
+      "statistics": {
+        "teaching_units": 15,
+        "teaching_duration_seconds": 340,
+        "frames_analyzed": 5,
+        "mentions": 48
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "trading_application": true,
+        "chart_examples": true
+      },
+      "key_rules": [
+        "FVG = 3-candle pattern with middle candle wick not overlapping",
+        "Represents price imbalance/inefficiency",
+        "Market tends to return to fill FVGs (rebalance)",
+        "Bullish FVG = support zone, Bearish FVG = resistance zone",
+        "Acts as optimal entry point when filled"
+      ],
+      "identification_pattern": {
+        "candle_count": 3,
+        "requirement": "middle_candle_wick_no_overlap_with_adjacent_candles",
+        "result": "gap_or_inefficiency_zone"
+      }
+    },
+
+    "bullish_fvg": {
+      "llm_summary": "Bullish FVG (also called Demand Imbalance) forms during strong upward move when price gaps up leaving inefficiency below. Pattern: 3 candles where middle bullish candle's low wick doesn't touch first candle's high or third candle's low. The gap between first candle high and third candle low is the Bullish FVG zone. Acts as SUPPORT - when price returns to fill this gap during pullback, it's optimal long entry. Smart Money often places buy orders in Bullish FVG zones.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 220,
+        "frames_analyzed": 4,
+        "mentions": 26
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "trading_strategy": true
+      },
+      "key_rules": [
+        "Forms during strong bullish moves",
+        "Gap below current price = support zone",
+        "Optimal long entry when price returns to fill",
+        "Buy within the FVG zone during pullbacks"
+      ],
+      "trading_application": {
+        "formation": "during_bullish_impulse",
+        "location": "below_current_price",
+        "function": "support_and_buy_zone",
+        "entry_timing": "when_price_pulls_back_to_fill_gap"
+      }
+    },
+
+    "bearish_fvg": {
+      "llm_summary": "Bearish FVG (also called Supply Imbalance) forms during strong downward move when price gaps down leaving inefficiency above. Pattern: 3 candles where middle bearish candle's high wick doesn't touch first candle's low or third candle's high. The gap between first candle low and third candle high is the Bearish FVG zone. Acts as RESISTANCE - when price returns to fill this gap during retracement, it's optimal short entry. Smart Money often places sell orders in Bearish FVG zones.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 220,
+        "frames_analyzed": 4,
+        "mentions": 24
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "trading_strategy": true
+      },
+      "key_rules": [
+        "Forms during strong bearish moves",
+        "Gap above current price = resistance zone",
+        "Optimal short entry when price returns to fill",
+        "Sell within the FVG zone during retracements"
+      ],
+      "trading_application": {
+        "formation": "during_bearish_impulse",
+        "location": "above_current_price",
+        "function": "resistance_and_sell_zone",
+        "entry_timing": "when_price_retraces_to_fill_gap"
+      }
+    },
+
+    "fvg_fill_rebalance": {
+      "llm_summary": "FVG Fill (or Rebalance) occurs when price returns to the Fair Value Gap zone to fill the inefficiency. Market has natural tendency to rebalance - 70-80% of FVGs get filled eventually. Full fill = price completely fills the gap. Partial fill = price enters FVG but doesn't fill completely. Unfilled FVG remains as strong support/resistance. When FVG fills, it often provides excellent entry with tight stop loss above/below the FVG. The fill represents Smart Money re-entering or institutional order absorption.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 3,
+        "mentions": 20
+      },
+      "teaching_types": {
+        "definition": true,
+        "probability": true,
+        "trading_timing": true
+      },
+      "key_rules": [
+        "70-80% of FVGs get filled eventually",
+        "Full fill = complete gap closure",
+        "Partial fill = price enters but doesn't complete",
+        "FVG fill = optimal entry point",
+        "Place stops beyond the FVG zone"
+      ]
+    },
+
+    "fvg_trading_strategy": {
+      "llm_summary": "FVG Trading Strategy: 1) Identify trend direction, 2) Spot FVG formation during impulse moves, 3) Wait for price to retrace/pull back, 4) Enter when price reaches FVG zone, 5) Place stop beyond FVG, 6) Target next structure level. Bullish trend: buy when price fills Bullish FVG. Bearish trend: sell when price fills Bearish FVG. Combine with other confluences (inducement, order blocks, premium/discount). FVG entries provide excellent risk/reward ratios.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 260,
+        "frames_analyzed": 4,
+        "mentions": 28
+      },
+      "teaching_types": {
+        "trading_strategy": true,
+        "step_by_step_process": true,
+        "risk_management": true
+      },
+      "strategy_steps": [
+        "1. Identify trend direction",
+        "2. Spot FVG during impulse move",
+        "3. Mark FVG zone on chart",
+        "4. Wait for retracement to FVG",
+        "5. Enter when price touches FVG",
+        "6. Stop loss beyond FVG zone",
+        "7. Target next swing or structure level"
+      ]
+    },
+
+    "imbalance_inefficiency": {
+      "llm_summary": "Imbalance and Inefficiency are the core concepts underlying FVG. Imbalance = unequal buy/sell pressure causing rapid price movement. Inefficiency = price levels that were skipped due to imbalance, creating 'unfair' pricing where normal market participants didn't get to transact. Market seeks efficiency - tends to return to these zones to allow proper price discovery. FVG, Order Blocks, and Breaker Blocks all represent various forms of imbalance/inefficiency that market aims to rebalance.",
+      "statistics": {
+        "teaching_units": 7,
+        "teaching_duration_seconds": 160,
+        "frames_analyzed": 2,
+        "mentions": 16
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "market_mechanics": true
+      },
+      "key_rules": [
+        "Imbalance = unequal buy/sell pressure",
+        "Inefficiency = skipped price levels",
+        "Market seeks to rebalance inefficiencies",
+        "FVG is visual representation of inefficiency"
+      ]
+    }
+  },
+
+  "key_insights": [
+    "FVG = 3-candle imbalance where middle candle wick doesn't overlap adjacent candles",
+    "70-80% of FVGs get filled (market seeks rebalance)",
+    "Bullish FVG = support zone, Bearish FVG = resistance zone",
+    "FVG fill provides optimal entry with tight stops",
+    "Forms during strong impulse moves (high momentum)",
+    "Represents price inefficiency that market returns to correct",
+    "Combine FVG with trend, inducement, and premium/discount for high probability setups"
+  ],
+
+  "related_concepts": [
+    "order_block",
+    "breaker_block",
+    "imbalance",
+    "optimal_trade_entry",
+    "support_resistance",
+    "market_structure"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.94,
+    "expert_verified": true,
+    "primary_concepts": ["fair_value_gap", "bullish_fvg", "bearish_fvg", "fvg_fill_rebalance"],
+    "difficulty_level": "intermediate",
+    "prerequisites": ["market_structure", "trend_identification", "support_resistance"]
+  }
+}

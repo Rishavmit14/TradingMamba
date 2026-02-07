@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 4.500000000000001,
+    "end_time": 60.74,
+    "duration": 56.24,
+    "text": "Welcome back. And welcome to Forex Minions. Today, our topic of discussion is pullbacks and valid inducement. We will learn how to identify valid inducement or fake inducement. To understand the validity of inducement, first we have to understand that what is pullback. Basically, a pullback occurs when the price takes break or pauses and correct itself or goes against trend in the market. Many of you may be called it as correction. Notice that it is a temporary dip in a generally upward trending market. Just for understand, note the schematic diagram of pullback. These are pullback in bullish market. Pullback can be very short or extended depending on market conditions. Secondly, these are pullback in bearish market. Pullbacks can be very minor or in form of deeper correction as you can see here.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        12.510222222222225,
+        "here"
+      ],
+      [
+        12.450444444444447,
+        "see"
+      ],
+      [
+        8.863777777777779,
+        "notice"
+      ],
+      [
+        12.271111111111113,
+        "as you can see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00006.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00009.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00012.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00018.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00060.00s.jpg"
+    ],
+    "frame_timestamps": [
+      6.0,
+      9.0,
+      12.0,
+      18.0,
+      60.0
+    ],
+    "word_count": 135
+  },
+  {
+    "id": "unit_001",
+    "start_time": 93.94,
+    "end_time": 140.62,
+    "duration": 46.68000000000001,
+    "text": "which is known as smart money, to execute their large orders. But why market need liquidity sweep? To get this idea, assume if you want to sell 10,000 of orders. To sell such huge amount of orders, you need a huge buyer pool or interested buyers to whom you can sell your orders. By this concept, now you can understand that smart money, big institutions and banks want bigger liquidity pool, or you can say buyer or sellers with open interest to buy from them or to sell them. Once bank will sell you on higher price or buy from you on lower price, they will not allow you to get that better price again. That's why liquidity sweeping move is very quick and efficient and it reflects the footprint of smart money executions.",
+    "detected_concepts": [
+      "liquidity",
+      "smart money",
+      "institutional",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        94.96798507462687,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00093.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00096.00s.jpg"
+    ],
+    "frame_timestamps": [
+      93.0,
+      96.0
+    ],
+    "word_count": 134
+  },
+  {
+    "id": "unit_002",
+    "start_time": 153.66,
+    "end_time": 163.04,
+    "duration": 9.379999999999995,
+    "text": "Assume, there are 100 buy stops orders and on sell side, sell stops order are 10,000 which is actually 100 times more than buy side.",
+    "detected_concepts": [
+      "buy stops",
+      "sell stops"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        153.7656,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00153.00s.jpg"
+    ],
+    "frame_timestamps": [
+      153.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_003",
+    "start_time": 163.72,
+    "end_time": 171.66,
+    "duration": 7.939999999999998,
+    "text": "So, what banks or smart money will do? They will try to target bigger liquidity pool side to execute their large orders.",
+    "detected_concepts": [
+      "liquidity",
+      "smart money"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00165.00s.jpg"
+    ],
+    "frame_timestamps": [
+      165.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_004",
+    "start_time": 172.54,
+    "end_time": 181.42,
+    "duration": 8.879999999999995,
+    "text": "So, market will move something like this. See, market took sell side liquidity, trapped them and moved in other direction.",
+    "detected_concepts": [
+      "liquidity",
+      "smart money trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        172.906,
+        "this"
+      ],
+      [
+        172.96699999999998,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00174.00s.jpg"
+    ],
+    "frame_timestamps": [
+      174.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_005",
+    "start_time": 182.42,
+    "end_time": 192.02,
+    "duration": 9.600000000000023,
+    "text": "This is known as low sweep or sell side sweep. Similarly, this schematic diagram shows the buy side sweep as market orders are hires on buy side.",
+    "detected_concepts": [
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        182.42,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00183.00s.jpg"
+    ],
+    "frame_timestamps": [
+      183.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_006",
+    "start_time": 206.32,
+    "end_time": 216.36,
+    "duration": 10.04000000000002,
+    "text": "Let's map out simple diagram. See, this is market ranging. This is market opening price. This is market closing price.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        206.674,
+        "this"
+      ],
+      [
+        206.61499999999998,
+        "see"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00207.00s.jpg"
+    ],
+    "frame_timestamps": [
+      207.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_007",
+    "start_time": 217.02,
+    "end_time": 231.04,
+    "duration": 14.019999999999982,
+    "text": "When we project the scheme in shape of candlestick, this form candle body. And what about these high and low level which market traded? When we project this high and low on candlestick, this will form or reflects the wicks.",
+    "detected_concepts": [
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        217.52175,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00216.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00219.00s.jpg"
+    ],
+    "frame_timestamps": [
+      216.0,
+      219.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_008",
+    "start_time": 238.14,
+    "end_time": 248.0,
+    "duration": 9.860000000000014,
+    "text": "Projecting these orders on candlesticks will looks like this. Understand. Actually, we projected this somatic diagram in form of candlesticks.",
+    "detected_concepts": [
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        238.708,
+        "this"
+      ],
+      [
+        238.56599999999997,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00237.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00240.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0,
+      240.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_009",
+    "start_time": 249.04,
+    "end_time": 257.24,
+    "duration": 8.200000000000017,
+    "text": "Let's see how market will act now. Price will sweep this lower side and move higher as sell stops liquidity pool is larger than buyer side.",
+    "detected_concepts": [
+      "liquidity",
+      "sell stops",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        249.57461538461538,
+        "this"
+      ],
+      [
+        249.09346153846153,
+        "see"
+      ],
+      [
+        249.09346153846153,
+        "see how"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      249.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_010",
+    "start_time": 258.08,
+    "end_time": 271.44,
+    "duration": 13.360000000000014,
+    "text": "Now, if we project this bullish or liquidity sweeping move in form of candle, here. This open to low is wick. And open to this close is body of candle. And high to close is this upper wick.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        258.27894736842103,
+        "this"
+      ],
+      [
+        258.77631578947364,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00258.00s.jpg"
+    ],
+    "frame_timestamps": [
+      258.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_011",
+    "start_time": 272.24,
+    "end_time": 282.52,
+    "duration": 10.279999999999973,
+    "text": "Now, you understand that how liquidity sweep looks like in form of candlesticks shape. We will use notation of X cross to mark the liquidity sweep.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        272.63576923076926,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00273.00s.jpg"
+    ],
+    "frame_timestamps": [
+      273.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_012",
+    "start_time": 289.56,
+    "end_time": 324.46,
+    "duration": 34.89999999999998,
+    "text": "Let's move to next slide. When price take out sweep the previous candle low or high, it is called valid pullback. In bullish market pullback, the low of the highest candle must be broken liquidity sweep to validate pullback. In bearish market pullback, the high of the lowest candle must be broken liquidity sweep to validate pullback. For example, in bullish market, liquidity sweep on low side will look like this. And for bearish market, these candle reflects the high side liquidity sweep.",
+    "detected_concepts": [
+      "liquidity",
+      "valid pullback",
+      "liquidity sweep"
+    ],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        293.71783132530123,
+        "this"
+      ],
+      [
+        293.5990361445783,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00291.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00294.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00324.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0,
+      294.0,
+      324.0
+    ],
+    "word_count": 83
+  },
+  {
+    "id": "unit_013",
+    "start_time": 325.34,
+    "end_time": 333.5,
+    "duration": 8.160000000000025,
+    "text": "Now, what is second rule? Candle closing. I mean body base sweep or liquidity sweep. It's mean wick base sweeping.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00324.00s.jpg"
+    ],
+    "frame_timestamps": [
+      324.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_014",
+    "start_time": 334.08,
+    "end_time": 343.5,
+    "duration": 9.420000000000016,
+    "text": "Both are valid rules for pullback. See this example. Body closing below previous low is also a valid pullback and same goes for this side.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        334.46639999999996,
+        "this"
+      ],
+      [
+        334.4112,
+        "see"
+      ],
+      [
+        334.4112,
+        "see this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00333.00s.jpg"
+    ],
+    "frame_timestamps": [
+      333.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_015",
+    "start_time": 349.62,
+    "end_time": 364.36,
+    "duration": 14.740000000000009,
+    "text": "high or low of the sweeping candle in bearish or bullish pullback respectively. See these examples. The next candle, this one's either break high of this previous candle or not. Both conditions are okay for pullbacks.",
+    "detected_concepts": [
+      "valid pullback",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        350.7652777777778,
+        "this"
+      ],
+      [
+        350.4036111111111,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00351.00s.jpg"
+    ],
+    "frame_timestamps": [
+      351.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_016",
+    "start_time": 365.3,
+    "end_time": 380.02,
+    "duration": 14.71999999999997,
+    "text": "Now, let's see more examples of it. To check and analyze pullback with candlesticks diagram, we consider a bearish market. Or candle closing rule, the high of the previous candle must be broke by next new candle.",
+    "detected_concepts": [
+      "valid pullback",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        365.41459459459463,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00366.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00369.00s.jpg"
+    ],
+    "frame_timestamps": [
+      366.0,
+      369.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_017",
+    "start_time": 413.5,
+    "end_time": 424.7,
+    "duration": 11.199999999999989,
+    "text": "Hence, this pullback is valid. Let's move on to another example. Here, first we have to mark lowest candle which is candle number five. Got it?",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        413.555,
+        "this"
+      ],
+      [
+        414.105,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00414.00s.jpg"
+    ],
+    "frame_timestamps": [
+      414.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_018",
+    "start_time": 437.54,
+    "end_time": 447.68,
+    "duration": 10.139999999999986,
+    "text": "So, this is not valid pullback. Let's move on to another example. Here, A is our lowest candle and candle B broke its high.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        437.59125,
+        "this"
+      ],
+      [
+        438.15500000000003,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00438.00s.jpg"
+    ],
+    "frame_timestamps": [
+      438.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_019",
+    "start_time": 448.58,
+    "end_time": 465.14,
+    "duration": 16.560000000000002,
+    "text": "So this is valid pullback. But, what about this pullback? Is it valid pullback or not? Here, some traders will mark this candle C as a lowest candle and they will look for its high to be broken. And they will mark it as invalid pullback.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        448.6315217391304,
+        "this"
+      ],
+      [
+        449.40434782608696,
+        "here"
+      ],
+      [
+        450.1771739130435,
+        "look"
+      ],
+      [
+        449.6619565217391,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00450.00s.jpg"
+    ],
+    "frame_timestamps": [
+      450.0
+    ],
+    "word_count": 46
+  },
+  {
+    "id": "unit_020",
+    "start_time": 465.88,
+    "end_time": 475.36,
+    "duration": 9.480000000000018,
+    "text": "But, note that C is not our lowest candle. Here lowest candle is candle D. And next candle taken out is hot.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        466.3218181818182,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00465.00s.jpg"
+    ],
+    "frame_timestamps": [
+      465.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_021",
+    "start_time": 476.26,
+    "end_time": 483.84,
+    "duration": 7.579999999999984,
+    "text": "So this is also valid pullback. I hope now you can identify a valid pullback easily, keeping these rules in mind.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        476.31380952380954,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00477.00s.jpg"
+    ],
+    "frame_timestamps": [
+      477.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_022",
+    "start_time": 484.88,
+    "end_time": 495.62,
+    "duration": 10.740000000000009,
+    "text": "Let's move to bullish pullback examples. Now, for candle closing rule for bullish market, the low of the previous highest candle must be broke by next new candle.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00486.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00489.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0,
+      489.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_023",
+    "start_time": 529.1199999999999,
+    "end_time": 540.32,
+    "duration": 11.20000000000016,
+    "text": "Hence, this pullback is valid. Let's move on to another example. Here, first we have to mark highest candle which is candle number five. Got it.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        529.1753846153845,
+        "this"
+      ],
+      [
+        529.7292307692306,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00528.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00531.00s.jpg"
+    ],
+    "frame_timestamps": [
+      528.0,
+      531.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_024",
+    "start_time": 552.3800000000001,
+    "end_time": 562.5,
+    "duration": 10.11999999999989,
+    "text": "So, this is not valid pullback. Let's move on to another example. Here, A is our highest candle and candle B broke its low.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        552.4312500000001,
+        "this"
+      ],
+      [
+        552.9950000000001,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00552.00s.jpg"
+    ],
+    "frame_timestamps": [
+      552.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_025",
+    "start_time": 563.46,
+    "end_time": 574.38,
+    "duration": 10.919999999999959,
+    "text": "So, this is valid pullback. But, what about this pullback? Is it valid pullback or not? Here, same trick as we discussed in previous slide.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        563.5156000000001,
+        "this"
+      ],
+      [
+        564.3496,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00564.00s.jpg"
+    ],
+    "frame_timestamps": [
+      564.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_026",
+    "start_time": 575.26,
+    "end_time": 581.68,
+    "duration": 6.419999999999959,
+    "text": "Retail traders will mark candle C as a highest candle and they will mark it as invalid pullback keeping in view its low.",
+    "detected_concepts": [
+      "valid pullback",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00576.00s.jpg"
+    ],
+    "frame_timestamps": [
+      576.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_027",
+    "start_time": 582.5600000000001,
+    "end_time": 591.84,
+    "duration": 9.279999999999973,
+    "text": "But, note that C is not our highest candle. Your highest candle is candle D and next candle taken out is hot.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00582.00s.jpg"
+    ],
+    "frame_timestamps": [
+      582.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_028",
+    "start_time": 592.72,
+    "end_time": 600.28,
+    "duration": 7.559999999999945,
+    "text": "So, this is also valid pullback. I hope now you can identify a valid pullback easily, keeping these rules in mind.",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        592.7742857142857,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00594.00s.jpg"
+    ],
+    "frame_timestamps": [
+      594.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_029",
+    "start_time": 605.9,
+    "end_time": 623.2,
+    "duration": 17.300000000000068,
+    "text": "Now, how to mark valid inducement. We studied liquidity sweep and valid pullbacks just to understand and marking a valid inducement. Inducement is basically first valid pullback. I repeat, first valid pullback on left side of recent high or recent low.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement",
+      "valid pullback",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00606.00s.jpg"
+    ],
+    "frame_timestamps": [
+      606.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_030",
+    "start_time": 644.74,
+    "end_time": 652.32,
+    "duration": 7.580000000000041,
+    "text": "Now, mark this candle's low. Notice, now see that next candles did not taken out the low of this candle.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        644.844,
+        "this"
+      ],
+      [
+        645.104,
+        "see"
+      ],
+      [
+        645.0,
+        "notice"
+      ],
+      [
+        644.844,
+        "this candle"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00645.00s.jpg"
+    ],
+    "frame_timestamps": [
+      645.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_031",
+    "start_time": 658.36,
+    "end_time": 666.78,
+    "duration": 8.419999999999959,
+    "text": "Is this valid inducement or not? Let's start checking with our rules. First, let's find highest candle which is here.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        658.4185,
+        "this"
+      ],
+      [
+        659.4715,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00657.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00660.00s.jpg"
+    ],
+    "frame_timestamps": [
+      657.0,
+      660.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_032",
+    "start_time": 673.4,
+    "end_time": 685.82,
+    "duration": 12.420000000000073,
+    "text": "So this is valid inducement. Let's check this another example. And this looks like an inducement. Is it? We have to identify that either it is valid inducement or not.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        673.4556666666666,
+        "this"
+      ],
+      [
+        674.068,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00672.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00675.00s.jpg"
+    ],
+    "frame_timestamps": [
+      672.0,
+      675.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_033",
+    "start_time": 699.46,
+    "end_time": 709.62,
+    "duration": 10.159999999999968,
+    "text": "Now, see that next candles did not taken out the low of this candle. So this is not a valid pullback. I hope after these examples annotation and with these rules,",
+    "detected_concepts": [
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        700.0870967741936,
+        "this"
+      ],
+      [
+        699.5122580645161,
+        "see"
+      ],
+      [
+        700.0870967741936,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00699.00s.jpg"
+    ],
+    "frame_timestamps": [
+      699.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_034",
+    "start_time": 710.24,
+    "end_time": 721.6,
+    "duration": 11.360000000000014,
+    "text": "you can easily identify valid inducement. In next lecture, we will discuss inducement shift. Until next lesson, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "inducement",
+      "inducement shift"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00711.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00714.00s.jpg"
+    ],
+    "frame_timestamps": [
+      711.0,
+      714.0
+    ],
+    "word_count": 24
+  }
+]

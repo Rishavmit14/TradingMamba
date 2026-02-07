@@ -1,0 +1,205 @@
+{
+  "video_id": "-zPGWtuuWdU",
+  "title": "14 - Valid Order Blocks - Institutional Order Zones",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 1193,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:35:00Z",
+  "expert_confidence": 0.93,
+
+  "processing_stats": {
+    "vision_analyses": 5,
+    "teaching_units_detected": 72,
+    "frames_extracted": 398,
+    "transcript_words": 2822
+  },
+
+  "concepts": {
+    "order_block": {
+      "llm_summary": "Order Block (OB) is the last bearish candle before bullish BOS (Bullish Order Block) or last bullish candle before bearish BOS (Bearish Order Block). Represents the zone where institutional orders were placed - Smart Money's buying or selling occurred here before price reversed. The candle that precedes the Break of Structure contains the institutional footprint. Order Blocks act as strong support (bullish OB) or resistance (bearish OB) when price returns. Key difference from retail S/R: OBs are based on institutional order flow, not arbitrary lines.",
+      "statistics": {
+        "teaching_units": 18,
+        "teaching_duration_seconds": 380,
+        "frames_analyzed": 5,
+        "mentions": 52
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "institutional_perspective": true,
+        "chart_examples": true
+      },
+      "key_rules": [
+        "Bullish OB = last bearish candle before bullish BOS",
+        "Bearish OB = last bullish candle before bearish BOS",
+        "Contains institutional order footprint",
+        "Acts as strong support/resistance",
+        "Must be associated with BOS (not just any candle)"
+      ],
+      "identification_pattern": {
+        "bullish_ob": "last_down_candle_before_upward_BOS",
+        "bearish_ob": "last_up_candle_before_downward_BOS",
+        "requirement": "must_precede_break_of_structure"
+      }
+    },
+
+    "bullish_order_block": {
+      "llm_summary": "Bullish Order Block is the last bearish (red/down) candle before price breaks structure to the upside (bullish BOS). This down candle represents where Smart Money placed large buy orders that caused the subsequent upward break. The entire candle body and wicks form the OB zone. When price returns to this zone during pullback, it often finds strong support as unfilled institutional buy orders remain. Entry strategy: buy when price touches the Bullish OB during retracement in uptrend.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 260,
+        "frames_analyzed": 4,
+        "mentions": 30
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "trading_strategy": true
+      },
+      "key_rules": [
+        "Last bearish candle before bullish BOS",
+        "Smart Money buy orders zone",
+        "Acts as support on pullback",
+        "Entry zone for long positions",
+        "Strong institutional footprint"
+      ],
+      "trading_application": {
+        "formation": "before_bullish_break_of_structure",
+        "candle_type": "bearish_down_candle",
+        "function": "support_zone",
+        "entry_timing": "pullback_to_OB_in_uptrend"
+      }
+    },
+
+    "bearish_order_block": {
+      "llm_summary": "Bearish Order Block is the last bullish (green/up) candle before price breaks structure to the downside (bearish BOS). This up candle represents where Smart Money placed large sell orders that caused the subsequent downward break. When price retraces to this zone, it often finds strong resistance as unfilled institutional sell orders remain. Entry strategy: sell when price touches the Bearish OB during retracement in downtrend.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 260,
+        "frames_analyzed": 4,
+        "mentions": 28
+      },
+      "teaching_types": {
+        "definition": true,
+        "identification": true,
+        "trading_strategy": true
+      },
+      "key_rules": [
+        "Last bullish candle before bearish BOS",
+        "Smart Money sell orders zone",
+        "Acts as resistance on retracement",
+        "Entry zone for short positions",
+        "Strong institutional footprint"
+      ],
+      "trading_application": {
+        "formation": "before_bearish_break_of_structure",
+        "candle_type": "bullish_up_candle",
+        "function": "resistance_zone",
+        "entry_timing": "retracement_to_OB_in_downtrend"
+      }
+    },
+
+    "valid_vs_invalid_ob": {
+      "llm_summary": "Valid Order Block must meet specific criteria: 1) Must precede a Break of Structure (BOS), not just any move, 2) Must be the LAST opposite candle before BOS, 3) BOS must be confirmed (body close beyond swing), 4) OB should not have been violated/mitigated yet. Invalid OB: candles not associated with BOS, candles in middle of moves, already-mitigated OBs. Only valid OBs have institutional significance and trading power. Many retail traders mark random candles as OBs incorrectly.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 220,
+        "frames_analyzed": 3,
+        "mentions": 24
+      },
+      "teaching_types": {
+        "validation_rules": true,
+        "comparison": true,
+        "common_mistakes": true
+      },
+      "valid_ob_criteria": [
+        "✓ Precedes confirmed BOS",
+        "✓ Last opposite candle before BOS",
+        "✓ BOS has body close beyond swing",
+        "✓ OB not yet mitigated/violated"
+      ],
+      "invalid_ob_indicators": [
+        "✗ No BOS association",
+        "✗ Not the last candle before BOS",
+        "✗ Already mitigated/broken",
+        "✗ Random candle selection"
+      ]
+    },
+
+    "ob_mitigation": {
+      "llm_summary": "Order Block Mitigation occurs when price returns to the OB zone and absorbs the institutional orders, reducing or eliminating the OB's power. Full mitigation = price completely fills/penetrates the OB zone. Partial mitigation = price touches OB but doesn't fully penetrate. After mitigation, OB loses strength and should not be used for future entries. Fresh (un-mitigated) OBs have highest probability. Track OB status: Fresh → Partially Mitigated → Fully Mitigated → Invalid.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 2,
+        "mentions": 18
+      },
+      "teaching_types": {
+        "definition": true,
+        "lifecycle": true,
+        "trading_rules": true
+      },
+      "key_rules": [
+        "Mitigation = price returns and fills OB orders",
+        "Full mitigation = complete OB penetration",
+        "Mitigated OBs lose trading power",
+        "Use only fresh (un-mitigated) OBs",
+        "Track OB lifecycle"
+      ]
+    },
+
+    "ob_trading_strategy": {
+      "llm_summary": "Order Block Trading Strategy: 1) Identify trend direction, 2) Spot BOS in trend direction, 3) Mark the last opposite candle before BOS as OB, 4) Wait for price to retrace to OB, 5) Enter when price touches OB zone, 6) Stop loss beyond OB, 7) Target next swing/structure. Combine with FVG, inducement, premium/discount for confluence. OB entries provide precise entry zones with logical stop placement. Higher probability when OB aligns with other SMC concepts.",
+      "statistics": {
+        "teaching_units": 12,
+        "teaching_duration_seconds": 260,
+        "frames_analyzed": 4,
+        "mentions": 26
+      },
+      "teaching_types": {
+        "trading_strategy": true,
+        "step_by_step_process": true,
+        "confluence": true
+      },
+      "strategy_steps": [
+        "1. Confirm trend direction",
+        "2. Identify BOS in trend direction",
+        "3. Mark last opposite candle as OB",
+        "4. Wait for retracement to OB",
+        "5. Enter at OB zone",
+        "6. Stop loss beyond OB",
+        "7. Target structure/swing"
+      ]
+    }
+  },
+
+  "key_insights": [
+    "OB = last opposite candle before BOS (institutional order zone)",
+    "Bullish OB = last bearish candle before bullish BOS (support)",
+    "Bearish OB = last bullish candle before bearish BOS (resistance)",
+    "Must be associated with confirmed BOS to be valid",
+    "Fresh (un-mitigated) OBs have highest probability",
+    "OB mitigation occurs when price returns and fills orders",
+    "Combine with FVG, inducement, premium/discount for best setups",
+    "OBs represent institutional footprint, not arbitrary S/R"
+  ],
+
+  "related_concepts": [
+    "break_of_structure",
+    "fair_value_gap",
+    "breaker_block",
+    "mitigation_block",
+    "institutional_order_flow",
+    "support_resistance"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.93,
+    "expert_verified": true,
+    "primary_concepts": ["order_block", "bullish_order_block", "bearish_order_block", "valid_vs_invalid_ob"],
+    "difficulty_level": "advanced",
+    "prerequisites": ["break_of_structure", "market_structure", "institutional_concepts"]
+  }
+}

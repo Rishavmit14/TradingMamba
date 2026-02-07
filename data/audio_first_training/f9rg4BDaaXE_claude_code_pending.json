@@ -1,0 +1,41 @@
+{
+  "video_id": "f9rg4BDaaXE",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:28:09.840880",
+  "instructions": {
+    "video_id": "f9rg4BDaaXE",
+    "transcript_path": "data/transcripts/f9rg4BDaaXE.json",
+    "frames_dir": "data/video_frames/f9rg4BDaaXE",
+    "selected_frames": [
+      "data/video_frames/f9rg4BDaaXE/frame_00006.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00009.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00012.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00018.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00060.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00093.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00096.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00153.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00165.00s.jpg",
+      "data/video_frames/f9rg4BDaaXE/frame_00174.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/f9rg4BDaaXE_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/f9rg4BDaaXE_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/f9rg4BDaaXE_knowledge_summary.md",
+    "concepts_detected": [
+      "inducement",
+      "institutional",
+      "retail trap",
+      "smart money trap",
+      "sell stops",
+      "inducement shift",
+      "smart money",
+      "candlestick analysis",
+      "liquidity sweep",
+      "buy stops",
+      "valid pullback",
+      "liquidity",
+      "optimal trade entry"
+    ],
+    "prompt": "Complete the training for video: f9rg4BDaaXE\n\n1. Read the transcript: data/transcripts/f9rg4BDaaXE.json\n2. View these key frames: data/video_frames/f9rg4BDaaXE/frame_00006.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00009.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00012.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00018.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00060.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00093.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00096.00s.jpg, data/video_frames/f9rg4BDaaXE/frame_00153.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/f9rg4BDaaXE_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/f9rg4BDaaXE_knowledge_summary.md\n\nConcepts detected so far: inducement, institutional, retail trap, smart money trap, sell stops, inducement shift, smart money, candlestick analysis, liquidity sweep, buy stops, valid pullback, liquidity, optimal trade entry\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

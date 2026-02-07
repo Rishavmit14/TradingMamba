@@ -1,0 +1,241 @@
+{
+  "video_id": "eoL_y_6ODLk",
+  "title": "09 - Fake CHoCH - Valid vs Fake Change of Character Detection",
+  "channel": "Forex Minions",
+  "playlist": "Forex Minions ICT/SMC Course",
+  "duration_seconds": 837,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-08T09:00:00Z",
+  "expert_confidence": 0.94,
+
+  "processing_stats": {
+    "vision_analyses": 4,
+    "teaching_units_detected": 56,
+    "frames_extracted": 279,
+    "transcript_words": 1987
+  },
+
+  "concepts": {
+    "fake_choch": {
+      "llm_summary": "Fake CHoCH is a Smart Money trap designed to deceive retail traders into thinking a trend reversal has occurred when it has not. Fake CHoCH occurs when market breaks a swing point that LOOKS like valid structure but fails validation rules - resulting in retail traders entering reversal trades that get stopped out while price continues in the original trend direction. Understanding fake vs valid CHoCH is critical to avoid being trapped. The video teaches 4 specific rules to distinguish fake from valid CHoCH.",
+      "statistics": {
+        "teaching_units": 18,
+        "teaching_duration_seconds": 360,
+        "frames_analyzed": 4,
+        "mentions": 42
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "validation_rules": true,
+        "chart_examples": true
+      },
+      "key_rules": [
+        "Fake CHoCH breaks weak swing points (not strong swings)",
+        "Fake CHoCH creates engineered liquidity to trap retail",
+        "Fake CHoCH often followed by price resuming original trend",
+        "Must validate ALL 4 rules to confirm real CHoCH"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00078.00s.jpg", "timestamp": 78, "description": "Fake CHoCH definition - market trap for retail traders"}
+      ]
+    },
+
+    "rule_1_weak_swing_fake_choch": {
+      "llm_summary": "Rule 1: When market breaks a WEAK SWING POINT, this is a Fake CHoCH. Weak swing points look like valid swing points but their strength is already consumed by the Swing Initiating Candle being part of a liquidity sweep. The candle that created the swing high/low is called 'Sweeping Candle' - its involvement in liquidity sweep invalidates the swing for CHoCH purposes. Breaking these weak swings creates fake CHoCH signals that trap retail traders.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 2,
+        "mentions": 22
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "visual_example": true
+      },
+      "key_rules": [
+        "Weak swing point = swing created by sweeping candle",
+        "Sweeping candle consumed swing strength via liquidity sweep",
+        "Breaking weak swing = fake CHoCH",
+        "Only strong swings can produce valid CHoCH"
+      ],
+      "detection_rules": {
+        "check_swing_initiating_candle": "if_part_of_liquidity_sweep_then_weak",
+        "weak_swing_break": "results_in_fake_choch"
+      },
+      "visual_evidence": [
+        {"frame": "frame_00174.00s.jpg", "timestamp": 174, "description": "Rule 1 slide showing weak swing point characteristics"}
+      ]
+    },
+
+    "rule_2_eng_liq_fake_choch": {
+      "llm_summary": "Rule 2: When market breaks a swing point that CREATES ENGINEERED LIQUIDITY to trap retail traders, this is Fake CHoCH. After breaking such swing, price creates a consolidation zone or trendline area where retail S/R traders place stops - this is engineered liquidity. Smart Money then hunts this ENG LIQ before resuming the original trend. The CHoCH that created the ENG LIQ zone was fake - its purpose was to set the trap, not signal trend reversal.",
+      "statistics": {
+        "teaching_units": 10,
+        "teaching_duration_seconds": 200,
+        "frames_analyzed": 2,
+        "mentions": 28
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true,
+        "trap_mechanism": true
+      },
+      "key_rules": [
+        "Swing break followed by ENG LIQ zone creation = fake CHoCH",
+        "ENG LIQ appears as consolidation, trendlines, or S/R zones",
+        "Smart Money hunts ENG LIQ then resumes original trend",
+        "Real CHoCH does NOT create ENG LIQ traps"
+      ],
+      "visual_evidence": [
+        {"frame": "frame_00366.00s.jpg", "timestamp": 366, "description": "Rule 2 slide - swing point creating engineered liquidity"}
+      ]
+    },
+
+    "rule_3_disrespect_inducement": {
+      "llm_summary": "Rule 3: When market breaks a swing point WITHOUT respecting (taking out) inducement first, this is Fake CHoCH. Valid CHoCH must follow the same inducement rules as all structural moves - inducement must be taken before the swing break. If price breaks a swing without touching its inducement level, this violates fundamental SMC principles and produces fake CHoCH. Price typically returns to take the inducement later, confirming the CHoCH was false.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 1,
+        "mentions": 15
+      },
+      "teaching_types": {
+        "definition": true,
+        "validation_rule": true,
+        "explanation": true
+      },
+      "key_rules": [
+        "Valid CHoCH must take inducement first",
+        "CHoCH without inducement break = fake CHoCH",
+        "Inducement rules apply to ALL structural moves including CHoCH",
+        "Price eventually returns to take missed inducement"
+      ],
+      "validation_rules": {
+        "inducement_must_be_taken": true,
+        "if_inducement_not_taken": "fake_choch"
+      }
+    },
+
+    "rule_4_lower_tf_is_higher_tf_inducement": {
+      "llm_summary": "Rule 4: When a LOWER TIMEFRAME swing low IS the HIGHER TIMEFRAME inducement level, breaking that lower TF swing creates Fake CHoCH on the lower timeframe. This is because the lower TF swing is acting as inducement for the higher TF structure - Smart Money is simply taking out higher TF inducement, not reversing trend. The video demonstrates how M15/H1 swing low might be the H4/D1 inducement level. Breaking it on lower TF appears as CHoCH but it's actually just higher TF inducement hunt.",
+      "statistics": {
+        "teaching_units": 8,
+        "teaching_duration_seconds": 180,
+        "frames_analyzed": 2,
+        "mentions": 18
+      },
+      "teaching_types": {
+        "definition": true,
+        "multi_timeframe_analysis": true,
+        "chart_example": true
+      },
+      "key_rules": [
+        "Lower TF swing can be higher TF inducement",
+        "Breaking lower TF swing = taking higher TF inducement (not CHoCH)",
+        "Must check higher timeframes before confirming CHoCH",
+        "Multi-timeframe analysis prevents false CHoCH signals"
+      },
+      "visual_evidence": [
+        {"frame": "frame_00753.00s.jpg", "timestamp": 753, "description": "Rule 4 demonstration - lower TF swing as higher TF inducement"}
+      ]
+    },
+
+    "sweeping_candle": {
+      "llm_summary": "Sweeping Candle is the candle that creates a swing high or swing low while simultaneously being part of a liquidity sweep. When a candle's wick sweeps liquidity (goes beyond previous level without body close) and that same candle forms the swing point, the swing is classified as weak. The swing's strength has been consumed by the liquidity sweep action. Such swings created by sweeping candles cannot produce valid CHoCH - breaking them results in fake CHoCH.",
+      "statistics": {
+        "teaching_units": 5,
+        "teaching_duration_seconds": 100,
+        "frames_analyzed": 1,
+        "mentions": 12
+      },
+      "teaching_types": {
+        "definition": true,
+        "explanation": true
+      },
+      "key_rules": [
+        "Sweeping candle = wick sweeps liquidity + creates swing point",
+        "Strength consumed by liquidity sweep",
+        "Results in weak swing point",
+        "Cannot produce valid CHoCH"
+      ]
+    },
+
+    "valid_choch_validation": {
+      "llm_summary": "Valid CHoCH Validation is the 4-rule checklist that must be satisfied for confirming a real trend reversal signal. ALL 4 rules must pass: 1) Swing point is STRONG (not weak/sweeping candle), 2) Swing break does NOT create engineered liquidity, 3) Inducement was taken BEFORE swing break, 4) Lower TF swing is NOT higher TF inducement. If even one rule fails, the CHoCH is fake. This systematic validation prevents retail traps and ensures traders only act on genuine trend reversals.",
+      "statistics": {
+        "teaching_units": 6,
+        "teaching_duration_seconds": 120,
+        "frames_analyzed": 2,
+        "mentions": 16
+      },
+      "teaching_types": {
+        "validation_checklist": true,
+        "step_by_step_process": true
+      },
+      "validation_checklist": [
+        "✓ Rule 1: Strong swing point (not weak/sweeping)",
+        "✓ Rule 2: Does NOT create ENG LIQ zone",
+        "✓ Rule 3: Inducement taken first",
+        "✓ Rule 4: Not higher TF inducement"
+      ],
+      "key_rules": [
+        "ALL 4 rules must pass for valid CHoCH",
+        "Even 1 failed rule = fake CHoCH",
+        "Systematic validation prevents traps",
+        "Check rules in sequence for efficiency"
+      ]
+    },
+
+    "multi_timeframe_choch_analysis": {
+      "llm_summary": "Multi-Timeframe CHoCH Analysis is the practice of checking higher timeframes before confirming CHoCH on lower timeframes. A CHoCH on M15 might be fake if it's simply taking out the H4 inducement. A CHoCH on H1 might be fake if it's taking the Daily inducement. Always check: Is this lower TF swing acting as higher TF inducement? This cross-timeframe validation is Rule 4 and critical for avoiding false reversal signals.",
+      "statistics": {
+        "teaching_units": 5,
+        "teaching_duration_seconds": 110,
+        "frames_analyzed": 1,
+        "mentions": 10
+      },
+      "teaching_types": {
+        "multi_timeframe_technique": true,
+        "explanation": true
+      },
+      "key_rules": [
+        "Check higher timeframes before confirming lower TF CHoCH",
+        "Lower TF swing may be higher TF inducement",
+        "Cross-timeframe validation is mandatory",
+        "Prevents false reversal signals"
+      ]
+    }
+  },
+
+  "key_insights": [
+    "Fake CHoCH is a systematic Smart Money trap, not random price action",
+    "4 rules distinguish valid from fake CHoCH - ALL must pass for validity",
+    "Rule 1: Weak swings (sweeping candles) produce fake CHoCH",
+    "Rule 2: Swing breaks that create ENG LIQ zones are fake CHoCH",
+    "Rule 3: CHoCH without inducement taken is fake",
+    "Rule 4: Lower TF swing as higher TF inducement = fake CHoCH on lower TF",
+    "Multi-timeframe analysis is essential for CHoCH validation",
+    "Valid CHoCH requires systematic validation, not visual observation alone"
+  ],
+
+  "related_concepts": [
+    "change_of_character",
+    "weak_swing_point",
+    "engineered_liquidity",
+    "inducement",
+    "liquidity_sweep",
+    "smart_money_trap",
+    "multi_timeframe_analysis"
+  ],
+
+  "metadata": {
+    "training_type": "claude_code_expert",
+    "quality_score": 0.94,
+    "expert_verified": true,
+    "primary_concepts": ["fake_choch", "valid_choch_validation", "rule_1_weak_swing_fake_choch"],
+    "difficulty_level": "advanced",
+    "prerequisites": ["change_of_character", "weak_swing_point", "engineered_liquidity", "inducement"]
+  }
+}

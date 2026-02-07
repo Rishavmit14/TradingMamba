@@ -1,0 +1,51 @@
+{
+  "video_id": "-zPGWtuuWdU",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:47:35.848572",
+  "instructions": {
+    "video_id": "-zPGWtuuWdU",
+    "transcript_path": "data/transcripts/-zPGWtuuWdU.json",
+    "frames_dir": "data/video_frames/-zPGWtuuWdU",
+    "selected_frames": [
+      "data/video_frames/-zPGWtuuWdU/frame_00009.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00036.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00042.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00093.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00126.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00129.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00144.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00147.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00174.00s.jpg",
+      "data/video_frames/-zPGWtuuWdU/frame_00192.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/-zPGWtuuWdU_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/-zPGWtuuWdU_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/-zPGWtuuWdU_knowledge_summary.md",
+    "concepts_detected": [
+      "distribution",
+      "valid pullback",
+      "inducement",
+      "order block",
+      "expansion",
+      "valid order block",
+      "engineered liquidity",
+      "liquidity sweep",
+      "price delivery cycle",
+      "optimal trade entry",
+      "fair value gap",
+      "buy stops",
+      "smart money trap",
+      "equilibrium",
+      "candlestick analysis",
+      "sell stops",
+      "institutional",
+      "retail trap",
+      "manipulation",
+      "mitigation",
+      "imbalance",
+      "liquidity",
+      "smart money"
+    ],
+    "prompt": "Complete the training for video: -zPGWtuuWdU\n\n1. Read the transcript: data/transcripts/-zPGWtuuWdU.json\n2. View these key frames: data/video_frames/-zPGWtuuWdU/frame_00009.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00036.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00042.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00093.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00126.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00129.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00144.00s.jpg, data/video_frames/-zPGWtuuWdU/frame_00147.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/-zPGWtuuWdU_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/-zPGWtuuWdU_knowledge_summary.md\n\nConcepts detected so far: distribution, valid pullback, inducement, order block, expansion, valid order block, engineered liquidity, liquidity sweep, price delivery cycle, optimal trade entry, fair value gap, buy stops, smart money trap, equilibrium, candlestick analysis, sell stops, institutional, retail trap, manipulation, mitigation, imbalance, liquidity, smart money\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

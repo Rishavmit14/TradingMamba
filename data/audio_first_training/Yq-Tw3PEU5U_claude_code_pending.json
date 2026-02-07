@@ -1,0 +1,37 @@
+{
+  "video_id": "Yq-Tw3PEU5U",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:32:41.213797",
+  "instructions": {
+    "video_id": "Yq-Tw3PEU5U",
+    "transcript_path": "data/transcripts/Yq-Tw3PEU5U.json",
+    "frames_dir": "data/video_frames/Yq-Tw3PEU5U",
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00012.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00033.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00051.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00054.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00057.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00108.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00120.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00132.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00144.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00162.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/Yq-Tw3PEU5U_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/Yq-Tw3PEU5U_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/Yq-Tw3PEU5U_knowledge_summary.md",
+    "concepts_detected": [
+      "candlestick analysis",
+      "optimal trade entry",
+      "liquidity sweep",
+      "inducement",
+      "market structure",
+      "break of structure",
+      "liquidity",
+      "swing low",
+      "swing high"
+    ],
+    "prompt": "Complete the training for video: Yq-Tw3PEU5U\n\n1. Read the transcript: data/transcripts/Yq-Tw3PEU5U.json\n2. View these key frames: data/video_frames/Yq-Tw3PEU5U/frame_00012.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00033.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00051.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00054.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00057.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00108.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00120.00s.jpg, data/video_frames/Yq-Tw3PEU5U/frame_00132.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/Yq-Tw3PEU5U_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/Yq-Tw3PEU5U_knowledge_summary.md\n\nConcepts detected so far: candlestick analysis, optimal trade entry, liquidity sweep, inducement, market structure, break of structure, liquidity, swing low, swing high\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

@@ -1,0 +1,845 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 11.78,
+    "end_time": 29.86,
+    "duration": 18.08,
+    "text": "break of structure, liquidity sweep, and swing high and swing lows. Even though, we have studied them in great detail in last four to five lectures. But I received request emails from some viewers to explain these all in parallel ways to clarify the difference between their rules and their identification.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "swing high",
+      "swing low",
+      "liquidity sweep",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00012.00s.jpg"
+    ],
+    "frame_timestamps": [
+      12.0
+    ],
+    "word_count": 51
+  },
+  {
+    "id": "unit_001",
+    "start_time": 32.08,
+    "end_time": 44.46,
+    "duration": 12.380000000000003,
+    "text": "Here, we will study this topic for bullish market structure and be sure, these rules and case study will be 100% applicable to bearish market structure as well. Now, we will study",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        32.30375,
+        "this"
+      ],
+      [
+        32.08,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00033.00s.jpg"
+    ],
+    "frame_timestamps": [
+      33.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_002",
+    "start_time": 51.2,
+    "end_time": 95.84,
+    "duration": 44.64,
+    "text": "First one is inducement. And if you do not have knowledge about inducement and how to mark valid inducement, then you must study second and third lecture available in playlist. You can check iButton on right upper corner of this video for quick access to inducement lecture. Second rule is based on candle closing below inducement. It's mean either candle body closed below inducement or not after taking it out. This will be cleared when we will move on and see market samples. Third rule, this is basically based on candle body closing above previous high in bullish market and below previous low in bearish market. Again, if you have not watched the first five lectures, then these points and rules may confuse you.",
+    "detected_concepts": [
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        53.458225806451615,
+        "this"
+      ],
+      [
+        55.83225806451613,
+        "see"
+      ],
+      [
+        57.627258064516134,
+        "watch"
+      ]
+    ],
+    "confidence": 0.8064516129032259,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00051.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00054.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00057.00s.jpg"
+    ],
+    "frame_timestamps": [
+      51.0,
+      54.0,
+      57.0
+    ],
+    "word_count": 124
+  },
+  {
+    "id": "unit_003",
+    "start_time": 107.2,
+    "end_time": 119.04,
+    "duration": 11.840000000000003,
+    "text": "and swing high and lows in parallel comparison so that you can easily differentiate amongst these three. Well, let's start by first rule and we will compare it for these mentioned three topics.",
+    "detected_concepts": [
+      "swing high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00108.00s.jpg"
+    ],
+    "frame_timestamps": [
+      108.0
+    ],
+    "word_count": 33
+  },
+  {
+    "id": "unit_004",
+    "start_time": 119.94,
+    "end_time": 129.74,
+    "duration": 9.800000000000011,
+    "text": "So, first liquidity sweep. Well, note that inducement is not compulsory to mark liquidity sweep. This is independent from inducement.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        120.9375,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00120.00s.jpg"
+    ],
+    "frame_timestamps": [
+      120.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_005",
+    "start_time": 130.5,
+    "end_time": 142.48,
+    "duration": 11.97999999999999,
+    "text": "Secondly, break of structure. To mark a valid break of structure, market must take out the inducement. This is primary and very basic rule to identify a break of structure.",
+    "detected_concepts": [
+      "market structure",
+      "inducement",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        131.47466666666668,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00132.00s.jpg"
+    ],
+    "frame_timestamps": [
+      132.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_006",
+    "start_time": 143.36,
+    "end_time": 155.98,
+    "duration": 12.619999999999976,
+    "text": "Third, swing high and swing lows. For true structure mapping, we must know how to mark swing high and swing lows. To mark valid swing high and lows, market must take out the inducement.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "swing low",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00144.00s.jpg"
+    ],
+    "frame_timestamps": [
+      144.0
+    ],
+    "word_count": 34
+  },
+  {
+    "id": "unit_007",
+    "start_time": 162.86,
+    "end_time": 183.76,
+    "duration": 20.899999999999977,
+    "text": "Now, second rule is candle closing below inducement. Well, note that we will only count candle wick in liquidity sweep. Candle body closing above previous high or low will invalidate the liquidity sweep. To understand the concept of liquidity sweep, you can click on I button on right corner for its complete understanding.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00162.00s.jpg"
+    ],
+    "frame_timestamps": [
+      162.0
+    ],
+    "word_count": 53
+  },
+  {
+    "id": "unit_008",
+    "start_time": 184.66000000000003,
+    "end_time": 201.66,
+    "duration": 16.99999999999997,
+    "text": "Secondly, break of structure. After taking out inducement, candle wick and candle body both validate the break of structure. Note again, if candle wick sweep the inducement or candle body close below inducement level, in both case this rule will be fulfilled.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        186.9416666666667,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00186.00s.jpg"
+    ],
+    "frame_timestamps": [
+      186.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_009",
+    "start_time": 202.8,
+    "end_time": 222.6,
+    "duration": 19.799999999999983,
+    "text": "Third, swing high and swing lows. After taking out inducement, we will count only candle body closing below inducement. Make notes, I repeat, we will consider only candle body close below inducement. If candle just sweep the inducement by wick, then we will not mark swing high and lows.",
+    "detected_concepts": [
+      "swing high",
+      "swing low",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00204.00s.jpg"
+    ],
+    "frame_timestamps": [
+      204.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_010",
+    "start_time": 224.82,
+    "end_time": 242.5,
+    "duration": 17.680000000000007,
+    "text": "Now, third rule which is candle body closing above previous high in bullish market. Here again, for liquidity sweep, we will only count candle wick. Remember candle body closing above previous high is not valid liquidity sweep. We will see examples shortly.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        225.67666666666665,
+        "here"
+      ],
+      [
+        227.20642857142857,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00225.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00228.00s.jpg"
+    ],
+    "frame_timestamps": [
+      225.0,
+      228.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_011",
+    "start_time": 243.58,
+    "end_time": 252.02,
+    "duration": 8.439999999999998,
+    "text": "Secondly, break of structure. After completing first two rules, candle body must close above the previous high in bullish market.",
+    "detected_concepts": [
+      "market structure",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00243.00s.jpg"
+    ],
+    "frame_timestamps": [
+      243.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_012",
+    "start_time": 265.03999999999996,
+    "end_time": 273.38,
+    "duration": 8.340000000000032,
+    "text": "Now, let's see some examples to understand this. First, this is chart and we will do case study of liquidity sweep.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        265.4233333333333,
+        "this"
+      ],
+      [
+        265.14952380952377,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00264.00s.jpg"
+    ],
+    "frame_timestamps": [
+      264.0
+    ],
+    "word_count": 21
+  },
+  {
+    "id": "unit_013",
+    "start_time": 291.26,
+    "end_time": 301.28,
+    "duration": 10.019999999999982,
+    "text": "So we will mark it as liquidity sweep. Now, check this chart. Note here candle rated this low by wick and candle body closed above this previous low.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        291.79214285714284,
+        "this"
+      ],
+      [
+        291.9517857142857,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_014",
+    "start_time": 307.94,
+    "end_time": 323.52,
+    "duration": 15.579999999999984,
+    "text": "Now, check this candle, which created a new high. As candle body closed above previous high, so this is not liquidity sweep and we will mark it as invalid liquidity sweep. Hopefully, now you have a clear concept about liquidity sweep.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        308.0541463414634,
+        "this"
+      ],
+      [
+        308.0541463414634,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00309.00s.jpg"
+    ],
+    "frame_timestamps": [
+      309.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_015",
+    "start_time": 345.62,
+    "end_time": 365.9,
+    "duration": 20.279999999999973,
+    "text": "Here, price created a new high and note the candle reaction above previous high. As candle body closed above previous high, so this is valid break of structure or we can call it boss. Because market respected all of these three rules. This is another example. Note, this is our inducement level.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "inducement",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        346.86807692307696,
+        "this"
+      ],
+      [
+        345.62,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00345.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00348.00s.jpg"
+    ],
+    "frame_timestamps": [
+      345.0,
+      348.0
+    ],
+    "word_count": 52
+  },
+  {
+    "id": "unit_016",
+    "start_time": 366.88,
+    "end_time": 393.38,
+    "duration": 26.5,
+    "text": "Now, candle taken out this inducement by candle body. Note that candle body closed below inducement level which is our second rule to mark a boss. Here, price created a new high and candle body closed above previous high, so this is also a valid break of structure. Take notes that if candle take out inducement by candle wick or candle body, here. In both case, break of structure is valid.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "inducement",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        367.10028169014083,
+        "this"
+      ],
+      [
+        368.3118309859155,
+        "here"
+      ],
+      [
+        367.4307042253521,
+        "that candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00366.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00369.00s.jpg"
+    ],
+    "frame_timestamps": [
+      366.0,
+      369.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_017",
+    "start_time": 429.82,
+    "end_time": 438.74,
+    "duration": 8.920000000000016,
+    "text": "So, as per above mentioned three rules, inducement taken out, candle body closed below it and candle body closing above previous high.",
+    "detected_concepts": [
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00429.00s.jpg"
+    ],
+    "frame_timestamps": [
+      429.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_018",
+    "start_time": 451.94,
+    "end_time": 467.48,
+    "duration": 15.54000000000002,
+    "text": "Here, we have only break of structure and swing high lows examples. Now, check these box diagrams or sample sizes. Have you noticed anything? Anything similar between them? Check here.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        451.94,
+        "here"
+      ],
+      [
+        453.28933333333333,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00453.00s.jpg"
+    ],
+    "frame_timestamps": [
+      453.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_019",
+    "start_time": 468.42,
+    "end_time": 492.44,
+    "duration": 24.019999999999982,
+    "text": "Both examples are similar, same inducement level. And same candle closing below inducement. And same candle closing above previous high. Notice it? Only in this case, break of structure and swing high and swing lows rules are same when candle body closed below inducement. In this case, every swing high will also be known as break of structure.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "swing low",
+      "inducement",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        469.84758620689655,
+        "this"
+      ],
+      [
+        469.6096551724138,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00468.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      468.0,
+      471.0
+    ],
+    "word_count": 58
+  },
+  {
+    "id": "unit_020",
+    "start_time": 493.14,
+    "end_time": 499.52,
+    "duration": 6.3799999999999955,
+    "text": "Make notes. Every swing high is a break of structure but every break of structure is not a swing high.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "optimal trade entry",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00492.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00498.00s.jpg"
+    ],
+    "frame_timestamps": [
+      492.0,
+      498.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_021",
+    "start_time": 500.36,
+    "end_time": 515.64,
+    "duration": 15.279999999999973,
+    "text": "Now, I expect that lot of questions running through your mind are cleared. Now you can easily differentiate between liquidity sweep, break of structure and swing high and swing low. Still, if you have any query, drop an email to me.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "swing high",
+      "swing low",
+      "liquidity sweep",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00501.00s.jpg"
+    ],
+    "frame_timestamps": [
+      501.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_022",
+    "start_time": 518.64,
+    "end_time": 529.18,
+    "duration": 10.539999999999964,
+    "text": "Now, let's map out a real market sample size. Here. We have Australian dollar versus American dollar chart, at time frame of four hour.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        519.14625,
+        "here"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00519.00s.jpg"
+    ],
+    "frame_timestamps": [
+      519.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_023",
+    "start_time": 529.18,
+    "end_time": 543.54,
+    "duration": 14.360000000000014,
+    "text": "We will see how all these rules applicable on this chart and how easily we can map out liquidity sweep, break of structure and swing high and lows here. Notice these highs, this candle just sweep previous high by candle wick.",
+    "detected_concepts": [
+      "liquidity",
+      "market structure",
+      "swing high",
+      "liquidity sweep",
+      "break of structure",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        529.6739024390243,
+        "this"
+      ],
+      [
+        530.7165853658536,
+        "here"
+      ],
+      [
+        529.2897560975609,
+        "see"
+      ],
+      [
+        530.7714634146341,
+        "notice"
+      ],
+      [
+        529.2897560975609,
+        "see how"
+      ],
+      [
+        530.9360975609756,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00528.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00531.00s.jpg"
+    ],
+    "frame_timestamps": [
+      528.0,
+      531.0
+    ],
+    "word_count": 41
+  },
+  {
+    "id": "unit_024",
+    "start_time": 561.8,
+    "end_time": 569.3,
+    "duration": 7.5,
+    "text": "Because market taken out this inducement by candle wick and created a new high. And this new candle closed above previous high.",
+    "detected_concepts": [
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        562.0309090909091,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00561.00s.jpg"
+    ],
+    "frame_timestamps": [
+      561.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_025",
+    "start_time": 577.12,
+    "end_time": 588.78,
+    "duration": 11.659999999999968,
+    "text": "Because market taken out this inducement by candle body. Note here candle body just closed below this inducement level and created a new high. This candle body closed above previous high.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        577.3612903225807,
+        "this"
+      ],
+      [
+        577.7232258064516,
+        "here"
+      ],
+      [
+        578.5677419354839,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00576.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00579.00s.jpg"
+    ],
+    "frame_timestamps": [
+      576.0,
+      579.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_026",
+    "start_time": 598.18,
+    "end_time": 605.38,
+    "duration": 7.2000000000000455,
+    "text": "Because market taken out this inducement by candle body and after creating this high, candle body closed above previous high.",
+    "detected_concepts": [
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        598.43,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00597.00s.jpg"
+    ],
+    "frame_timestamps": [
+      597.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_027",
+    "start_time": 606.24,
+    "end_time": 618.62,
+    "duration": 12.379999999999995,
+    "text": "So this is swing high and swing low. Now, as we discussed earlier, we can call out these swing highs as break of structure as well. Hopefully, this is all clear and make sense to you.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "swing low",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        606.2908333333334,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00606.00s.jpg"
+    ],
+    "frame_timestamps": [
+      606.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_028",
+    "start_time": 619.52,
+    "end_time": 640.12,
+    "duration": 20.600000000000023,
+    "text": "Now you can easily map structure as a professional trader. Do your paperwork because only by practice, you will learn much. If you have any question related to any lecture, drop me an email with your chart analysis or contact us on telegram. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.9433962264150942,
+    "selected_frames": [
+      "data/video_frames/Yq-Tw3PEU5U/frame_00621.00s.jpg",
+      "data/video_frames/Yq-Tw3PEU5U/frame_00627.00s.jpg"
+    ],
+    "frame_timestamps": [
+      621.0,
+      627.0
+    ],
+    "word_count": 53
+  }
+]

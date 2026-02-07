@@ -1,0 +1,535 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 3.919999999999999,
+    "end_time": 23.2,
+    "duration": 19.28,
+    "text": "Welcome back and welcome to Forex Minions. In this lecture, we will discuss daily candlestick formation and forex trading sessions. Many of you have brief knowledge about it, but let's discuss this in some logical ways. This lecture will set a good base for your session and intraday trading skills.",
+    "detected_concepts": [
+      "forex sessions",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        4.398399999999999,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00003.00s.jpg"
+    ],
+    "frame_timestamps": [
+      3.0
+    ],
+    "word_count": 50
+  },
+  {
+    "id": "unit_001",
+    "start_time": 30.78,
+    "end_time": 100.4,
+    "duration": 69.62,
+    "text": "Well, whenever we use word smart money, it's mean big institutions, big banks, insurance companies, and fund hedgers companies. Forex market works 24 hours a day and 5 days a week. Reason is our banking system, because our bank works 5 days within a week. As Saturday and Sunday is off day for banks and big institutions, that's why Saturday and Sunday are off trading days in forex. It's mean forex market is off on Saturday and Sunday. Well, to understand the concept and working principle of forex industry, we must start with small banks. Every country or region has small banks operating there. These small banks are bound to share data of each and every transaction to their state bank. They enter this data in system as a digital record. Suppose this is schematic illustration for Asian countries. Similarly, if we talk about London region, these small banks report all transactions data to their big banks or you can say that their state bank. Same goes for New York region and Sydney continent.",
+    "detected_concepts": [
+      "smart money",
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        37.8701724137931,
+        "this"
+      ],
+      [
+        36.774942528735636,
+        "here"
+      ]
+    ],
+    "confidence": 0.5747126436781609,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00030.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00036.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00039.00s.jpg"
+    ],
+    "frame_timestamps": [
+      30.0,
+      36.0,
+      39.0
+    ],
+    "word_count": 174
+  },
+  {
+    "id": "unit_002",
+    "start_time": 101.06,
+    "end_time": 119.68,
+    "duration": 18.620000000000005,
+    "text": "Now, if we talk collectively about these banks, I mean Asian, London, New York and Sydney banks, they report their data to another big institution. And, when this big institute add and record their data into a digital system, it reflects us as this forex trading chart.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        102.60531914893618,
+        "this"
+      ]
+    ],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00102.00s.jpg"
+    ],
+    "frame_timestamps": [
+      102.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_003",
+    "start_time": 127.72,
+    "end_time": 167.44,
+    "duration": 39.72,
+    "text": "Now, let's discuss about forex trading sessions. We will discuss how forex market works 24 hours. Consider, this is a time window of 24 hours. When a forex trading day starts, it actually begins with Asian session. During this Asian session window, London session start and overlap with Asian session. Similarly, before ending of London session, New York session start and overlap with London session and market work continuously. At the end of the trading day, Sydney session start with overlap of New York session and market keep working 24 hours.",
+    "detected_concepts": [
+      "forex sessions"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        128.7456043956044,
+        "this"
+      ]
+    ],
+    "confidence": 0.5494505494505494,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00129.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00147.00s.jpg"
+    ],
+    "frame_timestamps": [
+      129.0,
+      147.0
+    ],
+    "word_count": 91
+  },
+  {
+    "id": "unit_004",
+    "start_time": 168.48,
+    "end_time": 211.16,
+    "duration": 42.68000000000001,
+    "text": "Now, let's talk about the nature of forex trading sessions. First, when market actually start, market is ranging or you can say it's consolidating. This behavior is mostly observed in Asian session. After Asian session, forex market start trending. This is mostly occurred in London session which is much volatile as compared to Asian session. Similarly, this trending or volatile nature continues in New York trading session. Take notes, New York session is highly volatile for major or USD pairs. And finally, at the end of day, market again start ranging which usually happens in Sydney session.",
+    "detected_concepts": [
+      "order block",
+      "forex sessions",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        169.95958762886596,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00168.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00171.00s.jpg"
+    ],
+    "frame_timestamps": [
+      168.0,
+      171.0
+    ],
+    "word_count": 97
+  },
+  {
+    "id": "unit_005",
+    "start_time": 212.2,
+    "end_time": 223.7,
+    "duration": 11.5,
+    "text": "Now, you can understand and correlate that, Asian session build liquidity because of its consolidating nature and London and New York sessions are mostly trending sessions because of high trade volumes.",
+    "detected_concepts": [
+      "liquidity",
+      "forex sessions"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00213.00s.jpg"
+    ],
+    "frame_timestamps": [
+      213.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_006",
+    "start_time": 235.84,
+    "end_time": 246.2,
+    "duration": 10.359999999999985,
+    "text": "As we have discussed earlier that forex market continues 24 hours, and it consists on these four trading sessions. Asian, London, New York and Sydney sessions.",
+    "detected_concepts": [
+      "forex sessions"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00237.00s.jpg"
+    ],
+    "frame_timestamps": [
+      237.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_007",
+    "start_time": 247.32,
+    "end_time": 262.68,
+    "duration": 15.360000000000014,
+    "text": "Now let's talk about bullish candlestick formation. This is market opening price, as we studied earlier that forex trading day actually start with Asian session. After Asian session, market will take make a quick move and start trending.",
+    "detected_concepts": [
+      "forex sessions",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        247.7565789473684,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00246.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      246.0,
+      249.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_008",
+    "start_time": 263.66,
+    "end_time": 271.82,
+    "duration": 8.159999999999968,
+    "text": "Now, if we notice this sharp down and up move, this movement will balance the price, which will actually creates the wick of candlestick.",
+    "detected_concepts": [
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        263.8883333333334,
+        "this"
+      ],
+      [
+        263.83125,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00264.00s.jpg"
+    ],
+    "frame_timestamps": [
+      264.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_009",
+    "start_time": 278.18,
+    "end_time": 286.26,
+    "duration": 8.079999999999984,
+    "text": "Now, if we note this move, from this point to this one, this will create candle body, because price keep moving in one direction.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        278.395,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00279.00s.jpg"
+    ],
+    "frame_timestamps": [
+      279.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_010",
+    "start_time": 300.22,
+    "end_time": 320.64,
+    "duration": 20.41999999999996,
+    "text": "So this will create another half of candle body. And, finally in the end of trading day, market will start ranging and this usually happens in Sydney session. Here, if we notice this move, from this top to this level, as market moved up and down in same zone, this will create top of the wick of candlestick.",
+    "detected_concepts": [
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        300.2731034482759,
+        "this"
+      ],
+      [
+        301.7068965517242,
+        "here"
+      ],
+      [
+        301.8662068965518,
+        "notice"
+      ]
+    ],
+    "confidence": 0.8620689655172414,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00300.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00303.00s.jpg"
+    ],
+    "frame_timestamps": [
+      300.0,
+      303.0
+    ],
+    "word_count": 58
+  },
+  {
+    "id": "unit_011",
+    "start_time": 321.4,
+    "end_time": 345.62,
+    "duration": 24.220000000000027,
+    "text": "Now take notes. Remember, in bullish day, or you can say that bullish candlestick formation, market will post daily candle low in London session. Note this point. Similarly, for bullish market or bullish candlestick, market will post high of the day in New York session. But, question is why London session post daily low in bullish market?",
+    "detected_concepts": [
+      "forex sessions",
+      "optimal trade entry",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        322.89122807017543,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00321.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00324.00s.jpg"
+    ],
+    "frame_timestamps": [
+      321.0,
+      324.0
+    ],
+    "word_count": 57
+  },
+  {
+    "id": "unit_012",
+    "start_time": 346.52,
+    "end_time": 355.68,
+    "duration": 9.160000000000025,
+    "text": "Well, as we have discussed liquidity concept in great details in start of this course, that if market want to go higher, market will sweep the low side.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        347.2257142857143,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00348.00s.jpg"
+    ],
+    "frame_timestamps": [
+      348.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_013",
+    "start_time": 363.8,
+    "end_time": 377.12,
+    "duration": 13.319999999999993,
+    "text": "Similarly here, Asian session consolidate and build liquidity. In bullish trend, market will sweep the Asian low side liquidity, grab this liquidity, post a low in London session and start moving higher.",
+    "detected_concepts": [
+      "liquidity",
+      "forex sessions",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        365.06875,
+        "this"
+      ],
+      [
+        363.86343750000003,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00363.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00366.00s.jpg"
+    ],
+    "frame_timestamps": [
+      363.0,
+      366.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_014",
+    "start_time": 385.06,
+    "end_time": 397.98,
+    "duration": 12.920000000000016,
+    "text": "Now, let's talk about bearish candlestick formation. Remember, in bearish market, or you can say that bearish candlestick formation, market will post daily candlestick high in London session.",
+    "detected_concepts": [
+      "forex sessions",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00384.00s.jpg"
+    ],
+    "frame_timestamps": [
+      384.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_015",
+    "start_time": 398.76,
+    "end_time": 428.98,
+    "duration": 30.220000000000027,
+    "text": "Note this point. Similarly, for bearish market or bearish candlestick, market will post low of the day in New York session. But, question is why London session post daily high in bearish market? Same liquidity concept will be applicable here, Asian session consolidate and build liquidity. In bearish trend, market will sweep the Asian high side liquidity, grab this liquidity, market will post a high in London session and start moving lower.",
+    "detected_concepts": [
+      "liquidity",
+      "forex sessions",
+      "optimal trade entry",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        398.82152777777776,
+        "this"
+      ],
+      [
+        401.15958333333333,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00399.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00402.00s.jpg"
+    ],
+    "frame_timestamps": [
+      399.0,
+      402.0
+    ],
+    "word_count": 72
+  },
+  {
+    "id": "unit_016",
+    "start_time": 436.18,
+    "end_time": 469.06,
+    "duration": 32.879999999999995,
+    "text": "This is the basic and classical concept of candlestick formation on daily bearish basis. Well, every trader must have knowledge about OHLC values of candlestick and their importance. Considering this candlestick, note that every candlestick's body present bank trading or actual trading volume. On other hand, WIC or shadow of candlestick present the retail trader's volume. In bullish market, low of the candle will be on downside, as we discussed earlier.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "retail trap",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        436.18,
+        "this"
+      ],
+      [
+        438.04661971830984,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00435.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00438.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00444.00s.jpg"
+    ],
+    "frame_timestamps": [
+      435.0,
+      438.0,
+      444.0
+    ],
+    "word_count": 71
+  },
+  {
+    "id": "unit_017",
+    "start_time": 470.02,
+    "end_time": 486.26,
+    "duration": 16.24000000000001,
+    "text": "Because in bullish market, London session will post the low of the day. Similarly, this is the open, high, low and close values of bearish candlesticks. Remember the concept, London session will manipulate the high side liquidity in bearish market.",
+    "detected_concepts": [
+      "liquidity",
+      "forex sessions",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        470.888,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      471.0
+    ],
+    "word_count": 40
+  },
+  {
+    "id": "unit_018",
+    "start_time": 487.12,
+    "end_time": 499.94,
+    "duration": 12.819999999999993,
+    "text": "I hope now you can observe and analyze the market in better ways. Practice this concept and be a profitable trader. If you have any question related to this lecture, email us on this id.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        487.86400000000003,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/hRuUCLE7i6U/frame_00486.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00489.00s.jpg",
+      "data/video_frames/hRuUCLE7i6U/frame_00495.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0,
+      489.0,
+      495.0
+    ],
+    "word_count": 35
+  }
+]

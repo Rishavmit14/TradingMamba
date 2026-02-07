@@ -1,0 +1,1768 @@
+[
+  {
+    "id": "unit_000",
+    "start_time": 5.739999999999998,
+    "end_time": 16.22,
+    "duration": 10.48,
+    "text": "Welcome back. And welcome to forex minions. Today, we will study about change of character, which indicates the trend reversal in forex market.",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00006.00s.jpg"
+    ],
+    "frame_timestamps": [
+      6.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_001",
+    "start_time": 17.08,
+    "end_time": 33.34,
+    "duration": 16.260000000000005,
+    "text": "Big institutions and successful traders love to trade in major trend direction as you hear that trend is your friend. But, at some point, at a specific time, market trends start changing, market changes from bullish to bearish and trend reversal happened.",
+    "detected_concepts": [
+      "institutional"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00018.00s.jpg"
+    ],
+    "frame_timestamps": [
+      18.0
+    ],
+    "word_count": 42
+  },
+  {
+    "id": "unit_002",
+    "start_time": 40.32,
+    "end_time": 62.88,
+    "duration": 22.560000000000002,
+    "text": "by change of character which is also known as chalk. Just for information, please note that all premium content of SMC and ICT is available in English with subtitles in playlist. You can also watch same content in Urdu and Hindi in playlist. Please subscribe, like and share our YouTube channel with your friends.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "change of character",
+      "premium zone"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        42.29074074074074,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00039.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00042.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00045.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00048.00s.jpg"
+    ],
+    "frame_timestamps": [
+      39.0,
+      42.0,
+      45.0,
+      48.0
+    ],
+    "word_count": 54
+  },
+  {
+    "id": "unit_003",
+    "start_time": 65.1,
+    "end_time": 103.58,
+    "duration": 38.480000000000004,
+    "text": "Now, I would like to ask a question from all of viewers that why 95% of forex traders fail. Even though everyone knows that we must trade in major trend direction but still they fail. Why it happened? Very first reason of lack of accurate knowledge. 65% of forex traders fails due to lack of accurate knowledge. When a person joins forex market, he just hear about profit and quick earning techniques. But no one tells them risk involved, trading rules and logical reasoning. That's why we mark lack of accurate knowledge as biggest failure for forex traders.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00066.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00084.00s.jpg"
+    ],
+    "frame_timestamps": [
+      66.0,
+      84.0
+    ],
+    "word_count": 98
+  },
+  {
+    "id": "unit_004",
+    "start_time": 104.53999999999999,
+    "end_time": 137.52,
+    "duration": 32.98000000000002,
+    "text": "And if by chance a retail trader is making profit by following major trend, he suddenly become part of smart money trap and loses all of its profit because retail trader do not really know that when market is about to change its character. Secondly lack of discipline and forex strategy. Lack of discipline mean no trading plan, no psychology development, no risk to reward management and no patience. And if we talk about forex strategy, remember no forex strategy is successful without discipline and proper trading plan.",
+    "detected_concepts": [
+      "smart money",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00105.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00120.00s.jpg"
+    ],
+    "frame_timestamps": [
+      105.0,
+      120.0
+    ],
+    "word_count": 88
+  },
+  {
+    "id": "unit_005",
+    "start_time": 138.5,
+    "end_time": 153.9,
+    "duration": 15.400000000000006,
+    "text": "Now hope you understand the major reasons of forex traders failure. That's why we will target accurate knowledge learning as a basic in your training, once you will gain every bit of knowledge. We will study trading plans and entry techniques in upcoming lectures.",
+    "detected_concepts": [],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 0.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00138.00s.jpg"
+    ],
+    "frame_timestamps": [
+      138.0
+    ],
+    "word_count": 44
+  },
+  {
+    "id": "unit_006",
+    "start_time": 156.07999999999998,
+    "end_time": 165.14,
+    "duration": 9.060000000000002,
+    "text": "Now, let's study about change of character. Change of character which is also known as chalk, this is an indication of trend reversal.",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        157.01217391304345,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00156.00s.jpg"
+    ],
+    "frame_timestamps": [
+      156.0
+    ],
+    "word_count": 23
+  },
+  {
+    "id": "unit_007",
+    "start_time": 166.2,
+    "end_time": 178.3,
+    "duration": 12.100000000000023,
+    "text": "Now, when market is bullish and market break its current strong swing higher low, this is indication of chalk in bullish market. Here, this is simple schematic diagram of bullish trend reversal.",
+    "detected_concepts": [
+      "swing high",
+      "higher low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        167.04874999999998,
+        "this"
+      ],
+      [
+        167.53375,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00165.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00168.00s.jpg"
+    ],
+    "frame_timestamps": [
+      165.0,
+      168.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_008",
+    "start_time": 179.2,
+    "end_time": 188.76,
+    "duration": 9.560000000000002,
+    "text": "Note these points. These are higher highs and higher lows of bullish trend. Green marking is for higher high and red point indicates the swing higher low.",
+    "detected_concepts": [
+      "swing high",
+      "higher high",
+      "higher low",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00180.00s.jpg"
+    ],
+    "frame_timestamps": [
+      180.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_009",
+    "start_time": 203.56,
+    "end_time": 215.74,
+    "duration": 12.180000000000007,
+    "text": "Now, when market is bearish and market break its current strong swing lower high, this is indication of chalk in bearish market. Here, this is simple schematic diagram of bearish trend reversal.",
+    "detected_concepts": [
+      "swing low",
+      "lower high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        204.40875,
+        "this"
+      ],
+      [
+        204.89375,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00204.00s.jpg"
+    ],
+    "frame_timestamps": [
+      204.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_010",
+    "start_time": 216.72,
+    "end_time": 226.06,
+    "duration": 9.340000000000003,
+    "text": "Note these points. These are lower highs and lower lows of bearish trend. Blue swing is for lower high and brown point indicates the swing lower low.",
+    "detected_concepts": [
+      "swing low",
+      "lower low",
+      "lower high",
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00216.00s.jpg"
+    ],
+    "frame_timestamps": [
+      216.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_011",
+    "start_time": 232.06,
+    "end_time": 288.36,
+    "duration": 56.30000000000001,
+    "text": "indication of change of character or chalk. At this point, market changing its trend from bearish structure to bullish structure. Here, if you noticed, we have mentioned that strong swing points. What does it mean and how we can mark a strong swing's points and weak swing points? We will study this in complete details at end of this lecture or upcoming lecture. Take notes that chalk, I mean change of character depends on time frame you using for analysis. What does it mean? It's mean every time frame has its own chalk level. Daily time frame, H4 time frame and similarly for H1 and M15. Simple reason is that every time frame has its own swing points that why every time frame has its own chalk level. If you do not know how to mark swing points, you can check this I button or you can watch complete playlist to learn about them in complete details.",
+    "detected_concepts": [
+      "market structure",
+      "optimal trade entry",
+      "change of character",
+      "weak swing point"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        232.49617834394905,
+        "this"
+      ],
+      [
+        233.1504458598726,
+        "here"
+      ],
+      [
+        233.3140127388535,
+        "notice"
+      ],
+      [
+        240.0747770700637,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00231.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00234.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00240.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00246.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00249.00s.jpg"
+    ],
+    "frame_timestamps": [
+      231.0,
+      234.0,
+      240.0,
+      246.0,
+      249.0
+    ],
+    "word_count": 157
+  },
+  {
+    "id": "unit_012",
+    "start_time": 290.76,
+    "end_time": 303.76,
+    "duration": 13.0,
+    "text": "Now, let's check how retail trader map out a structure to find a trend reversal or change of character. Here, when a retail trader look at a chart, he mark every high and low as significant points.",
+    "detected_concepts": [
+      "market structure",
+      "retail trap",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        291.7716216216216,
+        "here"
+      ],
+      [
+        292.03783783783786,
+        "look"
+      ],
+      [
+        292.03783783783786,
+        "look at"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00291.00s.jpg"
+    ],
+    "frame_timestamps": [
+      291.0
+    ],
+    "word_count": 37
+  },
+  {
+    "id": "unit_013",
+    "start_time": 318.5,
+    "end_time": 326.5,
+    "duration": 8.0,
+    "text": "He will mark it as a change of character. But when market made a move, market moved higher and created a new high in trend direction.",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00318.00s.jpg"
+    ],
+    "frame_timestamps": [
+      318.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_014",
+    "start_time": 336.28,
+    "end_time": 351.5,
+    "duration": 15.220000000000027,
+    "text": "Now, when price created this new high, again, retail traders mark these points as higher highs and higher lows. Here, market came down and closed below this point. Again, they will mark this trend reversal point.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        336.5155555555555,
+        "this"
+      ],
+      [
+        337.39888888888885,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00336.00s.jpg"
+    ],
+    "frame_timestamps": [
+      336.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_015",
+    "start_time": 352.5,
+    "end_time": 364.72,
+    "duration": 12.220000000000027,
+    "text": "Now, let's see what market did. Notice, again, market created a new higher high, its mean market is actually moving in major trend direction and again, chalk failed.",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        352.61785714285713,
+        "see"
+      ],
+      [
+        352.85357142857146,
+        "notice"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00354.00s.jpg"
+    ],
+    "frame_timestamps": [
+      354.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_016",
+    "start_time": 365.64,
+    "end_time": 395.7,
+    "duration": 30.060000000000002,
+    "text": "Now, when price created this new high, again, retail traders mark these points as higher highs and higher lows. Here, market came down and closed below this point. Again, they will mark this trend reversal point, chalk. What will happen now? See, market moving higher and higher and retail trader is failing again and again. This fake chalk is smart money trap and retail trader being hunt down due to lack of accurate knowledge.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "smart money",
+      "smart money trap",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        365.8718918918919,
+        "this"
+      ],
+      [
+        366.74148648648645,
+        "here"
+      ],
+      [
+        368.0168918918919,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00366.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00369.00s.jpg"
+    ],
+    "frame_timestamps": [
+      366.0,
+      369.0
+    ],
+    "word_count": 74
+  },
+  {
+    "id": "unit_017",
+    "start_time": 396.34,
+    "end_time": 404.74,
+    "duration": 8.400000000000034,
+    "text": "Now this is high and low marked by retail traders. Now, after multiple hit and trial method, finally market changed",
+    "detected_concepts": [
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        396.3975,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00396.00s.jpg"
+    ],
+    "frame_timestamps": [
+      396.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_018",
+    "start_time": 417.98,
+    "end_time": 432.82,
+    "duration": 14.839999999999975,
+    "text": "like this retail trader which is not a professional trading approach. Now, let's study the smart money approach for structure mapping and chalk identification. Here, we will study the classical approach for basic and logic understanding.",
+    "detected_concepts": [
+      "market structure",
+      "smart money",
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        418.04583333333335,
+        "this"
+      ],
+      [
+        419.56,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00417.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00420.00s.jpg"
+    ],
+    "frame_timestamps": [
+      417.0,
+      420.0
+    ],
+    "word_count": 36
+  },
+  {
+    "id": "unit_019",
+    "start_time": 448.12,
+    "end_time": 457.72,
+    "duration": 9.600000000000023,
+    "text": "Let's start with from this end, considering a start of structure. Whenever a SMC trader map out a structure, he always start from recent high.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        448.3472,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00447.00s.jpg"
+    ],
+    "frame_timestamps": [
+      447.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_020",
+    "start_time": 458.66,
+    "end_time": 465.66,
+    "duration": 7.0,
+    "text": "Now, as per this high, smart money trader always look to find out inducement level which is key level for structure mapping.",
+    "detected_concepts": [
+      "market structure",
+      "smart money",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        458.82909090909095,
+        "this"
+      ],
+      [
+        459.16727272727275,
+        "look"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00459.00s.jpg"
+    ],
+    "frame_timestamps": [
+      459.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_021",
+    "start_time": 466.44,
+    "end_time": 486.28,
+    "duration": 19.839999999999975,
+    "text": "So, for this high, note this red point, where is its inducement? Note this, very first valid pullback on the left side of this recent high is our inducement level. We use IDM notation to mark it. I would request if you have no concept of inducement, then you must start from basics.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        466.54641509433964,
+        "this"
+      ],
+      [
+        466.9188679245283,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00465.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00468.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00471.00s.jpg"
+    ],
+    "frame_timestamps": [
+      465.0,
+      468.0,
+      471.0
+    ],
+    "word_count": 53
+  },
+  {
+    "id": "unit_022",
+    "start_time": 487.38,
+    "end_time": 497.4,
+    "duration": 10.019999999999982,
+    "text": "Watch first to third lecture to find about swing high and low points and inducement levels. Only then, you will be able to understand this change of character topic nicely.",
+    "detected_concepts": [
+      "swing high",
+      "inducement",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        488.756,
+        "this"
+      ],
+      [
+        487.38,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00486.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00489.00s.jpg"
+    ],
+    "frame_timestamps": [
+      486.0,
+      489.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_023",
+    "start_time": 511.36,
+    "end_time": 518.74,
+    "duration": 7.3799999999999955,
+    "text": "Now, we will mark these points valid swing points. Higher high and high low, annotation is marked here for reference.",
+    "detected_concepts": [
+      "higher high"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        512.3545,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00510.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00513.00s.jpg"
+    ],
+    "frame_timestamps": [
+      510.0,
+      513.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_024",
+    "start_time": 519.84,
+    "end_time": 531.62,
+    "duration": 11.779999999999973,
+    "text": "Now, we will again mark out inducement level. For this high, this is our inducement level. Market taken out this inducement, moved higher and closed above this previous high.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        520.38,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00519.00s.jpg"
+    ],
+    "frame_timestamps": [
+      519.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_025",
+    "start_time": 531.62,
+    "end_time": 543.46,
+    "duration": 11.840000000000032,
+    "text": "So, these are our higher high and higher low. Again, we will find our inducement level, which is here. Market rated inducement level and closed above this high.",
+    "detected_concepts": [
+      "higher high",
+      "higher low",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        533.1057142857143,
+        "this"
+      ],
+      [
+        532.6485714285715,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00531.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00534.00s.jpg"
+    ],
+    "frame_timestamps": [
+      531.0,
+      534.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_026",
+    "start_time": 569.84,
+    "end_time": 581.02,
+    "duration": 11.17999999999995,
+    "text": "retail trader were failing out to mark actual chalk level. Now, you can understand the power of knowledge. Your accurate knowledge is 65% success in forex.",
+    "detected_concepts": [
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00570.00s.jpg"
+    ],
+    "frame_timestamps": [
+      570.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_027",
+    "start_time": 595.72,
+    "end_time": 607.98,
+    "duration": 12.259999999999991,
+    "text": "I mean change of character zone. Next, when market post a lower low and lower high, then this chalk actually confirms trend reversal. I hope you have understand this approach really well.",
+    "detected_concepts": [
+      "lower low",
+      "lower high",
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        596.7134375,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00597.00s.jpg"
+    ],
+    "frame_timestamps": [
+      597.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_028",
+    "start_time": 608.86,
+    "end_time": 619.86,
+    "duration": 11.0,
+    "text": "Gain knowledge, do not act like a retail trader. I guarantee you, if you will follow these rules, you will be successful trader, here, as promised by me,",
+    "detected_concepts": [
+      "retail trap"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        610.1167857142857,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00609.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00618.00s.jpg"
+    ],
+    "frame_timestamps": [
+      609.0,
+      618.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_029",
+    "start_time": 620.3,
+    "end_time": 629.14,
+    "duration": 8.840000000000032,
+    "text": "we will do a complete structure mapping now. As I told you in start that, I will giving you little pieces, small blocks to learn forex.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00621.00s.jpg"
+    ],
+    "frame_timestamps": [
+      621.0
+    ],
+    "word_count": 26
+  },
+  {
+    "id": "unit_030",
+    "start_time": 629.9,
+    "end_time": 637.58,
+    "duration": 7.680000000000064,
+    "text": "Now it's time to combine these blocks to find a complete structure mapping approach. As we have studied about valid swing points,",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00630.00s.jpg"
+    ],
+    "frame_timestamps": [
+      630.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_031",
+    "start_time": 645.4399999999999,
+    "end_time": 654.62,
+    "duration": 9.180000000000064,
+    "text": "Now, let's move to appear on trading view and find out how we can do a proper structure mapping and how we can find a trend reversal point, which is chalk.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00645.00s.jpg"
+    ],
+    "frame_timestamps": [
+      645.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_032",
+    "start_time": 677.96,
+    "end_time": 693.94,
+    "duration": 15.980000000000018,
+    "text": "Now, let's find out inducement from this level. Check this pullback. Is this valid inducement? No, because this is not valid pullback. Check this candle, this is highest candle and it low is not broken by these candles.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        678.3057894736843,
+        "this"
+      ],
+      [
+        679.2855263157895,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00678.00s.jpg"
+    ],
+    "frame_timestamps": [
+      678.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_033",
+    "start_time": 706.02,
+    "end_time": 719.62,
+    "duration": 13.600000000000023,
+    "text": "Note candle body closed below this point. Next, let check candle reaction above previous high. Here, candle body closed below this inducement level and candle body also closed above this high.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        706.3296774193548,
+        "this"
+      ],
+      [
+        706.9490322580644,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00705.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00708.00s.jpg"
+    ],
+    "frame_timestamps": [
+      705.0,
+      708.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_034",
+    "start_time": 720.42,
+    "end_time": 730.84,
+    "duration": 10.420000000000073,
+    "text": "So, we will mark it as swing higher high which is also a break of structure. You can watch break of structure lecture to understand this rule. This is higher high.",
+    "detected_concepts": [
+      "market structure",
+      "swing high",
+      "higher high",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        721.7345161290323,
+        "this"
+      ],
+      [
+        721.3664516129032,
+        "watch"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00720.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00723.00s.jpg"
+    ],
+    "frame_timestamps": [
+      720.0,
+      723.0
+    ],
+    "word_count": 31
+  },
+  {
+    "id": "unit_035",
+    "start_time": 731.76,
+    "end_time": 741.86,
+    "duration": 10.100000000000023,
+    "text": "Now let's mark out higher low. This is our higher low and we will annotate it with HL. Price moved higher and created this high.",
+    "detected_concepts": [
+      "higher low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        732.0672,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00732.00s.jpg"
+    ],
+    "frame_timestamps": [
+      732.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_036",
+    "start_time": 742.78,
+    "end_time": 752.32,
+    "duration": 9.540000000000077,
+    "text": "This high didn't took any inducement and moved higher again. Now, we will check this high. We will check this high and find its inducement in previous swing",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        742.78,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00744.00s.jpg"
+    ],
+    "frame_timestamps": [
+      744.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_037",
+    "start_time": 766.26,
+    "end_time": 786.68,
+    "duration": 20.41999999999996,
+    "text": "and its high and low is protected. And this low will act as inducement if any of these candle break this highest candle's low. For example, if any of these candle make a long wick like this and break the low of this highest candle and this will be a valid inducement. As these candle did not break this low of this highest candle,",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement"
+    ],
+    "teaching_type": "example",
+    "deictic_references": [
+      [
+        766.6725,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00765.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00768.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00786.00s.jpg"
+    ],
+    "frame_timestamps": [
+      765.0,
+      768.0,
+      786.0
+    ],
+    "word_count": 64
+  },
+  {
+    "id": "unit_038",
+    "start_time": 787.14,
+    "end_time": 797.34,
+    "duration": 10.200000000000045,
+    "text": "so this is not a valid inducement. So, price created this high. Moved down without inducement, then this high, this low and again moved high.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        787.1964,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00786.00s.jpg"
+    ],
+    "frame_timestamps": [
+      786.0
+    ],
+    "word_count": 25
+  },
+  {
+    "id": "unit_039",
+    "start_time": 798.26,
+    "end_time": 808.34,
+    "duration": 10.080000000000041,
+    "text": "Now, let's check the candle reaction from previous high. And, see this low side is a liquidity sweep by candle wicks. We will mark it with X.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        798.8344444444444,
+        "this"
+      ],
+      [
+        798.7822222222222,
+        "see"
+      ],
+      [
+        798.7822222222222,
+        "see this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00798.00s.jpg"
+    ],
+    "frame_timestamps": [
+      798.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_040",
+    "start_time": 809.94,
+    "end_time": 828.16,
+    "duration": 18.219999999999914,
+    "text": "And here, this is not a higher high, not a boss. Because this did not took any inducement from previous swing. Because, this was our valid inducement level and price moved higher and higher without taking this valid inducement level. I'm marking this level just for your learning purpose.",
+    "detected_concepts": [
+      "higher high",
+      "inducement",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        810.0575510204083,
+        "this"
+      ],
+      [
+        809.9987755102042,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00810.00s.jpg"
+    ],
+    "frame_timestamps": [
+      810.0
+    ],
+    "word_count": 49
+  },
+  {
+    "id": "unit_041",
+    "start_time": 835.7,
+    "end_time": 847.34,
+    "duration": 11.639999999999986,
+    "text": "For this new high, where is inducement? This is our inducement level, let me mark it. Here, we will mark this level as inducement to avoid any confusion.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "annotation",
+    "deictic_references": [
+      [
+        835.7546428571429,
+        "this"
+      ],
+      [
+        835.9732142857143,
+        "here"
+      ],
+      [
+        836.3557142857144,
+        "let me mark"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00837.00s.jpg"
+    ],
+    "frame_timestamps": [
+      837.0
+    ],
+    "word_count": 28
+  },
+  {
+    "id": "unit_042",
+    "start_time": 850.3000000000001,
+    "end_time": 863.94,
+    "duration": 13.639999999999986,
+    "text": "Now, market moved down and created this new high without taking inducement. As market did not took previous inducement and created new high, then we will shift inducement from this level to this level as per inducement shift rule.",
+    "detected_concepts": [
+      "inducement",
+      "inducement shift"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        850.6538461538462,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00849.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_00852.00s.jpg"
+    ],
+    "frame_timestamps": [
+      849.0,
+      852.0
+    ],
+    "word_count": 39
+  },
+  {
+    "id": "unit_043",
+    "start_time": 864.76,
+    "end_time": 872.5,
+    "duration": 7.740000000000009,
+    "text": "Now, note this candle take out this inducement and this candle sweep this inducement low. This candle low sweep liquidity.",
+    "detected_concepts": [
+      "liquidity",
+      "optimal trade entry",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        864.882,
+        "this"
+      ],
+      [
+        864.882,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00864.00s.jpg"
+    ],
+    "frame_timestamps": [
+      864.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_044",
+    "start_time": 880.86,
+    "end_time": 895.44,
+    "duration": 14.580000000000041,
+    "text": "Whenever a candle sweep the inducement, we will check this candle low or wick to check that if next candle body closed below this point or not. We will draw a horizontal line from the low of this candle, to check next candle body closed below it.",
+    "detected_concepts": [
+      "inducement",
+      "liquidity sweep",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        881.3310638297872,
+        "this"
+      ],
+      [
+        881.3310638297872,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00882.00s.jpg"
+    ],
+    "frame_timestamps": [
+      882.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_045",
+    "start_time": 901.96,
+    "end_time": 912.96,
+    "duration": 11.0,
+    "text": "So this is just a liquidity sweep area. Now, let's check this high. See this candle high is not closed above previous high and candle traded high by wick only.",
+    "detected_concepts": [
+      "liquidity",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        902.013,
+        "this"
+      ],
+      [
+        902.649,
+        "see"
+      ],
+      [
+        902.649,
+        "see this"
+      ],
+      [
+        902.702,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00903.00s.jpg"
+    ],
+    "frame_timestamps": [
+      903.0
+    ],
+    "word_count": 30
+  },
+  {
+    "id": "unit_046",
+    "start_time": 926.16,
+    "end_time": 936.04,
+    "duration": 9.879999999999995,
+    "text": "Now, this is highest point and this high did not took any inducement and created this new high again. For this high, we will find inducement in previous swing.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        926.2148275862069,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00927.00s.jpg"
+    ],
+    "frame_timestamps": [
+      927.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_047",
+    "start_time": 948.66,
+    "end_time": 957.36,
+    "duration": 8.700000000000045,
+    "text": "Now, this price swing did not took any inducement and moved higher to this level. Here, let's check out where is our recent high.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        948.71375,
+        "this"
+      ],
+      [
+        949.46625,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00948.00s.jpg"
+    ],
+    "frame_timestamps": [
+      948.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_048",
+    "start_time": 959.14,
+    "end_time": 967.08,
+    "duration": 7.940000000000055,
+    "text": "Note this is our recent high now. Let's find inducement for this high. This is valid inducement for this high.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        959.1949999999999,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00960.00s.jpg"
+    ],
+    "frame_timestamps": [
+      960.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_049",
+    "start_time": 972.6800000000001,
+    "end_time": 981.1,
+    "duration": 8.419999999999959,
+    "text": "Marking it with IDM as inducement level. Note here, this candle closed below this inducement level with hardly 3-4 pips.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        973.22,
+        "this"
+      ],
+      [
+        973.1600000000001,
+        "here"
+      ],
+      [
+        973.22,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00972.00s.jpg"
+    ],
+    "frame_timestamps": [
+      972.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_050",
+    "start_time": 990.42,
+    "end_time": 999.32,
+    "duration": 8.900000000000091,
+    "text": "Now, we will mark this high as higher high or we can also call it break of structure as per our rules. And this point. This low.",
+    "detected_concepts": [
+      "market structure",
+      "higher high",
+      "break of structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        990.6096296296296,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00990.00s.jpg"
+    ],
+    "frame_timestamps": [
+      990.0
+    ],
+    "word_count": 27
+  },
+  {
+    "id": "unit_051",
+    "start_time": 1000.12,
+    "end_time": 1008.4,
+    "duration": 8.279999999999973,
+    "text": "This point is our higher low and we will mark it with HL. We will keep doing structure mapping as per these discussed rules.",
+    "detected_concepts": [
+      "market structure",
+      "higher low"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1000.12,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_00999.00s.jpg"
+    ],
+    "frame_timestamps": [
+      999.0
+    ],
+    "word_count": 24
+  },
+  {
+    "id": "unit_052",
+    "start_time": 1009.7,
+    "end_time": 1019.56,
+    "duration": 9.8599999999999,
+    "text": "Now, check this low to this high. When price move in from of impulse from this low to this high without a pullback, then such lows act as inducement.",
+    "detected_concepts": [
+      "inducement",
+      "valid pullback",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1009.8027586206897,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01011.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1011.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_053",
+    "start_time": 1021.84,
+    "end_time": 1035.36,
+    "duration": 13.519999999999868,
+    "text": "We studied this rule in previous lecture and let's mark this higher low as inducement. This low is an inducement because price moved in form of impulse from this low to this high. I have mentioned with both words for your learning purpose.",
+    "detected_concepts": [
+      "higher low",
+      "inducement",
+      "expansion"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1021.9511627906977,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01023.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1023.0
+    ],
+    "word_count": 43
+  },
+  {
+    "id": "unit_054",
+    "start_time": 1038.38,
+    "end_time": 1046.36,
+    "duration": 7.979999999999791,
+    "text": "This high, price is moving down and going higher without taking inducement. We will analyze price action above this high.",
+    "detected_concepts": [
+      "inducement"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1038.38,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01038.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1038.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_055",
+    "start_time": 1054.02,
+    "end_time": 1073.12,
+    "duration": 19.09999999999991,
+    "text": "So, this is just a liquidity sweep. Now, looking for this sweeping candle, this is our new recent high with this inducement level. For this high, this low is out valid inducement. Let mark it as inducement or IDM and this candle closed below this inducement level.",
+    "detected_concepts": [
+      "liquidity",
+      "inducement",
+      "liquidity sweep"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1054.0761702127659,
+        "this"
+      ],
+      [
+        1054.4693617021276,
+        "look"
+      ],
+      [
+        1056.2668085106384,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01053.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_01056.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1053.0,
+      1056.0
+    ],
+    "word_count": 47
+  },
+  {
+    "id": "unit_056",
+    "start_time": 1080.44,
+    "end_time": 1089.28,
+    "duration": 8.839999999999918,
+    "text": "Now, let's check next candle. Here. Note this candle body closed above it and this candle body closed below it.",
+    "detected_concepts": [
+      "optimal trade entry",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1080.8285,
+        "this"
+      ],
+      [
+        1080.7175,
+        "here"
+      ],
+      [
+        1080.8285,
+        "this candle"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01080.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1080.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_057",
+    "start_time": 1128.94,
+    "end_time": 1136.5,
+    "duration": 7.559999999999945,
+    "text": "Price take a dip and note, price broke this major swing low. Price broke this low with candle body closed this level.",
+    "detected_concepts": [
+      "swing low",
+      "optimal trade entry",
+      "candlestick analysis"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1129.3654545454547,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01128.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1128.0
+    ],
+    "word_count": 22
+  },
+  {
+    "id": "unit_058",
+    "start_time": 1137.28,
+    "end_time": 1144.5,
+    "duration": 7.220000000000027,
+    "text": "Now, as per rules, we will mark this swing point as change of character or chalk, which is reversal indication.",
+    "detected_concepts": [
+      "change of character"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1137.6685,
+        "this"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01137.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1137.0
+    ],
+    "word_count": 20
+  },
+  {
+    "id": "unit_059",
+    "start_time": 1145.94,
+    "end_time": 1155.36,
+    "duration": 9.419999999999845,
+    "text": "Now let's zoom out and check. Note that how price reacted at this level and price changed its character or you can say trend, from bullish to bearish here.",
+    "detected_concepts": [
+      "optimal trade entry"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1146.5813793103448,
+        "this"
+      ],
+      [
+        1147.436551724138,
+        "here"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01146.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1146.0
+    ],
+    "word_count": 29
+  },
+  {
+    "id": "unit_060",
+    "start_time": 1167.64,
+    "end_time": 1182.66,
+    "duration": 15.019999999999982,
+    "text": "Only those points, like these swing points, which obey OUE rules are valid swing points. Which we will use to find reversal point after which market change its trend from bullish to bearish. See, complete bearish market now.",
+    "detected_concepts": [
+      "order block"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [
+      [
+        1169.5852631578948,
+        "see"
+      ]
+    ],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01167.00s.jpg",
+      "data/video_frames/NbhVSLd18YM/frame_01170.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1167.0,
+      1170.0
+    ],
+    "word_count": 38
+  },
+  {
+    "id": "unit_061",
+    "start_time": 1183.62,
+    "end_time": 1193.14,
+    "duration": 9.52000000000021,
+    "text": "Now, I hope you have complete idea of structure mapping. As I promised in start that I will give you small blocks and we will combine them to make a complete structure.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01185.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1185.0
+    ],
+    "word_count": 32
+  },
+  {
+    "id": "unit_062",
+    "start_time": 1206.44,
+    "end_time": 1220.46,
+    "duration": 14.019999999999982,
+    "text": "If you have any question, related to structure mapping or any point, you can reach us at our email id. You can also contact us on telegram. Until next lecture, wish you good luck and happy trading.",
+    "detected_concepts": [
+      "market structure"
+    ],
+    "teaching_type": "explanation",
+    "deictic_references": [],
+    "confidence": 1.0,
+    "selected_frames": [
+      "data/video_frames/NbhVSLd18YM/frame_01206.00s.jpg"
+    ],
+    "frame_timestamps": [
+      1206.0
+    ],
+    "word_count": 37
+  }
+]

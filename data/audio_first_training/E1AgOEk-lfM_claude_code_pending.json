@@ -1,0 +1,46 @@
+{
+  "video_id": "E1AgOEk-lfM",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-08T00:29:30.330994",
+  "instructions": {
+    "video_id": "E1AgOEk-lfM",
+    "transcript_path": "data/transcripts/E1AgOEk-lfM.json",
+    "frames_dir": "data/video_frames/E1AgOEk-lfM",
+    "selected_frames": [
+      "data/video_frames/E1AgOEk-lfM/frame_00003.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00015.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00018.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00030.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00033.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00036.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00081.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00096.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00117.00s.jpg",
+      "data/video_frames/E1AgOEk-lfM/frame_00135.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/E1AgOEk-lfM_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/E1AgOEk-lfM_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/E1AgOEk-lfM_knowledge_summary.md",
+    "concepts_detected": [
+      "higher low",
+      "higher high",
+      "smart money trap",
+      "break of structure",
+      "liquidity sweep",
+      "order block",
+      "smart money",
+      "retail trap",
+      "imbalance",
+      "expansion",
+      "valid pullback",
+      "inducement shift",
+      "optimal trade entry",
+      "lower low",
+      "market structure",
+      "swing low",
+      "swing high",
+      "inducement"
+    ],
+    "prompt": "Complete the training for video: E1AgOEk-lfM\n\n1. Read the transcript: data/transcripts/E1AgOEk-lfM.json\n2. View these key frames: data/video_frames/E1AgOEk-lfM/frame_00003.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00015.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00018.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00030.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00033.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00036.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00081.00s.jpg, data/video_frames/E1AgOEk-lfM/frame_00096.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/E1AgOEk-lfM_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/E1AgOEk-lfM_knowledge_summary.md\n\nConcepts detected so far: higher low, higher high, smart money trap, break of structure, liquidity sweep, order block, smart money, retail trap, imbalance, expansion, valid pullback, inducement shift, optimal trade entry, lower low, market structure, swing low, swing high, inducement\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}
