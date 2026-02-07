@@ -137,7 +137,7 @@
         "Both wick-based AND body-based sweeps are valid",
         "Next candle doesn't need to immediately reverse",
         "Mark liquidity sweep with X cross notation"
-      },
+      ],
       "common_mistakes": {
         "wrong_reference_candle": "Marking wrong candle as highest/lowest",
         "expecting_immediate_reversal": "Thinking next candle must reverse",
@@ -334,7 +334,7 @@
         "ALWAYS check for liquidity sweep before trusting inducement",
         "No sweep = avoid the inducement zone completely",
         "Liquidity sweep is the ONLY confirmation factor"
-      },
+      ],
       "builds_on_video_2": {
         "video_2_taught": "What inducement is (trap before order block)",
         "video_3_adds": "HOW to validate if inducement is real or fake",
@@ -381,7 +381,7 @@
     "When price take out sweep the previous candle low or high, it is called valid pullback.",
     "It is not necessary that next candle must close or break the high or low of the sweeping candle.",
     "Banks will try to target bigger liquidity pool side to execute their large orders."
-  },
+  ],
 
   "critical_insights": {
     "main_teaching": "Liquidity sweep is THE ONLY factor for pullback and inducement validation",

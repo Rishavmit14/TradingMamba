@@ -136,7 +136,7 @@
         "Breaking lower TF swing = taking higher TF inducement (not CHoCH)",
         "Must check higher timeframes before confirming CHoCH",
         "Multi-timeframe analysis prevents false CHoCH signals"
-      },
+      ],
       "visual_evidence": [
         {"frame": "frame_00753.00s.jpg", "timestamp": 753, "description": "Rule 4 demonstration - lower TF swing as higher TF inducement"}
       ]
