@@ -65,7 +65,7 @@ const CONCEPT_INFO = {
 const COMPONENT_PATTERN_MAP = {
   'inducement': ['inducement', 'bullish_inducement', 'bearish_inducement', 'inducement_shift', 'valid_vs_invalid_inducement', 'high_probability_inducement', 'multiple_inducements', 'inducement_recency_priority', 'inducement_size_priority', 'impulse_based_inducement'],
   'liquidity': ['liquidity', 'liquidity_sweep', 'liquidity_sweep_high', 'liquidity_sweep_low', 'buy_stops', 'sell_stops', 'equal_highs', 'equal_lows', 'equal_highs_equal_lows', 'buyside_liquidity', 'sellside_liquidity', 'liquidity_sweep_mechanism', 'liquidity_pool_hierarchy'],
-  'market_structure': ['market_structure', 'smc_structure_mapping', 'higher_high', 'higher_low', 'lower_high', 'lower_low', 'swing_high', 'swing_low', 'structure_mapping_completion'],
+  'market_structure': ['market_structure', 'smc_structure_mapping', 'higher_high', 'higher_low', 'lower_high', 'lower_low', 'structure_mapping_completion'],
   'break_of_structure': ['break_of_structure', 'bos_bullish', 'bos_bearish', 'bos_validation_rule_1', 'bos_validation_rule_2', 'bullish_displacement', 'bearish_displacement', 'displacement', 'candle_close_validation'],
   'change_of_character': ['change_of_character', 'choch_bullish', 'choch_bearish', 'choch_confirmation', 'fake_choch', 'valid_choch_validation', 'unconfirmed_choch', 'confirmed_vs_unconfirmed'],
   'valid_pullback': ['valid_pullback', 'valid_pullback_rules', 'wick_based_vs_body_based_sweep', 'candlestick_anatomy_for_sweeps', 'reference_candle_identification', 'strong_swing_point', 'weak_swing_point', 'sweeping_candle'],
@@ -105,8 +105,6 @@ const PATTERN_TYPE_MAP = {
   'buy_stops': { short: 'BST', color: '#ff5252', direction: 'neutral' },
   'sell_stops': { short: 'SST', color: '#69f0ae', direction: 'neutral' },
   // Swing point markers
-  'swing_high': { short: 'SH', color: '#ff7043', direction: 'neutral' },
-  'swing_low': { short: 'SL', color: '#42a5f5', direction: 'neutral' },
   // Market structure labels (HH/HL/LH/LL)
   'higher_high': { short: 'HH', color: '#00e676', direction: 'bullish' },
   'higher_low': { short: 'HL', color: '#69f0ae', direction: 'bullish' },
@@ -206,7 +204,7 @@ function LiveChart() {
     // Split reasoning into sections by pattern headers (🧠, 📚, 📊 followed by **PATTERN**)
     // Each section starts with an emoji and bold pattern name
     const fullText = analysis.ml_reasoning;
-    const sections = fullText.split(/(?=(?:🧠|📚|📊|🎯|💡|🔍)\s*\*\*)/);
+    const sections = fullText.split(/(?=(?:🧠|📚|📊|🎯|💡|🔍|🏗️)\s*\*\*)/);
 
     // Filter sections that match selected patterns
     const filteredSections = sections.filter(section => {
@@ -429,8 +427,8 @@ function LiveChart() {
       const countKey = isIdmType ? pt : baseType;
       const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
       typeCounts[countKey] = (typeCounts[countKey] || 0) + 1;
-      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
-      const typeLimit = isIdmType ? 12 : isMarkerType ? 8 : 2;
+      const isMarkerType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
+      const typeLimit = isIdmType ? 12 : isMarkerType ? 999 : 2;
       if (typeCounts[countKey] > typeLimit) continue;
       const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
       if (isBoxType) {
@@ -457,8 +455,8 @@ function LiveChart() {
       'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity', 'buy_stops', 'sell_stops',
       'equilibrium',
-      // Swing markers and inducement are rays
-      'swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
+      // MS structure labels and inducement are rays
+      'higher_high', 'higher_low', 'lower_high', 'lower_low',
       'bullish_inducement', 'bearish_inducement',
     ];
     const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
@@ -515,7 +513,7 @@ function LiveChart() {
 
     // Helper: extract IDMs and swing markers separately (not subject to general ray limits)
     const idmPats = sortedPatterns.filter(p => p.pattern_type === 'bullish_inducement' || p.pattern_type === 'bearish_inducement');
-    const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
+    const swingMarkerTypes = ['higher_high', 'higher_low', 'lower_high', 'lower_low'];
     const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
     // Non-IDM, non-swing ray patterns
     const generalRays = rayPats.filter(p => {
@@ -531,7 +529,7 @@ function LiveChart() {
       const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bullish')).slice(0, 5),
         ...bullRays.slice(0, 6),
-        ...swingPats.slice(0, 8),
+        ...swingPats,
         ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
@@ -543,7 +541,7 @@ function LiveChart() {
       const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bearish')).slice(0, 5),
         ...bearRays.slice(0, 6),
-        ...swingPats.slice(0, 8),
+        ...swingPats,
         ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
@@ -556,7 +554,7 @@ function LiveChart() {
         const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
         if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
       }
-      const result = [...bosCh.slice(0, 8), ...boxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8), ...idmPats.slice(0, 16)];
+      const result = [...bosCh.slice(0, 8), ...boxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats, ...idmPats.slice(0, 16)];
       return applyVisibilityFilter(result);
     }
   }, [timeframe, visiblePatterns]);
@@ -609,18 +607,13 @@ function LiveChart() {
       'equilibrium',
       // Inducement zones - rays from origin extending right
       'bullish_inducement', 'bearish_inducement',
-      // Swing point markers - now drawn as horizontal rays
-      'swing_high', 'swing_low',
+      // MS structure labels - drawn as horizontal rays
       'higher_high', 'higher_low', 'lower_high', 'lower_low',
     ];
 
     // Get annotation labels for each pattern type (all solid lines now)
     const getAnnotation = (patternType, pattern = null) => {
       const annotations = {
-        'bos_bullish': { text: 'BOS ↑', color: '#4fc3f7' },
-        'bos_bearish': { text: 'BOS ↓', color: '#ff9800' },
-        'choch_bullish': { text: 'CHoCH ↑', color: '#66bb6a' },
-        'choch_bearish': { text: 'CHoCH ↓', color: '#ff5722' },
         'equal_highs': { text: 'EQH', color: '#ef5350' },
         'equal_lows': { text: 'EQL', color: '#66bb6a' },
         'liquidity_sweep_high': { text: 'BSL Sweep', color: '#e91e63' },
@@ -630,14 +623,6 @@ function LiveChart() {
         'buy_stops': { text: 'BST 🎯', color: '#ff5252' },
         'sell_stops': { text: 'SST 🎯', color: '#69f0ae' },
         'equilibrium': { text: 'EQ (50%)', color: '#ffd740' },
-        // Swing point markers
-        'swing_high': { text: 'SH', color: '#ff7043' },
-        'swing_low': { text: 'SL', color: '#42a5f5' },
-        // Market structure (HH/HL/LH/LL)
-        'higher_high': { text: 'HH', color: '#00e676' },
-        'higher_low': { text: 'HL', color: '#69f0ae' },
-        'lower_high': { text: 'LH', color: '#ff5252' },
-        'lower_low': { text: 'LL', color: '#ff8a80' },
       };
 
       // Dynamic IDM labels based on ICT validation (validity from backend)
@@ -651,6 +636,44 @@ function LiveChart() {
           'shifted': '#9e9e9e',
         };
         return { text: label, color: colorMap[validity] || '#a78bfa' };
+      }
+
+      // Dynamic MS labels based on ICT 3 SMC Rules validation
+      if (['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType)) {
+        const validity = pattern?.validity || 'raw';
+        const baseLabel = { higher_high: 'HH', higher_low: 'HL', lower_high: 'LH', lower_low: 'LL' }[patternType];
+        const tag = { validated: ' \u2713', weak: ' ?', impulse: ' \u26a1', raw: '' }[validity] || '';
+        const label = pattern?.label || (baseLabel + tag);
+        const colorMap = {
+          higher_high: { validated: '#00e676', weak: '#81c784', impulse: '#e91e63', raw: '#00e676', unknown: '#00e676' },
+          higher_low:  { validated: '#69f0ae', weak: '#a5d6a7', impulse: '#e91e63', raw: '#69f0ae', unknown: '#69f0ae' },
+          lower_high:  { validated: '#ff5252', weak: '#ef9a9a', impulse: '#e91e63', raw: '#ff5252', unknown: '#ff5252' },
+          lower_low:   { validated: '#ff8a80', weak: '#ffcdd2', impulse: '#e91e63', raw: '#ff8a80', unknown: '#ff8a80' },
+        };
+        return { text: label, color: (colorMap[patternType] || {})[validity] || '#9ca3af' };
+      }
+
+      // Dynamic BOS labels based on ICT validation
+      if (patternType === 'bos_bullish' || patternType === 'bos_bearish') {
+        const validity = pattern?.validity || 'unknown';
+        const label = pattern?.label || (patternType === 'bos_bullish' ? 'BOS \u2191' : 'BOS \u2193');
+        const colorMap = {
+          'confirmed': patternType === 'bos_bullish' ? '#4fc3f7' : '#ff9800',
+          'unconfirmed': '#78909c',
+        };
+        return { text: label, color: colorMap[validity] || (patternType === 'bos_bullish' ? '#4fc3f7' : '#ff9800') };
+      }
+
+      // Dynamic CHoCH labels with fake detection
+      if (patternType === 'choch_bullish' || patternType === 'choch_bearish') {
+        const validity = pattern?.validity || 'unknown';
+        const label = pattern?.label || (patternType === 'choch_bullish' ? 'CHoCH \u2191' : 'CHoCH \u2193');
+        const colorMap = {
+          'confirmed': patternType === 'choch_bullish' ? '#66bb6a' : '#ff5722',
+          'fake': '#9e9e9e',
+          'unconfirmed': '#78909c',
+        };
+        return { text: label, color: colorMap[validity] || (patternType === 'choch_bullish' ? '#66bb6a' : '#ff5722') };
       }
 
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
@@ -703,10 +726,8 @@ function LiveChart() {
           labelEl.style.cssText = `
             position: absolute; left: ${labelX}px; top: ${labelY}px;
             transform: translateX(-50%);
-            color: ${annotation.color}; font-size: 10px; font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.9);
-            padding: 1px 5px; background: rgba(0,0,0,0.8);
-            border: 1px solid ${annotation.color}60; border-radius: 3px;
+            color: #000000; font-size: 13px; font-weight: 700;
+            padding: 1px 4px;
             pointer-events: none; z-index: 6; white-space: nowrap;
           `;
           labelEl.textContent = labelText;
@@ -812,7 +833,7 @@ function LiveChart() {
       if (!startTime && candles.length === 0) return;
 
       // Check if this is a swing/structure/inducement marker type (should extend to right edge with price label)
-      const isSwingMarker = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
+      const isSwingMarker = ['higher_high', 'higher_low', 'lower_high', 'lower_low',
                              'bullish_inducement', 'bearish_inducement'].includes(patternType);
 
       try {
@@ -870,34 +891,33 @@ function LiveChart() {
           box-shadow: 0 0 4px ${annotation.color}60;
         `;
 
-        // Create the annotation label with pattern name - centered on the ray
+        // Create the annotation label with pattern name
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
 
-        // Position label at the center of the ray using CSS transform for perfect centering
-        const labelX = startX + rayWidth / 2;
+        // MS labels (HH/HL/LH/LL): left-aligned at ray origin
+        // Other labels: centered on the ray
+        const isMsType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
+        const labelX = isMsType ? startX : startX + rayWidth / 2;
+        const labelTransform = isMsType ? 'none' : 'translateX(-50%)';
 
         labelEl.style.cssText = `
           position: absolute;
           left: ${labelX}px;
           top: ${adjustedRayY - 10}px;
-          transform: translateX(-50%);
-          color: ${annotation.color};
-          font-size: 10px;
+          transform: ${labelTransform};
+          color: #000000;
+          font-size: 13px;
           font-weight: 700;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.9);
           white-space: nowrap;
-          padding: 2px 6px;
-          background: rgba(0,0,0,0.8);
-          border: 1px solid ${annotation.color};
-          border-radius: 3px;
+          padding: 2px 4px;
           pointer-events: none;
           z-index: 6;
         `;
         labelEl.textContent = annotation.text;
 
-        // Add tooltip with per-IDM reasoning on hover
-        if (isInducement && pattern.reasoning) {
+        // Add tooltip with per-pattern reasoning on hover (IDM, MS, BOS, CHoCH, swings)
+        if (pattern.reasoning) {
           labelEl.title = pattern.reasoning.replace(/ \| /g, '\n');
           labelEl.style.pointerEvents = 'auto';
           labelEl.style.cursor = 'help';
@@ -933,21 +953,92 @@ function LiveChart() {
             position: absolute;
             right: 75px;
             top: ${y - 9}px;
-            color: ${annotation.color};
-            font-size: 9px;
+            color: #000000;
+            font-size: 12px;
             font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.9);
             white-space: nowrap;
-            padding: 1px 4px;
-            background: rgba(0,0,0,0.85);
-            border: 1px solid ${annotation.color}80;
-            border-radius: 2px;
+            padding: 1px 3px;
             pointer-events: none;
             z-index: 6;
           `;
           priceLabel.textContent = formattedPrice;
           chartElement.appendChild(priceLabel);
           rayOverlaysRef.current.push(priceLabel);
+
+          // Draw associated IDM as a dashed horizontal ray starting from the IDM's actual candle
+          const idmPrice = pattern.associated_idm_price;
+          if (idmPrice && idmPrice > 0) {
+            const idmY = series.priceToCoordinate(idmPrice);
+            if (idmY !== null) {
+              const idmColor = '#a78bfa';
+
+              // Use the IDM's actual candle timestamp from the backend
+              let idmStartTime = pattern.associated_idm_time || startTime;
+
+              let idmStartX = timeScale.timeToCoordinate(idmStartTime);
+              if (idmStartX === null || idmStartX < 0) idmStartX = 0;
+              const idmRayWidth = rightEdge - idmStartX;
+
+              // Dashed horizontal ray for the associated IDM
+              const idmRay = document.createElement('div');
+              idmRay.className = 'pattern-ray-overlay';
+              idmRay.style.cssText = `
+                position: absolute;
+                left: ${idmStartX}px;
+                top: ${idmY}px;
+                width: ${idmRayWidth}px;
+                height: 2px;
+                background: repeating-linear-gradient(90deg, ${idmColor} 0px, ${idmColor} 6px, transparent 6px, transparent 12px);
+                pointer-events: none;
+                z-index: 3;
+                box-shadow: 0 0 4px ${idmColor}60;
+              `;
+              chartElement.appendChild(idmRay);
+              rayOverlaysRef.current.push(idmRay);
+
+              // Small circle at the IDM ray origin
+              if (idmStartX > 0) {
+                const idmOrigin = document.createElement('div');
+                idmOrigin.className = 'pattern-ray-overlay';
+                idmOrigin.style.cssText = `
+                  position: absolute;
+                  left: ${idmStartX - 3}px;
+                  top: ${idmY - 3}px;
+                  width: 6px;
+                  height: 6px;
+                  background: ${idmColor};
+                  border-radius: 50%;
+                  pointer-events: none;
+                  z-index: 5;
+                  box-shadow: 0 0 4px ${idmColor};
+                `;
+                chartElement.appendChild(idmOrigin);
+                rayOverlaysRef.current.push(idmOrigin);
+              }
+
+              // Centered label on the IDM ray
+              const idmLabelEl = document.createElement('div');
+              idmLabelEl.className = 'pattern-ray-overlay';
+              const fmtIdm = idmPrice > 1000 ? idmPrice.toFixed(2) : idmPrice > 1 ? idmPrice.toFixed(4) : idmPrice.toFixed(6);
+              const idmLabelX = idmStartX + idmRayWidth / 2;
+              idmLabelEl.style.cssText = `
+                position: absolute;
+                left: ${idmLabelX}px;
+                top: ${idmY - 9}px;
+                transform: translateX(-50%);
+                color: #000000;
+                font-size: 12px;
+                font-weight: 600;
+                white-space: nowrap;
+                padding: 1px 4px;
+                pointer-events: none;
+                z-index: 6;
+              `;
+              idmLabelEl.textContent = `IDM ${fmtIdm}`;
+              chartElement.appendChild(idmLabelEl);
+              rayOverlaysRef.current.push(idmLabelEl);
+            }
+          }
         }
 
         chartElement.style.position = 'relative';
@@ -994,8 +1085,7 @@ function LiveChart() {
       'equilibrium',
       // Inducement zones - drawn as rays from origin
       'bullish_inducement', 'bearish_inducement',
-      // Swing point markers - now drawn as horizontal rays
-      'swing_high', 'swing_low',
+      // MS structure labels - drawn as horizontal rays
       'higher_high', 'higher_low', 'lower_high', 'lower_low',
     ];
     const markers = [];
@@ -1221,15 +1311,11 @@ function LiveChart() {
           position: absolute;
           right: 70px;
           top: ${adjustedLabelY}px;
-          color: ${patternInfo.color};
-          font-size: 10px;
+          color: #000000;
+          font-size: 13px;
           font-weight: 700;
-          text-shadow: 0 1px 2px rgba(0,0,0,0.9);
           white-space: nowrap;
-          padding: 2px 6px;
-          background: rgba(0,0,0,0.75);
-          border: 1px solid ${patternInfo.color}80;
-          border-radius: 3px;
+          padding: 2px 4px;
           pointer-events: none;
           z-index: 6;
         `;

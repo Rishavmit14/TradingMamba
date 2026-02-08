@@ -603,12 +603,28 @@ async def analyze_symbol(
                 for event in analysis.structure_events:
                     if event.type in ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
                                        'higher_high', 'higher_low', 'lower_high', 'lower_low']:
-                        all_patterns.append({
+                        entry = {
                             'pattern_type': event.type,
                             'price': float(event.level),
                             'timeframe': tf,
                             'description': event.description,
-                        })
+                            # ICT validation fields (3 SMC Rules)
+                            'validity': getattr(event, 'validity', 'unknown'),
+                            'reasoning': getattr(event, 'reasoning', ''),
+                            'label': getattr(event, 'label', ''),
+                        }
+                        # Include associated IDM data for frontend linked marker
+                        idm_price = getattr(event, 'associated_idm_price', 0.0)
+                        if idm_price and idm_price > 0:
+                            entry['associated_idm_price'] = float(idm_price)
+                            # Pass IDM candle timestamp for accurate ray origin
+                            idm_ts = getattr(event, 'associated_idm_time', None)
+                            if idm_ts is not None:
+                                if hasattr(idm_ts, 'timestamp'):
+                                    entry['associated_idm_time'] = int(idm_ts.timestamp())
+                                elif isinstance(idm_ts, (int, float)):
+                                    entry['associated_idm_time'] = int(idm_ts)
+                        all_patterns.append(entry)
 
                 # Add liquidity levels (equal highs/lows)
                 if analysis.liquidity_levels.get('equal_highs'):
@@ -729,17 +745,9 @@ async def analyze_symbol(
                             idm_entry['time'] = int(ts)
                     all_patterns.append(idm_entry)
 
-                # Swing point markers (most recent 3 highs + 3 lows)
-                swing_highs = [sp for sp in analysis.swing_points if sp.type == 'high'][-3:]
-                swing_lows = [sp for sp in analysis.swing_points if sp.type == 'low'][-3:]
-                for sp in swing_highs + swing_lows:
-                    all_patterns.append({
-                        'pattern_type': f'swing_{sp.type}',  # 'swing_high' or 'swing_low'
-                        'price': float(sp.price),
-                        'start_index': int(sp.index),
-                        'timeframe': tf,
-                        'strength': int(sp.strength),
-                    })
+                # Note: swing_high/swing_low markers removed — HH/HL/LH/LL structure
+                # events (emitted above) are sufficient and include ICT validation.
+                # Raw swing points are still used internally for IDM detection.
 
                 # Premium/Discount zone overlay
                 pd_data = analysis.premium_discount
@@ -782,15 +790,19 @@ async def analyze_symbol(
         # Get ML Engine for reasoning generation (use playlist-scoped engine)
         # ml_engine already set above from PlaylistRegistry
 
-        # Collect per-IDM pattern details for enriched reasoning
+        # Collect per-pattern details for enriched reasoning
         idm_pattern_details = [p for p in all_patterns if 'inducement' in p.get('pattern_type', '')]
+        ms_pattern_details = [p for p in all_patterns if p.get('pattern_type', '') in
+                              ['higher_high', 'higher_low', 'lower_high', 'lower_low',
+                               'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
+                               'swing_high', 'swing_low']]
 
         # Generate ML-based reasoning (ONLY from learned knowledge, not generic SMC)
         ml_reasoning = ml_engine.generate_ml_reasoning(
             detected_patterns=all_ml_patterns_used,
             bias=analyses.get(tf_list[0], {}).get('bias', 'neutral'),
             zone=analyses.get(tf_list[0], {}).get('zone', 'neutral'),
-            detected_pattern_details=idm_pattern_details,
+            detected_pattern_details=idm_pattern_details + ms_pattern_details,
         )
 
         # Get entry/exit reasoning from ML knowledge

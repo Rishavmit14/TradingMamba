@@ -1141,6 +1141,26 @@ class MLPatternEngine:
                     idm_reasoning = idm.get('reasoning', 'No reasoning available')
                     reasoning_parts.append(f"   {emoji} {idm_reasoning}")
 
+        # Per-MS reasoning (market structure validation details)
+        if detected_pattern_details:
+            ms_types = {'higher_high', 'higher_low', 'lower_high', 'lower_low',
+                        'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'}
+            ms_details = [p for p in detected_pattern_details
+                          if p.get('pattern_type', '') in ms_types and p.get('validity', 'unknown') != 'unknown']
+            if ms_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("🏗️ **MARKET STRUCTURE DETAILS** (per-swing analysis):")
+                for ms in ms_details:
+                    validity = ms.get('validity', 'unknown')
+                    pt = ms.get('pattern_type', '')
+                    emoji = {
+                        'validated': '✅', 'weak': '⚠️', 'impulse': '🪤',
+                        'confirmed': '✅', 'unconfirmed': '⚠️', 'fake': '🚫',
+                    }.get(validity, '❓')
+                    ms_reasoning = ms.get('reasoning', ms.get('description', 'No reasoning'))
+                    label = ms.get('label', pt)
+                    reasoning_parts.append(f"   {emoji} {label}: {ms_reasoning}")
+
         # Explain unlearned patterns
         unlearned = self.get_unlearned_patterns()
         if unlearned:
