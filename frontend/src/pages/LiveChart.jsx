@@ -47,18 +47,32 @@ const TIMEFRAMES = [
   { value: 'MN', label: '1M' },
 ];
 
-// Smart Money concept descriptions (short names for display)
-// These are now dynamically shown based on ML training status
+// 10 Core SMC/ICT Components (learned from 16 Forex Minions videos)
 const CONCEPT_INFO = {
-  'fvg': { name: 'Fair Value Gap', short: 'FVG', color: '#ffd700', description: 'Price imbalance zone' },
-  'order_block': { name: 'Order Block', short: 'OB', color: '#26a69a', description: 'Institutional entry zone' },
-  'breaker_block': { name: 'Breaker Block', short: 'BB', color: '#ff6b6b', description: 'Failed order block' },
-  'market_structure': { name: 'Market Structure', short: 'BOS/CHoCH', color: '#4fc3f7', description: 'Trend continuation/reversal' },
-  'support_resistance': { name: 'Support/Resistance', short: 'S/R', color: '#9c27b0', description: 'Key price levels' },
-  'liquidity': { name: 'Liquidity', short: 'LIQ', color: '#e91e63', description: 'Stop hunt zones' },
-  'mitigation_block': { name: 'Mitigation Block', short: 'MB', color: '#00bcd4', description: 'Mitigation zone' },
-  'rejection_block': { name: 'Rejection Block', short: 'RB', color: '#ff9800', description: 'Rejection zone' },
-  'inducement': { name: 'Inducement', short: 'IDM', color: '#a78bfa', description: 'Smart Money trap zone' },
+  'inducement':         { name: 'Inducement (IDM)', short: 'IDM', color: '#a78bfa', description: '70% of forex market' },
+  'liquidity':          { name: 'Liquidity & Liquidity Sweep', short: 'LIQ', color: '#e91e63', description: 'Market catalyst' },
+  'market_structure':   { name: 'Market Structure', short: 'MS', color: '#4fc3f7', description: 'HH/HL/LL/LH - 50% of success' },
+  'break_of_structure': { name: 'Break of Structure (BOS)', short: 'BOS', color: '#29b6f6', description: 'Trend continuation' },
+  'change_of_character':{ name: 'Change of Character (CHoCH)', short: 'CHoCH', color: '#66bb6a', description: 'Trend reversal' },
+  'valid_pullback':     { name: 'Pullback & Valid Pullback', short: 'PB', color: '#ff7043', description: 'Liquidity sweep validation' },
+  'fvg':                { name: 'Fair Value Gap (FVG)', short: 'FVG', color: '#ffd700', description: '70-80% fill probability' },
+  'order_block':        { name: 'Order Block (OB)', short: 'OB', color: '#26a69a', description: 'Institutional footprint' },
+  'premium_discount':   { name: 'Premium & Discount Zones', short: 'P/D', color: '#9c27b0', description: 'Optimal entry pricing' },
+  'engineered_liquidity':{ name: 'Engineered Liquidity (ENG LIQ)', short: 'ENG', color: '#ff6b6b', description: 'Retail trap zones' },
+};
+
+// Maps each core component to ALL ML pattern names + chart pattern types it controls
+const COMPONENT_PATTERN_MAP = {
+  'inducement': ['inducement', 'bullish_inducement', 'bearish_inducement', 'inducement_shift', 'valid_vs_invalid_inducement', 'high_probability_inducement', 'multiple_inducements', 'inducement_recency_priority', 'inducement_size_priority', 'impulse_based_inducement'],
+  'liquidity': ['liquidity', 'liquidity_sweep', 'liquidity_sweep_high', 'liquidity_sweep_low', 'buy_stops', 'sell_stops', 'equal_highs', 'equal_lows', 'equal_highs_equal_lows', 'buyside_liquidity', 'sellside_liquidity', 'liquidity_sweep_mechanism', 'liquidity_pool_hierarchy'],
+  'market_structure': ['market_structure', 'smc_structure_mapping', 'higher_high', 'higher_low', 'lower_high', 'lower_low', 'swing_high', 'swing_low', 'structure_mapping_completion'],
+  'break_of_structure': ['break_of_structure', 'bos_bullish', 'bos_bearish', 'bos_validation_rule_1', 'bos_validation_rule_2', 'bullish_displacement', 'bearish_displacement', 'displacement', 'candle_close_validation'],
+  'change_of_character': ['change_of_character', 'choch_bullish', 'choch_bearish', 'choch_confirmation', 'fake_choch', 'valid_choch_validation', 'unconfirmed_choch', 'confirmed_vs_unconfirmed'],
+  'valid_pullback': ['valid_pullback', 'valid_pullback_rules', 'wick_based_vs_body_based_sweep', 'candlestick_anatomy_for_sweeps', 'reference_candle_identification', 'strong_swing_point', 'weak_swing_point', 'sweeping_candle'],
+  'fvg': ['fvg', 'bullish_fvg', 'bearish_fvg', 'fvg_fill_rebalance', 'fvg_trading_strategy', 'imbalance_inefficiency'],
+  'order_block': ['order_block', 'bullish_order_block', 'bearish_order_block', 'bullish_breaker', 'bearish_breaker', 'bullish_mitigation_block', 'bearish_mitigation_block', 'ob_mitigation', 'ob_trading_strategy', 'valid_vs_invalid_ob'],
+  'premium_discount': ['premium_discount', 'premium_zone', 'discount_zone', 'equilibrium', 'optimal_trade_entry', 'bullish_ote', 'bearish_ote'],
+  'engineered_liquidity': ['engineered_liquidity', 'support_resistance_liquidity', 'trendline_liquidity', 'smart_money_liquidity_strategy', 'smart_money_trap_impulse_swing', 'breakeven_orders_liquidity', 'accumulation', 'manipulation', 'distribution'],
 };
 
 // Map backend pattern types to display names
@@ -436,119 +450,30 @@ function LiveChart() {
         return [];
       }
 
-      // Get all checked ML pattern names (lowercase for comparison)
-      const checkedPatterns = Object.entries(visiblePatterns)
+      // Get checked component keys (from 10 core SMC components)
+      const checkedComponents = Object.entries(visiblePatterns)
         .filter(([_, checked]) => checked)
-        .map(([name, _]) => name.toLowerCase());
+        .map(([name]) => name);
 
-      if (checkedPatterns.length === 0) {
+      if (checkedComponents.length === 0) {
         return [];
       }
 
-      // Comprehensive mapping: ML concept name → chart pattern types it should show
-      const mlToChartMapping = {
-        // Order Block variants
-        'ob': ['order_block'],
-        'order_block': ['order_block'],
-        'valid_order_block': ['order_block'],
-        'order_block_mitigation': ['order_block', 'mitigation'],
-        'order_block_definition': ['order_block'],
-        'order_block_definition_and_structure': ['order_block'],
-        'institutional_order_flow': ['order_block', 'displacement'],
+      // Expand checked components to all child pattern types via COMPONENT_PATTERN_MAP
+      const allowedTypes = new Set();
+      checkedComponents.forEach(component => {
+        const childPatterns = COMPONENT_PATTERN_MAP[component] || [];
+        childPatterns.forEach(p => allowedTypes.add(p));
+      });
 
-        // FVG variants
-        'fvg': ['fvg', 'bullish_fvg', 'bearish_fvg'],
-        'fair_value_gap': ['fvg', 'bullish_fvg', 'bearish_fvg'],
-
-        // BOS/CHoCH variants
-        'bos/choch': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
-        'bos': ['bos_bullish', 'bos_bearish'],
-        'choch': ['choch_bullish', 'choch_bearish'],
-        'break_of_structure': ['bos_bullish', 'bos_bearish'],
-        'change_of_character': ['choch_bullish', 'choch_bearish'],
-        'market_structure': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
-        'market_structure_shift': ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'],
-        'bos_validation': ['bos_bullish', 'bos_bearish'],
-        'inducement_and_bos': ['bos_bullish', 'bos_bearish', 'displacement'],
-        'candle_closing_rules_for_bos': ['bos_bullish', 'bos_bearish'],
-        'liquidity_sweep_vs_bos': ['bos_bullish', 'bos_bearish', 'liquidity_sweep_high', 'liquidity_sweep_low'],
-        'bos_vs_swing_high_relationship': ['bos_bullish', 'bos_bearish', 'swing_high', 'swing_low'],
-
-        // Liquidity variants
-        'liq': ['buyside_liquidity', 'sellside_liquidity', 'equal_highs', 'equal_lows', 'buy_stops', 'sell_stops', 'liquidity_sweep_high', 'liquidity_sweep_low'],
-        'liquidity': ['buyside_liquidity', 'sellside_liquidity', 'equal_highs', 'equal_lows', 'buy_stops', 'sell_stops'],
-        'liquidity_sweep': ['liquidity_sweep_high', 'liquidity_sweep_low'],
-        'liquidity_in_price_cycle': ['buyside_liquidity', 'sellside_liquidity', 'liquidity_sweep_high', 'liquidity_sweep_low'],
-        'buyside_liquidity': ['buyside_liquidity', 'equal_highs', 'buy_stops'],
-        'sellside_liquidity': ['sellside_liquidity', 'equal_lows', 'sell_stops'],
-        'equal_highs_lows': ['equal_highs', 'equal_lows'],
-
-        // Displacement/Expansion/Smart Money variants
-        'displacement': ['displacement'],
-        'expansion': ['displacement'],
-        'smart_money_trap': ['displacement', 'liquidity_sweep_high', 'liquidity_sweep_low'],
-        'inducement': ['bullish_inducement', 'bearish_inducement'],
-        'price_delivery_cycle': ['displacement', 'fvg'],
-
-        // Swing/Structure variants
-        'swing': ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'],
-        'swing_high': ['swing_high'],
-        'swing_low': ['swing_low'],
-        'higher_high': ['higher_high'],
-        'higher_low': ['higher_low'],
-        'lower_high': ['lower_high'],
-        'lower_low': ['lower_low'],
-
-        // Premium/Discount
-        'premium': ['premium_zone'],
-        'discount': ['discount_zone'],
-        'premium_discount': ['premium_zone', 'discount_zone'],
-
-        // Breaker/Mitigation
-        'breaker': ['breaker_block', 'bullish_breaker', 'bearish_breaker'],
-        'breaker_block': ['breaker_block', 'bullish_breaker', 'bearish_breaker'],
-        'mitigation': ['mitigation_block'],
-        'mitigation_block': ['mitigation_block'],
-
-        // OTE variants
-        'ote': ['ote', 'optimal_trade_entry'],
-        'optimal_trade_entry': ['ote', 'optimal_trade_entry'],
-        'fibonacci_ote': ['ote', 'optimal_trade_entry'],
-      };
-
-      // Filter to only show patterns that match any checked ML concept
+      // Filter patterns: match pattern_type against allowed types
       return patterns.filter(p => {
         const pt = p.pattern_type.toLowerCase();
-        // Get base pattern type (e.g., bullish_fvg -> fvg)
+        if (allowedTypes.has(pt)) return true;
+        // Base type fallback (e.g., bullish_fvg → fvg)
         const baseType = pt.replace('bullish_', '').replace('bearish_', '');
-
-        // Check if any checked pattern matches this chart pattern
-        return checkedPatterns.some(checked => {
-          const checkedLower = checked.toLowerCase();
-
-          // First check the comprehensive mapping
-          const mappedTypes = mlToChartMapping[checkedLower];
-          if (mappedTypes) {
-            if (mappedTypes.some(mapped => pt === mapped || baseType === mapped || pt.includes(mapped) || mapped.includes(baseType))) {
-              return true;
-            }
-          }
-
-          // Fallback: flexible matching for patterns not in mapping
-          // Direct match
-          if (pt === checkedLower || baseType === checkedLower) return true;
-
-          // Partial match (e.g., 'order_block' in 'order_block_mitigation')
-          if (checkedLower.includes(baseType) || baseType.includes(checkedLower.replace(/_/g, ''))) return true;
-
-          // Word-based matching (e.g., 'order' and 'block' both in pattern)
-          const checkedWords = checkedLower.split(/[_\s/]+/);
-          const patternWords = baseType.split(/[_\s]+/);
-          const matchingWords = checkedWords.filter(cw => patternWords.some(pw => pw.includes(cw) || cw.includes(pw)));
-          if (matchingWords.length >= Math.min(2, checkedWords.length)) return true;
-
-          return false;
-        });
+        if (allowedTypes.has(baseType)) return true;
+        return false;
       });
     };
 
@@ -2211,53 +2136,59 @@ function LiveChart() {
                 <div className="space-y-2">
                   <div className="text-xs text-emerald-400 font-semibold mb-2 flex items-center gap-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    ML Learned Patterns ({Object.keys(analysis.ml_confidence_scores).length})
+                    10 Core SMC Components
                   </div>
-                  <div className="space-y-1 max-h-64 overflow-y-auto">
-                    {Object.entries(analysis.ml_confidence_scores)
-                      .sort(([,a], [,b]) => b - a)
-                      .map(([pattern, confidence]) => {
-                        const info = CONCEPT_INFO[pattern] || { name: pattern, short: pattern.toUpperCase(), color: '#9ca3af', description: 'Pattern' };
-                        const isActivelyDetected = analysis.ml_patterns_detected?.includes(pattern);
-                        // Check if pattern is selected (checked) - default to UNCHECKED (false)
-                        const isChecked = visiblePatterns[pattern] === true;
+                  <div className="space-y-1 max-h-80 overflow-y-auto">
+                    {Object.entries(CONCEPT_INFO).map(([componentKey, info]) => {
+                      // Get child ML patterns for this component
+                      const childPatterns = COMPONENT_PATTERN_MAP[componentKey] || [];
+                      // Calculate highest confidence from child patterns
+                      const childConfidences = childPatterns
+                        .map(p => analysis.ml_confidence_scores[p] || 0)
+                        .filter(c => c > 0);
+                      const confidence = childConfidences.length > 0 ? Math.max(...childConfidences) : 0;
+                      // Check if any child pattern is actively detected
+                      const isActivelyDetected = childPatterns.some(p => analysis.ml_patterns_detected?.includes(p));
+                      const isChecked = visiblePatterns[componentKey] === true;
 
-                        return (
-                          <label
-                            key={pattern}
-                            className={`flex items-center gap-2 text-xs p-2 rounded-lg cursor-pointer transition-all ${
-                              isChecked
-                                ? 'bg-purple-500/20 border border-purple-500/40'
-                                : isActivelyDetected
-                                  ? 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
-                                  : 'bg-slate-800/50 border border-slate-600/30 hover:bg-slate-700/50'
-                            }`}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={isChecked}
-                              onChange={(e) => {
-                                setVisiblePatterns(prev => ({ ...prev, [pattern]: e.target.checked }));
-                              }}
-                              className="w-3.5 h-3.5 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                            />
-                            <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
-                            <span className="text-white font-medium flex-1">{info.short}</span>
-                            {isActivelyDetected && (
-                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
-                            )}
-                            {confidence >= 0.85 && (
-                              <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
-                            )}
+                      return (
+                        <label
+                          key={componentKey}
+                          className={`flex items-center gap-2 text-xs p-2 rounded-lg cursor-pointer transition-all ${
+                            isChecked
+                              ? 'bg-purple-500/20 border border-purple-500/40'
+                              : isActivelyDetected
+                                ? 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
+                                : 'bg-slate-800/50 border border-slate-600/30 hover:bg-slate-700/50'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) => {
+                              setVisiblePatterns(prev => ({ ...prev, [componentKey]: e.target.checked }));
+                            }}
+                            className="w-3.5 h-3.5 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                          />
+                          <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
+                          <span className="text-white font-medium flex-1">{info.short}</span>
+                          {isActivelyDetected && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                          )}
+                          {confidence >= 0.85 && (
+                            <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
+                          )}
+                          {confidence > 0 && (
                             <span className={`font-mono text-[10px] ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-500'}`}>
                               {Math.round(confidence * 100)}%
                             </span>
-                          </label>
-                        );
-                      })}
+                          )}
+                        </label>
+                      );
+                    })}
                   </div>
                   <p className="text-[10px] text-slate-500 mt-2 pt-2 border-t border-slate-700/50">
-                    Select patterns to display on chart. Resets on timeframe change.
+                    10 core ICT/SMC components from ML training.
                   </p>
                 </div>
               ) : (

@@ -1,7 +1,7 @@
 # COMPLETE SMC/ICT KNOWLEDGE MAP - ENRICHED VERSION
 ## All 16 Forex Minions Videos - JSON + MD Combined
 
-**Generated:** 2026-02-08 04:27:48
+**Generated:** 2026-02-08 04:49:30
 **Method:** Combined knowledge_base.json + knowledge_summary.md
 **Videos:** 16/16 (100% Complete)
 
