@@ -1301,29 +1301,132 @@ class SmartMoneyAnalyzer:
 
         return displacements[-5:]  # Return last 5
 
+    def _check_liquidity_sweep(
+        self, data, idm_price, idm_index, parent_index, direction
+    ):
+        """
+        ICT Video 3 Rule: Liquidity sweep is THE ONLY confirmation for valid IDM.
+        Check if candles between IDM and parent swing swept through the IDM level.
+        Both wick-based and body-based sweeps are valid.
+
+        Returns dict: {'type': 'wick'|'body'|'none', 'index': int|None, 'reasoning': list}
+        """
+        opens = data['open'].values
+        closes = data['close'].values
+        highs = data['high'].values
+        lows = data['low'].values
+        reasoning = []
+
+        # Search from IDM candle to parent swing + a few candles beyond
+        for j in range(idm_index + 1, min(len(data), parent_index + 5)):
+            if direction == 'bullish':
+                # Bullish IDM (pullback low): sweep = price goes BELOW idm_price
+                if lows[j] < idm_price:
+                    body_low = min(closes[j], opens[j])
+                    if body_low < idm_price:
+                        reasoning.append(f'BODY sweep confirmed (candle {j} closed below IDM)')
+                        reasoning.append('Strongest confirmation - full liquidity taken (Video 3)')
+                        return {'type': 'body', 'index': j, 'reasoning': reasoning}
+                    else:
+                        reasoning.append(f'WICK sweep confirmed (candle {j} wicked below IDM)')
+                        reasoning.append('Valid sweep - wick pierced IDM, body held above (Video 3)')
+                        return {'type': 'wick', 'index': j, 'reasoning': reasoning}
+            else:
+                # Bearish IDM (pullback high): sweep = price goes ABOVE idm_price
+                if highs[j] > idm_price:
+                    body_high = max(closes[j], opens[j])
+                    if body_high > idm_price:
+                        reasoning.append(f'BODY sweep confirmed (candle {j} closed above IDM)')
+                        reasoning.append('Strongest confirmation - full liquidity taken (Video 3)')
+                        return {'type': 'body', 'index': j, 'reasoning': reasoning}
+                    else:
+                        reasoning.append(f'WICK sweep confirmed (candle {j} wicked above IDM)')
+                        reasoning.append('Valid sweep - wick pierced IDM, body held below (Video 3)')
+                        return {'type': 'wick', 'index': j, 'reasoning': reasoning}
+
+        reasoning.append('No liquidity sweep detected - IDM unconfirmed (Video 3: no sweep = invalid)')
+        return {'type': 'none', 'index': None, 'reasoning': reasoning}
+
+    def _build_inducement(
+        self, idm_type, idm_price, idm_index, parent_swing,
+        data, is_impulse, sweep_type, sweep_index=None, reasoning_parts=None,
+        depth=0.0
+    ):
+        """Build an inducement dict with validation status and per-IDM reasoning."""
+        zone_width = idm_price * 0.003  # Tighter 0.3% zone for pin-point accuracy
+
+        # Determine validity based on ICT rules
+        if is_impulse:
+            validity = 'impulse_trap'
+            confidence = 0.6
+        elif sweep_type == 'body':
+            validity = 'valid'
+            confidence = 0.85
+        elif sweep_type == 'wick':
+            validity = 'valid'
+            confidence = 0.7
+        else:
+            validity = 'unconfirmed'
+            confidence = 0.4
+
+        # Build human-readable reasoning
+        lines = reasoning_parts or []
+        direction_str = 'Bullish' if idm_type == 'bullish' else 'Bearish'
+        price_str = f'{idm_price:.2f}' if idm_price > 100 else f'{idm_price:.5f}'
+        parent_str = f'{parent_swing.price:.2f}' if parent_swing.price > 100 else f'{parent_swing.price:.5f}'
+
+        header = f'{direction_str} IDM @ {price_str}'
+        if is_impulse:
+            header += f' (impulse before swing {"high" if idm_type == "bullish" else "low"} @ {parent_str})'
+        else:
+            header += f' (pullback before swing {"high" if idm_type == "bullish" else "low"} @ {parent_str})'
+
+        if depth > 0:
+            lines.insert(0, f'Pullback depth: {depth:.1%}')
+        lines.insert(0, header)
+        lines.append(f'Validity: {validity.upper()} | Sweep: {sweep_type} | Confidence: {confidence:.0%}')
+
+        # Build label for chart
+        validity_tag = {'valid': '\u2713', 'unconfirmed': '?', 'impulse_trap': '\u26a1TRAP', 'shifted': '\u2197'}.get(validity, '')
+        label = f'{direction_str[:4]} IDM {validity_tag}'
+
+        return {
+            'type': idm_type,
+            'high': idm_price + zone_width,
+            'low': idm_price - zone_width,
+            'price': idm_price,
+            'index': idm_index,
+            'parent_swing_index': parent_swing.index,
+            'parent_swing_price': float(parent_swing.price),
+            'taken_out': sweep_type != 'none',  # Backward compat
+            'timestamp': data.index[idm_index] if hasattr(data.index, '__getitem__') else None,
+            # New ICT-rule fields
+            'validity': validity,
+            'sweep_type': sweep_type,
+            'sweep_index': sweep_index,
+            'is_impulse': is_impulse,
+            'confidence': confidence,
+            'depth': depth,
+            'reasoning': ' | '.join(lines),
+            'label': label,
+        }
+
     def find_inducement(
         self,
         data: 'pd.DataFrame',
         swing_points: List[SwingPoint]
     ) -> List[Dict]:
         """
-        Find inducement zones (ICT concept).
+        Find inducement zones using full ICT rules from 16-video training.
 
-        Inducement = the first pullback (minor swing) on the left side of a
-        major swing high/low. It's a liquidity pool where retail traders place
-        stop losses. Smart Money takes out inducement before valid structural moves.
-
-        ICT rules from training:
-        - Located at first pullback on left side of recent high/low
-        - Must be taken out (price must trade through it) for valid HH/HL
-        - Bullish inducement: first minor swing LOW before a swing HIGH
-          (the dip/pullback before price pushed to the high)
-        - Bearish inducement: first minor swing HIGH before a swing LOW
-          (the rally/pullback before price dropped to the low)
-
-        The inducement level is marked at the swing point price (the low of the
-        pullback for bullish, the high of the pullback for bearish), with a
-        narrow zone around it for visualization.
+        ICT Rules implemented:
+        1. IDM = first pullback on left side of swing high/low (Video 1-2)
+        2. LIQUIDITY SWEEP is THE ONLY confirmation (Video 3)
+        3. Both wick and body sweeps are valid (Video 3)
+        4. No sweep = unconfirmed IDM (Video 3)
+        5. Impulse swing (no pullback) = low/high IS inducement (Video 4 Rule 3)
+        6. Multiple IDMs: prioritize LARGEST, then MOST RECENT (Video 8)
+        7. Inducement shifts when new high formed without sweep (Video 4 Rule 1)
         """
         inducements = []
         if len(swing_points) < 3:
@@ -1331,135 +1434,225 @@ class SmartMoneyAnalyzer:
 
         highs = data['high'].values
         lows = data['low'].values
-        closes = data['close'].values
 
-        # For each major swing high, find bullish inducement
-        # (the first pullback LOW immediately to the left of the swing high)
+        # ---- BULLISH INDUCEMENT (pullback LOW before swing HIGH) ----
         for i, sh in enumerate(swing_points):
             if sh.type != 'high':
                 continue
 
-            # Look for the nearest pullback (minor low) between this swing high
-            # and the previous swing low. Search backwards from the swing high.
+            # Find previous swing low as search boundary
             prev_swing_low_idx = 0
+            prev_swing_low_price = 0.0
             for sp in swing_points:
                 if sp.type == 'low' and sp.index < sh.index:
                     prev_swing_low_idx = sp.index
+                    prev_swing_low_price = sp.price
 
             if prev_swing_low_idx == 0 and sh.index < 5:
-                continue  # Not enough data before this swing
+                continue
 
-            # Search backwards from swing high to find the first pullback low
-            # A pullback low = a candle whose low is lower than both neighbors
-            best_pullback = None
-            search_start = max(prev_swing_low_idx + 1, sh.index - 15)  # Don't search too far back
+            search_start = max(prev_swing_low_idx + 1, sh.index - 20)
 
+            # Collect ALL pullback candidates (Video 8: need all for size comparison)
+            pullback_candidates = []
             for j in range(sh.index - 1, search_start - 1, -1):
                 if j <= 0 or j >= len(data) - 1:
                     continue
-
-                # This candle made a local low (lower than both neighbors)
                 if lows[j] < lows[j - 1] and lows[j] < lows[j + 1]:
-                    # This is a pullback - the dip before the swing high
-                    # It must be BELOW the swing high (obvious) and represent
-                    # a genuine retracement, not just noise
                     pullback_depth = (sh.price - lows[j]) / sh.price
-                    if pullback_depth > 0.005:  # At least 0.5% pullback
-                        best_pullback = {
+                    if pullback_depth > 0.003:  # 0.3% minimum (more sensitive)
+                        pullback_candidates.append({
                             'index': j,
                             'price': float(lows[j]),
-                        }
-                        break  # First one found (closest to swing high) is the inducement
+                            'depth': pullback_depth,
+                        })
 
-            if best_pullback:
-                idm_price = best_pullback['price']
-                idx = best_pullback['index']
+            # RULE 7 (Video 4 Rule 3): Impulse swing = no pullback, low IS inducement
+            if not pullback_candidates and prev_swing_low_idx > 0:
+                impulse_depth = (sh.price - prev_swing_low_price) / sh.price
+                if impulse_depth > 0.005:
+                    inducements.append(self._build_inducement(
+                        idm_type='bullish',
+                        idm_price=prev_swing_low_price,
+                        idm_index=prev_swing_low_idx,
+                        parent_swing=sh,
+                        data=data,
+                        is_impulse=True,
+                        sweep_type='none',
+                        depth=impulse_depth,
+                        reasoning_parts=[
+                            'IMPULSE SWING - no pullback detected (Video 4 Rule 3)',
+                            'The swing low itself IS the inducement (BIGGEST retail trap)',
+                            'Retail sees this as valid HL/support but Smart Money knows it is IDM',
+                        ],
+                    ))
+                continue
 
-                # Create a narrow zone around the inducement level
-                # Use a small percentage of price for the zone width
-                zone_width = idm_price * 0.005  # 0.5% zone width
+            if not pullback_candidates:
+                continue
 
-                # Check if inducement was taken out (price traded below it after the pullback)
-                taken_out = False
-                for j in range(idx + 1, min(len(data), sh.index + 20)):
-                    if lows[j] < idm_price:
-                        taken_out = True
-                        break
+            # RULE 8 (Video 8): Sort by depth DESC, then index DESC (largest first, recent tiebreak)
+            pullback_candidates.sort(key=lambda x: (-x['depth'], -x['index']))
+            primary = pullback_candidates[0]
 
-                inducements.append({
-                    'type': 'bullish',
-                    'high': idm_price + zone_width,
-                    'low': idm_price - zone_width,
-                    'price': idm_price,
-                    'index': idx,
-                    'parent_swing_index': sh.index,
-                    'parent_swing_price': float(sh.price),
-                    'taken_out': taken_out,
-                    'timestamp': data.index[idx] if hasattr(data.index, '__getitem__') else None,
-                })
+            # RULE 2-4 (Video 3): Liquidity sweep validation
+            sweep = self._check_liquidity_sweep(
+                data, primary['price'], primary['index'], sh.index, 'bullish'
+            )
 
-        # For each major swing low, find bearish inducement
-        # (the first pullback HIGH immediately to the left of the swing low)
+            inducements.append(self._build_inducement(
+                idm_type='bullish',
+                idm_price=primary['price'],
+                idm_index=primary['index'],
+                parent_swing=sh,
+                data=data,
+                is_impulse=False,
+                sweep_type=sweep['type'],
+                sweep_index=sweep.get('index'),
+                depth=primary['depth'],
+                reasoning_parts=sweep['reasoning'],
+            ))
+
+            # RULE 6 (Video 4 Rule 2): Wick sweep + multiple pullbacks = secondary IDM
+            if sweep['type'] == 'wick' and len(pullback_candidates) > 1:
+                secondary = pullback_candidates[1]
+                sweep2 = self._check_liquidity_sweep(
+                    data, secondary['price'], secondary['index'], sh.index, 'bullish'
+                )
+                inducements.append(self._build_inducement(
+                    idm_type='bullish',
+                    idm_price=secondary['price'],
+                    idm_index=secondary['index'],
+                    parent_swing=sh,
+                    data=data,
+                    is_impulse=False,
+                    sweep_type=sweep2['type'],
+                    sweep_index=sweep2.get('index'),
+                    depth=secondary['depth'],
+                    reasoning_parts=[
+                        'SECONDARY IDM (Video 4 Rule 2: wick sweep created two levels)',
+                    ] + sweep2['reasoning'],
+                ))
+
+        # ---- BEARISH INDUCEMENT (pullback HIGH before swing LOW) ----
         for i, sl in enumerate(swing_points):
             if sl.type != 'low':
                 continue
 
-            # Look for the nearest previous swing high
             prev_swing_high_idx = 0
+            prev_swing_high_price = 0.0
             for sp in swing_points:
                 if sp.type == 'high' and sp.index < sl.index:
                     prev_swing_high_idx = sp.index
+                    prev_swing_high_price = sp.price
 
             if prev_swing_high_idx == 0 and sl.index < 5:
                 continue
 
-            # Search backwards from swing low to find the first pullback high
-            best_pullback = None
-            search_start = max(prev_swing_high_idx + 1, sl.index - 15)
+            search_start = max(prev_swing_high_idx + 1, sl.index - 20)
 
+            pullback_candidates = []
             for j in range(sl.index - 1, search_start - 1, -1):
                 if j <= 0 or j >= len(data) - 1:
                     continue
-
-                # This candle made a local high (higher than both neighbors)
                 if highs[j] > highs[j - 1] and highs[j] > highs[j + 1]:
-                    # Genuine pullback up before the drop
                     pullback_depth = (highs[j] - sl.price) / sl.price
-                    if pullback_depth > 0.005:  # At least 0.5% pullback
-                        best_pullback = {
+                    if pullback_depth > 0.003:
+                        pullback_candidates.append({
                             'index': j,
                             'price': float(highs[j]),
-                        }
+                            'depth': pullback_depth,
+                        })
+
+            # Impulse detection (bearish)
+            if not pullback_candidates and prev_swing_high_idx > 0:
+                impulse_depth = (prev_swing_high_price - sl.price) / sl.price
+                if impulse_depth > 0.005:
+                    inducements.append(self._build_inducement(
+                        idm_type='bearish',
+                        idm_price=prev_swing_high_price,
+                        idm_index=prev_swing_high_idx,
+                        parent_swing=sl,
+                        data=data,
+                        is_impulse=True,
+                        sweep_type='none',
+                        depth=impulse_depth,
+                        reasoning_parts=[
+                            'IMPULSE SWING - no pullback detected (Video 4 Rule 3)',
+                            'The swing high itself IS the inducement (BIGGEST retail trap)',
+                            'Retail sees this as valid LH/resistance but Smart Money knows it is IDM',
+                        ],
+                    ))
+                continue
+
+            if not pullback_candidates:
+                continue
+
+            pullback_candidates.sort(key=lambda x: (-x['depth'], -x['index']))
+            primary = pullback_candidates[0]
+
+            sweep = self._check_liquidity_sweep(
+                data, primary['price'], primary['index'], sl.index, 'bearish'
+            )
+
+            inducements.append(self._build_inducement(
+                idm_type='bearish',
+                idm_price=primary['price'],
+                idm_index=primary['index'],
+                parent_swing=sl,
+                data=data,
+                is_impulse=False,
+                sweep_type=sweep['type'],
+                sweep_index=sweep.get('index'),
+                depth=primary['depth'],
+                reasoning_parts=sweep['reasoning'],
+            ))
+
+            if sweep['type'] == 'wick' and len(pullback_candidates) > 1:
+                secondary = pullback_candidates[1]
+                sweep2 = self._check_liquidity_sweep(
+                    data, secondary['price'], secondary['index'], sl.index, 'bearish'
+                )
+                inducements.append(self._build_inducement(
+                    idm_type='bearish',
+                    idm_price=secondary['price'],
+                    idm_index=secondary['index'],
+                    parent_swing=sl,
+                    data=data,
+                    is_impulse=False,
+                    sweep_type=sweep2['type'],
+                    sweep_index=sweep2.get('index'),
+                    depth=secondary['depth'],
+                    reasoning_parts=[
+                        'SECONDARY IDM (Video 4 Rule 2: wick sweep created two levels)',
+                    ] + sweep2['reasoning'],
+                ))
+
+        # RULE 5 (Video 4 Rule 1): Mark shifted IDMs
+        # Only mark as shifted if a NEW higher high (bullish) or lower low (bearish)
+        # formed beyond the parent swing without sweeping this IDM
+        for idm in inducements:
+            if idm['validity'] == 'unconfirmed':
+                parent_idx = idm['parent_swing_index']
+                parent_price = idm['parent_swing_price']
+                expected_type = 'high' if idm['type'] == 'bullish' else 'low'
+                for sp in swing_points:
+                    if sp.index <= parent_idx or sp.type != expected_type:
+                        continue
+                    # Only shift if new swing exceeds parent (HH for bullish, LL for bearish)
+                    if (idm['type'] == 'bullish' and sp.price > parent_price) or \
+                       (idm['type'] == 'bearish' and sp.price < parent_price):
+                        idm['validity'] = 'shifted'
+                        idm['confidence'] = 0.3
+                        idm['reasoning'] += ' | SHIFTED: New swing formed without sweeping this IDM (Video 4 Rule 1)'
+                        label_dir = idm['label'][:4]
+                        idm['label'] = f'{label_dir} IDM \u2197'
                         break
 
-            if best_pullback:
-                idm_price = best_pullback['price']
-                idx = best_pullback['index']
-
-                zone_width = idm_price * 0.005
-
-                # Check if inducement was taken out (price traded above it after)
-                taken_out = False
-                for j in range(idx + 1, min(len(data), sl.index + 20)):
-                    if highs[j] > idm_price:
-                        taken_out = True
-                        break
-
-                inducements.append({
-                    'type': 'bearish',
-                    'high': idm_price + zone_width,
-                    'low': idm_price - zone_width,
-                    'price': idm_price,
-                    'index': idx,
-                    'parent_swing_index': sl.index,
-                    'parent_swing_price': float(sl.price),
-                    'taken_out': taken_out,
-                    'timestamp': data.index[idx] if hasattr(data.index, '__getitem__') else None,
-                })
-
-        # Sort by index and return recent ones
-        inducements.sort(key=lambda x: x['index'])
-        return inducements[-8:]
+        # Sort by priority: valid > impulse > unconfirmed > shifted, then by recency
+        validity_order = {'valid': 0, 'impulse_trap': 1, 'unconfirmed': 2, 'shifted': 3}
+        inducements.sort(key=lambda x: (validity_order.get(x['validity'], 9), -x['index']))
+        return inducements[:20]
 
     def find_ote_zone(
         self,

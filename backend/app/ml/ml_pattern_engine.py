@@ -1015,7 +1015,8 @@ class MLPatternEngine:
             'detection_note': f"AI can detect any {pattern_type} pattern on any chart based on learned characteristics",
         }
 
-    def generate_ml_reasoning(self, detected_patterns: List[str], bias: str, zone: str) -> str:
+    def generate_ml_reasoning(self, detected_patterns: List[str], bias: str, zone: str,
+                              detected_pattern_details: List[Dict] = None) -> str:
         """
         Generate a human-readable explanation of WHY ML made its analysis decision.
 
@@ -1123,6 +1124,22 @@ class MLPatternEngine:
 
                 if traits['institutional']:
                     reasoning_parts.append(f"   ↳ Indicates institutional activity")
+
+        # Per-IDM reasoning (pin-point detail for each plotted inducement)
+        if detected_pattern_details:
+            idm_details = [p for p in detected_pattern_details
+                           if 'inducement' in p.get('pattern_type', '')]
+            if idm_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("🔍 **INDUCEMENT DETAILS** (per-IDM analysis):")
+                for idm in idm_details:
+                    validity = idm.get('validity', 'unknown')
+                    emoji = {
+                        'valid': '✅', 'unconfirmed': '⚠️',
+                        'impulse_trap': '🪤', 'shifted': '↗️'
+                    }.get(validity, '❓')
+                    idm_reasoning = idm.get('reasoning', 'No reasoning available')
+                    reasoning_parts.append(f"   {emoji} {idm_reasoning}")
 
         # Explain unlearned patterns
         unlearned = self.get_unlearned_patterns()

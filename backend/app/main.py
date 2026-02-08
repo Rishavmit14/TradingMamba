@@ -701,7 +701,7 @@ async def analyze_symbol(
                             'distance_pct': float(ss.get('distance_pct', 0)),
                         })
 
-                # Inducement zones
+                # Inducement zones (with ICT validation data)
                 for idm in analysis.inducements:
                     idm_entry = {
                         'pattern_type': f'{idm["type"]}_inducement',
@@ -711,6 +711,13 @@ async def analyze_symbol(
                         'start_index': int(idm.get('index', 0)),
                         'timeframe': tf,
                         'taken_out': idm.get('taken_out', False),
+                        # Per-IDM ICT validation fields
+                        'validity': idm.get('validity', 'unknown'),
+                        'sweep_type': idm.get('sweep_type', 'unknown'),
+                        'is_impulse': idm.get('is_impulse', False),
+                        'confidence': idm.get('confidence', 0.5),
+                        'reasoning': idm.get('reasoning', ''),
+                        'label': idm.get('label', ''),
                     }
                     # Include unix timestamp for accurate chart positioning
                     ts = idm.get('timestamp')
@@ -775,11 +782,15 @@ async def analyze_symbol(
         # Get ML Engine for reasoning generation (use playlist-scoped engine)
         # ml_engine already set above from PlaylistRegistry
 
+        # Collect per-IDM pattern details for enriched reasoning
+        idm_pattern_details = [p for p in all_patterns if 'inducement' in p.get('pattern_type', '')]
+
         # Generate ML-based reasoning (ONLY from learned knowledge, not generic SMC)
         ml_reasoning = ml_engine.generate_ml_reasoning(
             detected_patterns=all_ml_patterns_used,
             bias=analyses.get(tf_list[0], {}).get('bias', 'neutral'),
             zone=analyses.get(tf_list[0], {}).get('zone', 'neutral'),
+            detected_pattern_details=idm_pattern_details,
         )
 
         # Get entry/exit reasoning from ML knowledge

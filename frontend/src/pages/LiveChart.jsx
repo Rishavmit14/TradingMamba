@@ -193,7 +193,7 @@ function LiveChart() {
 
     // If no patterns selected, show prompt to select patterns
     const checkedPatterns = Object.entries(visiblePatterns)
-      .filter(([_, checked]) => checked)
+      .filter(([key, checked]) => checked && !key.endsWith('_bull') && !key.endsWith('_bear'))
       .map(([name, _]) => name.toLowerCase());
 
     if (checkedPatterns.length === 0) {
@@ -206,7 +206,7 @@ function LiveChart() {
     // Split reasoning into sections by pattern headers (🧠, 📚, 📊 followed by **PATTERN**)
     // Each section starts with an emoji and bold pattern name
     const fullText = analysis.ml_reasoning;
-    const sections = fullText.split(/(?=(?:🧠|📚|📊|🎯|💡)\s*\*\*)/);
+    const sections = fullText.split(/(?=(?:🧠|📚|📊|🎯|💡|🔍)\s*\*\*)/);
 
     // Filter sections that match selected patterns
     const filteredSections = sections.filter(section => {
@@ -239,9 +239,27 @@ function LiveChart() {
       };
     }
 
+    // Apply IDM direction sub-filter to per-IDM reasoning lines
+    let content = filteredSections.join('\n\n');
+    if (visiblePatterns.inducement) {
+      const hideBull = visiblePatterns.inducement_bull === false;
+      const hideBear = visiblePatterns.inducement_bear === false;
+      if (hideBull || hideBear) {
+        content = content.split('\n').filter(line => {
+          const trimmed = line.trim();
+          // Only filter per-IDM detail lines (emoji-prefixed lines in INDUCEMENT DETAILS)
+          const isIdmLine = trimmed.startsWith('✅') || trimmed.startsWith('⚠️') || trimmed.startsWith('🪤') || trimmed.startsWith('↗️') || trimmed.startsWith('❓');
+          if (!isIdmLine) return true;
+          if (hideBull && (trimmed.includes('Bullish IDM') || trimmed.includes('Bull IDM'))) return false;
+          if (hideBear && (trimmed.includes('Bearish IDM') || trimmed.includes('Bear IDM'))) return false;
+          return true;
+        }).join('\n');
+      }
+    }
+
     return {
       hasContent: true,
-      content: filteredSections.join('\n\n'),
+      content,
       patternCount: filteredSections.length
     };
   }, [analysis?.ml_reasoning, visiblePatterns]);
@@ -405,12 +423,15 @@ function LiveChart() {
     const limitedPatterns = [];  // Renamed to avoid shadowing visiblePatterns state
     for (const p of filtered) {
       const pt = p.pattern_type || '';
+      const isIdmType = pt === 'bullish_inducement' || pt === 'bearish_inducement';
+      // IDMs count per direction (bull/bear separately), others by base type
       const baseType = pt.replace('bullish_', '').replace('bearish_', '');
+      const countKey = isIdmType ? pt : baseType;
       const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
-      typeCounts[baseType] = (typeCounts[baseType] || 0) + 1;
-      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
-                           'bullish_inducement', 'bearish_inducement'].includes(pt);
-      if (typeCounts[baseType] > (isMarkerType ? 8 : 2)) continue;
+      typeCounts[countKey] = (typeCounts[countKey] || 0) + 1;
+      const isMarkerType = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
+      const typeLimit = isIdmType ? 12 : isMarkerType ? 8 : 2;
+      if (typeCounts[countKey] > typeLimit) continue;
       const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
       if (isBoxType) {
         if (seenZones.some(z => Math.abs(z - mid) / mid < 0.03)) continue;
@@ -436,8 +457,9 @@ function LiveChart() {
       'equal_highs', 'equal_lows', 'liquidity_sweep_high', 'liquidity_sweep_low',
       'buyside_liquidity', 'sellside_liquidity', 'buy_stops', 'sell_stops',
       'equilibrium',
-      // Swing markers are now rays
+      // Swing markers and inducement are rays
       'swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low',
+      'bullish_inducement', 'bearish_inducement',
     ];
     const boxPats = sortedPatterns.filter(p => !rayTypes.includes(p.pattern_type));
     const rayPats = sortedPatterns.filter(p => rayTypes.includes(p.pattern_type));
@@ -450,9 +472,9 @@ function LiveChart() {
         return [];
       }
 
-      // Get checked component keys (from 10 core SMC components)
+      // Get checked component keys (from 10 core SMC components), excluding sub-filter keys
       const checkedComponents = Object.entries(visiblePatterns)
-        .filter(([_, checked]) => checked)
+        .filter(([key, checked]) => checked && !key.endsWith('_bull') && !key.endsWith('_bear'))
         .map(([name]) => name);
 
       if (checkedComponents.length === 0) {
@@ -466,9 +488,23 @@ function LiveChart() {
         childPatterns.forEach(p => allowedTypes.add(p));
       });
 
+      // Apply IDM direction sub-filter (Bull/Bear selection)
+      if (visiblePatterns.inducement) {
+        if (visiblePatterns.inducement_bull === false) {
+          allowedTypes.delete('bullish_inducement');
+          allowedTypes.delete('impulse_based_inducement'); // impulse bull removed too
+        }
+        if (visiblePatterns.inducement_bear === false) {
+          allowedTypes.delete('bearish_inducement');
+        }
+      }
+
       // Filter patterns: match pattern_type against allowed types
       return patterns.filter(p => {
         const pt = p.pattern_type.toLowerCase();
+        // IDM direction sub-filter FIRST (before base-type fallback can match)
+        if (pt === 'bullish_inducement' && visiblePatterns.inducement_bull === false) return false;
+        if (pt === 'bearish_inducement' && visiblePatterns.inducement_bear === false) return false;
         if (allowedTypes.has(pt)) return true;
         // Base type fallback (e.g., bullish_fvg → fvg)
         const baseType = pt.replace('bullish_', '').replace('bearish_', '');
@@ -477,45 +513,50 @@ function LiveChart() {
       });
     };
 
+    // Helper: extract IDMs and swing markers separately (not subject to general ray limits)
+    const idmPats = sortedPatterns.filter(p => p.pattern_type === 'bullish_inducement' || p.pattern_type === 'bearish_inducement');
+    const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
+    const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
+    // Non-IDM, non-swing ray patterns
+    const generalRays = rayPats.filter(p => {
+      const pt = p.pattern_type;
+      return pt !== 'bullish_inducement' && pt !== 'bearish_inducement' && !swingMarkerTypes.includes(pt);
+    });
+
     if (signalDirection === 'bullish') {
+      const bullRays = generalRays.filter(p => {
+        const pt = p.pattern_type;
+        return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity' || pt === 'sell_stops';
+      });
       const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bullish')).slice(0, 5),
-        ...rayPats.filter(p => {
-          const pt = p.pattern_type;
-          return pt.includes('bullish') || pt === 'liquidity_sweep_low' || pt === 'equal_lows' || pt === 'sellside_liquidity' || pt === 'sell_stops';
-        }).slice(0, 6),
+        ...bullRays.slice(0, 6),
+        ...swingPats.slice(0, 8),
+        ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
     } else if (signalDirection === 'bearish') {
+      const bearRays = generalRays.filter(p => {
+        const pt = p.pattern_type;
+        return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity' || pt === 'buy_stops';
+      });
       const result = [
         ...boxPats.filter(p => p.pattern_type.includes('bearish')).slice(0, 5),
-        ...rayPats.filter(p => {
-          const pt = p.pattern_type;
-          return pt.includes('bearish') || pt === 'liquidity_sweep_high' || pt === 'equal_highs' || pt === 'buyside_liquidity' || pt === 'buy_stops';
-        }).slice(0, 6),
+        ...bearRays.slice(0, 6),
+        ...swingPats.slice(0, 8),
+        ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
     } else {
-      const bosCh = rayPats.filter(p => p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch'));
-      const other = rayPats.filter(p => !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch'));
+      const bosCh = generalRays.filter(p => p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch'));
+      const other = generalRays.filter(p => !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch'));
       const uniqRays = [];
       const seen = new Set();
       for (const r of other) {
         const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
         if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
       }
-      // Swing markers are now in rayTypes, so they'll be in 'other' rays
-      // Filter to actual box patterns (excluding rays which are handled separately)
-      const actualBoxPats = boxPats;
-      // Include swing markers in the ray patterns
-      const swingMarkerTypes = ['swing_high', 'swing_low', 'higher_high', 'higher_low', 'lower_high', 'lower_low'];
-      const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
-      // Include inducement rays separately (not deduped by price rounding)
-      const idmPats = sortedPatterns.filter(p => p.pattern_type === 'bullish_inducement' || p.pattern_type === 'bearish_inducement');
-      // Remove IDMs from uniqRays to avoid double-counting
-      const uniqRaysNoIdm = uniqRays.filter(p => p.pattern_type !== 'bullish_inducement' && p.pattern_type !== 'bearish_inducement');
-      // Increased bosCh limit from 2 to 8 to ensure BOS/CHoCH patterns persist during zoom
-      const result = [...bosCh.slice(0, 8), ...actualBoxPats.slice(0, 6), ...uniqRaysNoIdm.slice(0, 6), ...swingPats.slice(0, 8), ...idmPats.slice(0, 8)];
+      const result = [...bosCh.slice(0, 8), ...boxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats.slice(0, 8), ...idmPats.slice(0, 16)];
       return applyVisibilityFilter(result);
     }
   }, [timeframe, visiblePatterns]);
@@ -574,7 +615,7 @@ function LiveChart() {
     ];
 
     // Get annotation labels for each pattern type (all solid lines now)
-    const getAnnotation = (patternType) => {
+    const getAnnotation = (patternType, pattern = null) => {
       const annotations = {
         'bos_bullish': { text: 'BOS ↑', color: '#4fc3f7' },
         'bos_bearish': { text: 'BOS ↓', color: '#ff9800' },
@@ -597,10 +638,21 @@ function LiveChart() {
         'higher_low': { text: 'HL', color: '#69f0ae' },
         'lower_high': { text: 'LH', color: '#ff5252' },
         'lower_low': { text: 'LL', color: '#ff8a80' },
-        // Inducement zones
-        'bullish_inducement': { text: 'Bullish IDM', color: '#a78bfa' },
-        'bearish_inducement': { text: 'Bearish IDM', color: '#ce93d8' },
       };
+
+      // Dynamic IDM labels based on ICT validation (validity from backend)
+      if (patternType === 'bullish_inducement' || patternType === 'bearish_inducement') {
+        const validity = pattern?.validity || 'unknown';
+        const label = pattern?.label || (patternType === 'bullish_inducement' ? 'Bull IDM' : 'Bear IDM');
+        const colorMap = {
+          'valid': patternType === 'bullish_inducement' ? '#a78bfa' : '#ce93d8',
+          'unconfirmed': '#ffa726',
+          'impulse_trap': '#e91e63',
+          'shifted': '#9e9e9e',
+        };
+        return { text: label, color: colorMap[validity] || '#a78bfa' };
+      }
+
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
 
@@ -609,7 +661,7 @@ function LiveChart() {
 
     rayPatterns.forEach((pattern, idx) => {
       const patternType = pattern.pattern_type;
-      const annotation = getAnnotation(patternType);
+      const annotation = getAnnotation(patternType, pattern);
 
       // Get the price level for the ray
       const price = pattern.price || pattern.high || pattern.low || pattern.price_high || pattern.price_low;
@@ -634,7 +686,7 @@ function LiveChart() {
           const rightEdge = chartWidth - 70;
           const startX = 0;
           const rayWidth = rightEdge;
-          const annotation = getAnnotation(patternType);
+          const annotation = getAnnotation(patternType, pattern);
           const lineEl = document.createElement('div');
           lineEl.className = 'ray-overlay';
           lineEl.style.cssText = `
@@ -843,6 +895,13 @@ function LiveChart() {
           z-index: 6;
         `;
         labelEl.textContent = annotation.text;
+
+        // Add tooltip with per-IDM reasoning on hover
+        if (isInducement && pattern.reasoning) {
+          labelEl.title = pattern.reasoning.replace(/ \| /g, '\n');
+          labelEl.style.pointerEvents = 'auto';
+          labelEl.style.cursor = 'help';
+        }
 
         // Create small circle at the start point (origin of the ray)
         if (startX > 0) {
@@ -1203,6 +1262,7 @@ function LiveChart() {
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
+    let cancelled = false; // Prevents stale async loadData from writing to wrong chart
     let chart = null;
     let candlestickSeries = null;
 
@@ -1365,6 +1425,7 @@ function LiveChart() {
         const candleLimit = 2000;  // Maximum candles for all timeframes
         console.log(`[LiveChart] Requesting ${candleLimit} candles for ${symbol} ${timeframe}`);
         const ohlcvData = await getLiveOHLCV(symbol, timeframe, candleLimit);
+        if (cancelled) return; // Stale response — user already switched TF/symbol
         console.log(`[LiveChart] Received ${ohlcvData?.candles?.length || 0} candles`);
 
         if (ohlcvData?.candles?.length > 0) {
@@ -1401,12 +1462,15 @@ function LiveChart() {
             }
           }
         } else {
-          setError('No data available');
+          if (!cancelled) setError('No data available');
         }
+
+        if (cancelled) return;
 
         // Load analysis
         try {
           const analysisData = await getSignalAnalysis(symbol, timeframe, selectedPlaylist);
+          if (cancelled) return; // Stale response — user already switched TF/symbol
           setAnalysis(analysisData);
 
           // Only draw patterns and price lines if ML is trained
@@ -1422,7 +1486,11 @@ function LiveChart() {
             // Filter for current visible range
             const relevantPatterns = getRelevantPatterns(analysisData.patterns, candlesDataRef.current, signalDirection);
             analysisPatternsRef.current = relevantPatterns;
-            setTimeout(() => drawPatternBoxes(relevantPatterns, candlesDataRef.current), 200);
+            if (!cancelled) {
+              setTimeout(() => {
+                if (!cancelled) drawPatternBoxes(relevantPatterns, candlesDataRef.current);
+              }, 200);
+            }
           } else {
             // Clear patterns if ML not trained or no patterns
             allApiPatternsRef.current = [];
@@ -1432,7 +1500,7 @@ function LiveChart() {
           }
 
           // Add price lines only if ML is trained
-          if (isMlTrained && analysisData?.signal && candlestickSeriesRef.current) {
+          if (!cancelled && isMlTrained && analysisData?.signal && candlestickSeriesRef.current) {
             const signal = analysisData.signal;
             priceLinesRef.current.forEach(line => {
               try { candlestickSeriesRef.current.removePriceLine(line); } catch (e) {}
@@ -1455,30 +1523,40 @@ function LiveChart() {
             priceLinesRef.current = [];
           }
         } catch (err) {
-          console.log('Analysis not available:', err.message);
+          if (!cancelled) console.log('Analysis not available:', err.message);
         }
+
+        if (cancelled) return;
 
         // Load ML prediction in background
         try {
           const pred = await predictPrice(symbol);
-          setMlPrediction(pred);
+          if (!cancelled) setMlPrediction(pred);
         } catch (err) {
-          setMlPrediction(null);
+          if (!cancelled) setMlPrediction(null);
         }
 
-        setLastUpdate(new Date());
+        if (!cancelled) setLastUpdate(new Date());
       } catch (err) {
-        console.error('Load error:', err);
-        setError(err.message || 'Failed to load data');
+        if (!cancelled) {
+          console.error('Load error:', err);
+          setError(err.message || 'Failed to load data');
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     initChart();
+    // Clear stale data refs immediately so other useEffects don't use old TF data
+    allApiPatternsRef.current = [];
+    candlesDataRef.current = [];
+    signalDirectionRef.current = null;
+    analysisPatternsRef.current = [];
     loadData();
 
     return () => {
+      cancelled = true; // Signal in-flight loadData to stop updating
       clearPatternOverlays();
       if (chartRef.current) {
         try { chartRef.current.remove(); } catch (e) {}
@@ -1862,8 +1940,12 @@ function LiveChart() {
                             });
                             // Indent lines starting with arrow or bullet
                             const isIndented = line.trim().startsWith('↳') || line.trim().startsWith('-') || line.trim().startsWith('•');
+                            const isIdmDetail = line.trim().startsWith('✅') || line.trim().startsWith('⚠️') || line.trim().startsWith('🪤') || line.trim().startsWith('↗️') || line.trim().startsWith('❓');
                             return (
-                              <div key={idx} className={isIndented ? 'pl-4 text-slate-400' : ''}>
+                              <div key={idx} className={
+                                isIdmDetail ? 'pl-6 text-slate-300 border-l-2 border-purple-500/40 ml-2 py-0.5'
+                                : isIndented ? 'pl-4 text-slate-400' : ''
+                              }>
                                 {formatted}
                               </div>
                             );
@@ -2152,38 +2234,106 @@ function LiveChart() {
                       const isChecked = visiblePatterns[componentKey] === true;
 
                       return (
-                        <label
-                          key={componentKey}
-                          className={`flex items-center gap-2 text-xs p-2 rounded-lg cursor-pointer transition-all ${
-                            isChecked
-                              ? 'bg-purple-500/20 border border-purple-500/40'
-                              : isActivelyDetected
-                                ? 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
-                                : 'bg-slate-800/50 border border-slate-600/30 hover:bg-slate-700/50'
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={(e) => {
-                              setVisiblePatterns(prev => ({ ...prev, [componentKey]: e.target.checked }));
-                            }}
-                            className="w-3.5 h-3.5 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
-                          />
-                          <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
-                          <span className="text-white font-medium flex-1">{info.short}</span>
-                          {isActivelyDetected && (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                        <div key={componentKey}>
+                          <label
+                            className={`flex items-center gap-2 text-xs p-2 rounded-lg cursor-pointer transition-all ${
+                              isChecked
+                                ? 'bg-purple-500/20 border border-purple-500/40'
+                                : isActivelyDetected
+                                  ? 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
+                                  : 'bg-slate-800/50 border border-slate-600/30 hover:bg-slate-700/50'
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={(e) => {
+                                if (componentKey === 'inducement') {
+                                  setVisiblePatterns(prev => {
+                                    const next = { ...prev };
+                                    if (e.target.checked) {
+                                      next.inducement = true;
+                                      next.inducement_bull = true;
+                                      next.inducement_bear = true;
+                                    } else {
+                                      next.inducement = false;
+                                      delete next.inducement_bull;
+                                      delete next.inducement_bear;
+                                    }
+                                    return next;
+                                  });
+                                } else {
+                                  setVisiblePatterns(prev => ({ ...prev, [componentKey]: e.target.checked }));
+                                }
+                              }}
+                              className="w-3.5 h-3.5 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                            />
+                            <div className="w-3 h-3 rounded" style={{ backgroundColor: info.color + '40', border: `1px solid ${info.color}` }} />
+                            <span className="text-white font-medium flex-1">{info.short}</span>
+                            {isActivelyDetected && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">ACTIVE</span>
+                            )}
+                            {confidence >= 0.85 && (
+                              <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
+                            )}
+                            {confidence > 0 && (
+                              <span className={`font-mono text-[10px] ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-500'}`}>
+                                {Math.round(confidence * 100)}%
+                              </span>
+                            )}
+                          </label>
+                          {/* IDM Sub-selection: Bull / Bear direction filter */}
+                          {componentKey === 'inducement' && isChecked && (
+                            <div className="ml-7 mt-1 mb-1 space-y-0.5">
+                              <label className="flex items-center gap-2 text-[11px] px-2 py-1.5 rounded-md cursor-pointer transition-all hover:bg-purple-500/10 bg-slate-800/30 border border-slate-700/40">
+                                <input
+                                  type="checkbox"
+                                  checked={visiblePatterns.inducement_bull !== false}
+                                  onChange={(e) => setVisiblePatterns(prev => ({ ...prev, inducement_bull: e.target.checked }))}
+                                  className="w-3 h-3 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                                />
+                                <div className="w-2.5 h-2.5 rounded" style={{ backgroundColor: '#a78bfa40', border: '1px solid #a78bfa' }} />
+                                <span className="text-slate-300 flex-1">Bull IDM</span>
+                                <TrendingUp className="w-3 h-3 text-emerald-400" />
+                              </label>
+                              <label className="flex items-center gap-2 text-[11px] px-2 py-1.5 rounded-md cursor-pointer transition-all hover:bg-purple-500/10 bg-slate-800/30 border border-slate-700/40">
+                                <input
+                                  type="checkbox"
+                                  checked={visiblePatterns.inducement_bear !== false}
+                                  onChange={(e) => setVisiblePatterns(prev => ({ ...prev, inducement_bear: e.target.checked }))}
+                                  className="w-3 h-3 rounded border-slate-500 bg-slate-700 text-purple-500 focus:ring-purple-500 focus:ring-offset-0 cursor-pointer"
+                                />
+                                <div className="w-2.5 h-2.5 rounded" style={{ backgroundColor: '#ce93d840', border: '1px solid #ce93d8' }} />
+                                <span className="text-slate-300 flex-1">Bear IDM</span>
+                                <TrendingDown className="w-3 h-3 text-red-400" />
+                              </label>
+                              {/* IDM Color Legend */}
+                              <div className="mt-1.5 pt-1.5 border-t border-slate-700/30 space-y-0.5">
+                                <div className="text-[9px] text-slate-500 font-medium mb-0.5">IDM Colors:</div>
+                                <div className="flex items-center gap-1.5 text-[9px]">
+                                  <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#a78bfa' }} />
+                                  <span className="text-slate-400">Valid</span>
+                                  <span className="text-slate-600">- Sweep confirmed</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-[9px]">
+                                  <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#ffa726' }} />
+                                  <span className="text-slate-400">Unconfirmed</span>
+                                  <span className="text-slate-600">- No sweep yet</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-[9px]">
+                                  <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#e91e63' }} />
+                                  <span className="text-slate-400">Impulse Trap</span>
+                                  <span className="text-slate-600">- Retail trap</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-[9px]">
+                                  <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: '#9e9e9e' }} />
+                                  <span className="text-slate-400">Shifted</span>
+                                  <span className="text-slate-600">- Obsolete</span>
+                                </div>
+                              </div>
+                            </div>
                           )}
-                          {confidence >= 0.85 && (
-                            <span className="text-[8px] px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">Expert</span>
-                          )}
-                          {confidence > 0 && (
-                            <span className={`font-mono text-[10px] ${isActivelyDetected ? 'text-emerald-400' : 'text-slate-500'}`}>
-                              {Math.round(confidence * 100)}%
-                            </span>
-                          )}
-                        </label>
+                        </div>
                       );
                     })}
                   </div>
