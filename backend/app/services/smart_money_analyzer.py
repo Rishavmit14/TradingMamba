@@ -82,7 +82,7 @@ class SwingPoint:
 
 @dataclass
 class OrderBlock:
-    """An Smart Money Order Block"""
+    """An ICT Order Block with V14 validation (last opposite candle before BOS)"""
     start_index: int
     end_index: int
     high: float
@@ -91,11 +91,21 @@ class OrderBlock:
     mitigated: bool = False
     timestamp: Optional[datetime] = None
     strength: float = 0.0  # Based on move after OB
+    # ICT V14 enhancement fields
+    bos_validity: str = 'none'        # 'confirmed' | 'unconfirmed' | 'none' (inherited from BOS)
+    bos_type: str = ''                # 'higher_high' | 'lower_low' | ''
+    is_last_opposite: bool = False    # True = verified last opposite candle before BOS
+    pd_zone: str = 'unknown'          # 'premium' | 'discount' | 'unknown'
+    zone_aligned: bool = False        # Bullish OB in discount / Bearish OB in premium
+    fvg_confluence: bool = False      # OB overlaps with an FVG (highest probability)
+    lifecycle: str = 'fresh'          # 'fresh' | 'partial' | 'mitigated' | 'invalid'
+    mitigation_pct: float = 0.0       # How much of OB zone has been filled (0-1)
+    reasoning: str = ''               # Per-OB explanation
 
 
 @dataclass
 class FairValueGap:
-    """A Fair Value Gap (Imbalance)"""
+    """A Fair Value Gap (Imbalance) with ICT Video 13 validation"""
     index: int
     high: float
     low: float
@@ -103,16 +113,26 @@ class FairValueGap:
     filled: bool = False
     fill_percentage: float = 0.0
     timestamp: Optional[datetime] = None
+    # ICT enhancement fields (Video 13 + V12 PD zone alignment)
+    pd_zone: str = 'unknown'            # 'premium' | 'discount' | 'unknown'
+    zone_aligned: bool = False           # True = FVG in correct zone for its type
+    lifecycle: str = 'fresh'             # 'fresh' | 'partial' | 'filled' | 'spent'
+    reasoning: str = ''                  # Per-FVG explanation
 
 
 @dataclass
 class LiquidityLevel:
-    """A liquidity level (stop loss cluster)"""
+    """A liquidity level (stop loss cluster) with ICT Video 2/6 validation"""
     price: float
     type: str  # 'buy_side' or 'sell_side'
-    strength: float = 0.0  # Based on number of swing points
+    strength: float = 0.0  # Based on swing validation
     timestamp: Optional[datetime] = None
     swept: bool = False
+    # ICT enhancement fields (Video 2, 6)
+    sweep_type: str = 'none'             # 'wick' | 'body' | 'none' (V6 3 SMC Rules)
+    swing_validity: str = 'raw'          # Inherited from swing's ICT validation
+    is_equal_level: bool = False         # Equal highs/lows (stronger pool)
+    reasoning: str = ''                  # Per-level explanation
 
 
 @dataclass
@@ -129,6 +149,9 @@ class StructureEvent:
     associated_idm_price: float = 0.0   # Price of IDM that validated this swing
     associated_idm_index: int = -1      # Index of the IDM candle
     associated_idm_time: Optional[datetime] = None  # Timestamp of the IDM candle
+    end_time: Optional[datetime] = None  # Timestamp where this ray should end (next same-group event)
+    # V6 3-way classification (BOS enhancement)
+    classification: str = 'unknown'  # 'swing_hl' | 'bos' | 'liquidity_sweep' | 'fake_bos' | 'unknown'
 
 
 @dataclass
@@ -153,6 +176,7 @@ class SmartMoneyAnalysisResult:
     breaker_blocks: List[Dict] = field(default_factory=list)
     buy_sell_stops: Dict = field(default_factory=dict)
     inducements: List[Dict] = field(default_factory=list)
+    eng_liq_zones: List[Dict] = field(default_factory=list)  # Engineered Liquidity zones (V8/V9)
     kill_zone_active: bool = False
     # ML Knowledge tracking
     ml_patterns_used: List[str] = field(default_factory=list)  # Patterns ML detected
@@ -266,7 +290,7 @@ class SmartMoneyAnalyzer:
         order_blocks = []
         mitigated_obs = []
         if self._can_detect('order_block'):
-            order_blocks, mitigated_obs = self.find_order_blocks(data, structure)
+            order_blocks, mitigated_obs = self.find_order_blocks(data, structure, swing_points)
             if order_blocks:
                 ml_patterns_used.append('order_block')
                 ml_confidence_scores['order_block'] = self._get_ml_confidence('order_block')
@@ -408,11 +432,118 @@ class SmartMoneyAnalyzer:
         else:
             ml_patterns_not_learned.append('liquidity_sweep')
 
-        # Step 11: Map liquidity levels (basic analysis - swing-based)
+        # Step 11: Map liquidity levels (ICT V2/V6 — sweep detection)
         liquidity = self.find_liquidity_levels(swing_points, data)
 
-        # Step 12: Calculate premium/discount (basic analysis)
-        premium_discount = self.calculate_premium_discount(data, swing_points)
+        # Step 11b: Detect Engineered Liquidity zones (ICT V8/V9)
+        eng_liq_zones = self.find_engineered_liquidity(swing_points, liquidity)
+
+        # Step 11c: Enhance CHoCH events with Rule 2 (ENG_LIQ) + Confirmation (V10)
+        all_highs = [sp for sp in swing_points if sp.type == 'high']
+        all_lows = [sp for sp in swing_points if sp.type == 'low']
+        for event in events:
+            if event.type not in ('choch_bullish', 'choch_bearish'):
+                continue
+            choch_level = event.level
+
+            # V9 Rule 2: Check if CHoCH break is near an ENG_LIQ zone (trap)
+            rule2_pass = True
+            for zone in eng_liq_zones:
+                zone_level = zone.get('level', 0)
+                if zone_level > 0 and abs(zone_level - choch_level) / max(zone_level, 1e-8) < 0.02:
+                    rule2_pass = False
+                    break
+
+            # V10 Confirmation: Check if opposite swing structure formed after CHoCH
+            confirmation_state = 'unconfirmed'
+            if event.type == 'choch_bearish':
+                # Need LL + LH after the CHoCH point
+                choch_lows_after = [sp for sp in all_lows if sp.price <= choch_level]
+                choch_highs_after = [sp for sp in all_highs if len(choch_lows_after) > 0]
+                has_ll = len(choch_lows_after) >= 2 and choch_lows_after[-1].price < choch_lows_after[-2].price
+                has_lh = len(all_highs) >= 2 and all_highs[-1].price < all_highs[-2].price
+                if has_ll and has_lh:
+                    confirmation_state = 'confirmed'
+            elif event.type == 'choch_bullish':
+                # Need HH + HL after the CHoCH point
+                choch_highs_after = [sp for sp in all_highs if sp.price >= choch_level]
+                has_hh = len(choch_highs_after) >= 2 and choch_highs_after[-1].price > choch_highs_after[-2].price
+                has_hl = len(all_lows) >= 2 and all_lows[-1].price > all_lows[-2].price
+                if has_hh and has_hl:
+                    confirmation_state = 'confirmed'
+
+            # Update reasoning with Rule 2 result and confirmation
+            r2_result = '\u2705' if rule2_pass else '\u274c (near ENG LIQ zone)'
+            updated_reasoning = event.reasoning.replace(
+                'R2(ENG LIQ): pending',
+                f'R2(ENG LIQ): {r2_result}'
+            )
+            conf_tag = f' | Confirmation(V10): {confirmation_state.upper()}'
+            updated_reasoning += conf_tag
+
+            # Re-evaluate validity with Rule 2
+            if not rule2_pass and event.validity != 'fake':
+                event.validity = 'fake'
+                event.label = event.label.replace('\u2713', 'FAKE').replace('?', 'FAKE')
+                event.description = event.description.replace('Rules 1+3 pass', 'FAKE — ENG LIQ trap (V9 Rule 2)')
+            elif confirmation_state == 'confirmed' and event.validity == 'confirmed':
+                event.description = event.description.replace('awaiting R2 post-check', 'CONFIRMED (V10)')
+            event.reasoning = updated_reasoning
+
+        # Step 12: Calculate premium/discount (ICT Video 12 — validated swing range)
+        premium_discount = self.calculate_premium_discount(data, swing_points, structure)
+
+        # Step 12b: Enrich FVGs with PD zone alignment (ICT V13 + V12)
+        if fvgs and premium_discount.get('equilibrium'):
+            eq = premium_discount['equilibrium']
+            for fvg in fvgs:
+                fvg_mid = (fvg.high + fvg.low) / 2
+                fvg.pd_zone = 'premium' if fvg_mid >= eq else 'discount'
+                # ICT V13: Bullish FVG in discount = highest probability
+                # Bearish FVG in premium = highest probability
+                fvg.zone_aligned = (
+                    (fvg.type == 'bullish' and fvg.pd_zone == 'discount') or
+                    (fvg.type == 'bearish' and fvg.pd_zone == 'premium')
+                )
+                # Lifecycle classification (V13)
+                if fvg.fill_percentage >= 0.8:
+                    fvg.lifecycle = 'spent'
+                elif fvg.fill_percentage > 0:
+                    fvg.lifecycle = 'partial'
+                else:
+                    fvg.lifecycle = 'fresh'
+                # Per-FVG reasoning
+                zone_tag = "ALIGNED" if fvg.zone_aligned else "wrong zone"
+                lifecycle_tag = fvg.lifecycle.upper()
+                fvg.reasoning = (
+                    f"{fvg.type.title()} FVG ({lifecycle_tag}) in {fvg.pd_zone} "
+                    f"[{zone_tag}] | Fill: {fvg.fill_percentage:.0%}"
+                )
+
+        # Step 12c: Enrich OBs with PD zone alignment + FVG confluence (ICT V14 + V12 + V13)
+        if (order_blocks or mitigated_obs) and premium_discount.get('equilibrium'):
+            eq = premium_discount['equilibrium']
+            all_obs = list(order_blocks) + list(mitigated_obs)
+            for ob in all_obs:
+                ob_mid = (ob.high + ob.low) / 2
+                ob.pd_zone = 'premium' if ob_mid >= eq else 'discount'
+                # V12: Bullish OB in discount = highest probability; Bearish OB in premium
+                ob.zone_aligned = (
+                    (ob.type == 'bullish' and ob.pd_zone == 'discount') or
+                    (ob.type == 'bearish' and ob.pd_zone == 'premium')
+                )
+                # V14+V13: Check FVG confluence (OB zone overlaps any FVG)
+                for fvg in fvgs:
+                    if fvg.filled:
+                        continue
+                    # Zones overlap if OB high >= FVG low AND OB low <= FVG high
+                    if ob.high >= fvg.low and ob.low <= fvg.high:
+                        ob.fvg_confluence = True
+                        break
+                # Update reasoning with PD + FVG info
+                zone_tag = 'ALIGNED' if ob.zone_aligned else 'wrong zone'
+                fvg_tag = 'OB+FVG \u2713' if ob.fvg_confluence else 'no FVG'
+                ob.reasoning += f" | PD: {ob.pd_zone} [{zone_tag}] | {fvg_tag}"
 
         # Step 12a: Validate patterns against ICT rules and detect conflicts
         pattern_validations = {}
@@ -537,6 +668,7 @@ class SmartMoneyAnalyzer:
             breaker_blocks=breaker_blocks,
             buy_sell_stops=buy_sell_stops,
             inducements=inducements,
+            eng_liq_zones=eng_liq_zones,
             kill_zone_active=kill_zone_active,
             # ML tracking
             ml_patterns_used=ml_patterns_used,
@@ -918,21 +1050,44 @@ class SmartMoneyAnalyzer:
         ll = recent_lows[-1].price < recent_lows[-2].price
 
         # Helper to build validated structure event from a swing point
+        # V6 3-way classification: swing_hl (strictest) | bos (middle) | liquidity_sweep | fake_bos
+        def _classify_v6(sp):
+            """Classify per V6 3 SMC Rules table: Swing H/L vs BOS vs Liq Sweep."""
+            has_idm = sp.has_idm
+            sweep_type = sp.idm_sweep_type  # 'body' | 'wick' | 'none'
+            body_closed = sp.is_validated   # Rule 3: body closed beyond prev swing
+
+            if not has_idm and not body_closed:
+                return 'unknown'
+            if not has_idm and body_closed:
+                return 'fake_bos'       # No IDM → invalid per Rule 1
+            if has_idm and not body_closed:
+                return 'liquidity_sweep'  # IDM taken but no body close = wick sweep of level
+            # has_idm AND body_closed → BOS or Swing H/L (Rule 2 differentiates)
+            if sweep_type == 'body':
+                return 'swing_hl'       # Strictest: body close below IDM
+            return 'bos'                # Wick OR body for IDM = BOS (middle)
+
         def _ms_event(event_type, sp, description):
-            """Create a StructureEvent with ICT validation from the swing point."""
+            """Create a StructureEvent with ICT validation + V6 3-way classification."""
             validity = sp.validity if sp.validity != 'raw' else 'unknown'
+            classification = _classify_v6(sp)
             tag = {'validated': '\u2713', 'weak': '?', 'impulse': '\u26a1', 'raw': '', 'unknown': ''}.get(validity, '')
+            # Add classification tag for BOS/Swing H/L distinction
+            cls_tag = {'swing_hl': ' [SHL]', 'bos': ' [BOS]', 'liquidity_sweep': ' [LS]',
+                       'fake_bos': ' [FAKE]'}.get(classification, '')
             base_label = {'higher_high': 'HH', 'higher_low': 'HL',
                           'lower_high': 'LH', 'lower_low': 'LL'}.get(event_type, event_type)
             label = f'{base_label} {tag}'.strip()
             return StructureEvent(
                 type=event_type, level=sp.price,
                 timestamp=sp.timestamp,
-                description=f'{description} ({validity})',
+                description=f'{description} ({validity}{cls_tag})',
                 validity=validity, reasoning=sp.reasoning, label=label,
                 associated_idm_price=sp.associated_idm_price,
                 associated_idm_index=sp.associated_idm_index,
-                associated_idm_time=sp.associated_idm_time
+                associated_idm_time=sp.associated_idm_time,
+                classification=classification
             )
 
         # Emit HH/HL/LH/LL labels for ALL consecutive swing pairs (full chart history)
@@ -947,6 +1102,19 @@ class SmartMoneyAnalyzer:
                 events.append(_ms_event('higher_low', all_lows[i], 'Higher Low'))
             elif all_lows[i].price < all_lows[i - 1].price:
                 events.append(_ms_event('lower_low', all_lows[i], 'Lower Low'))
+
+        # Compute end_time for each MS event: ray ends at the next same-group event
+        # Groups: highs (HH/LH) and lows (HL/LL)
+        high_events = [e for e in events if e.type in ('higher_high', 'lower_high')]
+        low_events = [e for e in events if e.type in ('higher_low', 'lower_low')]
+        # Sort by timestamp within each group
+        high_events.sort(key=lambda e: e.timestamp if e.timestamp else datetime.min)
+        low_events.sort(key=lambda e: e.timestamp if e.timestamp else datetime.min)
+        for group in (high_events, low_events):
+            for i in range(len(group)):
+                if i + 1 < len(group):
+                    group[i].end_time = group[i + 1].timestamp
+                # Last event in group: end_time stays None (ray extends to right edge)
 
         # Bullish structure: HH + HL
         if hh and hl:
@@ -991,86 +1159,93 @@ class SmartMoneyAnalyzer:
         inducements: Optional[List[Dict]] = None
     ) -> Optional[StructureEvent]:
         """
-        Check for Break of Structure with ICT 3 SMC Rules (Video 6).
+        Check for Break of Structure with ICT V5/V6 3 SMC Rules + 3-way classification.
 
-        BOS Rules:
-        - Rule 1: IDM required (must have inducement taken)
-        - Rule 2: Wick OR body break valid (more lenient than swing H/L)
-        - Rule 3: Body close beyond the level required for confirmation
+        V5 BOS 2-Rule System:
+        - Rule 1: IDM must be taken (wick OR body — both valid for BOS)
+        - Rule 2: Wick OR body for IDM sweep (BOS is middle ground per V6)
+        - Rule 3: Body close beyond the level required (wick only = Liquidity Sweep)
+
+        V6 3-Way Classification (BOS vs Liq Sweep vs Swing H/L):
+        - Swing H/L: IDM body-close only (strictest Rule 2)
+        - BOS: IDM wick or body (middle Rule 2)
+        - Liquidity Sweep: No body close beyond level (Rule 3 wick only)
         """
         inducements = inducements or []
         if len(recent_highs) < 2 or len(recent_lows) < 2:
             return None
 
+        def _build_bos_event(direction, breaking_swing, broken_level):
+            """Build a BOS StructureEvent with V6 3-way classification."""
+            price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
+            arrow = '\u2191' if direction == 'bullish' else '\u2193'
+
+            has_idm = breaking_swing.has_idm
+            sweep_type = breaking_swing.idm_sweep_type  # 'body' | 'wick' | 'none'
+            is_body_close = breaking_swing.is_validated
+
+            # V6 3-Way Classification
+            if not has_idm and not is_body_close:
+                classification = 'unknown'
+            elif not has_idm and is_body_close:
+                classification = 'fake_bos'
+            elif has_idm and not is_body_close:
+                classification = 'liquidity_sweep'
+            elif sweep_type == 'body':
+                classification = 'swing_hl'
+            else:
+                classification = 'bos'
+
+            cls_label = {
+                'swing_hl': 'Swing H/L',
+                'bos': 'BOS',
+                'liquidity_sweep': 'Liq Sweep',
+                'fake_bos': 'Fake BOS',
+                'unknown': 'Unclassified'
+            }.get(classification, 'Unknown')
+
+            # Build detailed reasoning per V5/V6
+            reasoning_parts = [f'{direction.title()} BOS at {price_str}']
+            if has_idm:
+                reasoning_parts.append(f'Rule 1: IDM taken \u2705 ({sweep_type} sweep)')
+            else:
+                reasoning_parts.append('Rule 1: No IDM taken \u274c')
+            # Rule 2 (V6 differentiator): how was IDM taken?
+            if has_idm:
+                if sweep_type == 'body':
+                    reasoning_parts.append('Rule 2: IDM body close \u2705 (qualifies as Swing H/L)')
+                else:
+                    reasoning_parts.append('Rule 2: IDM wick sweep \u2705 (BOS level, not Swing H/L)')
+            else:
+                reasoning_parts.append('Rule 2: N/A (no IDM)')
+            if is_body_close:
+                reasoning_parts.append('Rule 3: Body close beyond level \u2705')
+            else:
+                reasoning_parts.append('Rule 3: No body close \u274c (wick only = Liq Sweep)')
+            reasoning_parts.append(f'V6 Classification: {cls_label}')
+
+            # Validity
+            validity = 'confirmed' if has_idm and is_body_close else 'unconfirmed'
+            tag = '\u2713' if validity == 'confirmed' else '?'
+
+            return StructureEvent(
+                type=f'bos_{direction}',
+                level=broken_level,
+                timestamp=breaking_swing.timestamp,
+                description=f'{direction.title()} BOS at {price_str} ({validity} — {cls_label})',
+                validity=validity,
+                reasoning=' | '.join(reasoning_parts),
+                label=f'BOS {arrow} {tag}',
+                classification=classification
+            )
+
         if structure == MarketStructure.BULLISH:
-            # Bullish BOS: Price breaks above previous swing high
             if recent_highs[-1].price > recent_highs[-2].price:
-                breaking_swing = recent_highs[-1]
-                broken_level = recent_highs[-2].price
-                price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
-
-                # ICT Rule 1: IDM taken for breaking swing?
-                has_idm = breaking_swing.has_idm
-                # ICT Rule 3: Body close above broken level?
-                is_body_close = breaking_swing.is_validated
-
-                reasoning_parts = [f'Bullish BOS at {price_str}']
-                if has_idm:
-                    reasoning_parts.append(f'Rule 1: IDM taken \u2705 (sweep={breaking_swing.idm_sweep_type})')
-                else:
-                    reasoning_parts.append('Rule 1: No IDM taken \u274c')
-                reasoning_parts.append(f'Rule 2: Price broke above prev high \u2705')
-                if is_body_close:
-                    reasoning_parts.append('Rule 3: Body close confirmed \u2705')
-                else:
-                    reasoning_parts.append('Rule 3: Body close not confirmed \u274c')
-
-                validity = 'confirmed' if has_idm and is_body_close else 'unconfirmed'
-                tag = '\u2713' if validity == 'confirmed' else '?'
-
-                return StructureEvent(
-                    type='bos_bullish',
-                    level=broken_level,
-                    timestamp=breaking_swing.timestamp,
-                    description=f'Bullish BOS at {price_str} ({validity})',
-                    validity=validity,
-                    reasoning=' | '.join(reasoning_parts),
-                    label=f'BOS \u2191 {tag}'
-                )
+                return _build_bos_event('bullish', recent_highs[-1], recent_highs[-2].price)
 
         elif structure == MarketStructure.BEARISH:
-            # Bearish BOS: Price breaks below previous swing low
             if recent_lows[-1].price < recent_lows[-2].price:
-                breaking_swing = recent_lows[-1]
-                broken_level = recent_lows[-2].price
-                price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
-
-                has_idm = breaking_swing.has_idm
-                is_body_close = breaking_swing.is_validated
-
-                reasoning_parts = [f'Bearish BOS at {price_str}']
-                if has_idm:
-                    reasoning_parts.append(f'Rule 1: IDM taken \u2705 (sweep={breaking_swing.idm_sweep_type})')
-                else:
-                    reasoning_parts.append('Rule 1: No IDM taken \u274c')
-                reasoning_parts.append(f'Rule 2: Price broke below prev low \u2705')
-                if is_body_close:
-                    reasoning_parts.append('Rule 3: Body close confirmed \u2705')
-                else:
-                    reasoning_parts.append('Rule 3: Body close not confirmed \u274c')
-
-                validity = 'confirmed' if has_idm and is_body_close else 'unconfirmed'
-                tag = '\u2713' if validity == 'confirmed' else '?'
-
-                return StructureEvent(
-                    type='bos_bearish',
-                    level=broken_level,
-                    timestamp=breaking_swing.timestamp,
-                    description=f'Bearish BOS at {price_str} ({validity})',
-                    validity=validity,
-                    reasoning=' | '.join(reasoning_parts),
-                    label=f'BOS \u2193 {tag}'
-                )
+                return _build_bos_event('bearish', recent_lows[-1], recent_lows[-2].price)
 
         return None
 
@@ -1082,115 +1257,107 @@ class SmartMoneyAnalyzer:
         inducements: Optional[List[Dict]] = None
     ) -> Optional[StructureEvent]:
         """
-        Check for Change of Character with fake CHoCH detection.
+        Check for Change of Character with V9 4-rule fake CHoCH detection.
 
-        Video 7-10 Rules:
-        - CHoCH = breaking previous swing in opposite direction
-        - FAKE CHoCH if: (1) broken swing is WEAK, (2) no IDM taken before break
-        - Confirmed CHoCH: broken swing was STRONG + IDM taken
-
-        Note: ENG LIQ check (Rule 2) and multi-TF check (Rule 4) require
-        cross-component data - marked for future integration.
+        Video 7-10 Complete CHoCH System:
+        - CHoCH = breaking previous swing in OPPOSITE direction (reversal)
+        - 4 Fake CHoCH Rules (V9): ALL must pass for valid CHoCH
+          Rule 1: Broken swing must be STRONG (not weak/sweeping candle)
+          Rule 2: Must NOT create ENG LIQ zone (checked in post-processing)
+          Rule 3: IDM must be taken before break
+          Rule 4: Must NOT be higher TF inducement (single-TF = N/A)
+        - Confirmation (V10): LL+LH or HH+HL must form after CHoCH
         """
         inducements = inducements or []
         if len(recent_highs) < 2 or len(recent_lows) < 2:
             return None
 
-        # CHoCH in bullish structure: Price breaks below previous HL
+        def _build_choch_event(direction, broken_swing, breaking_swing, broken_level):
+            """Build a CHoCH StructureEvent with V9 4-rule validation + V6 classification."""
+            price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
+            arrow = '\u2191' if direction == 'bullish' else '\u2193'
+
+            reasoning_parts = [f'{direction.title()} CHoCH at {price_str}']
+
+            # V9 Rule 1: Was broken swing STRONG?
+            is_broken_strong = broken_swing.is_strong
+            if is_broken_strong:
+                reasoning_parts.append('R1(Strong Swing): \u2705')
+            else:
+                reasoning_parts.append(f'R1(Strong Swing): \u274c ({broken_swing.validity})')
+
+            # V9 Rule 2: ENG LIQ creation (checked in post-processing step)
+            rule2_pass = True  # Placeholder — enhanced in analyze() after ENG_LIQ detection
+            reasoning_parts.append('R2(ENG LIQ): pending')
+
+            # V9 Rule 3: Was IDM taken before break?
+            breaker_has_idm = breaking_swing.has_idm
+            if breaker_has_idm:
+                reasoning_parts.append(f'R3(IDM taken): \u2705 ({breaking_swing.idm_sweep_type})')
+            else:
+                reasoning_parts.append('R3(IDM taken): \u274c')
+
+            # V9 Rule 4: Multi-TF check (single-TF analysis = N/A)
+            reasoning_parts.append('R4(MTF IDM): N/A (single TF)')
+
+            # V6 3-way classification for the breaking swing
+            classification = 'unknown'
+            if not breaker_has_idm and not breaking_swing.is_validated:
+                classification = 'unknown'
+            elif not breaker_has_idm:
+                classification = 'fake_bos'
+            elif not breaking_swing.is_validated:
+                classification = 'liquidity_sweep'
+            elif breaking_swing.idm_sweep_type == 'body':
+                classification = 'swing_hl'
+            else:
+                classification = 'bos'
+
+            # Rules that can be checked now (1 + 3)
+            rules_checked = is_broken_strong and breaker_has_idm
+
+            if rules_checked:
+                validity = 'confirmed'
+                tag = '\u2713'
+                desc_suffix = 'Rules 1+3 pass — awaiting R2 post-check'
+            elif not is_broken_strong:
+                validity = 'fake'
+                tag = 'FAKE'
+                desc_suffix = 'FAKE — weak swing broken (V9 Rule 1)'
+            elif not breaker_has_idm:
+                validity = 'fake'
+                tag = 'FAKE'
+                desc_suffix = 'FAKE — no IDM before break (V9 Rule 3)'
+            else:
+                validity = 'unconfirmed'
+                tag = '?'
+                desc_suffix = 'unconfirmed'
+
+            reasoning_parts.append(f'Verdict: {validity.upper()} CHoCH')
+
+            return StructureEvent(
+                type=f'choch_{direction}',
+                level=broken_level,
+                timestamp=breaking_swing.timestamp,
+                description=f'{direction.title()} CHoCH — {desc_suffix}',
+                validity=validity,
+                reasoning=' | '.join(reasoning_parts),
+                label=f'CHoCH {arrow} {tag}',
+                classification=classification
+            )
+
+        # CHoCH in bullish structure: Price breaks below previous HL (reversal)
         if structure == MarketStructure.BULLISH:
             if recent_lows[-1].price < recent_lows[-2].price:
-                broken_swing = recent_lows[-2]  # The HL that was broken
-                breaking_swing = recent_lows[-1]  # The swing that broke it
-                broken_level = broken_swing.price
-                price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
-
-                reasoning_parts = [f'Bearish CHoCH at {price_str}']
-
-                # Fake CHoCH Rule 1 (Video 9): Was broken swing STRONG?
-                is_broken_strong = broken_swing.is_strong
-                if is_broken_strong:
-                    reasoning_parts.append('Rule 1: Broken swing is STRONG \u2705')
-                else:
-                    reasoning_parts.append(f'Rule 1: Broken swing is WEAK \u274c (validity={broken_swing.validity})')
-
-                # Fake CHoCH Rule 3 (Video 9): Was IDM taken before break?
-                breaker_has_idm = breaking_swing.has_idm
-                if breaker_has_idm:
-                    reasoning_parts.append(f'Rule 3: IDM taken before break \u2705')
-                else:
-                    reasoning_parts.append('Rule 3: No IDM taken before break \u274c')
-
-                # Determine validity
-                if is_broken_strong and breaker_has_idm:
-                    validity = 'confirmed'
-                    tag = '\u2713'
-                    desc_suffix = 'confirmed trend reversal'
-                elif not is_broken_strong:
-                    validity = 'fake'
-                    tag = 'FAKE'
-                    desc_suffix = 'FAKE - weak swing broken (Video 9 Rule 1)'
-                else:
-                    validity = 'unconfirmed'
-                    tag = '?'
-                    desc_suffix = 'unconfirmed - no IDM before break'
-
-                reasoning_parts.append(f'Verdict: {validity.upper()} CHoCH')
-
-                return StructureEvent(
-                    type='choch_bearish',
-                    level=broken_level,
-                    timestamp=breaking_swing.timestamp,
-                    description=f'Bearish CHoCH - {desc_suffix}',
-                    validity=validity,
-                    reasoning=' | '.join(reasoning_parts),
-                    label=f'CHoCH \u2193 {tag}'
+                return _build_choch_event(
+                    'bearish', recent_lows[-2], recent_lows[-1], recent_lows[-2].price
                 )
 
-        # CHoCH in bearish structure: Price breaks above previous LH
+        # CHoCH in bearish structure: Price breaks above previous LH (reversal)
         elif structure == MarketStructure.BEARISH:
             if recent_highs[-1].price > recent_highs[-2].price:
-                broken_swing = recent_highs[-2]  # The LH that was broken
-                breaking_swing = recent_highs[-1]  # The swing that broke it
-                broken_level = broken_swing.price
-                price_str = f'{broken_level:.2f}' if broken_level > 100 else f'{broken_level:.5f}'
-
-                reasoning_parts = [f'Bullish CHoCH at {price_str}']
-
-                is_broken_strong = broken_swing.is_strong
-                if is_broken_strong:
-                    reasoning_parts.append('Rule 1: Broken swing is STRONG \u2705')
-                else:
-                    reasoning_parts.append(f'Rule 1: Broken swing is WEAK \u274c (validity={broken_swing.validity})')
-
-                breaker_has_idm = breaking_swing.has_idm
-                if breaker_has_idm:
-                    reasoning_parts.append(f'Rule 3: IDM taken before break \u2705')
-                else:
-                    reasoning_parts.append('Rule 3: No IDM taken before break \u274c')
-
-                if is_broken_strong and breaker_has_idm:
-                    validity = 'confirmed'
-                    tag = '\u2713'
-                    desc_suffix = 'confirmed trend reversal'
-                elif not is_broken_strong:
-                    validity = 'fake'
-                    tag = 'FAKE'
-                    desc_suffix = 'FAKE - weak swing broken (Video 9 Rule 1)'
-                else:
-                    validity = 'unconfirmed'
-                    tag = '?'
-                    desc_suffix = 'unconfirmed - no IDM before break'
-
-                reasoning_parts.append(f'Verdict: {validity.upper()} CHoCH')
-
-                return StructureEvent(
-                    type='choch_bullish',
-                    level=broken_level,
-                    timestamp=breaking_swing.timestamp,
-                    description=f'Bullish CHoCH - {desc_suffix}',
-                    validity=validity,
-                    reasoning=' | '.join(reasoning_parts),
-                    label=f'CHoCH \u2191 {tag}'
+                return _build_choch_event(
+                    'bullish', recent_highs[-2], recent_highs[-1], recent_highs[-2].price
                 )
 
         return None
@@ -1198,96 +1365,232 @@ class SmartMoneyAnalyzer:
     def find_order_blocks(
         self,
         data: 'pd.DataFrame',
-        structure: MarketStructure
-    ) -> List[OrderBlock]:
+        structure: MarketStructure,
+        swing_points: Optional[List[SwingPoint]] = None
+    ) -> Tuple[List[OrderBlock], List[OrderBlock]]:
         """
-        Find Order Blocks using ML-learned parameters.
+        Find Order Blocks using ICT V14 rules.
 
-        The detection sensitivity is based on what ML learned from training videos.
-        - Higher frequency in training = stricter detection
-        - Teaching contexts inform what characteristics to look for
+        ICT Definition: OB = last opposite candle before a confirmed BOS.
+        - Bullish OB = last bearish candle before bullish BOS (HH event)
+        - Bearish OB = last bullish candle before bearish BOS (LL event)
 
-        Bullish OB: Last bearish candle before a bullish impulse
-        Bearish OB: Last bullish candle before a bearish impulse
+        Validation chain (V5 → V14):
+        - BOS must be valid (V5 Rule 1: IDM taken + Rule 2: body close beyond swing)
+        - OB must be the LAST opposite candle before BOS
+        - Mitigation lifecycle: fresh → partial → mitigated → invalid
         """
         order_blocks = []
-        current_price = data['close'].iloc[-1]
+        closes = data['close'].values
+        opens = data['open'].values
+        highs = data['high'].values
+        lows = data['low'].values
 
         # Get ML-learned parameters (with Tier 2 override support)
         ml_params = {}
         if self.ml_engine:
             ml_params = self.ml_engine.get_detection_parameters('order_block')
             confidence_multiplier = ml_params.get('confidence_multiplier', 0.5)
-            min_move_strength = ml_params.get('min_move_strength', 0.3)
         else:
             confidence_multiplier = 0.5
-            min_move_strength = 0.3
-        # Tier 2 optimizer overrides
         confidence_multiplier = self.params.get('ob_confidence_multiplier', confidence_multiplier)
-        min_move_strength = self.params.get('ob_min_move_strength', min_move_strength)
 
-        for i in range(2, len(data) - 1):
-            # Current candle info
-            is_bearish = data['close'].iloc[i] < data['open'].iloc[i]
-            is_bullish = data['close'].iloc[i] > data['open'].iloc[i]
+        # Helper: format price for reasoning
+        def _pfmt(p):
+            return f'{p:.2f}' if p > 100 else f'{p:.5f}'
 
-            # Next candle info
-            next_close = data['close'].iloc[i + 1]
-            current_high = data['high'].iloc[i]
-            current_low = data['low'].iloc[i]
+        # Helper: calculate mitigation lifecycle for an OB
+        def _calc_mitigation(ob_high, ob_low, ob_type, from_index):
+            ob_range = ob_high - ob_low
+            if ob_range <= 0:
+                return 0.0, 'fresh'
+            max_penetration = 0.0
+            for k in range(from_index, len(closes)):
+                if ob_type == 'bullish':
+                    # Bullish OB = support zone; mitigation = price dips into zone from above
+                    if lows[k] <= ob_high:
+                        penetration = (ob_high - lows[k]) / ob_range
+                        max_penetration = max(max_penetration, min(penetration, 1.0))
+                else:
+                    # Bearish OB = resistance zone; mitigation = price rises into zone from below
+                    if highs[k] >= ob_low:
+                        penetration = (highs[k] - ob_low) / ob_range
+                        max_penetration = max(max_penetration, min(penetration, 1.0))
+            lifecycle = 'fresh'
+            if max_penetration >= 1.0:
+                lifecycle = 'invalid'
+            elif max_penetration >= 0.5:
+                lifecycle = 'mitigated'
+            elif max_penetration > 0:
+                lifecycle = 'partial'
+            return max_penetration, lifecycle
 
-            # Bullish Order Block
-            # Bearish candle followed by strong bullish move (closes above the high)
-            if is_bearish and next_close > current_high:
-                # Calculate move strength
-                move = (next_close - current_high) / current_high
-                strength = min(move * 100, 1.0)
+        # Track used OB indices to prevent duplicates
+        used_ob_indices = set()
 
-                # Apply ML-learned minimum strength threshold
-                if strength < min_move_strength:
-                    continue
+        # ICT V14 approach: Find OBs from structure breaks (HH/LL events via swing_points)
+        if swing_points and len(swing_points) >= 4:
+            all_highs = [sp for sp in swing_points if sp.type == 'high']
+            all_lows = [sp for sp in swing_points if sp.type == 'low']
 
-                # Apply ML confidence to strength
-                adjusted_strength = strength * confidence_multiplier
+            # Bullish OBs from HH events (bullish BOS)
+            for i in range(1, len(all_highs)):
+                if all_highs[i].price > all_highs[i - 1].price:  # HH = bullish BOS
+                    bos_swing = all_highs[i]
+                    bos_index = bos_swing.index
 
-                ob = OrderBlock(
-                    start_index=i,
-                    end_index=i,
-                    high=float(current_high),
-                    low=float(current_low),
-                    type='bullish',
-                    mitigated=current_price < current_low,
-                    timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
-                    strength=adjusted_strength
-                )
-                order_blocks.append(ob)
+                    # BOS validity from swing validation (V5 rules)
+                    bos_valid = 'confirmed' if bos_swing.is_validated else (
+                        'unconfirmed' if bos_swing.has_idm else 'none'
+                    )
 
-            # Bearish Order Block
-            # Bullish candle followed by strong bearish move (closes below the low)
-            if is_bullish and next_close < current_low:
-                move = (current_low - next_close) / current_low
-                strength = min(move * 100, 1.0)
+                    # Find LAST bearish candle before BOS swing (search backward)
+                    ob_candle_idx = None
+                    for k in range(bos_index - 1, max(bos_index - 25, 0), -1):
+                        if k < len(closes) and closes[k] < opens[k]:  # Bearish candle
+                            ob_candle_idx = k
+                            break
 
-                # Apply ML-learned minimum strength threshold
-                if strength < min_move_strength:
-                    continue
+                    if ob_candle_idx is not None and ob_candle_idx not in used_ob_indices:
+                        used_ob_indices.add(ob_candle_idx)
+                        ob_high = float(highs[ob_candle_idx])
+                        ob_low = float(lows[ob_candle_idx])
 
-                # Apply ML confidence to strength
-                adjusted_strength = strength * confidence_multiplier
+                        # Strength: how far did price move after OB
+                        move = (bos_swing.price - ob_high) / ob_high if ob_high > 0 else 0
+                        strength = min(abs(move) * 100, 1.0) * confidence_multiplier
 
-                ob = OrderBlock(
-                    start_index=i,
-                    end_index=i,
-                    high=float(current_high),
-                    low=float(current_low),
-                    type='bearish',
-                    mitigated=current_price > current_high,
-                    timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
-                    strength=adjusted_strength
-                )
-                order_blocks.append(ob)
+                        # Mitigation lifecycle
+                        mit_pct, lifecycle = _calc_mitigation(ob_high, ob_low, 'bullish', bos_index + 1)
+                        mitigated = lifecycle in ('mitigated', 'invalid')
 
-        # Return unmitigated + mitigated order blocks separately
+                        # Build per-OB reasoning (V14)
+                        reasoning_parts = [f"Bullish OB {_pfmt(ob_low)}-{_pfmt(ob_high)}"]
+                        reasoning_parts.append(f"BOS: HH at {_pfmt(bos_swing.price)} ({bos_valid})")
+                        reasoning_parts.append('Last bearish candle before BOS \u2713')
+                        reasoning_parts.append(f"Lifecycle: {lifecycle.upper()} (fill: {mit_pct:.0%})")
+
+                        ob = OrderBlock(
+                            start_index=ob_candle_idx,
+                            end_index=ob_candle_idx,
+                            high=ob_high,
+                            low=ob_low,
+                            type='bullish',
+                            mitigated=mitigated,
+                            timestamp=data.index[ob_candle_idx] if hasattr(data.index, '__getitem__') else None,
+                            strength=strength,
+                            bos_validity=bos_valid,
+                            bos_type='higher_high',
+                            is_last_opposite=True,
+                            lifecycle=lifecycle,
+                            mitigation_pct=mit_pct,
+                            reasoning=' | '.join(reasoning_parts),
+                        )
+                        order_blocks.append(ob)
+
+            # Bearish OBs from LL events (bearish BOS)
+            for i in range(1, len(all_lows)):
+                if all_lows[i].price < all_lows[i - 1].price:  # LL = bearish BOS
+                    bos_swing = all_lows[i]
+                    bos_index = bos_swing.index
+
+                    bos_valid = 'confirmed' if bos_swing.is_validated else (
+                        'unconfirmed' if bos_swing.has_idm else 'none'
+                    )
+
+                    # Find LAST bullish candle before BOS swing
+                    ob_candle_idx = None
+                    for k in range(bos_index - 1, max(bos_index - 25, 0), -1):
+                        if k < len(closes) and closes[k] > opens[k]:  # Bullish candle
+                            ob_candle_idx = k
+                            break
+
+                    if ob_candle_idx is not None and ob_candle_idx not in used_ob_indices:
+                        used_ob_indices.add(ob_candle_idx)
+                        ob_high = float(highs[ob_candle_idx])
+                        ob_low = float(lows[ob_candle_idx])
+
+                        move = (ob_low - bos_swing.price) / ob_low if ob_low > 0 else 0
+                        strength = min(abs(move) * 100, 1.0) * confidence_multiplier
+
+                        mit_pct, lifecycle = _calc_mitigation(ob_high, ob_low, 'bearish', bos_index + 1)
+                        mitigated = lifecycle in ('mitigated', 'invalid')
+
+                        reasoning_parts = [f"Bearish OB {_pfmt(ob_low)}-{_pfmt(ob_high)}"]
+                        reasoning_parts.append(f"BOS: LL at {_pfmt(bos_swing.price)} ({bos_valid})")
+                        reasoning_parts.append('Last bullish candle before BOS \u2713')
+                        reasoning_parts.append(f"Lifecycle: {lifecycle.upper()} (fill: {mit_pct:.0%})")
+
+                        ob = OrderBlock(
+                            start_index=ob_candle_idx,
+                            end_index=ob_candle_idx,
+                            high=ob_high,
+                            low=ob_low,
+                            type='bearish',
+                            mitigated=mitigated,
+                            timestamp=data.index[ob_candle_idx] if hasattr(data.index, '__getitem__') else None,
+                            strength=strength,
+                            bos_validity=bos_valid,
+                            bos_type='lower_low',
+                            is_last_opposite=True,
+                            lifecycle=lifecycle,
+                            mitigation_pct=mit_pct,
+                            reasoning=' | '.join(reasoning_parts),
+                        )
+                        order_blocks.append(ob)
+
+        # Fallback: generic detection if no structure-based OBs found
+        if not order_blocks:
+            current_price = data['close'].iloc[-1]
+            min_move_strength = 0.3
+            if self.ml_engine:
+                min_move_strength = ml_params.get('min_move_strength', 0.3)
+            min_move_strength = self.params.get('ob_min_move_strength', min_move_strength)
+
+            for i in range(2, len(data) - 1):
+                is_bearish = closes[i] < opens[i]
+                is_bullish = closes[i] > opens[i]
+                next_close = closes[i + 1]
+                c_high = float(highs[i])
+                c_low = float(lows[i])
+
+                if is_bearish and next_close > c_high:
+                    move = (next_close - c_high) / c_high
+                    strength = min(move * 100, 1.0)
+                    if strength < min_move_strength:
+                        continue
+                    mit_pct, lifecycle = _calc_mitigation(c_high, c_low, 'bullish', i + 2)
+                    mitigated = lifecycle in ('mitigated', 'invalid')
+                    ob = OrderBlock(
+                        start_index=i, end_index=i,
+                        high=c_high, low=c_low, type='bullish',
+                        mitigated=mitigated,
+                        timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
+                        strength=strength * confidence_multiplier,
+                        lifecycle=lifecycle, mitigation_pct=mit_pct,
+                        reasoning=f"Bullish OB {_pfmt(c_low)}-{_pfmt(c_high)} | Generic detection (no BOS link)",
+                    )
+                    order_blocks.append(ob)
+
+                if is_bullish and next_close < c_low:
+                    move = (c_low - next_close) / c_low
+                    strength = min(move * 100, 1.0)
+                    if strength < min_move_strength:
+                        continue
+                    mit_pct, lifecycle = _calc_mitigation(c_high, c_low, 'bearish', i + 2)
+                    mitigated = lifecycle in ('mitigated', 'invalid')
+                    ob = OrderBlock(
+                        start_index=i, end_index=i,
+                        high=c_high, low=c_low, type='bearish',
+                        mitigated=mitigated,
+                        timestamp=data.index[i] if hasattr(data.index, '__getitem__') else None,
+                        strength=strength * confidence_multiplier,
+                        lifecycle=lifecycle, mitigation_pct=mit_pct,
+                        reasoning=f"Bearish OB {_pfmt(c_low)}-{_pfmt(c_high)} | Generic detection (no BOS link)",
+                    )
+                    order_blocks.append(ob)
+
+        # Sort by recency, separate unmitigated vs mitigated
         all_sorted = sorted(order_blocks, key=lambda x: x.start_index, reverse=True)
         unmitigated = [ob for ob in all_sorted if not ob.mitigated][:10]
         mitigated = [ob for ob in all_sorted if ob.mitigated][:5]
@@ -1402,44 +1705,122 @@ class SmartMoneyAnalyzer:
         data: 'pd.DataFrame'
     ) -> Dict[str, List[LiquidityLevel]]:
         """
-        Map liquidity levels (where stop losses are likely clustered)
+        Map liquidity levels with ICT Video 2/6 validation.
 
-        Buy-side liquidity: Above swing highs
-        Sell-side liquidity: Below swing lows
+        ICT Rules:
+        - Buy-side liquidity: Above swing highs (buy stops, short SLs)
+        - Sell-side liquidity: Below swing lows (sell stops, long SLs)
+        - Validated swings = stronger liquidity pools
+        - Sweep detection: wick vs body per Video 6 3 SMC Rules
+        - Equal highs/lows = strongest pools (V2)
         """
         current_price = float(data['close'].iloc[-1])
+        highs = data['high'].values
+        lows = data['low'].values
+        closes = data['close'].values
+        opens = data['open'].values
 
-        # Buy-side liquidity (above current price)
-        buy_side = []
-        for sp in swing_points:
-            if sp.type == 'high' and sp.price > current_price:
-                buy_side.append(LiquidityLevel(
-                    price=sp.price,
-                    type='buy_side',
-                    strength=sp.strength / 10,  # Normalize
-                    timestamp=sp.timestamp,
-                    swept=False
-                ))
-
-        # Sell-side liquidity (below current price)
-        sell_side = []
-        for sp in swing_points:
-            if sp.type == 'low' and sp.price < current_price:
-                sell_side.append(LiquidityLevel(
-                    price=sp.price,
-                    type='sell_side',
-                    strength=sp.strength / 10,
-                    timestamp=sp.timestamp,
-                    swept=False
-                ))
-
-        # Find equal highs/lows (stronger liquidity)
+        # Find equal highs/lows first (for is_equal_level marking)
         equal_highs = self._find_equal_levels(
             [sp for sp in swing_points if sp.type == 'high']
         )
         equal_lows = self._find_equal_levels(
             [sp for sp in swing_points if sp.type == 'low']
         )
+        eq_high_levels = {round(eh['level'], 5) for eh in equal_highs}
+        eq_low_levels = {round(el['level'], 5) for el in equal_lows}
+
+        # Buy-side liquidity (above current price)
+        buy_side = []
+        for sp in swing_points:
+            if sp.type == 'high' and sp.price > current_price:
+                # Sweep detection: did any candle after this swing wick above it?
+                swept = False
+                sweep_type = 'none'
+                for j in range(sp.index + 1, len(data)):
+                    if highs[j] > sp.price:
+                        body_high = max(closes[j], opens[j])
+                        if body_high > sp.price:
+                            swept = True
+                            sweep_type = 'body'
+                        else:
+                            swept = True
+                            sweep_type = 'wick'
+                        break
+
+                # Strength: validated swings = stronger pools
+                base_strength = sp.strength / 10
+                if sp.validity in ('validated', 'weak'):
+                    base_strength += 0.2
+                is_eq = any(abs(sp.price - lvl) / sp.price < 0.001 for lvl in eq_high_levels)
+                if is_eq:
+                    base_strength += 0.3
+
+                reasoning = f"BSL ${sp.price:,.2f}" if sp.price > 100 else f"BSL {sp.price:.5f}"
+                if is_eq:
+                    reasoning += " (EQH)"
+                if swept:
+                    reasoning += f" SWEPT ({sweep_type})"
+                else:
+                    reasoning += " UNSWEPT"
+
+                buy_side.append(LiquidityLevel(
+                    price=sp.price,
+                    type='buy_side',
+                    strength=min(base_strength, 1.0),
+                    timestamp=sp.timestamp,
+                    swept=swept,
+                    sweep_type=sweep_type,
+                    swing_validity=sp.validity,
+                    is_equal_level=is_eq,
+                    reasoning=reasoning,
+                ))
+
+        # Sell-side liquidity (below current price)
+        sell_side = []
+        for sp in swing_points:
+            if sp.type == 'low' and sp.price < current_price:
+                # Sweep detection: did any candle after this swing wick below it?
+                swept = False
+                sweep_type = 'none'
+                for j in range(sp.index + 1, len(data)):
+                    if lows[j] < sp.price:
+                        body_low = min(closes[j], opens[j])
+                        if body_low < sp.price:
+                            swept = True
+                            sweep_type = 'body'
+                        else:
+                            swept = True
+                            sweep_type = 'wick'
+                        break
+
+                # Strength: validated swings = stronger pools
+                base_strength = sp.strength / 10
+                if sp.validity in ('validated', 'weak'):
+                    base_strength += 0.2
+                is_eq = any(abs(sp.price - lvl) / sp.price < 0.001 for lvl in eq_low_levels)
+                if is_eq:
+                    base_strength += 0.3
+
+                reasoning = f"SSL ${sp.price:,.2f}" if sp.price > 100 else f"SSL {sp.price:.5f}"
+                if is_eq:
+                    reasoning += " (EQL)"
+                if swept:
+                    reasoning += f" SWEPT ({sweep_type})"
+                else:
+                    reasoning += " UNSWEPT"
+
+                sell_side.append(LiquidityLevel(
+                    price=sp.price,
+                    type='sell_side',
+                    strength=min(base_strength, 1.0),
+                    timestamp=sp.timestamp,
+                    swept=swept,
+                    sweep_type=sweep_type,
+                    swing_validity=sp.validity,
+                    is_equal_level=is_eq,
+                    reasoning=reasoning,
+                ))
 
         return {
             'buy_side': sorted(buy_side, key=lambda x: x.price)[:5],
@@ -1469,30 +1850,125 @@ class SmartMoneyAnalyzer:
 
         return equal_levels
 
+    def find_engineered_liquidity(
+        self,
+        swing_points: List[SwingPoint],
+        liquidity: Dict[str, List[LiquidityLevel]],
+    ) -> List[Dict]:
+        """
+        Detect Engineered Liquidity zones (ICT Video 8/9).
+
+        ENG LIQ = areas where retail S/R traders are trapped by Smart Money.
+        Detection heuristics:
+        1. Equal highs/lows clusters (strongest ENG LIQ — obvious retail S/R)
+        2. Consolidation zones (3+ swings within tight range)
+
+        Used by: Fake CHoCH Rule 2 (ENG LIQ creation = indicator of fake CHoCH)
+        """
+        eng_liq_zones = []
+
+        # Type 1: Equal highs/lows as ENG LIQ (strongest signal)
+        for eq in liquidity.get('equal_highs', []):
+            eng_liq_zones.append({
+                'type': 'equal_highs',
+                'level': eq['level'],
+                'count': eq.get('count', 2),
+                'indices': eq.get('points', []),
+                'strength': 0.8 + (eq.get('count', 2) - 2) * 0.1,
+                'reasoning': f"ENG LIQ (EQH): Equal highs at {eq['level']:.5f} — retail resistance trap",
+            })
+        for eq in liquidity.get('equal_lows', []):
+            eng_liq_zones.append({
+                'type': 'equal_lows',
+                'level': eq['level'],
+                'count': eq.get('count', 2),
+                'indices': eq.get('points', []),
+                'strength': 0.8 + (eq.get('count', 2) - 2) * 0.1,
+                'reasoning': f"ENG LIQ (EQL): Equal lows at {eq['level']:.5f} — retail support trap",
+            })
+
+        # Type 2: Consolidation zones (3+ swings within 2% range)
+        if len(swing_points) >= 6:
+            # Look at the most recent 20 swings for consolidation
+            recent = swing_points[-20:]
+            tolerance = 0.02  # 2% range = consolidation
+
+            # Group swings by price proximity
+            for i, sp1 in enumerate(recent):
+                cluster = [sp1]
+                for sp2 in recent[i + 1:]:
+                    if abs(sp1.price - sp2.price) / sp1.price < tolerance:
+                        cluster.append(sp2)
+                if len(cluster) >= 3:
+                    avg_price = sum(s.price for s in cluster) / len(cluster)
+                    # Avoid duplicates: only add if not already covered by equal levels
+                    already_covered = any(
+                        abs(ez['level'] - avg_price) / avg_price < tolerance
+                        for ez in eng_liq_zones
+                    )
+                    if not already_covered:
+                        eng_liq_zones.append({
+                            'type': 'consolidation',
+                            'level': avg_price,
+                            'count': len(cluster),
+                            'indices': [s.index for s in cluster],
+                            'strength': 0.5 + len(cluster) * 0.1,
+                            'reasoning': f"ENG LIQ (Consolidation): {len(cluster)} swings near {avg_price:.5f} — range trap",
+                        })
+
+        return eng_liq_zones
+
     def calculate_premium_discount(
         self,
         data: 'pd.DataFrame',
-        swing_points: List[SwingPoint]
+        swing_points: List[SwingPoint],
+        structure: 'MarketStructure' = None
     ) -> Dict:
         """
-        Calculate premium/discount zones
+        Calculate premium/discount zones using ICT methodology (Video 12).
 
-        Premium: Above 50% of range (look for sells)
-        Discount: Below 50% of range (look for buys)
+        ICT Rules:
+        - Range = most recent validated swing high to validated swing low
+        - Equilibrium = exact 50% midpoint (fair value line)
+        - Premium = above 50% (expensive), Discount = below 50% (cheap)
+        - Sub-zones: deep_discount (0-25%), discount (25-50%),
+                     premium (50-75%), deep_premium (75-100%)
+        - SM buys in discount, sells in premium
+        - OTE = pullback to discount (bullish) or premium (bearish)
         """
-        recent_highs = [sp for sp in swing_points if sp.type == 'high']
-        recent_lows = [sp for sp in swing_points if sp.type == 'low']
+        # Prefer validated/strong swings for range definition (ICT: use validated structure)
+        validated_highs = [sp for sp in swing_points if sp.type == 'high'
+                          and sp.validity in ('validated', 'weak')]
+        validated_lows = [sp for sp in swing_points if sp.type == 'low'
+                         and sp.validity in ('validated', 'weak')]
 
-        if not recent_highs or not recent_lows:
+        # Fallback to all swings if no validated ones exist
+        all_highs = validated_highs if validated_highs else [
+            sp for sp in swing_points if sp.type == 'high']
+        all_lows = validated_lows if validated_lows else [
+            sp for sp in swing_points if sp.type == 'low']
+
+        if not all_highs or not all_lows:
             return {
                 'zone': 'neutral',
+                'zone_simple': 'neutral',
+                'sub_zone': 'neutral',
                 'percentage': 50.0,
-                'equilibrium': 0.0
+                'equilibrium': 0.0,
+                'reasoning': 'Insufficient swing points for PD zone calculation'
             }
 
-        # Use last 5 swing points for range
-        range_high = max(sp.price for sp in recent_highs[-5:])
-        range_low = min(sp.price for sp in recent_lows[-5:])
+        # Use the ACTIVE swing range: most recent validated swing high + low
+        # This defines the current trading range per ICT Video 12
+        range_swing_high = all_highs[-1]
+        range_swing_low = all_lows[-1]
+        range_high = range_swing_high.price
+        range_low = range_swing_low.price
+
+        # Ensure range_high > range_low (swap if needed for proper zone calc)
+        if range_high < range_low:
+            range_high, range_low = range_low, range_high
+            range_swing_high, range_swing_low = range_swing_low, range_swing_high
 
         equilibrium = (range_high + range_low) / 2
         current_price = float(data['close'].iloc[-1])
@@ -1504,21 +1980,77 @@ class SmartMoneyAnalyzer:
         else:
             percentage = ((current_price - range_low) / range_size) * 100
 
-        # Determine zone
-        if percentage >= 70:
+        # ICT Zone determination: 50% is THE dividing line (Video 12)
+        # Above 50% = premium, below 50% = discount
+        if percentage >= 50:
+            zone_simple = 'premium'
+        else:
+            zone_simple = 'discount'
+
+        # Sub-zone classification (Video 12: finer precision)
+        if percentage >= 75:
+            sub_zone = 'deep_premium'
+            zone = 'deep_premium'
+        elif percentage >= 50:
+            sub_zone = 'premium'
             zone = 'premium'
-        elif percentage <= 30:
+        elif percentage >= 25:
+            sub_zone = 'discount'
             zone = 'discount'
         else:
-            zone = 'equilibrium'
+            sub_zone = 'deep_discount'
+            zone = 'deep_discount'
+
+        # Build per-zone reasoning (ICT Video 12 rules)
+        reasoning_parts = []
+        price_fmt = f"${current_price:,.2f}" if current_price > 100 else f"{current_price:.5f}"
+        eq_fmt = f"${equilibrium:,.2f}" if equilibrium > 100 else f"{equilibrium:.5f}"
+        hi_fmt = f"${range_high:,.2f}" if range_high > 100 else f"{range_high:.5f}"
+        lo_fmt = f"${range_low:,.2f}" if range_low > 100 else f"{range_low:.5f}"
+
+        reasoning_parts.append(f"Range: {lo_fmt} → {hi_fmt} | EQ: {eq_fmt} | Price: {price_fmt} ({percentage:.1f}%)")
+
+        # Swing quality note
+        if validated_highs and validated_lows:
+            reasoning_parts.append(f"Range defined by validated swings (ICT-confirmed)")
+        else:
+            reasoning_parts.append(f"Range from raw swings (no validated swings available)")
+
+        # Zone-specific trading implications per ICT
+        struct_val = structure.value if structure else 'consolidation'
+        if struct_val == 'bullish':
+            if zone_simple == 'discount':
+                reasoning_parts.append("Bullish + Discount = IDEAL long zone (SM buys here)")
+            else:
+                reasoning_parts.append("Bullish + Premium = Avoid new longs (SM takes profit here)")
+        elif struct_val == 'bearish':
+            if zone_simple == 'premium':
+                reasoning_parts.append("Bearish + Premium = IDEAL short zone (SM sells here)")
+            else:
+                reasoning_parts.append("Bearish + Discount = Avoid new shorts (SM covers here)")
+        else:
+            reasoning_parts.append("Consolidation = Wait for structure break before trading PD zones")
+
+        reasoning = " | ".join(reasoning_parts)
+
+        # Timestamps for range swing points (for frontend display)
+        range_high_time = range_swing_high.timestamp
+        range_low_time = range_swing_low.timestamp
 
         return {
             'zone': zone,
+            'zone_simple': zone_simple,
+            'sub_zone': sub_zone,
             'percentage': round(percentage, 2),
             'range_high': range_high,
             'range_low': range_low,
             'equilibrium': equilibrium,
-            'current_price': current_price
+            'current_price': current_price,
+            'reasoning': reasoning,
+            'range_high_validity': range_swing_high.validity,
+            'range_low_validity': range_swing_low.validity,
+            'range_high_time': range_high_time.isoformat() if range_high_time else None,
+            'range_low_time': range_low_time.isoformat() if range_low_time else None,
         }
 
     def determine_bias(
@@ -1528,53 +2060,70 @@ class SmartMoneyAnalyzer:
         events: List[StructureEvent]
     ) -> Tuple[Bias, float, str]:
         """
-        Determine overall market bias based on structure and position
+        Determine overall market bias based on structure and PD zone position.
+
+        ICT Video 12: SM buys in discount (bullish), sells in premium (bearish).
+        Uses zone_simple (binary 50/50 split) for core bias determination,
+        and sub_zone for confidence grading.
 
         Returns:
             Tuple of (bias, confidence, reasoning)
         """
-        zone = premium_discount.get('zone', 'neutral')
+        zone_simple = premium_discount.get('zone_simple', premium_discount.get('zone', 'neutral'))
+        sub_zone = premium_discount.get('sub_zone', zone_simple)
 
         # Bullish structure
         if structure == MarketStructure.BULLISH:
-            if zone == 'discount':
+            if sub_zone == 'deep_discount':
                 return (
                     Bias.BULLISH,
-                    0.8,
-                    "Bullish structure + price in discount zone - ideal long setup"
+                    0.85,
+                    "Bullish structure + deep discount zone - strongest long setup (V12 OTE)"
                 )
-            elif zone == 'equilibrium':
+            elif sub_zone == 'discount':
                 return (
                     Bias.BULLISH,
-                    0.6,
-                    "Bullish structure + price at equilibrium - wait for discount"
+                    0.75,
+                    "Bullish structure + discount zone - ideal long setup (SM buys here)"
                 )
-            else:  # premium
+            elif sub_zone == 'premium':
                 return (
                     Bias.NEUTRAL,
                     0.4,
-                    "Bullish structure but price in premium - avoid longs here"
+                    "Bullish structure but price in premium - avoid new longs (SM takes profit)"
+                )
+            else:  # deep_premium
+                return (
+                    Bias.NEUTRAL,
+                    0.3,
+                    "Bullish structure but deep premium - high risk for longs (overextended)"
                 )
 
         # Bearish structure
         elif structure == MarketStructure.BEARISH:
-            if zone == 'premium':
+            if sub_zone == 'deep_premium':
                 return (
                     Bias.BEARISH,
-                    0.8,
-                    "Bearish structure + price in premium zone - ideal short setup"
+                    0.85,
+                    "Bearish structure + deep premium zone - strongest short setup (V12 OTE)"
                 )
-            elif zone == 'equilibrium':
+            elif sub_zone == 'premium':
                 return (
                     Bias.BEARISH,
-                    0.6,
-                    "Bearish structure + price at equilibrium - wait for premium"
+                    0.75,
+                    "Bearish structure + premium zone - ideal short setup (SM sells here)"
                 )
-            else:  # discount
+            elif sub_zone == 'discount':
                 return (
                     Bias.NEUTRAL,
                     0.4,
-                    "Bearish structure but price in discount - avoid shorts here"
+                    "Bearish structure but price in discount - avoid new shorts (SM covers)"
+                )
+            else:  # deep_discount
+                return (
+                    Bias.NEUTRAL,
+                    0.3,
+                    "Bearish structure but deep discount - high risk for shorts (oversold)"
                 )
 
         # Consolidation

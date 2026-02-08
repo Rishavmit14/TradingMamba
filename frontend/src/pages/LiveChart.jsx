@@ -618,12 +618,24 @@ function LiveChart() {
         'equal_lows': { text: 'EQL', color: '#66bb6a' },
         'liquidity_sweep_high': { text: 'BSL Sweep', color: '#e91e63' },
         'liquidity_sweep_low': { text: 'SSL Sweep', color: '#9c27b0' },
-        'buyside_liquidity': { text: 'BSL', color: '#ef5350' },
-        'sellside_liquidity': { text: 'SSL', color: '#66bb6a' },
+        'buyside_liquidity': { text: 'BSL', color: '#ef5350' },  // Dynamic below
+        'sellside_liquidity': { text: 'SSL', color: '#66bb6a' },  // Dynamic below
         'buy_stops': { text: 'BST 🎯', color: '#ff5252' },
         'sell_stops': { text: 'SST 🎯', color: '#69f0ae' },
         'equilibrium': { text: 'EQ (50%)', color: '#ffd740' },
       };
+
+      // Dynamic LIQ labels based on ICT sweep detection (V2/V6)
+      if (patternType === 'buyside_liquidity' || patternType === 'sellside_liquidity') {
+        const swept = pattern?.swept || false;
+        const isEq = pattern?.is_equal_level || false;
+        const base = patternType === 'buyside_liquidity' ? 'BSL' : 'SSL';
+        const tag = isEq ? ' (EQ)' : '';
+        const sweptTag = swept ? ' \u2713' : '';
+        const baseColor = patternType === 'buyside_liquidity' ? '#ef5350' : '#66bb6a';
+        const color = swept ? '#9e9e9e' : (isEq ? '#ff9100' : baseColor);
+        return { text: base + tag + sweptTag, color };
+      }
 
       // Dynamic IDM labels based on ICT validation (validity from backend)
       if (patternType === 'bullish_inducement' || patternType === 'bearish_inducement') {
@@ -645,42 +657,79 @@ function LiveChart() {
         const tag = { validated: ' \u2713', weak: ' ?', impulse: ' \u26a1', raw: '' }[validity] || '';
         const label = pattern?.label || (baseLabel + tag);
         const colorMap = {
-          higher_high: { validated: '#00e676', weak: '#81c784', impulse: '#e91e63', raw: '#00e676', unknown: '#00e676' },
-          higher_low:  { validated: '#69f0ae', weak: '#a5d6a7', impulse: '#e91e63', raw: '#69f0ae', unknown: '#69f0ae' },
-          lower_high:  { validated: '#ff5252', weak: '#ef9a9a', impulse: '#e91e63', raw: '#ff5252', unknown: '#ff5252' },
-          lower_low:   { validated: '#ff8a80', weak: '#ffcdd2', impulse: '#e91e63', raw: '#ff8a80', unknown: '#ff8a80' },
+          higher_high: { validated: '#00e676', weak: '#81c784', impulse: '#e91e63', raw: '#00e676', unknown: '#66bb6a' },
+          higher_low:  { validated: '#69f0ae', weak: '#a5d6a7', impulse: '#e91e63', raw: '#69f0ae', unknown: '#81c784' },
+          lower_high:  { validated: '#ff5252', weak: '#ef9a9a', impulse: '#e91e63', raw: '#ff5252', unknown: '#e57373' },
+          lower_low:   { validated: '#ff8a80', weak: '#ffcdd2', impulse: '#e91e63', raw: '#ff8a80', unknown: '#ef9a9a' },
         };
         return { text: label, color: (colorMap[patternType] || {})[validity] || '#9ca3af' };
       }
 
-      // Dynamic BOS labels based on ICT validation
+      // Dynamic BOS labels based on ICT V5/V6 validation + 3-way classification
       if (patternType === 'bos_bullish' || patternType === 'bos_bearish') {
         const validity = pattern?.validity || 'unknown';
-        const label = pattern?.label || (patternType === 'bos_bullish' ? 'BOS \u2191' : 'BOS \u2193');
+        const classification = pattern?.classification || 'unknown';
+        const arrow = patternType === 'bos_bullish' ? '\u2191' : '\u2193';
+        const baseLabel = pattern?.label || `BOS ${arrow}`;
+        // V6 classification tag
+        const clsTag = { swing_hl: ' SHL', bos: '', liquidity_sweep: ' LS', fake_bos: ' FAKE' }[classification] || '';
+        const label = baseLabel + clsTag;
+        const isBull = patternType === 'bos_bullish';
         const colorMap = {
-          'confirmed': patternType === 'bos_bullish' ? '#4fc3f7' : '#ff9800',
+          'confirmed': isBull ? '#4fc3f7' : '#ff9800',
           'unconfirmed': '#78909c',
         };
-        return { text: label, color: colorMap[validity] || (patternType === 'bos_bullish' ? '#4fc3f7' : '#ff9800') };
+        // Liquidity sweeps and fakes get muted colors
+        const clsColor = classification === 'liquidity_sweep' ? '#616161' : (classification === 'fake_bos' ? '#9e9e9e' : null);
+        return { text: label, color: clsColor || colorMap[validity] || (isBull ? '#4fc3f7' : '#ff9800') };
       }
 
-      // Dynamic CHoCH labels with fake detection
+      // Dynamic CHoCH labels with V9 4-rule fake detection + V10 confirmation
       if (patternType === 'choch_bullish' || patternType === 'choch_bearish') {
         const validity = pattern?.validity || 'unknown';
-        const label = pattern?.label || (patternType === 'choch_bullish' ? 'CHoCH \u2191' : 'CHoCH \u2193');
+        const classification = pattern?.classification || 'unknown';
+        const arrow = patternType === 'choch_bullish' ? '\u2191' : '\u2193';
+        const baseLabel = pattern?.label || `CHoCH ${arrow}`;
+        const isBull = patternType === 'choch_bullish';
         const colorMap = {
-          'confirmed': patternType === 'choch_bullish' ? '#66bb6a' : '#ff5722',
+          'confirmed': isBull ? '#66bb6a' : '#ff5722',
           'fake': '#9e9e9e',
           'unconfirmed': '#78909c',
         };
-        return { text: label, color: colorMap[validity] || (patternType === 'choch_bullish' ? '#66bb6a' : '#ff5722') };
+        return { text: baseLabel, color: colorMap[validity] || (isBull ? '#66bb6a' : '#ff5722') };
       }
 
       return annotations[patternType] || { text: patternType, color: '#9ca3af' };
     };
 
     // Filter to only ray patterns
-    const rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
+    let rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
+
+    // ICT validity filtering: show all MS except impulse (no pullback = noise)
+    // validated = 3 SMC rules met, weak = has IDM but body-close missing, unknown = no IDM (but structurally significant)
+    const msTypes = ['higher_high', 'higher_low', 'lower_high', 'lower_low'];
+    rayPatterns = rayPatterns.filter(p => {
+      if (!msTypes.includes(p.pattern_type)) return true;
+      const v = p.validity || 'unknown';
+      return v !== 'impulse';
+    });
+
+    // Visible range filtering: only render MS/IDM rays that overlap the visible chart window
+    const timeScale = chart.timeScale();
+    const visibleRange = timeScale.getVisibleRange();
+    if (visibleRange) {
+      rayPatterns = rayPatterns.filter(p => {
+        if (!msTypes.includes(p.pattern_type)) return true; // non-MS rays: always show
+        // For MS patterns: check if their ray span overlaps the visible window
+        // Ray span = [min(startTime, idmTime), endTime or Infinity]
+        const pTime = p.time || p.start_time || 0;
+        const idmTime = p.associated_idm_time || pTime;
+        const rayStart = Math.min(pTime, idmTime) || pTime;
+        const rayEnd = p.end_time || Infinity;
+        // Show if ray span overlaps visible range
+        return rayEnd >= visibleRange.from && rayStart <= visibleRange.to;
+      });
+    }
 
     rayPatterns.forEach((pattern, idx) => {
       const patternType = pattern.pattern_type;
@@ -849,15 +898,22 @@ function LiveChart() {
           startX = 0;
         }
 
-        // For swing markers: extend ray to the full right edge
+        // For swing markers: clip ray to end_time (next same-group MS event) or right edge
         // For other patterns: cap the width
         let rayWidth;
+        const isMsType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
         if (isSwingMarker) {
-          // Swing markers extend to right edge (true horizontal ray)
-          rayWidth = rightEdge - startX;
-          if (rayWidth < 20) rayWidth = rightEdge; // If too short, span from left
-          if (startX > rightEdge - 50) startX = 0; // If start is too far right, start from left
-          rayWidth = rightEdge - startX;
+          let endX = rightEdge; // default: extend to right edge
+          // MS types with end_time: clip ray at next same-group event
+          if (isMsType && pattern.end_time) {
+            const clippedEndX = timeScale.timeToCoordinate(pattern.end_time);
+            if (clippedEndX !== null && clippedEndX > startX) {
+              endX = Math.min(clippedEndX, rightEdge);
+            }
+          }
+          rayWidth = endX - startX;
+          if (rayWidth < 20) { startX = 0; rayWidth = endX; }
+          if (startX > rightEdge - 50) { startX = 0; rayWidth = endX; }
         } else {
           // Other patterns: capped width
           const maxRayWidth = Math.min(rightEdge * 0.6, 500);
@@ -897,7 +953,6 @@ function LiveChart() {
 
         // MS labels (HH/HL/LH/LL): left-aligned at ray origin
         // Other labels: centered on the ray
-        const isMsType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
         const labelX = isMsType ? startX : startX + rayWidth / 2;
         const labelTransform = isMsType ? 'none' : 'translateX(-50%)';
 
@@ -921,6 +976,29 @@ function LiveChart() {
           labelEl.title = pattern.reasoning.replace(/ \| /g, '\n');
           labelEl.style.pointerEvents = 'auto';
           labelEl.style.cursor = 'help';
+        }
+
+        // MS labels: clickable to highlight associated IDM with heartbeat glow
+        if (isMsType && pattern.associated_idm_price) {
+          const idmId = `idm-${pattern.associated_idm_price}-${pattern.associated_idm_time || 0}`;
+          labelEl.style.cursor = 'pointer';
+          labelEl.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Remove any existing heartbeat animations
+            document.querySelectorAll('.idm-heartbeat').forEach(el => {
+              el.classList.remove('idm-heartbeat');
+            });
+            // Activate heartbeat on all elements with this IDM id
+            document.querySelectorAll(`[data-idm-id="${idmId}"]`).forEach(el => {
+              el.classList.add('idm-heartbeat');
+            });
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+              document.querySelectorAll('.idm-heartbeat').forEach(el => {
+                el.classList.remove('idm-heartbeat');
+              });
+            }, 4000);
+          });
         }
 
         // Create small circle at the start point (origin of the ray)
@@ -971,17 +1049,27 @@ function LiveChart() {
             const idmY = series.priceToCoordinate(idmPrice);
             if (idmY !== null) {
               const idmColor = '#a78bfa';
+              const idmId = `idm-${idmPrice}-${pattern.associated_idm_time || 0}`;
 
               // Use the IDM's actual candle timestamp from the backend
               let idmStartTime = pattern.associated_idm_time || startTime;
 
               let idmStartX = timeScale.timeToCoordinate(idmStartTime);
               if (idmStartX === null || idmStartX < 0) idmStartX = 0;
-              const idmRayWidth = rightEdge - idmStartX;
+              // Clip IDM ray to end at the MS event's swing point (startTime) it validates
+              let idmEndX = rightEdge;
+              if (startTime) {
+                const msX = timeScale.timeToCoordinate(startTime);
+                if (msX !== null && msX > idmStartX) {
+                  idmEndX = Math.min(msX, rightEdge);
+                }
+              }
+              const idmRayWidth = idmEndX - idmStartX;
 
               // Dashed horizontal ray for the associated IDM
               const idmRay = document.createElement('div');
               idmRay.className = 'pattern-ray-overlay';
+              idmRay.dataset.idmId = idmId;
               idmRay.style.cssText = `
                 position: absolute;
                 left: ${idmStartX}px;
@@ -1000,6 +1088,7 @@ function LiveChart() {
               if (idmStartX > 0) {
                 const idmOrigin = document.createElement('div');
                 idmOrigin.className = 'pattern-ray-overlay';
+                idmOrigin.dataset.idmId = idmId;
                 idmOrigin.style.cssText = `
                   position: absolute;
                   left: ${idmStartX - 3}px;
@@ -1019,6 +1108,7 @@ function LiveChart() {
               // Centered label on the IDM ray
               const idmLabelEl = document.createElement('div');
               idmLabelEl.className = 'pattern-ray-overlay';
+              idmLabelEl.dataset.idmId = idmId;
               const fmtIdm = idmPrice > 1000 ? idmPrice.toFixed(2) : idmPrice > 1 ? idmPrice.toFixed(4) : idmPrice.toFixed(6);
               const idmLabelX = idmStartX + idmRayWidth / 2;
               idmLabelEl.style.cssText = `
@@ -1116,8 +1206,52 @@ function LiveChart() {
 
     patterns.forEach((pattern, idx) => {
       const patternType = pattern.pattern_type;
-      const patternInfo = PATTERN_TYPE_MAP[patternType] || { short: patternType, color: '#9ca3af', direction: 'neutral' };
+      let patternInfo = PATTERN_TYPE_MAP[patternType] || { short: patternType, color: '#9ca3af', direction: 'neutral' };
       const patternTimeframe = pattern.timeframe || timeframe;
+
+      // Dynamic PD zone labels based on ICT sub-zones (Video 12)
+      if (patternType === 'premium_zone') {
+        const subZone = pattern.sub_zone || 'premium';
+        const isDeep = subZone === 'deep_premium' || subZone === 'deep_discount';
+        patternInfo = { ...patternInfo, short: isDeep ? 'DEEP PREM' : 'PREM', color: isDeep ? '#d32f2f' : '#ff5252' };
+      } else if (patternType === 'discount_zone') {
+        const subZone = pattern.sub_zone || 'discount';
+        const isDeep = subZone === 'deep_discount' || subZone === 'deep_premium';
+        patternInfo = { ...patternInfo, short: isDeep ? 'DEEP DISC' : 'DISC', color: isDeep ? '#00c853' : '#69f0ae' };
+      }
+
+      // Dynamic FVG labels with PD zone alignment (ICT V13 + V12)
+      if (patternType === 'bullish_fvg' || patternType === 'bearish_fvg') {
+        const aligned = pattern.zone_aligned || false;
+        const lifecycle = pattern.lifecycle || 'fresh';
+        const baseShort = patternType === 'bullish_fvg' ? 'FVG' : 'FVG';
+        const alignTag = aligned ? ' \u2713' : '';
+        const lifeTag = lifecycle === 'partial' ? ' ~' : '';
+        patternInfo = {
+          ...patternInfo,
+          short: baseShort + alignTag + lifeTag,
+          color: aligned ? (patternType === 'bullish_fvg' ? '#00e5ff' : '#ff6e40') : patternInfo.color,
+        };
+      }
+
+      // Dynamic OB labels based on ICT V14 (BOS validity + lifecycle + confluence)
+      if (patternType === 'bullish_order_block' || patternType === 'bearish_order_block') {
+        const bosValid = pattern.bos_validity || 'none';
+        const lifecycle = pattern.lifecycle || 'fresh';
+        const fvgConf = pattern.fvg_confluence || false;
+        const zoneAligned = pattern.zone_aligned || false;
+        const validTag = { confirmed: ' \u2713', unconfirmed: ' ?', none: '' }[bosValid] || '';
+        const confTag = fvgConf ? '+FVG' : '';
+        const lifeTag = lifecycle === 'partial' ? ' ~' : (lifecycle === 'mitigated' || lifecycle === 'invalid') ? ' \u2718' : '';
+        patternInfo = {
+          ...patternInfo,
+          short: 'OB' + validTag + confTag + lifeTag,
+          color: bosValid === 'confirmed'
+            ? (zoneAligned ? (patternType === 'bullish_order_block' ? '#00e5ff' : '#ff6e40') : patternInfo.color)
+            : (bosValid === 'unconfirmed' ? '#78909c' : '#616161'),
+        };
+      }
+
       const label = `${patternInfo.short} ${getTimeframeLabel(patternTimeframe)}`;
 
       const highPrice = pattern.high || pattern.price_high || pattern.price;

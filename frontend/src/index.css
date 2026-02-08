@@ -746,6 +746,31 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* IDM heartbeat glow animation - triggered when clicking MS labels */
+@keyframes idm-heartbeat {
+  0%, 100% {
+    box-shadow: 0 0 4px #a78bfa60;
+    opacity: 1;
+  }
+  25% {
+    box-shadow: 0 0 18px 6px #a78bfa, 0 0 36px 12px #a78bfa80;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 4px #a78bfa60;
+    opacity: 0.5;
+  }
+  75% {
+    box-shadow: 0 0 18px 6px #a78bfa, 0 0 36px 12px #a78bfa80;
+    opacity: 1;
+  }
+}
+
+.idm-heartbeat {
+  animation: idm-heartbeat 0.8s ease-in-out infinite !important;
+  z-index: 20 !important;
+}
+
 /* Stagger children animations */
 .stagger-children > * {
   animation: slideUp var(--transition-normal) ease-out both;

@@ -1125,11 +1125,22 @@ class MLPatternEngine:
                 if traits['institutional']:
                     reasoning_parts.append(f"   ↳ Indicates institutional activity")
 
-        # Per-IDM reasoning (pin-point detail for each plotted inducement)
+        # Per-IDM reasoning with VPB bridge (pin-point detail for each plotted inducement)
         if detected_pattern_details:
             idm_details = [p for p in detected_pattern_details
                            if 'inducement' in p.get('pattern_type', '')]
             if idm_details:
+                # VPB summary (Video 3: Valid Pullback = Valid Inducement)
+                valid_count = sum(1 for i in idm_details if i.get('validity') == 'valid')
+                impulse_count = sum(1 for i in idm_details if i.get('validity') == 'impulse_trap')
+                unconf_count = sum(1 for i in idm_details if i.get('validity') == 'unconfirmed')
+                total = len(idm_details)
+                reasoning_parts.append("")
+                reasoning_parts.append(f"🔄 **VALID PULLBACK** (V3: \"VPB = Valid IDM\"):")
+                reasoning_parts.append(
+                    f"   {valid_count}/{total} IDMs have valid pullbacks (liquidity swept) | "
+                    f"{impulse_count} impulse traps (V4 Rule 3) | {unconf_count} unconfirmed"
+                )
                 reasoning_parts.append("")
                 reasoning_parts.append("🔍 **INDUCEMENT DETAILS** (per-IDM analysis):")
                 for idm in idm_details:
@@ -1153,13 +1164,104 @@ class MLPatternEngine:
                 for ms in ms_details:
                     validity = ms.get('validity', 'unknown')
                     pt = ms.get('pattern_type', '')
+                    classification = ms.get('classification', 'unknown')
                     emoji = {
                         'validated': '✅', 'weak': '⚠️', 'impulse': '🪤',
                         'confirmed': '✅', 'unconfirmed': '⚠️', 'fake': '🚫',
                     }.get(validity, '❓')
+                    # V6 classification tag for BOS/CHoCH events
+                    cls_tag = ''
+                    if pt.startswith('bos_') or pt.startswith('choch_'):
+                        cls_map = {
+                            'swing_hl': ' [Swing H/L]', 'bos': ' [BOS]',
+                            'liquidity_sweep': ' [Liq Sweep]', 'fake_bos': ' [Fake]',
+                        }
+                        cls_tag = cls_map.get(classification, '')
                     ms_reasoning = ms.get('reasoning', ms.get('description', 'No reasoning'))
                     label = ms.get('label', pt)
-                    reasoning_parts.append(f"   {emoji} {label}: {ms_reasoning}")
+                    reasoning_parts.append(f"   {emoji} {label}{cls_tag}: {ms_reasoning}")
+
+        # Per-PD reasoning (Premium/Discount zone analysis — ICT Video 12)
+        if detected_pattern_details:
+            pd_details = [p for p in detected_pattern_details
+                          if p.get('pattern_type', '') in ('premium_zone', 'discount_zone', 'equilibrium')]
+            if pd_details:
+                pd_reasoning = pd_details[0].get('reasoning', '')
+                if pd_reasoning:
+                    sub_zone = pd_details[0].get('sub_zone', zone)
+                    zone_emoji = {
+                        'deep_premium': '🔴', 'premium': '🟠',
+                        'discount': '🟢', 'deep_discount': '🟣',
+                    }.get(sub_zone, '⚪')
+                    reasoning_parts.append("")
+                    reasoning_parts.append(f"📊 **PREMIUM/DISCOUNT ZONE** (ICT V12):")
+                    reasoning_parts.append(f"   {zone_emoji} {pd_reasoning}")
+
+        # Per-FVG reasoning (Fair Value Gap analysis — ICT Video 13)
+        if detected_pattern_details:
+            fvg_details = [p for p in detected_pattern_details
+                           if '_fvg' in p.get('pattern_type', '')]
+            if fvg_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("📐 **FVG DETAILS** (ICT V13 — 70-80% fill rate):")
+                for fvg in fvg_details[:5]:  # Limit to 5 most relevant
+                    aligned = fvg.get('zone_aligned', False)
+                    lifecycle = fvg.get('lifecycle', 'fresh')
+                    fvg_reasoning = fvg.get('reasoning', '')
+                    emoji = '✅' if aligned else '⚠️'
+                    life_emoji = {'fresh': '🆕', 'partial': '🔄', 'spent': '💤'}.get(lifecycle, '❓')
+                    if fvg_reasoning:
+                        reasoning_parts.append(f"   {emoji}{life_emoji} {fvg_reasoning}")
+
+        # Per-OB reasoning (Order Blocks — ICT Video 14)
+        if detected_pattern_details:
+            ob_details = [p for p in detected_pattern_details
+                          if 'order_block' in p.get('pattern_type', '') and 'mitigation' not in p.get('pattern_type', '')]
+            if ob_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("🧱 **ORDER BLOCK DETAILS** (ICT V14 — last opposite candle before BOS):")
+                for ob in ob_details[:6]:  # Limit to 6 most relevant
+                    bos_valid = ob.get('bos_validity', 'none')
+                    lifecycle = ob.get('lifecycle', 'fresh')
+                    zone_aligned = ob.get('zone_aligned', False)
+                    fvg_conf = ob.get('fvg_confluence', False)
+                    ob_reasoning = ob.get('reasoning', '')
+                    # Emojis based on status
+                    bos_emoji = {'confirmed': '✅', 'unconfirmed': '⚠️', 'none': '❌'}.get(bos_valid, '❓')
+                    life_emoji = {'fresh': '🆕', 'partial': '🔄', 'mitigated': '💤', 'invalid': '🚫'}.get(lifecycle, '❓')
+                    conf_tag = ' +FVG' if fvg_conf else ''
+                    zone_tag = ' ALIGNED' if zone_aligned else ''
+                    if ob_reasoning:
+                        reasoning_parts.append(f"   {bos_emoji}{life_emoji}{conf_tag}{zone_tag} {ob_reasoning}")
+
+        # Per-LIQ reasoning (Liquidity levels — ICT Video 2/6)
+        if detected_pattern_details:
+            liq_details = [p for p in detected_pattern_details
+                           if p.get('pattern_type', '') in ('buyside_liquidity', 'sellside_liquidity')]
+            if liq_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("💧 **LIQUIDITY LEVELS** (ICT V2/V6):")
+                for liq in liq_details:
+                    swept = liq.get('swept', False)
+                    sweep_t = liq.get('sweep_type', 'none')
+                    is_eq = liq.get('is_equal_level', False)
+                    liq_reasoning = liq.get('reasoning', '')
+                    emoji = '✅' if swept else '🎯'
+                    eq_tag = ' (EQ)' if is_eq else ''
+                    if liq_reasoning:
+                        reasoning_parts.append(f"   {emoji}{eq_tag} {liq_reasoning}")
+
+        # Per-ENG_LIQ reasoning (Engineered Liquidity — ICT V8/V9)
+        if detected_pattern_details:
+            eng_details = [p for p in detected_pattern_details
+                           if p.get('pattern_type', '') == 'eng_liq']
+            if eng_details:
+                reasoning_parts.append("")
+                reasoning_parts.append("🪤 **ENGINEERED LIQUIDITY** (ICT V8/V9 — retail traps):")
+                for eng in eng_details[:3]:
+                    eng_reasoning = eng.get('reasoning', '')
+                    if eng_reasoning:
+                        reasoning_parts.append(f"   ⚠️ {eng_reasoning}")
 
         # Explain unlearned patterns
         unlearned = self.get_unlearned_patterns()

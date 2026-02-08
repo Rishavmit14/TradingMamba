@@ -517,10 +517,12 @@ async def analyze_symbol(
 
         tf_list = [tf.strip() for tf in timeframes.split(",")]
 
-        # Fetch market data
+        # Fetch market data - higher TFs need more candles for historical context
+        TF_LIMITS = {'W1': 500, 'MN': 300, 'D1': 365}
         market_data = {}
         for tf in tf_list:
-            df = market_service.get_ohlcv(symbol, tf, limit=200)
+            limit = TF_LIMITS.get(tf, 200)
+            df = market_service.get_ohlcv(symbol, tf, limit=limit)
             if df is not None and not df.empty:
                 market_data[tf] = df
 
@@ -573,6 +575,13 @@ async def analyze_symbol(
                         'timeframe': tf,
                         'strength': float(ob.strength) if ob.strength else 0.5,
                         'mitigated': bool(ob.mitigated),
+                        # ICT V14 enhancement fields
+                        'bos_validity': getattr(ob, 'bos_validity', 'none'),
+                        'lifecycle': getattr(ob, 'lifecycle', 'fresh'),
+                        'zone_aligned': getattr(ob, 'zone_aligned', False),
+                        'fvg_confluence': getattr(ob, 'fvg_confluence', False),
+                        'pd_zone': getattr(ob, 'pd_zone', 'unknown'),
+                        'reasoning': getattr(ob, 'reasoning', ''),
                     })
 
                 # Mitigated order blocks (faded visualization)
@@ -584,6 +593,9 @@ async def analyze_symbol(
                         'start_index': int(mob.start_index),
                         'timeframe': tf,
                         'mitigated': True,
+                        # ICT V14 lifecycle
+                        'lifecycle': getattr(mob, 'lifecycle', 'mitigated'),
+                        'reasoning': getattr(mob, 'reasoning', ''),
                     })
 
                 for fvg in analysis.fair_value_gaps:
@@ -597,6 +609,11 @@ async def analyze_symbol(
                         'timeframe': tf,
                         'filled': False,
                         'fill_percentage': float(fvg.fill_percentage) if fvg.fill_percentage else 0.0,
+                        # ICT V13 + V12 PD zone alignment
+                        'pd_zone': getattr(fvg, 'pd_zone', 'unknown'),
+                        'zone_aligned': getattr(fvg, 'zone_aligned', False),
+                        'lifecycle': getattr(fvg, 'lifecycle', 'fresh'),
+                        'reasoning': getattr(fvg, 'reasoning', ''),
                     })
 
                 # Also add market structure events (BOS/CHoCH + HH/HL/LH/LL)
@@ -608,11 +625,20 @@ async def analyze_symbol(
                             'price': float(event.level),
                             'timeframe': tf,
                             'description': event.description,
+                            # V6 3-way classification
+                            'classification': getattr(event, 'classification', 'unknown'),
                             # ICT validation fields (3 SMC Rules)
                             'validity': getattr(event, 'validity', 'unknown'),
                             'reasoning': getattr(event, 'reasoning', ''),
                             'label': getattr(event, 'label', ''),
                         }
+                        # Include timestamp for chart positioning
+                        evt_ts = getattr(event, 'timestamp', None)
+                        if evt_ts is not None:
+                            if hasattr(evt_ts, 'timestamp'):
+                                entry['time'] = int(evt_ts.timestamp())
+                            elif isinstance(evt_ts, (int, float)):
+                                entry['time'] = int(evt_ts)
                         # Include associated IDM data for frontend linked marker
                         idm_price = getattr(event, 'associated_idm_price', 0.0)
                         if idm_price and idm_price > 0:
@@ -624,6 +650,13 @@ async def analyze_symbol(
                                     entry['associated_idm_time'] = int(idm_ts.timestamp())
                                 elif isinstance(idm_ts, (int, float)):
                                     entry['associated_idm_time'] = int(idm_ts)
+                        # Pass end_time for ray clipping (when this MS event's ray should stop)
+                        end_ts = getattr(event, 'end_time', None)
+                        if end_ts is not None:
+                            if hasattr(end_ts, 'timestamp'):
+                                entry['end_time'] = int(end_ts.timestamp())
+                            elif isinstance(end_ts, (int, float)):
+                                entry['end_time'] = int(end_ts)
                         all_patterns.append(entry)
 
                 # Add liquidity levels (equal highs/lows)
@@ -642,7 +675,7 @@ async def analyze_symbol(
                             'timeframe': tf,
                         })
 
-                # Add buy-side and sell-side liquidity levels
+                # Add buy-side and sell-side liquidity levels (ICT V2/V6 enhanced)
                 if analysis.liquidity_levels.get('buy_side'):
                     for liq in analysis.liquidity_levels['buy_side'][:3]:  # Top 3 BSL
                         all_patterns.append({
@@ -650,6 +683,10 @@ async def analyze_symbol(
                             'price': float(liq.price),
                             'timeframe': tf,
                             'strength': float(liq.strength) if liq.strength else 0.5,
+                            'swept': getattr(liq, 'swept', False),
+                            'sweep_type': getattr(liq, 'sweep_type', 'none'),
+                            'is_equal_level': getattr(liq, 'is_equal_level', False),
+                            'reasoning': getattr(liq, 'reasoning', ''),
                         })
                 if analysis.liquidity_levels.get('sell_side'):
                     for liq in analysis.liquidity_levels['sell_side'][:3]:  # Top 3 SSL
@@ -658,11 +695,27 @@ async def analyze_symbol(
                             'price': float(liq.price),
                             'timeframe': tf,
                             'strength': float(liq.strength) if liq.strength else 0.5,
+                            'swept': getattr(liq, 'swept', False),
+                            'sweep_type': getattr(liq, 'sweep_type', 'none'),
+                            'is_equal_level': getattr(liq, 'is_equal_level', False),
+                            'reasoning': getattr(liq, 'reasoning', ''),
                         })
 
                 # ============================================================
                 # NEW ICT PATTERNS (from Audio-First Training)
                 # ============================================================
+
+                # Engineered Liquidity zones (ICT V8/V9)
+                for eng in getattr(analysis, 'eng_liq_zones', []):
+                    all_patterns.append({
+                        'pattern_type': 'eng_liq',
+                        'price': float(eng['level']),
+                        'timeframe': tf,
+                        'eng_type': eng.get('type', 'unknown'),
+                        'strength': float(eng.get('strength', 0.5)),
+                        'count': eng.get('count', 0),
+                        'reasoning': eng.get('reasoning', ''),
+                    })
 
                 # Displacement candles
                 for disp in analysis.displacements:
@@ -749,7 +802,7 @@ async def analyze_symbol(
                 # events (emitted above) are sufficient and include ICT validation.
                 # Raw swing points are still used internally for IDM detection.
 
-                # Premium/Discount zone overlay
+                # Premium/Discount zone overlay (ICT Video 12 — validated swing range)
                 pd_data = analysis.premium_discount
                 if pd_data.get('range_high') and pd_data.get('range_low') and pd_data.get('equilibrium'):
                     all_patterns.append({
@@ -757,23 +810,32 @@ async def analyze_symbol(
                         'high': float(pd_data['range_high']),
                         'low': float(pd_data['equilibrium']),
                         'timeframe': tf,
+                        'sub_zone': pd_data.get('sub_zone', 'premium'),
+                        'reasoning': pd_data.get('reasoning', ''),
                     })
                     all_patterns.append({
                         'pattern_type': 'discount_zone',
                         'high': float(pd_data['equilibrium']),
                         'low': float(pd_data['range_low']),
                         'timeframe': tf,
+                        'sub_zone': pd_data.get('sub_zone', 'discount'),
+                        'reasoning': pd_data.get('reasoning', ''),
                     })
                     all_patterns.append({
                         'pattern_type': 'equilibrium',
                         'price': float(pd_data['equilibrium']),
                         'timeframe': tf,
+                        'reasoning': pd_data.get('reasoning', ''),
                     })
 
                 analyses[tf] = {
                     'bias': analysis.bias.value,
                     'bias_confidence': float(analysis.bias_confidence),
                     'zone': analysis.premium_discount.get('zone', 'neutral'),
+                    'zone_simple': analysis.premium_discount.get('zone_simple', 'neutral'),
+                    'sub_zone': analysis.premium_discount.get('sub_zone', 'neutral'),
+                    'pd_percentage': analysis.premium_discount.get('percentage', 50.0),
+                    'pd_reasoning': analysis.premium_discount.get('reasoning', ''),
                     'order_blocks': len(analysis.order_blocks),
                     'fvgs': len(analysis.fair_value_gaps),
                     'market_structure': analysis.market_structure.value,
@@ -796,13 +858,20 @@ async def analyze_symbol(
                               ['higher_high', 'higher_low', 'lower_high', 'lower_low',
                                'bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish',
                                'swing_high', 'swing_low']]
+        pd_pattern_details = [p for p in all_patterns if p.get('pattern_type', '') in
+                              ['premium_zone', 'discount_zone', 'equilibrium']]
+        fvg_pattern_details = [p for p in all_patterns if '_fvg' in p.get('pattern_type', '')]
+        liq_pattern_details = [p for p in all_patterns if p.get('pattern_type', '') in
+                               ['buyside_liquidity', 'sellside_liquidity']]
+        eng_liq_details = [p for p in all_patterns if p.get('pattern_type', '') == 'eng_liq']
+        ob_pattern_details = [p for p in all_patterns if 'order_block' in p.get('pattern_type', '')]
 
         # Generate ML-based reasoning (ONLY from learned knowledge, not generic SMC)
         ml_reasoning = ml_engine.generate_ml_reasoning(
             detected_patterns=all_ml_patterns_used,
             bias=analyses.get(tf_list[0], {}).get('bias', 'neutral'),
             zone=analyses.get(tf_list[0], {}).get('zone', 'neutral'),
-            detected_pattern_details=idm_pattern_details + ms_pattern_details,
+            detected_pattern_details=idm_pattern_details + ms_pattern_details + pd_pattern_details + fvg_pattern_details + liq_pattern_details + eng_liq_details + ob_pattern_details,
         )
 
         # Get entry/exit reasoning from ML knowledge
@@ -1027,6 +1096,11 @@ async def quick_signal(
                     'start_index': ob.start_index,
                     'timeframe': 'H1',
                     'strength': ob.strength,
+                    'bos_validity': getattr(ob, 'bos_validity', 'none'),
+                    'lifecycle': getattr(ob, 'lifecycle', 'fresh'),
+                    'zone_aligned': getattr(ob, 'zone_aligned', False),
+                    'fvg_confluence': getattr(ob, 'fvg_confluence', False),
+                    'reasoning': getattr(ob, 'reasoning', ''),
                 })
             for fvg in analysis.fair_value_gaps:
                 if fvg.filled:
