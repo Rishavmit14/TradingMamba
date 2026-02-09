@@ -295,7 +295,11 @@ class SmartMoneyAnalyzer:
         # Step 1: Find raw swing points (basic analysis, always available)
         swing_points = self.find_swing_points(data)
 
-        # Step 1a: Detect inducements EARLY (needed for swing validation)
+        # Step 1a: Derive intermediate HL/LH from 3-candle patterns in strong trends
+        # Catches swings missed by lookback window (e.g., BTC 2021 bull $28K HL)
+        swing_points = self.derive_trend_swing_points(data, swing_points)
+
+        # Step 1b: Detect inducements EARLY (needed for swing validation)
         # IDM detection feeds into swing validation → market structure
         inducements = []
         if self._can_detect('inducement'):
@@ -973,6 +977,152 @@ class SmartMoneyAnalyzer:
 
         return sorted(swing_points, key=lambda x: x.index)
 
+    def derive_trend_swing_points(
+        self, data: 'pd.DataFrame', swing_points: List[SwingPoint]
+    ) -> List[SwingPoint]:
+        """
+        Derive intermediate HL/LH swing points using 3-candle patterns in strong trends.
+
+        Standard lookback-based detection misses intermediate swings during strong
+        one-directional moves (e.g., BTC 2021 bull run where weekly lows kept rising).
+
+        Method:
+        - Bullish: Find 3-candle swing highs → track HH sequence → for each HH that
+          gets broken upward, derive HL = lowest low between HH and its break point.
+        - Bearish: Find 3-candle swing lows → track LL sequence → for each LL that
+          gets broken downward, derive LH = highest high between LL and its break point.
+
+        Derived swings are tagged with _is_derived=True and flow through validation
+        and market structure analysis normally.
+        """
+        if data is None or len(data) < 5:
+            return swing_points
+
+        highs = data['high'].values
+        lows = data['low'].values
+        closes = data['close'].values
+        opens = data['open'].values
+        n = len(data)
+
+        # Type-aware dedup: only skip if same-type swing is nearby
+        existing_low_indices = {sp.index for sp in swing_points if sp.type == 'low'}
+        existing_high_indices = {sp.index for sp in swing_points if sp.type == 'high'}
+        derived = []
+
+        # ---- BULLISH: 3-candle swing highs → HH → derive HL ----
+        # 3-candle swing high: C2 high > C1 high AND C2 high > C3 high
+        three_candle_highs = []
+        for i in range(1, n - 1):
+            if highs[i] > highs[i - 1] and highs[i] > highs[i + 1]:
+                three_candle_highs.append((i, float(highs[i])))
+
+        # Filter to HH sequence (strictly increasing highs)
+        hh_seq = []
+        max_high = -float('inf')
+        for idx, price in three_candle_highs:
+            if price > max_high:
+                hh_seq.append((idx, price))
+                max_high = price
+
+        # For each HH, find when broken upward → derive HL between HH and break
+        for hh_idx, hh_price in hh_seq:
+            # Find first candle where body closes above HH
+            break_idx = None
+            for k in range(hh_idx + 1, n):
+                body_high = max(closes[k], opens[k])
+                if body_high > hh_price:
+                    break_idx = k
+                    break
+
+            if break_idx is None or break_idx - hh_idx < 2:
+                continue  # HH never broken, or no room for HL
+
+            # HL = lowest low between HH and break (exclusive of HH candle)
+            search_range = lows[hh_idx + 1:break_idx]
+            if len(search_range) == 0:
+                continue
+
+            rel_min = int(np.argmin(search_range))
+            hl_idx = hh_idx + 1 + rel_min
+            hl_price = float(lows[hl_idx])
+
+            # Minimum pullback filter: at least 0.5% below HH
+            if (hh_price - hl_price) / max(hh_price, 1e-8) < 0.005:
+                continue
+
+            # Dedup: skip if within 2 candles of existing same-type (low) swing
+            if any(abs(hl_idx - ei) <= 2 for ei in existing_low_indices):
+                continue
+
+            ts = data.index[hl_idx] if hasattr(data.index[hl_idx], 'timestamp') else None
+            sp = SwingPoint(
+                index=hl_idx, price=hl_price, type='low', timestamp=ts, strength=1,
+                reasoning=f'Derived HL: lowest between HH@{hh_price:.0f}[idx={hh_idx}] and break[idx={break_idx}]'
+            )
+            sp._is_derived = True
+            derived.append(sp)
+            existing_low_indices.add(hl_idx)
+
+        # ---- BEARISH: 3-candle swing lows → LL → derive LH ----
+        # 3-candle swing low: C2 low < C1 low AND C2 low < C3 low
+        three_candle_lows = []
+        for i in range(1, n - 1):
+            if lows[i] < lows[i - 1] and lows[i] < lows[i + 1]:
+                three_candle_lows.append((i, float(lows[i])))
+
+        # Filter to LL sequence (strictly decreasing lows)
+        ll_seq = []
+        min_low = float('inf')
+        for idx, price in three_candle_lows:
+            if price < min_low:
+                ll_seq.append((idx, price))
+                min_low = price
+
+        # For each LL, find when broken downward → derive LH between LL and break
+        for ll_idx, ll_price in ll_seq:
+            # Find first candle where body closes below LL
+            break_idx = None
+            for k in range(ll_idx + 1, n):
+                body_low = min(closes[k], opens[k])
+                if body_low < ll_price:
+                    break_idx = k
+                    break
+
+            if break_idx is None or break_idx - ll_idx < 2:
+                continue
+
+            # LH = highest high between LL and break (exclusive of LL candle)
+            search_range = highs[ll_idx + 1:break_idx]
+            if len(search_range) == 0:
+                continue
+
+            rel_max = int(np.argmax(search_range))
+            lh_idx = ll_idx + 1 + rel_max
+            lh_price = float(highs[lh_idx])
+
+            # Minimum pullback filter: at least 0.5% above LL
+            if (lh_price - ll_price) / max(ll_price, 1e-8) < 0.005:
+                continue
+
+            # Dedup: skip if within 2 candles of existing same-type (high) swing
+            if any(abs(lh_idx - ei) <= 2 for ei in existing_high_indices):
+                continue
+
+            ts = data.index[lh_idx] if hasattr(data.index[lh_idx], 'timestamp') else None
+            sp = SwingPoint(
+                index=lh_idx, price=lh_price, type='high', timestamp=ts, strength=1,
+                reasoning=f'Derived LH: highest between LL@{ll_price:.0f}[idx={ll_idx}] and break[idx={break_idx}]'
+            )
+            sp._is_derived = True
+            derived.append(sp)
+            existing_high_indices.add(lh_idx)
+
+        if derived:
+            logger.info(f"Derived {len(derived)} trend swing points (3-candle method)")
+            swing_points = sorted(swing_points + derived, key=lambda x: x.index)
+
+        return swing_points
+
     def validate_swing_points(
         self,
         data: 'pd.DataFrame',
@@ -1077,6 +1227,13 @@ class SmartMoneyAnalyzer:
             else:
                 validity = 'raw'
 
+            # Derived swings (from 3-candle trend method) that would otherwise
+            # be 'raw' get promoted to 'derived' — structurally validated by
+            # the HH→break→HL chain even without IDM.
+            _is_derived = getattr(sp, '_is_derived', False)
+            if _is_derived and validity == 'raw':
+                validity = 'derived'
+
             # ---- Build per-swing reasoning ----
             price_str = f'{sp.price:.2f}' if sp.price > 100 else f'{sp.price:.5f}'
             swing_type_str = 'Swing High' if sp.type == 'high' else 'Swing Low'
@@ -1099,6 +1256,8 @@ class SmartMoneyAnalyzer:
 
             if is_impulse:
                 reasoning_lines.append('IMPULSE swing - no pullback, low/high IS inducement (Video 4 Rule 3)')
+            if _is_derived:
+                reasoning_lines.append(f'DERIVED swing (3-candle trend method) — {sp.reasoning}')
 
             validity_str = validity.upper()
             reasoning_lines.append(f'Classification: {validity_str} | Strong: {"Yes" if is_strong else "No"}')
@@ -1107,7 +1266,7 @@ class SmartMoneyAnalyzer:
 
             # ---- Build chart label ----
             # Label will be set by analyze_market_structure based on HH/HL/LH/LL context
-            validity_tag = {'validated': '\u2713', 'weak': '', 'impulse': '\u26a1', 'raw': ''}.get(validity, '')
+            validity_tag = {'validated': '\u2713', 'weak': '', 'impulse': '\u26a1', 'raw': '', 'derived': '\u25c7'}.get(validity, '')
             label = f'{swing_type_str[:2]} {validity_tag}'.strip()
 
             # Update swing point fields
@@ -1184,9 +1343,9 @@ class SmartMoneyAnalyzer:
 
         def _ms_event(event_type, sp, description):
             """Create a StructureEvent with ICT validation + V6 3-way classification."""
-            validity = sp.validity if sp.validity != 'raw' else 'unknown'
+            validity = sp.validity if sp.validity not in ('raw',) else 'unknown'
             classification = _classify_v6(sp)
-            tag = {'validated': '\u2713', 'weak': '', 'impulse': '\u26a1', 'raw': '', 'unknown': ''}.get(validity, '')
+            tag = {'validated': '\u2713', 'weak': '', 'impulse': '\u26a1', 'derived': '\u25c7', 'raw': '', 'unknown': ''}.get(validity, '')
             # Add classification tag for BOS/Swing H/L distinction
             cls_tag = {'swing_hl': ' [SHL]', 'bos': ' [BOS]', 'liquidity_sweep': ' [LS]',
                        'fake_bos': ' [FAKE]'}.get(classification, '')
@@ -1418,34 +1577,199 @@ class SmartMoneyAnalyzer:
             evt._breaking_sp_index = breaking_sp.index
             return evt
 
-        # Emit HH/HL/LH/LL labels for ALL consecutive swing pairs (full chart history)
-        for i in range(1, len(all_highs)):
-            if all_highs[i].price > all_highs[i - 1].price:
-                events.append(_ms_event('higher_high', all_highs[i], 'Higher High'))
-            elif all_highs[i].price < all_highs[i - 1].price:
-                events.append(_ms_event('lower_high', all_highs[i], 'Lower High'))
+        def _build_structural_pairs_bullish(all_highs_list, all_lows_list, idm_list, candle_data):
+            """
+            Build structural HH+HL pairs using ICT 3-condition filter.
+            Only labels a swing high as HH if the subsequent pullback creates a valid HL.
 
-        for i in range(1, len(all_lows)):
-            if all_lows[i].price > all_lows[i - 1].price:
-                events.append(_ms_event('higher_low', all_lows[i], 'Higher Low'))
-            elif all_lows[i].price < all_lows[i - 1].price:
-                events.append(_ms_event('lower_low', all_lows[i], 'Lower Low'))
+            Conditions for valid HL (at least one must be met):
+              A) Pullback low has associated IDM (has_idm=True)
+              B) Equal lows: pullback low within ~2% of previous HL price
+              C) Engineered liquidity: pullback low within ~3% below previous HL price
+              Bootstrap: first pair accepted if pullback depth > 1%
+
+            Returns: List of (hh_event, hl_event) tuples
+            """
+            pairs = []
+            last_hh_price = -float('inf')
+            last_hl_price = None
+
+            for i, sh in enumerate(all_highs_list):
+                if sh.price <= last_hh_price:
+                    continue  # Not a higher high candidate
+
+                # Find the next higher high's index (to bound the pullback search)
+                next_higher_idx = None
+                for j in range(i + 1, len(all_highs_list)):
+                    if all_highs_list[j].price > sh.price:
+                        next_higher_idx = all_highs_list[j].index
+                        break
+
+                # Collect lows between this HH and the next HH (or end of data)
+                end_idx = next_higher_idx if next_higher_idx is not None else float('inf')
+                candidate_lows = [sl for sl in all_lows_list
+                                  if sl.index > sh.index and sl.index < end_idx]
+
+                if not candidate_lows:
+                    continue  # No pullback = no valid HL
+
+                # Deepest low in the pullback
+                pullback_low = min(candidate_lows, key=lambda sl: sl.price)
+
+                # Check 3-condition filter
+                condition_met = False
+                condition_reason = ''
+
+                # Condition A: Pullback took its associated IDM
+                if getattr(pullback_low, 'has_idm', False):
+                    condition_met = True
+                    condition_reason = 'IDM taken'
+
+                # Condition B: Equal lows near previous HL (within ~2%)
+                if not condition_met and last_hl_price is not None:
+                    pct_diff = abs(pullback_low.price - last_hl_price) / max(last_hl_price, 1e-8)
+                    if pct_diff <= 0.02:
+                        condition_met = True
+                        condition_reason = f'Equal lows ({pct_diff:.1%} from prev HL)'
+
+                # Condition C: Engineered liquidity near previous HL (within ~3% below)
+                if not condition_met and last_hl_price is not None:
+                    if pullback_low.price < last_hl_price:
+                        below_pct = (last_hl_price - pullback_low.price) / max(last_hl_price, 1e-8)
+                        if below_pct <= 0.03:
+                            condition_met = True
+                            condition_reason = f'Engineered liquidity ({below_pct:.1%} below prev HL)'
+
+                # Bootstrap: first pair has no previous HL — accept if pullback depth > 1%
+                if not condition_met and last_hl_price is None:
+                    depth = (sh.price - pullback_low.price) / max(sh.price, 1e-8)
+                    if depth > 0.01:
+                        condition_met = True
+                        condition_reason = f'Bootstrap ({depth:.1%} pullback)'
+
+                if not condition_met:
+                    continue  # Skip — no valid HL for this HH
+
+                # Valid pair found
+                hh_evt = _ms_event('higher_high', sh, 'Higher High')
+                hl_evt = _ms_event('higher_low', pullback_low, 'Higher Low')
+                # Stash pair condition for debugging
+                hh_evt._pair_condition = condition_reason
+                hl_evt._pair_condition = condition_reason
+                pairs.append((hh_evt, hl_evt))
+
+                last_hh_price = sh.price
+                last_hl_price = pullback_low.price
+
+            return pairs
+
+        def _build_structural_pairs_bearish(all_lows_list, all_highs_list, idm_list, candle_data):
+            """
+            Build structural LL+LH pairs using ICT 3-condition filter (bearish mirror).
+            Only labels a swing low as LL if the rally before it creates a valid LH.
+
+            Bearish structure = descending lows. Compare each low to the PREVIOUS
+            swing low (not a running minimum) so bearish chains can start fresh
+            after bullish phases. Chain resets when lows stop descending.
+
+            Conditions for valid LH (at least one must be met):
+              A) Rally high has associated IDM (has_idm=True)
+              B) Equal highs: rally high within ~2% of previous LH price
+              C) Engineered liquidity: rally high within ~3% above previous LH price
+              Bootstrap: first pair in a new chain accepted if rally depth > 1%
+
+            Returns: List of (ll_event, lh_event) tuples
+            """
+            pairs = []
+            last_lh_price = None  # Previous LH in the current chain
+
+            for i in range(1, len(all_lows_list)):
+                prev_low = all_lows_list[i - 1]
+                curr_low = all_lows_list[i]
+
+                if curr_low.price >= prev_low.price:
+                    # Not a lower low — reset the chain
+                    last_lh_price = None
+                    continue
+
+                # curr_low < prev_low → LL candidate
+                # Find highest high between prev_low and curr_low → LH candidate
+                candidate_highs = [sh for sh in all_highs_list
+                                   if sh.index > prev_low.index and sh.index < curr_low.index]
+
+                if not candidate_highs:
+                    continue  # No rally between them
+
+                rally_high = max(candidate_highs, key=lambda sh: sh.price)
+
+                # Check 3-condition filter
+                condition_met = False
+                condition_reason = ''
+
+                # Condition A: Rally took its associated IDM
+                if getattr(rally_high, 'has_idm', False):
+                    condition_met = True
+                    condition_reason = 'IDM taken'
+
+                # Condition B: Equal highs near previous LH (within ~2%)
+                if not condition_met and last_lh_price is not None:
+                    pct_diff = abs(rally_high.price - last_lh_price) / max(last_lh_price, 1e-8)
+                    if pct_diff <= 0.02:
+                        condition_met = True
+                        condition_reason = f'Equal highs ({pct_diff:.1%} from prev LH)'
+
+                # Condition C: Engineered liquidity near previous LH (within ~3% above)
+                if not condition_met and last_lh_price is not None:
+                    if rally_high.price > last_lh_price:
+                        above_pct = (rally_high.price - last_lh_price) / max(last_lh_price, 1e-8)
+                        if above_pct <= 0.03:
+                            condition_met = True
+                            condition_reason = f'Engineered liquidity ({above_pct:.1%} above prev LH)'
+
+                # Bootstrap: first pair in chain has no previous LH — accept if rally depth > 1%
+                if not condition_met and last_lh_price is None:
+                    depth = (rally_high.price - curr_low.price) / max(curr_low.price, 1e-8)
+                    if depth > 0.01:
+                        condition_met = True
+                        condition_reason = f'Bootstrap ({depth:.1%} rally)'
+
+                if not condition_met:
+                    continue  # Skip — no valid LH for this LL
+
+                # Valid pair found
+                ll_evt = _ms_event('lower_low', curr_low, 'Lower Low')
+                lh_evt = _ms_event('lower_high', rally_high, 'Lower High')
+                ll_evt._pair_condition = condition_reason
+                lh_evt._pair_condition = condition_reason
+                pairs.append((ll_evt, lh_evt))
+
+                last_lh_price = rally_high.price
+
+            return pairs
+
+        # ---- Structural-Pair-First HH/HL (Bullish) ----
+        bullish_pairs = _build_structural_pairs_bullish(all_highs, all_lows, inducements, data)
+        for hh_evt, hl_evt in bullish_pairs:
+            events.append(hh_evt)
+            events.append(hl_evt)
+
+        # ---- Structural-Pair-First LL/LH (Bearish) ----
+        bearish_pairs = _build_structural_pairs_bearish(all_lows, all_highs, inducements, data)
+        for ll_evt, lh_evt in bearish_pairs:
+            events.append(ll_evt)
+            events.append(lh_evt)
 
         # Compute end_time for each MS event: ray ends when level is BROKEN by price
-        # Broken = candle body closes beyond the level
-        # Fallback: next same-group event time (if no price break found)
         high_events = [e for e in events if e.type in ('higher_high', 'lower_high')]
         low_events = [e for e in events if e.type in ('higher_low', 'lower_low')]
         high_events.sort(key=lambda e: e.timestamp if e.timestamp else datetime.min)
         low_events.sort(key=lambda e: e.timestamp if e.timestamp else datetime.min)
 
-        # Set next-event fallback end_time first
         for group in (high_events, low_events):
             for i in range(len(group)):
                 if i + 1 < len(group):
                     group[i].end_time = group[i + 1].timestamp
 
-        # Price-break detection: find when a candle body closes beyond the MS level
         if data is not None and len(data) > 0:
             closes = data['close'].values
             opens = data['open'].values
@@ -1455,24 +1779,21 @@ class SmartMoneyAnalyzer:
                     continue
                 level = event.level
                 is_high = event.type in ('higher_high', 'lower_high')
-                # Scan forward from swing candle
                 for k in range(swing_idx + 1, len(closes)):
                     body_high = max(closes[k], opens[k])
                     body_low = min(closes[k], opens[k])
                     if is_high and body_high > level:
-                        # High level broken: candle body closed above it
                         break_ts = data.index[k]
                         if event.end_time is None or (break_ts and break_ts < event.end_time):
                             event.end_time = break_ts
                         break
                     elif not is_high and body_low < level:
-                        # Low level broken: candle body closed below it
                         break_ts = data.index[k]
                         if event.end_time is None or (break_ts and break_ts < event.end_time):
                             event.end_time = break_ts
                         break
 
-        # Bullish structure: HH + HL
+        # Structure determination from recent swings
         if hh and hl:
             structure = MarketStructure.BULLISH
             events.append(StructureEvent(
@@ -1481,8 +1802,6 @@ class SmartMoneyAnalyzer:
                 timestamp=recent_highs[-1].timestamp,
                 description='Higher High and Higher Low confirmed'
             ))
-
-        # Bearish structure: LH + LL
         elif lh and ll:
             structure = MarketStructure.BEARISH
             events.append(StructureEvent(
@@ -1491,189 +1810,94 @@ class SmartMoneyAnalyzer:
                 timestamp=recent_lows[-1].timestamp,
                 description='Lower High and Lower Low confirmed'
             ))
-
         else:
             structure = MarketStructure.CONSOLIDATION
 
-        # BOS/CHoCH: generated AFTER pair-aware reclassification (see below)
+        # ---- BOS/CHoCH from structural pairs (Bullish) ----
+        bp_hi = [hh_e for hh_e, hl_e in bullish_pairs]
+        bp_lo = [hl_e for hh_e, hl_e in bullish_pairs]
 
-        # ---- ICT Pair-aware MS reclassification (V1-V3 + V6) ----
-        # SMC doesn't mark every swing. If a swing doesn't follow the rules,
-        # it's not structural — and its pair partner is also not structural.
-        # Step 1: Reclassify validated MS against only other validated MS.
-        # Step 2: Remove orphaned validated swings with no valid pair partner.
-        # Step 3: Promote weak patterns with V6 swing_hl classification (body-close
-        #         IDM sweep = highest quality), reclassify & pair-filter them too.
-        _ms_types_set = {'higher_high', 'lower_high', 'higher_low', 'lower_low'}
-        _lbl = {'higher_high': 'HH', 'higher_low': 'HL',
-                'lower_high': 'LH', 'lower_low': 'LL'}
-        _dsc = {'higher_high': 'Higher High', 'higher_low': 'Higher Low',
-                'lower_high': 'Lower High', 'lower_low': 'Lower Low'}
-
-        val_hi = sorted(
-            [e for e in events if e.type in ('higher_high', 'lower_high')
-             and e.validity == 'validated'],
-            key=lambda e: e.timestamp or datetime.min)
-        val_lo = sorted(
-            [e for e in events if e.type in ('higher_low', 'lower_low')
-             and e.validity == 'validated'],
-            key=lambda e: e.timestamp or datetime.min)
-
-        # Reclassify validated highs against validated-only references
-        for i in range(1, len(val_hi)):
-            new_t = 'higher_high' if val_hi[i].level > val_hi[i - 1].level else 'lower_high'
-            if val_hi[i].type != new_t:
-                val_hi[i].type = new_t
-                val_hi[i].label = f'{_lbl[new_t]} \u2713'
-                val_hi[i].description = f'{_dsc[new_t]} (validated)'
-
-        # Reclassify validated lows against validated-only references
-        for i in range(1, len(val_lo)):
-            new_t = 'higher_low' if val_lo[i].level > val_lo[i - 1].level else 'lower_low'
-            if val_lo[i].type != new_t:
-                val_lo[i].type = new_t
-                val_lo[i].label = f'{_lbl[new_t]} \u2713'
-                val_lo[i].description = f'{_dsc[new_t]} (validated)'
-
-        # --- V6 body-swept weak promotion ---
-        # Weak patterns where IDM was swept by candle body (idm_sweep_type='body')
-        # are the highest quality weak swings. Reclassify against combined set.
-        weak_body_hi = sorted(
-            [e for e in events if e.type in ('higher_high', 'lower_high')
-             and e.validity == 'weak' and e.idm_sweep_type == 'body'],
-            key=lambda e: e.timestamp or datetime.min)
-        weak_body_lo = sorted(
-            [e for e in events if e.type in ('higher_low', 'lower_low')
-             and e.validity == 'weak' and e.idm_sweep_type == 'body'],
-            key=lambda e: e.timestamp or datetime.min)
-
-        # --- Include impulse swings in MS pipeline ---
-        # Impulse swings (sharp moves without pullback) are structurally significant.
-        # A crash breaking below HL is the strongest form of bearish CHoCH.
-        # R4 displacement scoring handles their quality (high displacement = confirmed).
-        impulse_hi = sorted(
-            [e for e in events if e.type in ('higher_high', 'lower_high')
-             and e.validity == 'impulse'],
-            key=lambda e: e.timestamp or datetime.min)
-        impulse_lo = sorted(
-            [e for e in events if e.type in ('higher_low', 'lower_low')
-             and e.validity == 'impulse'],
-            key=lambda e: e.timestamp or datetime.min)
-
-        # Reclassify non-validated highs against combined refs
-        all_hi = sorted(val_hi + weak_body_hi + impulse_hi, key=lambda e: e.timestamp or datetime.min)
-        for i in range(1, len(all_hi)):
-            if all_hi[i].validity == 'validated':
-                continue  # Already reclassified above
-            new_t = 'higher_high' if all_hi[i].level > all_hi[i - 1].level else 'lower_high'
-            if all_hi[i].type != new_t:
-                all_hi[i].type = new_t
-                all_hi[i].label = _lbl[new_t]
-                suffix = 'impulse' if all_hi[i].validity == 'impulse' else 'weak body-swept'
-                all_hi[i].description = f'{_dsc[new_t]} ({suffix})'
-
-        # Reclassify non-validated lows against combined refs
-        all_lo = sorted(val_lo + weak_body_lo + impulse_lo, key=lambda e: e.timestamp or datetime.min)
-        for i in range(1, len(all_lo)):
-            if all_lo[i].validity == 'validated':
-                continue  # Already reclassified above
-            new_t = 'higher_low' if all_lo[i].level > all_lo[i - 1].level else 'lower_low'
-            if all_lo[i].type != new_t:
-                all_lo[i].type = new_t
-                all_lo[i].label = _lbl[new_t]
-                suffix = 'impulse' if all_lo[i].validity == 'impulse' else 'weak body-swept'
-                all_lo[i].description = f'{_dsc[new_t]} ({suffix})'
-
-        # Pair detection on combined set: HH↔HL (bullish), LH↔LL (bearish)
-        all_ms = sorted(all_hi + all_lo,
-                        key=lambda e: e.timestamp or datetime.min)
-        paired_ids = set()
-        for i, e in enumerate(all_ms):
-            if e.type == 'higher_high':
-                for j in range(i - 1, -1, -1):
-                    if all_ms[j].type == 'higher_low':
-                        paired_ids.add(id(e))
-                        paired_ids.add(id(all_ms[j]))
-                        break
-            elif e.type == 'higher_low':
-                for j in range(i + 1, len(all_ms)):
-                    if all_ms[j].type == 'higher_high':
-                        paired_ids.add(id(e))
-                        paired_ids.add(id(all_ms[j]))
-                        break
-                    elif all_ms[j].type in ('lower_high', 'lower_low'):
-                        break
-            elif e.type == 'lower_low':
-                for j in range(i - 1, -1, -1):
-                    if all_ms[j].type == 'lower_high':
-                        paired_ids.add(id(e))
-                        paired_ids.add(id(all_ms[j]))
-                        break
-            elif e.type == 'lower_high':
-                for j in range(i + 1, len(all_ms)):
-                    if all_ms[j].type == 'lower_low':
-                        paired_ids.add(id(e))
-                        paired_ids.add(id(all_ms[j]))
-                        break
-                    elif all_ms[j].type in ('higher_high', 'higher_low'):
-                        break
-
-        # Mark orphaned swings — validated→'orphan', weak→'orphan_weak'
-        for e in all_ms:
-            if id(e) not in paired_ids:
-                e.validity = 'orphan' if e.validity == 'validated' else 'orphan_weak'
-                e.label = _lbl.get(e.type, e.type)
-
-        # ---- Multi-BOS/CHoCH generation from paired MS events ----
-        # Only non-orphaned (paired) MS events produce BOS/CHoCH.
-        # BOS = continuation (HH breaks previous HH, LL breaks previous LL)
-        # CHoCH = reversal (breaks LH upward, or HL downward)
-        paired_hi = sorted(
-            [e for e in all_ms if id(e) in paired_ids
-             and e.type in ('higher_high', 'lower_high')],
-            key=lambda e: e.timestamp or datetime.min)
-        paired_lo = sorted(
-            [e for e in all_ms if id(e) in paired_ids
-             and e.type in ('higher_low', 'lower_low')],
-            key=lambda e: e.timestamp or datetime.min)
-
-        # Consecutive highs: detect BOS/CHoCH on upward level breaks
-        for i in range(1, len(paired_hi)):
-            prev_e, curr_e = paired_hi[i - 1], paired_hi[i]
+        # BOS bullish: consecutive HHs in the pair chain (must be ascending)
+        for i in range(1, len(bp_hi)):
+            prev_e, curr_e = bp_hi[i - 1], bp_hi[i]
             if curr_e.level <= prev_e.level:
-                continue  # No upward break
+                continue  # Not a valid BOS — HH must be higher than prev HH
             curr_sp = getattr(curr_e, '_swing_point', None)
-            prev_sp = getattr(prev_e, '_swing_point', None)
             if not curr_sp:
                 continue
-            if prev_e.type == 'lower_high':
-                # LH broken upward = CHoCH bullish (reversal from bearish)
-                evt = _build_choch_event('bullish', prev_sp, curr_sp, prev_e.level)
-            else:
-                # HH broken upward = BOS bullish (continuation)
-                evt = _build_bos_event('bullish', curr_sp, prev_e.level)
-            evt.timestamp = prev_e.timestamp   # Ray starts at broken level's time
-            evt.end_time = curr_e.timestamp     # Ray ends at break point
-            events.append(evt)
-
-        # Consecutive lows: detect BOS/CHoCH on downward level breaks
-        for i in range(1, len(paired_lo)):
-            prev_e, curr_e = paired_lo[i - 1], paired_lo[i]
-            if curr_e.level >= prev_e.level:
-                continue  # No downward break
-            curr_sp = getattr(curr_e, '_swing_point', None)
-            prev_sp = getattr(prev_e, '_swing_point', None)
-            if not curr_sp:
-                continue
-            if prev_e.type == 'higher_low':
-                # HL broken downward = CHoCH bearish (reversal from bullish)
-                evt = _build_choch_event('bearish', prev_sp, curr_sp, prev_e.level)
-            else:
-                # LL broken downward = BOS bearish (continuation)
-                evt = _build_bos_event('bearish', curr_sp, prev_e.level)
+            evt = _build_bos_event('bullish', curr_sp, prev_e.level)
             evt.timestamp = prev_e.timestamp
             evt.end_time = curr_e.timestamp
             events.append(evt)
+
+        # CHoCH bearish: HL broken downward by a subsequent lower low
+        for i in range(len(bp_lo)):
+            hl_e = bp_lo[i]
+            hl_level = hl_e.level
+            hl_idx = getattr(hl_e, '_swing_index', -1)
+            for lo in all_lows:
+                if lo.index > hl_idx and lo.price < hl_level:
+                    hl_sp = getattr(hl_e, '_swing_point', None)
+                    if hl_sp:
+                        evt = _build_choch_event('bearish', hl_sp, lo, hl_level)
+                        evt.timestamp = hl_e.timestamp
+                        evt.end_time = lo.timestamp
+                        events.append(evt)
+                    break
+
+        # ---- BOS/CHoCH from structural pairs (Bearish) ----
+        bear_lo = [ll_e for ll_e, lh_e in bearish_pairs]
+        bear_hi = [lh_e for ll_e, lh_e in bearish_pairs]
+
+        # BOS bearish: consecutive LLs in the pair chain (must be descending)
+        for i in range(1, len(bear_lo)):
+            prev_e, curr_e = bear_lo[i - 1], bear_lo[i]
+            if curr_e.level >= prev_e.level:
+                continue  # Not a valid BOS — LL must be lower than prev LL (skip cross-chain)
+            curr_sp = getattr(curr_e, '_swing_point', None)
+            if not curr_sp:
+                continue
+            evt = _build_bos_event('bearish', curr_sp, prev_e.level)
+            evt.timestamp = prev_e.timestamp
+            evt.end_time = curr_e.timestamp
+            events.append(evt)
+
+        # CHoCH bullish: LH broken upward by a subsequent higher high
+        for i in range(len(bear_hi)):
+            lh_e = bear_hi[i]
+            lh_level = lh_e.level
+            lh_idx = getattr(lh_e, '_swing_index', -1)
+            for hi in all_highs:
+                if hi.index > lh_idx and hi.price > lh_level:
+                    lh_sp = getattr(lh_e, '_swing_point', None)
+                    if lh_sp:
+                        evt = _build_choch_event('bullish', lh_sp, hi, lh_level)
+                        evt.timestamp = lh_e.timestamp
+                        evt.end_time = hi.timestamp
+                        events.append(evt)
+                    break
+
+        # ---- Deduplicate: if BOS and CHoCH overlap at same level, keep CHoCH ----
+        # CHoCH (trend reversal) is more significant than BOS (continuation) at same level.
+        choch_levels = set()
+        for e in events:
+            if hasattr(e, 'type') and 'choch' in str(getattr(e, 'type', '')):
+                choch_levels.add(round(e.level, 2))
+
+        if choch_levels:
+            deduped = []
+            for e in events:
+                if hasattr(e, 'type') and 'bos' in str(getattr(e, 'type', '')):
+                    bos_level = round(e.level, 2)
+                    # Check if a CHoCH exists within 1% of this BOS level
+                    is_dup = any(
+                        abs(bos_level - cl) / max(cl, 1e-8) < 0.01
+                        for cl in choch_levels
+                    )
+                    if is_dup:
+                        continue  # Drop BOS — CHoCH at same level takes priority
+                deduped.append(e)
+            events = deduped
 
         return structure, events
 

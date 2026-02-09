@@ -789,15 +789,8 @@ function LiveChart() {
 
     const msTypes = ['higher_high', 'higher_low', 'lower_high', 'lower_low'];
 
-    // V6 body-swept filter: show validated + weak patterns with body-close IDM sweep
-    // Body sweep is highest quality IDM interaction (V6 Swing H/L = strictest)
-    rayPatterns = rayPatterns.filter(p => {
-      if (!msTypes.includes(p.pattern_type)) return true; // non-MS: always keep
-      if (p.validity === 'validated') return true;
-      // Weak patterns: only show if IDM was swept by candle body (highest quality)
-      if (p.validity === 'weak' && p.idm_sweep_type === 'body') return true;
-      return false;
-    });
+    // MS visibility: all HH/HL/LH/LL are pre-validated by structural pair builders
+    // (3-condition filter in backend), so show all of them on chart.
 
     // Visible range filtering: only render MS/IDM/BOS/CHoCH rays that overlap the visible chart window
     const timeScale = chart.timeScale();
