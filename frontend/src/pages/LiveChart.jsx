@@ -230,7 +230,12 @@ function LiveChart() {
       });
     });
 
-    if (filteredSections.length === 0) {
+    // Check if BOS/CHoCH patterns exist for dynamic reasoning even if ml_reasoning text has no matching sections
+    const allPatterns = analysis?.patterns || [];
+    const hasBosChochData = (visiblePatterns.change_of_character && allPatterns.some(p => p.pattern_type === 'choch_bullish' || p.pattern_type === 'choch_bearish'))
+      || (visiblePatterns.break_of_structure && allPatterns.some(p => p.pattern_type === 'bos_bullish' || p.pattern_type === 'bos_bearish'));
+
+    if (filteredSections.length === 0 && !hasBosChochData) {
       return {
         hasContent: false,
         message: `No ML analysis available for selected patterns. The ML may not have learned detailed explanations for: ${checkedPatterns.join(', ')}`
@@ -255,12 +260,85 @@ function LiveChart() {
       }
     }
 
+    // Generate dynamic BOS/CHoCH level-by-level reasoning from pattern data
+    const patterns = analysis?.patterns || [];
+    const formatPrice = (p) => p >= 1000 ? `$${p.toLocaleString()}` : `$${p.toFixed(2)}`;
+    const formatTime = (ts) => {
+      if (!ts) return '';
+      const d = new Date(ts * 1000);
+      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    };
+
+    // CHoCH detailed reasoning
+    if (visiblePatterns.change_of_character) {
+      const chochPats = patterns.filter(p => p.pattern_type === 'choch_bullish' || p.pattern_type === 'choch_bearish');
+      if (chochPats.length > 0) {
+        const confirmed = chochPats.filter(p => p.validity === 'confirmed').length;
+        const fake = chochPats.filter(p => p.validity === 'fake').length;
+        const unconfirmed = chochPats.length - confirmed - fake;
+        const visiblePats = chochPats.filter(p => p.validity !== 'fake');
+        let chochSection = `\n\n🔄 **CHANGE OF CHARACTER (CHoCH) — ${visiblePats.length} Shown** (${fake} fake filtered)\n`;
+        chochSection += `↳ V11 Composite Scoring + Reclaim Detection\n\n`;
+        visiblePats.sort((a, b) => (a.time || 0) - (b.time || 0));
+        visiblePats.forEach((p, i) => {
+          const dir = p.pattern_type === 'choch_bullish' ? 'Bullish ↑' : 'Bearish ↓';
+          const icon = p.validity === 'confirmed' ? '✅' : '⚠️';
+          const status = p.validity === 'confirmed' ? 'VALID' : 'UNCONFIRMED';
+          chochSection += `${icon} **CHoCH #${i + 1}: ${dir} at ${formatPrice(p.price)}** — ${status}\n`;
+          chochSection += `  ↳ Established: ${formatTime(p.time)} → Broken: ${formatTime(p.end_time)}\n`;
+          if (p.reasoning) {
+            const rules = p.reasoning.split('|').map(r => r.trim()).filter(Boolean);
+            rules.forEach(rule => {
+              if (rule.match(/^(Bullish|Bearish) CHoCH at/)) return;
+              chochSection += `  • ${rule}\n`;
+            });
+          }
+          chochSection += '\n';
+        });
+        chochSection += `**Summary:** ${confirmed} Valid, ${unconfirmed} Unconfirmed, ${fake} Fake (hidden)`;
+        content += chochSection;
+      }
+    }
+
+    // BOS detailed reasoning
+    if (visiblePatterns.break_of_structure) {
+      const bosPats = patterns.filter(p => p.pattern_type === 'bos_bullish' || p.pattern_type === 'bos_bearish');
+      if (bosPats.length > 0) {
+        let bosSection = `\n\n📐 **BREAK OF STRUCTURE (BOS) — ${bosPats.length} Level${bosPats.length > 1 ? 's' : ''} Detected**\n`;
+        bosSection += `↳ V5/V6 2-Rule + 3-Way Classification applied\n\n`;
+        bosPats.sort((a, b) => (a.time || 0) - (b.time || 0));
+        bosPats.forEach((p, i) => {
+          const dir = p.pattern_type === 'bos_bullish' ? 'Bullish ↑' : 'Bearish ↓';
+          const clsMap = { swing_hl: 'Swing H/L', bos: 'BOS', liquidity_sweep: 'Liquidity Sweep', fake_bos: 'Fake BOS' };
+          const cls = clsMap[p.classification] || p.classification || 'Unknown';
+          const icon = p.validity === 'confirmed' ? '✅' : p.classification === 'fake_bos' ? '❌' : p.classification === 'liquidity_sweep' ? '🔻' : '⚠️';
+          const status = p.validity === 'confirmed' ? 'CONFIRMED' : p.classification === 'fake_bos' ? 'FAKE' : p.classification === 'liquidity_sweep' ? 'LIQ SWEEP' : 'UNCONFIRMED';
+          bosSection += `${icon} **BOS #${i + 1}: ${dir} at ${formatPrice(p.price)}** — ${status} (${cls})\n`;
+          bosSection += `  ↳ Established: ${formatTime(p.time)} → Broken: ${formatTime(p.end_time)}\n`;
+          if (p.reasoning) {
+            const rules = p.reasoning.split('|').map(r => r.trim()).filter(Boolean);
+            rules.forEach(rule => {
+              // Skip the first part (just repeats "Bullish/Bearish BOS at price")
+              if (rule.match(/^(Bullish|Bearish) BOS at/)) return;
+              bosSection += `  • ${rule}\n`;
+            });
+          }
+          bosSection += '\n';
+        });
+        const confirmed = bosPats.filter(p => p.validity === 'confirmed').length;
+        const liqSweep = bosPats.filter(p => p.classification === 'liquidity_sweep').length;
+        const fake = bosPats.filter(p => p.classification === 'fake_bos').length;
+        bosSection += `**Summary:** ${confirmed} Confirmed, ${liqSweep} Liquidity Sweeps, ${fake} Fake, ${bosPats.length - confirmed - liqSweep - fake} Unconfirmed`;
+        content += bosSection;
+      }
+    }
+
     return {
       hasContent: true,
       content,
       patternCount: filteredSections.length
     };
-  }, [analysis?.ml_reasoning, visiblePatterns]);
+  }, [analysis?.ml_reasoning, analysis?.patterns, visiblePatterns]);
 
   // Chart control functions (zoom in, zoom out, reset)
   const handleZoomIn = useCallback(() => {
@@ -428,7 +506,8 @@ function LiveChart() {
       const mid = p.price || ((p.high || 0) + (p.low || 0)) / 2;
       typeCounts[countKey] = (typeCounts[countKey] || 0) + 1;
       const isMarkerType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(pt);
-      const typeLimit = isIdmType ? 12 : isMarkerType ? 999 : 2;
+      const isBosChochType = ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'].includes(pt);
+      const typeLimit = isIdmType ? 12 : isMarkerType ? 999 : isBosChochType ? 999 : 2;
       if (typeCounts[countKey] > typeLimit) continue;
       const isBoxType = ['fvg', 'order_block', 'displacement', 'ote', 'breaker'].some(t => baseType.includes(t));
       if (isBoxType) {
@@ -511,14 +590,17 @@ function LiveChart() {
       });
     };
 
-    // Helper: extract IDMs and swing markers separately (not subject to general ray limits)
+    // Helper: extract IDMs, swing markers, and BOS/CHoCH separately (not subject to general ray limits)
     const idmPats = sortedPatterns.filter(p => p.pattern_type === 'bullish_inducement' || p.pattern_type === 'bearish_inducement');
     const swingMarkerTypes = ['higher_high', 'higher_low', 'lower_high', 'lower_low'];
     const swingPats = sortedPatterns.filter(p => swingMarkerTypes.includes(p.pattern_type));
-    // Non-IDM, non-swing ray patterns
+    const bosChochTypes = ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'];
+    const bosChochPats = sortedPatterns.filter(p => bosChochTypes.includes(p.pattern_type) && p.validity !== 'fake');
+    // Non-IDM, non-swing, non-BOS/CHoCH ray patterns
     const generalRays = rayPats.filter(p => {
       const pt = p.pattern_type;
-      return pt !== 'bullish_inducement' && pt !== 'bearish_inducement' && !swingMarkerTypes.includes(pt);
+      return pt !== 'bullish_inducement' && pt !== 'bearish_inducement'
+        && !swingMarkerTypes.includes(pt) && !bosChochTypes.includes(pt);
     });
 
     if (signalDirection === 'bullish') {
@@ -530,6 +612,7 @@ function LiveChart() {
         ...boxPats.filter(p => p.pattern_type.includes('bullish')).slice(0, 5),
         ...bullRays.slice(0, 6),
         ...swingPats,
+        ...bosChochPats,
         ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
@@ -542,19 +625,18 @@ function LiveChart() {
         ...boxPats.filter(p => p.pattern_type.includes('bearish')).slice(0, 5),
         ...bearRays.slice(0, 6),
         ...swingPats,
+        ...bosChochPats,
         ...idmPats.slice(0, 16),
       ];
       return applyVisibilityFilter(result);
     } else {
-      const bosCh = generalRays.filter(p => p.pattern_type?.includes('bos') || p.pattern_type?.includes('choch'));
-      const other = generalRays.filter(p => !p.pattern_type?.includes('bos') && !p.pattern_type?.includes('choch'));
       const uniqRays = [];
       const seen = new Set();
-      for (const r of other) {
+      for (const r of generalRays) {
         const rp = Math.round((r.price || r.high || r.low) / 100) * 100;
         if (!seen.has(rp)) { seen.add(rp); uniqRays.push(r); }
       }
-      const result = [...bosCh.slice(0, 8), ...boxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats, ...idmPats.slice(0, 16)];
+      const result = [...boxPats.slice(0, 6), ...uniqRays.slice(0, 6), ...swingPats, ...bosChochPats, ...idmPats.slice(0, 16)];
       return applyVisibilityFilter(result);
     }
   }, [timeframe, visiblePatterns]);
@@ -654,7 +736,7 @@ function LiveChart() {
       if (['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType)) {
         const validity = pattern?.validity || 'raw';
         const baseLabel = { higher_high: 'HH', higher_low: 'HL', lower_high: 'LH', lower_low: 'LL' }[patternType];
-        const tag = { validated: ' \u2713', weak: ' ?', impulse: ' \u26a1', raw: '' }[validity] || '';
+        const tag = { validated: ' \u2713', weak: '', impulse: ' \u26a1', raw: '' }[validity] || '';
         const label = pattern?.label || (baseLabel + tag);
         const colorMap = {
           higher_high: { validated: '#00e676', weak: '#81c784', impulse: '#e91e63', raw: '#00e676', unknown: '#66bb6a' },
@@ -705,22 +787,28 @@ function LiveChart() {
     // Filter to only ray patterns
     let rayPatterns = patterns.filter(p => rayPatternTypes.includes(p.pattern_type));
 
-    // ICT validity filtering: show all MS except impulse (no pullback = noise)
-    // validated = 3 SMC rules met, weak = has IDM but body-close missing, unknown = no IDM (but structurally significant)
     const msTypes = ['higher_high', 'higher_low', 'lower_high', 'lower_low'];
+
+    // V6 body-swept filter: show validated + weak patterns with body-close IDM sweep
+    // Body sweep is highest quality IDM interaction (V6 Swing H/L = strictest)
     rayPatterns = rayPatterns.filter(p => {
-      if (!msTypes.includes(p.pattern_type)) return true;
-      const v = p.validity || 'unknown';
-      return v !== 'impulse';
+      if (!msTypes.includes(p.pattern_type)) return true; // non-MS: always keep
+      if (p.validity === 'validated') return true;
+      // Weak patterns: only show if IDM was swept by candle body (highest quality)
+      if (p.validity === 'weak' && p.idm_sweep_type === 'body') return true;
+      return false;
     });
 
-    // Visible range filtering: only render MS/IDM rays that overlap the visible chart window
+    // Visible range filtering: only render MS/IDM/BOS/CHoCH rays that overlap the visible chart window
     const timeScale = chart.timeScale();
     const visibleRange = timeScale.getVisibleRange();
+    const idmTypes = ['bullish_inducement', 'bearish_inducement'];
+    const bosChochRayTypes = ['bos_bullish', 'bos_bearish', 'choch_bullish', 'choch_bearish'];
     if (visibleRange) {
       rayPatterns = rayPatterns.filter(p => {
-        if (!msTypes.includes(p.pattern_type)) return true; // non-MS rays: always show
-        // For MS patterns: check if their ray span overlaps the visible window
+        const pt = p.pattern_type;
+        if (!msTypes.includes(pt) && !idmTypes.includes(pt) && !bosChochRayTypes.includes(pt)) return true;
+        // For MS/IDM patterns: check if their ray span overlaps the visible window
         // Ray span = [min(startTime, idmTime), endTime or Infinity]
         const pTime = p.time || p.start_time || 0;
         const idmTime = p.associated_idm_time || pTime;
@@ -730,6 +818,48 @@ function LiveChart() {
         return rayEnd >= visibleRange.from && rayStart <= visibleRange.to;
       });
     }
+
+    // Helper: create a temporary IDM ray (click-to-reveal for non-validated MS patterns)
+    const createTemporaryIdmRay = (pat, idmId, ser, ts, container, rEdge, msStartTime) => {
+      const idmPrice = pat.associated_idm_price;
+      if (!idmPrice || idmPrice <= 0) return;
+      const idmY = ser.priceToCoordinate(idmPrice);
+      if (idmY === null) return;
+      const idmColor = '#a78bfa';
+      let idmStartTime = pat.associated_idm_time || msStartTime;
+      // Logical guard: IDM must be BEFORE the MS event it validates
+      if (idmStartTime >= msStartTime) return;
+      let idmStartX = ts.timeToCoordinate(idmStartTime);
+      if (idmStartX === null || idmStartX < 0) idmStartX = 0;
+      let idmEndX = rEdge;
+      if (msStartTime) {
+        const msX = ts.timeToCoordinate(msStartTime);
+        if (msX !== null && msX > idmStartX) idmEndX = Math.min(msX, rEdge);
+      }
+      const idmRayWidth = idmEndX - idmStartX;
+
+      const ray = document.createElement('div');
+      ray.className = 'pattern-ray-overlay idm-temp-ray idm-heartbeat';
+      ray.dataset.idmId = idmId;
+      ray.style.cssText = `position:absolute;left:${idmStartX}px;top:${idmY}px;width:${idmRayWidth}px;height:2px;background:repeating-linear-gradient(90deg,${idmColor} 0px,${idmColor} 6px,transparent 6px,transparent 12px);pointer-events:none;z-index:3;box-shadow:0 0 4px ${idmColor}60;`;
+      container.appendChild(ray);
+
+      if (idmStartX > 0) {
+        const origin = document.createElement('div');
+        origin.className = 'pattern-ray-overlay idm-temp-ray idm-heartbeat';
+        origin.dataset.idmId = idmId;
+        origin.style.cssText = `position:absolute;left:${idmStartX - 3}px;top:${idmY - 3}px;width:6px;height:6px;background:${idmColor};border-radius:50%;pointer-events:none;z-index:5;box-shadow:0 0 4px ${idmColor};`;
+        container.appendChild(origin);
+      }
+
+      const lbl = document.createElement('div');
+      lbl.className = 'pattern-ray-overlay idm-temp-ray idm-heartbeat';
+      lbl.dataset.idmId = idmId;
+      const lblX = idmStartX + idmRayWidth / 2;
+      lbl.style.cssText = `position:absolute;left:${lblX}px;top:${idmY - 9}px;transform:translateX(-50%);color:#000;font-size:12px;font-weight:600;white-space:nowrap;padding:1px 4px;pointer-events:none;z-index:6;`;
+      lbl.textContent = 'IDM';
+      container.appendChild(lbl);
+    };
 
     rayPatterns.forEach((pattern, idx) => {
       const patternType = pattern.pattern_type;
@@ -790,6 +920,7 @@ function LiveChart() {
 
       // Check if this is an inducement pattern
       const isInducement = patternType === 'bullish_inducement' || patternType === 'bearish_inducement';
+      const isBosChoch = patternType.startsWith('bos_') || patternType.startsWith('choch_');
 
       // Determine if this is a high-type or low-type pattern
       const isHighPattern = patternType.includes('high') || patternType.includes('bullish') ||
@@ -802,8 +933,8 @@ function LiveChart() {
       let foundValidLevel = false;
       const tolerance = 0.005; // 0.5% tolerance
 
-      // Inducements: use exact timestamp from backend, fallback to price matching
-      if (isInducement && pattern.time) {
+      // Inducements and BOS/CHoCH: use exact timestamp from backend
+      if ((isInducement || isBosChoch) && pattern.time) {
         startTime = pattern.time;
         foundValidLevel = true;
       } else if (isInducement && candles.length > 0) {
@@ -881,9 +1012,11 @@ function LiveChart() {
       // Only skip if we have no way to position the pattern at all
       if (!startTime && candles.length === 0) return;
 
-      // Check if this is a swing/structure/inducement marker type (should extend to right edge with price label)
+      // Check if this is a swing/structure/inducement/BOS/CHoCH marker type (should extend to right edge with price label)
       const isSwingMarker = ['higher_high', 'higher_low', 'lower_high', 'lower_low',
-                             'bullish_inducement', 'bearish_inducement'].includes(patternType);
+                             'bullish_inducement', 'bearish_inducement',
+                             'bos_bullish', 'bos_bearish',
+                             'choch_bullish', 'choch_bearish'].includes(patternType);
 
       try {
         const timeScale = chart.timeScale();
@@ -902,18 +1035,28 @@ function LiveChart() {
         // For other patterns: cap the width
         let rayWidth;
         const isMsType = ['higher_high', 'higher_low', 'lower_high', 'lower_low'].includes(patternType);
+        const isIdmType = ['bullish_inducement', 'bearish_inducement'].includes(patternType);
         if (isSwingMarker) {
           let endX = rightEdge; // default: extend to right edge
-          // MS types with end_time: clip ray at next same-group event
-          if (isMsType && pattern.end_time) {
+          const hasEndTime = (isMsType || isIdmType || isBosChoch) && pattern.end_time;
+          // MS and IDM types with end_time: clip ray at end point
+          if (hasEndTime) {
             const clippedEndX = timeScale.timeToCoordinate(pattern.end_time);
             if (clippedEndX !== null && clippedEndX > startX) {
               endX = Math.min(clippedEndX, rightEdge);
+            } else if (clippedEndX === null) {
+              // end_time is off the visible range — check if expired (left) or still active (right)
+              const visRange = timeScale.getVisibleRange();
+              if (visRange && pattern.end_time < visRange.from) {
+                return; // Expired: both time and end_time are before visible range — skip
+              }
+              // else: end_time is beyond visible range — extend to rightEdge (default)
             }
           }
           rayWidth = endX - startX;
-          if (rayWidth < 20) { startX = 0; rayWidth = endX; }
-          if (startX > rightEdge - 50) { startX = 0; rayWidth = endX; }
+          // Fallback for off-screen start: only for patterns WITHOUT end_time (open-ended rays)
+          if (!hasEndTime && rayWidth < 20) { startX = 0; rayWidth = endX; }
+          if (!hasEndTime && startX > rightEdge - 50) { startX = 0; rayWidth = endX; }
         } else {
           // Other patterns: capped width
           const maxRayWidth = Math.min(rightEdge * 0.6, 500);
@@ -930,8 +1073,8 @@ function LiveChart() {
         const rayLine = document.createElement('div');
         rayLine.className = 'pattern-ray-overlay';
 
-        // Inducements use dashed line style
-        const rayBg = isInducement
+        // Inducements and BOS/CHoCH use dashed line style
+        const rayBg = (isInducement || isBosChoch)
           ? `repeating-linear-gradient(90deg, ${annotation.color} 0px, ${annotation.color} 6px, transparent 6px, transparent 12px)`
           : annotation.color;
 
@@ -951,10 +1094,10 @@ function LiveChart() {
         const labelEl = document.createElement('div');
         labelEl.className = 'pattern-ray-overlay';
 
-        // MS labels (HH/HL/LH/LL): left-aligned at ray origin
+        // MS and BOS/CHoCH labels: left-aligned at ray origin
         // Other labels: centered on the ray
-        const labelX = isMsType ? startX : startX + rayWidth / 2;
-        const labelTransform = isMsType ? 'none' : 'translateX(-50%)';
+        const labelX = (isMsType || isBosChoch) ? startX : startX + rayWidth / 2;
+        const labelTransform = (isMsType || isBosChoch) ? 'none' : 'translateX(-50%)';
 
         labelEl.style.cssText = `
           position: absolute;
@@ -978,25 +1121,30 @@ function LiveChart() {
           labelEl.style.cursor = 'help';
         }
 
-        // MS labels: clickable to highlight associated IDM with heartbeat glow
+        // MS labels: clickable to highlight/reveal associated IDM
         if (isMsType && pattern.associated_idm_price) {
           const idmId = `idm-${pattern.associated_idm_price}-${pattern.associated_idm_time || 0}`;
           labelEl.style.cursor = 'pointer';
           labelEl.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Remove any existing heartbeat animations
-            document.querySelectorAll('.idm-heartbeat').forEach(el => {
-              el.classList.remove('idm-heartbeat');
-            });
-            // Activate heartbeat on all elements with this IDM id
-            document.querySelectorAll(`[data-idm-id="${idmId}"]`).forEach(el => {
-              el.classList.add('idm-heartbeat');
-            });
+            // Clean up any previous temporary rays and heartbeats
+            document.querySelectorAll('.idm-temp-ray').forEach(el => el.remove());
+            document.querySelectorAll('.idm-heartbeat').forEach(el => el.classList.remove('idm-heartbeat'));
+
+            // Check if permanent IDM elements exist (validated patterns)
+            const existingIdm = document.querySelectorAll(`[data-idm-id="${idmId}"]`);
+            if (existingIdm.length > 0) {
+              // Validated: activate heartbeat glow on existing elements
+              existingIdm.forEach(el => el.classList.add('idm-heartbeat'));
+            } else {
+              // Non-validated: create temporary IDM ray with glow
+              createTemporaryIdmRay(pattern, idmId, series, timeScale, chartElement, rightEdge, startTime);
+            }
+
             // Auto-remove after 4 seconds
             setTimeout(() => {
-              document.querySelectorAll('.idm-heartbeat').forEach(el => {
-                el.classList.remove('idm-heartbeat');
-              });
+              document.querySelectorAll('.idm-heartbeat').forEach(el => el.classList.remove('idm-heartbeat'));
+              document.querySelectorAll('.idm-temp-ray').forEach(el => el.remove());
             }, 4000);
           });
         }
@@ -1044,8 +1192,9 @@ function LiveChart() {
           rayOverlaysRef.current.push(priceLabel);
 
           // Draw associated IDM as a dashed horizontal ray starting from the IDM's actual candle
+          // Only draw permanently for VALIDATED patterns; others use click-to-reveal
           const idmPrice = pattern.associated_idm_price;
-          if (idmPrice && idmPrice > 0) {
+          if (idmPrice && idmPrice > 0 && pattern.validity === 'validated') {
             const idmY = series.priceToCoordinate(idmPrice);
             if (idmY !== null) {
               const idmColor = '#a78bfa';
@@ -1053,6 +1202,10 @@ function LiveChart() {
 
               // Use the IDM's actual candle timestamp from the backend
               let idmStartTime = pattern.associated_idm_time || startTime;
+
+              // Logical guard: IDM must be BEFORE the MS event it validates
+              if (idmStartTime >= startTime) idmStartTime = null;
+              if (idmStartTime) {
 
               let idmStartX = timeScale.timeToCoordinate(idmStartTime);
               if (idmStartX === null || idmStartX < 0) idmStartX = 0;
@@ -1109,7 +1262,6 @@ function LiveChart() {
               const idmLabelEl = document.createElement('div');
               idmLabelEl.className = 'pattern-ray-overlay';
               idmLabelEl.dataset.idmId = idmId;
-              const fmtIdm = idmPrice > 1000 ? idmPrice.toFixed(2) : idmPrice > 1 ? idmPrice.toFixed(4) : idmPrice.toFixed(6);
               const idmLabelX = idmStartX + idmRayWidth / 2;
               idmLabelEl.style.cssText = `
                 position: absolute;
@@ -1124,9 +1276,10 @@ function LiveChart() {
                 pointer-events: none;
                 z-index: 6;
               `;
-              idmLabelEl.textContent = `IDM ${fmtIdm}`;
+              idmLabelEl.textContent = 'IDM';
               chartElement.appendChild(idmLabelEl);
               rayOverlaysRef.current.push(idmLabelEl);
+            } // end: idmStartTime < startTime guard
             }
           }
         }
@@ -2148,7 +2301,7 @@ function LiveChart() {
 
                       {/* Show filtered content when patterns are selected */}
                       {filteredReasoning.hasContent && (
-                        <div className="text-slate-300 leading-relaxed text-xs max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+                        <div className="text-slate-300 leading-relaxed text-xs max-h-96 overflow-y-auto pr-1 custom-scrollbar">
                           {filteredReasoning.content.split('\n').map((line, idx) => {
                             // Format bold text (**text**)
                             const parts = line.split(/(\*\*[^*]+\*\*)/g);
@@ -2159,11 +2312,19 @@ function LiveChart() {
                               return part;
                             });
                             // Indent lines starting with arrow or bullet
-                            const isIndented = line.trim().startsWith('↳') || line.trim().startsWith('-') || line.trim().startsWith('•');
-                            const isIdmDetail = line.trim().startsWith('✅') || line.trim().startsWith('⚠️') || line.trim().startsWith('🪤') || line.trim().startsWith('↗️') || line.trim().startsWith('❓');
+                            const trimmed = line.trim();
+                            const isIndented = trimmed.startsWith('↳') || trimmed.startsWith('-') || trimmed.startsWith('•');
+                            const isIdmDetail = trimmed.startsWith('✅') || trimmed.startsWith('⚠️') || trimmed.startsWith('🪤') || trimmed.startsWith('↗️') || trimmed.startsWith('❓');
+                            // BOS/CHoCH per-level detail lines (✅/❌/⚠️/🔻 prefix with bold price)
+                            const isBosChochLevel = (trimmed.startsWith('✅') || trimmed.startsWith('❌') || trimmed.startsWith('⚠️') || trimmed.startsWith('🔻'))
+                              && (trimmed.includes('CHoCH #') || trimmed.includes('BOS #'));
+                            // Rule detail lines (• prefix with ✅/❌/✓/✗ or Rule/R1-R4/Verdict/V6/V10 keywords)
+                            const isRuleDetail = trimmed.startsWith('•') && (trimmed.includes('✓') || trimmed.includes('✗') || trimmed.includes('✅') || trimmed.includes('❌') || trimmed.includes('Rule') || trimmed.includes('R1') || trimmed.includes('R2') || trimmed.includes('R3') || trimmed.includes('R4') || trimmed.includes('Verdict') || trimmed.includes('V6') || trimmed.includes('V10') || trimmed.includes('N/A'));
                             return (
                               <div key={idx} className={
-                                isIdmDetail ? 'pl-6 text-slate-300 border-l-2 border-purple-500/40 ml-2 py-0.5'
+                                isBosChochLevel ? 'pl-2 py-1 border-l-2 border-cyan-500/40 ml-1 mt-1'
+                                : isRuleDetail ? 'pl-8 text-slate-400 text-[11px]'
+                                : isIdmDetail ? 'pl-6 text-slate-300 border-l-2 border-purple-500/40 ml-2 py-0.5'
                                 : isIndented ? 'pl-4 text-slate-400' : ''
                               }>
                                 {formatted}

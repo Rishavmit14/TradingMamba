@@ -627,6 +627,7 @@ async def analyze_symbol(
                             'description': event.description,
                             # V6 3-way classification
                             'classification': getattr(event, 'classification', 'unknown'),
+                            'idm_sweep_type': getattr(event, 'idm_sweep_type', 'none'),
                             # ICT validation fields (3 SMC Rules)
                             'validity': getattr(event, 'validity', 'unknown'),
                             'reasoning': getattr(event, 'reasoning', ''),
@@ -791,11 +792,22 @@ async def analyze_symbol(
                     # Include unix timestamp for accurate chart positioning
                     ts = idm.get('timestamp')
                     if ts is not None:
-                        import pandas as pd
                         if hasattr(ts, 'timestamp'):
                             idm_entry['time'] = int(ts.timestamp())
                         elif isinstance(ts, (int, float)):
                             idm_entry['time'] = int(ts)
+
+                    # Compute end_time for IDM ray clipping:
+                    # IDM ray extends from IDM candle to parent swing (the swing it induces before)
+                    # Note: sweep_index == idm_index (same candle), so use parent_swing_index
+                    parent_idx = idm.get('parent_swing_index')
+                    if parent_idx is not None and parent_idx < len(df.index):
+                        parent_ts = df.index[parent_idx]
+                        if hasattr(parent_ts, 'timestamp'):
+                            idm_entry['end_time'] = int(parent_ts.timestamp())
+                        elif isinstance(parent_ts, (int, float)):
+                            idm_entry['end_time'] = int(parent_ts)
+
                     all_patterns.append(idm_entry)
 
                 # Note: swing_high/swing_low markers removed — HH/HL/LH/LL structure
