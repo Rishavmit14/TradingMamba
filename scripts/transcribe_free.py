@@ -104,7 +104,7 @@ def transcribe_audio(audio_path: str, video_id: str, model_name: str = "tiny") -
 
     result = model.transcribe(
         audio_path,
-        language='en',
+        language='hi',
         fp16=False,  # Use FP32 for CPU
         verbose=False
     )

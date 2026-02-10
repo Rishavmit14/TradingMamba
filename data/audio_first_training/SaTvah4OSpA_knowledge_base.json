@@ -1,0 +1,153 @@
+{
+  "video_id": "SaTvah4OSpA",
+  "title": "SMC CHoCH Confirmation Rules — Swing-Based & Sweep-Based Models",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 10,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T22:30:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 23.5,
+    "transcript_words": 3850,
+    "frames_analyzed": 9,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "structure_mapping_checklist": {
+      "llm_summary": "Before teaching CHoCH confirmation, the presenter provides a complete 9-point checklist for True Structure Mapping — a self-evaluation tool for traders. The checklist is: (1) Understanding of Inducement, (2) How to find Valid Inducement, (3) Inducement Shift (smart money trap), (4) Liquidity and Liquidity Sweep, (5) Marking of Swing Points (HH/HL/LH/LL in bullish and bearish markets), (6) Break of Structure (trend continuation), (7) Change of Character Classical Approach (trend reversal indication point), (8) Change of Character Advanced Approach (fake CHoCH / smart money traps), (9) Change of Character Confirmation (today's lecture). The presenter emphasizes that CHoCH is the LAST and most important part of structure mapping because without knowing daily trend/bias, no smart money or ICT trader can succeed. Daily bias determination is the #1 confusion for ICT traders, and structure mapping is the ONLY reliable solution.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 500,
+        "frames_used": 2
+      },
+      "teaching_types": ["checklist", "overview", "importance_statement"],
+      "key_rules": [
+        "9-point checklist for True Structure Mapping self-evaluation",
+        "CHoCH Confirmation is the LAST part of structure mapping",
+        "Without daily trend/bias, no ICT/SMC trader can succeed",
+        "Structure mapping is the ONLY reliable solution for finding daily bias",
+        "Checklist: IDM → Valid IDM → IDM Shift → Liquidity → Swing Points → BOS → CHoCH Classical → CHoCH Advanced → CHoCH Confirmation",
+        "All 9 components must be understood for complete structure mapping ability"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000060.00s.jpg",
+          "description": "Structure Mapping Overview: 'Please Note, Either You are Smart Money Concept Trader (SMC) or ICT Trader, You Will Not Succeed Without Knowing Daily Bias. It is Biggest Confusion for ICT Traders to Find Daily Bias Easily.'"
+        },
+        {
+          "frame": "frame_000120.00s.jpg",
+          "description": "Structure Mapping Overview continued: 'Here is One and Only Solution, Which is Structure Mapping. What Do We Need For Complete & True Structure Mapping?'"
+        }
+      ]
+    },
+    "two_choch_models": {
+      "llm_summary": "Change of Character operates on two distinct models based on how price interacts with the previous high/low. Model 1: Swing-Based (Inducement-Based) CHoCH — when candle BODY closes above/below the previous high/low. This model REQUIRES inducement and has 4 confirmation rules. Model 2: Sweep-Based (Without Inducement) CHoCH — when only the candle WICK goes above/below the previous high/low (liquidity sweep). This model does NOT require inducement and has 2 confirmation rules. The distinction is critical: body close above previous high = swing-based model (must wait for inducement), wick only above previous high = sweep-based model (can trade without inducement). Each model has completely different rules and entry methods.",
+      "statistics": {
+        "teaching_time_minutes": 2.0,
+        "word_count": 300,
+        "frames_used": 0
+      },
+      "teaching_types": ["classification", "model_definition"],
+      "key_rules": [
+        "Two CHoCH models: Swing-Based (Inducement-Based) and Sweep-Based (Without Inducement)",
+        "Swing-Based = candle BODY closes above/below previous high/low → 4 rules required",
+        "Sweep-Based = only candle WICK goes above/below previous high/low → 2 rules required",
+        "Swing-Based model REQUIRES inducement for confirmation",
+        "Sweep-Based model does NOT require inducement (but higher probability if inducement forms)",
+        "Choosing wrong model for the scenario = incorrect analysis"
+      ],
+      "visual_evidence": []
+    },
+    "swing_based_choch_confirmation": {
+      "llm_summary": "The Swing-Based (Inducement-Based) CHoCH Confirmation Model has 4 rules. Rule 1: Price MUST break a major swing point (keep in mind fake CHoCH rules from V09). Rule 2: Candle body MUST close below the CHoCH point (below the swing point that was broken). Rule 3: After CHoCH indication, price MUST create an inducement level (market goes up, then returns to break the previous low, creating inducement). Rule 4: After inducement is created, market must take the inducement and create a Break of Structure, confirming trend continuation in the new direction. The presenter categorizes traders by how many rules they follow: Aggressive traders (Rules 1-2 only) = 50% win ratio. Advanced traders (Rules 1-3) = 80% win ratio. Conservative traders (all 4 rules) = 95% win ratio. For entry: after high TF CHoCH indication + inducement creation, find the Point of Interest (order block/supply zone/FVG) within the inducement swing, then look for a minor CHoCH on a lower timeframe at that POI for high-probability entry.",
+      "statistics": {
+        "teaching_time_minutes": 8.0,
+        "word_count": 1200,
+        "frames_used": 3
+      },
+      "teaching_types": ["rule_definition", "schematic_diagram", "win_ratio_analysis", "entry_method"],
+      "key_rules": [
+        "Rule 1: Price must break a major swing point (apply fake CHoCH filters from V09)",
+        "Rule 2: Candle body MUST close below the CHoCH point",
+        "Rule 3: After CHoCH indication, price MUST create an inducement level",
+        "Rule 4: Market must take inducement and create Break of Structure (confirms trend continuation)",
+        "Aggressive approach (Rules 1-2 only): 50% win ratio — NOT recommended",
+        "Advanced approach (Rules 1-3): 80% win ratio — good for intraday traders",
+        "Conservative approach (all 4 rules): 95% win ratio — best for swing traders",
+        "BOS after inducement = trend continuation confirmation of the new bearish/bullish trend",
+        "Entry method: HTF CHoCH → inducement → find POI (OB/Supply/FVG) → LTF minor CHoCH at POI",
+        "Without inducement after swing-based CHoCH = Smart Money Trap (fake CHoCH)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "CHoCH Confirmation — Inducement Based Model: Schematic showing bullish structure with HH, HL, IDM labels, then CHoCH point where major HL is broken. Rules listed: 1. Price Must Break a Major Swing Point, 2. Candle Body Must Close Below Swing Points, 3. When there is a CHoCH Point, Price Must Create an Inducement"
+        },
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "CHoCH Confirmation — Inducement Based Model (detailed): Complete bullish-to-bearish structure with HH, HL, IDM labels throughout. Shows the full sequence: trend → CHoCH indication at major HL break → inducement creation → BOS confirmation. Note: 'Remember, This HH Indicates that Candle Body is Closed Above Previous HH'"
+        },
+        {
+          "frame": "frame_000780.00s.jpg",
+          "description": "NZD/CAD 1H TradingView chart: Real Market Sample showing swing-based CHoCH confirmation. HH and HL labeled, then CHoCH Indication point where major HL breaks, followed by BOS confirmation. Shows complete 4-rule sequence on live chart"
+        }
+      ]
+    },
+    "without_inducement_trap": {
+      "llm_summary": "Critical warning: In the Swing-Based Model, if market breaks a major swing point (CHoCH indication) but does NOT create inducement afterward, the CHoCH is a Smart Money Trap (fake). When market gives CHoCH indication and goes directly to a Point of Interest (order block/supply zone) WITHOUT first creating inducement, retail traders enter at that POI and get trapped. Market then reverses back to its original direction, stopping out the retail traders. The presenter demonstrates this on an AUD/USD 4H chart where market breaks a major HL, candle body closes below, but no inducement is created — market returns to its original bullish direction, trapping sellers. If you see swing-based CHoCH with no inducement formation, either: (1) do NOT trade it, or (2) wait for a smaller timeframe CHoCH within the move to provide additional confirmation before entering.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 600,
+        "frames_used": 1
+      },
+      "teaching_types": ["warning", "trap_identification", "real_chart_example"],
+      "key_rules": [
+        "Swing-Based CHoCH WITHOUT inducement = Smart Money Trap (fake CHoCH)",
+        "Market breaks major swing + candle closes below, but no inducement → TRAP",
+        "Retail traders enter at POI (order block/supply) → get stopped out → market reverses",
+        "Solution 1: Do NOT trade swing-based CHoCH without inducement",
+        "Solution 2: Wait for smaller timeframe CHoCH within the move for extra confirmation",
+        "Inducement creation after CHoCH indication is THE critical filter for real vs fake",
+        "This connects to V09 fake CHoCH rules — additional validation layer"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000900.00s.jpg",
+          "description": "CHoCH Confirmation — 'If No Inducement After CHoCH?' slide: Same schematic with Smart Money Trap warning triangle at the POI/Order Block/Supply zone. Shows market breaking HL, CHoCH Indication given, but without inducement → price goes to POI → Smart Money Trap → market reverses to original direction"
+        }
+      ]
+    },
+    "sweep_based_choch_confirmation": {
+      "llm_summary": "The Sweep-Based (Without Inducement) CHoCH Model applies when candle only WICKS above the previous high (liquidity sweep) without body close. It has 2 rules: Rule 1: Price must sweep liquidity from previous high — candle wick moves above previous high but body stays BELOW. Rule 2: Candle body must close below the valid pullback between the two swing points. When both rules are met, CHoCH is confirmed. Unlike the swing-based model, inducement is NOT required — as soon as candle body closes below the pullback, the CHoCH is confirmed and tradeable. Entry can be taken on the first pullback after confirmation, using Fibonacci 50% or 62% levels, or at an imbalance zone (FVG). This is an aggressive approach with 75% win ratio. However, IF price also creates inducement after sweep-based CHoCH (not required but possible), the setup becomes higher probability. The sweep-based model can therefore be traded in two ways: without inducement (75% WR, aggressive) or with inducement if it forms (higher WR). Demonstrated on a Gold 1H chart showing liquidity sweep → candle close below pullback → major bearish reversal.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 900,
+        "frames_used": 2
+      },
+      "teaching_types": ["rule_definition", "schematic_diagram", "real_chart_example", "entry_method"],
+      "key_rules": [
+        "Sweep-Based Model: candle WICK above previous high, body stays BELOW = liquidity sweep",
+        "Rule 1: Price must sweep liquidity from previous high (wick only, no body close above)",
+        "Rule 2: Candle body must close below the valid pullback between the two swing points",
+        "Inducement NOT required for sweep-based model (unlike swing-based)",
+        "Entry: first pullback after confirmation, Fibonacci 50%/62%, or imbalance zone (FVG)",
+        "Without inducement: aggressive approach, 75% win ratio",
+        "With inducement (if it forms): higher probability setup",
+        "Sweep-based model can be categorized: without inducement OR with inducement",
+        "Also called 'Without Inducement Model' because inducement is optional"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_001050.00s.jpg",
+          "description": "CHoCH Confirmation — Sweep Based Model: Schematic showing 'X' point where candle wick moves above previous high (Liquidity Sweep Where Candle Wick Moved Above Previous High), CHoCH label, and 'Candle Body Must Close Below this Valid Pullback' annotation. Rules: 1. Price Must Sweep Liquidity from Previous High"
+        },
+        {
+          "frame": "frame_001200.00s.jpg",
+          "description": "Gold Spot/USD 1H OANDA TradingView chart: 'Sweep Base Model' label. Shows Liquidity Sweep (Candle Wick Only) at the high, then 'Candle Body Closed Below Valid Pullback' annotation at the confirmation point. Market then drops significantly from bullish to bearish after confirmation"
+        }
+      ]
+    }
+  }
+}

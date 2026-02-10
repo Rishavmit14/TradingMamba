@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
 """
-Local Whisper Transcription Script
+Local Transcription Script using whisper.cpp
 
-Uses OpenAI's Whisper model locally (FREE but slower).
-Requires: pip install openai-whisper torch
+Uses whisper.cpp with Metal GPU acceleration for fast local transcription.
+Optimized for Hindi audio with English ICT/SMC terms on Apple Silicon.
 
-First time will download the model (~1.5GB for 'base', ~3GB for 'medium').
+Default model: large-v3-turbo (Metal GPU, ~0.85x real-time on M1 8GB)
+
+Usage:
+  python transcribe_local.py --video VIDEO_ID              # Single video
+  python transcribe_local.py --playlist 1                  # Full playlist
+  python transcribe_local.py --playlist 1 --only-missing   # Only videos without transcripts
+  python transcribe_local.py --list                        # List playlists
 """
 
 import json
 import os
 import sys
-import tempfile
+import time
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
@@ -23,29 +30,23 @@ DATA_DIR = BASE_DIR / "data"
 PLAYLISTS_DIR = DATA_DIR / "playlists"
 TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
 AUDIO_DIR = DATA_DIR / "audio"
+MODELS_DIR = BASE_DIR / "models"
 
 AUDIO_DIR.mkdir(parents=True, exist_ok=True)
 TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
+MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
+# whisper.cpp binary (installed via brew)
+WHISPER_CLI = "/opt/homebrew/bin/whisper-cli"
 
-def check_whisper_installed():
-    """Check if Whisper is installed"""
-    try:
-        import whisper
-        return True
-    except ImportError:
-        return False
+# GGML model paths
+GGML_MODELS = {
+    "large-v3-turbo": MODELS_DIR / "ggml-large-v3-turbo.bin",
+    "medium": MODELS_DIR / "ggml-medium.bin",
+    "small": MODELS_DIR / "ggml-small.bin",
+}
 
-
-def install_whisper():
-    """Install Whisper and dependencies"""
-    import subprocess
-    print("Installing Whisper (this may take a few minutes)...")
-    subprocess.run([
-        sys.executable, '-m', 'pip', 'install', '--user',
-        'openai-whisper', 'torch', 'torchaudio'
-    ], check=True)
-    print("Whisper installed successfully!")
+DEFAULT_MODEL = "large-v3-turbo"
 
 
 def download_audio(video_id: str) -> str:
@@ -55,189 +56,360 @@ def download_audio(video_id: str) -> str:
     output_path = AUDIO_DIR / f"{video_id}.mp3"
 
     if output_path.exists():
-        print(f"    Audio exists: {output_path.name}")
+        size_mb = output_path.stat().st_size / (1024 * 1024)
+        print(f"  Audio cached: {output_path.name} ({size_mb:.1f} MB)")
         return str(output_path)
 
+    print(f"  Downloading audio...")
     url = f"https://www.youtube.com/watch?v={video_id}"
 
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'outtmpl': str(AUDIO_DIR / f"{video_id}.%(ext)s"),
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '128',  # Lower quality = faster download
-        }],
-        'quiet': True,
-        'no_warnings': True,
-        'socket_timeout': 30,
-        'retries': 3,
-    }
+    methods = [
+        {'format': 'bestaudio/best'},
+        {'format': 'bestaudio[ext=m4a]/bestaudio/best',
+         'extractor_args': {'youtube': {'player_client': ['android']}}},
+        {'format': 'worstaudio/worst'},
+    ]
 
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
-        print(f"    ✓ Downloaded audio")
-        return str(output_path)
-    except Exception as e:
-        print(f"    ✗ Download failed: {e}")
+    for i, method_opts in enumerate(methods, 1):
+        ydl_opts = {
+            **method_opts,
+            'outtmpl': str(AUDIO_DIR / f"{video_id}.%(ext)s"),
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '128',
+            }],
+            'quiet': True,
+            'no_warnings': True,
+            'socket_timeout': 30,
+            'retries': 3,
+        }
+
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+
+            if output_path.exists():
+                size_mb = output_path.stat().st_size / (1024 * 1024)
+                print(f"  Downloaded: {size_mb:.1f} MB")
+                return str(output_path)
+
+            for ext in ['m4a', 'webm', 'opus', 'mp4']:
+                alt_path = AUDIO_DIR / f"{video_id}.{ext}"
+                if alt_path.exists():
+                    subprocess.run([
+                        'ffmpeg', '-i', str(alt_path),
+                        '-vn', '-acodec', 'libmp3lame', '-q:a', '4',
+                        str(output_path), '-y'
+                    ], capture_output=True)
+                    if output_path.exists():
+                        os.remove(alt_path)
+                        size_mb = output_path.stat().st_size / (1024 * 1024)
+                        print(f"  Downloaded + converted: {size_mb:.1f} MB")
+                        return str(output_path)
+
+        except Exception as e:
+            if i < len(methods):
+                continue
+            print(f"  Download failed: {e}")
+            return None
+
+    print(f"  All download methods failed")
+    return None
+
+
+def convert_to_wav(audio_path: str) -> str:
+    """Convert audio to 16kHz mono WAV (required by whisper.cpp)"""
+    wav_path = audio_path.rsplit('.', 1)[0] + '.wav'
+
+    if os.path.exists(wav_path):
+        return wav_path
+
+    print(f"  Converting to WAV (16kHz mono)...")
+    result = subprocess.run([
+        'ffmpeg', '-i', audio_path,
+        '-ar', '16000', '-ac', '1', '-c:a', 'pcm_s16le',
+        wav_path, '-y'
+    ], capture_output=True, text=True)
+
+    if result.returncode == 0 and os.path.exists(wav_path):
+        return wav_path
+
+    print(f"  WAV conversion failed: {result.stderr[:200]}")
+    return None
+
+
+def transcribe_with_whisper_cpp(wav_path: str, video_id: str, model_name: str = DEFAULT_MODEL) -> dict:
+    """Transcribe audio using whisper.cpp with Metal GPU"""
+    model_path = GGML_MODELS.get(model_name)
+    if not model_path or not model_path.exists():
+        print(f"  GGML model not found: {model_path}")
+        print(f"  Download it from: https://huggingface.co/ggerganov/whisper.cpp/tree/main")
         return None
 
+    output_prefix = wav_path.rsplit('.', 1)[0] + '_whisper'
+    output_json = output_prefix + '.json'
 
-def transcribe_with_whisper(audio_path: str, video_id: str, model_name: str = "base") -> dict:
-    """Transcribe audio using local Whisper"""
-    import whisper
+    print(f"  Transcribing with whisper.cpp '{model_name}' (Metal GPU)...")
+    start_time = time.time()
 
-    print(f"    Loading Whisper model '{model_name}'...")
-    model = whisper.load_model(model_name)
+    result = subprocess.run([
+        WHISPER_CLI,
+        '-m', str(model_path),
+        '-f', wav_path,
+        '-l', 'hi',
+        '-oj',
+        '-of', output_prefix,
+    ], capture_output=True, timeout=3600)
 
-    print(f"    Transcribing (this may take a while)...")
-    result = model.transcribe(
-        audio_path,
-        verbose=False,
-        language='en',
-        fp16=False  # Use FP32 for CPU compatibility
-    )
+    elapsed = time.time() - start_time
 
-    # Convert to our format
+    if result.returncode != 0 or not os.path.exists(output_json):
+        stderr = result.stderr.decode('utf-8', errors='replace') if result.stderr else ''
+        print(f"  whisper.cpp failed: {stderr[:300]}")
+        return None
+
+    # Parse whisper.cpp JSON output
+    with open(output_json, 'rb') as f:
+        content = f.read().decode('utf-8', errors='replace')
+    raw = json.loads(content)
+
     segments = []
-    for seg in result.get('segments', []):
-        segments.append({
-            'start_time': seg['start'],
-            'end_time': seg['end'],
-            'text': seg['text'].strip(),
-        })
+    full_text_parts = []
+    for item in raw.get('transcription', []):
+        start_ms = item['offsets']['from']
+        end_ms = item['offsets']['to']
+        text = item['text'].strip()
+        if text:
+            segments.append({
+                'start_time': round(start_ms / 1000, 2),
+                'end_time': round(end_ms / 1000, 2),
+                'text': text
+            })
+            full_text_parts.append(text)
 
-    full_text = result.get('text', '')
+    full_text = ' '.join(full_text_parts)
+    word_count = len(full_text.split())
+
+    print(f"  Transcribed in {elapsed/60:.1f} min | {word_count:,} words | {len(segments)} segments")
+
+    # Clean up whisper.cpp output file
+    try:
+        os.remove(output_json)
+    except Exception:
+        pass
 
     return {
         'video_id': video_id,
         'full_text': full_text,
         'segments': segments,
-        'language': result.get('language', 'en'),
+        'language': 'hi',
         'duration': segments[-1]['end_time'] if segments else 0,
         'transcribed_at': datetime.utcnow().isoformat(),
-        'method': f'whisper_local_{model_name}',
-        'word_count': len(full_text.split())
+        'method': f'whisper_cpp_{model_name}',
+        'model': f'whisper.cpp/{model_name} (Metal GPU)',
+        'word_count': word_count,
+        'processing_time_seconds': round(elapsed, 1),
     }
 
 
-def process_video(video_id: str, title: str, model_name: str = "base") -> dict:
-    """Process a single video"""
-
+def process_video(video_id: str, title: str = "Video", model_name: str = DEFAULT_MODEL,
+                  force: bool = False) -> dict:
+    """
+    Process a single video using whisper.cpp with Metal GPU.
+    Always uses whisper.cpp — no YouTube captions (they have poor quality).
+    """
     transcript_path = TRANSCRIPTS_DIR / f"{video_id}.json"
 
-    # Check if already done
-    if transcript_path.exists():
-        print(f"    ℹ Already transcribed")
+    if transcript_path.exists() and not force:
+        print(f"  Already transcribed, skipping")
         with open(transcript_path) as f:
             return json.load(f)
 
-    # Download audio
+    # Download audio, convert to WAV, transcribe with whisper.cpp
     audio_path = download_audio(video_id)
     if not audio_path:
+        print(f"  FAILED: Could not download audio")
         return None
 
-    # Transcribe
+    wav_path = convert_to_wav(audio_path)
+    if not wav_path:
+        print(f"  FAILED: Could not convert to WAV")
+        return None
+
     try:
-        transcript = transcribe_with_whisper(audio_path, video_id, model_name)
+        transcript = transcribe_with_whisper_cpp(wav_path, video_id, model_name)
+    except Exception as e:
+        print(f"  Transcription failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+    # Clean up audio files
+    for path in [audio_path, wav_path]:
+        try:
+            os.remove(path)
+        except Exception:
+            pass
+    print(f"  Cleaned up audio files")
+
+    if transcript:
         transcript['title'] = title
 
-        # Save
         with open(transcript_path, 'w') as f:
             json.dump(transcript, f, indent=2, ensure_ascii=False)
+        print(f"  Saved: {transcript_path.name}")
 
-        print(f"    ✓ Transcribed: {transcript['word_count']:,} words")
-
-        # Optionally remove audio to save space
-        # os.remove(audio_path)
-
-        return transcript
-
-    except Exception as e:
-        print(f"    ✗ Transcription failed: {e}")
-        return None
+    return transcript
 
 
-def process_playlist(playlist_num: int, max_videos: int = None, model_name: str = "base"):
+def process_playlist(playlist_num: int = None, playlist_id: str = None,
+                     max_videos: int = None, model_name: str = DEFAULT_MODEL,
+                     only_missing: bool = False):
     """Process videos from a playlist"""
-
-    playlist_files = sorted(PLAYLISTS_DIR.glob("*.json"))
-
-    if playlist_num < 1 or playlist_num > len(playlist_files):
-        print(f"Invalid playlist. Choose 1-{len(playlist_files)}")
-        return
-
-    playlist_file = playlist_files[playlist_num - 1]
+    if playlist_id:
+        playlist_file = PLAYLISTS_DIR / f"{playlist_id}.json"
+    else:
+        playlist_files = sorted(PLAYLISTS_DIR.glob("*.json"))
+        if not playlist_num or playlist_num < 1 or playlist_num > len(playlist_files):
+            print(f"Invalid playlist number. Choose 1-{len(playlist_files)}")
+            return
+        playlist_file = playlist_files[playlist_num - 1]
 
     with open(playlist_file) as f:
         playlist = json.load(f)
-
-    print(f"\n{'='*70}")
-    print(f"📺 {playlist['title']}")
-    print(f"📊 Videos: {playlist['video_count']}")
-    print(f"🤖 Model: {model_name}")
-    print(f"{'='*70}\n")
 
     videos = playlist['videos']
     if max_videos:
         videos = videos[:max_videos]
 
+    if only_missing:
+        videos = [v for v in videos
+                  if not (TRANSCRIPTS_DIR / f"{v['video_id']}.json").exists()]
+        print(f"  {len(videos)} videos missing transcripts")
+
+    if not videos:
+        print("  All videos already transcribed!")
+        return
+
+    print(f"\n{'='*60}")
+    print(f"  Playlist: {playlist['title']}")
+    print(f"  Videos: {len(videos)}")
+    print(f"  Engine: whisper.cpp (Metal GPU)")
+    print(f"  Model: {model_name}")
+    print(f"{'='*60}\n")
+
     results = []
     total_words = 0
+    session_start = time.time()
 
     for i, video in enumerate(videos, 1):
-        print(f"\n[{i}/{len(videos)}] {video['title'][:50]}...")
+        print(f"\n[{i}/{len(videos)}] {video['title']}")
+        print(f"  ID: {video['video_id']}")
 
+        video_start = time.time()
         result = process_video(video['video_id'], video['title'], model_name)
+        video_time = time.time() - video_start
 
         if result:
-            results.append({'success': True, 'words': result.get('word_count', 0)})
-            total_words += result.get('word_count', 0)
+            words = result.get('word_count', 0)
+            results.append({'success': True, 'words': words, 'time': video_time})
+            total_words += words
         else:
-            results.append({'success': False})
+            results.append({'success': False, 'time': video_time})
 
-    # Summary
+        successful_so_far = [r for r in results if r['success']]
+        if successful_so_far and i < len(videos):
+            avg_time = sum(r['time'] for r in successful_so_far) / len(successful_so_far)
+            remaining = (len(videos) - i) * avg_time
+            print(f"  Estimated remaining: {remaining/60:.0f} min")
+
+    session_time = time.time() - session_start
     successful = sum(1 for r in results if r['success'])
-    print(f"\n{'='*70}")
-    print(f"✓ Processed: {successful}/{len(results)}")
-    print(f"📝 Total words: {total_words:,}")
-    print(f"{'='*70}")
+
+    print(f"\n{'='*60}")
+    print(f"  COMPLETE")
+    print(f"  Processed: {successful}/{len(results)} videos")
+    print(f"  Total words: {total_words:,}")
+    print(f"  Total time: {session_time/60:.1f} min")
+    print(f"{'='*60}")
+
+    return results
+
+
+def list_playlists():
+    """List available playlists with transcription progress"""
+    playlist_files = sorted(PLAYLISTS_DIR.glob("*.json"))
+
+    print(f"\nPlaylists:\n")
+    for i, pf in enumerate(playlist_files, 1):
+        with open(pf) as f:
+            p = json.load(f)
+
+        total = len(p.get('videos', []))
+        done = sum(1 for v in p.get('videos', [])
+                   if (TRANSCRIPTS_DIR / f"{v['video_id']}.json").exists())
+
+        status = f"[{done}/{total}]"
+        print(f"  {i}. {p['title']} {status}")
+    print()
 
 
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description='Local Whisper Transcription')
-    parser.add_argument('--install', action='store_true', help='Install Whisper')
-    parser.add_argument('--playlist', type=int, default=1, help='Playlist number')
-    parser.add_argument('--max-videos', type=int, default=None, help='Max videos')
-    parser.add_argument('--model', type=str, default='base',
-                       choices=['tiny', 'base', 'small', 'medium', 'large'],
-                       help='Whisper model size (tiny=fastest, large=best)')
+    parser = argparse.ArgumentParser(
+        description='Local transcription using whisper.cpp (Metal GPU)',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python transcribe_local.py --list                         # List playlists
+  python transcribe_local.py --video Ovd5QzZutsw            # Single video
+  python transcribe_local.py --playlist 1 --only-missing    # Only untranscribed videos
+  python transcribe_local.py --playlist 1 --max 3           # First 3 videos
+  python transcribe_local.py --video XYZ --model medium     # Use medium model
+        """
+    )
     parser.add_argument('--list', action='store_true', help='List playlists')
+    parser.add_argument('--video', type=str, help='Process single video by ID')
+    parser.add_argument('--title', type=str, default='Video', help='Video title (with --video)')
+    parser.add_argument('--playlist', type=int, help='Playlist number')
+    parser.add_argument('--playlist-id', type=str, help='Playlist ID directly')
+    parser.add_argument('--max', type=int, help='Max videos to process')
+    parser.add_argument('--model', type=str, default=DEFAULT_MODEL,
+                       help=f'Whisper model (default: {DEFAULT_MODEL})')
+    parser.add_argument('--only-missing', action='store_true',
+                       help='Only process videos without existing transcripts')
+    parser.add_argument('--force', action='store_true',
+                       help='Re-transcribe even if transcript exists')
 
     args = parser.parse_args()
 
-    if args.install:
-        install_whisper()
-        return
-
     if args.list:
-        playlist_files = sorted(PLAYLISTS_DIR.glob("*.json"))
-        print("\n📚 Playlists:\n")
-        for i, pf in enumerate(playlist_files, 1):
-            with open(pf) as f:
-                p = json.load(f)
-            print(f"  {i}. {p['title']} ({p['video_count']} videos)")
+        list_playlists()
         return
 
-    if not check_whisper_installed():
-        print("Whisper not installed. Run with --install first.")
-        print("  python transcribe_local.py --install")
+    if args.video:
+        print(f"\nProcessing: {args.video}")
+        result = process_video(args.video, args.title, args.model, args.force)
+        if result:
+            print(f"\nDone! {result.get('word_count', 0):,} words")
+        else:
+            print(f"\nFailed to transcribe video")
         return
 
-    process_playlist(args.playlist, args.max_videos, args.model)
+    if args.playlist or args.playlist_id:
+        process_playlist(
+            playlist_num=args.playlist,
+            playlist_id=args.playlist_id,
+            max_videos=args.max,
+            model_name=args.model,
+            only_missing=args.only_missing,
+        )
+        return
+
+    parser.print_help()
+    list_playlists()
 
 
 if __name__ == "__main__":

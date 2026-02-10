@@ -1,0 +1,169 @@
+{
+  "video_id": "sRXIoNPq85Q",
+  "title": "SMC Counter-Trend Trading (Low-Risk Approach)",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 21,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-11T01:30:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 35.7,
+    "transcript_words": 7500,
+    "frames_analyzed": 10,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "counter_trend_prerequisites": {
+      "llm_summary": "Before trading counter-trend, 4 elements must be understood: (1) Valid Inducement of Major Trend — where smart money traps retail, essential for all counter-trend decisions. (2) Fair Value Gap (FVG) — FVG tells market intention, where smart money wants to move. (3) Opposing HTF Point of Interest (POI) — if H4 is bullish, know where daily/weekly sell zones are above current price. (4) Where is Market Price Actually? Three states: (a) Rejecting from trending POI zone, (b) Retracing back to trending POI zone, (c) Has done Break of Structure or not. Counter-trend gains are smaller than trend trades — risk is similar but reward is comparatively less. However, with good command, you can achieve low risk and high reward even in counter-trend. The presenter recommends: pick your TF combination, stick with it for an extended period, backtest it.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["definition", "prerequisites", "table"],
+      "key_rules": [
+        "4 prerequisites: Valid IDM, FVG understanding, Opposing HTF POI, Market price location",
+        "Know where major trend's inducement is — SM traps retail there",
+        "FVG tells market intention (direction SM wants to move)",
+        "Know opposing HTF POI zones against your trading TF trend",
+        "Market price has 3 states: rejecting from POI, retracing to POI, BOS done or not",
+        "Counter-trend = smaller gains vs trending, but still good R:R with command",
+        "TF combinations: Positional (Monthly/Daily), Swing (Weekly/H4), Short Term (Daily/H1), Intra-day (H4/M30), Day Trading (H1/M15), Scalping (M15/M5)",
+        "Pick one combination and stick for extended period"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000060.00s.jpg",
+          "description": "Elements to Understand slide: 4 bullet points — (1) Where is Valid Inducement of Major Trend? (2) What is FVG? Because FVG tells Market Intention. (3) Opposing (Counter) HTF Point of Interest (POI). (4) Where is Market Price Actually? with 3 sub-points: Rejecting from Trending POI Zone, Retracing back to Trending POI Zone, Has Done Break of Structure (BOS) or Not."
+        },
+        {
+          "frame": "frame_000240.00s.jpg",
+          "description": "Timeframe Overview — Counter-Trend TF Selection table: 6 rows (Positional to Scalping) × 2 columns (Major Trend HTF + Counter-Trend LTF). Note below: 'To improve the consistency in your trading approach, I recommend picking one combination and sticking to it for an extended period.'"
+        }
+      ]
+    },
+    "counter_trend_rules_bearish": {
+      "llm_summary": "When market is bearish and sell zones are far from inducement, counter-trend buy trades can capture the pullback. 3 Rules: (1) Major trend (H4) must close candle body ABOVE its first valid inducement. When H4 closes above its own IDM → market will retrace upward (counter-trend). (2) A Fair Value Gap must exist in the swing where market closed above IDM. The FVG in that swing confirms market intention and makes the counter-trend high probability. (3) On LTF (M15), after IDM candle body close → map counter-trend IDM → when market taps FVG and closes above → counter-trend established → look for entry confirmations (MSS, SCOB, swing-based CHoCH). Range definition: from the high where market rejected to the low where market's candle body closed above IDM → this becomes the swing range. Draw Premium/Discount zones (50% level). Counter-trend target = FIRST sell zone above IDM or the 50% level of the swing. NEVER hold counter-trend beyond the first sell zone — take profit and release the trade. If market does BOS on LTF → deeper pullback indicated → can continue counter-trend entries. The bullish market counter-trend (selling into H4 buy zone) is the exact mirror.",
+      "statistics": {
+        "teaching_time_minutes": 7.0,
+        "word_count": 1500,
+        "frames_used": 2
+      },
+      "teaching_types": ["rules", "schematic", "workflow"],
+      "key_rules": [
+        "Rule 1: Major trend candle body close ABOVE its first valid IDM → counter-trend starts",
+        "Rule 2: FVG must exist in the swing that closed above IDM → high probability",
+        "Rule 3: LTF entry confirmation needed (MSS, SCOB, or swing-based CHoCH)",
+        "Range: rejected high ↔ IDM close low = swing range → draw Premium/Discount (50%)",
+        "Counter-trend target = FIRST sell zone above IDM or 50% equilibrium level",
+        "NEVER hold counter-trend beyond first opposing zone — take profit and exit",
+        "LTF BOS confirmed → deeper pullback → can continue counter-trend entries",
+        "Bullish counter-trend (bearish pullback) = exact mirror of bearish",
+        "Counter-trend entry after IDM close + FVG + LTF confirmation = high probability"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "Counter-Trend Approach schematic (bearish market): Major Trend (H4) in red showing Sell Zone, IDM, BOS. 'Major Trend Candle Body Close' label above IDM. Minor Trend (M15) in black shown starting after IDM close. Shows the initial counter-trend setup."
+        },
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "Complete Counter-Trend schematic: Sell Zones (2 levels), IDM, BOS, FVG on LTF, BOS on LTF. Premium Zone (right side pink) and Discount Zone (right side green) drawn from swing range. Minor Trend (M15) showing counter-trend bullish structure with IDM and BOS labels. Complete workflow for bearish market counter-trend buy trade."
+        }
+      ]
+    },
+    "real_chart_counter_trend_gbpusd": {
+      "llm_summary": "Complete GBP/USD demonstration using H4 (major bullish trend) and M15 (counter-trend sell). Setup: H4 bullish with BOS confirmed. IDM marked. Buy zones far below (Order Block + FVG, and extreme Order Block). Market has moved far from buy zones → counter-trend sell opportunity. HTF confirmation: Daily chart shows Order Block rejection at the high → market rejecting from Daily OB = strong evidence for counter-trend. H4: IDM close below confirmed → 3 rules satisfied (IDM close + FVG in swing + Daily OB rejection). M15 counter-trend execution: (1) Mark M15 counter-trend IDM. (2) Wait for structure shift after IDM close. (3) OB near IDM has no immediate liquidity → expect sweep. (4) Market sweeps OB → previous high liquidity swept → SCOB forms. First SCOB entry: at retest, SL above SCOB high (2-3 pips), TP at the low from which market rose to sweep. Aggressive drop → TP hit. Second SCOB entry: market retraces → new SCOB at retest → TP hit again. After counter-trend BOS: deeper pullback confirmed → mark new M15 IDM → M15 Lower High marked as change of character invalidation level.",
+      "statistics": {
+        "teaching_time_minutes": 12.0,
+        "word_count": 2500,
+        "frames_used": 4
+      },
+      "teaching_types": ["real_chart_example", "step_by_step_trade"],
+      "key_rules": [
+        "GBP/USD H4 bullish + Daily OB rejection → counter-trend sell on M15",
+        "H4 IDM close below + FVG in swing + Daily rejection = 3 rules satisfied",
+        "M15: mark counter-trend IDM → wait for structure shift",
+        "OB with no immediate liquidity nearby → market will sweep it first",
+        "SCOB entry after previous high liquidity sweep → aggressive drop → TP hit",
+        "Second SCOB entry from retracement → TP hit → both counter-trend take profits achieved",
+        "Counter-trend BOS on LTF → deeper pullback → continue counter-trend entries",
+        "M15 Lower High = CHoCH invalidation level — if broken, back to trend direction"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000780.00s.jpg",
+          "description": "GBP/USD H4 bullish chart: BOS label confirmed, IDM label at inducement. Buy zones far below. Strong bullish momentum visible. Beginning of counter-trend example."
+        },
+        {
+          "frame": "frame_000960.00s.jpg",
+          "description": "GBP/USD H4 with 'Daily OB' label at top showing rejection from Daily order block. IDM label. Two Order Block zones (peach) marked below IDM — first OB and extreme OB. Counter-trend sell setup with HTF rejection evidence."
+        },
+        {
+          "frame": "frame_001200.00s.jpg",
+          "description": "GBP/USD M15: 'Order Block' zone (sell zone, peach) at top, IDM label, structure shift area visible, BOS label. M15 counter-trend structure being mapped after H4 IDM close. Preparing for SCOB entry."
+        },
+        {
+          "frame": "frame_001500.00s.jpg",
+          "description": "GBP/USD M15 with 'M15 - LH' (Lower High) label, IDM labels, SBC label. Premium zone (pink) and Discount zone (green) drawn. Counter-trend structure mapped with multiple SCOB entries. Shows IDM sweep and SCOB formation area."
+        }
+      ]
+    },
+    "qml_in_counter_trend": {
+      "llm_summary": "When no unmitigated Order Block exists above the IDM in counter-trend, use QML Level as the POI zone. In the GBP/USD example: after counter-trend BOS, new IDM marked on M15. Above the IDM, no unmitigated OB available → use QML Level (Quasimodo Level) as the sell zone. The QML Level sits below the M15 Lower High (LH). At QML Level: (a) wait for IDM sweep → SCOB entry, or (b) take direct entry at QML Level because risk is defined (SL above LH — if LH breaks, market resumes trend). QML provides excellent risk-to-reward because SL is tight (above LH) and TP is at the swing low. This connects to V18 (POI Zones) where QML was introduced as the 3rd priority POI zone used when no FVG or OB is available.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 1
+      },
+      "teaching_types": ["application", "real_chart_example"],
+      "key_rules": [
+        "When no unmitigated OB above IDM → use QML Level as POI zone",
+        "QML Level sits below M15 Lower High (LH)",
+        "At QML: either wait for IDM sweep + SCOB, or take direct entry",
+        "Direct entry OK because risk defined: SL above LH (if broken = trend resumes)",
+        "QML provides excellent R:R — tight SL, wide TP to swing low",
+        "QML is 3rd priority POI zone (from V18): used when no FVG or OB available"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_001860.00s.jpg",
+          "description": "GBP/USD M15 with QML Level area visible. IDM labels, BOS label. Premium (pink) and Discount (green) zones. Market approaching QML Level after counter-trend BOS. Shows how QML is used when no OB is available above IDM."
+        }
+      ]
+    },
+    "multiple_scob_counter_trend_entries": {
+      "llm_summary": "The real chart demonstration shows a systematic approach of taking multiple counter-trend SCOB entries along the M15 structure: (1) First SCOB: after IDM sweep → previous high liquidity swept → SCOB forms → sell at retest → TP at previous low → hit. (2) Second SCOB: market retraces → new SCOB at IDM retest → sell → TP hit. (3) Counter-trend BOS confirmed → deeper pullback → new IDM marked. (4) Third SCOB: at IDM sweep → SCOB forms near QML level → sell → TP hit. (5) Fourth SCOB: after new BOS → new IDM → SCOB forms → sell at retest → 1:3.6 R:R. (6) Fifth entry: at Order Block near new IDM → 1:7.2 R:R achieved. Counter-trend stops when market reaches H4 buy zone (Order Block). Key recommendation: one pair = one trade at a time. The presenter emphasizes: do NOT overtrade — take one SCOB entry, achieve TP, then reassess. Multiple entries shown for education only. Safe SL = above SCOB high (2-3 pips) or above the most recent LTF LH for wider but safer placement.",
+      "statistics": {
+        "teaching_time_minutes": 8.7,
+        "word_count": 1900,
+        "frames_used": 2
+      },
+      "teaching_types": ["step_by_step_trade", "real_chart_example", "risk_management"],
+      "key_rules": [
+        "Systematic SCOB entries along M15 counter-trend structure",
+        "Each entry: IDM sweep → SCOB forms → sell at retest → TP at previous low",
+        "After BOS on LTF: mark new IDM → continue counter-trend entries",
+        "Counter-trend stops at H4 buy zone (Order Block) — do NOT sell below it",
+        "Risk-reward achievable: 1:2.5 to 1:7.2 on individual counter-trend entries",
+        "Recommendation: one pair = one trade at a time — avoid overtrading",
+        "Safe SL: above SCOB high (2-3 pips) or above most recent LTF Lower High",
+        "When LH is broken → CHoCH back to trend direction → stop counter-trend",
+        "OB with no immediate liquidity nearby = market will sweep it first — wait",
+        "Previous high/low liquidity sweep makes SCOB very effective"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_001680.00s.jpg",
+          "description": "GBP/USD M15 showing multiple counter-trend SCOB entries: IDM labels, BOS label, M15 LH label. Premium (pink) and Discount (green) zones showing the systematic selling approach. Multiple SCOB entry points visible along the counter-trend drop."
+        },
+        {
+          "frame": "frame_002040.00s.jpg",
+          "description": "GBP/USD M15 complete counter-trend result: Risk/Reward annotation showing 'Risk Reward Ratio: 7.2'. Entry, Stop Loss, and Take Profit clearly marked. Multiple premium/discount zones. Counter-trend entries taken from SCOB at each IDM level achieving excellent R:R ratios."
+        }
+      ]
+    }
+  }
+}

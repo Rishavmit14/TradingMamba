@@ -1,0 +1,125 @@
+{
+  "video_id": "dknxgbZrN3g",
+  "title": "SMC BOS vs Liquidity Sweep vs Swing High/Low: The Difference",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 6,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T20:00:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 10.8,
+    "transcript_words": 1845,
+    "frames_analyzed": 6,
+    "concepts_extracted": 4
+  },
+  "concepts": {
+    "three_rules_framework": {
+      "llm_summary": "This video was created in response to student confusion about differentiating between Liquidity Sweep, Break of Structure (BOS), and Swing High/Low. The presenter establishes a 3-rule comparison framework that applies differently to each concept. The three rules are: (1) Inducement (IDM) — must the swing take inducement? (2) Candle Body Close Below Inducement — what happens after inducement is taken? (3) Candle Body Close Above High — what must happen when price breaks the previous high? These rules are presented for bullish structure and are 100% applicable to bearish structure in reverse. The comparison table clearly shows where the three concepts differ and where they overlap, making it easy to differentiate them in real-time on charts.",
+      "statistics": {
+        "teaching_time_minutes": 2.0,
+        "word_count": 300,
+        "frames_used": 2
+      },
+      "teaching_types": ["comparison_table", "framework_setup", "student_confusion_resolution"],
+      "key_rules": [
+        "Three rules determine the difference between Liquidity Sweep, BOS, and Swing High/Low",
+        "Rule 1: Inducement (IDM) — is it required?",
+        "Rule 2: Candle Body Close Below Inducement — what type of close is needed?",
+        "Rule 3: Candle Body Close Above High — what type of close is needed?",
+        "Rules are shown for bullish structure — 100% same rules apply to bearish in reverse",
+        "This lecture was designed because students had difficulty differentiating these three concepts"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000060.00s.jpg",
+          "description": "True SMC Rules – Bullish Structure: Initial table setup with three row headers (Inducement/IDM, Candle Body Close Below Inducement, Candle Body Close Above High) and column headers to be filled"
+        },
+        {
+          "frame": "frame_000150.00s.jpg",
+          "description": "Complete comparison table: Liquidity Sweep (purple) | Break of Structure (purple) | Swing High/Low (yellow). Row 1: 'Inducement is not compulsory' | 'Must Take Out Inducement' | 'Must Take Out Inducement'. Row 2: 'Consider Only Candle Wick, Closing Body is Not Valid' | 'Candle Wick Below Inducement Valid, Candle Body Below Inducement Valid' | 'Candle Wick Below Inducement Invalid, Only Candle Body Below Inducement Valid'. Row 3: 'Consider Only Candle Wick, Closing Body is Not Valid' | 'Candle Body Must Close Above High' | 'Candle Body Must Close Above High'"
+        }
+      ]
+    },
+    "liquidity_sweep_rules": {
+      "llm_summary": "Liquidity Sweep has the most relaxed rules of the three concepts. Rule 1 (Inducement): Inducement is NOT compulsory for a liquidity sweep. Market can create a liquidity sweep whether it takes inducement or not. Rule 2 (Below Inducement): Only the candle WICK counts — if the candle body closes below inducement, it does NOT qualify as a liquidity sweep (it would become BOS or Swing High/Low instead). Rule 3 (Above High): Only the candle WICK counts — the candle wick goes above the previous high but the body does NOT close above. If the body closes above, it is NOT a liquidity sweep. The candlestick examples show: (1) High Liquidity Sweep — candle wick goes above high but body stays below, with inducement taken. (2) Invalid Liquidity Sweep / Low Liquidity Sweep — candle sweeps above but conditions differ. The key identifier of a liquidity sweep is that ONLY wicks matter — any body close invalidates it as a liquidity sweep.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 400,
+        "frames_used": 1
+      },
+      "teaching_types": ["rule_application", "candlestick_examples"],
+      "key_rules": [
+        "Liquidity Sweep Rule 1: Inducement is NOT compulsory — sweep can happen with or without IDM",
+        "Liquidity Sweep Rule 2: ONLY candle WICK counts below inducement — body close is NOT valid",
+        "Liquidity Sweep Rule 3: ONLY candle WICK counts above high — body close is NOT valid",
+        "Key identifier: only WICKS matter in liquidity sweeps — any body close disqualifies it",
+        "If candle body closes above the high → it's NOT a liquidity sweep (it's BOS or Swing High/Low)",
+        "If candle body closes below inducement → it's NOT a liquidity sweep (it's Swing High/Low)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000300.00s.jpg",
+          "description": "Rules table with Liquidity Sweep candlestick examples below: 'High Liquidity Sweep' with inducement label showing wick above high but body below, and 'Invalid Liquidity Sweep / Low Liquidity Sweep' example showing different scenario"
+        }
+      ]
+    },
+    "bos_vs_swing_high_low_rules": {
+      "llm_summary": "Break of Structure and Swing High/Low share two rules but differ critically on the second rule. SHARED RULES: Rule 1 — Both MUST take out inducement. Rule 3 — Both require candle body to close above the previous high. THE CRITICAL DIFFERENCE (Rule 2): For BOS, BOTH wick and body close below inducement are valid — whether the candle creates a wick below inducement or closes its body below, either counts for BOS. For Swing High/Low, ONLY candle body close below inducement is valid — a wick below inducement is INVALID for Swing High/Low. This means: Every Swing High/Low IS also a BOS (because if body closed below inducement, both conditions are met). But NOT every BOS is a Swing High/Low (because BOS can have just a wick below inducement, which Swing High/Low rejects). The presenter explicitly states: 'Every Higher High or Swing High/Low is a Break of Structure, but not every Break of Structure is a Swing High/Low.' When the candle body closes below inducement AND above the high, it creates BOTH a valid Swing High/Low AND a valid BOS. When only the wick goes below inducement, it's ONLY a BOS.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 600,
+        "frames_used": 1
+      },
+      "teaching_types": ["comparison", "rule_differentiation", "key_insight"],
+      "key_rules": [
+        "BOS and Swing High/Low share Rule 1 (must take inducement) and Rule 3 (body close above high)",
+        "CRITICAL DIFFERENCE is Rule 2 (candle behavior below inducement):",
+        "BOS: Wick OR Body below inducement = BOTH valid",
+        "Swing High/Low: ONLY Body below inducement = valid; Wick alone = INVALID",
+        "Every Swing High/Low IS also a BOS (body close satisfies both)",
+        "NOT every BOS is a Swing High/Low (wick-only satisfies BOS but not Swing High/Low)",
+        "When body closes below inducement: creates Swing High/Low AND BOS simultaneously",
+        "When only wick goes below inducement: creates ONLY BOS (not Swing High/Low)",
+        "BOS where candle body closes below inducement → becomes Swing High/Low",
+        "This distinction is critical for accurate structure mapping"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "Rules table with BOS and Swing High/Low candlestick examples in dashed boxes: BOS example shows 'BOS' and 'Inducement' labels with candle body closing above high. Swing High/Low example shows 'HH' (Higher High), 'HL' (Higher Low), and 'Inducement' labels with candle body closing below inducement AND above high"
+        }
+      ]
+    },
+    "real_chart_application": {
+      "llm_summary": "The presenter applies all three concepts to a real AUD/USD 4-hour chart, showing that Liquidity Sweep, BOS, and Swing High/Low can ALL occur within the same trend. The chart shows: (1) First two points are Liquidity Sweeps — candle wick goes above previous high but body doesn't close above. (2) Next point is a valid BOS — market took inducement (IDM labeled), candle body closed above the previous high. (3) Next points are Swing Highs with Higher Lows — market took inducement, candle body closed below inducement, AND candle body closed above the high. These are labeled as both 'HH BOS' (Higher High and Break of Structure). The annotation on the chart reads: 'These Swing High can also be marked as Break of structure (BOS).' The presenter also notes: at one point the candle did NOT close below inducement, so it was marked as only BOS (not Swing High/Low). But where the candle DID close below inducement AND above the high, it became both Swing High/Low AND BOS.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 500,
+        "frames_used": 2
+      },
+      "teaching_types": ["real_chart_example", "multi_concept_application"],
+      "key_rules": [
+        "Liquidity Sweep, BOS, and Swing High/Low can ALL occur within the same trend",
+        "Real chart: AUD/USD 4H timeframe used as example",
+        "Liquidity Sweeps identified where candle wick goes above high but body doesn't close above",
+        "BOS identified where inducement taken + body close above high",
+        "Swing High/Low (HH/HL) identified where inducement taken + body close BELOW inducement + body close ABOVE high",
+        "Swing High points can ALSO be marked as BOS ('HH BOS' dual label)",
+        "BOS points where body didn't close below inducement are ONLY BOS, not Swing High/Low",
+        "Practice finding all three on live charts — all three have their own rules, map accordingly"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000540.00s.jpg",
+          "description": "AUD/USD 4H TradingView chart with initial markings: 'Liquidity Sweep' labels at two points on the left, 'BOS' label with 'IDM' at the next break, and a red circle at a higher point being evaluated"
+        },
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "Complete AUD/USD 4H chart with all labels applied: 'Liquidity Sweep' (2x), 'BOS', 'HH BOS' (dual label), 'HH', 'HL', 'IDM' at multiple inducement levels. Annotation: 'These Swing High can also be marked as Break of structure (BOS).' Shows the full progression from liquidity sweeps to BOS to swing highs within one bullish trend"
+        }
+      ]
+    }
+  }
+}

@@ -149,7 +149,7 @@ def get_youtube_captions(video_id: str) -> dict:
         'no_warnings': True,
         'writesubtitles': True,
         'writeautomaticsub': True,
-        'subtitleslangs': ['en'],
+        'subtitleslangs': ['hi', 'en'],
         'skip_download': True,
     }
 
@@ -161,12 +161,16 @@ def get_youtube_captions(video_id: str) -> dict:
             subtitles = info.get('subtitles', {})
             auto_captions = info.get('automatic_captions', {})
 
-            # Prefer manual subtitles, fall back to auto
-            if 'en' in subtitles:
-                caption_info = subtitles['en']
-            elif 'en' in auto_captions:
-                caption_info = auto_captions['en']
-            else:
+            # Prefer Hindi, fall back to English; prefer manual over auto
+            caption_info = None
+            for lang in ['hi', 'en']:
+                if lang in subtitles:
+                    caption_info = subtitles[lang]
+                    break
+                elif lang in auto_captions:
+                    caption_info = auto_captions[lang]
+                    break
+            if caption_info is None:
                 return None
 
             # Get the caption URL (prefer vtt or json3)

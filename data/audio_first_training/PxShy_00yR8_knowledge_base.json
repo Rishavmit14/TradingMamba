@@ -1,0 +1,194 @@
+{
+  "video_id": "PxShy_00yR8",
+  "title": "SMC POI Zones — FVG, Order Block & QML Level",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 18,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T23:45:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 25.0,
+    "transcript_words": 5200,
+    "frames_analyzed": 18,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "poi_zones_overview": {
+      "llm_summary": "Point of Interest (POI) zones are the specific price levels where smart money traders look for trade entries. There are exactly 3 types of POI zones: (1) Fair Value Gap (FVG), (2) Order Block (OB), and (3) QML Level (Quasimodo Level). These three zones serve as the entry mechanisms after identifying market structure, liquidity, and inducement. FVG is the highest priority, Order Block is second priority, and QML Level is third priority (used as confluence when FVG and OB are not available). The presenter reviews FVG and OB concepts from previous videos and introduces QML Level as a new concept in this video.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 600,
+        "frames_used": 1
+      },
+      "teaching_types": ["overview", "classification", "priority_ranking"],
+      "key_rules": [
+        "POI (Point of Interest) = specific price zones where smart money enters trades",
+        "3 types of POI zones: FVG, Order Block, QML Level",
+        "Priority ranking: FVG (1st) → Order Block (2nd) → QML Level (3rd)",
+        "QML Level is used as confluence entry when no FVG or OB is available",
+        "POI zones are the ENTRY mechanism — used after identifying structure, liquidity, inducement"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000240.00s.jpg",
+          "description": "Complete POI Zones overview slide: Title 'Point of Interest (POI) Zones' with two sections — 'Fair Value Gap' (left text: 'FVG is Refined Form of Liquidity Void or Imbalance... Wick to Wick Gap between 1st and 3rd Candle') and 'Order Blocks' (left text: 'Order blocks is refined form of IOF... Collection of Orders of Big Banks And Institutions'). Center diagrams show valid FVG (checkmark) and invalid bearish OB examples with 'This Candle is Inside Candle, Not a Valid Pullback' annotation. Right side shows thumbnail references to previous FVG and Order Block videos."
+        }
+      ]
+    },
+    "fvg_review": {
+      "llm_summary": "Fair Value Gap (FVG) is the refined form of Liquidity Void or Price Imbalance — the area where price moves sharply in one direction, leaving pending orders behind as liquidity. FVG is specifically measured as the wick-to-wick gap between the 1st and 3rd candle (not the bodies). A valid FVG occurs when there is a clear gap between the wick of candle 1 and the wick of candle 3, with the middle candle (candle 2) being the expansion candle. Inside candles do NOT create valid FVGs because there is no genuine imbalance. FVG is the HIGHEST priority POI zone because it represents the purest form of price imbalance where smart money has unmitigated orders.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["review", "definition", "diagram"],
+      "key_rules": [
+        "FVG = Refined Form of Liquidity Void or Price Imbalance",
+        "FVG = Wick-to-Wick Gap between 1st and 3rd candle",
+        "Area where price moves sharply in one direction, leaving pending orders behind",
+        "Inside candle FVG = NOT important (no genuine imbalance)",
+        "FVG is HIGHEST priority POI zone (1st priority)",
+        "FVG represents the purest form of price imbalance with unmitigated SM orders"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000120.00s.jpg",
+          "description": "FVG definition slide from POI Zones: Shows 'Fair Value Gap is Refined Form of Liquidity Void or Imbalance is an area where price moves sharply in One Direction, Leaving Pending Orders behind as Liquidity. FVG is Wick to Wick Gap between 1st and 3rd Candle.' Diagrams show valid FVG with checkmarks and invalid FVG scenarios."
+        },
+        {
+          "frame": "frame_000240.00s.jpg",
+          "description": "Complete POI slide with FVG section showing candle diagrams with 'X' markers for wick-to-wick measurement. Valid FVG examples with checkmarks and 'FVG' labels on green/red gap zones between candle 1 and candle 3 wicks."
+        }
+      ]
+    },
+    "order_block_review": {
+      "llm_summary": "Order Block is a refined form of Institutional Order Flow (IOF) — the collection of pending orders of big banks and institutions distributed in block form. Every buy candle before a sell move is a Bearish Order Block; every sell candle before a buy move is a Bullish Order Block. For an OB to be valid, two rules must be satisfied: (1) the candle must sweep liquidity of the previous candle or previous high/low, and (2) a price imbalance (FVG) must exist below/above the candle's wick. Inside candles are NOT valid pullbacks and therefore cannot form valid OBs. OBs that are part of inducement or engineered liquidity become Smart Money Traps — market will break through them. Order Block is the 2nd priority POI zone after FVG.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["review", "definition", "validity_rules", "diagram"],
+      "key_rules": [
+        "Order Block = refined form of IOF = collection of pending orders of big banks",
+        "Bearish OB = buy candle before sell move; Bullish OB = sell candle before buy move",
+        "Valid OB Rule 1: candle MUST sweep liquidity of previous candle or previous high/low",
+        "Valid OB Rule 2: price imbalance (FVG) MUST exist below/above the candle's wick",
+        "Inside candle = NOT valid pullback → cannot form valid OB",
+        "OB in inducement/engineered liquidity zone = Smart Money Trap (market breaks through)",
+        "Order Block is 2nd priority POI zone (after FVG)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000240.00s.jpg",
+          "description": "Order Blocks section of POI slide: Shows bearish OB with checkmark (valid — FVG present below) and bearish OB with X (invalid — 'This Candle is Inside Candle, Not a Valid Pullback'). Text: 'Order blocks is refined form of IOF (Institutional Order Flow). Order Block is the Collection of Orders of Big Banks And Institutions in forex trading.'"
+        }
+      ]
+    },
+    "qml_level_definition": {
+      "llm_summary": "QML Level (Quasimodo Level, also called QM-Level) is a price level where market sweeps liquidity above/below a high/low and then moves sharply in the opposite direction. The name comes from Disney's Quasimodo character — the pattern resembles uneven shoulders (one shoulder higher than the other), similar to Quasimodo's hunchback. Bearish QML: In a bullish move, price makes a higher high (sweeping liquidity above the previous high with a liquidity grab), then reverses with a Market Structure Shift (MSS — candle body closes below the corresponding low). The horizontal line drawn at the swept high becomes the QML Level. When price returns to this level, it provides a sell entry. Bullish QML: In a bearish move, price makes a lower low (sweeping liquidity below the previous low), then reverses with MSS upward. The horizontal line at the swept low becomes the QML Level for buy entry. QML is the 3rd priority POI zone — used when no valid FVG or OB is available. QML provides excellent risk/reward ratio and becomes high probability when inducement is also available at the level. QML can align with IOF (Institutional Order Flow) baseline for even stronger confluence.",
+      "statistics": {
+        "teaching_time_minutes": 8.0,
+        "word_count": 1800,
+        "frames_used": 8
+      },
+      "teaching_types": ["definition", "diagram", "real_chart_example", "name_origin"],
+      "key_rules": [
+        "QML Level (Quasimodo Level) = level where market sweeps liquidity and moves sharply opposite",
+        "Named after Disney's Quasimodo — pattern resembles uneven shoulders (one higher than other)",
+        "Bearish QML: price sweeps high's liquidity (liquidity grab) → MSS below corresponding low → horizontal line at swept high = QML",
+        "Bullish QML: price sweeps low's liquidity → MSS above corresponding high → horizontal line at swept low = QML",
+        "MSS (Market Structure Shift) = candle body must CLOSE beyond the key level (not just wick)",
+        "QML is 3rd priority POI zone — used when no valid FVG or OB available",
+        "QML provides excellent risk/reward ratio",
+        "High probability when inducement is also available at QML level",
+        "QML can align with IOF baseline for stronger confluence",
+        "Draw horizontal line at the exact price where liquidity was swept = QML entry level"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000360.00s.jpg",
+          "description": "Understanding of QML (QM-Level) title slide: Shows beginning of bearish QML line diagram with price moving up from left, making a peak (red line showing the high). Label: 'Bearish QML' at bottom."
+        },
+        {
+          "frame": "frame_000480.00s.jpg",
+          "description": "Complete Bearish QML diagram: Shows full pattern — price rises (blue line), makes a peak, drops, makes a higher peak with 'Liquidity Grab' label at the top and '$$' at the previous high. Then sharp drop with 'MSS (Shift with Candle Body Close)' label. Dashed horizontal line from the $$ level shows the QML entry point. Label: 'Bearish QML'."
+        },
+        {
+          "frame": "frame_000540.00s.jpg",
+          "description": "Bullish QML understanding diagram: Shows inverted QML pattern for bullish entries — price descends, sweeps a low's liquidity, then shifts up with MSS. Horizontal line at the swept low = bullish QML entry level."
+        },
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "USD/CAD M30 real chart: Shows price action with green circle at a high (liquidity sweep point) and blue circles at key structural points. Bullish QML setup building — price swept a low and is developing the pattern."
+        },
+        {
+          "frame": "frame_000660.00s.jpg",
+          "description": "USD/CAD M30: 'IDM' label at the inducement point and horizontal line drawn at QML level. Shows how inducement aligns with the QML zone. 'Path' label visible at bottom."
+        },
+        {
+          "frame": "frame_000780.00s.jpg",
+          "description": "USD/CAD M30: 'Shift' label showing Market Structure Shift confirmed. 'IDM' label at inducement. 'IOF' label at Institutional Order Flow baseline. Shows the complete bullish setup — QML aligns with IOF."
+        },
+        {
+          "frame": "frame_000840.00s.jpg",
+          "description": "USD/CAD M30 complete trade: Shows entry point with 'Shift' and 'IDM' labels. Green target box at top showing 'Target: 0.00193 (0.14%) | 1:5, Amount: 1308.34'. Red stop-loss zone at bottom. Pink entry zone labeled 'Open PNL'. Demonstrates the excellent risk/reward that QML provides."
+        },
+        {
+          "frame": "frame_000900.00s.jpg",
+          "description": "USD/CAD M30 final result: 'QML Aligned with IOF' label on the pink zone. Shows market respected the QML level that aligned with IOF baseline. Large profit zone (gray) above. Demonstrates confluence of QML + IOF = high probability trade."
+        }
+      ]
+    },
+    "entry_workflow_with_poi": {
+      "llm_summary": "The complete entry workflow using POI zones follows a strict sequence: (1) NEVER trade the first POI zone directly — it will likely be used as inducement/liquidity. (2) Wait for price to reach a POI zone and create inducement. (3) Wait for a Market Structure Shift (MSS) — candle body must close beyond the key structural level. (4) After the shift, identify the NEW POI zone that forms (FVG, OB, or QML). (5) Trade the new zone, not the original one. The presenter demonstrates two complete real-chart examples: (A) USD/CAD M30 bullish trade — identifies QML level that aligns with IOF baseline, waits for inducement + shift, enters at the new zone with approximately 1:5 risk-reward. (B) AUD/USD M15 bearish trade — identifies BOS (Break of Structure) at top, recognizes IDM/SMT zone (inducement/smart money trap where retail OBs get broken), waits for internal liquidity sweep + shift, identifies QML Level as the POI entry, market respects QML and drops significantly. Key insight: OBs below inducement in a sell trend are Smart Money Traps — retail gets stopped out. Use QML as the POI when OBs are trapped.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 1200,
+        "frames_used": 7
+      },
+      "teaching_types": ["workflow", "real_chart_example", "step_by_step", "smt_identification"],
+      "key_rules": [
+        "NEVER trade the first POI zone directly — it is likely inducement/liquidity for SM",
+        "Wait for inducement to form at the POI zone before considering entry",
+        "Wait for Market Structure Shift (MSS) — candle body close beyond key level",
+        "After shift, identify NEW POI zone (FVG → OB → QML in priority order)",
+        "Trade the new zone formed AFTER the shift, not the original zone",
+        "OBs below inducement in sell trend = Smart Money Traps — retail gets stopped out",
+        "When OBs are trapped, use QML Level as the POI entry",
+        "QML aligned with IOF baseline = very high probability confluence",
+        "Internal liquidity sweeps within the structure provide additional confirmation",
+        "Complete workflow: Structure → Liquidity → Inducement → Shift → New POI → Entry"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000720.00s.jpg",
+          "description": "USD/CAD M30 bullish workflow: Shows 'Shift', 'IDM', and 'IOF' labels with the complete bullish trade setup. Market swept low liquidity, shift confirmed, QML level identified at the swept low."
+        },
+        {
+          "frame": "frame_000960.00s.jpg",
+          "description": "AUD/USD M15 bearish setup start: Shows bearish market structure with 'BOS' (Break of Structure) label at top left. Price drops sharply after BOS, then retraces. Beginning of the bearish QML trade identification."
+        },
+        {
+          "frame": "frame_001080.00s.jpg",
+          "description": "AUD/USD M15 bearish workflow: Shows 'IDM SMT' pink zone (inducement/Smart Money Trap where retail OBs are trapped) and 'Shift' label below. Market made a structure shift after sweeping the IDM zone."
+        },
+        {
+          "frame": "frame_001140.00s.jpg",
+          "description": "AUD/USD M15: 'Internal Liquidity' label at the high where liquidity was swept. 'IDM SMT' zone clearly marked. Shows how internal liquidity sweep provides additional confirmation for the bearish setup."
+        },
+        {
+          "frame": "frame_001260.00s.jpg",
+          "description": "AUD/USD M15: 'QML Level' horizontal line drawn at the high where internal liquidity was swept. 'Internal Liquidity' and 'Shift' labels visible. Shows the complete bearish QML entry identification."
+        },
+        {
+          "frame": "frame_001320.00s.jpg",
+          "description": "AUD/USD M15 bearish QML trade result: Shows QML Level held (market respected the horizontal line) and dropped significantly. Large red zone showing the profitable sell trade. 'Internal Liquidity' and 'QML Level' labels visible. Demonstrates the complete bearish workflow from BOS → IDM/SMT → Shift → QML entry → profit."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "video_id": "5c14eElh42k",
+  "title": "SMC Liquidity Void, Price Imbalance & Fair Value Gap — Valid FVG Rules",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 13,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T23:45:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 35.0,
+    "transcript_words": 6200,
+    "frames_analyzed": 6,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "liquidity_as_validation": {
+      "llm_summary": "The ONLY answer to 'which buy/sell zone is valid?' is LIQUIDITY. No order block, supply/demand zone, or fair value gap can be valid without liquidity sweep or liquidity grab happening first. This is the single most important validation principle: any zone is only valid if market has swept or grabbed liquidity at or near that zone. Traders who fail in forex fail because they trade zones without checking for liquidity events. Liquidity is the answer to every question in the forex market.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 400,
+        "frames_used": 1
+      },
+      "teaching_types": ["core_principle", "validation_rule"],
+      "key_rules": [
+        "The ONLY validation for any buy/sell zone = LIQUIDITY",
+        "No OB, S&D, or FVG is valid without liquidity sweep or grab",
+        "Liquidity is the answer to every question in forex",
+        "Traders who fail = trading zones without checking liquidity events",
+        "Zone validity = liquidity sweep OR liquidity grab must precede it"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000120.00s.jpg",
+          "description": "Title slide: 'WHICH FAIR VALUE GAP IS VALID?' with large question mark. Subtitle: 'Understanding of Logical BUY & SELL ZONES — Liquidity Void / Price Imbalance / Fair Value Gap (FVG)'"
+        }
+      ]
+    },
+    "liquidity_sweep_vs_grab": {
+      "llm_summary": "Liquidity Sweep and Liquidity Grab have the SAME objective (gain liquidity for market movement) but differ in execution. Liquidity Sweep: next candle's WICK sweeps previous candle's high/low and returns — no body close beyond the level. Buy Side Liquidity Sweep = next candle wicks above previous high. Sell Side Liquidity Sweep = next candle wicks below previous low. Liquidity Grab: market is in consolidation/ranging, then breaks out on ONE side with CANDLE BODY CLOSE, trapping breakout traders. Then market reverses to the OPPOSITE side of consolidation with expansion/speed. Buy Side Liquidity Grab = candle closes above consolidation range, then reverses down with speed. Sell Side Liquidity Grab = candle closes below consolidation range, then reverses up with speed. Both methods trap traders on one side and move to the opposite direction.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 800,
+        "frames_used": 1
+      },
+      "teaching_types": ["comparison", "candlestick_examples", "definition"],
+      "key_rules": [
+        "Liquidity Sweep: wick sweeps previous candle's high/low → returns (no body close)",
+        "Liquidity Grab: candle BODY closes beyond consolidation → traps breakout traders → reverses with speed",
+        "Both have SAME objective: gain liquidity for market movement",
+        "Buy Side Sweep = wick above prev high; Sell Side Sweep = wick below prev low",
+        "Buy Side Grab = body close above range → reversal down; Sell Side Grab = body close below range → reversal up",
+        "After grab: market moves to opposite side of consolidation with expansion/displacement",
+        "Breakout traders and less-informed traders are the primary targets"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "Liquidity Sweep or Liquidity Grab? — Side-by-side comparison. Left: Liquidity Sweep with Buy Side (wick above prev high) and Sell Side (wick below prev low) candlestick examples. Right: Liquidity Grab with Consolidation/Ranging zone, Buy Side Grab (candle closes above range then reverses) and Sell Side Grab examples"
+        }
+      ]
+    },
+    "price_imbalance_liquidity_void": {
+      "llm_summary": "Price Imbalance (also called Liquidity Void) occurs when market makes a one-directional sharp movement (expansion). During this sharp move, buyers and sellers have incomplete orders — pending orders remain. These pending orders ARE the liquidity. Market MUST return to fill these imbalances eventually (no time limit — could be hours, days, or weeks). Key rules: (1) Price imbalance in TREND direction = high probability (effective). (2) Price imbalance AGAINST trend = low probability (market may ignore it). (3) For entry, target minimum 50% of the liquidity void/price imbalance zone. (4) Market can fill 100% but we formulate trades at 50% level. The zone is identified by looking for one-sided candles — e.g., 3 consecutive buy candles with no sell candle = price imbalance. Measured from wick-to-wick of the surrounding candles.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 900,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "schematic_diagram", "real_chart_example"],
+      "key_rules": [
+        "Price Imbalance = Liquidity Void = one-directional sharp movement leaving pending orders",
+        "Pending orders left behind = liquidity → market MUST return to fill",
+        "No time limit for fill — can be immediate or days/weeks later",
+        "Price imbalance in TREND direction = high probability zone",
+        "Price imbalance AGAINST trend = low probability (market may ignore)",
+        "For entry: target minimum 50% of the imbalance zone",
+        "Market CAN fill 100% but formulate trades at 50%",
+        "Identification: consecutive one-sided candles with no opposite-side candle"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000720.00s.jpg",
+          "description": "Liquidity Void / Price Imbalance: Candlestick diagram showing sharp upward movement with 'Liquidity Void / Price Imbalance' label on the gap zone. Rules: 'Price Will tend to Fill the Liquidity Void / to Balance the Price Imbalance in Future. Price Can Fill such Void either Immediately or later (no time limit). Remember, Price Can Fill 100% this Liquidity Void/Price Imbalance. For Entry, We can Target minimum 50% of the liquidity Void or Price Imbalance'"
+        }
+      ]
+    },
+    "fair_value_gap_definition": {
+      "llm_summary": "Fair Value Gap (FVG) is the REFINED form of Liquidity Void/Price Imbalance. When a liquidity void zone is too large to identify precise entry, FVG refines it to a specific zone. FVG is measured WICK to WICK: the gap between candle 1's wick and candle 3's wick (skipping the middle candle). For Bullish Trend: buy-side FVGs (in trend direction) are high probability. For Bearish Trend: sell-side FVGs are high probability. FVG trading rules: (1) Only trade FVG in trend direction. (2) Only trade AFTER liquidity sweep or grab. (3) Preferably trade after inducement or FTR (Fail to Reach/Retest) level. (4) Couple FVG with order block or supply/demand for highest probability. Candle COLOR does NOT matter for FVG — only the wick-to-wick gap between candle 1 and candle 3.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 700,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "schematic_diagram", "trading_rules"],
+      "key_rules": [
+        "FVG = Refined Form of Liquidity Void / Price Imbalance",
+        "FVG is measured WICK to WICK: candle 1 wick to candle 3 wick gap",
+        "Candle COLOR does NOT matter — only wick-to-wick gap",
+        "Bullish trend: buy-side FVG = high probability",
+        "Bearish trend: sell-side FVG = high probability",
+        "Only trade FVG in trend direction",
+        "Only trade AFTER liquidity sweep or liquidity grab",
+        "Preferably trade after inducement or FTR (Fail to Reach/Retest) level",
+        "Couple FVG with OB or S&D for highest probability and lowest risk",
+        "Market fills FVGs — target 50% of FVG zone for entry"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_001080.00s.jpg",
+          "description": "Fair Value Gap (FVG): 'Fair Value Gap is Refined Form of Liquidity Void or Imbalance is an area where price moves sharply in One Direction, Leaving Pending Orders behind (orders waiting) as Liquidity. FVG is Wick to Wick Gap.' Diagrams showing liquidity void refined into specific FVG zones (wick-to-wick). Rules: 'For Bullish Trend, Buy Side FVG = High Probability. For Bearish Trend, Sell Side FVG = High Probability. Preferable to Trade FVG after Inducement or FTR Level (Failed to Reach/Retest).'"
+        }
+      ]
+    },
+    "valid_fvg_rules": {
+      "llm_summary": "Not every FVG is valid. The critical rule for VALID FVG: In SELL/BEARISH trend, draw FVG from the HIGHEST candle's wick. Any FVG not drawn from the highest candle = INVALID. In BUY/BULLISH trend, draw FVG from the LOWEST candle's wick. Any FVG not drawn from the lowest candle = INVALID. This is why many traders fail: they draw FVG from any candle, but only the extreme candle (highest for sell, lowest for buy) produces valid FVGs. Additionally, when finding FVG in a pullback, the pullback must be VALID. After the first valid FVG (from the extreme candle) is found, subsequent FVGs in that same swing are also valid. The presenter demonstrates with multiple quiz examples (A through H) showing valid vs invalid FVGs based on whether they originate from the extreme candle's wick.",
+      "statistics": {
+        "teaching_time_minutes": 12.0,
+        "word_count": 2000,
+        "frames_used": 2
+      },
+      "teaching_types": ["rule_definition", "quiz_examples", "valid_invalid_comparison", "real_chart_example"],
+      "key_rules": [
+        "SELL TREND: draw FVG from HIGHEST candle's wick → valid; any other candle → INVALID",
+        "BUY TREND: draw FVG from LOWEST candle's wick → valid; any other candle → INVALID",
+        "Highest candle = the candle that sweeps/reaches the highest point in the swing",
+        "Lowest candle = the candle that sweeps/reaches the lowest point in the swing",
+        "FVG not from extreme candle = INVALID (this is why most traders' FVGs fail)",
+        "To find FVG in a pullback: pullback must be VALID first",
+        "After first valid FVG (from extreme candle): subsequent FVGs in same swing = also valid",
+        "Candle color does NOT matter — only extreme candle wick position matters",
+        "When market doesn't reach your FVG: likely your FVG was invalid, real valid FVG was closer"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_001500.00s.jpg",
+          "description": "Fair Value Gap VALID or NOT? — 'For Sell Trend, We will Draw FVG from Highest Candle Wick. Remember: To find a FVG in a Pullback, It Must be Valid Pullback.' Two example boxes (G and H) showing candlestick diagrams with FVG zones highlighted — G appears valid but is actually invalid because it's not from the highest candle; H is the valid one drawn from the actual highest candle's wick"
+        },
+        {
+          "frame": "frame_001800.00s.jpg",
+          "description": "Fair Value Gap (FVG) — Real Market Sample: Bearish candlestick chart showing a valid FVG zone (light orange horizontal band) in sell trend direction. Market creates FVG during expansion, then returns to fill it and continues bearish. Labels: 'FVG' on the valid zone"
+        }
+      ]
+    }
+  }
+}

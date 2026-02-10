@@ -1,0 +1,121 @@
+{
+  "video_id": "lIbO4JrL_2I",
+  "title": "SMC High Probability Inducement & Engineered Liquidity",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 8,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T21:00:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 15.4,
+    "transcript_words": 2101,
+    "frames_analyzed": 5,
+    "concepts_extracted": 4
+  },
+  "concepts": {
+    "multiple_inducements": {
+      "llm_summary": "A swing can have one or more inducement levels. Every valid pullback within a swing is an inducement. Sometimes a swing has a single inducement (one pullback), sometimes two, and sometimes more than two. When there are multiple inducements, the question becomes: which inducement level should be used for planning buy/sell setups? There are two types: Minor Inducement (small/short pullback) and Major Inducement (deep pullback). The key distinction is that for structure mapping, the FIRST inducement is always used. But for planning buy/sell entries, the MAJOR (high probability) inducement should be considered.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 300,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "schematic_diagram", "classification"],
+      "key_rules": [
+        "A swing can have 1, 2, or more inducement levels",
+        "Every valid pullback within a swing = inducement",
+        "Two types: Minor Inducement (small pullback) and Major Inducement (deep pullback)",
+        "For STRUCTURE MAPPING: always use the FIRST inducement level",
+        "For BUY/SELL SETUP PLANNING: use the MAJOR (high probability) inducement",
+        "These are different use cases — mapping vs entry planning"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000090.00s.jpg",
+          "description": "SWING WITH MULTIPLE INDUCEMENTS: Three swing diagrams — blue swing with 1 inducement, red swing with 2 inducements, green swing with 3 inducements. Each inducement level labeled with horizontal dashed lines"
+        }
+      ]
+    },
+    "high_probability_inducement": {
+      "llm_summary": "High Probability Inducement is the MAJOR inducement within a swing — the deepest pullback compared to others. When multiple inducements exist, the major one (deepest) is the high probability inducement. 80-85% of the time, market trades the major inducement before moving in its major direction. Three rules determine high probability inducement: (1) If there's only one inducement, that IS the high probability inducement. (2) If there are multiple inducements of different sizes, the MAJOR (deepest) one is high probability. (3) If all inducements are the SAME SIZE, the FIRST one is high probability. The size of inducement correlates with the size of market's subsequent move: minor inducement → minor reaction (small move), major inducement → major reaction (large move). When planning buy/sell entries, find the major inducement and look for order blocks BELOW it — this gives 80-85% high probability setup.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 600,
+        "frames_used": 2
+      },
+      "teaching_types": ["rule_definition", "real_chart_example", "probability_analysis"],
+      "key_rules": [
+        "High Probability Inducement = MAJOR inducement (deepest pullback in the swing)",
+        "80-85% chance market trades major inducement before continuing in major direction",
+        "Rule 1: Single inducement → it IS the high probability inducement",
+        "Rule 2: Multiple different sizes → MAJOR (deepest) is high probability",
+        "Rule 3: All same size → FIRST one is high probability",
+        "Minor inducement → minor market reaction (small move)",
+        "Major inducement → major market reaction (large move)",
+        "For entry planning: find major inducement → look for order block below it → 80-85% setup",
+        "Structure mapping still uses first inducement regardless of size"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000240.00s.jpg",
+          "description": "HIGH PROBABILITY INDUCEMENT slide: Three diagrams showing single, double, and triple inducements. Bottom banner with mascot: 'For Same Size Inducements, First One is High Probability.' Questions addressed: 'What if there is single inducement?' and 'What if there are multiple inducement of same size?'"
+        },
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "GBP/USD 1H TradingView chart: Real Market Sample showing 3 'Minor Inducement' labels at small pullbacks and 1 'Major Inducement (High Probability)' label at the deepest pullback. Market shows minor reactions at minor inducements but major reversal move from the major inducement level"
+        }
+      ]
+    },
+    "engineered_liquidity_definition": {
+      "llm_summary": "Engineered Liquidity (ENG LIQ) is an area where Smart Money designs traps for retail Support and Resistance based traders. Market creates equal highs, equal lows, double tops, double bottoms, and trendline patterns that retail traders interpret as support/resistance or chart patterns (bull flag, bearish flag, channels). These are NOT real support/resistance — they are liquidity traps engineered by Smart Money. When price creates multiple lows at the same level, retail traders see 'strong support' and place buy orders. When price creates equal highs, retail sees 'strong resistance' and places sell orders. Smart Money then sweeps these levels, collecting all the pending orders (buy stops, sell stops, stop losses, breakevens) and moves in the opposite direction. Pattern-based traders (bull flag, bearish flag, channel breakout) are particularly vulnerable to engineered liquidity traps.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 500,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "schematic_diagram", "retail_trap_example"],
+      "key_rules": [
+        "Engineered Liquidity = trap designed by Smart Money for retail support/resistance traders",
+        "Equal lows (double/triple bottom) = engineered liquidity (NOT real support)",
+        "Equal highs (double/triple top) = engineered liquidity (NOT real resistance)",
+        "Retail pattern traders (bull flag, bearish flag, channels) are prime targets",
+        "Smart Money creates these patterns to accumulate pending orders at those levels",
+        "Then sweeps the engineered liquidity → collects stops/breakevens → moves opposite direction",
+        "Smart Money traders NEVER consider retail support and resistance as valid levels",
+        "Engineered liquidity understanding is essential for valid/fake CHoCH (next lecture)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "ENGINEERED LIQUIDITY definition slide: 'Engineered liquidity (ENG LIQ) is an Area where Retail Support And Resistance Based Traders are being trapped by Smart Money to create liquidity. (Retail Traders Support and Resistance)'. Schematic diagram shows price creating multiple equal lows that retail interprets as strong support, with price then breaking below to sweep that engineered liquidity"
+        }
+      ]
+    },
+    "engineered_liquidity_real_chart": {
+      "llm_summary": "The presenter demonstrates engineered liquidity on a real forex chart. Multiple instances are identified: (1) Equal lows at the same level — retail sees 'support', Smart Money sees engineered liquidity to sweep. (2) Equal highs at the same level — retail sees 'resistance', Smart Money sweeps above. (3) The market alternates between sweeping buy-side and sell-side engineered liquidity as it moves. When market needs to move up, it first sweeps sell-side engineered liquidity (below equal lows) to collect sell stops, then reverses upward. When market needs to move down, it sweeps buy-side engineered liquidity (above equal highs) to collect buy stops, then reverses downward. Trendline-based engineered liquidity is also shown: market creates channels and flag patterns that trendline traders trade, then breaks out to hit their stop losses and breakevens, using that liquidity for its real move. The concept is critical for the next lecture on valid vs fake CHoCH.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 500,
+        "frames_used": 1
+      },
+      "teaching_types": ["real_chart_example", "trendline_trap", "equal_highs_lows_analysis"],
+      "key_rules": [
+        "Equal lows on chart = engineered liquidity (sell-side) — Smart Money sweeps below",
+        "Equal highs on chart = engineered liquidity (buy-side) — Smart Money sweeps above",
+        "Market alternates between sweeping buy-side and sell-side engineered liquidity",
+        "Trendline channels and flags are also engineered liquidity traps",
+        "Trendline traders get trapped: breakout → reversal → stops hit → real move begins",
+        "Market designs liquidity at every level as it moves — later returns to sweep it",
+        "This concept directly feeds into valid/fake CHoCH determination (V09)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000780.00s.jpg",
+          "description": "Real Market Sample: Chart with 6+ 'Engineered Liquidity' labels — at equal highs (green horizontal zones at top), at equal lows (pink horizontal zones at bottom), showing how market creates and then sweeps these engineered liquidity zones throughout the trend"
+        }
+      ]
+    }
+  }
+}

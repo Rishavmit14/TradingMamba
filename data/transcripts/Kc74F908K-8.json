@@ -1,0 +1,1179 @@
+{
+  "video_id": "Kc74F908K-8",
+  "full_text": "वेलकम बैक एंड वेलकम टो फोरक्स मेनियन्स आज के इस लेक्चर में हम सिंगल केंडर ओर्डर ब्लॉग जो के एक एंट्री टेक्नीक है इसको स्टडी करेंगे जिसको स्कूब भी कहा जाता है तो बेसिकली सिंगल केंडर ओर्डर ब्लॉग का वैलिड होता है यह कितन Single candle auto block को समयने से पहले swing point को समयना जरूरी है कि basically swing points क्या होते हैं इसके लिए हम consider करते हैं कि market में एक candle है, कोई भी candle, for example अभी एक bullish candle है और किसी भी candle का जो top और bottom होता है, यानि week का जो top और उसकी week का जो bottom है ये उस candle के highs और lows होते हैं और किसी भी candle के high और low के उपर market की liquidity available होती है Consider करें इसके उपर एक liquidity पढ़ी है और next candle इसकी upper liquidity को sweep करके अंदर close कर जाती है और जैसे ही second candle, first candle के liquidity को sweep करती है और अंदर closing देती है और उससे third candle, third candle, middle candle के low के नीचे close कर जाती है middle candle के low के नीचे यानि weak के low के भी नीचे close कर जाती है तो ऐसी तीन candles मिलकर क्या बनाती है एक swing point लेकिन swing point में याद रखिएगा जो middle candle होगी इसका जो high है वो हमेशा protected लेना चाहिए protected का क्या मतलब है? कि market इसके high के उपर ना जाए इसी तरह अगर हम एक case study और देखें जिसमें market previous candle के high के उपर एक candle close करती है तो वहां भी market previous candle की liquid को take up कर लेती है लेकिन यहां पर उपर close होने के बावजूद अगर third candle aggressively अंदर आ जाए और middle candle के low के नीचे close कर दे ठीक है? जिस तरह इदर middle candle के low के नीचे close है similarly इदर भी middle candle के low के नीचे closing जरूरी है और जो middle candle है यानि अगर यह one, two, or three one, two, or three जो second candle, middle candle होती है उसका high भी again protected रहे तो इसको हम कहते है high swing point इसी तरह अगर हम bearish market में देखें तो वहां basically क्या होता है अगर एक sell candle बनती है और market उसका low sweep करके अंदर close करें और next candle उसके high के उपर close कर दे और middle candle का low protected रहना चाहिए तो इसको हम क्या चाहते है low swing point same condition में अगर market first candle के low के नीचे close भी कर दे लेकिन third candle, middle candle के high के उपर closing दे रहे वापस आके और middle candle का low protected रहे तो इस case में भी इसको हम swing point swing point के नाम से पहचानेंगे तो basically high swing point और low swing point में जो major condition के है जो middle candle है वो previous candle की लिगड़ी ले चाहे उपर closing करके आ जाए या सिरुप करके आए और second condition के हाई swing point में के third candle, third candle वो middle candle के low के नीचे closing दे दे यहाँ candle colors matter नहीं करते हमें यह pattern देखने हैं लेकिन यहाँ पर मैंने for the ease of understanding आप लोगों को समझाने के लिए यह कुछ colors यूज की हैं ताकि आपको पता चले कि यह high swing point है और यह low swing point है जब आपको यह swing point देखना आजेगा तो आप इसी ली single candle order block को मार कर सकते हैं जिसको हम आगे detail में study करेंगे अब अगर हम बात करें कि single candle order block क्या होता है तो basically जो single candle order block है यह एक entry confirmation technique है और इसको हम हमनेशा अपने point of interest यह किसी भी प्यूआई zone में देखेंगे अब point of interest यह significant levels वो कौन-कौन से होते हैं वो हमारा fair value gap हो सकते हैं जिसको हम सबसे पहले नंबर पर प्राटी देते हैं second पर institutional order flow जिसको second नंबर पर प्राटी देते हैं और third पर order blocks और इनके इलावा किसी भी high या low की liquidity के sweep होने पे भी हम single candle order block की base पे entry plan कर सकते हैं अब इसको हम आगे मज़ी detail में देखेंगे कि कैसे वो entry plan की जाती है और कैसे उस entry को play किया जाता है यहां पर देखें मैंने लिखा कि यह bullish single candle order block है और यह bearish है लेकिन कैसे बिलकुल जिस तर हमने swing point को पड़ा तो किसी भी market में जो valid swing point बनता है लेकिन हर swing point नहीं एसी candle जो previous candle के low को sweep करें और next candle उसके high के उपर close करें तो हमारा bullish single candle order block consider होगा until, unless यह condition याद रखेगा जब यह swing point किसी भी previous high या low की liberty को sweep करने पर बने या किसी fair value gap या order block के rejection पर बने तब हम ऐसी candle को जो previous candle की liberty sweep करें और next candle उसके high को breach करें उसको हम single candle order block मार कर सकते हैं इसी तरह अगर हम यहाँ देखें तो यह candle भी single candle order block है इसमें भी middle candle no doubt चाहे वो previous candle के low के नीचे close कर चुकी है या sweep कर चुकी है दो ही condition देखनी है middle candle का low protected रहे और next candle उसके high के उपर closing दे इसी तरह very single candle order block ऐसे मार किया जाते हैं लेकिन अब हम इसको मजीड detail में भी देख लेते हैं मजीड detail में बताने का purpose क्या है कि आपको पदा चले है कि जो ideal single candle order block है वो तो 3 candle से बन जाता है लेकिन ये 3 से 5 candle पे भी consist हो सकता है अब ये कैसी बात है कि एक single candle order block को बनने के लिए 5 candles या 3 candles required हैं जिस तरह मैंने आपको बताया कि single candle order block वहीं बनेंगा जहां swing point बनेंगा और swing point हमेशा और हमेशा minimum 3 candles का बनता है अब अगर हम single candle order block की कुछ types देखें तो इसमें देखें ये proper एक swing point है क्यों middle candle ने previous candle का high sweep की है और next candle middle candle के low के नीचे close है तो ये जो हमारी blue candle middle वाली ये single candle order block consider होगी लेकिन sometime क्या होता है कि पहली candle वो liquidity तो sweep कर लेती है लेकिन third candle उसके low के नीचे close नहीं कर पाती इस case में क्या करते हैं हम wait करते हैं कि fourth candle उस candle के low के नीचे close करे अगर fourth candle भी किसी candle के नीचे close कर जाती है तो हम red वाली candle को यहाँ scoop मार करेंगे वो क्यों करेंगे क्योंकि यहाँ पे red candle ने previous blue candle की liberty को भी sweep किया है इसके इलावा अगर हम इसके study में देखें यहाँ पे भी अगर हम देखें तो यह momentum candle बनी next candle ने previous candle के high के उपर close कर दिया फिर दोबारा एक candle बनी लेकिन वो middle candle के low के नीचे close नहीं कर पाई लेकिन fourth candle ने close कर दिया इस case में भी red candle हमारी single candle order block consider हो सकती है क्योंके इसने भी अपनी previous candle के लिफटी को स्वीप किया है लेकिन consider करें कि अगर यह candle previous candle के लिफटी स्वीप नहीं भी करती एक inside candle रह जाती है तो अगर यह fourth candle दोनों candle का low break करती है तो हम inside candle को छोड़के first वारी candle को as a scoop single candle order block मार कर सकते हैं अब यह four scenario है जिसमें यह वारी candle के next candle लिफटी स्वीप की third candle नीचे close नहीं कर पाई लेकिन fourth candle ने third candle के low के नीचे proper closing दे दी है तो इस case में हम अपनी red candle को single candle order block मार कर सकते हैं क्यों क्योंके यह जो पहली blue candle जिसने first one वारी candle की लिफटी स्वीप की है second candle उसके नीचे उसकी लिफटी को यूज कर चुकी है और third candle नीचे close की है तो इस case में भी यह candle हमारी single candle order block होगी लेकिन यह तो आपने वो conventional single candle order blocks हैं जो आप में पड़े हुए हैं और जिनको आप में भी use भी करते हूं लेकिन यहां पर एक और चेक में आपको बताता हूं कि basically एक single candle order block हाई probability कब हो सकते हैं यही single candle order block हाई probability कब होंगे इसमें सिर्फ और सिर्फ एक चेक आपने और एड़ करना है कि जब भी कभी आपको single candle order block नजर आए जिस तरह यह आपको नजर आ रहे हैं अगर इसके immediate basis पे बिलकुल फोरन नीचे आपको एक fair value gap भी मिल जाए तो यह वाले जो single candle order blocks हैं यह हमारे high probability single candle order blocks consider होंगे तो यहां पर थोड़ी सी differentiation है लेकिन वो single candle order block वो school candle जिसके नीचे fair value gap है वो high probability consider होगी और आपको बहुत अच्छा risk को reward देगी अब हम बात करते हैं कि single candle order block को कहां find करने और कहां पर trade करने यहां पर consider करें market हमारी एक bearish trend में है और bearish trend में एक देखें तो market जो भी पहला valid pullback लेती है वो market की एक endorsement होती है तो हम कोई भी order block, fair value gap यो order flow इसी endorsement के उपर उसको priority देते हैं तो consider करें यह हमारा एक sell zone है जो कि इस endorsement के उपर है तो यह हमारा एक high probability sell zone है क्योंकि यह market यहां से internal liquidity लेने के बाद ही इसको tap करेगी तो यह एक अच्छी rejection दे सकते हैं अब जैसे ही marketing sell zone को approach करेगी तो यहां पर हम क्या find करेंगे यहां पर हमारे पास वैसे तो MSS जो हम काफी डिटेल में study कर चुके हैं sweep based change of character, swing based change of character या इसके लावा बहुत early और बहुत high probability अंटी लेने के लिए हम single candle order block को भी consider कर सकते हैं लेकिन यहां यहां यह मेरी बात वोर से सुनियेंगा क्योंकि कमेंटरी में बता रहा हूं तो बात वोर से सुनें और लिख लें अगर तो यह M15 का trend है तो पहली पराउटी आपने देनी है के market M15 पे ही single candle order block बनाए जो यहां इस cell zone में rejection से बनेंगा वो कैसा होगा वो कुछ आपको market ऐसा single candle order block बनाके दिखाएगी जिसमें market जैसे ही fair value gap यह आपके cell zone में tap करेगी तो मिडल केंडल प्रीवेस केंडल की लिव्टी स्वीप करें थर्ड केंडल उसके नीचे close करें और उसके साथ अगर fair value gap बन जाए तो यह high probability single candle order block consider होगा और इसमें जैसे ही market वापस retrace करेगी तो इसकी clear testing पे हम अपनी entry plan कर लेंगे सिमिलर्ली जब market inducement लेगी इस cell zone में हम स्कूप को देखके single candle order block को देखके यहां पर अपनी entry plan करेंगे जिसे हमें काफी अच्छा एक response मिल सकते हैं अच्छा यह तो एक case study है जिसमें market inducement के ऊपर sales zone से rejection लेती है लेकिन some time basically क्या होता है के market दोबारे एक recent inducement बनाती है उस recent inducement को बनाने के बाद उपर किसी sell zone तक नहीं जाती और वहीं से उस inducement को sweep करने के बाद reaction शो करती है अगर यहां पे मिलने वाले reaction में इस जगा पे दोबारा आपको कुछ ऐसा फिनामिना single candle order block observe हो जिसमें market एक fair value gap भी create करें वह high probability consider होगा वरना आप single candle की base पे भी entry ले सकते हैं आप entry single candle की base भी ले सकते हैं लेकिन fair value gap का available होना इसको high probability बनाएगा तो अगर आपको यह phenomena मिलता है तो same इसमें fair value gap की rejection पे हम अपनी entry plan करके take profit achieve कर सकते हैं तो यह सारी थियोरी थी आपकी schematics की हग तक कुछ बात नहीं थी जो मैंने आपको बताई अब हम इस चीज़ को live market में trading view के उपर किसी pair पर टेस्ट करके देखते हैं कि यह कैसे work करती है यह euro usd m15 का चार्ट है जैसे कि आज हम single candle auto block को study करें तो हम देखेंगे कि इसको कैसे use करते हैं for the entry purpose यहां अगर हम करंटी देखें तो मार्केट m15 में bearish है और m15 में मार्केट ने इस करंट low के according यह वाली जो हमारी major endorsement है इसको take up की है ठीक है? मार्केट ने यहांसे major liquidity ली है major endorsement को यहांसे उठाया और उसके बाद market drop कर लिए अब drop करते करते मार्केट ने अभी तक जो last time 15 का low है इसके नीचे मार्केट को close नहीं किया जब तक मार्केट जिस low के according endorsement को लेती है उस low के नीचे close नहीं करती तब तक हम इसे endorsement को consider करेंगे ऐसा major endorsement यानि मार्केट ने यहां से major endorsement को ले लिया है तो अब हम sell entry plan करेंगे अब मार्केट ने यहां से major endorsement लिया और drop किया है और drop करने के बाद मार्केट ने यहां पर अपना structure shift की है जब यहां पर shift आई है मार्केट में तो अब हम यहां पर अपनी sell entry plan कर सकते हैं और sell entry लेने के लिए बहुत अच्छी बात होती है कि अगर हमें दोबारा से internal liquidity या minor endorsement इंटर्नल structure की endorsement मिल जाए तो अगर हम देखें तो यह हमारी internal structure की endorsement है ठीक है अब किस endorsement का हम वेट करेंगे कि मार्केट इस endorsement को ले या इस endorsement के ओपर यह जो हमारा fair value gap पड़ा है हम इस fair value gap में अपनी entry plan करेंगे क्योंकि यहां पर हम अपने zone को refine कर रहे हैं entry को refine कर रहे हैं ताकि हमारा risk को reward अच्छा हो अब यह हमारी endorsement है जो minor endorsement है और internal liquidity दोबारा से provide कर दिये अब हम देखते हैं कि market का यहां पर क्या reaction आता है अब अगर हम देखें इस candle पर focus करें तो इस candle ने previous endorsement को जो के internal endorsement है उसको sweep किया है और नीचे एक rejection शो की है लेकिन यह एक first signal है जहां पर market सिर्फ endorsement को sweep करके aggressively under drop हुई है अब हम इस से next candle भी चेक करेंगे कि आया कि वो confirm करती है कि यह candle हमारा single candle order block बन सकता है यह नहीं बन सकता अगर next candle इस candle के low के नीचे close कर गी इस candle के low के नीचे तो यह candle single candle order block act करेगी क्योंकि इस candle ने previous candle की liquidity भी sweep की हुई है लेकिन अभी देखते हैं क्या यह scoop बन सकती है नहीं बन सकती अब यहां पर देखें जैसे ही इस candle ने जिसको मैंने highlight किया endorsement को sweep किया और next candle ने aggressively drop किया अब यह जो candle है इसको हम as a scoop consider कर सकते हैं जिसे हम कहते हैं single candle order block लेकिन जैसा कि अभी मैंने आपको बताया single candle order block high probability वह होता है जिसमें इस candle के नीचे immediate basis पे हमारे पास एक fair value gap available हो अब इसको refine करने के लिए अगर हम M5 पे चले जाएं जैसा कि M5 का चार्ट है और यहां देखें मार्किट ने जैसे इस endorsement को clean किया और मार्किट ने जो candle drop की है अगर मैं यहां उस candle को highlight करूं यह जो candle है तो आप यहां देखें M15 के चार्ट के बाद अगर हम 5 पे फोकस करें तो यहां पे तीन red candles बनी हैं बड़ी बड़ी यहां एक aggressive drop आया है और इसके अंदर itself एक fair value gap available है अगर मैं उसको मार करूं तो वो यह वाला zone बनता है इस में कि अब यह जो single candle order block है यह हमारे पास एक high probability candle है trade करने के लिए अब जैसे ही market इसको retest करेगी तो हम यहां अपनी entry plan करेंगे बिलकुल इसके immediate retest पे और stop loss जो scoop candle है उससे highly कोई एक से डिर पीप उपर और take profit previous low जहां से market अभी तक उठके आ रही है हम इस low को as the first take profit target करेंगे अब हम देखते हैं कि market कैसे react करती है इस scoop के उपर यह देखें मार्के ने कितनी खूबसूरती से scoop candle को test किया और immediately drop किया और यह first take profit हमारा हिट किया है किया है लेकिन अगर आप एक चीज नोट करें हमारा यह वला जो जोन है यह अभी तक unmitigated है जिसको हम future के लिए भी यूज कर सकते हैं क्यों यूज कर सकते हैं क्योंके market ने अभी तक इस previous low के निचे proper closing नहीं दी market ने अभी तक सिर लो को sweep किया है तो हम इस zone को future में भी use कर सकते हैं तो अब हम देखते हैं कि इस zone के उपर हमें market कैसे aid provide कर सकती है क्या यहां भी हमारी को entry plan हो सकती है नहीं हो सकती अभी हम देखते हैं कि market कैसे इस zone को approach करती है लेकिन अब एक चीज को consider करें कि यह जो अंडियूस्मेंट है यहां पे single candle order block ने अंडियूस्मेंट को hardly one या two pip से sweep किया है अब यह जो अंडियूस्मेंट है हमारी future के लिए यह एंजिनियर लिवर्टी प्रवाइड करेंगी क्यों कि यह तक्रीब नीट एंड क्लीन हमारे equal tops जिसे हम double top भी कहते हैं यह इसे हम इंजिनियर लिवर्टी भी मार कर सकते हैं अब हम वेट करते हैं इस जोन के अंडर मार्किट का क्या reaction है जो के हमारा unmitigated fair value gap है एक बाद याद रखें जब कभी भी किसी sell zone या buy zone के पास immediately उसके बिलकुल पास कोई अंडियूस्मेंट लेवल या कोई engineer लिवर्टी अवेलेबल हो तो ऐसा zone बहुत high probability zone होता है यहां पर आप अगर मार्किट ने अंडियूस्मेंट ली है structure shift किया और एक ऐसा zone है जिसके पास market ने engineer लिवर्टी या अंडियूस्मेंट बनाई है तो आप उस zone पर direct entry भी ले सकते हैं अब हम देखते हैं कि मार्किट का क्या reaction है हम देखें मार्किट हमारी engineer liberty के पास आगी है और उप पिल्कुल immediate basis पे हमारा ओपर fair value gap है और मार्किट ने इसको tap कर दिया है अब क्योंके मार्किट ने major endorsement को ले लिए है उस structure को shift कर दिया है तो high probability है कि मार्किट इस top को sweep नहीं कर पाएगी तो यहां पे हम पहली अपनी aggressive entry ले सकते है और अपना S.L. इस previous top के उपर रख सकते है और पहला target हमारा क्या होगा वही लोग जहां से मार्किट move करते होगे आके हमारे zone तक आई है तो SMC trader भूब यह बास समयते हैं कि मार्किट जहां से उटके वापस आती है किसी zone तक वही लोग हमारा पहला take profit target होता है अब यह हमारी पहली entry है और इसमें देखते हैं कि मार्किट हमें कैसे aid provide करती है अब देखे हैं काफी strong reaction आ रहा है मार्किट यहां से drop होना शुरू होगी है further drop हो रही है और यह देखें अब मार्किट ने यहां पे क्या किया है मार्किट ने यहां पे एक और single candle order block बनाए अब यह कैसे single candle order block है इसमें अगर आप देखें थोड़ सा मैं जून करूं तो इस blue candle ने previous candle की liberty को sweep किया है और next candle ने इसके नीचे close किया है अब हमें यहां inducement की जरूरत नहीं है inducement की जरूरत क्यों नहीं है क्योंके market already major structure की major inducement लेने के बाद structure को shift कर चुकी है और nearly market ने engineer literally है तो यहां पे भी हम अपनी direct entry plan कर सकते है जो के हमें हमें एक अच्छा risk or reward प्रवाइड कर सकती है और take profit हम या तो यह पहले वालोग भी target कर सकते हैं क्योंके हमारा sell trend है तो हम अपना जो take profit है one is to five, one is to six तक भी plan कर सकते है यह दें कितना beautifully market यहां से drop कर दी है क्यों? क्योंके यहां पे यहां पे market के पास इस single candle order block के बिलकुल नीचे immediate basis पे एक fair value gap भी create हुआ जिसने इसको मज़ीद high probability बना दिया तो ऐसे जो single candle order blocks होते हैं यह high probability trade प्रवाइड करते हैं और काफी अच्छा risk of reward प्रवाइड करते हैं hopefully इस lecture से आपको काफी information मिली होगी next lecture तक आप अपना ख्यार रखिएगा wish you good luck and happy trading",
+  "segments": [
+    {
+      "start_time": 0.0,
+      "end_time": 30.0,
+      "text": "वेलकम बैक एंड वेलकम टो फोरक्स मेनियन्स आज के इस लेक्चर में हम सिंगल केंडर ओर्डर ब्लॉग जो के एक एंट्री टेक्नीक है इसको स्टडी करेंगे जिसको स्कूब भी कहा जाता है तो बेसिकली सिंगल केंडर ओर्डर ब्लॉग का वैलिड होता है यह कितन"
+    },
+    {
+      "start_time": 31.0,
+      "end_time": 37.0,
+      "text": "Single candle auto block को समयने से पहले swing point को समयना जरूरी है कि basically swing points क्या होते हैं"
+    },
+    {
+      "start_time": 37.0,
+      "end_time": 43.34,
+      "text": "इसके लिए हम consider करते हैं कि market में एक candle है, कोई भी candle, for example अभी एक bullish candle है"
+    },
+    {
+      "start_time": 43.34,
+      "end_time": 51.78,
+      "text": "और किसी भी candle का जो top और bottom होता है, यानि week का जो top और उसकी week का जो bottom है ये उस candle के highs और lows होते हैं"
+    },
+    {
+      "start_time": 51.78,
+      "end_time": 56.68,
+      "text": "और किसी भी candle के high और low के उपर market की liquidity available होती है"
+    },
+    {
+      "start_time": 56.68,
+      "end_time": 65.02,
+      "text": "Consider करें इसके उपर एक liquidity पढ़ी है और next candle इसकी upper liquidity को sweep करके अंदर close कर जाती है"
+    },
+    {
+      "start_time": 65.02,
+      "end_time": 71.36,
+      "text": "और जैसे ही second candle, first candle के liquidity को sweep करती है और अंदर closing देती है"
+    },
+    {
+      "start_time": 71.36,
+      "end_time": 77.88,
+      "text": "और उससे third candle, third candle, middle candle के low के नीचे close कर जाती है"
+    },
+    {
+      "start_time": 77.88,
+      "end_time": 82.98,
+      "text": "middle candle के low के नीचे यानि weak के low के भी नीचे close कर जाती है"
+    },
+    {
+      "start_time": 82.98,
+      "end_time": 88.04,
+      "text": "तो ऐसी तीन candles मिलकर क्या बनाती है एक swing point"
+    },
+    {
+      "start_time": 88.04,
+      "end_time": 91.82,
+      "text": "लेकिन swing point में याद रखिएगा जो middle candle होगी"
+    },
+    {
+      "start_time": 91.82,
+      "end_time": 94.72,
+      "text": "इसका जो high है वो हमेशा protected लेना चाहिए"
+    },
+    {
+      "start_time": 94.72,
+      "end_time": 96.08,
+      "text": "protected का क्या मतलब है?"
+    },
+    {
+      "start_time": 96.08,
+      "end_time": 98.78,
+      "text": "कि market इसके high के उपर ना जाए"
+    },
+    {
+      "start_time": 98.78,
+      "end_time": 102.28,
+      "text": "इसी तरह अगर हम एक case study और देखें"
+    },
+    {
+      "start_time": 102.28,
+      "end_time": 107.06,
+      "text": "जिसमें market previous candle के high के उपर एक candle close करती है"
+    },
+    {
+      "start_time": 107.06,
+      "end_time": 111.04,
+      "text": "तो वहां भी market previous candle की liquid को take up कर लेती है"
+    },
+    {
+      "start_time": 111.04,
+      "end_time": 114.14,
+      "text": "लेकिन यहां पर उपर close होने के बावजूद"
+    },
+    {
+      "start_time": 114.14,
+      "end_time": 117.0,
+      "text": "अगर third candle aggressively अंदर आ जाए"
+    },
+    {
+      "start_time": 117.0,
+      "end_time": 120.32,
+      "text": "और middle candle के low के नीचे close कर दे"
+    },
+    {
+      "start_time": 120.32,
+      "end_time": 121.46,
+      "text": "ठीक है?"
+    },
+    {
+      "start_time": 121.46,
+      "end_time": 124.22,
+      "text": "जिस तरह इदर middle candle के low के नीचे close है"
+    },
+    {
+      "start_time": 124.22,
+      "end_time": 128.28,
+      "text": "similarly इदर भी middle candle के low के नीचे closing जरूरी है"
+    },
+    {
+      "start_time": 128.28,
+      "end_time": 130.08,
+      "text": "और जो middle candle है"
+    },
+    {
+      "start_time": 130.08,
+      "end_time": 132.54,
+      "text": "यानि अगर यह one, two, or three"
+    },
+    {
+      "start_time": 132.54,
+      "end_time": 134.52,
+      "text": "one, two, or three"
+    },
+    {
+      "start_time": 134.52,
+      "end_time": 136.54,
+      "text": "जो second candle, middle candle होती है"
+    },
+    {
+      "start_time": 136.54,
+      "end_time": 139.46,
+      "text": "उसका high भी again protected रहे"
+    },
+    {
+      "start_time": 139.46,
+      "end_time": 141.8,
+      "text": "तो इसको हम कहते है high swing point"
+    },
+    {
+      "start_time": 141.8,
+      "end_time": 145.06,
+      "text": "इसी तरह अगर हम bearish market में देखें"
+    },
+    {
+      "start_time": 145.06,
+      "end_time": 148.14,
+      "text": "तो वहां basically क्या होता है अगर एक sell candle बनती है"
+    },
+    {
+      "start_time": 148.14,
+      "end_time": 151.58,
+      "text": "और market उसका low sweep करके अंदर close करें"
+    },
+    {
+      "start_time": 151.58,
+      "end_time": 155.94,
+      "text": "और next candle उसके high के उपर close कर दे"
+    },
+    {
+      "start_time": 155.94,
+      "end_time": 160.04,
+      "text": "और middle candle का low protected रहना चाहिए"
+    },
+    {
+      "start_time": 160.04,
+      "end_time": 162.6,
+      "text": "तो इसको हम क्या चाहते है low swing point"
+    },
+    {
+      "start_time": 162.6,
+      "end_time": 165.94,
+      "text": "same condition में अगर market"
+    },
+    {
+      "start_time": 165.94,
+      "end_time": 169.04,
+      "text": "first candle के low के नीचे close भी कर दे"
+    },
+    {
+      "start_time": 169.04,
+      "end_time": 172.5,
+      "text": "लेकिन third candle, middle candle के high के उपर closing दे रहे"
+    },
+    {
+      "start_time": 172.5,
+      "end_time": 175.66,
+      "text": "वापस आके और middle candle का low protected रहे"
+    },
+    {
+      "start_time": 175.66,
+      "end_time": 178.06,
+      "text": "तो इस case में भी इसको हम swing point"
+    },
+    {
+      "start_time": 178.06,
+      "end_time": 181.24,
+      "text": "swing point के नाम से पहचानेंगे"
+    },
+    {
+      "start_time": 181.24,
+      "end_time": 185.9,
+      "text": "तो basically high swing point और low swing point में जो major condition के है"
+    },
+    {
+      "start_time": 185.9,
+      "end_time": 189.5,
+      "text": "जो middle candle है वो previous candle की लिगड़ी ले"
+    },
+    {
+      "start_time": 189.5,
+      "end_time": 193.94,
+      "text": "चाहे उपर closing करके आ जाए या सिरुप करके आए"
+    },
+    {
+      "start_time": 193.94,
+      "end_time": 196.46,
+      "text": "और second condition के हाई swing point में"
+    },
+    {
+      "start_time": 196.46,
+      "end_time": 202.1,
+      "text": "के third candle, third candle वो middle candle के low के नीचे closing दे दे"
+    },
+    {
+      "start_time": 202.1,
+      "end_time": 216.76,
+      "text": "यहाँ candle colors matter नहीं करते हमें यह pattern देखने हैं लेकिन यहाँ पर मैंने for the ease of understanding आप लोगों को समझाने के लिए यह कुछ colors यूज की हैं ताकि आपको पता चले कि यह high swing point है और यह low swing point है"
+    },
+    {
+      "start_time": 216.76,
+      "end_time": 225.82,
+      "text": "जब आपको यह swing point देखना आजेगा तो आप इसी ली single candle order block को मार कर सकते हैं जिसको हम आगे detail में study करेंगे"
+    },
+    {
+      "start_time": 225.82,
+      "end_time": 241.08,
+      "text": "अब अगर हम बात करें कि single candle order block क्या होता है तो basically जो single candle order block है यह एक entry confirmation technique है और इसको हम हमनेशा अपने point of interest यह किसी भी"
+    },
+    {
+      "start_time": 241.08,
+      "end_time": 250.62,
+      "text": "प्यूआई zone में देखेंगे अब point of interest यह significant levels वो कौन-कौन से होते हैं वो हमारा fair value gap हो सकते हैं जिसको हम सबसे पहले नंबर पर प्राटी देते हैं"
+    },
+    {
+      "start_time": 250.62,
+      "end_time": 262.08,
+      "text": "second पर institutional order flow जिसको second नंबर पर प्राटी देते हैं और third पर order blocks और इनके इलावा किसी भी high या low की liquidity के sweep होने पे भी हम"
+    },
+    {
+      "start_time": 262.08,
+      "end_time": 273.18,
+      "text": "single candle order block की base पे entry plan कर सकते हैं अब इसको हम आगे मज़ी detail में देखेंगे कि कैसे वो entry plan की जाती है और कैसे उस entry को play किया जाता है"
+    },
+    {
+      "start_time": 273.18,
+      "end_time": 287.28,
+      "text": "यहां पर देखें मैंने लिखा कि यह bullish single candle order block है और यह bearish है लेकिन कैसे बिलकुल जिस तर हमने swing point को पड़ा तो किसी भी market में जो valid swing point बनता है लेकिन हर swing point नहीं"
+    },
+    {
+      "start_time": 287.28,
+      "end_time": 298.24,
+      "text": "एसी candle जो previous candle के low को sweep करें और next candle उसके high के उपर close करें तो हमारा bullish single candle order block consider होगा"
+    },
+    {
+      "start_time": 298.24,
+      "end_time": 309.02,
+      "text": "until, unless यह condition याद रखेगा जब यह swing point किसी भी previous high या low की liberty को sweep करने पर बने"
+    },
+    {
+      "start_time": 309.02,
+      "end_time": 317.32,
+      "text": "या किसी fair value gap या order block के rejection पर बने तब हम ऐसी candle को जो previous candle की liberty sweep करें"
+    },
+    {
+      "start_time": 317.32,
+      "end_time": 322.72,
+      "text": "और next candle उसके high को breach करें उसको हम single candle order block मार कर सकते हैं"
+    },
+    {
+      "start_time": 322.72,
+      "end_time": 327.54,
+      "text": "इसी तरह अगर हम यहाँ देखें तो यह candle भी single candle order block है"
+    },
+    {
+      "start_time": 327.54,
+      "end_time": 333.7,
+      "text": "इसमें भी middle candle no doubt चाहे वो previous candle के low के नीचे close कर चुकी है या sweep कर चुकी है"
+    },
+    {
+      "start_time": 333.7,
+      "end_time": 340.32,
+      "text": "दो ही condition देखनी है middle candle का low protected रहे और next candle उसके high के उपर closing दे"
+    },
+    {
+      "start_time": 340.32,
+      "end_time": 345.08,
+      "text": "इसी तरह very single candle order block ऐसे मार किया जाते हैं"
+    },
+    {
+      "start_time": 345.08,
+      "end_time": 347.7,
+      "text": "लेकिन अब हम इसको मजीड detail में भी देख लेते हैं"
+    },
+    {
+      "start_time": 347.7,
+      "end_time": 358.36,
+      "text": "मजीड detail में बताने का purpose क्या है कि आपको पदा चले है कि जो ideal single candle order block है वो तो 3 candle से बन जाता है"
+    },
+    {
+      "start_time": 358.36,
+      "end_time": 362.5,
+      "text": "लेकिन ये 3 से 5 candle पे भी consist हो सकता है"
+    },
+    {
+      "start_time": 362.5,
+      "end_time": 369.34,
+      "text": "अब ये कैसी बात है कि एक single candle order block को बनने के लिए 5 candles या 3 candles required हैं"
+    },
+    {
+      "start_time": 369.34,
+      "end_time": 374.46,
+      "text": "जिस तरह मैंने आपको बताया कि single candle order block वहीं बनेंगा जहां swing point बनेंगा"
+    },
+    {
+      "start_time": 374.46,
+      "end_time": 379.1,
+      "text": "और swing point हमेशा और हमेशा minimum 3 candles का बनता है"
+    },
+    {
+      "start_time": 379.1,
+      "end_time": 385.5,
+      "text": "अब अगर हम single candle order block की कुछ types देखें तो इसमें देखें ये proper एक swing point है"
+    },
+    {
+      "start_time": 385.5,
+      "end_time": 392.06,
+      "text": "क्यों middle candle ने previous candle का high sweep की है और next candle middle candle के low के नीचे close है"
+    },
+    {
+      "start_time": 392.06,
+      "end_time": 396.76,
+      "text": "तो ये जो हमारी blue candle middle वाली ये single candle order block consider होगी"
+    },
+    {
+      "start_time": 396.76,
+      "end_time": 403.52,
+      "text": "लेकिन sometime क्या होता है कि पहली candle वो liquidity तो sweep कर लेती है"
+    },
+    {
+      "start_time": 403.52,
+      "end_time": 407.08,
+      "text": "लेकिन third candle उसके low के नीचे close नहीं कर पाती"
+    },
+    {
+      "start_time": 407.08,
+      "end_time": 410.12,
+      "text": "इस case में क्या करते हैं हम wait करते हैं"
+    },
+    {
+      "start_time": 410.12,
+      "end_time": 413.48,
+      "text": "कि fourth candle उस candle के low के नीचे close करे"
+    },
+    {
+      "start_time": 413.48,
+      "end_time": 417.66,
+      "text": "अगर fourth candle भी किसी candle के नीचे close कर जाती है"
+    },
+    {
+      "start_time": 417.66,
+      "end_time": 421.78,
+      "text": "तो हम red वाली candle को यहाँ scoop मार करेंगे"
+    },
+    {
+      "start_time": 421.78,
+      "end_time": 425.36,
+      "text": "वो क्यों करेंगे क्योंकि यहाँ पे red candle ने"
+    },
+    {
+      "start_time": 425.36,
+      "end_time": 428.72,
+      "text": "previous blue candle की liberty को भी sweep किया है"
+    },
+    {
+      "start_time": 428.72,
+      "end_time": 432.66,
+      "text": "इसके इलावा अगर हम इसके study में देखें"
+    },
+    {
+      "start_time": 432.66,
+      "end_time": 436.2,
+      "text": "यहाँ पे भी अगर हम देखें तो यह momentum candle बनी"
+    },
+    {
+      "start_time": 436.2,
+      "end_time": 439.52,
+      "text": "next candle ने previous candle के high के उपर close कर दिया"
+    },
+    {
+      "start_time": 439.52,
+      "end_time": 444.58,
+      "text": "फिर दोबारा एक candle बनी लेकिन वो middle candle के low के नीचे close नहीं कर पाई"
+    },
+    {
+      "start_time": 444.58,
+      "end_time": 447.06,
+      "text": "लेकिन fourth candle ने close कर दिया"
+    },
+    {
+      "start_time": 447.06,
+      "end_time": 452.1,
+      "text": "इस case में भी red candle हमारी single candle order block consider हो सकती है"
+    },
+    {
+      "start_time": 452.1,
+      "end_time": 456.32,
+      "text": "क्योंके इसने भी अपनी previous candle के लिफटी को स्वीप किया है"
+    },
+    {
+      "start_time": 456.32,
+      "end_time": 463.66,
+      "text": "लेकिन consider करें कि अगर यह candle previous candle के लिफटी स्वीप नहीं भी करती एक inside candle रह जाती है"
+    },
+    {
+      "start_time": 463.66,
+      "end_time": 468.02,
+      "text": "तो अगर यह fourth candle दोनों candle का low break करती है"
+    },
+    {
+      "start_time": 468.02,
+      "end_time": 474.96,
+      "text": "तो हम inside candle को छोड़के first वारी candle को as a scoop single candle order block मार कर सकते हैं"
+    },
+    {
+      "start_time": 474.96,
+      "end_time": 482.62,
+      "text": "अब यह four scenario है जिसमें यह वारी candle के next candle लिफटी स्वीप की"
+    },
+    {
+      "start_time": 482.62,
+      "end_time": 490.12,
+      "text": "third candle नीचे close नहीं कर पाई लेकिन fourth candle ने third candle के low के नीचे proper closing दे दी है"
+    },
+    {
+      "start_time": 490.12,
+      "end_time": 495.6,
+      "text": "तो इस case में हम अपनी red candle को single candle order block मार कर सकते हैं"
+    },
+    {
+      "start_time": 495.6,
+      "end_time": 502.92,
+      "text": "क्यों क्योंके यह जो पहली blue candle जिसने first one वारी candle की लिफटी स्वीप की है"
+    },
+    {
+      "start_time": 502.92,
+      "end_time": 509.16,
+      "text": "second candle उसके नीचे उसकी लिफटी को यूज कर चुकी है और third candle नीचे close की है"
+    },
+    {
+      "start_time": 509.16,
+      "end_time": 513.28,
+      "text": "तो इस case में भी यह candle हमारी single candle order block होगी"
+    },
+    {
+      "start_time": 513.28,
+      "end_time": 517.26,
+      "text": "लेकिन यह तो आपने वो conventional single candle order blocks हैं"
+    },
+    {
+      "start_time": 517.26,
+      "end_time": 521.24,
+      "text": "जो आप में पड़े हुए हैं और जिनको आप में भी use भी करते हूं"
+    },
+    {
+      "start_time": 521.24,
+      "end_time": 529.24,
+      "text": "लेकिन यहां पर एक और चेक में आपको बताता हूं कि basically एक single candle order block हाई probability कब हो सकते हैं"
+    },
+    {
+      "start_time": 529.24,
+      "end_time": 538.24,
+      "text": "यही single candle order block हाई probability कब होंगे इसमें सिर्फ और सिर्फ एक चेक आपने और एड़ करना है"
+    },
+    {
+      "start_time": 538.24,
+      "end_time": 543.24,
+      "text": "कि जब भी कभी आपको single candle order block नजर आए जिस तरह यह आपको नजर आ रहे हैं"
+    },
+    {
+      "start_time": 543.24,
+      "end_time": 550.24,
+      "text": "अगर इसके immediate basis पे बिलकुल फोरन नीचे आपको एक fair value gap भी मिल जाए"
+    },
+    {
+      "start_time": 550.24,
+      "end_time": 558.24,
+      "text": "तो यह वाले जो single candle order blocks हैं यह हमारे high probability single candle order blocks consider होंगे"
+    },
+    {
+      "start_time": 558.24,
+      "end_time": 567.24,
+      "text": "तो यहां पर थोड़ी सी differentiation है लेकिन वो single candle order block वो school candle जिसके नीचे fair value gap है"
+    },
+    {
+      "start_time": 567.24,
+      "end_time": 572.24,
+      "text": "वो high probability consider होगी और आपको बहुत अच्छा risk को reward देगी"
+    },
+    {
+      "start_time": 572.24,
+      "end_time": 581.24,
+      "text": "अब हम बात करते हैं कि single candle order block को कहां find करने और कहां पर trade करने"
+    },
+    {
+      "start_time": 581.24,
+      "end_time": 587.24,
+      "text": "यहां पर consider करें market हमारी एक bearish trend में है और bearish trend में एक देखें"
+    },
+    {
+      "start_time": 587.24,
+      "end_time": 593.24,
+      "text": "तो market जो भी पहला valid pullback लेती है वो market की एक endorsement होती है"
+    },
+    {
+      "start_time": 593.24,
+      "end_time": 600.24,
+      "text": "तो हम कोई भी order block, fair value gap यो order flow इसी endorsement के उपर उसको priority देते हैं"
+    },
+    {
+      "start_time": 600.24,
+      "end_time": 606.24,
+      "text": "तो consider करें यह हमारा एक sell zone है जो कि इस endorsement के उपर है तो यह हमारा एक high probability sell zone है"
+    },
+    {
+      "start_time": 606.24,
+      "end_time": 613.24,
+      "text": "क्योंकि यह market यहां से internal liquidity लेने के बाद ही इसको tap करेगी तो यह एक अच्छी rejection दे सकते हैं"
+    },
+    {
+      "start_time": 613.24,
+      "end_time": 624.24,
+      "text": "अब जैसे ही marketing sell zone को approach करेगी तो यहां पर हम क्या find करेंगे यहां पर हमारे पास वैसे तो MSS जो हम काफी डिटेल में study कर चुके हैं"
+    },
+    {
+      "start_time": 624.24,
+      "end_time": 632.24,
+      "text": "sweep based change of character, swing based change of character या इसके लावा बहुत early और बहुत high probability अंटी लेने के लिए"
+    },
+    {
+      "start_time": 632.24,
+      "end_time": 637.24,
+      "text": "हम single candle order block को भी consider कर सकते हैं"
+    },
+    {
+      "start_time": 637.24,
+      "end_time": 640.24,
+      "text": "लेकिन यहां यहां यह मेरी बात वोर से सुनियेंगा"
+    },
+    {
+      "start_time": 640.24,
+      "end_time": 643.24,
+      "text": "क्योंकि कमेंटरी में बता रहा हूं तो बात वोर से सुनें और लिख लें"
+    },
+    {
+      "start_time": 643.24,
+      "end_time": 646.24,
+      "text": "अगर तो यह M15 का trend है"
+    },
+    {
+      "start_time": 646.24,
+      "end_time": 655.24,
+      "text": "तो पहली पराउटी आपने देनी है के market M15 पे ही single candle order block बनाए जो यहां इस cell zone में rejection से बनेंगा"
+    },
+    {
+      "start_time": 655.24,
+      "end_time": 661.24,
+      "text": "वो कैसा होगा वो कुछ आपको market ऐसा single candle order block बनाके दिखाएगी"
+    },
+    {
+      "start_time": 661.24,
+      "end_time": 666.24,
+      "text": "जिसमें market जैसे ही fair value gap यह आपके cell zone में tap करेगी"
+    },
+    {
+      "start_time": 666.24,
+      "end_time": 669.24,
+      "text": "तो मिडल केंडल प्रीवेस केंडल की लिव्टी स्वीप करें"
+    },
+    {
+      "start_time": 669.24,
+      "end_time": 671.24,
+      "text": "थर्ड केंडल उसके नीचे close करें"
+    },
+    {
+      "start_time": 671.24,
+      "end_time": 674.24,
+      "text": "और उसके साथ अगर fair value gap बन जाए"
+    },
+    {
+      "start_time": 674.24,
+      "end_time": 678.24,
+      "text": "तो यह high probability single candle order block consider होगा"
+    },
+    {
+      "start_time": 678.24,
+      "end_time": 682.24,
+      "text": "और इसमें जैसे ही market वापस retrace करेगी"
+    },
+    {
+      "start_time": 682.24,
+      "end_time": 686.24,
+      "text": "तो इसकी clear testing पे हम अपनी entry plan कर लेंगे"
+    },
+    {
+      "start_time": 686.24,
+      "end_time": 690.24,
+      "text": "सिमिलर्ली जब market inducement लेगी इस cell zone में"
+    },
+    {
+      "start_time": 690.24,
+      "end_time": 693.24,
+      "text": "हम स्कूप को देखके single candle order block को देखके"
+    },
+    {
+      "start_time": 693.24,
+      "end_time": 695.24,
+      "text": "यहां पर अपनी entry plan करेंगे"
+    },
+    {
+      "start_time": 695.24,
+      "end_time": 698.24,
+      "text": "जिसे हमें काफी अच्छा एक response मिल सकते हैं"
+    },
+    {
+      "start_time": 698.24,
+      "end_time": 703.24,
+      "text": "अच्छा यह तो एक case study है जिसमें market inducement के ऊपर"
+    },
+    {
+      "start_time": 703.24,
+      "end_time": 708.24,
+      "text": "sales zone से rejection लेती है लेकिन some time basically क्या होता है"
+    },
+    {
+      "start_time": 708.24,
+      "end_time": 715.24,
+      "text": "के market दोबारे एक recent inducement बनाती है उस recent inducement को बनाने के बाद"
+    },
+    {
+      "start_time": 715.24,
+      "end_time": 720.24,
+      "text": "उपर किसी sell zone तक नहीं जाती और वहीं से उस inducement को"
+    },
+    {
+      "start_time": 720.24,
+      "end_time": 725.24,
+      "text": "sweep करने के बाद reaction शो करती है अगर यहां पे मिलने वाले"
+    },
+    {
+      "start_time": 725.24,
+      "end_time": 730.24,
+      "text": "reaction में इस जगा पे दोबारा आपको कुछ ऐसा फिनामिना"
+    },
+    {
+      "start_time": 730.24,
+      "end_time": 736.24,
+      "text": "single candle order block observe हो जिसमें market एक fair value gap भी create करें"
+    },
+    {
+      "start_time": 736.24,
+      "end_time": 741.24,
+      "text": "वह high probability consider होगा वरना आप single candle की base पे भी entry ले"
+    },
+    {
+      "start_time": 741.24,
+      "end_time": 746.24,
+      "text": "सकते हैं आप entry single candle की base भी ले सकते हैं लेकिन fair value"
+    },
+    {
+      "start_time": 746.24,
+      "end_time": 751.24,
+      "text": "gap का available होना इसको high probability बनाएगा तो अगर आपको"
+    },
+    {
+      "start_time": 751.24,
+      "end_time": 755.24,
+      "text": "यह phenomena मिलता है तो same इसमें fair value gap की rejection पे हम अपनी"
+    },
+    {
+      "start_time": 755.24,
+      "end_time": 761.24,
+      "text": "entry plan करके take profit achieve कर सकते हैं तो यह सारी थियोरी थी"
+    },
+    {
+      "start_time": 761.24,
+      "end_time": 765.24,
+      "text": "आपकी schematics की हग तक कुछ बात नहीं थी जो मैंने आपको बताई अब"
+    },
+    {
+      "start_time": 765.24,
+      "end_time": 770.24,
+      "text": "हम इस चीज़ को live market में trading view के उपर किसी pair पर टेस्ट करके"
+    },
+    {
+      "start_time": 770.24,
+      "end_time": 777.24,
+      "text": "देखते हैं कि यह कैसे work करती है यह euro usd m15 का चार्ट है"
+    },
+    {
+      "start_time": 777.24,
+      "end_time": 783.24,
+      "text": "जैसे कि आज हम single candle auto block को study करें तो हम देखेंगे कि इसको कैसे use करते हैं for the entry purpose"
+    },
+    {
+      "start_time": 783.24,
+      "end_time": 791.24,
+      "text": "यहां अगर हम करंटी देखें तो मार्केट m15 में bearish है और m15 में मार्केट ने इस करंट low के according यह वाली जो हमारी"
+    },
+    {
+      "start_time": 791.24,
+      "end_time": 794.24,
+      "text": "major endorsement है इसको take up की है ठीक है?"
+    },
+    {
+      "start_time": 794.24,
+      "end_time": 800.24,
+      "text": "मार्केट ने यहांसे major liquidity ली है major endorsement को यहांसे उठाया और उसके बाद market drop कर लिए"
+    },
+    {
+      "start_time": 800.24,
+      "end_time": 807.24,
+      "text": "अब drop करते करते मार्केट ने अभी तक जो last time 15 का low है इसके नीचे मार्केट को close नहीं किया"
+    },
+    {
+      "start_time": 807.24,
+      "end_time": 814.24,
+      "text": "जब तक मार्केट जिस low के according endorsement को लेती है उस low के नीचे close नहीं करती"
+    },
+    {
+      "start_time": 814.24,
+      "end_time": 818.24,
+      "text": "तब तक हम इसे endorsement को consider करेंगे ऐसा major endorsement"
+    },
+    {
+      "start_time": 818.24,
+      "end_time": 823.24,
+      "text": "यानि मार्केट ने यहां से major endorsement को ले लिया है तो अब हम sell entry plan करेंगे"
+    },
+    {
+      "start_time": 823.24,
+      "end_time": 830.24,
+      "text": "अब मार्केट ने यहां से major endorsement लिया और drop किया है और drop करने के बाद मार्केट ने यहां पर अपना structure shift की है"
+    },
+    {
+      "start_time": 830.24,
+      "end_time": 836.24,
+      "text": "जब यहां पर shift आई है मार्केट में तो अब हम यहां पर अपनी sell entry plan कर सकते हैं"
+    },
+    {
+      "start_time": 836.24,
+      "end_time": 844.24,
+      "text": "और sell entry लेने के लिए बहुत अच्छी बात होती है कि अगर हमें दोबारा से internal liquidity या minor endorsement इंटर्नल structure की endorsement मिल जाए"
+    },
+    {
+      "start_time": 844.24,
+      "end_time": 849.24,
+      "text": "तो अगर हम देखें तो यह हमारी internal structure की endorsement है ठीक है"
+    },
+    {
+      "start_time": 849.24,
+      "end_time": 853.24,
+      "text": "अब किस endorsement का हम वेट करेंगे कि मार्केट इस endorsement को ले"
+    },
+    {
+      "start_time": 853.24,
+      "end_time": 860.24,
+      "text": "या इस endorsement के ओपर यह जो हमारा fair value gap पड़ा है हम इस fair value gap में अपनी entry plan करेंगे"
+    },
+    {
+      "start_time": 860.24,
+      "end_time": 864.24,
+      "text": "क्योंकि यहां पर हम अपने zone को refine कर रहे हैं entry को refine कर रहे हैं"
+    },
+    {
+      "start_time": 864.24,
+      "end_time": 868.24,
+      "text": "ताकि हमारा risk को reward अच्छा हो अब यह हमारी endorsement है"
+    },
+    {
+      "start_time": 868.24,
+      "end_time": 872.24,
+      "text": "जो minor endorsement है और internal liquidity दोबारा से provide कर दिये"
+    },
+    {
+      "start_time": 872.24,
+      "end_time": 875.24,
+      "text": "अब हम देखते हैं कि market का यहां पर क्या reaction आता है"
+    },
+    {
+      "start_time": 875.24,
+      "end_time": 883.24,
+      "text": "अब अगर हम देखें इस candle पर focus करें तो इस candle ने previous endorsement को"
+    },
+    {
+      "start_time": 883.24,
+      "end_time": 888.24,
+      "text": "जो के internal endorsement है उसको sweep किया है और नीचे एक rejection शो की है"
+    },
+    {
+      "start_time": 888.24,
+      "end_time": 894.24,
+      "text": "लेकिन यह एक first signal है जहां पर market सिर्फ endorsement को sweep करके aggressively under drop हुई है"
+    },
+    {
+      "start_time": 894.24,
+      "end_time": 903.24,
+      "text": "अब हम इस से next candle भी चेक करेंगे कि आया कि वो confirm करती है कि यह candle हमारा single candle order block बन सकता है यह नहीं बन सकता"
+    },
+    {
+      "start_time": 903.24,
+      "end_time": 912.24,
+      "text": "अगर next candle इस candle के low के नीचे close कर गी इस candle के low के नीचे तो यह candle single candle order block act करेगी"
+    },
+    {
+      "start_time": 912.24,
+      "end_time": 922.24,
+      "text": "क्योंकि इस candle ने previous candle की liquidity भी sweep की हुई है लेकिन अभी देखते हैं क्या यह scoop बन सकती है नहीं बन सकती"
+    },
+    {
+      "start_time": 922.24,
+      "end_time": 930.24,
+      "text": "अब यहां पर देखें जैसे ही इस candle ने जिसको मैंने highlight किया endorsement को sweep किया और next candle ने aggressively drop किया"
+    },
+    {
+      "start_time": 930.24,
+      "end_time": 939.24,
+      "text": "अब यह जो candle है इसको हम as a scoop consider कर सकते हैं जिसे हम कहते हैं single candle order block लेकिन जैसा कि अभी मैंने आपको बताया"
+    },
+    {
+      "start_time": 939.24,
+      "end_time": 950.24,
+      "text": "single candle order block high probability वह होता है जिसमें इस candle के नीचे immediate basis पे हमारे पास एक fair value gap available हो अब इसको refine करने के लिए"
+    },
+    {
+      "start_time": 950.24,
+      "end_time": 965.24,
+      "text": "अगर हम M5 पे चले जाएं जैसा कि M5 का चार्ट है और यहां देखें मार्किट ने जैसे इस endorsement को clean किया और मार्किट ने जो candle drop की है अगर मैं यहां उस candle को highlight करूं यह जो candle है"
+    },
+    {
+      "start_time": 965.24,
+      "end_time": 983.24,
+      "text": "तो आप यहां देखें M15 के चार्ट के बाद अगर हम 5 पे फोकस करें तो यहां पे तीन red candles बनी हैं बड़ी बड़ी यहां एक aggressive drop आया है और इसके अंदर itself एक fair value gap available है अगर मैं उसको मार करूं तो वो यह वाला zone बनता है"
+    },
+    {
+      "start_time": 983.24,
+      "end_time": 998.24,
+      "text": "इस में कि अब यह जो single candle order block है यह हमारे पास एक high probability candle है trade करने के लिए अब जैसे ही market इसको retest करेगी तो हम यहां अपनी entry plan करेंगे"
+    },
+    {
+      "start_time": 998.24,
+      "end_time": 1013.24,
+      "text": "बिलकुल इसके immediate retest पे और stop loss जो scoop candle है उससे highly कोई एक से डिर पीप उपर और take profit previous low जहां से market अभी तक उठके आ रही है हम इस low को as the first take profit target करेंगे"
+    },
+    {
+      "start_time": 1013.24,
+      "end_time": 1029.24,
+      "text": "अब हम देखते हैं कि market कैसे react करती है इस scoop के उपर यह देखें मार्के ने कितनी खूबसूरती से scoop candle को test किया और immediately drop किया और यह first take profit हमारा हिट किया है"
+    },
+    {
+      "start_time": 1029.24,
+      "end_time": 1046.24,
+      "text": "किया है लेकिन अगर आप एक चीज नोट करें हमारा यह वला जो जोन है यह अभी तक unmitigated है जिसको हम future के लिए भी यूज कर सकते हैं क्यों यूज कर सकते हैं क्योंके market ने अभी तक इस previous low के निचे proper closing नहीं दी market ने अभी तक सिर लो को sweep किया है"
+    },
+    {
+      "start_time": 1046.24,
+      "end_time": 1057.24,
+      "text": "तो हम इस zone को future में भी use कर सकते हैं तो अब हम देखते हैं कि इस zone के उपर हमें market कैसे aid provide कर सकती है क्या यहां भी हमारी को entry plan हो सकती है नहीं हो सकती"
+    },
+    {
+      "start_time": 1057.24,
+      "end_time": 1072.24,
+      "text": "अभी हम देखते हैं कि market कैसे इस zone को approach करती है लेकिन अब एक चीज को consider करें कि यह जो अंडियूस्मेंट है यहां पे single candle order block ने अंडियूस्मेंट को hardly one या two pip से sweep किया है"
+    },
+    {
+      "start_time": 1072.24,
+      "end_time": 1087.24,
+      "text": "अब यह जो अंडियूस्मेंट है हमारी future के लिए यह एंजिनियर लिवर्टी प्रवाइड करेंगी क्यों कि यह तक्रीब नीट एंड क्लीन हमारे equal tops जिसे हम double top भी कहते हैं यह इसे हम इंजिनियर लिवर्टी भी मार कर सकते हैं"
+    },
+    {
+      "start_time": 1090.24,
+      "end_time": 1097.18,
+      "text": "अब हम वेट करते हैं इस जोन के अंडर मार्किट का क्या reaction है जो के हमारा unmitigated fair value gap है"
+    },
+    {
+      "start_time": 1097.18,
+      "end_time": 1109.24,
+      "text": "एक बाद याद रखें जब कभी भी किसी sell zone या buy zone के पास immediately उसके बिलकुल पास कोई अंडियूस्मेंट लेवल या कोई engineer लिवर्टी अवेलेबल हो"
+    },
+    {
+      "start_time": 1109.24,
+      "end_time": 1112.36,
+      "text": "तो ऐसा zone बहुत high probability zone होता है"
+    },
+    {
+      "start_time": 1112.36,
+      "end_time": 1121.36,
+      "text": "यहां पर आप अगर मार्किट ने अंडियूस्मेंट ली है structure shift किया और एक ऐसा zone है जिसके पास market ने engineer लिवर्टी या अंडियूस्मेंट बनाई है"
+    },
+    {
+      "start_time": 1121.36,
+      "end_time": 1124.18,
+      "text": "तो आप उस zone पर direct entry भी ले सकते हैं"
+    },
+    {
+      "start_time": 1124.18,
+      "end_time": 1126.3,
+      "text": "अब हम देखते हैं कि मार्किट का क्या reaction है"
+    },
+    {
+      "start_time": 1126.3,
+      "end_time": 1131.92,
+      "text": "हम देखें मार्किट हमारी engineer liberty के पास आगी है"
+    },
+    {
+      "start_time": 1131.92,
+      "end_time": 1134.66,
+      "text": "और उप पिल्कुल immediate basis पे हमारा ओपर fair value gap है"
+    },
+    {
+      "start_time": 1134.66,
+      "end_time": 1136.64,
+      "text": "और मार्किट ने इसको tap कर दिया है"
+    },
+    {
+      "start_time": 1136.64,
+      "end_time": 1140.58,
+      "text": "अब क्योंके मार्किट ने major endorsement को ले लिए है उस structure को shift कर दिया है"
+    },
+    {
+      "start_time": 1140.58,
+      "end_time": 1144.14,
+      "text": "तो high probability है कि मार्किट इस top को sweep नहीं कर पाएगी"
+    },
+    {
+      "start_time": 1144.14,
+      "end_time": 1147.18,
+      "text": "तो यहां पे हम पहली अपनी aggressive entry ले सकते है"
+    },
+    {
+      "start_time": 1147.18,
+      "end_time": 1150.86,
+      "text": "और अपना S.L. इस previous top के उपर रख सकते है"
+    },
+    {
+      "start_time": 1150.86,
+      "end_time": 1152.96,
+      "text": "और पहला target हमारा क्या होगा"
+    },
+    {
+      "start_time": 1152.96,
+      "end_time": 1157.82,
+      "text": "वही लोग जहां से मार्किट move करते होगे आके हमारे zone तक आई है"
+    },
+    {
+      "start_time": 1157.82,
+      "end_time": 1160.14,
+      "text": "तो SMC trader भूब यह बास समयते हैं"
+    },
+    {
+      "start_time": 1160.14,
+      "end_time": 1163.66,
+      "text": "कि मार्किट जहां से उटके वापस आती है किसी zone तक"
+    },
+    {
+      "start_time": 1163.66,
+      "end_time": 1166.28,
+      "text": "वही लोग हमारा पहला take profit target होता है"
+    },
+    {
+      "start_time": 1166.28,
+      "end_time": 1168.44,
+      "text": "अब यह हमारी पहली entry है"
+    },
+    {
+      "start_time": 1168.44,
+      "end_time": 1172.14,
+      "text": "और इसमें देखते हैं कि मार्किट हमें कैसे aid provide करती है"
+    },
+    {
+      "start_time": 1172.14,
+      "end_time": 1176.22,
+      "text": "अब देखे हैं काफी strong reaction आ रहा है"
+    },
+    {
+      "start_time": 1176.22,
+      "end_time": 1178.86,
+      "text": "मार्किट यहां से drop होना शुरू होगी है"
+    },
+    {
+      "start_time": 1178.86,
+      "end_time": 1180.36,
+      "text": "further drop हो रही है"
+    },
+    {
+      "start_time": 1180.36,
+      "end_time": 1184.08,
+      "text": "और यह देखें"
+    },
+    {
+      "start_time": 1184.08,
+      "end_time": 1186.18,
+      "text": "अब मार्किट ने यहां पे क्या किया है"
+    },
+    {
+      "start_time": 1186.18,
+      "end_time": 1190.72,
+      "text": "मार्किट ने यहां पे एक और single candle order block बनाए"
+    },
+    {
+      "start_time": 1190.72,
+      "end_time": 1193.4,
+      "text": "अब यह कैसे single candle order block है"
+    },
+    {
+      "start_time": 1193.4,
+      "end_time": 1195.62,
+      "text": "इसमें अगर आप देखें थोड़ सा मैं जून करूं"
+    },
+    {
+      "start_time": 1195.62,
+      "end_time": 1200.22,
+      "text": "तो इस blue candle ने previous candle की liberty को sweep किया है"
+    },
+    {
+      "start_time": 1200.22,
+      "end_time": 1202.62,
+      "text": "और next candle ने इसके नीचे close किया है"
+    },
+    {
+      "start_time": 1202.62,
+      "end_time": 1205.18,
+      "text": "अब हमें यहां inducement की जरूरत नहीं है"
+    },
+    {
+      "start_time": 1205.18,
+      "end_time": 1206.94,
+      "text": "inducement की जरूरत क्यों नहीं है"
+    },
+    {
+      "start_time": 1206.94,
+      "end_time": 1211.26,
+      "text": "क्योंके market already major structure की major inducement लेने के बाद"
+    },
+    {
+      "start_time": 1211.26,
+      "end_time": 1213.18,
+      "text": "structure को shift कर चुकी है"
+    },
+    {
+      "start_time": 1213.18,
+      "end_time": 1216.06,
+      "text": "और nearly market ने engineer literally है"
+    },
+    {
+      "start_time": 1216.06,
+      "end_time": 1219.3,
+      "text": "तो यहां पे भी हम अपनी direct entry plan कर सकते है"
+    },
+    {
+      "start_time": 1219.3,
+      "end_time": 1223.6,
+      "text": "जो के हमें हमें एक अच्छा risk or reward प्रवाइड कर सकती है"
+    },
+    {
+      "start_time": 1223.6,
+      "end_time": 1225.04,
+      "text": "और take profit हम"
+    },
+    {
+      "start_time": 1225.04,
+      "end_time": 1227.96,
+      "text": "या तो यह पहले वालोग भी target कर सकते हैं"
+    },
+    {
+      "start_time": 1227.96,
+      "end_time": 1229.22,
+      "text": "क्योंके हमारा sell trend है"
+    },
+    {
+      "start_time": 1229.22,
+      "end_time": 1231.64,
+      "text": "तो हम अपना जो take profit है"
+    },
+    {
+      "start_time": 1231.64,
+      "end_time": 1234.92,
+      "text": "one is to five, one is to six तक भी plan कर सकते है"
+    },
+    {
+      "start_time": 1234.92,
+      "end_time": 1241.02,
+      "text": "यह दें कितना beautifully market यहां से drop कर दी है"
+    },
+    {
+      "start_time": 1241.02,
+      "end_time": 1242.8,
+      "text": "क्यों? क्योंके यहां पे"
+    },
+    {
+      "start_time": 1242.8,
+      "end_time": 1245.32,
+      "text": "यहां पे market के पास"
+    },
+    {
+      "start_time": 1245.32,
+      "end_time": 1248.82,
+      "text": "इस single candle order block के बिलकुल नीचे"
+    },
+    {
+      "start_time": 1248.82,
+      "end_time": 1251.62,
+      "text": "immediate basis पे एक fair value gap भी create हुआ"
+    },
+    {
+      "start_time": 1251.62,
+      "end_time": 1254.48,
+      "text": "जिसने इसको मज़ीद high probability बना दिया"
+    },
+    {
+      "start_time": 1254.48,
+      "end_time": 1257.38,
+      "text": "तो ऐसे जो single candle order blocks होते हैं"
+    },
+    {
+      "start_time": 1257.38,
+      "end_time": 1259.32,
+      "text": "यह high probability trade प्रवाइड करते हैं"
+    },
+    {
+      "start_time": 1259.32,
+      "end_time": 1261.64,
+      "text": "और काफी अच्छा risk of reward प्रवाइड करते हैं"
+    },
+    {
+      "start_time": 1261.64,
+      "end_time": 1266.82,
+      "text": "hopefully इस lecture से आपको काफी information मिली होगी"
+    },
+    {
+      "start_time": 1266.82,
+      "end_time": 1269.48,
+      "text": "next lecture तक आप अपना ख्यार रखिएगा"
+    },
+    {
+      "start_time": 1269.48,
+      "end_time": 1271.5,
+      "text": "wish you good luck and happy trading"
+    }
+  ],
+  "language": "hi",
+  "duration": 1271.5,
+  "transcribed_at": "2026-02-10T16:33:55.772209",
+  "method": "whisper_cpp_large-v3-turbo",
+  "model": "whisper.cpp/large-v3-turbo (Metal GPU)",
+  "word_count": 3645,
+  "processing_time_seconds": 1150.9,
+  "title": "Video"
+}

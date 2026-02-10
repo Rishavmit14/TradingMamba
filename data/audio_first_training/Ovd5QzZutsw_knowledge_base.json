@@ -1,0 +1,152 @@
+{
+  "video_id": "Ovd5QzZutsw",
+  "title": "SMC Valid Pullback & Inducement: The ONLY Rule You Need to Know",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 3,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T17:45:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 20.4,
+    "transcript_words": 3647,
+    "frames_analyzed": 12,
+    "concepts_extracted": 4
+  },
+  "concepts": {
+    "pullback_definition": {
+      "llm_summary": "A Pullback occurs when Price Takes a Break (pauses) and corrects itself or goes against the trend in the market. It is also known as Correction. It is a temporary dip in a generally upward-trending asset price (bullish) or a temporary rally in a downward-trending price (bearish). Pullbacks are short-term and temporary — market corrects for a short period, then resumes its original direction. The video shows side-by-side diagrams of pullback in bullish market (blue, zigzag upward with small dips) and pullback in bearish market (red, zigzag downward with small rallies). Understanding WHEN a pullback is valid is the core teaching of this video — this validity determines whether an inducement is valid.",
+      "statistics": {
+        "teaching_time_minutes": 2.0,
+        "word_count": 300,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "visual_diagram"],
+      "key_rules": [
+        "Pullback = Price takes a break, pauses, corrects against the trend",
+        "Also known as Correction (forest correction in market terminology)",
+        "Temporary dip in uptrend (bullish) or temporary rally in downtrend (bearish)",
+        "Pullback is short-term/temporary — market resumes original direction after correction",
+        "Valid pullback knowledge is essential — determines valid inducement"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00084.00s.jpg",
+          "description": "Pullback slide: definition with 3 bullet points. Left: 'Pullback in Bullish Market' (blue zigzag up). Right: 'Pullback in Bearish Market' (red zigzag down)"
+        }
+      ]
+    },
+    "liquidity_sweep": {
+      "llm_summary": "Liquidity Sweep is the mechanism by which institutional traders and banks (Smart Money) execute their large orders. Liquidity sweeps are very Quick and Efficient — the move happens so fast that retail traders cannot catch it without prior knowledge. Smart money leaves footprints at sweep locations. The video explains sweep mechanics using a range-bound market: when market builds a high and low, breakout traders place buy stops above and sell stops below. Banks target the side with MORE orders (larger liquidity pool). For a sell-side sweep: market breaks below the low, collects sell stops, then reverses upward. In candlestick form, a sell-side liquidity sweep appears as a long lower wick on a bullish candle — the wick represents the sweep below the previous candle's low, and the body represents the reversal. A cross (X) mark is placed on the swept side to indicate 'market has done its work here'. The presenter emphasizes that liquidity sweep knowledge is essential for EVERYTHING going forward — inducement validity, order block validation, Fibonacci, corrections, setups, and entries.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 900,
+        "frames_used": 3
+      },
+      "teaching_types": ["definition", "schematic_diagram", "candlestick_conversion", "sweep_marking"],
+      "key_rules": [
+        "Liquidity sweeps used by institutional traders/banks to execute large orders",
+        "Sweep moves are Quick and Efficient — retail can't catch without knowledge",
+        "Smart money targets the LARGER liquidity pool side (more orders)",
+        "Low Sweep = Sell Side Liquidity Sweep: market breaks below lows, collects sell stops, reverses up",
+        "High Sweep = Buy Side Liquidity Sweep: market breaks above highs, collects buy stops, reverses down",
+        "In candlestick form: long lower wick on bullish candle = sell side sweep",
+        "In candlestick form: long upper wick on bearish candle = buy side sweep",
+        "Cross (X) mark on swept side = market has completed its work there",
+        "Liquidity sweep knowledge essential for ALL future concepts: inducement, OB, FVG, entries",
+        "Retail trader volume is barely 1-2% of institutional volume — banks drive the market"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00159.00s.jpg",
+          "description": "Liquidity Sweep slide: 'Used by institutional traders and Banks (Smart Money) to execute their large orders' and 'Very Quick and Efficient'"
+        },
+        {
+          "frame": "frame_00246.00s.jpg",
+          "description": "Liquidity Sweep – Candlestick Diagram title slide (content being built)"
+        },
+        {
+          "frame": "frame_00393.00s.jpg",
+          "description": "Complete candlestick diagram: Left shows range with HIGH/LOW lines and schematic sweep. Right shows bearish candle (red) + bullish candle (purple) with 'Low' label, 'X' mark, and 'Low Sweep' dashed line. Bottom text: 'Low Sweep / Sell Side Liquidity Sweep'"
+        }
+      ]
+    },
+    "valid_pullback_rules": {
+      "llm_summary": "Valid Pullback is the SINGLE most important filter in this lecture. The definition: When Price Takes out (Sweeps) the Previous Candle's Low or High, it is a Valid Pullback. In Bullish market: the Low of the Highest Candle must be broken (liquidity sweep) to validate the pullback. In Bearish market: the High of the Lowest Candle must be broken. Three key rules: (1) Next candle must sweep/break the previous candle's low/high, (2) Both Candle Closing (body base sweep) AND Liquidity Sweep (wick base sweep) validate the pullback, (3) It is NOT necessary that the next candle must also close or break the HIGH of the previous candle — only the low/high sweep matters. The video demonstrates with detailed candlestick diagrams for bearish market: single candle base (Lowest Candle → next candle breaks its high → valid checkmark), two candle base (same rule → valid), three+ candle base (candles 5,6,7,8 → Lowest Candle's high NOT broken → INVALID X mark), and the tricky A,B,C,D case where you must identify the ACTUAL lowest candle (D, not C) to correctly assess validity. Same logic applies to bullish market (Highest Candle's low must be broken). Critical insight: candle color (bullish/bearish) does NOT matter — only the candle's POSITION as highest or lowest matters.",
+      "statistics": {
+        "teaching_time_minutes": 7.0,
+        "word_count": 1200,
+        "frames_used": 3
+      },
+      "teaching_types": ["rule_definition", "candlestick_diagram", "valid_invalid_examples", "tricky_cases"],
+      "key_rules": [
+        "Valid Pullback = When price sweeps the previous candle's Low (bullish) or High (bearish)",
+        "Bullish Market: LOW of the HIGHEST candle must be broken by next candle",
+        "Bearish Market: HIGH of the LOWEST candle must be broken by next candle",
+        "Body close (body base sweep) OR wick sweep (wick base sweep) — BOTH validate pullback",
+        "NOT necessary for next candle to also break the high/low in opposite direction",
+        "Step 1: Find the HIGHEST (bullish) or LOWEST (bearish) candle in the pullback",
+        "Step 2: Check if the next candle(s) broke its low (bullish) or high (bearish)",
+        "If broken → VALID pullback. If not broken → INVALID pullback",
+        "Inside bars (candles within a larger candle) have NO significance — they don't break high or low",
+        "Candle color (bullish/bearish) does NOT matter — only position (highest/lowest) matters",
+        "Tricky case: with multiple candles, must find the ACTUAL lowest/highest (may not be the obvious one)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00555.00s.jpg",
+          "description": "Pullback Validity Rules slide: 3 rules listed. Bottom shows candlestick examples — Bullish (left): 3 examples with green checkmarks showing low sweep with body, wick, small candle. Bearish (right): 2 examples with green checkmarks showing high sweep. Both X marks on swept levels."
+        },
+        {
+          "frame": "frame_00696.00s.jpg",
+          "description": "Bearish Pullback Candlestick Diagram: Rule text 'High of the Previous Lowest Candle must be broken'. 5 examples: (1) Single candle — Lowest Candle #1, #2 breaks high → checkmark. (2) Two candles — #3,#4 → checkmark. (3) Three candles — #5,6,7,8 → X (high not broken). (4) A,B,C,D tricky case showing D is actual lowest candle. (5) E,F case."
+        },
+        {
+          "frame": "frame_00813.00s.jpg",
+          "description": "Bullish Pullback Candlestick Diagram: Rule text 'Low of the Previous Highest Candle must be broken'. Shows Highest Candle labeled, candles 1(red) and 2(red) in pullback, next candle breaks highest candle's low → valid."
+        }
+      ]
+    },
+    "valid_inducement": {
+      "llm_summary": "Valid Inducement is the culminating concept that ties pullback validity to inducement. Definition: Inducement is the first Valid Pullback on the left side of the recent High or recent Low. It is a trap before an area of POI (Point of Interest = Order Block / Supply / Demand zone). The KEY rule: For inducement to be valid, the underlying pullback MUST be valid first. Process: (1) Find the highest point, (2) Look on its LEFT side, (3) Find the FIRST pullback, (4) Check if that pullback is valid using the candle rules, (5) If valid → that's the inducement. If NOT valid → skip it and look for the next valid pullback on the left — THAT becomes the inducement (inducement shifts). The video demonstrates with a candlestick chart showing two 'Highest Candle' labels — the upper one's pullback is INVALID (X mark, 'Valid Inducement? → No') because the highest candle's low wasn't broken. The inducement shifts to the lower swing's pullback which IS VALID (checkmark, 'Valid Inducement? → Yes') because the highest candle's low was broken. A second example confirms the same principle. Critical practical impact: what looks like an Order Block at an invalid inducement is actually a Smart Money Trap — neither the FVG nor OB at that point are tradeable. Understanding this improves success rate from 50% to 80% but reduces total entries from 100 to 70 (acts as a quality filter). Inducement transfer mechanics covered in next lecture (V04).",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 800,
+        "frames_used": 4
+      },
+      "teaching_types": ["definition", "candlestick_chart_example", "valid_invalid_comparison", "practical_impact"],
+      "key_rules": [
+        "Valid Inducement = FIRST Valid Pullback on left side of recent High or Low",
+        "Inducement is a trap before an area of POI (Order Block / Supply / Demand)",
+        "For inducement to be valid, the pullback MUST be valid first",
+        "Process: Find highest point → look left → find first VALID pullback → that's the inducement",
+        "If first pullback is INVALID → skip it → find next valid pullback → inducement SHIFTS there",
+        "What looks like an Order Block at invalid inducement = Smart Money Trap (NOT tradeable)",
+        "FVG and OB at inducement points are part of inducement zone — NOT tradeable",
+        "Understanding valid inducement: success rate 50% → 80%, but entries 100 → 70 (quality filter)",
+        "Sell condition: find inducement using LOWEST candle rules, entry BELOW inducement",
+        "Buy condition: find inducement using HIGHEST candle rules, entry BELOW inducement",
+        "Next lecture (V04) covers: how and why inducement transfers from one point to another"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00951.00s.jpg",
+          "description": "Valid Inducement definition slide: 'Inducement is first Valid Pullback on left side of recent high or recent Low. It is a trap before an area of POI.'"
+        },
+        {
+          "frame": "frame_01050.00s.jpg",
+          "description": "Valid Inducement Example 1 (partial): Highest Candle labeled at top of swing. Arrow to pullback zone with 'Valid Inducement?' + X mark (INVALID) — highest candle's low not broken by pullback"
+        },
+        {
+          "frame": "frame_01074.00s.jpg",
+          "description": "Valid Inducement Example 1 (complete): Two 'Highest Candle' labels — upper pullback INVALID (X), lower pullback VALID (checkmark). Inducement shifted from upper invalid point to lower valid point"
+        },
+        {
+          "frame": "frame_01155.00s.jpg",
+          "description": "Valid Inducement with second example: Left chart shows first example (X invalid, checkmark valid). Right chart shows second example with 'Highest Candle' and 'Valid Inducement?' labels — confirming same principle"
+        }
+      ]
+    }
+  }
+}

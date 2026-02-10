@@ -46,5 +46,8 @@ data/audio/
 data/ml_models/*.joblib
 data/ml_models/*.npz
 
+# Whisper models (large binaries)
+models/
+
 # Package locks (optional - uncomment if you want to ignore)
 # frontend/package-lock.json

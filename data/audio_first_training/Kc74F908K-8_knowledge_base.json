@@ -1,0 +1,157 @@
+{
+  "video_id": "Kc74F908K-8",
+  "title": "SMC Single Candle Order Block (SCOB) Entry Technique",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 19,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-11T00:10:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 21.0,
+    "transcript_words": 4200,
+    "frames_analyzed": 8,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "swing_point_foundation": {
+      "llm_summary": "Before understanding Single Candle Order Block (SCOB), one must understand swing points at the candlestick level. A swing point forms from a minimum of 3 candles: the middle candle sweeps the previous candle's liquidity (high or low), and the third candle closes beyond the middle candle's opposite extreme. Two types: (1) High Swing Point — middle candle sweeps (or closes above) previous candle's high liquidity, third candle closes below middle candle's low. The middle candle's HIGH must remain protected (price should not return above it). (2) Low Swing Point — middle candle sweeps (or closes below) previous candle's low, third candle closes above middle candle's high. The middle candle's LOW must remain protected. Candle colors do NOT matter — only the pattern (sweep + opposite close + protected extreme).",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["definition", "diagram", "case_study"],
+      "key_rules": [
+        "Swing point = minimum 3-candle pattern",
+        "Middle candle sweeps previous candle's liquidity (high or low)",
+        "Third candle closes beyond middle candle's opposite extreme",
+        "High Swing Point: middle candle sweeps previous high → third candle closes below middle candle's low",
+        "Low Swing Point: middle candle sweeps previous low → third candle closes above middle candle's high",
+        "Middle candle's extreme (high for High SP, low for Low SP) MUST remain protected",
+        "Protected = price does not return beyond that extreme",
+        "Candle colors do NOT matter — only the pattern matters",
+        "Two sweep types: wick sweep (sweep and close inside) or body close beyond (stronger)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00060.00s.jpg",
+          "description": "SWING POINT title slide: Shows one bullish candle with 'High' and 'Low' labels at the wick extremes. Beginning of swing point explanation — candle highs and lows have liquidity available above/below them."
+        },
+        {
+          "frame": "frame_00180.00s.jpg",
+          "description": "Complete Swing Point diagram: Left — 'HIGH SWING POINT' (two examples: wick sweep + close inside, and body close above + return). Both show 'High Should Be Protected' label and middle candle with 'X' mark, third red candle closing below. Right — 'LOW SWING POINT' (two examples: wick sweep below + return up, and body close below + 'Liquidity Taken'). Both show 'Low Should Be Protected' label. Complete reference for all swing point variations."
+        }
+      ]
+    },
+    "scob_definition": {
+      "llm_summary": "Single Candle Order Block (SCOB), also called SCOOP, is an entry confirmation technique based on swing points. The middle candle of a valid swing point IS the SCOB candle. SCOB is used at Point of Interest (POI) zones for precise entry: FVG (1st priority), IOF/Institutional Order Flow (2nd priority), Order Block (3rd priority), or at any liquidity sweep of a previous high/low. Bullish SCOB: middle candle sweeps previous candle's low → next candle closes above middle candle's high → the middle candle is the bullish SCOB. Bearish SCOB: middle candle sweeps previous candle's high → next candle closes below middle candle's low → the middle candle is the bearish SCOB. The SCOB candle is only valid when it forms at a significant level — a previous high/low liquidity sweep, FVG rejection, or order block rejection.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 1
+      },
+      "teaching_types": ["definition", "entry_technique"],
+      "key_rules": [
+        "SCOB (Single Candle Order Block) = entry confirmation technique based on swing points",
+        "Also called SCOOP (Single Candle Order Block)",
+        "The MIDDLE candle of a valid swing point = the SCOB candle",
+        "Bullish SCOB: middle candle sweeps previous low → next candle closes above middle high",
+        "Bearish SCOB: middle candle sweeps previous high → next candle closes below middle low",
+        "SCOB ONLY valid when forming at significant level (previous high/low sweep, FVG, OB)",
+        "POI zone priority for SCOB: FVG (1st) → IOF Candle (2nd) → Order Block (3rd)",
+        "SCOB can also form at liquidity sweep of any previous high/low",
+        "Entry: at SCOB candle's retest | SL: beyond SCOB candle's extreme | TP: previous structure low/high"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00360.00s.jpg",
+          "description": "Single Candle Order Block (SCOB) title slide: 'SCOB Consist of 3-5 Candles, Depending on Conditions. Let's Discuss them in great details.' Shows the beginning of SCOB concept discussion."
+        }
+      ]
+    },
+    "scob_types_and_variations": {
+      "llm_summary": "SCOB can consist of 3 to 5 candles depending on conditions. Standard SCOB (3 candles): middle candle sweeps previous candle's liquidity, third candle closes beyond middle candle's opposite extreme — the blue/middle candle is marked as SCOB. Extended SCOB (4 candles): middle candle sweeps liquidity but third candle fails to close beyond the opposite extreme — wait for fourth candle. If fourth candle closes beyond, the candle that swept the liquidity is still the SCOB. Inside candle variation: if the third candle is an inside candle (doesn't sweep previous candle's liquidity), and fourth candle breaks both candles' extreme, skip the inside candle and mark the first sweeping candle as SCOB. High Probability SCOB: when a Fair Value Gap (FVG) exists immediately below (bearish) or above (bullish) the SCOB candle. The FVG adds confluence and provides better risk-to-reward. The bottom row of the diagram shows all 4 standard patterns repeated with FVG zones underneath each SCOB, making them 'High Probability SCOB' entries.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 900,
+        "frames_used": 1
+      },
+      "teaching_types": ["classification", "diagram", "high_probability_filter"],
+      "key_rules": [
+        "Standard SCOB = 3 candles (middle sweeps, third closes beyond)",
+        "Extended SCOB = 4-5 candles (third candle fails to close → wait for fourth)",
+        "Inside candle variation: skip inside candle → mark the first sweeping candle as SCOB",
+        "High Probability SCOB: FVG exists immediately below/above the SCOB candle",
+        "FVG below bearish SCOB = high probability (better risk/reward)",
+        "FVG above bullish SCOB = high probability (better risk/reward)",
+        "Without FVG: SCOB is still valid but lower probability",
+        "4 standard bearish SCOB patterns + 4 high probability versions with FVG"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00540.00s.jpg",
+          "description": "Complete SCOB types diagram: Top row labeled 'SCOB' — 4 bearish SCOB variations (3-candle standard, 4-candle extended with wick sweep, 4-candle with body close, 4-candle inside candle variation). Each has 'SCOB' label on the key candle. Bottom row labeled 'High Probability SCOB' — same 4 patterns but each has a Fair Value Gap (FVG) zone immediately below the SCOB candle, making them high probability entries."
+        }
+      ]
+    },
+    "where_to_trade_scob": {
+      "llm_summary": "SCOB should be found and traded at specific locations in the market structure. In a bearish trend: (1) identify the first valid pullback (inducement), (2) mark the sell zone above the inducement, (3) when market approaches the sell zone — look for SCOB formation at the rejection. The SCOB forms when market taps the sell zone and creates a swing point rejection (middle candle sweeps the zone's liquidity, next candle drops). If the SCOB has FVG immediately below it → high probability. On the same timeframe (e.g., M15): first priority is SCOB on the trading timeframe itself. Can also refine to lower TF (M5) to find FVG inside the SCOB candle. For secondary entry: when market creates recent/minor inducement (internal structure IDM) without reaching the main sell zone, look for SCOB at that inducement sweep. When a sell/buy zone has engineered liquidity or inducement nearby → the zone becomes very high probability → can take direct entry at the zone even without waiting for SCOB. Take profit = the low from which market rallied to the zone (where market moved up from).",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["workflow", "schematic", "real_chart_example"],
+      "key_rules": [
+        "Trade SCOB at sell/buy zones above/below inducement",
+        "Bearish: identify IDM → mark sell zone above IDM → wait for SCOB at rejection",
+        "First priority: SCOB on the trading timeframe itself (e.g., M15 SCOB on M15 chart)",
+        "Can refine: drop to M5 to find FVG inside the M15 SCOB candle",
+        "When zone has engineered liquidity/IDM nearby → very high probability → direct entry OK",
+        "SCOB entry: at SCOB candle retest | SL: 1-2 pips beyond SCOB extreme | TP: previous structure low/high",
+        "Take profit = the low/high from which market rallied/dropped to the zone",
+        "Unmitigated SCOB zones can be used for future trades",
+        "Internal IDM sweep + SCOB = valid secondary entry without needing HTF zone tap"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00720.00s.jpg",
+          "description": "Where to Find and Trade SCOB? schematic: Bearish trend with 'Sell Zone' at top, 'IDM' labels at two inducement levels. Zoomed circle showing SCOB formation at the sell zone — 3 candles (blue-blue-red) with 'SCOB' label and 'FVG' zone immediately below. Shows how market approaches sell zone, creates SCOB rejection, then drops. Second IDM shown lower for secondary entry opportunity."
+        }
+      ]
+    },
+    "real_chart_scob_application": {
+      "llm_summary": "Complete real-chart demonstration on EUR/USD M15: (1) Market is bearish on M15. (2) Market takes out major inducement and drops → structure shift confirmed. (3) Internal structure creates minor inducement. (4) Sell zone marked at FVG above the internal inducement. (5) First SCOB identified: candle sweeps the internal inducement → next candle drops aggressively below the SCOB candle's low → SCOB confirmed. (6) Refine to M5: inside the M15 SCOB candle, 3 aggressive red candles with internal FVG visible → high probability SCOB. (7) Entry at SCOB retest → SL above SCOB candle → TP at previous low → first take profit HIT. (8) The unmitigated FVG zone remains valid for future. (9) Market creates engineered liquidity (equal tops/double top) near the FVG → very high probability zone. (10) Second entry: direct entry at the FVG zone (because engineered liquidity nearby provides extra confluence) → strong drop → 1:5 to 1:6 risk/reward achieved. Key insight: when zone has nearby engineered liquidity/inducement → you can take direct entry without waiting for SCOB.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 900,
+        "frames_used": 2
+      },
+      "teaching_types": ["real_chart_example", "step_by_step_trade"],
+      "key_rules": [
+        "Real example: EUR/USD M15 bearish SCOB trade",
+        "Step 1: Confirm bearish M15 trend + major IDM taken + structure shift",
+        "Step 2: Mark internal IDM and sell zones (FVG above IDM)",
+        "Step 3: Identify SCOB at internal IDM sweep → candle sweeps IDM, next closes below",
+        "Step 4: Refine to M5 → find FVG inside M15 SCOB → high probability confirmation",
+        "Step 5: Entry at SCOB retest → SL above SCOB → TP at previous low",
+        "Unmitigated zones remain valid for future trades",
+        "Equal tops / double tops near zone = engineered liquidity → very high probability",
+        "Zone with nearby engineered liquidity → direct entry OK → 1:5 to 1:6 R:R achievable",
+        "SMC rule: market rallies from a low to reach zone → that low = first take profit target"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00900.00s.jpg",
+          "description": "EUR/USD M15 real chart: Shows bearish structure with 'IDM' label at major inducement (horizontal line), 'Shift' label at structure shift point, secondary 'IDM' at internal inducement. FVG zone (gray rectangle) and SCOB zone marked above the internal IDM. Market approaching the SCOB entry area."
+        },
+        {
+          "frame": "frame_01200.00s.jpg",
+          "description": "EUR/USD M15 with complete SCOB trade setup: 'FVG' zone labeled at top, '$$ / Eng Liq' label showing engineered liquidity (equal tops near the zone), 'Shift' label at structure shift. SCOB zone (pink) and FVG zone (gray) visible. Blue circles showing the SCOB candle pattern being identified. Market about to enter the second trade at the unmitigated zone with engineered liquidity confluence."
+        }
+      ]
+    }
+  }
+}

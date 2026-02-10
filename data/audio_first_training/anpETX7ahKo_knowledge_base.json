@@ -1,0 +1,120 @@
+{
+  "video_id": "anpETX7ahKo",
+  "title": "SMC Premium & Discount Zones — Fibonacci Retracement for Entry",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 12,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T23:30:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 14.0,
+    "transcript_words": 2400,
+    "frames_analyzed": 5,
+    "concepts_extracted": 4
+  },
+  "concepts": {
+    "pd_zone_introduction": {
+      "llm_summary": "Premium and Discount (PD) Zones are a basic principle used when selling and buying currencies in forex. Just like in daily life where buyers want discounted prices and sellers want premium prices, the same applies to forex. All buying and selling by big institutes and banks follows the PD zone principle: buy at discounted price, sell at premium price. PD zones are used as CONFLUENCE (not confirmation) in trade setups. Key rules: In bullish trend, buy in discount zone (high probability) and sell in premium zone (low probability). In bearish trend, sell in discount zone (high probability) and buy in premium zone (low probability). PD zones are highly effective on Higher Time Frames (D1, H4, H1) for swing trading, but become LESS effective on Lower Time Frames (M10, M5, M3) for scalping.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 600,
+        "frames_used": 2
+      },
+      "teaching_types": ["definition", "daily_life_analogy", "advantage_disadvantage"],
+      "key_rules": [
+        "PD Zone = Premium & Discount Zone — basic principle for all forex buying/selling",
+        "Used as CONFLUENCE (not confirmation) in buy/sell setups",
+        "Bullish trend: buy in discount zone = high probability; sell in premium zone = low probability",
+        "Bearish trend: sell in discount zone = high probability; buy in premium zone = low probability",
+        "PD zones filter out low probability setups → improve risk:reward ratio",
+        "Large potential for trend continuation setups using retracement/pullback",
+        "Highly Effective on HTF (D1, H4, H1) and Swing Trading",
+        "Less Effective on LTF (M10, M5, M3) and Scalping"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000120.00s.jpg",
+          "description": "Introduction to Premium & Discount (PD Zone): 'Premium and Discount is a Basic Principle that can be used when Selling and Buying Currencies in Forex Market.'"
+        },
+        {
+          "frame": "frame_000300.00s.jpg",
+          "description": "PD Zone Advantages & Disadvantages: 'Buy in Discount Zone (Bullish) / Sell in Discount Zone (Bearish) → High Probability. Sell in Premium Zone (Bullish) / Buy in Premium Zone (Bearish) → Low Probability.' Advantage: Confluence for setups, trend continuation, filter low probability, HTF effective. Disadvantage: Less Effective on LTF/Scalping (M10, M5, M3)"
+        }
+      ]
+    },
+    "fibonacci_retracement_tool": {
+      "llm_summary": "Fibonacci Retracement Tool is used to find Premium and Discount zones in forex. It connects to the Price Delivery Cycle (V11): after expansion, market retraces — Fibonacci measures HOW MUCH the market will retrace (what percentage pullback). Key levels: 0%, 38%, 50% (equilibrium), 62%, 79%, 100%. The 50% level is the EQUILIBRIUM — at this level, price is neither premium nor discount, so NO trade should be taken at exactly 50%. Below 50% = Discount Zone (in buy trend). Above 50% = Premium Zone (in buy trend). The tool answers: after expansion, how many percent will market retrace? And which zone is the retracement in?",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 400,
+        "frames_used": 1
+      },
+      "teaching_types": ["tool_introduction", "level_definition"],
+      "key_rules": [
+        "Fibonacci Retracement Tool measures how much market will retrace after expansion",
+        "Key levels: 0%, 38%, 50% (equilibrium), 62%, 79%, 100%",
+        "50% = Equilibrium level — NO trade at this exact level",
+        "Below 50% = Discount Zone (in buy trend)",
+        "Above 50% = Premium Zone (in buy trend)",
+        "Connects to V11 Price Delivery Cycle: Expansion → Retracement",
+        "Also can use Gann Box (but Fibonacci covered in this lecture)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000480.00s.jpg",
+          "description": "Fibonacci Retracement Tool — Buying Trend: Upward arrow showing price direction, line from low to high representing the expansion move"
+        }
+      ]
+    },
+    "buy_trend_pd_zones": {
+      "llm_summary": "In a Buy (Bullish) Trend: Apply Fibonacci from the LOW (100%) to the HIGH (0%), bottom to top. Below 50% = Discount Zone (where we want to buy). Above 50% = Premium Zone. We WAIT for market to retrace to the Discount Zone (below 50%), then look for entry confluence: order blocks, demand zones, fair value gaps, or price imbalance on the LEFT side of the chart at that discount level. When market retraces to discount zone AND we find a POI (Point of Interest) there, we design our buy setup and sync with the original bullish trend. Demonstrated on TradingView chart showing: Fib from swing low to swing high, Premium Zone labeled above 50%, Discount Zone labeled below 50% near 79% level, market retraces to discount zone and then continues bullish.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 500,
+        "frames_used": 1
+      },
+      "teaching_types": ["application", "real_chart_example"],
+      "key_rules": [
+        "Buy trend: apply Fibonacci from LOW (100%) to HIGH (0%) — bottom to top",
+        "Below 50% = Discount Zone (buy here) — high probability",
+        "Above 50% = Premium Zone (don't buy here) — low probability",
+        "Wait for market to retrace to Discount Zone → find POI on left side → buy",
+        "POI types: Order Block, Demand Zone, FVG, Price Imbalance",
+        "Sync with original bullish trend continuation after retracement to discount",
+        "OBs/FVGs in discount zone = high probability, in premium zone = low probability"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000660.00s.jpg",
+          "description": "Fibonacci Retracement Tool — Buy Trend Real Chart: TradingView chart with Fib levels (0%, 38%, 50%, 62%, 79%, 100%). Premium Zone labeled at top (above 50%), Discount Zone labeled at bottom (below 50%). 50% bold equilibrium line. Market retraces to ~79% discount zone then bounces bullish"
+        }
+      ]
+    },
+    "sell_trend_pd_zones": {
+      "llm_summary": "In a Sell (Bearish) Trend: Apply Fibonacci from the HIGH (100%) to the LOW (0%), top to bottom. The zones INVERT: Above 50% = Discount Zone (where we want to sell). Below 50% = Premium Zone. This is counterintuitive — in a sell trend, the DISCOUNT zone is at the TOP (higher prices) because selling at a higher price is 'discounted' for the seller (better entry price for shorts). We WAIT for market to retrace UP to the Discount Zone (above 50%), then find POI on left side (supply zones, order blocks, FVGs), and design our sell setup syncing with the bearish trend. The presenter assigns this as homework: why is discount zone at the top in sell trend? (Answer: because in selling, higher price = better entry = discounted entry for the seller). Demonstrated on a real chart showing market retracing up above 50% then continuing bearish.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 500,
+        "frames_used": 1
+      },
+      "teaching_types": ["application", "real_chart_example", "assignment"],
+      "key_rules": [
+        "Sell trend: apply Fibonacci from HIGH (100%) to LOW (0%) — top to bottom",
+        "Above 50% = Discount Zone (sell here) — high probability",
+        "Below 50% = Premium Zone (don't sell here) — low probability",
+        "Zones are INVERTED compared to buy trend",
+        "Wait for market to retrace UP to Discount Zone → find POI on left side → sell",
+        "Higher price = better entry for short sellers = 'discounted' entry for shorts",
+        "Same rule: OBs/FVGs in discount zone = high probability"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000780.00s.jpg",
+          "description": "Fibonacci Retracement Tool — Sell Trend Real Chart: TradingView chart with Fib levels. Discount Zone labeled at TOP (above 50% = 62%, 79%, 100%), Premium Zone labeled at BOTTOM (below 50% = 38%, 0%). 50% bold equilibrium line. Market retraces up to discount zone (above 50%) then drops bearish"
+        }
+      ]
+    }
+  }
+}

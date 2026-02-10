@@ -141,7 +141,7 @@ def try_get_existing_transcript(video_id: str) -> dict:
 
             # Try manual English first
             for transcript in transcript_list:
-                if transcript.language_code.startswith('en'):
+                if transcript.language_code.startswith('en') or transcript.language_code.startswith('hi'):
                     data = transcript.fetch()
                     segments = [{
                         'start_time': item['start'],

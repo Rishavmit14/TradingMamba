@@ -1,0 +1,162 @@
+{
+  "video_id": "cCugrbID3wI",
+  "title": "SMC Million Dollar Trading Setup — Complete Strategy",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 15,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T23:45:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 30.0,
+    "transcript_words": 6500,
+    "frames_analyzed": 8,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "strategy_roadmap": {
+      "llm_summary": "The Million Dollar Trading Setup requires mastery of 6 basic tools in sequence: (1) Structure Mapping — for trend identification (covered in V01-V10, 10 lectures); (2) Price Cycle (Price Delivery) — understanding expansion, retracement, reversal, consolidation phases (V11); (3) Price Imbalance — Fair Value Gap and Liquidity Void zones where pending orders create tradeable zones (V13); (4) Entry Zones — Order Blocks and Buy/Sell Zones where smart money entered (V14); (5) Setup Confirmation — using Liquidity and Market Structure Shift (MSS) to validate entries; (6) Risk & Reward Management — SL/TP placement rules. The presenter emphasizes that each element links to the next — the strategy only works when ALL elements are combined. Without trend identification via structure mapping, no strategy will succeed. This strategy works on any market (forex, indices, crypto, commodities) and any timeframe.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 1000,
+        "frames_used": 2
+      },
+      "teaching_types": ["roadmap", "overview", "prerequisite_list"],
+      "key_rules": [
+        "6 basic tools required in sequence: Structure Mapping → Price Cycle → Price Imbalance → Entry Zones → Setup Confirmation → Risk/Reward",
+        "Structure Mapping (V01-V10) = trend identification — the FOUNDATION",
+        "Price Cycle (V11) = expansion phase shows where SM entered",
+        "Price Imbalance (V13) = FVG/Liquidity Void zones with pending orders",
+        "Entry Zones (V14) = Order Blocks and Buy/Sell Zones",
+        "Setup Confirmation = Liquidity + MSS (Market Structure Shift)",
+        "Risk/Reward Management = minimum 1:3 ratio",
+        "Each element links to the next — ALL must be combined",
+        "Strategy works on any market and any timeframe"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000210.00s.jpg",
+          "description": "Roadmap — Basic Tools: Road/path diagram showing Structure Mapping (Trend Identification) as the starting point, leading to other tools along a winding road."
+        },
+        {
+          "frame": "frame_000450.00s.jpg",
+          "description": "Roadmap — Basic Tools (complete): Full roadmap showing all 6 tools: Structure Mapping (Trend Identification) → Price Cycle (Price Delivery) → Price Imbalance (Liquidity Void/FVG) → Entry Zones (Order Blocks / Buy/Sell Zones) → Setup Confirmation (Liquidity & MSS) → Risk Reward Management (SL/TP) → Win/Success (Pass Funded Accounts)."
+        }
+      ]
+    },
+    "order_block_theory_secret": {
+      "llm_summary": "The 'secret' behind the Million Dollar Setup is Order Block Theory. The setup is driven by the OB phenomenon: when market rises to a psychological resistance level and gets rejected, it builds liquidity. Market then makes a sharp move (expansion) to the opposite side, grabbing all that liquidity. When market closes below the lowest point between the two reference points (first rejection and second liquidity grab), that zone becomes the tradeable Order Block. The critical condition is that the move must be in EXPANSION form (sharp, with speed/displacement). Two models are shown: Liquidity Grab based (market body closes above previous high) and Liquidity Sweep based (only wick goes above). Both create valid bearish OBs when price closes below the middle low in expansion form. The setup can be applied anywhere market grabs or sweeps liquidity — the wick-based OB (sweep model) is also valid because it contains the liquidity sweep.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["theory_reveal", "diagram", "model_comparison"],
+      "key_rules": [
+        "Setup is driven by Order Block Theory — liquidity grab/sweep → expansion → close below middle low",
+        "Condition: move MUST be in expansion form (sharp movement with speed/displacement)",
+        "Two models: Liquidity Grab (body close above previous high) and Liquidity Sweep (wick only)",
+        "Both create valid OB when price closes below middle low in expansion form",
+        "The zone that grabbed/swept liquidity = tradeable sell/buy zone",
+        "Apply anywhere market grabs or sweeps liquidity",
+        "Wick-based OB (sweep model) is valid because it contains the liquidity sweep",
+        "Expansion = Smart Money footprints — where SM entered the market"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "Secrete Behind Setup — Order Block Theory: Two line diagrams showing bearish setup. Left: 'Liquidity Grab' model with 'Bearish Order Block' labeled above, price closes below middle low. Right: 'Liquidity Sweep' model with same structure but wick-only above previous high."
+        },
+        {
+          "frame": "frame_000567.00s.jpg",
+          "description": "Secrete Behind Setup — Order Block Theory: Same two models shown in earlier build state with 'Liquidity Grab' and 'Bearish Order Block' labels."
+        }
+      ]
+    },
+    "market_structure_shift_mss": {
+      "llm_summary": "Market Structure Shift (MSS) is DIFFERENT from Break of Structure (BOS). MSS has only 3 rules: (1) Market must take out liquidity (grab or sweep), (2) Market must come down/up in expansion form (sharp movement creating liquidity void), (3) Market must close below/above the middle low/high. When all 3 conditions are met = MSS confirmed. MSS is the key confirmation signal for the strategy. After MSS, the zone that grabbed/swept liquidity becomes the valid sell/buy zone. MSS differs from BOS in that BOS rules from structure mapping remain separate — MSS specifically requires liquidity takeout + expansion + close beyond the middle point. The expansion phase also creates liquidity void/FVG which becomes the entry refinement area.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 600,
+        "frames_used": 2
+      },
+      "teaching_types": ["definition", "rule_definition", "diagram"],
+      "key_rules": [
+        "MSS (Market Structure Shift) is DIFFERENT from BOS (Break of Structure)",
+        "MSS Rule 1: Market must take out liquidity (grab or sweep)",
+        "MSS Rule 2: Market must expand (sharp movement = expansion form)",
+        "MSS Rule 3: Market must close below/above the middle low/high",
+        "All 3 conditions must be met for MSS confirmation",
+        "MSS = the key confirmation signal for the Million Dollar Setup",
+        "After MSS, the liquidity-grabbing zone = valid sell/buy zone",
+        "BOS rules from V05-V06 remain separate — MSS has its own 3-rule framework"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000750.00s.jpg",
+          "description": "Minions Intraday Trading Strategy (bearish model): Line diagram showing 'Liquidity Taken Out (X)' at top with '$$$' label, 'Expansion' arrow diagonal down, 'Market Structure Shift (MSS)' labeled at the close below middle low, 'SELL ZONE' marked with green checkmark at the liquidity grab zone."
+        },
+        {
+          "frame": "frame_000840.00s.jpg",
+          "description": "Minions Intraday Trading Strategy (with inducement): Same diagram with additional labels: 'Liquidity Void / FVG' in the expansion area, 'Inducement' at the first retracement that fails to reach sell zone. Checklist visible: Look for Liquidity Sweep/Grab, Expansion/Sharp Move, Price Must Close Below the Middle Low."
+        }
+      ]
+    },
+    "complete_setup_checklist": {
+      "llm_summary": "The complete Million Dollar Setup has 7 checklist items that must all be satisfied: (1) Look for Liquidity Sweep/Grab — market takes out previous high/low liquidity; (2) Expansion / Sharp Move — market moves with speed and displacement; (3) Price Must Close Below the Middle Low — confirms Market Structure Shift (MSS); (4) Market Structure Shift (MSS) — the 3 conditions above combined; (5) Price Must Create Liquidity Void — expansion creates FVG/liquidity void for high probability (without it = low probability setup); (6) Price Must Create an Inducement Level — the first retracement that fails to reach the sell/buy zone; (7) Wait for Price to Tap into Entry Zone — wait for market to return to the sell/buy zone. Risk to Reward: minimum 1:3. SL placement: 7-10 pips above/below the sell/buy zone. TP: 3x SL amount or target the leg's low/high. In trend direction, can expect 1:6 reward. Counter-trend: stick to 1:3. Add broker spread to entry price to avoid being whipsawed.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 1200,
+        "frames_used": 1
+      },
+      "teaching_types": ["checklist", "rule_definition", "risk_management"],
+      "key_rules": [
+        "Checklist Item 1: Look for Liquidity Sweep/Grab",
+        "Checklist Item 2: Expansion / Sharp Move (speed and displacement)",
+        "Checklist Item 3: Price Must Close Below the Middle Low (MSS)",
+        "Checklist Item 4: Market Structure Shift confirmed",
+        "Checklist Item 5: Price Must Create Liquidity Void/FVG (high probability filter)",
+        "Checklist Item 6: Price Must Create an Inducement Level (high probability filter)",
+        "Checklist Item 7: Wait for Price to Tap into Entry Zone",
+        "Risk to Reward: minimum 1:3 (preferably)",
+        "SL: 7-10 pips above/below the sell/buy zone",
+        "TP: 3x SL amount OR target the leg's low/high",
+        "Trend direction trades: can expect 1:6 reward",
+        "Counter-trend trades: stick to 1:3",
+        "Add broker spread to entry price to avoid whipsaw",
+        "Without FVG/liquidity void = low probability setup (still tradeable)",
+        "With FVG/liquidity void = high probability setup"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000891.00s.jpg",
+          "description": "Minions Intraday Trading Strategy — Complete: Full bearish model diagram with SELL ZONE, Expansion, MSS, Liquidity Void/FVG, Inducement labels. Complete Checklist on right: (1) Look for Liquidity Sweep/Grab, (2) Expansion/Sharp Move, (3) Price Must Close Below the Middle Low, (4) Market Structure Shift (MSS), (5) Price Must Create Liquidity Void, (6) Price Must Create an Inducement Level, (7) Wait for Price to Tap into Entry Zone, (8) Risk to Reward (1:3 Preferably)."
+        }
+      ]
+    },
+    "timeframe_application": {
+      "llm_summary": "The Million Dollar Setup works on ANY timeframe but requires multi-timeframe analysis for optimal execution. Recommended timeframe matrix: (1) Positional Trading: find trend on Monthly, find POI zone on Weekly, entry on Daily; (2) Swing Trading: find trend on Weekly, find POI zone on Daily, entry on H4; (3) Short-term/Intraday Trading: find trend on Daily/H4, find POI zone on Daily/H4/H1, entry on M15-M5; (4) Scalping: find trend on H4, find POI zone on H1/M15, entry confirmation on M5 or less. The key principle: find the setup on higher timeframe, then when price returns to the sell/buy zone, look for the SAME rules to be fulfilled on a lower timeframe (LTF MSS confirmation). This creates a minimum risk, high reward entry. The bullish model uses identical rules but inverted: market takes out liquidity below, expands up, closes above middle high, inducement forms, and the buy zone is the block that swept liquidity below.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 800,
+        "frames_used": 0
+      },
+      "teaching_types": ["timeframe_matrix", "multi_timeframe_method"],
+      "key_rules": [
+        "Strategy works on ANY timeframe — no restriction",
+        "Positional: Monthly trend → Weekly POI → Daily entry",
+        "Swing: Weekly trend → Daily POI → H4 entry",
+        "Intraday: Daily/H4 trend → Daily/H4/H1 POI → M15-M5 entry",
+        "Scalping: H4 trend → H1/M15 POI → M5 or less entry",
+        "Key principle: HTF setup → LTF entry confirmation (same rules on lower TF)",
+        "Do NOT trade below M15 for POI identification",
+        "Find POI on M15 → confirm with M5 MSS for minimum risk entry",
+        "Bullish model: identical rules but inverted (liquidity below → expand up → close above middle high)",
+        "Always trade in trend direction for maximum reward (1:6 possible)",
+        "Counter-trend: maximum 1:3 risk/reward"
+      ],
+      "visual_evidence": []
+    }
+  }
+}

@@ -32,23 +32,17 @@ TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_video_transcript(video_id: str) -> dict:
     """
-    Get transcript/captions from a YouTube video
-
-    Tries multiple methods:
-    1. YouTube Data API subtitles
-    2. yt-dlp subtitle extraction
-    3. Third-party transcript services
+    Get transcript for a YouTube video using whisper.cpp (Metal GPU).
+    Always uses local whisper.cpp transcription — no YouTube captions.
     """
-
-    # Method 1: Try yt-dlp for subtitles (doesn't download video)
-    transcript = get_subtitles_ytdlp(video_id)
-    if transcript and transcript.get('segments'):
-        return transcript
-
-    # Method 2: Try YouTube Transcript API
-    transcript = get_transcript_api(video_id)
-    if transcript and transcript.get('segments'):
-        return transcript
+    try:
+        sys.path.insert(0, str(Path(__file__).parent))
+        from transcribe_local import process_video as local_transcribe
+        transcript = local_transcribe(video_id, "Video")
+        if transcript and transcript.get('segments'):
+            return transcript
+    except Exception as e:
+        print(f"      whisper.cpp transcription failed: {e}")
 
     return None
 
@@ -64,7 +58,7 @@ def get_subtitles_ytdlp(video_id: str) -> dict:
         'skip_download': True,
         'writesubtitles': True,
         'writeautomaticsub': True,
-        'subtitleslangs': ['en', 'en-US', 'en-GB'],
+        'subtitleslangs': ['hi', 'hi-IN', 'en', 'en-US', 'en-GB'],
         'subtitlesformat': 'json3',
     }
 
@@ -83,7 +77,7 @@ def get_subtitles_ytdlp(video_id: str) -> dict:
             caption_data = None
             caption_type = None
 
-            for lang in ['en', 'en-US', 'en-GB']:
+            for lang in ['hi', 'hi-IN', 'en', 'en-US', 'en-GB']:
                 if lang in subtitles:
                     caption_data = subtitles[lang]
                     caption_type = 'manual'
@@ -135,7 +129,7 @@ def get_subtitles_ytdlp(video_id: str) -> dict:
                 'title': title,
                 'full_text': full_text,
                 'segments': segments,
-                'language': 'en',
+                'language': lang,
                 'duration': duration,
                 'transcribed_at': datetime.utcnow().isoformat(),
                 'method': f'youtube_{caption_type}_captions',
@@ -255,10 +249,10 @@ def get_transcript_api(video_id: str) -> dict:
 
         # Try to get English transcript
         try:
-            transcript = transcript_list.find_transcript(['en', 'en-US', 'en-GB'])
+            transcript = transcript_list.find_transcript(['hi', 'hi-IN', 'en', 'en-US', 'en-GB'])
         except:
             # Try auto-generated
-            transcript = transcript_list.find_generated_transcript(['en'])
+            transcript = transcript_list.find_generated_transcript(['hi', 'en'])
 
         data = transcript.fetch()
 
@@ -276,7 +270,7 @@ def get_transcript_api(video_id: str) -> dict:
             'video_id': video_id,
             'full_text': full_text,
             'segments': segments,
-            'language': 'en',
+            'language': transcript.language_code if hasattr(transcript, 'language_code') else 'hi',
             'transcribed_at': datetime.utcnow().isoformat(),
             'method': 'youtube_transcript_api',
             'word_count': len(full_text.split())

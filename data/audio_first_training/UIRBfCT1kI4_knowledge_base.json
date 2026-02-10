@@ -1,0 +1,136 @@
+{
+  "video_id": "UIRBfCT1kI4",
+  "title": "SMC Structure Mapping: The Secret Why 95% of Traders Lose",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 1,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T15:40:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 17.1,
+    "transcript_words": 2404,
+    "frames_analyzed": 10,
+    "concepts_extracted": 4
+  },
+  "concepts": {
+    "structure_mapping": {
+      "llm_summary": "Market Structure Mapping is the foundational concept for all ICT/SMC trading. Market trend (also called Market Structure) defines whether the market is bullish (creating Higher Highs and Higher Lows) or bearish (creating Lower Highs and Lower Lows). The presenter argues that understanding actual structure mapping accounts for 50% of trading success. The critical insight is that retail traders and smart money traders map the SAME price structure completely differently — retail marks every swing as HH/HL, while smart money only validates swings that meet specific inducement rules.",
+      "statistics": {
+        "teaching_time_minutes": 5.0,
+        "word_count": 600,
+        "frames_used": 3
+      },
+      "teaching_types": ["definition", "comparison", "visual_diagram"],
+      "key_rules": [
+        "Market Trend = Market Structure — same concept",
+        "Bullish trend: market creates Higher Highs (HH) and Higher Lows (HL)",
+        "Bearish trend: market creates Lower Highs (LH) and Lower Lows (LL)",
+        "Knowing actual HH/HL/LH/LL is 50% of trading success",
+        "Without trend knowledge, you cannot buy or sell effectively"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00120.00s.jpg",
+          "description": "Slide: Forex Structure Mapping — Up/Bullish creates HH and HL"
+        },
+        {
+          "frame": "frame_00180.00s.jpg",
+          "description": "Complete diagram: Bullish trend with HH/HL labels (left), Bearish trend with LH/LL labels (right)"
+        }
+      ]
+    },
+    "retail_vs_smart_money_mapping": {
+      "llm_summary": "The core teaching of this video: Retail traders and Smart Money traders map the EXACT SAME price structure but arrive at completely different HH/HL counts. Retail traders use a simple rule — any high above previous high is HH, any low above previous low is HL. This gives them 4+ HH and 4+ HL on the same structure where Smart Money only identifies 1 HH and 1 HL. The intermediate swings are marked with 'X' (invalid) by Smart Money. This difference in mapping causes retail traders to get repeatedly trapped — they sell on false breakouts that Smart Money recognizes as mere liquidity sweeps. The video shows a candlestick chart example where retail sees 'Sell Here?' and 'Breakout?' at points where price just sweeps liquidity and continues upward.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 800,
+        "frames_used": 3
+      },
+      "teaching_types": ["comparison", "candlestick_chart", "trap_example"],
+      "key_rules": [
+        "Retail Rule: Any high above previous high = Higher High (WRONG for SMC)",
+        "Retail Rule: Any low above previous low = Higher Low (WRONG for SMC)",
+        "Retail maps 4+ HH and 4+ HL where Smart Money sees only 1 HH and 1 HL",
+        "Retail gets trapped at false breakouts — sells where market just sweeps liquidity",
+        "Smart Money marks invalid swings with X — these are inducement/liquidity zones"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00240.00s.jpg",
+          "description": "Side-by-side: Retail (left) labels every swing as HH/HL; Smart Money (right) marks first swings with X"
+        },
+        {
+          "frame": "frame_00330.00s.jpg",
+          "description": "Complete comparison with 'Why?' overlay — Retail has 4 HH/4 HL, Smart Money has 1 HH/1 HL with check/cross marks"
+        },
+        {
+          "frame": "frame_00450.00s.jpg",
+          "description": "Candlestick chart: Retail approach with 'Sell Here?' and 'Breakout?' traps — Minion character says 'WHAAAA?!?!'"
+        }
+      ]
+    },
+    "inducement_rule": {
+      "llm_summary": "Inducement is the KEY differentiator between retail and Smart Money structure mapping. Inducement is defined as the first pullback on the left side of the current high. For a Higher High to be validated by Smart Money, the market MUST take out (break below) this inducement before creating the new high. Rule 1: Market must take out the first (recent) inducement from the previous swing. Rule 2: The candle must close BELOW the inducement AND close ABOVE the high. If the candle sweeps below inducement but does NOT close above the high, it is classified as a Liquidity Sweep, not a valid Higher High. The presenter shows this on a schematic diagram where some swings have 'No Inducement' (marked X) and others have valid 'Inducement' labels leading to confirmed HH/HL.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 600,
+        "frames_used": 4
+      },
+      "teaching_types": ["definition", "rule_explanation", "schematic_diagram", "candlestick_application"],
+      "key_rules": [
+        "Inducement = First pullback on Left side of Current High",
+        "Rule 1: Market must take out the first (recent) inducement from Previous Swing to confirm HH",
+        "Rule 2: Candle Must Close Below Inducement AND Above High",
+        "If candle does NOT close above high after taking inducement → it's a Liquidity Sweep, not valid HH",
+        "No Inducement available = Smart Money does NOT consider it a valid HH/HL",
+        "Inducement concept will be covered in full detail in the next lecture (V02)"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00570.00s.jpg",
+          "description": "Smart Money Approach slide: 1. Liquidity, 2. Inducement (Smart Money Trap/Manipulation) with schematic"
+        },
+        {
+          "frame": "frame_00630.00s.jpg",
+          "description": "Schematic with 'No Inducement' annotation on invalid swing, 'Inducement' labels on valid swings, HH/HL confirmed"
+        },
+        {
+          "frame": "frame_00699.00s.jpg",
+          "description": "Rules text: 'must take out the first (recent) inducement', 'Must Close Below Inducement and Above High', 'Otherwise = Liquidity Sweep'"
+        }
+      ]
+    },
+    "liquidity_sweep_vs_valid_hh": {
+      "llm_summary": "Liquidity Sweep is what happens when the market takes out inducement but does NOT close above the high — the candle sweeps below to hit sell stops, then returns. This is NOT a valid Higher High; it's Smart Money collecting pending orders (stop losses, breakeven orders). Liquidity is defined as pending orders, stop losses, and breakeven levels. The video demonstrates on a real candlestick chart how to differentiate: (1) First high is a Liquidity Sweep — no inducement taken, (2) Market then takes inducement, closes above, confirming valid HH, (3) New inducement forms at the next pullback, (4) Process repeats with confirmed Higher High and Higher Low labels. The final chart shows complete Smart Money mapping with labels: Liquidity Sweep, Inducement, Higher High (HH), and Higher Low (HL).",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 500,
+        "frames_used": 3
+      },
+      "teaching_types": ["definition", "candlestick_chart", "real_chart_application"],
+      "key_rules": [
+        "Liquidity Sweep: candle sweeps below inducement but does NOT close above high",
+        "Liquidity = Pending Orders, Stop Losses, Breakeven levels",
+        "Liquidity Sweep ≠ Valid Higher High — market just collects sell stops and returns",
+        "Valid HH requires: inducement taken + candle close above high",
+        "After confirming HH/HL, look for buy entry on pullback below the inducement zone"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_00810.00s.jpg",
+          "description": "Rules slide with Liquidity definition + candlestick chart showing market starting structure mapping"
+        },
+        {
+          "frame": "frame_00900.00s.jpg",
+          "description": "Candlestick chart with 'Liquidity Sweep' and 'Inducement' labels annotated on real price action"
+        },
+        {
+          "frame": "frame_00960.00s.jpg",
+          "description": "Complete mapping: Liquidity Sweep → Higher High (HH) → Inducement → Higher Low (HL) → next Higher High (HH) with all labels"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,3964 @@
+{
+  "video_id": "5c14eElh42k",
+  "full_text": "वेल्कम बैक और वेल्कम टू फोरक्स मिनियन्स जैसा कि हम इस कम्प्लीट सीरिज में एंट्री टेक्निक्स के बारे में स्टडी कर रहे हैं तो फोरक्स ट्रेडिंग में एंट्री रेने के लिए लिप्रिटिव वाइड प्राइस इम बैलन्स और फेर वैल्यू गैप का Forex Market में जब हम analysis कर रहे होते हैं तो जब हम structure mapping through market का trend find कर लेते हैं यानि जब हमें पता चल जाता है कि market bullish है या bearish है और bearish market में जब हम buy करना चाते हैं और bearish market में जब हम sell करना चाते हैं तो सबसे बड़ा question किसी भी trader के सामने ये आता है कि कौन सा buy या sell zone valid है market में हर zone को अपने perspective से देख रहा होता है लेकिन उस zone के पिछे क्या logic है वो zone वाके ही valid है या नहीं वो किस theory के तहत किस rule या principle के तहत हमारा logical buy या sell zone है इस lecture में हम वो दोनों logist को study करेंगे secondly जब हम एक complete zone find कर लेते हैं तो उस zone में किस factor को देखते हुए हम अपनी trade को formulate करना होता है वो उसके लिए हम आगके इस lecture में liquidity white, price imbalance और fair value gap को study करेंगे अब जब हम fair value gap की बात करते हैं तो सबसे पहला question जो mind में आता है वो यह है कि कौँ सा fair value gap zone valid है उससे पहले जब हम इसको आगे study करेंगे कि fair value gap होता क्या है उसके बाद जाहरी बात है यही mind में question आएगा कौँ सा fair value gap zone valid है क्योंकि अगर आप trader है और forrest market में trade कर रहे हैं तो आपने काफी बार note किया होगा कि sometime market आपके selected fair value gap zone से entry को trigger करती है और दोबारा आपके setup के direction में move कर जाती है लेकिन sometime आपको यह भी difficulties पेश आती है कि आपने fair value gap zone select किया market उस zone में गई लेकिन उस zone को reject कर दिया यानि उस zone से भी आगे निकल गी और आपके stop loss को hit कर दिया उसके पिछे एक reason है क्योंकि हर fair value gap zone valid नहीं होता और अगर वो valid होता है तो उसके क्या confirmations rule है और किसकी base पे वो fair value gap as a valid zone add करता है आज की इस lecture में हम इस चीज़ को काफी detail में study करेंगे और इस market में सबसे ज़्यदा पूछे जाने वाला सवाल जो अकसर वो ट्रेडर पूछे हैं जो के market में fail हो जाते हैं कि कौंसा buy या sell zone मेरा high probability zone है जैसा कि हमने last slide में इस question को discuss किया और कौंसा order block, supply and demand या fair value gap high probability या valid है तो इस सवाल का सिर्फ और सिर्फ एक ही आंसर है और वो है liquidity मार्किट में आपके हर सवाल का अगर कोई जवाब दे सकता है तो वो सिर्फ और सिर्फ लिग्रिटी है और फोरक्स मार्किट में कोई भी buy या sell zone या order block, supply and demand या fair value gap अगर valid हो सकते है तो सिर्फ और सिर्फ इस base पे हो सकते है कि वहां मार्किट ने या तो liquidity sweep की होगी या मार्किट ने liquidity grab की होगी इसके बिना आपका कोई भी setup high probability या valid नहीं हो सकता तो अब हम ये बात करते हैं कि liquidity sweep क्या होती है liquidity grab के है तो वो student जो मेरे सब बिल्कुल start से attach है उनको बता है कि हमने liquidity sweep का lecture काफी detail में study की है लेकिन आज के इस lecture में हम liquidity grab को भी study करेंगे और देखेंगे कि इन दोनों में क्या difference है और इसके बाद कैसे हमारा zone valid हो सकता है अब जब हम liquidity sweep और liquidity grab की बात करते है तो एक बात आपने पने mind में रखनी है कि liquidity sweep और liquidity grab का सिर्फ और सिर्फ एक ही objective है कि market को move करने के लिए जो liquidity चाहिए market ने वो liquidity gain करनी है चाहिए वो market liquidity sweep से gain करे या grabbing method से gain करे अब ये दोनों चीज़ें क्या है अब इन दोनों चीज़ों को हम parallel में study करते हैं तो सबसे पहले हम बात करते हैं liquidity sweep की अच्छा एक बात आपने mind में रखनी है कि liquidity sweep के उपर जैसा कि हम पहले काफी detail में study कर चुके है SMC series में इसके उपर दो से तीन lectures available है यहां सिर्फ हम इसकी सिर्फ और introduction को study करेंगे और साथ हम liquidity grab को study करेंगे यहां देखें यह एक bearish market है market ने जब यह नया high बनाया तो इसने अपने previous high के उपर से liquidity को sweep किया इसको हम कहेंगे buy side liquidity sweep क्योंकि यहां market में सिर्फ buy side पे जो trader थे जो break out का wait करे थे उनको receive किया उनकी liquidity को sweep किया और वापस दूसरी direction में आगी similarly अगर हम bullish market की बात करें तो market ने जब यह वाला low बनाया तो इस candle ने अपने previous candle के liquidity को sweep किया candle की week के साथ और दुबारा दूसरी direction में move कर गी तो इससे हम कहते हैं sell side liquidity sweep अब अगर हम इस चीज़ को buy side liquidity sweep और sell side liquidity sweep इस चीज़ को candlestick की form में देखें जैसा के मैं पहले भी lecture में study की है तो buy side liquidity sweep कुछ इस तरह आपको नज़र आएगी जिसमें next candle previous candle के high को sweep करती है सीमिल अलिए अगर हम sell side की बात करें तो उसमें candlestick कुछ इस तरह बनती है इसमें next candle अपनी previous candle के लोग को sweep करती है ठीक है यह है liquidity sweep अब हम बात करते हैं liquidity grab की अब आपके सामने यह candlestick pattern है यहां अगर आप note करें यह वाला range इसमें market क्या करी है यह market total एक consolidation phase में है जिसे हम कहते हैं market range कर दी है जब market range कर रही होती है तो सम्टें market एक साइट पर breakout दे देती है यहां इस consolidation के उपर market ने candle closing शो की जब market इस साइट पर candle close करती है तो जितने भी breakout traders यह जितने भी less informed जिनको इतनी understanding नहीं है वो यहां से इसको अपना authentic breakout समय के यहां से buy करना शुरू कर देते हैं लेकिन के ऐसा ही होता है सम्टें market यहां से liquidity grab करती है और फिर opposite side में consolidation की opposite side में आके निचे closing देती है जब market यहां liquidity को grab करती है तो market एक expansion की form में एक speed एक displacement की form में दोबारा opposite side पर move कर जाती है तो इस point पर यह जो market ने upper side पर candle close की थी तो यह सिरुफ और सिरुफ बाई side की liquidity grab करने के लिए थी यहां market ने ज्यादा से ज्यादा liquidity को create किया और ज्यादा traders को trap किया और opposite side में move कर गी similarly अगर हम buy trend की बात करें तो यहां देखें market एक consolidation phase में है range कर रही है again market क्या करेगी कि इसकी एक side पर candle की closing show करेगी तो जितने भी breakout traders हैं जितने भी less inform trader हैं यहां वो sell करना शुरू करेंगे कुछ retest का wait करेंगे कुछ इस point तक भी wait करेंगे कि यह inducement के नीचे sell करें लेकिं यह सिरुफ और सिरुफ एक liquidity grab है क्यों? क्योंकि market का major trend अगर bullish है तो consolidation के नीचे market के close करने का सिरुफ और सिरुफ एक purpose है वो है liberty को grab करना liberty grab करने के बाद market दोबारा इस consolidation की opposite side पे यहां candle को close करती है और यह सारी की सारी move यह एक expansion एक speed की form में होती है similarly यहां liberty grab करने के बाद buy side में और sell side में market जो बाद में move करती है वो सिरुफ और सिरुफ एक expansion और एक speed की form में होगी तब भी हम उसे liberty grab समझेंगे इस point पे यह जो market ने sell side की liquid लिए है इसे हम कहेंगे sell side liberty grab तो hopefully यहां आपको concept समझा गया कि liberty sweep और liberty grab में क्या difference है लेकिन दोनों का objective सेम है दोनों क्या करते हैं ट्रेडर्स को opposite side पे सिर्फ deceive करते हैं दोका देते हैं और market को again दुसरी direction में move करते है अब हम बात करते हैं price imbalance या liquidity void यह क्या चीज होती है इसका क्या purpose है और क्या objective है सबसे पहले फोरक्स market में जब भी price one directional काफी ज़्यदा sharp movement करती है काफी ज़्यदा speed से move करती है जिसे हम expansion भी कहते हैं तो वहां market mostly imbalance create करती है imbalance जिसे हम liquidity void भी कहते है basically जब भी market काफी speed से move करती है वहां buyers और sellers के कुछ incomplete options रह जाती है incomplete options का मतलब है के वहां market के कुछ pending orders रह जाते है और यह वही pending orders होते है जिसे हम liquidity कहते है इसलिए जहां कहीं price imbalance create होगा वहां pending orders होंगे और वही pending orders liquidity create करते है और यही reason है कि हम price imbalance को liquidity void भी कहते है क्योंकि यह price imbalance pending orders को छोड़ जाते है और वो pending orders liquidity create करते है और यही liquidity बार में buyers और sellers के interest को gain करती है और यही वज़ा होती है कि market को next movement के लिए liquidity चाहिए होती है इसी बिनापे जब market दोबारा इस price imbalance zone में आती है या liquidity wide zone में आती है तो हम अपनी इस liquidity के interest की base पे अपना sell या buy model design कर सकते है तो hopefully अब आपको समझ आ गया कि price imbalance क्या होती है और इसको हम liquidity wide क्यों कहते है और यह हमारे लिए area of interest क्यों है क्योंके यह price imbalance जो liquidity छोड़ जाती है तो एक तो उससे हमें पता लगता है कि smart money की movement की side पे है क्योंके market वहाँ one side काफी sharp move करती है और हमने expansion में study किया price cycle में study किया कि जहां कहीं expansion जहां कहीं market काफी fast move करती है वहां market एक area of interest छोड़ जाती है वहां market कुछ liquidity छोड़ जाती है और इसी liquidity की base पे हम वहाँ अपना buy या sell model design करते है अब यह liquidity white या price imbalance कैसा होता है देखने में उसकी एक यह simple सी diagram है जो देखें market ने इस candle से इस candle तक काफी sharp movement की है तो यहां अगर हम इस zone को देखें इस candle की wick से इस candle की wick तक तो यह जो zone है इसको हम कहते है liquidity wide या price imbalance similarly यह दो candle है अगर यह market में तीन candle बन जाएं तो भी वो एरिया जहां market काफी ज़्यदा fast move करती है इसको हम कहते हैं liquidity wide या price imbalance अगर हम same model bullish market के लिए study करें तो market जब काफी sharply upward move करती है तो again यह जो zone है जिसमें market सिर्फ one sided move की है buy side move की है तो हम इसको कहेंगे liquidity wide या price imbalance similarly अगर number of candles से कोई फर्ग नी पड़ता है चाहे यहां दो candles हो जाएं जैसा कि यहां तीन candles हैं लेकिन यह market की one sided movement है तो इस one sided movement को हम दोबारा liquidity wide या price imbalance कहते हैं तो hopefully यहां से आपको यह concept clear हो गया कि price imbalance क्या है liquidity wide क्या है price imbalance को liquidity wide क्यों कहते हैं और यह हमारे लिए area of interest क्यों होता है क्यों क्योंकि यहां market कुछ pending orders चोड़ जाती है जो act as a liquidity जो liquidity के तोर पर act करती है और वहां हम अपना buy or sell model design कर सकते हैं यह एक real market sample size है यहां देखें यह bearish market थी और यहां market ने one sided काफी sharp movement की है और यह वही one sided sharp movement है जिसे हम liquidity wide या price imbalance कहते हैं आपने एक बात याद रखनी है जहां कहीं भी liquidity wide या price imbalance होगा market future में इसको fill करने के लिए लाजमी आएगी लेकिन कब आएगी एक गंटे बाद, एक दिन बाद, एक अफ़ते बाद इसकी कोई time limit नहीं है market या तो उसको immediately fill करने आ सकती है या कुछ देर के बाद यानि एक दिन, दो दिन, एक हफ़ता, एक मिहने बाद भी fill कर सकती है लेकिन market उसको लाजमी fill करेगी market जो भी liquidity wide या price imbalance leave करती है उसको लाजमी fill करती है अच्छा, जो भी price imbalance या liquidity wide होती है market उसको mostly 100% fill कर सकती है लेकिन जब भी हम इस liquidity wide को अपने area of interest या अपने trade को formulate करने के लिए use करेंगे तो हम अपने mostly trades 50% of liquidity wide या price imbalance zone पे formulate करेंगे इसका क्या मतलब है यानि ये total liquidity wide या price imbalance है यहाँ हम इसका 0, 50 और 100% level यानि के 50% level को देखेंगे कहां आता है हम इस level पे जब market वापस आएगी 50% level तक तब हम इसको दोबारा sell कर सकते हैं क्योंकि market का major trend selling है अब हम देखते हैं market का reaction यह देखें market ये liquidity balance create किया sorry liquidity wide create की price imbalance create किया market वापस आई इसको 100% fill नहीं किया इसलिए हम इसको mostly 50% पे अपनी trade को formula करके इस sell trend के साथ दोबारा आपने आपको synchronize कर सकते हैं अब ये एक और market sample size है यहां देखें market total bullish direction में है आपने एक पार याद रखनी है liquidity wide और price imbalance के लिए कि जो भी liquidity wide zone या price imbalance zone trend की direction में होगा वही ज्यादा effective होगा लेकिन अगर कोई price imbalance या liquidity wide trend की against होगा वो high probability zone नहीं होगा क्योंकिए trend bullish है तो यहां देखें जब market bullish गई तो यहां market ने एक liquidity wide और price imbalance के रिएट किया market दोबारा आई इस zone को fill किया और फिर उपर sharp movement की जब दोबारा market ने यहां sharp movement की तो यहां market ने एक liquidity wide और price imbalance दोबारा के रिएट किया जिसको market ने दोबारा fill किया और दोबारा market ने काफी sharp movement की और यह sharp movement दोबारा एक liquidity wide और price imbalance के रिएट कर लिए और वापस market आई इस imbalance को दोबारा recover किया दोबारा fill किया दोबारा balance किया और दोबारा original trend के direction में market move कर गी इसलिए जो भी liquidity wide या price imbalance trend की direction में होगा market उसको ज्यादा importance ज्यादा high probability कंसिडर करेगी और जो भी trend के against होगा जिस तरह ये zone देखें ये भी imbalance है लेकिन market ने इसकी कोई एहमियत इसको किसी भी तरह की कोई एहमियत नहीं दी और इसको break करते हुए trend की direction में move कर गी हमने liquidity wide को study किया तो अब हम बात करते हैं कि fair value gap क्या होता है आपने देखा होगा फोरक्स market में mostly trader fair value gap यान जिसे हम FVG भी कहते हैं इसको use करते हैं उसकी क्या reason है तो सबसे पहले मैं आपको ये समझा दूँ कि fair value gap क्या होता है फोरक्स market में जहां भी liquidity wide या price imbalance होता है क्योंकि वहां market one sided काफी sharp movement करती है तो वो इतना ज्यादा area होता है कि हम नहीं पता है कि हमने वहां किस price level पे एंटी लेनी है तो इसलिए उस बड़ी range को हम refine करते हैं उसको limited करते हैं fair value gap पे अब fair value gap को हम कैसे measure करते हैं हम इसको candle की week to week measure करते हैं अब इसके एक diagram देखते हैं इस concept को समयने के लिए ये देखें ये एक liquidity wide zone है जैसे कि हमने previous slide में study किया अब ये इतना बड़ा zone है हम नहीं पता है कि हमने यहां entry लेनी है इस candle पे लेनी है ये इस candle पे लेनी है इस zone को refine किया जाता है into the form of fair value gap अब अगर इसी diagram को हम दोबारा देखें तो यहां देखें ये bullish candle है और इस bullish candle के दमें काफी ज़्यादा area है काफी ज़्यादा gap है हम कहाँ करते हैं इसको week to week design करते हैं week to week इसको categorize करके इसी तरह ये जो bearish candle का low है और ये जो bullish candle का high है इसके दरमें जो gap है इसको हम कहते हैं fair value gap तो hopefully अब आपको समझ आ गया कि liquidity wide की refined form है fair value gap अब हमें पता है कि या तो हमने यहाँ entry लेनी है या हमने यहाँ entry लेनी है क्योंकि हमने दो level refine कर लिए अपना risk कम कर लिया reward ratio बढ़ाली इसी तरह जब market bullish होती है वहाँ जो bullish liquidity wide है उसको भी हम refine करके bullish fair value gap find कर सकते हैं अब यहाँ यह bullish fair value gap है similarly यह भी fair value gap है अब आपने एक बात याद रखनी है कि bullish trend में वो fair value gap high probability होगा जो trend की direction में होगा इसी तरह bearish trend में वो fair value gap high probability होगा जो sell direction में होगा जो sell trend की direction में होगा और इसको कैसे trade करना है जब कभी भी आप फोरक्स market में fair value gap देखें तो fair value gap के बाद आप एक endorsement level का wait करें उसके बाद entry लें या फिर आप एक FTR level जिसे हम कहते हैं fail to reach या fail to retest level अब ये fail to reach और fail to retest level क्या होता है इसको हम अपने webinar में discuss करेंगे और ये आपके लिए एक assignment भी है इसको find करें ये क्या होता है इसके पेचे क्या logic है secondly fair value gap हमने जब भी trade करना है इसको FTR और endorsement level के बाद ही trade करना है fair value gap अगर इतना ही easy है तो फिर forex market में traders fail क्यों होते है वहां कुछ traders जब fair value gap find करते है तो sometime market उनके fair value gap zone में आती है और दोबारा उनके setup की form में चली जाती है sometime market उनके fair value gap की respect नहीं करती और उपर निकल जाती है इसकी क्या reason है तो उसकी reason ये है क्योंके हर fair value gap valid नहीं होता तो valid fair value gap कैसे find करना है उसके क्या rules है अब हम उसको study करते है अब सब fair value gap valid है या नहीं इसके लिए आपने दो बात याद रखनी है सबसे पहली बात कि अगर आपका sell trend है तो sell trend में हमेशा हमने higher scandal को consider करना है अब जब मैं इसकी example आगे दूँगा तो आपको ये बात clear हो जाएगी कि हाई ये scanner को consider करने का क्या मतलब है Secondly, आपने ये देखा होगा फोरेक्स market में कभी भी price सीधी move नहीं करती है market हमेशा चोटे चोटे pullbacks बनाती है तो ऐसे point पे जहां pullbacks हो और हमने fair value gap find करना तो ऐसे point पे जहाँ pullbacks हो और हमने fair value gap find करना हो तो वहाँ आपने सबसे पहले देखना है कि वो pullback valid है या नहीं अगर वो pullback valid है तो फिर ही आपने उस pullback में fair value gap find करना है अब हम इस चीज़ को कुछ डायग्राम कुछ example के साथ समझते हैं सबसे पहले यह सिंपल सी डायग्राम तो सबसे पहला rule क्या है कि हमने highest candle की विक को consider करना है और यहां यह पहली candle को देखें यह highest candle है इसकी यह bottom वाली विक है इसके बाद जो next candle को छोड़के उसके अगली candle है यानि पहली दूसरी और तीसरी candle इस candle के top वाली विक और highest candle के bottom वाली विक के दरमयान जो gap है यह जिसको मैंने highlight किया है इसको हम कहते हैं fair value gap वो यह valid है इसकी क्या reason है क्योंकि यह highest candle थी और उसकी हमने विक से यह measure किया है अच्छा जब हम पहला fair value gap find कर लेते हैं तो उस swing में बाकी जतने भी fair value gap होते हैं जिस तरह यह वाला fair value gap है तो यह भी valid होगा क्योंकि यह highest candle की fair value gap के बाद बन रहा है इस एक्जेंपल की बात करें तो यहां यह highest candle है इस candle की विक और third candle की विक के दरमयान कोई difference नहीं है इसलिए यहां कोई fair value gap नहीं तो इसके बाद हम देख सकते हैं कोई fair value gap अगर observe हो तो यह zone देखें इस candle की विक और इस candle की विक के दरमयान difference है यह fair value gap है और यह भी value fair value gap है अब ही आपके सामने एक यह दोड डाइगराम्स हैं जिनको मैंने box में encircle किया है तो आप मुझे बताएं इन में से यह वाला value fair value gap है यह b वाला fvg zone valid है आप एक सेक्ड के लिए अपनी स्क्रीन को रोकें और इस चीज़ का आंसर फाइंड करें for the timing में आपको इस का आंसर बताता चलो जो यह वाला fair value gap है यह invalid है उसकी क्या reason है क्योंके पहला principle यह है कि हमने highest candle की wick से find करना है और यहां हमारी red वाली candle highest है और red candle की wick यहां से start हो रही है तो इसके उपर जो भी fair value gap होगा जिस तरह यह वाला है यह invalid होगा तो यहां valid को सा होगा इस हाइस candle की wick से देखें और उसके बार यह थर्ड candle की wick के दरमयां जो gap होगा जिस तरह यह वाला gap है यह वाला fair value gap valid होगा इसलिए आपने note किया होगा कि sometime price आपके जो आपने map किया होता है fair value gap वहां नहीं आती उससे पहले ही return हो जाती है तो उसकी reason यह होती है कि जो आपने fair value gap highlight की है वो valid नहीं था market ने उससे नीचे एक valid fvg zone चोड़ा होगा था इसलिए market जब वहां आती है तो reversal मिल जाती है लेकिन b zone कि अगर हम बात करें इस b sample size की तो यह fair value gap valid है यह नहीं तो यह वाला valid है उसकी क्या reason है क्यों कि यह highest candle की विक से बना है और यहां blue highest candle है इसकी विक से next candle की विक तक का जो gap था वो fair value gap valid है और यहां एक और भी fair value gap है यह वाला तो यह भी valid है अब market ने अगर इस तरह दो valid fair value gap हों तो किसको trade करना है यह हम अगले lecture में study करेंगे अब आपके सामने इस example की बात करें तो मुझे बताएं यह वाला fair value gap zone valid है या नहीं अगर हम यहां देखें था हमारी highest candle कौन सी है क्योंकि यह fair value gap zone valid है और यहां हमारी highest candle blue candle थी क्योंकि इसने previous candle के लिविटरी स्वीट की है इसलिए यह highest candle है तो इस candle की विक और उसे अगली candle की विक के दरम्यान जो gap था वो fair value gap valid होगा इसी तरह गर हम इस वाले यह जो fair value gap है इसकी बात करें तो क्या यह valid है या नहीं यहां अब वो point आता है जो हमने यहां कहा कि valid pullback को find करेंगे तो यह रेखें यह valid pullback है reason कहा है क्योंकि यह blue वाली lowest candle है next candle ने इसका high break की है और उसके बाद red वाली highest candle है तो red candle के low और इस candle के विक के दरम्यान जो difference है दोनों width के दरम्यान यह fair value gap भी valid है एक बात आपने और जहन में रखनी है कि fair value gap find करते वकद color matter नहीं करता कि bullish candle है या bearish candle है हमेशा पहली candle की wick और तीसरी candle की wick के दरम्यान जो gap होगा उसको हम अपना fair value gap consider करेंगे जैसा कि यहाँ देखें यह bullish to bearish candle के दरम्यान difference है यह bearish to bearish है यानि candle का color माइन नहीं रखता सिर्फ दो candle की wick के दरम्यान जो difference है हमने उस fair value gap को consider करना है और highest candle से map out करना है अब यह आपके सामने C, D, E और F चार options हैं आप इनमें से बताएं कौन सा fair value gap valid है एक मिन के लिए अपनी स्क्रीन को रोकें और इस cancer दें चले अब मैं इस cancer बताता हूँ अगर हम C वाले की बात करें तो यह वाला fair value gap invalid है उसकी क्या reason है क्योंकि हमने rule study किया कि cell trend में जो highest candle होगी उसकी wix से हमने चेक करना है तो यहां जो red candle जिसकी wix से यह fair value gap draw किया गया है यह valid नहीं क्योंकि यह red candle highest candle नहीं है यहां यह red वाली candle highest candle है अब अगर हम D की बात करें तो यह fair value gap भी invalid है same reason क्योंकि यह blue वाली candle highest candle नहीं है highest candle यह red वाली candle है इसलिए यह fair value gap invalid है अब अगर E की बात करें तो यह भी invalid है क्योंकि यह जिस blue candle की wix से draw किया गया है यह वाली blue candle भी highest candle नहीं यहां यह red वाली candle ही again highest candle है अब आती है F की बात क्या F वाला fair value gap यह F वी जी जोन valid है बिलकुल अब यह वाली वाली वाली वाली है क्योंकि यह जिस वाली candle से draw किया गया है वो वाली candle हाई highest candle है अब यह वाला rule fulfill हो रहा है इसलिए जब कहीं भी हमने valid pullback पे fair value gap को draw करना है वह हमेशा valid pullback यह highest candle को चेक करना है क्योंसी highest candle है उसकी week से हम draw करेंगे इसलिए यह F वाला fair value gap है यह valid है अब हम इसकी further example को study करते है अब इस box में देखें आपके सामने again दो fair value gap शोग किये गये है यहां मुझे बताएं यह G वाला valid है यह H वाला valid है अब यह diagram last slide के साथ मिलती जुलती है तो मुझे लोग सोच रहे होंगे G वाला valid है लेकिन यह invalid है उसकी क्या reason है क्योंकि again वही rule सबसे पहले highest candle तो यहां यह red वाली highest candle है जिसने previous candle के high को sweep किये तो इसलिए यह fair value gap सरक इतना नहीं है अगर हम इसको same diagram को इदर देखें actually side पे तो यह वाला valid है क्योंकि यह same diagram है यहां यहां यहां यह candle है और इसकी wick से इस wick के zone तक यह वाला fair value gap valid है इसलिए कुछ लोग जब यह वाला fair value gap यूज करते हैं entry के लिए तो उनकी entry mostly उपर निकल जाती है क्योंकि उन्होंने गल्त चूज किया था fair value gap as per rule यह वाला valid fair value gap है similarly अगर हम इस example की बात करें तो यह वाला fair value gap invalid है अब इसकी क्या reason है इसकी reason यह यहां blue वाली हाय स्केंडल नहीं रही यहां हाय स्केंडल red वाली है यह red हाय स्केंडल है तो हमने हमेशा इसकी विक से चैक करना है blue की विक से draw किया गया fair value gap invalid होगा अब अगर हम इसी same diagram को लें तो इसमें valid fair value gap कौन सा होगा तो हाय स्केंडल की विक के bottom और उससे अगली candle की विक के दरमयान जो gap है यह वाला gap जिसको मैंने case से mention किया है यह वाला valid fair value gap है अब fair value gap को use कैसे करना है जैसा कि मैंने पहले बताया हमेशा forex market में कोई भी चीज है supply, demand, order block, order flow जिसको हम आगे study करेंगे यह fair value gap वो हमने वो ही use करना है और वो ही high probability होगा जो trend की direction में होगा secondly, fair value gap चाहे वो किसी भी point पे है वो सिरफ और सिरफ हमने sweep या liquidity grab के बाद ही उसको use करना है और किसी भी fair value gap की जो importance है जो value है वो तब ही बढ़ती है अगर market ने कहीं से liquidity sweep कर ली है या liquidity grab कर ली है उसके बाद ही हम fair value gap को endorsement के बाद trade कर सकते है और finally कोई भी fair value gap zone अगर order block या supply and demand के साथ couple कर लिया जाए तो आपकी trade मजीद high probability हो जाती है उसका risk मजीद कम हो जाता है और reward ratio और ज्यादा बढ़ जाती है अब यह जो same diagram है यह हमने sell trend के लिए पढ़ी यह 100% same rules हम bullish market के लिए भी study कर सकते है अब अगर हम fair value gap की bullish market के लिए बात करें तो सिर्फ और सिर्फ एक चीज़ का difference है यहाँ हम सिर्फ lowest candle को consider करेंगे यह आपके सामने जितनी भी examples है यहाँ यह जो fair value gap draw किये गये है यह lowest candle से draw किये गये है अब अगर कोई fair value gap lowest candle से draw नहीं किया जाएगा जैसा कि यह देखें तो वो fair value gap valid नहीं होगा अब यह valid है क्योंकि यहाँ red वाली lowest candle है similarly यहाँ देखें c, d और e इसलिए valid नहीं है क्योंकि यह जिन candle से draw किये गये है वो lowest candle नहीं थी यह blue वाली हमारी lowest candle थी और f वाली इसलिए valid fair value gap है क्योंकि यह lowest candle की week से draw किया गया है similarly अगर आप इन examples को देखें तो आपको पता लगेगा यह वाला fair value gap इसलिए invalid है क्योंकि यह जिस candle से draw किया गया वो candle lowest candle नहीं थी यहाँ यह वाली blue वाली lowest candle थी इसलिए यह वाला fair value gap valid होगा इसलिए यह वाला invalid है क्योंकि यह जिस candle से draw किया गया है वो lowest candle नहीं थी और इस candle के लिए same यह image है और यहाँ fair value gap इन दो candle की week के दर्मियान वाला difference valid FVG zone है तो hopefully यहाँ से आपको understanding होगी कि fair value gap sell market के लिए कैसे design करना है और buy market के लिए कैसे design करना है rule दोनों के लिए same है इसको trade करने हैं कि हमेशा trend की direction में trade करें और after liquidity sweep या liquidity grab trade करें और finally अगर हम इसको order block या supply and demand के साथ couple करके यूज़ करें तो आपको यह ज्यादा benefit ज्यादा profit दे सकते हैं load इसके साथ high reward ratio मिलेगी लेकिन यह supply and demand और order block इनको कैसे हमने readout करना है यह हम इसके बास study करेंगे अभी आपके सामने एक real market sample size है यहाँ देखें market total bearish mode में है यानि bearish momentum है bearish trend है तो यहाँ हम क्या करेंगे bearish side का fair value gap find करेंगे यह देखें market ने एक liquidity wide create की one side did इसकी market की move है और अगर इसको refine किया जाए इस liquidity wide को तो यह इसका fair value gap बनता है और fair value gap क्योंकि यहाँ market की liquidity होती है pending order होते हैं इसलिए जब market वापस जोन में आई liquidity को take out किया और दोबारा original trend की direction में move कर गी अगें यहाँ market ने liquidity wide create की और इस wide को जाब हम refine करते है तो यह इसका fair value gap बनता है यह एज़ा liquidity add करता है market वापस जोन में आई liquidity को grab किया take out किया और दोबारा original trend की direction में move कर गी आपने एक बात याद रखनी है कि fair value gap market किसी भी वक्त fill कर सकती है लाजमी नहीं अभी fill करना है आज, कल, परसों, एक दिन बाद, एक अफ़ते बाद किसी भी वक्त market इसको fill कर सकती है secondly, fair value gap market mostly 100% fill कर सकती है लेकिन जब भी हमने fair value gap को use करना है तो हमने इसका minimum 50% level पर अपनी entry को formulate कर सकते है तो अब मैं उम्मीर करता हूँ कि आपको price imbalance, liquidity wide और fair value gap का idea हो गया कि बेसिलिए क्या चीज़ें होती है ये as a liquidity क्यों act करती है और हम इनको ही क्यों use करके entry ले सकते है तो अगर आपका कोई question है तो आप मुझे इस email ID पर राप्ता कर सकते है या आप इस QR code को scan करें तो हमारे सारे social media platform आपके सामने आ जाएंगे मेरा WhatsApp नंबर भी आपके पास आ जाएगा तो आप मुझे से किसी भी वक्त राप्ता करके अपने quiz discuss कर सकते है नेक्स लेक्टे तक wish you good luck and happy trading",
+  "segments": [
+    {
+      "start_time": 0.0,
+      "end_time": 30.0,
+      "text": "वेल्कम बैक और वेल्कम टू फोरक्स मिनियन्स जैसा कि हम इस कम्प्लीट सीरिज में एंट्री टेक्निक्स के बारे में स्टडी कर रहे हैं तो फोरक्स ट्रेडिंग में एंट्री रेने के लिए लिप्रिटिव वाइड प्राइस इम बैलन्स और फेर वैल्यू गैप का"
+    },
+    {
+      "start_time": 30.0,
+      "end_time": 35.8,
+      "text": "Forex Market में जब हम analysis कर रहे होते हैं"
+    },
+    {
+      "start_time": 35.8,
+      "end_time": 39.5,
+      "text": "तो जब हम structure mapping through market का trend find कर लेते हैं"
+    },
+    {
+      "start_time": 39.5,
+      "end_time": 43.1,
+      "text": "यानि जब हमें पता चल जाता है कि market bullish है या bearish है"
+    },
+    {
+      "start_time": 43.1,
+      "end_time": 45.96,
+      "text": "और bearish market में जब हम buy करना चाते हैं"
+    },
+    {
+      "start_time": 45.96,
+      "end_time": 48.9,
+      "text": "और bearish market में जब हम sell करना चाते हैं"
+    },
+    {
+      "start_time": 48.9,
+      "end_time": 52.2,
+      "text": "तो सबसे बड़ा question किसी भी trader के सामने ये आता है"
+    },
+    {
+      "start_time": 52.2,
+      "end_time": 54.96,
+      "text": "कि कौन सा buy या sell zone valid है"
+    },
+    {
+      "start_time": 60.0,
+      "end_time": 63.32,
+      "text": "market में हर zone को अपने perspective से देख रहा होता है"
+    },
+    {
+      "start_time": 63.32,
+      "end_time": 65.5,
+      "text": "लेकिन उस zone के पिछे क्या logic है"
+    },
+    {
+      "start_time": 65.5,
+      "end_time": 68.24,
+      "text": "वो zone वाके ही valid है या नहीं"
+    },
+    {
+      "start_time": 68.24,
+      "end_time": 73.54,
+      "text": "वो किस theory के तहत किस rule या principle के तहत हमारा logical buy या sell zone है"
+    },
+    {
+      "start_time": 73.54,
+      "end_time": 76.24,
+      "text": "इस lecture में हम वो दोनों logist को study करेंगे"
+    },
+    {
+      "start_time": 76.24,
+      "end_time": 79.54,
+      "text": "secondly जब हम एक complete zone find कर लेते हैं"
+    },
+    {
+      "start_time": 79.54,
+      "end_time": 84.82,
+      "text": "तो उस zone में किस factor को देखते हुए हम अपनी trade को formulate करना होता है"
+    },
+    {
+      "start_time": 84.82,
+      "end_time": 91.22,
+      "text": "वो उसके लिए हम आगके इस lecture में liquidity white, price imbalance और fair value gap को study करेंगे"
+    },
+    {
+      "start_time": 91.22,
+      "end_time": 95.64,
+      "text": "अब जब हम fair value gap की बात करते हैं"
+    },
+    {
+      "start_time": 95.64,
+      "end_time": 98.38,
+      "text": "तो सबसे पहला question जो mind में आता है वो यह है"
+    },
+    {
+      "start_time": 98.38,
+      "end_time": 100.98,
+      "text": "कि कौँ सा fair value gap zone valid है"
+    },
+    {
+      "start_time": 100.98,
+      "end_time": 103.9,
+      "text": "उससे पहले जब हम इसको आगे study करेंगे"
+    },
+    {
+      "start_time": 103.9,
+      "end_time": 105.38,
+      "text": "कि fair value gap होता क्या है"
+    },
+    {
+      "start_time": 105.38,
+      "end_time": 107.88,
+      "text": "उसके बाद जाहरी बात है यही mind में question आएगा"
+    },
+    {
+      "start_time": 107.88,
+      "end_time": 109.9,
+      "text": "कौँ सा fair value gap zone valid है"
+    },
+    {
+      "start_time": 109.9,
+      "end_time": 113.84,
+      "text": "क्योंकि अगर आप trader है और forrest market में trade कर रहे हैं"
+    },
+    {
+      "start_time": 113.84,
+      "end_time": 115.46,
+      "text": "तो आपने काफी बार note किया होगा"
+    },
+    {
+      "start_time": 115.46,
+      "end_time": 121.7,
+      "text": "कि sometime market आपके selected fair value gap zone से entry को trigger करती है"
+    },
+    {
+      "start_time": 121.7,
+      "end_time": 124.16,
+      "text": "और दोबारा आपके setup के direction में move कर जाती है"
+    },
+    {
+      "start_time": 124.16,
+      "end_time": 127.96,
+      "text": "लेकिन sometime आपको यह भी difficulties पेश आती है"
+    },
+    {
+      "start_time": 127.96,
+      "end_time": 130.64,
+      "text": "कि आपने fair value gap zone select किया"
+    },
+    {
+      "start_time": 130.64,
+      "end_time": 134.04,
+      "text": "market उस zone में गई लेकिन उस zone को reject कर दिया"
+    },
+    {
+      "start_time": 134.04,
+      "end_time": 135.92,
+      "text": "यानि उस zone से भी आगे निकल गी"
+    },
+    {
+      "start_time": 135.92,
+      "end_time": 137.8,
+      "text": "और आपके stop loss को hit कर दिया"
+    },
+    {
+      "start_time": 137.8,
+      "end_time": 139.46,
+      "text": "उसके पिछे एक reason है"
+    },
+    {
+      "start_time": 139.46,
+      "end_time": 142.74,
+      "text": "क्योंकि हर fair value gap zone valid नहीं होता"
+    },
+    {
+      "start_time": 142.74,
+      "end_time": 144.3,
+      "text": "और अगर वो valid होता है"
+    },
+    {
+      "start_time": 144.3,
+      "end_time": 146.34,
+      "text": "तो उसके क्या confirmations rule है"
+    },
+    {
+      "start_time": 146.34,
+      "end_time": 150.42,
+      "text": "और किसकी base पे वो fair value gap as a valid zone add करता है"
+    },
+    {
+      "start_time": 150.42,
+      "end_time": 153.72,
+      "text": "आज की इस lecture में हम इस चीज़ को काफी detail में study करेंगे"
+    },
+    {
+      "start_time": 153.72,
+      "end_time": 159.52,
+      "text": "और इस market में सबसे ज़्यदा पूछे जाने वाला सवाल"
+    },
+    {
+      "start_time": 159.52,
+      "end_time": 162.04,
+      "text": "जो अकसर वो ट्रेडर पूछे हैं"
+    },
+    {
+      "start_time": 162.04,
+      "end_time": 164.1,
+      "text": "जो के market में fail हो जाते हैं"
+    },
+    {
+      "start_time": 164.1,
+      "end_time": 167.1,
+      "text": "कि कौंसा buy या sell zone मेरा high probability zone है"
+    },
+    {
+      "start_time": 167.1,
+      "end_time": 169.66,
+      "text": "जैसा कि हमने last slide में इस question को discuss किया"
+    },
+    {
+      "start_time": 169.66,
+      "end_time": 172.0,
+      "text": "और कौंसा order block, supply and demand"
+    },
+    {
+      "start_time": 172.0,
+      "end_time": 174.52,
+      "text": "या fair value gap high probability या valid है"
+    },
+    {
+      "start_time": 174.52,
+      "end_time": 177.8,
+      "text": "तो इस सवाल का सिर्फ और सिर्फ एक ही आंसर है"
+    },
+    {
+      "start_time": 177.8,
+      "end_time": 179.38,
+      "text": "और वो है liquidity"
+    },
+    {
+      "start_time": 179.38,
+      "end_time": 184.6,
+      "text": "मार्किट में आपके हर सवाल का अगर कोई जवाब दे सकता है"
+    },
+    {
+      "start_time": 184.6,
+      "end_time": 186.4,
+      "text": "तो वो सिर्फ और सिर्फ लिग्रिटी है"
+    },
+    {
+      "start_time": 186.4,
+      "end_time": 189.76,
+      "text": "और फोरक्स मार्किट में कोई भी buy या sell zone"
+    },
+    {
+      "start_time": 189.76,
+      "end_time": 191.48,
+      "text": "या order block, supply and demand"
+    },
+    {
+      "start_time": 191.48,
+      "end_time": 193.68,
+      "text": "या fair value gap अगर valid हो सकते है"
+    },
+    {
+      "start_time": 193.68,
+      "end_time": 196.0,
+      "text": "तो सिर्फ और सिर्फ इस base पे हो सकते है"
+    },
+    {
+      "start_time": 196.0,
+      "end_time": 198.84,
+      "text": "कि वहां मार्किट ने या तो liquidity sweep की होगी"
+    },
+    {
+      "start_time": 198.84,
+      "end_time": 200.94,
+      "text": "या मार्किट ने liquidity grab की होगी"
+    },
+    {
+      "start_time": 200.94,
+      "end_time": 203.66,
+      "text": "इसके बिना आपका कोई भी setup"
+    },
+    {
+      "start_time": 203.66,
+      "end_time": 206.14,
+      "text": "high probability या valid नहीं हो सकता"
+    },
+    {
+      "start_time": 206.14,
+      "end_time": 208.66,
+      "text": "तो अब हम ये बात करते हैं"
+    },
+    {
+      "start_time": 208.66,
+      "end_time": 209.86,
+      "text": "कि liquidity sweep क्या होती है"
+    },
+    {
+      "start_time": 209.86,
+      "end_time": 210.8,
+      "text": "liquidity grab के है"
+    },
+    {
+      "start_time": 210.8,
+      "end_time": 213.52,
+      "text": "तो वो student जो मेरे सब बिल्कुल start से attach है"
+    },
+    {
+      "start_time": 213.52,
+      "end_time": 215.42,
+      "text": "उनको बता है कि हमने liquidity sweep का lecture"
+    },
+    {
+      "start_time": 215.42,
+      "end_time": 216.82,
+      "text": "काफी detail में study की है"
+    },
+    {
+      "start_time": 216.82,
+      "end_time": 220.12,
+      "text": "लेकिन आज के इस lecture में हम liquidity grab को भी study करेंगे"
+    },
+    {
+      "start_time": 220.12,
+      "end_time": 222.2,
+      "text": "और देखेंगे कि इन दोनों में क्या difference है"
+    },
+    {
+      "start_time": 222.2,
+      "end_time": 225.98,
+      "text": "और इसके बाद कैसे हमारा zone valid हो सकता है"
+    },
+    {
+      "start_time": 225.98,
+      "end_time": 230.82,
+      "text": "अब जब हम liquidity sweep"
+    },
+    {
+      "start_time": 230.82,
+      "end_time": 232.84,
+      "text": "और liquidity grab की बात करते है"
+    },
+    {
+      "start_time": 232.84,
+      "end_time": 235.04,
+      "text": "तो एक बात आपने पने mind में रखनी है"
+    },
+    {
+      "start_time": 235.04,
+      "end_time": 239.28,
+      "text": "कि liquidity sweep और liquidity grab का सिर्फ और सिर्फ एक ही objective है"
+    },
+    {
+      "start_time": 239.28,
+      "end_time": 242.52,
+      "text": "कि market को move करने के लिए जो liquidity चाहिए"
+    },
+    {
+      "start_time": 242.52,
+      "end_time": 244.6,
+      "text": "market ने वो liquidity gain करनी है"
+    },
+    {
+      "start_time": 244.6,
+      "end_time": 246.94,
+      "text": "चाहिए वो market liquidity sweep से gain करे"
+    },
+    {
+      "start_time": 246.94,
+      "end_time": 248.9,
+      "text": "या grabbing method से gain करे"
+    },
+    {
+      "start_time": 248.9,
+      "end_time": 250.7,
+      "text": "अब ये दोनों चीज़ें क्या है"
+    },
+    {
+      "start_time": 250.7,
+      "end_time": 253.34,
+      "text": "अब इन दोनों चीज़ों को हम parallel में study करते हैं"
+    },
+    {
+      "start_time": 253.34,
+      "end_time": 255.76,
+      "text": "तो सबसे पहले हम बात करते हैं liquidity sweep की"
+    },
+    {
+      "start_time": 255.76,
+      "end_time": 257.74,
+      "text": "अच्छा एक बात आपने mind में रखनी है"
+    },
+    {
+      "start_time": 257.74,
+      "end_time": 259.12,
+      "text": "कि liquidity sweep के उपर"
+    },
+    {
+      "start_time": 259.12,
+      "end_time": 261.56,
+      "text": "जैसा कि हम पहले काफी detail में study कर चुके है"
+    },
+    {
+      "start_time": 261.56,
+      "end_time": 263.82,
+      "text": "SMC series में इसके उपर"
+    },
+    {
+      "start_time": 263.82,
+      "end_time": 265.62,
+      "text": "दो से तीन lectures available है"
+    },
+    {
+      "start_time": 265.62,
+      "end_time": 267.48,
+      "text": "यहां सिर्फ हम इसकी सिर्फ"
+    },
+    {
+      "start_time": 267.48,
+      "end_time": 269.74,
+      "text": "और introduction को study करेंगे"
+    },
+    {
+      "start_time": 269.74,
+      "end_time": 272.02,
+      "text": "और साथ हम liquidity grab को study करेंगे"
+    },
+    {
+      "start_time": 272.02,
+      "end_time": 274.16,
+      "text": "यहां देखें यह एक bearish market है"
+    },
+    {
+      "start_time": 274.16,
+      "end_time": 276.52,
+      "text": "market ने जब यह नया high बनाया"
+    },
+    {
+      "start_time": 276.52,
+      "end_time": 279.38,
+      "text": "तो इसने अपने previous high के उपर से liquidity को sweep किया"
+    },
+    {
+      "start_time": 279.38,
+      "end_time": 282.38,
+      "text": "इसको हम कहेंगे buy side liquidity sweep"
+    },
+    {
+      "start_time": 282.38,
+      "end_time": 284.72,
+      "text": "क्योंकि यहां market में सिर्फ buy side पे"
+    },
+    {
+      "start_time": 284.72,
+      "end_time": 286.72,
+      "text": "जो trader थे जो break out का wait करे थे"
+    },
+    {
+      "start_time": 286.72,
+      "end_time": 287.76,
+      "text": "उनको receive किया"
+    },
+    {
+      "start_time": 287.76,
+      "end_time": 289.56,
+      "text": "उनकी liquidity को sweep किया"
+    },
+    {
+      "start_time": 289.56,
+      "end_time": 291.38,
+      "text": "और वापस दूसरी direction में आगी"
+    },
+    {
+      "start_time": 291.38,
+      "end_time": 294.56,
+      "text": "similarly अगर हम bullish market की बात करें"
+    },
+    {
+      "start_time": 294.56,
+      "end_time": 296.72,
+      "text": "तो market ने जब यह वाला low बनाया"
+    },
+    {
+      "start_time": 296.72,
+      "end_time": 298.94,
+      "text": "तो इस candle ने अपने previous candle के"
+    },
+    {
+      "start_time": 298.94,
+      "end_time": 300.14,
+      "text": "liquidity को sweep किया"
+    },
+    {
+      "start_time": 300.14,
+      "end_time": 303.28,
+      "text": "candle की week के साथ और दुबारा दूसरी direction में"
+    },
+    {
+      "start_time": 303.28,
+      "end_time": 303.9,
+      "text": "move कर गी"
+    },
+    {
+      "start_time": 303.9,
+      "end_time": 306.76,
+      "text": "तो इससे हम कहते हैं sell side liquidity sweep"
+    },
+    {
+      "start_time": 306.76,
+      "end_time": 308.78,
+      "text": "अब अगर हम इस चीज़ को"
+    },
+    {
+      "start_time": 308.78,
+      "end_time": 311.78,
+      "text": "buy side liquidity sweep और sell side liquidity sweep"
+    },
+    {
+      "start_time": 311.78,
+      "end_time": 313.76,
+      "text": "इस चीज़ को candlestick की form में देखें"
+    },
+    {
+      "start_time": 313.76,
+      "end_time": 315.6,
+      "text": "जैसा के मैं पहले भी lecture में study की है"
+    },
+    {
+      "start_time": 315.6,
+      "end_time": 318.58,
+      "text": "तो buy side liquidity sweep कुछ इस तरह आपको नज़र आएगी"
+    },
+    {
+      "start_time": 318.58,
+      "end_time": 322.08,
+      "text": "जिसमें next candle previous candle के high को sweep करती है"
+    },
+    {
+      "start_time": 322.08,
+      "end_time": 324.62,
+      "text": "सीमिल अलिए अगर हम sell side की बात करें"
+    },
+    {
+      "start_time": 324.62,
+      "end_time": 326.74,
+      "text": "तो उसमें candlestick कुछ इस तरह बनती है"
+    },
+    {
+      "start_time": 326.74,
+      "end_time": 330.46,
+      "text": "इसमें next candle अपनी previous candle के लोग को sweep करती है"
+    },
+    {
+      "start_time": 330.46,
+      "end_time": 332.98,
+      "text": "ठीक है यह है liquidity sweep"
+    },
+    {
+      "start_time": 332.98,
+      "end_time": 335.38,
+      "text": "अब हम बात करते हैं liquidity grab की"
+    },
+    {
+      "start_time": 335.38,
+      "end_time": 338.7,
+      "text": "अब आपके सामने यह candlestick pattern है"
+    },
+    {
+      "start_time": 338.7,
+      "end_time": 340.34,
+      "text": "यहां अगर आप note करें"
+    },
+    {
+      "start_time": 340.34,
+      "end_time": 343.68,
+      "text": "यह वाला range इसमें market क्या करी है"
+    },
+    {
+      "start_time": 343.68,
+      "end_time": 346.0,
+      "text": "यह market total एक consolidation phase में है"
+    },
+    {
+      "start_time": 346.0,
+      "end_time": 347.96,
+      "text": "जिसे हम कहते हैं market range कर दी है"
+    },
+    {
+      "start_time": 347.96,
+      "end_time": 349.94,
+      "text": "जब market range कर रही होती है"
+    },
+    {
+      "start_time": 349.94,
+      "end_time": 352.48,
+      "text": "तो सम्टें market एक साइट पर breakout दे देती है"
+    },
+    {
+      "start_time": 352.48,
+      "end_time": 354.5,
+      "text": "यहां इस consolidation के उपर"
+    },
+    {
+      "start_time": 354.5,
+      "end_time": 356.7,
+      "text": "market ने candle closing शो की"
+    },
+    {
+      "start_time": 356.7,
+      "end_time": 359.2,
+      "text": "जब market इस साइट पर candle close करती है"
+    },
+    {
+      "start_time": 359.2,
+      "end_time": 361.28,
+      "text": "तो जितने भी breakout traders यह जितने भी"
+    },
+    {
+      "start_time": 361.28,
+      "end_time": 364.06,
+      "text": "less informed जिनको इतनी understanding नहीं है"
+    },
+    {
+      "start_time": 364.06,
+      "end_time": 365.48,
+      "text": "वो यहां से इसको"
+    },
+    {
+      "start_time": 365.48,
+      "end_time": 368.48,
+      "text": "अपना authentic breakout समय के यहां से"
+    },
+    {
+      "start_time": 368.48,
+      "end_time": 370.32,
+      "text": "buy करना शुरू कर देते हैं"
+    },
+    {
+      "start_time": 370.32,
+      "end_time": 371.56,
+      "text": "लेकिन के ऐसा ही होता है"
+    },
+    {
+      "start_time": 371.56,
+      "end_time": 373.98,
+      "text": "सम्टें market यहां से liquidity grab करती है"
+    },
+    {
+      "start_time": 373.98,
+      "end_time": 375.26,
+      "text": "और फिर opposite side में"
+    },
+    {
+      "start_time": 375.26,
+      "end_time": 378.9,
+      "text": "consolidation की opposite side में आके निचे closing देती है"
+    },
+    {
+      "start_time": 378.9,
+      "end_time": 382.02,
+      "text": "जब market यहां liquidity को grab करती है"
+    },
+    {
+      "start_time": 382.02,
+      "end_time": 384.12,
+      "text": "तो market एक expansion की form में"
+    },
+    {
+      "start_time": 384.12,
+      "end_time": 387.1,
+      "text": "एक speed एक displacement की form में"
+    },
+    {
+      "start_time": 387.1,
+      "end_time": 389.12,
+      "text": "दोबारा opposite side पर move कर जाती है"
+    },
+    {
+      "start_time": 389.12,
+      "end_time": 391.78,
+      "text": "तो इस point पर यह जो market ने"
+    },
+    {
+      "start_time": 391.78,
+      "end_time": 393.56,
+      "text": "upper side पर candle close की थी"
+    },
+    {
+      "start_time": 393.56,
+      "end_time": 396.76,
+      "text": "तो यह सिरुफ और सिरुफ बाई side की liquidity grab करने के लिए थी"
+    },
+    {
+      "start_time": 396.76,
+      "end_time": 400.1,
+      "text": "यहां market ने ज्यादा से ज्यादा liquidity को create किया"
+    },
+    {
+      "start_time": 400.1,
+      "end_time": 401.98,
+      "text": "और ज्यादा traders को trap किया"
+    },
+    {
+      "start_time": 401.98,
+      "end_time": 403.36,
+      "text": "और opposite side में move कर गी"
+    },
+    {
+      "start_time": 403.36,
+      "end_time": 406.86,
+      "text": "similarly अगर हम buy trend की बात करें"
+    },
+    {
+      "start_time": 406.86,
+      "end_time": 409.16,
+      "text": "तो यहां देखें market एक consolidation phase में है"
+    },
+    {
+      "start_time": 409.16,
+      "end_time": 410.16,
+      "text": "range कर रही है"
+    },
+    {
+      "start_time": 410.16,
+      "end_time": 411.94,
+      "text": "again market क्या करेगी"
+    },
+    {
+      "start_time": 411.94,
+      "end_time": 414.38,
+      "text": "कि इसकी एक side पर candle की closing show करेगी"
+    },
+    {
+      "start_time": 414.38,
+      "end_time": 416.58,
+      "text": "तो जितने भी breakout traders हैं"
+    },
+    {
+      "start_time": 416.58,
+      "end_time": 417.86,
+      "text": "जितने भी less inform trader हैं"
+    },
+    {
+      "start_time": 417.86,
+      "end_time": 419.24,
+      "text": "यहां वो sell करना शुरू करेंगे"
+    },
+    {
+      "start_time": 419.24,
+      "end_time": 420.68,
+      "text": "कुछ retest का wait करेंगे"
+    },
+    {
+      "start_time": 420.68,
+      "end_time": 422.8,
+      "text": "कुछ इस point तक भी wait करेंगे"
+    },
+    {
+      "start_time": 422.8,
+      "end_time": 424.28,
+      "text": "कि यह inducement के नीचे sell करें"
+    },
+    {
+      "start_time": 424.28,
+      "end_time": 426.48,
+      "text": "लेकिं यह सिरुफ और सिरुफ एक liquidity grab है"
+    },
+    {
+      "start_time": 426.48,
+      "end_time": 428.24,
+      "text": "क्यों? क्योंकि market का major trend"
+    },
+    {
+      "start_time": 428.24,
+      "end_time": 429.0,
+      "text": "अगर bullish है"
+    },
+    {
+      "start_time": 429.0,
+      "end_time": 432.28,
+      "text": "तो consolidation के नीचे market के close करने का"
+    },
+    {
+      "start_time": 432.28,
+      "end_time": 433.8,
+      "text": "सिरुफ और सिरुफ एक purpose है"
+    },
+    {
+      "start_time": 433.8,
+      "end_time": 435.86,
+      "text": "वो है liberty को grab करना"
+    },
+    {
+      "start_time": 435.86,
+      "end_time": 438.22,
+      "text": "liberty grab करने के बाद market दोबारा"
+    },
+    {
+      "start_time": 438.22,
+      "end_time": 440.38,
+      "text": "इस consolidation की opposite side पे"
+    },
+    {
+      "start_time": 440.38,
+      "end_time": 442.24,
+      "text": "यहां candle को close करती है"
+    },
+    {
+      "start_time": 442.24,
+      "end_time": 444.16,
+      "text": "और यह सारी की सारी move"
+    },
+    {
+      "start_time": 444.16,
+      "end_time": 447.1,
+      "text": "यह एक expansion एक speed की form में होती है"
+    },
+    {
+      "start_time": 447.1,
+      "end_time": 449.42,
+      "text": "similarly यहां"
+    },
+    {
+      "start_time": 449.42,
+      "end_time": 450.84,
+      "text": "liberty grab करने के बाद"
+    },
+    {
+      "start_time": 450.84,
+      "end_time": 452.54,
+      "text": "buy side में और sell side में"
+    },
+    {
+      "start_time": 452.54,
+      "end_time": 454.44,
+      "text": "market जो बाद में move करती है"
+    },
+    {
+      "start_time": 454.44,
+      "end_time": 456.12,
+      "text": "वो सिरुफ और सिरुफ एक expansion"
+    },
+    {
+      "start_time": 456.12,
+      "end_time": 458.82,
+      "text": "और एक speed की form में होगी"
+    },
+    {
+      "start_time": 458.82,
+      "end_time": 460.78,
+      "text": "तब भी हम उसे liberty grab समझेंगे"
+    },
+    {
+      "start_time": 460.78,
+      "end_time": 462.46,
+      "text": "इस point पे"
+    },
+    {
+      "start_time": 462.46,
+      "end_time": 464.38,
+      "text": "यह जो market ने sell side की liquid लिए है"
+    },
+    {
+      "start_time": 464.38,
+      "end_time": 466.86,
+      "text": "इसे हम कहेंगे sell side liberty grab"
+    },
+    {
+      "start_time": 466.86,
+      "end_time": 469.4,
+      "text": "तो hopefully यहां आपको concept समझा गया"
+    },
+    {
+      "start_time": 469.4,
+      "end_time": 472.3,
+      "text": "कि liberty sweep और liberty grab में क्या difference है"
+    },
+    {
+      "start_time": 472.3,
+      "end_time": 474.7,
+      "text": "लेकिन दोनों का objective सेम है"
+    },
+    {
+      "start_time": 474.7,
+      "end_time": 476.08,
+      "text": "दोनों क्या करते हैं"
+    },
+    {
+      "start_time": 476.08,
+      "end_time": 477.58,
+      "text": "ट्रेडर्स को opposite side पे"
+    },
+    {
+      "start_time": 477.58,
+      "end_time": 478.8,
+      "text": "सिर्फ deceive करते हैं"
+    },
+    {
+      "start_time": 478.8,
+      "end_time": 479.46,
+      "text": "दोका देते हैं"
+    },
+    {
+      "start_time": 479.46,
+      "end_time": 481.62,
+      "text": "और market को again दुसरी direction में move करते है"
+    },
+    {
+      "start_time": 481.62,
+      "end_time": 486.34,
+      "text": "अब हम बात करते हैं"
+    },
+    {
+      "start_time": 486.34,
+      "end_time": 488.5,
+      "text": "price imbalance या liquidity void"
+    },
+    {
+      "start_time": 488.5,
+      "end_time": 489.9,
+      "text": "यह क्या चीज होती है"
+    },
+    {
+      "start_time": 489.9,
+      "end_time": 491.14,
+      "text": "इसका क्या purpose है"
+    },
+    {
+      "start_time": 491.14,
+      "end_time": 492.4,
+      "text": "और क्या objective है"
+    },
+    {
+      "start_time": 492.4,
+      "end_time": 494.52,
+      "text": "सबसे पहले फोरक्स market में"
+    },
+    {
+      "start_time": 494.52,
+      "end_time": 498.62,
+      "text": "जब भी price one directional काफी ज़्यदा sharp movement करती है"
+    },
+    {
+      "start_time": 498.62,
+      "end_time": 500.32,
+      "text": "काफी ज़्यदा speed से move करती है"
+    },
+    {
+      "start_time": 500.32,
+      "end_time": 502.68,
+      "text": "जिसे हम expansion भी कहते हैं"
+    },
+    {
+      "start_time": 502.68,
+      "end_time": 505.48,
+      "text": "तो वहां market mostly imbalance create करती है"
+    },
+    {
+      "start_time": 505.48,
+      "end_time": 508.12,
+      "text": "imbalance जिसे हम liquidity void भी कहते है"
+    },
+    {
+      "start_time": 508.12,
+      "end_time": 511.32,
+      "text": "basically जब भी market काफी speed से move करती है"
+    },
+    {
+      "start_time": 511.32,
+      "end_time": 515.62,
+      "text": "वहां buyers और sellers के कुछ incomplete options रह जाती है"
+    },
+    {
+      "start_time": 515.62,
+      "end_time": 517.68,
+      "text": "incomplete options का मतलब है"
+    },
+    {
+      "start_time": 517.68,
+      "end_time": 520.44,
+      "text": "के वहां market के कुछ pending orders रह जाते है"
+    },
+    {
+      "start_time": 520.44,
+      "end_time": 522.48,
+      "text": "और यह वही pending orders होते है"
+    },
+    {
+      "start_time": 522.48,
+      "end_time": 523.9,
+      "text": "जिसे हम liquidity कहते है"
+    },
+    {
+      "start_time": 523.9,
+      "end_time": 527.06,
+      "text": "इसलिए जहां कहीं price imbalance create होगा"
+    },
+    {
+      "start_time": 527.06,
+      "end_time": 528.76,
+      "text": "वहां pending orders होंगे"
+    },
+    {
+      "start_time": 528.76,
+      "end_time": 531.64,
+      "text": "और वही pending orders liquidity create करते है"
+    },
+    {
+      "start_time": 531.64,
+      "end_time": 533.08,
+      "text": "और यही reason है"
+    },
+    {
+      "start_time": 533.08,
+      "end_time": 536.0,
+      "text": "कि हम price imbalance को liquidity void भी कहते है"
+    },
+    {
+      "start_time": 536.0,
+      "end_time": 539.64,
+      "text": "क्योंकि यह price imbalance pending orders को छोड़ जाते है"
+    },
+    {
+      "start_time": 539.64,
+      "end_time": 541.86,
+      "text": "और वो pending orders liquidity create करते है"
+    },
+    {
+      "start_time": 541.86,
+      "end_time": 545.78,
+      "text": "और यही liquidity बार में buyers और sellers के interest को gain करती है"
+    },
+    {
+      "start_time": 545.78,
+      "end_time": 547.3,
+      "text": "और यही वज़ा होती है"
+    },
+    {
+      "start_time": 547.3,
+      "end_time": 550.36,
+      "text": "कि market को next movement के लिए liquidity चाहिए होती है"
+    },
+    {
+      "start_time": 550.36,
+      "end_time": 552.5,
+      "text": "इसी बिनापे जब market दोबारा"
+    },
+    {
+      "start_time": 552.5,
+      "end_time": 554.44,
+      "text": "इस price imbalance zone में आती है"
+    },
+    {
+      "start_time": 554.44,
+      "end_time": 556.56,
+      "text": "या liquidity wide zone में आती है"
+    },
+    {
+      "start_time": 556.56,
+      "end_time": 557.52,
+      "text": "तो हम अपनी"
+    },
+    {
+      "start_time": 557.52,
+      "end_time": 560.32,
+      "text": "इस liquidity के interest की base पे"
+    },
+    {
+      "start_time": 560.32,
+      "end_time": 562.76,
+      "text": "अपना sell या buy model design कर सकते है"
+    },
+    {
+      "start_time": 562.76,
+      "end_time": 564.68,
+      "text": "तो hopefully अब आपको समझ आ गया"
+    },
+    {
+      "start_time": 564.68,
+      "end_time": 566.26,
+      "text": "कि price imbalance क्या होती है"
+    },
+    {
+      "start_time": 566.26,
+      "end_time": 568.54,
+      "text": "और इसको हम liquidity wide क्यों कहते है"
+    },
+    {
+      "start_time": 568.54,
+      "end_time": 571.1,
+      "text": "और यह हमारे लिए area of interest क्यों है"
+    },
+    {
+      "start_time": 571.1,
+      "end_time": 574.32,
+      "text": "क्योंके यह price imbalance जो liquidity छोड़ जाती है"
+    },
+    {
+      "start_time": 574.32,
+      "end_time": 576.32,
+      "text": "तो एक तो उससे हमें पता लगता है"
+    },
+    {
+      "start_time": 576.32,
+      "end_time": 578.14,
+      "text": "कि smart money की movement की side पे है"
+    },
+    {
+      "start_time": 578.14,
+      "end_time": 580.84,
+      "text": "क्योंके market वहाँ one side काफी sharp move करती है"
+    },
+    {
+      "start_time": 580.84,
+      "end_time": 582.84,
+      "text": "और हमने expansion में study किया"
+    },
+    {
+      "start_time": 582.84,
+      "end_time": 584.14,
+      "text": "price cycle में study किया"
+    },
+    {
+      "start_time": 584.14,
+      "end_time": 585.32,
+      "text": "कि जहां कहीं expansion"
+    },
+    {
+      "start_time": 585.32,
+      "end_time": 588.1,
+      "text": "जहां कहीं market काफी fast move करती है"
+    },
+    {
+      "start_time": 588.1,
+      "end_time": 591.12,
+      "text": "वहां market एक area of interest छोड़ जाती है"
+    },
+    {
+      "start_time": 591.12,
+      "end_time": 593.24,
+      "text": "वहां market कुछ liquidity छोड़ जाती है"
+    },
+    {
+      "start_time": 593.24,
+      "end_time": 595.42,
+      "text": "और इसी liquidity की base पे हम वहाँ"
+    },
+    {
+      "start_time": 595.42,
+      "end_time": 597.92,
+      "text": "अपना buy या sell model design करते है"
+    },
+    {
+      "start_time": 597.92,
+      "end_time": 602.02,
+      "text": "अब यह liquidity white या price imbalance कैसा होता है देखने में"
+    },
+    {
+      "start_time": 602.02,
+      "end_time": 603.72,
+      "text": "उसकी एक यह simple सी diagram है"
+    },
+    {
+      "start_time": 603.72,
+      "end_time": 605.24,
+      "text": "जो देखें market ने"
+    },
+    {
+      "start_time": 605.24,
+      "end_time": 608.68,
+      "text": "इस candle से इस candle तक काफी sharp movement की है"
+    },
+    {
+      "start_time": 608.68,
+      "end_time": 611.54,
+      "text": "तो यहां अगर हम इस zone को देखें"
+    },
+    {
+      "start_time": 611.54,
+      "end_time": 614.44,
+      "text": "इस candle की wick से इस candle की wick तक"
+    },
+    {
+      "start_time": 614.44,
+      "end_time": 616.9,
+      "text": "तो यह जो zone है इसको हम कहते है"
+    },
+    {
+      "start_time": 616.9,
+      "end_time": 618.6,
+      "text": "liquidity wide या price imbalance"
+    },
+    {
+      "start_time": 618.6,
+      "end_time": 621.68,
+      "text": "similarly यह दो candle है"
+    },
+    {
+      "start_time": 621.68,
+      "end_time": 623.68,
+      "text": "अगर यह market में तीन candle बन जाएं"
+    },
+    {
+      "start_time": 623.68,
+      "end_time": 627.28,
+      "text": "तो भी वो एरिया जहां market काफी ज़्यदा fast move करती है"
+    },
+    {
+      "start_time": 627.28,
+      "end_time": 630.18,
+      "text": "इसको हम कहते हैं liquidity wide या price imbalance"
+    },
+    {
+      "start_time": 630.18,
+      "end_time": 634.2,
+      "text": "अगर हम same model bullish market के लिए study करें"
+    },
+    {
+      "start_time": 634.2,
+      "end_time": 638.02,
+      "text": "तो market जब काफी sharply upward move करती है"
+    },
+    {
+      "start_time": 638.02,
+      "end_time": 639.88,
+      "text": "तो again यह जो zone है"
+    },
+    {
+      "start_time": 639.88,
+      "end_time": 642.32,
+      "text": "जिसमें market सिर्फ one sided move की है"
+    },
+    {
+      "start_time": 642.32,
+      "end_time": 643.32,
+      "text": "buy side move की है"
+    },
+    {
+      "start_time": 643.32,
+      "end_time": 646.3,
+      "text": "तो हम इसको कहेंगे liquidity wide या price imbalance"
+    },
+    {
+      "start_time": 646.3,
+      "end_time": 650.94,
+      "text": "similarly अगर number of candles से कोई फर्ग नी पड़ता है"
+    },
+    {
+      "start_time": 650.94,
+      "end_time": 652.68,
+      "text": "चाहे यहां दो candles हो जाएं"
+    },
+    {
+      "start_time": 652.68,
+      "end_time": 654.7,
+      "text": "जैसा कि यहां तीन candles हैं"
+    },
+    {
+      "start_time": 654.7,
+      "end_time": 656.72,
+      "text": "लेकिन यह market की one sided movement है"
+    },
+    {
+      "start_time": 656.72,
+      "end_time": 659.02,
+      "text": "तो इस one sided movement को हम दोबारा"
+    },
+    {
+      "start_time": 659.02,
+      "end_time": 661.16,
+      "text": "liquidity wide या price imbalance कहते हैं"
+    },
+    {
+      "start_time": 661.16,
+      "end_time": 663.62,
+      "text": "तो hopefully यहां से आपको यह concept clear हो गया"
+    },
+    {
+      "start_time": 663.62,
+      "end_time": 664.98,
+      "text": "कि price imbalance क्या है"
+    },
+    {
+      "start_time": 664.98,
+      "end_time": 666.58,
+      "text": "liquidity wide क्या है"
+    },
+    {
+      "start_time": 666.58,
+      "end_time": 669.22,
+      "text": "price imbalance को liquidity wide क्यों कहते हैं"
+    },
+    {
+      "start_time": 669.22,
+      "end_time": 671.5,
+      "text": "और यह हमारे लिए area of interest क्यों होता है"
+    },
+    {
+      "start_time": 671.5,
+      "end_time": 675.44,
+      "text": "क्यों क्योंकि यहां market कुछ pending orders चोड़ जाती है"
+    },
+    {
+      "start_time": 675.44,
+      "end_time": 676.92,
+      "text": "जो act as a liquidity"
+    },
+    {
+      "start_time": 676.92,
+      "end_time": 680.22,
+      "text": "जो liquidity के तोर पर act करती है"
+    },
+    {
+      "start_time": 680.22,
+      "end_time": 683.4,
+      "text": "और वहां हम अपना buy or sell model design कर सकते हैं"
+    },
+    {
+      "start_time": 683.4,
+      "end_time": 687.16,
+      "text": "यह एक real market sample size है"
+    },
+    {
+      "start_time": 687.16,
+      "end_time": 689.1,
+      "text": "यहां देखें यह bearish market थी"
+    },
+    {
+      "start_time": 689.1,
+      "end_time": 692.68,
+      "text": "और यहां market ने one sided काफी sharp movement की है"
+    },
+    {
+      "start_time": 692.68,
+      "end_time": 695.04,
+      "text": "और यह वही one sided sharp movement है"
+    },
+    {
+      "start_time": 695.04,
+      "end_time": 697.7,
+      "text": "जिसे हम liquidity wide या price imbalance कहते हैं"
+    },
+    {
+      "start_time": 697.7,
+      "end_time": 699.98,
+      "text": "आपने एक बात याद रखनी है"
+    },
+    {
+      "start_time": 699.98,
+      "end_time": 703.26,
+      "text": "जहां कहीं भी liquidity wide या price imbalance होगा"
+    },
+    {
+      "start_time": 703.26,
+      "end_time": 707.18,
+      "text": "market future में इसको fill करने के लिए लाजमी आएगी"
+    },
+    {
+      "start_time": 707.18,
+      "end_time": 711.98,
+      "text": "लेकिन कब आएगी एक गंटे बाद, एक दिन बाद, एक अफ़ते बाद"
+    },
+    {
+      "start_time": 711.98,
+      "end_time": 713.7,
+      "text": "इसकी कोई time limit नहीं है"
+    },
+    {
+      "start_time": 713.7,
+      "end_time": 717.08,
+      "text": "market या तो उसको immediately fill करने आ सकती है"
+    },
+    {
+      "start_time": 717.08,
+      "end_time": 718.74,
+      "text": "या कुछ देर के बाद"
+    },
+    {
+      "start_time": 718.74,
+      "end_time": 722.48,
+      "text": "यानि एक दिन, दो दिन, एक हफ़ता, एक मिहने बाद भी fill कर सकती है"
+    },
+    {
+      "start_time": 722.48,
+      "end_time": 725.36,
+      "text": "लेकिन market उसको लाजमी fill करेगी"
+    },
+    {
+      "start_time": 725.36,
+      "end_time": 729.98,
+      "text": "market जो भी liquidity wide या price imbalance leave करती है"
+    },
+    {
+      "start_time": 729.98,
+      "end_time": 731.48,
+      "text": "उसको लाजमी fill करती है"
+    },
+    {
+      "start_time": 731.48,
+      "end_time": 735.14,
+      "text": "अच्छा, जो भी price imbalance या liquidity wide होती है"
+    },
+    {
+      "start_time": 735.14,
+      "end_time": 737.7,
+      "text": "market उसको mostly 100% fill कर सकती है"
+    },
+    {
+      "start_time": 737.7,
+      "end_time": 741.3,
+      "text": "लेकिन जब भी हम इस liquidity wide को अपने area of interest"
+    },
+    {
+      "start_time": 741.3,
+      "end_time": 743.64,
+      "text": "या अपने trade को formulate करने के लिए use करेंगे"
+    },
+    {
+      "start_time": 743.64,
+      "end_time": 746.94,
+      "text": "तो हम अपने mostly trades 50% of liquidity wide"
+    },
+    {
+      "start_time": 746.94,
+      "end_time": 749.94,
+      "text": "या price imbalance zone पे formulate करेंगे"
+    },
+    {
+      "start_time": 749.94,
+      "end_time": 750.9,
+      "text": "इसका क्या मतलब है"
+    },
+    {
+      "start_time": 750.9,
+      "end_time": 753.78,
+      "text": "यानि ये total liquidity wide या price imbalance है"
+    },
+    {
+      "start_time": 753.78,
+      "end_time": 757.16,
+      "text": "यहाँ हम इसका 0, 50 और 100% level"
+    },
+    {
+      "start_time": 757.16,
+      "end_time": 759.6,
+      "text": "यानि के 50% level को देखेंगे कहां आता है"
+    },
+    {
+      "start_time": 759.6,
+      "end_time": 763.16,
+      "text": "हम इस level पे जब market वापस आएगी 50% level तक"
+    },
+    {
+      "start_time": 763.16,
+      "end_time": 765.16,
+      "text": "तब हम इसको दोबारा sell कर सकते हैं"
+    },
+    {
+      "start_time": 765.16,
+      "end_time": 767.16,
+      "text": "क्योंकि market का major trend selling है"
+    },
+    {
+      "start_time": 767.16,
+      "end_time": 769.58,
+      "text": "अब हम देखते हैं market का reaction"
+    },
+    {
+      "start_time": 769.58,
+      "end_time": 770.92,
+      "text": "यह देखें"
+    },
+    {
+      "start_time": 770.92,
+      "end_time": 773.0,
+      "text": "market ये liquidity balance create किया"
+    },
+    {
+      "start_time": 773.0,
+      "end_time": 774.6,
+      "text": "sorry liquidity wide create की"
+    },
+    {
+      "start_time": 774.6,
+      "end_time": 776.3,
+      "text": "price imbalance create किया"
+    },
+    {
+      "start_time": 776.3,
+      "end_time": 777.64,
+      "text": "market वापस आई"
+    },
+    {
+      "start_time": 777.64,
+      "end_time": 779.48,
+      "text": "इसको 100% fill नहीं किया"
+    },
+    {
+      "start_time": 779.48,
+      "end_time": 783.52,
+      "text": "इसलिए हम इसको mostly 50% पे अपनी trade को formula करके"
+    },
+    {
+      "start_time": 783.52,
+      "end_time": 786.48,
+      "text": "इस sell trend के साथ दोबारा आपने आपको synchronize कर सकते हैं"
+    },
+    {
+      "start_time": 786.48,
+      "end_time": 792.14,
+      "text": "अब ये एक और market sample size है"
+    },
+    {
+      "start_time": 792.14,
+      "end_time": 794.48,
+      "text": "यहां देखें market total bullish direction में है"
+    },
+    {
+      "start_time": 794.48,
+      "end_time": 796.2,
+      "text": "आपने एक पार याद रखनी है"
+    },
+    {
+      "start_time": 796.2,
+      "end_time": 798.04,
+      "text": "liquidity wide और price imbalance के लिए"
+    },
+    {
+      "start_time": 798.04,
+      "end_time": 801.22,
+      "text": "कि जो भी liquidity wide zone या price imbalance zone"
+    },
+    {
+      "start_time": 801.22,
+      "end_time": 803.12,
+      "text": "trend की direction में होगा"
+    },
+    {
+      "start_time": 803.12,
+      "end_time": 804.8,
+      "text": "वही ज्यादा effective होगा"
+    },
+    {
+      "start_time": 804.8,
+      "end_time": 806.94,
+      "text": "लेकिन अगर कोई price imbalance"
+    },
+    {
+      "start_time": 806.94,
+      "end_time": 809.94,
+      "text": "या liquidity wide trend की against होगा"
+    },
+    {
+      "start_time": 809.94,
+      "end_time": 811.9,
+      "text": "वो high probability zone नहीं होगा"
+    },
+    {
+      "start_time": 811.9,
+      "end_time": 813.48,
+      "text": "क्योंकिए trend bullish है"
+    },
+    {
+      "start_time": 813.48,
+      "end_time": 816.42,
+      "text": "तो यहां देखें जब market bullish गई तो यहां market ने"
+    },
+    {
+      "start_time": 816.42,
+      "end_time": 819.06,
+      "text": "एक liquidity wide और price imbalance के रिएट किया"
+    },
+    {
+      "start_time": 819.06,
+      "end_time": 820.54,
+      "text": "market दोबारा आई"
+    },
+    {
+      "start_time": 820.54,
+      "end_time": 823.78,
+      "text": "इस zone को fill किया और फिर उपर sharp movement की"
+    },
+    {
+      "start_time": 823.78,
+      "end_time": 825.94,
+      "text": "जब दोबारा market ने यहां sharp movement की"
+    },
+    {
+      "start_time": 825.94,
+      "end_time": 828.72,
+      "text": "तो यहां market ने एक liquidity wide और price imbalance"
+    },
+    {
+      "start_time": 828.72,
+      "end_time": 829.68,
+      "text": "दोबारा के रिएट किया"
+    },
+    {
+      "start_time": 829.68,
+      "end_time": 831.86,
+      "text": "जिसको market ने दोबारा fill किया"
+    },
+    {
+      "start_time": 831.86,
+      "end_time": 834.08,
+      "text": "और दोबारा market ने काफी sharp movement की"
+    },
+    {
+      "start_time": 834.08,
+      "end_time": 836.24,
+      "text": "और यह sharp movement दोबारा"
+    },
+    {
+      "start_time": 836.24,
+      "end_time": 838.34,
+      "text": "एक liquidity wide और price imbalance के रिएट कर लिए"
+    },
+    {
+      "start_time": 838.34,
+      "end_time": 840.28,
+      "text": "और वापस market आई"
+    },
+    {
+      "start_time": 840.28,
+      "end_time": 842.14,
+      "text": "इस imbalance को दोबारा recover किया"
+    },
+    {
+      "start_time": 842.14,
+      "end_time": 843.06,
+      "text": "दोबारा fill किया"
+    },
+    {
+      "start_time": 843.06,
+      "end_time": 844.12,
+      "text": "दोबारा balance किया"
+    },
+    {
+      "start_time": 844.12,
+      "end_time": 847.08,
+      "text": "और दोबारा original trend के direction में market move कर गी"
+    },
+    {
+      "start_time": 847.08,
+      "end_time": 850.46,
+      "text": "इसलिए जो भी liquidity wide या price imbalance"
+    },
+    {
+      "start_time": 850.46,
+      "end_time": 852.12,
+      "text": "trend की direction में होगा"
+    },
+    {
+      "start_time": 852.12,
+      "end_time": 856.08,
+      "text": "market उसको ज्यादा importance ज्यादा high probability कंसिडर करेगी"
+    },
+    {
+      "start_time": 856.08,
+      "end_time": 858.36,
+      "text": "और जो भी trend के against होगा"
+    },
+    {
+      "start_time": 858.36,
+      "end_time": 860.7,
+      "text": "जिस तरह ये zone देखें ये भी imbalance है"
+    },
+    {
+      "start_time": 860.7,
+      "end_time": 862.62,
+      "text": "लेकिन market ने इसकी कोई एहमियत"
+    },
+    {
+      "start_time": 862.62,
+      "end_time": 865.18,
+      "text": "इसको किसी भी तरह की कोई एहमियत नहीं दी"
+    },
+    {
+      "start_time": 865.18,
+      "end_time": 866.58,
+      "text": "और इसको break करते हुए"
+    },
+    {
+      "start_time": 866.58,
+      "end_time": 868.38,
+      "text": "trend की direction में move कर गी"
+    },
+    {
+      "start_time": 868.38,
+      "end_time": 873.12,
+      "text": "हमने liquidity wide को study किया"
+    },
+    {
+      "start_time": 873.12,
+      "end_time": 874.44,
+      "text": "तो अब हम बात करते हैं"
+    },
+    {
+      "start_time": 874.44,
+      "end_time": 876.08,
+      "text": "कि fair value gap क्या होता है"
+    },
+    {
+      "start_time": 876.08,
+      "end_time": 878.2,
+      "text": "आपने देखा होगा फोरक्स market में"
+    },
+    {
+      "start_time": 878.2,
+      "end_time": 880.02,
+      "text": "mostly trader fair value gap"
+    },
+    {
+      "start_time": 880.02,
+      "end_time": 881.98,
+      "text": "यान जिसे हम FVG भी कहते हैं"
+    },
+    {
+      "start_time": 881.98,
+      "end_time": 883.54,
+      "text": "इसको use करते हैं"
+    },
+    {
+      "start_time": 883.54,
+      "end_time": 884.7,
+      "text": "उसकी क्या reason है"
+    },
+    {
+      "start_time": 884.7,
+      "end_time": 886.88,
+      "text": "तो सबसे पहले मैं आपको ये समझा दूँ"
+    },
+    {
+      "start_time": 886.88,
+      "end_time": 888.34,
+      "text": "कि fair value gap क्या होता है"
+    },
+    {
+      "start_time": 888.34,
+      "end_time": 890.86,
+      "text": "फोरक्स market में जहां भी liquidity wide"
+    },
+    {
+      "start_time": 890.86,
+      "end_time": 892.3,
+      "text": "या price imbalance होता है"
+    },
+    {
+      "start_time": 892.3,
+      "end_time": 894.08,
+      "text": "क्योंकि वहां market one sided"
+    },
+    {
+      "start_time": 894.08,
+      "end_time": 895.8,
+      "text": "काफी sharp movement करती है"
+    },
+    {
+      "start_time": 895.8,
+      "end_time": 897.96,
+      "text": "तो वो इतना ज्यादा area होता है"
+    },
+    {
+      "start_time": 897.96,
+      "end_time": 899.88,
+      "text": "कि हम नहीं पता है कि हमने वहां"
+    },
+    {
+      "start_time": 899.88,
+      "end_time": 901.66,
+      "text": "किस price level पे एंटी लेनी है"
+    },
+    {
+      "start_time": 901.66,
+      "end_time": 904.06,
+      "text": "तो इसलिए उस बड़ी range को"
+    },
+    {
+      "start_time": 904.06,
+      "end_time": 905.76,
+      "text": "हम refine करते हैं"
+    },
+    {
+      "start_time": 905.76,
+      "end_time": 907.46,
+      "text": "उसको limited करते हैं"
+    },
+    {
+      "start_time": 907.46,
+      "end_time": 908.5,
+      "text": "fair value gap पे"
+    },
+    {
+      "start_time": 908.5,
+      "end_time": 911.58,
+      "text": "अब fair value gap को हम कैसे measure करते हैं"
+    },
+    {
+      "start_time": 911.58,
+      "end_time": 913.04,
+      "text": "हम इसको candle की"
+    },
+    {
+      "start_time": 913.04,
+      "end_time": 915.2,
+      "text": "week to week measure करते हैं"
+    },
+    {
+      "start_time": 915.2,
+      "end_time": 916.48,
+      "text": "अब इसके एक diagram देखते हैं"
+    },
+    {
+      "start_time": 916.48,
+      "end_time": 917.62,
+      "text": "इस concept को समयने के लिए"
+    },
+    {
+      "start_time": 917.62,
+      "end_time": 919.0,
+      "text": "ये देखें ये एक"
+    },
+    {
+      "start_time": 919.0,
+      "end_time": 920.74,
+      "text": "liquidity wide zone है"
+    },
+    {
+      "start_time": 920.74,
+      "end_time": 922.48,
+      "text": "जैसे कि हमने previous slide में study किया"
+    },
+    {
+      "start_time": 922.48,
+      "end_time": 924.04,
+      "text": "अब ये इतना बड़ा zone है"
+    },
+    {
+      "start_time": 924.04,
+      "end_time": 924.92,
+      "text": "हम नहीं पता है कि हमने"
+    },
+    {
+      "start_time": 924.92,
+      "end_time": 925.94,
+      "text": "यहां entry लेनी है"
+    },
+    {
+      "start_time": 925.94,
+      "end_time": 926.96,
+      "text": "इस candle पे लेनी है"
+    },
+    {
+      "start_time": 926.96,
+      "end_time": 928.14,
+      "text": "ये इस candle पे लेनी है"
+    },
+    {
+      "start_time": 928.14,
+      "end_time": 930.62,
+      "text": "इस zone को refine किया जाता है"
+    },
+    {
+      "start_time": 930.62,
+      "end_time": 932.98,
+      "text": "into the form of fair value gap"
+    },
+    {
+      "start_time": 932.98,
+      "end_time": 935.44,
+      "text": "अब अगर इसी diagram को हम दोबारा देखें"
+    },
+    {
+      "start_time": 935.44,
+      "end_time": 936.62,
+      "text": "तो यहां देखें"
+    },
+    {
+      "start_time": 936.62,
+      "end_time": 937.56,
+      "text": "ये bullish candle है"
+    },
+    {
+      "start_time": 937.56,
+      "end_time": 938.64,
+      "text": "और इस bullish candle के दमें"
+    },
+    {
+      "start_time": 938.64,
+      "end_time": 939.84,
+      "text": "काफी ज़्यादा area है"
+    },
+    {
+      "start_time": 939.84,
+      "end_time": 940.92,
+      "text": "काफी ज़्यादा gap है"
+    },
+    {
+      "start_time": 940.92,
+      "end_time": 941.96,
+      "text": "हम कहाँ करते हैं"
+    },
+    {
+      "start_time": 941.96,
+      "end_time": 942.86,
+      "text": "इसको week to week"
+    },
+    {
+      "start_time": 942.86,
+      "end_time": 944.16,
+      "text": "design करते हैं"
+    },
+    {
+      "start_time": 944.16,
+      "end_time": 945.0,
+      "text": "week to week"
+    },
+    {
+      "start_time": 945.0,
+      "end_time": 946.32,
+      "text": "इसको categorize करके"
+    },
+    {
+      "start_time": 956.96,
+      "end_time": 958.48,
+      "text": "इसी तरह ये जो"
+    },
+    {
+      "start_time": 958.48,
+      "end_time": 959.58,
+      "text": "bearish candle का low है"
+    },
+    {
+      "start_time": 959.58,
+      "end_time": 961.2,
+      "text": "और ये जो bullish candle का high है"
+    },
+    {
+      "start_time": 961.2,
+      "end_time": 962.68,
+      "text": "इसके दरमें जो gap है"
+    },
+    {
+      "start_time": 962.68,
+      "end_time": 963.32,
+      "text": "इसको हम कहते हैं"
+    },
+    {
+      "start_time": 963.32,
+      "end_time": 964.08,
+      "text": "fair value gap"
+    },
+    {
+      "start_time": 964.08,
+      "end_time": 966.22,
+      "text": "तो hopefully अब आपको समझ आ गया"
+    },
+    {
+      "start_time": 966.22,
+      "end_time": 967.86,
+      "text": "कि liquidity wide की"
+    },
+    {
+      "start_time": 967.86,
+      "end_time": 969.14,
+      "text": "refined form है"
+    },
+    {
+      "start_time": 969.14,
+      "end_time": 970.16,
+      "text": "fair value gap"
+    },
+    {
+      "start_time": 970.16,
+      "end_time": 971.22,
+      "text": "अब हमें पता है"
+    },
+    {
+      "start_time": 971.22,
+      "end_time": 972.88,
+      "text": "कि या तो हमने यहाँ entry लेनी है"
+    },
+    {
+      "start_time": 972.88,
+      "end_time": 974.44,
+      "text": "या हमने यहाँ entry लेनी है"
+    },
+    {
+      "start_time": 974.44,
+      "end_time": 974.98,
+      "text": "क्योंकि हमने"
+    },
+    {
+      "start_time": 974.98,
+      "end_time": 976.9,
+      "text": "दो level refine कर लिए"
+    },
+    {
+      "start_time": 976.9,
+      "end_time": 978.68,
+      "text": "अपना risk कम कर लिया"
+    },
+    {
+      "start_time": 978.68,
+      "end_time": 980.02,
+      "text": "reward ratio बढ़ाली"
+    },
+    {
+      "start_time": 980.02,
+      "end_time": 982.48,
+      "text": "इसी तरह जब market bullish होती है"
+    },
+    {
+      "start_time": 982.48,
+      "end_time": 984.58,
+      "text": "वहाँ जो bullish liquidity wide है"
+    },
+    {
+      "start_time": 984.58,
+      "end_time": 986.54,
+      "text": "उसको भी हम refine करके"
+    },
+    {
+      "start_time": 986.54,
+      "end_time": 990.58,
+      "text": "bullish fair value gap find कर सकते हैं"
+    },
+    {
+      "start_time": 990.58,
+      "end_time": 992.68,
+      "text": "अब यहाँ यह bullish fair value gap है"
+    },
+    {
+      "start_time": 992.68,
+      "end_time": 994.26,
+      "text": "similarly यह भी fair value gap है"
+    },
+    {
+      "start_time": 994.26,
+      "end_time": 997.18,
+      "text": "अब आपने एक बात याद रखनी है"
+    },
+    {
+      "start_time": 997.18,
+      "end_time": 999.0,
+      "text": "कि bullish trend में"
+    },
+    {
+      "start_time": 999.0,
+      "end_time": 1001.54,
+      "text": "वो fair value gap high probability होगा"
+    },
+    {
+      "start_time": 1001.54,
+      "end_time": 1003.1,
+      "text": "जो trend की direction में होगा"
+    },
+    {
+      "start_time": 1003.1,
+      "end_time": 1005.36,
+      "text": "इसी तरह bearish trend में"
+    },
+    {
+      "start_time": 1005.36,
+      "end_time": 1007.84,
+      "text": "वो fair value gap high probability होगा"
+    },
+    {
+      "start_time": 1007.84,
+      "end_time": 1009.6,
+      "text": "जो sell direction में होगा"
+    },
+    {
+      "start_time": 1009.6,
+      "end_time": 1011.66,
+      "text": "जो sell trend की direction में होगा"
+    },
+    {
+      "start_time": 1011.66,
+      "end_time": 1014.04,
+      "text": "और इसको कैसे trade करना है"
+    },
+    {
+      "start_time": 1014.04,
+      "end_time": 1015.18,
+      "text": "जब कभी भी आप"
+    },
+    {
+      "start_time": 1015.18,
+      "end_time": 1017.16,
+      "text": "फोरक्स market में fair value gap देखें"
+    },
+    {
+      "start_time": 1017.16,
+      "end_time": 1019.0,
+      "text": "तो fair value gap के बाद"
+    },
+    {
+      "start_time": 1019.0,
+      "end_time": 1020.98,
+      "text": "आप एक endorsement level का wait करें"
+    },
+    {
+      "start_time": 1020.98,
+      "end_time": 1022.58,
+      "text": "उसके बाद entry लें"
+    },
+    {
+      "start_time": 1022.58,
+      "end_time": 1024.52,
+      "text": "या फिर आप एक FTR level"
+    },
+    {
+      "start_time": 1024.52,
+      "end_time": 1026.34,
+      "text": "जिसे हम कहते हैं fail to reach"
+    },
+    {
+      "start_time": 1026.34,
+      "end_time": 1028.26,
+      "text": "या fail to retest level"
+    },
+    {
+      "start_time": 1028.26,
+      "end_time": 1031.4,
+      "text": "अब ये fail to reach और fail to retest level क्या होता है"
+    },
+    {
+      "start_time": 1031.4,
+      "end_time": 1034.08,
+      "text": "इसको हम अपने webinar में discuss करेंगे"
+    },
+    {
+      "start_time": 1034.08,
+      "end_time": 1035.68,
+      "text": "और ये आपके लिए एक assignment भी है"
+    },
+    {
+      "start_time": 1035.68,
+      "end_time": 1036.84,
+      "text": "इसको find करें"
+    },
+    {
+      "start_time": 1036.84,
+      "end_time": 1038.04,
+      "text": "ये क्या होता है"
+    },
+    {
+      "start_time": 1038.04,
+      "end_time": 1039.32,
+      "text": "इसके पेचे क्या logic है"
+    },
+    {
+      "start_time": 1039.32,
+      "end_time": 1040.38,
+      "text": "secondly"
+    },
+    {
+      "start_time": 1040.38,
+      "end_time": 1041.96,
+      "text": "fair value gap"
+    },
+    {
+      "start_time": 1041.96,
+      "end_time": 1043.22,
+      "text": "हमने जब भी trade करना है"
+    },
+    {
+      "start_time": 1043.22,
+      "end_time": 1046.54,
+      "text": "इसको FTR और endorsement level के बाद ही trade करना है"
+    },
+    {
+      "start_time": 1054.52,
+      "end_time": 1056.44,
+      "text": "fair value gap अगर इतना ही easy है"
+    },
+    {
+      "start_time": 1056.44,
+      "end_time": 1059.48,
+      "text": "तो फिर forex market में traders fail क्यों होते है"
+    },
+    {
+      "start_time": 1059.48,
+      "end_time": 1062.46,
+      "text": "वहां कुछ traders जब fair value gap find करते है"
+    },
+    {
+      "start_time": 1062.46,
+      "end_time": 1065.38,
+      "text": "तो sometime market उनके fair value gap zone में आती है"
+    },
+    {
+      "start_time": 1065.38,
+      "end_time": 1068.16,
+      "text": "और दोबारा उनके setup की form में चली जाती है"
+    },
+    {
+      "start_time": 1068.16,
+      "end_time": 1071.42,
+      "text": "sometime market उनके fair value gap की respect नहीं करती"
+    },
+    {
+      "start_time": 1071.42,
+      "end_time": 1072.78,
+      "text": "और उपर निकल जाती है"
+    },
+    {
+      "start_time": 1072.78,
+      "end_time": 1073.7,
+      "text": "इसकी क्या reason है"
+    },
+    {
+      "start_time": 1073.7,
+      "end_time": 1075.3,
+      "text": "तो उसकी reason ये है"
+    },
+    {
+      "start_time": 1075.3,
+      "end_time": 1078.26,
+      "text": "क्योंके हर fair value gap valid नहीं होता"
+    },
+    {
+      "start_time": 1078.26,
+      "end_time": 1081.14,
+      "text": "तो valid fair value gap कैसे find करना है"
+    },
+    {
+      "start_time": 1081.14,
+      "end_time": 1082.16,
+      "text": "उसके क्या rules है"
+    },
+    {
+      "start_time": 1082.16,
+      "end_time": 1083.44,
+      "text": "अब हम उसको study करते है"
+    },
+    {
+      "start_time": 1083.44,
+      "end_time": 1088.4,
+      "text": "अब सब fair value gap valid है या नहीं"
+    },
+    {
+      "start_time": 1088.4,
+      "end_time": 1090.12,
+      "text": "इसके लिए आपने दो बात याद रखनी है"
+    },
+    {
+      "start_time": 1090.12,
+      "end_time": 1092.98,
+      "text": "सबसे पहली बात कि अगर आपका sell trend है"
+    },
+    {
+      "start_time": 1092.98,
+      "end_time": 1096.22,
+      "text": "तो sell trend में हमेशा हमने higher scandal को consider करना है"
+    },
+    {
+      "start_time": 1096.22,
+      "end_time": 1099.44,
+      "text": "अब जब मैं इसकी example आगे दूँगा तो आपको ये बात clear हो जाएगी"
+    },
+    {
+      "start_time": 1099.44,
+      "end_time": 1101.7,
+      "text": "कि हाई ये scanner को consider करने का क्या मतलब है"
+    },
+    {
+      "start_time": 1101.7,
+      "end_time": 1107.26,
+      "text": "Secondly, आपने ये देखा होगा फोरेक्स market में कभी भी price सीधी move नहीं करती है"
+    },
+    {
+      "start_time": 1107.26,
+      "end_time": 1110.78,
+      "text": "market हमेशा चोटे चोटे pullbacks बनाती है"
+    },
+    {
+      "start_time": 1110.78,
+      "end_time": 1110.78,
+      "text": "तो ऐसे point पे जहां pullbacks हो और हमने fair value gap find करना"
+    },
+    {
+      "start_time": 1110.78,
+      "end_time": 1115.16,
+      "text": "तो ऐसे point पे जहाँ pullbacks हो और हमने fair value gap find करना हो"
+    },
+    {
+      "start_time": 1115.16,
+      "end_time": 1119.32,
+      "text": "तो वहाँ आपने सबसे पहले देखना है कि वो pullback valid है या नहीं"
+    },
+    {
+      "start_time": 1119.32,
+      "end_time": 1124.18,
+      "text": "अगर वो pullback valid है तो फिर ही आपने उस pullback में fair value gap find करना है"
+    },
+    {
+      "start_time": 1124.18,
+      "end_time": 1128.94,
+      "text": "अब हम इस चीज़ को कुछ डायग्राम कुछ example के साथ समझते हैं"
+    },
+    {
+      "start_time": 1128.94,
+      "end_time": 1130.86,
+      "text": "सबसे पहले यह सिंपल सी डायग्राम"
+    },
+    {
+      "start_time": 1130.86,
+      "end_time": 1135.0,
+      "text": "तो सबसे पहला rule क्या है कि हमने highest candle की विक को consider करना है"
+    },
+    {
+      "start_time": 1135.0,
+      "end_time": 1136.92,
+      "text": "और यहां यह पहली candle को देखें"
+    },
+    {
+      "start_time": 1136.92,
+      "end_time": 1139.64,
+      "text": "यह highest candle है इसकी यह bottom वाली विक है"
+    },
+    {
+      "start_time": 1139.64,
+      "end_time": 1143.3,
+      "text": "इसके बाद जो next candle को छोड़के उसके अगली candle है"
+    },
+    {
+      "start_time": 1143.3,
+      "end_time": 1145.96,
+      "text": "यानि पहली दूसरी और तीसरी candle"
+    },
+    {
+      "start_time": 1145.96,
+      "end_time": 1148.54,
+      "text": "इस candle के top वाली विक"
+    },
+    {
+      "start_time": 1148.54,
+      "end_time": 1152.14,
+      "text": "और highest candle के bottom वाली विक के दरमयान जो gap है"
+    },
+    {
+      "start_time": 1152.14,
+      "end_time": 1154.12,
+      "text": "यह जिसको मैंने highlight किया है"
+    },
+    {
+      "start_time": 1154.12,
+      "end_time": 1157.3,
+      "text": "इसको हम कहते हैं fair value gap वो यह valid है"
+    },
+    {
+      "start_time": 1157.3,
+      "end_time": 1160.0,
+      "text": "इसकी क्या reason है क्योंकि यह highest candle थी"
+    },
+    {
+      "start_time": 1160.0,
+      "end_time": 1162.28,
+      "text": "और उसकी हमने विक से यह measure किया है"
+    },
+    {
+      "start_time": 1162.28,
+      "end_time": 1165.9,
+      "text": "अच्छा जब हम पहला fair value gap find कर लेते हैं"
+    },
+    {
+      "start_time": 1165.9,
+      "end_time": 1168.94,
+      "text": "तो उस swing में बाकी जतने भी fair value gap होते हैं"
+    },
+    {
+      "start_time": 1168.94,
+      "end_time": 1170.44,
+      "text": "जिस तरह यह वाला fair value gap है"
+    },
+    {
+      "start_time": 1170.44,
+      "end_time": 1171.88,
+      "text": "तो यह भी valid होगा"
+    },
+    {
+      "start_time": 1171.88,
+      "end_time": 1176.44,
+      "text": "क्योंकि यह highest candle की fair value gap के बाद बन रहा है"
+    },
+    {
+      "start_time": 1176.44,
+      "end_time": 1180.54,
+      "text": "इस एक्जेंपल की बात करें"
+    },
+    {
+      "start_time": 1180.54,
+      "end_time": 1182.42,
+      "text": "तो यहां यह highest candle है"
+    },
+    {
+      "start_time": 1182.42,
+      "end_time": 1185.88,
+      "text": "इस candle की विक और third candle की विक के दरमयान"
+    },
+    {
+      "start_time": 1185.88,
+      "end_time": 1186.84,
+      "text": "कोई difference नहीं है"
+    },
+    {
+      "start_time": 1186.84,
+      "end_time": 1188.78,
+      "text": "इसलिए यहां कोई fair value gap नहीं"
+    },
+    {
+      "start_time": 1188.78,
+      "end_time": 1190.36,
+      "text": "तो इसके बाद हम देख सकते हैं"
+    },
+    {
+      "start_time": 1190.36,
+      "end_time": 1192.56,
+      "text": "कोई fair value gap अगर observe हो तो"
+    },
+    {
+      "start_time": 1192.56,
+      "end_time": 1193.92,
+      "text": "यह zone देखें"
+    },
+    {
+      "start_time": 1193.92,
+      "end_time": 1197.02,
+      "text": "इस candle की विक और इस candle की विक के दरमयान"
+    },
+    {
+      "start_time": 1197.02,
+      "end_time": 1197.6,
+      "text": "difference है"
+    },
+    {
+      "start_time": 1197.6,
+      "end_time": 1200.64,
+      "text": "यह fair value gap है और यह भी value fair value gap है"
+    },
+    {
+      "start_time": 1200.64,
+      "end_time": 1203.38,
+      "text": "अब ही आपके सामने एक"
+    },
+    {
+      "start_time": 1203.38,
+      "end_time": 1205.72,
+      "text": "यह दोड डाइगराम्स हैं"
+    },
+    {
+      "start_time": 1205.72,
+      "end_time": 1207.32,
+      "text": "जिनको मैंने box में encircle किया है"
+    },
+    {
+      "start_time": 1207.32,
+      "end_time": 1209.24,
+      "text": "तो आप मुझे बताएं इन में से"
+    },
+    {
+      "start_time": 1209.24,
+      "end_time": 1211.4,
+      "text": "यह वाला value fair value gap है"
+    },
+    {
+      "start_time": 1211.4,
+      "end_time": 1213.44,
+      "text": "यह b वाला fvg zone valid है"
+    },
+    {
+      "start_time": 1213.44,
+      "end_time": 1216.7,
+      "text": "आप एक सेक्ड के लिए अपनी स्क्रीन को रोकें"
+    },
+    {
+      "start_time": 1216.7,
+      "end_time": 1218.08,
+      "text": "और इस चीज़ का आंसर फाइंड करें"
+    },
+    {
+      "start_time": 1218.08,
+      "end_time": 1222.44,
+      "text": "for the timing में आपको इस का आंसर बताता चलो"
+    },
+    {
+      "start_time": 1222.44,
+      "end_time": 1225.02,
+      "text": "जो यह वाला fair value gap है"
+    },
+    {
+      "start_time": 1225.02,
+      "end_time": 1226.02,
+      "text": "यह invalid है"
+    },
+    {
+      "start_time": 1226.02,
+      "end_time": 1228.14,
+      "text": "उसकी क्या reason है"
+    },
+    {
+      "start_time": 1228.14,
+      "end_time": 1229.6,
+      "text": "क्योंके पहला principle यह है"
+    },
+    {
+      "start_time": 1229.6,
+      "end_time": 1231.7,
+      "text": "कि हमने highest candle की wick से find करना है"
+    },
+    {
+      "start_time": 1231.7,
+      "end_time": 1234.06,
+      "text": "और यहां हमारी red वाली candle highest है"
+    },
+    {
+      "start_time": 1234.06,
+      "end_time": 1236.86,
+      "text": "और red candle की wick यहां से start हो रही है"
+    },
+    {
+      "start_time": 1236.86,
+      "end_time": 1238.94,
+      "text": "तो इसके उपर जो भी fair value gap होगा"
+    },
+    {
+      "start_time": 1238.94,
+      "end_time": 1240.68,
+      "text": "जिस तरह यह वाला है यह invalid होगा"
+    },
+    {
+      "start_time": 1240.68,
+      "end_time": 1242.6,
+      "text": "तो यहां valid को सा होगा"
+    },
+    {
+      "start_time": 1242.6,
+      "end_time": 1245.2,
+      "text": "इस हाइस candle की wick से देखें"
+    },
+    {
+      "start_time": 1245.2,
+      "end_time": 1248.1,
+      "text": "और उसके बार यह थर्ड candle की wick के दरमयां जो gap होगा"
+    },
+    {
+      "start_time": 1248.1,
+      "end_time": 1249.28,
+      "text": "जिस तरह यह वाला gap है"
+    },
+    {
+      "start_time": 1249.28,
+      "end_time": 1252.04,
+      "text": "यह वाला fair value gap valid होगा"
+    },
+    {
+      "start_time": 1252.04,
+      "end_time": 1253.64,
+      "text": "इसलिए आपने note किया होगा"
+    },
+    {
+      "start_time": 1253.64,
+      "end_time": 1255.06,
+      "text": "कि sometime price आपके"
+    },
+    {
+      "start_time": 1255.06,
+      "end_time": 1257.4,
+      "text": "जो आपने map किया होता है fair value gap"
+    },
+    {
+      "start_time": 1257.4,
+      "end_time": 1258.26,
+      "text": "वहां नहीं आती"
+    },
+    {
+      "start_time": 1258.26,
+      "end_time": 1260.46,
+      "text": "उससे पहले ही return हो जाती है"
+    },
+    {
+      "start_time": 1260.46,
+      "end_time": 1261.58,
+      "text": "तो उसकी reason यह होती है"
+    },
+    {
+      "start_time": 1261.58,
+      "end_time": 1264.1,
+      "text": "कि जो आपने fair value gap highlight की है"
+    },
+    {
+      "start_time": 1264.1,
+      "end_time": 1265.46,
+      "text": "वो valid नहीं था"
+    },
+    {
+      "start_time": 1265.46,
+      "end_time": 1267.52,
+      "text": "market ने उससे नीचे एक valid"
+    },
+    {
+      "start_time": 1267.52,
+      "end_time": 1269.16,
+      "text": "fvg zone चोड़ा होगा था"
+    },
+    {
+      "start_time": 1269.16,
+      "end_time": 1270.72,
+      "text": "इसलिए market जब वहां आती है"
+    },
+    {
+      "start_time": 1270.72,
+      "end_time": 1271.94,
+      "text": "तो reversal मिल जाती है"
+    },
+    {
+      "start_time": 1271.94,
+      "end_time": 1274.82,
+      "text": "लेकिन b zone कि अगर हम बात करें"
+    },
+    {
+      "start_time": 1274.82,
+      "end_time": 1276.1,
+      "text": "इस b sample size की"
+    },
+    {
+      "start_time": 1276.1,
+      "end_time": 1278.72,
+      "text": "तो यह fair value gap valid है यह नहीं"
+    },
+    {
+      "start_time": 1278.72,
+      "end_time": 1280.14,
+      "text": "तो यह वाला valid है"
+    },
+    {
+      "start_time": 1280.14,
+      "end_time": 1281.62,
+      "text": "उसकी क्या reason है"
+    },
+    {
+      "start_time": 1281.62,
+      "end_time": 1284.32,
+      "text": "क्यों कि यह highest candle की विक से बना है"
+    },
+    {
+      "start_time": 1284.32,
+      "end_time": 1285.76,
+      "text": "और यहां blue highest candle है"
+    },
+    {
+      "start_time": 1285.76,
+      "end_time": 1287.04,
+      "text": "इसकी विक से"
+    },
+    {
+      "start_time": 1287.04,
+      "end_time": 1289.5,
+      "text": "next candle की विक तक का जो gap था"
+    },
+    {
+      "start_time": 1289.5,
+      "end_time": 1291.3,
+      "text": "वो fair value gap valid है"
+    },
+    {
+      "start_time": 1291.3,
+      "end_time": 1293.8,
+      "text": "और यहां एक और भी fair value gap है"
+    },
+    {
+      "start_time": 1293.8,
+      "end_time": 1295.68,
+      "text": "यह वाला तो यह भी valid है"
+    },
+    {
+      "start_time": 1295.68,
+      "end_time": 1297.26,
+      "text": "अब market ने"
+    },
+    {
+      "start_time": 1297.26,
+      "end_time": 1299.76,
+      "text": "अगर इस तरह दो valid fair value gap हों"
+    },
+    {
+      "start_time": 1299.76,
+      "end_time": 1301.04,
+      "text": "तो किसको trade करना है"
+    },
+    {
+      "start_time": 1301.04,
+      "end_time": 1303.0,
+      "text": "यह हम अगले lecture में study करेंगे"
+    },
+    {
+      "start_time": 1303.0,
+      "end_time": 1306.62,
+      "text": "अब आपके सामने इस example की बात करें"
+    },
+    {
+      "start_time": 1306.62,
+      "end_time": 1307.94,
+      "text": "तो मुझे बताएं"
+    },
+    {
+      "start_time": 1307.94,
+      "end_time": 1310.38,
+      "text": "यह वाला fair value gap zone valid है या नहीं"
+    },
+    {
+      "start_time": 1310.38,
+      "end_time": 1314.08,
+      "text": "अगर हम यहां देखें था हमारी highest candle कौन सी है"
+    },
+    {
+      "start_time": 1314.08,
+      "end_time": 1316.82,
+      "text": "क्योंकि यह fair value gap zone valid है"
+    },
+    {
+      "start_time": 1316.82,
+      "end_time": 1319.36,
+      "text": "और यहां हमारी highest candle blue candle थी"
+    },
+    {
+      "start_time": 1319.36,
+      "end_time": 1321.88,
+      "text": "क्योंकि इसने previous candle के लिविटरी स्वीट की है"
+    },
+    {
+      "start_time": 1321.88,
+      "end_time": 1323.4,
+      "text": "इसलिए यह highest candle है"
+    },
+    {
+      "start_time": 1323.4,
+      "end_time": 1328.04,
+      "text": "तो इस candle की विक और उसे अगली candle की विक के दरम्यान जो gap था"
+    },
+    {
+      "start_time": 1328.04,
+      "end_time": 1330.4,
+      "text": "वो fair value gap valid होगा"
+    },
+    {
+      "start_time": 1330.4,
+      "end_time": 1332.64,
+      "text": "इसी तरह गर हम इस वाले"
+    },
+    {
+      "start_time": 1332.64,
+      "end_time": 1335.34,
+      "text": "यह जो fair value gap है इसकी बात करें"
+    },
+    {
+      "start_time": 1335.34,
+      "end_time": 1337.4,
+      "text": "तो क्या यह valid है या नहीं"
+    },
+    {
+      "start_time": 1337.4,
+      "end_time": 1340.44,
+      "text": "यहां अब वो point आता है जो हमने यहां कहा"
+    },
+    {
+      "start_time": 1340.44,
+      "end_time": 1342.48,
+      "text": "कि valid pullback को find करेंगे"
+    },
+    {
+      "start_time": 1342.48,
+      "end_time": 1344.48,
+      "text": "तो यह रेखें यह valid pullback है"
+    },
+    {
+      "start_time": 1344.48,
+      "end_time": 1347.02,
+      "text": "reason कहा है क्योंकि यह blue वाली lowest candle है"
+    },
+    {
+      "start_time": 1347.02,
+      "end_time": 1349.1,
+      "text": "next candle ने इसका high break की है"
+    },
+    {
+      "start_time": 1349.1,
+      "end_time": 1351.18,
+      "text": "और उसके बाद red वाली highest candle है"
+    },
+    {
+      "start_time": 1351.18,
+      "end_time": 1352.5,
+      "text": "तो red candle के low"
+    },
+    {
+      "start_time": 1352.5,
+      "end_time": 1355.38,
+      "text": "और इस candle के विक के दरम्यान"
+    },
+    {
+      "start_time": 1355.38,
+      "end_time": 1357.52,
+      "text": "जो difference है दोनों width के दरम्यान"
+    },
+    {
+      "start_time": 1357.52,
+      "end_time": 1359.22,
+      "text": "यह fair value gap भी valid है"
+    },
+    {
+      "start_time": 1359.22,
+      "end_time": 1362.12,
+      "text": "एक बात आपने और जहन में रखनी है"
+    },
+    {
+      "start_time": 1362.12,
+      "end_time": 1364.42,
+      "text": "कि fair value gap find करते वकद"
+    },
+    {
+      "start_time": 1364.42,
+      "end_time": 1365.96,
+      "text": "color matter नहीं करता"
+    },
+    {
+      "start_time": 1365.96,
+      "end_time": 1368.0,
+      "text": "कि bullish candle है या bearish candle है"
+    },
+    {
+      "start_time": 1368.0,
+      "end_time": 1370.78,
+      "text": "हमेशा पहली candle की wick"
+    },
+    {
+      "start_time": 1370.78,
+      "end_time": 1372.82,
+      "text": "और तीसरी candle की wick के दरम्यान"
+    },
+    {
+      "start_time": 1372.82,
+      "end_time": 1373.84,
+      "text": "जो gap होगा"
+    },
+    {
+      "start_time": 1373.84,
+      "end_time": 1376.32,
+      "text": "उसको हम अपना fair value gap consider करेंगे"
+    },
+    {
+      "start_time": 1376.32,
+      "end_time": 1377.74,
+      "text": "जैसा कि यहाँ देखें"
+    },
+    {
+      "start_time": 1377.74,
+      "end_time": 1380.02,
+      "text": "यह bullish to bearish candle के दरम्यान"
+    },
+    {
+      "start_time": 1380.02,
+      "end_time": 1382.22,
+      "text": "difference है यह bearish to bearish है"
+    },
+    {
+      "start_time": 1382.22,
+      "end_time": 1384.84,
+      "text": "यानि candle का color माइन नहीं रखता"
+    },
+    {
+      "start_time": 1384.84,
+      "end_time": 1387.08,
+      "text": "सिर्फ दो candle की wick के दरम्यान"
+    },
+    {
+      "start_time": 1387.08,
+      "end_time": 1387.78,
+      "text": "जो difference है"
+    },
+    {
+      "start_time": 1387.78,
+      "end_time": 1390.36,
+      "text": "हमने उस fair value gap को consider करना है"
+    },
+    {
+      "start_time": 1390.36,
+      "end_time": 1392.5,
+      "text": "और highest candle से map out करना है"
+    },
+    {
+      "start_time": 1392.5,
+      "end_time": 1397.14,
+      "text": "अब यह आपके सामने"
+    },
+    {
+      "start_time": 1397.14,
+      "end_time": 1400.3,
+      "text": "C, D, E और F"
+    },
+    {
+      "start_time": 1400.3,
+      "end_time": 1401.46,
+      "text": "चार options हैं"
+    },
+    {
+      "start_time": 1401.46,
+      "end_time": 1404.4,
+      "text": "आप इनमें से बताएं कौन सा fair value gap valid है"
+    },
+    {
+      "start_time": 1404.4,
+      "end_time": 1407.44,
+      "text": "एक मिन के लिए अपनी स्क्रीन को रोकें"
+    },
+    {
+      "start_time": 1407.44,
+      "end_time": 1408.32,
+      "text": "और इस cancer दें"
+    },
+    {
+      "start_time": 1408.32,
+      "end_time": 1412.64,
+      "text": "चले अब मैं इस cancer बताता हूँ"
+    },
+    {
+      "start_time": 1412.64,
+      "end_time": 1414.38,
+      "text": "अगर हम C वाले की बात करें"
+    },
+    {
+      "start_time": 1414.38,
+      "end_time": 1416.94,
+      "text": "तो यह वाला fair value gap invalid है"
+    },
+    {
+      "start_time": 1416.94,
+      "end_time": 1418.7,
+      "text": "उसकी क्या reason है"
+    },
+    {
+      "start_time": 1418.7,
+      "end_time": 1420.4,
+      "text": "क्योंकि हमने rule study किया"
+    },
+    {
+      "start_time": 1420.4,
+      "end_time": 1422.84,
+      "text": "कि cell trend में जो highest candle होगी"
+    },
+    {
+      "start_time": 1422.84,
+      "end_time": 1424.46,
+      "text": "उसकी wix से हमने चेक करना है"
+    },
+    {
+      "start_time": 1424.46,
+      "end_time": 1426.6,
+      "text": "तो यहां जो red candle जिसकी wix से"
+    },
+    {
+      "start_time": 1426.6,
+      "end_time": 1428.58,
+      "text": "यह fair value gap draw किया गया है"
+    },
+    {
+      "start_time": 1428.58,
+      "end_time": 1430.66,
+      "text": "यह valid नहीं क्योंकि यह red candle"
+    },
+    {
+      "start_time": 1430.66,
+      "end_time": 1431.6,
+      "text": "highest candle नहीं है"
+    },
+    {
+      "start_time": 1431.6,
+      "end_time": 1434.38,
+      "text": "यहां यह red वाली candle highest candle है"
+    },
+    {
+      "start_time": 1434.38,
+      "end_time": 1436.48,
+      "text": "अब अगर हम D की बात करें"
+    },
+    {
+      "start_time": 1436.48,
+      "end_time": 1438.6,
+      "text": "तो यह fair value gap भी invalid है"
+    },
+    {
+      "start_time": 1438.6,
+      "end_time": 1440.88,
+      "text": "same reason क्योंकि यह blue वाली candle"
+    },
+    {
+      "start_time": 1440.88,
+      "end_time": 1441.92,
+      "text": "highest candle नहीं है"
+    },
+    {
+      "start_time": 1441.92,
+      "end_time": 1444.02,
+      "text": "highest candle यह red वाली candle है"
+    },
+    {
+      "start_time": 1444.02,
+      "end_time": 1446.3,
+      "text": "इसलिए यह fair value gap invalid है"
+    },
+    {
+      "start_time": 1446.3,
+      "end_time": 1449.0,
+      "text": "अब अगर E की बात करें"
+    },
+    {
+      "start_time": 1449.0,
+      "end_time": 1450.02,
+      "text": "तो यह भी invalid है"
+    },
+    {
+      "start_time": 1450.02,
+      "end_time": 1452.12,
+      "text": "क्योंकि यह जिस blue candle की wix से"
+    },
+    {
+      "start_time": 1452.12,
+      "end_time": 1453.28,
+      "text": "draw किया गया है"
+    },
+    {
+      "start_time": 1453.28,
+      "end_time": 1455.88,
+      "text": "यह वाली blue candle भी highest candle नहीं"
+    },
+    {
+      "start_time": 1455.88,
+      "end_time": 1457.7,
+      "text": "यहां यह red वाली candle ही"
+    },
+    {
+      "start_time": 1457.7,
+      "end_time": 1458.94,
+      "text": "again highest candle है"
+    },
+    {
+      "start_time": 1458.94,
+      "end_time": 1461.08,
+      "text": "अब आती है F की बात"
+    },
+    {
+      "start_time": 1461.08,
+      "end_time": 1462.76,
+      "text": "क्या F वाला fair value gap"
+    },
+    {
+      "start_time": 1462.76,
+      "end_time": 1464.78,
+      "text": "यह F वी जी जोन valid है"
+    },
+    {
+      "start_time": 1464.78,
+      "end_time": 1467.14,
+      "text": "बिलकुल अब यह वाली वाली वाली वाली है"
+    },
+    {
+      "start_time": 1467.14,
+      "end_time": 1470.28,
+      "text": "क्योंकि यह जिस वाली candle से draw किया गया है"
+    },
+    {
+      "start_time": 1470.28,
+      "end_time": 1472.36,
+      "text": "वो वाली candle हाई highest candle है"
+    },
+    {
+      "start_time": 1472.36,
+      "end_time": 1474.52,
+      "text": "अब यह वाला rule fulfill हो रहा है"
+    },
+    {
+      "start_time": 1474.52,
+      "end_time": 1476.18,
+      "text": "इसलिए जब कहीं भी हमने"
+    },
+    {
+      "start_time": 1476.18,
+      "end_time": 1479.5,
+      "text": "valid pullback पे fair value gap को draw करना है"
+    },
+    {
+      "start_time": 1479.5,
+      "end_time": 1484.4,
+      "text": "वह हमेशा valid pullback यह highest candle को चेक करना है"
+    },
+    {
+      "start_time": 1484.4,
+      "end_time": 1485.54,
+      "text": "क्योंसी highest candle है"
+    },
+    {
+      "start_time": 1485.54,
+      "end_time": 1487.2,
+      "text": "उसकी week से हम draw करेंगे"
+    },
+    {
+      "start_time": 1487.2,
+      "end_time": 1490.02,
+      "text": "इसलिए यह F वाला fair value gap है"
+    },
+    {
+      "start_time": 1490.02,
+      "end_time": 1491.06,
+      "text": "यह valid है"
+    },
+    {
+      "start_time": 1491.06,
+      "end_time": 1493.98,
+      "text": "अब हम इसकी further example को study करते है"
+    },
+    {
+      "start_time": 1493.98,
+      "end_time": 1498.76,
+      "text": "अब इस box में देखें"
+    },
+    {
+      "start_time": 1498.76,
+      "end_time": 1501.58,
+      "text": "आपके सामने again दो fair value gap शोग किये गये है"
+    },
+    {
+      "start_time": 1501.58,
+      "end_time": 1502.88,
+      "text": "यहां मुझे बताएं"
+    },
+    {
+      "start_time": 1502.88,
+      "end_time": 1504.38,
+      "text": "यह G वाला valid है"
+    },
+    {
+      "start_time": 1504.38,
+      "end_time": 1505.88,
+      "text": "यह H वाला valid है"
+    },
+    {
+      "start_time": 1505.88,
+      "end_time": 1508.86,
+      "text": "अब यह diagram last slide के साथ मिलती जुलती है"
+    },
+    {
+      "start_time": 1508.86,
+      "end_time": 1511.0,
+      "text": "तो मुझे लोग सोच रहे होंगे G वाला valid है"
+    },
+    {
+      "start_time": 1511.0,
+      "end_time": 1512.82,
+      "text": "लेकिन यह invalid है"
+    },
+    {
+      "start_time": 1512.82,
+      "end_time": 1514.34,
+      "text": "उसकी क्या reason है"
+    },
+    {
+      "start_time": 1514.34,
+      "end_time": 1516.98,
+      "text": "क्योंकि again वही rule सबसे पहले highest candle"
+    },
+    {
+      "start_time": 1516.98,
+      "end_time": 1519.12,
+      "text": "तो यहां यह red वाली highest candle है"
+    },
+    {
+      "start_time": 1519.12,
+      "end_time": 1521.12,
+      "text": "जिसने previous candle के high को sweep किये"
+    },
+    {
+      "start_time": 1521.12,
+      "end_time": 1524.28,
+      "text": "तो इसलिए यह fair value gap सरक इतना नहीं है"
+    },
+    {
+      "start_time": 1524.28,
+      "end_time": 1527.32,
+      "text": "अगर हम इसको same diagram को इदर देखें"
+    },
+    {
+      "start_time": 1527.32,
+      "end_time": 1528.7,
+      "text": "actually side पे"
+    },
+    {
+      "start_time": 1528.7,
+      "end_time": 1530.44,
+      "text": "तो यह वाला valid है"
+    },
+    {
+      "start_time": 1530.44,
+      "end_time": 1531.86,
+      "text": "क्योंकि यह same diagram है"
+    },
+    {
+      "start_time": 1531.86,
+      "end_time": 1533.02,
+      "text": "यहां यहां यहां यह candle है"
+    },
+    {
+      "start_time": 1533.02,
+      "end_time": 1534.66,
+      "text": "और इसकी wick से"
+    },
+    {
+      "start_time": 1534.66,
+      "end_time": 1536.16,
+      "text": "इस wick के zone तक"
+    },
+    {
+      "start_time": 1536.16,
+      "end_time": 1538.4,
+      "text": "यह वाला fair value gap valid है"
+    },
+    {
+      "start_time": 1538.4,
+      "end_time": 1541.52,
+      "text": "इसलिए कुछ लोग जब यह वाला fair value gap"
+    },
+    {
+      "start_time": 1541.52,
+      "end_time": 1543.72,
+      "text": "यूज करते हैं entry के लिए"
+    },
+    {
+      "start_time": 1543.72,
+      "end_time": 1546.26,
+      "text": "तो उनकी entry mostly उपर निकल जाती है"
+    },
+    {
+      "start_time": 1546.26,
+      "end_time": 1549.38,
+      "text": "क्योंकि उन्होंने गल्त चूज किया था"
+    },
+    {
+      "start_time": 1549.38,
+      "end_time": 1550.2,
+      "text": "fair value gap"
+    },
+    {
+      "start_time": 1550.2,
+      "end_time": 1553.3,
+      "text": "as per rule यह वाला valid fair value gap है"
+    },
+    {
+      "start_time": 1553.3,
+      "end_time": 1556.82,
+      "text": "similarly अगर हम इस example की बात करें"
+    },
+    {
+      "start_time": 1556.82,
+      "end_time": 1560.18,
+      "text": "तो यह वाला fair value gap invalid है"
+    },
+    {
+      "start_time": 1560.18,
+      "end_time": 1562.76,
+      "text": "अब इसकी क्या reason है"
+    },
+    {
+      "start_time": 1562.76,
+      "end_time": 1566.32,
+      "text": "इसकी reason यह यहां blue वाली हाय स्केंडल नहीं रही"
+    },
+    {
+      "start_time": 1566.32,
+      "end_time": 1568.28,
+      "text": "यहां हाय स्केंडल red वाली है"
+    },
+    {
+      "start_time": 1568.28,
+      "end_time": 1570.28,
+      "text": "यह red हाय स्केंडल है"
+    },
+    {
+      "start_time": 1570.28,
+      "end_time": 1572.34,
+      "text": "तो हमने हमेशा इसकी विक से चैक करना है"
+    },
+    {
+      "start_time": 1572.34,
+      "end_time": 1574.3,
+      "text": "blue की विक से draw किया गया"
+    },
+    {
+      "start_time": 1574.3,
+      "end_time": 1576.06,
+      "text": "fair value gap invalid होगा"
+    },
+    {
+      "start_time": 1576.06,
+      "end_time": 1579.82,
+      "text": "अब अगर हम इसी same diagram को लें"
+    },
+    {
+      "start_time": 1579.82,
+      "end_time": 1582.06,
+      "text": "तो इसमें valid fair value gap कौन सा होगा"
+    },
+    {
+      "start_time": 1582.06,
+      "end_time": 1584.08,
+      "text": "तो हाय स्केंडल की विक के bottom"
+    },
+    {
+      "start_time": 1584.08,
+      "end_time": 1587.04,
+      "text": "और उससे अगली candle की विक के दरमयान जो gap है"
+    },
+    {
+      "start_time": 1587.04,
+      "end_time": 1589.92,
+      "text": "यह वाला gap जिसको मैंने case से mention किया है"
+    },
+    {
+      "start_time": 1589.92,
+      "end_time": 1591.98,
+      "text": "यह वाला valid fair value gap है"
+    },
+    {
+      "start_time": 1591.98,
+      "end_time": 1596.88,
+      "text": "अब fair value gap को use कैसे करना है"
+    },
+    {
+      "start_time": 1596.88,
+      "end_time": 1598.42,
+      "text": "जैसा कि मैंने पहले बताया"
+    },
+    {
+      "start_time": 1598.42,
+      "end_time": 1600.76,
+      "text": "हमेशा forex market में कोई भी चीज है"
+    },
+    {
+      "start_time": 1600.76,
+      "end_time": 1603.42,
+      "text": "supply, demand, order block, order flow"
+    },
+    {
+      "start_time": 1603.42,
+      "end_time": 1604.76,
+      "text": "जिसको हम आगे study करेंगे"
+    },
+    {
+      "start_time": 1604.76,
+      "end_time": 1606.18,
+      "text": "यह fair value gap"
+    },
+    {
+      "start_time": 1606.18,
+      "end_time": 1607.84,
+      "text": "वो हमने वो ही use करना है"
+    },
+    {
+      "start_time": 1607.84,
+      "end_time": 1609.2,
+      "text": "और वो ही high probability होगा"
+    },
+    {
+      "start_time": 1609.2,
+      "end_time": 1610.72,
+      "text": "जो trend की direction में होगा"
+    },
+    {
+      "start_time": 1610.72,
+      "end_time": 1614.02,
+      "text": "secondly, fair value gap"
+    },
+    {
+      "start_time": 1614.02,
+      "end_time": 1617.22,
+      "text": "चाहे वो किसी भी point पे है"
+    },
+    {
+      "start_time": 1617.22,
+      "end_time": 1618.88,
+      "text": "वो सिरफ और सिरफ हमने sweep"
+    },
+    {
+      "start_time": 1618.88,
+      "end_time": 1621.64,
+      "text": "या liquidity grab के बाद ही उसको use करना है"
+    },
+    {
+      "start_time": 1621.64,
+      "end_time": 1624.4,
+      "text": "और किसी भी fair value gap की"
+    },
+    {
+      "start_time": 1624.4,
+      "end_time": 1625.94,
+      "text": "जो importance है जो value है"
+    },
+    {
+      "start_time": 1625.94,
+      "end_time": 1626.86,
+      "text": "वो तब ही बढ़ती है"
+    },
+    {
+      "start_time": 1626.86,
+      "end_time": 1629.06,
+      "text": "अगर market ने कहीं से liquidity sweep कर ली है"
+    },
+    {
+      "start_time": 1629.06,
+      "end_time": 1630.7,
+      "text": "या liquidity grab कर ली है"
+    },
+    {
+      "start_time": 1630.7,
+      "end_time": 1633.02,
+      "text": "उसके बाद ही हम fair value gap को"
+    },
+    {
+      "start_time": 1633.02,
+      "end_time": 1635.04,
+      "text": "endorsement के बाद trade कर सकते है"
+    },
+    {
+      "start_time": 1635.04,
+      "end_time": 1637.1,
+      "text": "और finally"
+    },
+    {
+      "start_time": 1637.1,
+      "end_time": 1639.04,
+      "text": "कोई भी fair value gap zone"
+    },
+    {
+      "start_time": 1639.04,
+      "end_time": 1641.6,
+      "text": "अगर order block या supply and demand के साथ"
+    },
+    {
+      "start_time": 1641.6,
+      "end_time": 1642.64,
+      "text": "couple कर लिया जाए"
+    },
+    {
+      "start_time": 1642.64,
+      "end_time": 1645.78,
+      "text": "तो आपकी trade मजीद high probability हो जाती है"
+    },
+    {
+      "start_time": 1645.78,
+      "end_time": 1647.74,
+      "text": "उसका risk मजीद कम हो जाता है"
+    },
+    {
+      "start_time": 1647.74,
+      "end_time": 1649.72,
+      "text": "और reward ratio और ज्यादा बढ़ जाती है"
+    },
+    {
+      "start_time": 1649.72,
+      "end_time": 1652.62,
+      "text": "अब यह जो same diagram है"
+    },
+    {
+      "start_time": 1652.62,
+      "end_time": 1654.26,
+      "text": "यह हमने sell trend के लिए पढ़ी"
+    },
+    {
+      "start_time": 1654.26,
+      "end_time": 1656.44,
+      "text": "यह 100% same rules"
+    },
+    {
+      "start_time": 1656.44,
+      "end_time": 1659.3,
+      "text": "हम bullish market के लिए भी study कर सकते है"
+    },
+    {
+      "start_time": 1659.3,
+      "end_time": 1664.46,
+      "text": "अब अगर हम fair value gap की bullish market के लिए बात करें"
+    },
+    {
+      "start_time": 1664.46,
+      "end_time": 1666.46,
+      "text": "तो सिर्फ और सिर्फ एक चीज़ का difference है"
+    },
+    {
+      "start_time": 1666.46,
+      "end_time": 1668.98,
+      "text": "यहाँ हम सिर्फ lowest candle को consider करेंगे"
+    },
+    {
+      "start_time": 1668.98,
+      "end_time": 1671.3,
+      "text": "यह आपके सामने जितनी भी examples है"
+    },
+    {
+      "start_time": 1671.3,
+      "end_time": 1673.78,
+      "text": "यहाँ यह जो fair value gap draw किये गये है"
+    },
+    {
+      "start_time": 1673.78,
+      "end_time": 1675.8,
+      "text": "यह lowest candle से draw किये गये है"
+    },
+    {
+      "start_time": 1675.8,
+      "end_time": 1677.88,
+      "text": "अब अगर कोई fair value gap"
+    },
+    {
+      "start_time": 1677.88,
+      "end_time": 1679.8,
+      "text": "lowest candle से draw नहीं किया जाएगा"
+    },
+    {
+      "start_time": 1679.8,
+      "end_time": 1680.74,
+      "text": "जैसा कि यह देखें"
+    },
+    {
+      "start_time": 1680.74,
+      "end_time": 1682.88,
+      "text": "तो वो fair value gap valid नहीं होगा"
+    },
+    {
+      "start_time": 1682.88,
+      "end_time": 1685.66,
+      "text": "अब यह valid है क्योंकि यहाँ red वाली lowest candle है"
+    },
+    {
+      "start_time": 1685.66,
+      "end_time": 1687.26,
+      "text": "similarly यहाँ देखें"
+    },
+    {
+      "start_time": 1687.26,
+      "end_time": 1689.5,
+      "text": "c, d और e इसलिए valid नहीं है"
+    },
+    {
+      "start_time": 1689.5,
+      "end_time": 1691.74,
+      "text": "क्योंकि यह जिन candle से draw किये गये है"
+    },
+    {
+      "start_time": 1691.74,
+      "end_time": 1693.0,
+      "text": "वो lowest candle नहीं थी"
+    },
+    {
+      "start_time": 1693.0,
+      "end_time": 1695.26,
+      "text": "यह blue वाली हमारी lowest candle थी"
+    },
+    {
+      "start_time": 1695.26,
+      "end_time": 1698.12,
+      "text": "और f वाली इसलिए valid fair value gap है"
+    },
+    {
+      "start_time": 1698.12,
+      "end_time": 1700.36,
+      "text": "क्योंकि यह lowest candle की week से draw किया गया है"
+    },
+    {
+      "start_time": 1700.36,
+      "end_time": 1705.34,
+      "text": "similarly अगर आप इन examples को देखें"
+    },
+    {
+      "start_time": 1705.34,
+      "end_time": 1707.86,
+      "text": "तो आपको पता लगेगा यह वाला fair value gap"
+    },
+    {
+      "start_time": 1707.86,
+      "end_time": 1708.9,
+      "text": "इसलिए invalid है"
+    },
+    {
+      "start_time": 1708.9,
+      "end_time": 1710.96,
+      "text": "क्योंकि यह जिस candle से draw किया गया"
+    },
+    {
+      "start_time": 1710.96,
+      "end_time": 1712.6,
+      "text": "वो candle lowest candle नहीं थी"
+    },
+    {
+      "start_time": 1712.6,
+      "end_time": 1714.76,
+      "text": "यहाँ यह वाली blue वाली lowest candle थी"
+    },
+    {
+      "start_time": 1714.76,
+      "end_time": 1717.34,
+      "text": "इसलिए यह वाला fair value gap valid होगा"
+    },
+    {
+      "start_time": 1717.34,
+      "end_time": 1720.22,
+      "text": "इसलिए यह वाला invalid है"
+    },
+    {
+      "start_time": 1720.22,
+      "end_time": 1722.18,
+      "text": "क्योंकि यह जिस candle से draw किया गया है"
+    },
+    {
+      "start_time": 1722.18,
+      "end_time": 1723.36,
+      "text": "वो lowest candle नहीं थी"
+    },
+    {
+      "start_time": 1723.36,
+      "end_time": 1726.64,
+      "text": "और इस candle के लिए same यह image है"
+    },
+    {
+      "start_time": 1726.64,
+      "end_time": 1728.02,
+      "text": "और यहाँ fair value gap"
+    },
+    {
+      "start_time": 1728.02,
+      "end_time": 1730.96,
+      "text": "इन दो candle की week के दर्मियान वाला difference"
+    },
+    {
+      "start_time": 1730.96,
+      "end_time": 1732.8,
+      "text": "valid FVG zone है"
+    },
+    {
+      "start_time": 1732.8,
+      "end_time": 1735.02,
+      "text": "तो hopefully यहाँ से आपको understanding होगी"
+    },
+    {
+      "start_time": 1735.02,
+      "end_time": 1736.24,
+      "text": "कि fair value gap"
+    },
+    {
+      "start_time": 1736.24,
+      "end_time": 1738.0,
+      "text": "sell market के लिए कैसे design करना है"
+    },
+    {
+      "start_time": 1738.0,
+      "end_time": 1740.34,
+      "text": "और buy market के लिए कैसे design करना है"
+    },
+    {
+      "start_time": 1740.34,
+      "end_time": 1741.98,
+      "text": "rule दोनों के लिए same है"
+    },
+    {
+      "start_time": 1741.98,
+      "end_time": 1744.98,
+      "text": "इसको trade करने हैं कि हमेशा trend की direction में trade करें"
+    },
+    {
+      "start_time": 1744.98,
+      "end_time": 1746.9,
+      "text": "और after liquidity sweep"
+    },
+    {
+      "start_time": 1746.9,
+      "end_time": 1748.58,
+      "text": "या liquidity grab trade करें"
+    },
+    {
+      "start_time": 1748.58,
+      "end_time": 1750.74,
+      "text": "और finally अगर हम इसको order block"
+    },
+    {
+      "start_time": 1750.74,
+      "end_time": 1752.84,
+      "text": "या supply and demand के साथ couple करके"
+    },
+    {
+      "start_time": 1752.84,
+      "end_time": 1756.26,
+      "text": "यूज़ करें तो आपको यह ज्यादा benefit ज्यादा profit दे सकते हैं"
+    },
+    {
+      "start_time": 1756.26,
+      "end_time": 1759.08,
+      "text": "load इसके साथ high reward ratio मिलेगी"
+    },
+    {
+      "start_time": 1759.08,
+      "end_time": 1761.6,
+      "text": "लेकिन यह supply and demand और order block"
+    },
+    {
+      "start_time": 1761.6,
+      "end_time": 1763.68,
+      "text": "इनको कैसे हमने readout करना है"
+    },
+    {
+      "start_time": 1763.68,
+      "end_time": 1765.28,
+      "text": "यह हम इसके बास study करेंगे"
+    },
+    {
+      "start_time": 1765.28,
+      "end_time": 1770.78,
+      "text": "अभी आपके सामने एक real market sample size है"
+    },
+    {
+      "start_time": 1770.78,
+      "end_time": 1773.18,
+      "text": "यहाँ देखें market total bearish mode में है"
+    },
+    {
+      "start_time": 1773.18,
+      "end_time": 1774.54,
+      "text": "यानि bearish momentum है"
+    },
+    {
+      "start_time": 1774.54,
+      "end_time": 1775.5,
+      "text": "bearish trend है"
+    },
+    {
+      "start_time": 1775.5,
+      "end_time": 1776.88,
+      "text": "तो यहाँ हम क्या करेंगे"
+    },
+    {
+      "start_time": 1776.88,
+      "end_time": 1779.06,
+      "text": "bearish side का fair value gap find करेंगे"
+    },
+    {
+      "start_time": 1779.06,
+      "end_time": 1781.66,
+      "text": "यह देखें market ने एक liquidity wide create की"
+    },
+    {
+      "start_time": 1781.66,
+      "end_time": 1783.82,
+      "text": "one side did इसकी market की move है"
+    },
+    {
+      "start_time": 1783.82,
+      "end_time": 1785.6,
+      "text": "और अगर इसको refine किया जाए"
+    },
+    {
+      "start_time": 1785.6,
+      "end_time": 1787.2,
+      "text": "इस liquidity wide को"
+    },
+    {
+      "start_time": 1787.2,
+      "end_time": 1789.14,
+      "text": "तो यह इसका fair value gap बनता है"
+    },
+    {
+      "start_time": 1789.14,
+      "end_time": 1790.8,
+      "text": "और fair value gap"
+    },
+    {
+      "start_time": 1790.8,
+      "end_time": 1792.92,
+      "text": "क्योंकि यहाँ market की liquidity होती है"
+    },
+    {
+      "start_time": 1792.92,
+      "end_time": 1794.32,
+      "text": "pending order होते हैं"
+    },
+    {
+      "start_time": 1794.32,
+      "end_time": 1796.32,
+      "text": "इसलिए जब market वापस जोन में आई"
+    },
+    {
+      "start_time": 1796.32,
+      "end_time": 1798.08,
+      "text": "liquidity को take out किया"
+    },
+    {
+      "start_time": 1798.08,
+      "end_time": 1800.54,
+      "text": "और दोबारा original trend की direction में move कर गी"
+    },
+    {
+      "start_time": 1800.54,
+      "end_time": 1803.68,
+      "text": "अगें यहाँ market ने liquidity wide create की"
+    },
+    {
+      "start_time": 1803.68,
+      "end_time": 1806.02,
+      "text": "और इस wide को जाब हम refine करते है"
+    },
+    {
+      "start_time": 1806.02,
+      "end_time": 1807.8,
+      "text": "तो यह इसका fair value gap बनता है"
+    },
+    {
+      "start_time": 1807.8,
+      "end_time": 1809.94,
+      "text": "यह एज़ा liquidity add करता है"
+    },
+    {
+      "start_time": 1809.94,
+      "end_time": 1811.46,
+      "text": "market वापस जोन में आई"
+    },
+    {
+      "start_time": 1811.46,
+      "end_time": 1813.08,
+      "text": "liquidity को grab किया"
+    },
+    {
+      "start_time": 1813.08,
+      "end_time": 1813.96,
+      "text": "take out किया"
+    },
+    {
+      "start_time": 1813.96,
+      "end_time": 1817.28,
+      "text": "और दोबारा original trend की direction में move कर गी"
+    },
+    {
+      "start_time": 1817.28,
+      "end_time": 1819.98,
+      "text": "आपने एक बात याद रखनी है"
+    },
+    {
+      "start_time": 1819.98,
+      "end_time": 1823.16,
+      "text": "कि fair value gap market किसी भी वक्त fill कर सकती है"
+    },
+    {
+      "start_time": 1823.16,
+      "end_time": 1824.62,
+      "text": "लाजमी नहीं अभी fill करना है"
+    },
+    {
+      "start_time": 1824.62,
+      "end_time": 1827.68,
+      "text": "आज, कल, परसों, एक दिन बाद, एक अफ़ते बाद"
+    },
+    {
+      "start_time": 1827.68,
+      "end_time": 1829.68,
+      "text": "किसी भी वक्त market इसको fill कर सकती है"
+    },
+    {
+      "start_time": 1829.68,
+      "end_time": 1834.18,
+      "text": "secondly, fair value gap market mostly 100% fill कर सकती है"
+    },
+    {
+      "start_time": 1834.18,
+      "end_time": 1837.18,
+      "text": "लेकिन जब भी हमने fair value gap को use करना है"
+    },
+    {
+      "start_time": 1837.18,
+      "end_time": 1841.58,
+      "text": "तो हमने इसका minimum 50% level पर अपनी entry को formulate कर सकते है"
+    },
+    {
+      "start_time": 1841.58,
+      "end_time": 1843.56,
+      "text": "तो अब मैं उम्मीर करता हूँ"
+    },
+    {
+      "start_time": 1843.56,
+      "end_time": 1848.9,
+      "text": "कि आपको price imbalance, liquidity wide और fair value gap का idea हो गया"
+    },
+    {
+      "start_time": 1848.9,
+      "end_time": 1850.46,
+      "text": "कि बेसिलिए क्या चीज़ें होती है"
+    },
+    {
+      "start_time": 1850.46,
+      "end_time": 1853.14,
+      "text": "ये as a liquidity क्यों act करती है"
+    },
+    {
+      "start_time": 1853.14,
+      "end_time": 1856.44,
+      "text": "और हम इनको ही क्यों use करके entry ले सकते है"
+    },
+    {
+      "start_time": 1856.44,
+      "end_time": 1860.78,
+      "text": "तो अगर आपका कोई question है"
+    },
+    {
+      "start_time": 1860.78,
+      "end_time": 1862.92,
+      "text": "तो आप मुझे इस email ID पर राप्ता कर सकते है"
+    },
+    {
+      "start_time": 1862.92,
+      "end_time": 1865.28,
+      "text": "या आप इस QR code को scan करें"
+    },
+    {
+      "start_time": 1865.28,
+      "end_time": 1867.98,
+      "text": "तो हमारे सारे social media platform आपके सामने आ जाएंगे"
+    },
+    {
+      "start_time": 1867.98,
+      "end_time": 1870.22,
+      "text": "मेरा WhatsApp नंबर भी आपके पास आ जाएगा"
+    },
+    {
+      "start_time": 1870.22,
+      "end_time": 1872.04,
+      "text": "तो आप मुझे से किसी भी वक्त राप्ता करके"
+    },
+    {
+      "start_time": 1872.04,
+      "end_time": 1873.54,
+      "text": "अपने quiz discuss कर सकते है"
+    },
+    {
+      "start_time": 1873.54,
+      "end_time": 1876.54,
+      "text": "नेक्स लेक्टे तक wish you good luck and happy trading"
+    }
+  ],
+  "language": "hi",
+  "duration": 1876.54,
+  "transcribed_at": "2026-02-10T14:29:32.996630",
+  "method": "whisper_cpp_large-v3-turbo",
+  "model": "whisper.cpp/large-v3-turbo (Metal GPU)",
+  "word_count": 5827,
+  "processing_time_seconds": 2367.9,
+  "title": "Video"
+}

@@ -1,0 +1,149 @@
+{
+  "video_id": "9BfwzGhkOFE",
+  "title": "SMC Daily Candlestick Formation Theory & Trading Sessions",
+  "playlist": "Hindi - Complete Logical SMC",
+  "video_number": 16,
+  "generation_method": "Claude Code expert analysis",
+  "generated_at": "2026-02-10T23:55:00Z",
+  "metadata": {
+    "source_language": "hi",
+    "transcript_method": "whisper_cpp_large_v3_turbo",
+    "training_type": "claude_code_expert",
+    "duration_minutes": 22.0,
+    "transcript_words": 5500,
+    "frames_analyzed": 8,
+    "concepts_extracted": 5
+  },
+  "concepts": {
+    "forex_market_working_principle": {
+      "llm_summary": "The forex market is driven by Smart Money — big banks, insurance companies, and hedge funds that have massive trading volumes capable of moving the market in any direction. The market operates 24 hours a day, 5 days a week (Saturday/Sunday holiday). The chain works as follows: small banks in each region (Asia, London, New York, Sydney) report daily transaction data to their country's state/central bank, which then reports to a centralized regulatory authority. When this data enters the system, it creates the candlestick charts we see. This is why forex is considered a legal, authentic, real market — all transactions are real, backed by actual banking data from around the world.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 2
+      },
+      "teaching_types": ["overview", "working_principle", "diagram"],
+      "key_rules": [
+        "Smart Money = big banks, insurance companies, hedge funds — they drive the market",
+        "Forex operates 24 hours x 5 days (Saturday/Sunday holiday)",
+        "Small banks → state/central bank → centralized regulatory authority → chart data",
+        "4 regions: Asia, London, New York, Sydney — each reports transaction data",
+        "Candlestick charts = visual representation of aggregated banking transaction data",
+        "Forex is a real market with real transactions — not synthetic"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000120.00s.jpg",
+          "description": "Forex Market Working Principle: 'Smart Money (Big Institutions | Banks, Insurance Companies, Fund Hedgers)' and '24/5 (24 Hours for 5 Days) / Saturday & Sunday Holiday'"
+        },
+        {
+          "frame": "frame_000300.00s.jpg",
+          "description": "Forex Market Working Principle (complete): Shows 4 regions (Asian, London, New York, Sydney) each with small banks → state bank → centralized system → candlestick chart on laptop. Flow: small banks report to regional state bank, all state banks feed into central system creating the charts."
+        }
+      ]
+    },
+    "four_trading_sessions": {
+      "llm_summary": "Forex market runs 24 hours through 4 overlapping trading sessions: (1) Asian Session — opens first, before it closes London Session starts; (2) London Session — overlaps with Asian close, before it closes New York starts; (3) New York Session — overlaps with London close, before it closes Sydney starts; (4) Sydney Session — overlaps with New York close, before it closes the next Asian session begins. This overlap chain creates continuous 24-hour coverage. Each session has a distinct nature: Asian = Ranging/Consolidation (low volume, builds liquidity); London = Volatile/Trending (high volume, EUR/GBP/USD transactions); New York = Volatile/Trending (high volume, USD transactions, continuation of London); Sydney = Ranging/Consolidation (low volume). Asia and Sydney range because dollar/euro transactions are minimal in those regions. London and New York are volatile because even the smallest businesses transact in dollar, pound, and euro.",
+      "statistics": {
+        "teaching_time_minutes": 4.0,
+        "word_count": 800,
+        "frames_used": 3
+      },
+      "teaching_types": ["session_overview", "nature_classification", "diagram"],
+      "key_rules": [
+        "4 sessions: Asian → London → New York → Sydney (overlapping chain = 24hr coverage)",
+        "Asian Session: Ranging / Consolidation — low trading volume, builds liquidity",
+        "London Session: Volatile / Trending — high volume (EUR/GBP/USD heavy transactions)",
+        "New York Session: Volatile / Trending — high volume, mostly continues London direction",
+        "Sydney Session: Ranging / Consolidation — low volume, closes the daily cycle",
+        "Sessions overlap: each new session starts before the previous one closes",
+        "Asia/Sydney range because those regions have minimal dollar/euro transactions",
+        "London/New York volatile because even small businesses use dollar/pound/euro"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000420.00s.jpg",
+          "description": "Forex Market Sessions: Timeline from 00:00 to 24:00 showing overlapping colored bars — Asian Session (pink), London Session (purple), New York Session (green), Sydney Session (orange). Sessions overlap to create continuous coverage."
+        },
+        {
+          "frame": "frame_000540.00s.jpg",
+          "description": "Forex Market Sessions with Nature of Sessions: Same timeline plus Nature section below showing: Asian — Ranging/Consolidation (zigzag), London — Volatile/Trending Session (trending line), New York — Volatile/Trending Session (trending line), Sydney — Ranging/Consolidation (zigzag)."
+        },
+        {
+          "frame": "frame_000480.00s.jpg",
+          "description": "Forex Market Sessions with Asian session nature starting to be revealed — ranging zigzag pattern shown below the session timeline."
+        }
+      ]
+    },
+    "bullish_candlestick_formation": {
+      "llm_summary": "A bullish daily candlestick forms through the combined action of all 4 sessions: (1) Asian Session — market opens and ranges (consolidation), building liquidity on both sides (above and below the range); (2) London Session — market dips DOWN first to sweep the Asian session's low-side liquidity (this creates the candle's WICK/LOW), then reverses up aggressively. This dip is the Judas Swing / liquidity sweep / manipulation. London session creates the daily LOW in bullish markets (~70% of the time). The trending move upward from this point starts building the candle's BODY; (3) New York Session — mostly continues London's direction, pushes price higher. Creates the daily HIGH in bullish markets. Together with London, forms the candle's body; (4) Sydney Session — market ranges again, high is posted, price pulls back creating the upper WICK, and candle CLOSES. The key insight: Asian range builds liquidity → London sweeps low-side liquidity (Judas Swing) → expansion upward builds the body → New York continues → Sydney closes.",
+      "statistics": {
+        "teaching_time_minutes": 6.0,
+        "word_count": 1200,
+        "frames_used": 2
+      },
+      "teaching_types": ["formation_theory", "session_role_analysis", "diagram"],
+      "key_rules": [
+        "Asian Session: ranges → builds liquidity on BOTH sides of the range",
+        "London Session: sweeps Asian low-side liquidity FIRST (Judas Swing/manipulation) → creates daily LOW",
+        "London + New York: trending move = candle BODY formation",
+        "New York Session: continues London direction → creates daily HIGH (~70% of time)",
+        "Sydney Session: ranges → creates upper WICK → candle CLOSE",
+        "Lower wick = balance between London's dip and recovery (liquidity sweep area)",
+        "Upper wick = balance between New York's high and Sydney's pullback",
+        "Body = the one-directional trending move during London + New York",
+        "London posts daily LOW in bullish market (70% of the time)",
+        "New York posts daily HIGH in bullish market (70% of the time)",
+        "Asian range liquidity → London sweeps low side → expansion up = the mechanism"
+      ],
+      "visual_evidence": [
+        {
+          "frame": "frame_000600.00s.jpg",
+          "description": "Candlestick Formation Theory — Bullish Candlestick: Timeline showing 24 Hours Market Cycle with all 4 sessions. Below: purple zigzag for Asian Session (ranging), then market dips down (London Session — creates low), trends up through London and New York sessions building the body, then ranges again at Sydney Session. A green bullish candlestick appears on the right showing how the formation maps to a single candle."
+        },
+        {
+          "frame": "frame_000750.00s.jpg",
+          "description": "Candlestick Formation Theory — Bullish Candlestick (complete): Same diagram fully filled in. Asian Session (purple zigzag) → London Session dip then rise (orange-green area) → New York Session continuation higher (green area) → Sydney Session pullback. The resulting green bullish candlestick shown on right with open at bottom, close at top, lower wick = London's dip, upper wick = Sydney's pullback."
+        }
+      ]
+    },
+    "bearish_candlestick_formation": {
+      "llm_summary": "Bearish daily candlestick formation is the 100% inverted version of the bullish formation: (1) Asian Session — ranges and builds liquidity on both sides; (2) London Session — sweeps Asian session's HIGH-side liquidity (Judas Swing upward), then reverses DOWN aggressively. London creates the daily HIGH in bearish markets; (3) New York Session — continues London's bearish direction, pushes price lower. Creates the daily LOW in bearish markets; (4) Sydney Session — market ranges, candle closes. So in bearish markets: London = daily HIGH, New York = daily LOW. The mechanism is identical but inverted: Asian builds liquidity → London sweeps high-side liquidity → expansion downward.",
+      "statistics": {
+        "teaching_time_minutes": 2.0,
+        "word_count": 400,
+        "frames_used": 0
+      },
+      "teaching_types": ["formation_theory", "inverted_model"],
+      "key_rules": [
+        "Bearish formation = 100% inverted bullish formation",
+        "Asian Session: ranges → builds liquidity on both sides",
+        "London Session: sweeps Asian HIGH-side liquidity (Judas Swing UP) → creates daily HIGH",
+        "New York Session: continues bearish direction → creates daily LOW",
+        "Sydney Session: ranges → candle closes",
+        "Bearish: London = daily HIGH, New York = daily LOW",
+        "Mechanism: Asian liquidity → London sweeps high side → expansion down"
+      ],
+      "visual_evidence": []
+    },
+    "candlestick_ohlc_and_anatomy": {
+      "llm_summary": "OHLC values (Open, High, Low, Close) have specific positions in bullish vs bearish candles. Bullish: Open at bottom, Close at top (price increased). Bearish: Open at top, Close at bottom (price decreased). High is always at the top and Low is always at the bottom regardless of candle direction. Critical insight about candle anatomy: the candle BODY represents actual bank/institutional/smart money trading volume — these are the real market movers. The candle WICKS represent retail trading — where buyers/sellers tried to push price but got pulled back by institutions. Body = smart money footprint, Wicks = retail trader footprint. This distinction is essential for understanding which part of the candle carries the real institutional intent. These concepts (candlestick formation, session roles) will be used in upcoming lectures on Power of Three, session trading, daily profiles, and weekly profiles.",
+      "statistics": {
+        "teaching_time_minutes": 3.0,
+        "word_count": 500,
+        "frames_used": 0
+      },
+      "teaching_types": ["definition", "anatomy_analysis", "preview"],
+      "key_rules": [
+        "Bullish candle: Open at bottom, Close at top (price went up)",
+        "Bearish candle: Open at top, Close at bottom (price went down)",
+        "High is ALWAYS at top, Low is ALWAYS at bottom (regardless of direction)",
+        "Candle BODY = bank/institutional/smart money trading volume (REAL movers)",
+        "Candle WICKS = retail trading volume (attempted moves that got reversed)",
+        "Body = smart money footprint, Wicks = retail trader footprint",
+        "These concepts used in: Power of Three, session trading, daily/weekly profiles"
+      ],
+      "visual_evidence": []
+    }
+  }
+}

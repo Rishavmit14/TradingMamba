@@ -1,69 +1,106 @@
 # TradingMamba - Claude Code Project Instructions
 
-## MANDATORY: Video Training Workflow
+## Project Purpose
 
-**When the user asks to train ANY video (Forex Minions or any playlist), ALWAYS follow the Claude Code Expert Training path. NEVER use the MLX-VLM fallback.**
+Build a **new trading system** from scratch, powered by domain knowledge extracted from 23 Hindi SMC/ICT YouTube videos (Forex Minions "Complete Logical SMC" playlist). The system will apply Smart Money Concepts against live market data to detect patterns and generate trading signals.
 
-### The Correct Training Flow (How Video 1 DabKey96qmE Was Trained)
+## Knowledge Foundation (COMPLETED)
 
-**Phase 0-3 (Automated):** Run `prepare_for_claude_code()` to download, extract frames, transcribe, and detect teaching units.
+All 23 videos have been trained using Claude Code Expert Analysis. The knowledge is stored as structured English knowledge bases derived from Hindi audio source material.
 
-```python
-from backend.app.ml.audio_first_learning import AudioFirstTrainer
-trainer = AudioFirstTrainer(data_dir='data')
-result = trainer.prepare_for_claude_code(video_id)
-```
-
-**Phase 4-5 (Claude Code Expert):** YOU (Claude Code) must:
-1. **Read** the transcript at `data/transcripts/{video_id}.json`
-2. **View** key frames at `data/video_frames/{video_id}/` (use the Read tool on .jpg files)
-3. **Analyze** what ICT/SMC concepts are being taught with expert-level vision analysis
-4. **Write** the knowledge base to `data/audio_first_training/{video_id}_knowledge_base.json`
-5. **Write** the summary to `data/audio_first_training/{video_id}_knowledge_summary.md`
-
-### Knowledge Base Format
-
-Must match the schema used by Video 1 (`DabKey96qmE_knowledge_base.json`):
-- `generation_method`: MUST be `"Claude Code expert analysis"`
-- `training_type` in metadata: MUST be `"claude_code_expert"`
-- Each concept needs: `llm_summary`, `statistics`, `teaching_types`, `key_rules`, `visual_evidence`
-- Include `visual_evidence` with specific frame references from your vision analysis
-
-### NEVER Do This
-- NEVER use `train_from_url()` — this uses MLX-VLM (low quality)
-- NEVER use `train_remaining.py` without `--claude-code` mode
-- NEVER skip the vision analysis step (viewing frames)
-- NEVER generate knowledge bases without reading the transcript AND viewing frames
-
-### Forex Minions Playlist Videos
-
-Playlist ID: `PLLxESps7ndeVQ1yoXC1QSEvCHLlTafB_d`
+### Playlist: Complete Logical SMC (PLLxESps7ndeWtSZowIo2v0fMmYj4Yiy-a)
 
 | # | Video ID | Title | Status |
 |---|----------|-------|--------|
-| 01 | DabKey96qmE | Structure Mapping | TRAINED |
-| 02 | BtCIrLqNKe4 | Liquidity & Inducement | PENDING |
-| 03 | f9rg4BDaaXE | Pullback & Valid Inducement | PENDING |
-| 04 | E1AgOEk-lfM | Inducement Shift & Traps | PENDING |
-| 05 | GunkTVpUccM | Break of Structure | PENDING |
-| 06 | Yq-Tw3PEU5U | BOS vs Liquidity Sweep | PENDING |
-| 07 | NbhVSLd18YM | CHoCH & Structure Mapping | PENDING |
-| 08 | evng_upluR0 | High Prob Inducement | PENDING |
-| 09 | eoL_y_6ODLk | Fake CHoCH | PENDING |
-| 10 | HEq0YzT19kI | CHoCH Confirmation | PENDING |
-| 11 | G-pD_Ts4UEE | Price Cycle Theory | PENDING |
-| 12 | gSyIFHd3HeE | Premium & Discount Zones | PENDING |
-| 13 | hMb-cEAVKcQ | Fair Value Gap | PENDING |
-| 14 | -zPGWtuuWdU | Valid Order Blocks | PENDING |
-| 15 | hdnldU2yQMw | Millions Dollar Setup | PENDING |
-| 16 | hRuUCLE7i6U | Candlestick & Sessions | PENDING |
+| 01 | UIRBfCT1kI4 | Structure Mapping | TRAINED |
+| 02 | DkOv2qG9Cn0 | Liquidity & Inducement | TRAINED |
+| 03 | Ovd5QzZutsw | Pullback & Valid Inducement | TRAINED |
+| 04 | PYHUHpvKIYo | Inducement Shift & Traps | TRAINED |
+| 05 | fTf3pO7F5T8 | Break of Structure | TRAINED |
+| 06 | dknxgbZrN3g | BOS vs Liquidity Sweep | TRAINED |
+| 07 | VH882sl1pl8 | CHoCH & Structure Mapping | TRAINED |
+| 08 | lIbO4JrL_2I | High Prob Inducement | TRAINED |
+| 09 | u-LM2DjDd7M | Fake CHoCH | TRAINED |
+| 10 | SaTvah4OSpA | CHoCH Confirmation | TRAINED |
+| 11 | 3-NsLSV6huY | Price Cycle Theory | TRAINED |
+| 12 | anpETX7ahKo | Premium & Discount Zones | TRAINED |
+| 13 | 5c14eElh42k | Fair Value Gap | TRAINED |
+| 14 | -20GrDt-Aws | Valid Order Blocks | TRAINED |
+| 15 | cCugrbID3wI | Million Dollar Setup | TRAINED |
+| 16 | 9BfwzGhkOFE | Candlestick & Sessions | TRAINED |
+| 17 | exF1jB8qCxo | Complete SMC Guideline (Entry) | TRAINED |
+| 18 | PxShy_00yR8 | QML & POI Zones | TRAINED |
+| 19 | Kc74F908K-8 | SCOB Entry Technique | TRAINED |
+| 20 | JaYMVwyauKA | Multi-Timeframe Analysis | TRAINED |
+| 21 | sRXIoNPq85Q | Counter-Trend Trading | TRAINED |
+| 22 | newJA7qOzpE | Liquidity Sweep Module (Wyckoff) | TRAINED |
+| 23 | vuZqh_oKBp8 | Putting All Together — SMC The End | TRAINED |
 
-### Quality Checklist (Before Marking a Video as Trained)
-- [ ] `generation_method` = `"Claude Code expert analysis"`
-- [ ] Transcript was read and analyzed
-- [ ] Key frames were viewed (vision analysis done by Claude Code)
-- [ ] All ICT/SMC concepts from the video are captured
-- [ ] Each concept has structured `llm_summary` with Definition, Rules, Identification
-- [ ] `visual_evidence` array references actual frames viewed
-- [ ] `statistics` reflect real teaching content
-- [ ] Knowledge base JSON is valid and follows the schema
+### Knowledge Base Location
+
+- **Knowledge bases**: `data/audio_first_training/{video_id}_knowledge_base.json` (23 files)
+- **Summaries**: `data/audio_first_training/{video_id}_knowledge_summary.md` (23 files)
+- **Transcripts**: `data/transcripts/{video_id}.json` (23 files)
+- **Video frames**: `data/video_frames/{video_id}/` (23 directories)
+- **Audio files**: `data/audio/` (downloaded .wav files)
+- **Playlist data**: `data/playlists/`
+
+### Knowledge Base Schema
+
+Each `*_knowledge_base.json` contains:
+- `generation_method`: `"Claude Code expert analysis"`
+- `metadata.training_type`: `"claude_code_expert"`
+- `metadata.source_language`: `"hi"`
+- `concepts`: Array of concepts, each with:
+  - `llm_summary`: Structured English explanation (Definition, Rules, Identification)
+  - `statistics`: Teaching time, word count, frame count
+  - `teaching_types`: Array of teaching methods used
+  - `key_rules`: Array of actionable trading rules
+  - `visual_evidence`: References to specific analyzed frames
+
+### Core SMC Concepts Covered
+
+The 23 videos progressively build a complete SMC trading system:
+1. **Structure**: HH/HL/LH/LL, swing points, trend identification (V01)
+2. **Liquidity**: Buy/sell liquidity pools, inducement, traps (V02-V04, V08)
+3. **BOS**: Break of Structure rules, BOS vs liquidity sweep (V05-V06)
+4. **CHoCH**: Change of Character, fake CHoCH, confirmation (V07, V09-V10)
+5. **Market Context**: Price cycle theory, premium/discount zones (V11-V12)
+6. **Zones**: FVG, Order Blocks, IOF identification (V13-V14)
+7. **Setups**: Million Dollar Setup, sessions/kill zones (V15-V16)
+8. **Entries**: MSS/SBC/CHoCH entries, QML, SCOB technique (V17-V19)
+9. **Multi-TF**: Higher TF direction + lower TF entry (V20)
+10. **Advanced**: Counter-trend rules, Wyckoff/SBC module, full integration (V21-V23)
+
+## Project Structure
+
+```
+TradingMamba/
+├── CLAUDE.md                          # This file
+├── .env.example                       # Environment variables template
+├── .gitignore                         # Git ignore rules
+├── data/
+│   ├── audio_first_training/          # 23 KBs + 23 summaries (THE KNOWLEDGE)
+│   ├── transcripts/                   # 23 Hindi transcripts
+│   ├── video_frames/                  # 23 directories of extracted frames
+│   ├── audio/                         # Downloaded audio files
+│   └── playlists/                     # Playlist metadata
+├── scripts/                           # Transcription & processing utilities
+└── models/                            # Whisper model files
+```
+
+## Building the New System
+
+When building the new codebase, Claude should:
+1. **Read all 23 knowledge bases** to understand the complete SMC framework
+2. **Use the key_rules arrays** as the algorithmic foundation for pattern detection
+3. **Reference the summaries** for concept relationships and dependencies
+4. **Apply the Master Trading Checklist** (from V23) as the top-level system flow
+5. **Preserve ICT methodology constants** (Fibonacci levels, ATR multiples, session times)
+
+## Transcription Tools (Preserved)
+
+- **whisper.cpp**: `/opt/homebrew/bin/whisper-cli` with Metal GPU acceleration
+- **Model**: `models/ggml-large-v3-turbo.bin`
+- **Script**: `scripts/transcribe_local.py --video VIDEO_ID`
+- **CRITICAL**: Never run 2+ whisper.cpp instances simultaneously on Metal GPU
