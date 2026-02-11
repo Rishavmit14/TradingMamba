@@ -5,15 +5,34 @@ import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
 import { fetchAnalysis } from "@/lib/api";
-import { AnalysisResult } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility } from "@/lib/types";
 
-const TIMEFRAMES = ["W1", "D1", "H4", "M15"] as const;
+const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
+
+const DETECTOR_LABELS: { key: keyof DetectorVisibility; label: string; color: string }[] = [
+  { key: "swings", label: "Swings", color: "#f59e0b" },
+  { key: "idm", label: "IDM", color: "#60a5fa" },
+  { key: "bos", label: "BOS", color: "#22d3ee" },
+  { key: "choch", label: "CHoCH", color: "#a855f7" },
+  { key: "fvg", label: "FVG", color: "#22c55e" },
+  { key: "ob", label: "OB", color: "#3b82f6" },
+  { key: "pd", label: "P/D", color: "#eab308" },
+];
+
+const DEFAULT_VISIBILITY: DetectorVisibility = {
+  swings: true, idm: true, bos: true, choch: true, fvg: true, ob: true, pd: true,
+};
 
 export default function Dashboard() {
   const [selectedTF, setSelectedTF] = useState<string>("H4");
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [visibility, setVisibility] = useState<DetectorVisibility>(DEFAULT_VISIBILITY);
+
+  const toggleDetector = useCallback((key: keyof DetectorVisibility) => {
+    setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
+  }, []);
 
   const runAnalysis = useCallback(async (tf: string) => {
     setSelectedTF(tf);
@@ -59,6 +78,24 @@ export default function Dashboard() {
               } disabled:opacity-50`}
             >
               {tf}
+            </button>
+          ))}
+        </div>
+
+        {/* Detector toggles */}
+        <div className="flex items-center gap-1">
+          {DETECTOR_LABELS.map(({ key, label, color }) => (
+            <button
+              key={key}
+              onClick={() => toggleDetector(key)}
+              className={`px-2 py-1 text-xs font-medium rounded transition-colors border ${
+                visibility[key]
+                  ? "border-current bg-opacity-20"
+                  : "border-gray-700 bg-gray-800/50 text-gray-600"
+              }`}
+              style={visibility[key] ? { color, backgroundColor: `${color}20` } : undefined}
+            >
+              {label}
             </button>
           ))}
         </div>
@@ -128,7 +165,7 @@ export default function Dashboard() {
                 </div>
               </div>
             ) : (
-              <Chart data={analysis} />
+              <Chart data={analysis} visibility={visibility} />
             )}
           </div>
 

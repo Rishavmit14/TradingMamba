@@ -3,17 +3,18 @@
 import { useEffect, useRef } from "react";
 import {
   createChart,
+  CrosshairMode,
   IChartApi,
   ISeriesApi,
   CandlestickData,
   ColorType,
   LineStyle,
 } from "lightweight-charts";
-import { AnalysisResult, SwingPoint, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
 
 interface ChartProps {
   data: AnalysisResult | null;
-  height?: number;
+  visibility: DetectorVisibility;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -21,10 +22,13 @@ function toTV(ts: number) {
   return Math.floor(ts / 1000) as any;
 }
 
-export default function Chart({ data, height = 600 }: ChartProps) {
+export default function Chart({ data, visibility }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+  const priceLinesRef = useRef<any[]>([]);
+  const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
+  const prevDataRef = useRef<AnalysisResult | null>(null);
 
   // Create chart once
   useEffect(() => {
@@ -36,10 +40,11 @@ export default function Chart({ data, height = 600 }: ChartProps) {
         textColor: "#9ca3af",
       },
       grid: {
-        vertLines: { color: "#1f2937" },
-        horzLines: { color: "#1f2937" },
+        vertLines: { visible: false },
+        horzLines: { visible: false },
       },
       crosshair: {
+        mode: CrosshairMode.Normal,
         vertLine: { color: "#4b5563", width: 1, style: LineStyle.Dashed },
         horzLine: { color: "#4b5563", width: 1, style: LineStyle.Dashed },
       },
@@ -52,7 +57,7 @@ export default function Chart({ data, height = 600 }: ChartProps) {
         secondsVisible: false,
       },
       width: containerRef.current.clientWidth,
-      height,
+      height: containerRef.current.clientHeight,
     });
 
     const candleSeries = chart.addCandlestickSeries({
@@ -67,21 +72,24 @@ export default function Chart({ data, height = 600 }: ChartProps) {
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
 
-    // Resize handler
-    const handleResize = () => {
-      if (containerRef.current) {
-        chart.applyOptions({ width: containerRef.current.clientWidth });
+    // ResizeObserver tracks both width and height of the container
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        chart.applyOptions({ width, height });
       }
-    };
-    window.addEventListener("resize", handleResize);
+    });
+    ro.observe(containerRef.current);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      ro.disconnect();
       chart.remove();
       chartRef.current = null;
       candleSeriesRef.current = null;
+      priceLinesRef.current = [];
+      idmSeriesRef.current = [];
     };
-  }, [height]);
+  }, []);
 
   // Update data when analysis result changes
   useEffect(() => {
@@ -106,148 +114,210 @@ export default function Chart({ data, height = 600 }: ChartProps) {
     const markers: any[] = [];
 
     // Swing point markers
-    data.swings.forEach((s: SwingPoint) => {
-      const candle = candles[s.candle_index];
-      if (!candle) return;
+    if (visibility.swings) {
+      data.swings.forEach((s: SwingPoint) => {
+        const candle = candles[s.candle_index];
+        if (!candle) return;
 
-      const isHigh = s.swing_type === "swing_high";
-      const label = s.classification === "unclassified" ? "?" : s.classification;
-      const validColor = s.is_valid_smc ? (isHigh ? "#f59e0b" : "#3b82f6") : "#6b7280";
+        const isHigh = s.swing_type === "swing_high";
+        const label = s.classification === "unclassified" ? "?" : s.classification;
+        const validColor = s.is_valid_smc ? (isHigh ? "#f59e0b" : "#3b82f6") : "#6b7280";
 
-      markers.push({
-        time: toTV(candle.timestamp),
-        position: isHigh ? "aboveBar" : "belowBar",
-        color: validColor,
-        shape: isHigh ? "arrowDown" : "arrowUp",
-        text: label,
+        markers.push({
+          time: toTV(candle.timestamp),
+          position: isHigh ? "aboveBar" : "belowBar",
+          color: validColor,
+          shape: isHigh ? "arrowDown" : "arrowUp",
+          text: label,
+        });
       });
-    });
+    }
 
     // BOS markers
-    data.bos_events.forEach((b: BOS) => {
-      const candle = candles[b.candle_index];
-      if (!candle) return;
+    if (visibility.bos) {
+      data.bos_events.forEach((b: BOS) => {
+        const candle = candles[b.candle_index];
+        if (!candle) return;
 
-      markers.push({
-        time: toTV(candle.timestamp),
-        position: b.direction === "bullish" ? "belowBar" : "aboveBar",
-        color: b.valid ? "#22d3ee" : "#6b7280",
-        shape: "circle",
-        text: b.valid ? "BOS" : "xBOS",
+        markers.push({
+          time: toTV(candle.timestamp),
+          position: b.direction === "bullish" ? "belowBar" : "aboveBar",
+          color: b.valid ? "#22d3ee" : "#6b7280",
+          shape: "circle",
+          text: b.valid ? "BOS" : "xBOS",
+        });
       });
-    });
+    }
 
     // CHoCH markers
-    data.choch_events.forEach((ch: CHoCH) => {
-      const candle = candles[ch.candle_index];
-      if (!candle) return;
+    if (visibility.choch) {
+      data.choch_events.forEach((ch: CHoCH) => {
+        const candle = candles[ch.candle_index];
+        if (!candle) return;
 
-      let color = "#a855f7"; // purple
-      if (ch.is_fake) color = "#6b7280";
-      else if (ch.confirmed) color = "#ec4899"; // pink
+        let color = "#a855f7"; // purple
+        if (ch.is_fake) color = "#6b7280";
+        else if (ch.confirmed) color = "#ec4899"; // pink
 
-      markers.push({
-        time: toTV(candle.timestamp),
-        position: ch.direction === "bullish" ? "belowBar" : "aboveBar",
-        color,
-        shape: "square",
-        text: ch.is_fake ? "xCHoCH" : "CHoCH",
+        markers.push({
+          time: toTV(candle.timestamp),
+          position: ch.direction === "bullish" ? "belowBar" : "aboveBar",
+          color,
+          shape: "square",
+          text: ch.is_fake ? "xCHoCH" : "CHoCH",
+        });
       });
-    });
+    }
 
     // Sort markers by time (required by lightweight-charts)
     markers.sort((a, b) => (a.time as number) - (b.time as number));
     candleSeries.setMarkers(markers);
 
+    // --- IDM RAYS: horizontal dashed lines from origin to taken candle ---
+
+    // Remove old IDM line series
+    for (const s of idmSeriesRef.current) {
+      try { chart.removeSeries(s); } catch { /* series already removed */ }
+    }
+    idmSeriesRef.current = [];
+
+    if (visibility.idm) {
+      const lastIdx = candles.length - 1;
+      data.inducements.forEach((idm: Inducement) => {
+          const startCandle = candles[idm.candle_index];
+          if (!startCandle) return;
+
+          const endIdx = idm.taken_at_candle != null
+            ? idm.taken_at_candle
+            : lastIdx;
+          if (endIdx <= idm.candle_index) return;
+          const endCandle = candles[endIdx];
+          if (!endCandle) return;
+
+          const startTime = toTV(startCandle.timestamp);
+          const endTime = toTV(endCandle.timestamp);
+          if (endTime <= startTime) return;
+
+          const isTaken = idm.status === "taken";
+          const color = isTaken ? "#60a5fa80" : "#60a5fa";
+
+          const lineSeries = chart.addLineSeries({
+            color,
+            lineWidth: 1,
+            lineStyle: LineStyle.Dashed,
+            crosshairMarkerVisible: false,
+            priceLineVisible: false,
+            lastValueVisible: false,
+          });
+
+          lineSeries.setData([
+            { time: startTime, value: idm.price },
+            { time: endTime, value: idm.price },
+          ]);
+
+          idmSeriesRef.current.push(lineSeries);
+        });
+    }
+
     // --- PRICE LINES: Premium/Discount, FVG, OB ---
 
-    // Clear old line series by removing and re-adding
-    // For zones (FVG, OB), we use price lines on the candle series
+    // Remove all previous price lines before creating new ones
+    for (const line of priceLinesRef.current) {
+      candleSeries.removePriceLine(line);
+    }
+    priceLinesRef.current = [];
 
     // Premium/Discount equilibrium line
-    if (data.premium_discount) {
-      candleSeries.createPriceLine({
+    if (visibility.pd && data.premium_discount) {
+      priceLinesRef.current.push(candleSeries.createPriceLine({
         price: data.premium_discount.equilibrium,
         color: "#eab308",
         lineWidth: 1,
         lineStyle: LineStyle.Dashed,
         axisLabelVisible: true,
         title: "EQ 50%",
-      });
-      candleSeries.createPriceLine({
+      }));
+      priceLinesRef.current.push(candleSeries.createPriceLine({
         price: data.premium_discount.swing_high,
         color: "#ef444480",
         lineWidth: 1,
         lineStyle: LineStyle.Dotted,
         axisLabelVisible: false,
         title: "Premium",
-      });
-      candleSeries.createPriceLine({
+      }));
+      priceLinesRef.current.push(candleSeries.createPriceLine({
         price: data.premium_discount.swing_low,
         color: "#22c55e80",
         lineWidth: 1,
         lineStyle: LineStyle.Dotted,
         axisLabelVisible: false,
         title: "Discount",
-      });
+      }));
     }
 
     // Active FVG zones as price lines
-    data.fvgs
-      .filter((f: FVG) => f.valid && !f.mitigated)
-      .slice(-5) // show last 5 active FVGs
-      .forEach((f: FVG) => {
-        const color = f.direction === "bullish" ? "#22c55e40" : "#ef444440";
-        candleSeries.createPriceLine({
-          price: f.upper_price,
-          color,
-          lineWidth: 1,
-          lineStyle: LineStyle.Dotted,
-          axisLabelVisible: false,
-          title: "",
+    if (visibility.fvg) {
+      data.fvgs
+        .filter((f: FVG) => f.valid && !f.mitigated)
+        .slice(-5) // show last 5 active FVGs
+        .forEach((f: FVG) => {
+          const color = f.direction === "bullish" ? "#22c55e40" : "#ef444440";
+          priceLinesRef.current.push(candleSeries.createPriceLine({
+            price: f.upper_price,
+            color,
+            lineWidth: 1,
+            lineStyle: LineStyle.Dotted,
+            axisLabelVisible: false,
+            title: "",
+          }));
+          priceLinesRef.current.push(candleSeries.createPriceLine({
+            price: f.lower_price,
+            color,
+            lineWidth: 1,
+            lineStyle: LineStyle.Dotted,
+            axisLabelVisible: false,
+            title: `FVG ${f.direction === "bullish" ? "▲" : "▼"}`,
+          }));
         });
-        candleSeries.createPriceLine({
-          price: f.lower_price,
-          color,
-          lineWidth: 1,
-          lineStyle: LineStyle.Dotted,
-          axisLabelVisible: false,
-          title: `FVG ${f.direction === "bullish" ? "▲" : "▼"}`,
-        });
-      });
+    }
 
     // Active OB zones as price lines
-    data.order_blocks
-      .filter((ob: OrderBlock) => ob.valid && !ob.mitigated)
-      .slice(-3) // show last 3 active OBs
-      .forEach((ob: OrderBlock) => {
-        const color = ob.direction === "bullish" ? "#3b82f680" : "#f97316b0";
-        candleSeries.createPriceLine({
-          price: ob.upper_price,
-          color,
-          lineWidth: 2,
-          lineStyle: LineStyle.Solid,
-          axisLabelVisible: false,
-          title: "",
+    if (visibility.ob) {
+      data.order_blocks
+        .filter((ob: OrderBlock) => ob.valid && !ob.mitigated)
+        .slice(-3) // show last 3 active OBs
+        .forEach((ob: OrderBlock) => {
+          const color = ob.direction === "bullish" ? "#3b82f680" : "#f97316b0";
+          priceLinesRef.current.push(candleSeries.createPriceLine({
+            price: ob.upper_price,
+            color,
+            lineWidth: 2,
+            lineStyle: LineStyle.Solid,
+            axisLabelVisible: false,
+            title: "",
+          }));
+          priceLinesRef.current.push(candleSeries.createPriceLine({
+            price: ob.lower_price,
+            color,
+            lineWidth: 2,
+            lineStyle: LineStyle.Solid,
+            axisLabelVisible: false,
+            title: `OB ${ob.direction === "bullish" ? "▲" : "▼"}`,
+          }));
         });
-        candleSeries.createPriceLine({
-          price: ob.lower_price,
-          color,
-          lineWidth: 2,
-          lineStyle: LineStyle.Solid,
-          axisLabelVisible: false,
-          title: `OB ${ob.direction === "bullish" ? "▲" : "▼"}`,
-        });
-      });
+    }
 
-    // Fit content
-    chart.timeScale().fitContent();
-  }, [data]);
+    // Fit content only when data changes (new timeframe), not on visibility toggles
+    if (data !== prevDataRef.current) {
+      chart.timeScale().fitContent();
+      prevDataRef.current = data;
+    }
+  }, [data, visibility]);
 
   return (
     <div
       ref={containerRef}
-      className="w-full rounded-lg overflow-hidden border border-gray-800"
+      className="w-full h-full rounded-lg overflow-hidden border border-gray-800"
     />
   );
 }

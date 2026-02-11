@@ -11,12 +11,15 @@ TIMEFRAMES = {
     "M15": "15m",   # Entry confirmation
 }
 
-# Binance kline interval mapping
+# Binance kline interval mapping (all viewable timeframes)
 BINANCE_INTERVALS = {
+    "1M": "1M",
     "W1": "1w",
     "D1": "1d",
     "H4": "4h",
+    "H1": "1h",
     "M15": "15m",
+    "M5": "5m",
 }
 
 # How many candles to keep in rolling buffer per timeframe
@@ -29,10 +32,13 @@ CANDLE_BUFFER_SIZE = {
 
 # Swing detection: minimum candles on each side to confirm a swing point
 SWING_LOOKBACK = {
+    "1M": 2,
     "W1": 3,
     "D1": 3,
     "H4": 5,
+    "H1": 5,
     "M15": 5,
+    "M5": 5,
 }
 
 # SL buffer beyond zone (in price percentage for crypto, replaces "2-4 pips")

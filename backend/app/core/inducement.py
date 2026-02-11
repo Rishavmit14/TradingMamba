@@ -176,26 +176,29 @@ def check_idm_taken(
         if not parent_swing:
             continue
 
-        # Check candles between IDM and its parent swing for a sweep
+        # Check candles from IDM onward (not just up to parent swing).
+        # An IDM is "taken" whenever price sweeps its level, even after
+        # the parent swing has formed — the level remains valid until swept.
         for candle in candles:
             if candle.index <= idm.candle_index:
                 continue
-            if candle.index > parent_swing.candle_index:
-                break
 
             if parent_swing.swing_type == SwingType.SWING_HIGH:
                 # Bullish swing: IDM is a low. Taken if price wicks below.
                 if candle.low <= idm.price:
                     idm.status = IDMStatus.TAKEN
                     idm.taken_at_candle = candle.index
-                    parent_swing.idm_taken = True
+                    # Only mark parent swing's idm_taken if swept before swing formed
+                    if candle.index <= parent_swing.candle_index:
+                        parent_swing.idm_taken = True
                     break
             else:
                 # Bearish swing: IDM is a high. Taken if price wicks above.
                 if candle.high >= idm.price:
                     idm.status = IDMStatus.TAKEN
                     idm.taken_at_candle = candle.index
-                    parent_swing.idm_taken = True
+                    if candle.index <= parent_swing.candle_index:
+                        parent_swing.idm_taken = True
                     break
 
     return inducements

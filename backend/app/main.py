@@ -181,7 +181,7 @@ async def health():
 async def analyze_single_tf(timeframe: str = "H4"):
     """Run analysis on a single timeframe."""
     tf = timeframe.upper()
-    candles = await fetch_klines(SYMBOL, tf)
+    candles = await fetch_klines(SYMBOL, tf, limit=1000)
     result = analyze_timeframe(candles, tf)
     return _serialize_result(result, candles)
 

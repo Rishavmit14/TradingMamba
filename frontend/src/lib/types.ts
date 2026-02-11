@@ -124,6 +124,16 @@ export interface TradingSignal {
   is_counter_trend: boolean;
 }
 
+export interface DetectorVisibility {
+  swings: boolean;
+  idm: boolean;
+  bos: boolean;
+  choch: boolean;
+  fvg: boolean;
+  ob: boolean;
+  pd: boolean;
+}
+
 export interface AnalysisResult {
   timeframe: string;
   trend: TrendState;
