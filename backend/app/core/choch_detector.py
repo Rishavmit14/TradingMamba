@@ -14,9 +14,11 @@ Core Rules (V07, V09, V10):
 
 from __future__ import annotations
 from app.models import (
-    Candle, SwingPoint, BOS, CHoCH,
+    Candle, SwingPoint, BOS, CHoCH, Inducement, LiquidityPool,
     SwingType, SwingClassification, Direction, TrendState,
+    IDMStatus, LiquiditySource,
 )
+from app.core.liquidity import prices_equal
 
 
 def _calculate_move_size(candles: list[Candle], start_idx: int, end_idx: int) -> float:
@@ -280,53 +282,339 @@ def detect_choch(
                     ))
                     break
 
-    return choch_events
+    # Deduplicate: same (candle_index, broken_swing_index) can appear from
+    # both the main loop and the live edge-case check
+    seen = set()
+    unique = []
+    for ch in choch_events:
+        key = (ch.candle_index, ch.broken_swing_index)
+        if key not in seen:
+            seen.add(key)
+            unique.append(ch)
+    return unique
+
+
+def _classify_choch_model(
+    choch: CHoCH,
+    idx_map: dict[int, Candle],
+) -> str:
+    """Classify CHoCH as 'swing' or 'sweep' based (V10).
+
+    Swing-Based: candle BODY closed beyond the broken swing level.
+    Sweep-Based: only WICK went beyond (body stayed on original side).
+    """
+    break_candle = idx_map.get(choch.candle_index)
+    if not break_candle:
+        return "swing"  # default to swing-based
+
+    if choch.direction == Direction.BEARISH:
+        # Body closed below broken price → swing-based
+        if break_candle.body_bottom < choch.broken_price:
+            return "swing"
+        # Only wick went below → sweep-based (liquidity sweep)
+        return "sweep"
+    else:
+        if break_candle.body_top > choch.broken_price:
+            return "swing"
+        return "sweep"
+
+
+def _check_weak_swing(
+    choch: CHoCH,
+    swings: list[SwingPoint],
+    idx_map: dict[int, Candle],
+) -> bool:
+    """V09 Rule 1: Check if the broken swing point was WEAK.
+
+    A swing is weak when its Swing Initiating Candle (SIC) simultaneously
+    sweeps prior liquidity on the other side. The energy was spent on the
+    sweep, not building genuine structure.
+    """
+    swing_map = {s.candle_index: s for s in swings}
+    broken_swing = swing_map.get(choch.broken_swing_index)
+    if not broken_swing:
+        return False
+
+    sic = idx_map.get(broken_swing.candle_index)
+    if not sic:
+        return False
+
+    # Get the 3 most recent opposite-type swings before the broken swing
+    opposite_type = (SwingType.SWING_LOW
+                     if broken_swing.swing_type == SwingType.SWING_HIGH
+                     else SwingType.SWING_HIGH)
+    prior_opposite = [
+        s for s in swings
+        if s.swing_type == opposite_type and s.candle_index < broken_swing.candle_index
+    ][-3:]
+
+    for prior in prior_opposite:
+        if broken_swing.swing_type == SwingType.SWING_HIGH:
+            # SIC created a swing HIGH — did its LOW also sweep a prior swing low?
+            if sic.low < prior.price:
+                return True
+        else:
+            # SIC created a swing LOW — did its HIGH also sweep a prior swing high?
+            if sic.high > prior.price:
+                return True
+
+    return False
+
+
+def _check_engineered_liquidity(
+    choch: CHoCH,
+    liquidity_pools: list[LiquidityPool],
+) -> bool:
+    """V09 Rule 2: Check if the broken swing has engineered liquidity.
+
+    If the broken swing price matches equal highs/lows (engineered liquidity),
+    breaking it is just a liquidity sweep, not real CHoCH.
+    """
+    for pool in liquidity_pools:
+        if pool.source not in (LiquiditySource.EQUAL_HIGHS, LiquiditySource.EQUAL_LOWS):
+            continue
+        if prices_equal(choch.broken_price, pool.price_level):
+            return True
+    return False
+
+
+def _check_impulse_origin(
+    choch: CHoCH,
+    inducements: list[Inducement],
+) -> bool:
+    """V09 Rule 3: Check if the broken swing was an impulse-origin level.
+
+    If the IDM for the broken swing has TRANSFERRED status, it means no
+    pullback was found in the current swing range — the move was impulsive.
+    Breaking an impulse-origin level is just IDM being taken, not real CHoCH.
+    """
+    for idm in inducements:
+        if idm.parent_swing_index == choch.broken_swing_index:
+            if idm.status == IDMStatus.TRANSFERRED:
+                return True
+            break
+    return False
+
+
+def _confirm_swing_based(
+    choch: CHoCH,
+    candles: list[Candle],
+    idx_map: dict[int, Candle],
+) -> tuple[bool, bool]:
+    """V10 Swing-Based Confirmation (4 rules).
+
+    Rules 1-2 are already satisfied by detect_choch() (major swing + body close).
+    Here we check Rules 3-4:
+      Rule 3: After CHoCH, price must create inducement (pullback in new direction)
+      Rule 4: Market must take that inducement and create a BOS
+
+    Returns:
+        (confirmed, is_no_idm_trap)
+        - confirmed=True if all 4 rules pass
+        - is_no_idm_trap=True if no inducement forms after CHoCH (V10 trap)
+    """
+    choch_candle = idx_map.get(choch.candle_index)
+    if not choch_candle:
+        return False, False
+
+    window = 20  # candles to look ahead for confirmation
+    end_idx = choch.candle_index + window
+
+    # Scan for inducement creation (a pullback in the new trend direction)
+    pullback_price = None
+    pullback_idx = None
+    made_progress = False  # Did price move in CHoCH direction first?
+
+    for candle in candles:
+        if candle.index <= choch.candle_index:
+            continue
+        if candle.index > end_idx:
+            break
+
+        if choch.direction == Direction.BEARISH:
+            # After bearish CHoCH: expect price to drop, then pull back UP
+            if candle.low < choch_candle.low:
+                made_progress = True
+            if made_progress and pullback_price is None:
+                # Looking for a rally (pullback up)
+                if candle.high > candle.body_top:  # Has upper wick = some retracement
+                    pullback_price = candle.high
+                    pullback_idx = candle.index
+                elif candle.is_bullish:  # Bullish candle = pullback
+                    pullback_price = candle.high
+                    pullback_idx = candle.index
+        else:
+            # After bullish CHoCH: expect price to rise, then pull back DOWN
+            if candle.high > choch_candle.high:
+                made_progress = True
+            if made_progress and pullback_price is None:
+                if candle.low < candle.body_bottom:
+                    pullback_price = candle.low
+                    pullback_idx = candle.index
+                elif candle.is_bearish:
+                    pullback_price = candle.low
+                    pullback_idx = candle.index
+
+    if pullback_price is None:
+        # No pullback/inducement formed after CHoCH
+        # If price kept moving in CHoCH direction without pullback → unconfirmed (live)
+        # If price reversed back → no-IDM trap (fake)
+        if not made_progress:
+            # Price didn't even move in CHoCH direction → trap
+            return False, True
+        # Price is moving but no pullback yet → unconfirmed, not necessarily fake
+        return False, False
+
+    # Rule 4: Check if inducement was taken (price breaks past the pullback)
+    for candle in candles:
+        if candle.index <= pullback_idx:
+            continue
+        if candle.index > end_idx:
+            break
+
+        if choch.direction == Direction.BEARISH:
+            # Bearish: inducement (pullback high) taken when price goes above then
+            # creates BOS (new low below the post-pullback structure)
+            if candle.low < choch_candle.low:
+                return True, False  # Mini-BOS confirmed
+        else:
+            if candle.high > choch_candle.high:
+                return True, False
+
+    # Inducement exists but not yet broken → unconfirmed (awaiting Rule 4)
+    return False, False
+
+
+def _confirm_sweep_based(
+    choch: CHoCH,
+    swings: list[SwingPoint],
+    candles: list[Candle],
+    idx_map: dict[int, Candle],
+) -> bool:
+    """V10 Sweep-Based Confirmation (2 rules).
+
+    Rule 1: Price swept liquidity (wick only) — already classified as sweep-based.
+    Rule 2: Candle body must close below/above the valid pullback between
+            the broken swing and the previous opposite-type swing.
+
+    Returns True if confirmed.
+    """
+    swing_map = {s.candle_index: s for s in swings}
+    broken_swing = swing_map.get(choch.broken_swing_index)
+    if not broken_swing:
+        return False
+
+    # Find the previous opposite-type swing (the swing before the broken one)
+    opposite_type = (SwingType.SWING_LOW
+                     if broken_swing.swing_type == SwingType.SWING_HIGH
+                     else SwingType.SWING_HIGH)
+    prev_opposite = None
+    for s in reversed(swings):
+        if s.swing_type == opposite_type and s.candle_index < broken_swing.candle_index:
+            prev_opposite = s
+            break
+
+    if not prev_opposite:
+        return False
+
+    # Find the valid pullback between prev_opposite and broken_swing
+    # This is the internal retracement high (for bearish) or low (for bullish)
+    start_idx = min(prev_opposite.candle_index, broken_swing.candle_index)
+    end_idx = max(prev_opposite.candle_index, broken_swing.candle_index)
+
+    pullback_level = None
+    if choch.direction == Direction.BEARISH:
+        # Bearish CHoCH: find the internal LOW between the two swings
+        for candle in candles:
+            if candle.index <= start_idx or candle.index >= end_idx:
+                continue
+            if pullback_level is None or candle.low < pullback_level:
+                pullback_level = candle.low
+    else:
+        # Bullish CHoCH: find the internal HIGH between the two swings
+        for candle in candles:
+            if candle.index <= start_idx or candle.index >= end_idx:
+                continue
+            if pullback_level is None or candle.high > pullback_level:
+                pullback_level = candle.high
+
+    if pullback_level is None:
+        return False
+
+    # Rule 2: Check if break candle's body closed beyond the pullback level
+    break_candle = idx_map.get(choch.candle_index)
+    if not break_candle:
+        return False
+
+    if choch.direction == Direction.BEARISH:
+        return break_candle.body_bottom < pullback_level
+    else:
+        return break_candle.body_top > pullback_level
 
 
 def filter_fake_choch(
     choch_events: list[CHoCH],
     swings: list[SwingPoint],
     candles: list[Candle],
+    inducements: list[Inducement] | None = None,
+    liquidity_pools: list[LiquidityPool] | None = None,
+    bos_events: list[BOS] | None = None,
 ) -> list[CHoCH]:
-    """Apply V09 fake CHoCH filters.
+    """Apply V09 fake CHoCH filters and V10 confirmation models.
 
-    A CHoCH is FAKE (and should be filtered) if:
-    1. The broken swing was not a MAJOR swing (was weak/minor)
-    2. No follow-through: price doesn't create opposing structure after the break
-    3. The break was during an inducement sweep (price returns quickly)
+    V09 Fake CHoCH Rules (set is_fake=True):
+      Rule 1: Weak Swing Point — SIC sweeps prior liquidity
+      Rule 2: Engineered Liquidity — broken swing has equal highs/lows
+      Rule 3: Impulse-Origin — broken swing's IDM was TRANSFERRED (no pullback)
+
+    V10 CHoCH Confirmation (set confirmed=True/False):
+      Swing-Based Model (body close): 4 rules including post-CHoCH IDM + BOS
+      Sweep-Based Model (wick only): 2 rules — sweep + body close below pullback
+
+    Note: V09 Rule 4 (multi-TF trap) is applied separately in run_multi_tf_analysis().
     """
+    if inducements is None:
+        inducements = []
+    if liquidity_pools is None:
+        liquidity_pools = []
+    if bos_events is None:
+        bos_events = []
+
     idx_map = {c.index: c for c in candles}
 
     for choch in choch_events:
-        # Filter: Check for follow-through within a reasonable window
-        # After CHoCH, expect opposing structure within next few candles
-        window_size = 10
-        choch_candle = idx_map.get(choch.candle_index)
-        if not choch_candle:
+        # ── V09: Fake CHoCH Detection ──
+
+        # Rule 1: Weak swing point (SIC swept prior liquidity)
+        if _check_weak_swing(choch, swings, idx_map):
+            choch.is_fake = True
             continue
 
-        has_followthrough = False
-        for candle in candles:
-            if candle.index <= choch.candle_index:
-                continue
-            if candle.index > choch.candle_index + window_size:
-                break
+        # Rule 2: Engineered liquidity at broken swing level
+        if _check_engineered_liquidity(choch, liquidity_pools):
+            choch.is_fake = True
+            continue
 
-            if choch.direction == Direction.BEARISH:
-                # After bearish CHoCH: expect a lower high (pullback that fails)
-                if candle.high > choch_candle.high:
-                    # Price went above CHoCH candle — weak follow-through
-                    break
-                has_followthrough = True
+        # Rule 3: Impulse-origin inducement (TRANSFERRED IDM = no pullback)
+        if _check_impulse_origin(choch, inducements):
+            choch.is_fake = True
+            continue
+
+        # ── V10: CHoCH Confirmation ──
+
+        model = _classify_choch_model(choch, idx_map)
+        choch.model = model  # V15: store for MSS vs SBC entry classification
+
+        if model == "swing":
+            # Swing-Based: 4 rules (1-2 already met, check 3-4)
+            confirmed, is_trap = _confirm_swing_based(choch, candles, idx_map)
+            if is_trap:
+                # No inducement after swing-based CHoCH = Smart Money Trap
+                choch.is_fake = True
             else:
-                if candle.low < choch_candle.low:
-                    break
-                has_followthrough = True
-
-        if has_followthrough:
-            choch.confirmed = True
+                choch.confirmed = confirmed
         else:
-            # No clear follow-through yet — don't mark fake, just unconfirmed
-            choch.confirmed = False
+            # Sweep-Based: 2 rules (sweep + body close below pullback)
+            choch.confirmed = _confirm_sweep_based(choch, swings, candles, idx_map)
 
     return choch_events

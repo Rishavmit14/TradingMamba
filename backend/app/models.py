@@ -151,6 +151,8 @@ class Inducement:
     parent_swing_index: int   # The swing this IDM belongs to
     status: IDMStatus = IDMStatus.ACTIVE
     taken_at_candle: Optional[int] = None  # Candle index where IDM was swept
+    body_closed: bool = False  # V04: body closed beyond IDM (not just wick)
+    is_major: bool = True      # V08: major IDM (deepest pullback, 80-85% probability)
 
 
 @dataclass
@@ -174,6 +176,7 @@ class BOS:
     broken_price: float        # The price level that was broken
     valid: bool = True
     invalidation_reason: Optional[str] = None
+    idm_body_closed: bool = False  # V06: IDM taken with body close (Swing HH tier)
 
 
 @dataclass
@@ -187,6 +190,7 @@ class CHoCH:
     has_climax_confluence: bool = False
     is_fake: bool = False      # Filtered by V09 fake CHoCH rules
     confirmed: bool = False    # V10 confirmation (follow-through)
+    model: str = ""            # V10/V15: "swing" (MSS) or "sweep" (SBC)
 
 
 @dataclass

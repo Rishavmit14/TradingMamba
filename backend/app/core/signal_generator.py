@@ -202,6 +202,39 @@ def _grade_signal(confluences: list[str], is_counter_trend: bool, climax_warning
         return SignalGrade.D
 
 
+def _determine_entry_method(
+    zone: dict,
+    bos_events: list[BOS],
+    choch_events: list[CHoCH],
+) -> EntryMethod:
+    """V15/V17: Classify entry as MSS, SBC, or PULLBACK_BREAK.
+
+    MSS = confirmed CHoCH with body close (swing-based model V10)
+    SBC = confirmed CHoCH with wick only (sweep-based model V10)
+    PULLBACK_BREAK = valid BOS trend continuation (no recent CHoCH)
+    """
+    zone_idx = zone.get("candle_index", 0)
+
+    # Check for confirmed CHoCH near this zone
+    confirmed_chochs = [
+        c for c in choch_events
+        if c.confirmed and not c.is_fake and c.candle_index <= zone_idx
+    ]
+
+    if confirmed_chochs:
+        latest = max(confirmed_chochs, key=lambda c: c.candle_index)
+        if latest.model == "sweep":
+            return EntryMethod.SBC
+        return EntryMethod.MSS
+
+    # No confirmed CHoCH → check for valid BOS (trend continuation)
+    valid_bos = [b for b in bos_events if b.valid and b.candle_index <= zone_idx]
+    if valid_bos:
+        return EntryMethod.PULLBACK_BREAK
+
+    return EntryMethod.MSS  # default
+
+
 def generate_signals(
     candles: list[Candle],
     swings: list[SwingPoint],
@@ -287,6 +320,11 @@ def generate_signals(
             base_score -= 20
         confidence = max(0, min(100, base_score))
 
+        # V15/V17: Determine entry method from recent structure events
+        entry_method = _determine_entry_method(
+            zone, bos_events, choch_events,
+        )
+
         signals.append(TradingSignal(
             direction=direction,
             entry_price=entry,
@@ -297,7 +335,7 @@ def generate_signals(
             grade=grade,
             confluences=confluences,
             timeframe="M15",
-            entry_method=EntryMethod.MSS,
+            entry_method=entry_method,
             pattern_type=f"{zone['type']} trend continuation",
             timestamp=candles[-1].timestamp,
             w1_trend=w1_trend,

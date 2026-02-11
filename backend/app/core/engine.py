@@ -16,7 +16,7 @@ from app.models import (
 )
 from app.core.swing_detector import detect_and_classify
 from app.core.inducement import detect_and_validate as detect_idm
-from app.core.liquidity import detect_all_liquidity
+from app.core.liquidity import detect_all_liquidity, prices_equal
 from app.core.bos_detector import detect_bos
 from app.core.choch_detector import detect_choch, filter_fake_choch, detect_climax
 from app.core.fvg_detector import detect_all_fvgs
@@ -65,7 +65,7 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     swings, trend = detect_and_classify(candles, lookback)
 
     # 1.2: Inducement detection + swing validation
-    inducements, swings = detect_idm(candles, swings)
+    inducements, swings = detect_idm(candles, swings, lookback)
 
     # 1.3: Liquidity pool identification
     liquidity_pools = detect_all_liquidity(candles, swings, inducements)
@@ -75,7 +75,8 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
 
     # 1.5: Change of Character detection
     choch_events = detect_choch(candles, swings, bos_events, trend)
-    choch_events = filter_fake_choch(choch_events, swings, candles)
+    choch_events = filter_fake_choch(choch_events, swings, candles,
+                                     inducements, liquidity_pools, bos_events)
 
     # Climax detection
     is_climactic, climax_ratio = detect_climax(candles, swings, trend)
@@ -110,6 +111,42 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     )
 
 
+def _apply_cross_tf_fake_choch(results: dict[str, AnalysisResult]) -> None:
+    """V09 Rule 4: Mark lower TF CHoCH as fake if the broken price matches
+    a higher TF active inducement level.
+
+    Hierarchy: W1 > D1 > H4 > M15
+    """
+    tf_hierarchy = [("M15", ["H4", "D1", "W1"]),
+                    ("H4", ["D1", "W1"])]
+
+    for lower_tf, higher_tfs in tf_hierarchy:
+        lower = results.get(lower_tf)
+        if not lower:
+            continue
+
+        # Collect active inducement prices from all higher TFs
+        higher_idm_prices: list[float] = []
+        for htf in higher_tfs:
+            higher = results.get(htf)
+            if not higher:
+                continue
+            for idm in higher.inducements:
+                higher_idm_prices.append(idm.price)
+
+        if not higher_idm_prices:
+            continue
+
+        # Check each lower TF CHoCH against higher TF inducements
+        for choch in lower.choch_events:
+            if choch.is_fake:
+                continue
+            for htf_price in higher_idm_prices:
+                if prices_equal(choch.broken_price, htf_price):
+                    choch.is_fake = True
+                    break
+
+
 def run_multi_tf_analysis(
     candles_by_tf: dict[str, list[Candle]],
 ) -> dict[str, AnalysisResult]:
@@ -126,6 +163,10 @@ def run_multi_tf_analysis(
             results[tf] = analyze_timeframe(candles, tf)
         else:
             results[tf] = AnalysisResult(timeframe=tf, trend=TrendState.RANGING)
+
+    # V09 Rule 4: Cross-TF fake CHoCH detection
+    # Lower TF swing that is higher TF inducement = fake CHoCH on lower TF
+    _apply_cross_tf_fake_choch(results)
 
     # Generate signals on M15 using higher TF context
     m15 = results.get("M15")

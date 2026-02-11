@@ -18,7 +18,7 @@ Core Rules (V05):
 from __future__ import annotations
 from app.models import (
     Candle, SwingPoint, Inducement, BOS,
-    SwingType, SwingClassification, Direction, IDMStatus,
+    SwingType, SwingClassification, Direction,
 )
 
 
@@ -39,8 +39,10 @@ def detect_bos(
         return []
 
     idx_map = {c.index: c for c in candles}
-    idm_by_swing = {idm.parent_swing_index: idm for idm in inducements}
     bos_events: list[BOS] = []
+
+    # V06: Build IDM lookup by parent swing for body_closed check
+    idm_by_swing = {idm.parent_swing_index: idm for idm in inducements}
 
     for i, swing in enumerate(swings):
         # TREND CONTEXT: Only process HH and LL (continuation levels)
@@ -56,9 +58,10 @@ def detect_bos(
             ):
                 continue
 
-        # Check RULE 1: Was IDM taken?
-        idm = idm_by_swing.get(swing.candle_index)
-        idm_was_taken = idm is not None and idm.status == IDMStatus.TAKEN
+        # Check RULE 1: Was IDM taken within the structural window?
+        # swing.idm_taken is set by check_idm_taken() and respects the
+        # lookback-based structural window — not just any sweep after the fact.
+        idm_was_taken = swing.idm_taken
 
         # Find the break candle — search forward through ALL candles
         # (no artificial search_end limit that was cutting off valid breaks)
@@ -127,6 +130,10 @@ def detect_bos(
             elif not break_valid:
                 reason = "Body did not close beyond wick (Rule 2 failed)"
 
+            # V06: Check if IDM was taken with body close (Swing HH tier)
+            idm = idm_by_swing.get(swing.candle_index)
+            idm_body = idm.body_closed if idm else False
+
             bos_events.append(BOS(
                 candle_index=break_candle_idx,
                 direction=direction,
@@ -134,6 +141,7 @@ def detect_bos(
                 broken_price=swing.price,
                 valid=is_valid,
                 invalidation_reason=reason,
+                idm_body_closed=idm_body,
             ))
 
     return bos_events

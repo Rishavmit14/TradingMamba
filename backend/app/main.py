@@ -58,6 +58,8 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
                 "classification": s.classification.value,
                 "is_valid_smc": s.is_valid_smc,
                 "idm_taken": s.idm_taken,
+                "is_strong": s.is_strong,
+                "candle_closed_properly": s.candle_closed_properly,
             }
             for s in result.swings
         ],
@@ -68,6 +70,8 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
                 "parent_swing_index": idm.parent_swing_index,
                 "status": idm.status.value,
                 "taken_at_candle": idm.taken_at_candle,
+                "body_closed": idm.body_closed,
+                "is_major": idm.is_major,
             }
             for idm in result.inducements
         ],
@@ -91,6 +95,7 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
                 "broken_price": b.broken_price,
                 "valid": b.valid,
                 "invalidation_reason": b.invalidation_reason,
+                "idm_body_closed": b.idm_body_closed,
             }
             for b in result.bos_events
         ],
@@ -104,6 +109,7 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
                 "has_climax_confluence": ch.has_climax_confluence,
                 "is_fake": ch.is_fake,
                 "confirmed": ch.confirmed,
+                "model": ch.model,
             }
             for ch in result.choch_events
         ],

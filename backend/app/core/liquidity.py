@@ -24,7 +24,7 @@ from app.models import (
 EQUAL_PRICE_TOLERANCE = 0.001  # 0.1%
 
 
-def _prices_equal(a: float, b: float) -> bool:
+def prices_equal(a: float, b: float) -> bool:
     if a == 0 or b == 0:
         return a == b
     return abs(a - b) / max(a, b) < EQUAL_PRICE_TOLERANCE
@@ -38,14 +38,14 @@ def detect_equal_highs(swings: list[SwingPoint]) -> list[LiquidityPool]:
     for i in range(len(highs)):
         cluster_indices = [highs[i].candle_index]
         for j in range(i + 1, len(highs)):
-            if _prices_equal(highs[i].price, highs[j].price):
+            if prices_equal(highs[i].price, highs[j].price):
                 cluster_indices.append(highs[j].candle_index)
 
         if len(cluster_indices) >= 2:
             # Check we haven't already added this cluster
             pool_level = highs[i].price
             already_exists = any(
-                _prices_equal(p.price_level, pool_level)
+                prices_equal(p.price_level, pool_level)
                 for p in pools if p.source == LiquiditySource.EQUAL_HIGHS
             )
             if not already_exists:
@@ -67,13 +67,13 @@ def detect_equal_lows(swings: list[SwingPoint]) -> list[LiquidityPool]:
     for i in range(len(lows)):
         cluster_indices = [lows[i].candle_index]
         for j in range(i + 1, len(lows)):
-            if _prices_equal(lows[i].price, lows[j].price):
+            if prices_equal(lows[i].price, lows[j].price):
                 cluster_indices.append(lows[j].candle_index)
 
         if len(cluster_indices) >= 2:
             pool_level = lows[i].price
             already_exists = any(
-                _prices_equal(p.price_level, pool_level)
+                prices_equal(p.price_level, pool_level)
                 for p in pools if p.source == LiquiditySource.EQUAL_LOWS
             )
             if not already_exists:
