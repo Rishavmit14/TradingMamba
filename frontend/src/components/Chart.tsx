@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   createChart,
   CrosshairMode,
@@ -9,6 +9,7 @@ import {
   CandlestickData,
   ColorType,
   LineStyle,
+  MouseEventParams,
 } from "lightweight-charts";
 import { AnalysisResult, DetectorVisibility, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
 
@@ -120,6 +121,11 @@ export default function Chart({ data, visibility }: ChartProps) {
   const obPrimitiveRef = useRef<OBBoxPrimitive | null>(null);
   const prevCandleCountRef = useRef<number>(0);
 
+  // Swing ↔ IDM click interaction
+  const [selectedSwingIdx, setSelectedSwingIdx] = useState<number | null>(null);
+  const dataRef = useRef<AnalysisResult | null>(null);
+  dataRef.current = data;
+
   // Create chart once
   useEffect(() => {
     if (!containerRef.current) return;
@@ -166,6 +172,71 @@ export default function Chart({ data, visibility }: ChartProps) {
 
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
+
+    // Click handler: find nearest swing and highlight its IDM
+    chart.subscribeClick((param: MouseEventParams) => {
+      const d = dataRef.current;
+      if (!param.time || !d || !d.candles.length) {
+        setSelectedSwingIdx(null);
+        return;
+      }
+
+      // Find which candle was clicked by matching timestamp
+      const clickedTimeSec = param.time as number;
+      const clickedCandle = d.candles.find(
+        (c) => Math.floor(c.timestamp / 1000) === clickedTimeSec
+      );
+      if (!clickedCandle) {
+        setSelectedSwingIdx(null);
+        return;
+      }
+
+      // Get clicked price from y coordinate
+      const clickedPrice =
+        param.point && candleSeriesRef.current
+          ? candleSeriesRef.current.coordinateToPrice(param.point.y)
+          : null;
+
+      // Find swings at this candle (could be both a high and low)
+      const swingsAtCandle = d.swings.filter(
+        (s) =>
+          s.candle_index === clickedCandle.index &&
+          s.classification !== "unclassified"
+      );
+
+      if (swingsAtCandle.length === 0) {
+        // Also check 1 candle tolerance for easier clicking
+        const nearby = d.swings.filter(
+          (s) =>
+            Math.abs(s.candle_index - clickedCandle.index) <= 1 &&
+            s.classification !== "unclassified"
+        );
+        if (nearby.length === 0) {
+          setSelectedSwingIdx(null);
+          return;
+        }
+        // Pick closest by price
+        if (clickedPrice !== null) {
+          nearby.sort(
+            (a, b) =>
+              Math.abs(a.price - clickedPrice) -
+              Math.abs(b.price - clickedPrice)
+          );
+        }
+        setSelectedSwingIdx(nearby[0].candle_index);
+        return;
+      }
+
+      // If multiple swings at same candle, pick closest to clicked price
+      if (swingsAtCandle.length > 1 && clickedPrice !== null) {
+        swingsAtCandle.sort(
+          (a, b) =>
+            Math.abs(a.price - clickedPrice) -
+            Math.abs(b.price - clickedPrice)
+        );
+      }
+      setSelectedSwingIdx(swingsAtCandle[0].candle_index);
+    });
 
     // ResizeObserver tracks both width and height of the container
     const ro = new ResizeObserver((entries) => {
@@ -219,14 +290,17 @@ export default function Chart({ data, visibility }: ChartProps) {
 
         const isHigh = s.swing_type === "swing_high";
         const label = s.classification === "unclassified" ? "?" : s.classification;
-        const validColor = s.is_valid_smc ? (isHigh ? "#f59e0b" : "#3b82f6") : "#6b7280";
+        const isSelected = s.candle_index === selectedSwingIdx;
+        const validColor = isSelected
+          ? "#fbbf24"  // bright yellow when selected
+          : s.is_valid_smc ? (isHigh ? "#f59e0b" : "#3b82f6") : "#6b7280";
 
         markers.push({
           time: toTV(candle.timestamp),
           position: isHigh ? "aboveBar" : "belowBar",
           color: validColor,
           shape: isHigh ? "arrowDown" : "arrowUp",
-          text: label,
+          text: isSelected ? `▶ ${label}` : label,
         });
       });
     }
@@ -261,11 +335,15 @@ export default function Chart({ data, visibility }: ChartProps) {
           if (endTime <= startTime) return;
 
           const isTaken = idm.status === "taken";
-          const color = isTaken ? "#60a5fa80" : "#60a5fa";
+          const isHighlighted = idm.parent_swing_index === selectedSwingIdx;
+          const color = isHighlighted
+            ? "#fbbf24"  // bright yellow when parent swing is selected
+            : isTaken ? "#60a5fa80" : "#60a5fa";
+          const lineWidth = isHighlighted ? 3 : 1;
 
           const lineSeries = chart.addLineSeries({
             color,
-            lineWidth: 1,
+            lineWidth,
             lineStyle: LineStyle.Dashed,
             crosshairMarkerVisible: false,
             priceLineVisible: false,
@@ -286,7 +364,7 @@ export default function Chart({ data, visibility }: ChartProps) {
               position: "aboveBar" as const,
               color,
               shape: "square" as const,
-              size: 0.01,
+              size: isHighlighted ? 1 : 0.01,
               text: "IDM",
             }]);
           }
@@ -541,7 +619,7 @@ export default function Chart({ data, visibility }: ChartProps) {
       chart.timeScale().fitContent();
       prevCandleCountRef.current = candles.length;
     }
-  }, [data, visibility]);
+  }, [data, visibility, selectedSwingIdx]);
 
   return (
     <div
