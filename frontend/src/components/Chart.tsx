@@ -28,6 +28,7 @@ export default function Chart({ data, visibility }: ChartProps) {
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const priceLinesRef = useRef<any[]>([]);
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
+  const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const prevDataRef = useRef<AnalysisResult | null>(null);
 
@@ -89,6 +90,7 @@ export default function Chart({ data, visibility }: ChartProps) {
       candleSeriesRef.current = null;
       priceLinesRef.current = [];
       idmSeriesRef.current = [];
+      bosSeriesRef.current = [];
       chochSeriesRef.current = [];
     };
   }, []);
@@ -131,22 +133,6 @@ export default function Chart({ data, visibility }: ChartProps) {
           color: validColor,
           shape: isHigh ? "arrowDown" : "arrowUp",
           text: label,
-        });
-      });
-    }
-
-    // BOS markers
-    if (visibility.bos) {
-      data.bos_events.forEach((b: BOS) => {
-        const candle = candles[b.candle_index];
-        if (!candle) return;
-
-        markers.push({
-          time: toTV(candle.timestamp),
-          position: b.direction === "bullish" ? "belowBar" : "aboveBar",
-          color: b.valid ? "#22d3ee" : "#6b7280",
-          shape: "circle",
-          text: b.valid ? "BOS" : "xBOS",
         });
       });
     }
@@ -197,8 +183,74 @@ export default function Chart({ data, visibility }: ChartProps) {
             { time: endTime, value: idm.price },
           ]);
 
+          // Add "IDM" label at the midpoint of the ray
+          const midIdx = Math.floor((idm.candle_index + endIdx) / 2);
+          const midCandle = candles[midIdx];
+          if (midCandle) {
+            lineSeries.setMarkers([{
+              time: toTV(midCandle.timestamp),
+              position: "aboveBar" as const,
+              color,
+              shape: "square" as const,
+              size: 0.01,
+              text: "IDM",
+            }]);
+          }
+
           idmSeriesRef.current.push(lineSeries);
         });
+    }
+
+    // --- BOS RAYS: horizontal lines from broken swing to break candle ---
+
+    // Remove old BOS line series
+    for (const s of bosSeriesRef.current) {
+      try { chart.removeSeries(s); } catch { /* already removed */ }
+    }
+    bosSeriesRef.current = [];
+
+    if (visibility.bos) {
+      data.bos_events.forEach((b: BOS) => {
+        const startCandle = candles[b.broken_swing_index];
+        const endCandle = candles[b.candle_index];
+        if (!startCandle || !endCandle) return;
+
+        const startTime = toTV(startCandle.timestamp);
+        const endTime = toTV(endCandle.timestamp);
+        if (endTime <= startTime) return;
+
+        const color = b.valid ? "#22d3ee" : "#6b728080"; // cyan valid, gray invalid
+
+        const lineSeries = chart.addLineSeries({
+          color,
+          lineWidth: 2,
+          lineStyle: LineStyle.Dashed,
+          crosshairMarkerVisible: false,
+          priceLineVisible: false,
+          lastValueVisible: false,
+        });
+
+        lineSeries.setData([
+          { time: startTime, value: b.broken_price },
+          { time: endTime, value: b.broken_price },
+        ]);
+
+        // Add "BOS" label at the midpoint of the ray
+        const midIdx = Math.floor((b.broken_swing_index + b.candle_index) / 2);
+        const midCandle = candles[midIdx];
+        if (midCandle) {
+          lineSeries.setMarkers([{
+            time: toTV(midCandle.timestamp),
+            position: "aboveBar" as const,
+            color,
+            shape: "square" as const,
+            size: 0.01,
+            text: b.valid ? "BOS" : "xBOS",
+          }]);
+        }
+
+        bosSeriesRef.current.push(lineSeries);
+      });
     }
 
     // --- CHoCH RAYS: horizontal lines from broken swing to break candle ---

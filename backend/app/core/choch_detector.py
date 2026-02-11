@@ -167,7 +167,14 @@ def detect_choch(
                 running_trend = TrendState.BULLISH
             elif h_cls == SwingClassification.LH and l_cls == SwingClassification.LL:
                 running_trend = TrendState.BEARISH
-            # Mixed (HH+LL, LH+HL): keep previous trend
+            elif h_cls == SwingClassification.HH and l_cls == SwingClassification.LL:
+                # HL broke while highs still higher → bearish CHoCH
+                if old_trend == TrendState.BULLISH:
+                    running_trend = TrendState.BEARISH
+            elif h_cls == SwingClassification.LH and l_cls == SwingClassification.HL:
+                # LH broke while lows still higher → bullish CHoCH
+                if old_trend == TrendState.BEARISH:
+                    running_trend = TrendState.BULLISH
 
         # --- Handle trend transitions ---
 
@@ -207,6 +214,14 @@ def detect_choch(
                     key_hl = s
                     break
             key_lh = None
+
+        # Update key levels within current trend to track most recent HL/LH
+        if running_trend == TrendState.BULLISH:
+            if swing.classification == SwingClassification.HL and swing.is_valid_smc:
+                key_hl = swing
+        elif running_trend == TrendState.BEARISH:
+            if swing.classification == SwingClassification.LH and swing.is_valid_smc:
+                key_lh = swing
 
     # Edge case: check if current price breaks the key level (live CHoCH)
     # Since key_hl/key_lh are only set at trend transitions (not updated within

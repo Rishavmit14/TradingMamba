@@ -1,6 +1,9 @@
 """1.4 — Break of Structure (BOS) Detection
 
-Identifies valid trend continuation signals where price breaks previous structure.
+Identifies valid trend CONTINUATION signals where price breaks previous structure.
+
+BOS = continuation: breaking HH (bullish) or LL (bearish).
+Breaking HL/LH is CHoCH territory and NOT a BOS.
 
 Core Rules (V05):
 - RULE 1: Price swing MUST have taken inducement from previous swing
@@ -15,7 +18,7 @@ Core Rules (V05):
 from __future__ import annotations
 from app.models import (
     Candle, SwingPoint, Inducement, BOS,
-    SwingType, Direction, IDMStatus,
+    SwingType, SwingClassification, Direction, IDMStatus,
 )
 
 
@@ -24,11 +27,13 @@ def detect_bos(
     swings: list[SwingPoint],
     inducements: list[Inducement],
 ) -> list[BOS]:
-    """Detect all Break of Structure events.
+    """Detect Break of Structure events (trend continuation only).
 
-    For each swing high, check if a subsequent candle breaks above it.
-    For each swing low, check if a subsequent candle breaks below it.
-    Then validate using the two BOS rules.
+    Only processes HH and LL swings — these are trend continuation levels.
+    HL and LH breaks are reversal signals (CHoCH territory) and are skipped.
+
+    For each HH, check if a subsequent candle breaks above it (bullish BOS).
+    For each LL, check if a subsequent candle breaks below it (bearish BOS).
     """
     if len(swings) < 2:
         return []
@@ -38,37 +43,39 @@ def detect_bos(
     bos_events: list[BOS] = []
 
     for i, swing in enumerate(swings):
-        # Find the next swing of same type to define the "current leg"
-        next_same = None
-        for j in range(i + 1, len(swings)):
-            if swings[j].swing_type == swing.swing_type:
-                next_same = swings[j]
-                break
+        # TREND CONTEXT: Only process HH and LL (continuation levels)
+        # HL/LH breaks are CHoCH territory — skip them entirely
+        if swing.swing_type == SwingType.SWING_HIGH:
+            if swing.classification not in (
+                SwingClassification.HH, SwingClassification.UNCLASSIFIED,
+            ):
+                continue
+        else:  # SWING_LOW
+            if swing.classification not in (
+                SwingClassification.LL, SwingClassification.UNCLASSIFIED,
+            ):
+                continue
 
-        # Define the search range for the break
-        search_end = next_same.candle_index if next_same else candles[-1].index if candles else 0
-
-        # Check RULE 1: Was IDM taken for the swing that BREAKS this level?
-        # The IDM check is on the swing that forms AFTER the break attempt
+        # Check RULE 1: Was IDM taken?
         idm = idm_by_swing.get(swing.candle_index)
         idm_was_taken = idm is not None and idm.status == IDMStatus.TAKEN
 
-        # Find the break candle
+        # Find the break candle — search forward through ALL candles
+        # (no artificial search_end limit that was cutting off valid breaks)
+        swing_candle = idx_map.get(swing.candle_index)
+        if not swing_candle:
+            continue
+
         break_candle_idx = None
         break_valid = False
 
         if swing.swing_type == SwingType.SWING_HIGH:
             # Bullish BOS: look for candle body closing above swing high's wick
-            swing_candle = idx_map.get(swing.candle_index)
-            if not swing_candle:
-                continue
             break_level = swing_candle.high  # RULE 2: must close above WICK
 
             for candle in candles:
                 if candle.index <= swing.candle_index:
                     continue
-                if candle.index > search_end:
-                    break
 
                 # Check if this candle or the next achieves body close above wick
                 if candle.high > swing.price:
@@ -89,16 +96,11 @@ def detect_bos(
 
         else:  # SWING_LOW
             # Bearish BOS: look for candle body closing below swing low's wick
-            swing_candle = idx_map.get(swing.candle_index)
-            if not swing_candle:
-                continue
             break_level = swing_candle.low  # RULE 2: must close below WICK
 
             for candle in candles:
                 if candle.index <= swing.candle_index:
                     continue
-                if candle.index > search_end:
-                    break
 
                 if candle.low < swing.price:
                     if candle.body_bottom < break_level:

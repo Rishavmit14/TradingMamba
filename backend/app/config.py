@@ -24,7 +24,8 @@ BINANCE_INTERVALS = {
 
 # How many candles to keep in rolling buffer per timeframe
 CANDLE_BUFFER_SIZE = {
-    "W1": 104,    # ~2 years of weekly
+    "1M": 120,    # ~10 years of monthly
+    "W1": 500,    # ~9.5 years of weekly
     "D1": 365,    # ~1 year of daily
     "H4": 500,    # ~83 days of 4h
     "M15": 1000,  # ~10 days of 15m
