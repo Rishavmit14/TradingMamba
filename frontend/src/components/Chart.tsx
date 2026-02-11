@@ -118,7 +118,7 @@ export default function Chart({ data, visibility }: ChartProps) {
   const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const obPrimitiveRef = useRef<OBBoxPrimitive | null>(null);
-  const prevDataRef = useRef<AnalysisResult | null>(null);
+  const prevCandleCountRef = useRef<number>(0);
 
   // Create chart once
   useEffect(() => {
@@ -536,10 +536,10 @@ export default function Chart({ data, visibility }: ChartProps) {
       obPrimitiveRef.current.setBoxes([]);
     }
 
-    // Fit content only when data changes (new timeframe), not on visibility toggles
-    if (data !== prevDataRef.current) {
+    // Fit content only when candle count changes (new timeframe), not on live refreshes
+    if (candles.length !== prevCandleCountRef.current) {
       chart.timeScale().fitContent();
-      prevDataRef.current = data;
+      prevCandleCountRef.current = candles.length;
     }
   }, [data, visibility]);
 

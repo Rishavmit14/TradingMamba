@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
@@ -34,6 +34,17 @@ export default function Dashboard() {
     setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
+  // Silent refresh: updates data without showing loading spinner
+  const silentRefresh = useCallback(async (tf: string) => {
+    try {
+      const result = await fetchAnalysis(tf);
+      setAnalysis(result);
+      setError(null);
+    } catch {
+      // Silent fail — keep showing last data
+    }
+  }, []);
+
   const runAnalysis = useCallback(async (tf: string) => {
     setSelectedTF(tf);
     setLoading(true);
@@ -49,6 +60,36 @@ export default function Dashboard() {
       setLoading(false);
     }
   }, []);
+
+  // Auto-refresh polling — interval depends on timeframe
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const selectedTFRef = useRef(selectedTF);
+  selectedTFRef.current = selectedTF;
+
+  useEffect(() => {
+    // Only poll when we have data loaded
+    if (!analysis) return;
+
+    // Polling intervals per timeframe
+    const pollMs: Record<string, number> = {
+      "M5": 5_000,     // 5s
+      "M15": 10_000,   // 10s
+      "H1": 15_000,    // 15s
+      "H4": 30_000,    // 30s
+      "D1": 60_000,    // 60s
+      "W1": 60_000,    // 60s
+      "1M": 120_000,   // 2min
+    };
+    const ms = pollMs[selectedTF] ?? 30_000;
+
+    intervalRef.current = setInterval(() => {
+      silentRefresh(selectedTFRef.current);
+    }, ms);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [analysis, selectedTF, silentRefresh]);
 
   return (
     <div className="h-screen flex flex-col bg-[#0a0a0f]">
@@ -102,6 +143,12 @@ export default function Dashboard() {
 
         {/* Status */}
         <div className="flex items-center gap-3 text-xs">
+          {analysis && (
+            <span className="flex items-center gap-1.5 text-green-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              LIVE
+            </span>
+          )}
           {analysis && (
             <span className={`px-2 py-0.5 rounded font-medium ${
               analysis.trend === "bullish"
