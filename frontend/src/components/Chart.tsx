@@ -230,23 +230,36 @@ export default function Chart({ data, visibility }: ChartProps) {
           lastValueVisible: false,
         });
 
-        lineSeries.setData([
-          { time: startTime, value: b.broken_price },
-          { time: endTime, value: b.broken_price },
-        ]);
-
-        // Add "BOS" label at the midpoint of the ray
+        // Add midpoint data point so the marker can sit in the center of the ray
         const midIdx = Math.floor((b.broken_swing_index + b.candle_index) / 2);
         const midCandle = candles[midIdx];
+        const lineData: { time: any; value: number }[] = [
+          { time: startTime, value: b.broken_price },
+        ];
         if (midCandle) {
-          lineSeries.setMarkers([{
-            time: toTV(midCandle.timestamp),
-            position: "aboveBar" as const,
-            color,
-            shape: "square" as const,
-            size: 0.01,
-            text: b.valid ? "BOS" : "xBOS",
-          }]);
+          const midTime = toTV(midCandle.timestamp);
+          if (midTime > startTime && midTime < endTime) {
+            lineData.push({ time: midTime, value: b.broken_price });
+          }
+        }
+        lineData.push({ time: endTime, value: b.broken_price });
+        lineSeries.setData(lineData);
+
+        // Add "BOS" label with directional arrow at the midpoint of the ray
+        if (midCandle) {
+          const midTime = toTV(midCandle.timestamp);
+          if (midTime > startTime && midTime < endTime) {
+            const isBull = b.direction === "bullish";
+            const label = b.valid ? "BOS" : "xBOS";
+            lineSeries.setMarkers([{
+              time: midTime,
+              position: "inBar" as const,
+              color,
+              shape: isBull ? "arrowUp" as const : "arrowDown" as const,
+              size: 0.5,
+              text: label,
+            }]);
+          }
         }
 
         bosSeriesRef.current.push(lineSeries);
@@ -284,23 +297,36 @@ export default function Chart({ data, visibility }: ChartProps) {
           lastValueVisible: false,
         });
 
-        lineSeries.setData([
-          { time: startTime, value: ch.broken_price },
-          { time: endTime, value: ch.broken_price },
-        ]);
-
-        // Add "CHoCH" label at the midpoint of the ray
+        // Add midpoint data point so the marker can sit in the center of the ray
         const midIdx = Math.floor((ch.broken_swing_index + ch.candle_index) / 2);
         const midCandle = candles[midIdx];
+        const lineData: { time: any; value: number }[] = [
+          { time: startTime, value: ch.broken_price },
+        ];
         if (midCandle) {
-          lineSeries.setMarkers([{
-            time: toTV(midCandle.timestamp),
-            position: "aboveBar" as const,
-            color,
-            shape: "square" as const,
-            size: 0.01,
-            text: ch.is_fake ? "xCHoCH" : "CHoCH",
-          }]);
+          const midTime = toTV(midCandle.timestamp);
+          if (midTime > startTime && midTime < endTime) {
+            lineData.push({ time: midTime, value: ch.broken_price });
+          }
+        }
+        lineData.push({ time: endTime, value: ch.broken_price });
+        lineSeries.setData(lineData);
+
+        // Add "CHoCH" label with directional arrow at the midpoint of the ray
+        if (midCandle) {
+          const midTime = toTV(midCandle.timestamp);
+          if (midTime > startTime && midTime < endTime) {
+            const isBull = ch.direction === "bullish";
+            const label = ch.is_fake ? "xCHoCH" : "CHoCH";
+            lineSeries.setMarkers([{
+              time: midTime,
+              position: "inBar" as const,
+              color,
+              shape: isBull ? "arrowUp" as const : "arrowDown" as const,
+              size: 0.5,
+              text: label,
+            }]);
+          }
         }
 
         chochSeriesRef.current.push(lineSeries);
