@@ -28,6 +28,7 @@ export default function Chart({ data, visibility }: ChartProps) {
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const priceLinesRef = useRef<any[]>([]);
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
+  const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const prevDataRef = useRef<AnalysisResult | null>(null);
 
   // Create chart once
@@ -88,6 +89,7 @@ export default function Chart({ data, visibility }: ChartProps) {
       candleSeriesRef.current = null;
       priceLinesRef.current = [];
       idmSeriesRef.current = [];
+      chochSeriesRef.current = [];
     };
   }, []);
 
@@ -149,26 +151,6 @@ export default function Chart({ data, visibility }: ChartProps) {
       });
     }
 
-    // CHoCH markers
-    if (visibility.choch) {
-      data.choch_events.forEach((ch: CHoCH) => {
-        const candle = candles[ch.candle_index];
-        if (!candle) return;
-
-        let color = "#a855f7"; // purple
-        if (ch.is_fake) color = "#6b7280";
-        else if (ch.confirmed) color = "#ec4899"; // pink
-
-        markers.push({
-          time: toTV(candle.timestamp),
-          position: ch.direction === "bullish" ? "belowBar" : "aboveBar",
-          color,
-          shape: "square",
-          text: ch.is_fake ? "xCHoCH" : "CHoCH",
-        });
-      });
-    }
-
     // Sort markers by time (required by lightweight-charts)
     markers.sort((a, b) => (a.time as number) - (b.time as number));
     candleSeries.setMarkers(markers);
@@ -217,6 +199,60 @@ export default function Chart({ data, visibility }: ChartProps) {
 
           idmSeriesRef.current.push(lineSeries);
         });
+    }
+
+    // --- CHoCH RAYS: horizontal lines from broken swing to break candle ---
+
+    // Remove old CHoCH line series
+    for (const s of chochSeriesRef.current) {
+      try { chart.removeSeries(s); } catch { /* already removed */ }
+    }
+    chochSeriesRef.current = [];
+
+    if (visibility.choch) {
+      data.choch_events.forEach((ch: CHoCH) => {
+        const startCandle = candles[ch.broken_swing_index];
+        const endCandle = candles[ch.candle_index];
+        if (!startCandle || !endCandle) return;
+
+        const startTime = toTV(startCandle.timestamp);
+        const endTime = toTV(endCandle.timestamp);
+        if (endTime <= startTime) return;
+
+        let color = "#a855f7"; // purple default
+        if (ch.is_fake) color = "#6b728080";
+        else if (ch.confirmed) color = "#ec4899"; // pink confirmed
+
+        const lineSeries = chart.addLineSeries({
+          color,
+          lineWidth: 2,
+          lineStyle: LineStyle.Dashed,
+          crosshairMarkerVisible: false,
+          priceLineVisible: false,
+          lastValueVisible: false,
+        });
+
+        lineSeries.setData([
+          { time: startTime, value: ch.broken_price },
+          { time: endTime, value: ch.broken_price },
+        ]);
+
+        // Add "CHoCH" label at the midpoint of the ray
+        const midIdx = Math.floor((ch.broken_swing_index + ch.candle_index) / 2);
+        const midCandle = candles[midIdx];
+        if (midCandle) {
+          lineSeries.setMarkers([{
+            time: toTV(midCandle.timestamp),
+            position: "aboveBar" as const,
+            color,
+            shape: "square" as const,
+            size: 0.01,
+            text: ch.is_fake ? "xCHoCH" : "CHoCH",
+          }]);
+        }
+
+        chochSeriesRef.current.push(lineSeries);
+      });
     }
 
     // --- PRICE LINES: Premium/Discount, FVG, OB ---
