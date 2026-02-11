@@ -22,6 +22,93 @@ function toTV(ts: number) {
   return Math.floor(ts / 1000) as any;
 }
 
+// --- OB Box Primitive: draws filled rectangles on the chart canvas ---
+
+interface OBBoxData {
+  startTime: any;
+  endTime: any;
+  upperPrice: number;
+  lowerPrice: number;
+  fillColor: string;
+  borderColor: string;
+  label: string;
+  labelColor: string;
+}
+
+class OBBoxPrimitive {
+  _boxes: OBBoxData[] = [];
+  _chart: IChartApi | null = null;
+  _series: any = null;
+  _requestUpdate: (() => void) | null = null;
+
+  setBoxes(boxes: OBBoxData[]) {
+    this._boxes = boxes;
+    this._requestUpdate?.();
+  }
+
+  attached(param: any) {
+    this._chart = param.chart;
+    this._series = param.series;
+    this._requestUpdate = param.requestUpdate;
+  }
+
+  detached() {
+    this._chart = null;
+    this._series = null;
+    this._requestUpdate = null;
+  }
+
+  paneViews() {
+    return [{
+      zOrder: () => "bottom" as const,
+      renderer: () => ({
+        draw: (target: any) => {
+          target.useBitmapCoordinateSpace((scope: any) => {
+            const ctx = scope.context as CanvasRenderingContext2D;
+            if (!this._chart || !this._series) return;
+            const hpr = scope.horizontalPixelRatio;
+            const vpr = scope.verticalPixelRatio;
+
+            for (const box of this._boxes) {
+              const x1 = this._chart.timeScale().timeToCoordinate(box.startTime);
+              const x2 = this._chart.timeScale().timeToCoordinate(box.endTime);
+              const y1 = this._series.priceToCoordinate(box.upperPrice);
+              const y2 = this._series.priceToCoordinate(box.lowerPrice);
+
+              if (x1 === null || x2 === null || y1 === null || y2 === null) continue;
+
+              const px1 = Math.round(x1 * hpr);
+              const px2 = Math.round(x2 * hpr);
+              const py1 = Math.round(y1 * vpr);
+              const py2 = Math.round(y2 * vpr);
+
+              // Filled rectangle
+              ctx.fillStyle = box.fillColor;
+              ctx.fillRect(px1, py1, px2 - px1, py2 - py1);
+
+              // Border
+              ctx.strokeStyle = box.borderColor;
+              ctx.lineWidth = Math.max(1, Math.round(1.5 * hpr));
+              ctx.strokeRect(px1, py1, px2 - px1, py2 - py1);
+
+              // Label centered in the box
+              const fontSize = Math.round(11 * vpr);
+              ctx.font = `bold ${fontSize}px sans-serif`;
+              ctx.fillStyle = box.labelColor;
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              const cx = (px1 + px2) / 2;
+              const cy = (py1 + py2) / 2;
+              ctx.fillText(box.label, cx, cy);
+              ctx.textAlign = "start"; // reset
+            }
+          });
+        },
+      }),
+    }];
+  }
+}
+
 export default function Chart({ data, visibility }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
@@ -30,6 +117,7 @@ export default function Chart({ data, visibility }: ChartProps) {
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
+  const obPrimitiveRef = useRef<OBBoxPrimitive | null>(null);
   const prevDataRef = useRef<AnalysisResult | null>(null);
 
   // Create chart once
@@ -71,6 +159,11 @@ export default function Chart({ data, visibility }: ChartProps) {
       wickDownColor: "#ef4444",
     });
 
+    // Attach OB box primitive to candle series
+    const obPrimitive = new OBBoxPrimitive();
+    (candleSeries as any).attachPrimitive(obPrimitive);
+    obPrimitiveRef.current = obPrimitive;
+
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
 
@@ -92,6 +185,7 @@ export default function Chart({ data, visibility }: ChartProps) {
       idmSeriesRef.current = [];
       bosSeriesRef.current = [];
       chochSeriesRef.current = [];
+      obPrimitiveRef.current = null;
     };
   }, []);
 
@@ -333,7 +427,7 @@ export default function Chart({ data, visibility }: ChartProps) {
       });
     }
 
-    // --- PRICE LINES: Premium/Discount, FVG, OB ---
+    // --- PRICE LINES: Premium/Discount, FVG ---
 
     // Remove all previous price lines before creating new ones
     for (const line of priceLinesRef.current) {
@@ -395,30 +489,51 @@ export default function Chart({ data, visibility }: ChartProps) {
         });
     }
 
-    // Active OB zones as price lines
-    if (visibility.ob) {
-      data.order_blocks
-        .filter((ob: OrderBlock) => ob.valid && !ob.mitigated)
-        .slice(-3) // show last 3 active OBs
-        .forEach((ob: OrderBlock) => {
-          const color = ob.direction === "bullish" ? "#3b82f680" : "#f97316b0";
-          priceLinesRef.current.push(candleSeries.createPriceLine({
-            price: ob.upper_price,
-            color,
-            lineWidth: 2,
-            lineStyle: LineStyle.Solid,
-            axisLabelVisible: false,
-            title: "",
-          }));
-          priceLinesRef.current.push(candleSeries.createPriceLine({
-            price: ob.lower_price,
-            color,
-            lineWidth: 2,
-            lineStyle: LineStyle.Solid,
-            axisLabelVisible: false,
-            title: `OB ${ob.direction === "bullish" ? "▲" : "▼"}`,
-          }));
-        });
+    // --- OB ZONES: filled rectangular boxes via canvas primitive ---
+
+    if (visibility.ob && obPrimitiveRef.current) {
+      const lastIdx = candles.length - 1;
+      const boxes: OBBoxData[] = data.order_blocks
+        .filter((ob: OrderBlock) => ob.valid)
+        .slice(-10)
+        .map((ob: OrderBlock) => {
+          const startCandle = candles[ob.candle_index_start];
+          if (!startCandle) return null;
+
+          const endIdx = ob.mitigated && ob.mitigated_at_candle != null
+            ? ob.mitigated_at_candle
+            : lastIdx;
+          const endCandle = candles[endIdx];
+          if (!endCandle) return null;
+
+          const startTime = toTV(startCandle.timestamp);
+          const endTime = toTV(endCandle.timestamp);
+          if (endTime <= startTime) return null;
+
+          const isBull = ob.direction === "bullish";
+          const rgb = isBull ? "59, 130, 246" : "249, 115, 22";
+          const fillAlpha = ob.mitigated ? 0.08 : 0.18;
+          const borderAlpha = ob.mitigated ? 0.25 : 0.7;
+          const labelAlpha = ob.mitigated ? 0.4 : 0.9;
+          const arrow = isBull ? " \u25B2" : " \u25BC";
+          const label = (ob.mitigated ? "xOB" : "OB") + arrow;
+
+          return {
+            startTime,
+            endTime,
+            upperPrice: ob.upper_price,
+            lowerPrice: ob.lower_price,
+            fillColor: `rgba(${rgb}, ${fillAlpha})`,
+            borderColor: `rgba(${rgb}, ${borderAlpha})`,
+            label,
+            labelColor: `rgba(${rgb}, ${labelAlpha})`,
+          } as OBBoxData;
+        })
+        .filter((b): b is OBBoxData => b !== null);
+
+      obPrimitiveRef.current.setBoxes(boxes);
+    } else if (obPrimitiveRef.current) {
+      obPrimitiveRef.current.setBoxes([]);
     }
 
     // Fit content only when data changes (new timeframe), not on visibility toggles

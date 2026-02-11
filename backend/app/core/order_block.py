@@ -169,8 +169,12 @@ def check_ob_mitigation(
 ) -> list[OrderBlock]:
     """Check if price has returned to mitigate any order blocks.
 
-    An OB is mitigated when price returns to its zone.
-    50% rule: if body closes beyond OB's 50%, the OB is invalidated.
+    An OB is mitigated when price enters the zone and a candle body closes
+    beyond the OB's 50% midpoint — this means the institutional orders in
+    the zone have been filled.
+
+    Simply touching the outer edge of the OB is NOT mitigation — that's
+    just price testing the zone (and is actually a valid OB reaction).
     """
     for ob in order_blocks:
         if ob.mitigated:
@@ -181,23 +185,18 @@ def check_ob_mitigation(
                 continue
 
             if ob.direction == Direction.BULLISH:
-                # Bullish OB: price drops to OB zone
-                if candle.low <= ob.upper_price:
+                # Bullish OB: mitigated when a candle body closes below
+                # the OB's midpoint (50% rule) — institutional orders filled
+                if candle.body_bottom < ob.midpoint:
                     ob.mitigated = True
                     ob.mitigated_at_candle = candle.index
-
-                    # 50% rule check
-                    if candle.body_bottom < ob.midpoint:
-                        ob.valid = False  # Body closed beyond 50%
                     break
             else:
-                # Bearish OB: price rises to OB zone
-                if candle.high >= ob.lower_price:
+                # Bearish OB: mitigated when a candle body closes above
+                # the OB's midpoint (50% rule)
+                if candle.body_top > ob.midpoint:
                     ob.mitigated = True
                     ob.mitigated_at_candle = candle.index
-
-                    if candle.body_top > ob.midpoint:
-                        ob.valid = False
                     break
 
     return order_blocks
