@@ -15,7 +15,7 @@ import {
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
-import { fetchAnalysis } from "@/lib/api";
+import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DetectorVisibility } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
@@ -47,6 +47,7 @@ export default function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [visibility, setVisibility] = useState<DetectorVisibility>(DEFAULT_VISIBILITY);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [ticker, setTicker] = useState<PriceTicker | null>(null);
 
   const toggleDetector = useCallback((key: keyof DetectorVisibility) => {
     setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -94,12 +95,22 @@ export default function Dashboard() {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [analysis, selectedTF, silentRefresh]);
 
-  // Price from last candle
-  const lastCandle = analysis?.candles?.[analysis.candles.length - 1];
-  const price = lastCandle ? lastCandle.close : null;
-  const prevCandle = analysis?.candles?.[analysis.candles.length - 2];
-  const priceChange = price && prevCandle ? price - prevCandle.close : 0;
-  const priceChangePct = prevCandle ? (priceChange / prevCandle.close) * 100 : 0;
+  // Live price ticker — polls Binance every 2s
+  useEffect(() => {
+    let active = true;
+    const poll = async () => {
+      try {
+        const t = await fetchLivePrice();
+        if (active) setTicker(t);
+      } catch { /* silent */ }
+    };
+    poll(); // immediate first fetch
+    const id = setInterval(poll, 2_000);
+    return () => { active = false; clearInterval(id); };
+  }, []);
+
+  const price = ticker?.price ?? null;
+  const priceChangePct = ticker?.changePercent ?? 0;
 
   return (
     <div className="h-screen flex flex-col bg-[var(--bg-primary)] overflow-hidden">
@@ -126,8 +137,8 @@ export default function Dashboard() {
                   <span className="text-sm font-mono font-medium text-[var(--text-primary)]">
                     ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </span>
-                  <span className={`text-xs font-mono ${priceChange >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                    {priceChange >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+                  <span className={`text-xs font-mono ${priceChangePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
                   </span>
                 </div>
               )}
@@ -286,7 +297,7 @@ export default function Dashboard() {
                 </div>
               </div>
             ) : (
-              <Chart data={analysis} visibility={visibility} />
+              <Chart data={analysis} visibility={visibility} livePrice={price} />
             )}
           </div>
 

@@ -21,3 +21,25 @@ export async function fetchHealth(): Promise<{ status: string }> {
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
+
+/** Lightweight price ticker from Binance (no backend needed). */
+export interface PriceTicker {
+  price: number;
+  changePercent: number;
+  high24h: number;
+  low24h: number;
+  volume24h: number;
+}
+
+export async function fetchLivePrice(): Promise<PriceTicker> {
+  const res = await fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT");
+  if (!res.ok) throw new Error("Binance API error");
+  const data = await res.json();
+  return {
+    price: parseFloat(data.lastPrice),
+    changePercent: parseFloat(data.priceChangePercent),
+    high24h: parseFloat(data.highPrice),
+    low24h: parseFloat(data.lowPrice),
+    volume24h: parseFloat(data.volume),
+  };
+}

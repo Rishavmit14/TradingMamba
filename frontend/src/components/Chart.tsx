@@ -16,6 +16,7 @@ import { AnalysisResult, DetectorVisibility, SwingPoint, Inducement, BOS, CHoCH,
 interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
+  livePrice?: number | null;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -110,7 +111,7 @@ class OBBoxPrimitive {
   }
 }
 
-export default function Chart({ data, visibility }: ChartProps) {
+export default function Chart({ data, visibility, livePrice }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -620,6 +621,22 @@ export default function Chart({ data, visibility }: ChartProps) {
       prevCandleCountRef.current = candles.length;
     }
   }, [data, visibility, selectedSwingIdx]);
+
+  // Live price update — update the last candle's close in real-time
+  useEffect(() => {
+    if (!livePrice || !candleSeriesRef.current || !data?.candles?.length) return;
+
+    const lastCandle = data.candles[data.candles.length - 1];
+    if (!lastCandle) return;
+
+    candleSeriesRef.current.update({
+      time: toTV(lastCandle.timestamp),
+      open: lastCandle.open,
+      high: Math.max(lastCandle.high, livePrice),
+      low: Math.min(lastCandle.low, livePrice),
+      close: livePrice,
+    });
+  }, [livePrice, data]);
 
   return (
     <div
