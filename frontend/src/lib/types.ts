@@ -169,3 +169,14 @@ export interface SelectedElement {
   index: number;
   candle_index: number;
 }
+
+export interface ClickCandidate extends SelectedElement {
+  dist: number;
+  label: string;
+}
+
+export interface ChartClickResult {
+  candidates: ClickCandidate[];
+  clickX: number;
+  clickY: number;
+}

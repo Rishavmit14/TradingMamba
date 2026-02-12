@@ -11,13 +11,13 @@ import {
   LineStyle,
   MouseEventParams,
 } from "lightweight-charts";
-import { AnalysisResult, DetectorVisibility, SelectedElement, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
 
 interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
   livePrice?: number | null;
-  onElementClick?: (element: SelectedElement | null) => void;
+  onElementClick?: (result: ChartClickResult | null) => void;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -219,9 +219,14 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
 
       const inRange = (a: number, b: number) => ci >= Math.min(a, b) - 1 && ci <= Math.max(a, b) + 1;
 
-      // Collect all candidate matches with their "distance" to pick the closest
-      type Candidate = { type: "bos" | "choch" | "idm" | "fvg" | "ob" | "swing"; index: number; candle_index: number; dist: number };
-      const candidates: Candidate[] = [];
+      // Collect ALL candidate matches with labels for the picker
+      const candidates: ClickCandidate[] = [];
+
+      // Helper to build a label for each candidate type
+      const makeLabel = (type: string, detail: string) => {
+        const prefix: Record<string, string> = { bos: "BOS", choch: "CHoCH", idm: "IDM", fvg: "FVG", ob: "OB", swing: "Swing" };
+        return `${prefix[type] ?? type} ${detail}`;
+      };
 
       // 1. BOS lines
       for (let i = 0; i < d.bos_events.length; i++) {
@@ -229,7 +234,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         if (inRange(b.broken_swing_index, b.candle_index)) {
           const dist = Math.abs(clickedPrice - b.broken_price);
           if (dist < tol) {
-            candidates.push({ type: "bos", index: i, candle_index: b.candle_index, dist });
+            const dir = b.direction === "bullish" ? "\u25B2" : "\u25BC";
+            candidates.push({ type: "bos", index: i, candle_index: b.candle_index, dist, label: makeLabel("bos", dir) });
           }
         }
       }
@@ -240,7 +246,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         if (inRange(ch.broken_swing_index, ch.candle_index)) {
           const dist = Math.abs(clickedPrice - ch.broken_price);
           if (dist < tol) {
-            candidates.push({ type: "choch", index: i, candle_index: ch.candle_index, dist });
+            const tag = ch.is_fake ? "Fake" : ch.confirmed ? "Confirmed" : "";
+            candidates.push({ type: "choch", index: i, candle_index: ch.candle_index, dist, label: makeLabel("choch", tag) });
           }
         }
       }
@@ -252,7 +259,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         if (inRange(idm.candle_index, endIdx)) {
           const dist = Math.abs(clickedPrice - idm.price);
           if (dist < tol) {
-            candidates.push({ type: "idm", index: i, candle_index: idm.candle_index, dist });
+            const tag = idm.is_major ? "Major" : "Minor";
+            candidates.push({ type: "idm", index: i, candle_index: idm.candle_index, dist, label: makeLabel("idm", tag) });
           }
         }
       }
@@ -263,12 +271,13 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         if (!ob.valid) continue;
         const endIdx = ob.mitigated && ob.mitigated_at_candle != null ? ob.mitigated_at_candle : d.candles.length - 1;
         if (inRange(ob.candle_index_start, endIdx)) {
+          const dir = ob.direction === "bullish" ? "\u25B2" : "\u25BC";
           if (clickedPrice >= ob.lower_price && clickedPrice <= ob.upper_price) {
-            candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist: 0 });
+            candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist: 0, label: makeLabel("ob", dir) });
           } else {
             const dist = Math.min(Math.abs(clickedPrice - ob.upper_price), Math.abs(clickedPrice - ob.lower_price));
             if (dist < tol * 0.5) {
-              candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist });
+              candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist, label: makeLabel("ob", dir) });
             }
           }
         }
@@ -280,7 +289,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         if (!f.valid) continue;
         if (Math.abs(ci - f.candle_index) <= 5) {
           if (clickedPrice >= f.lower_price && clickedPrice <= f.upper_price) {
-            candidates.push({ type: "fvg", index: i, candle_index: f.candle_index, dist: 0 });
+            const dir = f.direction === "bullish" ? "\u25B2" : "\u25BC";
+            candidates.push({ type: "fvg", index: i, candle_index: f.candle_index, dist: 0, label: makeLabel("fvg", dir) });
           }
         }
       }
@@ -293,20 +303,27 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
         const idx = d.swings.indexOf(s);
         const dist = Math.abs(clickedPrice - s.price);
         if (dist < tol) {
-          candidates.push({ type: "swing", index: idx, candle_index: s.candle_index, dist });
+          candidates.push({ type: "swing", index: idx, candle_index: s.candle_index, dist, label: makeLabel("swing", s.classification) });
         }
       }
 
-      // Pick the closest candidate
+      // Sort by distance
+      candidates.sort((a, b) => a.dist - b.dist);
+
       if (candidates.length > 0) {
-        candidates.sort((a, b) => a.dist - b.dist);
+        // Highlight swing if the closest is a swing
         const best = candidates[0];
-        if (best.type === "swing") {
-          setSelectedSwingIdx(best.candle_index);
-        } else {
-          setSelectedSwingIdx(null);
-        }
-        cb?.({ type: best.type, index: best.index, candle_index: best.candle_index });
+        setSelectedSwingIdx(best.type === "swing" ? best.candle_index : null);
+
+        // Get click pixel coordinates relative to the page
+        const clickX = param.point?.x ?? 0;
+        const clickY = param.point?.y ?? 0;
+        // Offset by chart container position
+        const rect = containerRef.current?.getBoundingClientRect();
+        const pageX = (rect?.left ?? 0) + clickX;
+        const pageY = (rect?.top ?? 0) + clickY;
+
+        cb?.({ candidates, clickX: pageX, clickY: pageY });
         return;
       }
 

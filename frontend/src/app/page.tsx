@@ -16,8 +16,9 @@ import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
 import AnalysisPanel from "@/components/AnalysisPanel";
+import ElementPicker from "@/components/ElementPicker";
 import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DetectorVisibility, SelectedElement } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -50,6 +51,30 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [ticker, setTicker] = useState<PriceTicker | null>(null);
   const [selectedElement, setSelectedElement] = useState<SelectedElement | null>(null);
+  const [pickerState, setPickerState] = useState<{ candidates: ClickCandidate[]; x: number; y: number } | null>(null);
+
+  const handleChartClick = useCallback((result: ChartClickResult | null) => {
+    if (!result || result.candidates.length === 0) {
+      setSelectedElement(null);
+      setPickerState(null);
+      return;
+    }
+
+    if (result.candidates.length === 1) {
+      // Single candidate — select directly
+      const c = result.candidates[0];
+      setSelectedElement({ type: c.type, index: c.index, candle_index: c.candle_index });
+      setPickerState(null);
+    } else {
+      // Multiple candidates — show picker
+      setPickerState({ candidates: result.candidates, x: result.clickX, y: result.clickY });
+    }
+  }, []);
+
+  const handlePickerSelect = useCallback((candidate: ClickCandidate) => {
+    setSelectedElement({ type: candidate.type, index: candidate.index, candle_index: candidate.candle_index });
+    setPickerState(null);
+  }, []);
 
   const toggleDetector = useCallback((key: keyof DetectorVisibility) => {
     setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -70,6 +95,7 @@ export default function Dashboard() {
     setLoading(true);
     setError(null);
     setSelectedElement(null);
+    setPickerState(null);
 
     try {
       const result = await fetchAnalysis(tf);
@@ -300,16 +326,27 @@ export default function Dashboard() {
                 </div>
               </div>
             ) : (
-              <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={setSelectedElement} />
+              <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} />
             )}
           </div>
+
+          {/* Radial element picker — shows when multiple elements overlap */}
+          {pickerState && (
+            <ElementPicker
+              candidates={pickerState.candidates}
+              x={pickerState.x}
+              y={pickerState.y}
+              onPick={handlePickerSelect}
+              onDismiss={() => setPickerState(null)}
+            />
+          )}
 
           {/* Analysis Panel — shows when a chart element is clicked */}
           {analysis && selectedElement && (
             <AnalysisPanel
               element={selectedElement}
               data={analysis}
-              onClose={() => setSelectedElement(null)}
+              onClose={() => { setSelectedElement(null); setPickerState(null); }}
             />
           )}
 
