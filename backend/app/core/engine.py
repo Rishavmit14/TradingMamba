@@ -23,8 +23,11 @@ from app.core.fvg_detector import detect_all_fvgs
 from app.core.order_block import detect_all_order_blocks
 from app.core.premium_discount import calculate_premium_discount
 from app.core.session import get_current_session
+from app.core.amd_detector import detect_amd_patterns
+from app.core.price_cycle_detector import detect_price_cycles
 from app.core.signal_generator import generate_signals
 from app.config import SWING_LOOKBACK
+from app.models import AMDPattern, PriceCycleEvent, PricePhase
 
 
 @dataclass
@@ -43,6 +46,9 @@ class AnalysisResult:
     session: Session | None = None
     climax_warning: bool = False
     climax_ratio: float = 0.0
+    amd_patterns: list[AMDPattern] = field(default_factory=list)
+    price_cycles: list[PriceCycleEvent] = field(default_factory=list)
+    current_phase: PricePhase = PricePhase.CONSOLIDATION
     signals: list[TradingSignal] = field(default_factory=list)
 
 
@@ -65,7 +71,7 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     swings, trend = detect_and_classify(candles, lookback)
 
     # 1.2: Inducement detection + swing validation
-    inducements, swings = detect_idm(candles, swings, lookback)
+    inducements, swings = detect_idm(candles, swings)
 
     # 1.3: Liquidity pool identification
     liquidity_pools = detect_all_liquidity(candles, swings, inducements)
@@ -94,6 +100,14 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     # 1.9: Session
     session = get_current_session(candles[-1].timestamp)
 
+    # 1.10: AMD pattern detection (V17)
+    amd_patterns = detect_amd_patterns(candles, swings, inducements, trend)
+
+    # 1.11: Price Delivery Cycle (V11)
+    price_cycles, current_phase = detect_price_cycles(
+        candles, bos_events, choch_events, fvgs, swings
+    )
+
     return AnalysisResult(
         timeframe=timeframe,
         trend=trend,
@@ -108,6 +122,9 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
         session=session,
         climax_warning=is_climactic,
         climax_ratio=climax_ratio,
+        amd_patterns=amd_patterns,
+        price_cycles=price_cycles,
+        current_phase=current_phase,
     )
 
 
@@ -170,9 +187,30 @@ def run_multi_tf_analysis(
 
     # Generate signals on M15 using higher TF context
     m15 = results.get("M15")
-    if m15 and m15.trend != TrendState.RANGING:
+    if m15:
         w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
         d1_trend = results.get("D1", AnalysisResult(timeframe="D1", trend=TrendState.RANGING)).trend
+
+        # V20: Collect unmitigated HTF zones for LTF alignment
+        htf_zones: list[dict] = []
+        for htf_key in ["H4", "D1"]:
+            htf = results.get(htf_key)
+            if not htf:
+                continue
+            for ob in htf.order_blocks:
+                if ob.valid and not ob.mitigated:
+                    htf_zones.append({
+                        "type": "OB", "upper": ob.upper_price,
+                        "lower": ob.lower_price, "direction": ob.direction.value,
+                        "tf": htf_key,
+                    })
+            for fvg in htf.fvgs:
+                if fvg.valid and not fvg.mitigated:
+                    htf_zones.append({
+                        "type": "FVG", "upper": fvg.upper_price,
+                        "lower": fvg.lower_price, "direction": fvg.direction.value,
+                        "tf": htf_key,
+                    })
 
         m15_candles = candles_by_tf.get("M15", [])
         m15.signals = generate_signals(
@@ -190,6 +228,7 @@ def run_multi_tf_analysis(
             w1_trend=w1_trend,
             d1_trend=d1_trend,
             climax_warning=m15.climax_warning,
+            htf_zones=htf_zones,
         )
 
     return results

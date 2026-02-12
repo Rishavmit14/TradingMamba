@@ -6,10 +6,10 @@ BOS = continuation: breaking HH (bullish) or LL (bearish).
 Breaking HL/LH is CHoCH territory and NOT a BOS.
 
 Core Rules (V05):
-- RULE 1: Price swing MUST have taken inducement from previous swing
+- RULE 1: IDM MUST have been taken (swept) at some point before the break
 - RULE 2: Candle body MUST close ABOVE previous highest candle's WICK (bullish)
          or BELOW previous lowest candle's WICK (bearish)
-- If Rule 1 fails (no IDM taken) → BOS is INVALID (fake)
+- If Rule 1 fails (IDM never taken / transferred / active) → BOS is INVALID
 - If first sweeping candle doesn't close beyond wick → wait for next candle
 - If next candle body closes above sweeping candle's high → BOS is VALID
 - Both rules must be satisfied simultaneously
@@ -18,7 +18,7 @@ Core Rules (V05):
 from __future__ import annotations
 from app.models import (
     Candle, SwingPoint, Inducement, BOS,
-    SwingType, SwingClassification, Direction,
+    SwingType, SwingClassification, Direction, IDMStatus,
 )
 
 
@@ -58,10 +58,10 @@ def detect_bos(
             ):
                 continue
 
-        # Check RULE 1: Was IDM taken within the structural window?
-        # swing.idm_taken is set by check_idm_taken() and respects the
-        # lookback-based structural window — not just any sweep after the fact.
-        idm_was_taken = swing.idm_taken
+        # Check RULE 1: Was IDM taken?
+        # Requires that the IDM was swept at some point — no timing constraint.
+        idm = idm_by_swing.get(swing.candle_index)
+        idm_was_taken = idm is not None and idm.status == IDMStatus.TAKEN
 
         # Find the break candle — search forward through ALL candles
         # (no artificial search_end limit that was cutting off valid breaks)

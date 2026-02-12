@@ -132,8 +132,8 @@ export default function Chart({ data, visibility }: ChartProps) {
 
     const chart = createChart(containerRef.current, {
       layout: {
-        background: { type: ColorType.Solid, color: "#0a0a0f" },
-        textColor: "#9ca3af",
+        background: { type: ColorType.Solid, color: "#ffffff" },
+        textColor: "#333333",
       },
       grid: {
         vertLines: { visible: false },

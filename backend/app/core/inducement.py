@@ -13,8 +13,8 @@ Core Rules (V02-V04):
 - Multiple pullbacks = multiple IDM points; first (most recent) is primary
 
 The IDM detector also re-validates swing classifications:
-- A swing is only valid SMC structure if IDM was taken before it formed
-- Swings without IDM taken are marked as inducement zones (is_valid_smc=False)
+- A swing is only valid SMC structure if its IDM was taken (swept) at any point
+- Swings with ACTIVE or TRANSFERRED IDM are marked as inducement zones (is_valid_smc=False)
 """
 
 from __future__ import annotations
@@ -207,7 +207,6 @@ def check_idm_taken(
     candles: list[Candle],
     inducements: list[Inducement],
     swings: list[SwingPoint],
-    lookback: int = 5,
 ) -> list[Inducement]:
     """Check which inducements have been taken (swept) by price action.
 
@@ -217,12 +216,8 @@ def check_idm_taken(
     - For bearish IDM (above swing low): price goes above IDM level
 
     Also updates swing validity:
-    - Swings where IDM was taken before formation → is_valid_smc = True
-    - Swings where IDM was NOT taken → is_valid_smc = False (inducement zone)
-
-    The structural window accounts for lookback: a swing at index N with
-    lookback L isn't confirmed until candle N+L, so IDM sweeps during
-    the confirmation period still count.
+    - Swings where IDM was taken at any point → idm_taken = True
+    - Swings where IDM was NOT taken (active/transferred) → idm_taken = False
     """
     swing_map = {s.candle_index: s for s in swings}
 
@@ -230,9 +225,6 @@ def check_idm_taken(
         parent_swing = swing_map.get(idm.parent_swing_index)
         if not parent_swing:
             continue
-
-        # Structural window: swing isn't confirmed until candle_index + lookback
-        structural_max_idx = parent_swing.candle_index + lookback
 
         for candle in candles:
             if candle.index <= idm.candle_index:
@@ -246,8 +238,7 @@ def check_idm_taken(
                     # V04: body closed beyond IDM = stronger confirmation
                     if candle.body_bottom <= idm.price:
                         idm.body_closed = True
-                    if candle.index <= structural_max_idx:
-                        parent_swing.idm_taken = True
+                    parent_swing.idm_taken = True
                     break
             else:
                 # Bearish swing: IDM is a high. Taken if price wicks above.
@@ -257,8 +248,7 @@ def check_idm_taken(
                     # V04: body closed beyond IDM = stronger confirmation
                     if candle.body_top >= idm.price:
                         idm.body_closed = True
-                    if candle.index <= structural_max_idx:
-                        parent_swing.idm_taken = True
+                    parent_swing.idm_taken = True
                     break
 
     return inducements
@@ -274,12 +264,11 @@ def validate_swings_with_idm(
     V01 Rule: A valid HH requires IDM taken + candle close conditions.
     Swings without IDM taken are marked as liquidity/inducement zones.
 
-    Uses swing.idm_taken (set by check_idm_taken with structural window)
-    as the single source of truth. This correctly handles:
+    Uses swing.idm_taken (set by check_idm_taken) as the single source
+    of truth. This correctly handles:
     - ACTIVE IDMs that were never swept → invalid
-    - TRANSFERRED IDMs that were never swept → invalid
-    - IDMs swept after the structural window → invalid
-    - IDMs swept within the structural window → valid
+    - TRANSFERRED IDMs (impulse move, no pullback) → invalid
+    - IDMs swept at any point → valid
 
     V04/V06 additions:
     - candle_closed_properly: a candle body closed above previous swing high
@@ -377,18 +366,13 @@ def _check_candle_closed_properly(
 def detect_and_validate(
     candles: list[Candle],
     swings: list[SwingPoint],
-    lookback: int = 5,
 ) -> tuple[list[Inducement], list[SwingPoint]]:
     """Complete IDM pipeline: detect → check taken → validate swings.
-
-    Args:
-        lookback: Swing confirmation window — passed to check_idm_taken
-                  so structural window = candle_index + lookback.
 
     Returns:
         (inducements, validated_swings)
     """
     inducements = detect_inducements(candles, swings)
-    inducements = check_idm_taken(candles, inducements, swings, lookback)
+    inducements = check_idm_taken(candles, inducements, swings)
     swings = validate_swings_with_idm(swings, inducements, candles)
     return inducements, swings

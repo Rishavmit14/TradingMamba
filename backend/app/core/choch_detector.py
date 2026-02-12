@@ -327,8 +327,12 @@ def _check_weak_swing(
     """V09 Rule 1: Check if the broken swing point was WEAK.
 
     A swing is weak when its Swing Initiating Candle (SIC) simultaneously
-    sweeps prior liquidity on the other side. The energy was spent on the
-    sweep, not building genuine structure.
+    sweeps the immediately preceding opposite-type swing's liquidity.
+    The energy was spent on the sweep, not building genuine structure.
+
+    Only checks the IMMEDIATE structural predecessor (the directly preceding
+    opposite-type swing), and only if that swing's price falls within the
+    SIC candle's range — confirming the SIC actually reached for it.
     """
     swing_map = {s.candle_index: s for s in swings}
     broken_swing = swing_map.get(choch.broken_swing_index)
@@ -339,26 +343,27 @@ def _check_weak_swing(
     if not sic:
         return False
 
-    # Get the 3 most recent opposite-type swings before the broken swing
+    # Find the IMMEDIATELY PRECEDING opposite-type swing (structural predecessor)
     opposite_type = (SwingType.SWING_LOW
                      if broken_swing.swing_type == SwingType.SWING_HIGH
                      else SwingType.SWING_HIGH)
-    prior_opposite = [
-        s for s in swings
-        if s.swing_type == opposite_type and s.candle_index < broken_swing.candle_index
-    ][-3:]
+    prior = None
+    for s in reversed(swings):
+        if s.swing_type == opposite_type and s.candle_index < broken_swing.candle_index:
+            prior = s
+            break
 
-    for prior in prior_opposite:
-        if broken_swing.swing_type == SwingType.SWING_HIGH:
-            # SIC created a swing HIGH — did its LOW also sweep a prior swing low?
-            if sic.low < prior.price:
-                return True
-        else:
-            # SIC created a swing LOW — did its HIGH also sweep a prior swing high?
-            if sic.high > prior.price:
-                return True
+    if not prior:
+        return False
 
-    return False
+    if broken_swing.swing_type == SwingType.SWING_HIGH:
+        # SIC created a swing HIGH — did its LOW also sweep the prior swing low?
+        # Prior swing low must be within SIC's range to be a genuine sweep
+        return sic.low < prior.price <= sic.high
+    else:
+        # SIC created a swing LOW — did its HIGH also sweep the prior swing high?
+        # Prior swing high must be within SIC's range to be a genuine sweep
+        return sic.low <= prior.price < sic.high
 
 
 def _check_engineered_liquidity(
