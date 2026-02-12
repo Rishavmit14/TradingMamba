@@ -1,0 +1,47 @@
+{
+  "video_id": "MV8g9-3udFk",
+  "status": "pending_claude_code",
+  "created_at": "2026-02-12T23:01:52.734439",
+  "instructions": {
+    "video_id": "MV8g9-3udFk",
+    "transcript_path": "data/transcripts/MV8g9-3udFk.json",
+    "frames_dir": "data/video_frames/MV8g9-3udFk",
+    "selected_frames": [
+      "data/video_frames/MV8g9-3udFk/frame_00000.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00003.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00006.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00018.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00036.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00045.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00066.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00159.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00168.00s.jpg",
+      "data/video_frames/MV8g9-3udFk/frame_00261.00s.jpg"
+    ],
+    "teaching_units_path": "data/audio_first_training/MV8g9-3udFk_teaching_units.json",
+    "output_knowledge_base": "data/audio_first_training/MV8g9-3udFk_knowledge_base.json",
+    "output_markdown": "data/audio_first_training/MV8g9-3udFk_knowledge_summary.md",
+    "concepts_detected": [
+      "liquidity sweep",
+      "optimal trade entry",
+      "retail trap",
+      "displacement",
+      "fair value gap",
+      "expansion",
+      "smart money trap",
+      "premium zone",
+      "discount zone",
+      "stop hunt",
+      "smart money",
+      "equilibrium",
+      "market structure",
+      "price delivery cycle",
+      "institutional",
+      "liquidity",
+      "order block",
+      "retracement",
+      "inducement"
+    ],
+    "prompt": "Complete the training for video: MV8g9-3udFk\n\n1. Read the transcript: data/transcripts/MV8g9-3udFk.json\n2. View these key frames: data/video_frames/MV8g9-3udFk/frame_00000.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00003.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00006.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00018.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00036.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00045.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00066.00s.jpg, data/video_frames/MV8g9-3udFk/frame_00159.00s.jpg\n3. Extract all ICT/SMC concepts taught in this video\n4. Write expert knowledge base to: data/audio_first_training/MV8g9-3udFk_knowledge_base.json\n5. Write markdown summary to: data/audio_first_training/MV8g9-3udFk_knowledge_summary.md\n\nConcepts detected so far: liquidity sweep, optimal trade entry, retail trap, displacement, fair value gap, expansion, smart money trap, premium zone, discount zone, stop hunt, smart money, equilibrium, market structure, price delivery cycle, institutional, liquidity, order block, retracement, inducement\n\nUse the CLAUDE_CODE_TRAINING_WORKFLOW.md format for output."
+  }
+}

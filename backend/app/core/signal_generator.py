@@ -164,6 +164,10 @@ def _count_confluences(
         elif trend == TrendState.BEARISH and pd.zone == ZoneType.PREMIUM:
             confluences.append("Premium zone (sell)")
 
+        # V12: Fibonacci qualification
+        if pd.is_fib_qualified:
+            confluences.append(f"Fib {pd.closest_fib} level")
+
     # Session/Kill zone
     if session and session.is_kill_zone:
         confluences.append("Kill zone active")
@@ -235,6 +239,133 @@ def _determine_entry_method(
     return EntryMethod.MSS  # default
 
 
+def _check_counter_trend_conditions(
+    candles: list[Candle],
+    inducements: list[Inducement],
+    fvgs: list[FVG],
+    trend: TrendState,
+) -> Direction | None:
+    """V21: Check if counter-trend 3-condition entry is valid.
+
+    Rule 1: Major trend candle body closes beyond first valid IDM
+    Rule 2: An FVG must exist in the swing where IDM was closed
+    Rule 3: (LTF confirmation — handled by entry method check)
+
+    Returns counter-trend direction if conditions met, None otherwise.
+    """
+    if not inducements or not candles:
+        return None
+
+    last_candle = candles[-1]
+
+    # Find the most recent taken IDM with body close
+    body_closed_idms = [
+        idm for idm in inducements
+        if idm.status == IDMStatus.TAKEN and idm.body_closed
+    ]
+    if not body_closed_idms:
+        return None
+
+    latest_idm = max(body_closed_idms, key=lambda i: i.taken_at_candle or 0)
+
+    # Check if an FVG exists near/after the IDM candle
+    idm_fvg_exists = any(
+        f.valid and not f.mitigated
+        and abs(f.candle_index - (latest_idm.taken_at_candle or 0)) <= 5
+        for f in fvgs
+    )
+
+    if not idm_fvg_exists:
+        return None
+
+    # Counter-trend direction is opposite to current trend
+    if trend == TrendState.BULLISH:
+        return Direction.BEARISH
+    elif trend == TrendState.BEARISH:
+        return Direction.BULLISH
+    return None
+
+
+def _get_counter_trend_tp(
+    direction: Direction,
+    zone: dict,
+    order_blocks: list[OrderBlock],
+    fvgs: list[FVG],
+) -> float | None:
+    """V21: TP at FIRST opposing zone only — never hold deeper.
+
+    For counter-trend buy: TP = first sell zone (bearish OB/FVG) above entry
+    For counter-trend sell: TP = first buy zone (bullish OB/FVG) below entry
+    """
+    opposing_dir = Direction.BEARISH if direction == Direction.BULLISH else Direction.BULLISH
+
+    targets: list[float] = []
+
+    for ob in order_blocks:
+        if not ob.valid or ob.mitigated or ob.direction != opposing_dir:
+            continue
+        if direction == Direction.BULLISH and ob.midpoint > zone["upper"]:
+            targets.append(ob.midpoint)
+        elif direction == Direction.BEARISH and ob.midpoint < zone["lower"]:
+            targets.append(ob.midpoint)
+
+    for fvg in fvgs:
+        if not fvg.valid or fvg.mitigated or fvg.direction != opposing_dir:
+            continue
+        if direction == Direction.BULLISH and fvg.midpoint > zone["upper"]:
+            targets.append(fvg.midpoint)
+        elif direction == Direction.BEARISH and fvg.midpoint < zone["lower"]:
+            targets.append(fvg.midpoint)
+
+    if not targets:
+        return None
+
+    # First opposing zone = closest target
+    if direction == Direction.BULLISH:
+        return min(targets)  # Closest above
+    else:
+        return max(targets)  # Closest below
+
+
+def _deduplicate_signals(signals: list[TradingSignal]) -> list[TradingSignal]:
+    """V23: One trade per zone — keep highest grade signal per overlapping zone.
+
+    Two zones overlap when their price ranges intersect.
+    Priority: Grade A > B > C > D, then trend-aligned > counter-trend, then R:R.
+    """
+    if len(signals) <= 1:
+        return signals
+
+    _grade_rank = {"A": 4, "B": 3, "C": 2, "D": 1}
+
+    def _sort_key(sig: TradingSignal):
+        return (
+            _grade_rank.get(sig.grade.value, 0),
+            0 if sig.is_counter_trend else 1,
+            sig.risk_reward_ratio,
+            sig.confidence_score,
+        )
+
+    # Group overlapping zones
+    groups: list[list[TradingSignal]] = []
+    for sig in signals:
+        sig_lower = min(sig.entry_price, sig.stop_loss)
+        sig_upper = max(sig.entry_price, sig.take_profit)
+        added = False
+        for group in groups:
+            ref = group[0]
+            ref_lower = min(ref.entry_price, ref.stop_loss)
+            ref_upper = max(ref.entry_price, ref.take_profit)
+            if sig_lower <= ref_upper and sig_upper >= ref_lower:
+                group.append(sig)
+                added = True
+                break
+        if not added:
+            groups.append([sig])
+
+    return [max(group, key=_sort_key) for group in groups]
+
+
 def generate_signals(
     candles: list[Candle],
     swings: list[SwingPoint],
@@ -250,12 +381,14 @@ def generate_signals(
     w1_trend: TrendState | None = None,
     d1_trend: TrendState | None = None,
     climax_warning: bool = False,
+    htf_zones: list[dict] | None = None,
 ) -> list[TradingSignal]:
     """The Master Checklist — generate trading signals from all detector outputs.
 
     This is the top-level function that orchestrates the entire system.
+    V20: htf_zones passed from higher TF for zone alignment.
     """
-    if not candles or trend == TrendState.RANGING:
+    if not candles:
         return []
 
     current_price = candles[-1].close
@@ -271,78 +404,153 @@ def generate_signals(
             has_multi_tf = (w1_trend == TrendState.BEARISH
                            and d1_trend == TrendState.BEARISH)
 
-    # Step 4: Find active zones
-    zones = _find_active_zones(order_blocks, fvgs, trend)
+    # V20: Check if M15 CHoCH aligns with HTF trend direction
+    has_ltf_choch_sync = False
+    if htf_zones and choch_events:
+        confirmed_chochs = [c for c in choch_events if c.confirmed and not c.is_fake]
+        if confirmed_chochs:
+            latest_choch = max(confirmed_chochs, key=lambda c: c.candle_index)
+            # CHoCH direction should match trend (HTF bias)
+            if (trend == TrendState.BULLISH and latest_choch.direction == Direction.BULLISH) or \
+               (trend == TrendState.BEARISH and latest_choch.direction == Direction.BEARISH):
+                has_ltf_choch_sync = True
 
-    for zone in zones:
-        # Step 6: Check zone tap
-        if not _check_zone_tap(zone, current_price):
-            continue
+    # Skip trend-aligned signals only if trend is RANGING (not for all cases)
+    if trend != TrendState.RANGING:
+        # Step 4: Find active zones
+        zones = _find_active_zones(order_blocks, fvgs, trend)
 
-        direction = zone["direction"]
+        for zone in zones:
+            # Step 6: Check zone tap
+            if not _check_zone_tap(zone, current_price):
+                continue
 
-        # Step 8: Calculate SL
-        sl = _calculate_sl(zone, direction)
+            direction = zone["direction"]
 
-        # Step 9: Calculate TP
-        tp = _calculate_tp(zone, direction, swings, inducements)
-        if tp is None:
-            continue
+            # Step 8: Calculate SL
+            sl = _calculate_sl(zone, direction)
 
-        # Calculate R:R
-        entry = current_price
-        risk = abs(entry - sl)
-        reward = abs(tp - entry)
+            # Step 9: Calculate TP
+            tp = _calculate_tp(zone, direction, swings, inducements)
+            if tp is None:
+                continue
 
-        if risk == 0:
-            continue
+            # Calculate R:R
+            entry = current_price
+            risk = abs(entry - sl)
+            reward = abs(tp - entry)
 
-        rr = reward / risk
-        if rr < MIN_RISK_REWARD:
-            continue
+            if risk == 0:
+                continue
 
-        # Count confluences
-        confluences = _count_confluences(
-            zone, pd, session, trend,
-            bos_events, choch_events, has_multi_tf,
-        )
+            rr = reward / risk
+            if rr < MIN_RISK_REWARD:
+                continue
 
-        # Grade
-        grade = _grade_signal(confluences, False, climax_warning)
+            # Count confluences
+            confluences = _count_confluences(
+                zone, pd, session, trend,
+                bos_events, choch_events, has_multi_tf,
+            )
 
-        # Confidence score (0-100)
-        base_score = len(confluences) * 15
-        if has_multi_tf:
-            base_score += 10
-        if session and session.is_kill_zone:
-            base_score += 5
-        if climax_warning:
-            base_score -= 20
-        confidence = max(0, min(100, base_score))
+            # V20: Add CHoCH sync confluence
+            if has_ltf_choch_sync:
+                confluences.append("LTF CHoCH sync")
 
-        # V15/V17: Determine entry method from recent structure events
-        entry_method = _determine_entry_method(
-            zone, bos_events, choch_events,
-        )
+            # Grade
+            grade = _grade_signal(confluences, False, climax_warning)
 
-        signals.append(TradingSignal(
-            direction=direction,
-            entry_price=entry,
-            stop_loss=sl,
-            take_profit=tp,
-            risk_reward_ratio=round(rr, 2),
-            confidence_score=confidence,
-            grade=grade,
-            confluences=confluences,
-            timeframe="M15",
-            entry_method=entry_method,
-            pattern_type=f"{zone['type']} trend continuation",
-            timestamp=candles[-1].timestamp,
-            w1_trend=w1_trend,
-            d1_trend=d1_trend,
-            session=session,
-            climax_warning=climax_warning,
-            is_counter_trend=False,
-        ))
+            # Confidence score (0-100)
+            base_score = len(confluences) * 15
+            if has_multi_tf:
+                base_score += 10
+            if session and session.is_kill_zone:
+                base_score += 5
+            if has_ltf_choch_sync:
+                base_score += 5
+            if climax_warning:
+                base_score -= 20
+            confidence = max(0, min(100, base_score))
 
-    return signals
+            # V15/V17: Determine entry method from recent structure events
+            entry_method = _determine_entry_method(
+                zone, bos_events, choch_events,
+            )
+
+            signals.append(TradingSignal(
+                direction=direction,
+                entry_price=entry,
+                stop_loss=sl,
+                take_profit=tp,
+                risk_reward_ratio=round(rr, 2),
+                confidence_score=confidence,
+                grade=grade,
+                confluences=confluences,
+                timeframe="M15",
+                entry_method=entry_method,
+                pattern_type=f"{zone['type']} trend continuation",
+                timestamp=candles[-1].timestamp,
+                w1_trend=w1_trend,
+                d1_trend=d1_trend,
+                session=session,
+                climax_warning=climax_warning,
+                is_counter_trend=False,
+            ))
+
+    # V21: Counter-trend signal generation
+    ct_dir = _check_counter_trend_conditions(candles, inducements, fvgs, trend)
+    if ct_dir:
+        # Find zones in counter-trend direction
+        ct_trend = TrendState.BULLISH if ct_dir == Direction.BULLISH else TrendState.BEARISH
+        ct_zones = _find_active_zones(order_blocks, fvgs, ct_trend)
+
+        for zone in ct_zones:
+            if not _check_zone_tap(zone, current_price):
+                continue
+
+            sl = _calculate_sl(zone, ct_dir)
+            tp = _get_counter_trend_tp(ct_dir, zone, order_blocks, fvgs)
+            if tp is None:
+                continue
+
+            entry = current_price
+            risk = abs(entry - sl)
+            reward = abs(tp - entry)
+            if risk == 0:
+                continue
+            rr = reward / risk
+            if rr < MIN_RISK_REWARD:
+                continue
+
+            confluences = ["Counter-trend IDM body close"]
+            if pd:
+                if ct_dir == Direction.BULLISH and pd.zone == ZoneType.DISCOUNT:
+                    confluences.append("Discount zone (buy)")
+                elif ct_dir == Direction.BEARISH and pd.zone == ZoneType.PREMIUM:
+                    confluences.append("Premium zone (sell)")
+
+            grade = _grade_signal(confluences, True, climax_warning)
+            confidence = max(0, min(100, len(confluences) * 10))
+
+            signals.append(TradingSignal(
+                direction=ct_dir,
+                entry_price=entry,
+                stop_loss=sl,
+                take_profit=tp,
+                risk_reward_ratio=round(rr, 2),
+                confidence_score=confidence,
+                grade=grade,
+                confluences=confluences,
+                timeframe="M15",
+                entry_method=EntryMethod.MSS,
+                pattern_type=f"{zone['type']} counter-trend",
+                timestamp=candles[-1].timestamp,
+                w1_trend=w1_trend,
+                d1_trend=d1_trend,
+                session=session,
+                climax_warning=climax_warning,
+                is_counter_trend=True,
+            ))
+
+    # V23: Deduplicate — one signal per zone
+    return _deduplicate_signals(signals)

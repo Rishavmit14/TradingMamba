@@ -116,6 +116,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+  const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
   const priceLinesRef = useRef<any[]>([]);
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
@@ -168,6 +169,16 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       wickUpColor: "#10b98180",
       wickDownColor: "#ef444480",
     });
+
+    // Volume histogram on a separate price scale at the bottom
+    const volumeSeries = chart.addHistogramSeries({
+      priceFormat: { type: "volume" },
+      priceScaleId: "volume",
+    });
+    chart.priceScale("volume").applyOptions({
+      scaleMargins: { top: 0.85, bottom: 0 },
+    });
+    volumeSeriesRef.current = volumeSeries;
 
     // Attach OB box primitive to candle series
     const obPrimitive = new OBBoxPrimitive();
@@ -346,6 +357,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       chart.remove();
       chartRef.current = null;
       candleSeriesRef.current = null;
+      volumeSeriesRef.current = null;
       priceLinesRef.current = [];
       idmSeriesRef.current = [];
       bosSeriesRef.current = [];
@@ -372,6 +384,15 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       close: c.close,
     }));
     candleSeries.setData(candleData);
+
+    // Volume bars — green for up candles, red for down
+    if (volumeSeriesRef.current) {
+      volumeSeriesRef.current.setData(candles.map((c) => ({
+        time: toTV(c.timestamp),
+        value: c.volume,
+        color: c.close >= c.open ? "#10b98130" : "#ef444430",
+      })));
+    }
 
     // --- MARKERS: Swings, BOS, CHoCH ---
     const markers: any[] = [];

@@ -11,14 +11,18 @@ import {
   Loader2,
   AlertTriangle,
   Radio,
+  FlaskConical,
+  LineChart,
 } from "lucide-react";
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
 import AnalysisPanel from "@/components/AnalysisPanel";
 import ElementPicker from "@/components/ElementPicker";
+import BacktestTab from "@/components/BacktestTab";
+import PerformanceTab from "@/components/PerformanceTab";
 import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -43,6 +47,8 @@ function TrendIcon({ trend }: { trend: string }) {
 }
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState<AppTab>("live");
+  const [backtestResult, setBacktestResult] = useState<BacktestResult | null>(null);
   const [selectedTF, setSelectedTF] = useState<string>("H4");
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -159,244 +165,309 @@ export default function Dashboard() {
 
             <div className="h-5 w-px bg-[var(--border-primary)]" />
 
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-[var(--text-primary)]">BTCUSDT</span>
-              {price && (
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-mono font-medium text-[var(--text-primary)]">
-                    ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                  </span>
-                  <span className={`text-xs font-mono ${priceChangePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                    {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Timeframe pills */}
-          <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
-            {TIMEFRAMES.map((tf) => (
+            {/* Tab pills */}
+            <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
               <button
-                key={tf}
-                onClick={() => runAnalysis(tf)}
-                disabled={loading}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
-                  selectedTF === tf
+                onClick={() => setActiveTab("live")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "live"
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
                     : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
-                } disabled:opacity-50`}
-              >
-                {tf}
-              </button>
-            ))}
-          </div>
-
-          {/* Detector toggles */}
-          <div className="flex items-center gap-1">
-            {DETECTOR_LABELS.map(({ key, label, color }) => (
-              <button
-                key={key}
-                onClick={() => toggleDetector(key)}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 border ${
-                  visibility[key]
-                    ? ""
-                    : "border-transparent bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
                 }`}
-                style={
-                  visibility[key]
-                    ? {
-                        color,
-                        backgroundColor: `${color}15`,
-                        borderColor: `${color}40`,
-                      }
-                    : undefined
-                }
               >
-                {label}
+                <Activity className="w-3 h-3" />
+                Live Charts
               </button>
-            ))}
+              <button
+                onClick={() => setActiveTab("backtest")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "backtest"
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                <FlaskConical className="w-3 h-3" />
+                Backtest
+              </button>
+              <button
+                onClick={() => setActiveTab("performance")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "performance"
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                <LineChart className="w-3 h-3" />
+                Performance
+              </button>
+            </div>
+
+            {activeTab === "live" && (
+              <>
+                <div className="h-5 w-px bg-[var(--border-primary)]" />
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-[var(--text-primary)]">BTCUSDT</span>
+                  {price && (
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm font-mono font-medium text-[var(--text-primary)]">
+                        ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      </span>
+                      <span className={`text-xs font-mono ${priceChangePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Status cluster */}
+          {/* Center: TF pills (live tab only) */}
+          {activeTab === "live" && (
+            <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
+              {TIMEFRAMES.map((tf) => (
+                <button
+                  key={tf}
+                  onClick={() => runAnalysis(tf)}
+                  disabled={loading}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                    selectedTF === tf
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                      : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                  } disabled:opacity-50`}
+                >
+                  {tf}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Right side */}
           <div className="flex items-center gap-2">
-            {analysis && (
-              <div className="flex items-center gap-1.5 text-emerald-400 text-xs">
-                <Radio className="w-3 h-3 animate-pulse" />
-                <span className="font-medium">LIVE</span>
+            {/* Detector toggles (live tab only) */}
+            {activeTab === "live" && (
+              <div className="flex items-center gap-1">
+                {DETECTOR_LABELS.map(({ key, label, color }) => (
+                  <button
+                    key={key}
+                    onClick={() => toggleDetector(key)}
+                    className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 border ${
+                      visibility[key]
+                        ? ""
+                        : "border-transparent bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                    }`}
+                    style={
+                      visibility[key]
+                        ? {
+                            color,
+                            backgroundColor: `${color}15`,
+                            borderColor: `${color}40`,
+                          }
+                        : undefined
+                    }
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
             )}
 
-            {analysis && (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium ${
-                analysis.trend === "bullish"
-                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                  : analysis.trend === "bearish"
-                  ? "bg-red-500/10 text-red-400 border border-red-500/20"
-                  : "bg-[var(--bg-tertiary)] text-[var(--text-muted)] border border-[var(--border-primary)]"
-              }`}>
-                <TrendIcon trend={analysis.trend} />
-                {analysis.trend.toUpperCase()}
-              </div>
-            )}
+            {/* Status cluster (live tab only) */}
+            {activeTab === "live" && (
+              <>
+                {analysis && (
+                  <div className="flex items-center gap-1.5 text-emerald-400 text-xs">
+                    <Radio className="w-3 h-3 animate-pulse" />
+                    <span className="font-medium">LIVE</span>
+                  </div>
+                )}
 
-            {analysis?.climax_warning && (
-              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                <AlertTriangle className="w-3 h-3" />
-                CLIMAX
-              </div>
-            )}
+                {analysis && (
+                  <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium ${
+                    analysis.trend === "bullish"
+                      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                      : analysis.trend === "bearish"
+                      ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                      : "bg-[var(--bg-tertiary)] text-[var(--text-muted)] border border-[var(--border-primary)]"
+                  }`}>
+                    <TrendIcon trend={analysis.trend} />
+                    {analysis.trend.toUpperCase()}
+                  </div>
+                )}
 
-            {analysis?.session?.is_kill_zone && (
-              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                <Zap className="w-3 h-3" />
-                KILL ZONE
-              </div>
-            )}
+                {analysis?.climax_warning && (
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <AlertTriangle className="w-3 h-3" />
+                    CLIMAX
+                  </div>
+                )}
 
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className={`p-1.5 rounded-md transition-colors ${
-                sidebarOpen
-                  ? "text-blue-400 bg-blue-500/10"
-                  : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)]"
-              }`}
-              title="Toggle panel"
-            >
-              <BarChart3 className="w-4 h-4" />
-            </button>
+                {analysis?.session?.is_kill_zone && (
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                    <Zap className="w-3 h-3" />
+                    KILL ZONE
+                  </div>
+                )}
+
+                <button
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className={`p-1.5 rounded-md transition-colors ${
+                    sidebarOpen
+                      ? "text-blue-400 bg-blue-500/10"
+                      : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)]"
+                  }`}
+                  title="Toggle panel"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
 
       {/* ============ MAIN CONTENT ============ */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Chart area */}
-        <div className="flex-1 flex flex-col min-w-0">
-          <div className="flex-1 min-h-0 p-2">
-            {loading ? (
-              <div className="flex items-center justify-center h-full animate-fade-in">
-                <div className="text-center">
-                  <Loader2 className="w-10 h-10 text-blue-500 animate-spin mx-auto mb-4" />
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    Analyzing {selectedTF} structure...
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)] mt-1">
-                    Detecting swings, IDM, BOS, CHoCH, FVG, OB
-                  </p>
-                </div>
-              </div>
-            ) : error ? (
-              <div className="flex items-center justify-center h-full animate-fade-in">
-                <div className="text-center max-w-sm">
-                  <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
-                    <AlertTriangle className="w-6 h-6 text-red-400" />
+      {activeTab === "live" && (
+        <div className="flex flex-1 overflow-hidden">
+          {/* Chart area */}
+          <div className="flex-1 flex flex-col min-w-0">
+            <div className="flex-1 min-h-0 p-2">
+              {loading ? (
+                <div className="flex items-center justify-center h-full animate-fade-in">
+                  <div className="text-center">
+                    <Loader2 className="w-10 h-10 text-blue-500 animate-spin mx-auto mb-4" />
+                    <p className="text-sm text-[var(--text-secondary)]">
+                      Analyzing {selectedTF} structure...
+                    </p>
+                    <p className="text-xs text-[var(--text-muted)] mt-1">
+                      Detecting swings, IDM, BOS, CHoCH, FVG, OB
+                    </p>
                   </div>
-                  <p className="text-sm text-red-400 mb-1">Connection Error</p>
-                  <p className="text-xs text-[var(--text-muted)] mb-4">{error}</p>
-                  <button
-                    onClick={() => runAnalysis(selectedTF)}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-lg transition-colors shadow-lg shadow-blue-600/20"
-                  >
-                    Retry
-                  </button>
                 </div>
-              </div>
-            ) : !analysis ? (
-              <div className="flex items-center justify-center h-full animate-fade-in">
-                <div className="text-center max-w-md">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-400/20 border border-blue-500/20 flex items-center justify-center mx-auto mb-6">
-                    <Activity className="w-8 h-8 text-blue-400" />
+              ) : error ? (
+                <div className="flex items-center justify-center h-full animate-fade-in">
+                  <div className="text-center max-w-sm">
+                    <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+                      <AlertTriangle className="w-6 h-6 text-red-400" />
+                    </div>
+                    <p className="text-sm text-red-400 mb-1">Connection Error</p>
+                    <p className="text-xs text-[var(--text-muted)] mb-4">{error}</p>
+                    <button
+                      onClick={() => runAnalysis(selectedTF)}
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-lg transition-colors shadow-lg shadow-blue-600/20"
+                    >
+                      Retry
+                    </button>
                   </div>
-                  <h2 className="text-xl font-semibold gradient-text mb-2">
-                    TradingMamba
-                  </h2>
-                  <p className="text-sm text-[var(--text-secondary)] mb-1">
-                    Smart Money Concepts Detection Engine
-                  </p>
-                  <p className="text-xs text-[var(--text-muted)] mb-6">
-                    Select a timeframe to analyze BTCUSDT structure
-                  </p>
-                  <button
-                    onClick={() => runAnalysis("H4")}
-                    className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-medium rounded-lg transition-all shadow-lg shadow-blue-600/25"
-                  >
-                    Analyze H4
-                  </button>
+                </div>
+              ) : !analysis ? (
+                <div className="flex items-center justify-center h-full animate-fade-in">
+                  <div className="text-center max-w-md">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-400/20 border border-blue-500/20 flex items-center justify-center mx-auto mb-6">
+                      <Activity className="w-8 h-8 text-blue-400" />
+                    </div>
+                    <h2 className="text-xl font-semibold gradient-text mb-2">
+                      TradingMamba
+                    </h2>
+                    <p className="text-sm text-[var(--text-secondary)] mb-1">
+                      Smart Money Concepts Detection Engine
+                    </p>
+                    <p className="text-xs text-[var(--text-muted)] mb-6">
+                      Select a timeframe to analyze BTCUSDT structure
+                    </p>
+                    <button
+                      onClick={() => runAnalysis("H4")}
+                      className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-medium rounded-lg transition-all shadow-lg shadow-blue-600/25"
+                    >
+                      Analyze H4
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} />
+              )}
+            </div>
+
+            {/* Radial element picker — shows when multiple elements overlap */}
+            {pickerState && (
+              <ElementPicker
+                candidates={pickerState.candidates}
+                x={pickerState.x}
+                y={pickerState.y}
+                onPick={handlePickerSelect}
+                onDismiss={() => setPickerState(null)}
+              />
+            )}
+
+            {/* Analysis Panel — shows when a chart element is clicked */}
+            {analysis && selectedElement && (
+              <AnalysisPanel
+                element={selectedElement}
+                data={analysis}
+                onClose={() => { setSelectedElement(null); setPickerState(null); }}
+              />
+            )}
+
+            {/* Signals bar */}
+            {analysis && analysis.signals.length > 0 && (
+              <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] animate-fade-in">
+                <div className="px-4 py-3">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <Zap className="w-3.5 h-3.5 text-amber-400" />
+                    <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                      Active Signals
+                    </h3>
+                    <span className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-tertiary)] px-1.5 py-0.5 rounded">
+                      {analysis.signals.length}
+                    </span>
+                  </div>
+                  <div className="flex gap-3 overflow-x-auto pb-1">
+                    {analysis.signals.map((sig, i) => (
+                      <div key={i} className="min-w-[300px] animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
+                        <SignalCard signal={sig} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ) : (
-              <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} />
             )}
           </div>
 
-          {/* Radial element picker — shows when multiple elements overlap */}
-          {pickerState && (
-            <ElementPicker
-              candidates={pickerState.candidates}
-              x={pickerState.x}
-              y={pickerState.y}
-              onPick={handlePickerSelect}
-              onDismiss={() => setPickerState(null)}
-            />
-          )}
-
-          {/* Analysis Panel — shows when a chart element is clicked */}
-          {analysis && selectedElement && (
-            <AnalysisPanel
-              element={selectedElement}
-              data={analysis}
-              onClose={() => { setSelectedElement(null); setPickerState(null); }}
-            />
-          )}
-
-          {/* Signals bar */}
-          {analysis && analysis.signals.length > 0 && (
-            <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] animate-fade-in">
-              <div className="px-4 py-3">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
-                  <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                    Active Signals
-                  </h3>
-                  <span className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-tertiary)] px-1.5 py-0.5 rounded">
-                    {analysis.signals.length}
+          {/* Right sidebar */}
+          {sidebarOpen && (
+            <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
+              <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
+                <div className="flex items-center gap-2">
+                  <BarChart3 className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+                  <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    Detections
+                  </h2>
+                </div>
+                {analysis && (
+                  <span className="text-xs font-mono text-[var(--text-muted)]">
+                    {analysis.timeframe}
                   </span>
-                </div>
-                <div className="flex gap-3 overflow-x-auto pb-1">
-                  {analysis.signals.map((sig, i) => (
-                    <div key={i} className="min-w-[300px] animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
-                      <SignalCard signal={sig} />
-                    </div>
-                  ))}
-                </div>
+                )}
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <DetectionPanel data={analysis} />
               </div>
             </div>
           )}
         </div>
+      )}
 
-        {/* Right sidebar */}
-        {sidebarOpen && (
-          <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
-            <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <BarChart3 className="w-3.5 h-3.5 text-[var(--text-muted)]" />
-                <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                  Detections
-                </h2>
-              </div>
-              {analysis && (
-                <span className="text-xs font-mono text-[var(--text-muted)]">
-                  {analysis.timeframe}
-                </span>
-              )}
-            </div>
-            <div className="flex-1 overflow-y-auto">
-              <DetectionPanel data={analysis} />
-            </div>
-          </div>
-        )}
-      </div>
+      {activeTab === "backtest" && (
+        <div className="flex-1 overflow-hidden">
+          <BacktestTab result={backtestResult} onResult={setBacktestResult} />
+        </div>
+      )}
+
+      {activeTab === "performance" && (
+        <div className="flex-1 overflow-hidden">
+          <PerformanceTab result={backtestResult} />
+        </div>
+      )}
     </div>
   );
 }

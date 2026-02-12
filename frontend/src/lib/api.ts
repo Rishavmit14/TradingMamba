@@ -1,6 +1,6 @@
 /** API client for the TradingMamba backend (localhost:8000). */
 
-import { AnalysisResult } from "./types";
+import { AnalysisResult, BacktestResult } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -20,6 +20,32 @@ export async function fetchHealth(): Promise<{ status: string }> {
   const res = await fetch(`${API_BASE}/health`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
+}
+
+/** Phase 3: Backtest API */
+export async function runBacktest(params: {
+  start_date: string;
+  end_date: string;
+  symbol?: string;
+  step_size?: number;
+}): Promise<BacktestResult> {
+  const searchParams = new URLSearchParams({
+    start_date: params.start_date,
+    end_date: params.end_date,
+    symbol: params.symbol || "BTCUSDT",
+    step_size: String(params.step_size || 96),
+  });
+  const res = await fetch(`${API_BASE}/backtest?${searchParams}`, { method: "POST" });
+  if (!res.ok) throw new Error(`Backtest error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+export async function fetchLatestBacktest(): Promise<BacktestResult | null> {
+  const res = await fetch(`${API_BASE}/backtest/latest`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  if (data.error) return null;
+  return data;
 }
 
 /** Lightweight price ticker from Binance (no backend needed). */

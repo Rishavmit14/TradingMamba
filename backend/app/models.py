@@ -82,6 +82,20 @@ class SignalGrade(Enum):
     D = "D"  # Counter-trend or climax warning
 
 
+class AMDPhase(Enum):
+    ACCUMULATION = "accumulation"    # Range forming near zone
+    MANIPULATION = "manipulation"    # Internal liquidity sweep
+    DISTRIBUTION = "distribution"    # Post-sweep directional move
+    COMPLETE = "complete"            # All 3 phases done
+
+
+class PricePhase(Enum):
+    CONSOLIDATION = "consolidation"  # Ranging, building liquidity
+    EXPANSION = "expansion"          # Quick move, BOS, SM footprints
+    RETRACEMENT = "retracement"      # Pullback, correcting imbalances
+    REVERSAL = "reversal"            # CHoCH, trend change
+
+
 # ──────────────────────────────────────────────
 # Core Data Models
 # ──────────────────────────────────────────────
@@ -246,6 +260,11 @@ class PremiumDiscount:
     equilibrium: float         # 50% level
     zone: ZoneType
     depth_pct: float           # How deep into premium/discount (0-100%)
+    # V12: Fibonacci qualification
+    fibonacci_levels: dict = field(default_factory=dict)
+    closest_fib: str = ""      # Nearest Fib level key (e.g. "0.618")
+    fib_distance_pct: float = 100.0  # Distance to nearest Fib level (0=on it)
+    is_fib_qualified: bool = False    # Price within tolerance of a key Fib level
 
     @classmethod
     def calculate(cls, swing_high: float, swing_low: float, current_price: float) -> PremiumDiscount:
@@ -264,7 +283,67 @@ class PremiumDiscount:
             zone = ZoneType.EQUILIBRIUM
             depth_pct = 50.0
 
-        return cls(swing_high, swing_low, eq, zone, min(depth_pct, 100.0))
+        # V12: Fibonacci level calculation
+        diff = swing_high - swing_low
+        fib_levels = {
+            "0.236": swing_low + diff * 0.236,
+            "0.382": swing_low + diff * 0.382,
+            "0.5": eq,
+            "0.618": swing_low + diff * 0.618,
+            "0.705": swing_low + diff * 0.705,
+            "0.786": swing_low + diff * 0.786,
+        }
+
+        # Find closest Fib level
+        closest_key = ""
+        min_dist = float("inf")
+        for key, level in fib_levels.items():
+            dist = abs(current_price - level)
+            if dist < min_dist:
+                min_dist = dist
+                closest_key = key
+
+        fib_dist_pct = (min_dist / total_range * 100) if total_range > 0 else 100.0
+        # Qualified if within 3% of range from a key Fib level
+        is_qualified = fib_dist_pct <= 3.0
+
+        return cls(
+            swing_high, swing_low, eq, zone, min(depth_pct, 100.0),
+            fibonacci_levels=fib_levels,
+            closest_fib=closest_key,
+            fib_distance_pct=round(fib_dist_pct, 2),
+            is_fib_qualified=is_qualified,
+        )
+
+
+@dataclass
+class AMDPattern:
+    """AMD (Accumulation-Manipulation-Distribution) pattern.
+
+    V17: Market ranges near a zone without taking IDM, then sweeps
+    internal liquidity and provides MSS entry.
+    """
+    range_start_idx: int
+    range_end_idx: int
+    range_high: float
+    range_low: float
+    phase: AMDPhase = AMDPhase.ACCUMULATION
+    sweep_direction: Optional[Direction] = None
+    sweep_candle_idx: Optional[int] = None
+    mss_candle_idx: Optional[int] = None
+    mss_confirmed: bool = False
+
+
+@dataclass
+class PriceCycleEvent:
+    """V11: Price Delivery Cycle phase identification."""
+    candle_index: int          # Candle confirming phase entry
+    phase: PricePhase
+    start_index: int           # Where phase began
+    end_index: int             # Where phase ended (or current)
+    high: float
+    low: float
+    valid_transition: bool = True
 
 
 @dataclass
@@ -296,3 +375,71 @@ class TradingSignal:
     session: Optional[Session] = None
     climax_warning: bool = False
     is_counter_trend: bool = False
+
+
+# ──────────────────────────────────────────────
+# Phase 2: Validation Models
+# ──────────────────────────────────────────────
+
+@dataclass
+class DetectorMetrics:
+    """Metrics for a single detector on a single timeframe."""
+    detector_name: str
+    timeframe: str
+    total_detected: int
+    per_1000_candles: float
+    valid_pct: float
+    breakdown: dict = field(default_factory=dict)
+
+
+@dataclass
+class ValidationReport:
+    """Complete Phase 2 validation report."""
+    symbol: str
+    start_date: str
+    end_date: str
+    total_candles: dict = field(default_factory=dict)
+    detector_metrics: list[DetectorMetrics] = field(default_factory=list)
+    multi_tf_alignment: dict = field(default_factory=dict)
+    sanity_check_results: dict = field(default_factory=dict)
+    timestamp: str = ""
+
+
+# ──────────────────────────────────────────────
+# Phase 3: Backtesting Models
+# ──────────────────────────────────────────────
+
+class TradeOutcome(Enum):
+    WIN = "win"
+    LOSS = "loss"
+    TIMEOUT = "timeout"
+
+
+@dataclass
+class TradeRecord:
+    """A single backtested trade with signal info + outcome."""
+    # Signal info
+    direction: Direction
+    entry_price: float
+    stop_loss: float
+    take_profit: float
+    risk_reward_ratio: float
+    grade: SignalGrade
+    confidence_score: float
+    confluences: list[str] = field(default_factory=list)
+    entry_method: str = ""
+    pattern_type: str = ""
+    is_counter_trend: bool = False
+    climax_warning: bool = False
+    # Timing
+    entry_candle_idx: int = 0
+    entry_timestamp: int = 0
+    # Outcome
+    outcome: TradeOutcome = TradeOutcome.TIMEOUT
+    exit_price: float = 0.0
+    exit_candle_idx: int = 0
+    exit_timestamp: int = 0
+    bars_held: int = 0
+    pnl_pct: float = 0.0
+    max_favorable_excursion: float = 0.0
+    max_adverse_excursion: float = 0.0

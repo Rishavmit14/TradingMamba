@@ -180,3 +180,75 @@ export interface ChartClickResult {
   clickX: number;
   clickY: number;
 }
+
+// ── Phase 3: Backtest Types ──
+
+export type TradeOutcome = "win" | "loss" | "timeout";
+export type AppTab = "live" | "backtest" | "performance";
+
+export interface TradeRecord {
+  direction: Direction;
+  entry_price: number;
+  stop_loss: number;
+  take_profit: number;
+  risk_reward_ratio: number;
+  grade: SignalGrade;
+  confidence_score: number;
+  confluences: string[];
+  entry_method: string;
+  pattern_type: string;
+  is_counter_trend: boolean;
+  climax_warning: boolean;
+  entry_candle_idx: number;
+  entry_timestamp: number;
+  outcome: TradeOutcome;
+  exit_price: number;
+  exit_candle_idx: number;
+  exit_timestamp: number;
+  bars_held: number;
+  pnl_pct: number;
+  max_favorable_excursion: number;
+  max_adverse_excursion: number;
+}
+
+export interface GradeBreakdown {
+  grade: string;
+  trades: number;
+  wins: number;
+  losses: number;
+  timeouts: number;
+  win_rate: number;
+  avg_pnl: number;
+  recommendation: string;
+}
+
+export interface ConfluenceEdge {
+  name: string;
+  present_wr: number;
+  absent_wr: number;
+  edge: number;
+  present_count: number;
+  absent_count: number;
+}
+
+export interface BacktestResult {
+  symbol: string;
+  start_date: string;
+  end_date: string;
+  total_signals: number;
+  total_trades: number;
+  wins: number;
+  losses: number;
+  timeouts: number;
+  win_rate: number;
+  avg_rr: number;
+  profit_factor: number;
+  total_pnl_pct: number;
+  max_drawdown_pct: number;
+  by_grade: GradeBreakdown[];
+  by_confluence: ConfluenceEdge[];
+  by_entry_method: Record<string, { trades: number; win_rate: number; avg_pnl: number }>;
+  by_session: Record<string, { trades: number; win_rate: number }>;
+  trades: TradeRecord[];
+  equity_curve: { timestamp: number; pnl: number }[];
+}

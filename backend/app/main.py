@@ -14,6 +14,7 @@ from app.config import SYMBOL
 from app.services.data_fetcher import fetch_klines, fetch_all_timeframes
 from app.core.engine import analyze_timeframe, run_multi_tf_analysis, AnalysisResult
 from app.models import TrendState
+from app.services.backtester import run_backtest, get_latest_backtest, print_backtest_report
 
 app = FastAPI(
     title="TradingMamba",
@@ -148,6 +149,12 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
             "equilibrium": result.premium_discount.equilibrium,
             "zone": result.premium_discount.zone.value,
             "depth_pct": round(result.premium_discount.depth_pct, 1),
+            "fibonacci_levels": {
+                k: round(v, 2) for k, v in result.premium_discount.fibonacci_levels.items()
+            },
+            "closest_fib": result.premium_discount.closest_fib,
+            "fib_distance_pct": result.premium_discount.fib_distance_pct,
+            "is_fib_qualified": result.premium_discount.is_fib_qualified,
         } if result.premium_discount else None,
         "session": {
             "name": result.session.name,
@@ -156,6 +163,33 @@ def _serialize_result(result: AnalysisResult, candles=None) -> dict:
         } if result.session else None,
         "climax_warning": result.climax_warning,
         "climax_ratio": round(result.climax_ratio, 2),
+        "amd_patterns": [
+            {
+                "range_start_idx": amd.range_start_idx,
+                "range_end_idx": amd.range_end_idx,
+                "range_high": amd.range_high,
+                "range_low": amd.range_low,
+                "phase": amd.phase.value,
+                "sweep_direction": amd.sweep_direction.value if amd.sweep_direction else None,
+                "sweep_candle_idx": amd.sweep_candle_idx,
+                "mss_candle_idx": amd.mss_candle_idx,
+                "mss_confirmed": amd.mss_confirmed,
+            }
+            for amd in result.amd_patterns
+        ],
+        "price_cycles": [
+            {
+                "candle_index": pc.candle_index,
+                "phase": pc.phase.value,
+                "start_index": pc.start_index,
+                "end_index": pc.end_index,
+                "high": pc.high,
+                "low": pc.low,
+                "valid_transition": pc.valid_transition,
+            }
+            for pc in result.price_cycles
+        ],
+        "current_phase": result.current_phase.value,
         "signals": [
             {
                 "direction": sig.direction.value,
@@ -226,3 +260,32 @@ async def get_signals():
         "climax_warning": m15.climax_warning,
         "signals": _serialize_result(m15, candles_by_tf.get("M15", []))["signals"],
     }
+
+
+@app.post("/api/backtest")
+async def run_backtest_endpoint(
+    start_date: str = "2024-06-01",
+    end_date: str = "2025-01-01",
+    symbol: str = SYMBOL,
+    step_size: int = 96,
+):
+    """Run Phase 3 backtest on historical data.
+
+    This may take 5-15 minutes depending on date range.
+    """
+    result = await run_backtest(
+        symbol=symbol,
+        start_date=start_date,
+        end_date=end_date,
+        step_size=step_size,
+    )
+    return result
+
+
+@app.get("/api/backtest/latest")
+async def get_latest_backtest_endpoint():
+    """Get the most recent backtest results from cache."""
+    result = get_latest_backtest()
+    if result is None:
+        return {"error": "No backtest results found. Run a backtest first."}
+    return result
