@@ -15,8 +15,9 @@ import {
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
+import AnalysisPanel from "@/components/AnalysisPanel";
 import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DetectorVisibility } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -48,6 +49,7 @@ export default function Dashboard() {
   const [visibility, setVisibility] = useState<DetectorVisibility>(DEFAULT_VISIBILITY);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [ticker, setTicker] = useState<PriceTicker | null>(null);
+  const [selectedElement, setSelectedElement] = useState<SelectedElement | null>(null);
 
   const toggleDetector = useCallback((key: keyof DetectorVisibility) => {
     setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -67,6 +69,7 @@ export default function Dashboard() {
     setSelectedTF(tf);
     setLoading(true);
     setError(null);
+    setSelectedElement(null);
 
     try {
       const result = await fetchAnalysis(tf);
@@ -244,7 +247,7 @@ export default function Dashboard() {
       <div className="flex flex-1 overflow-hidden">
         {/* Chart area */}
         <div className="flex-1 flex flex-col min-w-0">
-          <div className="flex-1 p-2">
+          <div className="flex-1 min-h-0 p-2">
             {loading ? (
               <div className="flex items-center justify-center h-full animate-fade-in">
                 <div className="text-center">
@@ -297,9 +300,18 @@ export default function Dashboard() {
                 </div>
               </div>
             ) : (
-              <Chart data={analysis} visibility={visibility} livePrice={price} />
+              <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={setSelectedElement} />
             )}
           </div>
+
+          {/* Analysis Panel — shows when a chart element is clicked */}
+          {analysis && selectedElement && (
+            <AnalysisPanel
+              element={selectedElement}
+              data={analysis}
+              onClose={() => setSelectedElement(null)}
+            />
+          )}
 
           {/* Signals bar */}
           {analysis && analysis.signals.length > 0 && (

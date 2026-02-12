@@ -27,7 +27,9 @@ export interface SwingPoint {
   swing_type: SwingType;
   classification: SwingClassification;
   is_valid_smc: boolean;
+  is_strong: boolean;
   idm_taken: boolean;
+  candle_closed_properly: boolean;
 }
 
 export interface Inducement {
@@ -36,6 +38,8 @@ export interface Inducement {
   parent_swing_index: number;
   status: IDMStatus;
   taken_at_candle: number | null;
+  body_closed: boolean;
+  is_major: boolean;
 }
 
 export interface LiquidityPool {
@@ -55,6 +59,7 @@ export interface BOS {
   broken_price: number;
   valid: boolean;
   invalidation_reason: string | null;
+  idm_body_closed: boolean;
 }
 
 export interface CHoCH {
@@ -66,6 +71,7 @@ export interface CHoCH {
   has_climax_confluence: boolean;
   is_fake: boolean;
   confirmed: boolean;
+  model: string;
 }
 
 export interface FVG {
@@ -99,6 +105,10 @@ export interface PremiumDiscount {
   equilibrium: number;
   zone: ZoneType;
   depth_pct: number;
+  fibonacci_levels: Record<string, number>;
+  closest_fib: string;
+  fib_distance_pct: number;
+  is_fib_qualified: boolean;
 }
 
 export interface Session {
@@ -150,4 +160,12 @@ export interface AnalysisResult {
   climax_ratio: number;
   signals: TradingSignal[];
   candles: Candle[];
+}
+
+export type SelectedElementType = "swing" | "bos" | "choch" | "idm" | "fvg" | "ob";
+
+export interface SelectedElement {
+  type: SelectedElementType;
+  index: number;
+  candle_index: number;
 }

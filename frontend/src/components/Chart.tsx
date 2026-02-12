@@ -11,12 +11,13 @@ import {
   LineStyle,
   MouseEventParams,
 } from "lightweight-charts";
-import { AnalysisResult, DetectorVisibility, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
 
 interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
   livePrice?: number | null;
+  onElementClick?: (element: SelectedElement | null) => void;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -111,7 +112,7 @@ class OBBoxPrimitive {
   }
 }
 
-export default function Chart({ data, visibility, livePrice }: ChartProps) {
+export default function Chart({ data, visibility, livePrice, onElementClick }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -126,6 +127,8 @@ export default function Chart({ data, visibility, livePrice }: ChartProps) {
   const [selectedSwingIdx, setSelectedSwingIdx] = useState<number | null>(null);
   const dataRef = useRef<AnalysisResult | null>(null);
   dataRef.current = data;
+  const onElementClickRef = useRef(onElementClick);
+  onElementClickRef.current = onElementClick;
 
   // Create chart once
   useEffect(() => {
@@ -174,69 +177,142 @@ export default function Chart({ data, visibility, livePrice }: ChartProps) {
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
 
-    // Click handler: find nearest swing and highlight its IDM
+    // Click handler: find nearest chart element to the click point
     chart.subscribeClick((param: MouseEventParams) => {
       const d = dataRef.current;
+      const cb = onElementClickRef.current;
       if (!param.time || !d || !d.candles.length) {
         setSelectedSwingIdx(null);
+        cb?.(null);
         return;
       }
 
-      // Find which candle was clicked by matching timestamp
       const clickedTimeSec = param.time as number;
       const clickedCandle = d.candles.find(
         (c) => Math.floor(c.timestamp / 1000) === clickedTimeSec
       );
       if (!clickedCandle) {
         setSelectedSwingIdx(null);
+        cb?.(null);
         return;
       }
 
-      // Get clicked price from y coordinate
       const clickedPrice =
         param.point && candleSeriesRef.current
           ? candleSeriesRef.current.coordinateToPrice(param.point.y)
           : null;
 
-      // Find swings at this candle (could be both a high and low)
-      const swingsAtCandle = d.swings.filter(
-        (s) =>
-          s.candle_index === clickedCandle.index &&
-          s.classification !== "unclassified"
-      );
-
-      if (swingsAtCandle.length === 0) {
-        // Also check 1 candle tolerance for easier clicking
-        const nearby = d.swings.filter(
-          (s) =>
-            Math.abs(s.candle_index - clickedCandle.index) <= 1 &&
-            s.classification !== "unclassified"
-        );
-        if (nearby.length === 0) {
-          setSelectedSwingIdx(null);
-          return;
-        }
-        // Pick closest by price
-        if (clickedPrice !== null) {
-          nearby.sort(
-            (a, b) =>
-              Math.abs(a.price - clickedPrice) -
-              Math.abs(b.price - clickedPrice)
-          );
-        }
-        setSelectedSwingIdx(nearby[0].candle_index);
+      if (clickedPrice === null) {
+        setSelectedSwingIdx(null);
+        cb?.(null);
         return;
       }
 
-      // If multiple swings at same candle, pick closest to clicked price
-      if (swingsAtCandle.length > 1 && clickedPrice !== null) {
-        swingsAtCandle.sort(
-          (a, b) =>
-            Math.abs(a.price - clickedPrice) -
-            Math.abs(b.price - clickedPrice)
-        );
+      const ci = clickedCandle.index;
+
+      // Calculate adaptive tolerance from visible price range (~2% of visible range)
+      const allPrices = d.candles.map(c => [c.high, c.low]).flat();
+      const visibleHigh = Math.max(...allPrices);
+      const visibleLow = Math.min(...allPrices);
+      const priceRange = visibleHigh - visibleLow;
+      const tol = priceRange * 0.025; // 2.5% of visible range
+
+      const inRange = (a: number, b: number) => ci >= Math.min(a, b) - 1 && ci <= Math.max(a, b) + 1;
+
+      // Collect all candidate matches with their "distance" to pick the closest
+      type Candidate = { type: "bos" | "choch" | "idm" | "fvg" | "ob" | "swing"; index: number; candle_index: number; dist: number };
+      const candidates: Candidate[] = [];
+
+      // 1. BOS lines
+      for (let i = 0; i < d.bos_events.length; i++) {
+        const b = d.bos_events[i];
+        if (inRange(b.broken_swing_index, b.candle_index)) {
+          const dist = Math.abs(clickedPrice - b.broken_price);
+          if (dist < tol) {
+            candidates.push({ type: "bos", index: i, candle_index: b.candle_index, dist });
+          }
+        }
       }
-      setSelectedSwingIdx(swingsAtCandle[0].candle_index);
+
+      // 2. CHoCH lines
+      for (let i = 0; i < d.choch_events.length; i++) {
+        const ch = d.choch_events[i];
+        if (inRange(ch.broken_swing_index, ch.candle_index)) {
+          const dist = Math.abs(clickedPrice - ch.broken_price);
+          if (dist < tol) {
+            candidates.push({ type: "choch", index: i, candle_index: ch.candle_index, dist });
+          }
+        }
+      }
+
+      // 3. IDM rays
+      for (let i = 0; i < d.inducements.length; i++) {
+        const idm = d.inducements[i];
+        const endIdx = idm.taken_at_candle ?? d.candles.length - 1;
+        if (inRange(idm.candle_index, endIdx)) {
+          const dist = Math.abs(clickedPrice - idm.price);
+          if (dist < tol) {
+            candidates.push({ type: "idm", index: i, candle_index: idm.candle_index, dist });
+          }
+        }
+      }
+
+      // 4. OB boxes (click inside the box = distance 0)
+      for (let i = 0; i < d.order_blocks.length; i++) {
+        const ob = d.order_blocks[i];
+        if (!ob.valid) continue;
+        const endIdx = ob.mitigated && ob.mitigated_at_candle != null ? ob.mitigated_at_candle : d.candles.length - 1;
+        if (inRange(ob.candle_index_start, endIdx)) {
+          if (clickedPrice >= ob.lower_price && clickedPrice <= ob.upper_price) {
+            candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist: 0 });
+          } else {
+            const dist = Math.min(Math.abs(clickedPrice - ob.upper_price), Math.abs(clickedPrice - ob.lower_price));
+            if (dist < tol * 0.5) {
+              candidates.push({ type: "ob", index: i, candle_index: ob.candle_index_start, dist });
+            }
+          }
+        }
+      }
+
+      // 5. FVG zones
+      for (let i = 0; i < d.fvgs.length; i++) {
+        const f = d.fvgs[i];
+        if (!f.valid) continue;
+        if (Math.abs(ci - f.candle_index) <= 5) {
+          if (clickedPrice >= f.lower_price && clickedPrice <= f.upper_price) {
+            candidates.push({ type: "fvg", index: i, candle_index: f.candle_index, dist: 0 });
+          }
+        }
+      }
+
+      // 6. Swings (within ±2 candle tolerance)
+      const nearbySwings = d.swings.filter(
+        (s) => Math.abs(s.candle_index - ci) <= 2 && s.classification !== "unclassified"
+      );
+      for (const s of nearbySwings) {
+        const idx = d.swings.indexOf(s);
+        const dist = Math.abs(clickedPrice - s.price);
+        if (dist < tol) {
+          candidates.push({ type: "swing", index: idx, candle_index: s.candle_index, dist });
+        }
+      }
+
+      // Pick the closest candidate
+      if (candidates.length > 0) {
+        candidates.sort((a, b) => a.dist - b.dist);
+        const best = candidates[0];
+        if (best.type === "swing") {
+          setSelectedSwingIdx(best.candle_index);
+        } else {
+          setSelectedSwingIdx(null);
+        }
+        cb?.({ type: best.type, index: best.index, candle_index: best.candle_index });
+        return;
+      }
+
+      // Nothing matched
+      setSelectedSwingIdx(null);
+      cb?.(null);
     });
 
     // ResizeObserver tracks both width and height of the container
