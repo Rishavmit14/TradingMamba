@@ -1,6 +1,6 @@
 /** API client for the TradingMamba backend (localhost:8000). */
 
-import { AnalysisResult, BacktestResult } from "./types";
+import { AnalysisResult, BacktestResult, DetailedSignals } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -46,6 +46,13 @@ export async function fetchLatestBacktest(): Promise<BacktestResult | null> {
   const data = await res.json();
   if (data.error) return null;
   return data;
+}
+
+/** Phase 4: Detailed Signals API */
+export async function fetchDetailedSignals(): Promise<DetailedSignals> {
+  const res = await fetch(`${API_BASE}/signals/detailed`);
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+  return res.json();
 }
 
 /** Lightweight price ticker from Binance (no backend needed). */

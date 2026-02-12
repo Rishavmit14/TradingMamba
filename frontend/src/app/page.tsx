@@ -21,6 +21,7 @@ import AnalysisPanel from "@/components/AnalysisPanel";
 import ElementPicker from "@/components/ElementPicker";
 import BacktestTab from "@/components/BacktestTab";
 import PerformanceTab from "@/components/PerformanceTab";
+import SignalsTab from "@/components/SignalsTab";
 import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab } from "@/lib/types";
 
@@ -199,6 +200,17 @@ export default function Dashboard() {
               >
                 <LineChart className="w-3 h-3" />
                 Performance
+              </button>
+              <button
+                onClick={() => setActiveTab("signals")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "signals"
+                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                <Zap className="w-3 h-3" />
+                Signals
               </button>
             </div>
 
@@ -466,6 +478,12 @@ export default function Dashboard() {
       {activeTab === "performance" && (
         <div className="flex-1 overflow-hidden">
           <PerformanceTab result={backtestResult} />
+        </div>
+      )}
+
+      {activeTab === "signals" && (
+        <div className="flex-1 overflow-hidden">
+          <SignalsTab />
         </div>
       )}
     </div>

@@ -184,7 +184,7 @@ export interface ChartClickResult {
 // ── Phase 3: Backtest Types ──
 
 export type TradeOutcome = "win" | "loss" | "timeout";
-export type AppTab = "live" | "backtest" | "performance";
+export type AppTab = "live" | "backtest" | "performance" | "signals";
 
 export interface TradeRecord {
   direction: Direction;
@@ -229,6 +229,48 @@ export interface ConfluenceEdge {
   edge: number;
   present_count: number;
   absent_count: number;
+}
+
+// ── Phase 4: Signals Tab Types ──
+
+export type ChecklistStatus = "passed" | "failed" | "pending";
+
+export interface ChecklistItem {
+  rule?: number;
+  step?: number;
+  name: string;
+  status: ChecklistStatus;
+  detail: string;
+}
+
+export interface MultiTFContext {
+  w1_trend: TrendState;
+  d1_trend: TrendState;
+  h4_trend: TrendState;
+  h1_trend: TrendState;
+  m15_trend: TrendState;
+  session: Session | null;
+  climax_warning: boolean;
+  climax_ratio: number;
+  current_phase: string;
+  premium_discount: {
+    swing_high: number;
+    swing_low: number;
+    equilibrium: number;
+    zone: ZoneType;
+    depth_pct: number;
+    is_fib_qualified: boolean;
+    closest_fib: string;
+  } | null;
+}
+
+export interface DetailedSignals {
+  symbol: string;
+  timestamp: number;
+  context: MultiTFContext;
+  checklist_v24: ChecklistItem[];
+  checklist_v23: ChecklistItem[];
+  signals: TradingSignal[];
 }
 
 export interface BacktestResult {
