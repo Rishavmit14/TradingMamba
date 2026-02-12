@@ -1,6 +1,17 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import {
+  Activity,
+  BarChart3,
+  Zap,
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Loader2,
+  AlertTriangle,
+  Radio,
+} from "lucide-react";
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
 import SignalCard from "@/components/SignalCard";
@@ -14,7 +25,7 @@ const DETECTOR_LABELS: { key: keyof DetectorVisibility; label: string; color: st
   { key: "idm", label: "IDM", color: "#60a5fa" },
   { key: "bos", label: "BOS", color: "#22d3ee" },
   { key: "choch", label: "CHoCH", color: "#a855f7" },
-  { key: "fvg", label: "FVG", color: "#22c55e" },
+  { key: "fvg", label: "FVG", color: "#10b981" },
   { key: "ob", label: "OB", color: "#3b82f6" },
   { key: "pd", label: "P/D", color: "#eab308" },
 ];
@@ -23,18 +34,24 @@ const DEFAULT_VISIBILITY: DetectorVisibility = {
   swings: true, idm: true, bos: true, choch: true, fvg: true, ob: true, pd: true,
 };
 
+function TrendIcon({ trend }: { trend: string }) {
+  if (trend === "bullish") return <TrendingUp className="w-3.5 h-3.5" />;
+  if (trend === "bearish") return <TrendingDown className="w-3.5 h-3.5" />;
+  return <Minus className="w-3.5 h-3.5" />;
+}
+
 export default function Dashboard() {
   const [selectedTF, setSelectedTF] = useState<string>("H4");
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [visibility, setVisibility] = useState<DetectorVisibility>(DEFAULT_VISIBILITY);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const toggleDetector = useCallback((key: keyof DetectorVisibility) => {
     setVisibility((prev) => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
-  // Silent refresh: updates data without showing loading spinner
   const silentRefresh = useCallback(async (tf: string) => {
     try {
       const result = await fetchAnalysis(tf);
@@ -61,151 +78,208 @@ export default function Dashboard() {
     }
   }, []);
 
-  // Auto-refresh polling — interval depends on timeframe
+  // Auto-refresh polling
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const selectedTFRef = useRef(selectedTF);
   selectedTFRef.current = selectedTF;
 
   useEffect(() => {
-    // Only poll when we have data loaded
     if (!analysis) return;
-
-    // Polling intervals per timeframe
     const pollMs: Record<string, number> = {
-      "M5": 5_000,     // 5s
-      "M15": 10_000,   // 10s
-      "H1": 15_000,    // 15s
-      "H4": 30_000,    // 30s
-      "D1": 60_000,    // 60s
-      "W1": 60_000,    // 60s
-      "1M": 120_000,   // 2min
+      "M5": 5_000, "M15": 10_000, "H1": 15_000, "H4": 30_000,
+      "D1": 60_000, "W1": 60_000, "1M": 120_000,
     };
     const ms = pollMs[selectedTF] ?? 30_000;
-
-    intervalRef.current = setInterval(() => {
-      silentRefresh(selectedTFRef.current);
-    }, ms);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
+    intervalRef.current = setInterval(() => silentRefresh(selectedTFRef.current), ms);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [analysis, selectedTF, silentRefresh]);
 
+  // Price from last candle
+  const lastCandle = analysis?.candles?.[analysis.candles.length - 1];
+  const price = lastCandle ? lastCandle.close : null;
+  const prevCandle = analysis?.candles?.[analysis.candles.length - 2];
+  const priceChange = price && prevCandle ? price - prevCandle.close : 0;
+  const priceChangePct = prevCandle ? (priceChange / prevCandle.close) * 100 : 0;
+
   return (
-    <div className="h-screen flex flex-col bg-[#0a0a0f]">
-      {/* Header */}
-      <header className="flex items-center justify-between px-4 py-2 border-b border-gray-800 bg-[#0d0d14]">
-        <div className="flex items-center gap-3">
-          <h1 className="text-lg font-bold text-white tracking-tight">
-            TradingMamba
-          </h1>
-          <span className="text-xs text-gray-500 border border-gray-700 rounded px-1.5 py-0.5">
-            SMC Engine
-          </span>
-          <span className="text-xs text-gray-600">BTCUSDT</span>
-        </div>
+    <div className="h-screen flex flex-col bg-[var(--bg-primary)] overflow-hidden">
+      {/* ============ HEADER ============ */}
+      <header className="glass border-b border-[var(--border-primary)] z-20">
+        <div className="flex items-center justify-between px-4 h-12">
+          {/* Logo + pair */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <Activity className="w-4 h-4 text-white" />
+              </div>
+              <span className="text-sm font-semibold tracking-tight gradient-text">
+                TradingMamba
+              </span>
+            </div>
 
-        {/* Timeframe selector */}
-        <div className="flex items-center gap-1">
-          {TIMEFRAMES.map((tf) => (
-            <button
-              key={tf}
-              onClick={() => runAnalysis(tf)}
-              disabled={loading}
-              className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
-                selectedTF === tf
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white"
-              } disabled:opacity-50`}
-            >
-              {tf}
-            </button>
-          ))}
-        </div>
+            <div className="h-5 w-px bg-[var(--border-primary)]" />
 
-        {/* Detector toggles */}
-        <div className="flex items-center gap-1">
-          {DETECTOR_LABELS.map(({ key, label, color }) => (
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-[var(--text-primary)]">BTCUSDT</span>
+              {price && (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-mono font-medium text-[var(--text-primary)]">
+                    ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                  </span>
+                  <span className={`text-xs font-mono ${priceChange >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    {priceChange >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Timeframe pills */}
+          <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
+            {TIMEFRAMES.map((tf) => (
+              <button
+                key={tf}
+                onClick={() => runAnalysis(tf)}
+                disabled={loading}
+                className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  selectedTF === tf
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                } disabled:opacity-50`}
+              >
+                {tf}
+              </button>
+            ))}
+          </div>
+
+          {/* Detector toggles */}
+          <div className="flex items-center gap-1">
+            {DETECTOR_LABELS.map(({ key, label, color }) => (
+              <button
+                key={key}
+                onClick={() => toggleDetector(key)}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 border ${
+                  visibility[key]
+                    ? ""
+                    : "border-transparent bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                }`}
+                style={
+                  visibility[key]
+                    ? {
+                        color,
+                        backgroundColor: `${color}15`,
+                        borderColor: `${color}40`,
+                      }
+                    : undefined
+                }
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* Status cluster */}
+          <div className="flex items-center gap-2">
+            {analysis && (
+              <div className="flex items-center gap-1.5 text-emerald-400 text-xs">
+                <Radio className="w-3 h-3 animate-pulse" />
+                <span className="font-medium">LIVE</span>
+              </div>
+            )}
+
+            {analysis && (
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium ${
+                analysis.trend === "bullish"
+                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                  : analysis.trend === "bearish"
+                  ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                  : "bg-[var(--bg-tertiary)] text-[var(--text-muted)] border border-[var(--border-primary)]"
+              }`}>
+                <TrendIcon trend={analysis.trend} />
+                {analysis.trend.toUpperCase()}
+              </div>
+            )}
+
+            {analysis?.climax_warning && (
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <AlertTriangle className="w-3 h-3" />
+                CLIMAX
+              </div>
+            )}
+
+            {analysis?.session?.is_kill_zone && (
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <Zap className="w-3 h-3" />
+                KILL ZONE
+              </div>
+            )}
+
             <button
-              key={key}
-              onClick={() => toggleDetector(key)}
-              className={`px-2 py-1 text-xs font-medium rounded transition-colors border ${
-                visibility[key]
-                  ? "border-current bg-opacity-20"
-                  : "border-gray-700 bg-gray-800/50 text-gray-600"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className={`p-1.5 rounded-md transition-colors ${
+                sidebarOpen
+                  ? "text-blue-400 bg-blue-500/10"
+                  : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)]"
               }`}
-              style={visibility[key] ? { color, backgroundColor: `${color}20` } : undefined}
+              title="Toggle panel"
             >
-              {label}
+              <BarChart3 className="w-4 h-4" />
             </button>
-          ))}
-        </div>
-
-        {/* Status */}
-        <div className="flex items-center gap-3 text-xs">
-          {analysis && (
-            <span className="flex items-center gap-1.5 text-green-500">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              LIVE
-            </span>
-          )}
-          {analysis && (
-            <span className={`px-2 py-0.5 rounded font-medium ${
-              analysis.trend === "bullish"
-                ? "bg-green-900/50 text-green-400"
-                : analysis.trend === "bearish"
-                ? "bg-red-900/50 text-red-400"
-                : "bg-gray-800 text-gray-400"
-            }`}>
-              {analysis.trend.toUpperCase()}
-            </span>
-          )}
-          {analysis?.session?.is_kill_zone && (
-            <span className="px-2 py-0.5 rounded bg-yellow-900/50 text-yellow-400 font-medium">
-              KILL ZONE
-            </span>
-          )}
+          </div>
         </div>
       </header>
 
-      {/* Main content */}
+      {/* ============ MAIN CONTENT ============ */}
       <div className="flex flex-1 overflow-hidden">
         {/* Chart area */}
-        <div className="flex-1 flex flex-col">
-          {/* Chart */}
+        <div className="flex-1 flex flex-col min-w-0">
           <div className="flex-1 p-2">
             {loading ? (
-              <div className="flex items-center justify-center h-full text-gray-500">
+              <div className="flex items-center justify-center h-full animate-fade-in">
                 <div className="text-center">
-                  <div className="animate-spin w-8 h-8 border-2 border-gray-600 border-t-blue-500 rounded-full mx-auto mb-3" />
-                  <p className="text-sm">Fetching {selectedTF} candles & running analysis...</p>
+                  <Loader2 className="w-10 h-10 text-blue-500 animate-spin mx-auto mb-4" />
+                  <p className="text-sm text-[var(--text-secondary)]">
+                    Analyzing {selectedTF} structure...
+                  </p>
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
+                    Detecting swings, IDM, BOS, CHoCH, FVG, OB
+                  </p>
                 </div>
               </div>
             ) : error ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <p className="text-red-400 text-sm mb-2">Error: {error}</p>
-                  <p className="text-gray-500 text-xs">
-                    Make sure the backend is running on localhost:8000
-                  </p>
+              <div className="flex items-center justify-center h-full animate-fade-in">
+                <div className="text-center max-w-sm">
+                  <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
+                    <AlertTriangle className="w-6 h-6 text-red-400" />
+                  </div>
+                  <p className="text-sm text-red-400 mb-1">Connection Error</p>
+                  <p className="text-xs text-[var(--text-muted)] mb-4">{error}</p>
                   <button
                     onClick={() => runAnalysis(selectedTF)}
-                    className="mt-3 px-4 py-1.5 bg-gray-800 text-white text-xs rounded hover:bg-gray-700"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-lg transition-colors shadow-lg shadow-blue-600/20"
                   >
                     Retry
                   </button>
                 </div>
               </div>
             ) : !analysis ? (
-              <div className="flex items-center justify-center h-full text-gray-600">
-                <div className="text-center">
-                  <p className="text-lg mb-2">TradingMamba SMC Engine</p>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Select a timeframe to analyze BTCUSDT
+              <div className="flex items-center justify-center h-full animate-fade-in">
+                <div className="text-center max-w-md">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-400/20 border border-blue-500/20 flex items-center justify-center mx-auto mb-6">
+                    <Activity className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <h2 className="text-xl font-semibold gradient-text mb-2">
+                    TradingMamba
+                  </h2>
+                  <p className="text-sm text-[var(--text-secondary)] mb-1">
+                    Smart Money Concepts Detection Engine
+                  </p>
+                  <p className="text-xs text-[var(--text-muted)] mb-6">
+                    Select a timeframe to analyze BTCUSDT structure
                   </p>
                   <button
                     onClick={() => runAnalysis("H4")}
-                    className="px-6 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-500"
+                    className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-medium rounded-lg transition-all shadow-lg shadow-blue-600/25"
                   >
                     Analyze H4
                   </button>
@@ -216,32 +290,52 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Signals bar at bottom */}
+          {/* Signals bar */}
           {analysis && analysis.signals.length > 0 && (
-            <div className="border-t border-gray-800 p-3 bg-[#0d0d14]">
-              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                Active Signals ({analysis.signals.length})
-              </h3>
-              <div className="flex gap-3 overflow-x-auto">
-                {analysis.signals.map((sig, i) => (
-                  <div key={i} className="min-w-[280px]">
-                    <SignalCard signal={sig} />
-                  </div>
-                ))}
+            <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] animate-fade-in">
+              <div className="px-4 py-3">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    Active Signals
+                  </h3>
+                  <span className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-tertiary)] px-1.5 py-0.5 rounded">
+                    {analysis.signals.length}
+                  </span>
+                </div>
+                <div className="flex gap-3 overflow-x-auto pb-1">
+                  {analysis.signals.map((sig, i) => (
+                    <div key={i} className="min-w-[300px] animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
+                      <SignalCard signal={sig} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
         </div>
 
-        {/* Right sidebar — Detection Panel */}
-        <div className="w-72 border-l border-gray-800 bg-[#0d0d14] overflow-y-auto">
-          <div className="sticky top-0 bg-[#0d0d14] border-b border-gray-800 px-4 py-2">
-            <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-              Detections
-            </h2>
+        {/* Right sidebar */}
+        {sidebarOpen && (
+          <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
+            <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+                <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                  Detections
+                </h2>
+              </div>
+              {analysis && (
+                <span className="text-xs font-mono text-[var(--text-muted)]">
+                  {analysis.timeframe}
+                </span>
+              )}
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <DetectionPanel data={analysis} />
+            </div>
           </div>
-          <DetectionPanel data={analysis} />
-        </div>
+        )}
       </div>
     </div>
   );

@@ -133,7 +133,7 @@ export default function Chart({ data, visibility }: ChartProps) {
     const chart = createChart(containerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: "#ffffff" },
-        textColor: "#333333",
+        textColor: "#5c6370",
       },
       grid: {
         vertLines: { visible: false },
@@ -141,14 +141,14 @@ export default function Chart({ data, visibility }: ChartProps) {
       },
       crosshair: {
         mode: CrosshairMode.Normal,
-        vertLine: { color: "#4b5563", width: 1, style: LineStyle.Dashed },
-        horzLine: { color: "#4b5563", width: 1, style: LineStyle.Dashed },
+        vertLine: { color: "#3b82f640", width: 1, style: LineStyle.Dashed },
+        horzLine: { color: "#3b82f640", width: 1, style: LineStyle.Dashed },
       },
       rightPriceScale: {
-        borderColor: "#1f2937",
+        borderColor: "#1e2230",
       },
       timeScale: {
-        borderColor: "#1f2937",
+        borderColor: "#1e2230",
         timeVisible: true,
         secondsVisible: false,
       },
@@ -157,12 +157,12 @@ export default function Chart({ data, visibility }: ChartProps) {
     });
 
     const candleSeries = chart.addCandlestickSeries({
-      upColor: "#22c55e",
+      upColor: "#10b981",
       downColor: "#ef4444",
-      borderUpColor: "#22c55e",
+      borderUpColor: "#10b981",
       borderDownColor: "#ef4444",
-      wickUpColor: "#22c55e",
-      wickDownColor: "#ef4444",
+      wickUpColor: "#10b98180",
+      wickDownColor: "#ef444480",
     });
 
     // Attach OB box primitive to candle series
@@ -624,7 +624,7 @@ export default function Chart({ data, visibility }: ChartProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full rounded-lg overflow-hidden border border-gray-800"
+      className="w-full h-full rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/20"
     />
   );
 }

@@ -1,68 +1,124 @@
 "use client";
 
+import {
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Shield,
+  Target,
+  ArrowRight,
+} from "lucide-react";
 import { TradingSignal } from "@/lib/types";
 
 interface SignalCardProps {
   signal: TradingSignal;
 }
 
-const gradeColors: Record<string, string> = {
-  A: "bg-green-500 text-white",
-  B: "bg-blue-500 text-white",
-  C: "bg-yellow-500 text-black",
-  D: "bg-red-500 text-white",
+const gradeConfig: Record<string, { bg: string; text: string; border: string; label: string }> = {
+  A: { bg: "bg-emerald-500/15", text: "text-emerald-400", border: "border-emerald-500/30", label: "A" },
+  B: { bg: "bg-blue-500/15", text: "text-blue-400", border: "border-blue-500/30", label: "B" },
+  C: { bg: "bg-amber-500/15", text: "text-amber-400", border: "border-amber-500/30", label: "C" },
+  D: { bg: "bg-red-500/15", text: "text-red-400", border: "border-red-500/30", label: "D" },
 };
 
 export default function SignalCard({ signal }: SignalCardProps) {
   const isBull = signal.direction === "bullish";
+  const grade = gradeConfig[signal.grade] || gradeConfig.D;
 
   return (
-    <div className={`rounded-lg border p-3 ${
-      isBull ? "border-green-800 bg-green-950/30" : "border-red-800 bg-red-950/30"
-    }`}>
-      <div className="flex items-center justify-between mb-2">
+    <div className={`glass-card rounded-xl p-3.5 transition-all hover:border-[var(--border-hover)] ${
+      isBull ? "hover:shadow-emerald-500/5" : "hover:shadow-red-500/5"
+    } hover:shadow-lg`}>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className={`text-lg font-bold ${isBull ? "text-green-400" : "text-red-400"}`}>
-            {isBull ? "LONG" : "SHORT"}
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+            isBull ? "bg-emerald-500/10" : "bg-red-500/10"
+          }`}>
+            {isBull
+              ? <TrendingUp className="w-4 h-4 text-emerald-400" />
+              : <TrendingDown className="w-4 h-4 text-red-400" />
+            }
+          </div>
+          <div>
+            <span className={`text-sm font-bold ${isBull ? "text-emerald-400" : "text-red-400"}`}>
+              {isBull ? "LONG" : "SHORT"}
+            </span>
+            <span className="text-xs text-[var(--text-muted)] ml-2 font-mono">{signal.timeframe}</span>
+          </div>
+        </div>
+        <div className={`px-2 py-1 rounded-md text-xs font-bold border ${grade.bg} ${grade.text} ${grade.border}`}>
+          Grade {grade.label}
+        </div>
+      </div>
+
+      {/* Price levels */}
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="bg-[var(--bg-tertiary)] rounded-lg px-2.5 py-2">
+          <div className="flex items-center gap-1 mb-1">
+            <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
+            <span className="text-xs text-[var(--text-muted)]">Entry</span>
+          </div>
+          <span className="text-xs font-mono font-medium text-[var(--text-primary)]">
+            ${signal.entry_price.toLocaleString()}
           </span>
-          <span className={`px-2 py-0.5 text-xs font-bold rounded ${gradeColors[signal.grade]}`}>
-            {signal.grade}
+        </div>
+        <div className="bg-red-500/5 rounded-lg px-2.5 py-2">
+          <div className="flex items-center gap-1 mb-1">
+            <Shield className="w-3 h-3 text-red-400/60" />
+            <span className="text-xs text-red-400/60">SL</span>
+          </div>
+          <span className="text-xs font-mono font-medium text-red-400">
+            ${signal.stop_loss.toLocaleString()}
           </span>
         </div>
-        <span className="text-gray-400 text-xs font-mono">{signal.timeframe}</span>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2 mb-2 text-xs">
-        <div>
-          <span className="text-gray-500 block">Entry</span>
-          <span className="text-white font-mono">${signal.entry_price.toLocaleString()}</span>
-        </div>
-        <div>
-          <span className="text-gray-500 block">SL</span>
-          <span className="text-red-400 font-mono">${signal.stop_loss.toLocaleString()}</span>
-        </div>
-        <div>
-          <span className="text-gray-500 block">TP</span>
-          <span className="text-green-400 font-mono">${signal.take_profit.toLocaleString()}</span>
+        <div className="bg-emerald-500/5 rounded-lg px-2.5 py-2">
+          <div className="flex items-center gap-1 mb-1">
+            <Target className="w-3 h-3 text-emerald-400/60" />
+            <span className="text-xs text-emerald-400/60">TP</span>
+          </div>
+          <span className="text-xs font-mono font-medium text-emerald-400">
+            ${signal.take_profit.toLocaleString()}
+          </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs mb-2">
-        <span className="text-gray-400">R:R {signal.risk_reward_ratio}</span>
-        <span className="text-gray-400">Confidence: {signal.confidence_score}%</span>
+      {/* R:R and Confidence */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-[var(--text-muted)]">
+            R:R <span className="font-mono font-medium text-[var(--text-secondary)]">{signal.risk_reward_ratio}</span>
+          </span>
+          <span className="text-xs text-[var(--text-muted)]">
+            Conf <span className="font-mono font-medium text-[var(--text-secondary)]">{signal.confidence_score}%</span>
+          </span>
+        </div>
       </div>
 
+      {/* Confluences */}
       <div className="flex flex-wrap gap-1">
         {signal.confluences.map((c, i) => (
-          <span key={i} className="px-1.5 py-0.5 text-xs bg-gray-800 text-gray-300 rounded">
+          <span
+            key={i}
+            className="px-2 py-0.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-md border border-[var(--border-primary)]"
+          >
             {c}
           </span>
         ))}
       </div>
 
+      {/* Warnings */}
       {signal.climax_warning && (
-        <div className="mt-2 text-yellow-400 text-xs bg-yellow-900/20 rounded px-2 py-1">
-          Climax warning active
+        <div className="mt-2.5 flex items-center gap-1.5 bg-amber-500/5 border border-amber-500/15 rounded-lg px-2.5 py-1.5">
+          <AlertTriangle className="w-3 h-3 text-amber-400" />
+          <span className="text-xs text-amber-400">Climax warning active</span>
+        </div>
+      )}
+
+      {signal.is_counter_trend && (
+        <div className="mt-2 flex items-center gap-1.5 bg-purple-500/5 border border-purple-500/15 rounded-lg px-2.5 py-1.5">
+          <ArrowRight className="w-3 h-3 text-purple-400 rotate-180" />
+          <span className="text-xs text-purple-400">Counter-trend signal</span>
         </div>
       )}
     </div>
