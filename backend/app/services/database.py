@@ -451,6 +451,37 @@ async def skip_trade(trade_id: int, source: str = "web") -> bool:
         await db.close()
 
 
+async def update_trade_sl_tp(trade_id: int, stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Optional[dict]:
+    """Update SL and/or TP of an open trade. Recalculates R:R. Returns trade dict or None."""
+    db = await _get_db()
+    try:
+        cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
+        trade = await cursor.fetchone()
+        if not trade or trade["status"] != "open":
+            return None
+
+        new_sl = stop_loss if stop_loss is not None else trade["stop_loss"]
+        new_tp = take_profit if take_profit is not None else trade["take_profit"]
+        entry = trade["entry_price"]
+
+        # Recalculate R:R
+        risk = abs(entry - new_sl)
+        reward = abs(new_tp - entry)
+        rr = round(reward / risk, 2) if risk > 0 else 0
+
+        await db.execute(
+            "UPDATE trades SET stop_loss = ?, take_profit = ?, risk_reward_ratio = ? WHERE id = ?",
+            (new_sl, new_tp, rr, trade_id),
+        )
+        await db.commit()
+
+        cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
+        row = await cursor.fetchone()
+        return _trade_to_dict(row) if row else None
+    finally:
+        await db.close()
+
+
 async def close_trade(trade_id: int, exit_price: float, source: str = "web") -> Optional[dict]:
     """Close an open trade at given price. Returns trade dict or None."""
     db = await _get_db()

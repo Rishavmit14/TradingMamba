@@ -29,6 +29,7 @@ import {
   resetDemoAccount,
   updateDemoSettings,
   sendTelegramTest,
+  updateTradeSLTP,
 } from "@/lib/api";
 import type {
   DemoAccount,
@@ -142,6 +143,9 @@ export default function DemoTab() {
   const [actionLoading, setActionLoading] = useState<number | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   const [riskInput, setRiskInput] = useState("");
+  const [editingTrade, setEditingTrade] = useState<number | null>(null);
+  const [editSL, setEditSL] = useState("");
+  const [editTP, setEditTP] = useState("");
   const pollRef = useRef<ReturnType<typeof setInterval>>();
 
   const fetchAll = useCallback(async () => {
@@ -196,6 +200,25 @@ export default function DemoTab() {
     setActionLoading(tradeId);
     try {
       await closeDemoTrade(tradeId);
+      await fetchAll();
+    } catch {}
+    setActionLoading(null);
+  };
+
+  const handleEditSLTP = (trade: DemoTrade) => {
+    setEditingTrade(trade.id);
+    setEditSL(String(trade.stop_loss));
+    setEditTP(String(trade.take_profit));
+  };
+
+  const handleSaveSLTP = async (tradeId: number) => {
+    const sl = parseFloat(editSL);
+    const tp = parseFloat(editTP);
+    if (isNaN(sl) || isNaN(tp) || sl <= 0 || tp <= 0) return;
+    setActionLoading(tradeId);
+    try {
+      await updateTradeSLTP(tradeId, { stop_loss: sl, take_profit: tp });
+      setEditingTrade(null);
       await fetchAll();
     } catch {}
     setActionLoading(null);
@@ -478,7 +501,7 @@ export default function DemoTab() {
                     </div>
                     <GradeBadge grade={t.grade} />
 
-                    {/* Prices */}
+                    {/* Prices — editable SL/TP */}
                     <div className="flex-1 grid grid-cols-3 gap-2 text-xs font-mono">
                       <div>
                         <span className="text-[var(--text-muted)]">Entry</span>
@@ -488,15 +511,39 @@ export default function DemoTab() {
                       </div>
                       <div>
                         <span className="text-red-400/70">SL</span>
-                        <div className="text-red-400">
-                          ${t.stop_loss.toLocaleString()}
-                        </div>
+                        {editingTrade === t.id ? (
+                          <input
+                            type="number"
+                            value={editSL}
+                            onChange={(e) => setEditSL(e.target.value)}
+                            className="w-full mt-0.5 px-1.5 py-0.5 text-xs rounded bg-[var(--bg-tertiary)] border border-red-500/40 text-red-400 font-mono focus:outline-none focus:border-red-500"
+                          />
+                        ) : (
+                          <div
+                            className="text-red-400 cursor-pointer hover:underline"
+                            onClick={() => handleEditSLTP(t)}
+                          >
+                            ${t.stop_loss.toLocaleString()}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <span className="text-emerald-400/70">TP</span>
-                        <div className="text-emerald-400">
-                          ${t.take_profit.toLocaleString()}
-                        </div>
+                        {editingTrade === t.id ? (
+                          <input
+                            type="number"
+                            value={editTP}
+                            onChange={(e) => setEditTP(e.target.value)}
+                            className="w-full mt-0.5 px-1.5 py-0.5 text-xs rounded bg-[var(--bg-tertiary)] border border-emerald-500/40 text-emerald-400 font-mono focus:outline-none focus:border-emerald-500"
+                          />
+                        ) : (
+                          <div
+                            className="text-emerald-400 cursor-pointer hover:underline"
+                            onClick={() => handleEditSLTP(t)}
+                          >
+                            ${t.take_profit.toLocaleString()}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -520,15 +567,36 @@ export default function DemoTab() {
                       </div>
                     )}
 
-                    {/* Close button */}
-                    <button
-                      onClick={() => handleClose(t.id)}
-                      disabled={actionLoading === t.id}
-                      className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-md bg-amber-600/20 hover:bg-amber-600/40 text-amber-400 border border-amber-500/30 transition-colors disabled:opacity-50"
-                    >
-                      <XCircle className="w-3 h-3" />
-                      Close
-                    </button>
+                    {/* Action buttons */}
+                    <div className="flex flex-col gap-1">
+                      {editingTrade === t.id ? (
+                        <>
+                          <button
+                            onClick={() => handleSaveSLTP(t.id)}
+                            disabled={actionLoading === t.id}
+                            className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-md bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/30 transition-colors disabled:opacity-50"
+                          >
+                            <CheckCircle className="w-3 h-3" />
+                            Save
+                          </button>
+                          <button
+                            onClick={() => setEditingTrade(null)}
+                            className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-md bg-[var(--bg-tertiary)] hover:bg-[var(--bg-tertiary)]/80 text-[var(--text-muted)] border border-[var(--border-primary)] transition-colors"
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => handleClose(t.id)}
+                          disabled={actionLoading === t.id}
+                          className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-md bg-amber-600/20 hover:bg-amber-600/40 text-amber-400 border border-amber-500/30 transition-colors disabled:opacity-50"
+                        >
+                          <XCircle className="w-3 h-3" />
+                          Close
+                        </button>
+                      )}
+                    </div>
                   </div>
 
                   {/* Position size + source */}

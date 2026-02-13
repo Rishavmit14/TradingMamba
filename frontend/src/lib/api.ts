@@ -114,6 +114,19 @@ export async function skipDemoTrade(tradeId: number): Promise<void> {
   if (!res.ok) throw new Error(`API error: ${res.status}`);
 }
 
+export async function updateTradeSLTP(tradeId: number, params: {
+  stop_loss?: number;
+  take_profit?: number;
+}): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/sl-tp`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
 export async function closeDemoTrade(tradeId: number): Promise<DemoTrade> {
   const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/close`, {
     method: "POST",

@@ -46,6 +46,7 @@ from app.services.database import (
     close_trade,
     get_equity_curve,
     insert_manual_trade,
+    update_trade_sl_tp,
 )
 
 logger = logging.getLogger("tradingmamba")
@@ -800,6 +801,22 @@ async def skip_demo_trade(trade_id: int):
     if not ok:
         raise HTTPException(status_code=400, detail="Trade not found or not pending")
     return {"status": "skipped"}
+
+
+class UpdateSLTPRequest(BaseModel):
+    stop_loss: Optional[float] = None
+    take_profit: Optional[float] = None
+
+
+@app.put("/api/demo/trades/{trade_id}/sl-tp")
+async def update_demo_trade_sl_tp(trade_id: int, req: UpdateSLTPRequest):
+    """Update SL and/or TP of an open trade."""
+    if req.stop_loss is None and req.take_profit is None:
+        raise HTTPException(status_code=400, detail="Provide stop_loss and/or take_profit")
+    result = await update_trade_sl_tp(trade_id, stop_loss=req.stop_loss, take_profit=req.take_profit)
+    if not result:
+        raise HTTPException(status_code=400, detail="Trade not found or not open")
+    return result
 
 
 @app.post("/api/demo/trades/{trade_id}/close")
