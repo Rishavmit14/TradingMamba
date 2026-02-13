@@ -125,22 +125,37 @@ def _calculate_tp(
     direction: Direction,
     swings: list[SwingPoint],
     inducements: list[Inducement],
+    entry: float = 0,
+    sl: float = 0,
 ) -> float | None:
     """Calculate take profit.
 
     V23: TP = previous high/low from which market took inducement.
+    Skips swings that are too close (would give R:R below minimum).
     """
+    risk = abs(entry - sl) if entry and sl else 0
+
     if direction == Direction.BULLISH:
         # TP at the swing high above current zone
         for swing in sorted(swings, key=lambda s: s.price):
             if (swing.swing_type == SwingType.SWING_HIGH
                     and swing.price > zone["upper"]):
+                # Skip swings too close for acceptable R:R
+                if risk > 0:
+                    reward = abs(swing.price - entry)
+                    if reward / risk < MIN_RISK_REWARD:
+                        continue
                 return swing.price
     else:
         # TP at the swing low below current zone
         for swing in sorted(swings, key=lambda s: s.price, reverse=True):
             if (swing.swing_type == SwingType.SWING_LOW
                     and swing.price < zone["lower"]):
+                # Skip swings too close for acceptable R:R
+                if risk > 0:
+                    reward = abs(swing.price - entry)
+                    if reward / risk < MIN_RISK_REWARD:
+                        continue
                 return swing.price
 
     return None
@@ -437,8 +452,9 @@ def generate_signals(
             # Step 8: Calculate SL
             sl = _calculate_sl(zone, direction)
 
-            # Step 9: Calculate TP
-            tp = _calculate_tp(zone, direction, swings, inducements)
+            # Step 9: Calculate TP (skip swings too close for min R:R)
+            tp = _calculate_tp(zone, direction, swings, inducements,
+                               entry=current_price, sl=sl)
             if tp is None:
                 continue
 

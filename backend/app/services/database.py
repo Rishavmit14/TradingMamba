@@ -74,7 +74,8 @@ CREATE TABLE IF NOT EXISTS trades (
     opened_at TEXT,
     closed_at TEXT,
     action_source TEXT DEFAULT 'web',
-    bars_monitored INTEGER DEFAULT 0
+    bars_monitored INTEGER DEFAULT 0,
+    trade_source TEXT DEFAULT 'signal'
 );
 
 CREATE TABLE IF NOT EXISTS equity_snapshots (
@@ -109,6 +110,12 @@ async def init_db(initial_balance: float = 10_000.0, risk_pct: float = 1.0):
     db = await _get_db()
     try:
         await db.executescript(_SCHEMA)
+        # Migration: add trade_source column if missing (existing DBs)
+        try:
+            await db.execute("ALTER TABLE trades ADD COLUMN trade_source TEXT DEFAULT 'signal'")
+            await db.commit()
+        except Exception:
+            pass  # column already exists
         # Seed account singleton
         await db.execute(
             """INSERT OR IGNORE INTO account (id, balance, initial_balance, risk_per_trade_pct)
@@ -296,6 +303,91 @@ async def insert_trade(signal_id: int, signal_data: dict) -> int:
         )
         await db.commit()
         return cursor.lastrowid
+    finally:
+        await db.close()
+
+
+async def insert_manual_trade(trade_data: dict) -> Optional[dict]:
+    """Create a manual trade directly in 'open' status (no signal required)."""
+    import uuid
+
+    db = await _get_db()
+    try:
+        # Create a placeholder signal record for FK constraint
+        manual_hash = f"manual_{uuid.uuid4().hex[:12]}"
+        sig_cursor = await db.execute(
+            """INSERT INTO signals
+               (signal_hash, direction, entry_price, stop_loss, take_profit,
+                risk_reward_ratio, grade, confidence_score, confluences,
+                entry_method, pattern_type, timeframe, created_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                manual_hash,
+                trade_data["direction"],
+                trade_data["entry_price"],
+                trade_data["stop_loss"],
+                trade_data["take_profit"],
+                trade_data.get("risk_reward_ratio", 0),
+                "M",  # Manual grade marker
+                0,
+                "[]",
+                "manual",
+                "Manual trade",
+                trade_data.get("timeframe", "M15"),
+                _now(),
+            ),
+        )
+        signal_id = sig_cursor.lastrowid
+
+        # Calculate position size
+        acct = await db.execute("SELECT * FROM account WHERE id = 1")
+        account = await acct.fetchone()
+        balance = account["balance"]
+        risk_pct = account["risk_per_trade_pct"]
+
+        entry = trade_data["entry_price"]
+        sl = trade_data["stop_loss"]
+        risk_amount = balance * (risk_pct / 100)
+        price_risk = abs(entry - sl)
+        if price_risk == 0:
+            price_risk = entry * 0.01
+
+        position_size_btc = risk_amount / price_risk
+        position_size_usd = position_size_btc * entry
+
+        rr = abs(trade_data["take_profit"] - entry) / price_risk if price_risk > 0 else 0
+
+        cursor = await db.execute(
+            """INSERT INTO trades
+               (signal_id, status, direction, entry_price, stop_loss, take_profit,
+                risk_reward_ratio, grade, confidence_score, confluences,
+                entry_method, pattern_type, position_size_usd, position_size_btc,
+                opened_at, action_source, trade_source, created_at)
+               VALUES (?, 'open', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'manual', ?)""",
+            (
+                signal_id,
+                trade_data["direction"],
+                entry,
+                sl,
+                trade_data["take_profit"],
+                round(rr, 2),
+                "M",
+                0,
+                "[]",
+                "manual",
+                "Manual trade",
+                round(position_size_usd, 2),
+                round(position_size_btc, 6),
+                _now(),
+                "web",
+                _now(),
+            ),
+        )
+        await db.commit()
+
+        trade_cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (cursor.lastrowid,))
+        row = await trade_cursor.fetchone()
+        return _trade_to_dict(row) if row else None
     finally:
         await db.close()
 

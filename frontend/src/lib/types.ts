@@ -9,7 +9,7 @@ export type LiquidityType = "buy_side" | "sell_side";
 export type LiquiditySource = "equal_highs" | "equal_lows" | "swing_extreme" | "trendline" | "idm_level";
 export type LiquidityEvent = "sweep" | "grab";
 export type ZoneType = "premium" | "discount" | "equilibrium";
-export type SignalGrade = "A" | "B" | "C" | "D";
+export type SignalGrade = "A" | "B" | "C" | "D" | "M";
 
 export interface Candle {
   timestamp: number;
@@ -147,6 +147,7 @@ export interface DetectorVisibility {
 export interface AnalysisResult {
   timeframe: string;
   trend: TrendState;
+  trade_bias: TrendState;  // HTF-derived trade direction (W1→D1→M15 fallback)
   swings: SwingPoint[];
   inducements: Inducement[];
   liquidity_pools: LiquidityPool[];
@@ -277,6 +278,7 @@ export interface DetailedSignals {
 
 export type TradeStatus = "pending" | "open" | "skipped" | "closed";
 export type ActionSource = "telegram" | "web" | "timeout" | "monitor";
+export type TradeSource = "signal" | "manual";
 
 export interface DemoAccount {
   balance: number;
@@ -314,6 +316,7 @@ export interface DemoTrade {
   opened_at: string | null;
   closed_at: string | null;
   action_source: ActionSource;
+  trade_source: TradeSource;
 }
 
 export interface DemoEquityPoint {

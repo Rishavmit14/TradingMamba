@@ -11,13 +11,14 @@ import {
   LineStyle,
   MouseEventParams,
 } from "lightweight-charts";
-import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock } from "@/lib/types";
+import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock, DemoTrade } from "@/lib/types";
 
 interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
   livePrice?: number | null;
   onElementClick?: (result: ChartClickResult | null) => void;
+  openTrades?: DemoTrade[];
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -118,7 +119,7 @@ class BoxPrimitive {
 // Keep old name as alias for readability
 type OBBoxData = BoxData;
 
-export default function Chart({ data, visibility, livePrice, onElementClick }: ChartProps) {
+export default function Chart({ data, visibility, livePrice, onElementClick, openTrades = [] }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -129,6 +130,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const obPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const fvgPrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const positionPrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const positionLinesRef = useRef<any[]>([]);
   const prevCandleCountRef = useRef<number>(0);
 
   // Swing ↔ IDM click interaction
@@ -195,6 +198,10 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
     const obPrimitive = new BoxPrimitive();
     (candleSeries as any).attachPrimitive(obPrimitive);
     obPrimitiveRef.current = obPrimitive;
+
+    const positionPrimitive = new BoxPrimitive();
+    (candleSeries as any).attachPrimitive(positionPrimitive);
+    positionPrimitiveRef.current = positionPrimitive;
 
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
@@ -374,6 +381,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       bosSeriesRef.current = [];
       chochSeriesRef.current = [];
       obPrimitiveRef.current = null;
+      positionPrimitiveRef.current = null;
+      positionLinesRef.current = [];
     };
   }, []);
 
@@ -671,17 +680,14 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
     if (visibility.fvg && fvgPrimitiveRef.current) {
       const lastIdx = candles.length - 1;
       const fvgBoxes: BoxData[] = data.fvgs
-        .filter((f: FVG) => f.valid)
-        .slice(-30) // show last 30 valid FVGs
+        .filter((f: FVG) => f.valid && !f.mitigated) // only show active (unfilled) FVGs
+        .slice(-30)
         .map((f: FVG) => {
           const startCandle = candles[f.candle_index];
           if (!startCandle) return null;
 
-          // Extend box to mitigation point or chart end
-          const endIdx = f.mitigated && f.mitigated_at_candle != null
-            ? Math.min(f.mitigated_at_candle, lastIdx)
-            : lastIdx;
-          const endCandle = candles[endIdx];
+          // Active FVGs extend to chart end
+          const endCandle = candles[lastIdx];
           if (!endCandle) return null;
 
           const startTime = toTV(startCandle.timestamp);
@@ -690,21 +696,18 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
 
           const isBull = f.direction === "bullish";
           const rgb = isBull ? "34, 197, 94" : "239, 68, 68"; // green-500 / red-500
-          const fillAlpha = f.mitigated ? 0.10 : 0.18;
-          const borderAlpha = f.mitigated ? 0.30 : 0.6;
-          const labelAlpha = f.mitigated ? 0.45 : 0.85;
           const arrow = isBull ? " \u25B2" : " \u25BC";
-          const label = (f.mitigated ? "xFVG" : "FVG") + arrow;
+          const label = "FVG" + arrow;
 
           return {
             startTime,
             endTime,
             upperPrice: f.upper_price,
             lowerPrice: f.lower_price,
-            fillColor: `rgba(${rgb}, ${fillAlpha})`,
-            borderColor: `rgba(${rgb}, ${borderAlpha})`,
+            fillColor: `rgba(${rgb}, 0.18)`,
+            borderColor: `rgba(${rgb}, 0.6)`,
             label,
-            labelColor: `rgba(${rgb}, ${labelAlpha})`,
+            labelColor: `rgba(${rgb}, 0.85)`,
           } as BoxData;
         })
         .filter((b): b is BoxData => b !== null);
@@ -762,10 +765,11 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
     }
 
     // --- NEAREST ZONE INDICATOR ---
-    // Show dashed amber lines at the nearest active zones above and below price
-    // so the user can see how far price is from the next signal trigger.
+    // Show the nearest bias-aligned zone (would trigger a signal) in amber,
+    // and optionally the nearest non-aligned zone in gray for context.
     {
       const currentPrice = candles[candles.length - 1]?.close ?? 0;
+      const bias = data.trade_bias; // HTF trade direction (W1→D1→M15 fallback)
       if (currentPrice > 0) {
         type ActiveZone = { type: string; direction: string; upper: number; lower: number };
         const activeZones: ActiveZone[] = [];
@@ -781,49 +785,171 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
           }
         }
 
-        // Nearest zone above current price (entry edge = lower boundary)
-        const zonesAbove = activeZones
+        // Split into bias-aligned and non-aligned zones
+        const biasAligned = activeZones.filter((z) => z.direction === bias);
+        const nonAligned = activeZones.filter((z) => z.direction !== bias);
+
+        // Nearest bias-aligned zone (this would actually trigger a signal)
+        const biasAbove = biasAligned
           .filter((z) => z.lower > currentPrice)
           .sort((a, b) => a.lower - b.lower);
-        // Nearest zone below current price (entry edge = upper boundary)
-        const zonesBelow = activeZones
+        const biasBelow = biasAligned
           .filter((z) => z.upper < currentPrice)
           .sort((a, b) => b.upper - a.upper);
 
-        const nearestAbove = zonesAbove[0];
-        const nearestBelow = zonesBelow[0];
+        const nearestBias = biasAbove[0] || biasBelow[0];
 
-        if (nearestAbove) {
-          const dist = nearestAbove.lower - currentPrice;
+        if (nearestBias) {
+          const isAbove = nearestBias.lower > currentPrice;
+          const edgePrice = isAbove ? nearestBias.lower : nearestBias.upper;
+          const dist = Math.abs(edgePrice - currentPrice);
           const pct = ((dist / currentPrice) * 100).toFixed(1);
-          const label = nearestAbove.direction === "bearish" ? "SELL" : "BUY";
+          const sign = isAbove ? "+" : "-";
+          const label = nearestBias.direction === "bearish" ? "SELL" : "BUY";
           priceLinesRef.current.push(
             candleSeries.createPriceLine({
-              price: nearestAbove.lower,
+              price: edgePrice,
               color: "#f59e0b",
               lineWidth: 1,
               lineStyle: LineStyle.SparseDotted,
               axisLabelVisible: true,
-              title: `\u2192 ${nearestAbove.type} ${label} zone (+${pct}%)`,
+              title: `\u2192 ${nearestBias.type} ${label} signal zone (${sign}${pct}%)`,
             })
           );
         }
 
-        if (nearestBelow) {
-          const dist = currentPrice - nearestBelow.upper;
+        // Also show nearest non-aligned zone in gray (informational — won't trigger signal)
+        const nonAbove = nonAligned
+          .filter((z) => z.lower > currentPrice)
+          .sort((a, b) => a.lower - b.lower);
+        const nonBelow = nonAligned
+          .filter((z) => z.upper < currentPrice)
+          .sort((a, b) => b.upper - a.upper);
+
+        const nearestNon = nonBelow[0] || nonAbove[0];
+
+        if (nearestNon) {
+          const isAbove = nearestNon.lower > currentPrice;
+          const edgePrice = isAbove ? nearestNon.lower : nearestNon.upper;
+          const dist = Math.abs(edgePrice - currentPrice);
           const pct = ((dist / currentPrice) * 100).toFixed(1);
-          const label = nearestBelow.direction === "bullish" ? "BUY" : "SELL";
+          const sign = isAbove ? "+" : "-";
+          const dir = nearestNon.direction === "bearish" ? "SELL" : "BUY";
           priceLinesRef.current.push(
             candleSeries.createPriceLine({
-              price: nearestBelow.upper,
-              color: "#f59e0b",
+              price: edgePrice,
+              color: "#6b7280",
               lineWidth: 1,
               lineStyle: LineStyle.SparseDotted,
-              axisLabelVisible: true,
-              title: `\u2192 ${nearestBelow.type} ${label} zone (-${pct}%)`,
+              axisLabelVisible: false,
+              title: `${nearestNon.type} ${dir} zone (${sign}${pct}%) [no signal - HTF ${bias}]`,
             })
           );
         }
+      }
+    }
+
+    // --- OPEN POSITION DISPLAY: SL / Entry / TP boxes ---
+    // Remove old position price lines
+    for (const line of positionLinesRef.current) {
+      candleSeries.removePriceLine(line);
+    }
+    positionLinesRef.current = [];
+
+    if (positionPrimitiveRef.current) {
+      const posBoxes: BoxData[] = [];
+      const lastCandle = candles[candles.length - 1];
+
+      for (const trade of openTrades) {
+        if (!lastCandle) break;
+        const entry = trade.entry_price;
+        const sl = trade.stop_loss;
+        const tp = trade.take_profit;
+        if (!entry || !sl || !tp) continue;
+
+        // Box spans 10 candles back from the current candle
+        const startIdx = Math.max(0, candles.length - 1 - 10);
+        const startCandle = candles[startIdx];
+        if (!startCandle) continue;
+        const startTime = toTV(startCandle.timestamp);
+        const endTime = toTV(lastCandle.timestamp);
+        if (endTime < startTime) continue;
+
+        // TP zone (green) — between entry and TP
+        posBoxes.push({
+          startTime,
+          endTime,
+          upperPrice: Math.max(entry, tp),
+          lowerPrice: Math.min(entry, tp),
+          fillColor: "rgba(34, 197, 94, 0.12)",
+          borderColor: "rgba(34, 197, 94, 0.0)",
+          label: "",
+          labelColor: "rgba(34, 197, 94, 0.9)",
+        });
+
+        // SL zone (red) — between entry and SL
+        posBoxes.push({
+          startTime,
+          endTime,
+          upperPrice: Math.max(entry, sl),
+          lowerPrice: Math.min(entry, sl),
+          fillColor: "rgba(239, 68, 68, 0.12)",
+          borderColor: "rgba(239, 68, 68, 0.0)",
+          label: "",
+          labelColor: "rgba(239, 68, 68, 0.9)",
+        });
+      }
+      positionPrimitiveRef.current.setBoxes(posBoxes);
+
+      // Price lines for Entry / SL / TP
+      for (const trade of openTrades) {
+        const entry = trade.entry_price;
+        const sl = trade.stop_loss;
+        const tp = trade.take_profit;
+        if (!entry || !sl || !tp) continue;
+
+        const isLong = trade.direction === "bullish";
+        const dir = isLong ? "LONG" : "SHORT";
+        const isManual = trade.trade_source === "manual";
+        const tag = isManual ? "Manual" : (trade.grade || "");
+        const rr = trade.risk_reward_ratio?.toFixed(1) || "";
+        const entryColor = isManual ? "#a855f7" : "#3b82f6"; // purple for manual, blue for signal
+
+        // Entry line
+        positionLinesRef.current.push(
+          candleSeries.createPriceLine({
+            price: entry,
+            color: entryColor,
+            lineWidth: 2,
+            lineStyle: LineStyle.Solid,
+            axisLabelVisible: true,
+            title: `${dir} ${tag} Entry $${entry.toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
+          })
+        );
+
+        // TP line
+        positionLinesRef.current.push(
+          candleSeries.createPriceLine({
+            price: tp,
+            color: "#22c55e",
+            lineWidth: 1,
+            lineStyle: LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: `TP $${tp.toLocaleString(undefined, { maximumFractionDigits: 0 })} (R:R ${rr})`,
+          })
+        );
+
+        // SL line
+        positionLinesRef.current.push(
+          candleSeries.createPriceLine({
+            price: sl,
+            color: "#ef4444",
+            lineWidth: 1,
+            lineStyle: LineStyle.Dashed,
+            axisLabelVisible: true,
+            title: `SL $${sl.toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
+          })
+        );
       }
     }
 
@@ -832,7 +958,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       chart.timeScale().fitContent();
       prevCandleCountRef.current = candles.length;
     }
-  }, [data, visibility, selectedSwingIdx]);
+  }, [data, visibility, selectedSwingIdx, openTrades]);
 
   // Live price update — update the last candle's close in real-time
   useEffect(() => {

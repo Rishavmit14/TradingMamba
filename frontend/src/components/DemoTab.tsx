@@ -46,12 +46,13 @@ function GradeBadge({ grade }: { grade: SignalGrade }) {
     B: "bg-blue-500/20 text-blue-400 border-blue-500/30",
     C: "bg-amber-500/20 text-amber-400 border-amber-500/30",
     D: "bg-red-500/20 text-red-400 border-red-500/30",
+    M: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   };
   return (
     <span
       className={`px-1.5 py-0.5 text-[10px] font-bold rounded border ${colors[grade] || colors.D}`}
     >
-      {grade}
+      {grade === "M" ? "MAN" : grade}
     </span>
   );
 }
@@ -537,7 +538,13 @@ export default function DemoTab() {
                     )}
                     <span>R:R {t.risk_reward_ratio.toFixed(1)}</span>
                     <span>{t.entry_method?.toUpperCase() || "—"}</span>
-                    <span>via {t.action_source}</span>
+                    <span className={`px-1 py-0.5 rounded text-[10px] font-bold ${
+                      t.trade_source === "manual"
+                        ? "bg-purple-500/15 text-purple-400"
+                        : "bg-blue-500/15 text-blue-400"
+                    }`}>
+                      {t.trade_source === "manual" ? "Manual" : "Signal"}
+                    </span>
                   </div>
                 </div>
               );
@@ -660,12 +667,14 @@ export default function DemoTab() {
                             ? `${t.pnl_usd >= 0 ? "+" : ""}$${t.pnl_usd.toFixed(2)}`
                             : "—"}
                       </td>
-                      <td className="p-2 pr-3 text-[var(--text-muted)] capitalize">
-                        {t.action_source === "telegram"
-                          ? "TG"
-                          : t.action_source === "monitor"
-                            ? "Auto"
-                            : t.action_source}
+                      <td className="p-2 pr-3">
+                        <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded ${
+                          t.trade_source === "manual"
+                            ? "bg-purple-500/20 text-purple-400"
+                            : "bg-blue-500/20 text-blue-400"
+                        }`}>
+                          {t.trade_source === "manual" ? "Manual" : "Signal"}
+                        </span>
                       </td>
                     </tr>
                   ))}

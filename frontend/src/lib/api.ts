@@ -122,6 +122,20 @@ export async function closeDemoTrade(tradeId: number): Promise<DemoTrade> {
   return res.json();
 }
 
+export async function createManualTrade(params: {
+  direction: "bullish" | "bearish";
+  stop_loss: number;
+  take_profit: number;
+}): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/manual`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
 export async function fetchDemoEquity(): Promise<DemoEquityPoint[]> {
   const res = await fetch(`${API_BASE}/demo/equity`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);

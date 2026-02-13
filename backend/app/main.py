@@ -45,6 +45,7 @@ from app.services.database import (
     skip_trade,
     close_trade,
     get_equity_curve,
+    insert_manual_trade,
 )
 
 logger = logging.getLogger("tradingmamba")
@@ -125,14 +126,16 @@ app.add_middleware(
 )
 
 
-def _serialize_result(result: AnalysisResult, candles=None) -> dict:
+def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | None = None) -> dict:
     """Convert AnalysisResult to JSON-serializable dict.
 
     Field names match the frontend TypeScript types exactly.
+    trade_bias: HTF-derived trade direction (W1→D1→M15 fallback). If None, uses this TF's trend.
     """
     return {
         "timeframe": result.timeframe,
         "trend": result.trend.value,
+        "trade_bias": trade_bias or result.trend.value,
         "candles": [
             {
                 "timestamp": c.timestamp,
@@ -313,11 +316,34 @@ async def health():
 
 @app.get("/api/analyze/{timeframe}")
 async def analyze_single_tf(timeframe: str = "H4"):
-    """Run analysis on a single timeframe."""
+    """Run analysis on a single timeframe.
+
+    For M15/M5/H1/H4, also computes trade_bias from W1→D1 trends
+    so the frontend nearest-zone indicator knows which zones would trigger signals.
+    """
     tf = timeframe.upper()
     candles = await fetch_klines(SYMBOL, tf, limit=1000)
     result = analyze_timeframe(candles, tf)
-    return _serialize_result(result, candles)
+
+    # Compute HTF trade bias for entry timeframes
+    trade_bias = None
+    if tf in ("M15", "M5", "H1", "H4"):
+        from app.core.swing_detector import detect_and_classify
+        from app.config import SWING_LOOKBACK
+        try:
+            w1_candles = await fetch_klines(SYMBOL, "W1", limit=100)
+            _, w1_trend = detect_and_classify(w1_candles, SWING_LOOKBACK.get("W1", 3))
+            d1_candles = await fetch_klines(SYMBOL, "D1", limit=100)
+            _, d1_trend = detect_and_classify(d1_candles, SWING_LOOKBACK.get("D1", 3))
+
+            if w1_trend != TrendState.RANGING:
+                trade_bias = w1_trend.value
+            elif d1_trend != TrendState.RANGING:
+                trade_bias = d1_trend.value
+        except Exception:
+            pass  # Fallback to this TF's own trend
+
+    return _serialize_result(result, candles, trade_bias=trade_bias)
 
 
 @app.get("/api/analyze")
@@ -326,14 +352,24 @@ async def analyze_all():
     candles_by_tf = await fetch_all_timeframes(SYMBOL)
     results = run_multi_tf_analysis(candles_by_tf)
 
+    # Compute trade bias from HTF trends
+    w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
+    d1_trend = results.get("D1", AnalysisResult(timeframe="D1", trend=TrendState.RANGING)).trend
+    if w1_trend != TrendState.RANGING:
+        bias = w1_trend.value
+    elif d1_trend != TrendState.RANGING:
+        bias = d1_trend.value
+    else:
+        bias = None
+
     return {
         "symbol": SYMBOL,
         "timeframes": {
-            tf: _serialize_result(r, candles_by_tf.get(tf, []))
+            tf: _serialize_result(r, candles_by_tf.get(tf, []), trade_bias=bias)
             for tf, r in results.items()
         },
         "signals": _serialize_result(
-            results["M15"], candles_by_tf.get("M15", [])
+            results["M15"], candles_by_tf.get("M15", []), trade_bias=bias
         )["signals"] if "M15" in results else [],
     }
 
@@ -780,6 +816,37 @@ async def close_demo_trade(trade_id: int):
     result = await close_trade(trade_id, exit_price=current_price, source="web")
     if not result:
         raise HTTPException(status_code=400, detail="Trade not found or not open")
+    return result
+
+
+class ManualTradeRequest(BaseModel):
+    direction: str  # "bullish" or "bearish"
+    stop_loss: float
+    take_profit: float
+
+
+@app.post("/api/demo/trades/manual")
+async def create_manual_trade(req: ManualTradeRequest):
+    """Place a manual trade at current market price."""
+    if req.direction not in ("bullish", "bearish"):
+        raise HTTPException(status_code=400, detail="direction must be 'bullish' or 'bearish'")
+
+    import httpx
+    async with httpx.AsyncClient() as client:
+        resp = await client.get(
+            f"https://api.binance.com/api/v3/ticker/price?symbol={SYMBOL}"
+        )
+        price_data = resp.json()
+        current_price = float(price_data["price"])
+
+    result = await insert_manual_trade({
+        "direction": req.direction,
+        "entry_price": current_price,
+        "stop_loss": req.stop_loss,
+        "take_profit": req.take_profit,
+    })
+    if not result:
+        raise HTTPException(status_code=500, detail="Failed to create manual trade")
     return result
 
 

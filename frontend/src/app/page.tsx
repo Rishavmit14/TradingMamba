@@ -24,8 +24,8 @@ import BacktestTab from "@/components/BacktestTab";
 import PerformanceTab from "@/components/PerformanceTab";
 import SignalsTab from "@/components/SignalsTab";
 import DemoTab from "@/components/DemoTab";
-import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab } from "@/lib/types";
+import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, PriceTicker } from "@/lib/api";
+import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -61,6 +61,25 @@ export default function Dashboard() {
   const [ticker, setTicker] = useState<PriceTicker | null>(null);
   const [selectedElement, setSelectedElement] = useState<SelectedElement | null>(null);
   const [pickerState, setPickerState] = useState<{ candidates: ClickCandidate[]; x: number; y: number } | null>(null);
+  const [openTrades, setOpenTrades] = useState<DemoTrade[]>([]);
+  const [manualSL, setManualSL] = useState("");
+  const [manualTP, setManualTP] = useState("");
+  const [manualLoading, setManualLoading] = useState(false);
+
+  const handleManualTrade = useCallback(async (direction: "bullish" | "bearish") => {
+    const sl = parseFloat(manualSL);
+    const tp = parseFloat(manualTP);
+    if (isNaN(sl) || isNaN(tp) || sl <= 0 || tp <= 0) return;
+    setManualLoading(true);
+    try {
+      await createManualTrade({ direction, stop_loss: sl, take_profit: tp });
+      setManualSL("");
+      setManualTP("");
+      const trades = await fetchDemoTrades("open");
+      setOpenTrades(trades);
+    } catch { /* silent */ }
+    setManualLoading(false);
+  }, [manualSL, manualTP]);
 
   const handleChartClick = useCallback((result: ChartClickResult | null) => {
     if (!result || result.candidates.length === 0) {
@@ -132,6 +151,20 @@ export default function Dashboard() {
     intervalRef.current = setInterval(() => silentRefresh(selectedTFRef.current), ms);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [analysis, selectedTF, silentRefresh]);
+
+  // Fetch open demo trades for chart position display — polls every 5s
+  useEffect(() => {
+    let active = true;
+    const poll = async () => {
+      try {
+        const trades = await fetchDemoTrades("open");
+        if (active) setOpenTrades(trades);
+      } catch { /* silent */ }
+    };
+    poll();
+    const id = setInterval(poll, 5_000);
+    return () => { active = false; clearInterval(id); };
+  }, []);
 
   // Live price ticker — polls Binance every 2s
   useEffect(() => {
@@ -409,7 +442,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} />
+                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} openTrades={openTrades} />
               )}
             </div>
 
@@ -453,6 +486,52 @@ export default function Dashboard() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Manual Trade Bar */}
+            {analysis && (
+              <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)]">
+                <div className="px-4 py-2 flex items-center gap-3">
+                  <span className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider whitespace-nowrap">
+                    Manual Trade
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="SL price"
+                    value={manualSL}
+                    onChange={(e) => setManualSL(e.target.value)}
+                    className="w-28 px-2 py-1.5 text-xs rounded-md bg-[var(--bg-tertiary)] border border-[var(--border-primary)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-red-500/50"
+                  />
+                  <input
+                    type="number"
+                    placeholder="TP price"
+                    value={manualTP}
+                    onChange={(e) => setManualTP(e.target.value)}
+                    className="w-28 px-2 py-1.5 text-xs rounded-md bg-[var(--bg-tertiary)] border border-[var(--border-primary)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-emerald-500/50"
+                  />
+                  {price && (
+                    <span className="text-[10px] text-[var(--text-muted)] font-mono">
+                      @ ${price.toLocaleString()}
+                    </span>
+                  )}
+                  <button
+                    onClick={() => handleManualTrade("bullish")}
+                    disabled={manualLoading || !manualSL || !manualTP}
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold rounded-md bg-emerald-600 hover:bg-emerald-500 text-white transition-colors disabled:opacity-40"
+                  >
+                    <TrendingUp className="w-3 h-3" />
+                    Long
+                  </button>
+                  <button
+                    onClick={() => handleManualTrade("bearish")}
+                    disabled={manualLoading || !manualSL || !manualTP}
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold rounded-md bg-red-600 hover:bg-red-500 text-white transition-colors disabled:opacity-40"
+                  >
+                    <TrendingDown className="w-3 h-3" />
+                    Short
+                  </button>
                 </div>
               </div>
             )}
