@@ -25,9 +25,10 @@ function toTV(ts: number) {
   return Math.floor(ts / 1000) as any;
 }
 
-// --- OB Box Primitive: draws filled rectangles on the chart canvas ---
+// --- Box Primitive: draws filled rectangles on the chart canvas ---
 
-interface OBBoxData {
+/** Shared box primitive for drawing filled rectangles on the chart canvas. */
+interface BoxData {
   startTime: any;
   endTime: any;
   upperPrice: number;
@@ -38,13 +39,13 @@ interface OBBoxData {
   labelColor: string;
 }
 
-class OBBoxPrimitive {
-  _boxes: OBBoxData[] = [];
+class BoxPrimitive {
+  _boxes: BoxData[] = [];
   _chart: IChartApi | null = null;
   _series: any = null;
   _requestUpdate: (() => void) | null = null;
 
-  setBoxes(boxes: OBBoxData[]) {
+  setBoxes(boxes: BoxData[]) {
     this._boxes = boxes;
     this._requestUpdate?.();
   }
@@ -95,15 +96,17 @@ class OBBoxPrimitive {
               ctx.strokeRect(px1, py1, px2 - px1, py2 - py1);
 
               // Label centered in the box
-              const fontSize = Math.round(11 * vpr);
-              ctx.font = `bold ${fontSize}px sans-serif`;
-              ctx.fillStyle = box.labelColor;
-              ctx.textAlign = "center";
-              ctx.textBaseline = "middle";
-              const cx = (px1 + px2) / 2;
-              const cy = (py1 + py2) / 2;
-              ctx.fillText(box.label, cx, cy);
-              ctx.textAlign = "start"; // reset
+              if (box.label) {
+                const fontSize = Math.round(11 * vpr);
+                ctx.font = `bold ${fontSize}px sans-serif`;
+                ctx.fillStyle = box.labelColor;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                const cx = (px1 + px2) / 2;
+                const cy = (py1 + py2) / 2;
+                ctx.fillText(box.label, cx, cy);
+                ctx.textAlign = "start"; // reset
+              }
             }
           });
         },
@@ -111,6 +114,9 @@ class OBBoxPrimitive {
     }];
   }
 }
+
+// Keep old name as alias for readability
+type OBBoxData = BoxData;
 
 export default function Chart({ data, visibility, livePrice, onElementClick }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,7 +127,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
-  const obPrimitiveRef = useRef<OBBoxPrimitive | null>(null);
+  const obPrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const fvgPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const prevCandleCountRef = useRef<number>(0);
 
   // Swing ↔ IDM click interaction
@@ -180,8 +187,12 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
     });
     volumeSeriesRef.current = volumeSeries;
 
-    // Attach OB box primitive to candle series
-    const obPrimitive = new OBBoxPrimitive();
+    // Attach box primitives to candle series (FVG rendered behind OB)
+    const fvgPrimitive = new BoxPrimitive();
+    (candleSeries as any).attachPrimitive(fvgPrimitive);
+    fvgPrimitiveRef.current = fvgPrimitive;
+
+    const obPrimitive = new BoxPrimitive();
     (candleSeries as any).attachPrimitive(obPrimitive);
     obPrimitiveRef.current = obPrimitive;
 
@@ -656,30 +667,51 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       }));
     }
 
-    // Active FVG zones as price lines
-    if (visibility.fvg) {
-      data.fvgs
-        .filter((f: FVG) => f.valid && !f.mitigated)
-        .slice(-5) // show last 5 active FVGs
-        .forEach((f: FVG) => {
-          const color = f.direction === "bullish" ? "#22c55e40" : "#ef444440";
-          priceLinesRef.current.push(candleSeries.createPriceLine({
-            price: f.upper_price,
-            color,
-            lineWidth: 1,
-            lineStyle: LineStyle.Dotted,
-            axisLabelVisible: false,
-            title: "",
-          }));
-          priceLinesRef.current.push(candleSeries.createPriceLine({
-            price: f.lower_price,
-            color,
-            lineWidth: 1,
-            lineStyle: LineStyle.Dotted,
-            axisLabelVisible: false,
-            title: `FVG ${f.direction === "bullish" ? "▲" : "▼"}`,
-          }));
-        });
+    // FVG zones as filled boxes (rendered via canvas primitive)
+    if (visibility.fvg && fvgPrimitiveRef.current) {
+      const lastIdx = candles.length - 1;
+      const fvgBoxes: BoxData[] = data.fvgs
+        .filter((f: FVG) => f.valid)
+        .slice(-30) // show last 30 valid FVGs
+        .map((f: FVG) => {
+          const startCandle = candles[f.candle_index];
+          if (!startCandle) return null;
+
+          // Extend box to mitigation point or chart end
+          const endIdx = f.mitigated && f.mitigated_at_candle != null
+            ? Math.min(f.mitigated_at_candle, lastIdx)
+            : lastIdx;
+          const endCandle = candles[endIdx];
+          if (!endCandle) return null;
+
+          const startTime = toTV(startCandle.timestamp);
+          const endTime = toTV(endCandle.timestamp);
+          if (endTime <= startTime) return null;
+
+          const isBull = f.direction === "bullish";
+          const rgb = isBull ? "34, 197, 94" : "239, 68, 68"; // green-500 / red-500
+          const fillAlpha = f.mitigated ? 0.10 : 0.18;
+          const borderAlpha = f.mitigated ? 0.30 : 0.6;
+          const labelAlpha = f.mitigated ? 0.45 : 0.85;
+          const arrow = isBull ? " \u25B2" : " \u25BC";
+          const label = (f.mitigated ? "xFVG" : "FVG") + arrow;
+
+          return {
+            startTime,
+            endTime,
+            upperPrice: f.upper_price,
+            lowerPrice: f.lower_price,
+            fillColor: `rgba(${rgb}, ${fillAlpha})`,
+            borderColor: `rgba(${rgb}, ${borderAlpha})`,
+            label,
+            labelColor: `rgba(${rgb}, ${labelAlpha})`,
+          } as BoxData;
+        })
+        .filter((b): b is BoxData => b !== null);
+
+      fvgPrimitiveRef.current.setBoxes(fvgBoxes);
+    } else if (fvgPrimitiveRef.current) {
+      fvgPrimitiveRef.current.setBoxes([]);
     }
 
     // --- OB ZONES: filled rectangular boxes via canvas primitive ---
@@ -727,6 +759,72 @@ export default function Chart({ data, visibility, livePrice, onElementClick }: C
       obPrimitiveRef.current.setBoxes(boxes);
     } else if (obPrimitiveRef.current) {
       obPrimitiveRef.current.setBoxes([]);
+    }
+
+    // --- NEAREST ZONE INDICATOR ---
+    // Show dashed amber lines at the nearest active zones above and below price
+    // so the user can see how far price is from the next signal trigger.
+    {
+      const currentPrice = candles[candles.length - 1]?.close ?? 0;
+      if (currentPrice > 0) {
+        type ActiveZone = { type: string; direction: string; upper: number; lower: number };
+        const activeZones: ActiveZone[] = [];
+
+        for (const f of data.fvgs) {
+          if (f.valid && !f.mitigated) {
+            activeZones.push({ type: "FVG", direction: f.direction, upper: f.upper_price, lower: f.lower_price });
+          }
+        }
+        for (const ob of data.order_blocks) {
+          if (ob.valid && !ob.mitigated) {
+            activeZones.push({ type: "OB", direction: ob.direction, upper: ob.upper_price, lower: ob.lower_price });
+          }
+        }
+
+        // Nearest zone above current price (entry edge = lower boundary)
+        const zonesAbove = activeZones
+          .filter((z) => z.lower > currentPrice)
+          .sort((a, b) => a.lower - b.lower);
+        // Nearest zone below current price (entry edge = upper boundary)
+        const zonesBelow = activeZones
+          .filter((z) => z.upper < currentPrice)
+          .sort((a, b) => b.upper - a.upper);
+
+        const nearestAbove = zonesAbove[0];
+        const nearestBelow = zonesBelow[0];
+
+        if (nearestAbove) {
+          const dist = nearestAbove.lower - currentPrice;
+          const pct = ((dist / currentPrice) * 100).toFixed(1);
+          const label = nearestAbove.direction === "bearish" ? "SELL" : "BUY";
+          priceLinesRef.current.push(
+            candleSeries.createPriceLine({
+              price: nearestAbove.lower,
+              color: "#f59e0b",
+              lineWidth: 1,
+              lineStyle: LineStyle.SparseDotted,
+              axisLabelVisible: true,
+              title: `\u2192 ${nearestAbove.type} ${label} zone (+${pct}%)`,
+            })
+          );
+        }
+
+        if (nearestBelow) {
+          const dist = currentPrice - nearestBelow.upper;
+          const pct = ((dist / currentPrice) * 100).toFixed(1);
+          const label = nearestBelow.direction === "bullish" ? "BUY" : "SELL";
+          priceLinesRef.current.push(
+            candleSeries.createPriceLine({
+              price: nearestBelow.upper,
+              color: "#f59e0b",
+              lineWidth: 1,
+              lineStyle: LineStyle.SparseDotted,
+              axisLabelVisible: true,
+              title: `\u2192 ${nearestBelow.type} ${label} zone (-${pct}%)`,
+            })
+          );
+        }
+      }
     }
 
     // Fit content only when candle count changes (new timeframe), not on live refreshes

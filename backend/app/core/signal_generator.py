@@ -94,12 +94,19 @@ def _find_active_zones(
     return zones
 
 
-def _check_zone_tap(zone: dict, current_price: float) -> bool:
-    """Check if current price has tapped (reached) a zone.
+def _check_zone_tap(zone: dict, candles: list[Candle], lookback: int = 3) -> bool:
+    """Check if price has tapped (reached) a zone in the last N candles.
 
     Step 6: price must reach the identified zone before entry.
+    Uses the high/low range of recent candles — not just the last close —
+    to catch wicks that tapped the zone.
     """
-    return zone["lower"] <= current_price <= zone["upper"]
+    recent = candles[-lookback:] if len(candles) >= lookback else candles
+    for c in recent:
+        # Any candle whose range overlaps the zone counts as a tap
+        if c.low <= zone["upper"] and c.high >= zone["lower"]:
+            return True
+    return False
 
 
 def _calculate_sl(zone: dict, direction: Direction) -> float:
@@ -394,15 +401,16 @@ def generate_signals(
     current_price = candles[-1].close
     signals: list[TradingSignal] = []
 
-    # Multi-TF alignment check
-    has_multi_tf = False
-    if w1_trend and d1_trend:
-        if trend == TrendState.BULLISH:
-            has_multi_tf = (w1_trend == TrendState.BULLISH
-                           and d1_trend == TrendState.BULLISH)
-        elif trend == TrendState.BEARISH:
-            has_multi_tf = (w1_trend == TrendState.BEARISH
-                           and d1_trend == TrendState.BEARISH)
+    # V23 Step 1: Trade bias comes from HTF (W1 → D1 → M15 fallback)
+    # W1 sets the macro direction, D1 confirms, M15 is for entry timing
+    trade_bias = trend  # default to M15 trend
+    if w1_trend and w1_trend != TrendState.RANGING:
+        trade_bias = w1_trend
+    elif d1_trend and d1_trend != TrendState.RANGING:
+        trade_bias = d1_trend
+
+    # Multi-TF alignment: M15 trend matches the HTF bias
+    has_multi_tf = (trade_bias == trend and trade_bias != TrendState.RANGING)
 
     # V20: Check if M15 CHoCH aligns with HTF trend direction
     has_ltf_choch_sync = False
@@ -410,19 +418,18 @@ def generate_signals(
         confirmed_chochs = [c for c in choch_events if c.confirmed and not c.is_fake]
         if confirmed_chochs:
             latest_choch = max(confirmed_chochs, key=lambda c: c.candle_index)
-            # CHoCH direction should match trend (HTF bias)
-            if (trend == TrendState.BULLISH and latest_choch.direction == Direction.BULLISH) or \
-               (trend == TrendState.BEARISH and latest_choch.direction == Direction.BEARISH):
+            if (trade_bias == TrendState.BULLISH and latest_choch.direction == Direction.BULLISH) or \
+               (trade_bias == TrendState.BEARISH and latest_choch.direction == Direction.BEARISH):
                 has_ltf_choch_sync = True
 
-    # Skip trend-aligned signals only if trend is RANGING (not for all cases)
-    if trend != TrendState.RANGING:
-        # Step 4: Find active zones
-        zones = _find_active_zones(order_blocks, fvgs, trend)
+    # Generate trend-aligned signals using HTF bias for zone selection
+    if trade_bias != TrendState.RANGING:
+        # Step 4: Find active zones matching HTF bias direction
+        zones = _find_active_zones(order_blocks, fvgs, trade_bias)
 
         for zone in zones:
-            # Step 6: Check zone tap
-            if not _check_zone_tap(zone, current_price):
+            # Step 6: Check zone tap (recent 3 candle range, not just last close)
+            if not _check_zone_tap(zone, candles):
                 continue
 
             direction = zone["direction"]
@@ -449,7 +456,7 @@ def generate_signals(
 
             # Count confluences
             confluences = _count_confluences(
-                zone, pd, session, trend,
+                zone, pd, session, trade_bias,
                 bos_events, choch_events, has_multi_tf,
             )
 
@@ -505,7 +512,7 @@ def generate_signals(
         ct_zones = _find_active_zones(order_blocks, fvgs, ct_trend)
 
         for zone in ct_zones:
-            if not _check_zone_tap(zone, current_price):
+            if not _check_zone_tap(zone, candles):
                 continue
 
             sl = _calculate_sl(zone, ct_dir)

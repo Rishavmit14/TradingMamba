@@ -63,19 +63,25 @@ def _find_extreme_candle_in_swing(
     swing_end_idx: int,
     swing_type: SwingType,
 ) -> int | None:
-    """Find the extreme candle within a swing.
+    """Find the impulse-origin extreme candle within a swing leg (V13).
 
-    For swing high (sell trend FVG): the HIGHEST candle's index
-    For swing low (buy trend FVG): the LOWEST candle's index
+    V13: "In sell trend, FVG must come from HIGHEST candle"
+    V13: "In buy trend, FVG must come from LOWEST candle"
+
+    swing_type is the ENDING swing of the leg:
+    - SWING_HIGH end = bullish leg (low→high): impulse starts at LOWEST candle
+    - SWING_LOW end = bearish leg (high→low): impulse starts at HIGHEST candle
     """
     relevant = [c for c in candles if swing_start_idx <= c.index <= swing_end_idx]
     if not relevant:
         return None
 
     if swing_type == SwingType.SWING_HIGH:
-        return max(relevant, key=lambda c: c.high).index
-    else:
+        # Bullish leg: V13 buy trend → FVG from LOWEST candle (start of buy impulse)
         return min(relevant, key=lambda c: c.low).index
+    else:
+        # Bearish leg: V13 sell trend → FVG from HIGHEST candle (start of sell impulse)
+        return max(relevant, key=lambda c: c.high).index
 
 
 def validate_fvgs(
@@ -86,13 +92,12 @@ def validate_fvgs(
 ) -> list[FVG]:
     """Apply V13 validity rules to detected FVGs.
 
-    Key rule: FVG must come from the EXTREME candle of its swing.
-    - Bearish trend: FVG must be from the HIGHEST candle in the swing
-    - Bullish trend: FVG must be from the LOWEST candle in the swing
+    V13 extreme candle rule applies only to trend-aligned FVGs:
+    - Bearish swing leg: bearish FVGs must be near HIGHEST candle (sell impulse start)
+    - Bullish swing leg: bullish FVGs must be near LOWEST candle (buy impulse start)
 
-    Also filters FVGs against trend direction:
-    - Bullish trend: only bullish FVGs valid
-    - Bearish trend: only bearish FVGs valid
+    Counter-trend FVGs (bullish in downswing, bearish in upswing) are marked valid
+    for chart display — the signal generator handles trade filtering.
     """
     # Build swing ranges: pairs of consecutive swings define "swing legs"
     swing_ranges = []
@@ -102,16 +107,7 @@ def validate_fvgs(
     first_valid_found_per_swing: dict[tuple[int, int], bool] = {}
 
     for fvg in fvgs:
-        # Filter 1: trend direction alignment
-        if trend == TrendState.BULLISH and fvg.direction != Direction.BULLISH:
-            fvg.valid = False
-            continue
-        if trend == TrendState.BEARISH and fvg.direction != Direction.BEARISH:
-            fvg.valid = False
-            continue
-
-        # Filter 2: extreme candle rule
-        # Find which swing this FVG belongs to
+        # Find which swing leg this FVG belongs to
         fvg_swing_range = None
         for start_idx, end_idx, s_type in swing_ranges:
             if start_idx <= fvg.candle_index <= end_idx:
@@ -120,11 +116,27 @@ def validate_fvgs(
 
         if fvg_swing_range:
             start, end, s_type = fvg_swing_range
+
+            # Determine if FVG is trend-aligned with its swing leg
+            # SWING_HIGH end = bullish leg → bullish FVGs are trend-aligned
+            # SWING_LOW end = bearish leg → bearish FVGs are trend-aligned
+            is_trend_aligned = (
+                (s_type == SwingType.SWING_HIGH and fvg.direction == Direction.BULLISH)
+                or (s_type == SwingType.SWING_LOW and fvg.direction == Direction.BEARISH)
+            )
+
+            if not is_trend_aligned:
+                # Counter-trend FVGs: valid for chart display, no extreme candle rule
+                fvg.valid = True
+                continue
+
+            # Apply V13 extreme candle rule to trend-aligned FVGs
+            swing_len = end - start
+            tolerance = max(3, int(swing_len * 0.2))
             extreme_idx = _find_extreme_candle_in_swing(candles, start, end, s_type)
 
             if extreme_idx is not None:
-                # FVG's middle candle should be the extreme or adjacent to it
-                if abs(fvg.candle_index - extreme_idx) <= 1:
+                if abs(fvg.candle_index - extreme_idx) <= tolerance:
                     fvg.from_extreme_candle = True
                     fvg.valid = True
                     first_valid_found_per_swing[(start, end)] = True
@@ -145,26 +157,32 @@ def validate_fvgs(
 def check_fvg_mitigation(fvgs: list[FVG], candles: list[Candle]) -> list[FVG]:
     """Check if price has returned to fill (mitigate) any FVGs.
 
-    A bullish FVG is mitigated when price drops into the gap zone.
-    A bearish FVG is mitigated when price rises into the gap zone.
+    V13: "Target 50% of FVG zone for entry" — the midpoint is the ENTRY level,
+    not the mitigation level. An FVG is only mitigated when the full gap is filled:
+
+    - Bullish FVG: mitigated when price drops through the entire gap (low <= lower_price)
+    - Bearish FVG: mitigated when price rises through the entire gap (high >= upper_price)
+
+    Skip the 3-candle pattern itself (candle_index-1 through candle_index+1).
     """
     for fvg in fvgs:
         if fvg.mitigated:
             continue
 
         for candle in candles:
-            if candle.index <= fvg.candle_index:
+            # Skip the 3-candle FVG pattern itself (prev, middle, next)
+            if candle.index <= fvg.candle_index + 1:
                 continue
 
             if fvg.direction == Direction.BULLISH:
-                # Bullish FVG mitigated when price drops into the gap
-                if candle.low <= fvg.upper_price:
+                # Bullish FVG mitigated when price fills the entire gap
+                if candle.low <= fvg.lower_price:
                     fvg.mitigated = True
                     fvg.mitigated_at_candle = candle.index
                     break
             else:
-                # Bearish FVG mitigated when price rises into the gap
-                if candle.high >= fvg.lower_price:
+                # Bearish FVG mitigated when price fills the entire gap
+                if candle.high >= fvg.upper_price:
                     fvg.mitigated = True
                     fvg.mitigated_at_candle = candle.index
                     break
