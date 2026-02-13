@@ -815,15 +815,23 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
     // FVG zones as filled boxes (rendered via canvas primitive)
     if (visibility.fvg && fvgPrimitiveRef.current) {
       const lastIdx = candles.length - 1;
-      const fvgBoxes: BoxData[] = data.fvgs
-        .filter((f: FVG) => f.valid && !f.mitigated) // only show active (unfilled) FVGs
-        .slice(-30)
+      // Show both active AND recently mitigated FVGs (mitigated = faded)
+      // Take last N of each direction to ensure both buy/sell zones are visible
+      const validFvgs = data.fvgs.filter((f: FVG) => f.valid);
+      const bullFvgs = validFvgs.filter((f: FVG) => f.direction === "bullish").slice(-15);
+      const bearFvgs = validFvgs.filter((f: FVG) => f.direction === "bearish").slice(-15);
+      const balancedFvgs = [...bullFvgs, ...bearFvgs];
+
+      const fvgBoxes: BoxData[] = balancedFvgs
         .map((f: FVG) => {
           const startCandle = candles[f.candle_index];
           if (!startCandle) return null;
 
-          // Active FVGs extend to chart end
-          const endCandle = candles[lastIdx];
+          // Mitigated FVGs end at mitigated candle; active extend to chart end
+          const endIdx = f.mitigated && f.mitigated_at_candle != null
+            ? f.mitigated_at_candle
+            : lastIdx;
+          const endCandle = candles[endIdx];
           if (!endCandle) return null;
 
           const startTime = toTV(startCandle.timestamp);
@@ -832,18 +840,21 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
 
           const isBull = f.direction === "bullish";
           const rgb = isBull ? "34, 197, 94" : "239, 68, 68"; // green-500 / red-500
+          const fillAlpha = f.mitigated ? 0.06 : 0.18;
+          const borderAlpha = f.mitigated ? 0.2 : 0.6;
+          const labelAlpha = f.mitigated ? 0.35 : 0.85;
           const arrow = isBull ? " \u25B2" : " \u25BC";
-          const label = "FVG" + arrow;
+          const label = (f.mitigated ? "xFVG" : "FVG") + arrow;
 
           return {
             startTime,
             endTime,
             upperPrice: f.upper_price,
             lowerPrice: f.lower_price,
-            fillColor: `rgba(${rgb}, 0.18)`,
-            borderColor: `rgba(${rgb}, 0.6)`,
+            fillColor: `rgba(${rgb}, ${fillAlpha})`,
+            borderColor: `rgba(${rgb}, ${borderAlpha})`,
             label,
-            labelColor: `rgba(${rgb}, 0.85)`,
+            labelColor: `rgba(${rgb}, ${labelAlpha})`,
           } as BoxData;
         })
         .filter((b): b is BoxData => b !== null);
@@ -857,9 +868,13 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
 
     if (visibility.ob && obPrimitiveRef.current) {
       const lastIdx = candles.length - 1;
-      const boxes: OBBoxData[] = data.order_blocks
-        .filter((ob: OrderBlock) => ob.valid)
-        .slice(-10)
+      // Take last N of each direction to ensure both buy/sell zones are visible
+      const validObs = data.order_blocks.filter((ob: OrderBlock) => ob.valid);
+      const bullObs = validObs.filter((ob: OrderBlock) => ob.direction === "bullish").slice(-8);
+      const bearObs = validObs.filter((ob: OrderBlock) => ob.direction === "bearish").slice(-8);
+      const balancedObs = [...bullObs, ...bearObs];
+
+      const boxes: OBBoxData[] = balancedObs
         .map((ob: OrderBlock) => {
           const startCandle = candles[ob.candle_index_start];
           if (!startCandle) return null;

@@ -234,29 +234,39 @@ def _determine_entry_method(
     bos_events: list[BOS],
     choch_events: list[CHoCH],
 ) -> EntryMethod:
-    """V15/V17: Classify entry as MSS, SBC, or PULLBACK_BREAK.
+    """V15/V17: Classify entry based on the most recent structural event.
+
+    Compares the latest confirmed CHoCH vs the latest valid BOS:
+    - If CHoCH is more recent → MSS (body close) or SBC (wick sweep)
+    - If BOS is more recent → PULLBACK_BREAK (trend continuation)
 
     MSS = confirmed CHoCH with body close (swing-based model V10)
     SBC = confirmed CHoCH with wick only (sweep-based model V10)
-    PULLBACK_BREAK = valid BOS trend continuation (no recent CHoCH)
+    PULLBACK_BREAK = valid BOS trend continuation
     """
-    zone_idx = zone.get("candle_index", 0)
-
-    # Check for confirmed CHoCH near this zone
+    # Find the most recent confirmed CHoCH
     confirmed_chochs = [
         c for c in choch_events
-        if c.confirmed and not c.is_fake and c.candle_index <= zone_idx
+        if c.confirmed and not c.is_fake
     ]
+    latest_choch_idx = max(
+        (c.candle_index for c in confirmed_chochs), default=-1
+    )
 
-    if confirmed_chochs:
+    # Find the most recent valid BOS
+    valid_bos = [b for b in bos_events if b.valid]
+    latest_bos_idx = max(
+        (b.candle_index for b in valid_bos), default=-1
+    )
+
+    # The most recent structural event determines the entry method
+    if latest_choch_idx > latest_bos_idx and latest_choch_idx >= 0:
         latest = max(confirmed_chochs, key=lambda c: c.candle_index)
         if latest.model == "sweep":
             return EntryMethod.SBC
         return EntryMethod.MSS
 
-    # No confirmed CHoCH → check for valid BOS (trend continuation)
-    valid_bos = [b for b in bos_events if b.valid and b.candle_index <= zone_idx]
-    if valid_bos:
+    if latest_bos_idx >= 0:
         return EntryMethod.PULLBACK_BREAK
 
     return EntryMethod.MSS  # default

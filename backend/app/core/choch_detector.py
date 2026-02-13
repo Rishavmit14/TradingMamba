@@ -78,8 +78,9 @@ def _add_choch_break(
 ) -> None:
     """Find the candle that broke the key swing level and add a CHoCH event.
 
-    Scans candles between the key swing and the trigger swing (the swing
-    whose classification confirmed the trend change).
+    Scans candles between the key swing and the trigger swing.
+    Detects both body-close breaks (swing-based → MSS) and wick-only
+    breaks (sweep-based → SBC) per V10.
     """
     for candle in candles:
         if candle.index <= key_swing.candle_index:
@@ -87,22 +88,26 @@ def _add_choch_break(
         if candle.index > trigger_swing.candle_index + 2:
             break
 
-        broke = False
+        body_broke = False
+        wick_broke = False
         if direction == Direction.BEARISH:
-            broke = candle.body_bottom < key_swing.price
+            body_broke = candle.body_bottom < key_swing.price
+            wick_broke = not body_broke and candle.low < key_swing.price
         else:
-            broke = candle.body_top > key_swing.price
+            body_broke = candle.body_top > key_swing.price
+            wick_broke = not body_broke and candle.high > key_swing.price
 
-        if broke:
-            confidence = 0.5
+        if body_broke or wick_broke:
+            confidence = 0.5 if body_broke else 0.35
             if is_climactic:
                 confidence += 0.25
-            if direction == Direction.BEARISH:
-                if candle.body_bottom < key_swing.price * 0.998:
-                    confidence += 0.15
-            else:
-                if candle.body_top > key_swing.price * 1.002:
-                    confidence += 0.15
+            if body_broke:
+                if direction == Direction.BEARISH:
+                    if candle.body_bottom < key_swing.price * 0.998:
+                        confidence += 0.15
+                else:
+                    if candle.body_top > key_swing.price * 1.002:
+                        confidence += 0.15
 
             choch_events.append(CHoCH(
                 candle_index=candle.index,
@@ -239,11 +244,13 @@ def detect_choch(
             for candle in candles:
                 if candle.index <= max(live_hl.candle_index, last_swing_idx):
                     continue
-                if candle.body_bottom < live_hl.price:
-                    confidence = 0.5
+                body_broke = candle.body_bottom < live_hl.price
+                wick_broke = not body_broke and candle.low < live_hl.price
+                if body_broke or wick_broke:
+                    confidence = 0.5 if body_broke else 0.35
                     if is_climactic:
                         confidence += 0.25
-                    if candle.body_bottom < live_hl.price * 0.998:
+                    if body_broke and candle.body_bottom < live_hl.price * 0.998:
                         confidence += 0.15
                     choch_events.append(CHoCH(
                         candle_index=candle.index,
@@ -266,11 +273,13 @@ def detect_choch(
             for candle in candles:
                 if candle.index <= max(live_lh.candle_index, last_swing_idx):
                     continue
-                if candle.body_top > live_lh.price:
-                    confidence = 0.5
+                body_broke = candle.body_top > live_lh.price
+                wick_broke = not body_broke and candle.high > live_lh.price
+                if body_broke or wick_broke:
+                    confidence = 0.5 if body_broke else 0.35
                     if is_climactic:
                         confidence += 0.25
-                    if candle.body_top > live_lh.price * 1.002:
+                    if body_broke and candle.body_top > live_lh.price * 1.002:
                         confidence += 0.15
                     choch_events.append(CHoCH(
                         candle_index=candle.index,

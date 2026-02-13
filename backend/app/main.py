@@ -31,6 +31,7 @@ from app.config import (
 )
 from app.services.data_fetcher import fetch_klines, fetch_all_timeframes
 from app.core.engine import analyze_timeframe, run_multi_tf_analysis, AnalysisResult
+from app.core.signal_generator import generate_signals
 from app.models import TrendState, Direction, IDMStatus
 from app.services.backtester import run_backtest, get_latest_backtest, print_backtest_report
 from app.services.database import (
@@ -317,32 +318,87 @@ async def health():
 
 @app.get("/api/analyze/{timeframe}")
 async def analyze_single_tf(timeframe: str = "H4"):
-    """Run analysis on a single timeframe.
+    """Run analysis on a single timeframe + always generate M15 signals.
 
-    For M15/M5/H1/H4, also computes trade_bias from W1→D1 trends
-    so the frontend nearest-zone indicator knows which zones would trigger signals.
+    Chart patterns come from the selected timeframe.
+    Signals ALWAYS come from M15 (the entry timeframe) with full HTF context,
+    so both buy and sell opportunities are visible regardless of which TF
+    the user is viewing. The signal bar and chart are complementary views.
     """
     tf = timeframe.upper()
     candles = await fetch_klines(SYMBOL, tf, limit=1000)
     result = analyze_timeframe(candles, tf)
 
-    # Compute HTF trade bias for entry timeframes
+    # Always generate signals from M15 + HTF context
     trade_bias = None
-    if tf in ("M15", "M5", "H1", "H4"):
-        from app.core.swing_detector import detect_and_classify
-        from app.config import SWING_LOOKBACK
-        try:
-            w1_candles = await fetch_klines(SYMBOL, "W1", limit=100)
-            _, w1_trend = detect_and_classify(w1_candles, SWING_LOOKBACK.get("W1", 3))
-            d1_candles = await fetch_klines(SYMBOL, "D1", limit=100)
-            _, d1_trend = detect_and_classify(d1_candles, SWING_LOOKBACK.get("D1", 3))
+    try:
+        # Fetch W1/D1 for trend bias
+        w1_candles = await fetch_klines(SYMBOL, "W1", limit=100)
+        w1_result = analyze_timeframe(w1_candles, "W1")
+        w1_trend = w1_result.trend
 
-            if w1_trend != TrendState.RANGING:
-                trade_bias = w1_trend.value
-            elif d1_trend != TrendState.RANGING:
-                trade_bias = d1_trend.value
-        except Exception:
-            pass  # Fallback to this TF's own trend
+        d1_candles = await fetch_klines(SYMBOL, "D1", limit=100)
+        d1_result = analyze_timeframe(d1_candles, "D1")
+        d1_trend = d1_result.trend
+
+        if w1_trend != TrendState.RANGING:
+            trade_bias = w1_trend.value
+        elif d1_trend != TrendState.RANGING:
+            trade_bias = d1_trend.value
+
+        # Get M15 analysis (reuse if already viewing M15)
+        if tf == "M15":
+            m15_candles = candles
+            m15_result = result
+        else:
+            m15_candles = await fetch_klines(SYMBOL, "M15", limit=1000)
+            m15_result = analyze_timeframe(m15_candles, "M15")
+
+        # Get H4 analysis for HTF zones (reuse if already viewing H4)
+        if tf == "H4":
+            h4_result = result
+        else:
+            h4_candles = await fetch_klines(SYMBOL, "H4", limit=200)
+            h4_result = analyze_timeframe(h4_candles, "H4")
+
+        # Build HTF zones from H4/D1 OBs and FVGs (V20)
+        htf_zones: list[dict] = []
+        for htf_key, htf_r in [("D1", d1_result), ("H4", h4_result)]:
+            for ob in htf_r.order_blocks:
+                if ob.valid and not ob.mitigated:
+                    htf_zones.append({
+                        "type": "OB", "upper": ob.upper_price,
+                        "lower": ob.lower_price, "direction": ob.direction.value,
+                        "tf": htf_key,
+                    })
+            for fvg in htf_r.fvgs:
+                if fvg.valid and not fvg.mitigated:
+                    htf_zones.append({
+                        "type": "FVG", "upper": fvg.upper_price,
+                        "lower": fvg.lower_price, "direction": fvg.direction.value,
+                        "tf": htf_key,
+                    })
+
+        # Generate signals from M15 data (entry timeframe) with HTF context
+        result.signals = generate_signals(
+            candles=m15_candles,
+            swings=m15_result.swings,
+            inducements=m15_result.inducements,
+            liquidity_pools=m15_result.liquidity_pools,
+            bos_events=m15_result.bos_events,
+            choch_events=m15_result.choch_events,
+            fvgs=m15_result.fvgs,
+            order_blocks=m15_result.order_blocks,
+            trend=m15_result.trend,
+            pd=m15_result.premium_discount,
+            session=m15_result.session,
+            w1_trend=w1_trend,
+            d1_trend=d1_trend,
+            climax_warning=m15_result.climax_warning,
+            htf_zones=htf_zones,
+        )
+    except Exception as e:
+        logger.warning(f"Signal generation failed for {tf}: {e}")
 
     return _serialize_result(result, candles, trade_bias=trade_bias)
 
