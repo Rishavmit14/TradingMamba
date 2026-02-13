@@ -16,7 +16,7 @@ import {
   Wallet,
 } from "lucide-react";
 import Chart from "@/components/Chart";
-import DetectionPanel from "@/components/DetectionPanel";
+
 import SignalCard from "@/components/SignalCard";
 import AnalysisPanel from "@/components/AnalysisPanel";
 import ElementPicker from "@/components/ElementPicker";
@@ -466,30 +466,6 @@ export default function Dashboard() {
               />
             )}
 
-            {/* Signals bar */}
-            {analysis && analysis.signals.length > 0 && (
-              <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] animate-fade-in">
-                <div className="px-4 py-3">
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <Zap className="w-3.5 h-3.5 text-amber-400" />
-                    <h3 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                      Active Signals
-                    </h3>
-                    <span className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-tertiary)] px-1.5 py-0.5 rounded">
-                      {analysis.signals.length}
-                    </span>
-                  </div>
-                  <div className="flex gap-3 overflow-x-auto pb-1">
-                    {analysis.signals.map((sig, i) => (
-                      <div key={i} className="min-w-[300px] animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
-                        <SignalCard signal={sig} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Manual Trade Bar */}
             {analysis && (
               <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)]">
@@ -537,24 +513,43 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Right sidebar */}
+          {/* Right sidebar — Active Signals */}
           {sidebarOpen && (
             <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
               <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
                 <div className="flex items-center gap-2">
-                  <BarChart3 className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
                   <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                    Detections
+                    Signals
                   </h2>
+                  {analysis && analysis.signals.length > 0 && (
+                    <span className="text-xs font-mono text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded">
+                      {analysis.signals.length}
+                    </span>
+                  )}
                 </div>
                 {analysis && (
                   <span className="text-xs font-mono text-[var(--text-muted)]">
-                    {analysis.timeframe}
+                    M15
                   </span>
                 )}
               </div>
-              <div className="flex-1 overflow-y-auto">
-                <DetectionPanel data={analysis} />
+              <div className="flex-1 overflow-y-auto p-3 space-y-3">
+                {!analysis ? (
+                  <p className="text-xs text-[var(--text-muted)] text-center py-8">
+                    Select a timeframe to analyze
+                  </p>
+                ) : analysis.signals.length === 0 ? (
+                  <p className="text-xs text-[var(--text-muted)] text-center py-8">
+                    No active signals
+                  </p>
+                ) : (
+                  analysis.signals.map((sig, i) => (
+                    <div key={i} className="animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
+                      <SignalCard signal={sig} />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           )}
