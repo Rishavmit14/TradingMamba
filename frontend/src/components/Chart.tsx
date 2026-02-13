@@ -26,6 +26,46 @@ function toTV(ts: number) {
   return Math.floor(ts / 1000) as any;
 }
 
+/** Format a unix-seconds timestamp in New York time. */
+function formatNY(timeSec: number, opts?: Intl.DateTimeFormatOptions): string {
+  return new Date(timeSec * 1000).toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    ...opts,
+  });
+}
+
+/** Convert a NY-local hour on a given date to UTC milliseconds (DST-aware). */
+function nyHourToUtcMs(year: number, month: number, day: number, hour: number): number {
+  // Create a UTC date as if the NY time were UTC
+  const approxUtc = Date.UTC(year, month - 1, day, hour, 0, 0);
+  // Find what NY hour this UTC timestamp actually represents
+  const nyHour = parseInt(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      hour: "numeric",
+      hour12: false,
+    }).format(new Date(approxUtc))
+  );
+  // Difference = NY offset; adjust to get the real UTC for the desired NY hour
+  let diff = nyHour - hour;
+  if (diff > 12) diff -= 24;
+  if (diff < -12) diff += 24;
+  return approxUtc - diff * 3600_000;
+}
+
+/** ICT Kill Zones defined in New York local time.
+ *  Opacity varies by timeframe: higher on H4 (narrow bands) vs M15/M5 (wide bands). */
+const KILL_ZONES_NY = [
+  { name: "LDN", startHour: 2, endHour: 5, rgb: "96, 165, 250" },
+  { name: "NY",  startHour: 7, endHour: 10, rgb: "251, 191, 36" },
+];
+const KZ_OPACITY: Record<string, { fill: number; border: number; label: number }> = {
+  H4:  { fill: 0.14, border: 0.40, label: 0.70 },
+  H1:  { fill: 0.10, border: 0.28, label: 0.60 },
+  M15: { fill: 0.06, border: 0.18, label: 0.50 },
+  M5:  { fill: 0.06, border: 0.18, label: 0.50 },
+};
+
 // --- Box Primitive: draws filled rectangles on the chart canvas ---
 
 /** Shared box primitive for drawing filled rectangles on the chart canvas. */
@@ -39,6 +79,7 @@ interface BoxData {
   label: string;
   labelColor: string;
   rightExtendPx?: number; // extra logical pixels to add past endTime
+  labelTop?: boolean; // render label near top of box instead of centered
 }
 
 class BoxPrimitive {
@@ -107,7 +148,8 @@ class BoxPrimitive {
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 const cx = (px1 + px2) / 2;
-                const cy = (py1 + py2) / 2;
+                // labelTop: fixed offset from canvas top (ignores py1 which may be off-screen)
+                const cy = box.labelTop ? fontSize + Math.round(6 * vpr) : (py1 + py2) / 2;
                 ctx.fillText(box.label, cx, cy);
                 ctx.textAlign = "start"; // reset
               }
@@ -134,6 +176,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
   const obPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const fvgPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const positionPrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const killZonePrimitiveRef = useRef<BoxPrimitive | null>(null);
   const positionLinesRef = useRef<any[]>([]);
   const prevCandleCountRef = useRef<number>(0);
 
@@ -165,10 +208,32 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       rightPriceScale: {
         borderColor: "#1e2230",
       },
+      localization: {
+        timeFormatter: (time: number) =>
+          formatNY(time as number, {
+            month: "short", day: "numeric",
+            hour: "2-digit", minute: "2-digit", hour12: false,
+          }),
+      },
       timeScale: {
         borderColor: "#1e2230",
         timeVisible: true,
         secondsVisible: false,
+        tickMarkFormatter: (time: number) => {
+          const d = new Date((time as number) * 1000);
+          const ny = new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            year: "numeric", month: "2-digit", day: "2-digit",
+            hour: "2-digit", minute: "2-digit", hour12: false,
+          }).formatToParts(d);
+          const p = (t: string) => ny.find(x => x.type === t)?.value || "";
+          const hh = p("hour"), mm = p("minute");
+          // Show date when at midnight, otherwise show time
+          if (hh === "00" && mm === "00") {
+            return `${p("month")}/${p("day")}`;
+          }
+          return `${hh}:${mm}`;
+        },
       },
       width: containerRef.current.clientWidth,
       height: containerRef.current.clientHeight,
@@ -193,7 +258,11 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
     });
     volumeSeriesRef.current = volumeSeries;
 
-    // Attach box primitives to candle series (FVG rendered behind OB)
+    // Attach box primitives to candle series (kill zones behind FVG behind OB)
+    const killZonePrimitive = new BoxPrimitive();
+    (candleSeries as any).attachPrimitive(killZonePrimitive);
+    killZonePrimitiveRef.current = killZonePrimitive;
+
     const fvgPrimitive = new BoxPrimitive();
     (candleSeries as any).attachPrimitive(fvgPrimitive);
     fvgPrimitiveRef.current = fvgPrimitive;
@@ -384,6 +453,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       bosSeriesRef.current = [];
       chochSeriesRef.current = [];
       obPrimitiveRef.current = null;
+      killZonePrimitiveRef.current = null;
       positionPrimitiveRef.current = null;
       positionLinesRef.current = [];
     };
@@ -415,6 +485,69 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
         value: c.volume,
         color: c.close >= c.open ? "#10b98130" : "#ef444430",
       })));
+    }
+
+    // --- KILL ZONE SHADING: London (2-5AM NY) and NY (7-10AM NY) ---
+    if (killZonePrimitiveRef.current) {
+      const subDaily = ["H4", "H1", "M15", "M5"].includes(data.timeframe);
+      if (subDaily) {
+        const kzBoxes: BoxData[] = [];
+        // Get the full price range for full-height bands
+        const allHighs = candles.map(c => c.high);
+        const allLows = candles.map(c => c.low);
+        const priceHigh = Math.max(...allHighs);
+        const priceLow = Math.min(...allLows);
+        const pricePad = (priceHigh - priceLow) * 0.5;
+        const boxTop = priceHigh + pricePad;
+        const boxBottom = priceLow - pricePad;
+
+        // Collect unique NY dates from chart data
+        const nyDateFmt = new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/New_York",
+          year: "numeric", month: "2-digit", day: "2-digit",
+        });
+        const seenDates = new Set<string>();
+        const nyDates: { year: number; month: number; day: number }[] = [];
+        for (const c of candles) {
+          const parts = nyDateFmt.formatToParts(new Date(c.timestamp));
+          const key = parts.map(p => p.value).join("");
+          if (!seenDates.has(key)) {
+            seenDates.add(key);
+            nyDates.push({
+              year: parseInt(parts.find(p => p.type === "year")!.value),
+              month: parseInt(parts.find(p => p.type === "month")!.value),
+              day: parseInt(parts.find(p => p.type === "day")!.value),
+            });
+          }
+        }
+
+        // For each day, create kill zone boxes (opacity adapts to timeframe)
+        const firstTs = candles[0].timestamp;
+        const lastTs = candles[candles.length - 1].timestamp;
+        const opac = KZ_OPACITY[data.timeframe] || KZ_OPACITY.M15;
+        for (const { year, month, day } of nyDates) {
+          for (const kz of KILL_ZONES_NY) {
+            const startMs = nyHourToUtcMs(year, month, day, kz.startHour);
+            const endMs = nyHourToUtcMs(year, month, day, kz.endHour);
+            // Skip if completely outside chart data range
+            if (endMs < firstTs || startMs > lastTs) continue;
+            kzBoxes.push({
+              startTime: toTV(Math.max(startMs, firstTs)),
+              endTime: toTV(Math.min(endMs, lastTs)),
+              upperPrice: boxTop,
+              lowerPrice: boxBottom,
+              fillColor: `rgba(${kz.rgb}, ${opac.fill})`,
+              borderColor: `rgba(${kz.rgb}, ${opac.border})`,
+              label: kz.name,
+              labelColor: "#000000",
+              labelTop: true,
+            });
+          }
+        }
+        killZonePrimitiveRef.current.setBoxes(kzBoxes);
+      } else {
+        killZonePrimitiveRef.current.setBoxes([]);
+      }
     }
 
     // --- MARKERS: Swings, BOS, CHoCH ---

@@ -94,12 +94,13 @@ def _find_active_zones(
     return zones
 
 
-def _check_zone_tap(zone: dict, candles: list[Candle], lookback: int = 3) -> bool:
+def _check_zone_tap(zone: dict, candles: list[Candle], lookback: int = 10) -> bool:
     """Check if price has tapped (reached) a zone in the last N candles.
 
     Step 6: price must reach the identified zone before entry.
     Uses the high/low range of recent candles — not just the last close —
     to catch wicks that tapped the zone.
+    Default lookback=10 (2.5h on M15) balances recency with detection rate.
     """
     recent = candles[-lookback:] if len(candles) >= lookback else candles
     for c in recent:
@@ -437,13 +438,33 @@ def generate_signals(
                (trade_bias == TrendState.BEARISH and latest_choch.direction == Direction.BEARISH):
                 has_ltf_choch_sync = True
 
+    # ── Build combined zone pool: M15 zones + HTF zones (V20) ──
+    def _build_zone_pool(bias: TrendState) -> list[dict]:
+        """Collect M15 zones + HTF zones matching the given bias direction."""
+        zones = _find_active_zones(order_blocks, fvgs, bias)
+        if htf_zones:
+            bias_dir = Direction.BULLISH if bias == TrendState.BULLISH else Direction.BEARISH
+            for hz in htf_zones:
+                hz_dir = Direction.BULLISH if hz["direction"] == "bullish" else Direction.BEARISH
+                if hz_dir == bias_dir:
+                    zones.append({
+                        "type": hz["type"],
+                        "upper": hz["upper"],
+                        "lower": hz["lower"],
+                        "midpoint": (hz["upper"] + hz["lower"]) / 2,
+                        "direction": hz_dir,
+                        "has_fvg": hz["type"] == "FVG",
+                        "candle_index": 0,
+                    })
+        return zones
+
     # Generate trend-aligned signals using HTF bias for zone selection
     if trade_bias != TrendState.RANGING:
-        # Step 4: Find active zones matching HTF bias direction
-        zones = _find_active_zones(order_blocks, fvgs, trade_bias)
+        # Step 4: Find active zones matching HTF bias direction (M15 + HTF)
+        zones = _build_zone_pool(trade_bias)
 
         for zone in zones:
-            # Step 6: Check zone tap (recent 3 candle range, not just last close)
+            # Step 6: Check zone tap
             if not _check_zone_tap(zone, candles):
                 continue
 
@@ -520,19 +541,31 @@ def generate_signals(
                 is_counter_trend=False,
             ))
 
-    # V21: Counter-trend signal generation
-    ct_dir = _check_counter_trend_conditions(candles, inducements, fvgs, trend)
-    if ct_dir:
-        # Find zones in counter-trend direction
-        ct_trend = TrendState.BULLISH if ct_dir == Direction.BULLISH else TrendState.BEARISH
-        ct_zones = _find_active_zones(order_blocks, fvgs, ct_trend)
+    # ── Counter-trend signal generation ──
+    # Use trade_bias (not M15 trend) to determine counter-trend direction.
+    # This ensures CT signals are generated even when M15 is ranging.
+    # V21 strict conditions (IDM body close + FVG) are a bonus, not a gate.
+    if trade_bias in (TrendState.BULLISH, TrendState.BEARISH):
+        ct_dir = Direction.BEARISH if trade_bias == TrendState.BULLISH else Direction.BULLISH
+        ct_trend = TrendState.BEARISH if trade_bias == TrendState.BULLISH else TrendState.BULLISH
+        ct_zones = _build_zone_pool(ct_trend)
+
+        # V21: Check if strict counter-trend conditions are met (bonus confluence)
+        v21_met = _check_counter_trend_conditions(
+            candles, inducements, fvgs, trade_bias,
+        ) is not None
 
         for zone in ct_zones:
             if not _check_zone_tap(zone, candles):
                 continue
 
             sl = _calculate_sl(zone, ct_dir)
+
+            # Try V21 opposing-zone TP first, fall back to swing-based TP
             tp = _get_counter_trend_tp(ct_dir, zone, order_blocks, fvgs)
+            if tp is None:
+                tp = _calculate_tp(zone, ct_dir, swings, inducements,
+                                   entry=current_price, sl=sl)
             if tp is None:
                 continue
 
@@ -545,15 +578,25 @@ def generate_signals(
             if rr < MIN_RISK_REWARD:
                 continue
 
-            confluences = ["Counter-trend IDM body close"]
+            confluences = []
+            if v21_met:
+                confluences.append("Counter-trend IDM body close")
+            confluences.append(f"Counter-trend {zone['type']}")
+            if zone["has_fvg"]:
+                confluences.append("FVG")
             if pd:
                 if ct_dir == Direction.BULLISH and pd.zone == ZoneType.DISCOUNT:
                     confluences.append("Discount zone (buy)")
                 elif ct_dir == Direction.BEARISH and pd.zone == ZoneType.PREMIUM:
                     confluences.append("Premium zone (sell)")
+            if session and session.is_kill_zone:
+                confluences.append("Kill zone active")
 
             grade = _grade_signal(confluences, True, climax_warning)
-            confidence = max(0, min(100, len(confluences) * 10))
+            base_score = len(confluences) * 10
+            if v21_met:
+                base_score += 15
+            confidence = max(0, min(100, base_score))
 
             signals.append(TradingSignal(
                 direction=ct_dir,
@@ -565,7 +608,7 @@ def generate_signals(
                 grade=grade,
                 confluences=confluences,
                 timeframe="M15",
-                entry_method=EntryMethod.MSS,
+                entry_method=_determine_entry_method(zone, bos_events, choch_events),
                 pattern_type=f"{zone['type']} counter-trend",
                 timestamp=candles[-1].timestamp,
                 w1_trend=w1_trend,

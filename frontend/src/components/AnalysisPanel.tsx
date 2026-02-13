@@ -84,7 +84,8 @@ function formatPrice(p: number) {
 }
 
 function formatTime(ts: number) {
-  return new Date(ts).toLocaleString(undefined, {
+  return new Date(ts).toLocaleString("en-US", {
+    timeZone: "America/New_York",
     month: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
   });
 }

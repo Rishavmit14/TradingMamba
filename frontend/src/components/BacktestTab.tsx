@@ -124,8 +124,8 @@ function GradeBadge({ grade }: { grade: string }) {
 function formatTimestamp(ts: number): string {
   if (!ts) return "—";
   const d = new Date(ts);
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " " +
-    d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return d.toLocaleDateString("en-US", { timeZone: "America/New_York", month: "short", day: "numeric" }) + " " +
+    d.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
 export default function BacktestTab({ result, onResult }: BacktestTabProps) {

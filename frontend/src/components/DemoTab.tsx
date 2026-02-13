@@ -681,6 +681,7 @@ export default function DemoTab() {
                       <td className="p-2 text-[var(--text-muted)] font-mono">
                         {t.closed_at
                           ? new Date(t.closed_at + "Z").toLocaleString("en-US", {
+                              timeZone: "America/New_York",
                               month: "short",
                               day: "numeric",
                               hour: "2-digit",
