@@ -184,7 +184,7 @@ export interface ChartClickResult {
 // ── Phase 3: Backtest Types ──
 
 export type TradeOutcome = "win" | "loss" | "timeout";
-export type AppTab = "live" | "backtest" | "performance" | "signals";
+export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo";
 
 export interface TradeRecord {
   direction: Direction;
@@ -271,6 +271,60 @@ export interface DetailedSignals {
   checklist_v24: ChecklistItem[];
   checklist_v23: ChecklistItem[];
   signals: TradingSignal[];
+}
+
+// ── Phase 5: Demo Account Types ──
+
+export type TradeStatus = "pending" | "open" | "skipped" | "closed";
+export type ActionSource = "telegram" | "web" | "timeout" | "monitor";
+
+export interface DemoAccount {
+  balance: number;
+  initial_balance: number;
+  risk_per_trade_pct: number;
+  total_trades: number;
+  wins: number;
+  losses: number;
+  win_rate: number;
+  pnl_total: number;
+  open_positions: number;
+}
+
+export interface DemoTrade {
+  id: number;
+  signal_id: number;
+  status: TradeStatus;
+  direction: Direction;
+  entry_price: number;
+  stop_loss: number;
+  take_profit: number;
+  risk_reward_ratio: number;
+  grade: SignalGrade;
+  confidence_score: number;
+  confluences: string[];
+  entry_method: string | null;
+  pattern_type: string | null;
+  position_size_usd: number | null;
+  position_size_btc: number | null;
+  exit_price: number | null;
+  pnl_usd: number | null;
+  pnl_pct: number | null;
+  outcome: string | null;
+  created_at: string;
+  opened_at: string | null;
+  closed_at: string | null;
+  action_source: ActionSource;
+}
+
+export interface DemoEquityPoint {
+  balance: number;
+  timestamp: string;
+}
+
+export interface TelegramStatus {
+  connected: boolean;
+  chat_id: string | null;
+  bot_username: string | null;
 }
 
 export interface BacktestResult {

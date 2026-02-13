@@ -6,23 +6,114 @@ Endpoints:
 - GET /api/signals          → Get current trading signals
 - GET /api/signals/detailed → Get signals with multi-TF context + checklists
 - GET /api/health           → Health check
+- GET/POST /api/demo/*      → Demo account + paper trading
+- GET/POST /api/telegram/*  → Telegram bot status + test
 """
+from __future__ import annotations
 
+import asyncio
+import logging
+import os
+from contextlib import asynccontextmanager
 from datetime import datetime, timezone
+from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-from app.config import SYMBOL
+from app.config import (
+    SYMBOL,
+    DEMO_INITIAL_BALANCE,
+    DEMO_RISK_PER_TRADE_PCT,
+    TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHAT_ID,
+)
 from app.services.data_fetcher import fetch_klines, fetch_all_timeframes
 from app.core.engine import analyze_timeframe, run_multi_tf_analysis, AnalysisResult
 from app.models import TrendState, Direction, IDMStatus
 from app.services.backtester import run_backtest, get_latest_backtest, print_backtest_report
+from app.services.database import (
+    init_db,
+    get_account,
+    update_account_settings,
+    reset_account,
+    get_trades,
+    get_open_trades,
+    get_pending_trades,
+    take_trade,
+    skip_trade,
+    close_trade,
+    get_equity_curve,
+)
+
+logger = logging.getLogger("tradingmamba")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup/shutdown lifecycle: init DB, start monitors + bot."""
+    # ── Startup ──
+    await init_db(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT)
+    logger.info("Demo database initialized")
+
+    bot = None
+    signal_monitor = None
+    position_monitor = None
+
+    if TELEGRAM_BOT_TOKEN:
+        try:
+            from app.services.telegram_bot import TelegramAlertBot
+            from app.services.signal_monitor import SignalMonitor
+            from app.services.position_monitor import PositionMonitor
+
+            bot = TelegramAlertBot(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+            await bot.start()
+            logger.info("Telegram bot started")
+
+            signal_monitor = SignalMonitor(bot)
+            signal_monitor.start()
+            logger.info("Signal monitor started (30s interval)")
+
+            position_monitor = PositionMonitor(bot)
+            position_monitor.start()
+            logger.info("Position monitor started (10s interval)")
+        except Exception as e:
+            logger.warning(f"Telegram/monitors failed to start: {e}")
+    else:
+        # Even without Telegram, start monitors for web-only mode
+        try:
+            from app.services.signal_monitor import SignalMonitor
+            from app.services.position_monitor import PositionMonitor
+
+            signal_monitor = SignalMonitor(bot=None)
+            signal_monitor.start()
+            position_monitor = PositionMonitor(bot=None)
+            position_monitor.start()
+            logger.info("Monitors started (web-only mode, no Telegram)")
+        except Exception as e:
+            logger.warning(f"Monitors failed to start: {e}")
+
+    app.state.telegram_bot = bot
+    app.state.signal_monitor = signal_monitor
+    app.state.position_monitor = position_monitor
+
+    yield
+
+    # ── Shutdown ──
+    if signal_monitor:
+        signal_monitor.stop()
+    if position_monitor:
+        position_monitor.stop()
+    if bot:
+        await bot.stop()
+    logger.info("Shutdown complete")
+
 
 app = FastAPI(
     title="TradingMamba",
     description="ICT/SMC Pattern Detection Engine — powered by 23 Hindi SMC training videos",
-    version="0.1.0",
+    version="0.2.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -614,3 +705,116 @@ async def get_detailed_signals():
             for sig in (m15.signals if m15 else [])
         ],
     }
+
+
+# ──────────────────────────────────────────────
+# Phase 5: Demo Account + Telegram
+# ──────────────────────────────────────────────
+
+
+class SettingsUpdate(BaseModel):
+    risk_per_trade_pct: Optional[float] = None
+
+
+@app.get("/api/demo/account")
+async def get_demo_account():
+    """Get current demo account state."""
+    account = await get_account()
+    if not account:
+        raise HTTPException(status_code=500, detail="Account not initialized")
+    open_trades = await get_open_trades()
+    account["open_positions"] = len(open_trades)
+    return account
+
+
+@app.post("/api/demo/account/reset")
+async def reset_demo_account():
+    """Reset demo account to initial balance and clear all trades."""
+    await reset_account(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT)
+    return {"status": "ok", "message": "Account reset successfully"}
+
+
+@app.put("/api/demo/account/settings")
+async def update_demo_settings(settings: SettingsUpdate):
+    """Update demo account settings."""
+    await update_account_settings(risk_pct=settings.risk_per_trade_pct)
+    return {"status": "ok"}
+
+
+@app.get("/api/demo/trades")
+async def get_demo_trades(status: Optional[str] = None, limit: int = 100):
+    """Get demo trades, optionally filtered by status."""
+    trades = await get_trades(status=status, limit=limit)
+    return {"trades": trades}
+
+
+@app.post("/api/demo/trades/{trade_id}/take")
+async def take_demo_trade(trade_id: int):
+    """Take a pending trade (open position)."""
+    result = await take_trade(trade_id, source="web")
+    if not result:
+        raise HTTPException(status_code=400, detail="Trade not found or not pending")
+    return result
+
+
+@app.post("/api/demo/trades/{trade_id}/skip")
+async def skip_demo_trade(trade_id: int):
+    """Skip a pending trade."""
+    ok = await skip_trade(trade_id, source="web")
+    if not ok:
+        raise HTTPException(status_code=400, detail="Trade not found or not pending")
+    return {"status": "skipped"}
+
+
+@app.post("/api/demo/trades/{trade_id}/close")
+async def close_demo_trade(trade_id: int):
+    """Manually close an open trade at current market price."""
+    import httpx
+    async with httpx.AsyncClient() as client:
+        resp = await client.get(
+            f"https://api.binance.com/api/v3/ticker/price?symbol={SYMBOL}"
+        )
+        price_data = resp.json()
+        current_price = float(price_data["price"])
+
+    result = await close_trade(trade_id, exit_price=current_price, source="web")
+    if not result:
+        raise HTTPException(status_code=400, detail="Trade not found or not open")
+    return result
+
+
+@app.get("/api/demo/equity")
+async def get_demo_equity():
+    """Get equity curve data for chart."""
+    curve = await get_equity_curve()
+    return {"equity_curve": curve}
+
+
+@app.get("/api/telegram/status")
+async def get_telegram_status():
+    """Get Telegram bot connection status."""
+    bot = getattr(app.state, "telegram_bot", None)
+    if bot and bot.running:
+        return {
+            "connected": True,
+            "chat_id": bot.chat_id or None,
+            "bot_username": bot.username or None,
+        }
+    return {"connected": False, "chat_id": None, "bot_username": None}
+
+
+@app.post("/api/telegram/test")
+async def send_telegram_test():
+    """Send a test message to the registered Telegram chat."""
+    bot = getattr(app.state, "telegram_bot", None)
+    if not bot or not bot.running:
+        raise HTTPException(status_code=400, detail="Telegram bot not connected")
+    if not bot.chat_id:
+        raise HTTPException(
+            status_code=400,
+            detail="No chat ID registered. Send /start to the bot first.",
+        )
+    await bot.send_message(
+        bot.chat_id, "TradingMamba test message — bot is connected!"
+    )
+    return {"status": "ok", "message": "Test message sent"}

@@ -1,5 +1,7 @@
 """TradingMamba configuration."""
 
+import os
+
 # Primary trading pair
 SYMBOL = "BTCUSDT"
 
@@ -61,3 +63,13 @@ KILL_ZONES = {
     "us_equity_close": {"start": 20, "end": 21},   # 20:00 UTC
     "cme_btc_open": {"start": 13, "end": 14},      # CME futures
 }
+
+# ── Phase 5: Demo Account + Telegram ──
+
+DEMO_INITIAL_BALANCE = 10_000.0        # Starting paper balance (USD)
+DEMO_RISK_PER_TRADE_PCT = 1.0          # Risk 1% of balance per trade
+DEMO_PENDING_TIMEOUT_SECONDS = 300     # Auto-skip after 5 minutes
+DEMO_MIN_SIGNAL_GRADE = "B"            # Only alert on A and B grades
+
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")

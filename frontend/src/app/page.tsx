@@ -13,6 +13,7 @@ import {
   Radio,
   FlaskConical,
   LineChart,
+  Wallet,
 } from "lucide-react";
 import Chart from "@/components/Chart";
 import DetectionPanel from "@/components/DetectionPanel";
@@ -22,6 +23,7 @@ import ElementPicker from "@/components/ElementPicker";
 import BacktestTab from "@/components/BacktestTab";
 import PerformanceTab from "@/components/PerformanceTab";
 import SignalsTab from "@/components/SignalsTab";
+import DemoTab from "@/components/DemoTab";
 import { fetchAnalysis, fetchLivePrice, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab } from "@/lib/types";
 
@@ -211,6 +213,17 @@ export default function Dashboard() {
               >
                 <Zap className="w-3 h-3" />
                 Signals
+              </button>
+              <button
+                onClick={() => setActiveTab("demo")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "demo"
+                    ? "bg-purple-500 text-white shadow-lg shadow-purple-500/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                <Wallet className="w-3 h-3" />
+                Demo
               </button>
             </div>
 
@@ -484,6 +497,12 @@ export default function Dashboard() {
       {activeTab === "signals" && (
         <div className="flex-1 overflow-hidden">
           <SignalsTab />
+        </div>
+      )}
+
+      {activeTab === "demo" && (
+        <div className="flex-1 overflow-hidden">
+          <DemoTab />
         </div>
       )}
     </div>

@@ -1,6 +1,14 @@
 /** API client for the TradingMamba backend (localhost:8000). */
 
-import { AnalysisResult, BacktestResult, DetailedSignals } from "./types";
+import {
+  AnalysisResult,
+  BacktestResult,
+  DetailedSignals,
+  DemoAccount,
+  DemoTrade,
+  DemoEquityPoint,
+  TelegramStatus,
+} from "./types";
 
 const API_BASE = "http://localhost:8000/api";
 
@@ -53,6 +61,83 @@ export async function fetchDetailedSignals(): Promise<DetailedSignals> {
   const res = await fetch(`${API_BASE}/signals/detailed`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
+}
+
+/** Phase 5: Demo Account API */
+export async function fetchDemoAccount(): Promise<DemoAccount> {
+  const res = await fetch(`${API_BASE}/demo/account`);
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
+export async function resetDemoAccount(): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/account/reset`, { method: "POST" });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+}
+
+export async function updateDemoSettings(settings: {
+  risk_per_trade_pct?: number;
+}): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/account/settings`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(settings),
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+}
+
+export async function fetchDemoTrades(
+  status?: string,
+  limit?: number
+): Promise<DemoTrade[]> {
+  const params = new URLSearchParams();
+  if (status) params.set("status", status);
+  if (limit) params.set("limit", String(limit));
+  const res = await fetch(`${API_BASE}/demo/trades?${params}`);
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  const data = await res.json();
+  return data.trades;
+}
+
+export async function takeDemoTrade(tradeId: number): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/take`, {
+    method: "POST",
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
+export async function skipDemoTrade(tradeId: number): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/skip`, {
+    method: "POST",
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+}
+
+export async function closeDemoTrade(tradeId: number): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/close`, {
+    method: "POST",
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
+export async function fetchDemoEquity(): Promise<DemoEquityPoint[]> {
+  const res = await fetch(`${API_BASE}/demo/equity`);
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  const data = await res.json();
+  return data.equity_curve;
+}
+
+export async function fetchTelegramStatus(): Promise<TelegramStatus> {
+  const res = await fetch(`${API_BASE}/telegram/status`);
+  if (!res.ok) return { connected: false, chat_id: null, bot_username: null };
+  return res.json();
+}
+
+export async function sendTelegramTest(): Promise<void> {
+  const res = await fetch(`${API_BASE}/telegram/test`, { method: "POST" });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
 }
 
 /** Lightweight price ticker from Binance (no backend needed). */
