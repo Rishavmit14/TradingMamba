@@ -280,6 +280,7 @@ function CHoCHAnalysis({ choch, data }: { choch: CHoCH; data: AnalysisResult }) 
       <div className="flex flex-wrap gap-1.5">
         <Badge ok={!choch.is_fake} label={choch.is_fake ? "Fake CHoCH" : "Real CHoCH"} />
         <Badge ok={choch.confirmed} label={choch.confirmed ? "Confirmed" : "Unconfirmed"} />
+        {choch.is_mss && <Badge ok={true} label="MSS (Liq Swept + Expansion)" />}
         <Badge ok={choch.has_climax_confluence} label={choch.has_climax_confluence ? "Climax Zone" : "No Climax"} />
       </div>
 

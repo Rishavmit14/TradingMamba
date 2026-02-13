@@ -237,12 +237,15 @@ def _determine_entry_method(
     """V15/V17: Classify entry based on the most recent structural event.
 
     Compares the latest confirmed CHoCH vs the latest valid BOS:
-    - If CHoCH is more recent → MSS (body close) or SBC (wick sweep)
+    - If CHoCH is more recent and is_mss=True → MSS (liq swept + expansion + body close)
+    - If CHoCH is more recent and model="sweep" → SBC (wick-only break)
+    - If CHoCH is more recent but NOT MSS → PULLBACK_BREAK (just a body-close CHoCH,
+      not a true MSS per V15 3-rule framework)
     - If BOS is more recent → PULLBACK_BREAK (trend continuation)
 
-    MSS = confirmed CHoCH with body close (swing-based model V10)
-    SBC = confirmed CHoCH with wick only (sweep-based model V10)
-    PULLBACK_BREAK = valid BOS trend continuation
+    MSS = V15 true Market Structure Shift (liquidity swept + expansion + body close)
+    SBC = sweep-based CHoCH (wick only)
+    PULLBACK_BREAK = trend continuation or non-MSS CHoCH
     """
     # Find the most recent confirmed CHoCH
     confirmed_chochs = [
@@ -264,12 +267,14 @@ def _determine_entry_method(
         latest = max(confirmed_chochs, key=lambda c: c.candle_index)
         if latest.model == "sweep":
             return EntryMethod.SBC
-        return EntryMethod.MSS
+        if latest.is_mss:
+            return EntryMethod.MSS
+        return EntryMethod.PULLBACK_BREAK
 
     if latest_bos_idx >= 0:
         return EntryMethod.PULLBACK_BREAK
 
-    return EntryMethod.MSS  # default
+    return EntryMethod.PULLBACK_BREAK  # default when no structural events
 
 
 def _check_counter_trend_conditions(

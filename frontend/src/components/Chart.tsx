@@ -727,14 +727,24 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
         const endTime = toTV(endCandle.timestamp);
         if (endTime <= startTime) return;
 
+        // MSS = gold/solid, confirmed CHoCH = pink/dashed, fake = gray, default = purple
         let color = "#a855f7"; // purple default
-        if (ch.is_fake) color = "#6b728080";
-        else if (ch.confirmed) color = "#ec4899"; // pink confirmed
+        let lineWidth = 2;
+        let style = LineStyle.Dashed;
+        if (ch.is_fake) {
+          color = "#6b728080";
+        } else if (ch.is_mss) {
+          color = "#f59e0b"; // amber/gold for MSS
+          lineWidth = 3;
+          style = LineStyle.Solid;
+        } else if (ch.confirmed) {
+          color = "#ec4899"; // pink confirmed CHoCH
+        }
 
         const lineSeries = chart.addLineSeries({
           color,
-          lineWidth: 2,
-          lineStyle: LineStyle.Dashed,
+          lineWidth,
+          lineStyle: style,
           crosshairMarkerVisible: false,
           priceLineVisible: false,
           lastValueVisible: false,
@@ -755,18 +765,18 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
         lineData.push({ time: endTime, value: ch.broken_price });
         lineSeries.setData(lineData);
 
-        // Add "CHoCH" label with directional arrow at the midpoint of the ray
+        // MSS gets "MSS" label, CHoCH gets "CHoCH" or "xCHoCH"
         if (midCandle) {
           const midTime = toTV(midCandle.timestamp);
           if (midTime > startTime && midTime < endTime) {
             const isBull = ch.direction === "bullish";
-            const label = ch.is_fake ? "xCHoCH" : "CHoCH";
+            const label = ch.is_mss ? "MSS" : ch.is_fake ? "xCHoCH" : "CHoCH";
             lineSeries.setMarkers([{
               time: midTime,
               position: "inBar" as const,
               color,
               shape: isBull ? "arrowUp" as const : "arrowDown" as const,
-              size: 0.5,
+              size: ch.is_mss ? 0.8 : 0.5,
               text: label,
             }]);
           }

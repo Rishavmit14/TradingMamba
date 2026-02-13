@@ -72,6 +72,7 @@ export interface CHoCH {
   is_fake: boolean;
   confirmed: boolean;
   model: string;
+  is_mss: boolean;
 }
 
 export interface FVG {

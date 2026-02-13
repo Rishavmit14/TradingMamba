@@ -18,7 +18,7 @@ from app.core.swing_detector import detect_and_classify
 from app.core.inducement import detect_and_validate as detect_idm
 from app.core.liquidity import detect_all_liquidity, prices_equal
 from app.core.bos_detector import detect_bos
-from app.core.choch_detector import detect_choch, filter_fake_choch, detect_climax
+from app.core.choch_detector import detect_choch, filter_fake_choch, detect_climax, classify_mss
 from app.core.fvg_detector import detect_all_fvgs
 from app.core.order_block import detect_all_order_blocks
 from app.core.premium_discount import calculate_premium_discount
@@ -83,6 +83,9 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     choch_events = detect_choch(candles, swings, bos_events, trend)
     choch_events = filter_fake_choch(choch_events, swings, candles,
                                      inducements, liquidity_pools, bos_events)
+
+    # 1.5b: MSS classification — which CHoCH events are true MSS (V15 3-rule check)
+    classify_mss(choch_events, liquidity_pools, candles)
 
     # Climax detection
     is_climactic, climax_ratio = detect_climax(candles, swings, trend)

@@ -214,7 +214,7 @@ export default function DetectionPanel({ data }: DetectionPanelProps) {
       </Section>
 
       {/* CHoCH */}
-      <Section title="CHoCH" icon={GitBranch} count={data.choch_events.length} color="#a855f7" defaultOpen={true}>
+      <Section title={`CHoCH${data.choch_events.filter(c => c.is_mss).length > 0 ? ` (${data.choch_events.filter(c => c.is_mss).length} MSS)` : ""}`} icon={GitBranch} count={data.choch_events.length} color="#a855f7" defaultOpen={true}>
         {data.choch_events.length === 0 ? (
           <p className="text-xs text-[var(--text-muted)] py-1">None detected</p>
         ) : (
@@ -226,8 +226,9 @@ export default function DetectionPanel({ data }: DetectionPanelProps) {
                     {ch.direction === "bullish" ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
                     {ch.direction}
                   </Badge>
+                  {ch.is_mss && <Badge variant="amber">MSS</Badge>}
                   {ch.is_fake && <Badge variant="gray">FAKE</Badge>}
-                  {ch.confirmed && <Badge variant="purple">CONFIRMED</Badge>}
+                  {!ch.is_mss && ch.confirmed && <Badge variant="purple">CONFIRMED</Badge>}
                   {ch.has_climax_confluence && <Badge variant="amber">CLIMAX</Badge>}
                 </div>
                 <div className="mt-1.5 flex items-center justify-between">

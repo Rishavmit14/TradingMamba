@@ -210,6 +210,7 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "is_fake": ch.is_fake,
                 "confirmed": ch.confirmed,
                 "model": ch.model,
+                "is_mss": ch.is_mss,
             }
             for ch in result.choch_events
         ],

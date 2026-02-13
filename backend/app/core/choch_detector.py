@@ -16,7 +16,7 @@ from __future__ import annotations
 from app.models import (
     Candle, SwingPoint, BOS, CHoCH, Inducement, LiquidityPool,
     SwingType, SwingClassification, Direction, TrendState,
-    IDMStatus, LiquiditySource,
+    IDMStatus, LiquiditySource, LiquidityType,
 )
 from app.core.liquidity import prices_equal
 
@@ -632,3 +632,90 @@ def filter_fake_choch(
             choch.confirmed = _confirm_sweep_based(choch, swings, candles, idx_map)
 
     return choch_events
+
+
+def classify_mss(
+    choch_events: list[CHoCH],
+    liquidity_pools: list[LiquidityPool],
+    candles: list[Candle],
+    sweep_lookback: int = 30,
+    expansion_mult: float = 1.5,
+) -> None:
+    """V15: Post-process CHoCH events to identify which qualify as MSS.
+
+    MSS (Market Structure Shift) is NOT the same as CHoCH. MSS has 3 strict rules:
+      Rule 1: Opposite-side liquidity must be taken out BEFORE the break
+              (bearish MSS needs buy-side swept; bullish MSS needs sell-side swept)
+      Rule 2: Market must expand (sharp impulsive move — break candle body > 1.5x avg)
+      Rule 3: Body close beyond the key level (already satisfied by confirmed CHoCH
+              with model="swing")
+
+    Only confirmed, non-fake, body-close CHoCH can be promoted to MSS.
+    Sets choch.is_mss = True in-place for qualifying events.
+    """
+    if not candles:
+        return
+
+    # Pre-compute average body size over the whole dataset for expansion check
+    bodies = [abs(c.close - c.open) for c in candles]
+    total_body = sum(bodies)
+    n = len(bodies)
+
+    for ch in choch_events:
+        # Only confirmed body-close CHoCH can be MSS
+        if not ch.confirmed or ch.is_fake or ch.model != "swing":
+            continue
+
+        # --- Rule 1: Was opposite-side liquidity swept before this CHoCH? ---
+        # Bearish CHoCH (price broke below HL) needs BUY-SIDE liquidity swept
+        #   (smart money swept stops above highs, then reversed down)
+        # Bullish CHoCH (price broke above LH) needs SELL-SIDE liquidity swept
+        #   (smart money swept stops below lows, then reversed up)
+        needed_pool_type = (
+            LiquidityType.BUY_SIDE if ch.direction == Direction.BEARISH
+            else LiquidityType.SELL_SIDE
+        )
+
+        sweep_found = False
+        for pool in liquidity_pools:
+            if not pool.swept or pool.swept_at_candle is None:
+                continue
+            if pool.pool_type != needed_pool_type:
+                continue
+            # Sweep must happen BEFORE the CHoCH but within lookback window
+            if ch.candle_index - sweep_lookback <= pool.swept_at_candle < ch.candle_index:
+                sweep_found = True
+                break
+
+        if not sweep_found:
+            continue
+
+        # --- Rule 2: Expansion — break candle has abnormally large body ---
+        if ch.candle_index >= n:
+            continue
+        break_body = bodies[ch.candle_index]
+
+        # Local average: 20 candles before the break (exclude the break candle itself)
+        local_start = max(0, ch.candle_index - 20)
+        local_end = ch.candle_index
+        if local_end > local_start:
+            local_avg = sum(bodies[local_start:local_end]) / (local_end - local_start)
+        elif n > 0:
+            local_avg = total_body / n
+        else:
+            continue
+
+        if local_avg == 0:
+            continue
+
+        if break_body < local_avg * expansion_mult:
+            # Also check the candle before (the expansion might be 1-2 candles)
+            if ch.candle_index >= 1:
+                prev_body = bodies[ch.candle_index - 1]
+                if prev_body < local_avg * expansion_mult:
+                    continue  # Neither break candle nor preceding candle expanded
+            else:
+                continue
+
+        # All 3 rules met → this is a true MSS
+        ch.is_mss = True

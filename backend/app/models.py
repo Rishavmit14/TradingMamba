@@ -204,7 +204,8 @@ class CHoCH:
     has_climax_confluence: bool = False
     is_fake: bool = False      # Filtered by V09 fake CHoCH rules
     confirmed: bool = False    # V10 confirmation (follow-through)
-    model: str = ""            # V10/V15: "swing" (MSS) or "sweep" (SBC)
+    model: str = ""            # V10/V15: "swing" (body close) or "sweep" (wick only / SBC)
+    is_mss: bool = False       # V15: True MSS = liquidity swept + expansion + body close
 
 
 @dataclass
