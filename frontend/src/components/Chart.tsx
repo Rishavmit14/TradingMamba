@@ -38,6 +38,7 @@ interface BoxData {
   borderColor: string;
   label: string;
   labelColor: string;
+  rightExtendPx?: number; // extra logical pixels to add past endTime
 }
 
 class BoxPrimitive {
@@ -83,7 +84,9 @@ class BoxPrimitive {
               if (x1 === null || x2 === null || y1 === null || y2 === null) continue;
 
               const px1 = Math.round(x1 * hpr);
-              const px2 = Math.round(x2 * hpr);
+              let px2 = Math.round(x2 * hpr);
+              // Apply optional right extension (e.g. position boxes extending past last candle)
+              if (box.rightExtendPx) px2 += Math.round(box.rightExtendPx * hpr);
               const py1 = Math.round(y1 * vpr);
               const py2 = Math.round(y2 * vpr);
 
@@ -860,6 +863,16 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       const posBoxes: BoxData[] = [];
       const lastCandle = candles[candles.length - 1];
 
+      // Compute 5-candle pixel extension for position boxes
+      const lastCandleCoord = chart.timeScale().timeToCoordinate(toTV(lastCandle.timestamp));
+      const prevCandleCoord = candles.length >= 2
+        ? chart.timeScale().timeToCoordinate(toTV(candles[candles.length - 2].timestamp))
+        : null;
+      const candlePxWidth = (lastCandleCoord !== null && prevCandleCoord !== null)
+        ? Math.abs(lastCandleCoord - prevCandleCoord)
+        : 15;
+      const extendRightPx = 5 * candlePxWidth;
+
       for (const trade of openTrades) {
         if (!lastCandle) break;
         const entry = trade.entry_price;
@@ -867,13 +880,30 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
         const tp = trade.take_profit;
         if (!entry || !sl || !tp) continue;
 
-        // Box spans 10 candles back from the current candle
-        const startIdx = Math.max(0, candles.length - 1 - 10);
-        const startCandle = candles[startIdx];
-        if (!startCandle) continue;
-        const startTime = toTV(startCandle.timestamp);
+        // Start from opened_at timestamp — snap to the candle whose period contains that time.
+        // Candle timestamps mark the START of each period, so we find the last candle
+        // with timestamp <= openedMs (the candle the trade was opened within).
+        let startTime: any;
+        if (trade.opened_at) {
+          const openedMs = new Date(trade.opened_at.replace(" ", "T") + "Z").getTime();
+          if (!isNaN(openedMs)) {
+            let snapIdx = -1;
+            for (let i = candles.length - 1; i >= 0; i--) {
+              if (candles[i].timestamp <= openedMs) {
+                snapIdx = i;
+                break;
+              }
+            }
+            // If opened before all chart data, start from first candle
+            if (snapIdx === -1) snapIdx = 0;
+            startTime = toTV(candles[snapIdx].timestamp);
+          } else {
+            startTime = toTV(lastCandle.timestamp);
+          }
+        } else {
+          startTime = toTV(lastCandle.timestamp);
+        }
         const endTime = toTV(lastCandle.timestamp);
-        if (endTime < startTime) continue;
 
         // TP zone (green) — between entry and TP
         posBoxes.push({
@@ -885,6 +915,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
           borderColor: "rgba(34, 197, 94, 0.0)",
           label: "",
           labelColor: "rgba(34, 197, 94, 0.9)",
+          rightExtendPx: extendRightPx,
         });
 
         // SL zone (red) — between entry and SL
@@ -897,6 +928,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
           borderColor: "rgba(239, 68, 68, 0.0)",
           label: "",
           labelColor: "rgba(239, 68, 68, 0.9)",
+          rightExtendPx: extendRightPx,
         });
       }
       positionPrimitiveRef.current.setBoxes(posBoxes);
