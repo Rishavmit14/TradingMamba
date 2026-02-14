@@ -192,6 +192,9 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
   const positionLinesRef = useRef<any[]>([]);
   const prevCandleCountRef = useRef<number>(0);
 
+  // Crosshair OHLCV display
+  const [hoverOHLCV, setHoverOHLCV] = useState<{ o: number; h: number; l: number; c: number; v: number } | null>(null);
+
   // Swing ↔ IDM click interaction
   const [selectedSwingIdx, setSelectedSwingIdx] = useState<number | null>(null);
   const dataRef = useRef<AnalysisResult | null>(null);
@@ -458,6 +461,31 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
       // Nothing matched
       setSelectedSwingIdx(null);
       cb?.(null);
+    });
+
+    // Crosshair move — show OHLCV of hovered candle
+    chart.subscribeCrosshairMove((param: MouseEventParams) => {
+      if (!param.time || !param.seriesData) {
+        setHoverOHLCV(null);
+        return;
+      }
+      const candleData = param.seriesData.get(candleSeries) as any;
+      if (candleData && candleData.open !== undefined) {
+        setHoverOHLCV({
+          o: candleData.open,
+          h: candleData.high,
+          l: candleData.low,
+          c: candleData.close,
+          v: 0, // will be filled from volume series
+        });
+        // Try to get volume from volume series
+        const volData = param.seriesData.get(volumeSeries) as any;
+        if (volData && volData.value !== undefined) {
+          setHoverOHLCV(prev => prev ? { ...prev, v: volData.value } : null);
+        }
+      } else {
+        setHoverOHLCV(null);
+      }
     });
 
     // ResizeObserver tracks both width and height of the container
@@ -1228,20 +1256,31 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
         ref={containerRef}
         className="w-full h-full rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/20"
       />
-      {/* Price label overlay — top left of chart */}
-      <div className="absolute top-2.5 left-3 flex items-center gap-2 pointer-events-none" style={{ zIndex: 10 }}>
-        <span className="text-sm font-semibold text-black">BTCUSDT</span>
-        {livePrice != null && (
-          <>
-            <span className="text-sm font-mono font-medium text-black">
-              ${livePrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-            </span>
-            {priceChangePct != null && (
-              <span className={`text-xs font-mono font-medium ${priceChangePct >= 0 ? "text-emerald-600" : "text-red-600"}`}>
-                {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+      {/* Price label + OHLCV overlay — top left of chart */}
+      <div className="absolute top-2 left-3 pointer-events-none" style={{ zIndex: 10 }}>
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-black">BTCUSDT</span>
+          {livePrice != null && (
+            <>
+              <span className="text-sm font-mono font-medium text-black">
+                ${livePrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
               </span>
-            )}
-          </>
+              {priceChangePct != null && (
+                <span className={`text-xs font-mono font-medium ${priceChangePct >= 0 ? "text-emerald-600" : "text-red-600"}`}>
+                  {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+                </span>
+              )}
+            </>
+          )}
+        </div>
+        {hoverOHLCV && (
+          <div className="flex items-center gap-2.5 mt-0.5 text-[11px] font-mono text-gray-500">
+            <span>O: <span className={hoverOHLCV.c >= hoverOHLCV.o ? "text-emerald-600" : "text-red-600"}>{hoverOHLCV.o.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+            <span>H: <span className={hoverOHLCV.c >= hoverOHLCV.o ? "text-emerald-600" : "text-red-600"}>{hoverOHLCV.h.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+            <span>L: <span className={hoverOHLCV.c >= hoverOHLCV.o ? "text-emerald-600" : "text-red-600"}>{hoverOHLCV.l.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+            <span>C: <span className={hoverOHLCV.c >= hoverOHLCV.o ? "text-emerald-600" : "text-red-600"}>{hoverOHLCV.c.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span></span>
+            <span>V: <span className="text-gray-600">{hoverOHLCV.v >= 1e6 ? (hoverOHLCV.v / 1e6).toFixed(2) + "M" : hoverOHLCV.v >= 1e3 ? (hoverOHLCV.v / 1e3).toFixed(1) + "K" : hoverOHLCV.v.toFixed(0)}</span></span>
+          </div>
         )}
       </div>
       {/* Reset / recenter button — bottom center, above time axis */}
