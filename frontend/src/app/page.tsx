@@ -300,24 +300,6 @@ export default function Dashboard() {
               </button>
             </div>
 
-            {activeTab === "live" && (
-              <>
-                <div className="h-5 w-px bg-[var(--border-primary)]" />
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-[var(--text-primary)]">BTCUSDT</span>
-                  {price && (
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-mono font-medium text-[var(--text-primary)]">
-                        ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                      </span>
-                      <span className={`text-xs font-mono ${priceChangePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                        {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
           </div>
 
           {/* Center: TF pills (live tab only) */}
@@ -482,7 +464,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} openTrades={openTrades} signalMarker={signalMarker} />
+                <Chart data={analysis} visibility={visibility} livePrice={price} priceChangePct={priceChangePct} onElementClick={handleChartClick} openTrades={openTrades} signalMarker={signalMarker} />
               )}
             </div>
 

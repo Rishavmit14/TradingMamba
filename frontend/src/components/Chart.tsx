@@ -25,6 +25,7 @@ interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
   livePrice?: number | null;
+  priceChangePct?: number | null;
   onElementClick?: (result: ChartClickResult | null) => void;
   openTrades?: DemoTrade[];
   signalMarker?: SignalMarker | null;
@@ -173,7 +174,7 @@ class BoxPrimitive {
 // Keep old name as alias for readability
 type OBBoxData = BoxData;
 
-export default function Chart({ data, visibility, livePrice, onElementClick, openTrades = [], signalMarker }: ChartProps) {
+export default function Chart({ data, visibility, livePrice, priceChangePct, onElementClick, openTrades = [], signalMarker }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -1227,6 +1228,22 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
         ref={containerRef}
         className="w-full h-full rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/20"
       />
+      {/* Price label overlay — top left of chart */}
+      <div className="absolute top-2.5 left-3 flex items-center gap-2 pointer-events-none" style={{ zIndex: 10 }}>
+        <span className="text-sm font-semibold text-black">BTCUSDT</span>
+        {livePrice != null && (
+          <>
+            <span className="text-sm font-mono font-medium text-black">
+              ${livePrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </span>
+            {priceChangePct != null && (
+              <span className={`text-xs font-mono font-medium ${priceChangePct >= 0 ? "text-emerald-600" : "text-red-600"}`}>
+                {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+              </span>
+            )}
+          </>
+        )}
+      </div>
       {/* Reset / recenter button — bottom center, above time axis */}
       <button
         onClick={handleReset}
