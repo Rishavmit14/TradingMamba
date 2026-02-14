@@ -13,7 +13,7 @@ The Checklist:
 7. CONFIRM ENTRY on M15 → MSS / SCOB / valid pullback break
 8. SET SL → beyond the H4 zone
 9. SET TP → previous H4 high/low from which market took inducement
-10. MONITOR FOR CLIMAX → largest D1 move = caution
+10. VSA ABSORPTION → ultra-high volume institutional flow = confirmation
 11. DETECT CHoCH → D1 HL/LH break = direction switch
 12. COUNTER-TREND → D1 BOS + IDM close + FVG → TP first opposing zone
 """
@@ -23,7 +23,7 @@ from app.models import (
     Candle, SwingPoint, Inducement, LiquidityPool, BOS, CHoCH,
     FVG, OrderBlock, PremiumDiscount, Session, TradingSignal,
     Direction, TrendState, SwingType, SwingClassification,
-    ZoneType, EntryMethod, SignalGrade, IDMStatus,
+    ZoneType, EntryMethod, SignalGrade, IDMStatus, MSSGrade,
 )
 from app.config import SL_BUFFER_PCT, MIN_RISK_REWARD
 
@@ -207,45 +207,69 @@ def _count_confluences(
     return confluences
 
 
-def _grade_signal(confluences: list[str], is_counter_trend: bool, climax_warning: bool) -> SignalGrade:
-    """Assign signal grade based on confluences.
+def _grade_signal(
+    confluences: list[str],
+    is_counter_trend: bool,
+    vsa_match: bool = False,
+    mss_grade: MSSGrade = MSSGrade.NONE,
+) -> SignalGrade:
+    """Assign signal grade based on confluences + V25 MSS quality.
 
+    V25 MSS grading directly influences signal grade:
+    - A++ MSS (BPR) → auto grade A (institutional confluence)
+    - A+ MSS (iFVG) → promotes grade by 1 tier
+    - Standard MSS → counted as extra confluence
+
+    V22 VSA Absorption: counted as extra confluence (positive).
+
+    Base grading from confluences:
     A: 3+ confluences, trend-aligned, kill zone, multi-TF
     B: 2 confluences, trend-aligned
     C: 1 confluence or weak alignment
-    D: Counter-trend or climax warning
+    D: Counter-trend
     """
-    if is_counter_trend or climax_warning:
+    if is_counter_trend:
         return SignalGrade.D
 
     count = len(confluences)
-    if count >= 3:
+
+    # V25: A++ MSS with BPR = automatic grade A
+    if mss_grade == MSSGrade.A_PLUS_PLUS:
         return SignalGrade.A
+
+    # Base grade from confluences
+    if count >= 3:
+        base = SignalGrade.A
     elif count >= 2:
-        return SignalGrade.B
+        base = SignalGrade.B
     elif count >= 1:
-        return SignalGrade.C
+        base = SignalGrade.C
     else:
-        return SignalGrade.D
+        base = SignalGrade.D
+
+    # V25: A+ MSS promotes grade by one tier
+    if mss_grade == MSSGrade.A_PLUS:
+        promote = {SignalGrade.D: SignalGrade.C, SignalGrade.C: SignalGrade.B,
+                   SignalGrade.B: SignalGrade.A, SignalGrade.A: SignalGrade.A}
+        return promote[base]
+
+    return base
 
 
 def _determine_entry_method(
     zone: dict,
     bos_events: list[BOS],
     choch_events: list[CHoCH],
-) -> EntryMethod:
-    """V15/V17: Classify entry based on the most recent structural event.
+) -> tuple[EntryMethod, MSSGrade]:
+    """V15/V17/V25: Classify entry based on the most recent structural event.
 
     Compares the latest confirmed CHoCH vs the latest valid BOS:
     - If CHoCH is more recent and is_mss=True → MSS (liq swept + expansion + body close)
     - If CHoCH is more recent and model="sweep" → SBC (wick-only break)
-    - If CHoCH is more recent but NOT MSS → PULLBACK_BREAK (just a body-close CHoCH,
-      not a true MSS per V15 3-rule framework)
+    - If CHoCH is more recent but NOT MSS → PULLBACK_BREAK (just a body-close CHoCH)
     - If BOS is more recent → PULLBACK_BREAK (trend continuation)
 
-    MSS = V15 true Market Structure Shift (liquidity swept + expansion + body close)
-    SBC = sweep-based CHoCH (wick only)
-    PULLBACK_BREAK = trend continuation or non-MSS CHoCH
+    Returns (entry_method, mss_grade) — mss_grade is NONE for non-MSS entries.
     """
     # Find the most recent confirmed CHoCH
     confirmed_chochs = [
@@ -266,15 +290,12 @@ def _determine_entry_method(
     if latest_choch_idx > latest_bos_idx and latest_choch_idx >= 0:
         latest = max(confirmed_chochs, key=lambda c: c.candle_index)
         if latest.model == "sweep":
-            return EntryMethod.SBC
+            return EntryMethod.SBC, MSSGrade.NONE
         if latest.is_mss:
-            return EntryMethod.MSS
-        return EntryMethod.PULLBACK_BREAK
+            return EntryMethod.MSS, latest.mss_grade
+        return EntryMethod.PULLBACK_BREAK, MSSGrade.NONE
 
-    if latest_bos_idx >= 0:
-        return EntryMethod.PULLBACK_BREAK
-
-    return EntryMethod.PULLBACK_BREAK  # default when no structural events
+    return EntryMethod.PULLBACK_BREAK, MSSGrade.NONE
 
 
 def _check_counter_trend_conditions(
@@ -418,13 +439,14 @@ def generate_signals(
     session: Session | None = None,
     w1_trend: TrendState | None = None,
     d1_trend: TrendState | None = None,
-    climax_warning: bool = False,
+    vsa_absorptions: list | None = None,
     htf_zones: list[dict] | None = None,
 ) -> list[TradingSignal]:
     """The Master Checklist — generate trading signals from all detector outputs.
 
     This is the top-level function that orchestrates the entire system.
     V20: htf_zones passed from higher TF for zone alignment.
+    V22: vsa_absorptions passed for institutional flow confluence.
     """
     if not candles:
         return []
@@ -516,10 +538,32 @@ def generate_signals(
             if has_ltf_choch_sync:
                 confluences.append("LTF CHoCH sync")
 
-            # Grade
-            grade = _grade_signal(confluences, False, climax_warning)
+            # V15/V17/V25: Determine entry method + MSS quality grade
+            entry_method, mss_grade = _determine_entry_method(
+                zone, bos_events, choch_events,
+            )
 
-            # Confidence score (0-100)
+            # V25: Add MSS quality as confluence
+            if mss_grade == MSSGrade.A_PLUS_PLUS:
+                confluences.append("MSS A++ (BPR)")
+            elif mss_grade == MSSGrade.A_PLUS:
+                confluences.append("MSS A+ (iFVG)")
+            elif mss_grade == MSSGrade.STANDARD:
+                confluences.append("MSS Standard")
+
+            # V22: Check for VSA absorption matching signal direction
+            vsa_match = False
+            if vsa_absorptions:
+                for vsa in vsa_absorptions:
+                    if vsa.direction == direction and abs(vsa.candle_index - len(candles) + 1) <= 20:
+                        vsa_match = True
+                        confluences.append("VSA Absorption")
+                        break
+
+            # Grade (V25 MSS quality influences grading)
+            grade = _grade_signal(confluences, False, vsa_match, mss_grade)
+
+            # Confidence score (0-100) with V25 MSS quality boost
             base_score = len(confluences) * 15
             if has_multi_tf:
                 base_score += 10
@@ -527,14 +571,17 @@ def generate_signals(
                 base_score += 5
             if has_ltf_choch_sync:
                 base_score += 5
-            if climax_warning:
-                base_score -= 20
+            # V25: MSS quality confidence boost
+            if mss_grade == MSSGrade.A_PLUS_PLUS:
+                base_score += 30
+            elif mss_grade == MSSGrade.A_PLUS:
+                base_score += 20
+            elif mss_grade == MSSGrade.STANDARD:
+                base_score += 10
+            # V22: VSA absorption boosts confidence (institutional flow confirmation)
+            if vsa_match:
+                base_score += 15
             confidence = max(0, min(100, base_score))
-
-            # V15/V17: Determine entry method from recent structure events
-            entry_method = _determine_entry_method(
-                zone, bos_events, choch_events,
-            )
 
             signals.append(TradingSignal(
                 direction=direction,
@@ -552,8 +599,9 @@ def generate_signals(
                 w1_trend=w1_trend,
                 d1_trend=d1_trend,
                 session=session,
-                climax_warning=climax_warning,
+                vsa_absorption=vsa_match,
                 is_counter_trend=False,
+                mss_quality=mss_grade.value if mss_grade != MSSGrade.NONE else "",
             ))
 
     # ── Counter-trend signal generation ──
@@ -607,11 +655,13 @@ def generate_signals(
             if session and session.is_kill_zone:
                 confluences.append("Kill zone active")
 
-            grade = _grade_signal(confluences, True, climax_warning)
+            grade = _grade_signal(confluences, True)
             base_score = len(confluences) * 10
             if v21_met:
                 base_score += 15
             confidence = max(0, min(100, base_score))
+
+            ct_entry_method, _ = _determine_entry_method(zone, bos_events, choch_events)
 
             signals.append(TradingSignal(
                 direction=ct_dir,
@@ -623,13 +673,13 @@ def generate_signals(
                 grade=grade,
                 confluences=confluences,
                 timeframe="M15",
-                entry_method=_determine_entry_method(zone, bos_events, choch_events),
+                entry_method=ct_entry_method,
                 pattern_type=f"{zone['type']} counter-trend",
                 timestamp=candles[-1].timestamp,
                 w1_trend=w1_trend,
                 d1_trend=d1_trend,
                 session=session,
-                climax_warning=climax_warning,
+                vsa_absorption=False,
                 is_counter_trend=True,
             ))
 

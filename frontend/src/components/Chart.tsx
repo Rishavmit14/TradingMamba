@@ -925,25 +925,19 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       obPrimitiveRef.current.setBoxes([]);
     }
 
-    // --- NEAREST ZONE INDICATOR ---
-    // Show the nearest bias-aligned zone (would trigger a signal) in amber,
-    // and optionally the nearest non-aligned zone in gray for context.
+    // --- NEAREST ZONE INDICATOR (HTF-based — constant across all timeframes) ---
+    // Uses HTF zones (H4/D1) so the nearest zone stays the same when switching TFs.
+    // Shows the nearest bias-aligned zone in amber, and nearest non-aligned in gray.
     {
       const currentPrice = candles[candles.length - 1]?.close ?? 0;
       const bias = data.trade_bias; // HTF trade direction (W1→D1→M15 fallback)
       if (currentPrice > 0) {
-        type ActiveZone = { type: string; direction: string; upper: number; lower: number };
+        type ActiveZone = { type: string; direction: string; upper: number; lower: number; tf: string };
         const activeZones: ActiveZone[] = [];
 
-        for (const f of data.fvgs) {
-          if (f.valid && !f.mitigated) {
-            activeZones.push({ type: "FVG", direction: f.direction, upper: f.upper_price, lower: f.lower_price });
-          }
-        }
-        for (const ob of data.order_blocks) {
-          if (ob.valid && !ob.mitigated) {
-            activeZones.push({ type: "OB", direction: ob.direction, upper: ob.upper_price, lower: ob.lower_price });
-          }
+        // Use HTF zones (H4/D1) for consistent cross-TF display
+        for (const z of (data.htf_zones || [])) {
+          activeZones.push({ type: z.type, direction: z.direction, upper: z.upper, lower: z.lower, tf: z.tf });
         }
 
         // Split into bias-aligned and non-aligned zones
@@ -974,7 +968,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
               lineWidth: 1,
               lineStyle: LineStyle.SparseDotted,
               axisLabelVisible: true,
-              title: `\u2192 ${nearestBias.type} ${label} signal zone (${sign}${pct}%)`,
+              title: `\u2192 ${nearestBias.tf} ${nearestBias.type} ${label} signal zone (${sign}${pct}%)`,
             })
           );
         }
@@ -1003,7 +997,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
               lineWidth: 1,
               lineStyle: LineStyle.SparseDotted,
               axisLabelVisible: false,
-              title: `${nearestNon.type} ${dir} zone (${sign}${pct}%) [no signal - HTF ${bias}]`,
+              title: `${nearestNon.tf} ${nearestNon.type} ${dir} zone (${sign}${pct}%) [no signal - HTF ${bias}]`,
             })
           );
         }

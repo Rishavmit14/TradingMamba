@@ -281,7 +281,7 @@ function CHoCHAnalysis({ choch, data }: { choch: CHoCH; data: AnalysisResult }) 
         <Badge ok={!choch.is_fake} label={choch.is_fake ? "Fake CHoCH" : "Real CHoCH"} />
         <Badge ok={choch.confirmed} label={choch.confirmed ? "Confirmed" : "Unconfirmed"} />
         {choch.is_mss && <Badge ok={true} label="MSS (Liq Swept + Expansion)" />}
-        <Badge ok={choch.has_climax_confluence} label={choch.has_climax_confluence ? "Climax Zone" : "No Climax"} />
+        <Badge ok={choch.has_vsa_confluence} label={choch.has_vsa_confluence ? "VSA Confluence" : "No VSA"} />
       </div>
 
       {choch.is_fake && (

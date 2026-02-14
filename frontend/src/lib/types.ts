@@ -10,6 +10,7 @@ export type LiquiditySource = "equal_highs" | "equal_lows" | "swing_extreme" | "
 export type LiquidityEvent = "sweep" | "grab";
 export type ZoneType = "premium" | "discount" | "equilibrium";
 export type SignalGrade = "A" | "B" | "C" | "D" | "M";
+export type MSSGrade = "none" | "standard" | "a_plus" | "a_plus_plus";
 
 export interface Candle {
   timestamp: number;
@@ -68,11 +69,12 @@ export interface CHoCH {
   broken_swing_index: number;
   broken_price: number;
   confidence: number;
-  has_climax_confluence: boolean;
+  has_vsa_confluence: boolean;
   is_fake: boolean;
   confirmed: boolean;
   model: string;
   is_mss: boolean;
+  mss_grade: MSSGrade;
 }
 
 export interface FVG {
@@ -84,6 +86,8 @@ export interface FVG {
   from_extreme_candle: boolean;
   mitigated: boolean;
   mitigated_at_candle: number | null;
+  is_inverted: boolean;
+  inverted_at_candle: number | null;
 }
 
 export interface OrderBlock {
@@ -131,8 +135,17 @@ export interface TradingSignal {
   entry_method: string | null;
   pattern_type: string;
   timestamp: number;
-  climax_warning: boolean;
+  vsa_absorption: boolean;
   is_counter_trend: boolean;
+  mss_quality: string;
+}
+
+export interface HTFZone {
+  type: "OB" | "FVG";
+  upper: number;
+  lower: number;
+  direction: Direction;
+  tf: string;  // "H4" | "D1"
 }
 
 export interface DetectorVisibility {
@@ -158,10 +171,11 @@ export interface AnalysisResult {
   order_blocks: OrderBlock[];
   premium_discount: PremiumDiscount | null;
   session: Session | null;
-  climax_warning: boolean;
-  climax_ratio: number;
+  vsa_active: boolean;
+  vsa_absorptions: { candle_index: number; direction: Direction; volume_ratio: number; confirmation: boolean }[];
   signals: TradingSignal[];
   candles: Candle[];
+  htf_zones: HTFZone[];
 }
 
 export type SelectedElementType = "swing" | "bos" | "choch" | "idm" | "fvg" | "ob";
@@ -200,7 +214,7 @@ export interface TradeRecord {
   entry_method: string;
   pattern_type: string;
   is_counter_trend: boolean;
-  climax_warning: boolean;
+  vsa_absorption: boolean;
   entry_candle_idx: number;
   entry_timestamp: number;
   outcome: TradeOutcome;
@@ -252,8 +266,7 @@ export interface MultiTFContext {
   h1_trend: TrendState;
   m15_trend: TrendState;
   session: Session | null;
-  climax_warning: boolean;
-  climax_ratio: number;
+  vsa_active: boolean;
   current_phase: string;
   premium_discount: {
     swing_high: number;

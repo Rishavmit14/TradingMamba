@@ -353,10 +353,10 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {analysis?.climax_warning && (
-                  <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    <AlertTriangle className="w-3 h-3" />
-                    CLIMAX
+                {analysis?.vsa_active && (
+                  <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <TrendingUp className="w-3 h-3" />
+                    VSA
                   </div>
                 )}
 

@@ -95,8 +95,8 @@ async def test_single_timeframe(tf: str, limit: int):
             fake = "FAKE" if ch.is_fake else ("CONFIRMED" if ch.confirmed else "UNCONFIRMED")
             print(f"    idx={ch.candle_index:4d}  {ch.direction.value:<8}  "
                   f"conf={ch.confidence:.2f}  [{fake}]"
-                  f"{'  CLIMAX!' if ch.has_climax_confluence else ''}")
-    print(f"  Climax warning: {result.climax_warning} (ratio: {result.climax_ratio:.2f})")
+                  f"{'  VSA!' if ch.has_vsa_confluence else ''}")
+    print(f"  VSA active: {result.vsa_active} ({len(result.vsa_absorptions)} absorptions)")
 
     print(f"\n--- 1.6 FVGs ({len(result.fvgs)} detected) ---")
     if result.fvgs:

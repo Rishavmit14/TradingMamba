@@ -132,12 +132,12 @@ export default function DetectionPanel({ data }: DetectionPanelProps) {
             {data.trend.toUpperCase()}
           </Badge>
         </div>
-        {data.climax_warning && (
-          <div className="flex items-center gap-2 bg-amber-500/5 border border-amber-500/15 rounded-lg px-3 py-2">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+        {data.vsa_active && (
+          <div className="flex items-center gap-2 bg-emerald-500/5 border border-emerald-500/15 rounded-lg px-3 py-2">
+            <BarChart className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
             <div>
-              <p className="text-xs font-medium text-amber-400">Climax Warning</p>
-              <p className="text-xs text-[var(--text-muted)]">Ratio {data.climax_ratio.toFixed(2)}</p>
+              <p className="text-xs font-medium text-emerald-400">VSA Absorption</p>
+              <p className="text-xs text-[var(--text-muted)]">{data.vsa_absorptions.length} pattern(s) detected</p>
             </div>
           </div>
         )}
@@ -229,7 +229,7 @@ export default function DetectionPanel({ data }: DetectionPanelProps) {
                   {ch.is_mss && <Badge variant="amber">MSS</Badge>}
                   {ch.is_fake && <Badge variant="gray">FAKE</Badge>}
                   {!ch.is_mss && ch.confirmed && <Badge variant="purple">CONFIRMED</Badge>}
-                  {ch.has_climax_confluence && <Badge variant="amber">CLIMAX</Badge>}
+                  {ch.has_vsa_confluence && <Badge variant="green">VSA</Badge>}
                 </div>
                 <div className="mt-1.5 flex items-center justify-between">
                   <span className="text-xs text-[var(--text-muted)]">Confidence</span>

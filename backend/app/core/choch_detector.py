@@ -9,63 +9,16 @@ Core Rules (V07, V09, V10):
 - Distinguish from inducement: what retail calls CHoCH is often just IDM being taken
 - Fake CHoCH filters (V09): 3 conditions that invalidate apparent CHoCH
 - CHoCH confirmation (V10): requires follow-through structure
-- Climax + CHoCH = strong reversal signal (V23)
+- VSA Absorption + CHoCH = strong reversal signal (V22/V23)
 """
 
 from __future__ import annotations
 from app.models import (
-    Candle, SwingPoint, BOS, CHoCH, Inducement, LiquidityPool,
+    Candle, SwingPoint, BOS, CHoCH, Inducement, LiquidityPool, FVG,
     SwingType, SwingClassification, Direction, TrendState,
-    IDMStatus, LiquiditySource, LiquidityType,
+    IDMStatus, LiquiditySource, LiquidityType, MSSGrade,
 )
 from app.core.liquidity import prices_equal
-
-
-def _calculate_move_size(candles: list[Candle], start_idx: int, end_idx: int) -> float:
-    """Calculate the absolute price move between two candle indices."""
-    idx_map = {c.index: c for c in candles}
-    start = idx_map.get(start_idx)
-    end = idx_map.get(end_idx)
-    if not start or not end:
-        return 0.0
-    return abs(end.close - start.close)
-
-
-def detect_climax(
-    candles: list[Candle],
-    swings: list[SwingPoint],
-    trend: TrendState,
-) -> tuple[bool, float]:
-    """Detect if the most recent move is climactic (V23 rule).
-
-    Climax = the LARGEST single move in the current trend.
-    If the latest swing-to-swing move is significantly larger than average,
-    it's climactic → be vigilant for reversal.
-
-    Returns:
-        (is_climactic, climax_ratio) where climax_ratio > 1.5 = climactic
-    """
-    if len(swings) < 4:
-        return False, 0.0
-
-    # Calculate move sizes between consecutive swings
-    move_sizes = []
-    for i in range(1, len(swings)):
-        size = abs(swings[i].price - swings[i - 1].price)
-        if size > 0:
-            move_sizes.append(size)
-
-    if len(move_sizes) < 3:
-        return False, 0.0
-
-    latest_move = move_sizes[-1]
-    avg_move = sum(move_sizes[:-1]) / len(move_sizes[:-1])
-
-    if avg_move == 0:
-        return False, 0.0
-
-    ratio = latest_move / avg_move
-    return ratio > 1.5, ratio
 
 
 def _add_choch_break(
@@ -73,7 +26,7 @@ def _add_choch_break(
     key_swing: SwingPoint,
     trigger_swing: SwingPoint,
     direction: Direction,
-    is_climactic: bool,
+    has_vsa: bool,
     choch_events: list[CHoCH],
 ) -> None:
     """Find the candle that broke the key swing level and add a CHoCH event.
@@ -99,7 +52,7 @@ def _add_choch_break(
 
         if body_broke or wick_broke:
             confidence = 0.5 if body_broke else 0.35
-            if is_climactic:
+            if has_vsa:
                 confidence += 0.25
             if body_broke:
                 if direction == Direction.BEARISH:
@@ -115,7 +68,7 @@ def _add_choch_break(
                 broken_swing_index=key_swing.candle_index,
                 broken_price=key_swing.price,
                 confidence=min(confidence, 1.0),
-                has_climax_confluence=is_climactic,
+                has_vsa_confluence=has_vsa,
             ))
             break
 
@@ -125,6 +78,7 @@ def detect_choch(
     swings: list[SwingPoint],
     bos_events: list[BOS],
     trend: TrendState,
+    vsa_absorptions: list | None = None,
 ) -> list[CHoCH]:
     """Detect CHoCH by walking through swing structure chronologically.
 
@@ -135,12 +89,23 @@ def detect_choch(
 
     Also checks if current price action is breaking the key level
     (potential CHoCH before new swing structure confirms it).
+
+    vsa_absorptions: VSA absorption objects for confluence marking.
+    A CHoCH within 5 candles of a matching VSA absorption gets has_vsa_confluence=True.
     """
     if len(swings) < 4:
         return []
 
     choch_events: list[CHoCH] = []
-    is_climactic, climax_ratio = detect_climax(candles, swings, trend)
+    vsa_absorptions = vsa_absorptions or []
+
+    def _has_vsa_near(candle_idx: int, direction: Direction) -> bool:
+        """Check if a VSA absorption exists within 5 candles before candle_idx
+        with matching direction."""
+        for vsa in vsa_absorptions:
+            if vsa.direction == direction and candle_idx - 5 <= vsa.candle_index <= candle_idx:
+                return True
+        return False
 
     running_trend = TrendState.RANGING
     recent_high: SwingPoint | None = None
@@ -202,7 +167,7 @@ def detect_choch(
         elif old_trend == TrendState.BULLISH and running_trend == TrendState.BEARISH:
             if key_hl:
                 _add_choch_break(candles, key_hl, swing,
-                                 Direction.BEARISH, is_climactic, choch_events)
+                                 Direction.BEARISH, _has_vsa_near(swing.candle_index, Direction.BEARISH), choch_events)
             # Initialize key_lh for the new bearish trend
             for s in reversed(swings[:i + 1]):
                 if s.classification == SwingClassification.LH and s.is_valid_smc:
@@ -214,7 +179,7 @@ def detect_choch(
         elif old_trend == TrendState.BEARISH and running_trend == TrendState.BULLISH:
             if key_lh:
                 _add_choch_break(candles, key_lh, swing,
-                                 Direction.BULLISH, is_climactic, choch_events)
+                                 Direction.BULLISH, _has_vsa_near(swing.candle_index, Direction.BULLISH), choch_events)
             # Initialize key_hl for the new bullish trend
             for s in reversed(swings[:i + 1]):
                 if s.classification == SwingClassification.HL and s.is_valid_smc:
@@ -247,8 +212,9 @@ def detect_choch(
                 body_broke = candle.body_bottom < live_hl.price
                 wick_broke = not body_broke and candle.low < live_hl.price
                 if body_broke or wick_broke:
+                    vsa_here = _has_vsa_near(candle.index, Direction.BEARISH)
                     confidence = 0.5 if body_broke else 0.35
-                    if is_climactic:
+                    if vsa_here:
                         confidence += 0.25
                     if body_broke and candle.body_bottom < live_hl.price * 0.998:
                         confidence += 0.15
@@ -258,7 +224,7 @@ def detect_choch(
                         broken_swing_index=live_hl.candle_index,
                         broken_price=live_hl.price,
                         confidence=min(confidence, 1.0),
-                        has_climax_confluence=is_climactic,
+                        has_vsa_confluence=vsa_here,
                     ))
                     break
 
@@ -276,8 +242,9 @@ def detect_choch(
                 body_broke = candle.body_top > live_lh.price
                 wick_broke = not body_broke and candle.high > live_lh.price
                 if body_broke or wick_broke:
+                    vsa_here = _has_vsa_near(candle.index, Direction.BULLISH)
                     confidence = 0.5 if body_broke else 0.35
-                    if is_climactic:
+                    if vsa_here:
                         confidence += 0.25
                     if body_broke and candle.body_top > live_lh.price * 1.002:
                         confidence += 0.15
@@ -287,7 +254,7 @@ def detect_choch(
                         broken_swing_index=live_lh.candle_index,
                         broken_price=live_lh.price,
                         confidence=min(confidence, 1.0),
-                        has_climax_confluence=is_climactic,
+                        has_vsa_confluence=vsa_here,
                     ))
                     break
 
@@ -638,84 +605,163 @@ def classify_mss(
     choch_events: list[CHoCH],
     liquidity_pools: list[LiquidityPool],
     candles: list[Candle],
+    fvgs: list[FVG] | None = None,
     sweep_lookback: int = 30,
     expansion_mult: float = 1.5,
 ) -> None:
-    """V15: Post-process CHoCH events to identify which qualify as MSS.
+    """V15 + V25: Classify MSS and grade quality.
 
-    MSS (Market Structure Shift) is NOT the same as CHoCH. MSS has 3 strict rules:
+    V15 3-rule framework (gate for is_mss=True):
       Rule 1: Opposite-side liquidity must be taken out BEFORE the break
-              (bearish MSS needs buy-side swept; bullish MSS needs sell-side swept)
-      Rule 2: Market must expand (sharp impulsive move — break candle body > 1.5x avg)
-      Rule 3: Body close beyond the key level (already satisfied by confirmed CHoCH
-              with model="swing")
+      Rule 2: Market must expand (break candle body > 1.5x local avg)
+      Rule 3: Body close beyond key level (confirmed swing-based CHoCH)
 
-    Only confirmed, non-fake, body-close CHoCH can be promoted to MSS.
-    Sets choch.is_mss = True in-place for qualifying events.
+    V25 quality grading (sets mss_grade):
+      NONE:        MSS passes V15 but no FVG in shift leg (weak, ~no reliable win rate)
+      STANDARD:    FVG in shift leg (~50% win rate)
+      A_PLUS:      FVG + iFVG (inverted opposite FVG) (~65% win rate)
+      A_PLUS_PLUS: FVG + BPR (iFVG overlaps shift leg FVG) (~75-85% win rate)
+
+    V25 also marks inverted FVGs (is_inverted=True) on FVG objects for chart display.
     """
     if not candles:
         return
+    if fvgs is None:
+        fvgs = []
 
-    # Pre-compute average body size over the whole dataset for expansion check
+    # Pre-compute body sizes for expansion check
     bodies = [abs(c.close - c.open) for c in candles]
-    total_body = sum(bodies)
     n = len(bodies)
+    idx_map = {c.index: c for c in candles}
 
     for ch in choch_events:
         # Only confirmed body-close CHoCH can be MSS
         if not ch.confirmed or ch.is_fake or ch.model != "swing":
             continue
 
-        # --- Rule 1: Was opposite-side liquidity swept before this CHoCH? ---
-        # Bearish CHoCH (price broke below HL) needs BUY-SIDE liquidity swept
-        #   (smart money swept stops above highs, then reversed down)
-        # Bullish CHoCH (price broke above LH) needs SELL-SIDE liquidity swept
-        #   (smart money swept stops below lows, then reversed up)
+        # ── V15 Rule 1: Opposite-side liquidity swept before break ──
         needed_pool_type = (
             LiquidityType.BUY_SIDE if ch.direction == Direction.BEARISH
             else LiquidityType.SELL_SIDE
         )
 
-        sweep_found = False
+        sweep_candle_idx: int | None = None
         for pool in liquidity_pools:
             if not pool.swept or pool.swept_at_candle is None:
                 continue
             if pool.pool_type != needed_pool_type:
                 continue
-            # Sweep must happen BEFORE the CHoCH but within lookback window
             if ch.candle_index - sweep_lookback <= pool.swept_at_candle < ch.candle_index:
-                sweep_found = True
+                sweep_candle_idx = pool.swept_at_candle
                 break
 
-        if not sweep_found:
+        if sweep_candle_idx is None:
             continue
 
-        # --- Rule 2: Expansion — break candle has abnormally large body ---
+        # ── V15 Rule 2: Expansion ──
         if ch.candle_index >= n:
             continue
         break_body = bodies[ch.candle_index]
 
-        # Local average: 20 candles before the break (exclude the break candle itself)
         local_start = max(0, ch.candle_index - 20)
         local_end = ch.candle_index
         if local_end > local_start:
             local_avg = sum(bodies[local_start:local_end]) / (local_end - local_start)
         elif n > 0:
-            local_avg = total_body / n
+            local_avg = sum(bodies) / n
         else:
             continue
 
         if local_avg == 0:
             continue
 
-        if break_body < local_avg * expansion_mult:
-            # Also check the candle before (the expansion might be 1-2 candles)
-            if ch.candle_index >= 1:
-                prev_body = bodies[ch.candle_index - 1]
-                if prev_body < local_avg * expansion_mult:
-                    continue  # Neither break candle nor preceding candle expanded
-            else:
-                continue
+        expanded = break_body >= local_avg * expansion_mult
+        if not expanded and ch.candle_index >= 1:
+            expanded = bodies[ch.candle_index - 1] >= local_avg * expansion_mult
+        if not expanded:
+            continue
 
-        # All 3 rules met → this is a true MSS
+        # V15 Rule 3: Body close — already satisfied by confirmed swing-based CHoCH
         ch.is_mss = True
+
+        # ── V25: MSS Quality Grading ──
+
+        # Define shift leg: from sweep candle to break candle
+        shift_start = sweep_candle_idx
+        shift_end = ch.candle_index
+
+        # V25 Rule: FVG = identity of MSS.  Check for FVG in the shift leg
+        # direction matching the MSS (bullish MSS → bullish FVGs in shift leg)
+        shift_leg_fvgs = [
+            f for f in fvgs
+            if f.valid
+            and f.direction == ch.direction
+            and shift_start <= f.candle_index <= shift_end
+        ]
+
+        if not shift_leg_fvgs:
+            # No FVG in shift leg → weak MSS (V25: "if no FVG → likely fails")
+            ch.mss_grade = MSSGrade.NONE
+            continue
+
+        # Has FVG in shift leg → at least STANDARD
+        ch.mss_grade = MSSGrade.STANDARD
+
+        # ── V25: Check for iFVG (Inverse Fair Value Gap) ──
+        # For bullish MSS: look for bearish FVGs that existed BEFORE shift
+        #   and were closed THROUGH by shift leg candles (body above upper_price)
+        # For bearish MSS: look for bullish FVGs closed through (body below lower_price)
+        opposite_dir = (
+            Direction.BEARISH if ch.direction == Direction.BULLISH
+            else Direction.BULLISH
+        )
+
+        # Prior opposite-direction FVGs that were still active when shift started
+        prior_fvgs = [
+            f for f in fvgs
+            if f.direction == opposite_dir
+            and f.candle_index < shift_start
+            and f.candle_index >= shift_start - 50  # reasonable lookback
+            and (not f.mitigated or (f.mitigated_at_candle is not None
+                                     and f.mitigated_at_candle >= shift_start))
+        ]
+
+        inverted_fvgs: list[FVG] = []
+        for prior_fvg in prior_fvgs:
+            for ci in range(shift_start, shift_end + 1):
+                candle = idx_map.get(ci)
+                if candle is None:
+                    continue
+
+                inverted = False
+                if ch.direction == Direction.BULLISH:
+                    # Bullish MSS: bearish FVG inverted when body closes ABOVE
+                    inverted = candle.body_top > prior_fvg.upper_price
+                else:
+                    # Bearish MSS: bullish FVG inverted when body closes BELOW
+                    inverted = candle.body_bottom < prior_fvg.lower_price
+
+                if inverted:
+                    prior_fvg.is_inverted = True
+                    prior_fvg.inverted_at_candle = ci
+                    inverted_fvgs.append(prior_fvg)
+                    break
+
+        if not inverted_fvgs:
+            continue  # No iFVG → stays STANDARD
+
+        # Has iFVG → at least A+
+        ch.mss_grade = MSSGrade.A_PLUS
+
+        # ── V25: Check for BPR (Balanced Price Range) ──
+        # BPR = iFVG zone and a shift leg FVG overlap at the same price level
+        for ifvg in inverted_fvgs:
+            for sfvg in shift_leg_fvgs:
+                overlap_lower = max(ifvg.lower_price, sfvg.lower_price)
+                overlap_upper = min(ifvg.upper_price, sfvg.upper_price)
+                if overlap_lower < overlap_upper:
+                    # BPR found — zones overlap
+                    ch.mss_grade = MSSGrade.A_PLUS_PLUS
+                    break
+            if ch.mss_grade == MSSGrade.A_PLUS_PLUS:
+                break

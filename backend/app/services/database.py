@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS signals (
     pattern_type TEXT,
     timeframe TEXT NOT NULL,
     is_counter_trend INTEGER DEFAULT 0,
-    climax_warning INTEGER DEFAULT 0,
+    vsa_absorption INTEGER DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     telegram_sent INTEGER DEFAULT 0,
     telegram_message_id INTEGER
@@ -235,7 +235,7 @@ async def insert_signal(signal_data: dict) -> int:
                (signal_hash, direction, entry_price, stop_loss, take_profit,
                 risk_reward_ratio, grade, confidence_score, confluences,
                 entry_method, pattern_type, timeframe, is_counter_trend,
-                climax_warning, created_at)
+                vsa_absorption, created_at)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 signal_data["signal_hash"],
@@ -251,7 +251,7 @@ async def insert_signal(signal_data: dict) -> int:
                 signal_data.get("pattern_type"),
                 signal_data.get("timeframe", "M15"),
                 int(signal_data.get("is_counter_trend", False)),
-                int(signal_data.get("climax_warning", False)),
+                int(signal_data.get("vsa_absorption", False)),
                 _now(),
             ),
         )

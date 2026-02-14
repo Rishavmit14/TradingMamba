@@ -216,10 +216,10 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
       </div>
 
       {/* Warnings */}
-      {signal.climax_warning && (
-        <div className="mt-2.5 flex items-center gap-1.5 bg-amber-500/5 border border-amber-500/15 rounded-lg px-2.5 py-1.5">
-          <AlertTriangle className="w-3 h-3 text-amber-400" />
-          <span className="text-xs text-amber-400">Climax warning active</span>
+      {signal.vsa_absorption && (
+        <div className="mt-2.5 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/15 rounded-lg px-2.5 py-1.5">
+          <TrendingUp className="w-3 h-3 text-emerald-400" />
+          <span className="text-xs text-emerald-400">VSA Absorption confirmed</span>
         </div>
       )}
     </div>
@@ -368,11 +368,11 @@ export default function SignalsTab() {
               </div>
             )}
 
-            {/* Climax */}
-            {data.context.climax_warning && (
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                <AlertTriangle className="w-3 h-3" />
-                CLIMAX ({data.context.climax_ratio}x)
+            {/* VSA */}
+            {data.context.vsa_active && (
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <TrendingUp className="w-3 h-3" />
+                VSA ABSORPTION
               </div>
             )}
           </div>

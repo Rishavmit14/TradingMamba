@@ -128,11 +128,12 @@ app.add_middleware(
 )
 
 
-def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | None = None) -> dict:
+def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | None = None, htf_zones: list[dict] | None = None) -> dict:
     """Convert AnalysisResult to JSON-serializable dict.
 
     Field names match the frontend TypeScript types exactly.
     trade_bias: HTF-derived trade direction (W1→D1→M15 fallback). If None, uses this TF's trend.
+    htf_zones: Unmitigated OB/FVG zones from H4/D1 for consistent cross-TF display.
     """
     return {
         "timeframe": result.timeframe,
@@ -206,11 +207,12 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "broken_swing_index": ch.broken_swing_index,
                 "broken_price": ch.broken_price,
                 "confidence": ch.confidence,
-                "has_climax_confluence": ch.has_climax_confluence,
+                "has_vsa_confluence": ch.has_vsa_confluence,
                 "is_fake": ch.is_fake,
                 "confirmed": ch.confirmed,
                 "model": ch.model,
                 "is_mss": ch.is_mss,
+                "mss_grade": ch.mss_grade.value,
             }
             for ch in result.choch_events
         ],
@@ -224,6 +226,8 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "from_extreme_candle": f.from_extreme_candle,
                 "mitigated": f.mitigated,
                 "mitigated_at_candle": f.mitigated_at_candle,
+                "is_inverted": f.is_inverted,
+                "inverted_at_candle": f.inverted_at_candle,
             }
             for f in result.fvgs
         ],
@@ -261,8 +265,16 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
             "is_kill_zone": result.session.is_kill_zone,
             "volatility_expectation": result.session.volatility_expectation,
         } if result.session else None,
-        "climax_warning": result.climax_warning,
-        "climax_ratio": round(result.climax_ratio, 2),
+        "vsa_active": result.vsa_active,
+        "vsa_absorptions": [
+            {
+                "candle_index": v.candle_index,
+                "direction": v.direction.value,
+                "volume_ratio": v.volume_ratio,
+                "confirmation": v.confirmation,
+            }
+            for v in result.vsa_absorptions
+        ],
         "amd_patterns": [
             {
                 "range_start_idx": amd.range_start_idx,
@@ -304,11 +316,13 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "entry_method": sig.entry_method.value if sig.entry_method else None,
                 "pattern_type": sig.pattern_type,
                 "timestamp": sig.timestamp,
-                "climax_warning": sig.climax_warning,
+                "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
+                "mss_quality": sig.mss_quality,
             }
             for sig in result.signals
         ],
+        "htf_zones": htf_zones or [],
     }
 
 
@@ -332,6 +346,7 @@ async def analyze_single_tf(timeframe: str = "H4"):
 
     # Always generate signals from M15 + HTF context
     trade_bias = None
+    htf_zones: list[dict] = []
     try:
         # Fetch W1/D1 for trend bias
         w1_candles = await fetch_klines(SYMBOL, "W1", limit=100)
@@ -359,7 +374,7 @@ async def analyze_single_tf(timeframe: str = "H4"):
         if tf == "H4":
             h4_result = result
         else:
-            h4_candles = await fetch_klines(SYMBOL, "H4", limit=200)
+            h4_candles = await fetch_klines(SYMBOL, "H4", limit=1000)
             h4_result = analyze_timeframe(h4_candles, "H4")
 
         # Build HTF zones from H4/D1 OBs and FVGs (V20)
@@ -395,13 +410,13 @@ async def analyze_single_tf(timeframe: str = "H4"):
             session=m15_result.session,
             w1_trend=w1_trend,
             d1_trend=d1_trend,
-            climax_warning=m15_result.climax_warning,
+            vsa_absorptions=m15_result.vsa_absorptions,
             htf_zones=htf_zones,
         )
     except Exception as e:
         logger.warning(f"Signal generation failed for {tf}: {e}")
 
-    return _serialize_result(result, candles, trade_bias=trade_bias)
+    return _serialize_result(result, candles, trade_bias=trade_bias, htf_zones=htf_zones)
 
 
 @app.get("/api/analyze")
@@ -445,7 +460,7 @@ async def get_signals():
     return {
         "symbol": SYMBOL,
         "trend": m15.trend.value,
-        "climax_warning": m15.climax_warning,
+        "vsa_active": m15.vsa_active,
         "signals": _serialize_result(m15, candles_by_tf.get("M15", []))["signals"],
     }
 
@@ -703,14 +718,16 @@ def _compute_v23_checklist(
         status, detail = "pending", "No signal — TP not applicable yet"
     checklist.append({"step": 8, "name": "Set Take Profit", "status": status, "detail": detail})
 
-    # Step 9: Monitor Climax
-    climax = m15.climax_warning if m15 else False
-    ratio = m15.climax_ratio if m15 else 0
-    if climax:
-        status, detail = "failed", f"CLIMAX ACTIVE — ratio {ratio:.1f}x (caution!)"
+    # Step 9: VSA Absorption Check (V22)
+    vsa_active = m15.vsa_active if m15 else False
+    vsa_count = len(m15.vsa_absorptions) if m15 else 0
+    if vsa_active:
+        latest_vsa = m15.vsa_absorptions[-1]
+        dir_label = latest_vsa.direction.value.upper()
+        status, detail = "passed", f"VSA Absorption detected — {dir_label} {latest_vsa.volume_ratio}x volume ({'confirmed' if latest_vsa.confirmation else 'unconfirmed'})"
     else:
-        status, detail = "passed", f"No climax — ratio {ratio:.1f}x (safe)"
-    checklist.append({"step": 9, "name": "Monitor Climax", "status": status, "detail": detail})
+        status, detail = "pending", "No VSA absorption — awaiting ultra-high volume signal"
+    checklist.append({"step": 9, "name": "VSA Absorption", "status": status, "detail": detail})
 
     # Step 10: Detect CHoCH (D1 direction switch)
     recent_d1_choch = [c for c in (d1.choch_events if d1 else []) if c.confirmed and not c.is_fake]
@@ -764,8 +781,7 @@ async def get_detailed_signals():
                 "is_kill_zone": m15.session.is_kill_zone,
                 "volatility_expectation": m15.session.volatility_expectation,
             } if m15 and m15.session else None,
-            "climax_warning": m15.climax_warning if m15 else False,
-            "climax_ratio": round(m15.climax_ratio, 2) if m15 else 0,
+            "vsa_active": m15.vsa_active if m15 else False,
             "current_phase": m15.current_phase.value if m15 else "consolidation",
             "premium_discount": {
                 "swing_high": m15.premium_discount.swing_high,
@@ -793,7 +809,7 @@ async def get_detailed_signals():
                 "entry_method": sig.entry_method.value if sig.entry_method else None,
                 "pattern_type": sig.pattern_type,
                 "timestamp": sig.timestamp,
-                "climax_warning": sig.climax_warning,
+                "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
             }
             for sig in (m15.signals if m15 else [])

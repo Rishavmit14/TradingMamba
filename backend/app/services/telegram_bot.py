@@ -139,8 +139,8 @@ class TelegramAlertBot:
             text += f"<b>Confluences:</b> {', '.join(confluences)}\n"
         text += f"<b>Entry:</b> {method} | <b>Pattern:</b> {pattern}\n"
 
-        if signal_data.get("climax_warning"):
-            text += "\n\u26A0\uFE0F <b>CLIMAX WARNING</b> \u2014 Proceed with caution!"
+        if signal_data.get("vsa_absorption"):
+            text += "\n\U0001F3E6 <b>VSA ABSORPTION</b> \u2014 Institutional flow confirmed"
         if signal_data.get("is_counter_trend"):
             text += "\n\u21BA <b>Counter-trend</b> signal"
 

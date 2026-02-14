@@ -4,7 +4,7 @@ This is the single entry point that takes OHLCV candles and returns
 detected patterns + trading signals. Each detector builds on the previous.
 
 Pipeline:
-  Candles → Swings → IDM → Liquidity → BOS → CHoCH → FVG → OB → P/D → Session → Signals
+  Candles → Swings → IDM → Liquidity → BOS → CHoCH → FVG → MSS(V25) → OB → P/D → Session → Signals
 """
 
 from __future__ import annotations
@@ -18,7 +18,8 @@ from app.core.swing_detector import detect_and_classify
 from app.core.inducement import detect_and_validate as detect_idm
 from app.core.liquidity import detect_all_liquidity, prices_equal
 from app.core.bos_detector import detect_bos
-from app.core.choch_detector import detect_choch, filter_fake_choch, detect_climax, classify_mss
+from app.core.choch_detector import detect_choch, filter_fake_choch, classify_mss
+from app.core.vsa_detector import detect_vsa_absorptions
 from app.core.fvg_detector import detect_all_fvgs
 from app.core.order_block import detect_all_order_blocks
 from app.core.premium_discount import calculate_premium_discount
@@ -44,8 +45,8 @@ class AnalysisResult:
     order_blocks: list[OrderBlock] = field(default_factory=list)
     premium_discount: PremiumDiscount | None = None
     session: Session | None = None
-    climax_warning: bool = False
-    climax_ratio: float = 0.0
+    vsa_active: bool = False
+    vsa_absorptions: list = field(default_factory=list)
     amd_patterns: list[AMDPattern] = field(default_factory=list)
     price_cycles: list[PriceCycleEvent] = field(default_factory=list)
     current_phase: PricePhase = PricePhase.CONSOLIDATION
@@ -79,19 +80,19 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     # 1.4: Break of Structure detection
     bos_events = detect_bos(candles, swings, inducements)
 
-    # 1.5: Change of Character detection
-    choch_events = detect_choch(candles, swings, bos_events, trend)
+    # 1.5a: VSA Ultra High Volume absorption detection (V22)
+    vsa_absorptions = detect_vsa_absorptions(candles)
+
+    # 1.5: Change of Character detection (with VSA confluence)
+    choch_events = detect_choch(candles, swings, bos_events, trend, vsa_absorptions=vsa_absorptions)
     choch_events = filter_fake_choch(choch_events, swings, candles,
                                      inducements, liquidity_pools, bos_events)
 
-    # 1.5b: MSS classification — which CHoCH events are true MSS (V15 3-rule check)
-    classify_mss(choch_events, liquidity_pools, candles)
-
-    # Climax detection
-    is_climactic, climax_ratio = detect_climax(candles, swings, trend)
-
-    # 1.6: Fair Value Gap detection
+    # 1.6: Fair Value Gap detection (moved before MSS — V25 grading needs FVGs)
     fvgs = detect_all_fvgs(candles, swings, trend)
+
+    # 1.5b: MSS classification + V25 quality grading (Standard/A+/A++)
+    classify_mss(choch_events, liquidity_pools, candles, fvgs)
 
     # 1.7: Order Block detection
     order_blocks = detect_all_order_blocks(candles, swings, fvgs, inducements, trend)
@@ -123,8 +124,8 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
         order_blocks=order_blocks,
         premium_discount=pd,
         session=session,
-        climax_warning=is_climactic,
-        climax_ratio=climax_ratio,
+        vsa_active=len(vsa_absorptions) > 0,
+        vsa_absorptions=vsa_absorptions,
         amd_patterns=amd_patterns,
         price_cycles=price_cycles,
         current_phase=current_phase,
@@ -230,7 +231,7 @@ def run_multi_tf_analysis(
             session=m15.session,
             w1_trend=w1_trend,
             d1_trend=d1_trend,
-            climax_warning=m15.climax_warning,
+            vsa_absorptions=m15.vsa_absorptions,
             htf_zones=htf_zones,
         )
 

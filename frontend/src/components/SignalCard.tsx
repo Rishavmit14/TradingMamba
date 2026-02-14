@@ -21,9 +21,16 @@ const gradeConfig: Record<string, { bg: string; text: string; border: string; la
   D: { bg: "bg-red-500/15", text: "text-red-400", border: "border-red-500/30", label: "D" },
 };
 
+const mssConfig: Record<string, { bg: string; text: string; border: string; label: string } | null> = {
+  a_plus_plus: { bg: "bg-yellow-500/15", text: "text-yellow-400", border: "border-yellow-500/30", label: "MSS A++" },
+  a_plus: { bg: "bg-cyan-500/15", text: "text-cyan-400", border: "border-cyan-500/30", label: "MSS A+" },
+  standard: { bg: "bg-slate-500/15", text: "text-slate-400", border: "border-slate-500/30", label: "MSS" },
+};
+
 export default function SignalCard({ signal }: SignalCardProps) {
   const isBull = signal.direction === "bullish";
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
+  const mss = signal.mss_quality ? mssConfig[signal.mss_quality] : null;
 
   return (
     <div className={`glass-card rounded-xl p-3.5 transition-all hover:border-[var(--border-hover)] ${
@@ -47,8 +54,15 @@ export default function SignalCard({ signal }: SignalCardProps) {
             <span className="text-xs text-[var(--text-muted)] ml-2 font-mono">{signal.timeframe}</span>
           </div>
         </div>
-        <div className={`px-2 py-1 rounded-md text-xs font-bold border ${grade.bg} ${grade.text} ${grade.border}`}>
-          Grade {grade.label}
+        <div className="flex items-center gap-1.5">
+          {mss && (
+            <div className={`px-2 py-1 rounded-md text-xs font-bold border ${mss.bg} ${mss.text} ${mss.border}`}>
+              {mss.label}
+            </div>
+          )}
+          <div className={`px-2 py-1 rounded-md text-xs font-bold border ${grade.bg} ${grade.text} ${grade.border}`}>
+            Grade {grade.label}
+          </div>
         </div>
       </div>
 
@@ -108,10 +122,10 @@ export default function SignalCard({ signal }: SignalCardProps) {
       </div>
 
       {/* Warnings */}
-      {signal.climax_warning && (
-        <div className="mt-2.5 flex items-center gap-1.5 bg-amber-500/5 border border-amber-500/15 rounded-lg px-2.5 py-1.5">
-          <AlertTriangle className="w-3 h-3 text-amber-400" />
-          <span className="text-xs text-amber-400">Climax warning active</span>
+      {signal.vsa_absorption && (
+        <div className="mt-2.5 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/15 rounded-lg px-2.5 py-1.5">
+          <TrendingUp className="w-3 h-3 text-emerald-400" />
+          <span className="text-xs text-emerald-400">VSA Absorption confirmed</span>
         </div>
       )}
 

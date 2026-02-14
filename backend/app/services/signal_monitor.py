@@ -48,7 +48,7 @@ def _compute_priority_score(signal_data: dict) -> float:
     """Compute a 0-100 priority score for ranking competing signals.
 
     Weights: Grade 35%, Confidence 25%, R:R 20%, Confluences 10%,
-    Penalties: counter-trend -10, climax warning -5.
+    Penalties: counter-trend -10. Bonuses: VSA absorption +10.
     """
     # Grade score (A=100, B=75, C=50, D=25)
     grade_scores = {"A": 100, "B": 75, "C": 50, "D": 25}
@@ -75,8 +75,8 @@ def _compute_priority_score(signal_data: dict) -> float:
     # Penalties
     if signal_data.get("is_counter_trend"):
         score -= 10
-    if signal_data.get("climax_warning"):
-        score -= 5
+    if signal_data.get("vsa_absorption"):
+        score += 10
 
     return round(max(0, min(100, score)), 1)
 
@@ -96,7 +96,7 @@ def _serialize_signal(signal) -> dict:
         "pattern_type": signal.pattern_type,
         "timeframe": signal.timeframe,
         "is_counter_trend": signal.is_counter_trend,
-        "climax_warning": signal.climax_warning,
+        "vsa_absorption": signal.vsa_absorption,
     }
     data["priority_score"] = _compute_priority_score(data)
     return data

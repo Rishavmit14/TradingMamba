@@ -110,7 +110,7 @@ function computePriorityScore(t: DemoTrade): number {
 
   let score = gradeS * 0.35 + confS * 0.25 + rrS * 0.20 + confCountS * 0.10;
 
-  // Check for counter-trend / climax from confluences text (flags not on DemoTrade directly)
+  // Check for counter-trend / VSA from confluences text (flags not on DemoTrade directly)
   // These are stored in signal_data but we don't have them on the trade object yet
   return Math.round(Math.max(0, Math.min(100, score)));
 }

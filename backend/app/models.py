@@ -79,7 +79,15 @@ class SignalGrade(Enum):
     A = "A"  # 3+ confluences, trend-aligned, kill zone, multi-TF
     B = "B"  # 2 confluences, trend-aligned
     C = "C"  # 1 confluence or weak alignment
-    D = "D"  # Counter-trend or climax warning
+    D = "D"  # Counter-trend
+
+
+class MSSGrade(Enum):
+    """V25: MSS quality grading based on shift leg composition."""
+    NONE = "none"                  # Weak MSS — no FVG in shift leg
+    STANDARD = "standard"          # FVG in shift leg (~50% win rate)
+    A_PLUS = "a_plus"              # FVG + iFVG (~65% win rate)
+    A_PLUS_PLUS = "a_plus_plus"    # FVG + BPR (iFVG+FVG overlap) (~75-85%)
 
 
 class AMDPhase(Enum):
@@ -201,11 +209,12 @@ class CHoCH:
     broken_swing_index: int    # Which major HL/LH was broken
     broken_price: float
     confidence: float = 0.0   # 0-1 confidence score
-    has_climax_confluence: bool = False
+    has_vsa_confluence: bool = False
     is_fake: bool = False      # Filtered by V09 fake CHoCH rules
     confirmed: bool = False    # V10 confirmation (follow-through)
     model: str = ""            # V10/V15: "swing" (body close) or "sweep" (wick only / SBC)
     is_mss: bool = False       # V15: True MSS = liquidity swept + expansion + body close
+    mss_grade: MSSGrade = MSSGrade.NONE  # V25: quality grading (standard/A+/A++)
 
 
 @dataclass
@@ -219,6 +228,8 @@ class FVG:
     from_extreme_candle: bool = False   # Is this from the extreme candle? (V13 rule)
     mitigated: bool = False    # Has price returned to fill this gap?
     mitigated_at_candle: Optional[int] = None
+    is_inverted: bool = False  # V25: FVG closed through during MSS expansion → iFVG
+    inverted_at_candle: Optional[int] = None
 
     @property
     def midpoint(self) -> float:
@@ -374,8 +385,9 @@ class TradingSignal:
     w1_trend: Optional[TrendState] = None
     d1_trend: Optional[TrendState] = None
     session: Optional[Session] = None
-    climax_warning: bool = False
+    vsa_absorption: bool = False
     is_counter_trend: bool = False
+    mss_quality: str = ""      # V25: "standard", "a_plus", "a_plus_plus", or ""
 
 
 # ──────────────────────────────────────────────
@@ -431,7 +443,7 @@ class TradeRecord:
     entry_method: str = ""
     pattern_type: str = ""
     is_counter_trend: bool = False
-    climax_warning: bool = False
+    vsa_absorption: bool = False
     # Timing
     entry_candle_idx: int = 0
     entry_timestamp: int = 0
