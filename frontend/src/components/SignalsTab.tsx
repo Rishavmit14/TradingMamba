@@ -161,8 +161,8 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
         </div>
       )}
 
-      {/* Price levels */}
-      <div className="grid grid-cols-3 gap-2 mb-3">
+      {/* Price levels — Entry + SL */}
+      <div className="grid grid-cols-2 gap-2 mb-2">
         <div className="bg-[var(--bg-tertiary)] rounded-lg px-2.5 py-2">
           <div className="flex items-center gap-1 mb-1">
             <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
@@ -181,22 +181,33 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
             ${signal.stop_loss.toLocaleString()}
           </span>
         </div>
-        <div className="bg-emerald-500/5 rounded-lg px-2.5 py-2">
-          <div className="flex items-center gap-1 mb-1">
-            <Target className="w-3 h-3 text-emerald-400/60" />
-            <span className="text-[10px] text-emerald-400/60">TP</span>
-          </div>
-          <span className="text-xs font-mono font-medium text-emerald-400">
-            ${signal.take_profit.toLocaleString()}
-          </span>
-        </div>
       </div>
 
-      {/* R:R and Confidence */}
+      {/* TP levels */}
+      <div className={`grid gap-2 mb-3 ${
+        (signal.take_profits?.length ?? 0) >= 3 ? "grid-cols-3" :
+        (signal.take_profits?.length ?? 0) === 2 ? "grid-cols-2" : "grid-cols-1"
+      }`}>
+        {(signal.take_profits && signal.take_profits.length > 0 ? signal.take_profits : [
+          { price: signal.take_profit, rr: signal.risk_reward_ratio, label: "TP1" }
+        ]).map((tp, i) => (
+          <div key={i} className={`rounded-lg px-2.5 py-2 ${
+            i === 0 ? "bg-emerald-500/10" : "bg-emerald-500/5"
+          }`}>
+            <div className="flex items-center gap-1 mb-1">
+              <Target className={`w-3 h-3 ${i === 0 ? "text-emerald-400" : "text-emerald-400/50"}`} />
+              <span className={`text-[10px] ${i === 0 ? "text-emerald-400" : "text-emerald-400/50"}`}>{tp.label}</span>
+              <span className={`text-[10px] font-mono ml-auto ${i === 0 ? "text-emerald-400/70" : "text-emerald-400/40"}`}>{tp.rr}R</span>
+            </div>
+            <span className={`text-xs font-mono font-medium ${i === 0 ? "text-emerald-400" : "text-emerald-400/70"}`}>
+              ${tp.price.toLocaleString()}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Confidence + Type */}
       <div className="flex items-center gap-4 mb-3">
-        <span className="text-xs text-[var(--text-muted)]">
-          R:R <span className="font-mono font-medium text-[var(--text-secondary)]">{signal.risk_reward_ratio}</span>
-        </span>
         <span className="text-xs text-[var(--text-muted)]">
           Conf <span className="font-mono font-medium text-[var(--text-secondary)]">{signal.confidence_score}%</span>
         </span>

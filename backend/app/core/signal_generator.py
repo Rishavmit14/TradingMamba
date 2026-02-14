@@ -393,12 +393,18 @@ def _get_counter_trend_tp(
 
 
 def _deduplicate_signals(signals: list[TradingSignal]) -> list[TradingSignal]:
-    """V23: One trade per zone — keep highest grade signal per overlapping zone.
+    """V23: One trade per zone — merge overlapping signals into multi-TP levels.
 
     Two zones overlap when their price ranges intersect.
+    Best-grade signal becomes the primary; all unique TPs are collected as TP1, TP2, TP3.
     Priority: Grade A > B > C > D, then trend-aligned > counter-trend, then R:R.
     """
     if len(signals) <= 1:
+        if signals:
+            sig = signals[0]
+            risk = abs(sig.entry_price - sig.stop_loss)
+            rr = round(abs(sig.take_profit - sig.entry_price) / risk, 2) if risk > 0 else 0
+            sig.take_profits = [{"price": sig.take_profit, "rr": rr, "label": "TP1"}]
         return signals
 
     _grade_rank = {"A": 4, "B": 3, "C": 2, "D": 1}
@@ -428,7 +434,69 @@ def _deduplicate_signals(signals: list[TradingSignal]) -> list[TradingSignal]:
         if not added:
             groups.append([sig])
 
-    return [max(group, key=_sort_key) for group in groups]
+    result = []
+    for group in groups:
+        # Pick the best signal as primary
+        best = max(group, key=_sort_key)
+        entry = best.entry_price
+        sl = best.stop_loss
+        risk = abs(entry - sl)
+        is_bull = (best.direction == Direction.BULLISH
+                   if isinstance(best.direction, Direction)
+                   else best.direction == "bullish")
+
+        # Collect all unique TPs from the group, filtering out invalid ones
+        seen_tps: set[float] = set()
+        raw_tps: list[float] = []
+        for sig in group:
+            tp = sig.take_profit
+            # Filter: TP must be on the correct side of entry and provide >= 1R
+            if risk > 0:
+                tp_rr = abs(tp - entry) / risk
+                if tp_rr < 1.0:
+                    continue  # TP too close to entry — useless target
+                if is_bull and tp <= entry:
+                    continue  # Bullish TP must be above entry
+                if not is_bull and tp >= entry:
+                    continue  # Bearish TP must be below entry
+            tp_rounded = round(tp, -1)
+            if tp_rounded not in seen_tps:
+                seen_tps.add(tp_rounded)
+                raw_tps.append(tp)
+
+        # Sort: closest to entry first
+        if is_bull:
+            raw_tps.sort()
+        else:
+            raw_tps.sort(reverse=True)
+
+        # If all TPs got filtered, fall back to the best signal's original TP
+        if not raw_tps:
+            raw_tps = [best.take_profit]
+
+        # Build take_profits list with R:R for each level
+        take_profits = []
+        for i, tp in enumerate(raw_tps):
+            rr = round(abs(tp - entry) / risk, 2) if risk > 0 else 0
+            take_profits.append({"price": tp, "rr": rr, "label": f"TP{i + 1}"})
+
+        # Primary TP = TP1 (closest target)
+        best.take_profit = raw_tps[0]
+        best.risk_reward_ratio = take_profits[0]["rr"]
+        best.take_profits = take_profits
+
+        # Merge confluences from all signals in group (unique only)
+        all_confluences: list[str] = []
+        seen_conf: set[str] = set()
+        for sig in group:
+            for c in sig.confluences:
+                if c not in seen_conf:
+                    seen_conf.add(c)
+                    all_confluences.append(c)
+        best.confluences = all_confluences
+
+        result.append(best)
+    return result
 
 
 def _generate_sbc_signals(

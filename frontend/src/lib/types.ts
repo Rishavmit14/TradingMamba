@@ -122,11 +122,18 @@ export interface Session {
   volatility_expectation: string;
 }
 
+export interface TakeProfit {
+  price: number;
+  rr: number;
+  label: string;  // "TP1", "TP2", "TP3"
+}
+
 export interface TradingSignal {
   direction: Direction;
   entry_price: number;
   stop_loss: number;
   take_profit: number;
+  take_profits?: TakeProfit[];
   risk_reward_ratio: number;
   confidence_score: number;
   grade: SignalGrade;
@@ -305,6 +312,7 @@ export interface ResolvedSignal {
   entry_price: number;
   stop_loss: number;
   take_profit: number;
+  take_profits?: TakeProfit[];
   risk_reward_ratio: number;
   grade: SignalGrade;
   trading_styles: string[];

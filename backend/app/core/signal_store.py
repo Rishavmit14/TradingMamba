@@ -25,7 +25,7 @@ _GRADE_PRIORITY = {"A": 0, "B": 1, "C": 2, "D": 3}
 @dataclass
 class TrackedSignal:
     """A signal being tracked for its lifecycle."""
-    signal_id: str                    # Hash of direction + rounded SL/TP (entry excluded)
+    signal_id: str                    # Hash of direction + rounded entry/SL (TP excluded for multi-TP merge)
     signal: TradingSignal             # Best-grade signal from merged group
     trading_styles: list[str]         # All styles that agree
     created_at: int                   # Unix ms when first generated
@@ -55,46 +55,125 @@ class SignalStore:
 
     @staticmethod
     def _compute_signal_id(sig: TradingSignal) -> str:
-        """Hash of (direction, rounded SL, rounded TP).
+        """Hash of (direction, rounded entry, rounded SL).
 
-        Entry price is EXCLUDED because it drifts with current price on each
-        analysis cycle. SL and TP are derived from structure (zones, swings)
-        and stay stable — they define the signal's structural identity.
+        TP is EXCLUDED so signals from the same zone with different TPs merge
+        into one signal with multiple TP levels (TP1, TP2, TP3).
+        Entry (zone midpoint) and SL (zone boundary) define the zone identity.
         Rounding to nearest 10 ensures cross-style duplicates produce the same ID.
         """
         key = (
             sig.direction.value if isinstance(sig.direction, Direction) else sig.direction,
+            round(sig.entry_price, -1),
             round(sig.stop_loss, -1),
-            round(sig.take_profit, -1),
         )
         return hashlib.md5(str(key).encode()).hexdigest()[:12]
+
+    @staticmethod
+    def _merge_take_profits(signals: list[TradingSignal], best: TradingSignal) -> list[dict]:
+        """Merge take_profits from multiple signals into a deduplicated, sorted list."""
+        entry = best.entry_price
+        sl = best.stop_loss
+        risk = abs(entry - sl)
+        is_bull = (best.direction == Direction.BULLISH
+                   if isinstance(best.direction, Direction)
+                   else best.direction == "bullish")
+
+        # Collect all TPs from all signals' take_profits lists + their primary TP
+        # Filter out TPs that are on wrong side of entry or provide < 1R
+        seen: set[float] = set()
+        raw_tps: list[float] = []
+        for sig in signals:
+            # From take_profits list (already built by _deduplicate_signals)
+            for tp_entry in (sig.take_profits or []):
+                tp_price = tp_entry["price"]
+                if risk > 0:
+                    tp_rr = abs(tp_price - entry) / risk
+                    if tp_rr < 1.0:
+                        continue
+                    if is_bull and tp_price <= entry:
+                        continue
+                    if not is_bull and tp_price >= entry:
+                        continue
+                tp_rounded = round(tp_price, -1)
+                if tp_rounded not in seen:
+                    seen.add(tp_rounded)
+                    raw_tps.append(tp_price)
+            # Also check the primary TP in case take_profits is empty
+            tp_price = sig.take_profit
+            if risk > 0:
+                tp_rr = abs(tp_price - entry) / risk
+                valid = tp_rr >= 1.0
+                if is_bull and tp_price <= entry:
+                    valid = False
+                if not is_bull and tp_price >= entry:
+                    valid = False
+            else:
+                valid = True
+            if valid:
+                tp_rounded = round(tp_price, -1)
+                if tp_rounded not in seen:
+                    seen.add(tp_rounded)
+                    raw_tps.append(tp_price)
+
+        # Sort: closest to entry first
+        if is_bull:
+            raw_tps.sort()
+        else:
+            raw_tps.sort(reverse=True)
+
+        # Fallback: if all TPs got filtered, keep best signal's TP
+        if not raw_tps:
+            raw_tps = [best.take_profit]
+
+        # Build labeled list
+        result = []
+        for i, tp in enumerate(raw_tps):
+            rr = round(abs(tp - entry) / risk, 2) if risk > 0 else 0
+            result.append({"price": tp, "rr": rr, "label": f"TP{i + 1}"})
+        return result
 
     def _deduplicate_cross_style(
         self, signals: list[TradingSignal]
     ) -> dict[str, tuple[TradingSignal, list[str]]]:
-        """Group signals by signal_id, merge trading_styles, keep best grade.
+        """Group signals by signal_id, merge trading_styles + take_profits, keep best grade.
 
         Returns dict mapping signal_id → (best_signal, merged_styles).
         """
-        groups: dict[str, tuple[TradingSignal, list[str]]] = {}
+        groups: dict[str, tuple[list[TradingSignal], list[str]]] = {}
 
         for sig in signals:
             sid = self._compute_signal_id(sig)
             style = sig.trading_style or "unknown"
 
             if sid not in groups:
-                groups[sid] = (sig, [style])
+                groups[sid] = ([sig], [style])
             else:
-                best, styles = groups[sid]
+                sigs, styles = groups[sid]
+                sigs.append(sig)
                 if style not in styles:
                     styles.append(style)
-                # Keep the signal with the better grade
+
+        # For each group: pick best grade, merge take_profits
+        result: dict[str, tuple[TradingSignal, list[str]]] = {}
+        for sid, (sigs, styles) in groups.items():
+            best = sigs[0]
+            for sig in sigs[1:]:
                 sig_grade = sig.grade.value if isinstance(sig.grade, SignalGrade) else sig.grade
                 best_grade = best.grade.value if isinstance(best.grade, SignalGrade) else best.grade
                 if _GRADE_PRIORITY.get(sig_grade, 9) < _GRADE_PRIORITY.get(best_grade, 9):
-                    groups[sid] = (sig, styles)
+                    best = sig
 
-        return groups
+            # Merge take_profits from all signals in this cross-style group
+            merged_tps = self._merge_take_profits(sigs, best)
+            best.take_profits = merged_tps
+            if merged_tps:
+                best.take_profit = merged_tps[0]["price"]
+                best.risk_reward_ratio = merged_tps[0]["rr"]
+
+            result[sid] = (best, styles)
+
+        return result
 
     @staticmethod
     def _check_sl_tp_hit(
@@ -166,16 +245,17 @@ class SignalStore:
         # 2. Match vs existing active signals
         for sid, (sig, styles) in deduped.items():
             if sid in self.active:
-                # Signal regenerated — refresh but LOCK entry_price from first detection.
-                # The signal generator recalculates entry=current_price each cycle,
-                # but we want the entry fixed to when the signal was first detected.
+                # Signal regenerated — refresh but LOCK entry, R:R, and take_profits
+                # from first detection.
                 tracked = self.active[sid]
                 locked_entry = tracked.signal.entry_price
                 locked_rr = tracked.signal.risk_reward_ratio
+                locked_tps = tracked.signal.take_profits
                 tracked.signal = sig
-                # Restore the locked entry price and R:R
+                # Restore locked fields
                 tracked.signal.entry_price = locked_entry
                 tracked.signal.risk_reward_ratio = locked_rr
+                tracked.signal.take_profits = locked_tps
                 tracked.trading_styles = styles
                 tracked.bars_active += 1
                 tracked.entry_timeframe = sig.timeframe
@@ -267,6 +347,7 @@ class SignalStore:
                 "entry_method": entry_method,
                 "confidence_score": sig.confidence_score,
                 "timeframe": sig.timeframe,
+                "take_profits": sig.take_profits if sig.take_profits else [],
             })
         return result
 

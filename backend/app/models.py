@@ -395,6 +395,7 @@ class TradingSignal:
     status: str = "active"     # "active" | "sl_hit" | "tp_hit" | "expired"
     created_at: int = 0        # Unix ms when first generated
     bars_active: int = 0       # How many analysis cycles this signal has persisted
+    take_profits: list = field(default_factory=list)  # Multi-TP: [{price, rr, label}]
 
 
 # ──────────────────────────────────────────────
