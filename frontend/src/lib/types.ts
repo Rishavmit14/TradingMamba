@@ -155,14 +155,6 @@ export interface TradingSignal {
   trigger_candle_index?: number;
 }
 
-export interface HTFZone {
-  type: "OB" | "FVG";
-  upper: number;
-  lower: number;
-  direction: Direction;
-  tf: string;  // "H4" | "D1"
-}
-
 export interface DetectorVisibility {
   swings: boolean;
   idm: boolean;
@@ -191,7 +183,6 @@ export interface AnalysisResult {
   signals: TradingSignal[];
   all_style_signals: TradingSignal[];
   candles: Candle[];
-  htf_zones: HTFZone[];
 }
 
 export type SelectedElementType = "swing" | "bos" | "choch" | "idm" | "fvg" | "ob";
