@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 from app.models import (
     Candle, SwingPoint, Inducement, LiquidityPool,
     BOS, CHoCH, FVG, OrderBlock, PremiumDiscount,
-    Session, TradingSignal, TrendState,
+    Session, TradingSignal, TrendState, IDMStatus,
 )
 from app.core.swing_detector import detect_and_classify
 from app.core.inducement import detect_and_validate as detect_idm
@@ -153,14 +153,17 @@ def _apply_cross_tf_fake_choch(results: dict[str, AnalysisResult]) -> None:
         if not lower:
             continue
 
-        # Collect active inducement prices from all higher TFs
+        # Collect ACTIVE inducement prices from all higher TFs.
+        # Only untaken IDMs can act as traps — taken/transferred IDMs
+        # have already been consumed and should NOT invalidate CHoCH.
         higher_idm_prices: list[float] = []
         for htf in higher_tfs:
             higher = results.get(htf)
             if not higher:
                 continue
             for idm in higher.inducements:
-                higher_idm_prices.append(idm.price)
+                if idm.status == IDMStatus.ACTIVE:
+                    higher_idm_prices.append(idm.price)
 
         if not higher_idm_prices:
             continue

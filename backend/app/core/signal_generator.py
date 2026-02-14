@@ -442,17 +442,18 @@ def _deduplicate_signals(signals: list[TradingSignal]) -> list[TradingSignal]:
             sig.confidence_score,
         )
 
-    # Group overlapping zones
+    # Group overlapping zones — use full trade range (SL to TP) for overlap check
     groups: list[list[TradingSignal]] = []
     for sig in signals:
-        sig_lower = min(sig.entry_price, sig.stop_loss)
-        sig_upper = max(sig.entry_price, sig.take_profit)
+        sig_lower = min(sig.entry_price, sig.stop_loss, sig.take_profit)
+        sig_upper = max(sig.entry_price, sig.stop_loss, sig.take_profit)
         added = False
         for group in groups:
             ref = group[0]
-            ref_lower = min(ref.entry_price, ref.stop_loss)
-            ref_upper = max(ref.entry_price, ref.take_profit)
-            if sig_lower <= ref_upper and sig_upper >= ref_lower:
+            ref_lower = min(ref.entry_price, ref.stop_loss, ref.take_profit)
+            ref_upper = max(ref.entry_price, ref.stop_loss, ref.take_profit)
+            # Same direction required for merging
+            if sig.direction == ref.direction and sig_lower <= ref_upper and sig_upper >= ref_lower:
                 group.append(sig)
                 added = True
                 break

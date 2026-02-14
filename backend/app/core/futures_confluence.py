@@ -92,10 +92,10 @@ def evaluate_futures_confluences(
                 confluences.append(f"Futures: Taker sell dominant ({1/taker_ratio:.2f}x)")
                 modifier += 5
             elif is_bull and taker_ratio < 0.85:
-                # Strong sell aggression contradicts bullish signal
+                confluences.append(f"Futures: Taker sell dominant ({1/taker_ratio:.2f}x) \u26a0")
                 modifier -= 5
             elif not is_bull and taker_ratio > 1.15:
-                # Strong buy aggression contradicts bearish signal
+                confluences.append(f"Futures: Taker buy dominant ({taker_ratio:.2f}x) \u26a0")
                 modifier -= 5
 
     # ── 4. Top Trader Long/Short Ratio ──
@@ -110,5 +110,11 @@ def evaluate_futures_confluences(
         elif not is_bull and short_pct > 0.55:
             confluences.append(f"Futures: Top traders {short_pct*100:.0f}% short")
             modifier += 5
+        elif is_bull and short_pct > 0.55:
+            confluences.append(f"Futures: Top traders {short_pct*100:.0f}% short \u26a0")
+            modifier -= 5
+        elif not is_bull and long_pct > 0.55:
+            confluences.append(f"Futures: Top traders {long_pct*100:.0f}% long \u26a0")
+            modifier -= 5
 
     return confluences, modifier

@@ -148,11 +148,14 @@ export default function SignalCard({ signal, onShowDetails }: SignalCardProps) {
       <div className="flex flex-wrap gap-1">
         {signal.confluences.map((c, i) => {
           const isFutures = c.startsWith("Futures:");
+          const isFuturesWarn = isFutures && c.endsWith("\u26a0");
           return (
             <span
               key={i}
               className={`px-2 py-0.5 text-xs rounded-md border ${
-                isFutures
+                isFuturesWarn
+                  ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                  : isFutures
                   ? "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
                   : "bg-[var(--bg-tertiary)] text-[var(--text-secondary)] border-[var(--border-primary)]"
               }`}
