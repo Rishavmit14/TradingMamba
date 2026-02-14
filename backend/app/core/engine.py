@@ -52,6 +52,7 @@ class AnalysisResult:
     current_phase: PricePhase = PricePhase.CONSOLIDATION
     signals: list[TradingSignal] = field(default_factory=list)
     all_style_signals: list[TradingSignal] = field(default_factory=list)
+    futures_context: dict | None = None
 
 
 def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
@@ -203,6 +204,7 @@ def _generate_style_signals(
     style_cfg: dict,
     results: dict[str, AnalysisResult],
     candles_by_tf: dict[str, list[Candle]],
+    futures_data: dict | None = None,
 ) -> list[TradingSignal]:
     """Generate signals for a single trading style using its TF hierarchy.
 
@@ -252,16 +254,39 @@ def _generate_style_signals(
         trade_bias_override=bias_trend,
         trading_style=style_key,
         entry_timeframe=entry_tf,
+        futures_data=futures_data,
     )
+
+
+def _compute_futures_context(futures_data: dict) -> dict:
+    """Extract chart-friendly data from raw futures_data for frontend overlays."""
+    oi_hist = futures_data.get("open_interest", {}).get("history", [])
+    oi_deltas = []
+    for prev, cur in zip(oi_hist, oi_hist[1:]):
+        prev_oi = prev.get("oi_usd", 0)
+        if prev_oi > 0:
+            oi_deltas.append({
+                "timestamp": cur["timestamp"],
+                "delta_pct": round((cur["oi_usd"] - prev_oi) / prev_oi * 100, 3),
+                "oi_usd": cur["oi_usd"],
+            })
+    return {
+        "oi_deltas": oi_deltas,
+        "funding_history": futures_data.get("funding_rate", {}).get("history", []),
+        "current_funding": futures_data.get("funding_rate", {}).get("current", 0),
+        "taker_volume": futures_data.get("taker_volume", []),
+    }
 
 
 def run_multi_tf_analysis(
     candles_by_tf: dict[str, list[Candle]],
+    futures_data: dict | None = None,
 ) -> dict[str, AnalysisResult]:
     """Run analysis across all 7 timeframes and generate multi-style signals.
 
     V20: Each TF is analyzed once, then results are reused across all 6
     trading styles (Positional, Swing, Short-Term, Intraday, Day Trading, Scalping).
+    Futures: OI/funding/taker data passed through to signal generator as confluences.
     """
     results: dict[str, AnalysisResult] = {}
 
@@ -281,6 +306,7 @@ def run_multi_tf_analysis(
     for style_key, style_cfg in TRADING_STYLES.items():
         style_signals = _generate_style_signals(
             style_key, style_cfg, results, candles_by_tf,
+            futures_data=futures_data,
         )
         all_style_signals.extend(style_signals)
 
@@ -300,5 +326,8 @@ def run_multi_tf_analysis(
         ]
         # All styles combined (deduplicated, lifecycle-tracked)
         m15.all_style_signals = active_signals
+        # Attach futures context for chart overlays
+        if futures_data:
+            m15.futures_context = _compute_futures_context(futures_data)
 
     return results

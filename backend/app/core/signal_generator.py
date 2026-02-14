@@ -28,6 +28,7 @@ from app.models import (
     LiquidityType, LiquiditySource, LiquidityEvent,
 )
 from app.core.liquidity import prices_equal
+from app.core.futures_confluence import evaluate_futures_confluences
 from app.config import (
     SL_BUFFER_PCT, MIN_RISK_REWARD,
     SBC_MIN_RISK_REWARD, SBC_RECENCY_WINDOW, SBC_CONFIRM_WINDOW,
@@ -801,12 +802,14 @@ def generate_signals(
     trade_bias_override: TrendState | None = None,
     trading_style: str = "",
     entry_timeframe: str = "M15",
+    futures_data: dict | None = None,
 ) -> list[TradingSignal]:
     """The Master Checklist — generate trading signals from all detector outputs.
 
     This is the top-level function that orchestrates the entire system.
     V20: htf_zones passed from higher TF for zone alignment.
     V22: vsa_absorptions passed for institutional flow confluence.
+    Futures: OI/funding/taker/L-S confluences appended AFTER grading (confidence, not grade).
     """
     if not candles:
         return []
@@ -814,6 +817,10 @@ def generate_signals(
     current_price = candles[-1].close
     idx_map = {c.index: c for c in candles}
     signals: list[TradingSignal] = []
+
+    # Pre-compute futures confluences for both directions (applied after grading)
+    futures_bull, futures_bull_mod = evaluate_futures_confluences(futures_data, Direction.BULLISH)
+    futures_bear, futures_bear_mod = evaluate_futures_confluences(futures_data, Direction.BEARISH)
 
     # V23 Step 1: Trade bias from HTF
     # When trade_bias_override is provided (multi-style mode), use it directly.
@@ -1078,6 +1085,21 @@ def generate_signals(
         entry_timeframe=entry_timeframe,
     )
     signals.extend(sbc_signals)
+
+    # ── Apply futures confluences AFTER grading ──
+    # Affects confidence score but NOT the A/B/C/D structural grade.
+    for sig in signals:
+        is_bull = (
+            sig.direction == Direction.BULLISH
+            if isinstance(sig.direction, Direction)
+            else sig.direction == "bullish"
+        )
+        if is_bull:
+            sig.confluences.extend(futures_bull)
+            sig.confidence_score = max(0, min(100, sig.confidence_score + futures_bull_mod))
+        else:
+            sig.confluences.extend(futures_bear)
+            sig.confidence_score = max(0, min(100, sig.confidence_score + futures_bear_mod))
 
     # V23: Deduplicate — one signal per zone
     return _deduplicate_signals(signals)

@@ -186,6 +186,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
   const fvgPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const positionPrimitiveRef = useRef<BoxPrimitive | null>(null);
   const killZonePrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const fundingPrimitiveRef = useRef<BoxPrimitive | null>(null);
+  const oiDeltaSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
   const positionLinesRef = useRef<any[]>([]);
   const prevCandleCountRef = useRef<number>(0);
 
@@ -283,6 +285,21 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
     const positionPrimitive = new BoxPrimitive();
     (candleSeries as any).attachPrimitive(positionPrimitive);
     positionPrimitiveRef.current = positionPrimitive;
+
+    // Funding rate background tinting (behind everything)
+    const fundingPrimitive = new BoxPrimitive();
+    (candleSeries as any).attachPrimitive(fundingPrimitive);
+    fundingPrimitiveRef.current = fundingPrimitive;
+
+    // OI delta histogram on separate price scale at the very bottom
+    const oiDeltaSeries = chart.addHistogramSeries({
+      priceFormat: { type: "price", precision: 2, minMove: 0.01 },
+      priceScaleId: "oi_delta",
+    });
+    chart.priceScale("oi_delta").applyOptions({
+      scaleMargins: { top: 0.92, bottom: 0 },
+    });
+    oiDeltaSeriesRef.current = oiDeltaSeries;
 
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
@@ -464,6 +481,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       obPrimitiveRef.current = null;
       killZonePrimitiveRef.current = null;
       positionPrimitiveRef.current = null;
+      fundingPrimitiveRef.current = null;
+      oiDeltaSeriesRef.current = null;
       positionLinesRef.current = [];
     };
   }, []);
@@ -967,6 +986,73 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       obPrimitiveRef.current.setBoxes(boxes);
     } else if (obPrimitiveRef.current) {
       obPrimitiveRef.current.setBoxes([]);
+    }
+
+    // --- FUTURES OVERLAYS: OI Delta histogram + Funding rate tinting ---
+
+    // OI Delta histogram — green bars for rising OI, red for falling
+    if (visibility.futures && data.futures_context?.oi_deltas?.length && oiDeltaSeriesRef.current) {
+      // Map OI delta timestamps to nearest candle timestamps
+      const oiMap = new Map<number, number>(); // tvTime -> delta_pct
+      for (const oi of data.futures_context.oi_deltas) {
+        let bestCandle = candles[0];
+        let bestDist = Math.abs(candles[0].timestamp - oi.timestamp);
+        for (const c of candles) {
+          const dist = Math.abs(c.timestamp - oi.timestamp);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestCandle = c;
+          }
+        }
+        oiMap.set(toTV(bestCandle.timestamp), oi.delta_pct);
+      }
+
+      const oiData = Array.from(oiMap.entries())
+        .sort((a, b) => a[0] - b[0])
+        .map(([time, delta]) => ({
+          time: time as any,
+          value: delta,
+          color: delta >= 0 ? "rgba(34, 197, 94, 0.6)" : "rgba(239, 68, 68, 0.6)",
+        }));
+      oiDeltaSeriesRef.current.setData(oiData);
+    } else if (oiDeltaSeriesRef.current) {
+      oiDeltaSeriesRef.current.setData([]);
+    }
+
+    // Funding rate background tinting — red for crowded longs, green for crowded shorts
+    if (visibility.futures && data.futures_context?.funding_history?.length && fundingPrimitiveRef.current) {
+      const allHighs = candles.map(c => c.high);
+      const allLows = candles.map(c => c.low);
+      const priceHigh = Math.max(...allHighs);
+      const priceLow = Math.min(...allLows);
+      const pricePad = (priceHigh - priceLow) * 0.5;
+      const boxTop = priceHigh + pricePad;
+      const boxBottom = priceLow - pricePad;
+
+      const fundingBoxes: BoxData[] = [];
+      for (const fh of data.futures_context.funding_history) {
+        const rate = fh.rate;
+        if (Math.abs(rate) <= 0.0005) continue; // Only tint extreme funding
+        const startTime = toTV(fh.timestamp);
+        const endTime = toTV(fh.timestamp + 8 * 3600_000); // Funding periods are ~8h
+        const alpha = Math.min(0.08, Math.abs(rate) * 50);
+        const color = rate > 0
+          ? `rgba(239, 68, 68, ${alpha})`   // Red = crowded longs (bearish pressure)
+          : `rgba(34, 197, 94, ${alpha})`;   // Green = crowded shorts (bullish pressure)
+        fundingBoxes.push({
+          startTime,
+          endTime,
+          upperPrice: boxTop,
+          lowerPrice: boxBottom,
+          fillColor: color,
+          borderColor: "transparent",
+          label: "",
+          labelColor: "transparent",
+        });
+      }
+      fundingPrimitiveRef.current.setBoxes(fundingBoxes);
+    } else if (fundingPrimitiveRef.current) {
+      fundingPrimitiveRef.current.setBoxes([]);
     }
 
     // --- OPEN POSITION DISPLAY: SL / Entry / TP boxes ---

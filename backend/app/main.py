@@ -52,6 +52,17 @@ from app.services.database import (
 
 logger = logging.getLogger("tradingmamba")
 
+
+async def _fetch_futures_safe(symbol: str = SYMBOL) -> dict | None:
+    """Fetch Binance Futures data, returning None on any failure (graceful degradation)."""
+    try:
+        from app.services.futures_data import fetch_market_intel
+        return await fetch_market_intel(symbol)
+    except Exception as e:
+        logger.debug(f"Futures data unavailable: {e}")
+        return None
+
+
 # ── Cached analysis results for deep analysis reuse ──
 # Updated by every full multi-TF analysis call; deep analysis reads
 # from here instead of re-running (avoids SignalStore side-effects
@@ -366,6 +377,7 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
             for sig in result.all_style_signals
         ],
         "htf_zones": htf_zones or [],
+        "futures_context": result.futures_context,
     }
 
 
@@ -391,10 +403,13 @@ async def analyze_single_tf(timeframe: str = "H4"):
     trade_bias = None
     htf_zones: list[dict] = []
     try:
-        all_candles = await fetch_all_timeframes(SYMBOL)
+        all_candles, futures_data = await asyncio.gather(
+            fetch_all_timeframes(SYMBOL),
+            _fetch_futures_safe(),
+        )
         # Use already-fetched candles for the selected TF
         all_candles[tf] = candles
-        multi_results = run_multi_tf_analysis(all_candles)
+        multi_results = run_multi_tf_analysis(all_candles, futures_data=futures_data)
         _cached_results.update(multi_results)
         _cached_candles.update(all_candles)
 
@@ -424,8 +439,11 @@ async def analyze_single_tf(timeframe: str = "H4"):
 @app.get("/api/analyze")
 async def analyze_all():
     """Run full multi-TF analysis (W1→D1→H4→M15) and generate signals."""
-    candles_by_tf = await fetch_all_timeframes(SYMBOL)
-    results = run_multi_tf_analysis(candles_by_tf)
+    candles_by_tf, futures_data = await asyncio.gather(
+        fetch_all_timeframes(SYMBOL),
+        _fetch_futures_safe(),
+    )
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
     _cached_results.update(results)
     _cached_candles.update(candles_by_tf)
 
@@ -457,8 +475,11 @@ async def analyze_all():
 @app.get("/api/signals")
 async def get_signals():
     """Get current trading signals from M15 analysis."""
-    candles_by_tf = await fetch_all_timeframes(SYMBOL)
-    results = run_multi_tf_analysis(candles_by_tf)
+    candles_by_tf, futures_data = await asyncio.gather(
+        fetch_all_timeframes(SYMBOL),
+        _fetch_futures_safe(),
+    )
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
     _cached_results.update(results)
     _cached_candles.update(candles_by_tf)
 
@@ -769,8 +790,11 @@ def _compute_v23_checklist(
 @app.get("/api/signals/detailed")
 async def get_detailed_signals():
     """Get signals with full multi-TF context + V24/V23 checklists for the Signals tab."""
-    candles_by_tf = await fetch_all_timeframes(SYMBOL)
-    results = run_multi_tf_analysis(candles_by_tf)
+    candles_by_tf, futures_data = await asyncio.gather(
+        fetch_all_timeframes(SYMBOL),
+        _fetch_futures_safe(),
+    )
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
     _cached_results.update(results)
     _cached_candles.update(candles_by_tf)
 
@@ -889,8 +913,11 @@ async def get_signal_deep_analysis(signal_id: str):
         candles_by_tf = _cached_candles
     else:
         # Cold start fallback: no analysis has run yet
-        candles_by_tf = await fetch_all_timeframes(SYMBOL)
-        results = run_multi_tf_analysis(candles_by_tf)
+        candles_by_tf, futures_data = await asyncio.gather(
+            fetch_all_timeframes(SYMBOL),
+            _fetch_futures_safe(),
+        )
+        results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
         _cached_results.update(results)
         _cached_candles.update(candles_by_tf)
 

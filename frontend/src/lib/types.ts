@@ -163,6 +163,7 @@ export interface DetectorVisibility {
   fvg: boolean;
   ob: boolean;
   pd: boolean;
+  futures: boolean;
 }
 
 export interface AnalysisResult {
@@ -183,6 +184,7 @@ export interface AnalysisResult {
   signals: TradingSignal[];
   all_style_signals: TradingSignal[];
   candles: Candle[];
+  futures_context?: FuturesContext | null;
 }
 
 export type SelectedElementType = "swing" | "bos" | "choch" | "idm" | "fvg" | "ob";
@@ -444,6 +446,21 @@ export interface TelegramStatus {
   connected: boolean;
   chat_id: string | null;
   bot_username: string | null;
+}
+
+// ── Futures Context (chart overlays from signal engine) ──
+
+export interface OIDelta {
+  timestamp: number;
+  delta_pct: number;
+  oi_usd: number;
+}
+
+export interface FuturesContext {
+  oi_deltas: OIDelta[];
+  funding_history: { timestamp: number; rate: number; mark_price: number }[];
+  current_funding: number;
+  taker_volume: { timestamp: number; buy_vol: number; sell_vol: number; ratio: number }[];
 }
 
 // ── Phase 6: Market Intel Types ──

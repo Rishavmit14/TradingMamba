@@ -39,10 +39,11 @@ const DETECTOR_LABELS: { key: keyof DetectorVisibility; label: string; color: st
   { key: "fvg", label: "FVG", color: "#10b981" },
   { key: "ob", label: "OB", color: "#3b82f6" },
   { key: "pd", label: "P/D", color: "#eab308" },
+  { key: "futures", label: "Futures", color: "#06b6d4" },
 ];
 
 const DEFAULT_VISIBILITY: DetectorVisibility = {
-  swings: true, idm: true, bos: true, choch: true, fvg: true, ob: true, pd: true,
+  swings: true, idm: true, bos: true, choch: true, fvg: true, ob: true, pd: true, futures: true,
 };
 
 function TrendIcon({ trend }: { trend: string }) {
