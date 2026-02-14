@@ -28,10 +28,10 @@ def detect_raw_fvgs(candles: list[Candle]) -> list[FVG]:
     """
     fvgs: list[FVG] = []
 
-    if len(candles) < 3:
+    if len(candles) < 4:
         return fvgs
 
-    for i in range(1, len(candles) - 1):
+    for i in range(1, len(candles) - 2):
         prev = candles[i - 1]
         curr = candles[i]
         nxt = candles[i + 1]

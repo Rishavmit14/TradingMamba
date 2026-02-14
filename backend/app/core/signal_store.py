@@ -180,18 +180,26 @@ class SignalStore:
         tracked: TrackedSignal,
         candles: list[Candle],
     ) -> Optional[tuple[str, float]]:
-        """Walk candles after created_at to check if SL or TP was hit.
+        """Walk candles after signal trigger to check if SL or TP was hit.
 
         Returns ("sl_hit", price) or ("tp_hit", price) or None.
+        Uses signal.timestamp (the zone-tap candle time, locked on first detection)
+        instead of created_at (server wall clock) so SL/TP resolution survives
+        server restarts.
         """
         direction = tracked.signal.direction
         is_bull = (direction == Direction.BULLISH) if isinstance(direction, Direction) else (direction == "bullish")
         sl = tracked.signal.stop_loss
         tp = tracked.signal.take_profit
 
+        # Use the signal's trigger timestamp (zone tap time) to find the
+        # starting point for SL/TP checking.  Falls back to created_at
+        # for legacy signals that don't have a trigger timestamp.
+        check_after = tracked.signal.timestamp or tracked.created_at
+
         for candle in candles:
-            # Only check candles after signal creation
-            if candle.timestamp <= tracked.created_at:
+            # Only check candles after the signal was triggered
+            if candle.timestamp <= check_after:
                 continue
 
             if is_bull:
@@ -251,11 +259,15 @@ class SignalStore:
                 locked_entry = tracked.signal.entry_price
                 locked_rr = tracked.signal.risk_reward_ratio
                 locked_tps = tracked.signal.take_profits
+                locked_trigger = tracked.signal.trigger_candle_index
+                locked_ts = tracked.signal.timestamp
                 tracked.signal = sig
                 # Restore locked fields
                 tracked.signal.entry_price = locked_entry
                 tracked.signal.risk_reward_ratio = locked_rr
                 tracked.signal.take_profits = locked_tps
+                tracked.signal.trigger_candle_index = locked_trigger
+                tracked.signal.timestamp = locked_ts
                 tracked.trading_styles = styles
                 tracked.bars_active += 1
                 tracked.entry_timeframe = sig.timeframe

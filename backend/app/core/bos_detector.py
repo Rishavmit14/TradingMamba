@@ -76,7 +76,7 @@ def detect_bos(
             # Bullish BOS: look for candle body closing above swing high's wick
             break_level = swing_candle.high  # RULE 2: must close above WICK
 
-            for candle in candles:
+            for candle in candles[:-1]:  # exclude live (unfinished) candle
                 if candle.index <= swing.candle_index:
                     continue
 
@@ -101,7 +101,7 @@ def detect_bos(
             # Bearish BOS: look for candle body closing below swing low's wick
             break_level = swing_candle.low  # RULE 2: must close below WICK
 
-            for candle in candles:
+            for candle in candles[:-1]:  # exclude live (unfinished) candle
                 if candle.index <= swing.candle_index:
                     continue
 

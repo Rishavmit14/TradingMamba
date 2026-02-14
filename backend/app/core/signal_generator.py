@@ -100,20 +100,44 @@ def _find_active_zones(
     return zones
 
 
-def _check_zone_tap(zone: dict, candles: list[Candle], lookback: int = 10) -> bool:
+def _check_zone_tap(zone: dict, candles: list[Candle], lookback: int = 10) -> tuple[bool, int]:
     """Check if price has tapped (reached) a zone in the last N candles.
 
     Step 6: price must reach the identified zone before entry.
     Uses the high/low range of recent candles — not just the last close —
     to catch wicks that tapped the zone.
     Default lookback=10 (2.5h on M15) balances recency with detection rate.
+
+    Returns (tapped, tap_candle_index): whether zone was tapped and which
+    candle first tapped it within the lookback window.
+
+    For wide zones (HTF OBs), a simple "any overlap" check can match candles
+    that barely clip the zone edge.  To pick the most meaningful tap, we
+    require the candle to reach the zone MIDPOINT (the entry price area):
+      - Bullish zone: candle low ≤ midpoint
+      - Bearish zone: candle high ≥ midpoint
+    If no candle reaches the midpoint, fall back to any overlap.
     """
     recent = candles[-lookback:] if len(candles) >= lookback else candles
+    midpoint = (zone["upper"] + zone["lower"]) / 2
+    is_bull = zone.get("direction") in ("bullish", Direction.BULLISH)
+
+    # First pass: candle that reached the zone midpoint (strong tap)
     for c in recent:
-        # Any candle whose range overlaps the zone counts as a tap
+        overlaps = c.low <= zone["upper"] and c.high >= zone["lower"]
+        if not overlaps:
+            continue
+        if is_bull and c.low <= midpoint:
+            return True, c.index
+        if not is_bull and c.high >= midpoint:
+            return True, c.index
+
+    # Fallback: any overlap (edge tap — still valid, just less precise)
+    for c in recent:
         if c.low <= zone["upper"] and c.high >= zone["lower"]:
-            return True
-    return False
+            return True, c.index
+
+    return False, -1
 
 
 def _calculate_sl(zone: dict, direction: Direction) -> float:
@@ -741,8 +765,8 @@ def _generate_sbc_signals(
             timeframe=entry_timeframe,
             entry_method=EntryMethod.SBC,
             pattern_type="SBC sweep entry",
-            timestamp=candles[-1].timestamp,
-            trigger_candle_index=candles[-1].index,
+            timestamp=idx_map[pool.swept_at_candle].timestamp if pool.swept_at_candle and pool.swept_at_candle in idx_map else candles[-1].timestamp,
+            trigger_candle_index=pool.swept_at_candle if pool.swept_at_candle else candles[-1].index,
             w1_trend=w1_trend,
             d1_trend=d1_trend,
             session=session,
@@ -788,6 +812,7 @@ def generate_signals(
         return []
 
     current_price = candles[-1].close
+    idx_map = {c.index: c for c in candles}
     signals: list[TradingSignal] = []
 
     # V23 Step 1: Trade bias from HTF
@@ -842,7 +867,8 @@ def generate_signals(
 
         for zone in zones:
             # Step 6: Check zone tap
-            if not _check_zone_tap(zone, candles):
+            tapped, tap_candle_idx = _check_zone_tap(zone, candles)
+            if not tapped:
                 continue
 
             direction = zone["direction"]
@@ -939,8 +965,8 @@ def generate_signals(
                 timeframe=entry_timeframe,
                 entry_method=entry_method,
                 pattern_type=f"{zone['type']} trend continuation",
-                timestamp=candles[-1].timestamp,
-                trigger_candle_index=candles[-1].index,
+                timestamp=idx_map[tap_candle_idx].timestamp if tap_candle_idx in idx_map else candles[-1].timestamp,
+                trigger_candle_index=tap_candle_idx if tap_candle_idx >= 0 else candles[-1].index,
                 w1_trend=w1_trend,
                 d1_trend=d1_trend,
                 session=session,
@@ -965,7 +991,8 @@ def generate_signals(
         ) is not None
 
         for zone in ct_zones:
-            if not _check_zone_tap(zone, candles):
+            tapped, ct_tap_candle_idx = _check_zone_tap(zone, candles)
+            if not tapped:
                 continue
 
             sl = _calculate_sl(zone, ct_dir)
@@ -1022,8 +1049,8 @@ def generate_signals(
                 timeframe=entry_timeframe,
                 entry_method=ct_entry_method,
                 pattern_type=f"{zone['type']} counter-trend",
-                timestamp=candles[-1].timestamp,
-                trigger_candle_index=candles[-1].index,
+                timestamp=idx_map[ct_tap_candle_idx].timestamp if ct_tap_candle_idx in idx_map else candles[-1].timestamp,
+                trigger_candle_index=ct_tap_candle_idx if ct_tap_candle_idx >= 0 else candles[-1].index,
                 w1_trend=w1_trend,
                 d1_trend=d1_trend,
                 session=session,

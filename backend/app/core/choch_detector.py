@@ -206,7 +206,7 @@ def detect_choch(
                 break
         if live_hl:
             last_swing_idx = swings[-1].candle_index
-            for candle in candles:
+            for candle in candles[:-1]:  # exclude live (unfinished) candle
                 if candle.index <= max(live_hl.candle_index, last_swing_idx):
                     continue
                 body_broke = candle.body_bottom < live_hl.price
@@ -236,7 +236,7 @@ def detect_choch(
                 break
         if live_lh:
             last_swing_idx = swings[-1].candle_index
-            for candle in candles:
+            for candle in candles[:-1]:  # exclude live (unfinished) candle
                 if candle.index <= max(live_lh.candle_index, last_swing_idx):
                     continue
                 body_broke = candle.body_top > live_lh.price
