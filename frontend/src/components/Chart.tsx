@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { RotateCcw } from "lucide-react";
 import {
   createChart,
   CrosshairMode,
@@ -1124,10 +1125,32 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
     });
   }, [livePrice, data]);
 
+  const handleReset = useCallback(() => {
+    if (!chartRef.current || !candleSeriesRef.current) return;
+    const ts = chartRef.current.timeScale();
+    const count = candleSeriesRef.current.data().length;
+    if (count > 0) {
+      const from = Math.max(0, count - 80);
+      ts.setVisibleLogicalRange({ from, to: count + 5 });
+    }
+  }, []);
+
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-full rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/20"
-    />
+    <div className="relative w-full h-full">
+      <div
+        ref={containerRef}
+        className="w-full h-full rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-lg shadow-black/20"
+      />
+      {/* Reset / recenter button — bottom center, above time axis */}
+      <button
+        onClick={handleReset}
+        style={{ zIndex: 10, background: "rgba(26,26,46,0.55)", borderColor: "rgba(255,255,255,0.08)" }}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 text-[10px] font-medium text-[var(--text-muted)] backdrop-blur-sm border rounded-full shadow-sm hover:text-[var(--text-primary)] transition-all opacity-40 hover:opacity-100"
+        title="Reset chart view"
+      >
+        <RotateCcw className="w-3 h-3" />
+        Reset
+      </button>
+    </div>
   );
 }
