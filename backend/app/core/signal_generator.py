@@ -16,6 +16,7 @@ The Checklist:
 10. VSA ABSORPTION → ultra-high volume institutional flow = confirmation
 11. DETECT CHoCH → D1 HL/LH break = direction switch
 12. COUNTER-TREND → D1 BOS + IDM close + FVG → TP first opposing zone
+13. SBC ENTRY → sweep liquidity (wick) + body close opposite side = standalone entry
 """
 
 from __future__ import annotations
@@ -24,8 +25,13 @@ from app.models import (
     FVG, OrderBlock, PremiumDiscount, Session, TradingSignal,
     Direction, TrendState, SwingType, SwingClassification,
     ZoneType, EntryMethod, SignalGrade, IDMStatus, MSSGrade,
+    LiquidityType, LiquiditySource, LiquidityEvent,
 )
-from app.config import SL_BUFFER_PCT, MIN_RISK_REWARD
+from app.core.liquidity import prices_equal
+from app.config import (
+    SL_BUFFER_PCT, MIN_RISK_REWARD,
+    SBC_MIN_RISK_REWARD, SBC_RECENCY_WINDOW, SBC_CONFIRM_WINDOW,
+)
 
 
 def _find_active_zones(
@@ -425,6 +431,261 @@ def _deduplicate_signals(signals: list[TradingSignal]) -> list[TradingSignal]:
     return [max(group, key=_sort_key) for group in groups]
 
 
+def _generate_sbc_signals(
+    candles: list[Candle],
+    swings: list[SwingPoint],
+    liquidity_pools: list[LiquidityPool],
+    fvgs: list[FVG],
+    trend: TrendState,
+    pd: PremiumDiscount | None,
+    session: Session | None,
+    trade_bias: TrendState,
+    has_multi_tf: bool,
+    vsa_absorptions: list | None,
+    w1_trend: TrendState | None,
+    d1_trend: TrendState | None,
+) -> list[TradingSignal]:
+    """V22 SBC (Sweep Based Change of Character) standalone entry signals.
+
+    SBC = sweep one side's liquidity (wick only) + first candle body close
+    on opposite side of the swept swing → direct entry.
+
+    This generates signals INDEPENDENTLY of zone-tap signals. It uses
+    existing liquidity sweep data to find SBC patterns and create entries
+    at 50% fib or FVG within the sweep swing range.
+    """
+    if not candles or not liquidity_pools or not swings:
+        return []
+
+    signals: list[TradingSignal] = []
+    last_idx = candles[-1].index
+    current_price = candles[-1].close
+    idx_map = {c.index: c for c in candles}
+
+    # Step 1: Find recent wick-only sweeps (SWEEP, not GRAB)
+    recent_sweeps = [
+        pool for pool in liquidity_pools
+        if pool.swept
+        and pool.event_type == LiquidityEvent.SWEEP
+        and pool.swept_at_candle is not None
+        and (last_idx - pool.swept_at_candle) <= SBC_RECENCY_WINDOW
+    ]
+
+    if not recent_sweeps:
+        return []
+
+    # Sort by sweep time (earliest first) for two-sided resolution
+    recent_sweeps.sort(key=lambda p: p.swept_at_candle or 0)
+
+    for pool in recent_sweeps:
+        # Step 2: Find the swing point that created this liquidity pool
+        swept_swing = None
+        for swing in swings:
+            if swing.candle_index in pool.candle_indices:
+                swept_swing = swing
+                break
+        if not swept_swing:
+            for swing in swings:
+                if prices_equal(swing.price, pool.price_level):
+                    swept_swing = swing
+                    break
+        if not swept_swing:
+            continue
+
+        swept_swing_candle = idx_map.get(swept_swing.candle_index)
+        if not swept_swing_candle:
+            continue
+
+        # Step 3: Determine SBC direction
+        if pool.pool_type == LiquidityType.SELL_SIDE:
+            sbc_dir = Direction.BULLISH   # Low swept → buy
+        else:
+            sbc_dir = Direction.BEARISH   # High swept → sell
+
+        # Step 4: Check body close confirmation
+        # V22: body must close ABOVE the swept swing price (buy)
+        #      or BELOW the swept swing price (sell)
+        # This confirms the sweep was absorbed and price reversed.
+        sweep_idx = pool.swept_at_candle
+        confirmation_candle = None
+        for c in candles:
+            if c.index < sweep_idx:
+                continue
+            if c.index > sweep_idx + SBC_CONFIRM_WINDOW:
+                break
+            if sbc_dir == Direction.BULLISH:
+                if c.body_top > swept_swing.price:
+                    confirmation_candle = c
+                    break
+            else:
+                if c.body_bottom < swept_swing.price:
+                    confirmation_candle = c
+                    break
+
+        if not confirmation_candle:
+            continue
+
+        # Step 5: Define sweep swing range for entry calculation
+        sweep_candle = idx_map.get(sweep_idx)
+        if not sweep_candle:
+            continue
+
+        if sbc_dir == Direction.BULLISH:
+            sweep_extreme = sweep_candle.low      # The actual sweep wick low
+            swing_opposite = swept_swing.price    # The swing price level
+        else:
+            sweep_extreme = sweep_candle.high     # The actual sweep wick high
+            swing_opposite = swept_swing.price    # The swing price level
+
+        # Entry: FVG within sweep range (preferred) or 50% fib (fallback)
+        fvg_entry = None
+        sweep_lo = min(sweep_extreme, swing_opposite)
+        sweep_hi = max(sweep_extreme, swing_opposite)
+        for fvg in fvgs:
+            if not fvg.valid or fvg.mitigated:
+                continue
+            if fvg.direction != sbc_dir:
+                continue
+            if sweep_lo <= fvg.midpoint <= sweep_hi:
+                fvg_entry = fvg.midpoint
+                break
+
+        fib_50_entry = (sweep_extreme + swing_opposite) / 2
+        ideal_entry = fvg_entry if fvg_entry is not None else fib_50_entry
+
+        # If price already passed the ideal entry, use current price
+        # (SBC confirmed → market entry is valid).
+        # Skip only if price ran past the sweep range by more than the
+        # sweep range size itself (move already played out).
+        sweep_range_size = sweep_hi - sweep_lo
+        if sbc_dir == Direction.BULLISH:
+            if current_price > sweep_hi + sweep_range_size * 3:
+                continue  # Move already played out
+            entry = max(current_price, ideal_entry)
+        else:
+            if current_price < sweep_lo - sweep_range_size * 3:
+                continue  # Move already played out
+            entry = min(current_price, ideal_entry)
+
+        # SL: beyond the sweep extreme
+        if sbc_dir == Direction.BULLISH:
+            sl = sweep_extreme * (1 - SL_BUFFER_PCT)
+        else:
+            sl = sweep_extreme * (1 + SL_BUFFER_PCT)
+
+        # TP: first swing beyond entry with >= SBC_MIN_RISK_REWARD R:R
+        risk = abs(entry - sl)
+        if risk == 0:
+            continue
+
+        tp = None
+        if sbc_dir == Direction.BULLISH:
+            for swing in sorted(swings, key=lambda s: s.price):
+                if swing.swing_type == SwingType.SWING_HIGH and swing.price > entry:
+                    reward = swing.price - entry
+                    if reward / risk >= SBC_MIN_RISK_REWARD:
+                        tp = swing.price
+                        break
+        else:
+            for swing in sorted(swings, key=lambda s: s.price, reverse=True):
+                if swing.swing_type == SwingType.SWING_LOW and swing.price < entry:
+                    reward = entry - swing.price
+                    if reward / risk >= SBC_MIN_RISK_REWARD:
+                        tp = swing.price
+                        break
+
+        if tp is None:
+            continue
+
+        rr = abs(tp - entry) / risk
+
+        # Step 6: Build confluences
+        confluences: list[str] = ["SBC sweep entry"]
+
+        is_trend_aligned = (
+            (trade_bias == TrendState.BULLISH and sbc_dir == Direction.BULLISH)
+            or (trade_bias == TrendState.BEARISH and sbc_dir == Direction.BEARISH)
+        )
+        is_counter_trend = not is_trend_aligned and trade_bias != TrendState.RANGING
+
+        if is_trend_aligned:
+            confluences.append("HTF trend aligned")
+        if pd:
+            if sbc_dir == Direction.BULLISH and pd.zone == ZoneType.DISCOUNT:
+                confluences.append("Discount zone (buy)")
+            elif sbc_dir == Direction.BEARISH and pd.zone == ZoneType.PREMIUM:
+                confluences.append("Premium zone (sell)")
+        if session and session.is_kill_zone:
+            confluences.append("Kill zone active")
+        if has_multi_tf:
+            confluences.append("Multi-TF aligned")
+        if fvg_entry is not None:
+            confluences.append("FVG entry refinement")
+        if pool.source in (LiquiditySource.EQUAL_HIGHS, LiquiditySource.EQUAL_LOWS):
+            confluences.append("Major liquidity pool swept")
+
+        # VSA absorption confluence
+        vsa_match = False
+        if vsa_absorptions:
+            for vsa in vsa_absorptions:
+                if vsa.direction == sbc_dir and abs(vsa.candle_index - last_idx) <= 20:
+                    vsa_match = True
+                    confluences.append("VSA Absorption")
+                    break
+
+        # Grade: CT SBC capped at B (V22 shows CT SBC works), otherwise normal
+        if is_counter_trend:
+            count = len(confluences)
+            if count >= 3:
+                grade = SignalGrade.B
+            elif count >= 2:
+                grade = SignalGrade.C
+            else:
+                grade = SignalGrade.D
+        else:
+            grade = _grade_signal(confluences, False, vsa_match)
+
+        # Confidence score
+        base_score = len(confluences) * 15
+        if has_multi_tf:
+            base_score += 10
+        if session and session.is_kill_zone:
+            base_score += 5
+        if fvg_entry is not None:
+            base_score += 10
+        if vsa_match:
+            base_score += 15
+        if pool.source in (LiquiditySource.EQUAL_HIGHS, LiquiditySource.EQUAL_LOWS):
+            base_score += 10
+        confidence = max(0, min(100, base_score))
+
+        signals.append(TradingSignal(
+            direction=sbc_dir,
+            entry_price=entry,
+            stop_loss=sl,
+            take_profit=tp,
+            risk_reward_ratio=round(rr, 2),
+            confidence_score=confidence,
+            grade=grade,
+            confluences=confluences,
+            timeframe="M15",
+            entry_method=EntryMethod.SBC,
+            pattern_type="SBC sweep entry",
+            timestamp=candles[-1].timestamp,
+            w1_trend=w1_trend,
+            d1_trend=d1_trend,
+            session=session,
+            vsa_absorption=vsa_match,
+            is_counter_trend=is_counter_trend,
+        ))
+
+        # Limit: max 1 SBC signal per analysis cycle to prevent over-generation
+        if signals:
+            break
+
+    return signals
+
+
 def generate_signals(
     candles: list[Candle],
     swings: list[SwingPoint],
@@ -682,6 +943,24 @@ def generate_signals(
                 vsa_absorption=False,
                 is_counter_trend=True,
             ))
+
+    # ── V22 SBC (Sweep Based Change) standalone signal generation ──
+    # SBC entries are independent of zone-tapping: sweep + body close = entry
+    sbc_signals = _generate_sbc_signals(
+        candles=candles,
+        swings=swings,
+        liquidity_pools=liquidity_pools,
+        fvgs=fvgs,
+        trend=trend,
+        pd=pd,
+        session=session,
+        trade_bias=trade_bias,
+        has_multi_tf=has_multi_tf,
+        vsa_absorptions=vsa_absorptions,
+        w1_trend=w1_trend,
+        d1_trend=d1_trend,
+    )
+    signals.extend(sbc_signals)
 
     # V23: Deduplicate — one signal per zone
     return _deduplicate_signals(signals)

@@ -50,6 +50,11 @@ SL_BUFFER_PCT = 0.001  # 0.1% beyond zone
 # Minimum R:R to consider a signal valid
 MIN_RISK_REWARD = 1.5
 
+# V22 SBC (Sweep Based Change of Character) standalone entry parameters
+SBC_MIN_RISK_REWARD = 3.0       # V22: minimum 1:3 R:R for SBC entries
+SBC_RECENCY_WINDOW = 10         # Only sweeps within last N candles qualify
+SBC_CONFIRM_WINDOW = 3          # Candles after sweep to look for body close confirmation
+
 # Crypto session windows (UTC hours)
 CRYPTO_SESSIONS = {
     "asian": {"start": 0, "end": 8},        # 00:00-08:00 UTC (low vol)
