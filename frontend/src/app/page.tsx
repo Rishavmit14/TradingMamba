@@ -25,6 +25,7 @@ import BacktestTab from "@/components/BacktestTab";
 import PerformanceTab from "@/components/PerformanceTab";
 import SignalsTab from "@/components/SignalsTab";
 import DemoTab from "@/components/DemoTab";
+import MarketIntelTab from "@/components/MarketIntelTab";
 import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade } from "@/lib/types";
 
@@ -284,6 +285,17 @@ export default function Dashboard() {
               >
                 <Wallet className="w-3 h-3" />
                 Demo
+              </button>
+              <button
+                onClick={() => setActiveTab("market_intel")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                  activeTab === "market_intel"
+                    ? "bg-cyan-500 text-white shadow-lg shadow-cyan-500/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                <BarChart3 className="w-3 h-3" />
+                Market Intel
               </button>
             </div>
 
@@ -659,6 +671,12 @@ export default function Dashboard() {
       {activeTab === "demo" && (
         <div className="flex-1 overflow-hidden">
           <DemoTab />
+        </div>
+      )}
+
+      {activeTab === "market_intel" && (
+        <div className="flex-1 overflow-hidden">
+          <MarketIntelTab />
         </div>
       )}
     </div>

@@ -11,6 +11,7 @@ import {
   TelegramStatus,
   ResolvedSignal,
   SignalStoreStats,
+  MarketIntelData,
 } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
@@ -184,6 +185,13 @@ export async function fetchTelegramStatus(): Promise<TelegramStatus> {
 export async function sendTelegramTest(): Promise<void> {
   const res = await fetch(`${API_BASE}/telegram/test`, { method: "POST" });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
+}
+
+/** Phase 6: Market Intel API */
+export async function fetchMarketIntel(symbol: string = "BTCUSDT"): Promise<MarketIntelData> {
+  const res = await fetch(`${API_BASE}/market-intel?symbol=${symbol}`);
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
 }
 
 /** Lightweight price ticker from Binance (no backend needed). */

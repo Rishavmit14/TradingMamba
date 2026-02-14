@@ -1065,3 +1065,14 @@ async def send_telegram_test():
         bot.chat_id, "TradingMamba test message — bot is connected!"
     )
     return {"status": "ok", "message": "Test message sent"}
+
+
+# ──────────────────────────────────────────────
+# Phase 6: Market Intel (Binance Futures Data)
+# ──────────────────────────────────────────────
+
+@app.get("/api/market-intel")
+async def get_market_intel(symbol: str = "BTCUSDT"):
+    """Fetch Binance Futures market intelligence (OI, funding, L/S ratios, taker volume)."""
+    from app.services.futures_data import fetch_market_intel
+    return await fetch_market_intel(symbol)

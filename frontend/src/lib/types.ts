@@ -269,7 +269,7 @@ export interface DeepAnalysis {
 // ── Phase 3: Backtest Types ──
 
 export type TradeOutcome = "win" | "loss" | "timeout";
-export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo";
+export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel";
 
 export interface TradeRecord {
   direction: Direction;
@@ -444,6 +444,31 @@ export interface TelegramStatus {
   connected: boolean;
   chat_id: string | null;
   bot_username: string | null;
+}
+
+// ── Phase 6: Market Intel Types ──
+
+export interface MarketIntelData {
+  open_interest: {
+    current: number;
+    current_usd: number;
+    history: { timestamp: number; oi: number; oi_usd: number }[];
+  };
+  funding_rate: {
+    current: number;
+    next_funding_time: number;
+    mark_price: number;
+    index_price: number;
+    history: { timestamp: number; rate: number; mark_price: number }[];
+  };
+  top_trader_ratio: { timestamp: number; long_pct: number; short_pct: number; ratio: number }[];
+  global_ratio: { timestamp: number; long_pct: number; short_pct: number; ratio: number }[];
+  taker_volume: { timestamp: number; buy_vol: number; sell_vol: number; ratio: number }[];
+  premium_index: {
+    mark_price: number;
+    index_price: number;
+    premium_pct: number;
+  };
 }
 
 export interface BacktestResult {
