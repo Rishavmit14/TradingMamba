@@ -61,10 +61,15 @@ function EquityCurve({ data }: { data: { timestamp: number; pnl: number }[] }) {
       priceFormat: { type: "custom", formatter: (v: number) => `${v >= 0 ? "+" : ""}${v.toFixed(2)}%` },
     });
 
-    const lineData = data.map((d) => ({
-      time: Math.floor(d.timestamp / 1000) as any,
-      value: d.pnl,
-    }));
+    // Deduplicate: lightweight-charts requires strictly increasing times.
+    // Multiple trades can share a timestamp; keep the last (final cumulative PnL).
+    const byTime = new Map<number, number>();
+    for (const d of data) {
+      byTime.set(Math.floor(d.timestamp / 1000), d.pnl);
+    }
+    const lineData = Array.from(byTime.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(([t, v]) => ({ time: t as any, value: v }));
     series.setData(lineData);
     chart.timeScale().fitContent();
     chartRef.current = chart;
