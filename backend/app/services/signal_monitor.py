@@ -40,7 +40,8 @@ def _compute_signal_hash(signal) -> str:
     direction = signal.direction.value
     price_bucket = round(signal.entry_price, -2)  # nearest $100
     time_bucket = signal.timestamp // 900_000  # 15 min in ms
-    raw = f"{direction}_{price_bucket}_{time_bucket}"
+    style = getattr(signal, "trading_style", "") or ""
+    raw = f"{direction}_{price_bucket}_{time_bucket}_{style}"
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
 
@@ -97,6 +98,7 @@ def _serialize_signal(signal) -> dict:
         "timeframe": signal.timeframe,
         "is_counter_trend": signal.is_counter_trend,
         "vsa_absorption": signal.vsa_absorption,
+        "trading_style": signal.trading_style,
     }
     data["priority_score"] = _compute_priority_score(data)
     return data
@@ -143,12 +145,17 @@ class SignalMonitor:
             return
 
         m15 = results.get("M15")
-        if not m15 or not m15.signals:
+        if not m15:
+            return
+
+        # Process all style signals (cross-style), fall back to m15.signals
+        all_signals = m15.all_style_signals if m15.all_style_signals else m15.signals
+        if not all_signals:
             return
 
         min_grade = _GRADE_ORDER.get(DEMO_MIN_SIGNAL_GRADE, 1)
 
-        for signal in m15.signals:
+        for signal in all_signals:
             grade_rank = _GRADE_ORDER.get(signal.grade.value, 3)
             if grade_rank > min_grade:
                 continue

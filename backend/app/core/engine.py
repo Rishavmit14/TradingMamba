@@ -27,7 +27,7 @@ from app.core.session import get_current_session
 from app.core.amd_detector import detect_amd_patterns
 from app.core.price_cycle_detector import detect_price_cycles
 from app.core.signal_generator import generate_signals
-from app.config import SWING_LOOKBACK
+from app.config import SWING_LOOKBACK, TRADING_STYLES
 from app.models import AMDPattern, PriceCycleEvent, PricePhase
 
 
@@ -51,6 +51,7 @@ class AnalysisResult:
     price_cycles: list[PriceCycleEvent] = field(default_factory=list)
     current_phase: PricePhase = PricePhase.CONSOLIDATION
     signals: list[TradingSignal] = field(default_factory=list)
+    all_style_signals: list[TradingSignal] = field(default_factory=list)
 
 
 def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
@@ -138,8 +139,13 @@ def _apply_cross_tf_fake_choch(results: dict[str, AnalysisResult]) -> None:
 
     Hierarchy: W1 > D1 > H4 > M15
     """
-    tf_hierarchy = [("M15", ["H4", "D1", "W1"]),
-                    ("H4", ["D1", "W1"])]
+    tf_hierarchy = [
+        ("M5",  ["M15", "H1", "H4", "D1", "W1"]),
+        ("M15", ["H1", "H4", "D1", "W1"]),
+        ("H1",  ["H4", "D1", "W1"]),
+        ("H4",  ["D1", "W1"]),
+        ("D1",  ["W1"]),
+    ]
 
     for lower_tf, higher_tfs in tf_hierarchy:
         lower = results.get(lower_tf)
@@ -168,17 +174,99 @@ def _apply_cross_tf_fake_choch(results: dict[str, AnalysisResult]) -> None:
                     break
 
 
+def _collect_htf_zones(results: dict[str, AnalysisResult], tf_keys: list[str]) -> list[dict]:
+    """Collect unmitigated OBs + FVGs from given TFs as htf_zones."""
+    zones: list[dict] = []
+    for tf_key in tf_keys:
+        htf = results.get(tf_key)
+        if not htf:
+            continue
+        for ob in htf.order_blocks:
+            if ob.valid and not ob.mitigated:
+                zones.append({
+                    "type": "OB", "upper": ob.upper_price,
+                    "lower": ob.lower_price, "direction": ob.direction.value,
+                    "tf": tf_key,
+                })
+        for fvg in htf.fvgs:
+            if fvg.valid and not fvg.mitigated:
+                zones.append({
+                    "type": "FVG", "upper": fvg.upper_price,
+                    "lower": fvg.lower_price, "direction": fvg.direction.value,
+                    "tf": tf_key,
+                })
+    return zones
+
+
+def _generate_style_signals(
+    style_key: str,
+    style_cfg: dict,
+    results: dict[str, AnalysisResult],
+    candles_by_tf: dict[str, list[Candle]],
+) -> list[TradingSignal]:
+    """Generate signals for a single trading style using its TF hierarchy.
+
+    Each style has: bias_tf → setup_tf → entry_tf.
+    Bias TF provides trend direction, setup TF provides zones (OBs + FVGs),
+    entry TF provides the candles and detectors for signal generation.
+    """
+    bias_tf = style_cfg["bias_tf"]
+    setup_tf = style_cfg["setup_tf"]
+    entry_tf = style_cfg["entry_tf"]
+
+    entry_result = results.get(entry_tf)
+    if not entry_result:
+        return []
+
+    entry_candles = candles_by_tf.get(entry_tf, [])
+    if not entry_candles:
+        return []
+
+    # Get bias from bias TF trend
+    bias_result = results.get(bias_tf)
+    bias_trend = bias_result.trend if bias_result else TrendState.RANGING
+
+    # Collect setup zones from setup TF (and bias TF for higher-level zones)
+    setup_zones = _collect_htf_zones(results, [setup_tf])
+
+    # w1_trend and d1_trend for context fields on TradingSignal
+    w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
+    d1_trend = results.get("D1", AnalysisResult(timeframe="D1", trend=TrendState.RANGING)).trend
+
+    return generate_signals(
+        candles=entry_candles,
+        swings=entry_result.swings,
+        inducements=entry_result.inducements,
+        liquidity_pools=entry_result.liquidity_pools,
+        bos_events=entry_result.bos_events,
+        choch_events=entry_result.choch_events,
+        fvgs=entry_result.fvgs,
+        order_blocks=entry_result.order_blocks,
+        trend=entry_result.trend,
+        pd=entry_result.premium_discount,
+        session=entry_result.session,
+        w1_trend=w1_trend,
+        d1_trend=d1_trend,
+        vsa_absorptions=entry_result.vsa_absorptions,
+        htf_zones=setup_zones,
+        trade_bias_override=bias_trend,
+        trading_style=style_key,
+        entry_timeframe=entry_tf,
+    )
+
+
 def run_multi_tf_analysis(
     candles_by_tf: dict[str, list[Candle]],
 ) -> dict[str, AnalysisResult]:
-    """Run analysis across all timeframes (W1→D1→H4→M15).
+    """Run analysis across all 7 timeframes and generate multi-style signals.
 
-    Higher TF results inform lower TF signal generation.
+    V20: Each TF is analyzed once, then results are reused across all 6
+    trading styles (Positional, Swing, Short-Term, Intraday, Day Trading, Scalping).
     """
     results: dict[str, AnalysisResult] = {}
 
-    # Analyze each timeframe
-    for tf in ["W1", "D1", "H4", "M15"]:
+    # Analyze all 7 timeframes
+    for tf in ["1M", "W1", "D1", "H4", "H1", "M15", "M5"]:
         candles = candles_by_tf.get(tf, [])
         if candles:
             results[tf] = analyze_timeframe(candles, tf)
@@ -186,53 +274,22 @@ def run_multi_tf_analysis(
             results[tf] = AnalysisResult(timeframe=tf, trend=TrendState.RANGING)
 
     # V09 Rule 4: Cross-TF fake CHoCH detection
-    # Lower TF swing that is higher TF inducement = fake CHoCH on lower TF
     _apply_cross_tf_fake_choch(results)
 
-    # Generate signals on M15 using higher TF context
+    # ── Generate signals for each V20 trading style ──
+    all_style_signals: list[TradingSignal] = []
+    for style_key, style_cfg in TRADING_STYLES.items():
+        style_signals = _generate_style_signals(
+            style_key, style_cfg, results, candles_by_tf,
+        )
+        all_style_signals.extend(style_signals)
+
+    # Store all style signals on M15 result (primary entry for backward compat)
     m15 = results.get("M15")
     if m15:
-        w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
-        d1_trend = results.get("D1", AnalysisResult(timeframe="D1", trend=TrendState.RANGING)).trend
-
-        # V20: Collect unmitigated HTF zones for LTF alignment
-        htf_zones: list[dict] = []
-        for htf_key in ["H4", "D1"]:
-            htf = results.get(htf_key)
-            if not htf:
-                continue
-            for ob in htf.order_blocks:
-                if ob.valid and not ob.mitigated:
-                    htf_zones.append({
-                        "type": "OB", "upper": ob.upper_price,
-                        "lower": ob.lower_price, "direction": ob.direction.value,
-                        "tf": htf_key,
-                    })
-            for fvg in htf.fvgs:
-                if fvg.valid and not fvg.mitigated:
-                    htf_zones.append({
-                        "type": "FVG", "upper": fvg.upper_price,
-                        "lower": fvg.lower_price, "direction": fvg.direction.value,
-                        "tf": htf_key,
-                    })
-
-        m15_candles = candles_by_tf.get("M15", [])
-        m15.signals = generate_signals(
-            candles=m15_candles,
-            swings=m15.swings,
-            inducements=m15.inducements,
-            liquidity_pools=m15.liquidity_pools,
-            bos_events=m15.bos_events,
-            choch_events=m15.choch_events,
-            fvgs=m15.fvgs,
-            order_blocks=m15.order_blocks,
-            trend=m15.trend,
-            pd=m15.premium_discount,
-            session=m15.session,
-            w1_trend=w1_trend,
-            d1_trend=d1_trend,
-            vsa_absorptions=m15.vsa_absorptions,
-            htf_zones=htf_zones,
-        )
+        # Backward compat: m15.signals = intraday-only signals
+        m15.signals = [s for s in all_style_signals if s.trading_style == "intraday"]
+        # All styles combined
+        m15.all_style_signals = all_style_signals
 
     return results

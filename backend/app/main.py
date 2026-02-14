@@ -319,8 +319,30 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
                 "mss_quality": sig.mss_quality,
+                "trading_style": sig.trading_style,
             }
             for sig in result.signals
+        ],
+        "all_style_signals": [
+            {
+                "direction": sig.direction.value,
+                "entry_price": sig.entry_price,
+                "stop_loss": sig.stop_loss,
+                "take_profit": sig.take_profit,
+                "risk_reward_ratio": sig.risk_reward_ratio,
+                "confidence_score": sig.confidence_score,
+                "grade": sig.grade.value,
+                "confluences": sig.confluences,
+                "timeframe": sig.timeframe,
+                "entry_method": sig.entry_method.value if sig.entry_method else None,
+                "pattern_type": sig.pattern_type,
+                "timestamp": sig.timestamp,
+                "vsa_absorption": sig.vsa_absorption,
+                "is_counter_trend": sig.is_counter_trend,
+                "mss_quality": sig.mss_quality,
+                "trading_style": sig.trading_style,
+            }
+            for sig in result.all_style_signals
         ],
         "htf_zones": htf_zones or [],
     }
@@ -344,75 +366,32 @@ async def analyze_single_tf(timeframe: str = "H4"):
     candles = await fetch_klines(SYMBOL, tf, limit=1000)
     result = analyze_timeframe(candles, tf)
 
-    # Always generate signals from M15 + HTF context
+    # Run full multi-TF analysis for signal generation across all styles
     trade_bias = None
     htf_zones: list[dict] = []
     try:
-        # Fetch W1/D1 for trend bias
-        w1_candles = await fetch_klines(SYMBOL, "W1", limit=100)
-        w1_result = analyze_timeframe(w1_candles, "W1")
-        w1_trend = w1_result.trend
+        all_candles = await fetch_all_timeframes(SYMBOL)
+        # Use already-fetched candles for the selected TF
+        all_candles[tf] = candles
+        multi_results = run_multi_tf_analysis(all_candles)
 
-        d1_candles = await fetch_klines(SYMBOL, "D1", limit=100)
-        d1_result = analyze_timeframe(d1_candles, "D1")
-        d1_trend = d1_result.trend
-
+        # Compute trade bias from HTF trends
+        w1_trend = multi_results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
+        d1_trend = multi_results.get("D1", AnalysisResult(timeframe="D1", trend=TrendState.RANGING)).trend
         if w1_trend != TrendState.RANGING:
             trade_bias = w1_trend.value
         elif d1_trend != TrendState.RANGING:
             trade_bias = d1_trend.value
 
-        # Get M15 analysis (reuse if already viewing M15)
-        if tf == "M15":
-            m15_candles = candles
-            m15_result = result
-        else:
-            m15_candles = await fetch_klines(SYMBOL, "M15", limit=1000)
-            m15_result = analyze_timeframe(m15_candles, "M15")
+        # Get multi-style signals from the M15 result
+        m15_multi = multi_results.get("M15")
+        if m15_multi:
+            result.signals = m15_multi.signals
+            result.all_style_signals = m15_multi.all_style_signals
 
-        # Get H4 analysis for HTF zones (reuse if already viewing H4)
-        if tf == "H4":
-            h4_result = result
-        else:
-            h4_candles = await fetch_klines(SYMBOL, "H4", limit=1000)
-            h4_result = analyze_timeframe(h4_candles, "H4")
-
-        # Build HTF zones from H4/D1 OBs and FVGs (V20)
-        htf_zones: list[dict] = []
-        for htf_key, htf_r in [("D1", d1_result), ("H4", h4_result)]:
-            for ob in htf_r.order_blocks:
-                if ob.valid and not ob.mitigated:
-                    htf_zones.append({
-                        "type": "OB", "upper": ob.upper_price,
-                        "lower": ob.lower_price, "direction": ob.direction.value,
-                        "tf": htf_key,
-                    })
-            for fvg in htf_r.fvgs:
-                if fvg.valid and not fvg.mitigated:
-                    htf_zones.append({
-                        "type": "FVG", "upper": fvg.upper_price,
-                        "lower": fvg.lower_price, "direction": fvg.direction.value,
-                        "tf": htf_key,
-                    })
-
-        # Generate signals from M15 data (entry timeframe) with HTF context
-        result.signals = generate_signals(
-            candles=m15_candles,
-            swings=m15_result.swings,
-            inducements=m15_result.inducements,
-            liquidity_pools=m15_result.liquidity_pools,
-            bos_events=m15_result.bos_events,
-            choch_events=m15_result.choch_events,
-            fvgs=m15_result.fvgs,
-            order_blocks=m15_result.order_blocks,
-            trend=m15_result.trend,
-            pd=m15_result.premium_discount,
-            session=m15_result.session,
-            w1_trend=w1_trend,
-            d1_trend=d1_trend,
-            vsa_absorptions=m15_result.vsa_absorptions,
-            htf_zones=htf_zones,
-        )
+        # Build HTF zones for chart display
+        from app.core.engine import _collect_htf_zones
+        htf_zones = _collect_htf_zones(multi_results, ["H4", "D1"])
     except Exception as e:
         logger.warning(f"Signal generation failed for {tf}: {e}")
 
@@ -435,15 +414,18 @@ async def analyze_all():
     else:
         bias = None
 
+    m15_data = _serialize_result(
+        results["M15"], candles_by_tf.get("M15", []), trade_bias=bias
+    ) if "M15" in results else {}
+
     return {
         "symbol": SYMBOL,
         "timeframes": {
             tf: _serialize_result(r, candles_by_tf.get(tf, []), trade_bias=bias)
             for tf, r in results.items()
         },
-        "signals": _serialize_result(
-            results["M15"], candles_by_tf.get("M15", []), trade_bias=bias
-        )["signals"] if "M15" in results else [],
+        "signals": m15_data.get("signals", []),
+        "all_style_signals": m15_data.get("all_style_signals", []),
     }
 
 
@@ -457,11 +439,13 @@ async def get_signals():
     if not m15:
         return {"signals": [], "trend": "ranging"}
 
+    m15_serialized = _serialize_result(m15, candles_by_tf.get("M15", []))
     return {
         "symbol": SYMBOL,
         "trend": m15.trend.value,
         "vsa_active": m15.vsa_active,
-        "signals": _serialize_result(m15, candles_by_tf.get("M15", []))["signals"],
+        "signals": m15_serialized["signals"],
+        "all_style_signals": m15_serialized.get("all_style_signals", []),
     }
 
 
@@ -811,8 +795,29 @@ async def get_detailed_signals():
                 "timestamp": sig.timestamp,
                 "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
+                "trading_style": sig.trading_style,
             }
             for sig in (m15.signals if m15 else [])
+        ],
+        "all_style_signals": [
+            {
+                "direction": sig.direction.value,
+                "entry_price": sig.entry_price,
+                "stop_loss": sig.stop_loss,
+                "take_profit": sig.take_profit,
+                "risk_reward_ratio": sig.risk_reward_ratio,
+                "confidence_score": sig.confidence_score,
+                "grade": sig.grade.value,
+                "confluences": sig.confluences,
+                "timeframe": sig.timeframe,
+                "entry_method": sig.entry_method.value if sig.entry_method else None,
+                "pattern_type": sig.pattern_type,
+                "timestamp": sig.timestamp,
+                "vsa_absorption": sig.vsa_absorption,
+                "is_counter_trend": sig.is_counter_trend,
+                "trading_style": sig.trading_style,
+            }
+            for sig in (m15.all_style_signals if m15 else [])
         ],
     }
 

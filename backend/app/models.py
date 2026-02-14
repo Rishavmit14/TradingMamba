@@ -388,6 +388,7 @@ class TradingSignal:
     vsa_absorption: bool = False
     is_counter_trend: bool = False
     mss_quality: str = ""      # V25: "standard", "a_plus", "a_plus_plus", or ""
+    trading_style: str = ""    # V20: "positional", "swing", "short_term", "intraday", "day_trading", "scalping"
 
 
 # ──────────────────────────────────────────────

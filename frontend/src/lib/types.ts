@@ -138,6 +138,7 @@ export interface TradingSignal {
   vsa_absorption: boolean;
   is_counter_trend: boolean;
   mss_quality: string;
+  trading_style: string;
 }
 
 export interface HTFZone {
@@ -174,6 +175,7 @@ export interface AnalysisResult {
   vsa_active: boolean;
   vsa_absorptions: { candle_index: number; direction: Direction; volume_ratio: number; confirmation: boolean }[];
   signals: TradingSignal[];
+  all_style_signals: TradingSignal[];
   candles: Candle[];
   htf_zones: HTFZone[];
 }

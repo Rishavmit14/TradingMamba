@@ -30,7 +30,19 @@ CANDLE_BUFFER_SIZE = {
     "W1": 500,    # ~9.5 years of weekly
     "D1": 365,    # ~1 year of daily
     "H4": 500,    # ~83 days of 4h
+    "H1": 500,    # ~20 days of 1h
     "M15": 1000,  # ~10 days of 15m
+    "M5": 1000,   # ~3.5 days of 5m
+}
+
+# V20: Trading Style TF Hierarchy (Bias → Setup → Entry)
+TRADING_STYLES = {
+    "positional":  {"label": "Positional",  "bias_tf": "1M", "setup_tf": "W1",  "entry_tf": "D1"},
+    "swing":       {"label": "Swing",       "bias_tf": "W1", "setup_tf": "D1",  "entry_tf": "H4"},
+    "short_term":  {"label": "Short-Term",  "bias_tf": "D1", "setup_tf": "H4",  "entry_tf": "H1"},
+    "intraday":    {"label": "Intraday",    "bias_tf": "H4", "setup_tf": "H1",  "entry_tf": "M15"},
+    "day_trading": {"label": "Day Trading", "bias_tf": "H4", "setup_tf": "M15", "entry_tf": "M5"},
+    "scalping":    {"label": "Scalping",    "bias_tf": "H1", "setup_tf": "M15", "entry_tf": "M5"},
 }
 
 # Swing detection: minimum candles on each side to confirm a swing point

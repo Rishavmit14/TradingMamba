@@ -513,46 +513,74 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Right sidebar — Active Signals */}
-          {sidebarOpen && (
-            <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
-              <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
-                <div className="flex items-center gap-2">
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
-                  <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                    Signals
-                  </h2>
-                  {analysis && analysis.signals.length > 0 && (
-                    <span className="text-xs font-mono text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded">
-                      {analysis.signals.length}
+          {/* Right sidebar — Active Signals (all trading styles) */}
+          {sidebarOpen && (() => {
+            const allSigs = analysis?.all_style_signals ?? [];
+            // Count how many styles agree on each direction
+            const bullStyles = new Set(allSigs.filter(s => s.direction === "bullish").map(s => s.trading_style));
+            const bearStyles = new Set(allSigs.filter(s => s.direction === "bearish").map(s => s.trading_style));
+            const alignedCount = Math.max(bullStyles.size, bearStyles.size);
+            const alignedDir = bullStyles.size >= bearStyles.size ? "bullish" : "bearish";
+
+            return (
+              <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">
+                <div className="flex items-center justify-between px-4 h-10 border-b border-[var(--border-primary)] flex-shrink-0">
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-3.5 h-3.5 text-amber-400" />
+                    <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                      Signals
+                    </h2>
+                    {allSigs.length > 0 && (
+                      <span className="text-xs font-mono text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded">
+                        {allSigs.length}
+                      </span>
+                    )}
+                  </div>
+                  {analysis && (
+                    <span className="text-xs font-mono text-[var(--text-muted)]">
+                      All Styles
                     </span>
                   )}
                 </div>
-                {analysis && (
-                  <span className="text-xs font-mono text-[var(--text-muted)]">
-                    M15
-                  </span>
+
+                {/* Multi-style alignment indicator */}
+                {alignedCount >= 2 && (
+                  <div className={`mx-3 mt-3 flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-medium ${
+                    alignedDir === "bullish"
+                      ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+                      : "bg-red-500/10 border-red-500/20 text-red-400"
+                  }`}>
+                    {alignedDir === "bullish"
+                      ? <TrendingUp className="w-3.5 h-3.5" />
+                      : <TrendingDown className="w-3.5 h-3.5" />
+                    }
+                    <span>{alignedCount} styles aligned {alignedDir.toUpperCase()}</span>
+                    {alignedCount >= 3 && (
+                      <span className="ml-auto text-[10px] opacity-75">Hold for bigger targets</span>
+                    )}
+                  </div>
                 )}
+
+                <div className="flex-1 overflow-y-auto p-3 space-y-3">
+                  {!analysis ? (
+                    <p className="text-xs text-[var(--text-muted)] text-center py-8">
+                      Select a timeframe to analyze
+                    </p>
+                  ) : allSigs.length === 0 ? (
+                    <p className="text-xs text-[var(--text-muted)] text-center py-8">
+                      No active signals
+                    </p>
+                  ) : (
+                    allSigs.map((sig, i) => (
+                      <div key={i} className="animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
+                        <SignalCard signal={sig} />
+                      </div>
+                    ))
+                  )}
+                </div>
               </div>
-              <div className="flex-1 overflow-y-auto p-3 space-y-3">
-                {!analysis ? (
-                  <p className="text-xs text-[var(--text-muted)] text-center py-8">
-                    Select a timeframe to analyze
-                  </p>
-                ) : analysis.signals.length === 0 ? (
-                  <p className="text-xs text-[var(--text-muted)] text-center py-8">
-                    No active signals
-                  </p>
-                ) : (
-                  analysis.signals.map((sig, i) => (
-                    <div key={i} className="animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
-                      <SignalCard signal={sig} />
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       )}
 

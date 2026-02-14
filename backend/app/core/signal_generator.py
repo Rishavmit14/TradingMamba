@@ -444,6 +444,8 @@ def _generate_sbc_signals(
     vsa_absorptions: list | None,
     w1_trend: TrendState | None,
     d1_trend: TrendState | None,
+    trading_style: str = "",
+    entry_timeframe: str = "M15",
 ) -> list[TradingSignal]:
     """V22 SBC (Sweep Based Change of Character) standalone entry signals.
 
@@ -668,7 +670,7 @@ def _generate_sbc_signals(
             confidence_score=confidence,
             grade=grade,
             confluences=confluences,
-            timeframe="M15",
+            timeframe=entry_timeframe,
             entry_method=EntryMethod.SBC,
             pattern_type="SBC sweep entry",
             timestamp=candles[-1].timestamp,
@@ -677,6 +679,7 @@ def _generate_sbc_signals(
             session=session,
             vsa_absorption=vsa_match,
             is_counter_trend=is_counter_trend,
+            trading_style=trading_style,
         ))
 
         # Limit: max 1 SBC signal per analysis cycle to prevent over-generation
@@ -702,6 +705,9 @@ def generate_signals(
     d1_trend: TrendState | None = None,
     vsa_absorptions: list | None = None,
     htf_zones: list[dict] | None = None,
+    trade_bias_override: TrendState | None = None,
+    trading_style: str = "",
+    entry_timeframe: str = "M15",
 ) -> list[TradingSignal]:
     """The Master Checklist — generate trading signals from all detector outputs.
 
@@ -715,13 +721,17 @@ def generate_signals(
     current_price = candles[-1].close
     signals: list[TradingSignal] = []
 
-    # V23 Step 1: Trade bias comes from HTF (W1 → D1 → M15 fallback)
-    # W1 sets the macro direction, D1 confirms, M15 is for entry timing
-    trade_bias = trend  # default to M15 trend
-    if w1_trend and w1_trend != TrendState.RANGING:
-        trade_bias = w1_trend
-    elif d1_trend and d1_trend != TrendState.RANGING:
-        trade_bias = d1_trend
+    # V23 Step 1: Trade bias from HTF
+    # When trade_bias_override is provided (multi-style mode), use it directly.
+    # Otherwise, legacy W1 → D1 → entry TF fallback.
+    if trade_bias_override is not None:
+        trade_bias = trade_bias_override
+    else:
+        trade_bias = trend  # default to entry TF trend
+        if w1_trend and w1_trend != TrendState.RANGING:
+            trade_bias = w1_trend
+        elif d1_trend and d1_trend != TrendState.RANGING:
+            trade_bias = d1_trend
 
     # Multi-TF alignment: M15 trend matches the HTF bias
     has_multi_tf = (trade_bias == trend and trade_bias != TrendState.RANGING)
@@ -853,7 +863,7 @@ def generate_signals(
                 confidence_score=confidence,
                 grade=grade,
                 confluences=confluences,
-                timeframe="M15",
+                timeframe=entry_timeframe,
                 entry_method=entry_method,
                 pattern_type=f"{zone['type']} trend continuation",
                 timestamp=candles[-1].timestamp,
@@ -863,6 +873,7 @@ def generate_signals(
                 vsa_absorption=vsa_match,
                 is_counter_trend=False,
                 mss_quality=mss_grade.value if mss_grade != MSSGrade.NONE else "",
+                trading_style=trading_style,
             ))
 
     # ── Counter-trend signal generation ──
@@ -933,7 +944,7 @@ def generate_signals(
                 confidence_score=confidence,
                 grade=grade,
                 confluences=confluences,
-                timeframe="M15",
+                timeframe=entry_timeframe,
                 entry_method=ct_entry_method,
                 pattern_type=f"{zone['type']} counter-trend",
                 timestamp=candles[-1].timestamp,
@@ -942,6 +953,7 @@ def generate_signals(
                 session=session,
                 vsa_absorption=False,
                 is_counter_trend=True,
+                trading_style=trading_style,
             ))
 
     # ── V22 SBC (Sweep Based Change) standalone signal generation ──
@@ -959,6 +971,8 @@ def generate_signals(
         vsa_absorptions=vsa_absorptions,
         w1_trend=w1_trend,
         d1_trend=d1_trend,
+        trading_style=trading_style,
+        entry_timeframe=entry_timeframe,
     )
     signals.extend(sbc_signals)
 

@@ -27,10 +27,20 @@ const mssConfig: Record<string, { bg: string; text: string; border: string; labe
   standard: { bg: "bg-slate-500/15", text: "text-slate-400", border: "border-slate-500/30", label: "MSS" },
 };
 
+const styleConfig: Record<string, { bg: string; text: string; border: string; label: string }> = {
+  positional:  { bg: "bg-purple-500/15", text: "text-purple-400", border: "border-purple-500/30", label: "Positional" },
+  swing:       { bg: "bg-indigo-500/15", text: "text-indigo-400", border: "border-indigo-500/30", label: "Swing" },
+  short_term:  { bg: "bg-sky-500/15",    text: "text-sky-400",    border: "border-sky-500/30",    label: "Short-Term" },
+  intraday:    { bg: "bg-teal-500/15",   text: "text-teal-400",   border: "border-teal-500/30",   label: "Intraday" },
+  day_trading: { bg: "bg-orange-500/15", text: "text-orange-400", border: "border-orange-500/30", label: "Day Trading" },
+  scalping:    { bg: "bg-rose-500/15",   text: "text-rose-400",   border: "border-rose-500/30",   label: "Scalping" },
+};
+
 export default function SignalCard({ signal }: SignalCardProps) {
   const isBull = signal.direction === "bullish";
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
   const mss = signal.mss_quality ? mssConfig[signal.mss_quality] : null;
+  const style = signal.trading_style ? styleConfig[signal.trading_style] : null;
 
   return (
     <div className={`glass-card rounded-xl p-3.5 transition-all hover:border-[var(--border-hover)] ${
@@ -55,6 +65,11 @@ export default function SignalCard({ signal }: SignalCardProps) {
           </div>
         </div>
         <div className="flex items-center gap-1.5">
+          {style && (
+            <div className={`px-2 py-1 rounded-md text-xs font-bold border ${style.bg} ${style.text} ${style.border}`}>
+              {style.label}
+            </div>
+          )}
           {mss && (
             <div className={`px-2 py-1 rounded-md text-xs font-bold border ${mss.bg} ${mss.text} ${mss.border}`}>
               {mss.label}
