@@ -148,7 +148,7 @@ export default function BacktestTab({ result, onResult }: BacktestTabProps) {
     setError(null);
     try {
       const r = await runBacktest({ start_date: startDate, end_date: endDate });
-      if (r.error) {
+      if ((r as any).error) {
         setError((r as any).error);
       } else {
         onResult(r);

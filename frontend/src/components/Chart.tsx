@@ -773,7 +773,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
 
         const lineSeries = chart.addLineSeries({
           color,
-          lineWidth,
+          lineWidth: lineWidth as any,
           lineStyle: style,
           crosshairMarkerVisible: false,
           priceLineVisible: false,

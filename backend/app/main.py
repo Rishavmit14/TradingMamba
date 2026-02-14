@@ -52,6 +52,13 @@ from app.services.database import (
 
 logger = logging.getLogger("tradingmamba")
 
+# ── Cached analysis results for deep analysis reuse ──
+# Updated by every full multi-TF analysis call; deep analysis reads
+# from here instead of re-running (avoids SignalStore side-effects
+# and ensures the analysis context matches what generated the signal).
+_cached_results: dict[str, AnalysisResult] = {}
+_cached_candles: dict[str, list] = {}
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup/shutdown lifecycle: init DB, start monitors + bot."""
@@ -388,6 +395,8 @@ async def analyze_single_tf(timeframe: str = "H4"):
         # Use already-fetched candles for the selected TF
         all_candles[tf] = candles
         multi_results = run_multi_tf_analysis(all_candles)
+        _cached_results.update(multi_results)
+        _cached_candles.update(all_candles)
 
         # Compute trade bias from HTF trends
         w1_trend = multi_results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
@@ -417,6 +426,8 @@ async def analyze_all():
     """Run full multi-TF analysis (W1→D1→H4→M15) and generate signals."""
     candles_by_tf = await fetch_all_timeframes(SYMBOL)
     results = run_multi_tf_analysis(candles_by_tf)
+    _cached_results.update(results)
+    _cached_candles.update(candles_by_tf)
 
     # Compute trade bias from HTF trends
     w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
@@ -448,6 +459,8 @@ async def get_signals():
     """Get current trading signals from M15 analysis."""
     candles_by_tf = await fetch_all_timeframes(SYMBOL)
     results = run_multi_tf_analysis(candles_by_tf)
+    _cached_results.update(results)
+    _cached_candles.update(candles_by_tf)
 
     m15 = results.get("M15")
     if not m15:
@@ -758,6 +771,8 @@ async def get_detailed_signals():
     """Get signals with full multi-TF context + V24/V23 checklists for the Signals tab."""
     candles_by_tf = await fetch_all_timeframes(SYMBOL)
     results = run_multi_tf_analysis(candles_by_tf)
+    _cached_results.update(results)
+    _cached_candles.update(candles_by_tf)
 
     w1 = results.get("W1")
     d1 = results.get("D1")
@@ -865,9 +880,19 @@ async def get_signal_deep_analysis(signal_id: str):
 
     signal = tracked.signal
 
-    # Fetch candles and run analysis for all TFs
-    candles_by_tf = await fetch_all_timeframes(SYMBOL)
-    results = run_multi_tf_analysis(candles_by_tf)
+    # Use cached results from the most recent analysis cycle.
+    # This avoids re-running run_multi_tf_analysis which would:
+    # 1. Trigger store.update() side-effects (resolve/expire signals)
+    # 2. Show fresh analysis that may not match the signal's generation context
+    if _cached_results:
+        results = _cached_results
+        candles_by_tf = _cached_candles
+    else:
+        # Cold start fallback: no analysis has run yet
+        candles_by_tf = await fetch_all_timeframes(SYMBOL)
+        results = run_multi_tf_analysis(candles_by_tf)
+        _cached_results.update(results)
+        _cached_candles.update(candles_by_tf)
 
     # Build the deep analysis
     analysis = build_deep_analysis(signal, signal_id, results, candles_by_tf)

@@ -553,7 +553,7 @@ export default function SignalsTab() {
                 V24 — 6-Rule Trading Framework
               </h3>
               <span className="text-[10px] text-[var(--text-muted)]">
-                "If all 6 rules fulfilled, ANY concept works"
+                &ldquo;If all 6 rules fulfilled, ANY concept works&rdquo;
               </span>
             </div>
             <div className="flex items-center gap-2">

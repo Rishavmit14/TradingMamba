@@ -253,14 +253,15 @@ class SignalStore:
         # 2. Match vs existing active signals
         for sid, (sig, styles) in deduped.items():
             if sid in self.active:
-                # Signal regenerated — refresh but LOCK entry, R:R, and take_profits
-                # from first detection.
+                # Signal regenerated — refresh but LOCK fields from first detection
+                # so the signal identity stays stable across cycles.
                 tracked = self.active[sid]
                 locked_entry = tracked.signal.entry_price
                 locked_rr = tracked.signal.risk_reward_ratio
                 locked_tps = tracked.signal.take_profits
                 locked_trigger = tracked.signal.trigger_candle_index
                 locked_ts = tracked.signal.timestamp
+                locked_style = tracked.signal.trading_style
                 tracked.signal = sig
                 # Restore locked fields
                 tracked.signal.entry_price = locked_entry
@@ -268,6 +269,7 @@ class SignalStore:
                 tracked.signal.take_profits = locked_tps
                 tracked.signal.trigger_candle_index = locked_trigger
                 tracked.signal.timestamp = locked_ts
+                tracked.signal.trading_style = locked_style
                 tracked.trading_styles = styles
                 tracked.bars_active += 1
                 tracked.entry_timeframe = sig.timeframe
