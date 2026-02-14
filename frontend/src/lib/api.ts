@@ -4,6 +4,7 @@ import {
   AnalysisResult,
   BacktestResult,
   DetailedSignals,
+  DeepAnalysis,
   DemoAccount,
   DemoTrade,
   DemoEquityPoint,
@@ -61,6 +62,13 @@ export async function fetchLatestBacktest(): Promise<BacktestResult | null> {
 /** Phase 4: Detailed Signals API */
 export async function fetchDetailedSignals(): Promise<DetailedSignals> {
   const res = await fetch(`${API_BASE}/signals/detailed`);
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+/** Deep Analysis: comprehensive multi-TF analysis for a signal */
+export async function fetchDeepAnalysis(signalId: string): Promise<DeepAnalysis> {
+  const res = await fetch(`${API_BASE}/signals/${signalId}/deep-analysis`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }

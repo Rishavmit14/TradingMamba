@@ -846,6 +846,30 @@ async def get_detailed_signals():
     }
 
 
+@app.get("/api/signals/{signal_id}/deep-analysis")
+async def get_signal_deep_analysis(signal_id: str):
+    """Get deep multi-TF analysis explaining why a signal was generated."""
+    from app.core.signal_store import SignalStore
+    from app.core.deep_analysis import build_deep_analysis
+
+    store = SignalStore.get_instance()
+
+    # Find the signal in active store
+    tracked = store.active.get(signal_id)
+    if not tracked:
+        raise HTTPException(status_code=404, detail=f"Signal {signal_id} not found in active signals")
+
+    signal = tracked.signal
+
+    # Fetch candles and run analysis for all TFs
+    candles_by_tf = await fetch_all_timeframes(SYMBOL)
+    results = run_multi_tf_analysis(candles_by_tf)
+
+    # Build the deep analysis
+    analysis = build_deep_analysis(signal, signal_id, results, candles_by_tf)
+    return analysis
+
+
 @app.get("/api/signals/resolved")
 async def get_resolved_signals(limit: int = 50):
     """Get recently resolved signals (SL hit, TP hit, expired) for performance tracking."""

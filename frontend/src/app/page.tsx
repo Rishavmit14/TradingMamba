@@ -19,13 +19,14 @@ import Chart from "@/components/Chart";
 
 import SignalCard from "@/components/SignalCard";
 import AnalysisPanel from "@/components/AnalysisPanel";
+import DeepAnalysisPanel from "@/components/DeepAnalysisPanel";
 import ElementPicker from "@/components/ElementPicker";
 import BacktestTab from "@/components/BacktestTab";
 import PerformanceTab from "@/components/PerformanceTab";
 import SignalsTab from "@/components/SignalsTab";
 import DemoTab from "@/components/DemoTab";
-import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade } from "@/lib/types";
+import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
+import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -65,6 +66,8 @@ export default function Dashboard() {
   const [manualSL, setManualSL] = useState("");
   const [manualTP, setManualTP] = useState("");
   const [manualLoading, setManualLoading] = useState(false);
+  const [deepAnalysis, setDeepAnalysis] = useState<DeepAnalysis | null>(null);
+  const [deepAnalysisLoading, setDeepAnalysisLoading] = useState(false);
 
   const handleManualTrade = useCallback(async (direction: "bullish" | "bearish") => {
     const sl = parseFloat(manualSL);
@@ -81,12 +84,28 @@ export default function Dashboard() {
     setManualLoading(false);
   }, [manualSL, manualTP]);
 
+  const handleShowDetails = useCallback(async (signalId: string) => {
+    setDeepAnalysisLoading(true);
+    setSelectedElement(null);  // Close AnalysisPanel (mutual exclusion)
+    setPickerState(null);
+    try {
+      const result = await fetchDeepAnalysis(signalId);
+      setDeepAnalysis(result);
+    } catch {
+      setDeepAnalysis(null);
+    }
+    setDeepAnalysisLoading(false);
+  }, []);
+
   const handleChartClick = useCallback((result: ChartClickResult | null) => {
     if (!result || result.candidates.length === 0) {
       setSelectedElement(null);
       setPickerState(null);
       return;
     }
+
+    // Close DeepAnalysisPanel when chart element is clicked (mutual exclusion)
+    setDeepAnalysis(null);
 
     if (result.candidates.length === 1) {
       // Single candidate — select directly
@@ -466,6 +485,22 @@ export default function Dashboard() {
               />
             )}
 
+            {/* Deep Analysis Panel — shows when "Show Details" is clicked on a signal */}
+            {deepAnalysis && (
+              <DeepAnalysisPanel
+                analysis={deepAnalysis}
+                onClose={() => setDeepAnalysis(null)}
+              />
+            )}
+
+            {/* Deep Analysis loading indicator */}
+            {deepAnalysisLoading && !deepAnalysis && (
+              <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)] px-4 py-3 flex items-center gap-2">
+                <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
+                <span className="text-xs text-[var(--text-secondary)]">Loading deep analysis...</span>
+              </div>
+            )}
+
             {/* Manual Trade Bar */}
             {analysis && (
               <div className="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)]">
@@ -584,7 +619,7 @@ export default function Dashboard() {
                   ) : (
                     allSigs.map((sig, i) => (
                       <div key={i} className="animate-slide-in-right" style={{ animationDelay: `${i * 50}ms` }}>
-                        <SignalCard signal={sig} />
+                        <SignalCard signal={sig} onShowDetails={handleShowDetails} />
                       </div>
                     ))
                   )}

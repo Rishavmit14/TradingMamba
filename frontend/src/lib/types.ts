@@ -212,6 +212,59 @@ export interface ChartClickResult {
   clickY: number;
 }
 
+// ── Deep Analysis Types ──
+
+export interface DeepAnalysisComponent {
+  type: string;        // "swing" | "bos" | "choch" | "idm" | "fvg" | "ob" | "liquidity" | "pd" | "vsa"
+  detail: string;      // "LH at $85,309 (weak swing)"
+  price: number | null;
+}
+
+export interface DeepAnalysisLevel {
+  tf: string;          // "W1", "D1", etc.
+  role: string;        // "Bias" | "Setup" | "Entry"
+  trend: TrendState;
+  narrative: string;   // Human-readable paragraph
+  components: DeepAnalysisComponent[];
+}
+
+export interface DeepAnalysisEntryZone {
+  type: string;
+  upper: number;
+  lower: number;
+  method: string;
+  narrative: string;
+}
+
+export interface DeepAnalysisTP {
+  label: string;
+  price: number;
+  target: string;
+  rr: number;
+}
+
+export interface DeepAnalysisConfluence {
+  name: string;
+  detail: string;
+  strength: string;   // "strong" | "medium" | "weak"
+}
+
+export interface DeepAnalysis {
+  signal_id: string;
+  signal_summary: {
+    direction: Direction;
+    entry_price: number;
+    stop_loss: number;
+    take_profits: TakeProfit[];
+    grade: string;
+    style: string;
+  };
+  levels: DeepAnalysisLevel[];
+  entry_zone: DeepAnalysisEntryZone;
+  tp_logic: DeepAnalysisTP[];
+  confluences: DeepAnalysisConfluence[];
+}
+
 // ── Phase 3: Backtest Types ──
 
 export type TradeOutcome = "win" | "loss" | "timeout";

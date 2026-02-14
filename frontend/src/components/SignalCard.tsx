@@ -7,11 +7,13 @@ import {
   Shield,
   Target,
   ArrowRight,
+  Search,
 } from "lucide-react";
 import { TradingSignal } from "@/lib/types";
 
 interface SignalCardProps {
   signal: TradingSignal;
+  onShowDetails?: (signalId: string) => void;
 }
 
 const gradeConfig: Record<string, { bg: string; text: string; border: string; label: string }> = {
@@ -36,7 +38,7 @@ const styleConfig: Record<string, { bg: string; text: string; border: string; la
   scalping:    { bg: "bg-rose-500/15",   text: "text-rose-400",   border: "border-rose-500/30",   label: "Scalping" },
 };
 
-export default function SignalCard({ signal }: SignalCardProps) {
+export default function SignalCard({ signal, onShowDetails }: SignalCardProps) {
   const isBull = signal.direction === "bullish";
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
   const mss = signal.mss_quality ? mssConfig[signal.mss_quality] : null;
@@ -179,6 +181,17 @@ export default function SignalCard({ signal }: SignalCardProps) {
             <span className="font-medium text-amber-400">{styles.length} styles agree</span>
           )}
         </div>
+      )}
+
+      {/* Show Details button */}
+      {signal.signal_id && onShowDetails && (
+        <button
+          onClick={() => onShowDetails(signal.signal_id!)}
+          className="mt-2.5 w-full flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-blue-400 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/15 hover:border-blue-500/30 rounded-lg transition-all"
+        >
+          <Search className="w-3 h-3" />
+          Show Details
+        </button>
       )}
     </div>
   );
