@@ -781,14 +781,18 @@ def generate_signals(
             # Step 8: Calculate SL
             sl = _calculate_sl(zone, direction)
 
+            # Entry = zone midpoint (limit order fill at the zone).
+            # In SMC, traders place limit orders at the zone — not market
+            # orders at current price. This makes entry structural and stable.
+            entry = zone["midpoint"]
+
             # Step 9: Calculate TP (skip swings too close for min R:R)
             tp = _calculate_tp(zone, direction, swings, inducements,
-                               entry=current_price, sl=sl)
+                               entry=entry, sl=sl)
             if tp is None:
                 continue
 
             # Calculate R:R
-            entry = current_price
             risk = abs(entry - sl)
             reward = abs(tp - entry)
 
@@ -896,15 +900,16 @@ def generate_signals(
 
             sl = _calculate_sl(zone, ct_dir)
 
+            # Entry = zone midpoint (limit order fill at the zone)
+            entry = zone["midpoint"]
+
             # Try V21 opposing-zone TP first, fall back to swing-based TP
             tp = _get_counter_trend_tp(ct_dir, zone, order_blocks, fvgs)
             if tp is None:
                 tp = _calculate_tp(zone, ct_dir, swings, inducements,
-                                   entry=current_price, sl=sl)
+                                   entry=entry, sl=sl)
             if tp is None:
                 continue
-
-            entry = current_price
             risk = abs(entry - sl)
             reward = abs(tp - entry)
             if risk == 0:
