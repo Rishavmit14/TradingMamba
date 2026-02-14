@@ -14,18 +14,22 @@ from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
 
-from app.config import SYMBOL
+from app.config import SYMBOL, TRADING_STYLES
 from app.core.engine import run_multi_tf_analysis, AnalysisResult
 from app.models import (
     Candle, Direction, SignalGrade, TradingSignal,
     TradeOutcome, TradeRecord,
 )
 from app.services.data_fetcher import fetch_or_cache_historical
+from app.services.history_db import DB_PATH, open_db, query_candles, query_futures
 
 BACKTEST_DIR = Path(__file__).resolve().parents[3] / "data" / "backtest"
 
+# All TFs needed for multi-style signal generation
+ALL_TFS = ["1M", "W1", "D1", "H4", "H1", "M15"]
+
 # Minimum candles needed per TF before we start generating signals
-MIN_CANDLES = {"W1": 10, "D1": 60, "H4": 200, "M15": 500}
+MIN_CANDLES = {"W1": 10, "D1": 60, "H4": 200, "H1": 200, "M15": 500}
 
 
 def _find_tf_index_at_timestamp(candles: list[Candle], timestamp: int) -> int:
@@ -299,13 +303,10 @@ async def run_backtest(
     max_bars_timeout: int = 960,
     progress_callback=None,
 ) -> dict:
-    """Run the full Phase 3 backtest pipeline.
+    """Run the full backtest pipeline with SQLite data + futures confluences.
 
-    1. Fetch historical data for all 4 TFs
-    2. Slide a window across M15 candles in steps
-    3. At each step, run multi-TF analysis and collect signals
-    4. Evaluate each signal's outcome using future candles
-    5. Compute statistics and return results
+    Uses SQLite database if available (all TFs + futures data per window).
+    Falls back to Binance API fetch (legacy 4-TF mode, no futures) if no DB.
 
     Args:
         symbol: Trading pair
@@ -318,24 +319,39 @@ async def run_backtest(
     Returns:
         Complete backtest results dict
     """
-    # Step 1: Fetch historical data
+    use_sqlite = DB_PATH.exists()
+    start_ms = int(datetime.strptime(start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp() * 1000)
+    end_ms = int(datetime.strptime(end_date, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp() * 1000)
+
+    # Step 1: Load historical data
     candles_by_tf: dict[str, list[Candle]] = {}
-    for tf in ["W1", "D1", "H4", "M15"]:
-        candles_by_tf[tf] = await fetch_or_cache_historical(symbol, tf, start_date, end_date)
+    conn = None
 
-    m15_candles = candles_by_tf["M15"]
+    if use_sqlite:
+        conn = open_db()
+        tfs_to_load = ALL_TFS
+        for tf in tfs_to_load:
+            candles_by_tf[tf] = query_candles(conn, tf, start_ms, end_ms)
+    else:
+        # Legacy fallback: fetch from Binance API
+        tfs_to_load = ["W1", "D1", "H4", "M15"]
+        for tf in tfs_to_load:
+            candles_by_tf[tf] = await fetch_or_cache_historical(symbol, tf, start_date, end_date)
+
+    m15_candles = candles_by_tf.get("M15", [])
     if len(m15_candles) < MIN_CANDLES["M15"]:
+        if conn:
+            conn.close()
         return {"error": f"Not enough M15 candles: {len(m15_candles)} < {MIN_CANDLES['M15']}"}
-
-    # Build timestamp arrays for TF alignment
-    tf_timestamps = {tf: [c.timestamp for c in cs] for tf, cs in candles_by_tf.items()}
 
     # Step 2: Slide window
     total_steps = (len(m15_candles) - MIN_CANDLES["M15"]) // step_size
-    all_signals: list[TradingSignal] = []
     all_trades: list[TradeRecord] = []
-    active_zones: dict[str, int] = {}  # zone_key -> entry_candle_idx
+    active_zones: dict[str, int] = {}
     total_signals_raw = 0
+
+    # Futures lookback window: 12h before current timestamp for OI/taker context
+    futures_lookback_ms = 48 * 3600_000  # 48 hours
 
     for step_num, window_end in enumerate(
         range(MIN_CANDLES["M15"], len(m15_candles), step_size)
@@ -343,12 +359,11 @@ async def run_backtest(
         if progress_callback:
             progress_callback(step_num, total_steps)
 
-        # Current timestamp boundary
         current_ts = m15_candles[window_end - 1].timestamp
 
         # Slice each TF up to current timestamp
         windowed: dict[str, list[Candle]] = {}
-        for tf in ["W1", "D1", "H4", "M15"]:
+        for tf in tfs_to_load:
             if tf == "M15":
                 windowed[tf] = m15_candles[:window_end]
             else:
@@ -364,25 +379,36 @@ async def run_backtest(
         if skip:
             continue
 
-        # Run multi-TF analysis
-        results = run_multi_tf_analysis(windowed)
+        # Query futures data for this window (SQLite only)
+        futures_data = None
+        if conn:
+            futures_data = query_futures(
+                conn,
+                current_ts - futures_lookback_ms,
+                current_ts,
+            )
 
-        # Collect M15 signals
+        # Run multi-TF analysis with futures context
+        results = run_multi_tf_analysis(windowed, futures_data=futures_data)
+
+        # Collect all-style signals (not just intraday)
         m15_result = results.get("M15")
-        if not m15_result or not m15_result.signals:
+        if not m15_result:
             continue
 
-        for signal in m15_result.signals:
+        signals_to_evaluate = m15_result.all_style_signals or m15_result.signals
+        if not signals_to_evaluate:
+            continue
+
+        for signal in signals_to_evaluate:
             total_signals_raw += 1
             zone_key = _make_zone_key(signal)
 
-            # Dedup: skip if same zone has active trade within step_size candles
             if zone_key in active_zones:
                 prev_idx = active_zones[zone_key]
                 if window_end - prev_idx < step_size * 2:
                     continue
 
-            # Evaluate outcome using future candles
             future = m15_candles[window_end:]
             if not future:
                 continue
@@ -394,9 +420,11 @@ async def run_backtest(
             all_trades.append(trade)
             active_zones[zone_key] = window_end
 
-            # Clear zone after trade resolves
             if outcome["outcome"] != TradeOutcome.TIMEOUT:
                 active_zones.pop(zone_key, None)
+
+    if conn:
+        conn.close()
 
     # Step 3: Compute statistics
     stats = _compute_statistics(all_trades)
@@ -411,6 +439,8 @@ async def run_backtest(
         "total_candles": {tf: len(cs) for tf, cs in candles_by_tf.items()},
         "step_size": step_size,
         "timestamp": timestamp,
+        "data_source": "sqlite" if use_sqlite else "binance_api",
+        "futures_enabled": use_sqlite,
         **stats,
         "trades": [
             {

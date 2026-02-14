@@ -1,4 +1,7 @@
-"""Phase 3: Backtest CLI — Run backtests from the command line.
+"""Backtest CLI — Run backtests from the command line.
+
+Uses SQLite historical data (candles + futures) when available.
+Falls back to Binance API fetch (no futures) if no DB exists.
 
 Usage:
     python3 scripts/run_backtest.py [--start 2024-06-01] [--end 2025-01-01] [--step 96]
@@ -15,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from app.config import SYMBOL
 from app.services.backtester import run_backtest, print_backtest_report
+from app.services.history_db import DB_PATH
 
 
 def progress(step: int, total: int) -> None:
@@ -27,7 +31,15 @@ def progress(step: int, total: int) -> None:
 
 
 async def main(start_date: str, end_date: str, symbol: str, step_size: int) -> None:
-    print(f"\nPhase 3 Backtest: {symbol} | {start_date} -> {end_date} | step={step_size}")
+    # Check for SQLite DB
+    if DB_PATH.exists():
+        db_size = DB_PATH.stat().st_size / (1024 * 1024)
+        print(f"\nData source: SQLite ({db_size:.1f} MB) — 6 TFs + futures confluences")
+    else:
+        print(f"\nData source: Binance API (no SQLite DB found)")
+        print(f"  Tip: Run 'python3 scripts/fetch_history.py --start 2020-01-01' for faster backtests with futures data")
+
+    print(f"Backtest: {symbol} | {start_date} -> {end_date} | step={step_size}")
     print("=" * 60)
     print()
 
@@ -49,7 +61,7 @@ async def main(start_date: str, end_date: str, symbol: str, step_size: int) -> N
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="TradingMamba Phase 3 Backtest")
+    parser = argparse.ArgumentParser(description="TradingMamba Backtest")
     parser.add_argument("--start", default="2024-06-01", help="Start date (YYYY-MM-DD)")
     parser.add_argument("--end", default="2025-01-01", help="End date (YYYY-MM-DD)")
     parser.add_argument("--symbol", default=SYMBOL, help="Trading pair")
