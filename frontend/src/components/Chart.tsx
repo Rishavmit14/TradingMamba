@@ -13,12 +13,20 @@ import {
 } from "lightweight-charts";
 import { AnalysisResult, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, SwingPoint, Inducement, BOS, CHoCH, FVG, OrderBlock, DemoTrade } from "@/lib/types";
 
+interface SignalMarker {
+  timestamp: number;     // ms — find matching candle by timestamp
+  direction: string;     // "bullish" | "bearish"
+  entryPrice: number;    // for price line
+  grade: string;         // "A" | "B" | "C" | "D"
+}
+
 interface ChartProps {
   data: AnalysisResult | null;
   visibility: DetectorVisibility;
   livePrice?: number | null;
   onElementClick?: (result: ChartClickResult | null) => void;
   openTrades?: DemoTrade[];
+  signalMarker?: SignalMarker | null;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -164,7 +172,7 @@ class BoxPrimitive {
 // Keep old name as alias for readability
 type OBBoxData = BoxData;
 
-export default function Chart({ data, visibility, livePrice, onElementClick, openTrades = [] }: ChartProps) {
+export default function Chart({ data, visibility, livePrice, onElementClick, openTrades = [], signalMarker }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -576,6 +584,28 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       });
     }
 
+    // Signal activation marker (shown when deep analysis is open)
+    if (signalMarker) {
+      // Determine candle interval for fuzzy matching across TFs
+      const candleInterval = candles.length >= 2
+        ? Math.abs(candles[1].timestamp - candles[0].timestamp)
+        : 60000;
+      const sigCandle = candles.find(c =>
+        Math.abs(c.timestamp - signalMarker.timestamp) < candleInterval
+      );
+      if (sigCandle) {
+        const isBull = signalMarker.direction === "bullish";
+        markers.push({
+          time: toTV(sigCandle.timestamp),
+          position: isBull ? "belowBar" : "aboveBar",
+          color: isBull ? "#22c55e" : "#ef4444",
+          shape: isBull ? "arrowUp" : "arrowDown",
+          size: 2,
+          text: `${isBull ? "LONG" : "SHORT"} Entry`,
+        });
+      }
+    }
+
     // Sort markers by time (required by lightweight-charts)
     markers.sort((a, b) => (a.time as number) - (b.time as number));
     candleSeries.setMarkers(markers);
@@ -793,6 +823,19 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       candleSeries.removePriceLine(line);
     }
     priceLinesRef.current = [];
+
+    // Signal activation entry price line (shown when deep analysis is open)
+    if (signalMarker) {
+      const isBull = signalMarker.direction === "bullish";
+      priceLinesRef.current.push(candleSeries.createPriceLine({
+        price: signalMarker.entryPrice,
+        color: isBull ? "#22c55e" : "#ef4444",
+        lineWidth: 1 as 1,
+        lineStyle: LineStyle.Dashed,
+        axisLabelVisible: true,
+        title: `Entry ${signalMarker.grade}`,
+      }));
+    }
 
     // Premium/Discount equilibrium line
     if (visibility.pd && data.premium_discount) {
@@ -1142,7 +1185,7 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
       chart.timeScale().fitContent();
       prevCandleCountRef.current = candles.length;
     }
-  }, [data, visibility, selectedSwingIdx, openTrades]);
+  }, [data, visibility, selectedSwingIdx, openTrades, signalMarker]);
 
   // Live price update — update the last candle's close in real-time
   useEffect(() => {

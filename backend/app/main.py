@@ -326,6 +326,7 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "status": sig.status,
                 "created_at": sig.created_at,
                 "bars_active": sig.bars_active,
+                "trigger_candle_index": sig.trigger_candle_index,
             }
             for sig in result.signals
         ],
@@ -353,6 +354,7 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "status": sig.status,
                 "created_at": sig.created_at,
                 "bars_active": sig.bars_active,
+                "trigger_candle_index": sig.trigger_candle_index,
             }
             for sig in result.all_style_signals
         ],
@@ -814,6 +816,7 @@ async def get_detailed_signals():
                 "status": sig.status,
                 "created_at": sig.created_at,
                 "bars_active": sig.bars_active,
+                "trigger_candle_index": sig.trigger_candle_index,
             }
             for sig in (m15.signals if m15 else [])
         ],
@@ -840,6 +843,7 @@ async def get_detailed_signals():
                 "status": sig.status,
                 "created_at": sig.created_at,
                 "bars_active": sig.bars_active,
+                "trigger_candle_index": sig.trigger_candle_index,
             }
             for sig in (m15.all_style_signals if m15 else [])
         ],

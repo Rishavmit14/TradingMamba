@@ -15,6 +15,7 @@ import {
   GitBranch,
   Activity,
   BarChart3,
+  Clock,
 } from "lucide-react";
 import { useState } from "react";
 import { DeepAnalysis } from "@/lib/types";
@@ -134,6 +135,33 @@ export default function DeepAnalysisPanel({ analysis, onClose }: DeepAnalysisPan
             </div>
           ))}
         </div>
+
+        {/* Timing */}
+        {analysis.timing && (
+          <div className="flex items-center gap-3 mb-4 text-xs">
+            <div className="flex items-center gap-1.5 bg-[var(--bg-tertiary)] px-2.5 py-1.5 rounded-lg">
+              <Clock className="w-3 h-3 text-[var(--text-muted)]" />
+              <span className="text-[var(--text-muted)]">Activated</span>
+              <span className="font-mono text-[var(--text-primary)]">
+                {new Date(analysis.timing.activated_at).toLocaleString()}
+              </span>
+            </div>
+            <div className="bg-[var(--bg-tertiary)] px-2.5 py-1.5 rounded-lg">
+              <span className="text-[var(--text-muted)]">TF </span>
+              <span className="font-mono font-medium text-[var(--text-primary)]">
+                {analysis.timing.entry_timeframe}
+              </span>
+            </div>
+            {analysis.timing.bars_active > 0 && (
+              <div className="bg-[var(--bg-tertiary)] px-2.5 py-1.5 rounded-lg">
+                <span className="text-[var(--text-muted)]">Age </span>
+                <span className="font-mono font-medium text-[var(--text-primary)]">
+                  {analysis.timing.bars_active} cycle{analysis.timing.bars_active > 1 ? "s" : ""}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* TF Levels */}
         <div className="space-y-2 mb-4">

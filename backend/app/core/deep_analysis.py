@@ -759,6 +759,15 @@ def build_deep_analysis(
     # Confluences (now evidence-backed)
     confluences = _build_confluences(signal, levels, entry_zone)
 
+    # Timing info
+    timing = {
+        "activated_at": signal.created_at,
+        "trigger_timestamp": signal.timestamp,
+        "trigger_candle_index": signal.trigger_candle_index,
+        "bars_active": signal.bars_active,
+        "entry_timeframe": signal.timeframe,
+    }
+
     return {
         "signal_id": signal_id,
         "signal_summary": signal_summary,
@@ -766,4 +775,5 @@ def build_deep_analysis(
         "entry_zone": entry_zone,
         "tp_logic": tp_logic,
         "confluences": confluences,
+        "timing": timing,
     }

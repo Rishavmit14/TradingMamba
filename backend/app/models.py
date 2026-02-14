@@ -396,6 +396,7 @@ class TradingSignal:
     created_at: int = 0        # Unix ms when first generated
     bars_active: int = 0       # How many analysis cycles this signal has persisted
     take_profits: list = field(default_factory=list)  # Multi-TP: [{price, rr, label}]
+    trigger_candle_index: int = -1  # Index of the candle that triggered this signal
 
 
 # ──────────────────────────────────────────────

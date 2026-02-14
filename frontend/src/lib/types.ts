@@ -152,6 +152,7 @@ export interface TradingSignal {
   status?: string;           // "active" | "sl_hit" | "tp_hit" | "expired"
   created_at?: number;
   bars_active?: number;
+  trigger_candle_index?: number;
 }
 
 export interface HTFZone {
@@ -249,6 +250,14 @@ export interface DeepAnalysisConfluence {
   strength: string;   // "strong" | "medium" | "weak"
 }
 
+export interface DeepAnalysisTiming {
+  activated_at: number;
+  trigger_timestamp: number;
+  trigger_candle_index: number;
+  bars_active: number;
+  entry_timeframe: string;
+}
+
 export interface DeepAnalysis {
   signal_id: string;
   signal_summary: {
@@ -263,6 +272,7 @@ export interface DeepAnalysis {
   entry_zone: DeepAnalysisEntryZone;
   tp_logic: DeepAnalysisTP[];
   confluences: DeepAnalysisConfluence[];
+  timing: DeepAnalysisTiming;
 }
 
 // ── Phase 3: Backtest Types ──

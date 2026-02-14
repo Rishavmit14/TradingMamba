@@ -69,6 +69,14 @@ export default function Dashboard() {
   const [deepAnalysis, setDeepAnalysis] = useState<DeepAnalysis | null>(null);
   const [deepAnalysisLoading, setDeepAnalysisLoading] = useState(false);
 
+  // Derive signal marker from deep analysis for chart overlay
+  const signalMarker = deepAnalysis ? {
+    timestamp: deepAnalysis.timing.trigger_timestamp,
+    direction: deepAnalysis.signal_summary.direction,
+    entryPrice: deepAnalysis.signal_summary.entry_price,
+    grade: deepAnalysis.signal_summary.grade,
+  } : null;
+
   const handleManualTrade = useCallback(async (direction: "bullish" | "bearish") => {
     const sl = parseFloat(manualSL);
     const tp = parseFloat(manualTP);
@@ -461,7 +469,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} openTrades={openTrades} />
+                <Chart data={analysis} visibility={visibility} livePrice={price} onElementClick={handleChartClick} openTrades={openTrades} signalMarker={signalMarker} />
               )}
             </div>
 
