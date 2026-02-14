@@ -288,6 +288,7 @@ export interface DetailedSignals {
   checklist_v24: ChecklistItem[];
   checklist_v23: ChecklistItem[];
   signals: TradingSignal[];
+  all_style_signals: TradingSignal[];
 }
 
 // ── Phase 5: Demo Account Types ──

@@ -13,10 +13,6 @@ import {
   Clock,
   ChevronDown,
   ChevronRight,
-  ArrowUpRight,
-  Repeat2,
-  GitBranch,
-  Crosshair,
   Radio,
   Shield,
   Target,
@@ -32,60 +28,36 @@ import {
   TrendState,
 } from "@/lib/types";
 
-// ── Entry Method Metadata (from V17/V22/V23/V24 knowledge) ──
+// ── V20 Trading Style Metadata ──
 
-interface EntryMethodMeta {
+interface TradingStyleMeta {
   key: string;
-  name: string;
-  fullName: string;
-  description: string;
-  source: string;
-  icon: typeof ArrowUpRight;
+  label: string;
+  biasTF: string;
+  setupTF: string;
+  entryTF: string;
   color: string;
+  bgColor: string;
+  borderColor: string;
 }
 
-const ENTRY_METHODS: EntryMethodMeta[] = [
-  {
-    key: "mss",
-    name: "MSS",
-    fullName: "Market Structure Shift",
-    description:
-      "Body closes beyond swept liquidity, expansion leg forms with FVG. Wait for IDM before entry.",
-    source: "V17 — 80-88% accuracy",
-    icon: ArrowUpRight,
-    color: "#10b981",
-  },
-  {
-    key: "sbc",
-    name: "SBC",
-    fullName: "Sweep Based Change",
-    description:
-      "Sweep one side + first candle body close on opposite side = trade direction. Works on major liquidity sweeps.",
-    source: "V22 — Wyckoff-based",
-    icon: Repeat2,
-    color: "#3b82f6",
-  },
-  {
-    key: "pullback_break",
-    name: "Pullback Break",
-    fullName: "Trend Continuation",
-    description:
-      "Valid BOS continuation. After confirmed BOS, enter on pullback to new zone. Same-TF: 1:1-1:2 R:R.",
-    source: "V23 — Master Checklist",
-    icon: GitBranch,
-    color: "#a855f7",
-  },
-  {
-    key: "scob",
-    name: "SCOB",
-    fullName: "Sweep Change of Bias",
-    description:
-      "Only valid at POI zone or after major liquidity sweep. Never standalone.",
-    source: "V19/V23",
-    icon: Crosshair,
-    color: "#f59e0b",
-  },
+const TRADING_STYLES: TradingStyleMeta[] = [
+  { key: "positional",  label: "Positional",  biasTF: "1M", setupTF: "W1",  entryTF: "D1",  color: "text-purple-400",  bgColor: "bg-purple-500/15",  borderColor: "border-purple-500/30" },
+  { key: "swing",       label: "Swing",       biasTF: "W1", setupTF: "D1",  entryTF: "H4",  color: "text-indigo-400",  bgColor: "bg-indigo-500/15",  borderColor: "border-indigo-500/30" },
+  { key: "short_term",  label: "Short-Term",  biasTF: "D1", setupTF: "H4",  entryTF: "H1",  color: "text-sky-400",     bgColor: "bg-sky-500/15",     borderColor: "border-sky-500/30" },
+  { key: "intraday",    label: "Intraday",    biasTF: "H4", setupTF: "H1",  entryTF: "M15", color: "text-teal-400",    bgColor: "bg-teal-500/15",    borderColor: "border-teal-500/30" },
+  { key: "day_trading", label: "Day Trading", biasTF: "H4", setupTF: "M15", entryTF: "M5",  color: "text-orange-400",  bgColor: "bg-orange-500/15",  borderColor: "border-orange-500/30" },
+  { key: "scalping",    label: "Scalping",    biasTF: "H1", setupTF: "M15", entryTF: "M5",  color: "text-rose-400",    bgColor: "bg-rose-500/15",    borderColor: "border-rose-500/30" },
 ];
+
+// ── Entry Method Config (for badges on cards) ──
+
+const ENTRY_METHOD_COLORS: Record<string, { color: string; bg: string; border: string; label: string }> = {
+  mss:            { color: "text-emerald-400", bg: "bg-emerald-500/15", border: "border-emerald-500/30", label: "MSS" },
+  sbc:            { color: "text-blue-400",    bg: "bg-blue-500/15",    border: "border-blue-500/30",    label: "SBC" },
+  pullback_break: { color: "text-purple-400",  bg: "bg-purple-500/15",  border: "border-purple-500/30",  label: "Pullback" },
+  scob:           { color: "text-amber-400",   bg: "bg-amber-500/15",   border: "border-amber-500/30",   label: "SCOB" },
+};
 
 // ── Helpers ──
 
@@ -124,6 +96,7 @@ const gradeConfig: Record<string, { bg: string; text: string; border: string }> 
 function SignalCardFull({ signal }: { signal: TradingSignal }) {
   const isBull = signal.direction === "bullish";
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
+  const method = signal.entry_method ? ENTRY_METHOD_COLORS[signal.entry_method] : null;
 
   return (
     <div className={`glass-card rounded-xl p-4 transition-all hover:border-[var(--border-hover)] ${
@@ -147,11 +120,16 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
             <span className="text-xs text-[var(--text-muted)] ml-2 font-mono">{signal.timeframe}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {signal.is_counter_trend && (
             <span className="px-1.5 py-0.5 text-[10px] font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded">
               CT
             </span>
+          )}
+          {method && (
+            <div className={`px-2 py-1 rounded-md text-[10px] font-bold border ${method.bg} ${method.color} ${method.border}`}>
+              {method.label}
+            </div>
           )}
           <div className={`px-2 py-1 rounded-md text-xs font-bold border ${grade.bg} ${grade.text} ${grade.border}`}>
             Grade {signal.grade}
@@ -255,22 +233,29 @@ export default function SignalsTab() {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [fetchData]);
 
-  // Group signals by entry method
-  const signalsByMethod: Record<string, TradingSignal[]> = {};
-  for (const method of ENTRY_METHODS) {
-    signalsByMethod[method.key] = [];
+  // Use all_style_signals (all 6 trading styles) — fall back to signals (intraday-only)
+  const allSignals = data?.all_style_signals?.length ? data.all_style_signals : (data?.signals ?? []);
+
+  // Group signals by trading style
+  const signalsByStyle: Record<string, TradingSignal[]> = {};
+  for (const style of TRADING_STYLES) {
+    signalsByStyle[style.key] = [];
   }
-  signalsByMethod["other"] = [];
-  if (data?.signals) {
-    for (const sig of data.signals) {
-      const key = sig.entry_method || "other";
-      if (signalsByMethod[key]) {
-        signalsByMethod[key].push(sig);
-      } else {
-        signalsByMethod["other"].push(sig);
-      }
+  signalsByStyle["other"] = [];
+  for (const sig of allSignals) {
+    const key = sig.trading_style || "other";
+    if (signalsByStyle[key]) {
+      signalsByStyle[key].push(sig);
+    } else {
+      signalsByStyle["other"].push(sig);
     }
   }
+
+  // Multi-style alignment detection
+  const bullStyles = new Set(allSignals.filter(s => s.direction === "bullish").map(s => s.trading_style));
+  const bearStyles = new Set(allSignals.filter(s => s.direction === "bearish").map(s => s.trading_style));
+  const alignedCount = Math.max(bullStyles.size, bearStyles.size);
+  const alignedDir = bullStyles.size >= bearStyles.size ? "bullish" : "bearish";
 
   const v24Score = data?.checklist_v24?.filter((c) => c.status === "passed").length ?? 0;
   const v24Total = data?.checklist_v24?.length ?? 6;
@@ -379,62 +364,79 @@ export default function SignalsTab() {
         </div>
       )}
 
-      {/* ═══ SECTION B: Signals by Entry Strategy ═══ */}
+      {/* ═══ SECTION B: Multi-Style Alignment ═══ */}
+      {alignedCount >= 2 && (
+        <div className={`glass-card rounded-xl p-4 animate-fade-in ${
+          alignedDir === "bullish"
+            ? "border-emerald-500/20"
+            : "border-red-500/20"
+        }`}>
+          <div className="flex items-center gap-3">
+            {alignedDir === "bullish"
+              ? <TrendingUp className="w-5 h-5 text-emerald-400" />
+              : <TrendingDown className="w-5 h-5 text-red-400" />
+            }
+            <div>
+              <span className={`text-sm font-bold ${alignedDir === "bullish" ? "text-emerald-400" : "text-red-400"}`}>
+                {alignedCount} Trading Styles Aligned {alignedDir.toUpperCase()}
+              </span>
+              {alignedCount >= 3 && (
+                <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                  Strong multi-style confluence — consider holding for bigger targets
+                </p>
+              )}
+            </div>
+            <div className="ml-auto flex items-center gap-1">
+              {Array.from(alignedDir === "bullish" ? bullStyles : bearStyles).map(style => {
+                const meta = TRADING_STYLES.find(s => s.key === style);
+                return meta ? (
+                  <span key={style} className={`px-2 py-0.5 rounded text-[10px] font-bold border ${meta.bgColor} ${meta.color} ${meta.borderColor}`}>
+                    {meta.label}
+                  </span>
+                ) : null;
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ SECTION C: Signals by Trading Style ═══ */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-amber-400" />
           <h2 className="text-sm font-semibold text-[var(--text-primary)]">
-            Active Signals by Entry Strategy
+            Active Signals by Trading Style
           </h2>
           {data && (
             <span className="text-xs font-mono text-[var(--text-muted)] bg-[var(--bg-tertiary)] px-1.5 py-0.5 rounded">
-              {data.signals.length} total
+              {allSignals.length} total
             </span>
           )}
         </div>
 
-        {ENTRY_METHODS.map((method) => {
-          const signals = signalsByMethod[method.key] || [];
-          const Icon = method.icon;
+        {TRADING_STYLES.map((style) => {
+          const signals = signalsByStyle[style.key] || [];
 
           return (
-            <div key={method.key} className="glass-card rounded-xl overflow-hidden animate-fade-in">
-              {/* Method Header */}
+            <div key={style.key} className="glass-card rounded-xl overflow-hidden animate-fade-in">
+              {/* Style Header */}
               <div className="px-4 py-3 border-b border-[var(--border-primary)]">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: `${method.color}15` }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: method.color }} />
+                    <div className={`px-2.5 py-1 rounded-lg text-xs font-bold border ${style.bgColor} ${style.color} ${style.borderColor}`}>
+                      {style.label}
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold" style={{ color: method.color }}>
-                          {method.name}
-                        </span>
-                        <span className="text-xs text-[var(--text-secondary)]">
-                          {method.fullName}
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-[var(--text-muted)] mt-0.5 max-w-lg">
-                        {method.description}
-                      </p>
+                    <div className="text-[10px] text-[var(--text-muted)] font-mono">
+                      {style.biasTF} → {style.setupTF} → {style.entryTF}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[var(--text-muted)]">{method.source}</span>
-                    <span
-                      className="text-xs font-mono font-bold px-2 py-0.5 rounded"
-                      style={{
-                        color: signals.length > 0 ? method.color : "var(--text-muted)",
-                        backgroundColor: signals.length > 0 ? `${method.color}15` : "var(--bg-tertiary)",
-                      }}
-                    >
-                      {signals.length}
-                    </span>
-                  </div>
+                  <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                    signals.length > 0
+                      ? `${style.bgColor} ${style.color}`
+                      : "bg-[var(--bg-tertiary)] text-[var(--text-muted)]"
+                  }`}>
+                    {signals.length}
+                  </span>
                 </div>
               </div>
 
@@ -448,7 +450,7 @@ export default function SignalsTab() {
                   </div>
                 ) : (
                   <p className="text-xs text-[var(--text-muted)] text-center py-3">
-                    No active signals for this entry model
+                    No active signals for {style.label}
                   </p>
                 )}
               </div>
@@ -457,11 +459,11 @@ export default function SignalsTab() {
         })}
 
         {/* Other / unclassified signals */}
-        {signalsByMethod["other"]?.length > 0 && (
+        {signalsByStyle["other"]?.length > 0 && (
           <div className="glass-card rounded-xl p-4">
             <h3 className="text-xs font-semibold text-[var(--text-muted)] mb-3">Other Signals</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {signalsByMethod["other"].map((sig, i) => (
+              {signalsByStyle["other"].map((sig, i) => (
                 <SignalCardFull key={i} signal={sig} />
               ))}
             </div>
@@ -469,7 +471,7 @@ export default function SignalsTab() {
         )}
       </div>
 
-      {/* ═══ SECTION C: V24 6-Rule Checklist ═══ */}
+      {/* ═══ SECTION D: V24 6-Rule Checklist ═══ */}
       {data?.checklist_v24 && (
         <div className="glass-card rounded-xl p-4 animate-fade-in">
           <div className="flex items-center justify-between mb-4">
@@ -528,7 +530,7 @@ export default function SignalsTab() {
         </div>
       )}
 
-      {/* ═══ SECTION D: V23 Master Checklist (Collapsible) ═══ */}
+      {/* ═══ SECTION E: V23 Master Checklist (Collapsible) ═══ */}
       {data?.checklist_v23 && (
         <div className="glass-card rounded-xl overflow-hidden animate-fade-in">
           <button
