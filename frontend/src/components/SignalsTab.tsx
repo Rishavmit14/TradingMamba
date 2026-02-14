@@ -48,8 +48,6 @@ const TRADING_STYLES: TradingStyleMeta[] = [
   { key: "swing",       label: "Swing",       biasTF: "W1", setupTF: "D1",  entryTF: "H4",  color: "text-indigo-400",  bgColor: "bg-indigo-500/15",  borderColor: "border-indigo-500/30" },
   { key: "short_term",  label: "Short-Term",  biasTF: "D1", setupTF: "H4",  entryTF: "H1",  color: "text-sky-400",     bgColor: "bg-sky-500/15",     borderColor: "border-sky-500/30" },
   { key: "intraday",    label: "Intraday",    biasTF: "H4", setupTF: "H1",  entryTF: "M15", color: "text-teal-400",    bgColor: "bg-teal-500/15",    borderColor: "border-teal-500/30" },
-  { key: "day_trading", label: "Day Trading", biasTF: "H4", setupTF: "M15", entryTF: "M5",  color: "text-orange-400",  bgColor: "bg-orange-500/15",  borderColor: "border-orange-500/30" },
-  { key: "scalping",    label: "Scalping",    biasTF: "H1", setupTF: "M15", entryTF: "M5",  color: "text-rose-400",    bgColor: "bg-rose-500/15",    borderColor: "border-rose-500/30" },
 ];
 
 // ── Entry Method Config (for badges on cards) ──

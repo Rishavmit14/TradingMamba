@@ -34,8 +34,6 @@ const styleConfig: Record<string, { bg: string; text: string; border: string; la
   swing:       { bg: "bg-indigo-500/15", text: "text-indigo-400", border: "border-indigo-500/30", label: "Swing" },
   short_term:  { bg: "bg-sky-500/15",    text: "text-sky-400",    border: "border-sky-500/30",    label: "Short-Term" },
   intraday:    { bg: "bg-teal-500/15",   text: "text-teal-400",   border: "border-teal-500/30",   label: "Intraday" },
-  day_trading: { bg: "bg-orange-500/15", text: "text-orange-400", border: "border-orange-500/30", label: "Day Trading" },
-  scalping:    { bg: "bg-rose-500/15",   text: "text-rose-400",   border: "border-rose-500/30",   label: "Scalping" },
 };
 
 export default function SignalCard({ signal, onShowDetails }: SignalCardProps) {
