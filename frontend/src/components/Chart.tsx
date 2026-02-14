@@ -1130,8 +1130,8 @@ export default function Chart({ data, visibility, livePrice, onElementClick, ope
     const ts = chartRef.current.timeScale();
     const count = candleSeriesRef.current.data().length;
     if (count > 0) {
-      const from = Math.max(0, count - 80);
-      ts.setVisibleLogicalRange({ from, to: count + 5 });
+      const from = Math.max(0, count - 50);
+      ts.setVisibleLogicalRange({ from, to: count + 3 });
     }
   }, []);
 
