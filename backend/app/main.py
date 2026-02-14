@@ -426,6 +426,7 @@ async def analyze_single_tf(timeframe: str = "H4"):
         if m15_multi:
             result.signals = m15_multi.signals
             result.all_style_signals = m15_multi.all_style_signals
+            result.futures_context = m15_multi.futures_context
 
         # Build HTF zones for chart display
         from app.core.engine import _collect_htf_zones
