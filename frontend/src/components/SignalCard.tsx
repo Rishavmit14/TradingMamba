@@ -40,7 +40,13 @@ export default function SignalCard({ signal }: SignalCardProps) {
   const isBull = signal.direction === "bullish";
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
   const mss = signal.mss_quality ? mssConfig[signal.mss_quality] : null;
-  const style = signal.trading_style ? styleConfig[signal.trading_style] : null;
+
+  // Use trading_styles[] (merged) if available, otherwise fall back to single trading_style
+  const styles = signal.trading_styles?.length
+    ? signal.trading_styles
+    : signal.trading_style
+    ? [signal.trading_style]
+    : [];
 
   return (
     <div className={`glass-card rounded-xl p-3.5 transition-all hover:border-[var(--border-hover)] ${
@@ -65,11 +71,14 @@ export default function SignalCard({ signal }: SignalCardProps) {
           </div>
         </div>
         <div className="flex items-center gap-1.5">
-          {style && (
-            <div className={`px-2 py-1 rounded-md text-xs font-bold border ${style.bg} ${style.text} ${style.border}`}>
-              {style.label}
-            </div>
-          )}
+          {styles.map((s) => {
+            const cfg = styleConfig[s];
+            return cfg ? (
+              <div key={s} className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold border ${cfg.bg} ${cfg.text} ${cfg.border}`}>
+                {cfg.label}
+              </div>
+            ) : null;
+          })}
           {mss && (
             <div className={`px-2 py-1 rounded-md text-xs font-bold border ${mss.bg} ${mss.text} ${mss.border}`}>
               {mss.label}
@@ -148,6 +157,16 @@ export default function SignalCard({ signal }: SignalCardProps) {
         <div className="mt-2 flex items-center gap-1.5 bg-purple-500/5 border border-purple-500/15 rounded-lg px-2.5 py-1.5">
           <ArrowRight className="w-3 h-3 text-purple-400 rotate-180" />
           <span className="text-xs text-purple-400">Counter-trend signal</span>
+        </div>
+      )}
+
+      {/* Signal age indicator */}
+      {(signal.bars_active != null && signal.bars_active > 0) && (
+        <div className="mt-2 flex items-center justify-between text-[10px] text-[var(--text-muted)]">
+          <span>Active for {signal.bars_active} cycle{signal.bars_active > 1 ? "s" : ""}</span>
+          {styles.length > 1 && (
+            <span className="font-medium text-amber-400">{styles.length} styles agree</span>
+          )}
         </div>
       )}
     </div>

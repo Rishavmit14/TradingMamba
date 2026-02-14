@@ -284,12 +284,21 @@ def run_multi_tf_analysis(
         )
         all_style_signals.extend(style_signals)
 
-    # Store all style signals on M15 result (primary entry for backward compat)
+    # ── Cross-style dedup + lifecycle tracking via SignalStore ──
+    from app.core.signal_store import SignalStore
+    store = SignalStore.get_instance()
+    store.update(all_style_signals, candles_by_tf)
+    active_signals = store.get_active_as_trading_signals()
+
+    # Store active signals on M15 result (primary entry for backward compat)
     m15 = results.get("M15")
     if m15:
         # Backward compat: m15.signals = intraday-only signals
-        m15.signals = [s for s in all_style_signals if s.trading_style == "intraday"]
-        # All styles combined
-        m15.all_style_signals = all_style_signals
+        m15.signals = [
+            s for s in active_signals
+            if "intraday" in (s.trading_styles or [s.trading_style])
+        ]
+        # All styles combined (deduplicated, lifecycle-tracked)
+        m15.all_style_signals = active_signals
 
     return results

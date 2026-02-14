@@ -19,13 +19,15 @@ import {
   ArrowRight,
   RefreshCw,
 } from "lucide-react";
-import { fetchDetailedSignals } from "@/lib/api";
+import { fetchDetailedSignals, fetchResolvedSignals } from "@/lib/api";
 import {
   DetailedSignals,
   TradingSignal,
   ChecklistItem,
   ChecklistStatus,
   TrendState,
+  ResolvedSignal,
+  SignalStoreStats,
 } from "@/lib/types";
 
 // ── V20 Trading Style Metadata ──
@@ -98,6 +100,13 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
   const grade = gradeConfig[signal.grade] || gradeConfig.D;
   const method = signal.entry_method ? ENTRY_METHOD_COLORS[signal.entry_method] : null;
 
+  // Use merged trading_styles[] if available
+  const styles = signal.trading_styles?.length
+    ? signal.trading_styles
+    : signal.trading_style
+    ? [signal.trading_style]
+    : [];
+
   return (
     <div className={`glass-card rounded-xl p-4 transition-all hover:border-[var(--border-hover)] ${
       isBull ? "hover:shadow-emerald-500/5" : "hover:shadow-red-500/5"
@@ -136,6 +145,21 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
           </div>
         </div>
       </div>
+
+      {/* Multi-style badges */}
+      {styles.length > 1 && (
+        <div className="flex items-center gap-1 mb-3">
+          <span className="text-[10px] text-[var(--text-muted)]">Styles:</span>
+          {styles.map((s) => {
+            const meta = TRADING_STYLES.find((ts) => ts.key === s);
+            return meta ? (
+              <span key={s} className={`px-1.5 py-0.5 rounded text-[10px] font-bold border ${meta.bgColor} ${meta.color} ${meta.borderColor}`}>
+                {meta.label}
+              </span>
+            ) : null;
+          })}
+        </div>
+      )}
 
       {/* Price levels */}
       <div className="grid grid-cols-3 gap-2 mb-3">
@@ -200,6 +224,13 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
           <span className="text-xs text-emerald-400">VSA Absorption confirmed</span>
         </div>
       )}
+
+      {/* Signal age */}
+      {(signal.bars_active != null && signal.bars_active > 0) && (
+        <div className="mt-2 text-[10px] text-[var(--text-muted)]">
+          Active for {signal.bars_active} cycle{signal.bars_active > 1 ? "s" : ""}
+        </div>
+      )}
     </div>
   );
 }
@@ -211,6 +242,9 @@ export default function SignalsTab() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [v23Open, setV23Open] = useState(false);
+  const [resolvedSignals, setResolvedSignals] = useState<ResolvedSignal[]>([]);
+  const [storeStats, setStoreStats] = useState<SignalStoreStats | null>(null);
+  const [outcomesOpen, setOutcomesOpen] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const fetchData = useCallback(async (silent = false) => {
@@ -219,6 +253,15 @@ export default function SignalsTab() {
     try {
       const result = await fetchDetailedSignals();
       setData(result);
+
+      // Fetch resolved signals separately — don't block main signals if this fails
+      try {
+        const resolvedData = await fetchResolvedSignals(20);
+        setResolvedSignals(resolvedData.resolved);
+        setStoreStats(resolvedData.stats);
+      } catch {
+        // Resolved endpoint may not be available yet — silently ignore
+      }
     } catch (err: any) {
       if (!silent) setError(err.message || "Failed to fetch signals");
     } finally {
@@ -236,26 +279,46 @@ export default function SignalsTab() {
   // Use all_style_signals (all 6 trading styles) — fall back to signals (intraday-only)
   const allSignals = data?.all_style_signals?.length ? data.all_style_signals : (data?.signals ?? []);
 
-  // Group signals by trading style
+  // Group signals by trading style — use trading_styles[] (merged) for correct multi-style placement
   const signalsByStyle: Record<string, TradingSignal[]> = {};
   for (const style of TRADING_STYLES) {
     signalsByStyle[style.key] = [];
   }
   signalsByStyle["other"] = [];
   for (const sig of allSignals) {
-    const key = sig.trading_style || "other";
-    if (signalsByStyle[key]) {
-      signalsByStyle[key].push(sig);
-    } else {
+    const styles = sig.trading_styles?.length
+      ? sig.trading_styles
+      : sig.trading_style
+      ? [sig.trading_style]
+      : ["other"];
+    let placed = false;
+    for (const s of styles) {
+      if (signalsByStyle[s]) {
+        signalsByStyle[s].push(sig);
+        placed = true;
+      }
+    }
+    if (!placed) {
       signalsByStyle["other"].push(sig);
     }
   }
 
-  // Multi-style alignment detection
-  const bullStyles = new Set(allSignals.filter(s => s.direction === "bullish").map(s => s.trading_style));
-  const bearStyles = new Set(allSignals.filter(s => s.direction === "bearish").map(s => s.trading_style));
-  const alignedCount = Math.max(bullStyles.size, bearStyles.size);
-  const alignedDir = bullStyles.size >= bearStyles.size ? "bullish" : "bearish";
+  // Multi-style alignment detection — use trading_styles[] for accurate counting
+  const bullStyleSet = new Set<string>();
+  const bearStyleSet = new Set<string>();
+  for (const sig of allSignals) {
+    const styles = sig.trading_styles?.length
+      ? sig.trading_styles
+      : sig.trading_style
+      ? [sig.trading_style]
+      : [];
+    for (const s of styles) {
+      if (sig.direction === "bullish") bullStyleSet.add(s);
+      else bearStyleSet.add(s);
+    }
+  }
+  const alignedCount = Math.max(bullStyleSet.size, bearStyleSet.size);
+  const alignedDir = bullStyleSet.size >= bearStyleSet.size ? "bullish" : "bearish";
 
   const v24Score = data?.checklist_v24?.filter((c) => c.status === "passed").length ?? 0;
   const v24Total = data?.checklist_v24?.length ?? 6;
@@ -387,7 +450,7 @@ export default function SignalsTab() {
               )}
             </div>
             <div className="ml-auto flex items-center gap-1">
-              {Array.from(alignedDir === "bullish" ? bullStyles : bearStyles).map(style => {
+              {Array.from(alignedDir === "bullish" ? bullStyleSet : bearStyleSet).map(style => {
                 const meta = TRADING_STYLES.find(s => s.key === style);
                 return meta ? (
                   <span key={style} className={`px-2 py-0.5 rounded text-[10px] font-bold border ${meta.bgColor} ${meta.color} ${meta.borderColor}`}>
@@ -576,6 +639,129 @@ export default function SignalsTab() {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ SECTION F: Recent Outcomes (Resolved Signals) ═══ */}
+      {(resolvedSignals.length > 0 || (storeStats && storeStats.resolved_count > 0)) && (
+        <div className="glass-card rounded-xl overflow-hidden animate-fade-in">
+          <button
+            onClick={() => setOutcomesOpen(!outcomesOpen)}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-[var(--bg-tertiary)] transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              <Target className="w-4 h-4 text-cyan-400" />
+              <h3 className="text-sm font-semibold text-[var(--text-primary)]">
+                Recent Outcomes
+              </h3>
+              {storeStats && (
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    {storeStats.tp_hits} TP
+                  </span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">
+                    {storeStats.sl_hits} SL
+                  </span>
+                  {storeStats.win_rate > 0 && (
+                    <span className={`text-[10px] font-mono font-bold ${storeStats.win_rate >= 50 ? "text-emerald-400" : "text-red-400"}`}>
+                      {storeStats.win_rate}% WR
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+            {outcomesOpen ? (
+              <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
+            ) : (
+              <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
+            )}
+          </button>
+
+          {outcomesOpen && resolvedSignals.length > 0 && (
+            <div className="px-4 pb-4 border-t border-[var(--border-primary)] pt-3">
+              <div className="space-y-2">
+                {resolvedSignals.map((rs) => {
+                  const isBull = rs.direction === "bullish";
+                  const isWin = rs.status === "tp_hit";
+                  const isLoss = rs.status === "sl_hit";
+                  return (
+                    <div
+                      key={rs.signal_id}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border ${
+                        isWin
+                          ? "bg-emerald-500/5 border-emerald-500/15"
+                          : isLoss
+                          ? "bg-red-500/5 border-red-500/15"
+                          : "bg-[var(--bg-tertiary)] border-[var(--border-primary)]"
+                      }`}
+                    >
+                      {/* Direction */}
+                      <div className={`w-6 h-6 rounded flex items-center justify-center ${
+                        isBull ? "bg-emerald-500/10" : "bg-red-500/10"
+                      }`}>
+                        {isBull
+                          ? <TrendingUp className="w-3 h-3 text-emerald-400" />
+                          : <TrendingDown className="w-3 h-3 text-red-400" />
+                        }
+                      </div>
+
+                      {/* Outcome badge */}
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        isWin
+                          ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                          : isLoss
+                          ? "bg-red-500/15 text-red-400 border border-red-500/30"
+                          : "bg-[var(--bg-tertiary)] text-[var(--text-muted)] border border-[var(--border-primary)]"
+                      }`}>
+                        {isWin ? "TP HIT" : isLoss ? "SL HIT" : "EXPIRED"}
+                      </span>
+
+                      {/* Price info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 text-[10px]">
+                          <span className="text-[var(--text-muted)]">
+                            Entry <span className="font-mono text-[var(--text-secondary)]">${rs.entry_price.toLocaleString()}</span>
+                          </span>
+                          <span className="text-[var(--text-muted)]">→</span>
+                          <span className={isWin ? "text-emerald-400" : isLoss ? "text-red-400" : "text-[var(--text-muted)]"}>
+                            {isWin ? `TP $${rs.take_profit.toLocaleString()}` : isLoss ? `SL $${rs.stop_loss.toLocaleString()}` : "Expired"}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-0.5">
+                          {rs.trading_styles.map((s) => {
+                            const meta = TRADING_STYLES.find((ts) => ts.key === s);
+                            return meta ? (
+                              <span key={s} className={`px-1 py-0 rounded text-[8px] font-bold ${meta.color}`}>
+                                {meta.label}
+                              </span>
+                            ) : null;
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Grade + R:R */}
+                      <div className="text-right">
+                        <span className={`text-[10px] font-bold ${
+                          gradeConfig[rs.grade]?.text || "text-[var(--text-muted)]"
+                        }`}>
+                          {rs.grade}
+                        </span>
+                        <span className="text-[10px] text-[var(--text-muted)] ml-1.5">
+                          R:R {rs.risk_reward_ratio}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {resolvedSignals.length === 0 && (
+                <p className="text-xs text-[var(--text-muted)] text-center py-4">
+                  No resolved signals yet — signals will appear here after SL/TP is hit
+                </p>
+              )}
             </div>
           )}
         </div>

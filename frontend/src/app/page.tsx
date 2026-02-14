@@ -516,11 +516,22 @@ export default function Dashboard() {
           {/* Right sidebar — Active Signals (all trading styles) */}
           {sidebarOpen && (() => {
             const allSigs = analysis?.all_style_signals ?? [];
-            // Count how many styles agree on each direction
-            const bullStyles = new Set(allSigs.filter(s => s.direction === "bullish").map(s => s.trading_style));
-            const bearStyles = new Set(allSigs.filter(s => s.direction === "bearish").map(s => s.trading_style));
-            const alignedCount = Math.max(bullStyles.size, bearStyles.size);
-            const alignedDir = bullStyles.size >= bearStyles.size ? "bullish" : "bearish";
+            // Count how many styles agree on each direction — use trading_styles[] for accurate counting
+            const bullStyleSet = new Set<string>();
+            const bearStyleSet = new Set<string>();
+            for (const s of allSigs) {
+              const styles = s.trading_styles?.length
+                ? s.trading_styles
+                : s.trading_style
+                ? [s.trading_style]
+                : [];
+              for (const st of styles) {
+                if (s.direction === "bullish") bullStyleSet.add(st);
+                else bearStyleSet.add(st);
+              }
+            }
+            const alignedCount = Math.max(bullStyleSet.size, bearStyleSet.size);
+            const alignedDir = bullStyleSet.size >= bearStyleSet.size ? "bullish" : "bearish";
 
             return (
               <div className="w-80 border-l border-[var(--border-primary)] bg-[var(--bg-secondary)] overflow-hidden flex flex-col animate-slide-in-right">

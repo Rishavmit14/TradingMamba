@@ -8,6 +8,8 @@ import {
   DemoTrade,
   DemoEquityPoint,
   TelegramStatus,
+  ResolvedSignal,
+  SignalStoreStats,
 } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
@@ -59,6 +61,15 @@ export async function fetchLatestBacktest(): Promise<BacktestResult | null> {
 /** Phase 4: Detailed Signals API */
 export async function fetchDetailedSignals(): Promise<DetailedSignals> {
   const res = await fetch(`${API_BASE}/signals/detailed`);
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+/** Signal lifecycle: resolved signals (SL hit, TP hit, expired) */
+export async function fetchResolvedSignals(
+  limit: number = 50
+): Promise<{ resolved: ResolvedSignal[]; stats: SignalStoreStats }> {
+  const res = await fetch(`${API_BASE}/signals/resolved?limit=${limit}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }

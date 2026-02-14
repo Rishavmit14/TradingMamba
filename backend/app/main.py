@@ -320,6 +320,11 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "is_counter_trend": sig.is_counter_trend,
                 "mss_quality": sig.mss_quality,
                 "trading_style": sig.trading_style,
+                "signal_id": sig.signal_id,
+                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
+                "status": sig.status,
+                "created_at": sig.created_at,
+                "bars_active": sig.bars_active,
             }
             for sig in result.signals
         ],
@@ -341,6 +346,11 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
                 "is_counter_trend": sig.is_counter_trend,
                 "mss_quality": sig.mss_quality,
                 "trading_style": sig.trading_style,
+                "signal_id": sig.signal_id,
+                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
+                "status": sig.status,
+                "created_at": sig.created_at,
+                "bars_active": sig.bars_active,
             }
             for sig in result.all_style_signals
         ],
@@ -796,6 +806,11 @@ async def get_detailed_signals():
                 "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
                 "trading_style": sig.trading_style,
+                "signal_id": sig.signal_id,
+                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
+                "status": sig.status,
+                "created_at": sig.created_at,
+                "bars_active": sig.bars_active,
             }
             for sig in (m15.signals if m15 else [])
         ],
@@ -816,10 +831,23 @@ async def get_detailed_signals():
                 "vsa_absorption": sig.vsa_absorption,
                 "is_counter_trend": sig.is_counter_trend,
                 "trading_style": sig.trading_style,
+                "signal_id": sig.signal_id,
+                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
+                "status": sig.status,
+                "created_at": sig.created_at,
+                "bars_active": sig.bars_active,
             }
             for sig in (m15.all_style_signals if m15 else [])
         ],
     }
+
+
+@app.get("/api/signals/resolved")
+async def get_resolved_signals(limit: int = 50):
+    """Get recently resolved signals (SL hit, TP hit, expired) for performance tracking."""
+    from app.core.signal_store import SignalStore
+    store = SignalStore.get_instance()
+    return {"resolved": store.get_resolved_signals(limit), "stats": store.get_stats()}
 
 
 # ──────────────────────────────────────────────

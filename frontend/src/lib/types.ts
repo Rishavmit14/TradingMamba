@@ -139,6 +139,12 @@ export interface TradingSignal {
   is_counter_trend: boolean;
   mss_quality: string;
   trading_style: string;
+  // Signal lifecycle fields (populated by SignalStore)
+  signal_id?: string;
+  trading_styles?: string[];
+  status?: string;           // "active" | "sl_hit" | "tp_hit" | "expired"
+  created_at?: number;
+  bars_active?: number;
 }
 
 export interface HTFZone {
@@ -289,6 +295,37 @@ export interface DetailedSignals {
   checklist_v23: ChecklistItem[];
   signals: TradingSignal[];
   all_style_signals: TradingSignal[];
+}
+
+// ── Signal Lifecycle Types ──
+
+export interface ResolvedSignal {
+  signal_id: string;
+  direction: Direction;
+  entry_price: number;
+  stop_loss: number;
+  take_profit: number;
+  risk_reward_ratio: number;
+  grade: SignalGrade;
+  trading_styles: string[];
+  status: string;
+  created_at: number;
+  resolved_at: number | null;
+  resolved_price: number | null;
+  bars_active: number;
+  confluences: string[];
+  entry_method: string | null;
+  confidence_score: number;
+  timeframe: string;
+}
+
+export interface SignalStoreStats {
+  active_count: number;
+  resolved_count: number;
+  sl_hits: number;
+  tp_hits: number;
+  expired: number;
+  win_rate: number;
 }
 
 // ── Phase 5: Demo Account Types ──
