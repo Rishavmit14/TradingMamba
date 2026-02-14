@@ -98,9 +98,9 @@ def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
     # 1.7: Order Block detection
     order_blocks = detect_all_order_blocks(candles, swings, fvgs, inducements, trend)
 
-    # 1.8: Premium/Discount
+    # 1.8: Premium/Discount (V12: anchored to structural BOS/CHoCH leg)
     current_price = candles[-1].close
-    pd = calculate_premium_discount(swings, current_price)
+    pd = calculate_premium_discount(swings, current_price, bos_events, choch_events, trend)
 
     # 1.9: Session
     session = get_current_session(candles[-1].timestamp)
