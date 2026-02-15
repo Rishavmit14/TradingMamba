@@ -271,6 +271,7 @@ export interface DeepAnalysis {
 // ── Phase 3: Backtest Types ──
 
 export type TradeOutcome = "win" | "loss" | "timeout";
+export type EngineMode = "smc" | "quant";
 export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel";
 
 export interface TradeRecord {

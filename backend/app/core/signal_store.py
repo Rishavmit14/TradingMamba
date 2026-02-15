@@ -37,9 +37,13 @@ class TrackedSignal:
 
 
 class SignalStore:
-    """Singleton in-memory store for signal lifecycle tracking."""
+    """In-memory store for signal lifecycle tracking.
 
-    _instance: Optional[SignalStore] = None
+    Supports multiple named instances (e.g. "smc", "quant") so that
+    different engine modes maintain independent signal lifecycles.
+    """
+
+    _instances: dict[str, SignalStore] = {}
     EXPIRY_MS = 4 * 3600 * 1000  # 4 hours max
     MAX_RESOLVED = 200           # Ring buffer cap
 
@@ -48,10 +52,10 @@ class SignalStore:
         self.resolved: list[TrackedSignal] = []
 
     @classmethod
-    def get_instance(cls) -> SignalStore:
-        if cls._instance is None:
-            cls._instance = cls()
-        return cls._instance
+    def get_instance(cls, mode: str = "smc") -> SignalStore:
+        if mode not in cls._instances:
+            cls._instances[mode] = cls()
+        return cls._instances[mode]
 
     @staticmethod
     def _compute_signal_id(sig: TradingSignal) -> str:

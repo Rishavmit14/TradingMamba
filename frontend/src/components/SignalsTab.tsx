@@ -22,6 +22,7 @@ import {
 import { fetchDetailedSignals, fetchResolvedSignals } from "@/lib/api";
 import {
   DetailedSignals,
+  EngineMode,
   TradingSignal,
   ChecklistItem,
   ChecklistStatus,
@@ -246,7 +247,7 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
 
 // ── Main Component ──
 
-export default function SignalsTab() {
+export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: EngineMode }) {
   const [data, setData] = useState<DetailedSignals | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -260,12 +261,12 @@ export default function SignalsTab() {
     if (!silent) setLoading(true);
     setError(null);
     try {
-      const result = await fetchDetailedSignals();
+      const result = await fetchDetailedSignals(mode);
       setData(result);
 
       // Fetch resolved signals separately — don't block main signals if this fails
       try {
-        const resolvedData = await fetchResolvedSignals(20);
+        const resolvedData = await fetchResolvedSignals(20, mode);
         setResolvedSignals(resolvedData.resolved);
         setStoreStats(resolvedData.stats);
       } catch {
@@ -276,7 +277,7 @@ export default function SignalsTab() {
     } finally {
       if (!silent) setLoading(false);
     }
-  }, []);
+  }, [mode]);
 
   // Initial fetch + 30s auto-refresh
   useEffect(() => {

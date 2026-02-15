@@ -37,6 +37,7 @@ import type {
   DemoEquityPoint,
   TelegramStatus,
   SignalGrade,
+  EngineMode,
 } from "@/lib/types";
 
 // ── Helpers ──
@@ -133,7 +134,7 @@ function PriorityBadge({ rank, score }: { rank: number; score: number }) {
 
 // ── Main Component ──
 
-export default function DemoTab() {
+export default function DemoTab({ mode = "smc" as EngineMode }: { mode?: EngineMode }) {
   const [account, setAccount] = useState<DemoAccount | null>(null);
   const [trades, setTrades] = useState<DemoTrade[]>([]);
   const [equity, setEquity] = useState<DemoEquityPoint[]>([]);
@@ -151,9 +152,9 @@ export default function DemoTab() {
   const fetchAll = useCallback(async () => {
     try {
       const [acct, allTrades, eq, tg, price] = await Promise.all([
-        fetchDemoAccount(),
-        fetchDemoTrades(undefined, 100),
-        fetchDemoEquity(),
+        fetchDemoAccount(mode),
+        fetchDemoTrades(undefined, 100, mode),
+        fetchDemoEquity(mode),
         fetchTelegramStatus(),
         fetchLivePrice().then((p) => p.price).catch(() => null),
       ]);
@@ -168,7 +169,7 @@ export default function DemoTab() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     fetchAll();
@@ -181,7 +182,7 @@ export default function DemoTab() {
   const handleTake = async (tradeId: number) => {
     setActionLoading(tradeId);
     try {
-      await takeDemoTrade(tradeId);
+      await takeDemoTrade(tradeId, mode);
       await fetchAll();
     } catch {}
     setActionLoading(null);
@@ -190,7 +191,7 @@ export default function DemoTab() {
   const handleSkip = async (tradeId: number) => {
     setActionLoading(tradeId);
     try {
-      await skipDemoTrade(tradeId);
+      await skipDemoTrade(tradeId, mode);
       await fetchAll();
     } catch {}
     setActionLoading(null);
@@ -199,7 +200,7 @@ export default function DemoTab() {
   const handleClose = async (tradeId: number) => {
     setActionLoading(tradeId);
     try {
-      await closeDemoTrade(tradeId);
+      await closeDemoTrade(tradeId, mode);
       await fetchAll();
     } catch {}
     setActionLoading(null);
@@ -217,7 +218,7 @@ export default function DemoTab() {
     if (isNaN(sl) || isNaN(tp) || sl <= 0 || tp <= 0) return;
     setActionLoading(tradeId);
     try {
-      await updateTradeSLTP(tradeId, { stop_loss: sl, take_profit: tp });
+      await updateTradeSLTP(tradeId, { stop_loss: sl, take_profit: tp }, mode);
       setEditingTrade(null);
       await fetchAll();
     } catch {}
@@ -226,7 +227,7 @@ export default function DemoTab() {
 
   const handleReset = async () => {
     if (!confirm("Reset demo account? All trades will be cleared.")) return;
-    await resetDemoAccount();
+    await resetDemoAccount(mode);
     setRiskInput("");
     await fetchAll();
   };
@@ -234,7 +235,7 @@ export default function DemoTab() {
   const handleSaveSettings = async () => {
     const val = parseFloat(riskInput);
     if (isNaN(val) || val <= 0 || val > 10) return;
-    await updateDemoSettings({ risk_per_trade_pct: val });
+    await updateDemoSettings({ risk_per_trade_pct: val }, mode);
     await fetchAll();
     setShowSettings(false);
   };

@@ -2,6 +2,8 @@
 
 Uses aiosqlite with WAL mode for concurrent access from both the
 Telegram bot callbacks and the FastAPI REST endpoints.
+
+Supports multiple engine modes (e.g. "smc", "quant") via separate DB files.
 """
 
 import json
@@ -11,7 +13,14 @@ from typing import Optional, List
 
 import aiosqlite
 
-DB_PATH = Path(__file__).resolve().parents[3] / "data" / "demo_account.db"
+_DATA_DIR = Path(__file__).resolve().parents[3] / "data"
+
+
+def _db_path(mode: str = "smc") -> Path:
+    """Return DB path for a given engine mode. SMC uses legacy filename for compat."""
+    if mode == "smc":
+        return _DATA_DIR / "demo_account.db"
+    return _DATA_DIR / f"demo_account_{mode}.db"
 
 # ── Schema ──────────────────────────────────────────────
 
@@ -93,9 +102,10 @@ def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
 
-async def _get_db() -> aiosqlite.Connection:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    db = await aiosqlite.connect(str(DB_PATH))
+async def _get_db(mode: str = "smc") -> aiosqlite.Connection:
+    path = _db_path(mode)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    db = await aiosqlite.connect(str(path))
     db.row_factory = aiosqlite.Row
     await db.execute("PRAGMA journal_mode=WAL")
     await db.execute("PRAGMA foreign_keys=ON")
@@ -105,9 +115,9 @@ async def _get_db() -> aiosqlite.Connection:
 # ── Init ────────────────────────────────────────────────
 
 
-async def init_db(initial_balance: float = 10_000.0, risk_pct: float = 1.0):
+async def init_db(initial_balance: float = 10_000.0, risk_pct: float = 1.0, mode: str = "smc"):
     """Create tables and seed account row if missing."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         await db.executescript(_SCHEMA)
         # Migration: add trade_source column if missing (existing DBs)
@@ -138,8 +148,8 @@ async def init_db(initial_balance: float = 10_000.0, risk_pct: float = 1.0):
 # ── Account ─────────────────────────────────────────────
 
 
-async def get_account() -> dict:
-    db = await _get_db()
+async def get_account(mode: str = "smc") -> dict:
+    db = await _get_db(mode)
     try:
         cursor = await db.execute("SELECT * FROM account WHERE id = 1")
         row = await cursor.fetchone()
@@ -154,9 +164,9 @@ async def get_account() -> dict:
         await db.close()
 
 
-async def update_account_balance(delta_usd: float, is_win: bool):
+async def update_account_balance(delta_usd: float, is_win: bool, mode: str = "smc"):
     """Adjust balance after a trade closes and increment win/loss counter."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         if is_win:
             await db.execute(
@@ -177,8 +187,8 @@ async def update_account_balance(delta_usd: float, is_win: bool):
         await db.close()
 
 
-async def update_account_settings(risk_pct: Optional[float] = None):
-    db = await _get_db()
+async def update_account_settings(risk_pct: Optional[float] = None, mode: str = "smc"):
+    db = await _get_db(mode)
     try:
         if risk_pct is not None:
             await db.execute(
@@ -190,9 +200,9 @@ async def update_account_settings(risk_pct: Optional[float] = None):
         await db.close()
 
 
-async def reset_account(initial_balance: float = 10_000.0, risk_pct: float = 1.0):
+async def reset_account(initial_balance: float = 10_000.0, risk_pct: float = 1.0, mode: str = "smc"):
     """Wipe all trades/signals and reset balance."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         await db.execute("DELETE FROM trades")
         await db.execute("DELETE FROM signals")
@@ -215,8 +225,8 @@ async def reset_account(initial_balance: float = 10_000.0, risk_pct: float = 1.0
 # ── Signals ─────────────────────────────────────────────
 
 
-async def signal_exists(signal_hash: str) -> bool:
-    db = await _get_db()
+async def signal_exists(signal_hash: str, mode: str = "smc") -> bool:
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             "SELECT 1 FROM signals WHERE signal_hash = ?", (signal_hash,)
@@ -226,9 +236,9 @@ async def signal_exists(signal_hash: str) -> bool:
         await db.close()
 
 
-async def insert_signal(signal_data: dict) -> int:
+async def insert_signal(signal_data: dict, mode: str = "smc") -> int:
     """Insert a new signal and return its ID."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             """INSERT INTO signals
@@ -261,8 +271,8 @@ async def insert_signal(signal_data: dict) -> int:
         await db.close()
 
 
-async def mark_signal_sent(signal_id: int, message_id: Optional[int] = None):
-    db = await _get_db()
+async def mark_signal_sent(signal_id: int, message_id: Optional[int] = None, mode: str = "smc"):
+    db = await _get_db(mode)
     try:
         await db.execute(
             "UPDATE signals SET telegram_sent = 1, telegram_message_id = ? WHERE id = ?",
@@ -276,9 +286,9 @@ async def mark_signal_sent(signal_id: int, message_id: Optional[int] = None):
 # ── Trades ──────────────────────────────────────────────
 
 
-async def insert_trade(signal_id: int, signal_data: dict) -> int:
+async def insert_trade(signal_id: int, signal_data: dict, mode: str = "smc") -> int:
     """Create a pending trade linked to a signal."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             """INSERT INTO trades
@@ -307,11 +317,11 @@ async def insert_trade(signal_id: int, signal_data: dict) -> int:
         await db.close()
 
 
-async def insert_manual_trade(trade_data: dict) -> Optional[dict]:
+async def insert_manual_trade(trade_data: dict, mode: str = "smc") -> Optional[dict]:
     """Create a manual trade directly in 'open' status (no signal required)."""
     import uuid
 
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         # Create a placeholder signal record for FK constraint
         manual_hash = f"manual_{uuid.uuid4().hex[:12]}"
@@ -392,9 +402,9 @@ async def insert_manual_trade(trade_data: dict) -> Optional[dict]:
         await db.close()
 
 
-async def take_trade(trade_id: int, source: str = "web") -> Optional[dict]:
+async def take_trade(trade_id: int, source: str = "web", mode: str = "smc") -> Optional[dict]:
     """Transition a pending trade to open. Returns the trade dict or None."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
         trade = await cursor.fetchone()
@@ -433,9 +443,9 @@ async def take_trade(trade_id: int, source: str = "web") -> Optional[dict]:
         await db.close()
 
 
-async def skip_trade(trade_id: int, source: str = "web") -> bool:
+async def skip_trade(trade_id: int, source: str = "web", mode: str = "smc") -> bool:
     """Mark a pending trade as skipped. Returns True if successful."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute("SELECT status FROM trades WHERE id = ?", (trade_id,))
         trade = await cursor.fetchone()
@@ -451,9 +461,9 @@ async def skip_trade(trade_id: int, source: str = "web") -> bool:
         await db.close()
 
 
-async def update_trade_sl_tp(trade_id: int, stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Optional[dict]:
+async def update_trade_sl_tp(trade_id: int, stop_loss: Optional[float] = None, take_profit: Optional[float] = None, mode: str = "smc") -> Optional[dict]:
     """Update SL and/or TP of an open trade. Recalculates R:R. Returns trade dict or None."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
         trade = await cursor.fetchone()
@@ -482,9 +492,9 @@ async def update_trade_sl_tp(trade_id: int, stop_loss: Optional[float] = None, t
         await db.close()
 
 
-async def close_trade(trade_id: int, exit_price: float, source: str = "web") -> Optional[dict]:
+async def close_trade(trade_id: int, exit_price: float, source: str = "web", mode: str = "smc") -> Optional[dict]:
     """Close an open trade at given price. Returns trade dict or None."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
         trade = await cursor.fetchone()
@@ -516,17 +526,21 @@ async def close_trade(trade_id: int, exit_price: float, source: str = "web") -> 
         await db.commit()
 
         # Update account balance
-        await update_account_balance(round(pnl_usd, 2), outcome == "win")
+        await update_account_balance(round(pnl_usd, 2), outcome == "win", mode=mode)
 
-        # Snapshot equity
-        acct = await db.execute("SELECT balance FROM account WHERE id = 1")
-        row = await acct.fetchone()
-        if row:
-            await db.execute(
-                "INSERT INTO equity_snapshots (balance, timestamp) VALUES (?, ?)",
-                (row["balance"], _now()),
-            )
-            await db.commit()
+        # Snapshot equity — reopen db since update_account_balance closed its own connection
+        db2 = await _get_db(mode)
+        try:
+            acct = await db2.execute("SELECT balance FROM account WHERE id = 1")
+            row = await acct.fetchone()
+            if row:
+                await db2.execute(
+                    "INSERT INTO equity_snapshots (balance, timestamp) VALUES (?, ?)",
+                    (row["balance"], _now()),
+                )
+                await db2.commit()
+        finally:
+            await db2.close()
 
         cursor = await db.execute("SELECT * FROM trades WHERE id = ?", (trade_id,))
         row = await cursor.fetchone()
@@ -535,8 +549,8 @@ async def close_trade(trade_id: int, exit_price: float, source: str = "web") -> 
         await db.close()
 
 
-async def get_open_trades() -> List[dict]:
-    db = await _get_db()
+async def get_open_trades(mode: str = "smc") -> List[dict]:
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             "SELECT * FROM trades WHERE status = 'open' ORDER BY opened_at DESC"
@@ -547,8 +561,8 @@ async def get_open_trades() -> List[dict]:
         await db.close()
 
 
-async def get_pending_trades() -> List[dict]:
-    db = await _get_db()
+async def get_pending_trades(mode: str = "smc") -> List[dict]:
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             "SELECT * FROM trades WHERE status = 'pending' ORDER BY created_at DESC"
@@ -559,8 +573,8 @@ async def get_pending_trades() -> List[dict]:
         await db.close()
 
 
-async def get_trades(status: Optional[str] = None, limit: int = 50) -> List[dict]:
-    db = await _get_db()
+async def get_trades(status: Optional[str] = None, limit: int = 50, mode: str = "smc") -> List[dict]:
+    db = await _get_db(mode)
     try:
         if status:
             cursor = await db.execute(
@@ -577,9 +591,9 @@ async def get_trades(status: Optional[str] = None, limit: int = 50) -> List[dict
         await db.close()
 
 
-async def timeout_pending_trades(timeout_seconds: int = 300) -> List[int]:
+async def timeout_pending_trades(timeout_seconds: int = 300, mode: str = "smc") -> List[int]:
     """Auto-skip pending trades older than timeout. Returns list of skipped IDs."""
-    db = await _get_db()
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             """SELECT id, created_at FROM trades WHERE status = 'pending'"""
@@ -607,8 +621,8 @@ async def timeout_pending_trades(timeout_seconds: int = 300) -> List[int]:
 # ── Equity ──────────────────────────────────────────────
 
 
-async def insert_equity_snapshot(balance: float):
-    db = await _get_db()
+async def insert_equity_snapshot(balance: float, mode: str = "smc"):
+    db = await _get_db(mode)
     try:
         await db.execute(
             "INSERT INTO equity_snapshots (balance, timestamp) VALUES (?, ?)",
@@ -619,8 +633,8 @@ async def insert_equity_snapshot(balance: float):
         await db.close()
 
 
-async def get_equity_curve() -> List[dict]:
-    db = await _get_db()
+async def get_equity_curve(mode: str = "smc") -> List[dict]:
+    db = await _get_db(mode)
     try:
         cursor = await db.execute(
             "SELECT balance, timestamp FROM equity_snapshots ORDER BY id ASC"

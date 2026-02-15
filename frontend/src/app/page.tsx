@@ -27,7 +27,7 @@ import SignalsTab from "@/components/SignalsTab";
 import DemoTab from "@/components/DemoTab";
 import MarketIntelTab from "@/components/MarketIntelTab";
 import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
-import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade } from "@/lib/types";
+import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade, EngineMode } from "@/lib/types";
 
 const TIMEFRAMES = ["1M", "W1", "D1", "H4", "H1", "M15", "M5"] as const;
 
@@ -53,6 +53,7 @@ function TrendIcon({ trend }: { trend: string }) {
 }
 
 export default function Dashboard() {
+  const [engineMode, setEngineMode] = useState<EngineMode>("smc");
   const [activeTab, setActiveTab] = useState<AppTab>("live");
   const [backtestResult, setBacktestResult] = useState<BacktestResult | null>(null);
   const [selectedTF, setSelectedTF] = useState<string>("H4");
@@ -99,13 +100,13 @@ export default function Dashboard() {
     setSelectedElement(null);  // Close AnalysisPanel (mutual exclusion)
     setPickerState(null);
     try {
-      const result = await fetchDeepAnalysis(signalId);
+      const result = await fetchDeepAnalysis(signalId, engineMode);
       setDeepAnalysis(result);
     } catch {
       setDeepAnalysis(null);
     }
     setDeepAnalysisLoading(false);
-  }, []);
+  }, [engineMode]);
 
   const handleChartClick = useCallback((result: ChartClickResult | null) => {
     if (!result || result.candidates.length === 0) {
@@ -139,13 +140,13 @@ export default function Dashboard() {
 
   const silentRefresh = useCallback(async (tf: string) => {
     try {
-      const result = await fetchAnalysis(tf);
+      const result = await fetchAnalysis(tf, engineMode);
       setAnalysis(result);
       setError(null);
     } catch {
       // Silent fail — keep showing last data
     }
-  }, []);
+  }, [engineMode]);
 
   const runAnalysis = useCallback(async (tf: string) => {
     setSelectedTF(tf);
@@ -155,7 +156,7 @@ export default function Dashboard() {
     setPickerState(null);
 
     try {
-      const result = await fetchAnalysis(tf);
+      const result = await fetchAnalysis(tf, engineMode);
       setAnalysis(result);
     } catch (err: any) {
       setError(err.message || "Failed to fetch analysis");
@@ -163,7 +164,7 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [engineMode]);
 
   // Auto-refresh polling
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -226,6 +227,32 @@ export default function Dashboard() {
               <span className="text-sm font-semibold tracking-tight gradient-text">
                 TradingMamba
               </span>
+            </div>
+
+            <div className="h-5 w-px bg-[var(--border-primary)]" />
+
+            {/* Engine mode toggle */}
+            <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
+              <button
+                onClick={() => { setEngineMode("smc"); setAnalysis(null); }}
+                className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
+                  engineMode === "smc"
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                SMC
+              </button>
+              <button
+                onClick={() => { setEngineMode("quant"); setAnalysis(null); }}
+                className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
+                  engineMode === "quant"
+                    ? "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                }`}
+              >
+                QUANT
+              </button>
             </div>
 
             <div className="h-5 w-px bg-[var(--border-primary)]" />
@@ -363,6 +390,16 @@ export default function Dashboard() {
                 )}
 
                 {analysis && (
+                  <div className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                    engineMode === "smc"
+                      ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                      : "bg-orange-500/15 text-orange-400 border border-orange-500/30"
+                  }`}>
+                    {engineMode}
+                  </div>
+                )}
+
+                {analysis && (
                   <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium ${
                     analysis.trend === "bullish"
                       ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
@@ -449,8 +486,18 @@ export default function Dashboard() {
                     <h2 className="text-xl font-semibold gradient-text mb-2">
                       TradingMamba
                     </h2>
+                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 ${
+                      engineMode === "smc"
+                        ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                        : "bg-orange-500/15 text-orange-400 border border-orange-500/30"
+                    }`}>
+                      {engineMode === "smc" ? "SMC Mode" : "Quant Mode"}
+                    </div>
                     <p className="text-sm text-[var(--text-secondary)] mb-1">
-                      Smart Money Concepts Detection Engine
+                      {engineMode === "smc"
+                        ? "Smart Money Concepts Detection Engine"
+                        : "Institutional Quant Engine — 4-Layer Model"
+                      }
                     </p>
                     <p className="text-xs text-[var(--text-muted)] mb-6">
                       Select a timeframe to analyze BTCUSDT structure
@@ -647,13 +694,13 @@ export default function Dashboard() {
 
       {activeTab === "signals" && (
         <div className="flex-1 overflow-hidden">
-          <SignalsTab />
+          <SignalsTab mode={engineMode} />
         </div>
       )}
 
       {activeTab === "demo" && (
         <div className="flex-1 overflow-hidden">
-          <DemoTab />
+          <DemoTab mode={engineMode} />
         </div>
       )}
 

@@ -67,15 +67,19 @@ async def _fetch_futures_safe(symbol: str = SYMBOL) -> dict | None:
 # Updated by every full multi-TF analysis call; deep analysis reads
 # from here instead of re-running (avoids SignalStore side-effects
 # and ensures the analysis context matches what generated the signal).
-_cached_results: dict[str, AnalysisResult] = {}
-_cached_candles: dict[str, list] = {}
+# Keyed by engine mode ("smc", "quant") so each mode has its own cache.
+_cached_results: dict[str, dict[str, AnalysisResult]] = {}
+_cached_candles: dict[str, dict[str, list]] = {}
+
+VALID_MODES = ("smc", "quant")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup/shutdown lifecycle: init DB, start monitors + bot."""
     # ── Startup ──
-    await init_db(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT)
-    logger.info("Demo database initialized")
+    await init_db(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT, mode="smc")
+    await init_db(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT, mode="quant")
+    logger.info("Demo databases initialized (smc + quant)")
 
     bot = None
     signal_monitor = None
@@ -387,7 +391,7 @@ async def health():
 
 
 @app.get("/api/analyze/{timeframe}")
-async def analyze_single_tf(timeframe: str = "H4"):
+async def analyze_single_tf(timeframe: str = "H4", mode: str = "smc"):
     """Run analysis on a single timeframe + always generate M15 signals.
 
     Chart patterns come from the selected timeframe.
@@ -395,6 +399,8 @@ async def analyze_single_tf(timeframe: str = "H4"):
     so both buy and sell opportunities are visible regardless of which TF
     the user is viewing. The signal bar and chart are complementary views.
     """
+    if mode not in VALID_MODES:
+        mode = "smc"
     tf = timeframe.upper()
     candles = await fetch_klines(SYMBOL, tf, limit=1000)
     result = analyze_timeframe(candles, tf)
@@ -409,9 +415,9 @@ async def analyze_single_tf(timeframe: str = "H4"):
         )
         # Use already-fetched candles for the selected TF
         all_candles[tf] = candles
-        multi_results = run_multi_tf_analysis(all_candles, futures_data=futures_data)
-        _cached_results.update(multi_results)
-        _cached_candles.update(all_candles)
+        multi_results = run_multi_tf_analysis(all_candles, futures_data=futures_data, mode=mode)
+        _cached_results[mode] = multi_results
+        _cached_candles[mode] = all_candles
 
         # Compute trade bias from HTF trends
         w1_trend = multi_results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
@@ -438,15 +444,17 @@ async def analyze_single_tf(timeframe: str = "H4"):
 
 
 @app.get("/api/analyze")
-async def analyze_all():
+async def analyze_all(mode: str = "smc"):
     """Run full multi-TF analysis (W1→D1→H4→M15) and generate signals."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     candles_by_tf, futures_data = await asyncio.gather(
         fetch_all_timeframes(SYMBOL),
         _fetch_futures_safe(),
     )
-    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
-    _cached_results.update(results)
-    _cached_candles.update(candles_by_tf)
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data, mode=mode)
+    _cached_results[mode] = results
+    _cached_candles[mode] = candles_by_tf
 
     # Compute trade bias from HTF trends
     w1_trend = results.get("W1", AnalysisResult(timeframe="W1", trend=TrendState.RANGING)).trend
@@ -474,15 +482,17 @@ async def analyze_all():
 
 
 @app.get("/api/signals")
-async def get_signals():
+async def get_signals(mode: str = "smc"):
     """Get current trading signals from M15 analysis."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     candles_by_tf, futures_data = await asyncio.gather(
         fetch_all_timeframes(SYMBOL),
         _fetch_futures_safe(),
     )
-    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
-    _cached_results.update(results)
-    _cached_candles.update(candles_by_tf)
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data, mode=mode)
+    _cached_results[mode] = results
+    _cached_candles[mode] = candles_by_tf
 
     m15 = results.get("M15")
     if not m15:
@@ -789,15 +799,17 @@ def _compute_v23_checklist(
 
 
 @app.get("/api/signals/detailed")
-async def get_detailed_signals():
+async def get_detailed_signals(mode: str = "smc"):
     """Get signals with full multi-TF context + V24/V23 checklists for the Signals tab."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     candles_by_tf, futures_data = await asyncio.gather(
         fetch_all_timeframes(SYMBOL),
         _fetch_futures_safe(),
     )
-    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
-    _cached_results.update(results)
-    _cached_candles.update(candles_by_tf)
+    results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data, mode=mode)
+    _cached_results[mode] = results
+    _cached_candles[mode] = candles_by_tf
 
     w1 = results.get("W1")
     d1 = results.get("D1")
@@ -891,12 +903,14 @@ async def get_detailed_signals():
 
 
 @app.get("/api/signals/{signal_id}/deep-analysis")
-async def get_signal_deep_analysis(signal_id: str):
+async def get_signal_deep_analysis(signal_id: str, mode: str = "smc"):
     """Get deep multi-TF analysis explaining why a signal was generated."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     from app.core.signal_store import SignalStore
     from app.core.deep_analysis import build_deep_analysis
 
-    store = SignalStore.get_instance()
+    store = SignalStore.get_instance(mode)
 
     # Find the signal in active store
     tracked = store.active.get(signal_id)
@@ -909,18 +923,18 @@ async def get_signal_deep_analysis(signal_id: str):
     # This avoids re-running run_multi_tf_analysis which would:
     # 1. Trigger store.update() side-effects (resolve/expire signals)
     # 2. Show fresh analysis that may not match the signal's generation context
-    if _cached_results:
-        results = _cached_results
-        candles_by_tf = _cached_candles
+    if mode in _cached_results:
+        results = _cached_results[mode]
+        candles_by_tf = _cached_candles[mode]
     else:
         # Cold start fallback: no analysis has run yet
         candles_by_tf, futures_data = await asyncio.gather(
             fetch_all_timeframes(SYMBOL),
             _fetch_futures_safe(),
         )
-        results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data)
-        _cached_results.update(results)
-        _cached_candles.update(candles_by_tf)
+        results = run_multi_tf_analysis(candles_by_tf, futures_data=futures_data, mode=mode)
+        _cached_results[mode] = results
+        _cached_candles[mode] = candles_by_tf
 
     # Build the deep analysis
     analysis = build_deep_analysis(signal, signal_id, results, candles_by_tf)
@@ -928,18 +942,22 @@ async def get_signal_deep_analysis(signal_id: str):
 
 
 @app.get("/api/signals/resolved")
-async def get_resolved_signals(limit: int = 50):
+async def get_resolved_signals(limit: int = 50, mode: str = "smc"):
     """Get recently resolved signals (SL hit, TP hit, expired) for performance tracking."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     from app.core.signal_store import SignalStore
-    store = SignalStore.get_instance()
+    store = SignalStore.get_instance(mode)
     return {"resolved": store.get_resolved_signals(limit), "stats": store.get_stats()}
 
 
 @app.post("/api/signals/resolved/clear")
-async def clear_resolved_signals():
+async def clear_resolved_signals(mode: str = "smc"):
     """Clear all resolved signals (removes stale/duplicate entries)."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     from app.core.signal_store import SignalStore
-    store = SignalStore.get_instance()
+    store = SignalStore.get_instance(mode)
     count = len(store.resolved)
     store.resolved.clear()
     return {"status": "ok", "cleared": count}
@@ -955,50 +973,62 @@ class SettingsUpdate(BaseModel):
 
 
 @app.get("/api/demo/account")
-async def get_demo_account():
+async def get_demo_account(mode: str = "smc"):
     """Get current demo account state."""
-    account = await get_account()
+    if mode not in VALID_MODES:
+        mode = "smc"
+    account = await get_account(mode=mode)
     if not account:
         raise HTTPException(status_code=500, detail="Account not initialized")
-    open_trades = await get_open_trades()
+    open_trades = await get_open_trades(mode=mode)
     account["open_positions"] = len(open_trades)
     return account
 
 
 @app.post("/api/demo/account/reset")
-async def reset_demo_account():
+async def reset_demo_account(mode: str = "smc"):
     """Reset demo account to initial balance and clear all trades."""
-    await reset_account(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT)
+    if mode not in VALID_MODES:
+        mode = "smc"
+    await reset_account(DEMO_INITIAL_BALANCE, DEMO_RISK_PER_TRADE_PCT, mode=mode)
     return {"status": "ok", "message": "Account reset successfully"}
 
 
 @app.put("/api/demo/account/settings")
-async def update_demo_settings(settings: SettingsUpdate):
+async def update_demo_settings(settings: SettingsUpdate, mode: str = "smc"):
     """Update demo account settings."""
-    await update_account_settings(risk_pct=settings.risk_per_trade_pct)
+    if mode not in VALID_MODES:
+        mode = "smc"
+    await update_account_settings(risk_pct=settings.risk_per_trade_pct, mode=mode)
     return {"status": "ok"}
 
 
 @app.get("/api/demo/trades")
-async def get_demo_trades(status: Optional[str] = None, limit: int = 100):
+async def get_demo_trades(status: Optional[str] = None, limit: int = 100, mode: str = "smc"):
     """Get demo trades, optionally filtered by status."""
-    trades = await get_trades(status=status, limit=limit)
+    if mode not in VALID_MODES:
+        mode = "smc"
+    trades = await get_trades(status=status, limit=limit, mode=mode)
     return {"trades": trades}
 
 
 @app.post("/api/demo/trades/{trade_id}/take")
-async def take_demo_trade(trade_id: int):
+async def take_demo_trade(trade_id: int, mode: str = "smc"):
     """Take a pending trade (open position)."""
-    result = await take_trade(trade_id, source="web")
+    if mode not in VALID_MODES:
+        mode = "smc"
+    result = await take_trade(trade_id, source="web", mode=mode)
     if not result:
         raise HTTPException(status_code=400, detail="Trade not found or not pending")
     return result
 
 
 @app.post("/api/demo/trades/{trade_id}/skip")
-async def skip_demo_trade(trade_id: int):
+async def skip_demo_trade(trade_id: int, mode: str = "smc"):
     """Skip a pending trade."""
-    ok = await skip_trade(trade_id, source="web")
+    if mode not in VALID_MODES:
+        mode = "smc"
+    ok = await skip_trade(trade_id, source="web", mode=mode)
     if not ok:
         raise HTTPException(status_code=400, detail="Trade not found or not pending")
     return {"status": "skipped"}
@@ -1010,19 +1040,23 @@ class UpdateSLTPRequest(BaseModel):
 
 
 @app.put("/api/demo/trades/{trade_id}/sl-tp")
-async def update_demo_trade_sl_tp(trade_id: int, req: UpdateSLTPRequest):
+async def update_demo_trade_sl_tp(trade_id: int, req: UpdateSLTPRequest, mode: str = "smc"):
     """Update SL and/or TP of an open trade."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     if req.stop_loss is None and req.take_profit is None:
         raise HTTPException(status_code=400, detail="Provide stop_loss and/or take_profit")
-    result = await update_trade_sl_tp(trade_id, stop_loss=req.stop_loss, take_profit=req.take_profit)
+    result = await update_trade_sl_tp(trade_id, stop_loss=req.stop_loss, take_profit=req.take_profit, mode=mode)
     if not result:
         raise HTTPException(status_code=400, detail="Trade not found or not open")
     return result
 
 
 @app.post("/api/demo/trades/{trade_id}/close")
-async def close_demo_trade(trade_id: int):
+async def close_demo_trade(trade_id: int, mode: str = "smc"):
     """Manually close an open trade at current market price."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     import httpx
     async with httpx.AsyncClient() as client:
         resp = await client.get(
@@ -1031,7 +1065,7 @@ async def close_demo_trade(trade_id: int):
         price_data = resp.json()
         current_price = float(price_data["price"])
 
-    result = await close_trade(trade_id, exit_price=current_price, source="web")
+    result = await close_trade(trade_id, exit_price=current_price, source="web", mode=mode)
     if not result:
         raise HTTPException(status_code=400, detail="Trade not found or not open")
     return result
@@ -1044,8 +1078,10 @@ class ManualTradeRequest(BaseModel):
 
 
 @app.post("/api/demo/trades/manual")
-async def create_manual_trade(req: ManualTradeRequest):
+async def create_manual_trade(req: ManualTradeRequest, mode: str = "smc"):
     """Place a manual trade at current market price."""
+    if mode not in VALID_MODES:
+        mode = "smc"
     if req.direction not in ("bullish", "bearish"):
         raise HTTPException(status_code=400, detail="direction must be 'bullish' or 'bearish'")
 
@@ -1062,16 +1098,18 @@ async def create_manual_trade(req: ManualTradeRequest):
         "entry_price": current_price,
         "stop_loss": req.stop_loss,
         "take_profit": req.take_profit,
-    })
+    }, mode=mode)
     if not result:
         raise HTTPException(status_code=500, detail="Failed to create manual trade")
     return result
 
 
 @app.get("/api/demo/equity")
-async def get_demo_equity():
+async def get_demo_equity(mode: str = "smc"):
     """Get equity curve data for chart."""
-    curve = await get_equity_curve()
+    if mode not in VALID_MODES:
+        mode = "smc"
+    curve = await get_equity_curve(mode=mode)
     return {"equity_curve": curve}
 
 

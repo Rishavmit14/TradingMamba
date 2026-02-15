@@ -286,6 +286,7 @@ def _compute_futures_context(futures_data: dict) -> dict:
 def run_multi_tf_analysis(
     candles_by_tf: dict[str, list[Candle]],
     futures_data: dict | None = None,
+    mode: str = "smc",
 ) -> dict[str, AnalysisResult]:
     """Run analysis across all 7 timeframes and generate multi-style signals.
 
@@ -317,7 +318,7 @@ def run_multi_tf_analysis(
 
     # ── Cross-style dedup + lifecycle tracking via SignalStore ──
     from app.core.signal_store import SignalStore
-    store = SignalStore.get_instance()
+    store = SignalStore.get_instance(mode)
     store.update(all_style_signals, candles_by_tf)
     active_signals = store.get_active_as_trading_signals()
 

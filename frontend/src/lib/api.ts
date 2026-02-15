@@ -8,6 +8,7 @@ import {
   DemoAccount,
   DemoTrade,
   DemoEquityPoint,
+  EngineMode,
   TelegramStatus,
   ResolvedSignal,
   SignalStoreStats,
@@ -16,14 +17,14 @@ import {
 
 const API_BASE = "http://localhost:8000/api";
 
-export async function fetchAnalysis(timeframe: string): Promise<AnalysisResult> {
-  const res = await fetch(`${API_BASE}/analyze/${timeframe}`);
+export async function fetchAnalysis(timeframe: string, mode: EngineMode = "smc"): Promise<AnalysisResult> {
+  const res = await fetch(`${API_BASE}/analyze/${timeframe}?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
-export async function fetchMultiTFAnalysis(): Promise<Record<string, AnalysisResult>> {
-  const res = await fetch(`${API_BASE}/analyze`);
+export async function fetchMultiTFAnalysis(mode: EngineMode = "smc"): Promise<Record<string, AnalysisResult>> {
+  const res = await fetch(`${API_BASE}/analyze?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
@@ -61,44 +62,45 @@ export async function fetchLatestBacktest(): Promise<BacktestResult | null> {
 }
 
 /** Phase 4: Detailed Signals API */
-export async function fetchDetailedSignals(): Promise<DetailedSignals> {
-  const res = await fetch(`${API_BASE}/signals/detailed`);
+export async function fetchDetailedSignals(mode: EngineMode = "smc"): Promise<DetailedSignals> {
+  const res = await fetch(`${API_BASE}/signals/detailed?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
 /** Deep Analysis: comprehensive multi-TF analysis for a signal */
-export async function fetchDeepAnalysis(signalId: string): Promise<DeepAnalysis> {
-  const res = await fetch(`${API_BASE}/signals/${signalId}/deep-analysis`);
+export async function fetchDeepAnalysis(signalId: string, mode: EngineMode = "smc"): Promise<DeepAnalysis> {
+  const res = await fetch(`${API_BASE}/signals/${signalId}/deep-analysis?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
 /** Signal lifecycle: resolved signals (SL hit, TP hit, expired) */
 export async function fetchResolvedSignals(
-  limit: number = 50
+  limit: number = 50,
+  mode: EngineMode = "smc"
 ): Promise<{ resolved: ResolvedSignal[]; stats: SignalStoreStats }> {
-  const res = await fetch(`${API_BASE}/signals/resolved?limit=${limit}`);
+  const res = await fetch(`${API_BASE}/signals/resolved?limit=${limit}&mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
 /** Phase 5: Demo Account API */
-export async function fetchDemoAccount(): Promise<DemoAccount> {
-  const res = await fetch(`${API_BASE}/demo/account`);
+export async function fetchDemoAccount(mode: EngineMode = "smc"): Promise<DemoAccount> {
+  const res = await fetch(`${API_BASE}/demo/account?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
 
-export async function resetDemoAccount(): Promise<void> {
-  const res = await fetch(`${API_BASE}/demo/account/reset`, { method: "POST" });
+export async function resetDemoAccount(mode: EngineMode = "smc"): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/account/reset?mode=${mode}`, { method: "POST" });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
 }
 
 export async function updateDemoSettings(settings: {
   risk_per_trade_pct?: number;
-}): Promise<void> {
-  const res = await fetch(`${API_BASE}/demo/account/settings`, {
+}, mode: EngineMode = "smc"): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/account/settings?mode=${mode}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(settings),
@@ -108,27 +110,29 @@ export async function updateDemoSettings(settings: {
 
 export async function fetchDemoTrades(
   status?: string,
-  limit?: number
+  limit?: number,
+  mode: EngineMode = "smc"
 ): Promise<DemoTrade[]> {
   const params = new URLSearchParams();
   if (status) params.set("status", status);
   if (limit) params.set("limit", String(limit));
+  params.set("mode", mode);
   const res = await fetch(`${API_BASE}/demo/trades?${params}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   const data = await res.json();
   return data.trades;
 }
 
-export async function takeDemoTrade(tradeId: number): Promise<DemoTrade> {
-  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/take`, {
+export async function takeDemoTrade(tradeId: number, mode: EngineMode = "smc"): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/take?mode=${mode}`, {
     method: "POST",
   });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
 
-export async function skipDemoTrade(tradeId: number): Promise<void> {
-  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/skip`, {
+export async function skipDemoTrade(tradeId: number, mode: EngineMode = "smc"): Promise<void> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/skip?mode=${mode}`, {
     method: "POST",
   });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -137,8 +141,8 @@ export async function skipDemoTrade(tradeId: number): Promise<void> {
 export async function updateTradeSLTP(tradeId: number, params: {
   stop_loss?: number;
   take_profit?: number;
-}): Promise<DemoTrade> {
-  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/sl-tp`, {
+}, mode: EngineMode = "smc"): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/sl-tp?mode=${mode}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
@@ -147,8 +151,8 @@ export async function updateTradeSLTP(tradeId: number, params: {
   return res.json();
 }
 
-export async function closeDemoTrade(tradeId: number): Promise<DemoTrade> {
-  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/close`, {
+export async function closeDemoTrade(tradeId: number, mode: EngineMode = "smc"): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/${tradeId}/close?mode=${mode}`, {
     method: "POST",
   });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -159,8 +163,8 @@ export async function createManualTrade(params: {
   direction: "bullish" | "bearish";
   stop_loss: number;
   take_profit: number;
-}): Promise<DemoTrade> {
-  const res = await fetch(`${API_BASE}/demo/trades/manual`, {
+}, mode: EngineMode = "smc"): Promise<DemoTrade> {
+  const res = await fetch(`${API_BASE}/demo/trades/manual?mode=${mode}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
@@ -169,8 +173,8 @@ export async function createManualTrade(params: {
   return res.json();
 }
 
-export async function fetchDemoEquity(): Promise<DemoEquityPoint[]> {
-  const res = await fetch(`${API_BASE}/demo/equity`);
+export async function fetchDemoEquity(mode: EngineMode = "smc"): Promise<DemoEquityPoint[]> {
+  const res = await fetch(`${API_BASE}/demo/equity?mode=${mode}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   const data = await res.json();
   return data.equity_curve;
