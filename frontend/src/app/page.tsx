@@ -41,7 +41,6 @@ const DETECTOR_LABELS: { key: keyof DetectorVisibility; label: string; color: st
   { key: "fvg", label: "FVG", color: "#10b981" },
   { key: "ob", label: "OB", color: "#3b82f6" },
   { key: "pd", label: "P/D", color: "#eab308" },
-  { key: "futures", label: "Futures", color: "#06b6d4" },
 ];
 
 const DEFAULT_VISIBILITY: DetectorVisibility = {
@@ -60,7 +59,7 @@ export default function Dashboard() {
   const [backtestResult, setBacktestResult] = useState<BacktestResult | null>(null);
   const [selectedTF, setSelectedTF] = useState<string>("H4");
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start loading for auto-load
   const [error, setError] = useState<string | null>(null);
   const [visibility, setVisibility] = useState<DetectorVisibility>(DEFAULT_VISIBILITY);
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -71,6 +70,7 @@ export default function Dashboard() {
   const [manualSL, setManualSL] = useState("");
   const [manualTP, setManualTP] = useState("");
   const [manualLoading, setManualLoading] = useState(false);
+  const [showVolume, setShowVolume] = useState(true);
   const [deepAnalysis, setDeepAnalysis] = useState<DeepAnalysis | null>(null);
   const [deepAnalysisLoading, setDeepAnalysisLoading] = useState(false);
 
@@ -212,6 +212,15 @@ export default function Dashboard() {
     return () => { active = false; clearInterval(id); };
   }, []);
 
+  // Auto-load H4 analysis on first page load + re-fetch when engine mode changes
+  const hasAutoLoaded = useRef(false);
+  useEffect(() => {
+    if (!hasAutoLoaded.current) {
+      hasAutoLoaded.current = true;
+    }
+    runAnalysis(selectedTF);
+  }, [engineMode]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const price = ticker?.price ?? null;
   const priceChangePct = ticker?.changePercent ?? 0;
 
@@ -236,7 +245,7 @@ export default function Dashboard() {
             {/* Engine mode toggle */}
             <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
               <button
-                onClick={() => { setEngineMode("smc"); setAnalysis(null); if (activeTab === "quant_analysis") setActiveTab("live"); }}
+                onClick={() => { setEngineMode("smc"); if (activeTab === "quant_analysis") setActiveTab("live"); }}
                 className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   engineMode === "smc"
                     ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
@@ -246,7 +255,7 @@ export default function Dashboard() {
                 SMC
               </button>
               <button
-                onClick={() => { setEngineMode("quant"); setAnalysis(null); }}
+                onClick={() => setEngineMode("quant")}
                 className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   engineMode === "quant"
                     ? "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
@@ -344,25 +353,8 @@ export default function Dashboard() {
 
           </div>
 
-          {/* Center: TF pills (live tab only) */}
-          {activeTab === "live" && (
-            <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
-              {TIMEFRAMES.map((tf) => (
-                <button
-                  key={tf}
-                  onClick={() => runAnalysis(tf)}
-                  disabled={loading}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
-                    selectedTF === tf
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                      : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
-                  } disabled:opacity-50`}
-                >
-                  {tf}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* Spacer — TF pills moved to chart toolbar */}
+          <div className="flex-1" />
 
           {/* Right side */}
           <div className="flex items-center gap-2">
@@ -463,6 +455,66 @@ export default function Dashboard() {
         <div className="flex flex-1 overflow-hidden">
           {/* Chart area */}
           <div className="flex-1 flex flex-col min-w-0">
+            {/* ── Chart Toolbar: TF selector + BTCUSDT ticker + Volume/Futures toggles ── */}
+            <div className="border-b border-[var(--border-primary)] bg-[var(--bg-secondary)] px-4">
+              {/* Row 1: BTCUSDT + price + TF pills */}
+              <div className="flex items-center gap-3 h-9">
+                <span className="text-sm font-bold text-[var(--text-primary)]">BTCUSDT</span>
+                {price && (
+                  <>
+                    <span className="text-sm font-mono font-semibold text-[var(--text-primary)]">
+                      ${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
+                    <span className={`text-xs font-semibold ${priceChangePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {priceChangePct >= 0 ? "+" : ""}{priceChangePct.toFixed(2)}%
+                    </span>
+                  </>
+                )}
+                <div className="h-4 w-px bg-[var(--border-primary)]" />
+                <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
+                  {TIMEFRAMES.map((tf) => (
+                    <button
+                      key={tf}
+                      onClick={() => runAnalysis(tf)}
+                      disabled={loading}
+                      className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 ${
+                        selectedTF === tf
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                          : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                      } disabled:opacity-50`}
+                    >
+                      {tf}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {/* Row 2: Volume + Futures toggles */}
+              <div className="flex items-center gap-2 pb-1.5">
+                <button
+                  onClick={() => setShowVolume((v) => !v)}
+                  className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 border ${
+                    showVolume
+                      ? "text-[#22d3ee] bg-[#22d3ee15] border-[#22d3ee40]"
+                      : "border-transparent bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                  }`}
+                >
+                  Volume
+                </button>
+                {engineMode === "quant" && (
+                  <button
+                    onClick={() => toggleDetector("futures")}
+                    className={`px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200 border ${
+                      visibility.futures
+                        ? "text-[#06b6d4] bg-[#06b6d415] border-[#06b6d440]"
+                        : "border-transparent bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                    }`}
+                  >
+                    Futures
+                  </button>
+                )}
+              </div>
+            </div>
+
             <div className="flex-1 min-h-0 p-2">
               {loading ? (
                 <div className="flex items-center justify-center h-full animate-fade-in">
@@ -492,41 +544,8 @@ export default function Dashboard() {
                     </button>
                   </div>
                 </div>
-              ) : !analysis ? (
-                <div className="flex items-center justify-center h-full animate-fade-in">
-                  <div className="text-center max-w-md">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-400/20 border border-blue-500/20 flex items-center justify-center mx-auto mb-6">
-                      <Activity className="w-8 h-8 text-blue-400" />
-                    </div>
-                    <h2 className="text-xl font-semibold gradient-text mb-2">
-                      TradingMamba
-                    </h2>
-                    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-3 ${
-                      engineMode === "smc"
-                        ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
-                        : "bg-orange-500/15 text-orange-400 border border-orange-500/30"
-                    }`}>
-                      {engineMode === "smc" ? "SMC Mode" : "Quant Mode"}
-                    </div>
-                    <p className="text-sm text-[var(--text-secondary)] mb-1">
-                      {engineMode === "smc"
-                        ? "Smart Money Concepts Detection Engine"
-                        : "Institutional Quant Engine — 4-Layer Model"
-                      }
-                    </p>
-                    <p className="text-xs text-[var(--text-muted)] mb-6">
-                      Select a timeframe to analyze BTCUSDT structure
-                    </p>
-                    <button
-                      onClick={() => runAnalysis("H4")}
-                      className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-medium rounded-lg transition-all shadow-lg shadow-blue-600/25"
-                    >
-                      Analyze H4
-                    </button>
-                  </div>
-                </div>
               ) : (
-                <Chart data={analysis} visibility={visibility} livePrice={price} priceChangePct={priceChangePct} onElementClick={handleChartClick} openTrades={openTrades} signalMarker={signalMarker} />
+                <Chart data={analysis} visibility={visibility} livePrice={price} priceChangePct={priceChangePct} onElementClick={handleChartClick} openTrades={openTrades} signalMarker={signalMarker} showVolume={showVolume} />
               )}
             </div>
 

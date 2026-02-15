@@ -29,6 +29,7 @@ interface ChartProps {
   onElementClick?: (result: ChartClickResult | null) => void;
   openTrades?: DemoTrade[];
   signalMarker?: SignalMarker | null;
+  showVolume?: boolean;
 }
 
 /** Convert unix ms timestamp to unix seconds for TradingView. */
@@ -174,7 +175,7 @@ class BoxPrimitive {
 // Keep old name as alias for readability
 type OBBoxData = BoxData;
 
-export default function Chart({ data, visibility, livePrice, priceChangePct, onElementClick, openTrades = [], signalMarker }: ChartProps) {
+export default function Chart({ data, visibility, livePrice, priceChangePct, onElementClick, openTrades = [], signalMarker, showVolume = true }: ChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
@@ -1278,6 +1279,12 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
       close: livePrice,
     });
   }, [livePrice, data]);
+
+  // Toggle volume histogram visibility
+  useEffect(() => {
+    if (!volumeSeriesRef.current) return;
+    volumeSeriesRef.current.applyOptions({ visible: showVolume });
+  }, [showVolume]);
 
   const handleReset = useCallback(() => {
     if (!chartRef.current || !candleSeriesRef.current) return;
