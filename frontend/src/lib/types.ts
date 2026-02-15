@@ -11,6 +11,7 @@ export type LiquidityEvent = "sweep" | "grab";
 export type ZoneType = "premium" | "discount" | "equilibrium";
 export type SignalGrade = "A" | "B" | "C" | "D" | "M";
 export type MSSGrade = "none" | "standard" | "a_plus" | "a_plus_plus";
+export type VolatilityRegime = "low" | "normal" | "high" | "extreme";
 
 export interface Candle {
   timestamp: number;
@@ -128,6 +129,62 @@ export interface TakeProfit {
   label: string;  // "TP1", "TP2", "TP3"
 }
 
+// ── Quant Types ──
+
+export interface QuantScore {
+  alpha_score: number;       // -100 to +100 (55% weight)
+  micro_score: number;       // -100 to +100 (20% weight)
+  risk_tradability: number;  // 0 to 100 (15% weight)
+  execution_score: number;   // -100 to +100 (10% weight)
+  combined_score: number;    // -100 to +100 (weighted sum)
+  confirmations: number;     // 0-3+ quant confirmations
+  contradictions: number;    // 0-3+ quant contradictions
+  grade_change: number;      // -2 to +2 (grade tiers shifted)
+  components: Record<string, unknown>;
+}
+
+export interface LiquidationEvent {
+  timestamp: number;
+  side: string;
+  price: number;
+  qty: number;
+  qty_usd: number;
+}
+
+export interface QuantContext {
+  vpin: number;
+  vpin_history: number[];
+  atr_m15: number;
+  atr_h4: number;
+  atr_d1: number;
+  dvol: number;
+  volatility_regime: VolatilityRegime;
+  recent_liquidations: LiquidationEvent[];
+  liquidation_clusters: Record<string, unknown>[];
+  cross_exchange_funding: {
+    bybit_rate?: number;
+    okx_rate?: number;
+    avg_rate?: number;
+    dispersion?: number;
+  };
+  options_data: {
+    pc_ratio?: number;
+    total_put_oi?: number;
+    total_call_oi?: number;
+    max_pain?: number;
+    net_gex?: number;
+    skew_25d?: number | null;
+    max_pain_distance_pct?: number;
+  };
+  cot_data: Record<string, unknown>;
+  onchain_flow: Record<string, unknown>;
+  fear_greed: {
+    value?: number;
+    classification?: string;
+    timestamp?: number;
+  };
+}
+
 export interface TradingSignal {
   direction: Direction;
   entry_price: number;
@@ -153,6 +210,13 @@ export interface TradingSignal {
   created_at?: number;
   bars_active?: number;
   trigger_candle_index?: number;
+  // Quant fields (populated in quant mode only)
+  quant_score?: QuantScore;
+  atr_stop_loss?: number;
+  atr_take_profit?: number;
+  position_size_pct?: number;
+  quant_confluences?: string[];
+  suppressed?: boolean;
 }
 
 export interface DetectorVisibility {
@@ -185,6 +249,7 @@ export interface AnalysisResult {
   all_style_signals: TradingSignal[];
   candles: Candle[];
   futures_context?: FuturesContext | null;
+  quant_context?: QuantContext | null;
 }
 
 export type SelectedElementType = "swing" | "bos" | "choch" | "idm" | "fvg" | "ob";
@@ -272,7 +337,7 @@ export interface DeepAnalysis {
 
 export type TradeOutcome = "win" | "loss" | "timeout";
 export type EngineMode = "smc" | "quant";
-export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel";
+export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel" | "quant_analysis";
 
 export interface TradeRecord {
   direction: Direction;

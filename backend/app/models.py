@@ -90,6 +90,13 @@ class MSSGrade(Enum):
     A_PLUS_PLUS = "a_plus_plus"    # FVG + BPR (iFVG+FVG overlap) (~75-85%)
 
 
+class VolatilityRegime(Enum):
+    LOW = "low"             # ATR14/ATR100 < 0.7 — compressed, good for mean reversion
+    NORMAL = "normal"       # 0.7-1.3 — standard conditions
+    HIGH = "high"           # 1.3-2.0 or DVOL > 80 — elevated, wider SL needed
+    EXTREME = "extreme"     # > 2.0 or DVOL > 100 — suppress signals
+
+
 class AMDPhase(Enum):
     ACCUMULATION = "accumulation"    # Range forming near zone
     MANIPULATION = "manipulation"    # Internal liquidity sweep
@@ -397,6 +404,50 @@ class TradingSignal:
     bars_active: int = 0       # How many analysis cycles this signal has persisted
     take_profits: list = field(default_factory=list)  # Multi-TP: [{price, rr, label}]
     trigger_candle_index: int = -1  # Index of the candle that triggered this signal
+    # Quant mode fields (populated by quant/engine.py when mode="quant")
+    quant_score: Optional["QuantScore"] = None
+    atr_stop_loss: float = 0.0       # ATR-based SL (0 = not computed)
+    atr_take_profit: float = 0.0     # ATR-based TP (0 = not computed)
+    position_size_pct: float = 0.0   # ATR-scaled position size as % of account
+    quant_confluences: list[str] = field(default_factory=list)
+    suppressed: bool = False         # True when extreme vol regime suppresses this signal
+
+
+# ──────────────────────────────────────────────
+# Quant Mode Models
+# ──────────────────────────────────────────────
+
+@dataclass
+class QuantScore:
+    """Quant scoring output for a single signal — 4-layer composite."""
+    alpha_score: float = 0.0        # -100 to +100 (55% weight)
+    micro_score: float = 0.0        # -100 to +100 (20% weight)
+    risk_tradability: float = 0.0   # 0 to 100 (15% weight)
+    execution_score: float = 0.0    # -100 to +100 (10% weight)
+    combined_score: float = 0.0     # -100 to +100 (weighted sum)
+    confirmations: int = 0          # 0-3+ quant confirmations
+    contradictions: int = 0         # 0-3+ quant contradictions
+    grade_change: int = 0           # -2 to +2 (grade tiers shifted)
+    components: dict = field(default_factory=dict)  # breakdown per source
+
+
+@dataclass
+class QuantContext:
+    """Quant analysis context attached to AnalysisResult for frontend display."""
+    vpin: float = 0.0
+    vpin_history: list = field(default_factory=list)
+    atr_m15: float = 0.0
+    atr_h4: float = 0.0
+    atr_d1: float = 0.0
+    dvol: float = 0.0                # Deribit implied vol index
+    volatility_regime: VolatilityRegime = VolatilityRegime.NORMAL
+    recent_liquidations: list = field(default_factory=list)
+    liquidation_clusters: list = field(default_factory=list)
+    cross_exchange_funding: dict = field(default_factory=dict)
+    options_data: dict = field(default_factory=dict)
+    cot_data: dict = field(default_factory=dict)
+    onchain_flow: dict = field(default_factory=dict)
+    fear_greed: dict = field(default_factory=dict)
 
 
 # ──────────────────────────────────────────────

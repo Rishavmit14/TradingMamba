@@ -51,7 +51,7 @@ export default function SignalCard({ signal, onShowDetails }: SignalCardProps) {
   return (
     <div className={`glass-card rounded-xl p-3.5 transition-all hover:border-[var(--border-hover)] ${
       isBull ? "hover:shadow-emerald-500/5" : "hover:shadow-red-500/5"
-    } hover:shadow-lg`}>
+    } hover:shadow-lg ${signal.suppressed ? "opacity-50" : ""}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
@@ -164,9 +164,95 @@ export default function SignalCard({ signal, onShowDetails }: SignalCardProps) {
             </span>
           );
         })}
+        {signal.quant_confluences?.map((c, i) => (
+          <span
+            key={`q${i}`}
+            className="px-2 py-0.5 text-xs rounded-md border bg-violet-500/10 text-violet-400 border-violet-500/20"
+          >
+            {c}
+          </span>
+        ))}
       </div>
 
+      {/* Quant Score (quant mode only) */}
+      {signal.quant_score && (
+        <div className="mb-3 p-2.5 rounded-lg bg-violet-500/5 border border-violet-500/15">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] font-bold text-violet-400 uppercase tracking-wider">Quant Score</span>
+            <div className={`px-2 py-0.5 rounded-md text-xs font-bold border ${
+              signal.quant_score.combined_score > 20
+                ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                : signal.quant_score.combined_score < -20
+                ? "bg-red-500/15 text-red-400 border-red-500/30"
+                : "bg-slate-500/15 text-slate-400 border-slate-500/30"
+            }`}>
+              {signal.quant_score.combined_score > 0 ? "+" : ""}{signal.quant_score.combined_score.toFixed(0)}
+            </div>
+          </div>
+          <div className="grid grid-cols-4 gap-1.5 text-[10px]">
+            <div className="text-center">
+              <div className="text-[var(--text-muted)]">Alpha</div>
+              <div className="font-mono font-medium text-violet-300">{signal.quant_score.alpha_score.toFixed(0)}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-[var(--text-muted)]">Micro</div>
+              <div className="font-mono font-medium text-violet-300">{signal.quant_score.micro_score.toFixed(0)}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-[var(--text-muted)]">Risk</div>
+              <div className="font-mono font-medium text-violet-300">{signal.quant_score.risk_tradability.toFixed(0)}</div>
+            </div>
+            <div className="text-center">
+              <div className="text-[var(--text-muted)]">Exec</div>
+              <div className="font-mono font-medium text-violet-300">{signal.quant_score.execution_score.toFixed(0)}</div>
+            </div>
+          </div>
+          {(signal.quant_score.confirmations > 0 || signal.quant_score.contradictions > 0) && (
+            <div className="mt-1.5 flex items-center gap-2 text-[10px]">
+              {signal.quant_score.confirmations > 0 && (
+                <span className="text-emerald-400">{signal.quant_score.confirmations} confirm{signal.quant_score.confirmations > 1 ? "s" : ""}</span>
+              )}
+              {signal.quant_score.contradictions > 0 && (
+                <span className="text-red-400">{signal.quant_score.contradictions} contradict{signal.quant_score.contradictions > 1 ? "s" : ""}</span>
+              )}
+              {signal.quant_score.grade_change !== 0 && (
+                <span className={signal.quant_score.grade_change > 0 ? "text-emerald-400" : "text-red-400"}>
+                  Grade {signal.quant_score.grade_change > 0 ? "+" : ""}{signal.quant_score.grade_change}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ATR SL/TP + Position Size (quant mode) */}
+      {(signal.atr_stop_loss != null && signal.atr_stop_loss > 0) && (
+        <div className="grid grid-cols-3 gap-1.5 mb-2">
+          <div className="bg-red-500/5 rounded-lg px-2 py-1.5 text-center">
+            <div className="text-[10px] text-red-400/60">ATR SL</div>
+            <div className="text-[10px] font-mono font-medium text-red-400">${signal.atr_stop_loss.toLocaleString()}</div>
+          </div>
+          <div className="bg-emerald-500/5 rounded-lg px-2 py-1.5 text-center">
+            <div className="text-[10px] text-emerald-400/60">ATR TP</div>
+            <div className="text-[10px] font-mono font-medium text-emerald-400">${(signal.atr_take_profit ?? 0).toLocaleString()}</div>
+          </div>
+          {(signal.position_size_pct != null && signal.position_size_pct > 0) && (
+            <div className="bg-violet-500/5 rounded-lg px-2 py-1.5 text-center">
+              <div className="text-[10px] text-violet-400/60">Size</div>
+              <div className="text-[10px] font-mono font-medium text-violet-400">{signal.position_size_pct}%</div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Warnings */}
+      {signal.suppressed && (
+        <div className="mt-2 flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 rounded-lg px-2.5 py-1.5">
+          <AlertTriangle className="w-3 h-3 text-amber-400" />
+          <span className="text-xs text-amber-400">Suppressed — extreme volatility</span>
+        </div>
+      )}
+
       {signal.vsa_absorption && (
         <div className="mt-2.5 flex items-center gap-1.5 bg-emerald-500/5 border border-emerald-500/15 rounded-lg px-2.5 py-1.5">
           <TrendingUp className="w-3 h-3 text-emerald-400" />

@@ -28,7 +28,7 @@ from app.core.amd_detector import detect_amd_patterns
 from app.core.price_cycle_detector import detect_price_cycles
 from app.core.signal_generator import generate_signals
 from app.config import SWING_LOOKBACK, TRADING_STYLES
-from app.models import AMDPattern, PriceCycleEvent, PricePhase
+from app.models import AMDPattern, PriceCycleEvent, PricePhase, QuantContext
 
 
 @dataclass
@@ -53,6 +53,7 @@ class AnalysisResult:
     signals: list[TradingSignal] = field(default_factory=list)
     all_style_signals: list[TradingSignal] = field(default_factory=list)
     futures_context: dict | None = None
+    quant_context: "QuantContext | None" = None
 
 
 def analyze_timeframe(candles: list[Candle], timeframe: str) -> AnalysisResult:
@@ -316,6 +317,21 @@ def run_multi_tf_analysis(
         )
         all_style_signals.extend(style_signals)
 
+    # ── Quant post-processing (mode="quant" only) ──
+    quant_context = None
+    if mode == "quant" and all_style_signals:
+        try:
+            from app.quant.engine import apply_quant_layer_sync
+            quant_context, all_style_signals = apply_quant_layer_sync(
+                signals=all_style_signals,
+                candles_by_tf=candles_by_tf,
+                futures_data=futures_data,
+                results=results,
+            )
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).error("Quant layer failed: %s", e)
+
     # ── Cross-style dedup + lifecycle tracking via SignalStore ──
     from app.core.signal_store import SignalStore
     store = SignalStore.get_instance(mode)
@@ -335,5 +351,8 @@ def run_multi_tf_analysis(
         # Attach futures context for chart overlays
         if futures_data:
             m15.futures_context = _compute_futures_context(futures_data)
+        # Attach quant context (mode="quant" only)
+        if quant_context:
+            m15.quant_context = quant_context
 
     return results

@@ -26,6 +26,8 @@ import PerformanceTab from "@/components/PerformanceTab";
 import SignalsTab from "@/components/SignalsTab";
 import DemoTab from "@/components/DemoTab";
 import MarketIntelTab from "@/components/MarketIntelTab";
+import QuantIntelPanel from "@/components/QuantIntelPanel";
+import QuantAnalysisTab from "@/components/QuantAnalysisTab";
 import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade, EngineMode } from "@/lib/types";
 
@@ -234,7 +236,7 @@ export default function Dashboard() {
             {/* Engine mode toggle */}
             <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
               <button
-                onClick={() => { setEngineMode("smc"); setAnalysis(null); }}
+                onClick={() => { setEngineMode("smc"); setAnalysis(null); if (activeTab === "quant_analysis") setActiveTab("live"); }}
                 className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   engineMode === "smc"
                     ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
@@ -325,6 +327,19 @@ export default function Dashboard() {
                 <BarChart3 className="w-3 h-3" />
                 Market Intel
               </button>
+              {engineMode === "quant" && (
+                <button
+                  onClick={() => setActiveTab("quant_analysis")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                    activeTab === "quant_analysis"
+                      ? "bg-violet-500 text-white shadow-lg shadow-violet-500/20"
+                      : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                  }`}
+                >
+                  <Zap className="w-3 h-3" />
+                  Quant Analysis
+                </button>
+              )}
             </div>
 
           </div>
@@ -673,6 +688,13 @@ export default function Dashboard() {
                       </div>
                     ))
                   )}
+
+                  {/* Quant Intelligence Panel — only in quant mode */}
+                  {engineMode === "quant" && (
+                    <div className="mt-4 pt-4 border-t border-[var(--border-primary)]">
+                      <QuantIntelPanel />
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -707,6 +729,12 @@ export default function Dashboard() {
       {activeTab === "market_intel" && (
         <div className="flex-1 overflow-hidden">
           <MarketIntelTab />
+        </div>
+      )}
+
+      {activeTab === "quant_analysis" && (
+        <div className="flex-1 overflow-hidden">
+          <QuantAnalysisTab />
         </div>
       )}
     </div>

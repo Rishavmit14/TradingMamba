@@ -327,6 +327,7 @@ async def run_backtest(
     step_size: int = 96,
     max_bars_timeout: int = 960,
     progress_callback=None,
+    mode: str = "smc",
 ) -> dict:
     """Run the full backtest pipeline with SQLite data + futures confluences.
 
@@ -340,6 +341,7 @@ async def run_backtest(
         step_size: M15 candles between analysis windows (96 = 1 day)
         max_bars_timeout: Max M15 candles to wait for SL/TP (960 = 10 days)
         progress_callback: Optional callable(step, total_steps) for progress updates
+        mode: "smc" or "quant" — quant applies TIER 1 scoring + ATR SL/TP
 
     Returns:
         Complete backtest results dict
@@ -428,7 +430,25 @@ async def run_backtest(
         if not signals_to_evaluate:
             continue
 
+        # Apply quant layer in quant mode (TIER 1 only — uses candle + futures data)
+        if mode == "quant" and signals_to_evaluate:
+            try:
+                from app.quant.engine import apply_quant_layer_sync
+                _, signals_to_evaluate = apply_quant_layer_sync(
+                    signals=signals_to_evaluate,
+                    candles_by_tf=windowed,
+                    futures_data=futures_data,
+                    results=results,
+                )
+            except Exception as e:
+                import logging
+                logging.getLogger(__name__).debug("Quant backtest layer failed: %s", e)
+
         for signal in signals_to_evaluate:
+            # Skip suppressed signals in quant mode
+            if mode == "quant" and getattr(signal, "suppressed", False):
+                continue
+
             total_signals_raw += 1
             zone_key = _make_zone_key(signal)
 
@@ -441,7 +461,16 @@ async def run_backtest(
             if not future:
                 continue
 
-            outcome = _evaluate_outcome(signal, future, max_bars_timeout)
+            # In quant mode, evaluate against ATR-based SL/TP if available
+            eval_signal = signal
+            if mode == "quant" and getattr(signal, "atr_stop_loss", 0) > 0:
+                # Create a copy with ATR-based levels for outcome evaluation
+                from copy import copy
+                eval_signal = copy(signal)
+                eval_signal.stop_loss = signal.atr_stop_loss
+                eval_signal.take_profit = signal.atr_take_profit
+
+            outcome = _evaluate_outcome(eval_signal, future, max_bars_timeout)
             trade = _signal_to_trade(signal, outcome)
             trade.entry_candle_idx = window_end - 1
 
@@ -463,6 +492,7 @@ async def run_backtest(
         "symbol": symbol,
         "start_date": start_date,
         "end_date": end_date,
+        "mode": mode,
         "total_signals": total_signals_raw,
         "total_candles": {tf: len(cs) for tf, cs in candles_by_tf.items()},
         "step_size": step_size,

@@ -118,13 +118,26 @@ async def lifespan(app: FastAPI):
         except Exception as e:
             logger.warning(f"Monitors failed to start: {e}")
 
+    # ── Start Liquidation WebSocket (for Quant mode) ──
+    liq_manager = None
+    try:
+        from app.services.liquidation_ws import get_liquidation_manager
+        liq_manager = get_liquidation_manager()
+        await liq_manager.start()
+        logger.info("Liquidation WebSocket started")
+    except Exception as e:
+        logger.warning(f"Liquidation WS failed to start: {e}")
+
     app.state.telegram_bot = bot
     app.state.signal_monitor = signal_monitor
     app.state.position_monitor = position_monitor
+    app.state.liquidation_manager = liq_manager
 
     yield
 
     # ── Shutdown ──
+    if liq_manager:
+        await liq_manager.stop()
     if signal_monitor:
         signal_monitor.stop()
     if position_monitor:
@@ -148,6 +161,82 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+def _serialize_signal(sig: "TradingSignal") -> dict:
+    """Serialize a TradingSignal to JSON dict, including quant fields."""
+    d = {
+        "direction": sig.direction.value,
+        "entry_price": sig.entry_price,
+        "stop_loss": sig.stop_loss,
+        "take_profit": sig.take_profit,
+        "take_profits": sig.take_profits if sig.take_profits else [],
+        "risk_reward_ratio": sig.risk_reward_ratio,
+        "confidence_score": sig.confidence_score,
+        "grade": sig.grade.value,
+        "confluences": sig.confluences,
+        "timeframe": sig.timeframe,
+        "entry_method": sig.entry_method.value if sig.entry_method else None,
+        "pattern_type": sig.pattern_type,
+        "timestamp": sig.timestamp,
+        "vsa_absorption": sig.vsa_absorption,
+        "is_counter_trend": sig.is_counter_trend,
+        "mss_quality": sig.mss_quality,
+        "trading_style": sig.trading_style,
+        "signal_id": sig.signal_id,
+        "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
+        "status": sig.status,
+        "created_at": sig.created_at,
+        "bars_active": sig.bars_active,
+        "trigger_candle_index": sig.trigger_candle_index,
+    }
+    # Quant fields (only present in quant mode)
+    if sig.quant_score is not None:
+        qs = sig.quant_score
+        d["quant_score"] = {
+            "alpha_score": qs.alpha_score,
+            "micro_score": qs.micro_score,
+            "risk_tradability": qs.risk_tradability,
+            "execution_score": qs.execution_score,
+            "combined_score": qs.combined_score,
+            "confirmations": qs.confirmations,
+            "contradictions": qs.contradictions,
+            "grade_change": qs.grade_change,
+            "components": qs.components,
+        }
+    if sig.atr_stop_loss > 0:
+        d["atr_stop_loss"] = sig.atr_stop_loss
+    if sig.atr_take_profit > 0:
+        d["atr_take_profit"] = sig.atr_take_profit
+    if sig.position_size_pct > 0:
+        d["position_size_pct"] = sig.position_size_pct
+    if sig.quant_confluences:
+        d["quant_confluences"] = sig.quant_confluences
+    if sig.suppressed:
+        d["suppressed"] = True
+    return d
+
+
+def _serialize_quant_context(ctx) -> dict | None:
+    """Serialize QuantContext to JSON dict."""
+    if ctx is None:
+        return None
+    return {
+        "vpin": ctx.vpin,
+        "vpin_history": ctx.vpin_history,
+        "atr_m15": ctx.atr_m15,
+        "atr_h4": ctx.atr_h4,
+        "atr_d1": ctx.atr_d1,
+        "dvol": ctx.dvol,
+        "volatility_regime": ctx.volatility_regime.value,
+        "recent_liquidations": ctx.recent_liquidations,
+        "liquidation_clusters": ctx.liquidation_clusters,
+        "cross_exchange_funding": ctx.cross_exchange_funding,
+        "options_data": ctx.options_data,
+        "cot_data": ctx.cot_data,
+        "onchain_flow": ctx.onchain_flow,
+        "fear_greed": ctx.fear_greed,
+    }
 
 
 def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | None = None, htf_zones: list[dict] | None = None) -> dict:
@@ -324,64 +413,11 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
             for pc in result.price_cycles
         ],
         "current_phase": result.current_phase.value,
-        "signals": [
-            {
-                "direction": sig.direction.value,
-                "entry_price": sig.entry_price,
-                "stop_loss": sig.stop_loss,
-                "take_profit": sig.take_profit,
-                "take_profits": sig.take_profits if sig.take_profits else [],
-                "risk_reward_ratio": sig.risk_reward_ratio,
-                "confidence_score": sig.confidence_score,
-                "grade": sig.grade.value,
-                "confluences": sig.confluences,
-                "timeframe": sig.timeframe,
-                "entry_method": sig.entry_method.value if sig.entry_method else None,
-                "pattern_type": sig.pattern_type,
-                "timestamp": sig.timestamp,
-                "vsa_absorption": sig.vsa_absorption,
-                "is_counter_trend": sig.is_counter_trend,
-                "mss_quality": sig.mss_quality,
-                "trading_style": sig.trading_style,
-                "signal_id": sig.signal_id,
-                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
-                "status": sig.status,
-                "created_at": sig.created_at,
-                "bars_active": sig.bars_active,
-                "trigger_candle_index": sig.trigger_candle_index,
-            }
-            for sig in result.signals
-        ],
-        "all_style_signals": [
-            {
-                "direction": sig.direction.value,
-                "entry_price": sig.entry_price,
-                "stop_loss": sig.stop_loss,
-                "take_profit": sig.take_profit,
-                "take_profits": sig.take_profits if sig.take_profits else [],
-                "risk_reward_ratio": sig.risk_reward_ratio,
-                "confidence_score": sig.confidence_score,
-                "grade": sig.grade.value,
-                "confluences": sig.confluences,
-                "timeframe": sig.timeframe,
-                "entry_method": sig.entry_method.value if sig.entry_method else None,
-                "pattern_type": sig.pattern_type,
-                "timestamp": sig.timestamp,
-                "vsa_absorption": sig.vsa_absorption,
-                "is_counter_trend": sig.is_counter_trend,
-                "mss_quality": sig.mss_quality,
-                "trading_style": sig.trading_style,
-                "signal_id": sig.signal_id,
-                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
-                "status": sig.status,
-                "created_at": sig.created_at,
-                "bars_active": sig.bars_active,
-                "trigger_candle_index": sig.trigger_candle_index,
-            }
-            for sig in result.all_style_signals
-        ],
+        "signals": [_serialize_signal(sig) for sig in result.signals],
+        "all_style_signals": [_serialize_signal(sig) for sig in result.all_style_signals],
         "htf_zones": htf_zones or [],
         "futures_context": result.futures_context,
+        "quant_context": _serialize_quant_context(getattr(result, "quant_context", None)),
     }
 
 
@@ -433,6 +469,7 @@ async def analyze_single_tf(timeframe: str = "H4", mode: str = "smc"):
             result.signals = m15_multi.signals
             result.all_style_signals = m15_multi.all_style_signals
             result.futures_context = m15_multi.futures_context
+            result.quant_context = m15_multi.quant_context
 
         # Build HTF zones for chart display
         from app.core.engine import _collect_htf_zones
@@ -514,16 +551,19 @@ async def run_backtest_endpoint(
     end_date: str = "2025-01-01",
     symbol: str = SYMBOL,
     step_size: int = 96,
+    mode: str = "smc",
 ):
     """Run Phase 3 backtest on historical data.
 
     This may take 5-15 minutes depending on date range.
+    mode: "smc" or "quant" — quant applies TIER 1 scoring + ATR SL/TP.
     """
     result = await run_backtest(
         symbol=symbol,
         start_date=start_date,
         end_date=end_date,
         step_size=step_size,
+        mode=mode,
     )
     return result
 
@@ -845,60 +885,9 @@ async def get_detailed_signals(mode: str = "smc"):
         },
         "checklist_v24": _compute_v24_checklist(results, candles_by_tf),
         "checklist_v23": _compute_v23_checklist(results, candles_by_tf),
-        "signals": [
-            {
-                "direction": sig.direction.value,
-                "entry_price": sig.entry_price,
-                "stop_loss": sig.stop_loss,
-                "take_profit": sig.take_profit,
-                "take_profits": sig.take_profits if sig.take_profits else [],
-                "risk_reward_ratio": sig.risk_reward_ratio,
-                "confidence_score": sig.confidence_score,
-                "grade": sig.grade.value,
-                "confluences": sig.confluences,
-                "timeframe": sig.timeframe,
-                "entry_method": sig.entry_method.value if sig.entry_method else None,
-                "pattern_type": sig.pattern_type,
-                "timestamp": sig.timestamp,
-                "vsa_absorption": sig.vsa_absorption,
-                "is_counter_trend": sig.is_counter_trend,
-                "trading_style": sig.trading_style,
-                "signal_id": sig.signal_id,
-                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
-                "status": sig.status,
-                "created_at": sig.created_at,
-                "bars_active": sig.bars_active,
-                "trigger_candle_index": sig.trigger_candle_index,
-            }
-            for sig in (m15.signals if m15 else [])
-        ],
-        "all_style_signals": [
-            {
-                "direction": sig.direction.value,
-                "entry_price": sig.entry_price,
-                "stop_loss": sig.stop_loss,
-                "take_profit": sig.take_profit,
-                "take_profits": sig.take_profits if sig.take_profits else [],
-                "risk_reward_ratio": sig.risk_reward_ratio,
-                "confidence_score": sig.confidence_score,
-                "grade": sig.grade.value,
-                "confluences": sig.confluences,
-                "timeframe": sig.timeframe,
-                "entry_method": sig.entry_method.value if sig.entry_method else None,
-                "pattern_type": sig.pattern_type,
-                "timestamp": sig.timestamp,
-                "vsa_absorption": sig.vsa_absorption,
-                "is_counter_trend": sig.is_counter_trend,
-                "trading_style": sig.trading_style,
-                "signal_id": sig.signal_id,
-                "trading_styles": sig.trading_styles if sig.trading_styles else [sig.trading_style] if sig.trading_style else [],
-                "status": sig.status,
-                "created_at": sig.created_at,
-                "bars_active": sig.bars_active,
-                "trigger_candle_index": sig.trigger_candle_index,
-            }
-            for sig in (m15.all_style_signals if m15 else [])
-        ],
+        "signals": [_serialize_signal(sig) for sig in (m15.signals if m15 else [])],
+        "all_style_signals": [_serialize_signal(sig) for sig in (m15.all_style_signals if m15 else [])],
+        "quant_context": _serialize_quant_context(getattr(m15, "quant_context", None)) if m15 else None,
     }
 
 
@@ -1152,3 +1141,42 @@ async def get_market_intel(symbol: str = "BTCUSDT"):
     """Fetch Binance Futures market intelligence (OI, funding, L/S ratios, taker volume)."""
     from app.services.futures_data import fetch_market_intel
     return await fetch_market_intel(symbol)
+
+
+# ──────────────────────────────────────────────
+# Phase 7: Quant Intelligence
+# ──────────────────────────────────────────────
+
+@app.get("/api/quant-intel")
+async def get_quant_intel(symbol: str = "BTCUSDT"):
+    """Fetch standalone quant intelligence data (TIER 2+3 + liquidation status).
+
+    Returns cross-exchange funding, Deribit options, Fear&Greed, L2 depth,
+    and liquidation WebSocket status — all independent of signal generation.
+    """
+    from app.services.quant_data import fetch_all_quant_data, fetch_l2_depth
+
+    quant_data, l2_depth = await asyncio.gather(
+        fetch_all_quant_data(symbol),
+        fetch_l2_depth(symbol),
+        return_exceptions=True,
+    )
+
+    if isinstance(quant_data, Exception):
+        quant_data = {}
+    if isinstance(l2_depth, Exception):
+        l2_depth = {}
+
+    # Liquidation WS status
+    liq_manager = getattr(app.state, "liquidation_manager", None)
+    liq_status = {
+        "running": liq_manager.is_running if liq_manager else False,
+        "event_count": liq_manager.event_count if liq_manager else 0,
+        "recent_30m": liq_manager.get_recent(30) if liq_manager else [],
+    }
+
+    return {
+        **quant_data,
+        "l2_depth": l2_depth,
+        "liquidation_ws": liq_status,
+    }

@@ -88,3 +88,45 @@ DEMO_MIN_SIGNAL_GRADE = "B"            # Only alert on A and B grades
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+# ── Quant Mode Configuration ──
+
+# ATR
+ATR_PERIOD = 14              # Standard ATR lookback
+ATR_LONG_PERIOD = 100        # Long-term ATR for regime detection
+
+# VPIN (Volume-Synchronized Probability of Informed Trading)
+VPIN_BUCKET_COUNT = 50       # Number of volume buckets
+VPIN_THRESHOLD = 0.7         # VPIN above this = high informed flow probability
+
+# 4-Layer Quant Scoring Weights
+QUANT_WEIGHTS = {"alpha": 0.55, "micro": 0.20, "risk": 0.15, "exec": 0.10}
+
+# Volatility Regime Thresholds (ATR14/ATR100 ratio)
+VOL_REGIME_LOW = 0.7         # Below this = low volatility
+VOL_REGIME_HIGH = 1.3        # Above this = high volatility
+VOL_REGIME_EXTREME = 2.0     # Above this = extreme — suppress signals
+
+# Deribit DVOL Implied Volatility Thresholds
+DVOL_HIGH = 80               # DVOL above this = HIGH regime override
+DVOL_EXTREME = 100           # DVOL above this = EXTREME regime override
+
+# ATR-Based SL Multipliers per Volatility Regime
+ATR_SL_MULT = {"low": 1.5, "normal": 2.0, "high": 2.5, "extreme": 3.0}
+
+# Risk Model
+MAX_DRAWDOWN_PCT = 0.10      # Halt trading if drawdown exceeds 10%
+SUPPRESS_ON_EXTREME_VOL = True  # Suppress signals during extreme volatility
+
+# Cache TTLs (seconds)
+CACHE_TTL_FUNDING = 60       # Cross-exchange funding: 1 minute
+CACHE_TTL_OPTIONS = 600      # Deribit options: 10 minutes
+CACHE_TTL_COT = 604800       # CME COT: 7 days
+CACHE_TTL_ONCHAIN = 3600     # On-chain flows: 1 hour
+CACHE_TTL_FNG = 3600         # Fear & Greed: 1 hour
+CACHE_TTL_L2 = 5             # Order book depth: 5 seconds
+CACHE_TTL_DVOL = 60          # DVOL: 1 minute
+
+# Optional API Keys (from environment)
+CRYPTOQUANT_API_KEY = os.environ.get("CRYPTOQUANT_API_KEY", "")
+COINGLASS_API_KEY = os.environ.get("COINGLASS_API_KEY", "")

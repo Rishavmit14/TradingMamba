@@ -30,7 +30,7 @@ def progress(step: int, total: int) -> None:
     print(f"\r  [{bar}] {pct:.0f}% ({step + 1}/{total} windows)", end="", flush=True)
 
 
-async def main(start_date: str, end_date: str, symbol: str, step_size: int) -> None:
+async def main(start_date: str, end_date: str, symbol: str, step_size: int, mode: str = "smc") -> None:
     # Check for SQLite DB
     if DB_PATH.exists():
         db_size = DB_PATH.stat().st_size / (1024 * 1024)
@@ -39,7 +39,8 @@ async def main(start_date: str, end_date: str, symbol: str, step_size: int) -> N
         print(f"\nData source: Binance API (no SQLite DB found)")
         print(f"  Tip: Run 'python3 scripts/fetch_history.py --start 2020-01-01' for faster backtests with futures data")
 
-    print(f"Backtest: {symbol} | {start_date} -> {end_date} | step={step_size}")
+    mode_label = "QUANT (TIER 1 scoring + ATR SL/TP)" if mode == "quant" else "SMC (zone-based)"
+    print(f"Backtest: {symbol} | {start_date} -> {end_date} | step={step_size} | mode={mode_label}")
     print("=" * 60)
     print()
 
@@ -49,6 +50,7 @@ async def main(start_date: str, end_date: str, symbol: str, step_size: int) -> N
         end_date=end_date,
         step_size=step_size,
         progress_callback=progress,
+        mode=mode,
     )
 
     print()  # newline after progress bar
@@ -66,6 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--end", default="2025-01-01", help="End date (YYYY-MM-DD)")
     parser.add_argument("--symbol", default=SYMBOL, help="Trading pair")
     parser.add_argument("--step", type=int, default=96, help="Step size in M15 candles (96 = 1 day)")
+    parser.add_argument("--mode", default="smc", choices=["smc", "quant"], help="Engine mode: smc or quant")
     args = parser.parse_args()
 
-    asyncio.run(main(args.start, args.end, args.symbol, args.step))
+    asyncio.run(main(args.start, args.end, args.symbol, args.step, args.mode))

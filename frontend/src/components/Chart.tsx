@@ -914,6 +914,45 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
       }));
     }
 
+    // --- QUANT OVERLAYS: ATR bands + Max Pain line (when quant_context available) ---
+    const qc = data.quant_context;
+    if (qc && qc.atr_m15 > 0) {
+      const lastCandle = candles[candles.length - 1];
+      if (lastCandle) {
+        const currentPrice = lastCandle.close;
+        const atr = qc.atr_m15;
+        // ATR bands: ±2×ATR from current price
+        priceLinesRef.current.push(candleSeries.createPriceLine({
+          price: currentPrice + atr * 2,
+          color: "rgba(139, 92, 246, 0.3)",
+          lineWidth: 1,
+          lineStyle: LineStyle.Dotted,
+          axisLabelVisible: true,
+          title: "ATR+2",
+        }));
+        priceLinesRef.current.push(candleSeries.createPriceLine({
+          price: currentPrice - atr * 2,
+          color: "rgba(139, 92, 246, 0.3)",
+          lineWidth: 1,
+          lineStyle: LineStyle.Dotted,
+          axisLabelVisible: true,
+          title: "ATR-2",
+        }));
+      }
+    }
+
+    // Max pain line from options data
+    if (qc?.options_data?.max_pain && qc.options_data.max_pain > 0) {
+      priceLinesRef.current.push(candleSeries.createPriceLine({
+        price: qc.options_data.max_pain,
+        color: "rgba(6, 182, 212, 0.5)",
+        lineWidth: 1,
+        lineStyle: LineStyle.LargeDashed,
+        axisLabelVisible: true,
+        title: "Max Pain",
+      }));
+    }
+
     // FVG zones as filled boxes (rendered via canvas primitive)
     if (visibility.fvg && fvgPrimitiveRef.current) {
       const lastIdx = candles.length - 1;

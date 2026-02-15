@@ -13,6 +13,7 @@ import {
   ResolvedSignal,
   SignalStoreStats,
   MarketIntelData,
+  QuantContext,
 } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
@@ -195,6 +196,34 @@ export async function sendTelegramTest(): Promise<void> {
 export async function fetchMarketIntel(symbol: string = "BTCUSDT"): Promise<MarketIntelData> {
   const res = await fetch(`${API_BASE}/market-intel?symbol=${symbol}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
+/** Phase 7: Quant Intelligence API */
+export interface QuantIntelData {
+  cross_exchange_funding: QuantContext["cross_exchange_funding"];
+  options_data: QuantContext["options_data"];
+  cot_data: Record<string, unknown>;
+  onchain_flow: Record<string, unknown>;
+  fear_greed: QuantContext["fear_greed"];
+  l2_depth: {
+    best_bid?: number;
+    best_ask?: number;
+    spread_pct?: number;
+    bid_wall_usd?: number;
+    ask_wall_usd?: number;
+    imbalance?: number;
+  };
+  liquidation_ws: {
+    running: boolean;
+    event_count: number;
+    recent_30m: { timestamp: number; side: string; price: number; qty: number; qty_usd: number }[];
+  };
+}
+
+export async function fetchQuantIntel(symbol: string = "BTCUSDT"): Promise<QuantIntelData> {
+  const res = await fetch(`${API_BASE}/quant-intel?symbol=${symbol}`);
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }
 
