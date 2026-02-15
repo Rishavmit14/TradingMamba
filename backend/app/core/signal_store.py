@@ -250,6 +250,16 @@ class SignalStore:
         # Track which active signals were regenerated this cycle
         regenerated_ids: set[str] = set()
 
+        # Build a set of recently-resolved zone fingerprints (direction + SL bucket)
+        # to prevent churn: signal created → SL immediately hit → resolved →
+        # regenerated next cycle → SL hit again → resolved → repeat forever.
+        # Suppress re-creation for EXPIRY_MS after resolution.
+        recently_resolved_zones: set[tuple[str, float]] = set()
+        for tracked in self.resolved:
+            if tracked.resolved_at and (now_ms - tracked.resolved_at < self.EXPIRY_MS):
+                rd = tracked.signal.direction.value if isinstance(tracked.signal.direction, Direction) else tracked.signal.direction
+                recently_resolved_zones.add((rd, round(tracked.signal.stop_loss, -1)))
+
         # 2. Match vs existing active signals
         for sid, (sig, styles) in deduped.items():
             if sid in self.active:
@@ -275,11 +285,16 @@ class SignalStore:
                 tracked.entry_timeframe = sig.timeframe
                 regenerated_ids.add(sid)
             else:
+                # Skip if this zone was recently resolved (prevents churn loop)
+                sig_dir = sig.direction.value if isinstance(sig.direction, Direction) else sig.direction
+                zone_key = (sig_dir, round(sig.stop_loss, -1))
+                if zone_key in recently_resolved_zones:
+                    continue
+
                 # Before adding, check if an existing active signal overlaps
                 # (same direction + similar SL). SBC signals drift entry with
                 # current_price each cycle, producing different signal_ids for
                 # the same zone. Detect this and replace the old signal.
-                sig_dir = sig.direction.value if isinstance(sig.direction, Direction) else sig.direction
                 replaced_old = None
                 for old_sid, old_tracked in self.active.items():
                     if old_sid in regenerated_ids:

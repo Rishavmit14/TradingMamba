@@ -935,6 +935,16 @@ async def get_resolved_signals(limit: int = 50):
     return {"resolved": store.get_resolved_signals(limit), "stats": store.get_stats()}
 
 
+@app.post("/api/signals/resolved/clear")
+async def clear_resolved_signals():
+    """Clear all resolved signals (removes stale/duplicate entries)."""
+    from app.core.signal_store import SignalStore
+    store = SignalStore.get_instance()
+    count = len(store.resolved)
+    store.resolved.clear()
+    return {"status": "ok", "cleared": count}
+
+
 # ──────────────────────────────────────────────
 # Phase 5: Demo Account + Telegram
 # ──────────────────────────────────────────────
