@@ -416,6 +416,14 @@ class SignalStore:
             })
         return result
 
+    def delete_resolved(self, signal_id: str) -> bool:
+        """Delete a single resolved signal by signal_id. Returns True if found and deleted."""
+        for i, tracked in enumerate(self.resolved):
+            if tracked.signal_id == signal_id:
+                self.resolved.pop(i)
+                return True
+        return False
+
     def get_stats(self) -> dict:
         """Return summary stats for the signal store."""
         sl_hits = sum(1 for t in self.resolved if t.status == "sl_hit")

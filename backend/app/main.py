@@ -952,6 +952,20 @@ async def clear_resolved_signals(mode: str = "smc"):
     return {"status": "ok", "cleared": count}
 
 
+@app.delete("/api/signals/resolved/{signal_id}")
+async def delete_resolved_signal(signal_id: str, mode: str = "smc"):
+    """Delete a single resolved signal by its signal_id."""
+    if mode not in VALID_MODES:
+        mode = "smc"
+    from app.core.signal_store import SignalStore
+    store = SignalStore.get_instance(mode)
+    deleted = store.delete_resolved(signal_id)
+    if not deleted:
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=404, content={"error": "Signal not found"})
+    return {"status": "ok", "deleted": signal_id}
+
+
 # ──────────────────────────────────────────────
 # Phase 5: Demo Account + Telegram
 # ──────────────────────────────────────────────

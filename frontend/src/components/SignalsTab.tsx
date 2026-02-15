@@ -18,8 +18,9 @@ import {
   Target,
   ArrowRight,
   RefreshCw,
+  Trash2,
 } from "lucide-react";
-import { fetchDetailedSignals, fetchResolvedSignals } from "@/lib/api";
+import { fetchDetailedSignals, fetchResolvedSignals, deleteResolvedSignal, clearResolvedSignals } from "@/lib/api";
 import {
   DetailedSignals,
   EngineMode,
@@ -277,6 +278,26 @@ export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: Engi
     } finally {
       if (!silent) setLoading(false);
     }
+  }, [mode]);
+
+  const handleDeleteOne = useCallback(async (signalId: string) => {
+    try {
+      await deleteResolvedSignal(signalId, mode);
+      setResolvedSignals((prev) => prev.filter((rs) => rs.signal_id !== signalId));
+      // Re-fetch stats after delete
+      try {
+        const resolvedData = await fetchResolvedSignals(20, mode);
+        setStoreStats(resolvedData.stats);
+      } catch { /* silent */ }
+    } catch { /* silent */ }
+  }, [mode]);
+
+  const handleClearAll = useCallback(async () => {
+    try {
+      await clearResolvedSignals(mode);
+      setResolvedSignals([]);
+      setStoreStats((prev) => prev ? { ...prev, resolved_count: 0, sl_hits: 0, tp_hits: 0, expired: 0, win_rate: 0 } : null);
+    } catch { /* silent */ }
   }, [mode]);
 
   // Initial fetch + 30s auto-refresh
@@ -682,11 +703,22 @@ export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: Engi
                 </div>
               )}
             </div>
-            {outcomesOpen ? (
-              <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
-            ) : (
-              <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
-            )}
+            <div className="flex items-center gap-2">
+              {outcomesOpen && resolvedSignals.length > 0 && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleClearAll(); }}
+                  className="flex items-center gap-1 px-2 py-1 text-[10px] font-medium rounded-md bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-colors"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  Clear All
+                </button>
+              )}
+              {outcomesOpen ? (
+                <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
+              )}
+            </div>
           </button>
 
           {outcomesOpen && resolvedSignals.length > 0 && (
@@ -762,6 +794,15 @@ export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: Engi
                           R:R {rs.risk_reward_ratio}
                         </span>
                       </div>
+
+                      {/* Delete button */}
+                      <button
+                        onClick={() => handleDeleteOne(rs.signal_id)}
+                        className="p-1 rounded hover:bg-red-500/15 text-[var(--text-muted)] hover:text-red-400 transition-colors"
+                        title="Delete outcome"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   );
                 })}

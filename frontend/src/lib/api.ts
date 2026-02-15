@@ -86,6 +86,24 @@ export async function fetchResolvedSignals(
   return res.json();
 }
 
+/** Delete a single resolved signal by ID */
+export async function deleteResolvedSignal(
+  signalId: string,
+  mode: EngineMode = "smc"
+): Promise<void> {
+  const res = await fetch(`${API_BASE}/signals/resolved/${signalId}?mode=${mode}`, { method: "DELETE" });
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+}
+
+/** Clear all resolved signals */
+export async function clearResolvedSignals(
+  mode: EngineMode = "smc"
+): Promise<{ cleared: number }> {
+  const res = await fetch(`${API_BASE}/signals/resolved/clear?mode=${mode}`, { method: "POST" });
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
 /** Phase 5: Demo Account API */
 export async function fetchDemoAccount(mode: EngineMode = "smc"): Promise<DemoAccount> {
   const res = await fetch(`${API_BASE}/demo/account?mode=${mode}`);
