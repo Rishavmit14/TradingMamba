@@ -14,6 +14,7 @@ import {
   SignalStoreStats,
   MarketIntelData,
   QuantContext,
+  CompositeBias,
 } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
@@ -241,6 +242,13 @@ export interface QuantIntelData {
 
 export async function fetchQuantIntel(symbol: string = "BTCUSDT"): Promise<QuantIntelData> {
   const res = await fetch(`${API_BASE}/quant-intel?symbol=${symbol}`);
+  if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+/** Phase 8: Algo Bias API */
+export async function fetchAlgoBias(symbol: string = "BTCUSDT"): Promise<CompositeBias> {
+  const res = await fetch(`${API_BASE}/algo-bias?symbol=${symbol}`);
   if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
   return res.json();
 }

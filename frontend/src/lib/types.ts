@@ -339,7 +339,7 @@ export interface DeepAnalysis {
 
 export type TradeOutcome = "win" | "loss" | "timeout";
 export type EngineMode = "smc" | "quant";
-export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel" | "quant_analysis";
+export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel" | "quant_analysis" | "algo_bias";
 
 export interface TradeRecord {
   direction: Direction;
@@ -578,4 +578,35 @@ export interface BacktestResult {
   by_session: Record<string, { trades: number; win_rate: number }>;
   trades: TradeRecord[];
   equity_curve: { timestamp: number; pnl: number }[];
+}
+
+// ── Algo Bias Types ──
+
+export type AlgoBiasDirection = "bullish" | "bearish" | "neutral";
+export type CompositeBiasDirection = "strong_bullish" | "bullish" | "neutral" | "bearish" | "strong_bearish";
+export type MarketRegime = "trending" | "mean_reverting" | "random";
+export type VolRegime = "low" | "normal" | "high" | "extreme";
+
+export interface AlgoBiasResult {
+  algo_id: string;
+  algo_name: string;
+  direction: AlgoBiasDirection;
+  score: number;        // -100 to +100
+  confidence: number;   // 0 to 100
+  components: Record<string, unknown>;
+  explanation: string;
+  data_age_seconds: number;
+}
+
+export interface CompositeBias {
+  direction: CompositeBiasDirection;
+  score: number;        // -100 to +100
+  confidence: number;   // 0 to 100
+  algo_count: number;
+  agreement_count: number;
+  regime: MarketRegime;
+  vol_regime: VolRegime;
+  entropy: number;
+  algos: AlgoBiasResult[];
+  timestamp: number;
 }

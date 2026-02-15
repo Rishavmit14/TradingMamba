@@ -1165,6 +1165,101 @@ async def get_market_intel(symbol: str = "BTCUSDT"):
 # Phase 7: Quant Intelligence
 # ──────────────────────────────────────────────
 
+@app.get("/api/algo-bias")
+async def get_algo_bias(symbol: str = "BTCUSDT"):
+    """Run 10 from-scratch institutional algorithms and return composite directional bias.
+
+    Fetches all raw data from APIs, passes to algo_bias engine, returns ensemble result.
+    """
+    from app.services.futures_data import fetch_market_intel
+    from app.services.quant_data import fetch_all_quant_data, fetch_l2_depth
+    from app.services.data_fetcher import fetch_klines
+    from app.quant.algo_bias import run_algo_bias
+
+    # Fetch all raw data in parallel
+    market_intel, quant_data, l2_depth, candles_h1, candles_h4, candles_d1 = await asyncio.gather(
+        fetch_market_intel(symbol),
+        fetch_all_quant_data(symbol),
+        fetch_l2_depth(symbol),
+        fetch_klines(symbol, "H1", limit=50),
+        fetch_klines(symbol, "H4", limit=200),
+        fetch_klines(symbol, "D1", limit=30),
+        return_exceptions=True,
+    )
+
+    # Graceful fallbacks for failed fetches
+    if isinstance(market_intel, Exception):
+        logger.warning(f"Algo bias: market intel failed: {market_intel}")
+        market_intel = {}
+    if isinstance(quant_data, Exception):
+        logger.warning(f"Algo bias: quant data failed: {quant_data}")
+        quant_data = {}
+    if isinstance(l2_depth, Exception):
+        l2_depth = {}
+    if isinstance(candles_h1, Exception):
+        candles_h1 = []
+    if isinstance(candles_h4, Exception):
+        candles_h4 = []
+    if isinstance(candles_d1, Exception):
+        candles_d1 = []
+
+    # Get liquidation events from WebSocket manager
+    liq_manager = getattr(app.state, "liquidation_manager", None)
+    liquidations = liq_manager.get_recent(30) if liq_manager else []
+
+    # Extract cross-exchange funding fields
+    cross_funding = quant_data.get("cross_exchange_funding", {})
+    options = quant_data.get("options_data", {})
+    fng = quant_data.get("fear_greed", {})
+    cot = quant_data.get("cot_data", {})
+    onchain = quant_data.get("onchain_flow", {})
+    whales = quant_data.get("whale_transactions", {})
+
+    # Convert Candle objects to dicts for the algo engine
+    def _candle_to_dict(c):
+        if isinstance(c, dict):
+            return c
+        return {"timestamp": c.timestamp, "open": c.open, "high": c.high,
+                "low": c.low, "close": c.close, "volume": c.volume}
+
+    # Assemble raw_data dict matching algo_bias.py schema
+    raw_data = {
+        # Market Intel (Binance Futures)
+        "oi_history": market_intel.get("open_interest", {}).get("history", []) if isinstance(market_intel, dict) else [],
+        "funding_current": market_intel.get("funding_rate", {}).get("current", 0) if isinstance(market_intel, dict) else 0,
+        "funding_history": market_intel.get("funding_rate", {}).get("history", []) if isinstance(market_intel, dict) else [],
+        "mark_price": market_intel.get("funding_rate", {}).get("mark_price", 0) if isinstance(market_intel, dict) else 0,
+        "index_price": market_intel.get("funding_rate", {}).get("index_price", 0) if isinstance(market_intel, dict) else 0,
+        "top_trader_ratio": market_intel.get("top_trader_ratio", []) if isinstance(market_intel, dict) else [],
+        "global_ratio": market_intel.get("global_ratio", []) if isinstance(market_intel, dict) else [],
+        "taker_volume": market_intel.get("taker_volume", []) if isinstance(market_intel, dict) else [],
+        "premium_pct": market_intel.get("premium_index", {}).get("premium_pct", 0) if isinstance(market_intel, dict) else 0,
+        # Cross-exchange funding
+        "bybit_rate": cross_funding.get("bybit_rate"),
+        "okx_rate": cross_funding.get("okx_rate"),
+        "funding_dispersion": cross_funding.get("dispersion", 0),
+        # Options (Deribit)
+        "options": options,
+        "dvol": options.get("dvol", 0),
+        # Sentiment
+        "fear_greed": fng,
+        "cot": cot,
+        "onchain": onchain,
+        "whales": whales,
+        # L2 Depth
+        "l2": l2_depth if isinstance(l2_depth, dict) else {},
+        # Liquidations (WebSocket)
+        "liquidations": liquidations,
+        # Candles (converted to dicts)
+        "candles_h1": [_candle_to_dict(c) for c in candles_h1] if candles_h1 else [],
+        "candles_h4": [_candle_to_dict(c) for c in candles_h4] if candles_h4 else [],
+        "candles_d1": [_candle_to_dict(c) for c in candles_d1] if candles_d1 else [],
+    }
+
+    composite = run_algo_bias(raw_data)
+    return composite.to_dict()
+
+
 @app.get("/api/quant-intel")
 async def get_quant_intel(symbol: str = "BTCUSDT"):
     """Fetch standalone quant intelligence data (TIER 2+3 + liquidation status).

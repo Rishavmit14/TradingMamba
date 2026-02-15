@@ -14,6 +14,7 @@ import {
   FlaskConical,
   LineChart,
   Wallet,
+  Brain,
 } from "lucide-react";
 import Chart from "@/components/Chart";
 
@@ -28,6 +29,7 @@ import DemoTab from "@/components/DemoTab";
 import MarketIntelTab from "@/components/MarketIntelTab";
 import QuantIntelPanel from "@/components/QuantIntelPanel";
 import QuantAnalysisTab from "@/components/QuantAnalysisTab";
+import AlgoBiasTab from "@/components/AlgoBiasTab";
 import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade, EngineMode } from "@/lib/types";
 
@@ -265,7 +267,7 @@ export default function Dashboard() {
             {/* Engine mode toggle */}
             <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
               <button
-                onClick={() => { setEngineMode("smc"); if (activeTab === "quant_analysis") setActiveTab("live"); }}
+                onClick={() => { setEngineMode("smc"); if (activeTab === "quant_analysis" || activeTab === "algo_bias") setActiveTab("live"); }}
                 className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   engineMode === "smc"
                     ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
@@ -357,17 +359,30 @@ export default function Dashboard() {
                 Market Intel
               </button>
               {engineMode === "quant" && (
-                <button
-                  onClick={() => setActiveTab("quant_analysis")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
-                    activeTab === "quant_analysis"
-                      ? "bg-violet-500 text-white shadow-lg shadow-violet-500/20"
-                      : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
-                  }`}
-                >
-                  <Zap className="w-3 h-3" />
-                  Quant Analysis
-                </button>
+                <>
+                  <button
+                    onClick={() => setActiveTab("quant_analysis")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                      activeTab === "quant_analysis"
+                        ? "bg-violet-500 text-white shadow-lg shadow-violet-500/20"
+                        : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                    }`}
+                  >
+                    <Zap className="w-3 h-3" />
+                    Quant Analysis
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("algo_bias")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                      activeTab === "algo_bias"
+                        ? "bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/20"
+                        : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                    }`}
+                  >
+                    <Brain className="w-3 h-3" />
+                    Algo Bias
+                  </button>
+                </>
               )}
             </div>
 
@@ -772,6 +787,12 @@ export default function Dashboard() {
       {mountedTabs.has("quant_analysis") && (
         <div className={`flex-1 overflow-hidden ${activeTab !== "quant_analysis" ? "hidden" : ""}`}>
           <QuantAnalysisTab />
+        </div>
+      )}
+
+      {mountedTabs.has("algo_bias") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "algo_bias" ? "hidden" : ""}`}>
+          <AlgoBiasTab />
         </div>
       )}
     </div>
