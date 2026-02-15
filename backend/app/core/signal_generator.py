@@ -649,19 +649,18 @@ def _generate_sbc_signals(
         fib_50_entry = (sweep_extreme + swing_opposite) / 2
         ideal_entry = fvg_entry if fvg_entry is not None else fib_50_entry
 
-        # If price already passed the ideal entry, use current price
-        # (SBC confirmed → market entry is valid).
-        # Skip only if price ran past the sweep range by more than the
+        # Skip if price ran past the sweep range by more than the
         # sweep range size itself (move already played out).
+        # Always use ideal_entry (FVG midpoint or 50% fib) for signal
+        # identity — structural levels are stable across analysis cycles.
         sweep_range_size = sweep_hi - sweep_lo
         if sbc_dir == Direction.BULLISH:
             if current_price > sweep_hi + sweep_range_size * 3:
                 continue  # Move already played out
-            entry = max(current_price, ideal_entry)
         else:
             if current_price < sweep_lo - sweep_range_size * 3:
                 continue  # Move already played out
-            entry = min(current_price, ideal_entry)
+        entry = ideal_entry
 
         # SL: beyond the sweep extreme
         if sbc_dir == Direction.BULLISH:

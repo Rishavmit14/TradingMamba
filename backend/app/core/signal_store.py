@@ -275,16 +275,48 @@ class SignalStore:
                 tracked.entry_timeframe = sig.timeframe
                 regenerated_ids.add(sid)
             else:
-                # New signal — add to active store (entry_price from this first detection is locked)
-                self.active[sid] = TrackedSignal(
-                    signal_id=sid,
-                    signal=sig,
-                    trading_styles=styles,
-                    created_at=now_ms,
-                    status="active",
-                    bars_active=0,
-                    entry_timeframe=sig.timeframe,
-                )
+                # Before adding, check if an existing active signal overlaps
+                # (same direction + similar SL). SBC signals drift entry with
+                # current_price each cycle, producing different signal_ids for
+                # the same zone. Detect this and replace the old signal.
+                sig_dir = sig.direction.value if isinstance(sig.direction, Direction) else sig.direction
+                replaced_old = None
+                for old_sid, old_tracked in self.active.items():
+                    if old_sid in regenerated_ids:
+                        continue  # Already matched this cycle
+                    old_sig = old_tracked.signal
+                    old_dir = old_sig.direction.value if isinstance(old_sig.direction, Direction) else old_sig.direction
+                    if old_dir != sig_dir:
+                        continue
+                    # Same direction — check if SL is within 0.5% (same zone)
+                    sl_pct_diff = abs(old_sig.stop_loss - sig.stop_loss) / max(abs(sig.stop_loss), 1)
+                    if sl_pct_diff < 0.005:
+                        replaced_old = old_sid
+                        break
+
+                if replaced_old:
+                    # Replace old signal with new one, preserving creation time
+                    old_tracked = self.active.pop(replaced_old)
+                    self.active[sid] = TrackedSignal(
+                        signal_id=sid,
+                        signal=sig,
+                        trading_styles=styles,
+                        created_at=old_tracked.created_at,
+                        status="active",
+                        bars_active=old_tracked.bars_active + 1,
+                        entry_timeframe=sig.timeframe,
+                    )
+                else:
+                    # Genuinely new signal
+                    self.active[sid] = TrackedSignal(
+                        signal_id=sid,
+                        signal=sig,
+                        trading_styles=styles,
+                        created_at=now_ms,
+                        status="active",
+                        bars_active=0,
+                        entry_timeframe=sig.timeframe,
+                    )
                 regenerated_ids.add(sid)
 
         # 3. Check SL/TP for ALL active signals (including regenerated ones)
