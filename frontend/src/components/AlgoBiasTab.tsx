@@ -18,6 +18,9 @@ import {
   Users,
   Gauge,
   LineChart,
+  ChevronDown,
+  ChevronRight,
+  Layers,
 } from "lucide-react";
 import { fetchAlgoBias } from "@/lib/api";
 import { CompositeBias, AlgoBiasResult } from "@/lib/types";
@@ -77,9 +80,9 @@ function DirectionIcon({ dir, size = 16 }: { dir: string; size?: number }) {
 // ── Composite Gauge (SVG arc) ──
 
 function CompositeGauge({ score, confidence, direction }: { score: number; confidence: number; direction: string }) {
-  // Arc from -100 to +100, mapped to 180-degree sweep
+  // Arc from -100 (left) to +100 (right), mapped to 180-degree sweep
   const normalized = (score + 100) / 200; // 0 to 1
-  const angle = -90 + normalized * 180; // -90 to +90
+  const angle = -180 + normalized * 180; // -180 (left) to 0 (right), -90 = center/top
 
   const radius = 80;
   const cx = 100;
@@ -124,9 +127,9 @@ function CompositeGauge({ score, confidence, direction }: { score: number; confi
         <circle cx={cx} cy={cy} r="4" fill={gaugeColor} />
 
         {/* Labels */}
-        <text x="18" y="100" fill="var(--text-muted)" fontSize="9" textAnchor="middle">-100</text>
-        <text x="100" y="12" fill="var(--text-muted)" fontSize="9" textAnchor="middle">0</text>
-        <text x="182" y="100" fill="var(--text-muted)" fontSize="9" textAnchor="middle">+100</text>
+        <text x="18" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">-100</text>
+        <text x="100" y="12" fill="var(--text-muted)" fontSize="11" textAnchor="middle">0</text>
+        <text x="182" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">+100</text>
       </svg>
 
       {/* Score display */}
@@ -140,7 +143,7 @@ function CompositeGauge({ score, confidence, direction }: { score: number; confi
             {directionLabel(direction)}
           </span>
         </div>
-        <div className="text-[10px] text-[var(--text-muted)] mt-1.5">
+        <div className="text-xs text-[var(--text-muted)] mt-1.5">
           Confidence: <span className="font-mono font-bold text-[var(--text-secondary)]">{confidence.toFixed(0)}%</span>
         </div>
       </div>
@@ -205,12 +208,12 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
           </div>
           <div>
             <div className="text-xs font-semibold text-[var(--text-primary)]">{algo.algo_name}</div>
-            <div className="text-[9px] text-[var(--text-muted)] uppercase tracking-wider">{algo.algo_id}</div>
+            <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider">{algo.algo_id}</div>
           </div>
         </div>
         <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full border ${directionBg(algo.direction)}`}>
           <DirectionIcon dir={algo.direction} size={12} />
-          <span className={`text-[10px] font-semibold ${directionColor(algo.direction)}`}>
+          <span className={`text-xs font-semibold ${directionColor(algo.direction)}`}>
             {algo.direction.toUpperCase()}
           </span>
         </div>
@@ -218,7 +221,7 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
 
       {/* Score bar */}
       <div className="mb-2">
-        <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-1">
+        <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mb-1">
           <span>Score</span>
           <span className="font-mono font-bold text-[var(--text-secondary)]">
             {algo.score > 0 ? "+" : ""}{algo.score.toFixed(1)}
@@ -229,7 +232,7 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
 
       {/* Confidence bar */}
       <div className="mb-3">
-        <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-1">
+        <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mb-1">
           <span>Confidence</span>
           <span className="font-mono font-bold text-[var(--text-secondary)]">{algo.confidence.toFixed(0)}%</span>
         </div>
@@ -241,8 +244,8 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
         <div className="grid grid-cols-2 gap-1.5 mb-2">
           {componentEntries.map(([key, val]) => (
             <div key={key} className="rounded-md bg-[var(--bg-primary)]/50 px-2 py-1">
-              <div className="text-[8px] text-[var(--text-muted)] uppercase truncate">{key.replace(/_/g, " ")}</div>
-              <div className="text-[10px] font-mono font-bold text-[var(--text-secondary)] truncate">
+              <div className="text-xs text-[var(--text-muted)] uppercase truncate">{key.replace(/_/g, " ")}</div>
+              <div className="text-xs font-mono font-bold text-[var(--text-secondary)] truncate">
                 {typeof val === "number" ? (
                   Math.abs(val) < 0.001 && val !== 0
                     ? val.toExponential(2)
@@ -257,7 +260,7 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
       )}
 
       {/* Explanation */}
-      <div className="text-[10px] text-[var(--text-muted)] leading-relaxed line-clamp-2">
+      <div className="text-xs text-[var(--text-muted)] leading-relaxed line-clamp-2">
         {algo.explanation}
       </div>
     </div>
@@ -273,9 +276,297 @@ function RegimeBadge({ label, value, variant }: { label: string; value: string; 
     neutral: "bg-[var(--bg-tertiary)] border-[var(--border-primary)] text-[var(--text-secondary)]",
   };
   return (
-    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[10px] font-medium ${styles[variant]}`}>
+    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium ${styles[variant]}`}>
       <span className="text-[var(--text-muted)]">{label}:</span>
       <span className="font-semibold uppercase">{value.replace(/_/g, " ")}</span>
+    </div>
+  );
+}
+
+// ── Meta-Algorithm Section ──
+
+function humanizeHurst(h: number): { label: string; detail: string; color: string } {
+  if (h > 0.65) return { label: "Strong Trend", detail: "Market is persistently trending — momentum strategies dominate", color: "text-cyan-400" };
+  if (h > 0.55) return { label: "Mild Trend", detail: "Slight trending bias — momentum strategies get a moderate edge", color: "text-blue-400" };
+  if (h < 0.35) return { label: "Strong Mean Reversion", detail: "Market is reverting aggressively — contrarian strategies dominate", color: "text-amber-400" };
+  if (h < 0.45) return { label: "Mild Mean Reversion", detail: "Slight reversion bias — contrarian strategies get a moderate edge", color: "text-yellow-400" };
+  return { label: "Random Walk", detail: "No structural bias detected — all strategies weighted equally", color: "text-[var(--text-muted)]" };
+}
+
+function humanizeVol(vol: string): { label: string; detail: string; color: string } {
+  if (vol === "extreme") return { label: "Extreme Volatility", detail: "All confidence scores reduced by 25% — anything can happen", color: "text-red-400" };
+  if (vol === "high") return { label: "High Volatility", detail: "Momentum algos get +15% weight — big moves tend to continue", color: "text-orange-400" };
+  if (vol === "low") return { label: "Low Volatility", detail: "Reversion algos get +10% weight — breakouts from compression tend to fade first", color: "text-teal-400" };
+  return { label: "Normal Volatility", detail: "No weight adjustment — standard allocation", color: "text-[var(--text-muted)]" };
+}
+
+function humanizeEntropy(adj: number): { label: string; detail: string; color: string } {
+  if (adj > 0) return { label: "Strong Agreement", detail: "Most algos agree on direction — confidence boosted by +15", color: "text-emerald-400" };
+  if (adj < 0) return { label: "High Disagreement", detail: "Algos conflict on direction — confidence penalized by -20", color: "text-red-400" };
+  return { label: "Moderate Agreement", detail: "Mixed signals — no confidence adjustment", color: "text-[var(--text-muted)]" };
+}
+
+function MetaAlgoSection({ data }: { data: CompositeBias }) {
+  const [open, setOpen] = useState(false);
+  const meta = data.meta;
+
+  if (!meta || !meta.algo_weights) return null;
+
+  const hurst = humanizeHurst(meta.hurst_value);
+  const vol = humanizeVol(data.vol_regime);
+  const entropy = humanizeEntropy(meta.entropy_adj);
+
+  // Group algos by category
+  const entries = Object.entries(meta.algo_weights);
+  const momentumAlgos = entries.filter(([, d]) => d.category === "momentum").sort(([, a], [, b]) => b.adjusted_weight - a.adjusted_weight);
+  const reversionAlgos = entries.filter(([, d]) => d.category === "reversion").sort(([, a], [, b]) => b.adjusted_weight - a.adjusted_weight);
+  const regimeAlgos = entries.filter(([, d]) => d.category === "regime").sort(([, a], [, b]) => b.adjusted_weight - a.adjusted_weight);
+
+  // Total contributions by category
+  const momContrib = momentumAlgos.reduce((s, [, d]) => s + d.contribution, 0);
+  const revContrib = reversionAlgos.reduce((s, [, d]) => s + d.contribution, 0);
+  const regContrib = regimeAlgos.reduce((s, [, d]) => s + d.contribution, 0);
+
+  // Total weight shift
+  const momWeightTotal = momentumAlgos.reduce((s, [, d]) => s + d.adjusted_weight, 0);
+  const revWeightTotal = reversionAlgos.reduce((s, [, d]) => s + d.adjusted_weight, 0);
+  const regWeightTotal = regimeAlgos.reduce((s, [, d]) => s + d.adjusted_weight, 0);
+
+  // Quick summary line
+  const favored = momWeightTotal > revWeightTotal + 5 ? "momentum" : revWeightTotal > momWeightTotal + 5 ? "mean-reversion" : "balanced";
+
+  return (
+    <div className="rounded-xl border border-[var(--border-primary)] bg-[var(--bg-card)] overflow-hidden">
+      {/* Toggle header */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-5 py-3 hover:bg-[var(--bg-tertiary)]/50 transition-colors"
+      >
+        <div className="flex items-center gap-2">
+          <Layers className="w-4 h-4 text-fuchsia-400" />
+          <span className="text-xs font-semibold text-[var(--text-primary)]">Meta-Algorithm</span>
+          <span className="text-xs text-[var(--text-muted)]">— how the ensemble combined 10 algos into one score</span>
+        </div>
+        {open ? (
+          <ChevronDown className="w-4 h-4 text-[var(--text-muted)]" />
+        ) : (
+          <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
+        )}
+      </button>
+
+      {open && (
+        <div className="px-5 pb-5 border-t border-[var(--border-primary)] pt-4 space-y-5">
+
+          {/* ── Step 1: Plain English summary ── */}
+          <div className="rounded-lg bg-fuchsia-500/5 border border-fuchsia-500/15 p-4">
+            <div className="text-xs text-fuchsia-400/70 uppercase tracking-wider font-semibold mb-2">What the ensemble did</div>
+            <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed">
+              The Hurst exponent detected a <span className={`font-bold ${hurst.color}`}>{hurst.label.toLowerCase()}</span> regime
+              (H&nbsp;=&nbsp;{meta.hurst_value.toFixed(3)}), so the ensemble <span className="font-semibold">
+              {favored === "momentum" ? "boosted momentum algos (VPIN, OFI, Kyle, Liquidation) and reduced contrarian ones" :
+               favored === "mean-reversion" ? "boosted contrarian algos (Funding OU, Bayesian, Smart/Retail) and reduced momentum ones" :
+               "kept weights roughly equal"}
+              </span>.
+              {vol.label !== "Normal Volatility" && <> Volatility is <span className={`font-bold ${vol.color}`}>{vol.label.toLowerCase()}</span> — {vol.detail.split("—")[1]?.trim() || vol.detail}.</>}
+              {" "}Algos showed <span className={`font-bold ${entropy.color}`}>{entropy.label.toLowerCase()}</span>
+              {meta.entropy_adj !== 0 && <> ({meta.entropy_adj > 0 ? "+" : ""}{meta.entropy_adj} confidence)</>}.
+            </p>
+          </div>
+
+          {/* ── Step 2: Three decision stages ── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {/* Stage 1: Hurst */}
+            <div className="rounded-lg bg-[var(--bg-primary)]/50 p-3 border border-[var(--border-primary)]">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-5 h-5 rounded-full bg-blue-500/15 flex items-center justify-center text-[11px] font-bold text-blue-400">1</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)]">Regime Detection</div>
+              </div>
+              <div className={`text-xs font-bold mb-1 ${hurst.color}`}>{hurst.label}</div>
+              <div className="text-xs text-[var(--text-muted)] leading-relaxed">{hurst.detail}</div>
+              <div className="mt-2 flex items-center gap-2">
+                <span className="text-[11px] text-[var(--text-muted)]">Hurst</span>
+                <div className="flex-1 h-1.5 rounded-full bg-[var(--bg-tertiary)] overflow-hidden">
+                  <div className={`h-full rounded-full transition-all ${meta.hurst_value > 0.5 ? "bg-cyan-500" : "bg-amber-500"}`}
+                       style={{ width: `${meta.hurst_value * 100}%` }} />
+                </div>
+                <span className="text-[11px] font-mono font-bold text-[var(--text-secondary)]">{meta.hurst_value.toFixed(3)}</span>
+              </div>
+            </div>
+
+            {/* Stage 2: Vol */}
+            <div className="rounded-lg bg-[var(--bg-primary)]/50 p-3 border border-[var(--border-primary)]">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-5 h-5 rounded-full bg-orange-500/15 flex items-center justify-center text-[11px] font-bold text-orange-400">2</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)]">Volatility Modifier</div>
+              </div>
+              <div className={`text-xs font-bold mb-1 ${vol.color}`}>{vol.label}</div>
+              <div className="text-xs text-[var(--text-muted)] leading-relaxed">{vol.detail}</div>
+            </div>
+
+            {/* Stage 3: Agreement */}
+            <div className="rounded-lg bg-[var(--bg-primary)]/50 p-3 border border-[var(--border-primary)]">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-5 h-5 rounded-full bg-violet-500/15 flex items-center justify-center text-[11px] font-bold text-violet-400">3</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)]">Agreement Check</div>
+              </div>
+              <div className={`text-xs font-bold mb-1 ${entropy.color}`}>{entropy.label}</div>
+              <div className="text-xs text-[var(--text-muted)] leading-relaxed">{entropy.detail}</div>
+            </div>
+          </div>
+
+          {/* ── Step 3: Category scoreboard ── */}
+          <div>
+            <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-3">
+              Who pulled the score where
+            </div>
+
+            {/* Momentum group */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                  <span className="text-xs font-semibold text-cyan-400">Momentum Algos</span>
+                  <span className="text-[11px] text-[var(--text-muted)]">— follow the dominant flow</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-[11px] text-[var(--text-muted)]">Weight: <span className="font-mono font-bold text-[var(--text-secondary)]">{momWeightTotal.toFixed(0)}%</span></span>
+                  <span className={`text-xs font-mono font-bold ${momContrib > 0 ? "text-emerald-400" : momContrib < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                    {momContrib > 0 ? "+" : ""}{momContrib.toFixed(1)} pts
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-1.5 pl-4">
+                {momentumAlgos.map(([algoId, detail]) => {
+                  const am = ALGO_META[algoId];
+                  const colors = COLOR_MAP[am?.color || "cyan"] || COLOR_MAP.cyan;
+                  const delta = detail.weight_change;
+                  return (
+                    <div key={algoId} className="flex items-center gap-2">
+                      <span className="w-20 text-xs text-[var(--text-secondary)] truncate">{am?.label || algoId}</span>
+                      <div className="flex-1 h-1.5 rounded-full bg-[var(--bg-tertiary)] overflow-hidden">
+                        <div className={`h-full rounded-full ${colors.accent}`} style={{ width: `${(detail.adjusted_weight / 20) * 100}%`, opacity: 0.7 }} />
+                      </div>
+                      <span className="w-10 text-[11px] font-mono text-[var(--text-muted)] text-right">{detail.adjusted_weight.toFixed(1)}%</span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${delta > 0.05 ? "text-emerald-400" : delta < -0.05 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {delta > 0 ? "+" : ""}{delta.toFixed(1)}%
+                      </span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${detail.contribution > 0 ? "text-emerald-400" : detail.contribution < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {detail.contribution > 0 ? "+" : ""}{detail.contribution.toFixed(1)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Reversion group */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-amber-500" />
+                  <span className="text-xs font-semibold text-amber-400">Mean-Reversion Algos</span>
+                  <span className="text-[11px] text-[var(--text-muted)]">— fade the crowded side</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-[11px] text-[var(--text-muted)]">Weight: <span className="font-mono font-bold text-[var(--text-secondary)]">{revWeightTotal.toFixed(0)}%</span></span>
+                  <span className={`text-xs font-mono font-bold ${revContrib > 0 ? "text-emerald-400" : revContrib < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                    {revContrib > 0 ? "+" : ""}{revContrib.toFixed(1)} pts
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-1.5 pl-4">
+                {reversionAlgos.map(([algoId, detail]) => {
+                  const am = ALGO_META[algoId];
+                  const colors = COLOR_MAP[am?.color || "amber"] || COLOR_MAP.amber;
+                  const delta = detail.weight_change;
+                  return (
+                    <div key={algoId} className="flex items-center gap-2">
+                      <span className="w-20 text-xs text-[var(--text-secondary)] truncate">{am?.label || algoId}</span>
+                      <div className="flex-1 h-1.5 rounded-full bg-[var(--bg-tertiary)] overflow-hidden">
+                        <div className={`h-full rounded-full ${colors.accent}`} style={{ width: `${(detail.adjusted_weight / 20) * 100}%`, opacity: 0.7 }} />
+                      </div>
+                      <span className="w-10 text-[11px] font-mono text-[var(--text-muted)] text-right">{detail.adjusted_weight.toFixed(1)}%</span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${delta > 0.05 ? "text-emerald-400" : delta < -0.05 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {delta > 0 ? "+" : ""}{delta.toFixed(1)}%
+                      </span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${detail.contribution > 0 ? "text-emerald-400" : detail.contribution < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {detail.contribution > 0 ? "+" : ""}{detail.contribution.toFixed(1)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Regime group */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[var(--text-muted)]" />
+                  <span className="text-xs font-semibold text-[var(--text-secondary)]">Regime Indicators</span>
+                  <span className="text-[11px] text-[var(--text-muted)]">— provide context, not direction</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-[11px] text-[var(--text-muted)]">Weight: <span className="font-mono font-bold text-[var(--text-secondary)]">{regWeightTotal.toFixed(0)}%</span></span>
+                  <span className={`text-xs font-mono font-bold ${regContrib > 0 ? "text-emerald-400" : regContrib < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                    {regContrib > 0 ? "+" : ""}{regContrib.toFixed(1)} pts
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-1.5 pl-4">
+                {regimeAlgos.map(([algoId, detail]) => {
+                  const am = ALGO_META[algoId];
+                  const colors = COLOR_MAP[am?.color || "cyan"] || COLOR_MAP.cyan;
+                  const delta = detail.weight_change;
+                  return (
+                    <div key={algoId} className="flex items-center gap-2">
+                      <span className="w-20 text-xs text-[var(--text-secondary)] truncate">{am?.label || algoId}</span>
+                      <div className="flex-1 h-1.5 rounded-full bg-[var(--bg-tertiary)] overflow-hidden">
+                        <div className={`h-full rounded-full ${colors.accent}`} style={{ width: `${(detail.adjusted_weight / 20) * 100}%`, opacity: 0.7 }} />
+                      </div>
+                      <span className="w-10 text-[11px] font-mono text-[var(--text-muted)] text-right">{detail.adjusted_weight.toFixed(1)}%</span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${delta > 0.05 ? "text-emerald-400" : delta < -0.05 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {delta > 0 ? "+" : ""}{delta.toFixed(1)}%
+                      </span>
+                      <span className={`w-12 text-[11px] font-mono font-bold text-right ${detail.contribution > 0 ? "text-emerald-400" : detail.contribution < 0 ? "text-red-400" : "text-[var(--text-muted)]"}`}>
+                        {detail.contribution > 0 ? "+" : ""}{detail.contribution.toFixed(1)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Column legend */}
+            <div className="flex items-center justify-end gap-4 mt-3 text-xs text-[var(--text-muted)]">
+              <span>Weight</span>
+              <span>Shift</span>
+              <span>Score Contribution</span>
+            </div>
+          </div>
+
+          {/* ── Step 4: Confidence math ── */}
+          <div className="rounded-lg bg-[var(--bg-primary)]/50 p-4 border border-[var(--border-primary)]">
+            <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-semibold mb-2">Confidence Calculation</div>
+            <div className="flex items-center gap-2 text-[13px] font-mono flex-wrap">
+              <span className="text-[var(--text-secondary)]">{meta.base_confidence.toFixed(1)}</span>
+              <span className="text-[var(--text-muted)]">base</span>
+              <span className={meta.entropy_adj > 0 ? "text-emerald-400" : meta.entropy_adj < 0 ? "text-red-400" : "text-[var(--text-muted)]"}>
+                {meta.entropy_adj > 0 ? "+" : ""}{meta.entropy_adj}
+              </span>
+              <span className="text-[var(--text-muted)]">{meta.entropy_adj > 0 ? "agreement bonus" : meta.entropy_adj < 0 ? "disagreement penalty" : "entropy"}</span>
+              {meta.vol_confidence_penalty < 1 && (
+                <>
+                  <span className="text-red-400">x{meta.vol_confidence_penalty.toFixed(2)}</span>
+                  <span className="text-[var(--text-muted)]">extreme vol penalty</span>
+                </>
+              )}
+              <span className="text-[var(--text-muted)]">=</span>
+              <span className="text-[var(--text-primary)] font-bold">{data.confidence.toFixed(1)}%</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -362,7 +653,7 @@ function AlgoBiasTabInner() {
           </div>
           <div className="flex items-center gap-2">
             {lastUpdated && (
-              <span className="text-[10px] text-[var(--text-muted)]">
+              <span className="text-xs text-[var(--text-muted)]">
                 {lastUpdated.toLocaleTimeString()}
               </span>
             )}
@@ -388,7 +679,7 @@ function AlgoBiasTabInner() {
           ].map(({ name, ok }) => (
             <div
               key={name}
-              className={`flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-medium ${
+              className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${
                 ok
                   ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                   : "bg-[var(--bg-tertiary)] text-[var(--text-muted)] border border-[var(--border-primary)]"
@@ -432,28 +723,28 @@ function AlgoBiasTabInner() {
               {/* Agreement grid */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <div className="rounded-lg bg-[var(--bg-primary)]/50 p-3">
-                  <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-1">Algos Active</div>
+                  <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-1">Algos Active</div>
                   <div className="text-xl font-bold font-mono text-[var(--text-primary)]">
                     {data.algo_count}<span className="text-sm text-[var(--text-muted)]">/10</span>
                   </div>
                 </div>
                 <div className="rounded-lg bg-emerald-500/5 p-3">
-                  <div className="text-[10px] text-emerald-400/70 uppercase tracking-wider mb-1">Bullish</div>
+                  <div className="text-xs text-emerald-400/70 uppercase tracking-wider mb-1">Bullish</div>
                   <div className="text-xl font-bold font-mono text-emerald-400">{bullCount}</div>
                 </div>
                 <div className="rounded-lg bg-red-500/5 p-3">
-                  <div className="text-[10px] text-red-400/70 uppercase tracking-wider mb-1">Bearish</div>
+                  <div className="text-xs text-red-400/70 uppercase tracking-wider mb-1">Bearish</div>
                   <div className="text-xl font-bold font-mono text-red-400">{bearCount}</div>
                 </div>
                 <div className="rounded-lg bg-yellow-500/5 p-3">
-                  <div className="text-[10px] text-yellow-400/70 uppercase tracking-wider mb-1">Neutral</div>
+                  <div className="text-xs text-yellow-400/70 uppercase tracking-wider mb-1">Neutral</div>
                   <div className="text-xl font-bold font-mono text-yellow-400">{neutCount}</div>
                 </div>
               </div>
 
               {/* Agreement bar */}
               <div>
-                <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-1">
+                <div className="flex items-center justify-between text-xs text-[var(--text-muted)] mb-1">
                   <span>Agreement Distribution</span>
                   <span className="font-mono">{data.agreement_count}/{data.algo_count} agree</span>
                 </div>
@@ -476,6 +767,9 @@ function AlgoBiasTabInner() {
           </div>
         </div>
 
+        {/* Meta-Algorithm Details (expandable) */}
+        <MetaAlgoSection data={data} />
+
         {/* Algorithm Cards Grid */}
         <div>
           <div className="flex items-center gap-2 mb-3">
@@ -493,10 +787,10 @@ function AlgoBiasTabInner() {
 
         {/* How it works section */}
         <div className="rounded-xl p-4 border border-[var(--border-primary)] bg-[var(--bg-card)]">
-          <div className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2 font-semibold">
+          <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-2 font-semibold">
             How It Works
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-[10px] text-[var(--text-muted)] leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-[var(--text-muted)] leading-relaxed">
             <div className="rounded-lg bg-[var(--bg-primary)]/50 p-3">
               <span className="font-bold text-[var(--text-secondary)]">10 Algorithms</span> — VPIN (informed flow), Ornstein-Uhlenbeck (funding mean reversion), GEX + Options Greeks, Kyle&apos;s Lambda (price impact), Hurst Exponent (regime), Liquidation Cascade (logistic model), ATR Volatility Regime, Order Flow Imbalance, Smart vs Retail divergence, Bayesian Sentiment Fusion.
             </div>

@@ -598,6 +598,26 @@ export interface AlgoBiasResult {
   data_age_seconds: number;
 }
 
+export interface AlgoWeightDetail {
+  base_weight: number;      // Original weight (%)
+  adjusted_weight: number;  // After Hurst + vol adjustments (%)
+  weight_change: number;    // Delta from base (%)
+  contribution: number;     // Score contribution to composite
+  category: "momentum" | "reversion" | "regime";
+}
+
+export interface MetaAlgoDetails {
+  hurst_value: number;
+  hurst_effect: string;
+  vol_effect: string;
+  entropy_adj: number;
+  vol_confidence_penalty: number;
+  base_confidence: number;
+  algo_weights: Record<string, AlgoWeightDetail>;
+  momentum_algos: string[];
+  reversion_algos: string[];
+}
+
 export interface CompositeBias {
   direction: CompositeBiasDirection;
   score: number;        // -100 to +100
@@ -609,4 +629,5 @@ export interface CompositeBias {
   entropy: number;
   algos: AlgoBiasResult[];
   timestamp: number;
+  meta: MetaAlgoDetails;
 }

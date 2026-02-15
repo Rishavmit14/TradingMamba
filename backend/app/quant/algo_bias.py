@@ -42,6 +42,7 @@ class CompositeBias:
     entropy: float
     algos: list = field(default_factory=list)
     timestamp: float = 0.0
+    meta: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -55,6 +56,7 @@ class CompositeBias:
             "entropy": round(self.entropy, 3),
             "algos": [a.to_dict() if isinstance(a, AlgoBiasResult) else a for a in self.algos],
             "timestamp": self.timestamp,
+            "meta": self.meta,
         }
 
 
@@ -1097,8 +1099,12 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
     hurst_val = hurst_result.components.get("hurst", 0.5) if hurst_result else 0.5
     vol_regime = vol_result.components.get("vol_regime", "normal") if vol_result else "normal"
 
+    # Capture base weights for meta output
+    base_weights_snapshot = dict(BASE_WEIGHTS)
+
     # Step 3: Hurst-adaptive weight modification
     weights = dict(BASE_WEIGHTS)
+    hurst_effect = "none"
 
     if hurst_val > 0.55:
         boost = 1 + (hurst_val - 0.5) * 2
@@ -1109,6 +1115,7 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
         for algo_id in REVERSION_ALGOS:
             if algo_id in weights:
                 weights[algo_id] *= max(reduce, 0.3)
+        hurst_effect = f"trending (H={hurst_val:.3f}): momentum algos x{boost:.2f}, reversion algos x{max(reduce, 0.3):.2f}"
     elif hurst_val < 0.45:
         boost = 1 + (0.5 - hurst_val) * 2
         reduce = 1 - (0.5 - hurst_val)
@@ -1118,18 +1125,31 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
         for algo_id in MOMENTUM_ALGOS:
             if algo_id in weights:
                 weights[algo_id] *= max(reduce, 0.3)
+        hurst_effect = f"mean-reverting (H={hurst_val:.3f}): reversion algos x{boost:.2f}, momentum algos x{max(reduce, 0.3):.2f}"
+    else:
+        hurst_effect = f"random walk (H={hurst_val:.3f}): no weight adjustment"
+
+    # Capture weights after Hurst, before vol
+    weights_after_hurst = dict(weights)
 
     # Step 4: Vol regime modifier
+    vol_effect = "none"
     if vol_regime == "low":
         for a in REVERSION_ALGOS:
             weights[a] = weights.get(a, 0) * 1.10
         for a in MOMENTUM_ALGOS:
             weights[a] = weights.get(a, 0) * 0.90
+        vol_effect = "low vol: reversion +10%, momentum -10%"
     elif vol_regime == "high":
         for a in MOMENTUM_ALGOS:
             weights[a] = weights.get(a, 0) * 1.15
         for a in REVERSION_ALGOS:
             weights[a] = weights.get(a, 0) * 0.85
+        vol_effect = "high vol: momentum +15%, reversion -15%"
+    elif vol_regime == "extreme":
+        vol_effect = "extreme vol: all confidences -25%"
+    else:
+        vol_effect = "normal vol: no adjustment"
 
     # Renormalize weights
     total_w = sum(weights.values())
@@ -1137,10 +1157,20 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
         weights = {k: v / total_w for k, v in weights.items()}
 
     # Step 5: Composite score (confidence-weighted)
+    # Track per-algo contribution for meta output
+    algo_contributions: dict[str, dict] = {}
     raw_score = 0.0
     for r in valid:
         w = weights.get(r.algo_id, 0.05)
-        raw_score += r.score * w * (r.confidence / 100)
+        contribution = r.score * w * (r.confidence / 100)
+        raw_score += contribution
+        algo_contributions[r.algo_id] = {
+            "base_weight": round(base_weights_snapshot.get(r.algo_id, 0.05) * 100, 1),
+            "adjusted_weight": round(w * 100, 1),
+            "weight_change": round((w - base_weights_snapshot.get(r.algo_id, 0.05)) * 100, 1),
+            "contribution": round(contribution, 2),
+            "category": "momentum" if r.algo_id in MOMENTUM_ALGOS else ("reversion" if r.algo_id in REVERSION_ALGOS else "regime"),
+        }
 
     composite_score = _clamp(raw_score, -100, 100)
 
@@ -1190,6 +1220,19 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
     else:
         regime = "random"
 
+    # Build meta dict with full transparency
+    meta = {
+        "hurst_value": round(hurst_val, 4),
+        "hurst_effect": hurst_effect,
+        "vol_effect": vol_effect,
+        "entropy_adj": entropy_adj,
+        "vol_confidence_penalty": vol_penalty,
+        "base_confidence": round(base_conf, 1),
+        "algo_weights": algo_contributions,
+        "momentum_algos": sorted(MOMENTUM_ALGOS),
+        "reversion_algos": sorted(REVERSION_ALGOS),
+    }
+
     return CompositeBias(
         direction=direction,
         score=composite_score,
@@ -1201,6 +1244,7 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
         entropy=entropy,
         algos=[r.to_dict() for r in results],
         timestamp=time.time(),
+        meta=meta,
     )
 
 
