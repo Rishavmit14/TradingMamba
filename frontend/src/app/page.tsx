@@ -74,6 +74,15 @@ export default function Dashboard() {
   const [deepAnalysis, setDeepAnalysis] = useState<DeepAnalysis | null>(null);
   const [deepAnalysisLoading, setDeepAnalysisLoading] = useState(false);
 
+  // Track mounted tabs — once visited, stay mounted to avoid re-fetch on tab switch
+  const [mountedTabs, setMountedTabs] = useState<Set<AppTab>>(new Set(["live"]));
+  useEffect(() => {
+    setMountedTabs(prev => {
+      if (prev.has(activeTab)) return prev;
+      return new Set([...prev, activeTab]);
+    });
+  }, [activeTab]);
+
   // Derive signal marker from deep analysis for chart overlay
   const signalMarker = deepAnalysis ? {
     timestamp: deepAnalysis.timing.trigger_timestamp,
@@ -173,8 +182,17 @@ export default function Dashboard() {
   const selectedTFRef = useRef(selectedTF);
   selectedTFRef.current = selectedTF;
 
+  const wasOnLiveRef = useRef(true);
   useEffect(() => {
-    if (!analysis) return;
+    if (activeTab !== "live" || !analysis) {
+      if (activeTab !== "live") wasOnLiveRef.current = false;
+      return;
+    }
+    // Immediate refresh when returning to live tab (prevents stale chart data)
+    if (!wasOnLiveRef.current) {
+      wasOnLiveRef.current = true;
+      silentRefresh(selectedTFRef.current);
+    }
     const pollMs: Record<string, number> = {
       "M5": 5_000, "M15": 10_000, "H1": 15_000, "H4": 30_000,
       "D1": 60_000, "W1": 60_000, "1M": 120_000,
@@ -182,10 +200,11 @@ export default function Dashboard() {
     const ms = pollMs[selectedTF] ?? 30_000;
     intervalRef.current = setInterval(() => silentRefresh(selectedTFRef.current), ms);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [analysis, selectedTF, silentRefresh]);
+  }, [analysis, selectedTF, silentRefresh, activeTab]);
 
-  // Fetch open demo trades for chart position display — polls every 5s
+  // Fetch open demo trades for chart position display — pause when not on live/demo tab
   useEffect(() => {
+    if (activeTab !== "live" && activeTab !== "demo") return;
     let active = true;
     const poll = async () => {
       try {
@@ -196,10 +215,11 @@ export default function Dashboard() {
     poll();
     const id = setInterval(poll, 5_000);
     return () => { active = false; clearInterval(id); };
-  }, []);
+  }, [activeTab]);
 
-  // Live price ticker — polls Binance every 2s
+  // Live price ticker — polls Binance every 5s, pauses when not on live tab
   useEffect(() => {
+    if (activeTab !== "live") return;
     let active = true;
     const poll = async () => {
       try {
@@ -207,10 +227,10 @@ export default function Dashboard() {
         if (active) setTicker(t);
       } catch { /* silent */ }
     };
-    poll(); // immediate first fetch
-    const id = setInterval(poll, 2_000);
+    poll();
+    const id = setInterval(poll, 5_000);
     return () => { active = false; clearInterval(id); };
-  }, []);
+  }, [activeTab]);
 
   // Auto-load H4 analysis on first page load + re-fetch when engine mode changes
   const hasAutoLoaded = useRef(false);
@@ -451,8 +471,7 @@ export default function Dashboard() {
       </header>
 
       {/* ============ MAIN CONTENT ============ */}
-      {activeTab === "live" && (
-        <div className="flex flex-1 overflow-hidden">
+      <div className={`flex flex-1 overflow-hidden ${activeTab !== "live" ? "hidden" : ""}`}>
           {/* Chart area */}
           <div className="flex-1 flex flex-col min-w-0">
             {/* ── Chart Toolbar: TF selector + BTCUSDT ticker + Volume/Futures toggles ── */}
@@ -719,40 +738,39 @@ export default function Dashboard() {
             );
           })()}
         </div>
-      )}
 
-      {activeTab === "backtest" && (
-        <div className="flex-1 overflow-hidden">
+      {mountedTabs.has("backtest") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "backtest" ? "hidden" : ""}`}>
           <BacktestTab result={backtestResult} onResult={setBacktestResult} />
         </div>
       )}
 
-      {activeTab === "performance" && (
-        <div className="flex-1 overflow-hidden">
+      {mountedTabs.has("performance") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "performance" ? "hidden" : ""}`}>
           <PerformanceTab result={backtestResult} />
         </div>
       )}
 
-      {activeTab === "signals" && (
-        <div className="flex-1 overflow-hidden">
-          <SignalsTab mode={engineMode} />
+      {mountedTabs.has("signals") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "signals" ? "hidden" : ""}`}>
+          <SignalsTab mode={engineMode} isActive={activeTab === "signals"} />
         </div>
       )}
 
-      {activeTab === "demo" && (
-        <div className="flex-1 overflow-hidden">
+      {mountedTabs.has("demo") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "demo" ? "hidden" : ""}`}>
           <DemoTab mode={engineMode} />
         </div>
       )}
 
-      {activeTab === "market_intel" && (
-        <div className="flex-1 overflow-hidden">
+      {mountedTabs.has("market_intel") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "market_intel" ? "hidden" : ""}`}>
           <MarketIntelTab />
         </div>
       )}
 
-      {activeTab === "quant_analysis" && (
-        <div className="flex-1 overflow-hidden">
+      {mountedTabs.has("quant_analysis") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "quant_analysis" ? "hidden" : ""}`}>
           <QuantAnalysisTab />
         </div>
       )}

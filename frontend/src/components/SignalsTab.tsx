@@ -248,7 +248,7 @@ function SignalCardFull({ signal }: { signal: TradingSignal }) {
 
 // ── Main Component ──
 
-export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: EngineMode }) {
+export default function SignalsTab({ mode = "smc" as EngineMode, isActive = true }: { mode?: EngineMode; isActive?: boolean }) {
   const [data, setData] = useState<DetailedSignals | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -257,6 +257,7 @@ export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: Engi
   const [storeStats, setStoreStats] = useState<SignalStoreStats | null>(null);
   const [outcomesOpen, setOutcomesOpen] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const hasInitiallyFetched = useRef(false);
 
   const fetchData = useCallback(async (silent = false) => {
     if (!silent) setLoading(true);
@@ -300,12 +301,18 @@ export default function SignalsTab({ mode = "smc" as EngineMode }: { mode?: Engi
     } catch { /* silent */ }
   }, [mode]);
 
-  // Initial fetch + 30s auto-refresh
+  // Fetch on first mount, silent refresh when tab becomes active again, 30s polling when active
   useEffect(() => {
-    fetchData();
+    if (!isActive) return;
+    if (!hasInitiallyFetched.current) {
+      hasInitiallyFetched.current = true;
+      fetchData(); // Full fetch with loading state
+    } else {
+      fetchData(true); // Silent refresh when returning to tab
+    }
     intervalRef.current = setInterval(() => fetchData(true), 30_000);
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [fetchData]);
+  }, [fetchData, isActive]);
 
   // Use all_style_signals (all 6 trading styles) — fall back to signals (intraday-only)
   const allSignals = data?.all_style_signals?.length ? data.all_style_signals : (data?.signals ?? []);
