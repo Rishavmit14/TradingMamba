@@ -23,6 +23,8 @@ async def fetch_market_intel(symbol: str = "BTCUSDT") -> dict:
         results = await asyncio.gather(
             client.get(f"{FAPI_BASE}/fapi/v1/openInterest", params={"symbol": symbol}),
             client.get(f"{FAPI_BASE}/futures/data/openInterestHist", params={"symbol": symbol, "period": "1h", "limit": 48}),
+            # Extended OI history at 4h granularity for chart overlay (~83 days)
+            client.get(f"{FAPI_BASE}/futures/data/openInterestHist", params={"symbol": symbol, "period": "4h", "limit": 500}),
             client.get(f"{FAPI_BASE}/fapi/v1/fundingRate", params={"symbol": symbol, "limit": 30}),
             client.get(f"{FAPI_BASE}/fapi/v1/premiumIndex", params={"symbol": symbol}),
             client.get(f"{FAPI_BASE}/futures/data/topLongShortPositionRatio", params={"symbol": symbol, "period": "1h", "limit": 48}),
@@ -31,7 +33,7 @@ async def fetch_market_intel(symbol: str = "BTCUSDT") -> dict:
             return_exceptions=True,
         )
 
-    oi_current_r, oi_hist_r, funding_r, premium_r, top_ls_r, global_ls_r, taker_r = results
+    oi_current_r, oi_hist_r, oi_chart_r, funding_r, premium_r, top_ls_r, global_ls_r, taker_r = results
 
     # --- Open Interest ---
     oi_current_data = _safe_json(oi_current_r)
@@ -44,6 +46,16 @@ async def fetch_market_intel(symbol: str = "BTCUSDT") -> dict:
     oi_history = []
     for entry in oi_hist_data:
         oi_history.append({
+            "timestamp": entry["timestamp"],
+            "oi": float(entry["sumOpenInterest"]),
+            "oi_usd": float(entry["sumOpenInterestValue"]),
+        })
+
+    # Extended OI history for chart overlay (4h granularity, ~83 days)
+    oi_chart_data = _safe_json(oi_chart_r) or []
+    oi_chart_history = []
+    for entry in oi_chart_data:
+        oi_chart_history.append({
             "timestamp": entry["timestamp"],
             "oi": float(entry["sumOpenInterest"]),
             "oi_usd": float(entry["sumOpenInterestValue"]),
@@ -107,6 +119,7 @@ async def fetch_market_intel(symbol: str = "BTCUSDT") -> dict:
             "current": current_oi,
             "current_usd": current_oi_usd,
             "history": oi_history,
+            "chart_history": oi_chart_history,
         },
         "funding_rate": {
             "current": current_funding,

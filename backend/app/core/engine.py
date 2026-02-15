@@ -263,7 +263,9 @@ def _generate_style_signals(
 
 def _compute_futures_context(futures_data: dict) -> dict:
     """Extract chart-friendly data from raw futures_data for frontend overlays."""
-    oi_hist = futures_data.get("open_interest", {}).get("history", [])
+    # Prefer extended 4h chart_history (~83 days) over 1h history (~2 days) for chart overlay
+    oi_data = futures_data.get("open_interest", {})
+    oi_hist = oi_data.get("chart_history") or oi_data.get("history", [])
     oi_deltas = []
     for prev, cur in zip(oi_hist, oi_hist[1:]):
         prev_oi = prev.get("oi_usd", 0)

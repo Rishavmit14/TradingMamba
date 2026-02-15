@@ -359,6 +359,7 @@ async def main(
     symbol: str,
     timeframes: list[str],
     include_m5: bool,
+    funding_only: bool = False,
 ) -> None:
     start_ms = _date_to_ms(start_date)
     end_ms = _now_ms()
@@ -370,7 +371,10 @@ async def main(
     print(f"\nTradingMamba Historical Data Fetch")
     print(f"  Symbol:     {symbol}")
     print(f"  Range:      {start_date} -> now")
-    print(f"  Timeframes: {', '.join(tfs)}")
+    if funding_only:
+        print(f"  Mode:       Funding rate only")
+    else:
+        print(f"  Timeframes: {', '.join(tfs)}")
     print(f"  DB:         {DB_PATH}")
     print(f"{'=' * 55}\n")
 
@@ -378,20 +382,23 @@ async def main(
     t0 = time.time()
 
     async with httpx.AsyncClient(timeout=30.0) as client:
-        # ── Candles ──
-        print("CANDLES:")
-        for tf in tfs:
-            await fetch_candles_for_tf(client, conn, symbol, tf, start_ms, end_ms)
+        if not funding_only:
+            # ── Candles ──
+            print("CANDLES:")
+            for tf in tfs:
+                await fetch_candles_for_tf(client, conn, symbol, tf, start_ms, end_ms)
 
         # ── Futures ──
         # Funding rate: supports startTime/endTime, full history from 2019
         # OI/taker/L-S: no pagination, only last ~30 days from Binance
         print("\nFUTURES:")
-        await fetch_oi_history(client, conn, symbol)
+        if not funding_only:
+            await fetch_oi_history(client, conn, symbol)
         await fetch_funding_rate(client, conn, symbol, start_ms, end_ms)
-        await fetch_taker_volume(client, conn, symbol)
-        await fetch_top_trader_ratio(client, conn, symbol)
-        await fetch_global_ratio(client, conn, symbol)
+        if not funding_only:
+            await fetch_taker_volume(client, conn, symbol)
+            await fetch_top_trader_ratio(client, conn, symbol)
+            await fetch_global_ratio(client, conn, symbol)
 
     elapsed = time.time() - t0
 
@@ -417,6 +424,7 @@ if __name__ == "__main__":
     parser.add_argument("--start", default="2020-01-01", help="Start date YYYY-MM-DD (default: 2020-01-01)")
     parser.add_argument("--symbol", default="BTCUSDT", help="Trading pair (default: BTCUSDT)")
     parser.add_argument("--include-m5", action="store_true", help="Also fetch M5 candles (slow, +884 requests)")
+    parser.add_argument("--funding-only", action="store_true", help="Only fetch funding rate history (skip candles + other futures)")
     args = parser.parse_args()
 
-    asyncio.run(main(args.start, args.symbol, DEFAULT_TFS, args.include_m5))
+    asyncio.run(main(args.start, args.symbol, DEFAULT_TFS, args.include_m5, args.funding_only))

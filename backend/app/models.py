@@ -451,6 +451,7 @@ class TradeRecord:
     confluences: list[str] = field(default_factory=list)
     entry_method: str = ""
     pattern_type: str = ""
+    trading_styles: list[str] = field(default_factory=list)
     is_counter_trend: bool = False
     vsa_absorption: bool = False
     # Timing

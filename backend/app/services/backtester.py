@@ -31,6 +31,11 @@ ALL_TFS = ["1M", "W1", "D1", "H4", "H1", "M15"]
 # Minimum candles needed per TF before we start generating signals
 MIN_CANDLES = {"W1": 10, "D1": 60, "H4": 200, "H1": 200, "M15": 500}
 
+# Max candles per TF to pass to the engine (fixed lookback window).
+# Detectors only need recent context — passing ALL candles from the start
+# causes O(n^2) slowdown as the window grows.
+MAX_LOOKBACK = {"1M": 24, "W1": 52, "D1": 200, "H4": 500, "H1": 500, "M15": 2000}
+
 
 def _find_tf_index_at_timestamp(candles: list[Candle], timestamp: int) -> int:
     """Find the last candle index with open time <= timestamp."""
@@ -148,6 +153,7 @@ def _signal_to_trade(signal: TradingSignal, outcome: dict) -> TradeRecord:
         confluences=list(signal.confluences),
         entry_method=signal.entry_method.value if signal.entry_method else "",
         pattern_type=signal.pattern_type,
+        trading_styles=list(signal.trading_styles) if signal.trading_styles else ([signal.trading_style] if signal.trading_style else []),
         is_counter_trend=signal.is_counter_trend,
         vsa_absorption=signal.vsa_absorption,
         entry_candle_idx=0,
@@ -277,6 +283,24 @@ def _compute_statistics(trades: list[TradeRecord]) -> dict:
         "off_hours": {"trades": len(off_trades), "win_rate": round(off_wr, 1)},
     }
 
+    # By trading style
+    by_style = {}
+    for style_name in ["positional", "swing", "short_term", "intraday"]:
+        st = [t for t in trades if style_name in t.trading_styles]
+        if not st:
+            by_style[style_name] = {"trades": 0, "win_rate": 0, "avg_pnl": 0, "profit_factor": 0}
+            continue
+        sw = sum(1 for t in st if t.outcome == TradeOutcome.WIN)
+        swr = sw / len(st) * 100
+        spnl = mean([t.pnl_pct for t in st])
+        sgp = sum(t.pnl_pct for t in st if t.pnl_pct > 0)
+        sgl = sum(abs(t.pnl_pct) for t in st if t.pnl_pct < 0)
+        spf = sgp / sgl if sgl > 0 else 999.0
+        by_style[style_name] = {
+            "trades": len(st), "win_rate": round(swr, 1),
+            "avg_pnl": round(spnl, 2), "profit_factor": round(spf, 2),
+        }
+
     return {
         "total_trades": total,
         "wins": len(wins),
@@ -290,6 +314,7 @@ def _compute_statistics(trades: list[TradeRecord]) -> dict:
         "by_grade": by_grade,
         "by_confluence": by_confluence,
         "by_entry_method": by_entry_method,
+        "by_style": by_style,
         "by_session": by_session,
         "equity_curve": equity,
     }
@@ -361,14 +386,17 @@ async def run_backtest(
 
         current_ts = m15_candles[window_end - 1].timestamp
 
-        # Slice each TF up to current timestamp
+        # Slice each TF up to current timestamp with fixed lookback
         windowed: dict[str, list[Candle]] = {}
         for tf in tfs_to_load:
+            max_lb = MAX_LOOKBACK.get(tf, 500)
             if tf == "M15":
-                windowed[tf] = m15_candles[:window_end]
+                start_idx = max(0, window_end - max_lb)
+                windowed[tf] = m15_candles[start_idx:window_end]
             else:
                 idx = _find_tf_index_at_timestamp(candles_by_tf[tf], current_ts)
-                windowed[tf] = candles_by_tf[tf][:idx + 1]
+                start_idx = max(0, idx + 1 - max_lb)
+                windowed[tf] = candles_by_tf[tf][start_idx:idx + 1]
 
         # Check minimum candles
         skip = False
@@ -454,6 +482,7 @@ async def run_backtest(
                 "confluences": t.confluences,
                 "entry_method": t.entry_method,
                 "pattern_type": t.pattern_type,
+                "trading_styles": t.trading_styles,
                 "is_counter_trend": t.is_counter_trend,
                 "vsa_absorption": t.vsa_absorption,
                 "entry_candle_idx": t.entry_candle_idx,
@@ -526,6 +555,15 @@ def print_backtest_report(result: dict) -> None:
     print("ENTRY METHOD:")
     for method, data in result.get("by_entry_method", {}).items():
         print(f"  {method:<20} {data['win_rate']:.1f}% WR ({data['trades']} trades)")
+    print()
+
+    style_labels = {"positional": "Positional", "swing": "Swing", "short_term": "Short-Term", "intraday": "Intraday"}
+    print("TRADING STYLE:")
+    print(f"  {'Style':<14} {'Trades':>8} {'Win%':>8} {'Avg PnL':>10} {'PF':>8}")
+    print(f"  {'─' * 14} {'─' * 8} {'─' * 8} {'─' * 10} {'─' * 8}")
+    for style_key, s_data in result.get("by_style", {}).items():
+        label = style_labels.get(style_key, style_key)
+        print(f"  {label:<14} {s_data['trades']:>8} {s_data['win_rate']:>7.1f}% {s_data['avg_pnl']:>+9.2f}% {s_data['profit_factor']:>7.2f}")
     print()
 
     print("SESSION:")
