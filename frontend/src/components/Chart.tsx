@@ -181,6 +181,7 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
   const priceLinesRef = useRef<any[]>([]);
+  const pdSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const idmSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const bosSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
   const chochSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
@@ -505,6 +506,7 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
       candleSeriesRef.current = null;
       volumeSeriesRef.current = null;
       priceLinesRef.current = [];
+      pdSeriesRef.current = [];
       idmSeriesRef.current = [];
       bosSeriesRef.current = [];
       chochSeriesRef.current = [];
@@ -887,32 +889,77 @@ export default function Chart({ data, visibility, livePrice, priceChangePct, onE
       }));
     }
 
-    // Premium/Discount equilibrium line
+    // Premium/Discount: rays from origin candles + EQ price line
+    // Clean up previous P/D ray series
+    for (const s of pdSeriesRef.current) {
+      chart.removeSeries(s);
+    }
+    pdSeriesRef.current = [];
+
     if (visibility.pd && data.premium_discount) {
+      const pd = data.premium_discount;
+      const lastCandle = candles[candles.length - 1];
+      const lastTime = lastCandle ? toTV(lastCandle.timestamp) : null;
+
+      // EQ 50% — full-width price line (always visible across chart)
       priceLinesRef.current.push(candleSeries.createPriceLine({
-        price: data.premium_discount.equilibrium,
+        price: pd.equilibrium,
         color: "#eab308",
         lineWidth: 1,
         lineStyle: LineStyle.Dashed,
         axisLabelVisible: true,
         title: "EQ 50%",
       }));
-      priceLinesRef.current.push(candleSeries.createPriceLine({
-        price: data.premium_discount.swing_high,
-        color: "#ef444480",
-        lineWidth: 1,
-        lineStyle: LineStyle.Dotted,
-        axisLabelVisible: false,
-        title: "Premium",
-      }));
-      priceLinesRef.current.push(candleSeries.createPriceLine({
-        price: data.premium_discount.swing_low,
-        color: "#22c55e80",
-        lineWidth: 1,
-        lineStyle: LineStyle.Dotted,
-        axisLabelVisible: false,
-        title: "Discount",
-      }));
+
+      // P/D High ray — from the swing high origin candle to the right
+      const highCandle = candles.find(c => c.index === pd.swing_high_index);
+      if (highCandle && lastTime) {
+        const highSeries = chart.addLineSeries({
+          color: "#ef4444",
+          lineWidth: 1,
+          lineStyle: LineStyle.Solid,
+          crosshairMarkerVisible: false,
+          priceLineVisible: false,
+          lastValueVisible: true,
+        });
+        highSeries.setData([
+          { time: toTV(highCandle.timestamp), value: pd.swing_high },
+          { time: lastTime, value: pd.swing_high },
+        ]);
+        highSeries.setMarkers([{
+          time: toTV(highCandle.timestamp),
+          position: "aboveBar" as const,
+          color: "#ef4444",
+          shape: "circle" as const,
+          text: "P/D High",
+        }]);
+        pdSeriesRef.current.push(highSeries);
+      }
+
+      // P/D Low ray — from the swing low origin candle to the right
+      const lowCandle = candles.find(c => c.index === pd.swing_low_index);
+      if (lowCandle && lastTime) {
+        const lowSeries = chart.addLineSeries({
+          color: "#22c55e",
+          lineWidth: 1,
+          lineStyle: LineStyle.Solid,
+          crosshairMarkerVisible: false,
+          priceLineVisible: false,
+          lastValueVisible: true,
+        });
+        lowSeries.setData([
+          { time: toTV(lowCandle.timestamp), value: pd.swing_low },
+          { time: lastTime, value: pd.swing_low },
+        ]);
+        lowSeries.setMarkers([{
+          time: toTV(lowCandle.timestamp),
+          position: "belowBar" as const,
+          color: "#22c55e",
+          shape: "circle" as const,
+          text: "P/D Low",
+        }]);
+        pdSeriesRef.current.push(lowSeries);
+      }
     }
 
     // --- QUANT OVERLAYS: ATR bands + Max Pain line (when quant_context available) ---

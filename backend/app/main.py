@@ -370,6 +370,8 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
             "closest_fib": result.premium_discount.closest_fib,
             "fib_distance_pct": result.premium_discount.fib_distance_pct,
             "is_fib_qualified": result.premium_discount.is_fib_qualified,
+            "swing_high_index": result.premium_discount.swing_high_index,
+            "swing_low_index": result.premium_discount.swing_low_index,
         } if result.premium_discount else None,
         "session": {
             "name": result.session.name,
@@ -881,6 +883,8 @@ async def get_detailed_signals(mode: str = "smc"):
                 "depth_pct": round(m15.premium_discount.depth_pct, 1),
                 "is_fib_qualified": m15.premium_discount.is_fib_qualified,
                 "closest_fib": m15.premium_discount.closest_fib,
+                "swing_high_index": m15.premium_discount.swing_high_index,
+                "swing_low_index": m15.premium_discount.swing_low_index,
             } if m15 and m15.premium_discount else None,
         },
         "checklist_v24": _compute_v24_checklist(results, candles_by_tf),

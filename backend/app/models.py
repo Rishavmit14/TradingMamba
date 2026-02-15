@@ -284,6 +284,9 @@ class PremiumDiscount:
     closest_fib: str = ""      # Nearest Fib level key (e.g. "0.618")
     fib_distance_pct: float = 100.0  # Distance to nearest Fib level (0=on it)
     is_fib_qualified: bool = False    # Price within tolerance of a key Fib level
+    # Origin candle indices for ray drawing on chart
+    swing_high_index: int = -1
+    swing_low_index: int = -1
 
     @classmethod
     def calculate(cls, swing_high: float, swing_low: float, current_price: float) -> PremiumDiscount:

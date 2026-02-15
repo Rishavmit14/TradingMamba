@@ -24,7 +24,7 @@ def _find_structural_range(
     bos_events: list[BOS],
     choch_events: list[CHoCH],
     trend: TrendState,
-) -> tuple[float, float] | None:
+) -> tuple[float, float, int, int] | None:
     """Find the swing high/low that define the current structural leg.
 
     V12 + V11: The range resets on each new BOS or CHoCH because those events
@@ -38,6 +38,8 @@ def _find_structural_range(
     4. The range = [swing low boundary, swing high boundary].
 
     Falls back to the most recent HH/HL + LL/LH pair if no BOS/CHoCH exists.
+
+    Returns (range_high, range_low, high_candle_index, low_candle_index) or None.
     """
     if not swings:
         return None
@@ -64,20 +66,10 @@ def _find_structural_range(
         broken_swing = swing_by_idx.get(broken_swing_idx)
 
         if broken_swing:
-            # The broken swing gives us one boundary.
-            # Find the opposite-type swing extreme that completes the leg.
-            #
-            # For bullish BOS (broke a swing high): the range high = broken price,
-            # range low = the most recent swing low BEFORE the break.
-            #
-            # For bearish BOS (broke a swing low): the range low = broken price,
-            # range high = the most recent swing high BEFORE the break.
-            #
-            # For CHoCH: same logic — the broken swing defines one boundary.
-
             if broken_swing.swing_type == SwingType.SWING_HIGH:
                 # Broken a high → need the swing low that pairs with it
                 range_high = broken_swing.price
+                high_idx = broken_swing.candle_index
                 # Find highest high AFTER the anchor (the expansion peak)
                 post_anchor_highs = [
                     s for s in swings
@@ -85,13 +77,18 @@ def _find_structural_range(
                     and s.candle_index >= anchor_candle_idx
                 ]
                 if post_anchor_highs:
-                    range_high = max(range_high, max(s.price for s in post_anchor_highs))
+                    best_high = max(post_anchor_highs, key=lambda s: s.price)
+                    if best_high.price > range_high:
+                        range_high = best_high.price
+                        high_idx = best_high.candle_index
 
                 # Find the swing low before or near the break
                 range_low = None
+                low_idx = -1
                 for s in reversed(swings):
                     if s.swing_type == SwingType.SWING_LOW and s.candle_index <= anchor_candle_idx:
                         range_low = s.price
+                        low_idx = s.candle_index
                         break
                 # Also check lows AFTER anchor (retracement may have made new low)
                 post_anchor_lows = [
@@ -100,16 +97,18 @@ def _find_structural_range(
                     and s.candle_index > anchor_candle_idx
                 ]
                 if post_anchor_lows:
-                    candidate = min(s.price for s in post_anchor_lows)
-                    if range_low is None or candidate < range_low:
-                        range_low = candidate
+                    best_low = min(post_anchor_lows, key=lambda s: s.price)
+                    if range_low is None or best_low.price < range_low:
+                        range_low = best_low.price
+                        low_idx = best_low.candle_index
 
                 if range_low is not None and range_high > range_low:
-                    return (range_high, range_low)
+                    return (range_high, range_low, high_idx, low_idx)
 
             else:  # SWING_LOW broken
                 # Broken a low → need the swing high that pairs with it
                 range_low = broken_swing.price
+                low_idx = broken_swing.candle_index
                 # Find lowest low AFTER the anchor (the expansion trough)
                 post_anchor_lows = [
                     s for s in swings
@@ -117,13 +116,18 @@ def _find_structural_range(
                     and s.candle_index >= anchor_candle_idx
                 ]
                 if post_anchor_lows:
-                    range_low = min(range_low, min(s.price for s in post_anchor_lows))
+                    best_low = min(post_anchor_lows, key=lambda s: s.price)
+                    if best_low.price < range_low:
+                        range_low = best_low.price
+                        low_idx = best_low.candle_index
 
                 # Find the swing high before or near the break
                 range_high = None
+                high_idx = -1
                 for s in reversed(swings):
                     if s.swing_type == SwingType.SWING_HIGH and s.candle_index <= anchor_candle_idx:
                         range_high = s.price
+                        high_idx = s.candle_index
                         break
                 # Also check highs AFTER anchor
                 post_anchor_highs = [
@@ -132,12 +136,13 @@ def _find_structural_range(
                     and s.candle_index > anchor_candle_idx
                 ]
                 if post_anchor_highs:
-                    candidate = max(s.price for s in post_anchor_highs)
-                    if range_high is None or candidate > range_high:
-                        range_high = candidate
+                    best_high = max(post_anchor_highs, key=lambda s: s.price)
+                    if range_high is None or best_high.price > range_high:
+                        range_high = best_high.price
+                        high_idx = best_high.candle_index
 
                 if range_high is not None and range_high > range_low:
-                    return (range_high, range_low)
+                    return (range_high, range_low, high_idx, low_idx)
 
     # Fallback: no BOS/CHoCH — use most recent swing high + swing low
     last_high = None
@@ -151,7 +156,7 @@ def _find_structural_range(
             break
 
     if last_high and last_low and last_high.price > last_low.price:
-        return (last_high.price, last_low.price)
+        return (last_high.price, last_low.price, last_high.candle_index, last_low.candle_index)
 
     return None
 
@@ -183,8 +188,11 @@ def calculate_premium_discount(
     if not result:
         return None
 
-    swing_high, swing_low = result
-    return PremiumDiscount.calculate(swing_high, swing_low, current_price)
+    swing_high, swing_low, high_idx, low_idx = result
+    pd = PremiumDiscount.calculate(swing_high, swing_low, current_price)
+    pd.swing_high_index = high_idx
+    pd.swing_low_index = low_idx
+    return pd
 
 
 def is_zone_in_favorable_position(

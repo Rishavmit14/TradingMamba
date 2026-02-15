@@ -115,6 +115,8 @@ export interface PremiumDiscount {
   closest_fib: string;
   fib_distance_pct: number;
   is_fib_qualified: boolean;
+  swing_high_index: number;
+  swing_low_index: number;
 }
 
 export interface Session {
@@ -413,6 +415,8 @@ export interface MultiTFContext {
     depth_pct: number;
     is_fib_qualified: boolean;
     closest_fib: string;
+    swing_high_index: number;
+    swing_low_index: number;
   } | null;
 }
 
