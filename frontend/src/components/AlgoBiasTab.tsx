@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, memo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, memo } from "react";
 import {
   Brain,
   RefreshCw,
@@ -78,6 +78,363 @@ function DirectionIcon({ dir, size = 16 }: { dir: string; size?: number }) {
   if (dir.includes("bearish")) return <TrendingDown size={size} className="text-red-400" />;
   return <Minus size={size} className="text-yellow-400" />;
 }
+
+// ── Significant Move Alert Types & Detection ──
+
+type AlertSeverity = "critical" | "warning" | "info";
+
+interface SignificantMoveAlert {
+  id: string;
+  severity: AlertSeverity;
+  title: string;
+  description: string;
+  icon: typeof AlertTriangle;
+  metrics: { label: string; value: string }[];
+  combo?: string;
+}
+
+function getAlgoComponents(data: CompositeBias, algoId: string): Record<string, unknown> {
+  const algo = data.algos?.find(a => a.algo_id === algoId);
+  return algo?.components || {};
+}
+
+function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
+  const alerts: SignificantMoveAlert[] = [];
+
+  // Extract components
+  const vpin = getAlgoComponents(data, "vpin");
+  const funding = getAlgoComponents(data, "funding_ou");
+  const options = getAlgoComponents(data, "options_greeks");
+  const kyle = getAlgoComponents(data, "kyle_amihud");
+  const liq = getAlgoComponents(data, "liquidation");
+  const vol = getAlgoComponents(data, "vol_regime");
+  const smart = getAlgoComponents(data, "smart_retail");
+  const bayes = getAlgoComponents(data, "bayesian_sentiment");
+
+  // Safe accessors
+  const n = (v: unknown): number => (typeof v === "number" ? v : 0);
+  const b = (v: unknown): boolean => (v === true);
+  const s = (v: unknown): string => (typeof v === "string" ? v : "");
+
+  // ── Boolean conditions ──
+  const vpinHigh = n(vpin.vpin) > 0.7;
+  const fundingExtreme = Math.abs(n(funding.z_score)) > 2.0;
+  const cascadeActive = b(liq.cascade_active);
+  const cascadeForming = n(liq.p_cascade) > 0.6;
+  const smartRetailSplit = Math.abs(n(smart.raw_divergence)) > 8;
+  const volCompression = s(vol.vol_regime) === "low" && n(vol.atr_ratio) < 0.65;
+  const volExtreme = s(vol.vol_regime) === "extreme";
+  const strongConsensus = data.entropy < 0.8 && (data.agreement_count / Math.max(data.algo_count, 1)) > 0.7;
+  const extremeBias = Math.abs(data.score) > 70 && data.confidence > 75;
+  const negativeGamma = n(options.net_gex) < -100;
+  const sentimentExtreme = n(bayes.p_posterior_bull) > 0.8 || (n(bayes.p_posterior_bull) > 0 && n(bayes.p_posterior_bull) < 0.2);
+  const illiquiditySpike = n(kyle.z_lambda) > 2.0;
+  const fngValue = n(bayes.fng_value);
+
+  // ── Perfect Storm Combos (CRITICAL) ──
+
+  if (cascadeActive && vpinHigh && fundingExtreme) {
+    alerts.push({
+      id: "combo-liquidation-waterfall",
+      severity: "critical",
+      title: "Liquidation Waterfall",
+      description: "Active cascade + toxic informed flow + extreme leverage — violent move then reversal expected",
+      icon: Zap,
+      combo: "liquidation_waterfall",
+      metrics: [
+        { label: "VPIN", value: n(vpin.vpin).toFixed(3) },
+        { label: "Funding z", value: n(funding.z_score).toFixed(2) },
+        { label: "Liq Vol", value: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M` },
+      ],
+    });
+  }
+
+  if (volCompression && negativeGamma && data.entropy < 0.8) {
+    alerts.push({
+      id: "combo-gamma-squeeze",
+      severity: "critical",
+      title: "Gamma Squeeze Setup",
+      description: "Vol compression + negative dealer gamma + algo consensus — explosive breakout imminent",
+      icon: Target,
+      combo: "gamma_squeeze",
+      metrics: [
+        { label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(3) },
+        { label: "Net GEX", value: n(options.net_gex).toFixed(0) },
+        { label: "Entropy", value: data.entropy.toFixed(2) },
+      ],
+    });
+  }
+
+  if (fngValue > 0 && fngValue < 25 && fundingExtreme && (cascadeActive || cascadeForming)) {
+    alerts.push({
+      id: "combo-capitulation",
+      severity: "critical",
+      title: "Capitulation Signal",
+      description: "Extreme fear + overleveraged funding + cascade pressure — bottom/top formation likely",
+      icon: Shield,
+      combo: "capitulation",
+      metrics: [
+        { label: "FnG", value: fngValue.toFixed(0) },
+        { label: "Funding z", value: n(funding.z_score).toFixed(2) },
+        { label: "P(Cascade)", value: `${(n(liq.p_cascade) * 100).toFixed(0)}%` },
+      ],
+    });
+  }
+
+  if (vpinHigh && smartRetailSplit && illiquiditySpike) {
+    alerts.push({
+      id: "combo-structural-imbalance",
+      severity: "critical",
+      title: "Structural Imbalance",
+      description: "Toxic flow + smart/retail divergence + illiquid market — institutional positioning detected",
+      icon: Activity,
+      combo: "structural_imbalance",
+      metrics: [
+        { label: "VPIN", value: n(vpin.vpin).toFixed(3) },
+        { label: "Divergence", value: `${n(smart.raw_divergence).toFixed(1)}pp` },
+        { label: "z(Lambda)", value: n(kyle.z_lambda).toFixed(2) },
+      ],
+    });
+  }
+
+  // ── Individual Alerts (skip if already in a combo) ──
+  const comboIds = new Set(alerts.map(a => a.combo).filter(Boolean));
+
+  if (cascadeActive && !comboIds.has("liquidation_waterfall")) {
+    alerts.push({
+      id: "cascade-active",
+      severity: "critical",
+      title: "Liquidation Cascade Active",
+      description: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M liquidated in 30 min — exhaustion reversal likely`,
+      icon: Zap,
+      metrics: [{ label: "Volume", value: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M` }],
+    });
+  }
+
+  if (extremeBias) {
+    alerts.push({
+      id: "extreme-composite",
+      severity: "warning",
+      title: "Extreme Composite Bias",
+      description: `Score ${data.score > 0 ? "+" : ""}${data.score.toFixed(1)} with ${data.confidence.toFixed(0)}% confidence — strong institutional directional bias`,
+      icon: Gauge,
+      metrics: [
+        { label: "Score", value: `${data.score > 0 ? "+" : ""}${data.score.toFixed(1)}` },
+        { label: "Confidence", value: `${data.confidence.toFixed(0)}%` },
+      ],
+    });
+  }
+
+  if (vpinHigh && !comboIds.has("liquidation_waterfall") && !comboIds.has("structural_imbalance")) {
+    alerts.push({
+      id: "vpin-toxic",
+      severity: "warning",
+      title: "Toxic Flow Detected",
+      description: `VPIN=${n(vpin.vpin).toFixed(3)} — informed institutional flow above 0.7 threshold`,
+      icon: Activity,
+      metrics: [{ label: "VPIN", value: n(vpin.vpin).toFixed(3) }],
+    });
+  }
+
+  if (fundingExtreme && !comboIds.has("liquidation_waterfall") && !comboIds.has("capitulation")) {
+    const zScore = n(funding.z_score);
+    const side = zScore > 0 ? "Longs" : "Shorts";
+    alerts.push({
+      id: "funding-extreme",
+      severity: "warning",
+      title: "Funding Extreme",
+      description: `z=${zScore.toFixed(2)} — ${side} overleveraged, mean reversion expected`,
+      icon: Waves,
+      metrics: [{ label: "z-score", value: zScore.toFixed(2) }],
+    });
+  }
+
+  if (cascadeForming && !cascadeActive && !comboIds.has("capitulation")) {
+    alerts.push({
+      id: "cascade-forming",
+      severity: "warning",
+      title: "Cascade Forming",
+      description: `P(cascade)=${(n(liq.p_cascade) * 100).toFixed(0)}% — liquidation cascade probability elevated`,
+      icon: Zap,
+      metrics: [{ label: "P(Cascade)", value: `${(n(liq.p_cascade) * 100).toFixed(0)}%` }],
+    });
+  }
+
+  if (smartRetailSplit && !comboIds.has("structural_imbalance")) {
+    const div = n(smart.raw_divergence);
+    alerts.push({
+      id: "smart-retail-split",
+      severity: "warning",
+      title: "Smart/Retail Split",
+      description: `Divergence=${div.toFixed(1)}pp — smart money and retail sharply disagree`,
+      icon: Users,
+      metrics: [{ label: "Divergence", value: `${div.toFixed(1)}pp` }],
+    });
+  }
+
+  if (volExtreme) {
+    alerts.push({
+      id: "vol-extreme",
+      severity: "warning",
+      title: "Extreme Volatility",
+      description: `ATR ratio=${n(vol.atr_ratio).toFixed(2)} — all algo confidence penalized 25%`,
+      icon: Gauge,
+      metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(2) }],
+    });
+  }
+
+  if (sentimentExtreme) {
+    const pBull = n(bayes.p_posterior_bull);
+    const label = pBull > 0.8 ? "Extreme Bullish" : "Extreme Bearish";
+    alerts.push({
+      id: "sentiment-extreme",
+      severity: "warning",
+      title: "Sentiment Extreme",
+      description: `P(bull)=${(pBull * 100).toFixed(0)}% — ${label} posterior, contrarian signal`,
+      icon: Shield,
+      metrics: [{ label: "P(Bull)", value: `${(pBull * 100).toFixed(0)}%` }],
+    });
+  }
+
+  if (illiquiditySpike && !comboIds.has("structural_imbalance")) {
+    alerts.push({
+      id: "illiquidity-spike",
+      severity: "warning",
+      title: "Illiquidity Spike",
+      description: `z(Lambda)=${n(kyle.z_lambda).toFixed(2)} — thin book, small orders move price`,
+      icon: BarChart3,
+      metrics: [{ label: "z(Lambda)", value: n(kyle.z_lambda).toFixed(2) }],
+    });
+  }
+
+  // INFO-level
+  if (volCompression && !comboIds.has("gamma_squeeze")) {
+    alerts.push({
+      id: "vol-compression",
+      severity: "info",
+      title: "Vol Compression",
+      description: `ATR ratio=${n(vol.atr_ratio).toFixed(3)} — breakout from compression likely (60% bullish for BTC)`,
+      icon: Gauge,
+      metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(3) }],
+    });
+  }
+
+  if (strongConsensus) {
+    alerts.push({
+      id: "strong-consensus",
+      severity: "info",
+      title: "Strong Consensus",
+      description: `${data.agreement_count}/${data.algo_count} algos agree, entropy=${data.entropy.toFixed(2)} — high conviction`,
+      icon: Brain,
+      metrics: [
+        { label: "Agreement", value: `${data.agreement_count}/${data.algo_count}` },
+        { label: "Entropy", value: data.entropy.toFixed(2) },
+      ],
+    });
+  }
+
+  if (negativeGamma && !comboIds.has("gamma_squeeze")) {
+    alerts.push({
+      id: "negative-gamma",
+      severity: "info",
+      title: "Negative Gamma",
+      description: `Net GEX=${n(options.net_gex).toFixed(0)} — dealers short gamma, moves amplified`,
+      icon: Target,
+      metrics: [{ label: "Net GEX", value: n(options.net_gex).toFixed(0) }],
+    });
+  }
+
+  // Sort: critical first, then warning, then info
+  const order: Record<AlertSeverity, number> = { critical: 0, warning: 1, info: 2 };
+  alerts.sort((a, b) => order[a.severity] - order[b.severity]);
+
+  return alerts;
+}
+
+// ── Alert Panel Component ──
+
+const SEVERITY_STYLES: Record<AlertSeverity, { bg: string; border: string; text: string; glow?: string }> = {
+  critical: { bg: "bg-red-500/10", border: "border-red-500/30", text: "text-red-400", glow: "animate-pulse-glow" },
+  warning: { bg: "bg-amber-500/10", border: "border-amber-500/25", text: "text-amber-400" },
+  info: { bg: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-400" },
+};
+
+const AlertPanel = memo(function AlertPanel({
+  alerts,
+  onDismiss,
+}: {
+  alerts: SignificantMoveAlert[];
+  onDismiss: (id: string) => void;
+}) {
+  if (alerts.length === 0) return null;
+
+  return (
+    <div className="space-y-2 animate-fade-in">
+      {/* Summary header */}
+      <div className="flex items-center gap-2">
+        <AlertTriangle className={`w-4 h-4 ${alerts[0].severity === "critical" ? "text-red-400" : "text-amber-400"}`} />
+        <span className="text-xs font-semibold text-[var(--text-primary)]">
+          {alerts.filter(a => a.severity === "critical").length > 0 ? "Significant Move Alert" : "Market Conditions"}
+        </span>
+        <span className="text-xs text-[var(--text-muted)]">
+          — {alerts.length} condition{alerts.length !== 1 ? "s" : ""} detected from quant algos
+        </span>
+      </div>
+
+      {alerts.map((alert) => {
+        const style = SEVERITY_STYLES[alert.severity];
+        const Icon = alert.icon;
+        const isCombo = !!alert.combo;
+
+        return (
+          <div
+            key={alert.id}
+            className={`rounded-xl border ${style.border} ${style.bg} p-3 ${
+              alert.severity === "critical" ? style.glow || "" : ""
+            } ${isCombo ? "ring-1 ring-red-500/20" : ""}`}
+            style={alert.severity === "critical" ? { color: "#f87171" } : undefined}
+          >
+            <div className="flex items-start gap-3">
+              <div className={`w-7 h-7 rounded-lg ${style.bg} border ${style.border} flex items-center justify-center shrink-0 mt-0.5`}>
+                <Icon className={`w-3.5 h-3.5 ${style.text}`} />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  {isCombo && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded">
+                      Perfect Storm
+                    </span>
+                  )}
+                  <span className={`text-xs font-bold ${style.text}`}>{alert.title}</span>
+                </div>
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed">{alert.description}</p>
+                {alert.metrics.length > 0 && (
+                  <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
+                    {alert.metrics.map((m) => (
+                      <span key={m.label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[var(--bg-primary)]/60 text-[11px]">
+                        <span className="text-[var(--text-muted)]">{m.label}:</span>
+                        <span className="font-mono font-bold text-[var(--text-secondary)]">{m.value}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                onClick={() => onDismiss(alert.id)}
+                className="shrink-0 p-1 rounded-md hover:bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                title="Dismiss"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+});
 
 // ── Composite Gauge (SVG arc) ──
 
@@ -696,6 +1053,11 @@ function AlgoBiasTabInner() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>>(new Set());
+
+  const handleDismissAlert = useCallback((id: string) => {
+    setDismissedAlerts(prev => new Set(prev).add(id));
+  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -703,6 +1065,7 @@ function AlgoBiasTabInner() {
       setData(result);
       setError(null);
       setLastUpdated(new Date());
+      setDismissedAlerts(new Set());
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to fetch algo bias data");
     } finally {
@@ -715,6 +1078,12 @@ function AlgoBiasTabInner() {
     const interval = setInterval(fetchData, 60_000);
     return () => clearInterval(interval);
   }, [fetchData]);
+
+  const alerts = useMemo(() => {
+    if (!data) return [];
+    const all = detectAlerts(data);
+    return all.filter(a => !dismissedAlerts.has(a.id));
+  }, [data, dismissedAlerts]);
 
   // Loading state
   if (loading && !data) {
@@ -808,6 +1177,9 @@ function AlgoBiasTabInner() {
             </div>
           ))}
         </div>
+
+        {/* Significant Move Alerts */}
+        <AlertPanel alerts={alerts} onDismiss={handleDismissAlert} />
 
         {/* Composite Gauge Section */}
         <div className="rounded-xl p-5 border border-[var(--border-primary)] bg-[var(--bg-card)]">
