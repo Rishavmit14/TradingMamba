@@ -122,22 +122,22 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
     smart = _get_components(composite, "smart_retail")
     bayes = _get_components(composite, "bayesian_sentiment")
 
-    # ── Boolean conditions ──
-    vpin_high = _n(vpin.get("vpin")) > 0.7
+    # ── Boolean conditions (thresholds calibrated on 3y BTCUSDT data) ──
+    vpin_high = _n(vpin.get("vpin")) > 0.064
     funding_z = _n(funding.get("z_score"))
-    funding_extreme = abs(funding_z) > 2.0
+    funding_extreme = abs(funding_z) > 0.551
     cascade_active = _b(liq.get("cascade_active"))
-    cascade_forming = _n(liq.get("p_cascade")) > 0.6
+    cascade_forming = _n(liq.get("p_cascade")) > 0.78
     smart_div = _n(smart.get("raw_divergence"))
-    smart_retail_split = abs(smart_div) > 8
-    vol_compression = _s(vol.get("vol_regime")) == "low" and _n(vol.get("atr_ratio")) < 0.65
+    smart_retail_split = abs(smart_div) > 3.8
+    vol_compression = _s(vol.get("vol_regime")) == "low" and _n(vol.get("atr_ratio")) < 0.769
     vol_extreme = _s(vol.get("vol_regime")) == "extreme"
-    strong_consensus = composite.entropy < 0.8 and (composite.agreement_count / max(composite.algo_count, 1)) > 0.7
-    extreme_bias = abs(composite.score) > 70 and composite.confidence > 75
+    strong_consensus = composite.entropy < 0.985 and (composite.agreement_count / max(composite.algo_count, 1)) > 0.7
+    extreme_bias = abs(composite.score) > 2.874 and composite.confidence > 16.144
     negative_gamma = _n(options.get("net_gex")) < -100
     p_bull = _n(bayes.get("p_posterior_bull"))
-    sentiment_extreme = p_bull > 0.8 or (p_bull > 0 and p_bull < 0.2)
-    illiquidity_spike = _n(kyle.get("z_lambda")) > 2.0
+    sentiment_extreme = p_bull > 0.638 or (p_bull > 0 and p_bull < 0.15)
+    illiquidity_spike = _n(kyle.get("z_lambda")) > 0.006
     fng_value = _n(bayes.get("fng_value"))
 
     # Direction derivations
@@ -154,8 +154,8 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
     smart_side = (f"Smart money net LONG vs retail SHORT → expect move UP" if smart_div > 0
                   else f"Smart money net SHORT vs retail LONG → expect move DOWN")
 
-    sent_dir = "bearish" if p_bull > 0.8 else "bullish"
-    sent_side = ("Crowd extremely bullish → contrarian: expect pullback DOWN" if p_bull > 0.8
+    sent_dir = "bearish" if p_bull > 0.638 else "bullish"
+    sent_side = ("Crowd extremely bullish → contrarian: expect pullback DOWN" if p_bull > 0.638
                  else "Crowd extremely bearish → contrarian: expect reversal UP")
 
     # ── Perfect Storm Combos (CRITICAL) ──
@@ -232,13 +232,16 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
                      "sell_liq": sell_liq, "buy_liq": buy_liq},
         ))
 
+    # Composite score sign direction (more reliable than thresholded direction)
+    cs_dir = "bullish" if composite.score > 0 else ("bearish" if composite.score < 0 else "neutral")
+
     if extreme_bias:
         alerts.append(QuantAlert(
             id="extreme-composite",
             severity="warning",
             title="Extreme Composite Bias",
-            direction=c_dir,
-            direction_reason=f"{composite.algo_count} algos collectively point {'UP' if c_dir == 'bullish' else 'DOWN'} with {composite.confidence:.0f}% confidence",
+            direction=cs_dir,
+            direction_reason=f"{composite.algo_count} algos collectively point {'UP' if cs_dir == 'bullish' else 'DOWN'} with {composite.confidence:.0f}% confidence",
             description=f"Composite score {'+'  if composite.score > 0 else ''}{composite.score:.1f} at {composite.confidence:.0f}% confidence",
             metrics={"score": composite.score, "confidence": composite.confidence},
         ))
@@ -251,7 +254,7 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
             title="Toxic Flow Detected",
             direction=d,
             direction_reason=f"Informed traders aggressively {'BUYING → expect price to push UP' if d == 'bullish' else 'SELLING → expect price to drop DOWN' if d == 'bearish' else 'active, direction unclear'}",
-            description=f"VPIN={_n(vpin.get('vpin')):.3f} — institutional flow above 0.7 toxicity threshold",
+            description=f"VPIN={_n(vpin.get('vpin')):.3f} — institutional flow above toxicity threshold",
             metrics={"vpin": _n(vpin.get("vpin"))},
         ))
 
@@ -344,8 +347,8 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
             id="strong-consensus",
             severity="info",
             title="Strong Consensus",
-            direction=c_dir,
-            direction_reason=f"{composite.agreement_count} of {composite.algo_count} algos agree: price likely to move {'UP' if c_dir == 'bullish' else 'DOWN' if c_dir == 'bearish' else 'sideways'}",
+            direction=cs_dir,
+            direction_reason=f"{composite.agreement_count} of {composite.algo_count} algos agree: price likely to move {'UP' if cs_dir == 'bullish' else 'DOWN' if cs_dir == 'bearish' else 'sideways'}",
             description=f"Algo agreement {composite.agreement_count}/{composite.algo_count}, entropy={composite.entropy:.2f}",
             metrics={"agreement": composite.agreement_count, "algo_count": composite.algo_count,
                      "entropy": composite.entropy},

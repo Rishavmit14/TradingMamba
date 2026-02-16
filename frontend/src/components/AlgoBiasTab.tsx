@@ -140,22 +140,22 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
     return "neutral";
   };
 
-  // ── Boolean conditions ──
-  const vpinHigh = n(vpin.vpin) > 0.7;
+  // ── Boolean conditions (thresholds calibrated on 3y BTCUSDT data) ──
+  const vpinHigh = n(vpin.vpin) > 0.064;
   const fundingZ = n(funding.z_score);
-  const fundingExtreme = Math.abs(fundingZ) > 2.0;
+  const fundingExtreme = Math.abs(fundingZ) > 0.551;
   const cascadeActive = b(liq.cascade_active);
-  const cascadeForming = n(liq.p_cascade) > 0.6;
+  const cascadeForming = n(liq.p_cascade) > 0.78;
   const smartDiv = n(smart.raw_divergence);
-  const smartRetailSplit = Math.abs(smartDiv) > 8;
-  const volCompression = s(vol.vol_regime) === "low" && n(vol.atr_ratio) < 0.65;
+  const smartRetailSplit = Math.abs(smartDiv) > 3.8;
+  const volCompression = s(vol.vol_regime) === "low" && n(vol.atr_ratio) < 0.769;
   const volExtreme = s(vol.vol_regime) === "extreme";
-  const strongConsensus = data.entropy < 0.8 && (data.agreement_count / Math.max(data.algo_count, 1)) > 0.7;
-  const extremeBias = Math.abs(data.score) > 70 && data.confidence > 75;
+  const strongConsensus = data.entropy < 0.985 && (data.agreement_count / Math.max(data.algo_count, 1)) > 0.7;
+  const extremeBias = Math.abs(data.score) > 2.874 && data.confidence > 16.144;
   const negativeGamma = n(options.net_gex) < -100;
   const pBull = n(bayes.p_posterior_bull);
-  const sentimentExtreme = pBull > 0.8 || (pBull > 0 && pBull < 0.2);
-  const illiquiditySpike = n(kyle.z_lambda) > 2.0;
+  const sentimentExtreme = pBull > 0.638 || (pBull > 0 && pBull < 0.15);
+  const illiquiditySpike = n(kyle.z_lambda) > 0.006;
   const fngValue = n(bayes.fng_value);
 
   // Cascade direction: if longs liquidated → exhaustion → reversal UP. If shorts liquidated → reversal DOWN
@@ -175,10 +175,13 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
     : `Smart money net SHORT vs retail LONG → expect move DOWN`;
 
   // Sentiment: contrarian. High P(bull) = crowd bullish → bearish. Low = crowd bearish → bullish
-  const sentDir: AlertDirection = pBull > 0.8 ? "bearish" : "bullish";
-  const sentSide = pBull > 0.8
+  const sentDir: AlertDirection = pBull > 0.638 ? "bearish" : "bullish";
+  const sentSide = pBull > 0.638
     ? "Crowd extremely bullish → contrarian: expect pullback DOWN"
     : "Crowd extremely bearish → contrarian: expect reversal UP";
+
+  // Composite score sign direction (more reliable than thresholded direction)
+  const csDir: AlertDirection = data.score > 0 ? "bullish" : data.score < 0 ? "bearish" : "neutral";
 
   // ── Perfect Storm Combos (CRITICAL) ──
 
@@ -290,8 +293,8 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       severity: "warning",
       title: "Extreme Composite Bias",
       icon: Gauge,
-      direction: cDir,
-      directionReason: `${data.algo_count} algos collectively point ${cDir === "bullish" ? "UP" : "DOWN"} with ${data.confidence.toFixed(0)}% confidence → expect price to move ${cDir === "bullish" ? "higher" : "lower"}`,
+      direction: csDir,
+      directionReason: `${data.algo_count} algos collectively point ${csDir === "bullish" ? "UP" : "DOWN"} with ${data.confidence.toFixed(0)}% confidence → expect price to move ${csDir === "bullish" ? "higher" : "lower"}`,
       description: `Composite score ${data.score > 0 ? "+" : ""}${data.score.toFixed(1)} at ${data.confidence.toFixed(0)}% confidence — strong institutional directional consensus`,
       metrics: [
         { label: "Score", value: `${data.score > 0 ? "+" : ""}${data.score.toFixed(1)}` },
@@ -426,8 +429,8 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       severity: "info",
       title: "Strong Consensus",
       icon: Brain,
-      direction: cDir,
-      directionReason: `${data.agreement_count} of ${data.algo_count} algos agree: price likely to move ${cDir === "bullish" ? "UP" : cDir === "bearish" ? "DOWN" : "sideways"}`,
+      direction: csDir,
+      directionReason: `${data.agreement_count} of ${data.algo_count} algos agree: price likely to move ${csDir === "bullish" ? "UP" : csDir === "bearish" ? "DOWN" : "sideways"}`,
       description: `Algo agreement ${data.agreement_count}/${data.algo_count}, entropy=${data.entropy.toFixed(2)} — high directional conviction`,
       metrics: [
         { label: "Agreement", value: `${data.agreement_count}/${data.algo_count}` },

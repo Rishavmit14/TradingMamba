@@ -250,34 +250,41 @@ async def fetch_deribit_options_hourly(
 
     total_days = (end_ms - start_ms) // DAY + 1
 
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        current_day = start_ms
-        day_count = 0
+    # Build list of day ranges to fetch
+    day_ranges: list[tuple[int, int]] = []
+    current_day = start_ms
+    while current_day < end_ms:
+        day_end = min(current_day + DAY, end_ms)
+        day_ranges.append((current_day, day_end))
+        current_day = day_end
 
-        while current_day < end_ms:
-            day_end = min(current_day + DAY, end_ms)
-            day_count += 1
+    # Fetch days in parallel with semaphore (5 concurrent)
+    sem = asyncio.Semaphore(5)
+    completed = [0]
 
-            if progress_callback:
+    async def _fetch_day(client: httpx.AsyncClient, day_start: int, day_end: int) -> list[dict]:
+        async with sem:
+            trades = await _fetch_deribit_day_trades(client, currency, day_start, day_end)
+            completed[0] += 1
+            if progress_callback and completed[0] % 10 == 0:
                 try:
-                    progress_callback(f"Deribit options: day {day_count}/{total_days}...")
+                    progress_callback(f"Deribit options: {completed[0]}/{total_days} days...")
                 except TypeError:
                     pass
+            return trades
 
-            # Fetch all option trades for this day
-            trades = await _fetch_deribit_day_trades(client, currency, current_day, day_end)
-            total_trades += len(trades)
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        tasks = [_fetch_day(client, ds, de) for ds, de in day_ranges]
+        results = await asyncio.gather(*tasks)
 
-            if trades:
-                hourly = _aggregate_deribit_hourly(trades)
-                all_hourly.extend(hourly)
-
-            if day_count % 15 == 0:
-                logger.info(f"  Deribit: {day_count}/{total_days} days, "
-                            f"{total_trades} trades, {len(all_hourly)} hourly records")
-
-            current_day = day_end
-            await asyncio.sleep(0.1)
+    for i, trades in enumerate(results):
+        total_trades += len(trades)
+        if trades:
+            hourly = _aggregate_deribit_hourly(trades)
+            all_hourly.extend(hourly)
+        if (i + 1) % 50 == 0:
+            logger.info(f"  Deribit: processed {i + 1}/{total_days} days, "
+                        f"{total_trades} trades, {len(all_hourly)} hourly records")
 
     all_hourly.sort(key=lambda x: x["timestamp"])
     _save_cache(cache_path, all_hourly)

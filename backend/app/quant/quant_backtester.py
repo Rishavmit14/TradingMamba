@@ -220,7 +220,7 @@ async def _fetch_funding_rate_history(
             all_rates.append({
                 "timestamp": int(r["fundingTime"]),
                 "rate": float(r["fundingRate"]),
-                "mark_price": float(r.get("markPrice", 0)),
+                "mark_price": float(r.get("markPrice") or 0),
             })
 
         last_ts = int(batch[-1]["fundingTime"])
