@@ -339,7 +339,7 @@ export interface DeepAnalysis {
 
 export type TradeOutcome = "win" | "loss" | "timeout";
 export type EngineMode = "smc" | "quant";
-export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel" | "quant_analysis" | "algo_bias";
+export type AppTab = "live" | "backtest" | "performance" | "signals" | "demo" | "market_intel" | "quant_analysis" | "algo_bias" | "quant_backtest";
 
 export interface TradeRecord {
   direction: Direction;
@@ -630,4 +630,60 @@ export interface CompositeBias {
   algos: AlgoBiasResult[];
   timestamp: number;
   meta: MetaAlgoDetails;
+}
+
+// ── Quant Backtest Types ──
+
+export interface QuantAlertRecord {
+  timestamp: number;
+  alert_id: string;
+  title: string;
+  severity: "critical" | "warning" | "info";
+  direction: "bullish" | "bearish" | "neutral";
+  trigger_price: number;
+  move_1h_pct: number;
+  move_4h_pct: number;
+  move_24h_pct: number;
+  correct_4h: boolean | null;
+  correct_24h: boolean | null;
+  combo: string | null;
+}
+
+export interface QuantAlertTypeStats {
+  title: string;
+  count: number;
+  severity: string;
+  hit_rate_1h: number;
+  hit_rate_4h: number;
+  hit_rate_24h: number;
+  avg_move_24h: number;
+  avg_favorable: number;
+  avg_adverse: number;
+}
+
+export interface QuantBacktestResult {
+  symbol: string;
+  start_date: string;
+  end_date: string;
+  run_timestamp: string;
+  elapsed_seconds: number;
+  total_hours: number;
+  step_hours: number;
+  total_alerts: number;
+  directional_alerts: number;
+  non_directional_alerts: number;
+  hit_rate_1h: number;
+  hit_rate_4h: number;
+  hit_rate_24h: number;
+  avg_abs_move_1h: number;
+  avg_abs_move_4h: number;
+  avg_abs_move_24h: number;
+  reliability_score: number;
+  algos_active: number;
+  algos_excluded: string[];
+  by_alert_type: Record<string, QuantAlertTypeStats>;
+  by_severity: Record<string, { count: number; hit_rate_4h: number; hit_rate_24h: number; avg_move_24h: number }>;
+  by_direction: Record<string, { count: number; hit_rate_4h: number; hit_rate_24h: number; avg_move_24h: number }>;
+  by_combo: Record<string, { title: string; count: number; hit_rate_4h: number; hit_rate_24h: number; avg_favorable: number }>;
+  timeline: QuantAlertRecord[];
 }

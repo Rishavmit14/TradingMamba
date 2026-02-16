@@ -1293,3 +1293,39 @@ async def get_quant_intel(symbol: str = "BTCUSDT"):
         "l2_depth": l2_depth,
         "liquidation_ws": liq_status,
     }
+
+
+# ──────────────────────────────────────────────
+# Phase 8: Quant Algo Bias Backtest
+# ──────────────────────────────────────────────
+
+@app.post("/api/quant-backtest")
+async def run_quant_backtest_endpoint(
+    start_date: str = "2025-11-01",
+    end_date: str = "2026-02-01",
+    symbol: str = "BTCUSDT",
+    step_hours: int = 1,
+):
+    """Run quant algo bias backtest — tests alert threshold crossings against historical price.
+
+    This is SEPARATE from the SMC backtest. Uses only raw quant data (candles, taker volume,
+    funding, OI, L/S ratios). May take 1-5 minutes for 3 months of data.
+    """
+    from app.quant.quant_backtester import run_quant_backtest
+    result = await run_quant_backtest(
+        symbol=symbol,
+        start_date=start_date,
+        end_date=end_date,
+        step_hours=step_hours,
+    )
+    return result
+
+
+@app.get("/api/quant-backtest/latest")
+async def get_latest_quant_backtest():
+    """Get the most recent quant backtest results from cache."""
+    from app.quant.quant_backtester import get_latest_quant_backtest
+    result = get_latest_quant_backtest()
+    if result is None:
+        return {"error": "No quant backtest results found. Run a quant backtest first."}
+    return result

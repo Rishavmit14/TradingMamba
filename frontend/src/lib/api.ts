@@ -15,6 +15,7 @@ import {
   MarketIntelData,
   QuantContext,
   CompositeBias,
+  QuantBacktestResult,
 } from "./types";
 
 const API_BASE = "http://localhost:8000/api";
@@ -273,4 +274,30 @@ export async function fetchLivePrice(): Promise<PriceTicker> {
     low24h: parseFloat(data.lowPrice),
     volume24h: parseFloat(data.volume),
   };
+}
+
+/** Phase 9: Quant Algo Bias Backtest API */
+export async function runQuantBacktest(params: {
+  start_date: string;
+  end_date: string;
+  symbol?: string;
+  step_hours?: number;
+}): Promise<QuantBacktestResult> {
+  const searchParams = new URLSearchParams({
+    start_date: params.start_date,
+    end_date: params.end_date,
+    symbol: params.symbol || "BTCUSDT",
+    step_hours: String(params.step_hours || 1),
+  });
+  const res = await fetch(`${API_BASE}/quant-backtest?${searchParams}`, { method: "POST" });
+  if (!res.ok) throw new Error(`Quant backtest error: ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+export async function fetchLatestQuantBacktest(): Promise<QuantBacktestResult | null> {
+  const res = await fetch(`${API_BASE}/quant-backtest/latest`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  if (data.error) return null;
+  return data;
 }

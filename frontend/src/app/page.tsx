@@ -30,6 +30,7 @@ import MarketIntelTab from "@/components/MarketIntelTab";
 import QuantIntelPanel from "@/components/QuantIntelPanel";
 import QuantAnalysisTab from "@/components/QuantAnalysisTab";
 import AlgoBiasTab from "@/components/AlgoBiasTab";
+import QuantBacktestTab from "@/components/QuantBacktestTab";
 import { fetchAnalysis, fetchLivePrice, fetchDemoTrades, createManualTrade, fetchDeepAnalysis, PriceTicker } from "@/lib/api";
 import { AnalysisResult, DeepAnalysis, DetectorVisibility, SelectedElement, ChartClickResult, ClickCandidate, BacktestResult, AppTab, DemoTrade, EngineMode } from "@/lib/types";
 
@@ -77,11 +78,13 @@ export default function Dashboard() {
   const [deepAnalysisLoading, setDeepAnalysisLoading] = useState(false);
 
   // Track mounted tabs — once visited, stay mounted to avoid re-fetch on tab switch
-  const [mountedTabs, setMountedTabs] = useState<Set<AppTab>>(new Set(["live"]));
+  const [mountedTabs, setMountedTabs] = useState<Set<AppTab>>(() => new Set<AppTab>(["live"]));
   useEffect(() => {
     setMountedTabs(prev => {
       if (prev.has(activeTab)) return prev;
-      return new Set([...prev, activeTab]);
+      const next = new Set<AppTab>(Array.from(prev));
+      next.add(activeTab);
+      return next;
     });
   }, [activeTab]);
 
@@ -267,7 +270,7 @@ export default function Dashboard() {
             {/* Engine mode toggle */}
             <div className="flex items-center gap-0.5 bg-[var(--bg-tertiary)] rounded-lg p-0.5">
               <button
-                onClick={() => { setEngineMode("smc"); if (activeTab === "quant_analysis" || activeTab === "algo_bias") setActiveTab("live"); }}
+                onClick={() => { setEngineMode("smc"); if (activeTab === "quant_analysis" || activeTab === "algo_bias" || activeTab === "quant_backtest") setActiveTab("live"); }}
                 className={`px-2.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   engineMode === "smc"
                     ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
@@ -381,6 +384,17 @@ export default function Dashboard() {
                   >
                     <Brain className="w-3 h-3" />
                     Algo Bias
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("quant_backtest")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                      activeTab === "quant_backtest"
+                        ? "bg-fuchsia-600 text-white shadow-lg shadow-fuchsia-600/20"
+                        : "text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)]"
+                    }`}
+                  >
+                    <FlaskConical className="w-3 h-3" />
+                    Quant Backtest
                   </button>
                 </>
               )}
@@ -793,6 +807,12 @@ export default function Dashboard() {
       {mountedTabs.has("algo_bias") && (
         <div className={`flex-1 overflow-hidden ${activeTab !== "algo_bias" ? "hidden" : ""}`}>
           <AlgoBiasTab />
+        </div>
+      )}
+
+      {mountedTabs.has("quant_backtest") && (
+        <div className={`flex-1 overflow-hidden ${activeTab !== "quant_backtest" ? "hidden" : ""}`}>
+          <QuantBacktestTab />
         </div>
       )}
     </div>
