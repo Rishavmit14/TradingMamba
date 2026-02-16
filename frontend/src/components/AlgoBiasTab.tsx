@@ -24,7 +24,7 @@ import {
   Info,
   X,
 } from "lucide-react";
-import { fetchAlgoBias } from "@/lib/api";
+import { fetchAlgoBias, fetchLivePrice } from "@/lib/api";
 import { CompositeBias, AlgoBiasResult } from "@/lib/types";
 
 // ── Algo metadata for icons and color theming ──
@@ -83,6 +83,8 @@ function DirectionIcon({ dir, size = 16 }: { dir: string; size?: number }) {
 
 type AlertSeverity = "critical" | "warning" | "info";
 
+type AlertDirection = "bullish" | "bearish" | "neutral";
+
 interface SignificantMoveAlert {
   id: string;
   severity: AlertSeverity;
@@ -91,6 +93,8 @@ interface SignificantMoveAlert {
   icon: typeof AlertTriangle;
   metrics: { label: string; value: string }[];
   combo?: string;
+  direction: AlertDirection;
+  directionReason: string; // e.g. "Longs overleveraged → expect drop"
 }
 
 function getAlgoComponents(data: CompositeBias, algoId: string): Record<string, unknown> {
@@ -98,8 +102,20 @@ function getAlgoComponents(data: CompositeBias, algoId: string): Record<string, 
   return algo?.components || {};
 }
 
+function getAlgoDirection(data: CompositeBias, algoId: string): string {
+  const algo = data.algos?.find(a => a.algo_id === algoId);
+  return algo?.direction || "neutral";
+}
+
+function compositeDirection(data: CompositeBias): AlertDirection {
+  if (data.direction.includes("bullish")) return "bullish";
+  if (data.direction.includes("bearish")) return "bearish";
+  return "neutral";
+}
+
 function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
   const alerts: SignificantMoveAlert[] = [];
+  const cDir = compositeDirection(data);
 
   // Extract components
   const vpin = getAlgoComponents(data, "vpin");
@@ -116,47 +132,89 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
   const b = (v: unknown): boolean => (v === true);
   const s = (v: unknown): string => (typeof v === "string" ? v : "");
 
+  // Direction helpers from algo results
+  const algoDir = (id: string): AlertDirection => {
+    const d = getAlgoDirection(data, id);
+    if (d.includes("bullish")) return "bullish";
+    if (d.includes("bearish")) return "bearish";
+    return "neutral";
+  };
+
   // ── Boolean conditions ──
   const vpinHigh = n(vpin.vpin) > 0.7;
-  const fundingExtreme = Math.abs(n(funding.z_score)) > 2.0;
+  const fundingZ = n(funding.z_score);
+  const fundingExtreme = Math.abs(fundingZ) > 2.0;
   const cascadeActive = b(liq.cascade_active);
   const cascadeForming = n(liq.p_cascade) > 0.6;
-  const smartRetailSplit = Math.abs(n(smart.raw_divergence)) > 8;
+  const smartDiv = n(smart.raw_divergence);
+  const smartRetailSplit = Math.abs(smartDiv) > 8;
   const volCompression = s(vol.vol_regime) === "low" && n(vol.atr_ratio) < 0.65;
   const volExtreme = s(vol.vol_regime) === "extreme";
   const strongConsensus = data.entropy < 0.8 && (data.agreement_count / Math.max(data.algo_count, 1)) > 0.7;
   const extremeBias = Math.abs(data.score) > 70 && data.confidence > 75;
   const negativeGamma = n(options.net_gex) < -100;
-  const sentimentExtreme = n(bayes.p_posterior_bull) > 0.8 || (n(bayes.p_posterior_bull) > 0 && n(bayes.p_posterior_bull) < 0.2);
+  const pBull = n(bayes.p_posterior_bull);
+  const sentimentExtreme = pBull > 0.8 || (pBull > 0 && pBull < 0.2);
   const illiquiditySpike = n(kyle.z_lambda) > 2.0;
   const fngValue = n(bayes.fng_value);
+
+  // Cascade direction: if longs liquidated → exhaustion → reversal UP. If shorts liquidated → reversal DOWN
+  const sellLiq = n(liq.sell_liq_usd);
+  const buyLiq = n(liq.buy_liq_usd);
+  const cascadeDir: AlertDirection = sellLiq > buyLiq ? "bullish" : buyLiq > sellLiq ? "bearish" : cDir;
+  const cascadeSide = sellLiq > buyLiq ? "Longs flushed → expect bounce UP" : "Shorts squeezed → expect drop DOWN";
+
+  // Funding: positive z = longs crowded → bearish reversion. Negative z = shorts crowded → bullish reversion
+  const fundingDir: AlertDirection = fundingZ > 0 ? "bearish" : "bullish";
+  const fundingSide = fundingZ > 0 ? "Longs overleveraged → expect price to drop" : "Shorts overleveraged → expect price to rise";
+
+  // Smart/Retail: follow smart money. Positive divergence = smart more long than retail → bullish
+  const smartDir: AlertDirection = smartDiv > 0 ? "bullish" : "bearish";
+  const smartSide = smartDiv > 0
+    ? `Smart money net LONG vs retail SHORT → expect move UP`
+    : `Smart money net SHORT vs retail LONG → expect move DOWN`;
+
+  // Sentiment: contrarian. High P(bull) = crowd bullish → bearish. Low = crowd bearish → bullish
+  const sentDir: AlertDirection = pBull > 0.8 ? "bearish" : "bullish";
+  const sentSide = pBull > 0.8
+    ? "Crowd extremely bullish → contrarian: expect pullback DOWN"
+    : "Crowd extremely bearish → contrarian: expect reversal UP";
 
   // ── Perfect Storm Combos (CRITICAL) ──
 
   if (cascadeActive && vpinHigh && fundingExtreme) {
+    // Waterfall: cascade exhaustion direction + informed flow
+    const dir = cascadeDir;
     alerts.push({
       id: "combo-liquidation-waterfall",
       severity: "critical",
       title: "Liquidation Waterfall",
-      description: "Active cascade + toxic informed flow + extreme leverage — violent move then reversal expected",
       icon: Zap,
       combo: "liquidation_waterfall",
+      direction: dir,
+      directionReason: `${cascadeSide}. Informed flow (VPIN ${n(vpin.vpin).toFixed(2)}) confirms direction`,
+      description: `Active cascade ($${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M) + toxic flow + extreme leverage — violent move then reversal`,
       metrics: [
         { label: "VPIN", value: n(vpin.vpin).toFixed(3) },
-        { label: "Funding z", value: n(funding.z_score).toFixed(2) },
+        { label: "Funding z", value: fundingZ.toFixed(2) },
         { label: "Liq Vol", value: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M` },
       ],
     });
   }
 
   if (volCompression && negativeGamma && data.entropy < 0.8) {
+    const dir = cDir !== "neutral" ? cDir : "bullish"; // BTC compression → 60% bullish historically
     alerts.push({
       id: "combo-gamma-squeeze",
       severity: "critical",
       title: "Gamma Squeeze Setup",
-      description: "Vol compression + negative dealer gamma + algo consensus — explosive breakout imminent",
       icon: Target,
       combo: "gamma_squeeze",
+      direction: dir,
+      directionReason: dir === "bullish"
+        ? "Compression + negative gamma → explosive breakout UP likely (BTC 60% bullish after low vol)"
+        : "Compression + negative gamma → explosive breakdown likely, dealers amplifying sell-off",
+      description: `Vol compression (ATR ${n(vol.atr_ratio).toFixed(2)}) + negative GEX (${n(options.net_gex).toFixed(0)}) + algo consensus — breakout imminent`,
       metrics: [
         { label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(3) },
         { label: "Net GEX", value: n(options.net_gex).toFixed(0) },
@@ -166,32 +224,41 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
   }
 
   if (fngValue > 0 && fngValue < 25 && fundingExtreme && (cascadeActive || cascadeForming)) {
+    // Capitulation = extreme fear → contrarian bullish (unless shorts are the ones liquidated)
+    const dir: AlertDirection = fundingZ > 0 ? "bullish" : "bearish";
     alerts.push({
       id: "combo-capitulation",
       severity: "critical",
       title: "Capitulation Signal",
-      description: "Extreme fear + overleveraged funding + cascade pressure — bottom/top formation likely",
       icon: Shield,
       combo: "capitulation",
+      direction: dir,
+      directionReason: dir === "bullish"
+        ? `Fear & Greed at ${fngValue.toFixed(0)} (extreme fear) + longs liquidating → selling exhaustion, expect bounce UP`
+        : `Fear & Greed at ${fngValue.toFixed(0)} + shorts squeezed under pressure → expect further DOWN before recovery`,
+      description: `Extreme fear (FnG ${fngValue.toFixed(0)}) + funding z=${fundingZ.toFixed(1)} + cascade pressure — capitulation forming`,
       metrics: [
         { label: "FnG", value: fngValue.toFixed(0) },
-        { label: "Funding z", value: n(funding.z_score).toFixed(2) },
+        { label: "Funding z", value: fundingZ.toFixed(2) },
         { label: "P(Cascade)", value: `${(n(liq.p_cascade) * 100).toFixed(0)}%` },
       ],
     });
   }
 
   if (vpinHigh && smartRetailSplit && illiquiditySpike) {
+    const dir = smartDir; // Follow smart money in structural setups
     alerts.push({
       id: "combo-structural-imbalance",
       severity: "critical",
       title: "Structural Imbalance",
-      description: "Toxic flow + smart/retail divergence + illiquid market — institutional positioning detected",
       icon: Activity,
       combo: "structural_imbalance",
+      direction: dir,
+      directionReason: `${smartSide}. Illiquid book (z=${n(kyle.z_lambda).toFixed(1)}) means small flow will move price ${dir === "bullish" ? "UP" : "DOWN"} fast`,
+      description: `Toxic flow (VPIN ${n(vpin.vpin).toFixed(2)}) + smart/retail split (${smartDiv.toFixed(1)}pp) + thin book — institutional positioning`,
       metrics: [
         { label: "VPIN", value: n(vpin.vpin).toFixed(3) },
-        { label: "Divergence", value: `${n(smart.raw_divergence).toFixed(1)}pp` },
+        { label: "Divergence", value: `${smartDiv.toFixed(1)}pp` },
         { label: "z(Lambda)", value: n(kyle.z_lambda).toFixed(2) },
       ],
     });
@@ -205,9 +272,15 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "cascade-active",
       severity: "critical",
       title: "Liquidation Cascade Active",
-      description: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M liquidated in 30 min — exhaustion reversal likely`,
       icon: Zap,
-      metrics: [{ label: "Volume", value: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M` }],
+      direction: cascadeDir,
+      directionReason: cascadeSide,
+      description: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M liquidated in 30 min — forced selling exhausting, reversal expected`,
+      metrics: [
+        { label: "Volume", value: `$${(n(liq.recent_volume_usd) / 1e6).toFixed(0)}M` },
+        { label: "Sell Liq", value: `$${(sellLiq / 1e6).toFixed(0)}M` },
+        { label: "Buy Liq", value: `$${(buyLiq / 1e6).toFixed(0)}M` },
+      ],
     });
   }
 
@@ -216,8 +289,10 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "extreme-composite",
       severity: "warning",
       title: "Extreme Composite Bias",
-      description: `Score ${data.score > 0 ? "+" : ""}${data.score.toFixed(1)} with ${data.confidence.toFixed(0)}% confidence — strong institutional directional bias`,
       icon: Gauge,
+      direction: cDir,
+      directionReason: `${data.algo_count} algos collectively point ${cDir === "bullish" ? "UP" : "DOWN"} with ${data.confidence.toFixed(0)}% confidence → expect price to move ${cDir === "bullish" ? "higher" : "lower"}`,
+      description: `Composite score ${data.score > 0 ? "+" : ""}${data.score.toFixed(1)} at ${data.confidence.toFixed(0)}% confidence — strong institutional directional consensus`,
       metrics: [
         { label: "Score", value: `${data.score > 0 ? "+" : ""}${data.score.toFixed(1)}` },
         { label: "Confidence", value: `${data.confidence.toFixed(0)}%` },
@@ -226,49 +301,62 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
   }
 
   if (vpinHigh && !comboIds.has("liquidation_waterfall") && !comboIds.has("structural_imbalance")) {
+    const dir = algoDir("vpin");
     alerts.push({
       id: "vpin-toxic",
       severity: "warning",
       title: "Toxic Flow Detected",
-      description: `VPIN=${n(vpin.vpin).toFixed(3)} — informed institutional flow above 0.7 threshold`,
       icon: Activity,
+      direction: dir,
+      directionReason: `Informed traders aggressively ${dir === "bullish" ? "BUYING → expect price to push UP" : dir === "bearish" ? "SELLING → expect price to drop DOWN" : "active, direction unclear"}`,
+      description: `VPIN=${n(vpin.vpin).toFixed(3)} — institutional flow above 0.7 toxicity threshold`,
       metrics: [{ label: "VPIN", value: n(vpin.vpin).toFixed(3) }],
     });
   }
 
   if (fundingExtreme && !comboIds.has("liquidation_waterfall") && !comboIds.has("capitulation")) {
-    const zScore = n(funding.z_score);
-    const side = zScore > 0 ? "Longs" : "Shorts";
     alerts.push({
       id: "funding-extreme",
       severity: "warning",
       title: "Funding Extreme",
-      description: `z=${zScore.toFixed(2)} — ${side} overleveraged, mean reversion expected`,
       icon: Waves,
-      metrics: [{ label: "z-score", value: zScore.toFixed(2) }],
+      direction: fundingDir,
+      directionReason: fundingSide,
+      description: `Funding z=${fundingZ.toFixed(2)} — ${fundingZ > 0 ? "longs" : "shorts"} ${Math.abs(fundingZ).toFixed(1)}σ above equilibrium, mean reversion within 16-48h`,
+      metrics: [{ label: "z-score", value: fundingZ.toFixed(2) }],
     });
   }
 
   if (cascadeForming && !cascadeActive && !comboIds.has("capitulation")) {
+    const dir = fundingZ > 0 ? "bearish" as AlertDirection : "bullish" as AlertDirection;
     alerts.push({
       id: "cascade-forming",
       severity: "warning",
       title: "Cascade Forming",
-      description: `P(cascade)=${(n(liq.p_cascade) * 100).toFixed(0)}% — liquidation cascade probability elevated`,
       icon: Zap,
+      direction: dir,
+      directionReason: fundingZ > 0
+        ? "Overleveraged longs at risk → if cascade triggers, expect sharp drop DOWN then reversal"
+        : "Overleveraged shorts at risk → if cascade triggers, expect squeeze UP then reversal",
+      description: `P(cascade)=${(n(liq.p_cascade) * 100).toFixed(0)}% — liquidation cascade probability elevated`,
       metrics: [{ label: "P(Cascade)", value: `${(n(liq.p_cascade) * 100).toFixed(0)}%` }],
     });
   }
 
   if (smartRetailSplit && !comboIds.has("structural_imbalance")) {
-    const div = n(smart.raw_divergence);
     alerts.push({
       id: "smart-retail-split",
       severity: "warning",
       title: "Smart/Retail Split",
-      description: `Divergence=${div.toFixed(1)}pp — smart money and retail sharply disagree`,
       icon: Users,
-      metrics: [{ label: "Divergence", value: `${div.toFixed(1)}pp` }],
+      direction: smartDir,
+      directionReason: smartSide,
+      description: `Divergence=${smartDiv.toFixed(1)}pp — smart money and retail sharply disagree`,
+      metrics: [
+        { label: "Divergence", value: `${smartDiv.toFixed(1)}pp` },
+        { label: "Smart Long", value: `${n(smart.smart_long_pct).toFixed(0)}%` },
+        { label: "Retail Long", value: `${n(smart.retail_long_pct).toFixed(0)}%` },
+      ],
     });
   }
 
@@ -277,33 +365,44 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "vol-extreme",
       severity: "warning",
       title: "Extreme Volatility",
-      description: `ATR ratio=${n(vol.atr_ratio).toFixed(2)} — all algo confidence penalized 25%`,
       icon: Gauge,
+      direction: "neutral",
+      directionReason: "Market too volatile for directional conviction — all algo confidence penalized 25%, reduce size",
+      description: `ATR ratio=${n(vol.atr_ratio).toFixed(2)} — chaotic conditions, signals less reliable`,
       metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(2) }],
     });
   }
 
   if (sentimentExtreme) {
-    const pBull = n(bayes.p_posterior_bull);
-    const label = pBull > 0.8 ? "Extreme Bullish" : "Extreme Bearish";
     alerts.push({
       id: "sentiment-extreme",
       severity: "warning",
       title: "Sentiment Extreme",
-      description: `P(bull)=${(pBull * 100).toFixed(0)}% — ${label} posterior, contrarian signal`,
       icon: Shield,
-      metrics: [{ label: "P(Bull)", value: `${(pBull * 100).toFixed(0)}%` }],
+      direction: sentDir,
+      directionReason: sentSide,
+      description: `Bayesian posterior P(bull)=${(pBull * 100).toFixed(0)}% — contrarian signal from 5 sentiment inputs`,
+      metrics: [
+        { label: "P(Bull)", value: `${(pBull * 100).toFixed(0)}%` },
+        ...(fngValue > 0 ? [{ label: "FnG", value: fngValue.toFixed(0) }] : []),
+      ],
     });
   }
 
   if (illiquiditySpike && !comboIds.has("structural_imbalance")) {
+    const dir = algoDir("kyle_amihud");
     alerts.push({
       id: "illiquidity-spike",
       severity: "warning",
       title: "Illiquidity Spike",
-      description: `z(Lambda)=${n(kyle.z_lambda).toFixed(2)} — thin book, small orders move price`,
       icon: BarChart3,
-      metrics: [{ label: "z(Lambda)", value: n(kyle.z_lambda).toFixed(2) }],
+      direction: dir,
+      directionReason: `Order book thin (z=${n(kyle.z_lambda).toFixed(1)}) — small orders will move price ${dir === "bullish" ? "UP" : dir === "bearish" ? "DOWN" : "sharply"}, gaps likely`,
+      description: `Kyle's Lambda z=${n(kyle.z_lambda).toFixed(2)} — price impact per unit flow is elevated`,
+      metrics: [
+        { label: "z(Lambda)", value: n(kyle.z_lambda).toFixed(2) },
+        { label: "Depth Imb", value: `${(n(kyle.depth_imbalance) * 100).toFixed(0)}%` },
+      ],
     });
   }
 
@@ -313,8 +412,10 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "vol-compression",
       severity: "info",
       title: "Vol Compression",
-      description: `ATR ratio=${n(vol.atr_ratio).toFixed(3)} — breakout from compression likely (60% bullish for BTC)`,
       icon: Gauge,
+      direction: "bullish",
+      directionReason: "BTC historically breaks UP 60% of the time after vol compression — breakout imminent",
+      description: `ATR ratio=${n(vol.atr_ratio).toFixed(3)} — volatility compressed, coiling for breakout`,
       metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(3) }],
     });
   }
@@ -324,8 +425,10 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "strong-consensus",
       severity: "info",
       title: "Strong Consensus",
-      description: `${data.agreement_count}/${data.algo_count} algos agree, entropy=${data.entropy.toFixed(2)} — high conviction`,
       icon: Brain,
+      direction: cDir,
+      directionReason: `${data.agreement_count} of ${data.algo_count} algos agree: price likely to move ${cDir === "bullish" ? "UP" : cDir === "bearish" ? "DOWN" : "sideways"}`,
+      description: `Algo agreement ${data.agreement_count}/${data.algo_count}, entropy=${data.entropy.toFixed(2)} — high directional conviction`,
       metrics: [
         { label: "Agreement", value: `${data.agreement_count}/${data.algo_count}` },
         { label: "Entropy", value: data.entropy.toFixed(2) },
@@ -338,8 +441,10 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
       id: "negative-gamma",
       severity: "info",
       title: "Negative Gamma",
-      description: `Net GEX=${n(options.net_gex).toFixed(0)} — dealers short gamma, moves amplified`,
       icon: Target,
+      direction: cDir,
+      directionReason: `Dealers short gamma → any move ${cDir === "bullish" ? "UP" : "DOWN"} will be amplified as dealers hedge in same direction`,
+      description: `Net GEX=${n(options.net_gex).toFixed(0)} — dealers must chase price, amplifying moves`,
       metrics: [{ label: "Net GEX", value: n(options.net_gex).toFixed(0) }],
     });
   }
@@ -359,32 +464,53 @@ const SEVERITY_STYLES: Record<AlertSeverity, { bg: string; border: string; text:
   info: { bg: "bg-blue-500/10", border: "border-blue-500/20", text: "text-blue-400" },
 };
 
+const DIR_BADGE: Record<AlertDirection, { bg: string; text: string; label: string; arrow: string }> = {
+  bullish: { bg: "bg-emerald-500/15 border-emerald-500/30", text: "text-emerald-400", label: "BULLISH", arrow: "UP" },
+  bearish: { bg: "bg-red-500/15 border-red-500/30", text: "text-red-400", label: "BEARISH", arrow: "DOWN" },
+  neutral: { bg: "bg-yellow-500/15 border-yellow-500/30", text: "text-yellow-400", label: "NEUTRAL", arrow: "" },
+};
+
 const AlertPanel = memo(function AlertPanel({
   alerts,
   onDismiss,
+  price,
 }: {
   alerts: SignificantMoveAlert[];
   onDismiss: (id: string) => void;
+  price: number | null;
 }) {
   if (alerts.length === 0) return null;
 
+  const hasCritical = alerts.some(a => a.severity === "critical");
+
   return (
     <div className="space-y-2 animate-fade-in">
-      {/* Summary header */}
-      <div className="flex items-center gap-2">
-        <AlertTriangle className={`w-4 h-4 ${alerts[0].severity === "critical" ? "text-red-400" : "text-amber-400"}`} />
-        <span className="text-xs font-semibold text-[var(--text-primary)]">
-          {alerts.filter(a => a.severity === "critical").length > 0 ? "Significant Move Alert" : "Market Conditions"}
-        </span>
-        <span className="text-xs text-[var(--text-muted)]">
-          — {alerts.length} condition{alerts.length !== 1 ? "s" : ""} detected from quant algos
-        </span>
+      {/* Summary header with price */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <AlertTriangle className={`w-4 h-4 ${hasCritical ? "text-red-400" : "text-amber-400"}`} />
+          <span className="text-xs font-semibold text-[var(--text-primary)]">
+            {hasCritical ? "Significant Move Alert" : "Market Conditions"}
+          </span>
+          <span className="text-xs text-[var(--text-muted)]">
+            — {alerts.length} condition{alerts.length !== 1 ? "s" : ""} from quant algos
+          </span>
+        </div>
+        {price && (
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--border-primary)]">
+            <span className="text-[11px] text-[var(--text-muted)]">BTC</span>
+            <span className="text-xs font-mono font-bold text-[var(--text-primary)]">
+              ${price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+            </span>
+          </div>
+        )}
       </div>
 
       {alerts.map((alert) => {
         const style = SEVERITY_STYLES[alert.severity];
         const Icon = alert.icon;
         const isCombo = !!alert.combo;
+        const dirBadge = DIR_BADGE[alert.direction];
 
         return (
           <div
@@ -400,15 +526,32 @@ const AlertPanel = memo(function AlertPanel({
               </div>
 
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
+                {/* Title row with direction badge */}
+                <div className="flex items-center gap-2 mb-1">
                   {isCombo && (
                     <span className="text-[10px] font-bold uppercase tracking-wider bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded">
                       Perfect Storm
                     </span>
                   )}
                   <span className={`text-xs font-bold ${style.text}`}>{alert.title}</span>
+                  {/* Direction badge */}
+                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px] font-bold ${dirBadge.bg} ${dirBadge.text}`}>
+                    {alert.direction === "bullish" && <TrendingUp className="w-3 h-3" />}
+                    {alert.direction === "bearish" && <TrendingDown className="w-3 h-3" />}
+                    {alert.direction === "neutral" && <Minus className="w-3 h-3" />}
+                    {dirBadge.label}
+                  </span>
                 </div>
+
+                {/* Direction reason — the key "where is it going" line */}
+                <p className={`text-xs font-semibold leading-relaxed mb-1 ${dirBadge.text}`}>
+                  {alert.directionReason}
+                </p>
+
+                {/* Technical description */}
                 <p className="text-xs text-[var(--text-muted)] leading-relaxed">{alert.description}</p>
+
+                {/* Metric badges */}
                 {alert.metrics.length > 0 && (
                   <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
                     {alert.metrics.map((m) => (
@@ -1054,6 +1197,7 @@ function AlgoBiasTabInner() {
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>>(new Set());
+  const [livePrice, setLivePrice] = useState<number | null>(null);
 
   const handleDismissAlert = useCallback((id: string) => {
     setDismissedAlerts(prev => new Set(prev).add(id));
@@ -1061,8 +1205,12 @@ function AlgoBiasTabInner() {
 
   const fetchData = useCallback(async () => {
     try {
-      const result = await fetchAlgoBias();
+      const [result, ticker] = await Promise.all([
+        fetchAlgoBias(),
+        fetchLivePrice().catch(() => null),
+      ]);
       setData(result);
+      if (ticker) setLivePrice(ticker.price);
       setError(null);
       setLastUpdated(new Date());
       setDismissedAlerts(new Set());
@@ -1179,7 +1327,7 @@ function AlgoBiasTabInner() {
         </div>
 
         {/* Significant Move Alerts */}
-        <AlertPanel alerts={alerts} onDismiss={handleDismissAlert} />
+        <AlertPanel alerts={alerts} onDismiss={handleDismissAlert} price={livePrice} />
 
         {/* Composite Gauge Section */}
         <div className="rounded-xl p-5 border border-[var(--border-primary)] bg-[var(--bg-card)]">
