@@ -525,6 +525,36 @@ def _fng_classification(value: int) -> str:
     return "Extreme Greed"
 
 
+def _synthesize_smart_money_proxy(coinalyze_ls: list[dict]) -> list[dict]:
+    """Create a 'smart money' proxy from Coinalyze L/S using 24h moving average.
+
+    Logic: 24h MA of L/S ratios smooths out noise → represents institutional/smart
+    money positioning. The raw Coinalyze data (already used as global_ratio) acts
+    as 'retail'. The smoothed version as 'top_trader' creates a meaningful
+    divergence when smart money moves before retail.
+
+    Coinalyze data is 4h resolution, so 24h = 6 data points for the MA window.
+    """
+    if len(coinalyze_ls) < 6:
+        return coinalyze_ls
+
+    result = []
+    for i in range(len(coinalyze_ls)):
+        # 24h MA window (6 x 4h candles)
+        window_start = max(0, i - 5)
+        window = coinalyze_ls[window_start:i + 1]
+        avg_long = sum(e.get("long_pct", 50) for e in window) / len(window)
+        avg_short = sum(e.get("short_pct", 50) for e in window) / len(window)
+        result.append({
+            "timestamp": coinalyze_ls[i]["timestamp"],
+            "long_pct": round(avg_long, 2),
+            "short_pct": round(avg_short, 2),
+            "ratio": round(avg_long / max(avg_short, 0.01), 4),
+        })
+
+    return result
+
+
 def _assemble_raw_data(
     current_ts: int,
     h1_candles: list[dict],
@@ -589,8 +619,14 @@ def _assemble_raw_data(
     coinalyze_ls_window = _slice_by_time(coinalyze_ls or [], current_ts - lookback_48h, current_ts)
     # For global ratio: prefer Binance, fall back to Coinalyze
     global_data = binance_global if len(binance_global) >= 6 else coinalyze_ls_window
-    # For top trader: Binance only (proprietary, no free alternative)
-    top_data = binance_top
+    # For top trader: Binance when available, otherwise synthesize "smart money"
+    # proxy from Coinalyze L/S using 24h moving average (smoothed = institutional)
+    if len(binance_top) >= 6:
+        top_data = binance_top
+    elif len(coinalyze_ls_window) >= 6:
+        top_data = _synthesize_smart_money_proxy(coinalyze_ls_window)
+    else:
+        top_data = binance_top
 
     # ── Liquidations: Coinalyze aggregated → synthetic events ──
     liq_events = synthesize_liquidation_events(
@@ -641,6 +677,9 @@ def _assemble_raw_data(
         "candles_h1": h1_window,
         "candles_h4": h4_window,
         "candles_d1": d1_window,
+
+        # Backtest timestamp (used by liquidation algo instead of time.time())
+        "current_timestamp": current_ts,
     }
 
 

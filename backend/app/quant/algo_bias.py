@@ -604,7 +604,8 @@ def algo_liquidation(raw: dict) -> AlgoBiasResult:
     funding_z = funding_current / funding_std if funding_std > 1e-8 else 0
 
     # Step 3: Liquidation clustering by $100 price bins
-    now = time.time() * 1000
+    # Use backtest timestamp when available, fall back to real time for live
+    now = raw.get("current_timestamp") or time.time() * 1000
     recent_30m = [e for e in liquidations
                   if now - e.get("timestamp", 0) < 30 * 60 * 1000]
 
