@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback, useRef, memo } from "react";
 import {
   Brain,
   RefreshCw,
@@ -21,6 +21,8 @@ import {
   ChevronDown,
   ChevronRight,
   Layers,
+  Info,
+  X,
 } from "lucide-react";
 import { fetchAlgoBias } from "@/lib/api";
 import { CompositeBias, AlgoBiasResult } from "@/lib/types";
@@ -186,12 +188,99 @@ function ConfidenceBar({ value, accent }: { value: number; accent: string }) {
   );
 }
 
+// ── Algorithm Descriptions ──
+
+const ALGO_DESCRIPTIONS: Record<string, { title: string; paper?: string; whatItDoes: string; whenUseful: string; signalType: string }> = {
+  vpin: {
+    title: "VPIN (Volume-Synchronized Probability of Informed Trading)",
+    paper: "Easley, L\u00f3pez de Prado & O\u2019Hara (2012)",
+    whatItDoes: "Measures whether \u201cinformed\u201d traders (institutions with private information) are aggressively buying or selling. It divides the last 48 hours of taker volume into 20 equal-size buckets and computes the order imbalance in each. High VPIN (>0.7) means toxic flow \u2014 someone knows something and is loading up directionally.",
+    whenUseful: "Right before big moves. VPIN famously predicted the 2010 Flash Crash 2 hours before it hit. Best during quiet markets when a sudden spike in informed flow appears. Less useful during already-volatile markets where flow is noisy.",
+    signalType: "Momentum \u2014 follows the direction of informed flow.",
+  },
+  funding_ou: {
+    title: "Funding Rate Ornstein-Uhlenbeck",
+    paper: "OU mean-reversion process",
+    whatItDoes: "Fits a statistical mean-reversion model to the last 30 funding rate snapshots (8h intervals). It estimates the long-term equilibrium level (\u03bc), the speed of reversion (\u03b8), and how far current funding has deviated (z-score). When funding is 2+ standard deviations above equilibrium, longs are overcrowded \u2192 fade them (bearish). When 2+ below, shorts are crowded \u2192 fade them (bullish).",
+    whenUseful: "During extreme funding spikes \u2014 perpetual futures premium hits 0.05%+ or goes deeply negative. These extremes historically revert within 16-48 hours. Less useful when funding is near its equilibrium (|z| < 1).",
+    signalType: "Mean-reversion / Contrarian \u2014 fades the crowded side.",
+  },
+  options_greeks: {
+    title: "Options Greeks Flow (Dealer Gamma Exposure)",
+    paper: "Black-Scholes gamma aggregation",
+    whatItDoes: "Combines 5 options sub-models: GEX (dealers long gamma = dampen moves, short gamma = amplify), Put/Call Ratio (contrarian), Max Pain Gravity (price pulled toward max pain near expiry), 25-Delta Skew (puts vs calls pricing = fear gauge), and DVOL (implied volatility risk-on/off).",
+    whenUseful: "Near weekly/monthly options expiries when gamma effects are strongest. Also during extreme skew readings and when GEX flips sign. Less useful when options OI is thin or no expiry nearby.",
+    signalType: "Mixed \u2014 momentum when negative GEX, reversion when positive GEX.",
+  },
+  kyle_amihud: {
+    title: "Kyle\u2019s Lambda + Amihud Illiquidity",
+    paper: "Kyle (1985), Amihud (2002)",
+    whatItDoes: "Measures how much price moves per unit of order flow (Kyle\u2019s Lambda = Cov(returns, flow) / Var(flow)). When lambda is high, the market is illiquid \u2014 small orders move price significantly. Combined with the Amihud ratio (|return|/volume) and L2 order book depth imbalance.",
+    whenUseful: "During liquidity drains \u2014 weekends, holidays, or sudden depth withdrawal. A rising lambda + strong directional taker flow = high-conviction move. Less useful when the order book is deep and liquid.",
+    signalType: "Momentum \u2014 follows flow direction, amplified by illiquidity.",
+  },
+  hurst: {
+    title: "Hurst Exponent (R/S Analysis)",
+    paper: "Hurst (1951), Mandelbrot (1968)",
+    whatItDoes: "Computes the Hurst exponent H from the last 48 hourly returns using Rescaled Range analysis at multiple sub-series lengths. H > 0.5 = trending (persistent), H < 0.5 = mean-reverting (anti-persistent), H \u2248 0.5 = random walk.",
+    whenUseful: "Primarily a regime detector, not a directional signal. Its real power is in the meta-algorithm where it dynamically adjusts the weights of all other algos \u2014 boosting momentum algos during trending regimes and reversion algos during mean-reverting regimes. Always useful as a regime context layer.",
+    signalType: "Regime indicator \u2014 weak directional signal, strong meta-signal.",
+  },
+  liquidation: {
+    title: "Liquidation Cascade Probability",
+    paper: "Logistic regression-style probability model",
+    whatItDoes: "Estimates the probability of a liquidation cascade using OI percentile, funding extremes, and liquidation event clustering. If a cascade is actively happening (>$50M in 30 min), it detects exhaustion \u2014 when the dominant side has been mostly liquidated, the fuel is spent and reversal is imminent.",
+    whenUseful: "During or right before cascades. High OI + extreme funding + nearby liquidation cluster = pre-cascade setup. During active cascades, it calls the bottom/top of the flush. Less useful during calm, low-OI periods.",
+    signalType: "Contrarian during cascades (exhaustion \u2192 reversal), anticipatory before cascades.",
+  },
+  vol_regime: {
+    title: "Volatility Regime (ATR Ratio + Realized vs Implied)",
+    whatItDoes: "Computes ATR(14)/ATR(100) ratio to classify volatility as LOW (<0.7), NORMAL, HIGH (>1.3), or EXTREME (>2.0). Also compares realized volatility against implied (DVOL). LOW vol \u2192 breakout likely (60% bullish for BTC). EXTREME vol \u2192 all algo confidences get a 25% penalty.",
+    whenUseful: "At regime transitions \u2014 especially LOW\u2192NORMAL (vol expansion from compression). Also critical when EXTREME: it tells the meta-algorithm to reduce confidence across the board. Less useful during normal vol.",
+    signalType: "Regime indicator \u2014 primarily modifies other algos\u2019 weights and confidences.",
+  },
+  ofi: {
+    title: "Order Flow Imbalance (OFI)",
+    paper: "Cont, Kukanov & Stoikov (2014)",
+    whatItDoes: "Combines static order book imbalance (bid walls vs ask walls) with dynamic taker aggression (net buy/sell flow over last 4 hours) and taker acceleration (is flow intensifying?). Also computes the price-flow regression \u03b2 to measure how predictive flow is for price.",
+    whenUseful: "During active trending conditions when taker aggression is clearly one-sided. The acceleration component catches the strengthening of a move before the price chart makes it obvious. Best when \u03b2 is positive (flow is actually predicting price).",
+    signalType: "Momentum \u2014 follows the dominant flow direction.",
+  },
+  smart_retail: {
+    title: "Smart Money vs Retail Divergence",
+    whatItDoes: "Compares Binance top trader positioning (proxy for smart money) against global retail positioning. Computes z-scores for each, measures their divergence, and tracks whether the divergence is widening or narrowing over 24 hours.",
+    whenUseful: "When smart money and retail sharply disagree \u2014 smart money net long while retail net short (or vice versa). The sweet spot is a raw divergence > \u00b18 percentage points. Widening divergence amplifies the signal. Less useful when both groups agree.",
+    signalType: "Smart money following \u2014 always sides with institutional positioning against retail.",
+  },
+  bayesian_sentiment: {
+    title: "Bayesian Sentiment Fusion",
+    paper: "Bayesian posterior probability",
+    whatItDoes: "Starts with a prior from COT data (contrarian) and updates through 5 evidence signals with calibrated likelihood ratios: Fear & Greed Index, Funding rate, Retail positioning, Put/Call ratio, and Futures premium. Multiplies all likelihood ratios, computes posterior P(bullish), maps to score.",
+    whenUseful: "At sentiment extremes \u2014 when Fear & Greed is <20 or >80, when multiple contrarian indicators align (extreme fear + negative funding + retail capitulation = strong bullish posterior). Less useful when sentiment is mixed/neutral.",
+    signalType: "Contrarian / Sentiment \u2014 fades crowd extremes, follows institutional hedging signals.",
+  },
+};
+
 // ── Algorithm Card ──
 
 function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
   const meta = ALGO_META[algo.algo_id] || { icon: Brain, color: "cyan", label: algo.algo_name };
   const colors = COLOR_MAP[meta.color] || COLOR_MAP.cyan;
   const Icon = meta.icon;
+  const [showInfo, setShowInfo] = useState(false);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  // Close popover on outside click
+  useEffect(() => {
+    if (!showInfo) return;
+    const handler = (e: MouseEvent) => {
+      if (infoRef.current && !infoRef.current.contains(e.target as Node)) setShowInfo(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [showInfo]);
+
+  const desc = ALGO_DESCRIPTIONS[algo.algo_id];
 
   // Pick 2-3 key components to display
   const componentEntries = Object.entries(algo.components || {}).filter(
@@ -199,16 +288,45 @@ function AlgoCard({ algo }: { algo: AlgoBiasResult }) {
   ).slice(0, 4);
 
   return (
-    <div className={`rounded-xl p-4 border ${colors.border} ${colors.bg} transition-all hover:border-opacity-40`}>
+    <div className={`rounded-xl p-4 border ${colors.border} ${colors.bg} transition-all hover:border-opacity-40 relative`}>
+      {/* Info Popover */}
+      {showInfo && desc && (
+        <div ref={infoRef} className="absolute inset-0 z-20 rounded-xl bg-[var(--bg-card)] border border-[var(--border-primary)] p-4 overflow-y-auto" style={{ background: "var(--bg-card)" }}>
+          <div className="flex items-start justify-between mb-2">
+            <div className="text-xs font-bold text-[var(--text-primary)] leading-snug pr-6">{desc.title}</div>
+            <button onClick={() => setShowInfo(false)} className="shrink-0 p-0.5 rounded hover:bg-[var(--bg-tertiary)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          {desc.paper && <div className="text-[11px] text-[var(--text-muted)] italic mb-2">{desc.paper}</div>}
+          <div className="space-y-2 text-xs text-[var(--text-secondary)] leading-relaxed">
+            <div><span className="font-semibold text-[var(--text-primary)]">What it does: </span>{desc.whatItDoes}</div>
+            <div><span className="font-semibold text-[var(--text-primary)]">When useful: </span>{desc.whenUseful}</div>
+            <div><span className="font-semibold text-[var(--text-primary)]">Signal type: </span>{desc.signalType}</div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <div className={`w-7 h-7 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center`}>
             <Icon className={`w-3.5 h-3.5 ${colors.text}`} />
           </div>
-          <div>
-            <div className="text-xs font-semibold text-[var(--text-primary)]">{algo.algo_name}</div>
-            <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider">{algo.algo_id}</div>
+          <div className="flex items-center gap-1.5">
+            <div>
+              <div className="text-xs font-semibold text-[var(--text-primary)]">{algo.algo_name}</div>
+              <div className="text-[11px] text-[var(--text-muted)] uppercase tracking-wider">{algo.algo_id}</div>
+            </div>
+            {desc && (
+              <button
+                onClick={() => setShowInfo(!showInfo)}
+                className="w-4 h-4 rounded-full border border-white/20 bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors shrink-0"
+                title="Algorithm info"
+              >
+                <Info className="w-2.5 h-2.5 text-white/70" />
+              </button>
+            )}
           </div>
         </div>
         <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full border ${directionBg(algo.direction)}`}>
@@ -770,19 +888,71 @@ function AlgoBiasTabInner() {
         {/* Meta-Algorithm Details (expandable) */}
         <MetaAlgoSection data={data} />
 
-        {/* Algorithm Cards Grid */}
+        {/* Algorithm Cards Grid — Grouped by Category */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2 mb-4">
             <Activity className="w-4 h-4 text-[var(--text-muted)]" />
             <h2 className="text-xs font-semibold text-[var(--text-primary)] uppercase tracking-wider">
               Individual Algorithms
             </h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {algos.map((algo) => (
-              <AlgoCard key={algo.algo_id} algo={algo} />
-            ))}
-          </div>
+
+          {/* Momentum Algos */}
+          {(() => {
+            const momentumIds = ["vpin", "kyle_amihud", "liquidation", "ofi"];
+            const momentumAlgos = algos.filter(a => momentumIds.includes(a.algo_id));
+            return momentumAlgos.length > 0 ? (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
+                  <span className="text-sm font-bold uppercase tracking-wider text-cyan-400">Momentum Algos</span>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {momentumAlgos.map((algo) => (
+                    <AlgoCard key={algo.algo_id} algo={algo} />
+                  ))}
+                </div>
+              </div>
+            ) : null;
+          })()}
+
+          {/* Mean-Reversion Algos */}
+          {(() => {
+            const reversionIds = ["funding_ou", "bayesian_sentiment", "smart_retail"];
+            const reversionAlgos = algos.filter(a => reversionIds.includes(a.algo_id));
+            return reversionAlgos.length > 0 ? (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                  <span className="text-sm font-bold uppercase tracking-wider text-amber-400">Mean-Reversion Algos</span>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {reversionAlgos.map((algo) => (
+                    <AlgoCard key={algo.algo_id} algo={algo} />
+                  ))}
+                </div>
+              </div>
+            ) : null;
+          })()}
+
+          {/* Regime Indicators */}
+          {(() => {
+            const regimeIds = ["hurst", "vol_regime", "options_greeks"];
+            const regimeAlgos = algos.filter(a => regimeIds.includes(a.algo_id));
+            return regimeAlgos.length > 0 ? (
+              <div className="mb-2">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]" />
+                  <span className="text-sm font-bold uppercase tracking-wider text-[var(--text-secondary)]">Regime Indicators</span>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {regimeAlgos.map((algo) => (
+                    <AlgoCard key={algo.algo_id} algo={algo} />
+                  ))}
+                </div>
+              </div>
+            ) : null;
+          })()}
         </div>
 
         {/* How it works section */}
