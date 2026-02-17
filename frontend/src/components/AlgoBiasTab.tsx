@@ -149,7 +149,6 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
   const smartDiv = n(smart.raw_divergence);
   const smartRetailSplit = Math.abs(smartDiv) > 3.8;
   const volCompression = s(vol.vol_regime) === "low" && n(vol.atr_ratio) < 0.769;
-  const volExtreme = s(vol.vol_regime) === "extreme";
   const strongConsensus = data.entropy < 0.985 && (data.agreement_count / Math.max(data.algo_count, 1)) > 0.7;
   const extremeBias = Math.abs(data.score) > 2.874 && data.confidence > 16.144;
   const negativeGamma = n(options.net_gex) < -100;
@@ -170,9 +169,22 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
 
   // Smart/Retail: follow smart money. Positive divergence = smart more long than retail → bullish
   const smartDir: AlertDirection = smartDiv > 0 ? "bullish" : "bearish";
-  const smartSide = smartDiv > 0
-    ? `Smart money net LONG vs retail SHORT → expect move UP`
-    : `Smart money net SHORT vs retail LONG → expect move DOWN`;
+  const smartLong = n(smart.smart_long_pct);
+  const retailLong = n(smart.retail_long_pct);
+  let smartSide: string;
+  if (smartDiv > 0) {
+    smartSide = (smartLong > 50 && retailLong > 50)
+      ? `Smart money MORE bullish than retail (${smartLong.toFixed(0)}% vs ${retailLong.toFixed(0)}% long) → expect UP`
+      : `Smart money net LONG vs retail SHORT → expect move UP`;
+  } else {
+    if (smartLong > 50 && retailLong > 50) {
+      smartSide = `Smart money LESS bullish than retail (${smartLong.toFixed(0)}% vs ${retailLong.toFixed(0)}% long) → expect DOWN`;
+    } else if (smartLong < 50 && retailLong < 50) {
+      smartSide = `Smart money MORE bearish than retail (${smartLong.toFixed(0)}% vs ${retailLong.toFixed(0)}% long) → expect DOWN`;
+    } else {
+      smartSide = `Smart money net SHORT vs retail LONG → expect move DOWN`;
+    }
+  }
 
   // Sentiment: contrarian. High P(bull) = crowd bullish → bearish. Low = crowd bearish → bullish
   const sentDir: AlertDirection = pBull > 0.638 ? "bearish" : "bullish";
@@ -363,18 +375,8 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
     });
   }
 
-  if (volExtreme) {
-    alerts.push({
-      id: "vol-extreme",
-      severity: "warning",
-      title: "Extreme Volatility",
-      icon: Gauge,
-      direction: "neutral",
-      directionReason: "Market too volatile for directional conviction — all algo confidence penalized 25%, reduce size",
-      description: `ATR ratio=${n(vol.atr_ratio).toFixed(2)} — chaotic conditions, signals less reliable`,
-      metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(2) }],
-    });
-  }
+  // volExtreme is NOT alerted — advisory only, not predictive.
+  // Backtest: 0% hit rate across 3 years. Vol regime info stays in composite metadata.
 
   if (sentimentExtreme) {
     alerts.push({
@@ -411,13 +413,17 @@ function detectAlerts(data: CompositeBias): SignificantMoveAlert[] {
 
   // INFO-level
   if (volCompression && !comboIds.has("gamma_squeeze")) {
+    const vcDir: AlertDirection = csDir !== "neutral" ? csDir : "bullish"; // fallback to historical 60% up bias
+    const vcReason = csDir !== "neutral"
+      ? `Volatility compressed, algo ensemble points ${csDir === "bullish" ? "UP" : "DOWN"} — breakout imminent`
+      : "BTC historically breaks UP 60% after vol compression — breakout imminent";
     alerts.push({
       id: "vol-compression",
       severity: "info",
       title: "Vol Compression",
       icon: Gauge,
-      direction: "bullish",
-      directionReason: "BTC historically breaks UP 60% of the time after vol compression — breakout imminent",
+      direction: vcDir,
+      directionReason: vcReason,
       description: `ATR ratio=${n(vol.atr_ratio).toFixed(3)} — volatility compressed, coiling for breakout`,
       metrics: [{ label: "ATR Ratio", value: n(vol.atr_ratio).toFixed(3) }],
     });
