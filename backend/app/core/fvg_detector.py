@@ -132,7 +132,7 @@ def validate_fvgs(
 
             # Apply V13 extreme candle rule to trend-aligned FVGs
             swing_len = end - start
-            tolerance = max(3, int(swing_len * 0.2))
+            tolerance = max(5, int(swing_len * 0.3))
             extreme_idx = _find_extreme_candle_in_swing(candles, start, end, s_type)
 
             if extreme_idx is not None:
