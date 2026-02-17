@@ -927,9 +927,17 @@ def algo_smart_retail(raw: dict) -> AlgoBiasResult:
     direction = _direction_from_score(score)
 
     if raw_div > 8:
-        label = "Smart LONG / Retail SHORT — accumulation"
+        if smart_long > 50 and retail_long > 50:
+            label = f"Smart MORE bullish ({smart_long:.0f}% vs {retail_long:.0f}%) — accumulation"
+        else:
+            label = "Smart LONG / Retail SHORT — accumulation"
     elif raw_div < -8:
-        label = "Smart SHORT / Retail LONG — distribution"
+        if smart_long > 50 and retail_long > 50:
+            label = f"Smart LESS bullish ({smart_long:.0f}% vs {retail_long:.0f}%) — distribution"
+        elif smart_long < 50 and retail_long < 50:
+            label = f"Smart MORE bearish ({smart_long:.0f}% vs {retail_long:.0f}%) — distribution"
+        else:
+            label = "Smart SHORT / Retail LONG — distribution"
     else:
         label = f"Divergence={raw_div:+.1f}pp"
     explanation = f"{label}, z(div)={z_div:.2f}, trend={div_trend:+.1f}pp/24h"
