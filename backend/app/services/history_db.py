@@ -70,6 +70,17 @@ _FUTURES_SCHEMAS = {
             ratio     REAL NOT NULL
         );
     """,
+    "l2_depth": """
+        CREATE TABLE IF NOT EXISTS l2_depth (
+            timestamp     INTEGER PRIMARY KEY,
+            bid_wall_usd  REAL NOT NULL,
+            ask_wall_usd  REAL NOT NULL,
+            best_bid      REAL NOT NULL,
+            best_ask      REAL NOT NULL,
+            spread_pct    REAL NOT NULL,
+            imbalance     REAL NOT NULL
+        );
+    """,
 }
 
 _SYNC_SCHEMA = """
@@ -182,6 +193,20 @@ def upsert_global_ratio(conn: sqlite3.Connection, rows: list[dict]) -> int:
     )
     conn.commit()
     _update_sync_meta(conn, "global_ratio")
+    return len(rows)
+
+
+def upsert_l2_depth(conn: sqlite3.Connection, rows: list[dict]) -> int:
+    if not rows:
+        return 0
+    conn.executemany(
+        "INSERT OR REPLACE INTO l2_depth "
+        "(timestamp, bid_wall_usd, ask_wall_usd, best_bid, best_ask, spread_pct, imbalance) "
+        "VALUES (:timestamp, :bid_wall_usd, :ask_wall_usd, :best_bid, :best_ask, :spread_pct, :imbalance)",
+        rows,
+    )
+    conn.commit()
+    _update_sync_meta(conn, "l2_depth")
     return len(rows)
 
 
@@ -338,4 +363,70 @@ def query_futures(
             "index_price": 0,
             "premium_pct": 0,
         },
+    }
+
+
+def query_l2_depth(
+    conn: sqlite3.Connection,
+    start_ms: int,
+    end_ms: int,
+) -> list[dict]:
+    """Query all L2 depth snapshots in a time range."""
+    rows = conn.execute(
+        "SELECT timestamp, bid_wall_usd, ask_wall_usd, best_bid, best_ask, "
+        "spread_pct, imbalance FROM l2_depth "
+        "WHERE timestamp BETWEEN ? AND ? ORDER BY timestamp",
+        (start_ms, end_ms),
+    ).fetchall()
+    return [
+        {
+            "timestamp": r[0], "bid_wall_usd": r[1], "ask_wall_usd": r[2],
+            "best_bid": r[3], "best_ask": r[4], "spread_pct": r[5],
+            "imbalance": r[6],
+        }
+        for r in rows
+    ]
+
+
+def query_l2_depth_hourly(
+    conn: sqlite3.Connection,
+    start_ms: int,
+    end_ms: int,
+) -> list[dict]:
+    """Query L2 depth downsampled to one snapshot per hour (last in each hour).
+
+    Optimized for the backtester which steps hourly.
+    """
+    rows = conn.execute(
+        "SELECT timestamp, bid_wall_usd, ask_wall_usd, best_bid, best_ask, "
+        "spread_pct, imbalance FROM l2_depth "
+        "WHERE timestamp BETWEEN ? AND ? "
+        "AND timestamp IN ("
+        "  SELECT MAX(timestamp) FROM l2_depth "
+        "  WHERE timestamp BETWEEN ? AND ? "
+        "  GROUP BY timestamp / 3600000"
+        ") ORDER BY timestamp",
+        (start_ms, end_ms, start_ms, end_ms),
+    ).fetchall()
+    return [
+        {
+            "timestamp": r[0], "bid_wall_usd": r[1], "ask_wall_usd": r[2],
+            "best_bid": r[3], "best_ask": r[4], "spread_pct": r[5],
+            "imbalance": r[6],
+        }
+        for r in rows
+    ]
+
+
+def l2_depth_stats(conn: sqlite3.Connection) -> dict:
+    """Get L2 depth recording statistics."""
+    row = conn.execute(
+        "SELECT COUNT(*), MIN(timestamp), MAX(timestamp) FROM l2_depth"
+    ).fetchone()
+    if not row or row[0] == 0:
+        return {"count": 0, "first_timestamp": None, "last_timestamp": None}
+    return {
+        "count": row[0],
+        "first_timestamp": row[1],
+        "last_timestamp": row[2],
     }

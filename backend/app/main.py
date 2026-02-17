@@ -128,14 +128,26 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Liquidation WS failed to start: {e}")
 
+    # ── Start L2 Depth Recorder (captures order book for OFI backtesting) ──
+    l2_recorder = None
+    try:
+        from app.services.l2_recorder import get_l2_recorder
+        l2_recorder = get_l2_recorder()
+        await l2_recorder.start()
+    except Exception as e:
+        logger.warning(f"L2 Recorder failed to start: {e}")
+
     app.state.telegram_bot = bot
     app.state.signal_monitor = signal_monitor
     app.state.position_monitor = position_monitor
     app.state.liquidation_manager = liq_manager
+    app.state.l2_recorder = l2_recorder
 
     yield
 
     # ── Shutdown ──
+    if l2_recorder:
+        await l2_recorder.stop()
     if liq_manager:
         await liq_manager.stop()
     if signal_monitor:
@@ -426,6 +438,33 @@ def _serialize_result(result: AnalysisResult, candles=None, trade_bias: str | No
 @app.get("/api/health")
 async def health():
     return {"status": "ok", "symbol": SYMBOL, "engine": "TradingMamba v0.1"}
+
+
+@app.get("/api/l2-recorder/status")
+async def l2_recorder_status():
+    """Get L2 depth recorder status and statistics."""
+    recorder = getattr(app.state, "l2_recorder", None)
+    if recorder:
+        status = recorder.get_status()
+        # Add DB stats
+        try:
+            from app.services.history_db import open_db, l2_depth_stats
+            import asyncio
+            stats = await asyncio.to_thread(_l2_db_stats)
+            status.update(stats)
+        except Exception:
+            pass
+        return status
+    return {"running": False, "snapshot_count": 0}
+
+
+def _l2_db_stats() -> dict:
+    from app.services.history_db import open_db, l2_depth_stats
+    conn = open_db()
+    try:
+        return l2_depth_stats(conn)
+    finally:
+        conn.close()
 
 
 @app.get("/api/analyze/{timeframe}")

@@ -125,6 +125,7 @@ CACHE_TTL_COT = 604800       # CME COT: 7 days
 CACHE_TTL_ONCHAIN = 3600     # On-chain flows: 1 hour
 CACHE_TTL_FNG = 3600         # Fear & Greed: 1 hour
 CACHE_TTL_L2 = 5             # Order book depth: 5 seconds
+L2_RECORD_INTERVAL = 10      # L2 depth recorder: seconds between snapshots
 CACHE_TTL_DVOL = 60          # DVOL: 1 minute
 
 # Optional API Keys (from environment)
