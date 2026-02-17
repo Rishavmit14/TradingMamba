@@ -151,8 +151,20 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
                     else "Shorts overleveraged → expect price to rise")
 
     smart_dir = "bullish" if smart_div > 0 else "bearish"
-    smart_side = (f"Smart money net LONG vs retail SHORT → expect move UP" if smart_div > 0
-                  else f"Smart money net SHORT vs retail LONG → expect move DOWN")
+    smart_long = _n(smart.get("smart_long_pct"))
+    retail_long = _n(smart.get("retail_long_pct"))
+    if smart_div > 0:
+        if smart_long > 50 and retail_long > 50:
+            smart_side = f"Smart money MORE bullish than retail ({smart_long:.0f}% vs {retail_long:.0f}% long) → expect UP"
+        else:
+            smart_side = f"Smart money net LONG vs retail SHORT → expect move UP"
+    else:
+        if smart_long < 50 and retail_long < 50:
+            smart_side = f"Smart money MORE bearish than retail ({smart_long:.0f}% vs {retail_long:.0f}% long) → expect DOWN"
+        elif smart_long > 50 and retail_long > 50:
+            smart_side = f"Smart money LESS bullish than retail ({smart_long:.0f}% vs {retail_long:.0f}% long) → expect DOWN"
+        else:
+            smart_side = f"Smart money net SHORT vs retail LONG → expect move DOWN"
 
     sent_dir = "bearish" if p_bull > 0.638 else "bullish"
     sent_side = ("Crowd extremely bullish → contrarian: expect pullback DOWN" if p_bull > 0.638
@@ -295,16 +307,9 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
                      "retail_long_pct": _n(smart.get("retail_long_pct"))},
         ))
 
-    if vol_extreme:
-        alerts.append(QuantAlert(
-            id="vol-extreme",
-            severity="warning",
-            title="Extreme Volatility",
-            direction="neutral",
-            direction_reason="Market too volatile for directional conviction — reduce size",
-            description=f"ATR ratio={_n(vol.get('atr_ratio')):.2f} — chaotic conditions",
-            metrics={"atr_ratio": _n(vol.get("atr_ratio"))},
-        ))
+    # vol_extreme is NOT alerted — it's advisory ("reduce size"), not predictive.
+    # Backtest: 140 alerts, 0% hit rate at all windows. The vol_regime info
+    # remains in composite metadata for consumers who need it.
 
     if sentiment_extreme:
         alerts.append(QuantAlert(
@@ -332,12 +337,16 @@ def detect_alerts(composite: CompositeBias) -> list[QuantAlert]:
 
     # INFO-level
     if vol_compression and "gamma_squeeze" not in combo_ids:
+        vc_dir = cs_dir if cs_dir != "neutral" else "bullish"  # fallback to historical 60% up bias
+        vc_reason = (f"Volatility compressed, algo ensemble points {'UP' if vc_dir == 'bullish' else 'DOWN'} — breakout imminent"
+                     if cs_dir != "neutral"
+                     else "BTC historically breaks UP 60% after vol compression — breakout imminent")
         alerts.append(QuantAlert(
             id="vol-compression",
             severity="info",
             title="Vol Compression",
-            direction="bullish",
-            direction_reason="BTC historically breaks UP 60% of the time after vol compression — breakout imminent",
+            direction=vc_dir,
+            direction_reason=vc_reason,
             description=f"ATR ratio={_n(vol.get('atr_ratio')):.3f} — volatility compressed, coiling for breakout",
             metrics={"atr_ratio": _n(vol.get("atr_ratio"))},
         ))

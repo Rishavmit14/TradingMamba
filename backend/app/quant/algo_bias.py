@@ -1152,10 +1152,9 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
     else:
         vol_effect = "normal vol: no adjustment"
 
-    # Renormalize weights
-    total_w = sum(weights.values())
-    if total_w > 0:
-        weights = {k: v / total_w for k, v in weights.items()}
+    # NOTE: No renormalization. BASE_WEIGHTS sum to 1.0. After Hurst/vol
+    # adjustments the total may drift to ~1.1-1.3 — this is intentional.
+    # Renormalizing would undo the regime adaptation entirely.
 
     # Step 5: Composite score (confidence-weighted)
     # Track per-algo contribution for meta output
@@ -1211,7 +1210,7 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
         entropy_adj = 0
 
     vol_penalty = 0.75 if vol_regime == "extreme" else 1.0
-    final_confidence = _clamp((base_conf + entropy_adj) * vol_penalty, 0, 95)
+    final_confidence = _clamp(base_conf * vol_penalty + entropy_adj, 0, 95)
 
     # Regime label
     if hurst_val > 0.55:
