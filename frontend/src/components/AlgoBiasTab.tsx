@@ -591,8 +591,11 @@ const AlertPanel = memo(function AlertPanel({
 // ── Composite Gauge (SVG arc) ──
 
 function CompositeGauge({ score, confidence, direction }: { score: number; confidence: number; direction: string }) {
-  // Arc from -100 (left) to +100 (right), mapped to 180-degree sweep
-  const normalized = (score + 100) / 200; // 0 to 1
+  // Arc range calibrated to real BTC data: 3yr max=15.4, P99=7.7, mean=1.6
+  // Using ±15 so needle uses full arc sweep in realistic conditions
+  const ARC_MAX = 15;
+  const clamped = Math.max(-ARC_MAX, Math.min(ARC_MAX, score));
+  const normalized = (clamped + ARC_MAX) / (2 * ARC_MAX); // 0 to 1
   const angle = -180 + normalized * 180; // -180 (left) to 0 (right), -90 = center/top
 
   const radius = 80;
@@ -620,27 +623,31 @@ function CompositeGauge({ score, confidence, direction }: { score: number; confi
 
   const gaugeColor = score > 2 ? "#34d399" : score < -2 ? "#f87171" : "#facc15";
 
+  // Segment boundaries mapped to direction thresholds:
+  // -15..-5.5 strong bearish | -5.5..-2 bearish | -2..+2 neutral | +2..+5.5 bullish | +5.5..+15 strong bullish
+  const seg = (val: number) => -180 + ((val + ARC_MAX) / (2 * ARC_MAX)) * 180;
+
   return (
     <div className="flex flex-col items-center">
       <svg width="200" height="120" viewBox="0 0 200 120">
         {/* Background arc */}
         <path d={arcPath(-180, 0, radius)} fill="none" stroke="var(--bg-tertiary)" strokeWidth="12" strokeLinecap="round" />
 
-        {/* Colored segments */}
-        <path d={arcPath(-180, -144, radius)} fill="none" stroke="#f87171" strokeWidth="12" strokeLinecap="round" opacity="0.3" />
-        <path d={arcPath(-144, -108, radius)} fill="none" stroke="#fb923c" strokeWidth="12" opacity="0.2" />
-        <path d={arcPath(-108, -72, radius)} fill="none" stroke="#facc15" strokeWidth="12" opacity="0.2" />
-        <path d={arcPath(-72, -36, radius)} fill="none" stroke="#a3e635" strokeWidth="12" opacity="0.2" />
-        <path d={arcPath(-36, 0, radius)} fill="none" stroke="#34d399" strokeWidth="12" strokeLinecap="round" opacity="0.3" />
+        {/* Colored segments aligned to direction thresholds */}
+        <path d={arcPath(-180, seg(-5.5), radius)} fill="none" stroke="#f87171" strokeWidth="12" strokeLinecap="round" opacity="0.3" />
+        <path d={arcPath(seg(-5.5), seg(-2), radius)} fill="none" stroke="#fb923c" strokeWidth="12" opacity="0.25" />
+        <path d={arcPath(seg(-2), seg(2), radius)} fill="none" stroke="#facc15" strokeWidth="12" opacity="0.25" />
+        <path d={arcPath(seg(2), seg(5.5), radius)} fill="none" stroke="#a3e635" strokeWidth="12" opacity="0.25" />
+        <path d={arcPath(seg(5.5), 0, radius)} fill="none" stroke="#34d399" strokeWidth="12" strokeLinecap="round" opacity="0.3" />
 
         {/* Needle */}
         <line x1={cx} y1={cy} x2={needleX} y2={needleY} stroke={gaugeColor} strokeWidth="2.5" strokeLinecap="round" />
         <circle cx={cx} cy={cy} r="4" fill={gaugeColor} />
 
         {/* Labels */}
-        <text x="18" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">-100</text>
+        <text x="18" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">-15</text>
         <text x="100" y="12" fill="var(--text-muted)" fontSize="11" textAnchor="middle">0</text>
-        <text x="182" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">+100</text>
+        <text x="182" y="100" fill="var(--text-muted)" fontSize="11" textAnchor="middle">+15</text>
       </svg>
 
       {/* Score display */}
