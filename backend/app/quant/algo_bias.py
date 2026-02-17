@@ -1197,13 +1197,15 @@ def compute_composite_bias(results: list[AlgoBiasResult]) -> CompositeBias:
     agreement_count = max(n_bull, n_bear, n_neut)
 
     # Step 7: Direction mapping
-    if composite_score >= 60:
+    # Calibrated on 3-year BTC data: |score| range is 0-15, mean=1.6, P90=3.8
+    # Old thresholds (±25/±60) were unreachable — dial always showed "neutral"
+    if composite_score >= 5.5:
         direction = "strong_bullish"
-    elif composite_score >= 25:
+    elif composite_score >= 2.0:
         direction = "bullish"
-    elif composite_score <= -60:
+    elif composite_score <= -5.5:
         direction = "strong_bearish"
-    elif composite_score <= -25:
+    elif composite_score <= -2.0:
         direction = "bearish"
     else:
         direction = "neutral"

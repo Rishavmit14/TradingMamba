@@ -618,7 +618,7 @@ function CompositeGauge({ score, confidence, direction }: { score: number; confi
   const needleX = cx + (radius - 10) * Math.cos(needleAngle);
   const needleY = cy + (radius - 10) * Math.sin(needleAngle);
 
-  const gaugeColor = score > 25 ? "#34d399" : score < -25 ? "#f87171" : "#facc15";
+  const gaugeColor = score > 2 ? "#34d399" : score < -2 ? "#f87171" : "#facc15";
 
   return (
     <div className="flex flex-col items-center">
